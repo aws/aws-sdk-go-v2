@@ -2,6 +2,52 @@
 
 package types
 
+type ApiDestinationHttpMethod string
+
+// Enum values for ApiDestinationHttpMethod
+const (
+	ApiDestinationHttpMethodPost    ApiDestinationHttpMethod = "POST"
+	ApiDestinationHttpMethodGet     ApiDestinationHttpMethod = "GET"
+	ApiDestinationHttpMethodHead    ApiDestinationHttpMethod = "HEAD"
+	ApiDestinationHttpMethodOptions ApiDestinationHttpMethod = "OPTIONS"
+	ApiDestinationHttpMethodPut     ApiDestinationHttpMethod = "PUT"
+	ApiDestinationHttpMethodPatch   ApiDestinationHttpMethod = "PATCH"
+	ApiDestinationHttpMethodDelete  ApiDestinationHttpMethod = "DELETE"
+)
+
+// Values returns all known values for ApiDestinationHttpMethod. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApiDestinationHttpMethod) Values() []ApiDestinationHttpMethod {
+	return []ApiDestinationHttpMethod{
+		"POST",
+		"GET",
+		"HEAD",
+		"OPTIONS",
+		"PUT",
+		"PATCH",
+		"DELETE",
+	}
+}
+
+type ApiDestinationState string
+
+// Enum values for ApiDestinationState
+const (
+	ApiDestinationStateActive   ApiDestinationState = "ACTIVE"
+	ApiDestinationStateInactive ApiDestinationState = "INACTIVE"
+)
+
+// Values returns all known values for ApiDestinationState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApiDestinationState) Values() []ApiDestinationState {
+	return []ApiDestinationState{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
 type ArchiveState string
 
 // Enum values for ArchiveState
@@ -43,6 +89,74 @@ func (AssignPublicIp) Values() []AssignPublicIp {
 	return []AssignPublicIp{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ConnectionAuthorizationType string
+
+// Enum values for ConnectionAuthorizationType
+const (
+	ConnectionAuthorizationTypeBasic                  ConnectionAuthorizationType = "BASIC"
+	ConnectionAuthorizationTypeOauthClientCredentials ConnectionAuthorizationType = "OAUTH_CLIENT_CREDENTIALS"
+	ConnectionAuthorizationTypeApiKey                 ConnectionAuthorizationType = "API_KEY"
+)
+
+// Values returns all known values for ConnectionAuthorizationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionAuthorizationType) Values() []ConnectionAuthorizationType {
+	return []ConnectionAuthorizationType{
+		"BASIC",
+		"OAUTH_CLIENT_CREDENTIALS",
+		"API_KEY",
+	}
+}
+
+type ConnectionOAuthHttpMethod string
+
+// Enum values for ConnectionOAuthHttpMethod
+const (
+	ConnectionOAuthHttpMethodGet  ConnectionOAuthHttpMethod = "GET"
+	ConnectionOAuthHttpMethodPost ConnectionOAuthHttpMethod = "POST"
+	ConnectionOAuthHttpMethodPut  ConnectionOAuthHttpMethod = "PUT"
+)
+
+// Values returns all known values for ConnectionOAuthHttpMethod. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionOAuthHttpMethod) Values() []ConnectionOAuthHttpMethod {
+	return []ConnectionOAuthHttpMethod{
+		"GET",
+		"POST",
+		"PUT",
+	}
+}
+
+type ConnectionState string
+
+// Enum values for ConnectionState
+const (
+	ConnectionStateCreating      ConnectionState = "CREATING"
+	ConnectionStateUpdating      ConnectionState = "UPDATING"
+	ConnectionStateDeleting      ConnectionState = "DELETING"
+	ConnectionStateAuthorized    ConnectionState = "AUTHORIZED"
+	ConnectionStateDeauthorized  ConnectionState = "DEAUTHORIZED"
+	ConnectionStateAuthorizing   ConnectionState = "AUTHORIZING"
+	ConnectionStateDeauthorizing ConnectionState = "DEAUTHORIZING"
+)
+
+// Values returns all known values for ConnectionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionState) Values() []ConnectionState {
+	return []ConnectionState{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"AUTHORIZED",
+		"DEAUTHORIZED",
+		"AUTHORIZING",
+		"DEAUTHORIZING",
 	}
 }
 

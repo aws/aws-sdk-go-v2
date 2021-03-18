@@ -228,6 +228,34 @@ func (HistoricalMetricName) Values() []HistoricalMetricName {
 	}
 }
 
+type HoursOfOperationDays string
+
+// Enum values for HoursOfOperationDays
+const (
+	HoursOfOperationDaysSunday    HoursOfOperationDays = "SUNDAY"
+	HoursOfOperationDaysMonday    HoursOfOperationDays = "MONDAY"
+	HoursOfOperationDaysTuesday   HoursOfOperationDays = "TUESDAY"
+	HoursOfOperationDaysWednesday HoursOfOperationDays = "WEDNESDAY"
+	HoursOfOperationDaysThursday  HoursOfOperationDays = "THURSDAY"
+	HoursOfOperationDaysFriday    HoursOfOperationDays = "FRIDAY"
+	HoursOfOperationDaysSaturday  HoursOfOperationDays = "SATURDAY"
+)
+
+// Values returns all known values for HoursOfOperationDays. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HoursOfOperationDays) Values() []HoursOfOperationDays {
+	return []HoursOfOperationDays{
+		"SUNDAY",
+		"MONDAY",
+		"TUESDAY",
+		"WEDNESDAY",
+		"THURSDAY",
+		"FRIDAY",
+		"SATURDAY",
+	}
+}
+
 type InstanceAttributeType string
 
 // Enum values for InstanceAttributeType
@@ -839,6 +867,24 @@ func (PhoneType) Values() []PhoneType {
 	return []PhoneType{
 		"SOFT_PHONE",
 		"DESK_PHONE",
+	}
+}
+
+type QueueStatus string
+
+// Enum values for QueueStatus
+const (
+	QueueStatusEnabled  QueueStatus = "ENABLED"
+	QueueStatusDisabled QueueStatus = "DISABLED"
+)
+
+// Values returns all known values for QueueStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (QueueStatus) Values() []QueueStatus {
+	return []QueueStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

@@ -13,10 +13,10 @@ import (
 
 // Updates the classification types for the specified S3 resources. If
 // memberAccountId isn't specified, the action updates the classification types of
-// the S3 resources associated with Amazon Macie Classic for the current master
-// account. If memberAccountId is specified, the action updates the classification
-// types of the S3 resources associated with Amazon Macie Classic for the specified
-// member account.
+// the S3 resources associated with Amazon Macie Classic for the current Macie
+// Classic administrator account. If memberAccountId is specified, the action
+// updates the classification types of the S3 resources associated with Macie
+// Classic for the specified member account.
 func (c *Client) UpdateS3Resources(ctx context.Context, params *UpdateS3ResourcesInput, optFns ...func(*Options)) (*UpdateS3ResourcesOutput, error) {
 	if params == nil {
 		params = &UpdateS3ResourcesInput{}

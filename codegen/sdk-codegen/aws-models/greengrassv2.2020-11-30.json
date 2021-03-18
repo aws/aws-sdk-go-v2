@@ -677,7 +677,7 @@
                 "tags": {
                     "target": "com.amazonaws.greengrassv2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -747,7 +747,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a continuous deployment for a target, which is a AWS IoT Greengrass core device or group of core\n      devices. When you add a new core device to a group of core devices that has a deployment, AWS IoT Greengrass\n      deploys that group's deployment to the new device.</p>\n         <p>You can define one deployment for each target. When you create a new deployment for a\n      target that has an existing deployment, you replace the previous deployment. AWS IoT Greengrass applies the\n      new deployment to the target devices.</p>\n         <p>Every deployment has a revision number that indicates how many deployment revisions you\n      define for a target. Use this operation to create a new revision of an existing deployment.\n      This operation returns the revision number of the new deployment when you create it.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html\">Create deployments</a>\n      in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Creates a continuous deployment for a target, which is a AWS IoT Greengrass core device or group of core\n      devices. When you add a new core device to a group of core devices that has a deployment, AWS IoT Greengrass\n      deploys that group's deployment to the new device.</p>\n         <p>You can define one deployment for each target. When you create a new deployment for a\n      target that has an existing deployment, you replace the previous deployment. AWS IoT Greengrass applies the\n      new deployment to the target devices.</p>\n         <p>Every deployment has a revision number that indicates how many deployment revisions you\n      define for a target. Use this operation to create a new revision of an existing deployment.\n      This operation returns the revision number of the new deployment when you create it.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the\n        <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/deployments",
@@ -792,7 +792,7 @@
                 "tags": {
                     "target": "com.amazonaws.greengrassv2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -986,7 +986,7 @@
                 "action": {
                     "target": "com.amazonaws.greengrassv2#DeploymentComponentUpdatePolicyAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether or not to notify components and wait for components to become safe to update.\n      Choose from the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before\n          it stops and updates that component. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates\">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then,\n          components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate\">DeferComponentUpdate</a> IPC operation. For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIP_NOTIFY_COMPONENTS</code> – The deployment doesn't notify components\n          or wait for them to be safe to update.</p>\n            </li>\n         </ul>\n         <p>Default: <code>NOTIFY_COMPONENTS</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether or not to notify components and wait for components to become safe to update.\n      Choose from the following options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NOTIFY_COMPONENTS</code> – The deployment notifies each component before\n          it stops and updates that component. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetocomponentupdates\">SubscribeToComponentUpdates</a> IPC operation to receive these notifications. Then,\n          components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate\">DeferComponentUpdate</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SKIP_NOTIFY_COMPONENTS</code> – The deployment doesn't notify components\n          or wait for them to be safe to update.</p>\n            </li>\n         </ul>\n         <p>Default: <code>NOTIFY_COMPONENTS</code>\n         </p>"
                     }
                 }
             },
@@ -1021,7 +1021,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about how long a component on a core device can validate its\n      configuration updates before it times out. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates\">SubscribeToValidateConfigurationUpdates</a> IPC operation to receive notifications when\n      a deployment specifies a configuration update. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport\">SendConfigurationValidityReport</a> IPC operation. For more information, see the <a href=\"https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Contains information about how long a component on a core device can validate its\n      configuration updates before it times out. Components can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-subscribetovalidateconfigurationupdates\">SubscribeToValidateConfigurationUpdates</a> IPC operation to receive notifications when\n      a deployment specifies a configuration update. Then, components can respond with the <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport\">SendConfigurationValidityReport</a> IPC operation. For more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html\">Create deployments</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.greengrassv2#DeploymentFailureHandlingPolicy": {
@@ -1246,7 +1246,7 @@
                 "tags": {
                     "target": "com.amazonaws.greengrassv2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -1470,7 +1470,7 @@
                 "tags": {
                     "target": "com.amazonaws.greengrassv2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -1501,7 +1501,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the pre-signed URL to a component artifact in an S3 bucket. Core devices can call\n      this operation to identify the URL that they can use to download an artifact to\n      install.</p>",
+                "smithy.api#documentation": "<p>Gets the pre-signed URL to download a public component artifact. Core devices call this\n      operation to identify the URL that they can use to download an artifact to install.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/greengrass/v2/components/{arn}/artifacts/{artifactName+}",
@@ -1515,7 +1515,7 @@
                 "arn": {
                     "target": "com.amazonaws.greengrassv2#ComponentVersionARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the component version.</p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the component version. Specify the ARN of a public component version.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1523,7 +1523,7 @@
                 "artifactName": {
                     "target": "com.amazonaws.greengrassv2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the artifact.</p>",
+                        "smithy.api#documentation": "<p>The name of the artifact.</p>\n         <p>You can use the <a href=\"https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html\">GetComponent</a> operation to\n      download the component recipe, which includes the URI of the artifact. The artifact name is\n      the section of the URI after the scheme. For example, in the artifact URI\n        <code>greengrass:SomeArtifact.zip</code>, the artifact name is\n      <code>SomeArtifact.zip</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1536,7 +1536,7 @@
                 "preSignedUrl": {
                     "target": "com.amazonaws.greengrassv2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL to the artifact.</p>",
+                        "smithy.api#documentation": "<p>The URL of the artifact.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1631,7 +1631,7 @@
                 "tags": {
                     "target": "com.amazonaws.greengrassv2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -1761,7 +1761,7 @@
                 "tags": {
                     "target": "com.amazonaws.greengrassv2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -3139,7 +3139,7 @@
                 "tags": {
                     "target": "com.amazonaws.greengrassv2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -3226,7 +3226,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of components that meet the component, version, and platform requirements\n      of a deployment. AWS IoT Greengrass core devices call this operation when they receive a deployment to\n      identify the components to install.</p>\n         <p>This operation identifies components that meet all dependency requirements for a\n      deployment. If the requirements conflict, then this operation returns an error and the\n      deployment fails. For example, this occurs if component <code>A</code> requires version\n        <code>>2.0.0</code> and component <code>B</code> requires version <code><2.0.0</code>\n      of a component dependency.</p>\n         <p>When you specify the component candidates to resolve, AWS IoT Greengrass compares each component's\n      digest from the core device with the component's digest in the AWS Cloud. If the digests don't\n      match, then AWS IoT Greengrass specifies to use the version from the AWS Cloud.</p>\n         <important>\n            <p>To use this operation, you must use the data plane API endpoint and authenticate with an\n        AWS IoT device certificate. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/general/latest/gr/greengrass.html\">AWS IoT Greengrass endpoints and\n          quotas</a>.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Retrieves a list of components that meet the component, version, and platform requirements\n      of a deployment. AWS IoT Greengrass core devices call this operation when they receive a deployment to\n      identify the components to install.</p>\n         <p>This operation identifies components that meet all dependency requirements for a\n      deployment. If the requirements conflict, then this operation returns an error and the\n      deployment fails. For example, this occurs if component <code>A</code> requires version\n        <code>>2.0.0</code> and component <code>B</code> requires version <code><2.0.0</code>\n      of a component dependency.</p>\n         <p>When you specify the component candidates to resolve, AWS IoT Greengrass compares each component's\n      digest from the core device with the component's digest in the AWS Cloud. If the digests don't\n      match, then AWS IoT Greengrass specifies to use the version from the AWS Cloud.</p>\n         <important>\n            <p>To use this operation, you must use the data plane API endpoint and authenticate with an\n        AWS IoT device certificate. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/greengrass.html\">AWS IoT Greengrass endpoints and quotas</a>.</p>\n         </important>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/resolveComponentCandidates",
@@ -3468,7 +3468,7 @@
                 "tags": {
                     "target": "com.amazonaws.greengrassv2#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the resource. For more\n      information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html\">Tag your\n        resources</a> in the <i>AWS IoT Greengrass V2 Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }

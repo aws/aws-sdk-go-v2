@@ -30,6 +30,26 @@ func (m *validateOpCreateFHIRDatastore) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFHIRExportJob struct {
+}
+
+func (*validateOpDescribeFHIRExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFHIRExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFHIRExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFHIRExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFHIRImportJob struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpDescribeFHIRImportJob) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeFHIRImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartFHIRExportJob struct {
+}
+
+func (*validateOpStartFHIRExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartFHIRExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartFHIRExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartFHIRExportJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -74,8 +114,16 @@ func addOpCreateFHIRDatastoreValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateFHIRDatastore{}, middleware.After)
 }
 
+func addOpDescribeFHIRExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFHIRExportJob{}, middleware.After)
+}
+
 func addOpDescribeFHIRImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFHIRImportJob{}, middleware.After)
+}
+
+func addOpStartFHIRExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartFHIRExportJob{}, middleware.After)
 }
 
 func addOpStartFHIRImportJobValidationMiddleware(stack *middleware.Stack) error {
@@ -117,6 +165,24 @@ func validateOpCreateFHIRDatastoreInput(v *CreateFHIRDatastoreInput) error {
 	}
 }
 
+func validateOpDescribeFHIRExportJobInput(v *DescribeFHIRExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFHIRExportJobInput"}
+	if v.DatastoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
+	}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeFHIRImportJobInput(v *DescribeFHIRImportJobInput) error {
 	if v == nil {
 		return nil
@@ -127,6 +193,30 @@ func validateOpDescribeFHIRImportJobInput(v *DescribeFHIRImportJobInput) error {
 	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartFHIRExportJobInput(v *StartFHIRExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartFHIRExportJobInput"}
+	if v.OutputDataConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputDataConfig"))
+	}
+	if v.DatastoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatastoreId"))
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

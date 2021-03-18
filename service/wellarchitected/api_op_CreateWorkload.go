@@ -161,6 +161,9 @@ type CreateWorkloadInput struct {
 	// The priorities of the pillars, which are used to order items in the improvement
 	// plan. Each pillar is represented by its PillarReviewSummary$PillarId.
 	PillarPriorities []string
+
+	// The tags to be associated with the workload.
+	Tags map[string]string
 }
 
 // Output of a create workload call.

@@ -629,10 +629,79 @@
                 "smithy.api#documentation": "<p>Describes an Elastic IP address, or a carrier IP address.</p>"
             }
         },
+        "com.amazonaws.ec2#AddressAttribute": {
+            "type": "structure",
+            "members": {
+                "PublicIp": {
+                    "target": "com.amazonaws.ec2#PublicIpAddress",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PublicIp",
+                        "smithy.api#documentation": "<p>The public IP address.</p>",
+                        "smithy.api#xmlName": "publicIp"
+                    }
+                },
+                "AllocationId": {
+                    "target": "com.amazonaws.ec2#AllocationId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AllocationId",
+                        "smithy.api#documentation": "<p>[EC2-VPC] The allocation ID.</p>",
+                        "smithy.api#xmlName": "allocationId"
+                    }
+                },
+                "PtrRecord": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PtrRecord",
+                        "smithy.api#documentation": "<p>The pointer (PTR) record for the IP address.</p>",
+                        "smithy.api#xmlName": "ptrRecord"
+                    }
+                },
+                "PtrRecordUpdate": {
+                    "target": "com.amazonaws.ec2#PtrUpdateStatus",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "PtrRecordUpdate",
+                        "smithy.api#documentation": "<p>The updated PTR record for the IP address.</p>",
+                        "smithy.api#xmlName": "ptrRecordUpdate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The attributes associated with an Elastic IP address.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AddressAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "domain-name",
+                        "name": "domain_name"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ec2#AddressList": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.ec2#Address",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#AddressMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ec2#AddressSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AddressAttribute",
                 "traits": {
                     "smithy.api#xmlName": "item"
                 }
@@ -933,6 +1002,15 @@
                 }
             }
         },
+        "com.amazonaws.ec2#AllocationIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AllocationId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#AllocationState": {
             "type": "string",
             "traits": {
@@ -979,6 +1057,10 @@
                     {
                         "value": "capacityOptimized",
                         "name": "CAPACITY_OPTIMIZED"
+                    },
+                    {
+                        "value": "capacityOptimizedPrioritized",
+                        "name": "CAPACITY_OPTIMIZED_PRIORITIZED"
                     }
                 ]
             }
@@ -1558,6 +1640,9 @@
                     "target": "com.amazonaws.ec2#DescribeAddresses"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeAddressesAttribute"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeAggregateIdFormat"
                 },
                 {
@@ -2083,6 +2168,9 @@
                     "target": "com.amazonaws.ec2#ImportVolume"
                 },
                 {
+                    "target": "com.amazonaws.ec2#ModifyAddressAttribute"
+                },
+                {
                     "target": "com.amazonaws.ec2#ModifyAvailabilityZoneGroup"
                 },
                 {
@@ -2293,6 +2381,9 @@
                     "target": "com.amazonaws.ec2#RequestSpotInstances"
                 },
                 {
+                    "target": "com.amazonaws.ec2#ResetAddressAttribute"
+                },
+                {
                     "target": "com.amazonaws.ec2#ResetEbsDefaultKmsKeyId"
                 },
                 {
@@ -2392,7 +2483,7 @@
                     "name": "ec2"
                 },
                 "aws.protocols#ec2Query": {},
-                "smithy.api#documentation": "<fullname>Amazon Elastic Compute Cloud</fullname>\n         <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS cloud. \n          Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and \n          deploy applications faster.</p>\n         <p>To learn more, see the following resources:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2: <a href=\"http://aws.amazon.com/ec2\">AmazonEC2 product page</a>, <a href=\"http://aws.amazon.com/documentation/ec2\">Amazon EC2 documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon EBS: <a href=\"http://aws.amazon.com/ebs\">Amazon EBS product page</a>, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon EBS documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon VPC: <a href=\"http://aws.amazon.com/vpc\">Amazon VPC product page</a>, <a href=\"http://aws.amazon.com/documentation/vpc\">Amazon VPC documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>AWS VPN: <a href=\"http://aws.amazon.com/vpn\">AWS VPN product page</a>, <a href=\"http://aws.amazon.com/documentation/vpn\">AWS VPN documentation</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>Amazon Elastic Compute Cloud</fullname>\n         <p>Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable computing capacity in the AWS Cloud. \n          Using Amazon EC2 eliminates the need to invest in hardware up front, so you can develop and deploy applications \n          faster. Amazon Virtual Private Cloud (Amazon VPC) enables you to provision a logically isolated section of the \n          AWS Cloud where you can launch AWS resources in a virtual network that you've defined. Amazon Elastic Block Store \n          (Amazon EBS) provides block level storage volumes for use with EC2 instances. EBS volumes are highly available  \n          and reliable storage volumes that can be attached to any running instance and used like a hard drive.</p>\n         <p>To learn more, see the following resources:</p>\n         <ul>\n            <li>\n               <p>Amazon EC2: <a href=\"http://aws.amazon.com/ec2\">AmazonEC2 product page</a>, <a href=\"http://aws.amazon.com/documentation/ec2\">Amazon EC2 documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon EBS: <a href=\"http://aws.amazon.com/ebs\">Amazon EBS product page</a>, <a href=\"http://aws.amazon.com/documentation/ebs\">Amazon EBS documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>Amazon VPC: <a href=\"http://aws.amazon.com/vpc\">Amazon VPC product page</a>, <a href=\"http://aws.amazon.com/documentation/vpc\">Amazon VPC documentation</a>\n               </p>\n            </li>\n            <li>\n               <p>AWS VPN: <a href=\"http://aws.amazon.com/vpn\">AWS VPN product page</a>, <a href=\"http://aws.amazon.com/documentation/vpn\">AWS VPN documentation</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Elastic Compute Cloud",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ec2.amazonaws.com/doc/2016-11-15"
@@ -2911,7 +3002,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv6AddressCount",
-                        "smithy.api#documentation": "<p>The number of IPv6 addresses to assign to the network interface. Amazon EC2\n            automatically selects the IPv6 addresses from the subnet range. You can't use this\n            option if specifying specific IPv6 addresses.</p>",
+                        "smithy.api#documentation": "<p>The number of additional IPv6 addresses to assign to the network interface. \n    \t\tThe specified number of IPv6 addresses are assigned in addition to the \n    \t\texisting IPv6 addresses that are already assigned to the network interface. \n    \t\tAmazon EC2 automatically selects the IPv6 addresses from the subnet range. You \n    \t\tcan't use this option if specifying specific IPv6 addresses.</p>",
                         "smithy.api#xmlName": "ipv6AddressCount"
                     }
                 },
@@ -2941,7 +3032,7 @@
                     "target": "com.amazonaws.ec2#Ipv6AddressList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AssignedIpv6Addresses",
-                        "smithy.api#documentation": "<p>The IPv6 addresses assigned to the network interface.</p>",
+                        "smithy.api#documentation": "<p>The new IPv6 addresses assigned to the network interface. Existing IPv6 addresses \n        \tthat were assigned to the network interface before the request are not included.</p>",
                         "smithy.api#xmlName": "assignedIpv6Addresses"
                     }
                 },
@@ -3078,13 +3169,13 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ec2#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance. This is required for EC2-Classic. For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both. The operation fails if you specify an instance ID unless exactly one network interface is attached.</p>"
+                        "smithy.api#documentation": "<p>The ID of the instance. The instance must have exactly one attached network interface.\n      For EC2-VPC, you can specify either the instance ID or the network interface ID, but not both.\n      For EC2-Classic, you must specify an instance ID and the instance must be in the running\n      state.</p>"
                     }
                 },
                 "PublicIp": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Elastic IP address to associate with the instance. This is required for EC2-Classic.</p>"
+                        "smithy.api#documentation": "<p>[EC2-Classic] The Elastic IP address to associate with the instance. This is required for\n      EC2-Classic.</p>"
                     }
                 },
                 "AllowReassociation": {
@@ -3285,7 +3376,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "CertificateS3ObjectKey",
-                        "smithy.api#documentation": "<p>The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored. The \n\t\t\tobject key is formatted as follows:  <code>certificate_arn</code>/<code>role_arn</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored. The \n\t\t\tobject key is formatted as follows:  <code>role_arn</code>/<code>certificate_arn</code>.</p>",
                         "smithy.api#xmlName": "certificateS3ObjectKey"
                     }
                 },
@@ -3427,15 +3518,6 @@
         "com.amazonaws.ec2#AssociateSubnetCidrBlockRequest": {
             "type": "structure",
             "members": {
-                "Ipv6CidrBlock": {
-                    "target": "com.amazonaws.ec2#String",
-                    "traits": {
-                        "aws.protocols#ec2QueryName": "Ipv6CidrBlock",
-                        "smithy.api#documentation": "<p>The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix\n            length.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "ipv6CidrBlock"
-                    }
-                },
                 "SubnetId": {
                     "target": "com.amazonaws.ec2#SubnetId",
                     "traits": {
@@ -3443,6 +3525,15 @@
                         "smithy.api#documentation": "<p>The ID of your subnet.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "subnetId"
+                    }
+                },
+                "Ipv6CidrBlock": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Ipv6CidrBlock",
+                        "smithy.api#documentation": "<p>The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix\n            length.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "ipv6CidrBlock"
                     }
                 }
             }
@@ -3693,7 +3784,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "CertificateS3ObjectKey",
-                        "smithy.api#documentation": "<p>The key of the Amazon S3 object ey where the certificate, certificate chain, and encrypted private key bundle \n\t\t\tis stored. The object key is formated as follows:  <code>certificate_arn</code>/<code>role_arn</code>.\n\t\t</p>",
+                        "smithy.api#documentation": "<p>The key of the Amazon S3 object ey where the certificate, certificate chain, and encrypted private key bundle \n\t\t\tis stored. The object key is formated as follows:  <code>role_arn</code>/<code>certificate_arn</code>.\n\t\t</p>",
                         "smithy.api#xmlName": "certificateS3ObjectKey"
                     }
                 },
@@ -7901,7 +7992,7 @@
                 "target": "com.amazonaws.ec2#CopyImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Initiates the copy of an AMI from the specified source Region to the current Region. You specify the destination Region by using its endpoint when making the request.</p>\n         <p>Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots\n       remain unencrypted, unless you set <code>Encrypted</code> during the copy operation. You cannot create an unencrypted \n       copy of an encrypted backing snapshot.</p>\n         <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a>\n        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a \n   \t\tRegion to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one \n   \t\tOutpost to another, or within the same Outpost.</p>\n     \t\n     \t   <p>To copy an AMI from one Region to another, specify the source Region using the  \n     \t\t<b>SourceRegion</b> parameter, and specify the \n     \t\tdestination Region using its endpoint. Copies of encrypted backing snapshots for\n     \t\tthe AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, \n     \t\tunless you set <code>Encrypted</code> during the copy operation. You cannot \n     \t\tcreate an unencrypted copy of an encrypted backing snapshot.</p>\n   \t\n   \t     <p>To copy an AMI from a Region to an Outpost, specify the source Region using the  \n   \t\t<b>SourceRegion</b> parameter, and specify the \n   \t\tARN of the destination Outpost using <b>DestinationOutpostArn</b>. \n   \t\tBacking snapshots copied to an Outpost are encrypted by default using the default\n   \t\tencryption key for the Region, or a different key that you specify in the request using \n   \t\t<b>KmsKeyId</b>. Outposts do not support unencrypted \n   \t\tsnapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n   \t\t\tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n   \n   \t\n         <p></p>\n         <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a>\n        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CopyImageRequest": {
@@ -7910,7 +8001,7 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n\t\t\t\tidempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a> in the \n\t\t\t  <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure\n       idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a> \n       in the <i>Amazon EC2 API Reference</i>.</p>"
                     }
                 },
                 "Description": {
@@ -7956,6 +8047,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "DestinationOutpostArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only \n  \t\tspecify this parameter when copying an AMI from an AWS Region to an Outpost. \n  \t\tThe AMI must be in the Region of the destination Outpost. You cannot copy an \n  \t\tAMI from an Outpost to a Region, from one Outpost to another, or within the same \n  \t\tOutpost.</p>\n  \t\n  \t      <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-amis\">\n  \t\tCopying AMIs from an AWS Region to an Outpost</a> in the \n  \t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                    }
+                },
                 "DryRun": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
@@ -7994,7 +8091,7 @@
                 "target": "com.amazonaws.ec2#CopySnapshotResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy the\n      snapshot within the same Region or from one Region to another. You can use the snapshot to\n      create EBS volumes or Amazon Machine Images (AMIs).</p>\n         <p>Copies of encrypted EBS snapshots remain encrypted. Copies of unencrypted snapshots remain\n      unencrypted, unless you enable encryption for the snapshot copy operation. By default, encrypted \n      snapshot copies use the default AWS Key Management Service (AWS KMS) customer master key (CMK); however, you can specify a \n      different CMK.</p>\n         <p>To copy an encrypted snapshot that has been shared from another account, you must have\n      permissions for the CMK used to encrypt the snapshot.</p>\n         <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not\n      be used for any purpose.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS snapshot</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Copies a point-in-time snapshot of an EBS volume and stores it in Amazon S3. You can copy a\n      snapshot within the same Region, from one Region to another, or from a Region to an Outpost. \n      You can't copy a snapshot from an Outpost to a Region, from one Outpost to another, or within \n      the same Outpost.</p>\n         <p>You can use the snapshot to create EBS volumes or Amazon Machine Images (AMIs).</p>\n    \n  \t\n         <p>When copying snapshots to a Region, copies of encrypted EBS snapshots remain encrypted. \n    \tCopies of unencrypted snapshots remain unencrypted, unless you enable encryption for the \n    \tsnapshot copy operation. By default, encrypted snapshot copies use the default AWS Key Management Service (AWS KMS) \n    \tcustomer master key (CMK); however, you can specify a different CMK. To copy an encrypted \n    \tsnapshot that has been shared from another account, you must have permissions for the CMK \n    \tused to encrypt the snapshot.</p>\n  \t\n  \t      <p>Snapshots copied to an Outpost are encrypted by default using the default\n  \t\tencryption key for the Region, or a different key that you specify in the request using \n  \t\t<b>KmsKeyId</b>. Outposts do not support unencrypted \n  \t\tsnapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n  \t\t\tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>Snapshots created by copying another snapshot have an arbitrary volume ID that should not\n      be used for any purpose.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-copy-snapshot.html\">Copying an Amazon EBS snapshot</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CopySnapshotRequest": {
@@ -8004,6 +8101,12 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the EBS snapshot.</p>"
+                    }
+                },
+                "DestinationOutpostArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Outpost to which to copy the snapshot. Only \n\t\tspecify this parameter when copying a snapshot from an AWS Region to an Outpost. \n\t\tThe snapshot must be in the Region for the destination Outpost. You cannot copy a \n\t\tsnapshot from an Outpost to a Region, from one Outpost to another, or within the same \n\t\tOutpost.</p>\n  \t      <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#copy-snapshots\">\n  \t\tCopying snapshots from an AWS Region to an Outpost</a> in the \n  \t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "DestinationRegion": {
@@ -9027,7 +9130,7 @@
                 "ReplaceUnhealthyInstances": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether EC2 Fleet should replace unhealthy instances.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported only for\n         fleets of type <code>maintain</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks\">EC2 Fleet\n            health checks</a> in the <i>Amazon EC2 User Guide</i>.</p>"
                     }
                 },
                 "TagSpecifications": {
@@ -9282,7 +9385,7 @@
                 "target": "com.amazonaws.ec2#CreateImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped.</p>\n         <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance \n     \tthat is either running or stopped.</p>\n     \n     \n      \n   \t\n   \t     <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the \n     \tnew AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, \n     \tthe instance automatically launches with those additional volumes.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateImageRequest": {
@@ -9292,7 +9395,7 @@
                     "target": "com.amazonaws.ec2#BlockDeviceMappingRequestList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "BlockDeviceMapping",
-                        "smithy.api#documentation": "<p>The block device mappings. This parameter cannot be used to modify the encryption status of existing volumes or snapshots. To create an AMI with encrypted snapshots, use the <a>CopyImage</a> action.</p>",
+                        "smithy.api#documentation": "<p>The block device mappings. This parameter cannot be used to modify the encryption \n   \t\tstatus of existing volumes or snapshots. To create an AMI with encrypted snapshots, \n   \t\tuse the <a>CopyImage</a> action.</p>",
                         "smithy.api#xmlName": "blockDeviceMapping"
                     }
                 },
@@ -9387,7 +9490,7 @@
                     "target": "com.amazonaws.ec2#ExportToS3TaskSpecification",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ExportToS3",
-                        "smithy.api#documentation": "<p>The format and location for an instance export task.</p>",
+                        "smithy.api#documentation": "<p>The format and location for an export instance task.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "exportToS3"
                     }
@@ -9413,7 +9516,7 @@
                 "TagSpecifications": {
                     "target": "com.amazonaws.ec2#TagSpecificationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to apply to the instance export task during creation.</p>",
+                        "smithy.api#documentation": "<p>The tags to apply to the export instance task during creation.</p>",
                         "smithy.api#xmlName": "TagSpecification"
                     }
                 }
@@ -9426,7 +9529,7 @@
                     "target": "com.amazonaws.ec2#ExportTask",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ExportTask",
-                        "smithy.api#documentation": "<p>Information about the instance export task.</p>",
+                        "smithy.api#documentation": "<p>Information about the export instance task.</p>",
                         "smithy.api#xmlName": "exportTask"
                     }
                 }
@@ -9881,13 +9984,6 @@
         "com.amazonaws.ec2#CreateNatGatewayRequest": {
             "type": "structure",
             "members": {
-                "AllocationId": {
-                    "target": "com.amazonaws.ec2#AllocationId",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "ClientToken": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -9913,6 +10009,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to assign to the NAT gateway.</p>",
                         "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "AllocationId": {
+                    "target": "com.amazonaws.ec2#AllocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The allocation ID of an Elastic IP address to associate with the NAT gateway. If the Elastic IP address is associated with another resource, you must first disassociate it.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -10785,7 +10888,7 @@
                 "target": "com.amazonaws.ec2#Snapshot"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for\n      backups, to make copies of EBS volumes, and to save data before shutting down an\n      instance.</p>\n         <p>When a snapshot is created, any AWS Marketplace product codes that are associated with the\n      source volume are propagated to the snapshot.</p>\n         <p>You can take a snapshot of an attached volume that is in use. However, snapshots only\n      capture data that has been written to your EBS volume at the time the snapshot command is\n      issued; this might exclude any data that has been cached by any applications or the operating\n      system. If you can pause any file systems on the volume long enough to take a snapshot, your\n      snapshot should be complete. However, if you cannot pause all file writes to the volume, you\n      should unmount the volume from within the instance, issue the snapshot command, and then\n      remount the volume to ensure a consistent and complete snapshot. You may remount and use your\n      volume while the snapshot status is <code>pending</code>.</p>\n         <p>To create a snapshot for EBS volumes that serve as root devices, you should stop the\n      instance before taking the snapshot.</p>\n         <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that\n      are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes\n      and any associated snapshots always remain protected.</p>\n         <p>You can tag your snapshots during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging your Amazon EC2\n        resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon Elastic Block Store</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates a snapshot of an EBS volume and stores it in Amazon S3. You can use snapshots for\n  \tbackups, to make copies of EBS volumes, and to save data before shutting down an\n  \tinstance.</p>\n    \n    \n         <p>You can create snapshots of volumes in a Region and volumes on an Outpost. If you \n    \tcreate a snapshot of a volume in a Region, the snapshot must be stored in the same \n    \tRegion as the volume. If you create a snapshot of a volume on an Outpost, the snapshot \n    \tcan be stored on the same Outpost as the volume, or in the Region for that Outpost.</p>\n  \t\n         <p>When a snapshot is created, any AWS Marketplace product codes that are associated with the\n      source volume are propagated to the snapshot.</p>\n         <p>You can take a snapshot of an attached volume that is in use. However, snapshots only\n      capture data that has been written to your EBS volume at the time the snapshot command is\n      issued; this might exclude any data that has been cached by any applications or the operating\n      system. If you can pause any file systems on the volume long enough to take a snapshot, your\n      snapshot should be complete. However, if you cannot pause all file writes to the volume, you\n      should unmount the volume from within the instance, issue the snapshot command, and then\n      remount the volume to ensure a consistent and complete snapshot. You may remount and use your\n      volume while the snapshot status is <code>pending</code>.</p>\n         <p>To create a snapshot for EBS volumes that serve as root devices, you should stop the\n      instance before taking the snapshot.</p>\n         <p>Snapshots that are taken from encrypted volumes are automatically encrypted. Volumes that\n      are created from encrypted snapshots are also automatically encrypted. Your encrypted volumes\n      and any associated snapshots always remain protected.</p>\n         <p>You can tag your snapshots during creation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging your Amazon EC2\n        resources</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AmazonEBS.html\">Amazon Elastic Block Store</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateSnapshotRequest": {
@@ -10795,6 +10898,12 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the snapshot.</p>"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Outpost on which to create a local  \n  \tsnapshot.</p>\n  \t      <ul>\n            <li>\n  \t\t\t          <p>To create a snapshot of a volume in a Region, omit this parameter. The snapshot \n  \t\t\t\tis created in the same Region as the volume.</p>\n  \t\t        </li>\n            <li>\n  \t\t\t          <p>To create a snapshot of a volume on an Outpost and store the snapshot in the \n  \t\t\t\tRegion, omit this parameter. The snapshot is created in the Region for the \n  \t\t\t\tOutpost.</p>\n  \t\t        </li>\n            <li>\n  \t\t\t          <p>To create a snapshot of a volume on an Outpost and store the snapshot on an \n  \t\t\tOutpost, specify the ARN of the destination Outpost. The snapshot must be created on \n  \t\t\tthe same Outpost as the volume.</p>\n  \t\t        </li>\n         </ul>\n  \t      <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-snapshot\">\n  \t\tCreating local snapshots from volumes on an Outpost</a> in the \n  \t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "VolumeId": {
@@ -10830,7 +10939,7 @@
                 "target": "com.amazonaws.ec2#CreateSnapshotsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3.\n    Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot\n    each that is crash-consistent across the instance. Boot volumes can be excluded by changing the \n    parameters. </p>"
+                "smithy.api#documentation": "<p>Creates crash-consistent snapshots of multiple EBS volumes and stores the data in S3.\n    Volumes are chosen by specifying an instance. Any attached volumes will produce one snapshot\n    each that is crash-consistent across the instance. Boot volumes can be excluded by changing the \n    parameters. </p>\n  \t\n         <p>You can create multi-volume snapshots of instances in a Region and instances on an \n  \tOutpost. If you create snapshots from an instance in a Region, the snapshots must be stored \n  \tin the same Region as the instance. If you create snapshots from an instance on an Outpost, \n  \tthe snapshots can be stored on the same Outpost as the instance, or in the Region for that \n  \tOutpost.</p>"
             }
         },
         "com.amazonaws.ec2#CreateSnapshotsRequest": {
@@ -10847,6 +10956,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The instance to specify which volumes should be included in the snapshots.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Outpost on which to create the local  \n  \t\tsnapshots.</p>\n  \t      <ul>\n            <li>\n  \t\t\t          <p>To create snapshots from an instance in a Region, omit this parameter. The \n  \t\t\t\tsnapshots are created in the same Region as the instance.</p>\n  \t\t        </li>\n            <li>\n  \t\t\t          <p>To create snapshots from an instance on an Outpost and store the snapshots \n  \t\t\t\tin the Region, omit this parameter. The snapshots are created in the Region \n  \t\t\t\tfor the Outpost.</p>\n  \t\t        </li>\n            <li>\n  \t\t\t          <p>To create snapshots from an instance on an Outpost and store the snapshots \n  \t\t\t\ton an Outpost, specify the ARN of the destination Outpost. The snapshots must \n  \t\t\t\tbe created on the same Outpost as the instance.</p>\n  \t\t        </li>\n         </ul>\n  \t      <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot\">\n  \t\tCreating multi-volume local snapshots from instances on an Outpost</a> in the \n  \t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "TagSpecifications": {
@@ -10978,13 +11093,6 @@
                         "smithy.api#documentation": "<p>The AZ ID or the Local Zone ID of the subnet.</p>"
                     }
                 },
-                "CidrBlock": {
-                    "target": "com.amazonaws.ec2#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "Ipv6CidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -11010,6 +11118,13 @@
                         "aws.protocols#ec2QueryName": "DryRun",
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
+                    }
+                },
+                "CidrBlock": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -15366,7 +15481,7 @@
                 "target": "com.amazonaws.ec2#DeleteVpcEndpointsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes one or more specified VPC endpoints. Deleting a gateway endpoint also deletes\n            the endpoint routes in the route tables that were associated with the endpoint. Deleting\n            an interface endpoint or a Gateway Load Balancer endpoint deletes the endpoint network interfaces. Gateway Load Balancer endpoints can only be deleted if the routes that are associated with the endpoint are deleted.</p>"
+                "smithy.api#documentation": "<p>Deletes one or more specified VPC endpoints. You can delete any of the following types of VPC endpoints.  </p>\n        <ul>\n            <li>\n               <p>Gateway endpoint,</p>\n            </li>\n            <li>\n               <p>Gateway Load Balancer endpoint,</p>\n            </li>\n            <li>\n               <p>Interface endpoint</p>\n            </li>\n         </ul>\n        <p>The following rules apply when you delete a VPC endpoint:</p>\n        <ul>\n            <li>\n                <p>When you delete a gateway endpoint, we delete the endpoint routes in the route tables that are associated with the endpoint.</p>\n            </li>\n            <li>\n                <p>When you delete a Gateway Load Balancer endpoint, we delete the endpoint network interfaces. </p>\n                <p>You can only delete Gateway Load Balancer endpoints when the routes that are associated with the endpoint are deleted.</p>\n            </li>\n            <li>\n                <p>When you delete an interface endpoint, we delete the  endpoint network interfaces.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ec2#DeleteVpcEndpointsRequest": {
@@ -15871,6 +15986,81 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the specified Elastic IP addresses or all of your Elastic IP addresses.</p>\n         <p>An Elastic IP address is for use in either the EC2-Classic platform or in a VPC.\n\t\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeAddressesAttribute": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeAddressesAttributeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeAddressesAttributeResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the attributes of the specified Elastic IP addresses. For requirements, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS\">Using reverse DNS for email applications</a>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Addresses",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeAddressesAttributeRequest": {
+            "type": "structure",
+            "members": {
+                "AllocationIds": {
+                    "target": "com.amazonaws.ec2#AllocationIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[EC2-VPC] The allocation IDs.</p>",
+                        "smithy.api#xmlName": "AllocationId"
+                    }
+                },
+                "Attribute": {
+                    "target": "com.amazonaws.ec2#AddressAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute of the IP address.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#AddressMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeAddressesAttributeResult": {
+            "type": "structure",
+            "members": {
+                "Addresses": {
+                    "target": "com.amazonaws.ec2#AddressSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AddressSet",
+                        "smithy.api#documentation": "<p>Information about the IP addresses.</p>",
+                        "smithy.api#xmlName": "addressSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
             }
         },
         "com.amazonaws.ec2#DescribeAddressesRequest": {
@@ -18751,7 +18941,7 @@
                 "Attribute": {
                     "target": "com.amazonaws.ec2#ImageAttributeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AMI attribute.</p>\n   \t     <p>\n            <b>Note</b>: Depending on your account privileges, the <code>blockDeviceMapping</code>\n   \t\tattribute may return a <code>Client.AuthFailure</code> error. If this happens, use\n   \t\t<a>DescribeImages</a> to get information about the block device mapping for the AMI.</p>",
+                        "smithy.api#documentation": "<p>The AMI attribute.</p>\n   \t     <p>\n            <b>Note</b>: The <code>blockDeviceMapping</code> attribute is deprecated. \n   \t    Using this attribute returns the <code>Client.AuthFailure</code> error. To get information about \n   \t    the block device mappings for an AMI, use the <a>DescribeImages</a> action.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18827,7 +19017,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>architecture</code> - The image architecture (<code>i386</code> |\n            <code>x86_64</code> | <code>arm64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates\n          whether the Amazon EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for\n          example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS\n          volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume\n            (<code>gp2</code> | <code>io1</code> | <code>io2</code> | <code>st1 </code>| <code>sc1</code> |\n            <code>standard</code>).</p>\n            </li>\n            <li>\n    \t\t         <p>\n    \t\t\t           <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p>\n    \t       </li>\n            <li>\n               <p>\n                  <code>description</code> - The description of the image (provided during image\n          creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ena-support</code> - A Boolean that indicates whether enhanced networking\n          with ENA is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |\n          <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-id</code> - The ID of the image.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> |\n            <code>ramdisk</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>is-public</code> - A Boolean that indicates whether the image is public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manifest-location</code> - The location of the image manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AMI (provided during image creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias, from an Amazon-maintained list  \n          (<code>amazon</code> | <code>aws-marketplace</code>). \n          This is not the user-configured AWS account alias set using the IAM console.\n          We recommend that you use the related parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The AWS account ID of the owner. We recommend that \n          you use the related parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code> - The platform. To only list Windows-based AMIs, use\n            <code>windows</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code.type</code> - The type of the product code (<code>devpay</code> |\n            <code>marketplace</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> |\n            <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the image (<code>available</code> | <code>pending</code>\n          | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-message</code> - The message for the state change.</p>\n            </li>\n            <li>\n                <p>\n                  <code>sriov-net-support</code> - A value of <code>simple</code> indicates\n                    that enhanced networking with the Intel 82599 VF interface is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> |\n            <code>hvm</code>).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>architecture</code> - The image architecture (<code>i386</code> |\n            <code>x86_64</code> | <code>arm64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.delete-on-termination</code> - A Boolean value that indicates\n          whether the Amazon EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.device-name</code> - The device name specified in the block device mapping (for\n          example, <code>/dev/sdh</code> or <code>xvdh</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.snapshot-id</code> - The ID of the snapshot used for the EBS\n          volume.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-size</code> - The volume size of the EBS volume, in GiB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>block-device-mapping.volume-type</code> - The volume type of the EBS volume\n            (<code>gp2</code> | <code>io1</code> | <code>io2</code> | <code>st1 </code>| <code>sc1</code> |\n            <code>standard</code>).</p>\n            </li>\n            <li>\n    \t\t         <p>\n    \t\t\t           <code>block-device-mapping.encrypted</code> - A Boolean that indicates whether the EBS volume is encrypted.</p>\n    \t       </li>\n            <li>\n               <p>\n                  <code>description</code> - The description of the image (provided during image\n          creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ena-support</code> - A Boolean that indicates whether enhanced networking\n          with ENA is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor type (<code>ovm</code> |\n          <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-id</code> - The ID of the image.</p>\n            </li>\n            <li>\n               <p>\n                  <code>image-type</code> - The image type (<code>machine</code> | <code>kernel</code> |\n            <code>ramdisk</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>is-public</code> - A Boolean that indicates whether the image is public.</p>\n            </li>\n            <li>\n               <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>manifest-location</code> - The location of the image manifest.</p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code> - The name of the AMI (provided during image creation).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-alias</code> - The owner alias (<code>amazon</code> | <code>aws-marketplace</code>). \n        \tThe valid aliases are defined in an Amazon-maintained list. This is not the AWS account alias that can be \n        \tset using the IAM console. We recommend that you use the <b>Owner</b> \n        \trequest parameter instead of this filter.</p>\n            </li>\n            <li>\n      \t        <p>\n                  <code>owner-id</code> - The AWS account ID of the owner. We recommend that you use the \n      \t\t<b>Owner</b> request parameter instead of this filter.</p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code> - The platform. To only list Windows-based AMIs, use\n            <code>windows</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code</code> - The product code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>product-code.type</code> - The type of the product code (<code>devpay</code> |\n            <code>marketplace</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-name</code> - The device name of the root device volume (for example, <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>root-device-type</code> - The type of the root device volume (<code>ebs</code> |\n            <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the image (<code>available</code> | <code>pending</code>\n          | <code>failed</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state-reason-message</code> - The message for the state change.</p>\n            </li>\n            <li>\n                <p>\n                  <code>sriov-net-support</code> - A value of <code>simple</code> indicates\n                    that enhanced networking with the Intel 82599 VF interface is enabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>virtualization-type</code> - The virtualization type (<code>paravirtual</code> |\n            <code>hvm</code>).</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -21185,7 +21375,7 @@
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Filter",
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n\t\t             <p>\n                  <code>addresses.private-ip-address</code> - The private IPv4 addresses\n                    associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.primary</code> - Whether the private IPv4 address is the primary\n                    IP address associated with the network interface. </p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.association.public-ip</code> - The association ID returned when\n                    the network interface was associated with the Elastic IP address\n                    (IPv4).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.association-id</code> - The association ID returned when the\n                    network interface was associated with an IPv4 address.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.allocation-id</code> - The allocation ID returned when you\n                    allocated the Elastic IP address (IPv4) for your network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.ip-owner-id</code> - The owner of the Elastic IP address\n                    (IPv4) associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.public-ip</code> - The address of the Elastic IP address\n                    (IPv4) bound to the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t \t\t          <p>\n                  <code>association.public-dns-name</code> - The public DNS name for the network\n                    interface (IPv4).</p>\n\t\t \t        </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.attachment-id</code> - The ID of the interface attachment.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.device-index</code> - The device index to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>availability-zone</code> - The Availability Zone of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>description</code> - The description of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>group-id</code> - The ID of a security group associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>group-name</code> - The name of a security group associated with the network interface.</p>\n\t\t          </li>\n            <li>\n                  <p>\n                  <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with\n                    the network interface.</p>\n               </li>\n            <li>\n\t\t             <p>\n                  <code>mac-address</code> - The MAC address of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>network-interface-id</code> - The ID of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>owner-id</code> - The AWS account ID of the network interface owner.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>private-ip-address</code> - The private IPv4 address or addresses of the\n                    network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>requester-id</code> - The ID of the entity that launched the instance on your behalf (for example, AWS Management Console, Auto Scaling, and so on).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>requester-managed</code> - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. \n\t\t            A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. \n\t\t            The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; \n\t\t            if a network interface is attached to an instance the status is <code>in-use</code>.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>subnet-id</code> - The ID of the subnet for the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>vpc-id</code> - The ID of the VPC for the network interface.</p>\n\t\t          </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n\t\t       <ul>\n            <li>\n\t\t             <p>\n                  <code>addresses.private-ip-address</code> - The private IPv4 addresses\n                    associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.primary</code> - Whether the private IPv4 address is the primary\n                    IP address associated with the network interface. </p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.association.public-ip</code> - The association ID returned when\n                    the network interface was associated with the Elastic IP address\n                    (IPv4).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>addresses.association.owner-id</code> - The owner ID of the addresses associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.association-id</code> - The association ID returned when the\n                    network interface was associated with an IPv4 address.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.allocation-id</code> - The allocation ID returned when you\n                    allocated the Elastic IP address (IPv4) for your network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.ip-owner-id</code> - The owner of the Elastic IP address\n                    (IPv4) associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>association.public-ip</code> - The address of the Elastic IP address\n                    (IPv4) bound to the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t \t\t          <p>\n                  <code>association.public-dns-name</code> - The public DNS name for the network\n                    interface (IPv4).</p>\n\t\t \t        </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.attachment-id</code> - The ID of the interface attachment.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.attach-time</code> - The time that the network interface was attached to an instance.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.delete-on-termination</code> - Indicates whether the attachment is deleted when an instance is terminated.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.device-index</code> - The device index to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.instance-id</code> - The ID of the instance to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.instance-owner-id</code> - The owner ID of the instance to which the network interface is attached.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>attachment.status</code> - The status of the attachment (<code>attaching</code> | <code>attached</code> | <code>detaching</code> | <code>detached</code>).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>availability-zone</code> - The Availability Zone of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>description</code> - The description of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>group-id</code> - The ID of a security group associated with the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>group-name</code> - The name of a security group associated with the network interface.</p>\n\t\t          </li>\n            <li>\n                  <p>\n                  <code>ipv6-addresses.ipv6-address</code> - An IPv6 address associated with\n                    the network interface.</p>\n               </li>\n            <li>\n\t\t             <p>\n                  <code>mac-address</code> - The MAC address of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>network-interface-id</code> - The ID of the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>owner-id</code> - The AWS account ID of the network interface owner.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>private-ip-address</code> - The private IPv4 address or addresses of the\n                    network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>private-dns-name</code> - The private DNS name of the network interface (IPv4).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>requester-id</code> - The alias or AWS account ID of the principal or service that created the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>requester-managed</code> - Indicates whether the network interface is being managed by an AWS service (for example, AWS Management Console, Auto Scaling, and so on).</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>source-dest-check</code> - Indicates whether the network interface performs source/destination checking. \n\t\t            A value of <code>true</code> means checking is enabled, and <code>false</code> means checking is disabled. \n\t\t            The value must be <code>false</code> for the network interface to perform network address translation (NAT) in your VPC. </p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>status</code> - The status of the network interface. If the network interface is not attached to an instance, the status is <code>available</code>; \n\t\t            if a network interface is attached to an instance the status is <code>in-use</code>.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>subnet-id</code> - The ID of the subnet for the network interface.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n\t\t          </li>\n            <li>\n\t\t             <p>\n                  <code>vpc-id</code> - The ID of the VPC for the network interface.</p>\n\t\t          </li>\n         </ul>",
                         "smithy.api#xmlName": "filter"
                     }
                 },
@@ -22305,7 +22495,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>description</code> - The description of the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound\n                    security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.from-port</code> - For an outbound rule, the\n                    start of port range for the TCP and UDP protocols, or an ICMP type\n                    number.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.group-id</code> - The ID of a security group\n                    that has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.group-name</code> - The name of a security group\n                    that has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an\n                    outbound security group rule.</p>\n            </li>\n            <li>\n     \t\t        <p>\n                  <code>egress.ip-permission.prefix-list-id</code> - The ID of a prefix list to which a security group rule allows outbound access.</p>\n     \t      </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.protocol</code> - The IP protocol for an\n                    outbound security group rule (<code>tcp</code> | <code>udp</code> |\n                        <code>icmp</code> or a protocol number).</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.to-port</code> - For an outbound rule, the end\n                    of port range for the TCP and UDP protocols, or an ICMP code.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.user-id</code> - The ID of an AWS account that\n                    has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>group-id</code> - The ID of the security group. </p>\n            </li>\n            <li>\n               <p>\n                  <code>group-name</code> - The name of the security group.</p>\n            </li>\n            <li>\n               <p>\n                    <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security\n                    group rule.</p>\n            </li>\n            <li>\n               <p>\n                    <code>ip-permission.from-port</code> - For an inbound rule, the start of port\n                    range for the TCP and UDP protocols, or an ICMP type number.</p>\n            </li>\n            <li>\n               <p>\n                    <code>ip-permission.group-id</code> - The ID of a security group that has been\n                    referenced in an inbound security group rule.</p>\n            </li>\n            <li>\n\t\t\t\t           <p>\n                    <code>ip-permission.group-name</code> - The name of a security group that has\n                    been referenced in an inbound security group rule.</p>\n\t\t\t         </li>\n            <li>\n               <p>\n                  <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security\n                    group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-permission.prefix-list-id</code> - The ID of a prefix list from which a security group rule allows inbound access.</p>\n            </li>\n            <li>\n               <p>\n                    <code>ip-permission.protocol</code> - The IP protocol for an inbound security\n                    group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code> or a\n                    protocol number).</p>\n            </li>\n            <li>\n               <p>\n                    <code>ip-permission.to-port</code> - For an inbound rule, the end of port range\n                    for the TCP and UDP protocols, or an ICMP code.</p>\n            </li>\n            <li>\n               <p>\n                    <code>ip-permission.user-id</code> - The ID of an AWS account that has been\n                    referenced in an inbound security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The AWS account ID of the owner of the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters. If using multiple filters for rules, the results include security groups for which any combination of rules - not necessarily a single rule - match all filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>description</code> - The description of the security group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.cidr</code> - An IPv4 CIDR block for an outbound\n                    security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.from-port</code> - For an outbound rule, the\n                    start of port range for the TCP and UDP protocols, or an ICMP type\n                    number.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.group-id</code> - The ID of a security group\n                    that has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.group-name</code> - The name of a security group\n                    that is referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an\n                    outbound security group rule.</p>\n            </li>\n            <li>\n     \t\t        <p>\n                  <code>egress.ip-permission.prefix-list-id</code> - The ID of a prefix list to which a security group rule allows outbound access.</p>\n     \t      </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.protocol</code> - The IP protocol for an\n                    outbound security group rule (<code>tcp</code> | <code>udp</code> |\n                        <code>icmp</code>, a protocol number, or -1 for all protocols).</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.to-port</code> - For an outbound rule, the end\n                    of port range for the TCP and UDP protocols, or an ICMP code.</p>\n            </li>\n            <li>\n                <p>\n                  <code>egress.ip-permission.user-id</code> - The ID of an AWS account that\n                    has been referenced in an outbound security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>group-id</code> - The ID of the security group. </p>\n            </li>\n            <li>\n               <p>\n                  <code>group-name</code> - The name of the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.cidr</code> - An IPv4 CIDR block for an inbound security\n                    group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.from-port</code> - For an inbound rule, the start of port\n                    range for the TCP and UDP protocols, or an ICMP type number.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.group-id</code> - The ID of a security group that has been\n                    referenced in an inbound security group rule.</p>\n            </li>\n            <li>\n\t\t\t            <p>\n                  <code>ip-permission.group-name</code> - The name of a security group that is\n                    referenced in an inbound security group rule.</p>\n\t           </li>\n            <li>\n               <p>\n                  <code>ip-permission.ipv6-cidr</code> - An IPv6 CIDR block for an inbound security\n                    group rule.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-permission.prefix-list-id</code> - The ID of a prefix list from which a security group rule allows inbound access.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.protocol</code> - The IP protocol for an inbound security\n                group rule (<code>tcp</code> | <code>udp</code> | <code>icmp</code>, a\n                protocol number, or -1 for all protocols).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.to-port</code> - For an inbound rule, the end of port range\n                    for the TCP and UDP protocols, or an ICMP code.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ip-permission.user-id</code> - The ID of an AWS account that has been\n                    referenced in an inbound security group rule.</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The AWS account ID of the owner of the security group.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vpc-id</code> - The ID of the VPC specified when the security group was created.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -25053,7 +25243,7 @@
                 "target": "com.amazonaws.ec2#DescribeVpcEndpointServicesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes available services to which you can create a VPC endpoint.</p>\n        <p>When the service provider  and the consumer have different accounts  multiple\n            Availability Zones, and the consumer views the VPC endpoint service information, the\n            response only includes the common Availability Zones. For example, when the service\n            provider account uses <code>us-east-1a</code> and <code>us-east-1c</code> and the\n            consumer uses <code>us-east-1a</code> and us-east-1a and us-east-1b, the response\n            includes the VPC endpoint services in the common Availability Zone,\n                <code>us-east-1a</code>.</p>"
+                "smithy.api#documentation": "<p>Describes available services to which you can create a VPC endpoint.</p>\n        <p>When the service provider and the consumer have different accounts in multiple\n            Availability Zones, and the consumer views the VPC endpoint service information, the\n            response only includes the common Availability Zones. For example, when the service\n            provider account uses <code>us-east-1a</code> and <code>us-east-1c</code> and the\n            consumer uses <code>us-east-1a</code> and <code>us-east-1b</code>, the response includes\n            the VPC endpoint services in the common Availability Zone,\n            <code>us-east-1a</code>.</p>"
             }
         },
         "com.amazonaws.ec2#DescribeVpcEndpointServicesRequest": {
@@ -25075,7 +25265,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>service-name</code> - The name of the service.</p>\n            </li>\n            <li>\n        \t\t     <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n        \t   </li>\n            <li>\n        \t\t     <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n        \t   </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>service-name</code> - The name of the service.</p>\n            </li>\n            <li>\n                <p>\n                  <code>service-type</code> - The type of service (<code>Interface</code> |\n                        <code>Gateway</code>).</p>\n            </li>\n            <li>\n        \t\t     <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n        \t   </li>\n            <li>\n        \t\t     <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n        \t   </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -27211,6 +27401,14 @@
                         "smithy.api#xmlName": "throughput"
                     }
                 },
+                "OutpostArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OutpostArn",
+                        "smithy.api#documentation": "<p>The ARN of the Outpost on which the snapshot is stored.</p>",
+                        "smithy.api#xmlName": "outpostArn"
+                    }
+                },
                 "Encrypted": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
@@ -29074,7 +29272,7 @@
                 "TagSpecifications": {
                     "target": "com.amazonaws.ec2#TagSpecificationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to apply to the image being exported.</p>",
+                        "smithy.api#documentation": "<p>The tags to apply to the export image task during creation.</p>",
                         "smithy.api#xmlName": "TagSpecification"
                     }
                 }
@@ -29159,7 +29357,7 @@
                     "target": "com.amazonaws.ec2#TagList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "TagSet",
-                        "smithy.api#documentation": "<p>Any tags assigned to the image being exported.</p>",
+                        "smithy.api#documentation": "<p>Any tags assigned to the export image task.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
                 }
@@ -29228,7 +29426,7 @@
                     "target": "com.amazonaws.ec2#TagList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "TagSet",
-                        "smithy.api#documentation": "<p>Any tags assigned to the image being exported.</p>",
+                        "smithy.api#documentation": "<p>Any tags assigned to the export image task.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
                 }
@@ -29319,7 +29517,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an instance export task.</p>"
+                "smithy.api#documentation": "<p>Describes an export instance task.</p>"
             }
         },
         "com.amazonaws.ec2#ExportTaskId": {
@@ -29448,7 +29646,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the format and location for an instance export task.</p>"
+                "smithy.api#documentation": "<p>Describes the format and location for the export task.</p>"
             }
         },
         "com.amazonaws.ec2#ExportToS3TaskSpecification": {
@@ -29488,7 +29686,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an instance export task.</p>"
+                "smithy.api#documentation": "<p>Describes an export instance task.</p>"
             }
         },
         "com.amazonaws.ec2#ExportTransitGatewayRoutes": {
@@ -29673,7 +29871,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. \n         Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.\n         The filters supported by a describe operation are documented with the describe operation. For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <a>DescribeAvailabilityZones</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeImages</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeInstances</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeKeyPairs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSecurityGroups</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSnapshots</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSubnets</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeTags</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeVolumes</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeVpcs</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A filter name and value pair that is used to return a more specific list of results from a describe operation. \n         Filters can be used to match a set of resources by specific criteria, such as tags, attributes, or IDs.</p>"
             }
         },
         "com.amazonaws.ec2#FilterList": {
@@ -29838,7 +30036,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ReplaceUnhealthyInstances",
-                        "smithy.api#documentation": "<p>Indicates whether EC2 Fleet should replace unhealthy instances.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether EC2 Fleet should replace unhealthy Spot Instances. Supported only for\n         fleets of type <code>maintain</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-ec2-fleet.html#ec2-fleet-health-checks\">EC2 Fleet\n            health checks</a> in the <i>Amazon EC2 User Guide</i>.</p>",
                         "smithy.api#xmlName": "replaceUnhealthyInstances"
                     }
                 },
@@ -30045,7 +30243,7 @@
                     "target": "com.amazonaws.ec2#Double",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Priority",
-                        "smithy.api#documentation": "<p>The priority for the launch template override. If <b>AllocationStrategy</b> is set to <code>prioritized</code>, EC2 Fleet uses priority to\n         determine which launch template override to use first in fulfilling On-Demand capacity. The\n         highest priority is launched first. Valid values are whole numbers starting at\n            <code>0</code>. The lower the number, the higher the priority. If no number is set, the\n         override has the lowest priority.</p>",
+                        "smithy.api#documentation": "<p>The priority for the launch template override. The highest priority is launched\n         first.</p>\n         <p>If the On-Demand <code>AllocationStrategy</code> is set to <code>prioritized</code>,\n         EC2 Fleet uses priority to determine which launch template override to use first in fulfilling\n         On-Demand capacity.</p>\n         <p>If the Spot <code>AllocationStrategy</code> is set to\n            <code>capacity-optimized-prioritized</code>,  EC2 Fleet uses priority on a best-effort basis\n         to determine which launch template override to use first in fulfilling Spot capacity, but\n         optimizes for capacity first.</p>\n         <p>Valid values are whole numbers starting at <code>0</code>. The lower the number, the\n         higher the priority. If no number is set, the override has the lowest priority. You can set\n         the same priority for different launch template overrides.</p>",
                         "smithy.api#xmlName": "priority"
                     }
                 },
@@ -30122,7 +30320,7 @@
                 "Priority": {
                     "target": "com.amazonaws.ec2#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The priority for the launch template override. If <b>AllocationStrategy</b> is set to <code>prioritized</code>, EC2 Fleet uses priority to\n         determine which launch template override to use first in fulfilling On-Demand capacity. The\n         highest priority is launched first. Valid values are whole numbers starting at\n            <code>0</code>. The lower the number, the higher the priority. If no number is set, the\n         launch template override has the lowest priority.</p>"
+                        "smithy.api#documentation": "<p>The priority for the launch template override. The highest priority is launched\n         first.</p>\n         <p>If the On-Demand <code>AllocationStrategy</code> is set to <code>prioritized</code>,\n         EC2 Fleet uses priority to determine which launch template override to use first in fulfilling\n         On-Demand capacity.</p>\n         <p>If the Spot <code>AllocationStrategy</code> is set to\n            <code>capacity-optimized-prioritized</code>,  EC2 Fleet uses priority on a best-effort basis\n         to determine which launch template override to use first in fulfilling Spot capacity, but\n         optimizes for capacity first.</p>\n         <p>Valid values are whole numbers starting at <code>0</code>. The lower the number, the\n         higher the priority. If no number is set, the launch template override has the lowest\n         priority. You can set the same priority for different launch template overrides.</p>"
                     }
                 },
                 "Placement": {
@@ -33776,7 +33974,7 @@
                 "Format": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the disk image being imported.</p>\n         <p>Valid values: <code>OVA</code> | <code>VHD</code> | <code>VHDX</code> |<code>VMDK</code> \n         </p>"
+                        "smithy.api#documentation": "<p>The format of the disk image being imported.</p>\n         <p>Valid values: <code>OVA</code> | <code>VHD</code> | <code>VHDX</code> | <code>VMDK</code> | <code>RAW</code> \n         </p>"
                     }
                 },
                 "SnapshotId": {
@@ -34081,7 +34279,7 @@
                 "TagSpecifications": {
                     "target": "com.amazonaws.ec2#TagSpecificationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to apply to the image being imported.</p>",
+                        "smithy.api#documentation": "<p>The tags to apply to the import image task during creation.</p>",
                         "smithy.api#xmlName": "TagSpecification"
                     }
                 }
@@ -34206,7 +34404,7 @@
                     "target": "com.amazonaws.ec2#TagList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "TagSet",
-                        "smithy.api#documentation": "<p>Any tags assigned to the image being imported.</p>",
+                        "smithy.api#documentation": "<p>Any tags assigned to the import image task.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
                 }
@@ -34783,7 +34981,7 @@
                 "TagSpecifications": {
                     "target": "com.amazonaws.ec2#TagSpecificationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to apply to the snapshot being imported.</p>",
+                        "smithy.api#documentation": "<p>The tags to apply to the import snapshot task during creation.</p>",
                         "smithy.api#xmlName": "TagSpecification"
                     }
                 }
@@ -34820,7 +35018,7 @@
                     "target": "com.amazonaws.ec2#TagList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "TagSet",
-                        "smithy.api#documentation": "<p>Any tags assigned to the snapshot being imported.</p>",
+                        "smithy.api#documentation": "<p>Any tags assigned to the import snapshot task.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
                 }
@@ -39543,7 +39741,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UserId",
-                        "smithy.api#documentation": "<p>The AWS account ID.</p>",
+                        "smithy.api#documentation": "<p>The AWS account ID.</p>\n         <p>Constraints: Up to 10 000 account IDs can be specified in a single request.</p>",
                         "smithy.api#xmlName": "userId"
                     }
                 }
@@ -39836,7 +40034,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "NoDevice",
-                        "smithy.api#documentation": "<p>Suppresses the specified device included in the block device mapping of the AMI.</p>",
+                        "smithy.api#documentation": "<p>To omit the device from the block device mapping, specify an empty string.</p>",
                         "smithy.api#xmlName": "noDevice"
                     }
                 }
@@ -39866,7 +40064,7 @@
                 "VirtualName": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. An instance type with 2 available instance store volumes can specify mappings for ephemeral0 and ephemeral1. The number of available instance store volumes depends on the instance type. After you connect to the instance, you must mount the volume.</p>"
+                        "smithy.api#documentation": "<p>The virtual device name (ephemeralN). Instance store volumes are numbered starting from 0. \n            An instance type with 2 available instance store volumes can specify mappings for ephemeral0 \n            and ephemeral1. The number of available instance store volumes depends on the instance type. \n            After you connect to the instance, you must mount the volume.</p>"
                     }
                 },
                 "Ebs": {
@@ -39878,7 +40076,7 @@
                 "NoDevice": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Suppresses the specified device included in the block device mapping of the AMI.</p>"
+                        "smithy.api#documentation": "<p>To omit the device from the block device mapping, specify an empty string.</p>"
                     }
                 }
             },
@@ -40106,7 +40304,7 @@
                 "Iops": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of I/O operations per second (IOPS). For <code>gp3</code>, <code>io1</code>, and <code>io2</code> \n            volumes, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, \n            this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits \n            for bursting.</p>\n        <p>The following are the supported values for each volume type:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>gp3</code>: 3,000-16,000 IOPS</p>\n            </li>\n            <li>\n                <p>\n                  <code>io1</code>: 100-64,000 IOPS</p>\n            </li>\n            <li>\n                <p>\n                  <code>io2</code>: 100-64,000 IOPS</p>\n            </li>\n         </ul>\n        <p>For <code>io1</code> and <code>io2</code> volumes, we guarantee 64,000 IOPS  \n            only for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Instances built on the Nitro System</a>. Other instance families guarantee performance up\n            to 32,000 IOPS.</p>\n        <p>This parameter is required for <code>io1</code> and <code>io2</code> volumes.\n            The default for <code>gp3</code> volumes is 3,000 IOPS.\n            This parameter is not supported for <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>"
+                        "smithy.api#documentation": "<p>The number of I/O operations per second (IOPS). For <code>gp3</code>, <code>io1</code>, and <code>io2</code> \n            volumes, this represents the number of IOPS that are provisioned for the volume. For <code>gp2</code> volumes, \n            this represents the baseline performance of the volume and the rate at which the volume accumulates I/O credits \n            for bursting.</p>\n        <p>The following are the supported values for each volume type:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>gp3</code>: 3,000-16,000 IOPS</p>\n            </li>\n            <li>\n                <p>\n                  <code>io1</code>: 100-64,000 IOPS</p>\n            </li>\n            <li>\n                <p>\n                  <code>io2</code>: 100-64,000 IOPS</p>\n            </li>\n         </ul>\n        <p>For <code>io1</code> and <code>io2</code> volumes, we guarantee 64,000 IOPS  \n            only for <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Instances built on the Nitro System</a>. Other instance families guarantee performance up\n            to 32,000 IOPS.</p>\n        <p>This parameter is supported for <code>io1</code>, <code>io2</code>, and <code>gp3</code> volumes only. This parameter is not supported for \n            <code>gp2</code>, <code>st1</code>, <code>sc1</code>, or <code>standard</code> volumes.</p>"
                     }
                 },
                 "KmsKeyId": {
@@ -40124,13 +40322,13 @@
                 "VolumeSize": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size.\n            If you specify a snapshot, the default is the snapshot size. You can specify a volume \n            size that is equal to or larger than the snapshot size.</p>\n        <p>The following are the supported volumes sizes for each volume type:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>gp2</code> and <code>gp3</code>: 1-16,384</p>\n            </li>\n            <li>\n               <p>\n                  <code>io1</code> and <code>io2</code>: 4-16,384</p>\n            </li>\n            <li>\n               <p>\n                  <code>st1</code> and <code>sc1</code>: 125-16,384</p>\n            </li>\n            <li>\n               <p>\n                  <code>standard</code>: 1-1,024</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size. The following \n            are the supported volumes sizes for each volume type:</p>\n        <ul>\n            <li>\n               <p>\n                  <code>gp2</code> and <code>gp3</code>: 1-16,384</p>\n            </li>\n            <li>\n               <p>\n                  <code>io1</code> and <code>io2</code>: 4-16,384</p>\n            </li>\n            <li>\n               <p>\n                  <code>st1</code> and <code>sc1</code>: 125-16,384</p>\n            </li>\n            <li>\n               <p>\n                  <code>standard</code>: 1-1,024</p>\n            </li>\n         </ul>"
                     }
                 },
                 "VolumeType": {
                     "target": "com.amazonaws.ec2#VolumeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The volume type. The default is <code>gp2</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS volume types</a> in the\n            <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The volume type. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html\">Amazon EBS volume types</a> in the\n            <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "Throughput": {
@@ -40876,7 +41074,7 @@
                     "target": "com.amazonaws.ec2#Double",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Priority",
-                        "smithy.api#documentation": "<p>The priority for the launch template override. If <b>OnDemandAllocationStrategy</b> is set to <code>prioritized</code>, Spot Fleet uses\n            priority to determine which launch template override to use first in fulfilling\n            On-Demand capacity. The highest priority is launched first. Valid values are whole numbers starting at <code>0</code>. The lower\n            the number, the higher the priority. If no number is set, the launch template override\n            has the lowest priority.</p>",
+                        "smithy.api#documentation": "<p>The priority for the launch template override. The highest priority is launched\n            first.</p>\n        <p>If <code>OnDemandAllocationStrategy</code> is set to <code>prioritized</code>, Spot Fleet\n            uses priority to determine which launch template override to use first in fulfilling\n            On-Demand capacity.</p>\n        <p>If the Spot <code>AllocationStrategy</code> is set to\n                <code>capacityOptimizedPrioritized</code>, Spot Fleet uses priority on a best-effort basis\n            to determine which launch template override to use first in fulfilling Spot capacity,\n            but optimizes for capacity first.</p>\n        <p>Valid values are whole numbers starting at <code>0</code>. The lower the number, the\n            higher the priority. If no number is set, the launch template override has the lowest\n            priority. You can set the same priority for different launch template overrides.</p>",
                         "smithy.api#xmlName": "priority"
                     }
                 }
@@ -42386,6 +42584,55 @@
         },
         "com.amazonaws.ec2#MillisecondDateTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.ec2#ModifyAddressAttribute": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ModifyAddressAttributeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ModifyAddressAttributeResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies an attribute of the specified Elastic IP address. For requirements, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS\">Using reverse DNS for email applications</a>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ModifyAddressAttributeRequest": {
+            "type": "structure",
+            "members": {
+                "AllocationId": {
+                    "target": "com.amazonaws.ec2#AllocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[EC2-VPC] The allocation ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name to modify for the IP address.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ModifyAddressAttributeResult": {
+            "type": "structure",
+            "members": {
+                "Address": {
+                    "target": "com.amazonaws.ec2#AddressAttribute",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Address",
+                        "smithy.api#documentation": "<p>Information about the Elastic IP address.</p>",
+                        "smithy.api#xmlName": "address"
+                    }
+                }
+            }
         },
         "com.amazonaws.ec2#ModifyAvailabilityZoneGroup": {
             "type": "operation",
@@ -46526,7 +46773,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "RequesterId",
-                        "smithy.api#documentation": "<p>The ID of the entity that launched the instance on your behalf (for example, AWS Management Console or Auto Scaling).</p>",
+                        "smithy.api#documentation": "<p>The alias or AWS account ID of the principal or service that created the network interface.</p>",
                         "smithy.api#xmlName": "requesterId"
                     }
                 },
@@ -48990,6 +49237,38 @@
                 "smithy.api#documentation": "<p>Reserved. If you need to sustain traffic greater than the <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html\">documented limits</a>, contact us through the <a href=\"https://console.aws.amazon.com/support/home?\">Support Center</a>.</p>"
             }
         },
+        "com.amazonaws.ec2#PtrUpdateStatus": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Value",
+                        "smithy.api#documentation": "<p>The value for the PTR record update.</p>",
+                        "smithy.api#xmlName": "value"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Status",
+                        "smithy.api#documentation": "<p>The status of the PTR record update.</p>",
+                        "smithy.api#xmlName": "status"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Reason",
+                        "smithy.api#documentation": "<p>The reason for the PTR record update.</p>",
+                        "smithy.api#xmlName": "reason"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status of an updated pointer (PTR) record for an Elastic IP address.</p>"
+            }
+        },
         "com.amazonaws.ec2#PublicIpAddress": {
             "type": "string"
         },
@@ -49653,7 +49932,7 @@
                 "target": "com.amazonaws.ec2#RegisterImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete\n      before you can launch an instance from the AMI. For more information about creating AMIs, see\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating your\n        own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <note>\n            <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers the AMI in a single request, so you don't have to register the AMI yourself.</p>\n         </note>\n\n         <p>You can also use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from\n      a snapshot of a root device volume. You specify the snapshot using the block device mapping.\n      For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-launch-snapshot.html\">Launching a Linux instance from\n        a backup</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n\n         <p>If any snapshots have AWS Marketplace product codes, they are copied to the new\n      AMI.</p>\n         <p>Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE\n      Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to\n      verify the subscription status for package updates. To create a new AMI for operating systems\n      that require a billing product code, instead of registering the AMI, do the following to\n      preserve the billing product code association:</p>\n         <ol>\n            <li>\n               <p>Launch an instance from an existing AMI with that billing product code.</p>\n            </li>\n            <li>\n               <p>Customize the instance.</p>\n            </li>\n            <li>\n               <p>Create an AMI from the instance using <a>CreateImage</a>.</p>\n            </li>\n         </ol>\n         <p>If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched\n      from an AMI with a billing product code, make sure that the Reserved Instance has the matching\n      billing product code. If you purchase a Reserved Instance without the matching billing product\n      code, the Reserved Instance will not be applied to the On-Demand Instance. For information\n      about how to obtain the platform details and billing information of an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html\">Obtaining billing\n        information</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>     \n         <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. \n       If you make changes to an image, deregister the previous image and register the new image.</p>"
+                "smithy.api#documentation": "<p>Registers an AMI. When you're creating an AMI, this is the final step you must complete\n      before you can launch an instance from the AMI. For more information about creating AMIs, see\n        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami.html\">Creating your\n        own AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <note>\n            <p>For Amazon EBS-backed instances, <a>CreateImage</a> creates and registers \n         \tthe AMI in a single request, so you don't have to register the AMI yourself.</p>\n         </note>\n\n         <p>If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. \n       If you make changes to an image, deregister the previous image and register the new image.</p>\n\n         <p>\n            <b>Register a snapshot of a root device volume</b>\n         </p>\n         <p>You can use <code>RegisterImage</code> to create an Amazon EBS-backed Linux AMI from\n       a snapshot of a root device volume. You specify the snapshot using a block device mapping.\n       You can't set the encryption state of the volume using the block device mapping. If the \n       snapshot is encrypted, or encryption by default is enabled, the root volume of an instance \n       launched from the AMI is encrypted.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html#creating-launching-ami-from-snapshot\">Create a Linux AMI from a snapshot</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AMIEncryption.html\">Use encryption with EBS-backed AMIs</a>\n       in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n     \n         <p>\n            <b>AWS Marketplace product codes</b>\n         </p>\n         <p>If any snapshots have AWS Marketplace product codes, they are copied to the new\n      AMI.</p>\n         <p>Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE\n      Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to\n      verify the subscription status for package updates. To create a new AMI for operating systems\n      that require a billing product code, instead of registering the AMI, do the following to\n      preserve the billing product code association:</p>\n         <ol>\n            <li>\n               <p>Launch an instance from an existing AMI with that billing product code.</p>\n            </li>\n            <li>\n               <p>Customize the instance.</p>\n            </li>\n            <li>\n               <p>Create an AMI from the instance using <a>CreateImage</a>.</p>\n            </li>\n         </ol>\n         <p>If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched\n      from an AMI with a billing product code, make sure that the Reserved Instance has the matching\n      billing product code. If you purchase a Reserved Instance without the matching billing product\n      code, the Reserved Instance will not be applied to the On-Demand Instance. For information\n      about how to obtain the platform details and billing information of an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html\">Obtaining billing\n        information</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#RegisterImageRequest": {
@@ -49676,7 +49955,7 @@
                 "BlockDeviceMappings": {
                     "target": "com.amazonaws.ec2#BlockDeviceMappingRequestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The block device mapping entries.</p>",
+                        "smithy.api#documentation": "<p>The block device mapping entries.</p>\n         <p>If you specify an EBS volume using the ID of an EBS snapshot, you can't specify the encryption state of the volume.</p>\n         <p>If you create an AMI on an Outpost, then all backing snapshots must be on the same Outpost or in the Region \n    \t of that Outpost. AMIs on an Outpost that include local snapshots can be used to launch instances on the same Outpost \n    \t only. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n    \t \tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                         "smithy.api#xmlName": "BlockDeviceMapping"
                     }
                 },
@@ -50948,7 +51227,7 @@
                 "IamInstanceProfile": {
                     "target": "com.amazonaws.ec2#LaunchTemplateIamInstanceProfileSpecificationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM instance profile.</p>"
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of an IAM instance profile.</p>"
                     }
                 },
                 "BlockDeviceMappings": {
@@ -52288,6 +52567,56 @@
                 "target": "com.amazonaws.ec2#ReservedInstancesId",
                 "traits": {
                     "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ResetAddressAttribute": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#ResetAddressAttributeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#ResetAddressAttributeResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resets the attribute of the specified IP address. For requirements, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html#Using_Elastic_Addressing_Reverse_DNS\">Using reverse DNS for email applications</a>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ResetAddressAttributeRequest": {
+            "type": "structure",
+            "members": {
+                "AllocationId": {
+                    "target": "com.amazonaws.ec2#AllocationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[EC2-VPC] The allocation ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Attribute": {
+                    "target": "com.amazonaws.ec2#AddressAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attribute of the IP address.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ResetAddressAttributeResult": {
+            "type": "structure",
+            "members": {
+                "Address": {
+                    "target": "com.amazonaws.ec2#AddressAttribute",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Address",
+                        "smithy.api#documentation": "<p>Information about the IP address.</p>",
+                        "smithy.api#xmlName": "address"
+                    }
                 }
             }
         },
@@ -54027,7 +54356,7 @@
                     "target": "com.amazonaws.ec2#IamInstanceProfileSpecification",
                     "traits": {
                         "aws.protocols#ec2QueryName": "IamInstanceProfile",
-                        "smithy.api#documentation": "<p>The IAM instance profile.</p>",
+                        "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) of an IAM instance profile.</p>",
                         "smithy.api#xmlName": "iamInstanceProfile"
                     }
                 },
@@ -55895,6 +56224,14 @@
                         "smithy.api#xmlName": "ownerAlias"
                     }
                 },
+                "OutpostArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OutpostArn",
+                        "smithy.api#documentation": "<p>The ARN of the AWS Outpost on which the snapshot is stored. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html\">EBS Local Snapshot on Outposts</a> in the \n  \t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#xmlName": "outpostArn"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.ec2#TagList",
                     "traits": {
@@ -56032,7 +56369,7 @@
                 "Format": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The format of the disk image being imported.</p>\n         <p>Valid values: <code>VHD</code> | <code>VMDK</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The format of the disk image being imported.</p>\n         <p>Valid values: <code>VHD</code> | <code>VMDK</code> | <code>RAW</code>\n         </p>"
                     }
                 },
                 "Url": {
@@ -56145,6 +56482,14 @@
                         "aws.protocols#ec2QueryName": "SnapshotId",
                         "smithy.api#documentation": "<p>Snapshot id that can be used to describe this snapshot.</p>",
                         "smithy.api#xmlName": "snapshotId"
+                    }
+                },
+                "OutpostArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "OutpostArn",
+                        "smithy.api#documentation": "<p>The ARN of the AWS Outpost on which the snapshot is stored. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html\">EBS Local Snapshot on Outposts</a> in the \n  \t\t<i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#xmlName": "outpostArn"
                     }
                 }
             },
@@ -56300,6 +56645,10 @@
                     {
                         "value": "capacity-optimized",
                         "name": "CAPACITY_OPTIMIZED"
+                    },
+                    {
+                        "value": "capacity-optimized-prioritized",
+                        "name": "CAPACITY_OPTIMIZED_PRIORITIZED"
                     }
                 ]
             }
@@ -56599,7 +56948,7 @@
                     "target": "com.amazonaws.ec2#AllocationStrategy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AllocationStrategy",
-                        "smithy.api#documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n            the Spot Fleet request.</p>\n        <p>If the allocation strategy is <code>lowestPrice</code>, Spot Fleet launches instances from\n            the Spot Instance pools with the lowest price. This is the default allocation strategy.</p>\n        <p>If the allocation strategy is <code>diversified</code>, Spot Fleet launches instances from\n            all the Spot Instance pools that you specify.</p>\n        <p>If the allocation strategy is <code>capacityOptimized</code>, Spot Fleet launches instances\n            from Spot Instance pools with optimal capacity for the number of instances that are\n            launching.</p>",
+                        "smithy.api#documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n            the Spot Fleet request.</p>\n        <p>If the allocation strategy is <code>lowestPrice</code>, Spot Fleet launches instances from\n            the Spot Instance pools with the lowest price. This is the default allocation strategy.</p>\n        <p>If the allocation strategy is <code>diversified</code>, Spot Fleet launches instances from\n            all the Spot Instance pools that you specify.</p>\n        <p>If the allocation strategy is <code>capacityOptimized</code> (recommended), Spot Fleet\n            launches instances from Spot Instance pools with optimal capacity for the number of instances\n            that are launching. To give certain instance types a higher chance of launching first,\n            use <code>capacityOptimizedPrioritized</code>. Set a priority for each instance type by\n            using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You\n            can assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2\n            implements the priorities on a best-effort basis, but optimizes for capacity first.\n                <code>capacityOptimizedPrioritized</code> is supported only if your Spot Fleet uses a\n            launch template. Note that if the <code>OnDemandAllocationStrategy</code> is set to\n                <code>prioritized</code>, the same priority is applied when fulfilling On-Demand\n            capacity.</p>",
                         "smithy.api#xmlName": "allocationStrategy"
                     }
                 },
@@ -57206,7 +57555,7 @@
                     "target": "com.amazonaws.ec2#SpotAllocationStrategy",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AllocationStrategy",
-                        "smithy.api#documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n         the EC2 Fleet.</p>\n         <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from\n         the Spot Instance pools with the lowest price. This is the default allocation strategy.</p>\n         <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all\n         of the Spot Instance pools that you specify.</p>\n         <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances\n         from Spot Instance pools with optimal capacity for the number of instances that are\n         launching.</p>",
+                        "smithy.api#documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n         the EC2 Fleet.</p>\n         <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from\n         the Spot Instance pools with the lowest price. This is the default allocation strategy.</p>\n         <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all\n         of the Spot Instance pools that you specify.</p>\n         <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), EC2 Fleet\n         launches instances from Spot Instance pools with optimal capacity for the number of instances that\n         are launching. To give certain instance types a higher chance of launching first, use\n            <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by\n         using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can\n         assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements\n         the priorities on a best-effort basis, but optimizes for capacity first.\n            <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a\n         launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to\n            <code>prioritized</code>, the same priority is applied when fulfilling On-Demand\n         capacity.</p>",
                         "smithy.api#xmlName": "allocationStrategy"
                     }
                 },
@@ -57277,7 +57626,7 @@
                 "AllocationStrategy": {
                     "target": "com.amazonaws.ec2#SpotAllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n         the EC2 Fleet.</p>\n         <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from\n         the Spot Instance pools with the lowest price. This is the default allocation strategy.</p>\n         <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all\n         of the Spot Instance pools that you specify.</p>\n         <p>If the allocation strategy is <code>capacity-optimized</code>, EC2 Fleet launches instances\n         from Spot Instance pools with optimal capacity for the number of instances that are\n         launching.</p>"
+                        "smithy.api#documentation": "<p>Indicates how to allocate the target Spot Instance capacity across the Spot Instance pools specified by\n         the EC2 Fleet.</p>\n         <p>If the allocation strategy is <code>lowest-price</code>, EC2 Fleet launches instances from\n         the Spot Instance pools with the lowest price. This is the default allocation strategy.</p>\n         <p>If the allocation strategy is <code>diversified</code>, EC2 Fleet launches instances from all\n         of the Spot Instance pools that you specify.</p>\n         <p>If the allocation strategy is <code>capacity-optimized</code> (recommended), EC2 Fleet\n         launches instances from Spot Instance pools with optimal capacity for the number of instances that\n         are launching. To give certain instance types a higher chance of launching first, use\n            <code>capacity-optimized-prioritized</code>. Set a priority for each instance type by\n         using the <code>Priority</code> parameter for <code>LaunchTemplateOverrides</code>. You can\n         assign the same priority to different <code>LaunchTemplateOverrides</code>. EC2 implements\n         the priorities on a best-effort basis, but optimizes for capacity first.\n            <code>capacity-optimized-prioritized</code> is supported only if your fleet uses a\n         launch template. Note that if the On-Demand <code>AllocationStrategy</code> is set to\n            <code>prioritized</code>, the same priority is applied when fulfilling On-Demand\n         capacity.</p>"
                     }
                 },
                 "MaintenanceStrategies": {
@@ -58197,7 +58546,7 @@
             "type": "structure",
             "members": {
                 "AssociationId": {
-                    "target": "com.amazonaws.ec2#String",
+                    "target": "com.amazonaws.ec2#SubnetCidrAssociationId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AssociationId",
                         "smithy.api#documentation": "<p>The association ID for the CIDR block.</p>",

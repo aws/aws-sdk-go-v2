@@ -23,20 +23,9 @@ import (
 // and optional description. Each simple alias can point to only one fleet, but a
 // fleet can have multiple aliases. If successful, a new alias record is returned,
 // including an alias ID and an ARN. You can reassign an alias to another fleet by
-// calling UpdateAlias.
-//
-// * CreateAlias
-//
-// * ListAliases
-//
-// * DescribeAlias
-//
-// *
-// UpdateAlias
-//
-// * DeleteAlias
-//
-// * ResolveAlias
+// calling UpdateAlias. Related actions CreateAlias | ListAliases | DescribeAlias |
+// UpdateAlias | DeleteAlias | ResolveAlias | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}

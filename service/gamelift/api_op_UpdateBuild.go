@@ -16,18 +16,9 @@ import (
 // If successful, a build object containing the updated metadata is returned. Learn
 // more  Upload a Custom Server Build
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
-// Related operations
-//
-// * CreateBuild
-//
-// * ListBuilds
-//
-// * DescribeBuild
-//
-// *
-// UpdateBuild
-//
-// * DeleteBuild
+// Related actions CreateBuild | ListBuilds | DescribeBuild | UpdateBuild |
+// DeleteBuild | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optFns ...func(*Options)) (*UpdateBuildOutput, error) {
 	if params == nil {
 		params = &UpdateBuildInput{}
@@ -46,7 +37,7 @@ func (c *Client) UpdateBuild(ctx context.Context, params *UpdateBuildInput, optF
 // Represents the input for a request operation.
 type UpdateBuildInput struct {
 
-	// A unique identifier for a build to update. You can use either the build ID or
+	// A unique identifier for the build to update. You can use either the build ID or
 	// ARN value.
 	//
 	// This member is required.

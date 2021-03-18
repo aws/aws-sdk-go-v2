@@ -46,6 +46,9 @@
                     "target": "com.amazonaws.athena#CreateNamedQuery"
                 },
                 {
+                    "target": "com.amazonaws.athena#CreatePreparedStatement"
+                },
+                {
                     "target": "com.amazonaws.athena#CreateWorkGroup"
                 },
                 {
@@ -53,6 +56,9 @@
                 },
                 {
                     "target": "com.amazonaws.athena#DeleteNamedQuery"
+                },
+                {
+                    "target": "com.amazonaws.athena#DeletePreparedStatement"
                 },
                 {
                     "target": "com.amazonaws.athena#DeleteWorkGroup"
@@ -65,6 +71,9 @@
                 },
                 {
                     "target": "com.amazonaws.athena#GetNamedQuery"
+                },
+                {
+                    "target": "com.amazonaws.athena#GetPreparedStatement"
                 },
                 {
                     "target": "com.amazonaws.athena#GetQueryExecution"
@@ -85,7 +94,13 @@
                     "target": "com.amazonaws.athena#ListDataCatalogs"
                 },
                 {
+                    "target": "com.amazonaws.athena#ListEngineVersions"
+                },
+                {
                     "target": "com.amazonaws.athena#ListNamedQueries"
+                },
+                {
+                    "target": "com.amazonaws.athena#ListPreparedStatements"
                 },
                 {
                     "target": "com.amazonaws.athena#ListQueryExecutions"
@@ -113,6 +128,9 @@
                 },
                 {
                     "target": "com.amazonaws.athena#UpdateDataCatalog"
+                },
+                {
+                    "target": "com.amazonaws.athena#UpdatePreparedStatement"
                 },
                 {
                     "target": "com.amazonaws.athena#UpdateWorkGroup"
@@ -440,7 +458,7 @@
                 "Type": {
                     "target": "com.amazonaws.athena#DataCatalogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog,\n                <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive\n            metastore.</p>",
+                        "smithy.api#documentation": "<p>The type of data catalog to create: <code>LAMBDA</code> for a federated catalog or\n                <code>HIVE</code> for an external hive metastore.</p>\n        <note>\n            <p>Do not use the <code>GLUE</code> type. This refers to the\n                    <code>AwsDataCatalog</code> that already exists in your account, of which you\n                can have only one. Specifying the <code>GLUE</code> type will result in an\n                    <code>INVALID_INPUT</code> error.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -453,7 +471,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.athena#ParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for creating the data catalog. This\n            is a mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The <code>GLUE</code> type has no parameters.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for creating the data catalog. This\n            is a mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "Tags": {
@@ -545,6 +563,62 @@
                 }
             }
         },
+        "com.amazonaws.athena#CreatePreparedStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#CreatePreparedStatementInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#CreatePreparedStatementOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a prepared statement for use with SQL queries in Athena.</p>"
+            }
+        },
+        "com.amazonaws.athena#CreatePreparedStatementInput": {
+            "type": "structure",
+            "members": {
+                "StatementName": {
+                    "target": "com.amazonaws.athena#StatementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prepared statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup to which the prepared statement belongs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryStatement": {
+                    "target": "com.amazonaws.athena#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query string for the prepared statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.athena#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the prepared statement.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#CreatePreparedStatementOutput": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.athena#CreateWorkGroup": {
             "type": "operation",
             "input": {
@@ -618,14 +692,14 @@
                 "Type": {
                     "target": "com.amazonaws.athena#DataCatalogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of data catalog: <code>LAMBDA</code> for a federated catalog,\n                <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an external hive\n            metastore.</p>",
+                        "smithy.api#documentation": "<p>The type of data catalog: <code>LAMBDA</code> for a federated catalog or\n                <code>HIVE</code> for an external hive metastore. <code>GLUE</code> refers to the\n                <code>AwsDataCatalog</code> that already exists in your account, of which you can\n            have only one.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Parameters": {
                     "target": "com.amazonaws.athena#ParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for the data catalog. This is a\n            mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The <code>GLUE</code> type has no parameters.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for the data catalog. This is a\n            mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -811,6 +885,52 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.athena#DeletePreparedStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#DeletePreparedStatementInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#DeletePreparedStatementOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.athena#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the prepared statement with the specified name from the specified\n            workgroup.</p>"
+            }
+        },
+        "com.amazonaws.athena#DeletePreparedStatementInput": {
+            "type": "structure",
+            "members": {
+                "StatementName": {
+                    "target": "com.amazonaws.athena#StatementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prepared statement to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workgroup to which the statement to be deleted belongs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#DeletePreparedStatementOutput": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.athena#DeleteWorkGroup": {
             "type": "operation",
             "input": {
@@ -845,7 +965,7 @@
                 "RecursiveDeleteOption": {
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The option to delete the workgroup and its contents even if the workgroup contains any\n            named queries.</p>"
+                        "smithy.api#documentation": "<p>The option to delete the workgroup and its contents even if the workgroup contains any\n            named queries or query executions.</p>"
                     }
                 }
             }
@@ -901,6 +1021,38 @@
                         "name": "CSE_KMS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.athena#EngineVersion": {
+            "type": "structure",
+            "members": {
+                "SelectedEngineVersion": {
+                    "target": "com.amazonaws.athena#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine version requested by the user. Possible values are determined by the output of <code>ListEngineVersions</code>, including Auto. The default is Auto.</p>"
+                    }
+                },
+                "EffectiveEngineVersion": {
+                    "target": "com.amazonaws.athena#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Read only. The engine version on which the query runs. If the user requests\n            a valid engine version other than Auto, the effective engine version is the same as the\n            engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a <code>CreateWorkGroup</code> or <code>UpdateWorkGroup</code> operation, the \n            <code>EffectiveEngineVersion</code> field is ignored.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Athena engine version for running queries.</p>"
+            }
+        },
+        "com.amazonaws.athena#EngineVersionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#EngineVersion"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.athena#ErrorCode": {
@@ -988,7 +1140,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a database object for the specfied database and data catalog.</p>"
+                "smithy.api#documentation": "<p>Returns a database object for the specified database and data catalog.</p>"
             }
         },
         "com.amazonaws.athena#GetDatabaseInput": {
@@ -1060,6 +1212,59 @@
                     "target": "com.amazonaws.athena#NamedQuery",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the query.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#GetPreparedStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#GetPreparedStatementInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#GetPreparedStatementOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.athena#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the prepared statement with the specified name from the specified\n            workgroup.</p>"
+            }
+        },
+        "com.amazonaws.athena#GetPreparedStatementInput": {
+            "type": "structure",
+            "members": {
+                "StatementName": {
+                    "target": "com.amazonaws.athena#StatementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prepared statement to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workgroup to which the statement to be retrieved belongs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#GetPreparedStatementOutput": {
+            "type": "structure",
+            "members": {
+                "PreparedStatement": {
+                    "target": "com.amazonaws.athena#PreparedStatement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prepared statement that was retrieved.</p>"
                     }
                 }
             }
@@ -1461,6 +1666,60 @@
                 }
             }
         },
+        "com.amazonaws.athena#ListEngineVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#ListEngineVersionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#ListEngineVersionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of engine versions that are available to choose from, including the\n            Auto option.</p>"
+            }
+        },
+        "com.amazonaws.athena#ListEngineVersionsInput": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.athena#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.athena#MaxEngineVersionsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of engine versions to return in this request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#ListEngineVersionsOutput": {
+            "type": "structure",
+            "members": {
+                "EngineVersions": {
+                    "target": "com.amazonaws.athena#EngineVersionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of engine versions that are available to choose from.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.athena#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.athena#ListNamedQueries": {
             "type": "operation",
             "input": {
@@ -1516,6 +1775,72 @@
                     "target": "com.amazonaws.athena#NamedQueryIdList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of unique query IDs.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.athena#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#ListPreparedStatements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#ListPreparedStatementsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#ListPreparedStatementsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the prepared statements in the specfied workgroup.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.athena#ListPreparedStatementsInput": {
+            "type": "structure",
+            "members": {
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workgroup to list the prepared statements for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.athena#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by the Athena service that specifies where to continue pagination if\n            a previous request was truncated. To obtain the next set of pages, pass in the\n                <code>NextToken</code> from the response object of the previous page call.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.athena#MaxPreparedStatementsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#ListPreparedStatementsOutput": {
+            "type": "structure",
+            "members": {
+                "PreparedStatements": {
+                    "target": "com.amazonaws.athena#PreparedStatementsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of prepared statements for the workgroup.</p>"
                     }
                 },
                 "NextToken": {
@@ -1792,7 +2117,7 @@
                 "WorkGroups": {
                     "target": "com.amazonaws.athena#WorkGroupsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of workgroups, including their names, descriptions, creation times, and\n            states.</p>"
+                        "smithy.api#documentation": "<p>A list of <a>WorkGroupSummary</a> objects that include the names,\n            descriptions, creation times, and states for each workgroup.</p>"
                     }
                 },
                 "NextToken": {
@@ -1829,12 +2154,32 @@
                 }
             }
         },
+        "com.amazonaws.athena#MaxEngineVersionsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.athena#MaxNamedQueriesCount": {
             "type": "integer",
             "traits": {
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.athena#MaxPreparedStatementsCount": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
                     "max": 50
                 }
             }
@@ -1995,6 +2340,76 @@
                 }
             }
         },
+        "com.amazonaws.athena#PreparedStatement": {
+            "type": "structure",
+            "members": {
+                "StatementName": {
+                    "target": "com.amazonaws.athena#StatementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prepared statement.</p>"
+                    }
+                },
+                "QueryStatement": {
+                    "target": "com.amazonaws.athena#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query string for the prepared statement.</p>"
+                    }
+                },
+                "WorkGroupName": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the workgroup to which the prepared statement belongs.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.athena#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the prepared statement.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.athena#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the prepared statement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A prepared SQL statement for use with Athena.</p>"
+            }
+        },
+        "com.amazonaws.athena#PreparedStatementSummary": {
+            "type": "structure",
+            "members": {
+                "StatementName": {
+                    "target": "com.amazonaws.athena#StatementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prepared statement.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.athena#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last modified time of the prepared statement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name and last modified time of the prepared statement.</p>"
+            }
+        },
+        "com.amazonaws.athena#PreparedStatementsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.athena#PreparedStatementSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.athena#QueryExecution": {
             "type": "structure",
             "members": {
@@ -2044,6 +2459,12 @@
                     "target": "com.amazonaws.athena#WorkGroupName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the workgroup in which the query ran.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.athena#EngineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine version that executed the query.</p>"
                     }
                 }
             },
@@ -2401,6 +2822,16 @@
                         "smithy.api#documentation": "<p>The unique ID of the query that ran as a result of this request.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.athena#StatementName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[a-zA-Z_][a-zA-Z0-9_@:]{1,256}"
             }
         },
         "com.amazonaws.athena#StatementType": {
@@ -2817,7 +3248,7 @@
                 "Type": {
                     "target": "com.amazonaws.athena#DataCatalogType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the type of data catalog to update. Specify <code>LAMBDA</code> for a\n            federated catalog, <code>GLUE</code> for AWS Glue Catalog, or <code>HIVE</code> for an\n            external hive metastore.</p>",
+                        "smithy.api#documentation": "<p>Specifies the type of data catalog to update. Specify <code>LAMBDA</code> for a\n            federated catalog or <code>HIVE</code> for an external hive metastore.</p>\n        <note>\n            <p>Do not use the <code>GLUE</code> type. This refers to the\n                    <code>AwsDataCatalog</code> that already exists in your account, of which you\n                can have only one. Specifying the <code>GLUE</code> type will result in an\n                    <code>INVALID_INPUT</code> error.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2830,12 +3261,71 @@
                 "Parameters": {
                     "target": "com.amazonaws.athena#ParametersMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for updating the data catalog. This\n            is a mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The <code>GLUE</code> type has no parameters.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the Lambda function or functions to use for updating the data catalog. This\n            is a mapping whose values depend on the catalog type. </p>\n        <ul>\n            <li>\n                <p>For the <code>HIVE</code> data catalog type, use the following syntax. The\n                        <code>metadata-function</code> parameter is required. <code>The\n                        sdk-version</code> parameter is optional and defaults to the currently\n                    supported version.</p>\n                <p>\n                  <code>metadata-function=<i>lambda_arn</i>,\n                            sdk-version=<i>version_number</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n                <p>For the <code>LAMBDA</code> data catalog type, use one of the following sets\n                    of required parameters, but not both.</p>\n                <ul>\n                  <li>\n                        <p>If you have one Lambda function that processes metadata and another\n                            for reading the actual data, use the following syntax. Both parameters\n                            are required.</p>\n                        <p>\n                        <code>metadata-function=<i>lambda_arn</i>,\n                                    record-function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n                  <li>\n                        <p> If you have a composite Lambda function that processes both metadata\n                            and data, use the following syntax to specify your Lambda\n                            function.</p>\n                        <p>\n                        <code>function=<i>lambda_arn</i>\n                        </code>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             }
         },
         "com.amazonaws.athena#UpdateDataCatalogOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.athena#UpdatePreparedStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.athena#UpdatePreparedStatementInput"
+            },
+            "output": {
+                "target": "com.amazonaws.athena#UpdatePreparedStatementOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.athena#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.athena#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.athena#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a prepared statement.</p>"
+            }
+        },
+        "com.amazonaws.athena#UpdatePreparedStatementInput": {
+            "type": "structure",
+            "members": {
+                "StatementName": {
+                    "target": "com.amazonaws.athena#StatementName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the prepared statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkGroup": {
+                    "target": "com.amazonaws.athena#WorkGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workgroup for the prepared statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QueryStatement": {
+                    "target": "com.amazonaws.athena#QueryString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query string for the prepared statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.athena#DescriptionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the prepared statement.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.athena#UpdatePreparedStatementOutput": {
             "type": "structure",
             "members": {}
         },
@@ -2964,6 +3454,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If set to <code>true</code>, allows members assigned to a workgroup to reference\n            Amazon S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup\n            members cannot query data from Requester Pays buckets, and queries that retrieve data\n            from Requester Pays buckets cause an error. The default is <code>false</code>. For more\n            information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester Pays Buckets</a>\n            in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
                     }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.athena#EngineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine version that all queries running on\n            the workgroup use. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3007,6 +3503,12 @@
                     "target": "com.amazonaws.athena#BoxedBoolean",
                     "traits": {
                         "smithy.api#documentation": "<p>If set to <code>true</code>, allows members assigned to a workgroup to specify Amazon\n            S3 Requester Pays buckets in queries. If set to <code>false</code>, workgroup members\n            cannot query data from Requester Pays buckets, and queries that retrieve data from\n            Requester Pays buckets cause an error. The default is <code>false</code>. For more\n            information about Requester Pays buckets, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html\">Requester Pays Buckets</a>\n            in the <i>Amazon Simple Storage Service Developer Guide</i>.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.athena#EngineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine version requested when a workgroup is updated. After the update, all queries on the workgroup run on the requested engine version. If no value was previously set, the default is Auto. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>"
                     }
                 }
             },
@@ -3069,6 +3571,12 @@
                     "target": "com.amazonaws.athena#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>The workgroup creation date and time.</p>"
+                    }
+                },
+                "EngineVersion": {
+                    "target": "com.amazonaws.athena#EngineVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine version setting for all queries on the workgroup. Queries on the <code>AmazonAthenaPreviewFunctionality</code> workgroup run on the preview engine regardless of this setting.</p>"
                     }
                 }
             },

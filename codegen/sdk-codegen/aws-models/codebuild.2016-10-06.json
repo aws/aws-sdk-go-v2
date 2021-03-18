@@ -462,7 +462,7 @@
                 "resolvedSourceVersion": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> An identifier for the version of this build's source code. </p>\n        <ul>\n            <li>\n                <p> For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p>\n            </li>\n            <li>\n                <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p>\n            </li>\n            <li>\n                <p> For Amazon Simple Storage Service (Amazon S3), this does not apply. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> An identifier for the version of this build's source code. </p>\n        <ul>\n            <li>\n                <p> For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p>\n            </li>\n            <li>\n                <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p>\n            </li>\n            <li>\n                <p> For Amazon S3, this does not apply. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "projectName": {
@@ -492,7 +492,7 @@
                 "secondarySourceVersions": {
                     "target": "com.amazonaws.codebuild#ProjectSecondarySourceVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p> An array of <code>ProjectSourceVersion</code> objects. Each\n                <code>ProjectSourceVersion</code> must be one of: </p>\n        <ul>\n            <li>\n                <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n                    corresponds to the version of the source code you want to build. If a pull\n                    request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                    (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n                    HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                    used.</p>\n            </li>\n            <li>\n                <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                    version of the source code you want to build. If a branch name is specified, the\n                    branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                    commit ID is used.</p>\n            </li>\n            <li>\n                <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP\n                    file to use.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> An array of <code>ProjectSourceVersion</code> objects. Each\n                <code>ProjectSourceVersion</code> must be one of: </p>\n        <ul>\n            <li>\n                <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n                    corresponds to the version of the source code you want to build. If a pull\n                    request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                    (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n                    HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                    used.</p>\n            </li>\n            <li>\n                <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                    version of the source code you want to build. If a branch name is specified, the\n                    branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                    commit ID is used.</p>\n            </li>\n            <li>\n                <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n                    file to use.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "artifacts": {
@@ -712,7 +712,7 @@
                 "resolvedSourceVersion": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the resolved version of this batch build's source code.</p>\n        <ul>\n            <li>\n                <p>For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.</p>\n            </li>\n            <li>\n                <p>For AWS CodePipeline, the source revision provided by AWS CodePipeline.</p>\n            </li>\n            <li>\n                <p>For Amazon Simple Storage Service (Amazon S3), this does not apply.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identifier of the resolved version of this batch build's source code.</p>\n        <ul>\n            <li>\n                <p>For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.</p>\n            </li>\n            <li>\n                <p>For AWS CodePipeline, the source revision provided by AWS CodePipeline.</p>\n            </li>\n            <li>\n                <p>For Amazon S3, this does not apply.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "projectName": {
@@ -739,7 +739,7 @@
                 "secondarySourceVersions": {
                     "target": "com.amazonaws.codebuild#ProjectSecondarySourceVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>ProjectSourceVersion</code> objects. Each\n                <code>ProjectSourceVersion</code> must be one of: </p>\n         <ul>\n            <li>\n               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of <code>ProjectSourceVersion</code> objects. Each\n                <code>ProjectSourceVersion</code> must be one of: </p>\n         <ul>\n            <li>\n               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "artifacts": {
@@ -822,6 +822,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of <code>BuildGroup</code> objects that define the build groups for the\n            batch build.</p>"
                     }
+                },
+                "debugSessionEnabled": {
+                    "target": "com.amazonaws.codebuild#WrapperBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>\n         <p>Specifies if session debugging is enabled for this batch build. For more information, see\n  <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>"
+                    }
                 }
             },
             "traits": {
@@ -890,7 +896,7 @@
                 "contexts": {
                     "target": "com.amazonaws.codebuild#PhaseContexts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Additional information about the batch build phase. Especially to help troubleshoot a\n            failed btach build.</p>"
+                        "smithy.api#documentation": "<p>Additional information about the batch build phase. Especially to help troubleshoot a\n            failed batch build.</p>"
                     }
                 }
             },
@@ -1424,7 +1430,7 @@
                     "name": "codebuild"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS CodeBuild</fullname>\n        <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code,\n            runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the\n            need to provision, manage, and scale your own build servers. It provides prepackaged\n            build environments for the most popular programming languages and build tools, such as\n            Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild\n            to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You\n            pay only for the build time you consume. For more information about AWS CodeBuild, see the <i>\n                <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html\">AWS CodeBuild User\n                    Guide</a>.</i>\n         </p>\n        <p>AWS CodeBuild supports these operations:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>BatchDeleteBuilds</code>: Deletes one or more builds.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BatchGetBuilds</code>: Gets information about one or more builds.</p>\n            </li>\n            <li>\n                <p>\n                  <code>BatchGetProjects</code>: Gets information about one or more build\n                    projects. A <i>build project</i> defines how AWS CodeBuild runs a build.\n                    This includes information such as where to get the source code to build, the\n                    build environment to use, the build commands to run, and where to store the\n                    build output. A <i>build environment</i> is a representation of\n                    operating system, programming language runtime, and tools that AWS CodeBuild uses to run\n                    a build. You can add tags to build projects to help manage your resources and\n                    costs.</p>\n            </li>\n            <li>\n                <p>\n                    <code>BatchGetReportGroups</code>: Returns an array of report groups. </p>\n            </li>\n            <li>\n                <p>\n                    <code>BatchGetReports</code>: Returns an array of reports. </p>\n            </li>\n            <li>\n                <p>\n                  <code>CreateProject</code>: Creates a build project.</p>\n            </li>\n            <li>\n                <p>\n                    <code>CreateReportGroup</code>: Creates a report group. A report group contains\n                    a collection of reports. </p>\n            </li>\n            <li>\n                <p>\n                  <code>CreateWebhook</code>: For an existing AWS CodeBuild build project that has its\n                    source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start\n                    rebuilding the source code every time a code change is pushed to the\n                    repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DeleteProject</code>: Deletes a build project.</p>\n            </li>\n            <li>\n                <p>\n                    <code>DeleteReport</code>: Deletes a report. </p>\n            </li>\n            <li>\n                <p>\n                    <code>DeleteReportGroup</code>: Deletes a report group. </p>\n            </li>\n            <li>\n                <p>\n                    <code>DeleteResourcePolicy</code>: Deletes a resource policy that is identified\n                    by its resource ARN. </p>\n            </li>\n            <li>\n                <p>\n                  <code>DeleteSourceCredentials</code>: Deletes a set of GitHub, GitHub\n                    Enterprise, or Bitbucket source credentials.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DeleteWebhook</code>: For an existing AWS CodeBuild build project that has its\n                    source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from\n                    rebuilding the source code every time a code change is pushed to the\n                    repository.</p>\n            </li>\n            <li>\n                <p>\n                    <code>DescribeTestCases</code>: Returns a list of details about test cases for a\n                    report. </p>\n            </li>\n            <li>\n                <p>\n                    <code>GetResourcePolicy</code>: Gets a resource policy that is identified by its\n                    resource ARN. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ImportSourceCredentials</code>: Imports the source repository\n                    credentials for an AWS CodeBuild project that has its source code stored in a\n                    GitHub, GitHub Enterprise, or Bitbucket repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>InvalidateProjectCache</code>: Resets the cache for a project.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ListBuilds</code>: Gets a list of build IDs, with each build ID\n                    representing a single build.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ListBuildsForProject</code>: Gets a list of build IDs for the specified\n                    build project, with each build ID representing a single build.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ListCuratedEnvironmentImages</code>: Gets information about Docker\n                    images that are managed by AWS CodeBuild.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ListProjects</code>: Gets a list of build project names, with each build\n                    project name representing a single build project.</p>\n            </li>\n            <li>\n                <p>\n                    <code>ListReportGroups</code>: Gets a list ARNs for the report groups in the\n                    current AWS account. </p>\n            </li>\n            <li>\n                <p>\n                    <code>ListReports</code>: Gets a list ARNs for the reports in the current AWS\n                    account. </p>\n            </li>\n            <li>\n                <p>\n                    <code>ListReportsForReportGroup</code>: Returns a list of ARNs for the reports\n                    that belong to a <code>ReportGroup</code>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ListSharedProjects</code>: Gets a list of ARNs associated with projects\n                    shared with the current AWS account or user.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ListSharedReportGroups</code>: Gets a list of ARNs associated with\n                    report groups shared with the current AWS account or user</p>\n            </li>\n            <li>\n                <p>\n                  <code>ListSourceCredentials</code>: Returns a list of\n                        <code>SourceCredentialsInfo</code> objects. Each\n                        <code>SourceCredentialsInfo</code> object includes the authentication type,\n                    token ARN, and type of source provider for one set of credentials.</p>\n            </li>\n            <li>\n                <p>\n                    <code>PutResourcePolicy</code>: Stores a resource policy for the ARN of a\n                        <code>Project</code> or <code>ReportGroup</code> object. </p>\n            </li>\n            <li>\n                <p>\n                  <code>StartBuild</code>: Starts running a build.</p>\n            </li>\n            <li>\n                <p>\n                  <code>StopBuild</code>: Attempts to stop running a build.</p>\n            </li>\n            <li>\n                <p>\n                  <code>UpdateProject</code>: Changes the settings of an existing build\n                    project.</p>\n            </li>\n            <li>\n                <p>\n                  <code>UpdateReportGroup</code>: Changes a report group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>UpdateWebhook</code>: Changes the settings of an existing\n                    webhook.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>AWS CodeBuild</fullname>\n        <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code,\n            runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the\n            need to provision, manage, and scale your own build servers. It provides prepackaged\n            build environments for the most popular programming languages and build tools, such as\n            Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild\n            to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You\n            pay only for the build time you consume. For more information about AWS CodeBuild, see the <i>\n                <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html\">AWS CodeBuild User\n                    Guide</a>.</i>\n         </p>",
                 "smithy.api#title": "AWS CodeBuild"
             }
         },
@@ -1630,7 +1636,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A version of the build input to be built for this project. If not specified, the latest\n            version is used. If specified, it must be one of: </p>\n         <ul>\n            <li>\n               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>\n         <p>If <code>sourceVersion</code> is specified at the build level, then that version takes\n            precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>A version of the build input to be built for this project. If not specified, the latest\n            version is used. If specified, it must be one of: </p>\n         <ul>\n            <li>\n               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>\n         <p>If <code>sourceVersion</code> is specified at the build level, then that version takes\n            precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. \n    </p>"
                     }
                 },
                 "secondarySourceVersions": {
@@ -1655,7 +1661,7 @@
                 "cache": {
                     "target": "com.amazonaws.codebuild#ProjectCache",
                     "traits": {
-                        "smithy.api#documentation": "<p>Stores recently used information so that it can be quickly accessed at a later\n            time.</p>"
+                        "smithy.api#documentation": "<p>Stores recently used information so that it can be quickly accessed at a later\n        time.</p>"
                     }
                 },
                 "environment": {
@@ -1687,7 +1693,7 @@
                 "encryptionKey": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output\n      artifacts.</p>\n         <note>\n            <p>You can use a cross-account KMS key to encrypt the build output artifacts if your\n        service role has permission to that key. </p>\n         </note>\n         <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using\n        the format <code>alias/<alias-name></code>).</p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output\n      artifacts.</p>\n         <note>\n            <p>You can use a cross-account KMS key to encrypt the build output artifacts if your\n        service role has permission to that key. </p>\n         </note>\n         <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using\n        the format <code>alias/<alias-name></code>).\n    </p>"
                     }
                 },
                 "tags": {
@@ -1705,7 +1711,7 @@
                 "badgeEnabled": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this to true to generate a publicly accessible URL for your project's build\n            badge.</p>"
+                        "smithy.api#documentation": "<p>Set this to true to generate a publicly accessible URL for your project's build\n        badge.</p>"
                     }
                 },
                 "logsConfig": {
@@ -1723,7 +1729,13 @@
                 "buildBatchConfig": {
                     "target": "com.amazonaws.codebuild#ProjectBuildBatchConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <a>ProjectBuildBatchConfig</a> object that defines the batch build options\n            for the project.</p>"
+                        "smithy.api#documentation": "<p>A <a>ProjectBuildBatchConfig</a>\n object that defines the batch build options\n            for the project.</p>"
+                    }
+                },
+                "concurrentBuildLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p>\n         <p>New builds are only started if the current number of builds is less than or equal to this limit. \n  If the current build count meets this limit, new builds are throttled and are not run.</p>"
                     }
                 }
             }
@@ -2035,7 +2047,7 @@
                 "deleteReports": {
                     "target": "com.amazonaws.codebuild#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>true</code>, deletes any reports that belong to a report group before deleting\n            the report group. </p>\n        <p>If <code>false</code>, you must delete any reports in the report group. Use <a href=\"https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html\">ListReportsForReportGroup</a> to get the reports in a report group. Use <a href=\"https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html\">DeleteReport</a> to delete the reports. If you call\n                <code>DeleteReportGroup</code> for a report group that contains one or more reports,\n            an exception is thrown. </p>"
+                        "smithy.api#documentation": "<p>If <code>true</code>, deletes any reports that belong to a report group before deleting\n            the report group. </p>\n         <p>If <code>false</code>, you must delete any reports in the report group. Use <a href=\"https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html\">ListReportsForReportGroup</a> to get the reports in a report group. Use <a href=\"https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html\">DeleteReport</a> to delete the reports. If you call\n      <code>DeleteReportGroup</code> for a report group that contains one or more reports,\n            an exception is thrown. </p>"
                     }
                 }
             }
@@ -2564,7 +2576,10 @@
                 {
                     "target": "com.amazonaws.codebuild#ResourceNotFoundException"
                 }
-            ]
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Analyzes and accumulates test report values for the specified test reports.</p>"
+            }
         },
         "com.amazonaws.codebuild#GetReportGroupTrendInput": {
             "type": "structure",
@@ -2572,15 +2587,20 @@
                 "reportGroupArn": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the report group that contains the reports to analyze.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "numOfReports": {
-                    "target": "com.amazonaws.codebuild#PageSize"
+                    "target": "com.amazonaws.codebuild#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of reports to analyze. This operation always retrieves the most recent\n            reports.</p>\n        <p>If this parameter is omitted, the most recent 100 reports are analyzed.</p>"
+                    }
                 },
                 "trendField": {
                     "target": "com.amazonaws.codebuild#ReportGroupTrendFieldType",
                     "traits": {
+                        "smithy.api#documentation": "<p>The test report value to accumulate. This must be one of the following values:</p>\n         <dl>\n            <dt>Test reports:</dt>\n            <dd>\n                    <dl>\n                  <dt>DURATION</dt>\n                  <dd>\n                                <p>Accumulate the test run times for the specified\n                                    reports.</p>\n                            </dd>\n                  <dt>PASS_RATE</dt>\n                  <dd>\n                                <p>Accumulate the percentage of tests that passed for the\n                                    specified test reports.</p>\n                            </dd>\n                  <dt>TOTAL</dt>\n                  <dd>\n                                <p>Accumulate the total number of tests for the specified test\n                                    reports.</p>\n                            </dd>\n               </dl>\n                </dd>\n         </dl>\n         <dl>\n            <dt>Code coverage reports:</dt>\n            <dd>\n                    <dl>\n                  <dt>BRANCH_COVERAGE</dt>\n                  <dd>\n                                <p>Accumulate the branch coverage percentages for the specified\n                                    test reports.</p>\n                            </dd>\n                  <dt>BRANCHES_COVERED</dt>\n                  <dd>\n                                <p>Accumulate the branches covered values for the specified test\n                                    reports.</p>\n                            </dd>\n                  <dt>BRANCHES_MISSED</dt>\n                  <dd>\n                                <p>Accumulate the branches missed values for the specified test\n                                    reports.</p>\n                            </dd>\n                  <dt>LINE_COVERAGE</dt>\n                  <dd>\n                                <p>Accumulate the line coverage percentages for the specified\n                                    test reports.</p>\n                            </dd>\n                  <dt>LINES_COVERED</dt>\n                  <dd>\n                                <p>Accumulate the lines covered values for the specified test\n                                    reports.</p>\n                            </dd>\n                  <dt>LINES_MISSED</dt>\n                  <dd>\n                                <p>Accumulate the lines not covered values for the specified test\n                                    reports.</p>\n                            </dd>\n               </dl>\n                </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2590,10 +2610,16 @@
             "type": "structure",
             "members": {
                 "stats": {
-                    "target": "com.amazonaws.codebuild#ReportGroupTrendStats"
+                    "target": "com.amazonaws.codebuild#ReportGroupTrendStats",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the accumulated trend data.</p>"
+                    }
                 },
                 "rawData": {
-                    "target": "com.amazonaws.codebuild#ReportGroupTrendRawDataList"
+                    "target": "com.amazonaws.codebuild#ReportGroupTrendRawDataList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that contains the raw data for each report.</p>"
+                    }
                 }
             }
         },
@@ -3054,7 +3080,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of build IDs for the specified build project, with each build ID\n            representing a single build.</p>",
+                "smithy.api#documentation": "<p>Gets a list of build identifiers for the specified build project, with each build\n            identifier representing a single build.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -3075,7 +3101,7 @@
                 "sortOrder": {
                     "target": "com.amazonaws.codebuild#SortOrderType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The order to list build IDs. Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ASCENDING</code>: List the build IDs in ascending order by build\n                    ID.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DESCENDING</code>: List the build IDs in descending order by build\n                    ID.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The order to list results in. The results are sorted by build number, not the build\n            identifier.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ASCENDING</code>: List the build IDs in ascending order by build\n                    ID.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DESCENDING</code>: List the build IDs in descending order by build\n                    ID.</p>\n            </li>\n         </ul>\n        <p>If the project has more than 100 builds, setting the sort order will result in an\n            error. </p>"
                     }
                 },
                 "nextToken": {
@@ -3858,7 +3884,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A version of the build input to be built for this project. If not specified, the\n      latest version is used. If specified, it must be one of:</p>\n         <ul>\n            <li>\n               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>\n         <p>If <code>sourceVersion</code> is specified at the build level, then that version\n      takes precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n      with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>A version of the build input to be built for this project. If not specified, the\n      latest version is used. If specified, it must be one of:</p>\n         <ul>\n            <li>\n               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n          corresponds to the version of the source code you want to build. If a pull\n          request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n          (for example <code>pr/25</code>). If a branch name is specified, the branch's\n          HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n          used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n          version of the source code you want to build. If a branch name is specified, the\n          branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n          commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n          file to use.</p>\n            </li>\n         </ul>\n         <p>If <code>sourceVersion</code> is specified at the build level, then that version\n      takes precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n      with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. \n    </p>"
                     }
                 },
                 "secondarySourceVersions": {
@@ -3912,7 +3938,7 @@
                 "encryptionKey": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output\n      artifacts.</p>\n         <note>\n            <p>You can use a cross-account KMS key to encrypt the build output artifacts if your\n        service role has permission to that key. </p>\n         </note>\n         <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using\n        the format <code>alias/<alias-name></code>).</p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output\n      artifacts.</p>\n         <note>\n            <p>You can use a cross-account KMS key to encrypt the build output artifacts if your\n        service role has permission to that key. </p>\n         </note>\n         <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using\n        the format <code>alias/<alias-name></code>).\n    </p>"
                     }
                 },
                 "tags": {
@@ -3966,7 +3992,13 @@
                 "buildBatchConfig": {
                     "target": "com.amazonaws.codebuild#ProjectBuildBatchConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <a>ProjectBuildBatchConfig</a> object that defines the batch build\n            options for the project.</p>"
+                        "smithy.api#documentation": "<p>A <a>ProjectBuildBatchConfig</a>\n object that defines the batch build\n            options for the project.</p>"
+                    }
+                },
+                "concurrentBuildLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p>\n         <p>New builds are only started if the current number of builds is less than or equal to this limit. \n  If the current build count meets this limit, new builds are throttled and are not run.</p>"
                     }
                 }
             },
@@ -3992,7 +4024,7 @@
                 "type": {
                     "target": "com.amazonaws.codebuild#ArtifactsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of build output artifact. Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CODEPIPELINE</code>: The build project has build output generated\n                    through AWS CodePipeline. </p>\n                <note>\n                    <p>The <code>CODEPIPELINE</code> type is not supported for\n                            <code>secondaryArtifacts</code>.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <code>NO_ARTIFACTS</code>: The build project does not produce any build\n                    output.</p>\n            </li>\n            <li>\n                <p>\n                  <code>S3</code>: The build project stores build output in Amazon Simple Storage Service (Amazon S3).</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of build output artifact. Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CODEPIPELINE</code>: The build project has build output generated\n                    through AWS CodePipeline. </p>\n                <note>\n                    <p>The <code>CODEPIPELINE</code> type is not supported for\n                            <code>secondaryArtifacts</code>.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <code>NO_ARTIFACTS</code>: The build project does not produce any build\n                    output.</p>\n            </li>\n            <li>\n                <p>\n                  <code>S3</code>: The build project stores build output in Amazon S3.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4035,7 +4067,7 @@
                 "encryptionDisabled": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Set to true if you do not want your output artifacts encrypted. This option is valid\n            only if your artifacts type is Amazon Simple Storage Service (Amazon S3). If this is set with another artifacts type, an\n            invalidInputException is thrown. </p>"
+                        "smithy.api#documentation": "<p> Set to true if you do not want your output artifacts encrypted. This option is valid\n            only if your artifacts type is Amazon S3. If this is set with another artifacts type, an\n            invalidInputException is thrown. </p>"
                     }
                 },
                 "artifactIdentifier": {
@@ -4073,7 +4105,7 @@
                 "badgeRequestUrl": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The publicly-accessible URL through which you can access the build badge for your\n            project. </p>\n        <p>The publicly accessible URL through which you can access the build badge for your\n            project. </p>"
+                        "smithy.api#documentation": "<p>The publicly-accessible URL through which you can access the build badge for your\n            project. </p>"
                     }
                 }
             },
@@ -4194,7 +4226,7 @@
                 "certificate": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon Simple Storage Service (Amazon S3) bucket, path prefix, and object key that contains the PEM-encoded\n            certificate for the build project. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate\">certificate</a> in the\n                <i>AWS CodeBuild User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon S3 bucket, path prefix, and object key that contains the PEM-encoded\n            certificate for the build project. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate\">certificate</a> in the\n                <i>AWS CodeBuild User Guide</i>.</p>"
                     }
                 },
                 "registryCredential": {
@@ -4317,14 +4349,14 @@
                 "type": {
                     "target": "com.amazonaws.codebuild#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of repository that contains the source code to be built. Valid values\n            include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CODEPIPELINE</code>: The source code settings are specified in the\n                    source action of a pipeline in AWS CodePipeline.</p>\n            </li>\n            <li>\n                <p>\n                  <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud\n                    repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise\n                    Server repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NO_SOURCE</code>: The project does not have input source code.</p>\n            </li>\n            <li>\n                <p>\n                  <code>S3</code>: The source code is in an Amazon Simple Storage Service (Amazon S3) input bucket.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of repository that contains the source code to be built. Valid values\n            include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CODEPIPELINE</code>: The source code settings are specified in the\n                    source action of a pipeline in AWS CodePipeline.</p>\n            </li>\n            <li>\n                <p>\n                  <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud\n                    repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise\n                    Server repository.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NO_SOURCE</code>: The project does not have input source code.</p>\n            </li>\n            <li>\n                <p>\n                  <code>S3</code>: The source code is in an Amazon S3 bucket.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "location": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the location of the source code to be built. Valid values\n            include:</p>\n        <ul>\n            <li>\n                <p>For source code settings that are specified in the source action of a pipeline\n                    in AWS CodePipeline, <code>location</code> should not be specified. If it is specified,\n                    AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source\n                    action instead of this value.</p>\n            </li>\n            <li>\n                <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository\n                    that contains the source code and the buildspec file (for example,\n                        <code>https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name></code>).</p>\n            </li>\n            <li>\n                <p>For source code in an Amazon Simple Storage Service (Amazon S3) input bucket, one of the following. </p>\n                <ul>\n                  <li>\n                        <p>The path to the ZIP file that contains the source code (for example,\n                                <code><bucket-name>/<path>/<object-name>.zip</code>). </p>\n                    </li>\n                  <li>\n                        <p>The path to the folder that contains the source code (for example,\n                                <code><bucket-name>/<path-to-source-code>/<folder>/</code>). </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For source code in a GitHub repository, the HTTPS clone URL to the repository\n                    that contains the source and the buildspec file. You must connect your AWS\n                    account to your GitHub account. Use the AWS CodeBuild console to start creating a build\n                    project. When you use the console to connect (or reconnect) with GitHub, on the\n                    GitHub <b>Authorize application</b> page, for\n                        <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to\n                    allow AWS CodeBuild to have access to, and then choose <b>Authorize\n                        application</b>. (After you have connected to your GitHub account,\n                    you do not need to finish creating the build project. You can leave the AWS CodeBuild\n                    console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code>\n                    object, set the <code>auth</code> object's <code>type</code> value to\n                        <code>OAUTH</code>.</p>\n            </li>\n            <li>\n                <p>For source code in a Bitbucket repository, the HTTPS clone URL to the\n                    repository that contains the source and the buildspec file. You must connect\n                    your AWS account to your Bitbucket account. Use the AWS CodeBuild console to start\n                    creating a build project. When you use the console to connect (or reconnect)\n                    with Bitbucket, on the Bitbucket <b>Confirm access to your\n                        account</b> page, choose <b>Grant\n                        access</b>. (After you have connected to your Bitbucket account, you\n                    do not need to finish creating the build project. You can leave the AWS CodeBuild\n                    console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code>\n                    object, set the <code>auth</code> object's <code>type</code> value to\n                        <code>OAUTH</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Information about the location of the source code to be built. Valid values\n            include:</p>\n        <ul>\n            <li>\n                <p>For source code settings that are specified in the source action of a pipeline\n                    in AWS CodePipeline, <code>location</code> should not be specified. If it is specified,\n                    AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source\n                    action instead of this value.</p>\n            </li>\n            <li>\n                <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository\n                    that contains the source code and the buildspec file (for example,\n                        <code>https://git-codecommit.<region-ID>.amazonaws.com/v1/repos/<repo-name></code>).</p>\n            </li>\n            <li>\n                <p>For source code in an Amazon S3 input bucket, one of the following. </p>\n                <ul>\n                  <li>\n                        <p>The path to the ZIP file that contains the source code (for example,\n                                <code><bucket-name>/<path>/<object-name>.zip</code>). </p>\n                    </li>\n                  <li>\n                        <p>The path to the folder that contains the source code (for example,\n                                <code><bucket-name>/<path-to-source-code>/<folder>/</code>). </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For source code in a GitHub repository, the HTTPS clone URL to the repository\n                    that contains the source and the buildspec file. You must connect your AWS\n                    account to your GitHub account. Use the AWS CodeBuild console to start creating a build\n                    project. When you use the console to connect (or reconnect) with GitHub, on the\n                    GitHub <b>Authorize application</b> page, for\n                        <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to\n                    allow AWS CodeBuild to have access to, and then choose <b>Authorize\n                        application</b>. (After you have connected to your GitHub account,\n                    you do not need to finish creating the build project. You can leave the AWS CodeBuild\n                    console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code>\n                    object, set the <code>auth</code> object's <code>type</code> value to\n                        <code>OAUTH</code>.</p>\n            </li>\n            <li>\n                <p>For source code in a Bitbucket repository, the HTTPS clone URL to the\n                    repository that contains the source and the buildspec file. You must connect\n                    your AWS account to your Bitbucket account. Use the AWS CodeBuild console to start\n                    creating a build project. When you use the console to connect (or reconnect)\n                    with Bitbucket, on the Bitbucket <b>Confirm access to your\n                        account</b> page, choose <b>Grant\n                        access</b>. (After you have connected to your Bitbucket account, you\n                    do not need to finish creating the build project. You can leave the AWS CodeBuild\n                    console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code>\n                    object, set the <code>auth</code> object's <code>type</code> value to\n                        <code>OAUTH</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "gitCloneDepth": {
@@ -4354,7 +4386,7 @@
                 "reportBuildStatus": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Set to true to report the status of a build's start and finish to your source\n            provider. This option is valid only when your source provider is GitHub, GitHub\n            Enterprise, or Bitbucket. If this is set and you use a different source provider, an\n            invalidInputException is thrown. </p>\n        <note>\n            <p> The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n        </note>"
+                        "smithy.api#documentation": "<p> Set to true to report the status of a build's start and finish to your source\n            provider. This option is valid only when your source provider is GitHub, GitHub\n            Enterprise, or Bitbucket. If this is set and you use a different source provider, an\n            <code>invalidInputException</code> is thrown. </p>\n            <p>To be able to report the build status to the source provider, the user associated with the source provider must\nhave write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p>\n        <note>\n            <p> The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n        </note>"
                     }
                 },
                 "buildStatusConfig": {
@@ -4366,13 +4398,13 @@
                 "insecureSsl": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable this flag to ignore SSL warnings while connecting to the project source\n            code.</p>"
+                        "smithy.api#documentation": "<p>Enable this flag to ignore SSL warnings while connecting to the project source\n          code.</p>"
                     }
                 },
                 "sourceIdentifier": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> An identifier for this project source. </p>"
+                        "smithy.api#documentation": "<p>An identifier for this project source. The identifier can only contain\n          alphanumeric characters and underscores, and must be less than 128 characters in length. </p>"
                     }
                 }
             },
@@ -4386,14 +4418,14 @@
                 "sourceIdentifier": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for a source in the build project.</p>",
+                        "smithy.api#documentation": "<p>An identifier for a source in the build project. The identifier can only contain\n            alphanumeric characters and underscores, and must be less than 128 characters in length. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source version for the corresponding source identifier. If specified, must be one\n            of:</p>\n        <ul>\n            <li>\n                <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n                    corresponds to the version of the source code you want to build. If a pull\n                    request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                    (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n                    HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                    used.</p>\n            </li>\n            <li>\n                <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                    version of the source code you want to build. If a branch name is specified, the\n                    branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                    commit ID is used.</p>\n            </li>\n            <li>\n                <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP\n                    file to use.</p>\n            </li>\n         </ul>\n        <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>",
+                        "smithy.api#documentation": "<p>The source version for the corresponding source identifier. If specified, must be one\n          of:</p>\n         <ul>\n            <li>\n              <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n              <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n                  corresponds to the version of the source code you want to build. If a pull\n                  request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                  (for example, <code>pr/25</code>). If a branch name is specified, the branch's\n                  HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                  used.</p>\n            </li>\n            <li>\n              <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                  version of the source code you want to build. If a branch name is specified, the\n                  branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                  commit ID is used.</p>\n            </li>\n            <li>\n              <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n                  file to use.</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n              with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4504,7 +4536,7 @@
                 "type": {
                     "target": "com.amazonaws.codebuild#ReportType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the report that was run.</p>\n        <dl>\n            <dt>CODE_COVERAGE</dt>\n            <dd>\n                    <p>A code coverage report.</p>\n                </dd>\n            <dt>TEST</dt>\n            <dd>\n                    <p>A test report.</p>\n                </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The type of the report that was run.</p>\n         <dl>\n            <dt>CODE_COVERAGE</dt>\n            <dd>\n               <p>A code coverage report.</p>\n            </dd>\n            <dt>TEST</dt>\n            <dd>\n               <p>A test report.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "name": {
@@ -4654,51 +4686,54 @@
                 "arn": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The ARN of a <code>ReportGroup</code>. </p>"
+                        "smithy.api#documentation": "<p>The ARN of the <code>ReportGroup</code>. \n    </p>"
                     }
                 },
                 "name": {
                     "target": "com.amazonaws.codebuild#ReportGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of a <code>ReportGroup</code>. </p>"
+                        "smithy.api#documentation": "<p>The name of the <code>ReportGroup</code>. \n    </p>"
                     }
                 },
                 "type": {
                     "target": "com.amazonaws.codebuild#ReportType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of the <code>ReportGroup</code>. The one valid value is <code>TEST</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>The type of the <code>ReportGroup</code>. This can be one of the following\n            values:</p>\n         <dl>\n            <dt>CODE_COVERAGE</dt>\n            <dd>\n               <p>The report group contains code coverage reports.</p>\n            </dd>\n            <dt>TEST</dt>\n            <dd>\n               <p>The report group contains test reports.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "exportConfig": {
                     "target": "com.amazonaws.codebuild#ReportExportConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Information about the destination where the raw data of this <code>ReportGroup</code>\n            is exported. </p>"
+                        "smithy.api#documentation": "<p>Information about the destination where the raw data of this <code>ReportGroup</code>\n            is exported. </p>"
                     }
                 },
                 "created": {
                     "target": "com.amazonaws.codebuild#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The date and time this <code>ReportGroup</code> was created. </p>"
+                        "smithy.api#documentation": "<p>The date and time this <code>ReportGroup</code> was created. </p>"
                     }
                 },
                 "lastModified": {
                     "target": "com.amazonaws.codebuild#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p> The date and time this <code>ReportGroup</code> was last modified. </p>"
+                        "smithy.api#documentation": "<p>The date and time this <code>ReportGroup</code> was last modified. </p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.codebuild#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of tag key and value pairs associated with this report group. </p>\n        <p>These tags are available for use by AWS services that support AWS CodeBuild report group\n      tags.</p>"
+                        "smithy.api#documentation": "<p>A list of tag key and value pairs associated with this report group. </p>\n        <p>These tags are available for use by AWS services that support AWS CodeBuild report group\n      tags.</p>"
                     }
                 },
                 "status": {
-                    "target": "com.amazonaws.codebuild#ReportGroupStatusType"
+                    "target": "com.amazonaws.codebuild#ReportGroupStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the report group. This property is read-only.</p>\n         <p>This can be one of the following values:</p>\n         <dl>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The report group is active.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>The report group is in the process of being deleted.</p>\n            </dd>\n         </dl>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> A series of reports. Each report contains information about the results from running\n            a series of test cases. You specify the test cases for a report group in the buildspec\n            for a build project using one or more paths to the test case files. </p>"
+                "smithy.api#documentation": "<p>A series of reports. Each report contains information about the results from running a\n            series of test cases. You specify the test cases for a report group in the buildspec for\n            a build project using one or more paths to the test case files. </p>"
             }
         },
         "com.amazonaws.codebuild#ReportGroupArns": {
@@ -4809,14 +4844,26 @@
             "type": "structure",
             "members": {
                 "average": {
-                    "target": "com.amazonaws.codebuild#String"
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the average of all values analyzed.</p>"
+                    }
                 },
                 "max": {
-                    "target": "com.amazonaws.codebuild#String"
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the maximum value analyzed.</p>"
+                    }
                 },
                 "min": {
-                    "target": "com.amazonaws.codebuild#String"
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the minimum value analyzed.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains trend statistics for a set of reports. The actual values depend on the type of\n            trend being collected. For more information, see .</p>"
             }
         },
         "com.amazonaws.codebuild#ReportGroups": {
@@ -4901,11 +4948,20 @@
             "type": "structure",
             "members": {
                 "reportArn": {
-                    "target": "com.amazonaws.codebuild#NonEmptyString"
+                    "target": "com.amazonaws.codebuild#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the report.</p>"
+                    }
                 },
                 "data": {
-                    "target": "com.amazonaws.codebuild#String"
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the requested data field from the report.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the unmodified data for the report. For more information, see .</p>"
             }
         },
         "com.amazonaws.codebuild#Reports": {
@@ -4943,7 +4999,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a resolved build artifact. A resolve artifact is an artifact that is built and\n            deployed to the destination, such as Amazon Simple Storage Service (Amazon S3).</p>"
+                "smithy.api#documentation": "<p>Represents a resolved build artifact. A resolve artifact is an artifact that is built and\n            deployed to the destination, such as Amazon S3.</p>"
             }
         },
         "com.amazonaws.codebuild#ResolvedSecondaryArtifacts": {
@@ -5124,6 +5180,12 @@
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p> The name of the S3 bucket where the raw data of a report are exported. </p>"
+                    }
+                },
+                "bucketOwner": {
+                    "target": "com.amazonaws.codebuild#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account identifier of the owner of the Amazon S3 bucket. This allows report data to be exported to an Amazon S3 bucket\n        that is owned by an account other than the account running the build.</p>"
                     }
                 },
                 "path": {
@@ -5392,7 +5454,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the batch build input to be built, for this build only. If not specified,\n            the latest version is used. If specified, the contents depends on the source\n            provider:</p>\n        <dl>\n            <dt>AWS CodeCommit</dt>\n            <dd>\n                    <p>The commit ID, branch, or Git tag to use.</p>\n                </dd>\n            <dt>GitHub</dt>\n            <dd>\n                    <p>The commit ID, pull request ID, branch name, or tag name that corresponds\n                        to the version of the source code you want to build. If a pull request ID is\n                        specified, it must use the format <code>pr/pull-request-ID</code> (for\n                        example <code>pr/25</code>). If a branch name is specified, the branch's\n                        HEAD commit ID is used. If not specified, the default branch's HEAD commit\n                        ID is used.</p>\n                </dd>\n            <dt>Bitbucket</dt>\n            <dd>\n                    <p>The commit ID, branch name, or tag name that corresponds to the version of\n                        the source code you want to build. If a branch name is specified, the\n                        branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                        commit ID is used.</p>\n                </dd>\n            <dt>Amazon Simple Storage Service (Amazon S3)</dt>\n            <dd>\n                    <p>The version ID of the object that represents the build input ZIP file to\n                        use.</p>\n                </dd>\n         </dl>\n         <p>If <code>sourceVersion</code> is specified at the project level, then this\n                <code>sourceVersion</code> (at the build level) takes precedence. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The version of the batch build input to be built, for this build only. If not specified,\n            the latest version is used. If specified, the contents depends on the source\n            provider:</p>\n        <dl>\n            <dt>AWS CodeCommit</dt>\n            <dd>\n                    <p>The commit ID, branch, or Git tag to use.</p>\n                </dd>\n            <dt>GitHub</dt>\n            <dd>\n                    <p>The commit ID, pull request ID, branch name, or tag name that corresponds\n                        to the version of the source code you want to build. If a pull request ID is\n                        specified, it must use the format <code>pr/pull-request-ID</code> (for\n                        example <code>pr/25</code>). If a branch name is specified, the branch's\n                        HEAD commit ID is used. If not specified, the default branch's HEAD commit\n                        ID is used.</p>\n                </dd>\n            <dt>Bitbucket</dt>\n            <dd>\n                    <p>The commit ID, branch name, or tag name that corresponds to the version of\n                        the source code you want to build. If a branch name is specified, the\n                        branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                        commit ID is used.</p>\n                </dd>\n            <dt>Amazon S3</dt>\n            <dd>\n                    <p>The version ID of the object that represents the build input ZIP file to\n                        use.</p>\n                </dd>\n         </dl>\n         <p>If <code>sourceVersion</code> is specified at the project level, then this\n                <code>sourceVersion</code> (at the build level) takes precedence. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
                     }
                 },
                 "artifactsOverride": {
@@ -5550,6 +5612,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A <code>BuildBatchConfigOverride</code> object that contains batch build configuration\n            overrides.</p>"
                     }
+                },
+                "debugSessionEnabled": {
+                    "target": "com.amazonaws.codebuild#WrapperBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if session debugging is enabled for this batch build. For more information, see\n  <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>"
+                    }
                 }
             }
         },
@@ -5589,7 +5657,7 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the build input to be built, for this build only. If not specified,\n            the latest version is used. If specified, the contents depends on the source\n            provider:</p>\n        <dl>\n            <dt>AWS CodeCommit</dt>\n            <dd>\n                    <p>The commit ID, branch, or Git tag to use.</p>\n                </dd>\n            <dt>GitHub</dt>\n            <dd>\n                    <p>The commit ID, pull request ID, branch name, or tag name that corresponds\n                        to the version of the source code you want to build. If a pull request ID is\n                        specified, it must use the format <code>pr/pull-request-ID</code> (for\n                        example <code>pr/25</code>). If a branch name is specified, the branch's\n                        HEAD commit ID is used. If not specified, the default branch's HEAD commit\n                        ID is used.</p>\n                </dd>\n            <dt>Bitbucket</dt>\n            <dd>\n                    <p>The commit ID, branch name, or tag name that corresponds to the version of\n                        the source code you want to build. If a branch name is specified, the\n                        branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                        commit ID is used.</p>\n                </dd>\n            <dt>Amazon Simple Storage Service (Amazon S3)</dt>\n            <dd>\n                    <p>The version ID of the object that represents the build input ZIP file to\n                        use.</p>\n                </dd>\n         </dl>\n        <p>If <code>sourceVersion</code> is specified at the project level, then this\n            <code>sourceVersion</code> (at the build level) takes precedence. </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n            with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>The version of the build input to be built, for this build only. If not specified,\n            the latest version is used. If specified, the contents depends on the source\n            provider:</p>\n        <dl>\n            <dt>AWS CodeCommit</dt>\n            <dd>\n                    <p>The commit ID, branch, or Git tag to use.</p>\n                </dd>\n            <dt>GitHub</dt>\n            <dd>\n                    <p>The commit ID, pull request ID, branch name, or tag name that corresponds\n                        to the version of the source code you want to build. If a pull request ID is\n                        specified, it must use the format <code>pr/pull-request-ID</code> (for\n                        example <code>pr/25</code>). If a branch name is specified, the branch's\n                        HEAD commit ID is used. If not specified, the default branch's HEAD commit\n                        ID is used.</p>\n                </dd>\n            <dt>Bitbucket</dt>\n            <dd>\n                    <p>The commit ID, branch name, or tag name that corresponds to the version of\n                        the source code you want to build. If a branch name is specified, the\n                        branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                        commit ID is used.</p>\n                </dd>\n            <dt>Amazon S3</dt>\n            <dd>\n                    <p>The version ID of the object that represents the build input ZIP file to\n                        use.</p>\n                </dd>\n         </dl>\n        <p>If <code>sourceVersion</code> is specified at the project level, then this\n            <code>sourceVersion</code> (at the build level) takes precedence. </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n            with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
                     }
                 },
                 "artifactsOverride": {
@@ -5655,7 +5723,7 @@
                 "reportBuildStatusOverride": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> Set to true to report to your source provider the status of a build's start and\n            completion. If you use this option with a source provider other than GitHub, GitHub\n            Enterprise, or Bitbucket, an invalidInputException is thrown. </p>\n        <note>\n            <p> The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n        </note>"
+                        "smithy.api#documentation": "<p> Set to true to report to your source provider the status of a build's start and\n            completion. If you use this option with a source provider other than GitHub, GitHub\n            Enterprise, or Bitbucket, an <code>invalidInputException</code> is thrown. </p>\n            <p>To be able to report the build status to the source provider, the user associated with the source provider must\nhave write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p>\n        <note>\n            <p> The status of a build triggered by a webhook is always reported to your source\n                provider. </p>\n        </note>"
                     }
                 },
                 "buildStatusConfigOverride": {
@@ -6078,7 +6146,7 @@
                 "name": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the build project.</p>\n        <note>\n            <p>You cannot change a build project's name.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The name of the build project.</p>\n         <note>\n            <p>You cannot change a build project's name.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6091,7 +6159,7 @@
                 "source": {
                     "target": "com.amazonaws.codebuild#ProjectSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information to be changed about the build input source code for the build\n            project.</p>"
+                        "smithy.api#documentation": "<p>Information to be changed about the build input source code for the build\n    project.</p>"
                     }
                 },
                 "secondarySources": {
@@ -6103,19 +6171,19 @@
                 "sourceVersion": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> A version of the build input to be built for this project. If not specified, the\n            latest version is used. If specified, it must be one of: </p>\n        <ul>\n            <li>\n                <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n                <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n                    corresponds to the version of the source code you want to build. If a pull\n                    request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n                    (for example <code>pr/25</code>). If a branch name is specified, the branch's\n                    HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n                    used.</p>\n            </li>\n            <li>\n                <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n                    version of the source code you want to build. If a branch name is specified, the\n                    branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n                    commit ID is used.</p>\n            </li>\n            <li>\n                <p>For Amazon Simple Storage Service (Amazon S3): the version ID of the object that represents the build input ZIP\n                    file to use.</p>\n            </li>\n         </ul>\n        <p> If <code>sourceVersion</code> is specified at the build level, then that version\n            takes precedence over this <code>sourceVersion</code> (at the project level). </p>\n        <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n                with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p> A version of the build input to be built for this project. If not specified, the\n    latest version is used. If specified, it must be one of: </p>\n         <ul>\n            <li>\n               <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p>\n            </li>\n            <li>\n               <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that\n            corresponds to the version of the source code you want to build. If a pull\n            request ID is specified, it must use the format <code>pr/pull-request-ID</code>\n            (for example <code>pr/25</code>). If a branch name is specified, the branch's\n            HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is\n            used.</p>\n            </li>\n            <li>\n               <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the\n            version of the source code you want to build. If a branch name is specified, the\n            branch's HEAD commit ID is used. If not specified, the default branch's HEAD\n            commit ID is used.</p>\n            </li>\n            <li>\n               <p>For Amazon S3: the version ID of the object that represents the build input ZIP\n            file to use.</p>\n            </li>\n         </ul>\n         <p> If <code>sourceVersion</code> is specified at the build level, then that version\n    takes precedence over this <code>sourceVersion</code> (at the project level). </p>\n         <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample\n        with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. \n    </p>"
                     }
                 },
                 "secondarySourceVersions": {
                     "target": "com.amazonaws.codebuild#ProjectSecondarySourceVersions",
                     "traits": {
-                        "smithy.api#documentation": "<p> An array of <code>ProjectSourceVersion</code> objects. If\n                <code>secondarySourceVersions</code> is specified at the build level, then they take\n            over these <code>secondarySourceVersions</code> (at the project level). </p>"
+                        "smithy.api#documentation": "<p> An array of <code>ProjectSourceVersion</code> objects. If\n      <code>secondarySourceVersions</code> is specified at the build level, then they take\n    over these <code>secondarySourceVersions</code> (at the project level). </p>"
                     }
                 },
                 "artifacts": {
                     "target": "com.amazonaws.codebuild#ProjectArtifacts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information to be changed about the build output artifacts for the build\n            project.</p>"
+                        "smithy.api#documentation": "<p>Information to be changed about the build output artifacts for the build\n        project.</p>"
                     }
                 },
                 "secondaryArtifacts": {
@@ -6127,7 +6195,7 @@
                 "cache": {
                     "target": "com.amazonaws.codebuild#ProjectCache",
                     "traits": {
-                        "smithy.api#documentation": "<p>Stores recently used information so that it can be quickly accessed at a later\n            time.</p>"
+                        "smithy.api#documentation": "<p>Stores recently used information so that it can be quickly accessed at a later\n      time.</p>"
                     }
                 },
                 "environment": {
@@ -6139,13 +6207,13 @@
                 "serviceRole": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The replacement ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent\n            AWS services on behalf of the AWS account.</p>"
+                        "smithy.api#documentation": "<p>The replacement ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent\n    AWS services on behalf of the AWS account.</p>"
                     }
                 },
                 "timeoutInMinutes": {
                     "target": "com.amazonaws.codebuild#TimeOut",
                     "traits": {
-                        "smithy.api#documentation": "<p>The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before\n            timing out any related build that did not get marked as completed.</p>"
+                        "smithy.api#documentation": "<p>The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before\n      timing out any related build that did not get marked as completed.</p>"
                     }
                 },
                 "queuedTimeoutInMinutes": {
@@ -6157,13 +6225,13 @@
                 "encryptionKey": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output\n            artifacts.</p>\n        <note>\n            <p> You can use a cross-account KMS key to encrypt the build output artifacts if your\n                service role has permission to that key. </p>\n        </note>\n        <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using\n            the format <code>alias/<alias-name></code>).</p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output\n    artifacts.</p>\n         <note>\n            <p> You can use a cross-account KMS key to encrypt the build output artifacts if your\n        service role has permission to that key. </p>\n         </note>\n         <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using\n    the format <code>alias/<alias-name></code>).\n    </p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.codebuild#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An updated list of tag key and value pairs associated with this build project.</p>\n        <p>These tags are available for use by AWS services that support AWS CodeBuild build project\n      tags.</p>"
+                        "smithy.api#documentation": "<p>An updated list of tag key and value pairs associated with this build project.</p>\n         <p>These tags are available for use by AWS services that support AWS CodeBuild build project\n      tags.</p>"
                     }
                 },
                 "vpcConfig": {
@@ -6175,13 +6243,13 @@
                 "badgeEnabled": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set this to true to generate a publicly accessible URL for your project's build\n            badge.</p>"
+                        "smithy.api#documentation": "<p>Set this to true to generate a publicly accessible URL for your project's build\n      badge.</p>"
                     }
                 },
                 "logsConfig": {
                     "target": "com.amazonaws.codebuild#LogsConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p> Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs,\n            logs in an S3 bucket, or both. </p>"
+                        "smithy.api#documentation": "<p> Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs,\n    logs in an S3 bucket, or both. </p>"
                     }
                 },
                 "fileSystemLocations": {
@@ -6192,6 +6260,12 @@
                 },
                 "buildBatchConfig": {
                     "target": "com.amazonaws.codebuild#ProjectBuildBatchConfig"
+                },
+                "concurrentBuildLimit": {
+                    "target": "com.amazonaws.codebuild#WrapperInt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent builds that are allowed for this project.</p>\n         <p>New builds are only started if the current number of builds is less than or equal to this limit. \n  If the current build count meets this limit, new builds are throttled and are not run.</p>\n         <p>To remove this limit, set this value to -1.</p>"
+                    }
                 }
             }
         },

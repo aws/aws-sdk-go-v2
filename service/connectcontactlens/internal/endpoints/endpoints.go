@@ -41,7 +41,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "connect.{region}.amazonaws.com",
+			Hostname:          "contact-lens.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -49,7 +49,6 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"ap-northeast-1": endpoints.Endpoint{},
-			"ap-southeast-1": endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
@@ -60,7 +59,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-cn",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "connect.{region}.amazonaws.com.cn",
+			Hostname:          "contact-lens.{region}.amazonaws.com.cn",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -70,7 +69,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "connect.{region}.c2s.ic.gov",
+			Hostname:          "contact-lens.{region}.c2s.ic.gov",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -80,7 +79,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso-b",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "connect.{region}.sc2s.sgov.gov",
+			Hostname:          "contact-lens.{region}.sc2s.sgov.gov",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -90,7 +89,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-us-gov",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "connect.{region}.amazonaws.com",
+			Hostname:          "contact-lens.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},

@@ -21,18 +21,9 @@ import (
 // script is updated and acquired by a fleet instance, the new version is used for
 // all new game sessions. Learn more Amazon GameLift Realtime Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
-// Related operations
-//
-// * CreateScript
-//
-// * ListScripts
-//
-// * DescribeScript
-//
-// *
-// UpdateScript
-//
-// * DeleteScript
+// Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
+// DeleteScript | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateScript(ctx context.Context, params *UpdateScriptInput, optFns ...func(*Options)) (*UpdateScriptOutput, error) {
 	if params == nil {
 		params = &UpdateScriptInput{}
@@ -50,7 +41,7 @@ func (c *Client) UpdateScript(ctx context.Context, params *UpdateScriptInput, op
 
 type UpdateScriptInput struct {
 
-	// A unique identifier for a Realtime script to update. You can use either the
+	// A unique identifier for the Realtime script to update. You can use either the
 	// script ID or ARN value.
 	//
 	// This member is required.
@@ -60,20 +51,18 @@ type UpdateScriptInput struct {
 	// to be unique.
 	Name *string
 
-	// The Amazon S3 location of your Realtime scripts. The storage location must
-	// specify the S3 bucket name, the zip file name (the "key"), and an IAM role ARN
-	// that allows Amazon GameLift to access the S3 storage location. The S3 bucket
-	// must be in the same Region as the script you're updating. By default, Amazon
-	// GameLift uploads the latest version of the zip file; if you have S3 object
-	// versioning turned on, you can use the ObjectVersion parameter to specify an
-	// earlier version. To call this operation with a storage location, you must have
-	// IAM PassRole permission. For more details on IAM roles and PassRole permissions,
-	// see  Set up a role for GameLift access
-	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html).
+	// The location of the Amazon S3 bucket where a zipped file containing your
+	// Realtime scripts is stored. The storage location must specify the Amazon S3
+	// bucket name, the zip file name (the "key"), and a role ARN that allows Amazon
+	// GameLift to access the Amazon S3 storage location. The S3 bucket must be in the
+	// same Region where you want to create a new script. By default, Amazon GameLift
+	// uploads the latest version of the zip file; if you have S3 object versioning
+	// turned on, you can use the ObjectVersion parameter to specify an earlier
+	// version.
 	StorageLocation *types.S3Location
 
-	// The version that is associated with a build or script. Version strings do not
-	// need to be unique.
+	// Version information that is associated with a build or script. Version strings
+	// do not need to be unique.
 	Version *string
 
 	// A data object containing your Realtime scripts and dependencies as a zip file.

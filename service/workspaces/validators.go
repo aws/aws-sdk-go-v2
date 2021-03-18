@@ -150,6 +150,26 @@ func (m *validateOpCreateTags) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWorkspaceBundle struct {
+}
+
+func (*validateOpCreateWorkspaceBundle) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorkspaceBundle) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorkspaceBundleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorkspaceBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkspaces struct {
 }
 
@@ -838,6 +858,10 @@ func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTags{}, middleware.After)
 }
 
+func addOpCreateWorkspaceBundleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorkspaceBundle{}, middleware.After)
+}
+
 func addOpCreateWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspaces{}, middleware.After)
 }
@@ -1290,6 +1314,38 @@ func validateOpCreateTagsInput(v *CreateTagsInput) error {
 	if v.Tags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	} else if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWorkspaceBundleInput(v *CreateWorkspaceBundleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkspaceBundleInput"}
+	if v.BundleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleName"))
+	}
+	if v.BundleDescription == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BundleDescription"))
+	}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if v.ComputeType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeType"))
+	}
+	if v.UserStorage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserStorage"))
+	}
+	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}

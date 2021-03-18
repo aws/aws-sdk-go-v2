@@ -44,18 +44,19 @@ type PutParameterInput struct {
 	// parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).
 	//
 	// *
-	// Parameter names can include only the following symbols and letters:
-	// a-zA-Z0-9_.-/
+	// Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-
+	// In addition, the slash character ( / ) is used to delineate hierarchies in
+	// parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter
 	//
-	// * A parameter name can't include spaces.
+	// * A
+	// parameter name can't include spaces.
 	//
-	// * Parameter hierarchies
-	// are limited to a maximum depth of fifteen levels.
+	// * Parameter hierarchies are limited to a
+	// maximum depth of fifteen levels.
 	//
-	// For additional information
-	// about valid values for parameter names, see About requirements and constraints
-	// for parameter names
-	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-parameter-name-constraints.html)
+	// For additional information about valid values
+	// for parameter names, see Creating Systems Manager parameters
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html)
 	// in the AWS Systems Manager User Guide. The maximum length constraint listed
 	// below includes capacity for additional system attributes that are not part of
 	// the name. The maximum length for a parameter name, including the full length of

@@ -4224,6 +4224,28 @@ func (RtmpOutputCertificateMode) Values() []RtmpOutputCertificateMode {
 	}
 }
 
+type S3CannedAcl string
+
+// Enum values for S3CannedAcl
+const (
+	S3CannedAclAuthenticatedRead      S3CannedAcl = "AUTHENTICATED_READ"
+	S3CannedAclBucketOwnerFullControl S3CannedAcl = "BUCKET_OWNER_FULL_CONTROL"
+	S3CannedAclBucketOwnerRead        S3CannedAcl = "BUCKET_OWNER_READ"
+	S3CannedAclPublicRead             S3CannedAcl = "PUBLIC_READ"
+)
+
+// Values returns all known values for S3CannedAcl. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (S3CannedAcl) Values() []S3CannedAcl {
+	return []S3CannedAcl{
+		"AUTHENTICATED_READ",
+		"BUCKET_OWNER_FULL_CONTROL",
+		"BUCKET_OWNER_READ",
+		"PUBLIC_READ",
+	}
+}
+
 type Scte20Convert608To708 string
 
 // Enum values for Scte20Convert608To708

@@ -127,6 +127,9 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Certificate Manager (ACM) certificate. Required\n      when <code>Protocols</code> is set to <code>FTPS</code>.</p>\n\n         <p>To request a new public certificate, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-public.html\">Request a public certificate</a>\n      in the <i> AWS Certificate Manager User Guide</i>.</p>\n\n         <p>To import an existing certificate into ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into ACM</a>\n      in the <i> AWS Certificate Manager User Guide</i>.</p>\n\n         <p>To request a private certificate to use FTPS through private IP addresses, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-request-private.html\">Request a\n        private certificate</a> in the <i> AWS Certificate Manager User\n      Guide</i>.</p>\n\n         <p>Certificates with the following cryptographic algorithms and key sizes are\n      supported:</p>\n\n         <ul>\n            <li>\n               <p>2048-bit RSA (RSA_2048)</p>\n            </li>\n            <li>\n               <p>4096-bit RSA (RSA_4096)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 256 bit (EC_prime256v1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 384 bit (EC_secp384r1)</p>\n            </li>\n            <li>\n               <p>Elliptic Prime Curve 521 bit (EC_secp521r1)</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The certificate must be a valid SSL/TLS X.509 version 3 certificate with FQDN or IP\n        address specified and information about the issuer.</p>\n         </note>"
                     }
                 },
+                "Domain": {
+                    "target": "com.amazonaws.transfer#Domain"
+                },
                 "EndpointDetails": {
                     "target": "com.amazonaws.transfer#EndpointDetails",
                     "traits": {
@@ -250,6 +253,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A scope-down policy for your user so you can use the same IAM role across multiple users.\n      This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you\n      can use inside this policy include <code>${Transfer:UserName}</code>,\n        <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n\n         <note>\n            <p>For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n\n         \n\n            <p>For an example of a scope-down policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down\">Creating a scope-down\n          policy</a>.</p>\n\n         \n\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>AWS\n          Security Token Service API Reference</i>.</p>\n         </note>"
                     }
+                },
+                "PosixProfile": {
+                    "target": "com.amazonaws.transfer#PosixProfile"
                 },
                 "Role": {
                     "target": "com.amazonaws.transfer#Role",
@@ -665,6 +671,9 @@
                         "smithy.api#documentation": "<p>Specifies the ARN of the AWS Certificate Manager (ACM) certificate. Required when\n        <code>Protocols</code> is set to <code>FTPS</code>.</p>"
                     }
                 },
+                "Domain": {
+                    "target": "com.amazonaws.transfer#Domain"
+                },
                 "EndpointDetails": {
                     "target": "com.amazonaws.transfer#EndpointDetails",
                     "traits": {
@@ -776,6 +785,9 @@
                         "smithy.api#documentation": "<p>Specifies the name of the policy in use for the described user.</p>"
                     }
                 },
+                "PosixProfile": {
+                    "target": "com.amazonaws.transfer#PosixProfile"
+                },
                 "Role": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
@@ -803,6 +815,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the properties of a user that was specified.</p>"
+            }
+        },
+        "com.amazonaws.transfer#Domain": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "S3",
+                        "name": "S3"
+                    },
+                    {
+                        "value": "EFS",
+                        "name": "EFS"
+                    }
+                ]
             }
         },
         "com.amazonaws.transfer#EndpointDetails": {
@@ -1414,6 +1441,9 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Domain": {
+                    "target": "com.amazonaws.transfer#Domain"
+                },
                 "IdentityProviderType": {
                     "target": "com.amazonaws.transfer#IdentityProviderType",
                     "traits": {
@@ -1573,6 +1603,36 @@
                 }
             }
         },
+        "com.amazonaws.transfer#PosixId": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 4294967295
+                }
+            }
+        },
+        "com.amazonaws.transfer#PosixProfile": {
+            "type": "structure",
+            "members": {
+                "Uid": {
+                    "target": "com.amazonaws.transfer#PosixId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Gid": {
+                    "target": "com.amazonaws.transfer#PosixId",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecondaryGids": {
+                    "target": "com.amazonaws.transfer#SecondaryGids"
+                }
+            }
+        },
         "com.amazonaws.transfer#Protocol": {
             "type": "string",
             "traits": {
@@ -1680,6 +1740,18 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "arn:.*role/.*"
+            }
+        },
+        "com.amazonaws.transfer#SecondaryGids": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#PosixId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                }
             }
         },
         "com.amazonaws.transfer#SecurityGroupId": {
@@ -2457,6 +2529,9 @@
                         "smithy.api#documentation": "<p>Allows you to supply a scope-down policy for your user so you can use the same IAM role\n      across multiple users. The policy scopes down user access to portions of your Amazon S3\n      bucket. Variables you can use inside this policy include <code>${Transfer:UserName}</code>,\n        <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n         <note>\n            <p>For scope-down policies, AWS Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n\n         \n\n            <p>For an example of a scope-down policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down\">Creating a scope-down\n          policy</a>.</p>\n\n         \n\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>AWS\n          Security Token Service API Reference</i>.</p>\n         </note>"
                     }
                 },
+                "PosixProfile": {
+                    "target": "com.amazonaws.transfer#PosixProfile"
+                },
                 "Role": {
                     "target": "com.amazonaws.transfer#Role",
                     "traits": {
@@ -2531,7 +2606,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 2048
+                    "max": 1024
                 },
                 "smithy.api#sensitive": {}
             }

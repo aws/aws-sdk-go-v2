@@ -16,7 +16,8 @@ import (
 // information about an image used for training or testing an Amazon Lookout for
 // Vision model. The following is an example JSON Line. Updating a dataset might
 // take a while to complete. To check the current status, call DescribeDataset and
-// check the Status field in the response.
+// check the Status field in the response. This operation requires permissions to
+// perform the lookoutvision:UpdateDatasetEntries operation.
 func (c *Client) UpdateDatasetEntries(ctx context.Context, params *UpdateDatasetEntriesInput, optFns ...func(*Options)) (*UpdateDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetEntriesInput{}

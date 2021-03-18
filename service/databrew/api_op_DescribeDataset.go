@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Returns the definition of a specific AWS Glue DataBrew dataset that is in the
-// current AWS account.
+// Returns the definition of a specific DataBrew dataset.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}
@@ -39,8 +38,8 @@ type DescribeDatasetInput struct {
 
 type DescribeDatasetOutput struct {
 
-	// Information on how AWS Glue DataBrew can find data, in either the AWS Glue Data
-	// Catalog or Amazon S3.
+	// Information on how DataBrew can find data, in either the AWS Glue Data Catalog
+	// or Amazon S3.
 	//
 	// This member is required.
 	Input *types.Input
@@ -56,7 +55,10 @@ type DescribeDatasetOutput struct {
 	// The identifier (user name) of the user who created the dataset.
 	CreatedBy *string
 
-	// Options that define how Microsoft Excel input is to be interpreted by DataBrew.
+	// Specifies the file format of a dataset created from an S3 file or folder.
+	Format types.InputFormat
+
+	// Options that define the structure of either Csv, Excel, or JSON input.
 	FormatOptions *types.FormatOptions
 
 	// The identifier (user name) of the user who last modified the dataset.

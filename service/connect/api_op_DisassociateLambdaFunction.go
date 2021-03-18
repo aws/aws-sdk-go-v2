@@ -11,7 +11,7 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
-// Remove the Lambda function from the drop-down options available in the relevant
+// Remove the Lambda function from the dropdown options available in the relevant
 // contact flow blocks.
 func (c *Client) DisassociateLambdaFunction(ctx context.Context, params *DisassociateLambdaFunctionInput, optFns ...func(*Options)) (*DisassociateLambdaFunctionOutput, error) {
 	if params == nil {

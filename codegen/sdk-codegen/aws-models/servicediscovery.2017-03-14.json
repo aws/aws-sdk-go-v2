@@ -112,7 +112,7 @@
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.servicediscovery#NamespaceName",
+                    "target": "com.amazonaws.servicediscovery#NamespaceNameHttp",
                     "traits": {
                         "smithy.api#documentation": "<p>The name that you want to assign to this namespace.</p>",
                         "smithy.api#required": {}
@@ -183,7 +183,7 @@
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.servicediscovery#NamespaceName",
+                    "target": "com.amazonaws.servicediscovery#NamespaceNamePrivate",
                     "traits": {
                         "smithy.api#documentation": "<p>The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map\n   automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.</p>",
                         "smithy.api#required": {}
@@ -261,7 +261,7 @@
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.servicediscovery#NamespaceName",
+                    "target": "com.amazonaws.servicediscovery#NamespaceNamePublic",
                     "traits": {
                         "smithy.api#documentation": "<p>The name that you want to assign to this namespace.</p>",
                         "smithy.api#required": {}
@@ -334,7 +334,7 @@
                 "Name": {
                     "target": "com.amazonaws.servicediscovery#ServiceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name that you want to assign to the service.</p>\n         <p>If you want AWS Cloud Map to create an <code>SRV</code> record when you register an instance, and if you're using a\n   system that requires a specific <code>SRV</code> format, such as <a href=\"http://www.haproxy.org/\">HAProxy</a>, specify the following for <code>Name</code>:</p>\n         <ul>\n            <li>\n               <p>Start the name with an underscore (_), such as <code>_exampleservice</code>\n               </p>\n            </li>\n            <li>\n               <p>End the name with <i>._protocol</i>, such as <code>._tcp</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you register an instance, AWS Cloud Map creates an <code>SRV</code> record and assigns a name to the record by\n   concatenating the service name and the namespace name, for example:</p>\n         <p>\n            <code>_exampleservice._tcp.example.com</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The name that you want to assign to the service.</p>\n         <p>If you want AWS Cloud Map to create an <code>SRV</code> record when you register an instance, and if you're using a\n   system that requires a specific <code>SRV</code> format, such as <a href=\"http://www.haproxy.org/\">HAProxy</a>, specify the following for <code>Name</code>:</p>\n         <ul>\n            <li>\n               <p>Start the name with an underscore (_), such as <code>_exampleservice</code>\n               </p>\n            </li>\n            <li>\n               <p>End the name with <i>._protocol</i>, such as <code>._tcp</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you register an instance, AWS Cloud Map creates an <code>SRV</code> record and assigns a name to the record by\n   concatenating the service name and the namespace name, for example:</p>\n         <p>\n            <code>_exampleservice._tcp.example.com</code>\n         </p>\n         <note>\n            <p>For a single DNS namespace, you cannot create two services with names that differ only by case (such as\n    EXAMPLE and example). Otherwise, these services will have the same DNS name. However, you can create multiple HTTP\n    services with names that differ only by case because HTTP services are case sensitive.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -379,6 +379,12 @@
                     "target": "com.amazonaws.servicediscovery#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to add to the service. Each tag consists of a key and an optional value, both of which you define.\n   Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum\n                     length of 256 characters.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.servicediscovery#ServiceTypeOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If present, specifies that the service\n   instances are only discoverable using the <code>DiscoverInstances</code> API operation. No DNS records will be\n   registered for the service instances. The only valid value is <code>HTTP</code>.</p>"
                     }
                 }
             }
@@ -1108,6 +1114,9 @@
                 "FailureThreshold": {
                     "target": "com.amazonaws.servicediscovery#FailureThreshold",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "Configurable FailureThreshold of HealthCheckCustomConfig is deprecated.  It will always have value 1."
+                        },
                         "smithy.api#documentation": "<important>\n            <p>This parameter has been deprecated and is always set to 1. AWS Cloud Map waits for approximately 30 seconds\n                after receiving an <code>UpdateInstanceCustomHealthStatus</code> request before changing the status of\n                the service instance.</p>\n        </important>\n        \n        <p>The number of 30-second intervals that you want AWS Cloud Map to wait after receiving an\n                <code>UpdateInstanceCustomHealthStatus</code> request before it changes the health status of a service\n            instance.</p>\n        <p>Sending a second or subsequent <code>UpdateInstanceCustomHealthStatus</code> request with the same value\n            before 30 seconds has passed doesn't accelerate the change. AWS Cloud Map still waits\n    <code>30</code> seconds after the first request to make the change.</p>"
                     }
                 }
@@ -1183,7 +1192,7 @@
                     }
                 },
                 "NamespaceName": {
-                    "target": "com.amazonaws.servicediscovery#NamespaceName",
+                    "target": "com.amazonaws.servicediscovery#NamespaceNameHttp",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the namespace that you specified when you registered the instance.</p>"
                     }
@@ -1786,6 +1795,36 @@
                     "min": 0,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.servicediscovery#NamespaceNameHttp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[!-~]{1,1024}$"
+            }
+        },
+        "com.amazonaws.servicediscovery#NamespaceNamePrivate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[!-~]{1,1024}$"
+            }
+        },
+        "com.amazonaws.servicediscovery#NamespaceNamePublic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z0-9]([a-zA-Z0-9\\-]{0,61}[a-zA-Z0-9])?$"
             }
         },
         "com.amazonaws.servicediscovery#NamespaceNotFound": {
@@ -2498,6 +2537,12 @@
                         "smithy.api#documentation": "<p>A complex type that contains information about the Route 53 DNS records that you want AWS Cloud Map to create when you\n   register an instance.</p>"
                     }
                 },
+                "Type": {
+                    "target": "com.amazonaws.servicediscovery#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the systems that can be used to\n   discover the service instances.</p>\n      \n         <dl>\n            <dt>DNS_HTTP</dt>\n            <dd>\n               <p>The service instances can be discovered using either DNS queries or the <code>DiscoverInstances</code> API\n      operation.</p>\n            </dd>\n            <dt>HTTP</dt>\n            <dd>\n               <p>The service instances can only be discovered using the <code>DiscoverInstances</code> API operation.</p>\n            </dd>\n            <dt>DNS</dt>\n            <dd>\n               <p>Reserved.</p>\n            </dd>\n         </dl>"
+                    }
+                },
                 "HealthCheckConfig": {
                     "target": "com.amazonaws.servicediscovery#HealthCheckConfig",
                     "traits": {
@@ -2669,6 +2714,12 @@
                         "smithy.api#documentation": "<p>The name of the service.</p>"
                     }
                 },
+                "Type": {
+                    "target": "com.amazonaws.servicediscovery#ServiceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the systems that can be used to discover the service instances.</p>\n         <dl>\n            <dt>DNS_HTTP</dt>\n            <dd>\n               <p>The service instances can be discovered using either DNS queries or the <code>DiscoverInstances</code> API\n      operation.</p>\n            </dd>\n            <dt>HTTP</dt>\n            <dd>\n               <p>The service instances can only be discovered using the <code>DiscoverInstances</code> API operation.</p>\n            </dd>\n            <dt>DNS</dt>\n            <dd>\n               <p>Reserved.</p>\n            </dd>\n         </dl>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.servicediscovery#ResourceDescription",
                     "traits": {
@@ -2699,6 +2750,36 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A complex type that contains information about a specified service.</p>"
+            }
+        },
+        "com.amazonaws.servicediscovery#ServiceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HTTP",
+                        "name": "HTTP"
+                    },
+                    {
+                        "value": "DNS_HTTP",
+                        "name": "DNS_HTTP"
+                    },
+                    {
+                        "value": "DNS",
+                        "name": "DNS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.servicediscovery#ServiceTypeOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HTTP",
+                        "name": "HTTP"
+                    }
+                ]
             }
         },
         "com.amazonaws.servicediscovery#Tag": {

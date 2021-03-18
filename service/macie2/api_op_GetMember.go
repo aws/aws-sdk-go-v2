@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Retrieves information about a member account that's associated with an Amazon
-// Macie master account.
+// Retrieves information about an account that's associated with an Amazon Macie
+// administrator account.
 func (c *Client) GetMember(ctx context.Context, params *GetMemberInput, optFns ...func(*Options)) (*GetMemberOutput, error) {
 	if params == nil {
 		params = &GetMemberInput{}
@@ -43,6 +43,9 @@ type GetMemberOutput struct {
 	// The AWS account ID for the account.
 	AccountId *string
 
+	// The AWS account ID for the administrator account.
+	AdministratorAccountId *string
+
 	// The Amazon Resource Name (ARN) of the account.
 	Arn *string
 
@@ -54,10 +57,12 @@ type GetMemberOutput struct {
 	// Macie invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
-	// The AWS account ID for the master account.
+	// (Deprecated) The AWS account ID for the administrator account. This property has
+	// been replaced by the administratorAccountId property and is retained only for
+	// backward compatibility.
 	MasterAccountId *string
 
-	// The current status of the relationship between the account and the master
+	// The current status of the relationship between the account and the administrator
 	// account.
 	RelationshipStatus types.RelationshipStatus
 
@@ -66,8 +71,8 @@ type GetMemberOutput struct {
 	Tags map[string]string
 
 	// The date and time, in UTC and extended ISO 8601 format, of the most recent
-	// change to the status of the relationship between the account and the master
-	// account.
+	// change to the status of the relationship between the account and the
+	// administrator account.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.

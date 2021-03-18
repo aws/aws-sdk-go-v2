@@ -97,10 +97,21 @@ type DescribePredictorOutput struct {
 	// predictor.
 	InputDataConfig *types.InputDataConfig
 
-	// Initially, the same as CreationTime (when the status is CREATE_PENDING). This
-	// value is updated when training starts (when the status changes to
-	// CREATE_IN_PROGRESS), and when training has completed (when the status changes to
-	// ACTIVE) or fails (when the status changes to CREATE_FAILED).
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -133,11 +144,10 @@ type DescribePredictorOutput struct {
 	// * DELETE_PENDING, DELETE_IN_PROGRESS,
 	// DELETE_FAILED
 	//
-	// * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
+	// * CREATE_STOPPING, CREATE_STOPPED
 	//
-	// The Status
-	// of the predictor must be ACTIVE before you can use the predictor to create a
-	// forecast.
+	// The Status of the predictor
+	// must be ACTIVE before you can use the predictor to create a forecast.
 	Status *string
 
 	// The default training parameters or overrides selected during model training.

@@ -283,12 +283,34 @@ type FargateProfileSelector struct {
 	Namespace *string
 }
 
-// An object representing an identity provider for authentication credentials.
+// An object representing an identity provider.
 type Identity struct {
 
-	// The OpenID Connect (https://openid.net/connect/) identity provider information
-	// for the cluster.
+	// An object representing the OpenID Connect (https://openid.net/connect/) identity
+	// provider information.
 	Oidc *OIDC
+}
+
+// An object representing an identity provider configuration.
+type IdentityProviderConfig struct {
+
+	// The name of the identity provider configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the identity provider configuration.
+	//
+	// This member is required.
+	Type *string
+}
+
+// An object that represents an identity configuration.
+type IdentityProviderConfigResponse struct {
+
+	// An object that represents an OpenID Connect (OIDC) identity provider
+	// configuration.
+	Oidc *OidcIdentityProviderConfig
 }
 
 // An object representing an issue with an Amazon EKS resource.
@@ -361,7 +383,7 @@ type Issue struct {
 	//
 	// * NodeCreationFailure: Your
 	// launched instances are unable to register with your Amazon EKS cluster. Common
-	// causes of this failure are insufficient worker node IAM role
+	// causes of this failure are insufficient node IAM role
 	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html)
 	// permissions or lack of outbound internet access for the nodes.
 	Code NodegroupIssueCode
@@ -504,9 +526,9 @@ type Nodegroup struct {
 	// modified.
 	ModifiedAt *time.Time
 
-	// The IAM role associated with your node group. The Amazon EKS worker node kubelet
-	// daemon makes calls to AWS APIs on your behalf. Worker nodes receive permissions
-	// for these API calls through an IAM instance profile and associated policies.
+	// The IAM role associated with your node group. The Amazon EKS node kubelet daemon
+	// makes calls to AWS APIs on your behalf. Nodes receive permissions for these API
+	// calls through an IAM instance profile and associated policies.
 	NodeRole *string
 
 	// The Amazon Resource Name (ARN) associated with the managed node group.
@@ -566,7 +588,7 @@ type NodegroupResources struct {
 	AutoScalingGroups []AutoScalingGroup
 
 	// The remote access security group associated with the node group. This security
-	// group controls SSH access to the worker nodes.
+	// group controls SSH access to the nodes.
 	RemoteAccessSecurityGroup *string
 }
 
@@ -575,24 +597,136 @@ type NodegroupResources struct {
 // property, then you must specify values for all of the properties.
 type NodegroupScalingConfig struct {
 
-	// The current number of worker nodes that the managed node group should maintain.
+	// The current number of nodes that the managed node group should maintain.
 	DesiredSize *int32
 
-	// The maximum number of worker nodes that the managed node group can scale out to.
-	// Managed node groups can support up to 100 nodes by default.
+	// The maximum number of nodes that the managed node group can scale out to. For
+	// information about the maximum number that you can specify, see Amazon EKS
+	// service quotas
+	// (https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html) in the
+	// Amazon EKS User Guide.
 	MaxSize *int32
 
-	// The minimum number of worker nodes that the managed node group can scale in to.
-	// This number must be greater than zero.
+	// The minimum number of nodes that the managed node group can scale in to. This
+	// number must be greater than zero.
 	MinSize *int32
 }
 
-// An object representing the OpenID Connect (https://openid.net/connect/) identity
-// provider information for the cluster.
+// An object representing the OpenID Connect (https://openid.net/connect/) (OIDC)
+// identity provider information for the cluster.
 type OIDC struct {
 
-	// The issuer URL for the OpenID Connect identity provider.
+	// The issuer URL for the OIDC identity provider.
 	Issuer *string
+}
+
+// An object that represents the configuration for an OpenID Connect (OIDC)
+// identity provider.
+type OidcIdentityProviderConfig struct {
+
+	// This is also known as audience. The ID of the client application that makes
+	// authentication requests to the OIDC identity provider.
+	ClientId *string
+
+	// The cluster that the configuration is associated to.
+	ClusterName *string
+
+	// The JSON web token (JWT) claim that the provider uses to return your groups.
+	GroupsClaim *string
+
+	// The prefix that is prepended to group claims to prevent clashes with existing
+	// names (such as system: groups). For example, the value oidc: creates group names
+	// like oidc:engineering and oidc:infra. The prefix can't contain system:
+	GroupsPrefix *string
+
+	// The ARN of the configuration.
+	IdentityProviderConfigArn *string
+
+	// The name of the configuration.
+	IdentityProviderConfigName *string
+
+	// The URL of the OIDC identity provider that allows the API server to discover
+	// public signing keys for verifying tokens.
+	IssuerUrl *string
+
+	// The key-value pairs that describe required claims in the identity token. If set,
+	// each claim is verified to be present in the token with a matching value.
+	RequiredClaims map[string]string
+
+	// The status of the OIDC identity provider.
+	Status ConfigStatus
+
+	// The metadata to apply to the provider configuration to assist with
+	// categorization and organization. Each tag consists of a key and an optional
+	// value, both of which you defined.
+	Tags map[string]string
+
+	// The JSON Web token (JWT) claim that is used as the username.
+	UsernameClaim *string
+
+	// The prefix that is prepended to username claims to prevent clashes with existing
+	// names. The prefix can't contain system:
+	UsernamePrefix *string
+}
+
+// An object representing an OpenID Connect (OIDC) configuration. Before
+// associating an OIDC identity provider to your cluster, review the considerations
+// in Authenticating users for your cluster from an OpenID Connect identity
+// provider
+// (https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html)
+// in the Amazon EKS User Guide.
+type OidcIdentityProviderConfigRequest struct {
+
+	// This is also known as audience. The ID for the client application that makes
+	// authentication requests to the OpenID identity provider.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The name of the OIDC provider configuration.
+	//
+	// This member is required.
+	IdentityProviderConfigName *string
+
+	// The URL of the OpenID identity provider that allows the API server to discover
+	// public signing keys for verifying tokens. The URL must begin with https:// and
+	// should correspond to the iss claim in the provider's OIDC ID tokens. Per the
+	// OIDC standard, path components are allowed but query parameters are not.
+	// Typically the URL consists of only a hostname, like https://server.example.org
+	// or https://example.com. This URL should point to the level below
+	// .well-known/openid-configuration and must be publicly accessible over the
+	// internet.
+	//
+	// This member is required.
+	IssuerUrl *string
+
+	// The JWT claim that the provider uses to return your groups.
+	GroupsClaim *string
+
+	// The prefix that is prepended to group claims to prevent clashes with existing
+	// names (such as system: groups). For example, the value oidc: will create group
+	// names like oidc:engineering and oidc:infra.
+	GroupsPrefix *string
+
+	// The key value pairs that describe required claims in the identity token. If set,
+	// each claim is verified to be present in the token with a matching value. For the
+	// maximum number of claims that you can require, see Amazon EKS service quotas
+	// (https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html) in the
+	// Amazon EKS User Guide.
+	RequiredClaims map[string]string
+
+	// The JSON Web Token (JWT) claim to use as the username. The default is sub, which
+	// is expected to be a unique identifier of the end user. You can choose other
+	// claims, such as email or name, depending on the OpenID identity provider. Claims
+	// other than email are prefixed with the issuer URL to prevent naming clashes with
+	// other plug-ins.
+	UsernameClaim *string
+
+	// The prefix that is prepended to username claims to prevent clashes with existing
+	// names. If you do not provide this field, and username is a value other than
+	// email, the prefix defaults to issuerurl#. You can use the value - to disable all
+	// prefixing.
+	UsernamePrefix *string
 }
 
 // Identifies the AWS Key Management Service (AWS KMS) customer master key (CMK)
@@ -612,18 +746,18 @@ type Provider struct {
 // group.
 type RemoteAccessConfig struct {
 
-	// The Amazon EC2 SSH key that provides access for SSH communication with the
-	// worker nodes in the managed node group. For more information, see Amazon EC2 Key
-	// Pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
-	// in the Amazon Elastic Compute Cloud User Guide for Linux Instances.
+	// The Amazon EC2 SSH key that provides access for SSH communication with the nodes
+	// in the managed node group. For more information, see Amazon EC2 Key Pairs
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html) in the
+	// Amazon Elastic Compute Cloud User Guide for Linux Instances.
 	Ec2SshKey *string
 
-	// The security groups that are allowed SSH access (port 22) to the worker nodes.
-	// If you specify an Amazon EC2 SSH key but do not specify a source security group
-	// when you create a managed node group, then port 22 on the worker nodes is opened
-	// to the internet (0.0.0.0/0). For more information, see Security Groups for Your
-	// VPC (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
-	// in the Amazon Virtual Private Cloud User Guide.
+	// The security groups that are allowed SSH access (port 22) to the nodes. If you
+	// specify an Amazon EC2 SSH key but do not specify a source security group when
+	// you create a managed node group, then port 22 on the nodes is opened to the
+	// internet (0.0.0.0/0). For more information, see Security Groups for Your VPC
+	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in
+	// the Amazon Virtual Private Cloud User Guide.
 	SourceSecurityGroups []string
 }
 
@@ -676,10 +810,10 @@ type VpcConfigRequest struct {
 	// API server endpoint. If you enable private access, Kubernetes API requests from
 	// within your cluster's VPC use the private VPC endpoint. The default value for
 	// this parameter is false, which disables private access for your Kubernetes API
-	// server. If you disable private access and you have worker nodes or AWS Fargate
-	// pods in the cluster, then ensure that publicAccessCidrs includes the necessary
-	// CIDR blocks for communication with the worker nodes or Fargate pods. For more
-	// information, see Amazon EKS Cluster Endpoint Access Control
+	// server. If you disable private access and you have nodes or AWS Fargate pods in
+	// the cluster, then ensure that publicAccessCidrs includes the necessary CIDR
+	// blocks for communication with the nodes or Fargate pods. For more information,
+	// see Amazon EKS Cluster Endpoint Access Control
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
 	EndpointPrivateAccess *bool
@@ -696,16 +830,16 @@ type VpcConfigRequest struct {
 	// The CIDR blocks that are allowed access to your cluster's public Kubernetes API
 	// server endpoint. Communication to the endpoint from addresses outside of the
 	// CIDR blocks that you specify is denied. The default value is 0.0.0.0/0. If
-	// you've disabled private endpoint access and you have worker nodes or AWS Fargate
-	// pods in the cluster, then ensure that you specify the necessary CIDR blocks. For
-	// more information, see Amazon EKS Cluster Endpoint Access Control
+	// you've disabled private endpoint access and you have nodes or AWS Fargate pods
+	// in the cluster, then ensure that you specify the necessary CIDR blocks. For more
+	// information, see Amazon EKS Cluster Endpoint Access Control
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
 	PublicAccessCidrs []string
 
 	// Specify one or more security groups for the cross-account elastic network
 	// interfaces that Amazon EKS creates to use to allow communication between your
-	// worker nodes and the Kubernetes control plane. If you don't specify any security
+	// nodes and the Kubernetes control plane. If you don't specify any security
 	// groups, then familiarize yourself with the difference between Amazon EKS
 	// defaults for clusters deployed with Kubernetes:
 	//
@@ -720,9 +854,9 @@ type VpcConfigRequest struct {
 	// Amazon EKS User Guide .
 	SecurityGroupIds []string
 
-	// Specify subnets for your Amazon EKS worker nodes. Amazon EKS creates
-	// cross-account elastic network interfaces in these subnets to allow communication
-	// between your worker nodes and the Kubernetes control plane.
+	// Specify subnets for your Amazon EKS nodes. Amazon EKS creates cross-account
+	// elastic network interfaces in these subnets to allow communication between your
+	// nodes and the Kubernetes control plane.
 	SubnetIds []string
 }
 
@@ -738,10 +872,10 @@ type VpcConfigResponse struct {
 	// enabled. If the Amazon EKS private API server endpoint is enabled, Kubernetes
 	// API requests that originate from within your cluster's VPC use the private VPC
 	// endpoint instead of traversing the internet. If this value is disabled and you
-	// have worker nodes or AWS Fargate pods in the cluster, then ensure that
+	// have nodes or AWS Fargate pods in the cluster, then ensure that
 	// publicAccessCidrs includes the necessary CIDR blocks for communication with the
-	// worker nodes or Fargate pods. For more information, see Amazon EKS Cluster
-	// Endpoint Access Control
+	// nodes or Fargate pods. For more information, see Amazon EKS Cluster Endpoint
+	// Access Control
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
 	EndpointPrivateAccess bool
@@ -755,16 +889,16 @@ type VpcConfigResponse struct {
 	// The CIDR blocks that are allowed access to your cluster's public Kubernetes API
 	// server endpoint. Communication to the endpoint from addresses outside of the
 	// listed CIDR blocks is denied. The default value is 0.0.0.0/0. If you've disabled
-	// private endpoint access and you have worker nodes or AWS Fargate pods in the
-	// cluster, then ensure that the necessary CIDR blocks are listed. For more
-	// information, see Amazon EKS Cluster Endpoint Access Control
+	// private endpoint access and you have nodes or AWS Fargate pods in the cluster,
+	// then ensure that the necessary CIDR blocks are listed. For more information, see
+	// Amazon EKS Cluster Endpoint Access Control
 	// (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
 	// Amazon EKS User Guide .
 	PublicAccessCidrs []string
 
 	// The security groups associated with the cross-account elastic network interfaces
-	// that are used to allow communication between your worker nodes and the
-	// Kubernetes control plane.
+	// that are used to allow communication between your nodes and the Kubernetes
+	// control plane.
 	SecurityGroupIds []string
 
 	// The subnets associated with your cluster.

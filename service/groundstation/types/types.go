@@ -6,6 +6,13 @@ import (
 	"time"
 )
 
+// Details about an antenna demod decode Config used in a contact.
+type AntennaDemodDecodeDetails struct {
+
+	// Name of an antenna demod decode output node used in a contact.
+	OutputNode *string
+}
+
 // Information about how AWS Ground Station should configure an antenna for
 // downlink during a contact.
 type AntennaDownlinkConfig struct {
@@ -49,8 +56,32 @@ type AntennaUplinkConfig struct {
 	// This member is required.
 	TargetEirp *Eirp
 
+	// Whether or not uplink transmit is disabled.
 	TransmitDisabled *bool
 }
+
+// Details for certain Config object types in a contact.
+//
+// The following types satisfy this interface:
+//  ConfigDetailsMemberEndpointDetails
+//  ConfigDetailsMemberAntennaDemodDecodeDetails
+type ConfigDetails interface {
+	isConfigDetails()
+}
+
+// Information about the endpoint details.
+type ConfigDetailsMemberEndpointDetails struct {
+	Value EndpointDetails
+}
+
+func (*ConfigDetailsMemberEndpointDetails) isConfigDetails() {}
+
+// Details for antenna demod decode Config in a contact.
+type ConfigDetailsMemberAntennaDemodDecodeDetails struct {
+	Value AntennaDemodDecodeDetails
+}
+
+func (*ConfigDetailsMemberAntennaDemodDecodeDetails) isConfigDetails() {}
 
 // An item in a list of Config objects.
 type ConfigListItem struct {
@@ -73,10 +104,10 @@ type ConfigListItem struct {
 //
 // The following types satisfy this interface:
 //  ConfigTypeDataMemberAntennaDownlinkConfig
+//  ConfigTypeDataMemberTrackingConfig
+//  ConfigTypeDataMemberDataflowEndpointConfig
 //  ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig
 //  ConfigTypeDataMemberAntennaUplinkConfig
-//  ConfigTypeDataMemberDataflowEndpointConfig
-//  ConfigTypeDataMemberTrackingConfig
 //  ConfigTypeDataMemberUplinkEchoConfig
 type ConfigTypeData interface {
 	isConfigTypeData()
@@ -89,6 +120,21 @@ type ConfigTypeDataMemberAntennaDownlinkConfig struct {
 }
 
 func (*ConfigTypeDataMemberAntennaDownlinkConfig) isConfigTypeData() {}
+
+// Object that determines whether tracking should be used during a contact executed
+// with this Config in the mission profile.
+type ConfigTypeDataMemberTrackingConfig struct {
+	Value TrackingConfig
+}
+
+func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
+
+// Information about the dataflow endpoint Config.
+type ConfigTypeDataMemberDataflowEndpointConfig struct {
+	Value DataflowEndpointConfig
+}
+
+func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
 
 // Information about how AWS Ground Station should conﬁgure an antenna for downlink
 // demod decode during a contact.
@@ -105,21 +151,6 @@ type ConfigTypeDataMemberAntennaUplinkConfig struct {
 }
 
 func (*ConfigTypeDataMemberAntennaUplinkConfig) isConfigTypeData() {}
-
-// Information about the dataflow endpoint Config.
-type ConfigTypeDataMemberDataflowEndpointConfig struct {
-	Value DataflowEndpointConfig
-}
-
-func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
-
-// Object that determines whether tracking should be used during a contact executed
-// with this Config in the mission profile.
-type ConfigTypeDataMemberTrackingConfig struct {
-	Value TrackingConfig
-}
-
-func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
 
 // Information about an uplink echo Config. Parameters from the
 // AntennaUplinkConfig, corresponding to the specified AntennaUplinkConfigArn, are
@@ -175,12 +206,26 @@ type ContactData struct {
 	Tags map[string]string
 }
 
+// Information about a dataflow edge used in a contact.
+type DataflowDetail struct {
+
+	// Dataflow details for the destination side.
+	Destination *Destination
+
+	// Error message for a dataflow.
+	ErrorMessage *string
+
+	// Dataflow details for the source side.
+	Source *Source
+}
+
 // Information about a dataflow endpoint.
 type DataflowEndpoint struct {
 
 	// Socket address of a dataflow endpoint.
 	Address *SocketAddress
 
+	// Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.
 	Mtu *int32
 
 	// Name of a dataflow endpoint.
@@ -230,6 +275,23 @@ type DemodulationConfig struct {
 	UnvalidatedJSON *string
 }
 
+// Dataflow details for the destination side.
+type Destination struct {
+
+	// Additional details for a Config, if type is dataflow endpoint or antenna demod
+	// decode.
+	ConfigDetails ConfigDetails
+
+	// UUID of a Config.
+	ConfigId *string
+
+	// Type of a Config.
+	ConfigType ConfigCapabilityType
+
+	// Region of a dataflow destination.
+	DataflowDestinationRegion *string
+}
+
 // Object that represents EIRP.
 type Eirp struct {
 
@@ -238,7 +300,7 @@ type Eirp struct {
 	// This member is required.
 	Units EirpUnits
 
-	// Value of an EIRP.
+	// Value of an EIRP. Valid values are between 20.0 to 50.0 dBW.
 	//
 	// This member is required.
 	Value *float64
@@ -276,7 +338,8 @@ type Frequency struct {
 	// This member is required.
 	Units FrequencyUnits
 
-	// Frequency value.
+	// Frequency value. Valid values are between 2200 to 2300 MHz and 7750 to 8400 MHz
+	// for downlink and 2025 to 2120 MHz for uplink.
 	//
 	// This member is required.
 	Value *float64
@@ -290,7 +353,17 @@ type FrequencyBandwidth struct {
 	// This member is required.
 	Units BandwidthUnits
 
-	// Frequency bandwidth value.
+	// Frequency bandwidth value. AWS Ground Station currently has the following
+	// bandwidth limitations:
+	//
+	// * For AntennaDownlinkDemodDecodeconfig, valid values are
+	// between 125 kHz to 650 MHz.
+	//
+	// * For AntennaDownlinkconfig, valid values are
+	// between 10 kHz to 54 MHz.
+	//
+	// * For AntennaUplinkConfig, valid values are between
+	// 10 kHz to 54 MHz.
 	//
 	// This member is required.
 	Value *float64
@@ -375,20 +448,49 @@ type SocketAddress struct {
 	Port *int32
 }
 
+// Dataflow details for the source side.
+type Source struct {
+
+	// Additional details for a Config, if type is dataflow endpoint or antenna demod
+	// decode.
+	ConfigDetails ConfigDetails
+
+	// UUID of a Config.
+	ConfigId *string
+
+	// Type of a Config.
+	ConfigType ConfigCapabilityType
+
+	// Region of a dataflow source.
+	DataflowSourceRegion *string
+}
+
 // Object that describes a spectral Config.
 type SpectrumConfig struct {
 
-	// Bandwidth of a spectral Config.
+	// Bandwidth of a spectral Config. AWS Ground Station currently has the following
+	// bandwidth limitations:
+	//
+	// * For AntennaDownlinkDemodDecodeconfig, valid values are
+	// between 125 kHz to 650 MHz.
+	//
+	// * For AntennaDownlinkconfig valid values are
+	// between 10 kHz to 54 MHz.
+	//
+	// * For AntennaUplinkConfig, valid values are between
+	// 10 kHz to 54 MHz.
 	//
 	// This member is required.
 	Bandwidth *FrequencyBandwidth
 
-	// Center frequency of a spectral Config.
+	// Center frequency of a spectral Config. Valid values are between 2200 to 2300 MHz
+	// and 7750 to 8400 MHz for downlink and 2025 to 2120 MHz for uplink.
 	//
 	// This member is required.
 	CenterFrequency *Frequency
 
-	// Polarization of a spectral Config.
+	// Polarization of a spectral Config. Capturing both "RIGHT_HAND" and "LEFT_HAND"
+	// polarization requires two separate configs.
 	Polarization Polarization
 }
 
@@ -421,12 +523,14 @@ type UplinkEchoConfig struct {
 // Information about the uplink spectral Config.
 type UplinkSpectrumConfig struct {
 
-	// Center frequency of an uplink spectral Config.
+	// Center frequency of an uplink spectral Config. Valid values are between 2025 to
+	// 2120 MHz.
 	//
 	// This member is required.
 	CenterFrequency *Frequency
 
-	// Polarization of an uplink spectral Config.
+	// Polarization of an uplink spectral Config. Capturing both "RIGHT_HAND" and
+	// "LEFT_HAND" polarization requires two separate configs.
 	Polarization Polarization
 }
 
@@ -437,4 +541,5 @@ type UnknownUnionMember struct {
 	Value []byte
 }
 
+func (*UnknownUnionMember) isConfigDetails()  {}
 func (*UnknownUnionMember) isConfigTypeData() {}

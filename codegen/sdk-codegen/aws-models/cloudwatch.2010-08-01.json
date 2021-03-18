@@ -1770,8 +1770,17 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of data points the request should return before paginating. If you omit\n\t\t\tthis, the default of 100,800 is used.</p>"
                     }
+                },
+                "LabelOptions": {
+                    "target": "com.amazonaws.cloudwatch#LabelOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure includes the <code>Timezone</code> parameter, which you can use\n\t\t\tto specify your time zone so that the labels of returned data display the \n\t\t\tcorrect time\n\t\t\tfor your time zone. </p>"
+                    }
                 }
             }
+        },
+        "com.amazonaws.cloudwatch#GetMetricDataLabelTimezone": {
+            "type": "string"
         },
         "com.amazonaws.cloudwatch#GetMetricDataMaxDatapoints": {
             "type": "integer",
@@ -2463,6 +2472,20 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudwatch#LabelOptions": {
+            "type": "structure",
+            "members": {
+                "Timezone": {
+                    "target": "com.amazonaws.cloudwatch#GetMetricDataLabelTimezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone to use for metric data return in this operation. \n\t\t\tThe format is <code>+</code> or <code>-</code> followed by four digits. \n\t\t\tThe first two digits indicate the number of hours ahead or behind of UTC, and \n\t\t\tthe final two digits are the number of minutes. For example, +0130 indicates a time zone that is 1 hour \n\t\t\tand 30 minutes ahead of UTC. The default is +0000. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This structure includes the <code>Timezone</code> parameter, which you can use\n\t\t\tto specify your time zone so that the labels that are associated with returned metrics display the \n\t\t\tcorrect time\n\t\t\tfor your time zone. </p>\n\t\t       <p>The <code>Timezone</code> value affects a label only if you have a time-based\n\t\tdynamic expression in the label. For more information about dynamic expressions in labels, \n\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html\">Using Dynamic Labels</a>.</p>"
+            }
+        },
         "com.amazonaws.cloudwatch#LastModified": {
             "type": "timestamp"
         },
@@ -2964,7 +2987,7 @@
                 "Label": {
                     "target": "com.amazonaws.cloudwatch#MetricLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>A human-readable label for this metric or expression. This is especially useful if this is an expression, so that you know\n\t\t\twhat the value represents. If the metric or expression is shown in a CloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch \n\t\t\tgenerates a default.</p>"
+                        "smithy.api#documentation": "<p>A human-readable label for this metric or expression. This is especially useful \n\t\t\tif this is an expression, so that you know\n\t\t\twhat the value represents. If the metric or expression is shown in a \n\t\t\tCloudWatch dashboard widget, the label is shown. If Label is omitted, CloudWatch \n\t\t\tgenerates a default.</p>\n\t\t       <p>You can put dynamic expressions into a label, so that it is more descriptive. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html\">Using Dynamic Labels</a>.</p>"
                     }
                 },
                 "ReturnData": {

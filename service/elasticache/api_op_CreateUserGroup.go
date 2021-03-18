@@ -31,7 +31,7 @@ func (c *Client) CreateUserGroup(ctx context.Context, params *CreateUserGroupInp
 
 type CreateUserGroupInput struct {
 
-	// Must be Redis.
+	// The current supported value is Redis.
 	//
 	// This member is required.
 	Engine *string
@@ -50,7 +50,7 @@ type CreateUserGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the user group.
 	ARN *string
 
-	// Must be Redis.
+	// The current supported value is Redis.
 	Engine *string
 
 	// A list of updates being applied to the user groups.

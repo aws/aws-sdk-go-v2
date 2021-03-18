@@ -12,7 +12,7 @@ import (
 )
 
 // Displays the properties of a FHIR import job, including the ID, ARN, name, and
-// the status of the datastore.
+// the status of the job.
 func (c *Client) DescribeFHIRImportJob(ctx context.Context, params *DescribeFHIRImportJobInput, optFns ...func(*Options)) (*DescribeFHIRImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeFHIRImportJobInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeFHIRImportJob(ctx context.Context, params *DescribeFHIR
 
 type DescribeFHIRImportJobInput struct {
 
-	// The AWS-generated ID of the datastore.
+	// The AWS-generated ID of the Data Store.
 	//
 	// This member is required.
 	DatastoreId *string
@@ -44,7 +44,7 @@ type DescribeFHIRImportJobInput struct {
 type DescribeFHIRImportJobOutput struct {
 
 	// The properties of the Import job request, including the ID, ARN, name, and the
-	// status of the datastore.
+	// status of the job.
 	//
 	// This member is required.
 	ImportJobProperties *types.ImportJobProperties

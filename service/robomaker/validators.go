@@ -1321,6 +1321,11 @@ func validateRobotApplicationConfig(v *types.RobotApplicationConfig) error {
 			invalidParams.AddNested("LaunchConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.UploadConfigurations != nil {
+		if err := validateUploadConfigurations(v.UploadConfigurations); err != nil {
+			invalidParams.AddNested("UploadConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1376,6 +1381,11 @@ func validateSimulationApplicationConfig(v *types.SimulationApplicationConfig) e
 	} else if v.LaunchConfig != nil {
 		if err := validateLaunchConfig(v.LaunchConfig); err != nil {
 			invalidParams.AddNested("LaunchConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.UploadConfigurations != nil {
+		if err := validateUploadConfigurations(v.UploadConfigurations); err != nil {
+			invalidParams.AddNested("UploadConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1449,6 +1459,44 @@ func validateTemplateLocation(v *types.TemplateLocation) error {
 	}
 	if v.S3Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUploadConfiguration(v *types.UploadConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UploadConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Path == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Path"))
+	}
+	if len(v.UploadBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UploadBehavior"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUploadConfigurations(v []types.UploadConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UploadConfigurations"}
+	for i := range v {
+		if err := validateUploadConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

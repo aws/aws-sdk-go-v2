@@ -43,14 +43,16 @@ type AccessPointDescription struct {
 	Tags []Tag
 }
 
-// The backup policy for the file system, showing the curent status. If ENABLED,
-// the file system is being backed up.
+// The backup policy for the file system used to create automatic daily backups. If
+// status has a value of ENABLED, the file system is being automatically backed up.
+// For more information, see Automatic backups
+// (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups).
 type BackupPolicy struct {
 
 	// Describes the status of the file system's backup policy.
 	//
 	// * ENABLED - EFS is
-	// automatically backing up the file system.
+	// automatically backing up the file system.>
 	//
 	// * ENABLING - EFS is turning on
 	// automatic backups for the file system.
@@ -58,7 +60,7 @@ type BackupPolicy struct {
 	// * DISABLED - automatic back ups are
 	// turned off for the file system.
 	//
-	// * DISABLED - EFS is turning off automatic
+	// * DISABLING - EFS is turning off automatic
 	// backups for the file system.
 	//
 	// This member is required.
@@ -69,7 +71,11 @@ type BackupPolicy struct {
 // POSIX IDs and permissions to apply to the access point's RootDirectory > Path.
 // If the access point root directory does not exist, EFS creates it with these
 // settings when a client connects to the access point. When specifying
-// CreationInfo, you must include values for all properties. If you do not provide
+// CreationInfo, you must include values for all properties. Amazon EFS creates a
+// root directory only if you have provided the CreationInfo: OwnUid, OwnGID, and
+// permissions for the directory. If you do not provide this information, Amazon
+// EFS does not create the root directory. If the root directory does not exist,
+// attempts to mount using the access point will fail. If you do not provide
 // CreationInfo and the specified RootDirectory does not exist, attempts to mount
 // the file system using the access point will fail.
 type CreationInfo struct {
@@ -152,6 +158,19 @@ type FileSystemDescription struct {
 	// This member is required.
 	Tags []Tag
 
+	// The unique and consistent identifier of the Availability Zone in which the file
+	// system's One Zone storage classes exist. For example, use1-az1 is an
+	// Availability Zone ID for the us-east-1 AWS Region, and it has the same location
+	// in every AWS account.
+	AvailabilityZoneId *string
+
+	// Describes the AWS Availability Zone in which the file system is located, and is
+	// valid only for file systems using One Zone storage classes. For more
+	// information, see Using EFS storage classes
+	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
+	// EFS User Guide.
+	AvailabilityZoneName *string
+
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool
 
@@ -170,20 +189,14 @@ type FileSystemDescription struct {
 	// value in this field.
 	Name *string
 
-	// The throughput, measured in MiB/s, that you want to provision for a file system.
-	// Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The
-	// limit on throughput is 1024 MiB/s. You can get these limits increased by
-	// contacting AWS Support. For more information, see Amazon EFS Limits That You Can
-	// Increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in
-	// the Amazon EFS User Guide.
+	// The amount of provisioned throughput, measured in MiB/s, for the file system.
+	// Valid for file systems using ThroughputMode set to provisioned.
 	ProvisionedThroughputInMibps *float64
 
-	// The throughput mode for a file system. There are two throughput modes to choose
-	// from for your file system: bursting and provisioned. If you set ThroughputMode
-	// to provisioned, you must also set a value for ProvisionedThroughPutInMibps. You
-	// can decrease your file system's throughput in Provisioned Throughput mode or
-	// change between the throughput modes as long as it’s been more than 24 hours
-	// since the last decrease or throughput mode change.
+	// Displays the file system's throughput mode. For more information, see Throughput
+	// modes
+	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes) in
+	// the Amazon EFS User Guide.
 	ThroughputMode ThroughputMode
 }
 
@@ -247,15 +260,15 @@ type MountTargetDescription struct {
 	// This member is required.
 	SubnetId *string
 
-	// The unique and consistent identifier of the Availability Zone (AZ) that the
-	// mount target resides in. For example, use1-az1 is an AZ ID for the us-east-1
-	// Region and it has the same location in every AWS account.
+	// The unique and consistent identifier of the Availability Zone that the mount
+	// target resides in. For example, use1-az1 is an AZ ID for the us-east-1 Region
+	// and it has the same location in every AWS account.
 	AvailabilityZoneId *string
 
-	// The name of the Availability Zone (AZ) that the mount target resides in. AZs are
-	// independently mapped to names for each AWS account. For example, the
-	// Availability Zone us-east-1a for your AWS account might not be the same location
-	// as us-east-1a for another AWS account.
+	// The name of the Availability Zone in which the mount target is located.
+	// Availability Zones are independently mapped to names for each AWS account. For
+	// example, the Availability Zone us-east-1a for your AWS account might not be the
+	// same location as us-east-1a for another AWS account.
 	AvailabilityZoneName *string
 
 	// Address at which the file system can be mounted by using the mount target.
@@ -268,7 +281,7 @@ type MountTargetDescription struct {
 	// AWS account ID that owns the resource.
 	OwnerId *string
 
-	// The Virtual Private Cloud (VPC) ID that the mount target is configured in.
+	// The virtual private cloud (VPC) ID that the mount target is configured in.
 	VpcId *string
 }
 

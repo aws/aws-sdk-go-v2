@@ -16,9 +16,9 @@ import (
 // policies attached to groups that the user is a member of. You can optionally
 // include a list of one or more additional policies, specified as strings. If you
 // want to include only a list of policies by string, use
-// GetContextKeysForCustomPolicy instead. Note: This API discloses information
-// about the permissions granted to other users. If you do not want users to see
-// other user's permissions, then consider allowing them to use
+// GetContextKeysForCustomPolicy instead. Note: This operation discloses
+// information about the permissions granted to other users. If you do not want
+// users to see other user's permissions, then consider allowing them to use
 // GetContextKeysForCustomPolicy instead. Context keys are variables maintained by
 // AWS and its services that provide details about the context of an API query
 // request. Context keys can be evaluated by testing against a value in an IAM
@@ -48,8 +48,7 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	// includes only those context keys that are found in policies attached to that
 	// entity. Note that all parameters are shown in unencoded form here for clarity,
 	// but must be URL encoded to be included as a part of a real HTML request. For
-	// more information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
+	// more information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//

@@ -1037,6 +1037,11 @@ func awsAwsjson11_serializeOpDocumentPutScheduledActionInput(v *PutScheduledActi
 		ok.Double(smithytime.FormatEpochSeconds(*v.StartTime))
 	}
 
+	if v.Timezone != nil {
+		ok := object.Key("Timezone")
+		ok.String(*v.Timezone)
+	}
+
 	return nil
 }
 

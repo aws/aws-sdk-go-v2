@@ -41,8 +41,8 @@ type ValidateTemplateInput struct {
 	TemplateBody *string
 
 	// Location of file containing the template body. The URL must point to a template
-	// (max size: 460,800 bytes) that is located in an Amazon S3 bucket. For more
-	// information, go to Template Anatomy
+	// (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems
+	// Manager document. For more information, go to Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or
 	// TemplateBody. If both are passed, only TemplateBody is used.

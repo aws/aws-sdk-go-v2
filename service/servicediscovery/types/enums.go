@@ -281,3 +281,39 @@ func (ServiceFilterName) Values() []ServiceFilterName {
 		"NAMESPACE_ID",
 	}
 }
+
+type ServiceType string
+
+// Enum values for ServiceType
+const (
+	ServiceTypeHttp    ServiceType = "HTTP"
+	ServiceTypeDnsHttp ServiceType = "DNS_HTTP"
+	ServiceTypeDns     ServiceType = "DNS"
+)
+
+// Values returns all known values for ServiceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServiceType) Values() []ServiceType {
+	return []ServiceType{
+		"HTTP",
+		"DNS_HTTP",
+		"DNS",
+	}
+}
+
+type ServiceTypeOption string
+
+// Enum values for ServiceTypeOption
+const (
+	ServiceTypeOptionHttp ServiceTypeOption = "HTTP"
+)
+
+// Values returns all known values for ServiceTypeOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceTypeOption) Values() []ServiceTypeOption {
+	return []ServiceTypeOption{
+		"HTTP",
+	}
+}

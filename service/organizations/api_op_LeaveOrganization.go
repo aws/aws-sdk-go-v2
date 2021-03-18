@@ -45,9 +45,15 @@ import (
 // (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_remove.html#leave-without-all-info)
 // in the AWS Organizations User Guide.
 //
-// * You can leave an organization only after
-// you enable IAM user access to billing in your account. For more information, see
-// Activating Access to the Billing and Cost Management Console
+// * The account that you want to leave must
+// not be a delegated administrator account for any AWS service enabled for your
+// organization. If the account is a delegated administrator, you must first change
+// the delegated administrator account to another account that is remaining in the
+// organization.
+//
+// * You can leave an organization only after you enable IAM user
+// access to billing in your account. For more information, see Activating Access
+// to the Billing and Cost Management Console
 // (http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/grantaccess.html#ControllingAccessWebsite-Activate)
 // in the AWS Billing and Cost Management User Guide.
 //

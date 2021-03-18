@@ -105,6 +105,15 @@ type CreateDeploymentGroupInput struct {
 	// tag groups. Cannot be used in the same call as onPremisesInstanceTagFilters.
 	OnPremisesTagSet *types.OnPremisesTagSet
 
+	// Indicates what happens when new EC2 instances are launched mid-deployment and do
+	// not receive the deployed application revision. If this option is set to UPDATE
+	// or is unspecified, CodeDeploy initiates one or more 'auto-update outdated
+	// instances' deployments to apply the deployed application revision to the new EC2
+	// instances. If this option is set to IGNORE, CodeDeploy does not initiate a
+	// deployment to update the new EC2 instances. This may result in instances having
+	// different revisions.
+	OutdatedInstancesStrategy types.OutdatedInstancesStrategy
+
 	// The metadata that you apply to CodeDeploy deployment groups to help you organize
 	// and categorize them. Each tag consists of a key and an optional value, both of
 	// which you define.

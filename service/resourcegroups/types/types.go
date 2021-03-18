@@ -22,11 +22,12 @@ type FailedResource struct {
 // ResourceQuery - Use a resource query to specify a set of tag keys and values.
 // All resources in the same AWS Region and AWS account that have those keys with
 // the same values are included in the group. You can add a resource query when you
-// create the group.
+// create the group, or later by using the PutGroupConfiguration operation.
 //
-// * GroupConfiguration - Use a service configuration to
-// associate the group with an AWS service. The configuration specifies which
-// resource types can be included in the group.
+// *
+// GroupConfiguration - Use a service configuration to associate the group with an
+// AWS service. The configuration specifies which resource types can be included in
+// the group.
 type Group struct {
 
 	// The ARN of the resource group.
@@ -46,7 +47,10 @@ type Group struct {
 // A service configuration associated with a resource group. The configuration
 // options are determined by the AWS service that defines the Type, and specifies
 // which resources can be included in the group. You can add a service
-// configuration when you create the group.
+// configuration when you create the group by using CreateGroup, or later by using
+// the PutGroupConfiguration operation. For details about group service
+// configuration syntax, see Service configurations for resource groups
+// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
 type GroupConfiguration struct {
 
 	// The configuration currently associated with the group and in effect.
@@ -63,60 +67,44 @@ type GroupConfiguration struct {
 	Status GroupConfigurationStatus
 }
 
-// An item in a group configuration. A group configuration can have one or more
-// items.
+// An item in a group configuration. A group service configuration can have one or
+// more items. For details about group service configuration syntax, see Service
+// configurations for resource groups
+// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
 type GroupConfigurationItem struct {
 
 	// Specifies the type of group configuration item. Each item must have a unique
-	// value for type. You can specify the following string values:
-	//
-	// *
-	// AWS::EC2::CapacityReservationPool For more information about EC2 capacity
-	// reservation groups, see Working with capacity reservation groups
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group)
-	// in the EC2 Users Guide.
-	//
-	// * AWS::ResourceGroups::Generic - Supports parameters
-	// that configure the behavior of resource groups of any type.
+	// value for type. For the list of types that you can specify for a configuration
+	// item, see Supported resource types and parameters
+	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
 	//
 	// This member is required.
 	Type *string
 
-	// A collection of parameters for this group configuration item.
+	// A collection of parameters for this group configuration item. For the list of
+	// parameters that you can use with each configuration item type, see Supported
+	// resource types and parameters
+	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
 	Parameters []GroupConfigurationParameter
 }
 
-// A parameter for a group configuration item.
+// A parameter for a group configuration item. For details about group service
+// configuration syntax, see Service configurations for resource groups
+// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
 type GroupConfigurationParameter struct {
 
-	// The name of the group configuration parameter. You can specify the following
-	// string values:
-	//
-	// * For configuration item type AWS::ResourceGroups::Generic:
-	//
-	// *
-	// allowed-resource-types Specifies the types of resources that you can add to this
-	// group by using the GroupResources operation.
-	//
-	// * For configuration item type
-	// AWS::EC2::CapacityReservationPool:
-	//
-	// * None - This configuration item type
-	// doesn't support any parameters.
-	//
-	// For more information about EC2 capacity
-	// reservation groups, see Working with capacity reservation groups
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group)
-	// in the EC2 Users Guide.
+	// The name of the group configuration parameter. For the list of parameters that
+	// you can use with each configuration item type, see Supported resource types and
+	// parameters
+	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
 	//
 	// This member is required.
 	Name *string
 
-	// The values of for this parameter. You can specify the following string value:
-	//
-	// *
-	// For item type allowed-resource-types: the only supported parameter value is
-	// AWS::EC2::CapacityReservation.
+	// The value or values to be used for the specified parameter. For the list of
+	// values you can use with each parameter, see Supported resource types and
+	// parameters
+	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
 	Values []string
 }
 
@@ -163,6 +151,28 @@ type GroupQuery struct {
 	ResourceQuery *ResourceQuery
 }
 
+// A structure returned by the ListGroupResources operation that contains identity
+// and group membership status information for one of the resources in the group.
+type ListGroupResourcesItem struct {
+
+	// A structure that contains the ARN of a resource and its resource type.
+	Identifier *ResourceIdentifier
+
+	// A structure that contains the status of this resource's membership in the group.
+	// This field is present in the response only if the group is of type
+	// AWS::EC2::HostManagement.
+	Status *ResourceStatus
+}
+
+// A structure that identifies a resource that is currently pending addition to the
+// group as a member. Adding a resource to a resource group happens asynchronously
+// as a background task and this one isn't completed yet.
+type PendingResource struct {
+
+	// The Amazon resource name (ARN) of the resource that's in a pending state.
+	ResourceArn *string
+}
+
 // A two-part error structure that can occur in ListGroupResources or
 // SearchResources operations on CloudFormation stack-based queries. The error
 // occurs if the CloudFormation stack on which the query is based either does not
@@ -199,7 +209,7 @@ type ResourceFilter struct {
 	Values []string
 }
 
-// The ARN of a resource, and its resource type.
+// A structure that contains the ARN of a resource and its resource type.
 type ResourceIdentifier struct {
 
 	// The ARN of a resource.
@@ -302,4 +312,14 @@ type ResourceQuery struct {
 	//
 	// This member is required.
 	Type QueryType
+}
+
+// A structure that identifies the current group membership status for a resource.
+// Adding a resource to a resource group is performed asynchronously as a
+// background task. A PENDING status indicates, for this resource, that the process
+// isn't completed yet.
+type ResourceStatus struct {
+
+	// The current status.
+	Name ResourceStatusValue
 }

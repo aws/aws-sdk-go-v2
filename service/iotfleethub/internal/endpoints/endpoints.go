@@ -41,17 +41,20 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "iotfleethub.{region}.amazonaws.com",
+			Hostname:          "api.fleethub.iot.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
 		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-east-1": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-cn",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "iotfleethub.{region}.amazonaws.com.cn",
+			Hostname:          "api.fleethub.iot.{region}.amazonaws.com.cn",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -61,7 +64,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "iotfleethub.{region}.c2s.ic.gov",
+			Hostname:          "api.fleethub.iot.{region}.c2s.ic.gov",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -71,7 +74,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso-b",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "iotfleethub.{region}.sc2s.sgov.gov",
+			Hostname:          "api.fleethub.iot.{region}.sc2s.sgov.gov",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -81,7 +84,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-us-gov",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "iotfleethub.{region}.amazonaws.com",
+			Hostname:          "api.fleethub.iot.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},

@@ -360,6 +360,9 @@
                     "target": "com.amazonaws.ecrpublic#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.ecrpublic#InvalidTagParameterException"
+                },
+                {
                     "target": "com.amazonaws.ecrpublic#LimitExceededException"
                 },
                 {
@@ -367,6 +370,9 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#TooManyTagsException"
                 }
             ],
             "traits": {
@@ -387,6 +393,12 @@
                     "target": "com.amazonaws.ecrpublic#RepositoryCatalogDataInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The details about the repository that are publicly visible in the\n         Amazon ECR Public Gallery.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ecrpublic#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you apply to the repository to help you categorize and organize them.\n         Each tag consists of a key and an optional value, both of which you define.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
                     }
                 }
             }
@@ -1489,6 +1501,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.ecrpublic#InvalidTagParameterException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecrpublic#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An invalid parameter has been specified. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecrpublic#Layer": {
             "type": "structure",
             "members": {
@@ -1671,6 +1695,52 @@
             "traits": {
                 "smithy.api#documentation": "<p>The operation did not succeed because it would have exceeded a service limit for your\n         account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/service-quotas.html\">Amazon ECR Service Quotas</a> in the\n         Amazon Elastic Container Registry User Guide.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecrpublic#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecrpublic#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecrpublic#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecrpublic#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#ServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the tags for an Amazon ECR Public resource.</p>"
+            }
+        },
+        "com.amazonaws.ecrpublic#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ecrpublic#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource for which to list the tags. Currently, the\n         supported resource is an Amazon ECR Public repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecrpublic#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.ecrpublic#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags for the resource.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.ecrpublic#LogoImageBlob": {
@@ -2546,6 +2616,9 @@
                     "target": "com.amazonaws.ecrpublic#InitiateLayerUpload"
                 },
                 {
+                    "target": "com.amazonaws.ecrpublic#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.ecrpublic#PutImage"
                 },
                 {
@@ -2556,6 +2629,12 @@
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#SetRepositoryPolicy"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#UntagResource"
                 },
                 {
                     "target": "com.amazonaws.ecrpublic#UploadLayerPart"
@@ -2580,6 +2659,132 @@
                 }
             }
         },
+        "com.amazonaws.ecrpublic#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ecrpublic#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One part of a key-value pair that make up a tag. A <code>key</code> is a general label\n         that acts like a category for more specific tag values.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.ecrpublic#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional part of a key-value pair that make up a tag. A <code>value</code> acts as a\n         descriptor within a tag category (key).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The metadata that you apply to a resource to help you categorize and organize them. Each\n         tag consists of a key and an optional value, both of which you define. Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>"
+            }
+        },
+        "com.amazonaws.ecrpublic#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.ecrpublic#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecrpublic#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ecrpublic#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ecrpublic#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ecrpublic#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecrpublic#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecrpublic#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecrpublic#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#InvalidTagParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates the specified tags to a resource with the specified <code>resourceArn</code>.\n         If existing tags on a resource are not specified in the request parameters, they are not\n         changed. When a resource is deleted, the tags associated with that resource are deleted as\n         well.</p>"
+            }
+        },
+        "com.amazonaws.ecrpublic#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ecrpublic#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which to add tags. Currently, the\n         supported resource is an Amazon ECR Public repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ecrpublic#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the resource. A tag is an array of key-value pairs.\n         Tag keys can have a maximum character length of 128 characters, and tag values can have a maximum length of 256 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecrpublic#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ecrpublic#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.ecrpublic#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecrpublic#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of tags on the repository is over the limit. The maximum number of tags that\n         can be applied to a repository is 50.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.ecrpublic#UnsupportedCommandException": {
             "type": "structure",
             "members": {
@@ -2591,6 +2796,58 @@
                 "smithy.api#documentation": "<p>The action is not supported in this Region.</p>",
                 "smithy.api#error": "client"
             }
+        },
+        "com.amazonaws.ecrpublic#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ecrpublic#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ecrpublic#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ecrpublic#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#InvalidTagParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#RepositoryNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.ecrpublic#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes specified tags from a resource.</p>"
+            }
+        },
+        "com.amazonaws.ecrpublic#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ecrpublic#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which to delete tags. Currently, the supported\n         resource is an Amazon ECR Public repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.ecrpublic#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ecrpublic#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.ecrpublic#UploadId": {
             "type": "string",

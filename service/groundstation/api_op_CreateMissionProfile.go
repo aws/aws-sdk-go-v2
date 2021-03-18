@@ -41,7 +41,7 @@ type CreateMissionProfileInput struct {
 	// duration.
 	//
 	// This member is required.
-	MinimumViableContactDurationSeconds int32
+	MinimumViableContactDurationSeconds *int32
 
 	// Name of a mission profile.
 	//
@@ -55,11 +55,11 @@ type CreateMissionProfileInput struct {
 
 	// Amount of time after a contact ends that you’d like to receive a CloudWatch
 	// event indicating the pass has finished.
-	ContactPostPassDurationSeconds int32
+	ContactPostPassDurationSeconds *int32
 
 	// Amount of time prior to contact start you’d like to receive a CloudWatch event
 	// indicating an upcoming pass.
-	ContactPrePassDurationSeconds int32
+	ContactPrePassDurationSeconds *int32
 
 	// Tags assigned to a mission profile.
 	Tags map[string]string

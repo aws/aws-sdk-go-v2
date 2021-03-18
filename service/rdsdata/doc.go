@@ -8,7 +8,5 @@
 // you work with the Data Service API. For more information about the Data Service
 // API, see Using the Data API for Aurora Serverless
 // (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html) in
-// the Amazon Aurora User Guide. If you have questions or comments related to the
-// Data API, send email to Rds-data-api-feedback@amazon.com
-// (mailto:Rds-data-api-feedback@amazon.com).
+// the Amazon Aurora User Guide.
 package rdsdata

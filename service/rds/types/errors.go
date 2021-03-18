@@ -642,6 +642,62 @@ func (e *DBProxyAlreadyExistsFault) ErrorMessage() string {
 func (e *DBProxyAlreadyExistsFault) ErrorCode() string             { return "DBProxyAlreadyExistsFault" }
 func (e *DBProxyAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified DB proxy endpoint name must be unique for all DB proxy endpoints
+// owned by your AWS account in the specified AWS Region.
+type DBProxyEndpointAlreadyExistsFault struct {
+	Message *string
+}
+
+func (e *DBProxyEndpointAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBProxyEndpointAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBProxyEndpointAlreadyExistsFault) ErrorCode() string {
+	return "DBProxyEndpointAlreadyExistsFault"
+}
+func (e *DBProxyEndpointAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The DB proxy endpoint doesn't exist.
+type DBProxyEndpointNotFoundFault struct {
+	Message *string
+}
+
+func (e *DBProxyEndpointNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBProxyEndpointNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBProxyEndpointNotFoundFault) ErrorCode() string             { return "DBProxyEndpointNotFoundFault" }
+func (e *DBProxyEndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The DB proxy already has the maximum number of endpoints.
+type DBProxyEndpointQuotaExceededFault struct {
+	Message *string
+}
+
+func (e *DBProxyEndpointQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *DBProxyEndpointQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *DBProxyEndpointQuotaExceededFault) ErrorCode() string {
+	return "DBProxyEndpointQuotaExceededFault"
+}
+func (e *DBProxyEndpointQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified proxy name doesn't correspond to a proxy owned by your AWS account
 // in the specified AWS Region.
 type DBProxyNotFoundFault struct {
@@ -1427,6 +1483,26 @@ func (e *InvalidDBParameterGroupStateFault) ErrorCode() string {
 	return "InvalidDBParameterGroupStateFault"
 }
 func (e *InvalidDBParameterGroupStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You can't perform this operation while the DB proxy endpoint is in a particular
+// state.
+type InvalidDBProxyEndpointStateFault struct {
+	Message *string
+}
+
+func (e *InvalidDBProxyEndpointStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDBProxyEndpointStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDBProxyEndpointStateFault) ErrorCode() string {
+	return "InvalidDBProxyEndpointStateFault"
+}
+func (e *InvalidDBProxyEndpointStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation can't be performed while the proxy is in this state.
 type InvalidDBProxyStateFault struct {

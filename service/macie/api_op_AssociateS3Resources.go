@@ -13,9 +13,9 @@ import (
 
 // Associates specified S3 resources with Amazon Macie Classic for monitoring and
 // data classification. If memberAccountId isn't specified, the action associates
-// specified S3 resources with Macie Classic for the current master account. If
-// memberAccountId is specified, the action associates specified S3 resources with
-// Macie Classic for the specified member account.
+// specified S3 resources with Macie Classic for the current Macie Classic
+// administrator account. If memberAccountId is specified, the action associates
+// specified S3 resources with Macie Classic for the specified member account.
 func (c *Client) AssociateS3Resources(ctx context.Context, params *AssociateS3ResourcesInput, optFns ...func(*Options)) (*AssociateS3ResourcesOutput, error) {
 	if params == nil {
 		params = &AssociateS3ResourcesInput{}

@@ -14,7 +14,7 @@ import (
 
 // Lists the Amazon Chime accounts under the administrator's AWS account. You can
 // filter accounts by account name prefix. To find out which Amazon Chime account a
-// user belongs to, you can filter by the user's email address, which returns one
+// user belongs to, toucan filter by the user's email address, which returns one
 // account result.
 func (c *Client) ListAccounts(ctx context.Context, params *ListAccountsInput, optFns ...func(*Options)) (*ListAccountsOutput, error) {
 	if params == nil {
@@ -48,10 +48,10 @@ type ListAccountsInput struct {
 
 type ListAccountsOutput struct {
 
-	// The list of accounts.
+	// List of Amazon Chime accounts and account details.
 	Accounts []types.Account
 
-	// The account's user token.
+	// The token to use to retrieve the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

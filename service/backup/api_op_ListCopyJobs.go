@@ -65,7 +65,10 @@ type ListCopyJobsInput struct {
 	// * RDS for Amazon Relational
 	// Database Service
 	//
-	// * Storage Gateway for AWS Storage Gateway
+	// * Aurora for Amazon Aurora
+	//
+	// * Storage Gateway for AWS Storage
+	// Gateway
 	ByResourceType *string
 
 	// Returns only copy jobs that are in the specified state.

@@ -70,6 +70,9 @@
                     "target": "com.amazonaws.costexplorer#GetCostAndUsageWithResources"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#GetCostCategories"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#GetCostForecast"
                 },
                 {
@@ -568,6 +571,12 @@
                 "smithy.api#pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
             }
         },
+        "com.amazonaws.costexplorer#CostCategoryNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#CostCategoryName"
+            }
+        },
         "com.amazonaws.costexplorer#CostCategoryProcessingStatus": {
             "type": "structure",
             "members": {
@@ -744,12 +753,12 @@
                 "MatchOptions": {
                     "target": "com.amazonaws.costexplorer#MatchOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The match options that you can use to filter your results. MatchOptions is only applicable for only applicable for actions related to cost category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            The match options that you can use to filter your results. MatchOptions is only applicable for actions related to cost category. The default values for <code>MatchOptions</code> is <code>EQUALS</code> and <code>CASE_SENSITIVE</code>.\n        </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Cost Categories values used for filtering the costs.</p>"
+                "smithy.api#documentation": "<p>The Cost Categories values used for filtering the costs.</p>\n\t\t       <p>If <code>Values</code> and <code>Key</code> are not specified, the <code>ABSENT</code> \n            <code>MatchOption</code> is applied to all Cost Categories. That is, filtering on resources that are not mapped to any Cost Categories.</p>\n         <p>If <code>Values</code> is provided and <code>Key</code> is not specified, the <code>ABSENT</code> \n            <code>MatchOption</code> is applied to the Cost Categories <code>Key</code> only. That is, filtering on resources without the given Cost Categories key.</p>"
             }
         },
         "com.amazonaws.costexplorer#CostCategoryValuesList": {
@@ -1138,20 +1147,20 @@
                 "Start": {
                     "target": "com.amazonaws.costexplorer#YearMonthDay",
                     "traits": {
-                        "smithy.api#documentation": "<p>The beginning of the time period that you want the usage and costs for. The start\n            date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, AWS\n            retrieves cost and usage data starting at <code>2017-01-01</code> up to the end\n            date.</p>",
+                        "smithy.api#documentation": "<p>The beginning of the time period. The start\n            date is inclusive. For example, if <code>start</code> is <code>2017-01-01</code>, AWS\n            retrieves cost and usage data starting at <code>2017-01-01</code> up to the end\n            date. The start date must be equal to or no later than the current date to avoid a validation error.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "End": {
                     "target": "com.amazonaws.costexplorer#YearMonthDay",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time period that you want the usage and costs for. The end date is\n            exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, AWS retrieves\n            cost and usage data from the start date up to, but not including,\n                <code>2017-05-01</code>.</p>",
+                        "smithy.api#documentation": "<p>The end of the time period. The end date is\n            exclusive. For example, if <code>end</code> is <code>2017-05-01</code>, AWS retrieves\n            cost and usage data from the start date up to, but not including,\n                <code>2017-05-01</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The time period that you want the usage and costs for.\n        </p>"
+                "smithy.api#documentation": "<p>The time period of the request.\n        </p>"
             }
         },
         "com.amazonaws.costexplorer#DeleteAnomalyMonitor": {
@@ -1440,6 +1449,14 @@
                     {
                         "value": "PAYMENT_OPTION",
                         "name": "PAYMENT_OPTION"
+                    },
+                    {
+                        "value": "AGREEMENT_END_DATE_TIME_AFTER",
+                        "name": "AGREEMENT_END_DATE_TIME_AFTER"
+                    },
+                    {
+                        "value": "AGREEMENT_END_DATE_TIME_BEFORE",
+                        "name": "AGREEMENT_END_DATE_TIME_BEFORE"
                     }
                 ]
             }
@@ -1824,7 +1841,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p>\n        <ul>\n            <li>\n                <p>Simple dimension values - You can set the dimension name and values for the\n                    filters that you plan to use. For example, you can filter for\n                    <code>REGION==us-east-1 OR REGION==us-west-1</code>. For <code>GetRightsizingRecommendation</code>, the Region is a full name (for example, <code>REGION==US East (N. Virginia)</code>. The\n                        <code>Expression</code> example looks like:</p>\n                <p>\n                  <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\",\n                        “us-west-1” ] } }</code>\n                </p>\n                <p>The list of dimension values are OR'd together to retrieve cost or usage\n                    data. You can create <code>Expression</code> and <code>DimensionValues</code>\n                    objects using either <code>with*</code> methods or <code>set*</code> methods in\n                    multiple lines. </p>\n            </li>\n            <li>\n                <p>Compound dimension values with logical operations - You can use multiple\n                        <code>Expression</code> types and the logical operators\n                        <code>AND/OR/NOT</code> to create a list of one or more\n                        <code>Expression</code> objects. This allows you to filter on more advanced\n                    options. For example, you can filter on <code>((REGION == us-east-1 OR\n                        REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=\n                        DataTransfer)</code>. The <code>Expression</code> for that looks like\n                    this:</p>\n                <p>\n                  <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\",\n                        \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\": \"TagName\",\n                        \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": { \"Key\": \"USAGE_TYPE\",\n                        \"Values\": [\"DataTransfer\"] }}} ] } </code>\n               </p>\n                <note>\n                    <p>Because each <code>Expression</code> can have only one operator, the\n                        service returns an error if more than one is specified. The following\n                        example shows an <code>Expression</code> object that creates an\n                        error.</p>\n                </note>\n                <p>\n                    <code> { \"And\": [ ... ], \"DimensionValues\": { \"Dimension\": \"USAGE_TYPE\",\n                        \"Values\": [ \"DataTransfer\" ] } } </code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>For <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not\n                supported. OR is not supported between different dimensions, or dimensions and tags.\n                NOT operators aren't supported.\n                Dimensions\n                are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or\n                    <code>RIGHTSIZING_TYPE</code>.</p> \n         </note>"
+                "smithy.api#documentation": "<p>Use <code>Expression</code> to filter by cost or by usage. There are two patterns: </p>\n        <ul>\n            <li>\n                <p>Simple dimension values - You can set the dimension name and values for the\n                    filters that you plan to use. For example, you can filter for\n                    <code>REGION==us-east-1 OR REGION==us-west-1</code>. For <code>GetRightsizingRecommendation</code>, the Region is a full name (for example, <code>REGION==US East (N. Virginia)</code>. The\n                        <code>Expression</code> example looks like:</p>\n                <p>\n                  <code>{ \"Dimensions\": { \"Key\": \"REGION\", \"Values\": [ \"us-east-1\",\n                        “us-west-1” ] } }</code>\n                </p>\n                <p>The list of dimension values are OR'd together to retrieve cost or usage\n                    data. You can create <code>Expression</code> and <code>DimensionValues</code>\n                    objects using either <code>with*</code> methods or <code>set*</code> methods in\n                    multiple lines. </p>\n            </li>\n            <li>\n                <p>Compound dimension values with logical operations - You can use multiple\n                        <code>Expression</code> types and the logical operators\n                        <code>AND/OR/NOT</code> to create a list of one or more\n                        <code>Expression</code> objects. This allows you to filter on more advanced\n                    options. For example, you can filter on <code>((REGION == us-east-1 OR\n                        REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=\n                        DataTransfer)</code>. The <code>Expression</code> for that looks like\n                    this:</p>\n                <p>\n                  <code>{ \"And\": [ {\"Or\": [ {\"Dimensions\": { \"Key\": \"REGION\",\n                        \"Values\": [ \"us-east-1\", \"us-west-1\" ] }}, {\"Tags\": { \"Key\": \"TagName\",\n                        \"Values\": [\"Value1\"] } } ]}, {\"Not\": {\"Dimensions\": { \"Key\": \"USAGE_TYPE\",\n                        \"Values\": [\"DataTransfer\"] }}} ] } </code>\n               </p>\n                <note>\n                    <p>Because each <code>Expression</code> can have only one operator, the\n                        service returns an error if more than one is specified. The following\n                        example shows an <code>Expression</code> object that creates an\n                        error.</p>\n                </note>\n                <p>\n                    <code> { \"And\": [ ... ], \"DimensionValues\": { \"Dimension\": \"USAGE_TYPE\",\n                        \"Values\": [ \"DataTransfer\" ] } } </code>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>For the <code>GetRightsizingRecommendation</code> action, a combination of OR and NOT is not\n                supported. OR is not supported between different dimensions, or dimensions and tags.\n                NOT operators aren't supported.\n                Dimensions\n                are also limited to <code>LINKED_ACCOUNT</code>, <code>REGION</code>, or\n                    <code>RIGHTSIZING_TYPE</code>.</p> \n\t\t\t\t\t\n\t\t\t\t\t       <p>For the <code>GetReservationPurchaseRecommendation</code> action, only NOT is supported. AND and OR are not supported. Dimensions are limited to <code>LINKED_ACCOUNT</code>.</p>\n\t\t\t\t\t\n\t\t\t\t\t\n\t\t\t\t\t\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#Expressions": {
@@ -2193,6 +2210,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time period that is covered by the results in the response.</p>"
                     }
+                },
+                "DimensionValueAttributes": {
+                    "target": "com.amazonaws.costexplorer#DimensionValuesWithAttributesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes that apply to a specific dimension value. For example, if the value is a linked account, the attribute is that account name.</p>"
+                    }
                 }
             }
         },
@@ -2288,6 +2311,119 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time period that is covered by the results in the response.</p>"
                     }
+                },
+                "DimensionValueAttributes": {
+                    "target": "com.amazonaws.costexplorer#DimensionValuesWithAttributesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes that apply to a specific dimension value. For example, if the value is a linked account, the attribute is that account name.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#GetCostCategories": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#GetCostCategoriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#GetCostCategoriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#BillExpirationException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#RequestChangedException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves an array of Cost Category names and values incurred cost.</p>\n\t        <note>\n            <p>If some Cost Category names and values are not associated with any cost, they will not be returned by this API.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.costexplorer#GetCostCategoriesRequest": {
+            "type": "structure",
+            "members": {
+                "SearchString": {
+                    "target": "com.amazonaws.costexplorer#SearchString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that you want to search the filter values for.</p>\n\t        <p>If you do not specify a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category names that match the <code>SearchString</code> pattern. If you do specifiy a <code>CostCategoryName</code>, <code>SearchString</code> will be used to filter Cost Category values that match the <code>SearchString</code> pattern.</p>"
+                    }
+                },
+                "TimePeriod": {
+                    "target": "com.amazonaws.costexplorer#DateInterval",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "CostCategoryName": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryName"
+                },
+                "Filter": {
+                    "target": "com.amazonaws.costexplorer#Expression"
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.costexplorer#SortDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value by which you want to sort the data.</p>\n\t        <p>The key represents cost and usage metrics. The following values are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BlendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetAmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetUnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageQuantity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NormalizedUsageAmount</code>\n               </p>\n            </li>\n         </ul>\n         <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>\n         <p>When using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field is only used when <code>SortBy</code> is provided in the request.</p>\n\t        <p>The maximum number of objects that to be returned for this request.  If <code>MaxResults</code> is not specified with <code>SortBy</code>, the request will return 1000 results as the default value for this parameter.</p>\n\t        <p>For <code>GetCostCategories</code>, MaxResults has an upper limit of 1000.</p>"
+                    }
+                },
+                "NextPageToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the number of objects that are still available for retrieval exceeds the limit, AWS returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the NextPageToken from the prior call in your next request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#GetCostCategoriesResponse": {
+            "type": "structure",
+            "members": {
+                "NextPageToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the number of objects that are still available for retrieval exceeds the limit, AWS returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+                    }
+                },
+                "CostCategoryNames": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryNamesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names of the Cost Categories.</p>"
+                    }
+                },
+                "CostCategoryValues": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryValuesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Cost Category values.</p>\n\t        <p>\n            <code>CostCategoryValues</code> are not returned if <code>CostCategoryName</code> is not specified in the request. </p>"
+                    }
+                },
+                "ReturnSize": {
+                    "target": "com.amazonaws.costexplorer#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects returned.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TotalSize": {
+                    "target": "com.amazonaws.costexplorer#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of objects.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -2338,7 +2474,7 @@
                 "Filter": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.</p>"
+                        "smithy.api#documentation": "<p>The filters that you want to use to filter your forecast. The <code>GetCostForecast</code> API supports filtering by the following dimensions:</p>\n\t\t    \n\t        <ul>\n            <li>\n               <p>\n                  <code>AZ</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PURCHASE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>USAGE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>USAGE_TYPE_GROUP</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RECORD_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATING_SYSTEM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TENANCY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SCOPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PLATFORM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUBSCRIPTION_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGAL_ENTITY_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPLOYMENT_OPTION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DATABASE_ENGINE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE_FAMILY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>BILLING_ENTITY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESERVATION_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SAVINGS_PLAN_ARN</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "PredictionIntervalLevel": {
@@ -2422,6 +2558,21 @@
                     "target": "com.amazonaws.costexplorer#Context",
                     "traits": {
                         "smithy.api#documentation": "<p>The context for the call to <code>GetDimensionValues</code>. This can be <code>RESERVATIONS</code> or <code>COST_AND_USAGE</code>. \n\t\t\tThe default value is <code>COST_AND_USAGE</code>. If the context is set to <code>RESERVATIONS</code>, the resulting dimension values \n\t\t\tcan be used in the <code>GetReservationUtilization</code> operation. If the context is set to <code>COST_AND_USAGE</code>, \n\t\t\tthe resulting dimension values can be used in the <code>GetCostAndUsage</code> operation.</p>\n\t\t       <p>If you set the context to <code>COST_AND_USAGE</code>, you can use the following \n           dimensions for searching:</p>\n           <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the AWS ID of the member account.</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>OPERATION - The action performed. Examples include <code>RunInstance</code> and <code>CreateBucket</code>.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand \n               Instances and Standard Reserved Instances.</p>\n            </li>\n            <li>\n               <p>SERVICE - The AWS service such as Amazon DynamoDB.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the <code>GetDimensionValues</code> operation\n           includes a unit attribute. Examples include GB and Hrs.</p>\n            </li>\n            <li>\n               <p>USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this \n               operation includes a unit attribute.</p>\n            </li>\n            <li>\n               <p>REGION - The AWS Region.</p>\n            </li>\n            <li>\n               <p>RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.</p>\n            </li>\n            <li>\n               <p>RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>RESERVATIONS</code>, you can use the following \n           dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>AZ - The Availability Zone. An example is <code>us-east-1a</code>.</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are <code>SingleAZ</code> and <code>MultiAZ</code>.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE - The type of Amazon EC2 instance. An example is <code>m4.xlarge</code>.</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the AWS ID of the member account.</p>\n            </li>\n            <li>\n               <p>PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.</p>\n            </li>\n            <li>\n               <p>REGION - The AWS Region.</p>\n            </li>\n            <li>\n               <p>SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.</p>\n            </li>\n            <li>\n               <p>TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).</p>\n            </li>\n            <li>\n               <p>TENANCY - The tenancy of a resource. Examples are shared or dedicated.</p>\n            </li>\n         </ul>\n         <p>If you set the context to <code>SAVINGS_PLANS</code>, you can use the following dimensions for searching:</p>\n         <ul>\n            <li>\n               <p>SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)</p>\n            </li>\n            <li>\n               <p>PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)</p>\n            </li>\n            <li>\n               <p>REGION - The AWS Region.</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE_FAMILY - The family of instances (For example, <code>m5</code>)</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value \n               field contains the AWS ID of the member account.</p>\n            </li>\n            <li>\n               <p>SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.costexplorer#Expression"
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.costexplorer#SortDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value by which you want to sort the data.</p>\n\t        <p>The key represents cost and usage metrics. The following values are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BlendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetAmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetUnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageQuantity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NormalizedUsageAmount</code>\n               </p>\n            </li>\n         </ul>\n         <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>\n         <p>When you specify a <code>SortBy</code> paramater, the context must be <code>COST_AND_USAGE</code>. Further, when using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.</p>\n\t        <p>For <code>GetDimensionValues</code>, MaxResults has an upper limit of 1000.</p>"
                     }
                 },
                 "NextPageToken": {
@@ -2526,6 +2677,19 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
                     }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.costexplorer#SortDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value by which you want to sort the data.</p>\n\t        <p>The following values are supported for <code>Key</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>OnDemandCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CoverageHoursPercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OnDemandHours</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReservedHours</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalRunningHours</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CoverageNormalizedUnitsPercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OnDemandNormalizedUnits</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ReservedNormalizedUnits</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalRunningNormalizedUnits</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Time</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#MaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of objects that you returned for this request. If more objects are available, in the response, AWS provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2594,6 +2758,9 @@
                         "smithy.api#documentation": "<p>The specific service that you want recommendations for.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.costexplorer#Expression"
                 },
                 "AccountScope": {
                     "target": "com.amazonaws.costexplorer#AccountScope",
@@ -2713,10 +2880,23 @@
                         "smithy.api#documentation": "<p>Filters utilization data by dimensions. You can filter by the following dimensions:</p>\n\t\t       <ul>\n            <li>\n               <p>AZ</p>\n            </li>\n            <li>\n               <p>CACHE_ENGINE</p>\n            </li>\n            <li>\n               <p>DEPLOYMENT_OPTION</p>\n            </li>\n            <li>\n               <p>INSTANCE_TYPE</p>\n            </li>\n            <li>\n               <p>LINKED_ACCOUNT</p>\n            </li>\n            <li>\n               <p>OPERATING_SYSTEM</p>\n            </li>\n            <li>\n               <p>PLATFORM</p>\n            </li>\n            <li>\n               <p>REGION</p>\n            </li>\n            <li>\n               <p>SERVICE</p>\n            </li>\n            <li>\n               <p>SCOPE</p>\n            </li>\n            <li>\n               <p>TENANCY</p>\n            </li>\n         </ul>\n\t\t       <p>\n            <code>GetReservationUtilization</code> uses the same \n\t\t\t<a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object \n\t\t\tas the other operations, but only <code>AND</code> is supported among each dimension, and nesting is supported up to \n\t\t\tonly one level deep. If there are multiple values for a dimension, they are OR'd together.</p>"
                     }
                 },
+                "SortBy": {
+                    "target": "com.amazonaws.costexplorer#SortDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value by which you want to sort the data.</p>\n\t  \n\t        <p>The following values are supported for <code>Key</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UtilizationPercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UtilizationPercentageInUnits</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PurchasedHours</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PurchasedUnits</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalActualHours</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalActualUnits</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnusedHours</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnusedUnits</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OnDemandCostOfRIHoursUsed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetRISavings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalPotentialRISavings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedUpfrontFee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedRecurringFee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalAmortizedFee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RICostForUnusedHours</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RealizedSavings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnrealizedSavings</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
+                    }
+                },
                 "NextPageToken": {
                     "target": "com.amazonaws.costexplorer#NextPageToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#MaxResults",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of objects that you returned for this request. If more objects are available, in the response, AWS provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.</p>"
                     }
                 }
             }
@@ -2907,6 +3087,12 @@
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>The number of items to be returned in a response. The default is <code>20</code>, with a minimum value of <code>1</code>.</p>"
                     }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.costexplorer#SortDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value by which you want to sort the data.</p>\n\t  \t     <p>The following values are supported for <code>Key</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SpendCoveredBySavingsPlan</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OnDemandCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CoveragePercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>InstanceFamily</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Region</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Service</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
+                    }
                 }
             }
         },
@@ -3092,6 +3278,12 @@
                         "smithy.api#documentation": "<p>Filters Savings Plans utilization coverage data for active Savings Plans dimensions.  You can filter data with the following dimensions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SAVINGS_PLAN_ARN</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PAYMENT_OPTION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE_FAMILY</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <code>GetSavingsPlansUtilizationDetails</code> uses the same \n      <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object \n      as the other operations, but only <code>AND</code> is supported among each dimension.</p>"
                     }
                 },
+                "DataType": {
+                    "target": "com.amazonaws.costexplorer#SavingsPlansDataTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type.</p>"
+                    }
+                },
                 "NextToken": {
                     "target": "com.amazonaws.costexplorer#NextPageToken",
                     "traits": {
@@ -3103,6 +3295,12 @@
                     "traits": {
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>The number of items to be returned in a response. The default is <code>20</code>, with a minimum value of <code>1</code>.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.costexplorer#SortDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value by which you want to sort the data.</p>\n\t  \n\t        <p>The following values are supported for <code>Key</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UtilizationPercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsedCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnusedCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetSavings</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedRecurringCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedUpfrontCommitment</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
                     }
                 }
             }
@@ -3157,6 +3355,12 @@
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
                         "smithy.api#documentation": "<p>Filters Savings Plans utilization coverage data for active Savings Plans dimensions.  You can filter data with the following dimensions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SAVINGS_PLAN_ARN</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SAVINGS_PLANS_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PAYMENT_OPTION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE_FAMILY</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <code>GetSavingsPlansUtilization</code> uses the same \n      <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object \n      as the other operations, but only <code>AND</code> is supported among each dimension.</p>"
+                    }
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.costexplorer#SortDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value by which you want to sort the data.</p>\n\t        <p>The following values are supported for <code>Key</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>UtilizationPercentage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TotalCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsedCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnusedCommitment</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetSavings</code>\n               </p>\n            </li>\n         </ul>\n\n         <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>"
                     }
                 }
             }
@@ -3228,6 +3432,21 @@
                     "target": "com.amazonaws.costexplorer#TagKey",
                     "traits": {
                         "smithy.api#documentation": "<p>The key of the tag that you want to return values for.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.costexplorer#Expression"
+                },
+                "SortBy": {
+                    "target": "com.amazonaws.costexplorer#SortDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value by which you want to sort the data.</p>\n\t        <p>The key represents cost and usage metrics. The following values are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BlendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetAmortizedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NetUnblendedCost</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UsageQuantity</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>NormalizedUsageAmount</code>\n               </p>\n            </li>\n         </ul>\n         <p>Supported values for <code>SortOrder</code> are <code>ASCENDING</code> or <code>DESCENDING</code>.</p>\n         <p>When using <code>SortBy</code>, <code>NextPageToken</code> and <code>SearchString</code> are not supported.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter.</p>\n\t        <p>For <code>GetTags</code>, MaxResults has an upper limit of 1000.</p>"
                     }
                 },
                 "NextPageToken": {
@@ -3320,7 +3539,7 @@
                 "Filter": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.</p>"
+                        "smithy.api#documentation": "<p>The filters that you want to use to filter your forecast. The <code>GetUsageForecast</code> API supports filtering by the following dimensions:</p>\n\t\t    \n\t        <ul>\n            <li>\n               <p>\n                  <code>AZ</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LINKED_ACCOUNT_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PURCHASE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>REGION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SERVICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>USAGE_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>USAGE_TYPE_GROUP</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RECORD_TYPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OPERATING_SYSTEM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>TENANCY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SCOPE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PLATFORM</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUBSCRIPTION_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LEGAL_ENTITY_NAME</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPLOYMENT_OPTION</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DATABASE_ENGINE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INSTANCE_TYPE_FAMILY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>BILLING_ENTITY</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>RESERVATION_ID</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>SAVINGS_PLAN_ARN</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "PredictionIntervalLevel": {
@@ -3629,6 +3848,10 @@
                     {
                         "value": "EQUALS",
                         "name": "EQUALS"
+                    },
+                    {
+                        "value": "ABSENT",
+                        "name": "ABSENT"
                     },
                     {
                         "value": "STARTS_WITH",
@@ -4050,6 +4273,12 @@
                 "smithy.api#documentation": "<p>Details about the Amazon RDS instances that AWS recommends that you\n            purchase.</p>"
             }
         },
+        "com.amazonaws.costexplorer#RICostForUnusedHours": {
+            "type": "string"
+        },
+        "com.amazonaws.costexplorer#RealizedSavings": {
+            "type": "string"
+        },
         "com.amazonaws.costexplorer#RecommendationTarget": {
             "type": "string",
             "traits": {
@@ -4200,6 +4429,24 @@
                     "target": "com.amazonaws.costexplorer#TotalAmortizedFee",
                     "traits": {
                         "smithy.api#documentation": "<p>The total cost of your reservation, amortized over the reservation\n            period.</p>"
+                    }
+                },
+                "RICostForUnusedHours": {
+                    "target": "com.amazonaws.costexplorer#RICostForUnusedHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cost of unused hours for your reservation.</p>"
+                    }
+                },
+                "RealizedSavings": {
+                    "target": "com.amazonaws.costexplorer#RealizedSavings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The realized savings due to purchasing and using a reservation.</p>"
+                    }
+                },
+                "UnrealizedSavings": {
+                    "target": "com.amazonaws.costexplorer#UnrealizedSavings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unrealized savings due to purchasing and using a reservation.</p>"
                     }
                 }
             },
@@ -4865,6 +5112,35 @@
                 "target": "com.amazonaws.costexplorer#SavingsPlansCoverage"
             }
         },
+        "com.amazonaws.costexplorer#SavingsPlansDataType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ATTRIBUTES",
+                        "name": "ATTRIBUTES"
+                    },
+                    {
+                        "value": "UTILIZATION",
+                        "name": "UTILIZATION"
+                    },
+                    {
+                        "value": "AMORTIZED_COMMITMENT",
+                        "name": "AMORTIZED_COMMITMENT"
+                    },
+                    {
+                        "value": "SAVINGS",
+                        "name": "SAVINGS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.costexplorer#SavingsPlansDataTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#SavingsPlansDataType"
+            }
+        },
         "com.amazonaws.costexplorer#SavingsPlansDetails": {
             "type": "structure",
             "members": {
@@ -5350,6 +5626,58 @@
                 "smithy.api#documentation": "<p>Hardware specifications for the service that you want recommendations\n            for.</p>"
             }
         },
+        "com.amazonaws.costexplorer#SortDefinition": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.costexplorer#SortDefinitionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key by which to sort the data.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SortOrder": {
+                    "target": "com.amazonaws.costexplorer#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order in which to sort the data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of how to sort the data.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#SortDefinitionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "[\\S\\s]*"
+            }
+        },
+        "com.amazonaws.costexplorer#SortDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#SortDefinition"
+            }
+        },
+        "com.amazonaws.costexplorer#SortOrder": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASCENDING",
+                        "name": "ASCENDING"
+                    },
+                    {
+                        "value": "DESCENDING",
+                        "name": "DESCENDING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.costexplorer#Subscriber": {
             "type": "structure",
             "members": {
@@ -5476,7 +5804,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The values that are available for a tag.</p>"
+                "smithy.api#documentation": "<p>The values that are available for a tag.</p>\n\t\t       <p>If <code>Values</code> and <code>Key</code> are not specified, the <code>ABSENT</code> \n            <code>MatchOption</code> is applied to all tags. That is, filtering on resources with no tags.</p>\n         <p>If <code>Values</code> is provided and <code>Key</code> is not specified, the <code>ABSENT</code> \n            <code>MatchOption</code> is applied to the tag <code>Key</code> only. That is, filtering on resources without the given tag key.</p>"
             }
         },
         "com.amazonaws.costexplorer#TagValuesList": {
@@ -5641,6 +5969,9 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
+        },
+        "com.amazonaws.costexplorer#UnrealizedSavings": {
+            "type": "string"
         },
         "com.amazonaws.costexplorer#UnresolvableUsageUnitException": {
             "type": "structure",

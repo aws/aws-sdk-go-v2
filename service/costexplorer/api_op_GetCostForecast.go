@@ -63,8 +63,59 @@ type GetCostForecastInput struct {
 	// This member is required.
 	TimePeriod *types.DateInterval
 
-	// The filters that you want to use to filter your forecast. Cost Explorer API
-	// supports all of the Cost Explorer filters.
+	// The filters that you want to use to filter your forecast. The GetCostForecast
+	// API supports filtering by the following dimensions:
+	//
+	// * AZ
+	//
+	// * INSTANCE_TYPE
+	//
+	// *
+	// LINKED_ACCOUNT
+	//
+	// * LINKED_ACCOUNT_NAME
+	//
+	// * OPERATION
+	//
+	// * PURCHASE_TYPE
+	//
+	// * REGION
+	//
+	// *
+	// SERVICE
+	//
+	// * USAGE_TYPE
+	//
+	// * USAGE_TYPE_GROUP
+	//
+	// * RECORD_TYPE
+	//
+	// * OPERATING_SYSTEM
+	//
+	// *
+	// TENANCY
+	//
+	// * SCOPE
+	//
+	// * PLATFORM
+	//
+	// * SUBSCRIPTION_ID
+	//
+	// * LEGAL_ENTITY_NAME
+	//
+	// *
+	// DEPLOYMENT_OPTION
+	//
+	// * DATABASE_ENGINE
+	//
+	// * INSTANCE_TYPE_FAMILY
+	//
+	// *
+	// BILLING_ENTITY
+	//
+	// * RESERVATION_ID
+	//
+	// * SAVINGS_PLAN_ARN
 	Filter *types.Expression
 
 	// Cost Explorer always returns the mean forecast as a single point. You can

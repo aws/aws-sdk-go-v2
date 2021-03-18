@@ -51,6 +51,12 @@ type DescribeAccountHealthOutput struct {
 	// This member is required.
 	OpenReactiveInsights int32
 
+	// The number of Amazon DevOps Guru resource analysis hours billed to the current
+	// AWS account in the last hour.
+	//
+	// This member is required.
+	ResourceHours *int64
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

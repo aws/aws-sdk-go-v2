@@ -7472,6 +7472,11 @@ func awsRestjson1_deserializeDocumentFunctionConfiguration(v **types.FunctionCon
 				sv.ResponseMappingTemplate = ptr.String(jtv)
 			}
 
+		case "syncConfig":
+			if err := awsRestjson1_deserializeDocumentSyncConfig(&sv.SyncConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

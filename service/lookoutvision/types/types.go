@@ -176,7 +176,8 @@ type ModelMetadata struct {
 	// The version of the model.
 	ModelVersion *string
 
-	// Performance metrics for the model. Created during training.
+	// Performance metrics for the model. Not available until training has successfully
+	// completed.
 	Performance *ModelPerformance
 
 	// The status of the model.
@@ -252,14 +253,29 @@ type ProjectMetadata struct {
 	ProjectName *string
 }
 
-// Information about the location of a manifest file.
+// Information about the location training output.
 type S3Location struct {
 
-	// The S3 bucket that contain the manifest file.
+	// The S3 bucket that contains the training output.
 	//
 	// This member is required.
 	Bucket *string
 
-	// The path and name of the manifest file with the S3 bucket.
+	// The path of the folder, within the S3 bucket, that contains the training output.
 	Prefix *string
+}
+
+// A key and value pair that is attached to the specified Amazon Lookout for Vision
+// model.
+type Tag struct {
+
+	// The key of the tag that is attached to the specified model.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the tag that is attached to the specified model.
+	//
+	// This member is required.
+	Value *string
 }

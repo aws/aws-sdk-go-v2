@@ -11,10 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Auto Scaling group with the specified name and attributes. If you
-// exceed your maximum limit of Auto Scaling groups, the call fails. To query this
-// limit, call the DescribeAccountLimits API. For information about updating this
-// limit, see Amazon EC2 Auto Scaling service quotas
+// We strongly recommend using a launch template when calling this operation to
+// ensure full functionality for Amazon EC2 Auto Scaling and Amazon EC2. Creates an
+// Auto Scaling group with the specified name and attributes. If you exceed your
+// maximum limit of Auto Scaling groups, the call fails. To query this limit, call
+// the DescribeAccountLimits API. For information about updating this limit, see
+// Amazon EC2 Auto Scaling service quotas
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
 // in the Amazon EC2 Auto Scaling User Guide. For introductory exercises for
 // creating an Auto Scaling group, see Getting started with Amazon EC2 Auto Scaling
@@ -134,13 +136,12 @@ type CreateAutoScalingGroupInput struct {
 	// InstanceId).
 	LaunchConfigurationName *string
 
-	// Parameters used to specify the launch template
-	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-ec2-launchtemplate.html)
-	// and version to use to launch instances. Conditional: You must specify either a
-	// launch template (LaunchTemplate or MixedInstancesPolicy) or a launch
-	// configuration (LaunchConfigurationName or InstanceId). The launch template that
-	// is specified must be configured for use with an Auto Scaling group. For more
-	// information, see Creating a launch template for an Auto Scaling group
+	// Parameters used to specify the launch template and version to use to launch
+	// instances. Conditional: You must specify either a launch template
+	// (LaunchTemplate or MixedInstancesPolicy) or a launch configuration
+	// (LaunchConfigurationName or InstanceId). The launch template that is specified
+	// must be configured for use with an Auto Scaling group. For more information, see
+	// Creating a launch template for an Auto Scaling group
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	LaunchTemplate *types.LaunchTemplateSpecification
@@ -163,11 +164,11 @@ type CreateAutoScalingGroupInput struct {
 	MaxInstanceLifetime *int32
 
 	// An embedded object that specifies a mixed instances policy. The required
-	// parameters must be specified. If optional parameters are unspecified, their
-	// default values are used. The policy includes parameters that not only define the
+	// properties must be specified. If optional properties are unspecified, their
+	// default values are used. The policy includes properties that not only define the
 	// distribution of On-Demand Instances and Spot Instances, the maximum price to pay
 	// for Spot Instances, and how the Auto Scaling group allocates instance types to
-	// fulfill On-Demand and Spot capacities, but also the parameters that specify the
+	// fulfill On-Demand and Spot capacities, but also the properties that specify the
 	// instance configuration information—the launch template and instance types. The
 	// policy can also include a weight for each instance type and different launch
 	// templates for individual instance types. For more information, see Auto Scaling

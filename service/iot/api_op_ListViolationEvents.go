@@ -43,6 +43,12 @@ type ListViolationEventsInput struct {
 	// This member is required.
 	StartTime *time.Time
 
+	// The criteria for a behavior.
+	BehaviorCriteriaType types.BehaviorCriteriaType
+
+	// A list of all suppressed alerts.
+	ListSuppressedAlerts *bool
+
 	// The maximum number of results to return at one time.
 	MaxResults *int32
 

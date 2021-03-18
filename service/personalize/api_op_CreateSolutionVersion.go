@@ -68,7 +68,11 @@ type CreateSolutionVersionInput struct {
 	// incrementally update your solution version instead of creating an entirely new
 	// one. The UPDATE option can only be used when you already have an active solution
 	// version created from the input solution using the FULL option and the input
-	// solution was trained with the native-recipe-hrnn-coldstart recipe.
+	// solution was trained with the User-Personalization
+	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
+	// recipe or the HRNN-Coldstart
+	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
+	// recipe.
 	TrainingMode types.TrainingMode
 }
 

@@ -11,8 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the password policy for the AWS account. For more information about
-// using a password policy, go to Managing an IAM Password Policy
+// Retrieves the password policy for the AWS account. This tells you the complexity
+// requirements and mandatory rotation periods for the IAM user passwords in your
+// account. For more information about using a password policy, see Managing an IAM
+// password policy
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html).
 func (c *Client) GetAccountPasswordPolicy(ctx context.Context, params *GetAccountPasswordPolicyInput, optFns ...func(*Options)) (*GetAccountPasswordPolicyOutput, error) {
 	if params == nil {

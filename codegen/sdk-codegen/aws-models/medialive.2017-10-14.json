@@ -521,6 +521,20 @@
                 "smithy.api#documentation": "Ancillary Source Settings"
             }
         },
+        "com.amazonaws.medialive#ArchiveCdnSettings": {
+            "type": "structure",
+            "members": {
+                "ArchiveS3Settings": {
+                    "target": "com.amazonaws.medialive#ArchiveS3Settings",
+                    "traits": {
+                        "smithy.api#jsonName": "archiveS3Settings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Archive Cdn Settings"
+            }
+        },
         "com.amazonaws.medialive#ArchiveContainerSettings": {
             "type": "structure",
             "members": {
@@ -544,6 +558,13 @@
         "com.amazonaws.medialive#ArchiveGroupSettings": {
             "type": "structure",
             "members": {
+                "ArchiveCdnSettings": {
+                    "target": "com.amazonaws.medialive#ArchiveCdnSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Parameters that control interactions with the CDN.",
+                        "smithy.api#jsonName": "archiveCdnSettings"
+                    }
+                },
                 "Destination": {
                     "target": "com.amazonaws.medialive#OutputLocationRef",
                     "traits": {
@@ -592,6 +613,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "Archive Output Settings"
+            }
+        },
+        "com.amazonaws.medialive#ArchiveS3Settings": {
+            "type": "structure",
+            "members": {
+                "CannedAcl": {
+                    "target": "com.amazonaws.medialive#S3CannedAcl",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the canned ACL to apply to each S3 request. Defaults to none.",
+                        "smithy.api#jsonName": "cannedAcl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Archive S3 Settings"
             }
         },
         "com.amazonaws.medialive#AribDestinationSettings": {
@@ -2335,6 +2371,46 @@
                 "smithy.api#documentation": "Maps a caption channel to an ISO 693-2 language code (http://www.loc.gov/standards/iso639-2), with an optional description."
             }
         },
+        "com.amazonaws.medialive#CaptionRectangle": {
+            "type": "structure",
+            "members": {
+                "Height": {
+                    "target": "com.amazonaws.medialive#__doubleMin0Max100",
+                    "traits": {
+                        "smithy.api#documentation": "See the description in leftOffset.\nFor height, specify the entire height of the rectangle as a percentage of the underlying frame height. For example, \\\"80\\\" means the rectangle height is 80% of the underlying frame height. The topOffset and rectangleHeight must add up to 100% or less.\nThis field corresponds to tts:extent - Y in the TTML standard.",
+                        "smithy.api#jsonName": "height",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LeftOffset": {
+                    "target": "com.amazonaws.medialive#__doubleMin0Max100",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. (Make sure to leave the default if you don't have either of these formats in the output.) You can define a display rectangle for the captions that is smaller than the underlying video frame. You define the rectangle by specifying the position of the left edge, top edge, bottom edge, and right edge of the rectangle, all within the underlying video frame. The units for the measurements are percentages.\nIf you specify a value for one of these fields, you must specify a value for all of them.\nFor leftOffset, specify the position of the left edge of the rectangle, as a percentage of the underlying frame width, and relative to the left edge of the frame. For example, \\\"10\\\" means the measurement is 10% of the underlying frame width. The rectangle left edge starts at that position from the left edge of the frame.\nThis field corresponds to tts:origin - X in the TTML standard.",
+                        "smithy.api#jsonName": "leftOffset",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TopOffset": {
+                    "target": "com.amazonaws.medialive#__doubleMin0Max100",
+                    "traits": {
+                        "smithy.api#documentation": "See the description in leftOffset.\nFor topOffset, specify the position of the top edge of the rectangle, as a percentage of the underlying frame height, and relative to the top edge of the frame. For example, \\\"10\\\" means the measurement is 10% of the underlying frame height. The rectangle top edge starts at that position from the top edge of the frame.\nThis field corresponds to tts:origin - Y in the TTML standard.",
+                        "smithy.api#jsonName": "topOffset",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.medialive#__doubleMin0Max100",
+                    "traits": {
+                        "smithy.api#documentation": "See the description in leftOffset.\nFor width, specify the entire width of the rectangle as a percentage of the underlying frame width. For example, \\\"80\\\" means the rectangle width is 80% of the underlying frame width. The leftOffset and rectangleWidth must add up to 100% or less.\nThis field corresponds to tts:extent - X in the TTML standard.",
+                        "smithy.api#jsonName": "width",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Caption Rectangle"
+            }
+        },
         "com.amazonaws.medialive#CaptionSelector": {
             "type": "structure",
             "members": {
@@ -2566,6 +2642,13 @@
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "Vpc": {
+                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#jsonName": "vpc"
+                    }
                 }
             },
             "traits": {
@@ -2754,6 +2837,13 @@
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "Vpc": {
+                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#jsonName": "vpc"
+                    }
                 }
             },
             "traits": {
@@ -2923,6 +3013,13 @@
                     "traits": {
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Vpc": {
+                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#jsonName": "vpc"
                     }
                 }
             },
@@ -3357,6 +3454,88 @@
                 "smithy.api#documentation": "Placeholder documentation for CreateMultiplexResponse"
             }
         },
+        "com.amazonaws.medialive#CreatePartnerInput": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.medialive#CreatePartnerInputRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.medialive#CreatePartnerInputResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.medialive#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#GatewayTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.medialive#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Create a partner input",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/prod/inputs/{InputId}/partners",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.medialive#CreatePartnerInputRequest": {
+            "type": "structure",
+            "members": {
+                "InputId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Unique ID of the input.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Unique identifier of the request to ensure the request is handled\nexactly once in case of retries.",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "requestId"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.medialive#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A collection of key-value pairs.",
+                        "smithy.api#jsonName": "tags"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A request to create a partner input"
+            }
+        },
+        "com.amazonaws.medialive#CreatePartnerInputResponse": {
+            "type": "structure",
+            "members": {
+                "Input": {
+                    "target": "com.amazonaws.medialive#Input",
+                    "traits": {
+                        "smithy.api#jsonName": "input"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for CreatePartnerInputResponse"
+            }
+        },
         "com.amazonaws.medialive#CreateTags": {
             "type": "operation",
             "input": {
@@ -3576,6 +3755,13 @@
                     "traits": {
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "Vpc": {
+                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#jsonName": "vpc"
                     }
                 }
             },
@@ -4574,6 +4760,13 @@
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "Vpc": {
+                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#jsonName": "vpc"
+                    }
                 }
             },
             "traits": {
@@ -5043,6 +5236,13 @@
                     "traits": {
                         "smithy.api#documentation": "Settings for the input devices.",
                         "smithy.api#jsonName": "inputDevices"
+                    }
+                },
+                "InputPartnerIds": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "A list of IDs for all Inputs which are partners of this one.",
+                        "smithy.api#jsonName": "inputPartnerIds"
                     }
                 },
                 "InputSourceType": {
@@ -6884,6 +7084,13 @@
         "com.amazonaws.medialive#EbuTtDDestinationSettings": {
             "type": "structure",
             "members": {
+                "CopyrightHolder": {
+                    "target": "com.amazonaws.medialive#__stringMax1000",
+                    "traits": {
+                        "smithy.api#documentation": "Applies only if you plan to convert these source captions to EBU-TT-D or TTML in an output. Complete this field if you want to include the name of the copyright holder in the copyright metadata tag in the TTML",
+                        "smithy.api#jsonName": "copyrightHolder"
+                    }
+                },
                 "FillLineGap": {
                     "target": "com.amazonaws.medialive#EbuTtDFillLineGapControl",
                     "traits": {
@@ -7415,6 +7622,20 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.medialive#FrameCaptureCdnSettings": {
+            "type": "structure",
+            "members": {
+                "FrameCaptureS3Settings": {
+                    "target": "com.amazonaws.medialive#FrameCaptureS3Settings",
+                    "traits": {
+                        "smithy.api#jsonName": "frameCaptureS3Settings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Frame Capture Cdn Settings"
+            }
+        },
         "com.amazonaws.medialive#FrameCaptureGroupSettings": {
             "type": "structure",
             "members": {
@@ -7425,10 +7646,24 @@
                         "smithy.api#jsonName": "destination",
                         "smithy.api#required": {}
                     }
+                },
+                "FrameCaptureCdnSettings": {
+                    "target": "com.amazonaws.medialive#FrameCaptureCdnSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Parameters that control interactions with the CDN.",
+                        "smithy.api#jsonName": "frameCaptureCdnSettings"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Frame Capture Group Settings"
+            }
+        },
+        "com.amazonaws.medialive#FrameCaptureHlsSettings": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Frame Capture Hls Settings"
             }
         },
         "com.amazonaws.medialive#FrameCaptureIntervalUnit": {
@@ -7462,6 +7697,21 @@
                 "smithy.api#documentation": "Frame Capture Output Settings"
             }
         },
+        "com.amazonaws.medialive#FrameCaptureS3Settings": {
+            "type": "structure",
+            "members": {
+                "CannedAcl": {
+                    "target": "com.amazonaws.medialive#S3CannedAcl",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the canned ACL to apply to each S3 request. Defaults to none.",
+                        "smithy.api#jsonName": "cannedAcl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Frame Capture S3 Settings"
+            }
+        },
         "com.amazonaws.medialive#FrameCaptureSettings": {
             "type": "structure",
             "members": {
@@ -7469,8 +7719,7 @@
                     "target": "com.amazonaws.medialive#__integerMin1Max3600000",
                     "traits": {
                         "smithy.api#documentation": "The frequency at which to capture frames for inclusion in the output. May be specified in either seconds or milliseconds, as specified by captureIntervalUnits.",
-                        "smithy.api#jsonName": "captureInterval",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "captureInterval"
                     }
                 },
                 "CaptureIntervalUnits": {
@@ -8266,7 +8515,7 @@
                 "Softness": {
                     "target": "com.amazonaws.medialive#__integerMin0Max128",
                     "traits": {
-                        "smithy.api#documentation": "Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.",
+                        "smithy.api#documentation": "Softness. Selects quantizer matrix, larger values reduce high-frequency content in the encoded image.  If not set to zero, must be greater than 15.",
                         "smithy.api#jsonName": "softness"
                     }
                 },
@@ -9121,6 +9370,12 @@
                         "smithy.api#jsonName": "hlsMediaStoreSettings"
                     }
                 },
+                "HlsS3Settings": {
+                    "target": "com.amazonaws.medialive#HlsS3Settings",
+                    "traits": {
+                        "smithy.api#jsonName": "hlsS3Settings"
+                    }
+                },
                 "HlsWebdavSettings": {
                     "target": "com.amazonaws.medialive#HlsWebdavSettings",
                     "traits": {
@@ -9839,6 +10094,21 @@
                 ]
             }
         },
+        "com.amazonaws.medialive#HlsS3Settings": {
+            "type": "structure",
+            "members": {
+                "CannedAcl": {
+                    "target": "com.amazonaws.medialive#S3CannedAcl",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the canned ACL to apply to each S3 request. Defaults to none.",
+                        "smithy.api#jsonName": "cannedAcl"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Hls S3 Settings"
+            }
+        },
         "com.amazonaws.medialive#HlsSegmentationMode": {
             "type": "string",
             "traits": {
@@ -9868,6 +10138,12 @@
                     "target": "com.amazonaws.medialive#Fmp4HlsSettings",
                     "traits": {
                         "smithy.api#jsonName": "fmp4HlsSettings"
+                    }
+                },
+                "FrameCaptureHlsSettings": {
+                    "target": "com.amazonaws.medialive#FrameCaptureHlsSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "frameCaptureHlsSettings"
                     }
                 },
                 "StandardHlsSettings": {
@@ -10074,6 +10350,13 @@
                     "traits": {
                         "smithy.api#documentation": "Settings for the input devices.",
                         "smithy.api#jsonName": "inputDevices"
+                    }
+                },
+                "InputPartnerIds": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "A list of IDs for all Inputs which are partners of this one.",
+                        "smithy.api#jsonName": "inputPartnerIds"
                     }
                 },
                 "InputSourceType": {
@@ -13512,6 +13795,9 @@
                     "target": "com.amazonaws.medialive#CreateMultiplexProgram"
                 },
                 {
+                    "target": "com.amazonaws.medialive#CreatePartnerInput"
+                },
+                {
                     "target": "com.amazonaws.medialive#CreateTags"
                 },
                 {
@@ -16145,6 +16431,30 @@
                 "smithy.api#documentation": "Rtmp Output Settings"
             }
         },
+        "com.amazonaws.medialive#S3CannedAcl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "S3 Canned Acl",
+                "smithy.api#enum": [
+                    {
+                        "value": "AUTHENTICATED_READ",
+                        "name": "AUTHENTICATED_READ"
+                    },
+                    {
+                        "value": "BUCKET_OWNER_FULL_CONTROL",
+                        "name": "BUCKET_OWNER_FULL_CONTROL"
+                    },
+                    {
+                        "value": "BUCKET_OWNER_READ",
+                        "name": "BUCKET_OWNER_READ"
+                    },
+                    {
+                        "value": "PUBLIC_READ",
+                        "name": "PUBLIC_READ"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.medialive#ScheduleAction": {
             "type": "structure",
             "members": {
@@ -17127,6 +17437,13 @@
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "Vpc": {
+                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#jsonName": "vpc"
+                    }
                 }
             },
             "traits": {
@@ -17580,6 +17897,13 @@
                         "smithy.api#documentation": "A collection of key-value pairs.",
                         "smithy.api#jsonName": "tags"
                     }
+                },
+                "Vpc": {
+                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for VPC output",
+                        "smithy.api#jsonName": "vpc"
+                    }
                 }
             },
             "traits": {
@@ -17767,6 +18091,13 @@
         "com.amazonaws.medialive#TeletextSourceSettings": {
             "type": "structure",
             "members": {
+                "OutputRectangle": {
+                    "target": "com.amazonaws.medialive#CaptionRectangle",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally defines a region where TTML style captions will be displayed",
+                        "smithy.api#jsonName": "outputRectangle"
+                    }
+                },
                 "PageNumber": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
@@ -18018,6 +18349,13 @@
                     "traits": {
                         "smithy.api#documentation": "The AWS account ID (12 digits) for the recipient of the device transfer.",
                         "smithy.api#jsonName": "targetCustomerId"
+                    }
+                },
+                "TargetRegion": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The target AWS region to transfer the device.",
+                        "smithy.api#jsonName": "targetRegion"
                     }
                 },
                 "TransferMessage": {
@@ -19363,6 +19701,36 @@
                 "smithy.api#documentation": "Video Selector Settings"
             }
         },
+        "com.amazonaws.medialive#VpcOutputSettings": {
+            "type": "structure",
+            "members": {
+                "PublicAddressAllocationIds": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "List of public address allocation ids to associate with ENIs that will be created in Output VPC.\nMust specify one for SINGLE_PIPELINE, two for STANDARD channels",
+                        "smithy.api#jsonName": "publicAddressAllocationIds"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network interfaces.\nIf none are specified then the VPC default security group will be used",
+                        "smithy.api#jsonName": "securityGroupIds"
+                    }
+                },
+                "SubnetIds": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "A list of VPC subnet IDs from the same VPC.\nIf STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).",
+                        "smithy.api#jsonName": "subnetIds",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The properties for a private VPC Output\nWhen this property is specified, the output egress addresses will be created in a user specified VPC"
+            }
+        },
         "com.amazonaws.medialive#WavCodingMode": {
             "type": "string",
             "traits": {
@@ -19439,6 +19807,12 @@
             "type": "double",
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __doubleMin0Max1"
+            }
+        },
+        "com.amazonaws.medialive#__doubleMin0Max100": {
+            "type": "double",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __doubleMin0Max100"
             }
         },
         "com.amazonaws.medialive#__doubleMin1": {
@@ -20434,6 +20808,16 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __string"
+            }
+        },
+        "com.amazonaws.medialive#__stringMax1000": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __stringMax1000",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
             }
         },
         "com.amazonaws.medialive#__stringMax256": {

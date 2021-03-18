@@ -3310,6 +3310,16 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.String(*v.SecretsManagerAccessRoleArn)
 	}
 
+	if v.SecretsManagerOracleAsmAccessRoleArn != nil {
+		ok := object.Key("SecretsManagerOracleAsmAccessRoleArn")
+		ok.String(*v.SecretsManagerOracleAsmAccessRoleArn)
+	}
+
+	if v.SecretsManagerOracleAsmSecretId != nil {
+		ok := object.Key("SecretsManagerOracleAsmSecretId")
+		ok.String(*v.SecretsManagerOracleAsmSecretId)
+	}
+
 	if v.SecretsManagerSecretId != nil {
 		ok := object.Key("SecretsManagerSecretId")
 		ok.String(*v.SecretsManagerSecretId)

@@ -1309,6 +1309,15 @@ func awsRestjson1_deserializeDocumentCreateRule(v **types.CreateRule, value inte
 				sv.IntervalUnit = types.IntervalUnitValues(jtv)
 			}
 
+		case "Location":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LocationValues to be of type string, got %T instead", value)
+				}
+				sv.Location = types.LocationValues(jtv)
+			}
+
 		case "Times":
 			if err := awsRestjson1_deserializeDocumentTimesList(&sv.Times, value); err != nil {
 				return err
@@ -1497,7 +1506,7 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				if !ok {
 					return fmt.Errorf("expected CopyTagsNullable to be of type *bool, got %T instead", value)
 				}
-				sv.CopyTags = jtv
+				sv.CopyTags = ptr.Bool(jtv)
 			}
 
 		case "Encrypted":
@@ -1506,12 +1515,21 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				if !ok {
 					return fmt.Errorf("expected Encrypted to be of type *bool, got %T instead", value)
 				}
-				sv.Encrypted = jtv
+				sv.Encrypted = ptr.Bool(jtv)
 			}
 
 		case "RetainRule":
 			if err := awsRestjson1_deserializeDocumentCrossRegionCopyRetainRule(&sv.RetainRule, value); err != nil {
 				return err
+			}
+
+		case "Target":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Target to be of type string, got %T instead", value)
+				}
+				sv.Target = ptr.String(jtv)
 			}
 
 		case "TargetRegion":
@@ -1603,7 +1621,7 @@ func awsRestjson1_deserializeDocumentEncryptionConfiguration(v **types.Encryptio
 				if !ok {
 					return fmt.Errorf("expected Encrypted to be of type *bool, got %T instead", value)
 				}
-				sv.Encrypted = jtv
+				sv.Encrypted = ptr.Bool(jtv)
 			}
 
 		default:
@@ -1917,28 +1935,28 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 		switch key {
 		case "DateCreated":
 			if value != nil {
-				jtv, ok := value.(string)
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
-				t, err := smithytime.ParseDateTime(jtv)
+				f64, err := jtv.Float64()
 				if err != nil {
 					return err
 				}
-				sv.DateCreated = ptr.Time(t)
+				sv.DateCreated = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "DateModified":
 			if value != nil {
-				jtv, ok := value.(string)
+				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+					return fmt.Errorf("expected Timestamp to be json.Number, got %T instead", value)
 				}
-				t, err := smithytime.ParseDateTime(jtv)
+				f64, err := jtv.Float64()
 				if err != nil {
 					return err
 				}
-				sv.DateModified = ptr.Time(t)
+				sv.DateModified = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "Description":
@@ -2242,7 +2260,7 @@ func awsRestjson1_deserializeDocumentParameters(v **types.Parameters, value inte
 				if !ok {
 					return fmt.Errorf("expected ExcludeBootVolume to be of type *bool, got %T instead", value)
 				}
-				sv.ExcludeBootVolume = jtv
+				sv.ExcludeBootVolume = ptr.Bool(jtv)
 			}
 
 		case "NoReboot":
@@ -2251,7 +2269,7 @@ func awsRestjson1_deserializeDocumentParameters(v **types.Parameters, value inte
 				if !ok {
 					return fmt.Errorf("expected NoReboot to be of type *bool, got %T instead", value)
 				}
-				sv.NoReboot = jtv
+				sv.NoReboot = ptr.Bool(jtv)
 			}
 
 		default:
@@ -2309,6 +2327,11 @@ func awsRestjson1_deserializeDocumentPolicyDetails(v **types.PolicyDetails, valu
 				sv.PolicyType = types.PolicyTypeValues(jtv)
 			}
 
+		case "ResourceLocations":
+			if err := awsRestjson1_deserializeDocumentResourceLocationList(&sv.ResourceLocations, value); err != nil {
+				return err
+			}
+
 		case "ResourceTypes":
 			if err := awsRestjson1_deserializeDocumentResourceTypeValuesList(&sv.ResourceTypes, value); err != nil {
 				return err
@@ -2361,6 +2384,42 @@ func awsRestjson1_deserializeDocumentPolicyIdList(v *[]string, value interface{}
 				return fmt.Errorf("expected PolicyId to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceLocationList(v *[]types.ResourceLocationValues, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceLocationValues
+	if *v == nil {
+		cv = []types.ResourceLocationValues{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceLocationValues
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ResourceLocationValues to be of type string, got %T instead", value)
+			}
+			col = types.ResourceLocationValues(jtv)
 		}
 		cv = append(cv, col)
 

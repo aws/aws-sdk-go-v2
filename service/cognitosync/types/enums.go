@@ -26,12 +26,6 @@ func (BulkPublishStatus) Values() []BulkPublishStatus {
 
 type Operation string
 
-// Enum values for Operation
-const (
-	OperationReplace Operation = "replace"
-	OperationRemove  Operation = "remove"
-)
-
 // Values returns all known values for Operation. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
 // slice is not guaranteed to be stable across updates.
@@ -43,14 +37,6 @@ func (Operation) Values() []Operation {
 }
 
 type Platform string
-
-// Enum values for Platform
-const (
-	PlatformApns        Platform = "APNS"
-	PlatformApnsSandbox Platform = "APNS_SANDBOX"
-	PlatformGcm         Platform = "GCM"
-	PlatformAdm         Platform = "ADM"
-)
 
 // Values returns all known values for Platform. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -65,12 +51,6 @@ func (Platform) Values() []Platform {
 }
 
 type StreamingStatus string
-
-// Enum values for StreamingStatus
-const (
-	StreamingStatusEnabled  StreamingStatus = "ENABLED"
-	StreamingStatusDisabled StreamingStatus = "DISABLED"
-)
 
 // Values returns all known values for StreamingStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The

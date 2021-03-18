@@ -2,6 +2,26 @@
 
 package types
 
+type BodyParsingFallbackBehavior string
+
+// Enum values for BodyParsingFallbackBehavior
+const (
+	BodyParsingFallbackBehaviorMatch            BodyParsingFallbackBehavior = "MATCH"
+	BodyParsingFallbackBehaviorNoMatch          BodyParsingFallbackBehavior = "NO_MATCH"
+	BodyParsingFallbackBehaviorEvaluateAsString BodyParsingFallbackBehavior = "EVALUATE_AS_STRING"
+)
+
+// Values returns all known values for BodyParsingFallbackBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BodyParsingFallbackBehavior) Values() []BodyParsingFallbackBehavior {
+	return []BodyParsingFallbackBehavior{
+		"MATCH",
+		"NO_MATCH",
+		"EVALUATE_AS_STRING",
+	}
+}
+
 type ComparisonOperator string
 
 // Enum values for ComparisonOperator
@@ -596,6 +616,26 @@ func (IPAddressVersion) Values() []IPAddressVersion {
 	}
 }
 
+type JsonMatchScope string
+
+// Enum values for JsonMatchScope
+const (
+	JsonMatchScopeAll   JsonMatchScope = "ALL"
+	JsonMatchScopeKey   JsonMatchScope = "KEY"
+	JsonMatchScopeValue JsonMatchScope = "VALUE"
+)
+
+// Values returns all known values for JsonMatchScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (JsonMatchScope) Values() []JsonMatchScope {
+	return []JsonMatchScope{
+		"ALL",
+		"KEY",
+		"VALUE",
+	}
+}
+
 type ParameterExceptionField string
 
 // Enum values for ParameterExceptionField
@@ -643,6 +683,9 @@ const (
 	ParameterExceptionFieldForwardedIpConfig              ParameterExceptionField = "FORWARDED_IP_CONFIG"
 	ParameterExceptionFieldIpSetForwardedIpConfig         ParameterExceptionField = "IP_SET_FORWARDED_IP_CONFIG"
 	ParameterExceptionFieldHeaderName                     ParameterExceptionField = "HEADER_NAME"
+	ParameterExceptionFieldJsonMatchPattern               ParameterExceptionField = "JSON_MATCH_PATTERN"
+	ParameterExceptionFieldJsonMatchScope                 ParameterExceptionField = "JSON_MATCH_SCOPE"
+	ParameterExceptionFieldBodyParsingFallbackBehavior    ParameterExceptionField = "BODY_PARSING_FALLBACK_BEHAVIOR"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -693,6 +736,9 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"FORWARDED_IP_CONFIG",
 		"IP_SET_FORWARDED_IP_CONFIG",
 		"HEADER_NAME",
+		"JSON_MATCH_PATTERN",
+		"JSON_MATCH_SCOPE",
+		"BODY_PARSING_FALLBACK_BEHAVIOR",
 	}
 }
 

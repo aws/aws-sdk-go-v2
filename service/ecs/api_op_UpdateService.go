@@ -161,6 +161,11 @@ type UpdateServiceInput struct {
 	// service.
 	DesiredCount *int32
 
+	// If true, this enables execute command functionality on all task containers. If
+	// you do not want to override the value that was set when the service was created,
+	// you can set this to null when performing this action.
+	EnableExecuteCommand *bool
+
 	// Whether to force a new deployment of the service. Deployments are not forced by
 	// default. You can use this option to trigger a new deployment with no service
 	// definition changes. For example, you can update a service's tasks to use a newer

@@ -18,6 +18,100 @@ type AccountDetails struct {
 	Email *string
 }
 
+// Provides details about one of the following actions that affects or that was
+// taken on a resource:
+//
+// * A remote IP address issued an AWS API call
+//
+// * A DNS
+// request was received
+//
+// * A remote IP address attempted to connect to an EC2
+// instance
+//
+// * A remote IP address attempted a port probe on an EC2 instance
+type Action struct {
+
+	// The type of action that was detected. The possible action types are:
+	//
+	// *
+	// NETWORK_CONNECTION
+	//
+	// * AWS_API_CALL
+	//
+	// * DNS_REQUEST
+	//
+	// * PORT_PROBE
+	ActionType *string
+
+	// Included if ActionType is AWS_API_CALL. Provides details about the API call that
+	// was detected.
+	AwsApiCallAction *AwsApiCallAction
+
+	// Included if ActionType is DNS_REQUEST. Provides details about the DNS request
+	// that was detected.
+	DnsRequestAction *DnsRequestAction
+
+	// Included if ActionType is NETWORK_CONNECTION. Provides details about the network
+	// connection that was detected.
+	NetworkConnectionAction *NetworkConnectionAction
+
+	// Included if ActionType is PORT_PROBE. Provides details about the port probe that
+	// was detected.
+	PortProbeAction *PortProbeAction
+}
+
+// Provides information about the IP address where the scanned port is located.
+type ActionLocalIpDetails struct {
+
+	// The IP address.
+	IpAddressV4 *string
+}
+
+// For NetworkConnectionAction and PortProbeDetails, LocalPortDetails provides
+// information about the local port that was involved in the action.
+type ActionLocalPortDetails struct {
+
+	// The number of the port.
+	Port int32
+
+	// The port name of the local connection.
+	PortName *string
+}
+
+// For AwsApiAction, NetworkConnectionAction, and PortProbeAction, RemoteIpDetails
+// provides information about the remote IP address that was involved in the
+// action.
+type ActionRemoteIpDetails struct {
+
+	// The city where the remote IP address is located.
+	City *City
+
+	// The country where the remote IP address is located.
+	Country *Country
+
+	// The coordinates of the location of the remote IP address.
+	GeoLocation *GeoLocation
+
+	// The IP address.
+	IpAddressV4 *string
+
+	// The internet service provider (ISP) organization associated with the remote IP
+	// address.
+	Organization *IpOrganizationDetails
+}
+
+// Provides information about the remote port that was involved in an attempted
+// network connection.
+type ActionRemotePortDetails struct {
+
+	// The number of the port.
+	Port int32
+
+	// The port name of the remote connection.
+	PortName *string
+}
+
 // An ActionTarget object.
 type ActionTarget struct {
 
@@ -57,6 +151,48 @@ type AvailabilityZone struct {
 
 	// The name of the Availability Zone.
 	ZoneName *string
+}
+
+// Provided if ActionType is AWS_API_CALL. It provides details about the API call
+// that was detected.
+type AwsApiCallAction struct {
+
+	// Identifies the resources that were affected by the API call.
+	AffectedResources map[string]string
+
+	// The name of the API method that was issued.
+	Api *string
+
+	// Indicates whether the API call originated from a remote IP address (remoteip) or
+	// from a DNS domain (domain).
+	CallerType *string
+
+	// Provided if CallerType is domain. Provides information about the DNS domain that
+	// the API call originated from.
+	DomainDetails *AwsApiCallActionDomainDetails
+
+	// An ISO8601-formatted timestamp that indicates when the API call was first
+	// observed.
+	FirstSeen *string
+
+	// An ISO8601-formatted timestamp that indicates when the API call was most
+	// recently observed.
+	LastSeen *string
+
+	// Provided if CallerType is remoteIp. Provides information about the remote IP
+	// address that the API call originated from.
+	RemoteIpDetails *ActionRemoteIpDetails
+
+	// The name of the AWS service that the API method belongs to.
+	ServiceName *string
+}
+
+// Provided if CallerType is domain. It provides information about the DNS domain
+// that issued the API call.
+type AwsApiCallActionDomainDetails struct {
+
+	// The name of the DNS domain that issued the API call.
+	Domain *string
 }
 
 // Contains information about settings for logging access for the stage.
@@ -1413,14 +1549,45 @@ type AwsEc2NetworkInterfaceDetails struct {
 	// The network interface attachment.
 	Attachment *AwsEc2NetworkInterfaceAttachment
 
+	// The IPv6 addresses associated with the network interface.
+	IpV6Addresses []AwsEc2NetworkInterfaceIpV6AddressDetail
+
 	// The ID of the network interface.
 	NetworkInterfaceId *string
+
+	// The private IPv4 addresses associated with the network interface.
+	PrivateIpAddresses []AwsEc2NetworkInterfacePrivateIpAddressDetail
+
+	// The public DNS name of the network interface.
+	PublicDnsName *string
+
+	// The address of the Elastic IP address bound to the network interface.
+	PublicIp *string
 
 	// Security groups for the network interface.
 	SecurityGroups []AwsEc2NetworkInterfaceSecurityGroup
 
 	// Indicates whether traffic to or from the instance is validated.
 	SourceDestCheck bool
+}
+
+// Provides information about an IPV6 address that is associated with the network
+// interface.
+type AwsEc2NetworkInterfaceIpV6AddressDetail struct {
+
+	// The IPV6 address.
+	IpV6Address *string
+}
+
+// Provides information about a private IPv4 address that is with the network
+// interface.
+type AwsEc2NetworkInterfacePrivateIpAddressDetail struct {
+
+	// The private DNS name for the IP address.
+	PrivateDnsName *string
+
+	// The IP address.
+	PrivateIpAddress *string
 }
 
 // A security group associated with the network interface.
@@ -2701,7 +2868,7 @@ type AwsRdsDbClusterSnapshotDetails struct {
 	// The identifier of the DB cluster snapshot.
 	DbClusterSnapshotIdentifier *string
 
-	//
+	// The name of the database engine that you want to use for this DB instance.
 	Engine *string
 
 	// The version of the database engine to use.
@@ -3034,167 +3201,174 @@ type AwsRdsDbInstanceVpcSecurityGroup struct {
 	VpcSecurityGroupId *string
 }
 
-//
+// An option group membership.
 type AwsRdsDbOptionGroupMembership struct {
 
-	//
+	// The name of the option group.
 	OptionGroupName *string
 
-	//
+	// The status of the option group membership.
 	Status *string
 }
 
-//
+// Provides information about a parameter group for a DB instance.
 type AwsRdsDbParameterGroup struct {
 
-	//
+	// The name of the parameter group.
 	DbParameterGroupName *string
 
-	//
+	// The status of parameter updates.
 	ParameterApplyStatus *string
 }
 
-//
+// Changes to a DB instance that are currently pending.
 type AwsRdsDbPendingModifiedValues struct {
 
-	//
+	// The new value of the allocated storage for the DB instance.
 	AllocatedStorage int32
 
-	//
+	// The new backup retention period for the DB instance.
 	BackupRetentionPeriod int32
 
-	//
+	// The new CA certificate identifier for the DB instance.
 	CaCertificateIdentifier *string
 
-	//
+	// The new DB instance class for the DB instance.
 	DbInstanceClass *string
 
-	//
+	// The new DB instance identifier for the DB instance.
 	DbInstanceIdentifier *string
 
-	//
+	// The name of the new subnet group for the DB instance.
 	DbSubnetGroupName *string
 
-	//
+	// The new engine version for the DB instance.
 	EngineVersion *string
 
-	//
+	// The new provisioned IOPS value for the DB instance.
 	Iops int32
 
-	//
+	// The new license model value for the DB instance.
 	LicenseModel *string
 
-	//
+	// The new master user password for the DB instance.
 	MasterUserPassword *string
 
-	//
+	// Indicates that a single Availability Zone DB instance is changing to a multiple
+	// Availability Zone deployment.
 	MultiAZ bool
 
-	//
+	// A list of log types that are being enabled or disabled.
 	PendingCloudWatchLogsExports *AwsRdsPendingCloudWatchLogsExports
 
-	//
+	// The new port for the DB instance.
 	Port int32
 
-	//
+	// Processor features that are being updated.
 	ProcessorFeatures []AwsRdsDbProcessorFeature
 
-	//
+	// The new storage type for the DB instance.
 	StorageType *string
 }
 
-//
+// A processor feature.
 type AwsRdsDbProcessorFeature struct {
 
-	//
+	// The name of the processor feature.
 	Name *string
 
-	//
+	// The value of the processor feature.
 	Value *string
 }
 
-//
+// Provides details about an Amazon RDS DB cluster snapshot.
 type AwsRdsDbSnapshotDetails struct {
 
-	//
+	// The amount of storage (in gigabytes) to be initially allocated for the database
+	// instance.
 	AllocatedStorage int32
 
-	//
+	// Specifies the name of the Availability Zone in which the DB instance was located
+	// at the time of the DB snapshot.
 	AvailabilityZone *string
 
-	//
+	// A name for the DB instance.
 	DbInstanceIdentifier *string
 
-	//
+	// The name or ARN of the DB snapshot that is used to restore the DB instance.
 	DbSnapshotIdentifier *string
 
-	//
+	// The identifier for the source DB instance.
 	DbiResourceId *string
 
-	//
+	// Whether the DB snapshot is encrypted.
 	Encrypted bool
 
-	//
+	// The name of the database engine to use for this DB instance.
 	Engine *string
 
-	//
+	// The version of the database engine.
 	EngineVersion *string
 
-	//
+	// Whether mapping of IAM accounts to database accounts is enabled.
 	IamDatabaseAuthenticationEnabled bool
 
-	//
+	// Specifies the time in Coordinated Universal Time (UTC) when the DB instance,
+	// from which the snapshot was taken, was created.
 	InstanceCreateTime *string
 
-	//
+	// The provisioned IOPS (I/O operations per second) value of the DB instance at the
+	// time of the snapshot.
 	Iops int32
 
-	//
+	// If Encrypted is true, the AWS KMS key identifier for the encrypted DB snapshot.
 	KmsKeyId *string
 
-	//
+	// License model information for the restored DB instance.
 	LicenseModel *string
 
-	//
+	// The master user name for the DB snapshot.
 	MasterUsername *string
 
-	//
+	// The option group name for the DB snapshot.
 	OptionGroupName *string
 
-	//
+	// The percentage of the estimated data that has been transferred.
 	PercentProgress int32
 
-	//
+	// The port that the database engine was listening on at the time of the snapshot.
 	Port int32
 
-	//
+	// The number of CPU cores and the number of threads per core for the DB instance
+	// class of the DB instance.
 	ProcessorFeatures []AwsRdsDbProcessorFeature
 
-	//
+	// When the snapshot was taken in Coordinated Universal Time (UTC).
 	SnapshotCreateTime *string
 
-	//
+	// The type of the DB snapshot.
 	SnapshotType *string
 
-	//
+	// The DB snapshot ARN that the DB snapshot was copied from.
 	SourceDbSnapshotIdentifier *string
 
-	//
+	// The AWS Region that the DB snapshot was created in or copied from.
 	SourceRegion *string
 
-	//
+	// The status of this DB snapshot.
 	Status *string
 
-	//
+	// The storage type associated with the DB snapshot.
 	StorageType *string
 
-	//
+	// The ARN from the key store with which to associate the instance for TDE
+	// encryption.
 	TdeCredentialArn *string
 
-	//
+	// The time zone of the DB snapshot.
 	Timezone *string
 
-	//
+	// The VPC ID associated with the DB snapshot.
 	VpcId *string
 }
 
@@ -3682,6 +3856,28 @@ type AwsRedshiftClusterVpcSecurityGroup struct {
 	VpcSecurityGroupId *string
 }
 
+// provides information about the Amazon S3 Public Access Block configuration for
+// accounts.
+type AwsS3AccountPublicAccessBlockDetails struct {
+
+	// Indicates whether to reject calls to update an S3 bucket if the calls include a
+	// public access control list (ACL).
+	BlockPublicAcls bool
+
+	// Indicates whether to reject calls to update the access policy for an S3 bucket
+	// or access point if the policy allows public access.
+	BlockPublicPolicy bool
+
+	// Indicates whether Amazon S3 ignores public ACLs that are associated with an S3
+	// bucket.
+	IgnorePublicAcls bool
+
+	// Indicates whether to restrict access to an access point or S3 bucket that has a
+	// public policy to only AWS service principals and authorized users within the S3
+	// bucket owner's account.
+	RestrictPublicBuckets bool
+}
+
 // The details of an Amazon S3 bucket.
 type AwsS3BucketDetails struct {
 
@@ -3696,6 +3892,10 @@ type AwsS3BucketDetails struct {
 
 	// The display name of the owner of the S3 bucket.
 	OwnerName *string
+
+	// Provides information about the Amazon S3 Public Access Block configuration for
+	// the S3 bucket.
+	PublicAccessBlockConfiguration *AwsS3AccountPublicAccessBlockDetails
 
 	// The encryption rules that are applied to the S3 bucket.
 	ServerSideEncryptionConfiguration *AwsS3BucketServerSideEncryptionConfiguration
@@ -3849,22 +4049,10 @@ type AwsSecurityFinding struct {
 	// This member is required.
 	SchemaVersion *string
 
-	// A finding's severity.
-	//
-	// This member is required.
-	Severity *Severity
-
 	// A finding's title. In this release, Title is a required property.
 	//
 	// This member is required.
 	Title *string
-
-	// One or more finding types in the format of namespace/category/classifier that
-	// classify a finding. Valid namespace values are: Software and Configuration
-	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
-	//
-	// This member is required.
-	Types []string
 
 	// Indicates when the security-findings provider last updated the finding record.
 	// Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time
@@ -3873,6 +4061,9 @@ type AwsSecurityFinding struct {
 	//
 	// This member is required.
 	UpdatedAt *string
+
+	// Provides details about an action that affects or that was taken on a resource.
+	Action *Action
 
 	// This data type is exclusive to findings that are generated as the result of a
 	// check run against a specific rule in a supported security standard, such as CIS
@@ -3889,6 +4080,11 @@ type AwsSecurityFinding struct {
 	// score of 0 means that the underlying resources have no criticality, and a score
 	// of 100 is reserved for the most critical resources.
 	Criticality int32
+
+	// In a BatchImportFindings request, finding providers use FindingProviderFields to
+	// provide and update their own values for confidence, criticality, related
+	// findings, severity, and types.
+	FindingProviderFields *FindingProviderFields
 
 	// Indicates when the security-findings provider first observed the potential
 	// security issue that a finding captured. Uses the date-time format specified in
@@ -3938,12 +4134,20 @@ type AwsSecurityFinding struct {
 	// A data type that describes the remediation options for a finding.
 	Remediation *Remediation
 
+	// A finding's severity.
+	Severity *Severity
+
 	// A URL that links to a page about the current finding in the security-findings
 	// provider's solution.
 	SourceUrl *string
 
 	// Threat intelligence details related to a finding.
 	ThreatIntelIndicators []ThreatIntelIndicator
+
+	// One or more finding types in the format of namespace/category/classifier that
+	// classify a finding. Valid namespace values are: Software and Configuration
+	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
+	Types []string
 
 	// A list of name/value string pairs associated with the finding. These are custom,
 	// user-defined fields added to a finding.
@@ -3999,6 +4203,39 @@ type AwsSecurityFindingFilters struct {
 
 	// A finding's description.
 	Description []StringFilter
+
+	// The finding provider value for the finding confidence. Confidence is defined as
+	// the likelihood that a finding accurately identifies the behavior or issue that
+	// it was intended to identify. Confidence is scored on a 0-100 basis using a ratio
+	// scale, where 0 means zero percent confidence and 100 means 100 percent
+	// confidence.
+	FindingProviderFieldsConfidence []NumberFilter
+
+	// The finding provider value for the level of importance assigned to the resources
+	// associated with the findings. A score of 0 means that the underlying resources
+	// have no criticality, and a score of 100 is reserved for the most critical
+	// resources.
+	FindingProviderFieldsCriticality []NumberFilter
+
+	// The finding identifier of a related finding that is identified by the finding
+	// provider.
+	FindingProviderFieldsRelatedFindingsId []StringFilter
+
+	// The ARN of the solution that generated a related finding that is identified by
+	// the finding provider.
+	FindingProviderFieldsRelatedFindingsProductArn []StringFilter
+
+	// The finding provider value for the severity label.
+	FindingProviderFieldsSeverityLabel []StringFilter
+
+	// The finding provider's original value for the severity.
+	FindingProviderFieldsSeverityOriginal []StringFilter
+
+	// One or more finding types that the finding provider assigned to the finding.
+	// Uses the format of namespace/category/classifier that classify a finding. Valid
+	// namespace values are: Software and Configuration Checks | TTPs | Effects |
+	// Unusual Behaviors | Sensitive Data Identifications
+	FindingProviderFieldsTypes []StringFilter
 
 	// An ISO8601-formatted timestamp that indicates when the security-findings
 	// provider first observed the potential security issue that a finding captured.
@@ -4196,10 +4433,16 @@ type AwsSecurityFindingFilters struct {
 	SeverityLabel []StringFilter
 
 	// The normalized severity of a finding.
+	//
+	// Deprecated: This filter is deprecated, use SeverityLabel or
+	// FindingProviderFieldsSeverityLabel instead.
 	SeverityNormalized []NumberFilter
 
 	// The native severity as defined by the security-findings provider's solution that
 	// generated the finding.
+	//
+	// Deprecated: This filter is deprecated, use FindingProviiltersSeverityOriginal
+	// instead.
 	SeverityProduct []NumberFilter
 
 	// A URL that links to a page about the current finding in the security-findings
@@ -4250,17 +4493,24 @@ type AwsSecurityFindingFilters struct {
 	// following.
 	//
 	// * NEW - The initial state of a finding, before it is reviewed.
+	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
+	// the following cases:
 	//
-	// *
-	// NOTIFIED - Indicates that the resource owner has been notified about the
-	// security issue. Used when the initial reviewer is not the resource owner, and
-	// needs intervention from the resource owner.
+	// * The record state changes from ARCHIVED to ACTIVE.
 	//
-	// * SUPPRESSED - The finding will not
-	// be reviewed again and will not be acted upon.
+	// * The
+	// compliance status changes from PASSED to either WARNING, FAILED, or
+	// NOT_AVAILABLE.
 	//
-	// * RESOLVED - The finding was
-	// reviewed and remediated and is now considered resolved.
+	// * NOTIFIED - Indicates that the resource owner has been notified
+	// about the security issue. Used when the initial reviewer is not the resource
+	// owner, and needs intervention from the resource owner.
+	//
+	// * SUPPRESSED - The
+	// finding will not be reviewed again and will not be acted upon.
+	//
+	// * RESOLVED - The
+	// finding was reviewed and remediated and is now considered resolved.
 	WorkflowStatus []StringFilter
 }
 
@@ -4325,6 +4575,96 @@ type AwsSqsQueueDetails struct {
 
 	// The name of the new queue.
 	QueueName *string
+}
+
+// Provides the details about the compliance status for a patch.
+type AwsSsmComplianceSummary struct {
+
+	// The type of resource for which the compliance was determined. For
+	// AwsSsmPatchCompliance, ComplianceType is Patch.
+	ComplianceType *string
+
+	// For the patches that are compliant, the number that have a severity of CRITICAL.
+	CompliantCriticalCount int32
+
+	// For the patches that are compliant, the number that have a severity of HIGH.
+	CompliantHighCount int32
+
+	// For the patches that are compliant, the number that have a severity of
+	// INFORMATIONAL.
+	CompliantInformationalCount int32
+
+	// For the patches that are compliant, the number that have a severity of LOW.
+	CompliantLowCount int32
+
+	// For the patches that are compliant, the number that have a severity of MEDIUM.
+	CompliantMediumCount int32
+
+	// For the patches that are compliant, the number that have a severity of
+	// UNSPECIFIED.
+	CompliantUnspecifiedCount int32
+
+	// The type of execution that was used determine compliance.
+	ExecutionType *string
+
+	// For the patch items that are noncompliant, the number of items that have a
+	// severity of CRITICAL.
+	NonCompliantCriticalCount int32
+
+	// For the patches that are noncompliant, the number that have a severity of HIGH.
+	NonCompliantHighCount int32
+
+	// For the patches that are noncompliant, the number that have a severity of
+	// INFORMATIONAL.
+	NonCompliantInformationalCount int32
+
+	// For the patches that are noncompliant, the number that have a severity of LOW.
+	NonCompliantLowCount int32
+
+	// For the patches that are noncompliant, the number that have a severity of
+	// MEDIUM.
+	NonCompliantMediumCount int32
+
+	// For the patches that are noncompliant, the number that have a severity of
+	// UNSPECIFIED.
+	NonCompliantUnspecifiedCount int32
+
+	// The highest severity for the patches.
+	OverallSeverity *string
+
+	// The identifier of the patch baseline. The patch baseline lists the patches that
+	// are approved for installation.
+	PatchBaselineId *string
+
+	// The identifier of the patch group for which compliance was determined. A patch
+	// group uses tags to group EC2 instances that should have the same patch
+	// compliance.
+	PatchGroup *string
+
+	// The current patch compliance status. The possible status values are:
+	//
+	// *
+	// COMPLIANT
+	//
+	// * NON_COMPLIANT
+	//
+	// * UNSPECIFIED_DATA
+	Status *string
+}
+
+// Provides details about the compliance for a patch.
+type AwsSsmPatch struct {
+
+	// The compliance status details for the patch.
+	ComplianceSummary *AwsSsmComplianceSummary
+}
+
+// Provides information about the state of a patch on an instance based on the
+// patch baseline that was used to patch the instance.
+type AwsSsmPatchComplianceDetails struct {
+
+	// Information about the status of a patch.
+	Patch *AwsSsmPatch
 }
 
 // Details about a WAF WebACL.
@@ -4401,6 +4741,28 @@ type BatchUpdateFindingsUnprocessedFinding struct {
 	FindingIdentifier *AwsSecurityFindingIdentifier
 }
 
+// An occurrence of sensitive data detected in a Microsoft Excel workbook,
+// comma-separated value (CSV) file, or tab-separated value (TSV) file.
+type Cell struct {
+
+	// For a Microsoft Excel workbook, provides the location of the cell, as an
+	// absolute cell reference, that contains the data. For example, Sheet2!C5 for cell
+	// C5 on Sheet2.
+	CellReference *string
+
+	// The column number of the column that contains the data. For a Microsoft Excel
+	// workbook, the column number corresponds to the alphabetical column identifiers.
+	// For example, a value of 1 for Column corresponds to the A column in the
+	// workbook.
+	Column int64
+
+	// The name of the column that contains the data.
+	ColumnName *string
+
+	// The row number of the row that contains the data.
+	Row int64
+}
+
 // An IPv4 CIDR block association.
 type CidrBlockAssociation struct {
 
@@ -4412,6 +4774,49 @@ type CidrBlockAssociation struct {
 
 	// Information about the state of the IPv4 CIDR block.
 	CidrBlockState *string
+}
+
+// Information about a city.
+type City struct {
+
+	// The name of the city.
+	CityName *string
+}
+
+// Details about the sensitive data that was detected on the resource.
+type ClassificationResult struct {
+
+	// Indicates whether there are additional occurrences of sensitive data that are
+	// not included in the finding. This occurs when the number of occurrences exceeds
+	// the maximum that can be included.
+	AdditionalOccurrences bool
+
+	// Provides details about sensitive data that was identified based on
+	// customer-defined configuration.
+	CustomDataIdentifiers *CustomDataIdentifiersResult
+
+	// The type of content that the finding applies to.
+	MimeType *string
+
+	// Provides details about sensitive data that was identified based on built-in
+	// configuration.
+	SensitiveData []SensitiveDataResult
+
+	// The total size in bytes of the affected data.
+	SizeClassified int64
+
+	// The current status of the sensitive data detection.
+	Status *ClassificationStatus
+}
+
+// Provides details about the current status of the sensitive data detection.
+type ClassificationStatus struct {
+
+	// The code that represents the status of the sensitive data detection.
+	Code *string
+
+	// A longer description of the current status of the sensitive data detection.
+	Reason *string
 }
 
 // Contains finding details that are specific to control-based findings. Only
@@ -4468,6 +4873,43 @@ type ContainerDetails struct {
 	Name *string
 }
 
+// Information about a country.
+type Country struct {
+
+	// The 2-letter ISO 3166 country code for the country.
+	CountryCode *string
+
+	// The name of the country.
+	CountryName *string
+}
+
+// The list of detected instances of sensitive data.
+type CustomDataIdentifiersDetections struct {
+
+	// The ARN of the custom identifier that was used to detect the sensitive data.
+	Arn *string
+
+	// The total number of occurrences of sensitive data that were detected.
+	Count int64
+
+	// he name of the custom identifier that detected the sensitive data.
+	Name *string
+
+	// Details about the sensitive data that was detected.
+	Occurrences *Occurrences
+}
+
+// Contains an instance of sensitive data that was detected by a customer-defined
+// identifier.
+type CustomDataIdentifiersResult struct {
+
+	// The list of detected instances of sensitive data.
+	Detections []CustomDataIdentifiersDetections
+
+	// The total number of occurrences of sensitive data.
+	TotalCount int64
+}
+
 // CVSS scores from the advisory related to the vulnerability.
 type Cvss struct {
 
@@ -4479,6 +4921,16 @@ type Cvss struct {
 
 	// The version of CVSS for the CVSS score.
 	Version *string
+}
+
+// Provides details about sensitive data that was detected on a resource.
+type DataClassificationDetails struct {
+
+	// The path to the folder or file that contains the sensitive data.
+	DetailedResultsLocation *string
+
+	// The details about the sensitive data that was detected on the resource.
+	Result *ClassificationResult
 }
 
 // A date filter for querying findings.
@@ -4502,6 +4954,68 @@ type DateRange struct {
 
 	// A date range value for the date filter.
 	Value int32
+}
+
+// Provided if ActionType is DNS_REQUEST. It provides details about the DNS request
+// that was detected.
+type DnsRequestAction struct {
+
+	// Indicates whether the DNS request was blocked.
+	Blocked bool
+
+	// The DNS domain that is associated with the DNS request.
+	Domain *string
+
+	// The protocol that was used for the DNS request.
+	Protocol *string
+}
+
+// In a BatchImportFindings request, finding providers use FindingProviderFields to
+// provide and update values for confidence, criticality, related findings,
+// severity, and types.
+type FindingProviderFields struct {
+
+	// A finding's confidence. Confidence is defined as the likelihood that a finding
+	// accurately identifies the behavior or issue that it was intended to identify.
+	// Confidence is scored on a 0-100 basis using a ratio scale, where 0 means zero
+	// percent confidence and 100 means 100 percent confidence.
+	Confidence int32
+
+	// The level of importance assigned to the resources associated with the finding. A
+	// score of 0 means that the underlying resources have no criticality, and a score
+	// of 100 is reserved for the most critical resources.
+	Criticality int32
+
+	// A list of findings that are related to the current finding.
+	RelatedFindings []RelatedFinding
+
+	// The severity of a finding.
+	Severity *FindingProviderSeverity
+
+	// One or more finding types in the format of namespace/category/classifier that
+	// classify a finding. Valid namespace values are: Software and Configuration
+	// Checks | TTPs | Effects | Unusual Behaviors | Sensitive Data Identifications
+	Types []string
+}
+
+// The severity assigned to the finding by the finding provider.
+type FindingProviderSeverity struct {
+
+	// The severity label assigned to the finding by the finding provider.
+	Label SeverityLabel
+
+	// The finding provider's original value for the severity.
+	Original *string
+}
+
+// Provides the latitude and longitude coordinates of a location.
+type GeoLocation struct {
+
+	// The latitude of the location.
+	Lat float64
+
+	// The longitude of the location.
+	Lon float64
 }
 
 // The list of the findings that cannot be imported. For each finding, the list
@@ -4610,6 +5124,22 @@ type IpFilter struct {
 
 	// A finding's CIDR value.
 	Cidr *string
+}
+
+// Provides information about an internet provider.
+type IpOrganizationDetails struct {
+
+	// The Autonomous System Number (ASN) of the internet provider
+	Asn int32
+
+	// The name of the organization that registered the ASN.
+	AsnOrg *string
+
+	// The ISP information for the internet provider.
+	Isp *string
+
+	// The name of the internet provider.
+	Org *string
 }
 
 // An IPV6 CIDR block association.
@@ -4776,6 +5306,30 @@ type Network struct {
 	SourcePort int32
 }
 
+// Provided if ActionType is NETWORK_CONNECTION. It provides details about the
+// attempted network connection that was detected.
+type NetworkConnectionAction struct {
+
+	// Indicates whether the network connection attempt was blocked.
+	Blocked bool
+
+	// The direction of the network connection request (IN or OUT).
+	ConnectionDirection *string
+
+	// Information about the port on the EC2 instance.
+	LocalPortDetails *ActionLocalPortDetails
+
+	// The protocol used to make the network connection request.
+	Protocol *string
+
+	// Information about the remote IP address that issued the network connection
+	// request.
+	RemoteIpDetails *ActionRemoteIpDetails
+
+	// Information about the port on the remote IP address.
+	RemotePortDetails *ActionRemotePortDetails
+}
+
 // Details about a network path component that occurs before or after the current
 // component.
 type NetworkHeader struct {
@@ -4870,6 +5424,44 @@ type NumberFilter struct {
 	Lte float64
 }
 
+// The detected occurrences of sensitive data.
+type Occurrences struct {
+
+	// Occurrences of sensitive data detected in Microsoft Excel workbooks,
+	// comma-separated value (CSV) files, or tab-separated value (TSV) files.
+	Cells []Cell
+
+	// Occurrences of sensitive data detected in a non-binary text file or a Microsoft
+	// Word file. Non-binary text files include files such as HTML, XML, JSON, and TXT
+	// files.
+	LineRanges []Range
+
+	// Occurrences of sensitive data detected in a binary text file.
+	OffsetRanges []Range
+
+	// Occurrences of sensitive data in an Adobe Portable Document Format (PDF) file.
+	Pages []Page
+
+	// Occurrences of sensitive data in an Apache Avro object container or an Apache
+	// Parquet file.
+	Records []Record
+}
+
+// An occurrence of sensitive data in an Adobe Portable Document Format (PDF) file.
+type Page struct {
+
+	// An occurrence of sensitive data detected in a non-binary text file or a
+	// Microsoft Word file. Non-binary text files include files such as HTML, XML,
+	// JSON, and TXT files.
+	LineRange *Range
+
+	// An occurrence of sensitive data detected in a binary text file.
+	OffsetRange *Range
+
+	// The page number of the page that contains the sensitive data.
+	PageNumber int64
+}
+
 // Provides an overview of the patch compliance status for an instance against a
 // selected compliance standard.
 type PatchSummary struct {
@@ -4920,6 +5512,32 @@ type PatchSummary struct {
 
 	// The reboot option specified for the instance.
 	RebootOption *string
+}
+
+// Provided if ActionType is PORT_PROBE. It provides details about the attempted
+// port probe that was detected.
+type PortProbeAction struct {
+
+	// Indicates whether the port probe was blocked.
+	Blocked bool
+
+	// Information about the ports affected by the port probe.
+	PortProbeDetails []PortProbeDetail
+}
+
+// A port scan that was part of the port probe. For each scan, PortProbeDetails
+// provides information about the local IP address and port that were scanned, and
+// the remote IP address that the scan originated from.
+type PortProbeDetail struct {
+
+	// Provides information about the IP address where the scanned port is located.
+	LocalIpDetails *ActionLocalIpDetails
+
+	// Provides information about the port that was scanned.
+	LocalPortDetails *ActionLocalPortDetails
+
+	// Provides information about the remote IP address that performed the scan.
+	RemoteIpDetails *ActionRemoteIpDetails
 }
 
 // A range of ports.
@@ -5000,6 +5618,22 @@ type Product struct {
 	ProductSubscriptionResourcePolicy *string
 }
 
+// Identifies where the sensitive data begins and ends.
+type Range struct {
+
+	// The number of lines (for a line range) or characters (for an offset range) from
+	// the beginning of the file to the end of the sensitive data.
+	End int64
+
+	// The number of lines (for a line range) or characters (for an offset range) from
+	// the beginning of the file to the end of the sensitive data.
+	Start int64
+
+	// In the line where the sensitive data starts, the column within the line where
+	// the sensitive data starts.
+	StartColumn int64
+}
+
 // A recommendation on how to remediate the issue identified in a finding.
 type Recommendation struct {
 
@@ -5010,6 +5644,19 @@ type Recommendation struct {
 	// A URL to a page or site that contains information about how to remediate a
 	// finding.
 	Url *string
+}
+
+// An occurrence of sensitive data in an Apache Avro object container or an Apache
+// Parquet file.
+type Record struct {
+
+	// The path, as a JSONPath expression, to the field in the record that contains the
+	// data. If the field name is longer than 20 characters, it is truncated. If the
+	// path is longer than 250 characters, it is truncated.
+	JsonPath *string
+
+	// The record index, starting from 0, for the record that contains the data.
+	RecordIndex int64
 }
 
 // Details about a related finding.
@@ -5050,6 +5697,9 @@ type Resource struct {
 	// This member is required.
 	Type *string
 
+	// Contains information about sensitive data that was detected on the resource.
+	DataClassification *DataClassificationDetails
+
 	// Additional details about the resource related to a finding.
 	Details *ResourceDetails
 
@@ -5059,7 +5709,8 @@ type Resource struct {
 	// The canonical AWS external Region name where this resource is located.
 	Region *string
 
-	//
+	// Identifies the role of the resource in the finding. A resource is either the
+	// actor or target of the finding activity,
 	ResourceRole *string
 
 	// A list of AWS tags associated with a resource at the time the finding was
@@ -5076,28 +5727,28 @@ type Resource struct {
 // the selected type does not have a corresponding object.
 type ResourceDetails struct {
 
-	//
+	// Provides information about a REST API in version 1 of Amazon API Gateway.
 	AwsApiGatewayRestApi *AwsApiGatewayRestApiDetails
 
-	//
+	// Provides information about a version 1 Amazon API Gateway stage.
 	AwsApiGatewayStage *AwsApiGatewayStageDetails
 
-	//
+	// Provides information about a version 2 API in Amazon API Gateway.
 	AwsApiGatewayV2Api *AwsApiGatewayV2ApiDetails
 
-	//
+	// Provides information about a version 2 stage for Amazon API Gateway.
 	AwsApiGatewayV2Stage *AwsApiGatewayV2StageDetails
 
 	// Details for an autoscaling group.
 	AwsAutoScalingAutoScalingGroup *AwsAutoScalingAutoScalingGroupDetails
 
-	//
+	// Provides details about an AWS Certificate Manager (ACM) certificate.
 	AwsCertificateManagerCertificate *AwsCertificateManagerCertificateDetails
 
 	// Details about a CloudFront distribution.
 	AwsCloudFrontDistribution *AwsCloudFrontDistributionDetails
 
-	//
+	// Provides details about a CloudTrail trail.
 	AwsCloudTrailTrail *AwsCloudTrailTrailDetails
 
 	// Details for an AWS CodeBuild project.
@@ -5127,7 +5778,7 @@ type ResourceDetails struct {
 	// Details for an Elasticsearch domain.
 	AwsElasticsearchDomain *AwsElasticsearchDomainDetails
 
-	//
+	// contains details about a Classic Load Balancer.
 	AwsElbLoadBalancer *AwsElbLoadBalancerDetails
 
 	// Details about a load balancer.
@@ -5136,7 +5787,7 @@ type ResourceDetails struct {
 	// Details about an IAM access key related to a finding.
 	AwsIamAccessKey *AwsIamAccessKeyDetails
 
-	//
+	// Contains details about an IAM group.
 	AwsIamGroup *AwsIamGroupDetails
 
 	// Details about an IAM permissions policy.
@@ -5169,8 +5820,11 @@ type ResourceDetails struct {
 	// Details about an Amazon RDS database snapshot.
 	AwsRdsDbSnapshot *AwsRdsDbSnapshotDetails
 
-	//
+	// Contains details about an Amazon Redshift cluster.
 	AwsRedshiftCluster *AwsRedshiftClusterDetails
+
+	// Details about the Amazon S3 Public Access Block configuration for an account.
+	AwsS3AccountPublicAccessBlock *AwsS3AccountPublicAccessBlockDetails
 
 	// Details about an Amazon S3 bucket related to a finding.
 	AwsS3Bucket *AwsS3BucketDetails
@@ -5186,6 +5840,10 @@ type ResourceDetails struct {
 
 	// Details about an SQS queue.
 	AwsSqsQueue *AwsSqsQueueDetails
+
+	// Provides information about the state of a patch on an instance based on the
+	// patch baseline that was used to patch the instance.
+	AwsSsmPatchCompliance *AwsSsmPatchComplianceDetails
 
 	// Details for a WAF WebACL.
 	AwsWafWebAcl *AwsWafWebAclDetails
@@ -5215,6 +5873,36 @@ type Result struct {
 
 	// The reason that the account was not processed.
 	ProcessingResult *string
+}
+
+// The list of detected instances of sensitive data.
+type SensitiveDataDetections struct {
+
+	// The total number of occurrences of sensitive data that were detected.
+	Count int64
+
+	// Details about the sensitive data that was detected.
+	Occurrences *Occurrences
+
+	// The type of sensitive data that was detected. For example, the type might
+	// indicate that the data is an email address.
+	Type *string
+}
+
+// Contains a detected instance of sensitive data that are based on built-in
+// identifiers.
+type SensitiveDataResult struct {
+
+	// The category of sensitive data that was detected. For example, the category can
+	// indicate that the sensitive data involved credentials, financial information, or
+	// personal information.
+	Category *string
+
+	// The list of detected instances of sensitive data.
+	Detections []SensitiveDataDetections
+
+	// The total number of occurrences of sensitive data.
+	TotalCount int64
 }
 
 // The severity of the finding. The finding provider can provide the initial
@@ -5427,7 +6115,21 @@ type StandardsSubscription struct {
 	// This member is required.
 	StandardsInput map[string]string
 
-	// The status of the standards subscription.
+	// The status of the standard subscription. The status values are as follows:
+	//
+	// *
+	// PENDING - Standard is in the process of being enabled.
+	//
+	// * READY - Standard is
+	// enabled.
+	//
+	// * INCOMPLETE - Standard could not be enabled completely. Some controls
+	// may not be available.
+	//
+	// * DELETING - Standard is in the process of being
+	// disabled.
+	//
+	// * FAILED - Standard could not be disabled.
 	//
 	// This member is required.
 	StandardsStatus StandardsStatus
@@ -5647,17 +6349,24 @@ type Workflow struct {
 	// following.
 	//
 	// * NEW - The initial state of a finding, before it is reviewed.
+	// Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in
+	// the following cases:
+	//
+	// * RecordState changes from ARCHIVED to ACTIVE.
 	//
 	// *
-	// NOTIFIED - Indicates that you notified the resource owner about the security
-	// issue. Used when the initial reviewer is not the resource owner, and needs
-	// intervention from the resource owner.
+	// ComplianceStatus changes from PASSED to either WARNING, FAILED, or
+	// NOT_AVAILABLE.
 	//
-	// * SUPPRESSED - The finding will not be
-	// reviewed again and will not be acted upon.
+	// * NOTIFIED - Indicates that you notified the resource owner
+	// about the security issue. Used when the initial reviewer is not the resource
+	// owner, and needs intervention from the resource owner.
 	//
-	// * RESOLVED - The finding was
-	// reviewed and remediated and is now considered resolved.
+	// * SUPPRESSED - The
+	// finding will not be reviewed again and will not be acted upon.
+	//
+	// * RESOLVED - The
+	// finding was reviewed and remediated and is now considered resolved.
 	Status WorkflowStatus
 }
 
@@ -5668,16 +6377,23 @@ type WorkflowUpdate struct {
 	// following.
 	//
 	// * NEW - The initial state of a finding, before it is reviewed.
+	// Security Hub also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the
+	// following cases:
 	//
-	// *
-	// NOTIFIED - Indicates that you notified the resource owner about the security
-	// issue. Used when the initial reviewer is not the resource owner, and needs
-	// intervention from the resource owner.
+	// * The record state changes from ARCHIVED to ACTIVE.
 	//
-	// * RESOLVED - The finding was reviewed and
-	// remediated and is now considered resolved.
+	// * The
+	// compliance status changes from PASSED to either WARNING, FAILED, or
+	// NOT_AVAILABLE.
 	//
-	// * SUPPRESSED - The finding will not
-	// be reviewed again and will not be acted upon.
+	// * NOTIFIED - Indicates that you notified the resource owner
+	// about the security issue. Used when the initial reviewer is not the resource
+	// owner, and needs intervention from the resource owner.
+	//
+	// * RESOLVED - The finding
+	// was reviewed and remediated and is now considered resolved.
+	//
+	// * SUPPRESSED - The
+	// finding will not be reviewed again and will not be acted upon.
 	Status WorkflowStatus
 }

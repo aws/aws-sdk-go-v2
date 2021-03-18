@@ -2,7 +2,78 @@
 
 package types
 
+type AccessPreviewStatus string
+
+// Enum values for AccessPreviewStatus
+const (
+	AccessPreviewStatusCompleted AccessPreviewStatus = "COMPLETED"
+	AccessPreviewStatusCreating  AccessPreviewStatus = "CREATING"
+	AccessPreviewStatusFailed    AccessPreviewStatus = "FAILED"
+)
+
+// Values returns all known values for AccessPreviewStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AccessPreviewStatus) Values() []AccessPreviewStatus {
+	return []AccessPreviewStatus{
+		"COMPLETED",
+		"CREATING",
+		"FAILED",
+	}
+}
+
+type AccessPreviewStatusReasonCode string
+
+// Enum values for AccessPreviewStatusReasonCode
+const (
+	AccessPreviewStatusReasonCodeInternalError        AccessPreviewStatusReasonCode = "INTERNAL_ERROR"
+	AccessPreviewStatusReasonCodeInvalidConfiguration AccessPreviewStatusReasonCode = "INVALID_CONFIGURATION"
+)
+
+// Values returns all known values for AccessPreviewStatusReasonCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AccessPreviewStatusReasonCode) Values() []AccessPreviewStatusReasonCode {
+	return []AccessPreviewStatusReasonCode{
+		"INTERNAL_ERROR",
+		"INVALID_CONFIGURATION",
+	}
+}
+
+type AclPermission string
+
+// Enum values for AclPermission
+const (
+	AclPermissionRead        AclPermission = "READ"
+	AclPermissionWrite       AclPermission = "WRITE"
+	AclPermissionReadAcp     AclPermission = "READ_ACP"
+	AclPermissionWriteAcp    AclPermission = "WRITE_ACP"
+	AclPermissionFullControl AclPermission = "FULL_CONTROL"
+)
+
+// Values returns all known values for AclPermission. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AclPermission) Values() []AclPermission {
+	return []AclPermission{
+		"READ",
+		"WRITE",
+		"READ_ACP",
+		"WRITE_ACP",
+		"FULL_CONTROL",
+	}
+}
+
 type AnalyzerStatus string
+
+// Enum values for AnalyzerStatus
+const (
+	AnalyzerStatusActive   AnalyzerStatus = "ACTIVE"
+	AnalyzerStatusCreating AnalyzerStatus = "CREATING"
+	AnalyzerStatusDisabled AnalyzerStatus = "DISABLED"
+	AnalyzerStatusFailed   AnalyzerStatus = "FAILED"
+)
 
 // Values returns all known values for AnalyzerStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -16,7 +87,34 @@ func (AnalyzerStatus) Values() []AnalyzerStatus {
 	}
 }
 
+type FindingChangeType string
+
+// Enum values for FindingChangeType
+const (
+	FindingChangeTypeChanged   FindingChangeType = "CHANGED"
+	FindingChangeTypeNew       FindingChangeType = "NEW"
+	FindingChangeTypeUnchanged FindingChangeType = "UNCHANGED"
+)
+
+// Values returns all known values for FindingChangeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingChangeType) Values() []FindingChangeType {
+	return []FindingChangeType{
+		"CHANGED",
+		"NEW",
+		"UNCHANGED",
+	}
+}
+
 type FindingSourceType string
+
+// Enum values for FindingSourceType
+const (
+	FindingSourceTypePolicy        FindingSourceType = "POLICY"
+	FindingSourceTypeBucketAcl     FindingSourceType = "BUCKET_ACL"
+	FindingSourceTypeS3AccessPoint FindingSourceType = "S3_ACCESS_POINT"
+)
 
 // Values returns all known values for FindingSourceType. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -26,11 +124,17 @@ func (FindingSourceType) Values() []FindingSourceType {
 		"POLICY",
 		"BUCKET_ACL",
 		"S3_ACCESS_POINT",
-		"KMS_GRANT",
 	}
 }
 
 type FindingStatus string
+
+// Enum values for FindingStatus
+const (
+	FindingStatusActive   FindingStatus = "ACTIVE"
+	FindingStatusArchived FindingStatus = "ARCHIVED"
+	FindingStatusResolved FindingStatus = "RESOLVED"
+)
 
 // Values returns all known values for FindingStatus. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
@@ -45,6 +149,12 @@ func (FindingStatus) Values() []FindingStatus {
 
 type FindingStatusUpdate string
 
+// Enum values for FindingStatusUpdate
+const (
+	FindingStatusUpdateActive   FindingStatusUpdate = "ACTIVE"
+	FindingStatusUpdateArchived FindingStatusUpdate = "ARCHIVED"
+)
+
 // Values returns all known values for FindingStatusUpdate. Note that this can be
 // expanded in the future, and so it is only as up to date as the client. The
 // ordering of this slice is not guaranteed to be stable across updates.
@@ -55,7 +165,89 @@ func (FindingStatusUpdate) Values() []FindingStatusUpdate {
 	}
 }
 
+type KmsGrantOperation string
+
+// Enum values for KmsGrantOperation
+const (
+	KmsGrantOperationCreateGrant                         KmsGrantOperation = "CreateGrant"
+	KmsGrantOperationDecrypt                             KmsGrantOperation = "Decrypt"
+	KmsGrantOperationDescribeKey                         KmsGrantOperation = "DescribeKey"
+	KmsGrantOperationEncrypt                             KmsGrantOperation = "Encrypt"
+	KmsGrantOperationGenerateDataKey                     KmsGrantOperation = "GenerateDataKey"
+	KmsGrantOperationGenerateDataKeyPair                 KmsGrantOperation = "GenerateDataKeyPair"
+	KmsGrantOperationGenerateDataKeyPairWithoutPlaintext KmsGrantOperation = "GenerateDataKeyPairWithoutPlaintext"
+	KmsGrantOperationGenerateDataKeyWithoutPlaintext     KmsGrantOperation = "GenerateDataKeyWithoutPlaintext"
+	KmsGrantOperationGetPublicKey                        KmsGrantOperation = "GetPublicKey"
+	KmsGrantOperationReencryptFrom                       KmsGrantOperation = "ReEncryptFrom"
+	KmsGrantOperationReencryptTo                         KmsGrantOperation = "ReEncryptTo"
+	KmsGrantOperationRetireGrant                         KmsGrantOperation = "RetireGrant"
+	KmsGrantOperationSign                                KmsGrantOperation = "Sign"
+	KmsGrantOperationVerify                              KmsGrantOperation = "Verify"
+)
+
+// Values returns all known values for KmsGrantOperation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KmsGrantOperation) Values() []KmsGrantOperation {
+	return []KmsGrantOperation{
+		"CreateGrant",
+		"Decrypt",
+		"DescribeKey",
+		"Encrypt",
+		"GenerateDataKey",
+		"GenerateDataKeyPair",
+		"GenerateDataKeyPairWithoutPlaintext",
+		"GenerateDataKeyWithoutPlaintext",
+		"GetPublicKey",
+		"ReEncryptFrom",
+		"ReEncryptTo",
+		"RetireGrant",
+		"Sign",
+		"Verify",
+	}
+}
+
+type Locale string
+
+// Enum values for Locale
+const (
+	LocaleDe   Locale = "DE"
+	LocaleEn   Locale = "EN"
+	LocaleEs   Locale = "ES"
+	LocaleFr   Locale = "FR"
+	LocaleIt   Locale = "IT"
+	LocaleJa   Locale = "JA"
+	LocaleKo   Locale = "KO"
+	LocalePtBr Locale = "PT_BR"
+	LocaleZhCn Locale = "ZH_CN"
+	LocaleZhTw Locale = "ZH_TW"
+)
+
+// Values returns all known values for Locale. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Locale) Values() []Locale {
+	return []Locale{
+		"DE",
+		"EN",
+		"ES",
+		"FR",
+		"IT",
+		"JA",
+		"KO",
+		"PT_BR",
+		"ZH_CN",
+		"ZH_TW",
+	}
+}
+
 type OrderBy string
+
+// Enum values for OrderBy
+const (
+	OrderByAsc  OrderBy = "ASC"
+	OrderByDesc OrderBy = "DESC"
+)
 
 // Values returns all known values for OrderBy. Note that this can be expanded in
 // the future, and so it is only as up to date as the client. The ordering of this
@@ -67,7 +259,35 @@ func (OrderBy) Values() []OrderBy {
 	}
 }
 
+type PolicyType string
+
+// Enum values for PolicyType
+const (
+	PolicyTypeIdentityPolicy       PolicyType = "IDENTITY_POLICY"
+	PolicyTypeResourcePolicy       PolicyType = "RESOURCE_POLICY"
+	PolicyTypeServiceControlPolicy PolicyType = "SERVICE_CONTROL_POLICY"
+)
+
+// Values returns all known values for PolicyType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (PolicyType) Values() []PolicyType {
+	return []PolicyType{
+		"IDENTITY_POLICY",
+		"RESOURCE_POLICY",
+		"SERVICE_CONTROL_POLICY",
+	}
+}
+
 type ReasonCode string
+
+// Enum values for ReasonCode
+const (
+	ReasonCodeAwsServiceAccessDisabled           ReasonCode = "AWS_SERVICE_ACCESS_DISABLED"
+	ReasonCodeDelegatedAdministratorDeregistered ReasonCode = "DELEGATED_ADMINISTRATOR_DEREGISTERED"
+	ReasonCodeOrganizationDeleted                ReasonCode = "ORGANIZATION_DELETED"
+	ReasonCodeServiceLinkedRoleCreationFailed    ReasonCode = "SERVICE_LINKED_ROLE_CREATION_FAILED"
+)
 
 // Values returns all known values for ReasonCode. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
@@ -83,6 +303,17 @@ func (ReasonCode) Values() []ReasonCode {
 
 type ResourceType string
 
+// Enum values for ResourceType
+const (
+	ResourceTypeAwsS3Bucket             ResourceType = "AWS::S3::Bucket"
+	ResourceTypeAwsIamRole              ResourceType = "AWS::IAM::Role"
+	ResourceTypeAwsSqsQueue             ResourceType = "AWS::SQS::Queue"
+	ResourceTypeAwsLambdaFunction       ResourceType = "AWS::Lambda::Function"
+	ResourceTypeAwsLambdaLayerversion   ResourceType = "AWS::Lambda::LayerVersion"
+	ResourceTypeAwsKmsKey               ResourceType = "AWS::KMS::Key"
+	ResourceTypeAwsSecretsmanagerSecret ResourceType = "AWS::SecretsManager::Secret"
+)
+
 // Values returns all known values for ResourceType. Note that this can be expanded
 // in the future, and so it is only as up to date as the client. The ordering of
 // this slice is not guaranteed to be stable across updates.
@@ -94,10 +325,17 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::Lambda::Function",
 		"AWS::Lambda::LayerVersion",
 		"AWS::KMS::Key",
+		"AWS::SecretsManager::Secret",
 	}
 }
 
 type Type string
+
+// Enum values for Type
+const (
+	TypeAccount      Type = "ACCOUNT"
+	TypeOrganization Type = "ORGANIZATION"
+)
 
 // Values returns all known values for Type. Note that this can be expanded in the
 // future, and so it is only as up to date as the client. The ordering of this
@@ -106,6 +344,28 @@ func (Type) Values() []Type {
 	return []Type{
 		"ACCOUNT",
 		"ORGANIZATION",
+	}
+}
+
+type ValidatePolicyFindingType string
+
+// Enum values for ValidatePolicyFindingType
+const (
+	ValidatePolicyFindingTypeError           ValidatePolicyFindingType = "ERROR"
+	ValidatePolicyFindingTypeSecurityWarning ValidatePolicyFindingType = "SECURITY_WARNING"
+	ValidatePolicyFindingTypeSuggestion      ValidatePolicyFindingType = "SUGGESTION"
+	ValidatePolicyFindingTypeWarning         ValidatePolicyFindingType = "WARNING"
+)
+
+// Values returns all known values for ValidatePolicyFindingType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidatePolicyFindingType) Values() []ValidatePolicyFindingType {
+	return []ValidatePolicyFindingType{
+		"ERROR",
+		"SECURITY_WARNING",
+		"SUGGESTION",
+		"WARNING",
 	}
 }
 

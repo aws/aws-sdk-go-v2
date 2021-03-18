@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing proxy.
+// Deletes an existing DB proxy.
 func (c *Client) DeleteDBProxy(ctx context.Context, params *DeleteDBProxyInput, optFns ...func(*Options)) (*DeleteDBProxyOutput, error) {
 	if params == nil {
 		params = &DeleteDBProxyInput{}

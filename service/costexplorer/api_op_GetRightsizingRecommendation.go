@@ -74,10 +74,12 @@ type GetRightsizingRecommendationInput struct {
 	// an error.  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE",
 	// "Values": [ "DataTransfer" ] } }
 	//
-	// For GetRightsizingRecommendation action, a
+	// For the GetRightsizingRecommendation action, a
 	// combination of OR and NOT is not supported. OR is not supported between
 	// different dimensions, or dimensions and tags. NOT operators aren't supported.
-	// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
+	// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For
+	// the GetReservationPurchaseRecommendation action, only NOT is supported. AND and
+	// OR are not supported. Dimensions are limited to LINKED_ACCOUNT.
 	Filter *types.Expression
 
 	// The pagination token that indicates the next set of results that you want to

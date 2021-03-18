@@ -250,6 +250,26 @@ func (m *validateOpDisassociateResolverRule) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResolverDnssecConfig struct {
+}
+
+func (*validateOpGetResolverDnssecConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResolverDnssecConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResolverDnssecConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResolverDnssecConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetResolverEndpoint struct {
 }
 
@@ -510,6 +530,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateResolverDnssecConfig struct {
+}
+
+func (*validateOpUpdateResolverDnssecConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateResolverDnssecConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateResolverDnssecConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateResolverDnssecConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateResolverEndpoint struct {
 }
 
@@ -598,6 +638,10 @@ func addOpDisassociateResolverRuleValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDisassociateResolverRule{}, middleware.After)
 }
 
+func addOpGetResolverDnssecConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResolverDnssecConfig{}, middleware.After)
+}
+
 func addOpGetResolverEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResolverEndpoint{}, middleware.After)
 }
@@ -648,6 +692,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateResolverDnssecConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateResolverDnssecConfig{}, middleware.After)
 }
 
 func addOpUpdateResolverEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -1017,6 +1065,21 @@ func validateOpDisassociateResolverRuleInput(v *DisassociateResolverRuleInput) e
 	}
 }
 
+func validateOpGetResolverDnssecConfigInput(v *GetResolverDnssecConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResolverDnssecConfigInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetResolverEndpointInput(v *GetResolverEndpointInput) error {
 	if v == nil {
 		return nil
@@ -1220,6 +1283,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateResolverDnssecConfigInput(v *UpdateResolverDnssecConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateResolverDnssecConfigInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if len(v.Validation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Validation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -81,6 +81,10 @@ type Action struct {
 	// asset properties.
 	IotSiteWise *IotSiteWiseAction
 
+	// Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or
+	// self-managed Apache Kafka cluster.
+	Kafka *KafkaAction
+
 	// Write data to an Amazon Kinesis stream.
 	Kinesis *KinesisAction
 
@@ -115,21 +119,23 @@ type Action struct {
 // Information about an active Device Defender security profile behavior violation.
 type ActiveViolation struct {
 
-	// The behavior which is being violated.
+	// The behavior that is being violated.
 	Behavior *Behavior
 
 	// The time the most recent violation occurred.
 	LastViolationTime *time.Time
 
-	// The value of the metric (the measurement) which caused the most recent
-	// violation.
+	// The value of the metric (the measurement) that caused the most recent violation.
 	LastViolationValue *MetricValue
 
-	// The security profile whose behavior is in violation.
+	// The security profile with the behavior is in violation.
 	SecurityProfileName *string
 
 	// The name of the thing responsible for the active violation.
 	ThingName *string
+
+	// The details of a violation event.
+	ViolationEventAdditionalInfo *ViolationEventAdditionalInfo
 
 	// The ID of the active violation.
 	ViolationId *string
@@ -143,21 +149,22 @@ type ActiveViolation struct {
 type AddThingsToThingGroupParams struct {
 
 	// The list of groups to which you want to add the things that triggered the
-	// mitigation action. You can add a thing to a maximum of 10 groups, but you cannot
+	// mitigation action. You can add a thing to a maximum of 10 groups, but you can't
 	// add a thing to more than one group in the same hierarchy.
 	//
 	// This member is required.
 	ThingGroupNames []string
 
 	// Specifies if this mitigation action can move the things that triggered the
-	// mitigation action even if they are part of one or more dynamic things groups.
+	// mitigation action even if they are part of one or more dynamic thing groups.
 	OverrideDynamicGroups bool
 }
 
 // A structure containing the alert target ARN and the role ARN.
 type AlertTarget struct {
 
-	// The ARN of the notification target to which alerts are sent.
+	// The Amazon Resource Name (ARN) of the notification target to which alerts are
+	// sent.
 	//
 	// This member is required.
 	AlertTargetArn *string
@@ -657,7 +664,7 @@ type AwsJobTimeoutConfig struct {
 // A Device Defender security profile behavior.
 type Behavior struct {
 
-	// The name you have given to the behavior.
+	// The name you've given to the behavior.
 	//
 	// This member is required.
 	Name *string
@@ -670,16 +677,31 @@ type Behavior struct {
 	Metric *string
 
 	// The dimension for a metric in your behavior. For example, using a TOPIC_FILTER
-	// dimension, you can narrow down the scope of the metric only to MQTT topics whose
-	// name match the pattern specified in the dimension.
+	// dimension, you can narrow down the scope of the metric to only MQTT topics where
+	// the name matches the pattern specified in the dimension. This can't be used with
+	// custom metrics.
 	MetricDimension *MetricDimension
+
+	// Suppresses alerts.
+	SuppressAlerts *bool
 }
 
 // The criteria by which the behavior is determined to be normal.
 type BehaviorCriteria struct {
 
 	// The operator that relates the thing measured (metric) to the criteria
-	// (containing a value or statisticalThreshold).
+	// (containing a value or statisticalThreshold). Valid operators include:
+	//
+	// *
+	// string-list: in-set and not-in-set
+	//
+	// * number-list: in-set and not-in-set
+	//
+	// *
+	// ip-address-list: in-cidr-set and not-in-cidr-set
+	//
+	// * number: less-than,
+	// less-than-equals, greater-than, and greater-than-equals
 	ComparisonOperator ComparisonOperator
 
 	// If a device is in violation of the behavior for the specified number of
@@ -692,19 +714,45 @@ type BehaviorCriteria struct {
 	ConsecutiveDatapointsToClear *int32
 
 	// Use this to specify the time duration over which the behavior is evaluated, for
-	// those criteria which have a time dimension (for example, NUM_MESSAGES_SENT). For
+	// those criteria that have a time dimension (for example, NUM_MESSAGES_SENT). For
 	// a statisticalThreshhold metric comparison, measurements from all devices are
 	// accumulated over this time duration before being used to calculate percentiles,
 	// and later, measurements from an individual device are also accumulated over this
-	// time duration before being given a percentile rank.
+	// time duration before being given a percentile rank. Cannot be used with
+	// list-based metric datatypes.
 	DurationSeconds *int32
 
-	// A statistical ranking (percentile) which indicates a threshold value by which a
+	// The configuration of an ML Detect
+	MlDetectionConfig *MachineLearningDetectionConfig
+
+	// A statistical ranking (percentile)that indicates a threshold value by which a
 	// behavior is determined to be in compliance or in violation of the behavior.
 	StatisticalThreshold *StatisticalThreshold
 
 	// The value to be compared with the metric.
 	Value *MetricValue
+}
+
+// The summary of an ML Detect behavior model.
+type BehaviorModelTrainingSummary struct {
+
+	// The name of the behavior.
+	BehaviorName *string
+
+	// The percentage of datapoints collected.
+	DatapointsCollectionPercentage *float64
+
+	// The date the model was last refreshed.
+	LastModelRefreshDate *time.Time
+
+	// The status of the behavior model.
+	ModelStatus ModelStatus
+
+	// The name of the security profile.
+	SecurityProfileName *string
+
+	// The date a training model started collecting data.
+	TrainingDataCollectionStartDate *time.Time
 }
 
 // Additional information about the billing group.
@@ -999,6 +1047,97 @@ type Destination struct {
 	S3Destination *S3Destination
 }
 
+// Describes which mitigation actions should be executed.
+type DetectMitigationActionExecution struct {
+
+	// The friendly name that uniquely identifies the mitigation action.
+	ActionName *string
+
+	// The error code of a mitigation action.
+	ErrorCode *string
+
+	// The date a mitigation action ended.
+	ExecutionEndDate *time.Time
+
+	// The date a mitigation action was started.
+	ExecutionStartDate *time.Time
+
+	// The message of a mitigation action.
+	Message *string
+
+	// The status of a mitigation action.
+	Status DetectMitigationActionExecutionStatus
+
+	// The unique identifier of the task.
+	TaskId *string
+
+	// The name of the thing.
+	ThingName *string
+
+	// The unique identifier of the violation.
+	ViolationId *string
+}
+
+// The statistics of a mitigation action task.
+type DetectMitigationActionsTaskStatistics struct {
+
+	// The actions that were performed.
+	ActionsExecuted *int64
+
+	// The actions that failed.
+	ActionsFailed *int64
+
+	// The actions that were skipped.
+	ActionsSkipped *int64
+}
+
+// The summary of the mitigation action tasks.
+type DetectMitigationActionsTaskSummary struct {
+
+	// The definition of the actions.
+	ActionsDefinition []MitigationAction
+
+	// Includes only active violations.
+	OnlyActiveViolationsIncluded bool
+
+	// Includes suppressed alerts.
+	SuppressedAlertsIncluded bool
+
+	// Specifies the ML Detect findings to which the mitigation actions are applied.
+	Target *DetectMitigationActionsTaskTarget
+
+	// The date the task ended.
+	TaskEndTime *time.Time
+
+	// The unique identifier of the task.
+	TaskId *string
+
+	// The date the task started.
+	TaskStartTime *time.Time
+
+	// The statistics of a mitigation action task.
+	TaskStatistics *DetectMitigationActionsTaskStatistics
+
+	// The status of the task.
+	TaskStatus DetectMitigationActionsTaskStatus
+
+	// Specifies the time period of which violation events occurred between.
+	ViolationEventOccurrenceRange *ViolationEventOccurrenceRange
+}
+
+// The target of a mitigation action task.
+type DetectMitigationActionsTaskTarget struct {
+
+	// The name of the behavior.
+	BehaviorName *string
+
+	// The name of the security profile.
+	SecurityProfileName *string
+
+	// The unique identifiers of the violations.
+	ViolationIds []string
+}
+
 // The summary of a domain configuration. A domain configuration specifies custom
 // IoT-specific information about a domain. A domain configuration can be
 // associated with an AWS-managed domain (for example,
@@ -1141,12 +1280,12 @@ type ElasticsearchAction struct {
 // Parameters used when defining a mitigation action that enable AWS IoT logging.
 type EnableIoTLoggingParams struct {
 
-	// Specifies the types of information to be logged.
+	// Specifies the type of information to be logged.
 	//
 	// This member is required.
 	LogLevel LogLevel
 
-	// The ARN of the IAM role used for logging.
+	// The Amazon Resource Name (ARN) of the IAM role used for logging.
 	//
 	// This member is required.
 	RoleArnForLogging *string
@@ -1658,6 +1797,32 @@ type JobSummary struct {
 	ThingGroupId *string
 }
 
+// Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or
+// self-managed Apache Kafka cluster.
+type KafkaAction struct {
+
+	// Properties of the Apache Kafka producer client.
+	//
+	// This member is required.
+	ClientProperties map[string]string
+
+	// The ARN of Kafka action's VPC TopicRuleDestination.
+	//
+	// This member is required.
+	DestinationArn *string
+
+	// The Kafka topic for messages to be sent to the Kafka broker.
+	//
+	// This member is required.
+	Topic *string
+
+	// The Kafka message key.
+	Key *string
+
+	// The Kafka message partition.
+	Partition *string
+}
+
 // Describes a key pair.
 type KeyPair struct {
 
@@ -1728,6 +1893,15 @@ type LogTargetConfiguration struct {
 	LogTarget *LogTarget
 }
 
+// The configuration of an ML Detect Security Profile.
+type MachineLearningDetectionConfig struct {
+
+	// The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High.
+	//
+	// This member is required.
+	ConfidenceLevel ConfidenceLevel
+}
+
 // The dimension of a metric.
 type MetricDimension struct {
 
@@ -1752,7 +1926,7 @@ type MetricToRetain struct {
 	// This member is required.
 	Metric *string
 
-	// The dimension of a metric.
+	// The dimension of a metric. This can't be used with custom metrics.
 	MetricDimension *MetricDimension
 }
 
@@ -1767,9 +1941,18 @@ type MetricValue struct {
 	// numeric value to be compared with the metric.
 	Count *int64
 
+	// The numeral value of a metric.
+	Number *float64
+
+	// The numeral values of a metric.
+	Numbers []float64
+
 	// If the comparisonOperator calls for a set of ports, use this to specify that set
 	// to be compared with the metric.
 	Ports []int32
+
+	// The string values of a metric.
+	Strings []string
 }
 
 // Describes which changes should be applied as part of a mitigation action.
@@ -1816,9 +1999,9 @@ type MitigationActionParams struct {
 	// specified level of detail.
 	EnableIoTLoggingParams *EnableIoTLoggingParams
 
-	// Parameters to define a mitigation action that publishes findings to Amazon SNS.
-	// You can implement your own custom actions in response to the Amazon SNS
-	// messages.
+	// Parameters to define a mitigation action that publishes findings to Amazon
+	// Simple Notification Service (Amazon SNS. You can implement your own custom
+	// actions in response to the Amazon SNS messages.
 	PublishFindingToSnsParams *PublishFindingToSnsParams
 
 	// Parameters to define a mitigation action that adds a blank policy to restrict
@@ -2348,7 +2531,7 @@ type SecurityProfileIdentifier struct {
 	// This member is required.
 	Arn *string
 
-	// The name you have given to the security profile.
+	// The name you've given to the security profile.
 	//
 	// This member is required.
 	Name *string
@@ -2473,11 +2656,11 @@ type StartSigningJobParameter struct {
 	SigningProfileParameter *SigningProfileParameter
 }
 
-// A statistical ranking (percentile) which indicates a threshold value by which a
+// A statistical ranking (percentile) that indicates a threshold value by which a
 // behavior is determined to be in compliance or in violation of the behavior.
 type StatisticalThreshold struct {
 
-	// The percentile which resolves to a threshold value by which compliance with a
+	// The percentile that resolves to a threshold value by which compliance with a
 	// behavior is determined. Metrics are collected over the specified period
 	// (durationSeconds) from all reporting devices in your account and statistical
 	// ranks are calculated. Then, the measurements from a device are collected over
@@ -2988,8 +3171,14 @@ type TopicRuleDestination struct {
 	// The topic rule destination URL.
 	Arn *string
 
+	// The date and time when the topic rule destination was created.
+	CreatedAt *time.Time
+
 	// Properties of the HTTP URL.
 	HttpUrlProperties *HttpUrlDestinationProperties
+
+	// The date and time when the topic rule destination was last updated.
+	LastUpdatedAt *time.Time
 
 	// The status of the topic rule destination. Valid values are: IN_PROGRESS A topic
 	// rule destination was created but has not been confirmed. You can set status to
@@ -3009,6 +3198,9 @@ type TopicRuleDestination struct {
 	// Additional details or reason why the topic rule destination is in the current
 	// status.
 	StatusReason *string
+
+	// Properties of the virtual private cloud (VPC) connection.
+	VpcProperties *VpcDestinationProperties
 }
 
 // Configuration of the topic rule destination.
@@ -3016,6 +3208,9 @@ type TopicRuleDestinationConfiguration struct {
 
 	// Configuration of the HTTP URL.
 	HttpUrlConfiguration *HttpUrlDestinationConfiguration
+
+	// Configuration of the virtual private cloud (VPC) connection.
+	VpcConfiguration *VpcDestinationConfiguration
 }
 
 // Information about the topic rule destination.
@@ -3024,8 +3219,14 @@ type TopicRuleDestinationSummary struct {
 	// The topic rule destination ARN.
 	Arn *string
 
+	// The date and time when the topic rule destination was created.
+	CreatedAt *time.Time
+
 	// Information about the HTTP URL.
 	HttpUrlSummary *HttpUrlDestinationSummary
+
+	// The date and time when the topic rule destination was last updated.
+	LastUpdatedAt *time.Time
 
 	// The status of the topic rule destination. Valid values are: IN_PROGRESS A topic
 	// rule destination was created but has not been confirmed. You can set status to
@@ -3044,6 +3245,9 @@ type TopicRuleDestinationSummary struct {
 
 	// The reason the topic rule destination is in the current status.
 	StatusReason *string
+
+	// Information about the virtual private cloud (VPC) connection.
+	VpcDestinationSummary *VpcDestinationSummary
 }
 
 // Describes a rule.
@@ -3117,7 +3321,7 @@ type TransferData struct {
 // certificate to inactive.
 type UpdateCACertificateParams struct {
 
-	// The action that you want to apply to the CA cerrtificate. The only supported
+	// The action that you want to apply to the CA certificate. The only supported
 	// value is DEACTIVATE.
 	//
 	// This member is required.
@@ -3128,7 +3332,7 @@ type UpdateCACertificateParams struct {
 // certificate to inactive.
 type UpdateDeviceCertificateParams struct {
 
-	// The action that you want to apply to the device cerrtificate. The only supported
+	// The action that you want to apply to the device certificate. The only supported
 	// value is DEACTIVATE.
 	//
 	// This member is required.
@@ -3145,7 +3349,7 @@ type ValidationError struct {
 // Information about a Device Defender security profile behavior violation.
 type ViolationEvent struct {
 
-	// The behavior which was violated.
+	// The behavior that was violated.
 	Behavior *Behavior
 
 	// The value of the metric (the measurement).
@@ -3157,6 +3361,9 @@ type ViolationEvent struct {
 	// The name of the thing responsible for the violation event.
 	ThingName *string
 
+	// The details of a violation event.
+	ViolationEventAdditionalInfo *ViolationEventAdditionalInfo
+
 	// The time the violation event occurred.
 	ViolationEventTime *time.Time
 
@@ -3165,6 +3372,84 @@ type ViolationEvent struct {
 
 	// The ID of the violation event.
 	ViolationId *string
+}
+
+// The details of a violation event.
+type ViolationEventAdditionalInfo struct {
+
+	// The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High.
+	ConfidenceLevel ConfidenceLevel
+}
+
+// Specifies the time period of which violation events occurred between.
+type ViolationEventOccurrenceRange struct {
+
+	// The end date and time of a time period in which violation events occurred.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The start date and time of a time period in which violation events occurred.
+	//
+	// This member is required.
+	StartTime *time.Time
+}
+
+// The configuration information for a virtual private cloud (VPC) destination.
+type VpcDestinationConfiguration struct {
+
+	// The ARN of a role that has permission to create and attach to elastic network
+	// interfaces (ENIs).
+	//
+	// This member is required.
+	RoleArn *string
+
+	// The subnet IDs of the VPC destination.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The ID of the VPC.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The security groups of the VPC destination.
+	SecurityGroups []string
+}
+
+// The properties of a virtual private cloud (VPC) destination.
+type VpcDestinationProperties struct {
+
+	// The ARN of a role that has permission to create and attach to elastic network
+	// interfaces (ENIs).
+	RoleArn *string
+
+	// The security groups of the VPC destination.
+	SecurityGroups []string
+
+	// The subnet IDs of the VPC destination.
+	SubnetIds []string
+
+	// The ID of the VPC.
+	VpcId *string
+}
+
+// The summary of a virtual private cloud (VPC) destination.
+type VpcDestinationSummary struct {
+
+	// The ARN of a role that has permission to create and attach to elastic network
+	// interfaces (ENIs).
+	RoleArn *string
+
+	// The security groups of the VPC destination.
+	SecurityGroups []string
+
+	// The subnet IDs of the VPC destination.
+	SubnetIds []string
+
+	// The ID of the VPC.
+	VpcId *string
 }
 
 // UnknownUnionMember is returned when a union member is returned over the wire,

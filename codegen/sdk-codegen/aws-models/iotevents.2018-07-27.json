@@ -95,13 +95,13 @@
                 "dynamoDB": {
                     "target": "com.amazonaws.iotevents#DynamoDBAction",
                     "traits": {
-                        "smithy.api#documentation": "<p>Writes to the DynamoDB table that you created. The default action payload contains all\n      attribute-value pairs that have the information about the detector model instance and the\n      event that triggered the action. You can also customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the\n      DynamoDB table receives all attribute-value pairs in the payload that you specify. For more\n      information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in\n        <i>AWS IoT Events Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Writes to the DynamoDB table that you created. The default action payload contains all\n      attribute-value pairs that have the information about the detector model instance and the\n      event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the\n      DynamoDB table receives all attribute-value pairs in the payload that you specify. For more\n      information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in\n        <i>AWS IoT Events Developer Guide</i>.</p>"
                     }
                 },
                 "dynamoDBv2": {
                     "target": "com.amazonaws.iotevents#DynamoDBv2Action",
                     "traits": {
-                        "smithy.api#documentation": "<p>Writes to the DynamoDB table that you created. The default action payload contains all\n      attribute-value pairs that have the information about the detector model instance and the\n      event that triggered the action. You can also customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of\n      the DynamoDB table receives one attribute-value pair in the payload that you specify. For more\n      information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in\n        <i>AWS IoT Events Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Writes to the DynamoDB table that you created. The default action payload contains all\n      attribute-value pairs that have the information about the detector model instance and the\n      event that triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of\n      the DynamoDB table receives one attribute-value pair in the payload that you specify. For more\n      information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-event-actions.html\">Actions</a> in\n        <i>AWS IoT Events Developer Guide</i>.</p>"
                     }
                 },
                 "iotSiteWise": {
@@ -129,6 +129,114 @@
                     "max": 2048
                 }
             }
+        },
+        "com.amazonaws.iotevents#AnalysisId": {
+            "type": "string"
+        },
+        "com.amazonaws.iotevents#AnalysisMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.iotevents#AnalysisResult": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.iotevents#AnalysisType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>supported-actions</code> - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-limits</code> - Resources or operations can't exceed service limits. Update your detector model or request a limit adjust.</p>\n            </li>\n            <li>\n               <p>\n                  <code>structure</code> - The detector model must follow a structure that AWS IoT Events supports. </p>\n            </li>\n            <li>\n               <p>\n                  <code>expression-syntax</code> - Your expression must follow the required syntax.</p>\n            </li>\n            <li>\n               <p>\n                  <code>data-type</code> - Data types referenced in the detector model must be compatible.</p>\n            </li>\n            <li>\n               <p>\n                  <code>referenced-data</code> - You must define the data referenced in your detector model before you can use the data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>referenced-resource</code> - Resources that the detector model uses must be available.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> \n      in the <i>AWS IoT Events Developer Guide</i>.</p>"
+                    }
+                },
+                "level": {
+                    "target": "com.amazonaws.iotevents#AnalysisResultLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity level of the analysis result. Analysis results fall into three general categories based on the severity level:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INFO</code> - \n          An information result informs you about a significant field \n          in your detector model. This type of result usually doesn't require immediate action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WARNING</code> - \n          A warning result draws special attention to fields \n          that are potentially damaging to your detector model. \n          We recommend that you review warnings and take necessary actions \n          before you use your detetor model in production environments. \n          Otherwise, the detector model may not fully function as expected.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - \n          An error result notifies you about a problem found in your detector model. \n          You must fix all errors before you can publish your detector model.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.iotevents#AnalysisMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains additional information about the analysis result.</p>"
+                    }
+                },
+                "locations": {
+                    "target": "com.amazonaws.iotevents#AnalysisResultLocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains one or more locations that you can use to locate the fields in your detector model that the analysis result references.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the result of the analysis.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AnalysisResultLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "INFO",
+                        "name": "INFO"
+                    },
+                    {
+                        "value": "WARNING",
+                        "name": "WARNING"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotevents#AnalysisResultLocation": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "com.amazonaws.iotevents#AnalysisResultLocationPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <a href=\"https://github.com/json-path/JsonPath\">JsonPath</a> expression \n      that identifies the error field in your detector model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information that you can use to locate the field in your detector model that the analysis result references.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AnalysisResultLocationPath": {
+            "type": "string"
+        },
+        "com.amazonaws.iotevents#AnalysisResultLocations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#AnalysisResultLocation"
+            }
+        },
+        "com.amazonaws.iotevents#AnalysisResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#AnalysisResult"
+            }
+        },
+        "com.amazonaws.iotevents#AnalysisStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotevents#AnalysisType": {
+            "type": "string"
         },
         "com.amazonaws.iotevents#AssetId": {
             "type": "string"
@@ -169,19 +277,19 @@
                 "timeInSeconds": {
                     "target": "com.amazonaws.iotevents#AssetPropertyTimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp, in seconds, in the Unix epoch format. The valid range is between\n      1-31556889864403199. You can also specify an expression.</p>",
+                        "smithy.api#documentation": "<p>The timestamp, in seconds, in the Unix epoch format. The valid range is between\n      1-31556889864403199.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "offsetInNanos": {
                     "target": "com.amazonaws.iotevents#AssetPropertyOffsetInNanos",
                     "traits": {
-                        "smithy.api#documentation": "<p>The nanosecond offset converted from <code>timeInSeconds</code>. The valid range is\n      between 0-999999999. You can also specify an expression.</p>"
+                        "smithy.api#documentation": "<p>The nanosecond offset converted from <code>timeInSeconds</code>. The valid range is\n      between 0-999999999.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains timestamp information. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html\">TimeInNanos</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>\n         <p>For parameters that are string data type, you can specify the following options:</p>\n         <ul>\n            <li>\n               <p>Use a string. For example, the <code>timeInSeconds</code> value can be\n            <code>'1586400675'</code>.</p>\n            </li>\n            <li>\n               <p>Use an expression. For example, the <code>timeInSeconds</code> value can be\n            <code>'${$input.TemperatureInput.sensorData.timestamp/1000}'</code>.</p>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in\n          the <i>AWS IoT Events Developer Guide</i>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A structure that contains timestamp information. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_TimeInNanos.html\">TimeInNanos</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>\n         <p>You must use expressions for all parameters in <code>AssetPropertyTimestamp</code>. The\n      expressions accept literals, operators, functions, references, and substitution\n      templates.</p>\n         <p class=\"title\">\n            <b>Examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>For literal values, the expressions must contain single quotes. For example, the value\n          for the <code>timeInSeconds</code> parameter can be <code>'1586400675'</code>.</p>\n            </li>\n            <li>\n               <p>For references, you must specify either variables or input values. For example, the\n          value for the <code>offsetInNanos</code> parameter can be\n          <code>$variable.time</code>.</p>\n            </li>\n            <li>\n               <p>For a substitution template, you must use <code>${}</code>, and the template must be\n          in single quotes. A substitution template can also contain a combination of literals,\n          operators, functions, references, and substitution templates.</p>\n               <p>In the following example, the value for the <code>timeInSeconds</code> parameter uses\n          a substitution template.</p>\n               <p>\n                  <code>'${$input.TemperatureInput.sensorData.timestamp / 1000}'</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, \n        see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> \n        in the <i>AWS IoT Events Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.iotevents#AssetPropertyValue": {
@@ -203,12 +311,12 @@
                 "quality": {
                     "target": "com.amazonaws.iotevents#AssetPropertyQuality",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quality of the asset property value. The value must be <code>GOOD</code>,\n        <code>BAD</code>, or <code>UNCERTAIN</code>. You can also specify an expression.</p>"
+                        "smithy.api#documentation": "<p>The quality of the asset property value. The value must be <code>'GOOD'</code>,\n        <code>'BAD'</code>, or <code>'UNCERTAIN'</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains value information. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html\">AssetPropertyValue</a> in the <i>AWS IoT SiteWise API\n      Reference</i>.</p>\n         <p>For parameters that are string data type, you can specify the following options: </p>\n         <ul>\n            <li>\n               <p>Use a string. For example, the <code>quality</code> value can be\n          <code>'GOOD'</code>.</p>\n            </li>\n            <li>\n               <p>Use an expression. For example, the <code>quality</code> value can be\n            <code>$input.TemperatureInput.sensorData.quality</code>\n               .</p>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in\n          the <i>AWS IoT Events Developer Guide</i>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A structure that contains value information. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetPropertyValue.html\">AssetPropertyValue</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>\n         <p>You must use expressions for all parameters in <code>AssetPropertyValue</code>. The\n      expressions accept literals, operators, functions, references, and substitution\n      templates.</p>\n         <p class=\"title\">\n            <b>Examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>For literal values, the expressions must contain single quotes. For example, the value\n          for the <code>quality</code> parameter can be <code>'GOOD'</code>.</p>\n            </li>\n            <li>\n               <p>For references, you must specify either variables or input values. For example, the\n          value for the <code>quality</code> parameter can be\n            <code>$input.TemperatureInput.sensorData.quality</code>.</p>\n            </li>\n         </ul>\n         <p>For more information, \n        see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> \n        in the <i>AWS IoT Events Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.iotevents#AssetPropertyVariant": {
@@ -217,30 +325,30 @@
                 "stringValue": {
                     "target": "com.amazonaws.iotevents#AssetPropertyStringValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The asset property value is a string. You can also specify an expression. If you use an\n      expression, the evaluated result should be a string.</p>"
+                        "smithy.api#documentation": "<p>The asset property value is a string. You must use an expression, and the evaluated result\n      should be a string.</p>"
                     }
                 },
                 "integerValue": {
                     "target": "com.amazonaws.iotevents#AssetPropertyIntegerValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The asset property value is an integer. You can also specify an expression. If you use an\n      expression, the evaluated result should be an integer.</p>"
+                        "smithy.api#documentation": "<p>The asset property value is an integer. You must use an expression, and the evaluated\n      result should be an integer.</p>"
                     }
                 },
                 "doubleValue": {
                     "target": "com.amazonaws.iotevents#AssetPropertyDoubleValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The asset property value is a double. You can also specify an expression. If you use an\n      expression, the evaluated result should be a double.</p>"
+                        "smithy.api#documentation": "<p>The asset property value is a double. You must use an expression, and the evaluated result\n      should be a double.</p>"
                     }
                 },
                 "booleanValue": {
                     "target": "com.amazonaws.iotevents#AssetPropertyBooleanValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The asset property value is a Boolean value that must be <code>TRUE</code> or\n        <code>FALSE</code>. You can also specify an expression. If you use an expression, the\n      evaluated result should be a Boolean value.</p>"
+                        "smithy.api#documentation": "<p>The asset property value is a Boolean value that must be <code>'TRUE'</code> or\n        <code>'FALSE'</code>. You must use an expression, and the evaluated result should be a\n      Boolean value.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A structure that contains an asset property value. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html\">Variant</a>\n      in the <i>AWS IoT SiteWise API Reference</i>.</p>\n         <important>\n            <p>You must specify one of the following value types, depending on the\n          <code>dataType</code> of the specified asset property. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html\">AssetProperty</a> in the <i>AWS IoT SiteWise API Reference</i>.</p>\n         </important>\n         <p>For parameters that are string data type, you can specify the following options:</p>\n         <ul>\n            <li>\n               <p>Use a string. For example, the <code>doubleValue</code> value can be\n            <code>'47.9'</code>.</p>\n            </li>\n            <li>\n               <p>Use an expression. For example, the <code>doubleValue</code> value can be\n            <code>$input.TemperatureInput.sensorData.temperature</code>.</p>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in\n          the <i>AWS IoT Events Developer Guide</i>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A structure that contains an asset property value. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_Variant.html\">Variant</a>\n      in the <i>AWS IoT SiteWise API Reference</i>.</p>\n         <p>You must use expressions for all parameters in <code>AssetPropertyVariant</code>. The\n      expressions accept literals, operators, functions, references, and substitution\n      templates.</p>\n         <p class=\"title\">\n            <b>Examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>For literal values, the expressions must contain single quotes. For example, the value\n          for the <code>integerValue</code> parameter can be <code>'100'</code>.</p>\n            </li>\n            <li>\n               <p>For references, you must specify either variables or parameters. For example, the\n          value for the <code>booleanValue</code> parameter can be\n          <code>$variable.offline</code>.</p>\n            </li>\n            <li>\n               <p>For a substitution template, you must use <code>${}</code>, and the template must be\n          in single quotes. A substitution template can also contain a combination of literals,\n          operators, functions, references, and substitution templates. </p>\n               <p>In the following example, the value for the <code>doubleValue</code> parameter uses a\n          substitution template. </p>\n               <p>\n                  <code>'${$input.TemperatureInput.sensorData.temperature * 6 / 5 + 32}'</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, \n        see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> \n        in the <i>AWS IoT Events Developer Guide</i>.</p>\n         <p>You must specify one of the following value types, depending on the <code>dataType</code>\n      of the specified asset property. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_AssetProperty.html\">AssetProperty</a> in the\n        <i>AWS IoT SiteWise API Reference</i>.</p>"
             }
         },
         "com.amazonaws.iotevents#Attribute": {
@@ -631,6 +739,64 @@
                     "method": "GET",
                     "uri": "/detector-models/{detectorModelName}",
                     "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#DescribeDetectorModelAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#DescribeDetectorModelAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#DescribeDetectorModelAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves execution information about a detector model analysis</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/analysis/detector-models/{analysisId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#DescribeDetectorModelAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "analysisId": {
+                    "target": "com.amazonaws.iotevents#AnalysisId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the analysis result that you want to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#DescribeDetectorModelAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.iotevents#AnalysisStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analysis activity. The status can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model .</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - AWS IoT Events couldn't analyze your detector model. Try again later.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -1083,13 +1249,13 @@
                 "hashKeyType": {
                     "target": "com.amazonaws.iotevents#DynamoKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type for the hash key (also called the partition key). You can specify the\n      following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STRING</code> - The hash key is a string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NUMBER</code> - The hash key is a number.</p>\n            </li>\n         </ul>\n         <p>If you don't specify <code>hashKeyType</code>, the default value is\n      <code>STRING</code>.</p>"
+                        "smithy.api#documentation": "<p>The data type for the hash key (also called the partition key). You can specify the\n      following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>'STRING'</code> - The hash key is a string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>'NUMBER'</code> - The hash key is a number.</p>\n            </li>\n         </ul>\n         <p>If you don't specify <code>hashKeyType</code>, the default value is\n      <code>'STRING'</code>.</p>"
                     }
                 },
                 "hashKeyField": {
                     "target": "com.amazonaws.iotevents#DynamoKeyField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the hash key (also called the partition key).</p>",
+                        "smithy.api#documentation": "<p>The name of the hash key (also called the partition key). The <code>hashKeyField</code>\n      value must match the partition key of the target DynamoDB table.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1103,13 +1269,13 @@
                 "rangeKeyType": {
                     "target": "com.amazonaws.iotevents#DynamoKeyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type for the range key (also called the sort key), You can specify the following\n      values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>STRING</code> - The range key is a string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NUMBER</code> - The range key is number.</p>\n            </li>\n         </ul>\n         <p>If you don't specify <code>rangeKeyField</code>, the default value is\n      <code>STRING</code>.</p>"
+                        "smithy.api#documentation": "<p>The data type for the range key (also called the sort key), You can specify the following\n      values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>'STRING'</code> - The range key is a string.</p>\n            </li>\n            <li>\n               <p>\n                  <code>'NUMBER'</code> - The range key is number.</p>\n            </li>\n         </ul>\n         <p>If you don't specify <code>rangeKeyField</code>, the default value is\n        <code>'STRING'</code>.</p>"
                     }
                 },
                 "rangeKeyField": {
                     "target": "com.amazonaws.iotevents#DynamoKeyField",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the range key (also called the sort key).</p>"
+                        "smithy.api#documentation": "<p>The name of the range key (also called the sort key). The <code>rangeKeyField</code> value\n      must match the sort key of the target DynamoDB table. </p>"
                     }
                 },
                 "rangeKeyValue": {
@@ -1121,7 +1287,7 @@
                 "operation": {
                     "target": "com.amazonaws.iotevents#DynamoOperation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of operation to perform. You can specify the following values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>INSERT</code> - Insert data as a new item into the DynamoDB table. This item uses\n          the specified hash key as a partition key. If you specified a range key, the item uses the\n          range key as a sort key.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE</code> - Update an existing item of the DynamoDB table with new data. This\n          item's partition key must match the specified hash key. If you specified a range key, the\n          range key must match the item's sort key.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE</code> - Delete an existing item of the DynamoDB table. This item's\n          partition key must match the specified hash key. If you specified a range key, the range\n          key must match the item's sort key.</p>\n            </li>\n         </ul>\n         <p>If you don't specify this parameter, AWS IoT Events triggers the <code>INSERT</code>\n      operation.</p>"
+                        "smithy.api#documentation": "<p>The type of operation to perform. You can specify the following values: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>'INSERT'</code> - Insert data as a new item into the DynamoDB table. This item uses\n          the specified hash key as a partition key. If you specified a range key, the item uses the\n          range key as a sort key.</p>\n            </li>\n            <li>\n               <p>\n                  <code>'UPDATE'</code> - Update an existing item of the DynamoDB table with new data. This\n          item's partition key must match the specified hash key. If you specified a range key, the\n          range key must match the item's sort key.</p>\n            </li>\n            <li>\n               <p>\n                  <code>'DELETE'</code> - Delete an existing item of the DynamoDB table. This item's\n          partition key must match the specified hash key. If you specified a range key, the range\n          key must match the item's sort key.</p>\n            </li>\n         </ul>\n         <p>If you don't specify this parameter, AWS IoT Events triggers the <code>'INSERT'</code>\n      operation.</p>"
                     }
                 },
                 "payloadField": {
@@ -1133,7 +1299,7 @@
                 "tableName": {
                     "target": "com.amazonaws.iotevents#DynamoTableName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DynamoDB table.</p>",
+                        "smithy.api#documentation": "<p>The name of the DynamoDB table. The <code>tableName</code> value must match the table name of\n      the target DynamoDB table. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1142,7 +1308,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The standard action\n      payload contains all attribute-value pairs that have the information about the detector model\n      instance and the event that triggered the action. You can also customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>.\n      One column of the DynamoDB table receives all attribute-value pairs in the payload that you\n      specify.</p>\n         <p>The <code>tableName</code> and <code>hashKeyField</code> values must match the table name\n      and the partition key of the DynamoDB table. </p>\n         <note>\n            <p>If the DynamoDB table also has a sort key, you must specify <code>rangeKeyField</code>. The\n          <code>rangeKeyField</code> value must match the sort key.</p>\n         </note>\n         <p></p>\n         <p>The <code>hashKeyValue</code> and <code>rangeKeyValue</code> use substitution templates.\n      These templates provide data at runtime. The syntax is <code>${sql-expression}</code>.</p>\n         <p>You can use expressions for parameters that are string data type. For more information,\n      see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the\n        <i>AWS IoT Events Developer Guide</i>.</p>\n         <note>\n            <p>If the defined payload type is a string, <code>DynamoDBAction</code> writes non-JSON data\n        to the DynamoDB table as binary data. The DynamoDB console displays the data as Base64-encoded\n        text. The <code>payloadField</code> is <code><payload-field>_raw</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The standard action\n      payload contains all the information about the detector model instance and the event that\n      triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. One column of the\n      DynamoDB table receives all attribute-value pairs in the payload that you specify.</p>\n         <p>You must use expressions for all parameters in <code>DynamoDBAction</code>. The expressions\n      accept literals, operators, functions, references, and substitution templates.</p>\n         <p class=\"title\">\n            <b>Examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>For literal values, the expressions must contain single quotes. For example, the value\n          for the <code>hashKeyType</code> parameter can be <code>'STRING'</code>.</p>\n            </li>\n            <li>\n               <p>For references, you must specify either variables or input values. For example, the\n          value for the <code>hashKeyField</code> parameter can be\n            <code>$input.GreenhouseInput.name</code>.</p>\n            </li>\n            <li>\n               <p>For a substitution template, you must use <code>${}</code>, and the template must be\n          in single quotes. A substitution template can also contain a combination of literals,\n          operators, functions, references, and substitution templates.</p>\n               <p>In the following example, the value for the <code>hashKeyValue</code> parameter uses a\n          substitution template. </p>\n               <p>\n                  <code>'${$input.GreenhouseInput.temperature * 6 / 5 + 32} in Fahrenheit'</code>\n               </p>\n            </li>\n            <li>\n               <p>For a string concatenation, you must use <code>+</code>. A string concatenation can\n          also contain a combination of literals, operators, functions, references, and substitution\n          templates.</p>\n               <p>In the following example, the value for the <code>tableName</code> parameter uses a\n          string concatenation. </p>\n               <p>\n                  <code>'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, \n        see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> \n        in the <i>AWS IoT Events Developer Guide</i>.</p>\n         <p>If the defined payload type is a string, <code>DynamoDBAction</code> writes non-JSON data to\n      the DynamoDB table as binary data. The DynamoDB console displays the data as Base64-encoded text.\n      The value for the <code>payloadField</code> parameter is\n        <code><payload-field>_raw</code>.</p>"
             }
         },
         "com.amazonaws.iotevents#DynamoDBv2Action": {
@@ -1160,7 +1326,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action\n      payload contains all attribute-value pairs that have the information about the detector model\n      instance and the event that triggered the action. You can also customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A\n      separate column of the DynamoDB table receives one attribute-value pair in the payload that you\n      specify.</p>\n         <important>\n            <p>The <code>type</code> value for <code>Payload</code> must be <code>JSON</code>.</p>\n         </important>\n         <p>You can use expressions for parameters that are strings. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Defines an action to write to the Amazon DynamoDB table that you created. The default action\n      payload contains all the information about the detector model instance and the event that\n      triggered the action. You can customize the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Payload.html\">payload</a>. A separate column of\n      the DynamoDB table receives one attribute-value pair in the payload that you specify.</p>\n         <p>You must use expressions for all parameters in <code>DynamoDBv2Action</code>. The expressions\n      accept literals, operators, functions, references, and substitution templates.</p>\n         <p class=\"title\">\n            <b>Examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>For literal values, the expressions must contain single quotes. For example, the value\n          for the <code>tableName</code> parameter can be\n          <code>'GreenhouseTemperatureTable'</code>.</p>\n            </li>\n            <li>\n               <p>For references, you must specify either variables or input values. For example, the\n          value for the <code>tableName</code> parameter can be\n          <code>$variable.ddbtableName</code>.</p>\n            </li>\n            <li>\n               <p>For a substitution template, you must use <code>${}</code>, and the template must be\n          in single quotes. A substitution template can also contain a combination of literals,\n          operators, functions, references, and substitution templates.</p>\n               <p>In the following example, the value for the <code>contentExpression</code> parameter\n          in <code>Payload</code> uses a substitution template. </p>\n               <p>\n                  <code>'{\\\"sensorID\\\": \\\"${$input.GreenhouseInput.sensor_id}\\\", \\\"temperature\\\":\n            \\\"${$input.GreenhouseInput.temperature * 9 / 5 + 32}\\\"}'</code>\n               </p>\n            </li>\n            <li>\n               <p>For a string concatenation, you must use <code>+</code>. A string concatenation can\n          also contain a combination of literals, operators, functions, references, and substitution\n          templates.</p>\n               <p>In the following example, the value for the <code>tableName</code> parameter uses a\n          string concatenation. </p>\n               <p>\n                  <code>'GreenhouseTemperatureTable ' + $input.GreenhouseInput.date</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, \n        see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> \n        in the <i>AWS IoT Events Developer Guide</i>.</p>\n         <p>The value for the <code>type</code> parameter in <code>Payload</code> must be\n        <code>JSON</code>.</p>"
             }
         },
         "com.amazonaws.iotevents#DynamoKeyField": {
@@ -1266,6 +1432,84 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "([\\n\\t])|(\\r\\n)|(,)"
+            }
+        },
+        "com.amazonaws.iotevents#GetDetectorModelAnalysisResults": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#GetDetectorModelAnalysisResultsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#GetDetectorModelAnalysisResultsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves one or more analysis results of the detector model.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/analysis/detector-models/{analysisId}/results",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#GetDetectorModelAnalysisResultsRequest": {
+            "type": "structure",
+            "members": {
+                "analysisId": {
+                    "target": "com.amazonaws.iotevents#AnalysisId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the analysis result that you want to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotevents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotevents#MaxAnalysisResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#GetDetectorModelAnalysisResultsResponse": {
+            "type": "structure",
+            "members": {
+                "analysisResults": {
+                    "target": "com.amazonaws.iotevents#AnalysisResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about one or more analysis results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotevents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.iotevents#Input": {
@@ -1499,10 +1743,16 @@
                     "target": "com.amazonaws.iotevents#DescribeDetectorModel"
                 },
                 {
+                    "target": "com.amazonaws.iotevents#DescribeDetectorModelAnalysis"
+                },
+                {
                     "target": "com.amazonaws.iotevents#DescribeInput"
                 },
                 {
                     "target": "com.amazonaws.iotevents#DescribeLoggingOptions"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#GetDetectorModelAnalysisResults"
                 },
                 {
                     "target": "com.amazonaws.iotevents#ListDetectorModels"
@@ -1518,6 +1768,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotevents#PutLoggingOptions"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#StartDetectorModelAnalysis"
                 },
                 {
                     "target": "com.amazonaws.iotevents#TagResource"
@@ -1575,25 +1828,25 @@
                 "entryId": {
                     "target": "com.amazonaws.iotevents#AssetPropertyEntryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for this entry. You can use the entry ID to track which data entry\n      causes an error in case of failure. The default is a new unique identifier. You can also\n      specify an expression.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for this entry. You can use the entry ID to track which data entry\n      causes an error in case of failure. The default is a new unique identifier.</p>"
                     }
                 },
                 "assetId": {
                     "target": "com.amazonaws.iotevents#AssetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the asset that has the specified property. You can specify an expression.</p>"
+                        "smithy.api#documentation": "<p>The ID of the asset that has the specified property.</p>"
                     }
                 },
                 "propertyId": {
                     "target": "com.amazonaws.iotevents#AssetPropertyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the asset property. You can specify an expression.</p>"
+                        "smithy.api#documentation": "<p>The ID of the asset property.</p>"
                     }
                 },
                 "propertyAlias": {
                     "target": "com.amazonaws.iotevents#AssetPropertyAlias",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alias of the asset property. You can also specify an expression.</p>"
+                        "smithy.api#documentation": "<p>The alias of the asset property.</p>"
                     }
                 },
                 "propertyValue": {
@@ -1605,7 +1858,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sends information about the detector model instance and the event that triggered the\n      action to a specified asset property in AWS IoT SiteWise.</p>\n         <important>\n            <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and\n          <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p>\n         </important>\n         <p>For parameters that are string data type, you can specify the following options: </p>\n         <ul>\n            <li>\n               <p>Use a string. For example, the <code>propertyAlias</code> value can be\n            <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p>\n            </li>\n            <li>\n               <p>Use an expression. For example, the <code>propertyAlias</code> value can be\n            <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/${$input.TemperatureInput.sensorData.turbineID}/temperature'</code>.</p>\n               <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> in\n          the <i>AWS IoT Events Developer Guide</i>.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Sends information about the detector model instance and the event that triggered the\n      action to a specified asset property in AWS IoT SiteWise.</p>\n         <p>You must use expressions for all parameters in <code>IotSiteWiseAction</code>. The\n      expressions accept literals, operators, functions, references, and substitutions\n      templates.</p>\n         <p class=\"title\">\n            <b>Examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>For literal values, the expressions must contain single quotes. For example, the value\n          for the <code>propertyAlias</code> parameter can be\n            <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p>\n            </li>\n            <li>\n               <p>For references, you must specify either variables or input values. For example, the\n          value for the <code>assetId</code> parameter can be\n            <code>$input.TurbineInput.assetId1</code>.</p>\n            </li>\n            <li>\n               <p>For a substitution template, you must use <code>${}</code>, and the template must be\n          in single quotes. A substitution template can also contain a combination of literals,\n          operators, functions, references, and substitution templates.</p>\n               <p>In the following example, the value for the <code>propertyAlias</code> parameter uses\n          a substitution template. </p>\n               <p>\n                  <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/\n            ${$input.TemperatureInput.sensorData.turbineID}/temperature'</code>\n               </p>\n            </li>\n         </ul>\n         <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and\n        <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p>\n         <p>For more information, \n        see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> \n        in the <i>AWS IoT Events Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.iotevents#IotTopicPublishAction": {
@@ -1724,14 +1977,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotevents#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.iotevents#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -1749,7 +2002,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotevents#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to retrieve the next set of results, or <code>null</code> if there are no\n      additional results.</p>"
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
                     }
                 }
             }
@@ -1791,14 +2044,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotevents#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.iotevents#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -1816,7 +2069,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotevents#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to retrieve the next set of results, or <code>null</code> if there are no\n      additional results.</p>"
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
                     }
                 }
             }
@@ -1858,14 +2111,14 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotevents#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results.</p>",
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.iotevents#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to return at one time.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -1883,7 +2136,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iotevents#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token to retrieve the next set of results, or <code>null</code> if there are no\n      additional results.</p>"
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
                     }
                 }
             }
@@ -2010,6 +2263,12 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.iotevents#MaxAnalysisResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.iotevents#MaxResults": {
@@ -2358,6 +2617,62 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Sends information about the detector model instance and the event that triggered the\n      action to an Amazon SQS queue.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#StartDetectorModelAnalysis": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#StartDetectorModelAnalysisRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#StartDetectorModelAnalysisResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Performs an analysis of your detector model. For more information, \n      see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> \n      in the <i>AWS IoT Events Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/analysis/detector-models",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#StartDetectorModelAnalysisRequest": {
+            "type": "structure",
+            "members": {
+                "detectorModelDefinition": {
+                    "target": "com.amazonaws.iotevents#DetectorModelDefinition",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#StartDetectorModelAnalysisResponse": {
+            "type": "structure",
+            "members": {
+                "analysisId": {
+                    "target": "com.amazonaws.iotevents#AnalysisId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID that you can use to retrieve the analysis result.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.iotevents#State": {

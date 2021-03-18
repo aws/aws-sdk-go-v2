@@ -169,6 +169,10 @@ const (
 	ConnectionPropertyKeyKafkaSslEnabled               ConnectionPropertyKey = "KAFKA_SSL_ENABLED"
 	ConnectionPropertyKeyKafkaCustomCert               ConnectionPropertyKey = "KAFKA_CUSTOM_CERT"
 	ConnectionPropertyKeyKafkaSkipCustomCertValidation ConnectionPropertyKey = "KAFKA_SKIP_CUSTOM_CERT_VALIDATION"
+	ConnectionPropertyKeySecretId                      ConnectionPropertyKey = "SECRET_ID"
+	ConnectionPropertyKeyConnectorUrl                  ConnectionPropertyKey = "CONNECTOR_URL"
+	ConnectionPropertyKeyConnectorType                 ConnectionPropertyKey = "CONNECTOR_TYPE"
+	ConnectionPropertyKeyConnectorClassName            ConnectionPropertyKey = "CONNECTOR_CLASS_NAME"
 )
 
 // Values returns all known values for ConnectionPropertyKey. Note that this can be
@@ -197,6 +201,10 @@ func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 		"KAFKA_SSL_ENABLED",
 		"KAFKA_CUSTOM_CERT",
 		"KAFKA_SKIP_CUSTOM_CERT_VALIDATION",
+		"SECRET_ID",
+		"CONNECTOR_URL",
+		"CONNECTOR_TYPE",
+		"CONNECTOR_CLASS_NAME",
 	}
 }
 
@@ -204,11 +212,13 @@ type ConnectionType string
 
 // Enum values for ConnectionType
 const (
-	ConnectionTypeJdbc    ConnectionType = "JDBC"
-	ConnectionTypeSftp    ConnectionType = "SFTP"
-	ConnectionTypeMongodb ConnectionType = "MONGODB"
-	ConnectionTypeKafka   ConnectionType = "KAFKA"
-	ConnectionTypeNetwork ConnectionType = "NETWORK"
+	ConnectionTypeJdbc        ConnectionType = "JDBC"
+	ConnectionTypeSftp        ConnectionType = "SFTP"
+	ConnectionTypeMongodb     ConnectionType = "MONGODB"
+	ConnectionTypeKafka       ConnectionType = "KAFKA"
+	ConnectionTypeNetwork     ConnectionType = "NETWORK"
+	ConnectionTypeMarketplace ConnectionType = "MARKETPLACE"
+	ConnectionTypeCustom      ConnectionType = "CUSTOM"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -221,6 +231,8 @@ func (ConnectionType) Values() []ConnectionType {
 		"MONGODB",
 		"KAFKA",
 		"NETWORK",
+		"MARKETPLACE",
+		"CUSTOM",
 	}
 }
 

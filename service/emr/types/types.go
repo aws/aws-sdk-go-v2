@@ -682,7 +682,7 @@ type HadoopJarStepConfig struct {
 	MainClass *string
 
 	// A list of Java properties that are set when the step runs. You can use these
-	// properties to pass key value pairs to your main function.
+	// properties to pass key-value pairs to your main function.
 	Properties []KeyValue
 }
 
@@ -805,8 +805,8 @@ type InstanceFleet struct {
 	TargetOnDemandCapacity *int32
 
 	// The target capacity of Spot units for the instance fleet, which determines how
-	// many Spot instances to provision. When the instance fleet launches, Amazon EMR
-	// tries to provision Spot instances as specified by InstanceTypeConfig. Each
+	// many Spot Instances to provision. When the instance fleet launches, Amazon EMR
+	// tries to provision Spot Instances as specified by InstanceTypeConfig. Each
 	// instance configuration has a specified WeightedCapacity. When a Spot instance is
 	// provisioned, the WeightedCapacity units count toward the target capacity. Amazon
 	// EMR provisions instances until the target capacity is totally fulfilled, even if
@@ -816,7 +816,7 @@ type InstanceFleet struct {
 	// capacity is exceeded by 3 units. You can use
 	// InstanceFleet$ProvisionedSpotCapacity to determine the Spot capacity units that
 	// have been provisioned for the instance fleet. If not specified or set to 0, only
-	// On-Demand instances are provisioned for the instance fleet. At least one of
+	// On-Demand Instances are provisioned for the instance fleet. At least one of
 	// TargetSpotCapacity and TargetOnDemandCapacity should be greater than 0. For a
 	// master instance fleet, only one of TargetSpotCapacity and TargetOnDemandCapacity
 	// can be specified, and its value must be 1.
@@ -828,7 +828,7 @@ type InstanceFleet struct {
 // excluding 5.0.x versions.
 type InstanceFleetConfig struct {
 
-	// The node type that the instance fleet hosts. Valid values are MASTER,CORE,and
+	// The node type that the instance fleet hosts. Valid values are MASTER, CORE, and
 	// TASK.
 	//
 	// This member is required.
@@ -993,9 +993,9 @@ type InstanceGroup struct {
 	// a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicyDescription
 
-	// The bid price for each EC2 Spot Instance type as defined by InstanceType.
-	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
-	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+	// If specified, indicates that the instance group uses Spot Instances. This is the
+	// maximum price you are willing to pay for Spot Instances. Specify OnDemandPrice
+	// to set the amount equal to the On-Demand price, or specify an amount in USD.
 	BidPrice *string
 
 	// Amazon EMR releases 4.x or later. The list of configurations supplied for an EMR
@@ -1076,9 +1076,9 @@ type InstanceGroupConfig struct {
 	// a CloudWatch metric. See PutAutoScalingPolicy.
 	AutoScalingPolicy *AutoScalingPolicy
 
-	// The bid price for each EC2 Spot Instance type as defined by InstanceType.
-	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
-	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+	// If specified, indicates that the instance group uses Spot Instances. This is the
+	// maximum price you are willing to pay for Spot Instances. Specify OnDemandPrice
+	// to set the amount equal to the On-Demand price, or specify an amount in USD.
 	BidPrice *string
 
 	// Amazon EMR releases 4.x or later. The list of configurations supplied for an EMR
@@ -1136,9 +1136,9 @@ type InstanceGroupDetail struct {
 	// This member is required.
 	State InstanceGroupState
 
-	// The bid price for each EC2 Spot Instance type as defined by InstanceType.
-	// Expressed in USD. If neither BidPrice nor BidPriceAsPercentageOfOnDemandPrice is
-	// provided, BidPriceAsPercentageOfOnDemandPrice defaults to 100%.
+	// If specified, indicates that the instance group uses Spot Instances. This is the
+	// maximum price you are willing to pay for Spot Instances. Specify OnDemandPrice
+	// to set the amount equal to the On-Demand price, or specify an amount in USD.
 	BidPrice *string
 
 	// The date/time the instance group was terminated.
@@ -1804,6 +1804,36 @@ type NotebookExecutionSummary struct {
 	Status NotebookExecutionStatus
 }
 
+// Describes the strategy for using unused Capacity Reservations for fulfilling
+// On-Demand capacity.
+type OnDemandCapacityReservationOptions struct {
+
+	// Indicates the instance's Capacity Reservation preferences. Possible preferences
+	// include:
+	//
+	// * open - The instance can run in any open Capacity Reservation that
+	// has matching attributes (instance type, platform, Availability Zone).
+	//
+	// * none -
+	// The instance avoids running in a Capacity Reservation even if one is available.
+	// The instance runs as an On-Demand Instance.
+	CapacityReservationPreference OnDemandCapacityReservationPreference
+
+	// The ARN of the Capacity Reservation resource group in which to run the instance.
+	CapacityReservationResourceGroupArn *string
+
+	// Indicates whether to use unused Capacity Reservations for fulfilling On-Demand
+	// capacity. If you specify use-capacity-reservations-first, the fleet uses unused
+	// Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand
+	// capacity. If multiple instance pools have unused Capacity Reservations, the
+	// On-Demand allocation strategy (lowest-price) is applied. If the number of unused
+	// Capacity Reservations is less than the On-Demand target capacity, the remaining
+	// On-Demand target capacity is launched according to the On-Demand allocation
+	// strategy (lowest-price). If you do not specify a value, the fleet fulfils the
+	// On-Demand capacity according to the chosen On-Demand allocation strategy.
+	UsageStrategy OnDemandCapacityReservationUsageStrategy
+}
+
 // The launch specification for On-Demand Instances in the instance fleet, which
 // determines the allocation strategy. The instance fleet configuration is
 // available only in Amazon EMR versions 4.8.0 and later, excluding 5.0.x versions.
@@ -1811,12 +1841,16 @@ type NotebookExecutionSummary struct {
 // 5.12.1 and later.
 type OnDemandProvisioningSpecification struct {
 
-	// Specifies the strategy to use in launching On-Demand Instance fleets. Currently,
+	// Specifies the strategy to use in launching On-Demand instance fleets. Currently,
 	// the only option is lowest-price (the default), which launches the lowest price
 	// first.
 	//
 	// This member is required.
 	AllocationStrategy OnDemandProvisioningAllocationStrategy
+
+	// The launch specification for On-Demand instances in the instance fleet, which
+	// determines the allocation strategy.
+	CapacityReservationOptions *OnDemandCapacityReservationOptions
 }
 
 // Placement group configuration for an Amazon EMR cluster. The configuration
@@ -1973,13 +2007,14 @@ type SessionMappingDetail struct {
 	IdentityId *string
 
 	// The name of the user or group. For more information, see UserName
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
 	// in the AWS SSO Identity Store API Reference.
 	IdentityName *string
 
-	// Specifies whether the identity mapped to the Studio is a user or a group.
+	// Specifies whether the identity mapped to the Amazon EMR Studio is a user or a
+	// group.
 	IdentityType IdentityType
 
 	// The time the session mapping was last modified.
@@ -2005,13 +2040,14 @@ type SessionMappingSummary struct {
 	IdentityId *string
 
 	// The name of the user or group. For more information, see UserName
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
 	// in the AWS SSO Identity Store API Reference.
 	IdentityName *string
 
-	// Specifies whether the identity mapped to the Studio is a user or a group.
+	// Specifies whether the identity mapped to the Amazon EMR Studio is a user or a
+	// group.
 	IdentityType IdentityType
 
 	// The Amazon Resource Name (ARN) of the session policy associated with the user or
@@ -2102,7 +2138,7 @@ type SpotProvisioningSpecification struct {
 
 	// The defined duration for Spot Instances (also known as Spot blocks) in minutes.
 	// When specified, the Spot Instance does not terminate before the defined duration
-	// expires, and defined duration pricing for Spot instances applies. Valid values
+	// expires, and defined duration pricing for Spot Instances applies. Valid values
 	// are 60, 120, 180, 240, 300, or 360. The duration period starts as soon as a Spot
 	// Instance receives its instance ID. At the end of the duration, Amazon EC2 marks
 	// the Spot Instance for termination and provides a Spot Instance termination
@@ -2253,18 +2289,18 @@ type StepTimeline struct {
 // Details for an Amazon EMR Studio including ID, creation time, name, and so on.
 type Studio struct {
 
-	// Specifies whether the Studio authenticates users using single sign-on (SSO) or
-	// IAM.
+	// Specifies whether the Amazon EMR Studio authenticates users using single sign-on
+	// (SSO) or IAM.
 	AuthMode AuthMode
 
 	// The time the Amazon EMR Studio was created.
 	CreationTime *time.Time
 
-	// The default Amazon S3 location to back up Amazon EMR Studio Workspaces and
-	// notebook files.
+	// The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook
+	// files.
 	DefaultS3Location *string
 
-	// The detailed description of the EMR Studio.
+	// The detailed description of the Amazon EMR Studio.
 	Description *string
 
 	// The ID of the Engine security group associated with the Amazon EMR Studio. The
@@ -2272,16 +2308,16 @@ type Studio struct {
 	// Workspace security group.
 	EngineSecurityGroupId *string
 
-	// The name of the EMR Studio.
+	// The name of the Amazon EMR Studio.
 	Name *string
 
 	// The name of the IAM role assumed by the Amazon EMR Studio.
 	ServiceRole *string
 
-	// The Amazon Resource Name (ARN) of the EMR Studio.
+	// The Amazon Resource Name (ARN) of the Amazon EMR Studio.
 	StudioArn *string
 
-	// The ID of the EMR Studio.
+	// The ID of the Amazon EMR Studio.
 	StudioId *string
 
 	// The list of IDs of the subnets associated with the Amazon EMR Studio.
@@ -2296,7 +2332,7 @@ type Studio struct {
 	// The name of the IAM role assumed by users logged in to the Amazon EMR Studio.
 	UserRole *string
 
-	// The ID of the VPC associated with the EMR Studio.
+	// The ID of the VPC associated with the Amazon EMR Studio.
 	VpcId *string
 
 	// The ID of the Workspace security group associated with the Amazon EMR Studio.
@@ -2313,7 +2349,7 @@ type StudioSummary struct {
 	// The time when the Amazon EMR Studio was created.
 	CreationTime *time.Time
 
-	// The detailed description of the EMR Studio.
+	// The detailed description of the Amazon EMR Studio.
 	Description *string
 
 	// The name of the Amazon EMR Studio.
@@ -2330,9 +2366,9 @@ type StudioSummary struct {
 	VpcId *string
 }
 
-// The list of supported product configurations which allow user-supplied
-// arguments. EMR accepts these arguments and forwards them to the corresponding
-// installation script as bootstrap action arguments.
+// The list of supported product configurations that allow user-supplied arguments.
+// EMR accepts these arguments and forwards them to the corresponding installation
+// script as bootstrap action arguments.
 type SupportedProductConfig struct {
 
 	// The list of user-supplied arguments.

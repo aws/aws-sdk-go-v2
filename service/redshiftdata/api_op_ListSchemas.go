@@ -45,11 +45,16 @@ type ListSchemasInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// The name of the database. This parameter is required when authenticating using
-	// temporary credentials.
+	// The name of the database that contains the schemas to list. If ConnectedDatabase
+	// is not specified, this is also the database to connect to with your
+	// authentication credentials.
 	//
 	// This member is required.
 	Database *string
+
+	// A database name. The connected database is specified when you connect with your
+	// authentication credentials.
+	ConnectedDatabase *string
 
 	// The database user name. This parameter is required when authenticating using
 	// temporary credentials.

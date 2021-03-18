@@ -5104,6 +5104,18 @@ func awsRestjson1_serializeDocumentRobotApplicationConfig(v *types.RobotApplicat
 		}
 	}
 
+	if v.UploadConfigurations != nil {
+		ok := object.Key("uploadConfigurations")
+		if err := awsRestjson1_serializeDocumentUploadConfigurations(v.UploadConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UseDefaultUploadConfigurations != nil {
+		ok := object.Key("useDefaultUploadConfigurations")
+		ok.Boolean(*v.UseDefaultUploadConfigurations)
+	}
+
 	return nil
 }
 
@@ -5200,6 +5212,18 @@ func awsRestjson1_serializeDocumentSimulationApplicationConfig(v *types.Simulati
 		if err := awsRestjson1_serializeDocumentLaunchConfig(v.LaunchConfig, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.UploadConfigurations != nil {
+		ok := object.Key("uploadConfigurations")
+		if err := awsRestjson1_serializeDocumentUploadConfigurations(v.UploadConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UseDefaultUploadConfigurations != nil {
+		ok := object.Key("useDefaultUploadConfigurations")
+		ok.Boolean(*v.UseDefaultUploadConfigurations)
 	}
 
 	if v.WorldConfigs != nil {
@@ -5396,6 +5420,41 @@ func awsRestjson1_serializeDocumentTemplateLocation(v *types.TemplateLocation, v
 		ok.String(*v.S3Key)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUploadConfiguration(v *types.UploadConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		ok.String(*v.Path)
+	}
+
+	if len(v.UploadBehavior) > 0 {
+		ok := object.Key("uploadBehavior")
+		ok.String(string(v.UploadBehavior))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUploadConfigurations(v []types.UploadConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentUploadConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

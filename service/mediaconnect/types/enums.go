@@ -60,8 +60,9 @@ type KeyType string
 
 // Enum values for KeyType
 const (
-	KeyTypeSpeke     KeyType = "speke"
-	KeyTypeStaticKey KeyType = "static-key"
+	KeyTypeSpeke       KeyType = "speke"
+	KeyTypeStaticKey   KeyType = "static-key"
+	KeyTypeSrtPassword KeyType = "srt-password"
 )
 
 // Values returns all known values for KeyType. Note that this can be expanded in
@@ -71,6 +72,7 @@ func (KeyType) Values() []KeyType {
 	return []KeyType{
 		"speke",
 		"static-key",
+		"srt-password",
 	}
 }
 
@@ -94,11 +96,12 @@ type Protocol string
 
 // Enum values for Protocol
 const (
-	ProtocolZixiPush Protocol = "zixi-push"
-	ProtocolRtpFec   Protocol = "rtp-fec"
-	ProtocolRtp      Protocol = "rtp"
-	ProtocolZixiPull Protocol = "zixi-pull"
-	ProtocolRist     Protocol = "rist"
+	ProtocolZixiPush    Protocol = "zixi-push"
+	ProtocolRtpFec      Protocol = "rtp-fec"
+	ProtocolRtp         Protocol = "rtp"
+	ProtocolZixiPull    Protocol = "zixi-pull"
+	ProtocolRist        Protocol = "rist"
+	ProtocolSrtListener Protocol = "srt-listener"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -111,6 +114,7 @@ func (Protocol) Values() []Protocol {
 		"rtp",
 		"zixi-pull",
 		"rist",
+		"srt-listener",
 	}
 }
 

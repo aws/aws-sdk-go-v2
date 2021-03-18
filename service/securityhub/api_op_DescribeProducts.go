@@ -12,8 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the available products that you can subscribe to and
-// integrate with Security Hub in order to consolidate findings.
+// Returns information about product integrations in Security Hub. You can
+// optionally provide an integration ARN. If you provide an integration ARN, then
+// the results only include that integration. If you do not provide an integration
+// ARN, then the results include all of the available product integrations.
 func (c *Client) DescribeProducts(ctx context.Context, params *DescribeProductsInput, optFns ...func(*Options)) (*DescribeProductsOutput, error) {
 	if params == nil {
 		params = &DescribeProductsInput{}
@@ -39,6 +41,9 @@ type DescribeProductsInput struct {
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
+
+	// The ARN of the integration to return.
+	ProductArn *string
 }
 
 type DescribeProductsOutput struct {

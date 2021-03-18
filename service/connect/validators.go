@@ -90,6 +90,26 @@ func (m *validateOpAssociateLexBot) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateQueueQuickConnects struct {
+}
+
+func (*validateOpAssociateQueueQuickConnects) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateQueueQuickConnects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateQueueQuickConnectsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateQueueQuickConnectsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateRoutingProfileQueues struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpCreateIntegrationAssociation) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateIntegrationAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateQueue struct {
+}
+
+func (*validateOpCreateQueue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateQueueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateQueueInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +470,26 @@ func (m *validateOpDescribeContactFlow) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeHoursOfOperation struct {
+}
+
+func (*validateOpDescribeHoursOfOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeHoursOfOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeHoursOfOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeHoursOfOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeInstanceAttribute struct {
 }
 
@@ -485,6 +545,26 @@ func (m *validateOpDescribeInstanceStorageConfig) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeInstanceStorageConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeQueue struct {
+}
+
+func (*validateOpDescribeQueue) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeQueue) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeQueueInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeQueueInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -665,6 +745,26 @@ func (m *validateOpDisassociateLexBot) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateLexBotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateQueueQuickConnects struct {
+}
+
+func (*validateOpDisassociateQueueQuickConnects) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateQueueQuickConnects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateQueueQuickConnectsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateQueueQuickConnectsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -985,6 +1085,26 @@ func (m *validateOpListPrompts) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListPromptsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListQueueQuickConnects struct {
+}
+
+func (*validateOpListQueueQuickConnects) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListQueueQuickConnects) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListQueueQuickConnectsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListQueueQuickConnectsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1490,6 +1610,106 @@ func (m *validateOpUpdateInstanceStorageConfig) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateQueueHoursOfOperation struct {
+}
+
+func (*validateOpUpdateQueueHoursOfOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueueHoursOfOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueHoursOfOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueHoursOfOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQueueMaxContacts struct {
+}
+
+func (*validateOpUpdateQueueMaxContacts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueueMaxContacts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueMaxContactsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueMaxContactsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQueueName struct {
+}
+
+func (*validateOpUpdateQueueName) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueueName) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueNameInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQueueOutboundCallerConfig struct {
+}
+
+func (*validateOpUpdateQueueOutboundCallerConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueueOutboundCallerConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueOutboundCallerConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueOutboundCallerConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateQueueStatus struct {
+}
+
+func (*validateOpUpdateQueueStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateQueueStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateQueueStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateQueueStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateQuickConnectConfig struct {
 }
 
@@ -1766,6 +1986,10 @@ func addOpAssociateLexBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateLexBot{}, middleware.After)
 }
 
+func addOpAssociateQueueQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateQueueQuickConnects{}, middleware.After)
+}
+
 func addOpAssociateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateRoutingProfileQueues{}, middleware.After)
 }
@@ -1784,6 +2008,10 @@ func addOpCreateInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateIntegrationAssociationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIntegrationAssociation{}, middleware.After)
+}
+
+func addOpCreateQueueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateQueue{}, middleware.After)
 }
 
 func addOpCreateQuickConnectValidationMiddleware(stack *middleware.Stack) error {
@@ -1834,6 +2062,10 @@ func addOpDescribeContactFlowValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeContactFlow{}, middleware.After)
 }
 
+func addOpDescribeHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeHoursOfOperation{}, middleware.After)
+}
+
 func addOpDescribeInstanceAttributeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInstanceAttribute{}, middleware.After)
 }
@@ -1844,6 +2076,10 @@ func addOpDescribeInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpDescribeQueueValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeQueue{}, middleware.After)
 }
 
 func addOpDescribeQuickConnectValidationMiddleware(stack *middleware.Stack) error {
@@ -1880,6 +2116,10 @@ func addOpDisassociateLambdaFunctionValidationMiddleware(stack *middleware.Stack
 
 func addOpDisassociateLexBotValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateLexBot{}, middleware.After)
+}
+
+func addOpDisassociateQueueQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateQueueQuickConnects{}, middleware.After)
 }
 
 func addOpDisassociateRoutingProfileQueuesValidationMiddleware(stack *middleware.Stack) error {
@@ -1944,6 +2184,10 @@ func addOpListPhoneNumbersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListPromptsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListPrompts{}, middleware.After)
+}
+
+func addOpListQueueQuickConnectsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListQueueQuickConnects{}, middleware.After)
 }
 
 func addOpListQueuesValidationMiddleware(stack *middleware.Stack) error {
@@ -2044,6 +2288,26 @@ func addOpUpdateInstanceAttributeValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdateInstanceStorageConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateInstanceStorageConfig{}, middleware.After)
+}
+
+func addOpUpdateQueueHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueueHoursOfOperation{}, middleware.After)
+}
+
+func addOpUpdateQueueMaxContactsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueueMaxContacts{}, middleware.After)
+}
+
+func addOpUpdateQueueNameValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueueName{}, middleware.After)
+}
+
+func addOpUpdateQueueOutboundCallerConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueueOutboundCallerConfig{}, middleware.After)
+}
+
+func addOpUpdateQueueStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateQueueStatus{}, middleware.After)
 }
 
 func addOpUpdateQuickConnectConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -2625,6 +2889,27 @@ func validateOpAssociateLexBotInput(v *AssociateLexBotInput) error {
 	}
 }
 
+func validateOpAssociateQueueQuickConnectsInput(v *AssociateQueueQuickConnectsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateQueueQuickConnectsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.QuickConnectIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateRoutingProfileQueuesInput(v *AssociateRoutingProfileQueuesInput) error {
 	if v == nil {
 		return nil
@@ -2735,6 +3020,27 @@ func validateOpCreateIntegrationAssociationInput(v *CreateIntegrationAssociation
 	}
 	if len(v.SourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateQueueInput(v *CreateQueueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateQueueInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3000,6 +3306,24 @@ func validateOpDescribeContactFlowInput(v *DescribeContactFlowInput) error {
 	}
 }
 
+func validateOpDescribeHoursOfOperationInput(v *DescribeHoursOfOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeHoursOfOperationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeInstanceAttributeInput(v *DescribeInstanceAttributeInput) error {
 	if v == nil {
 		return nil
@@ -3046,6 +3370,24 @@ func validateOpDescribeInstanceStorageConfigInput(v *DescribeInstanceStorageConf
 	}
 	if len(v.ResourceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeQueueInput(v *DescribeQueueInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeQueueInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3211,6 +3553,27 @@ func validateOpDisassociateLexBotInput(v *DisassociateLexBotInput) error {
 	}
 	if v.LexRegion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LexRegion"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateQueueQuickConnectsInput(v *DisassociateQueueQuickConnectsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateQueueQuickConnectsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.QuickConnectIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QuickConnectIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3488,6 +3851,24 @@ func validateOpListPromptsInput(v *ListPromptsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListPromptsInput"}
 	if v.InstanceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListQueueQuickConnectsInput(v *ListQueueQuickConnectsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListQueueQuickConnectsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3971,6 +4352,105 @@ func validateOpUpdateInstanceStorageConfigInput(v *UpdateInstanceStorageConfigIn
 		if err := validateInstanceStorageConfig(v.StorageConfig); err != nil {
 			invalidParams.AddNested("StorageConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueueHoursOfOperationInput(v *UpdateQueueHoursOfOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueHoursOfOperationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueueMaxContactsInput(v *UpdateQueueMaxContactsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueMaxContactsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueueNameInput(v *UpdateQueueNameInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueNameInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueueOutboundCallerConfigInput(v *UpdateQueueOutboundCallerConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueOutboundCallerConfigInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if v.OutboundCallerConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutboundCallerConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateQueueStatusInput(v *UpdateQueueStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateQueueStatusInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.QueueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueueId"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

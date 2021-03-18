@@ -44,8 +44,8 @@ type DescribeScalingPlansInput struct {
 	// you cannot specify scaling plan names.
 	ScalingPlanNames []string
 
-	// The version number of the scaling plan. If you specify a scaling plan version,
-	// you must also specify a scaling plan name.
+	// The version number of the scaling plan. Currently, the only valid value is 1. If
+	// you specify a scaling plan version, you must also specify a scaling plan name.
 	ScalingPlanVersion *int64
 }
 

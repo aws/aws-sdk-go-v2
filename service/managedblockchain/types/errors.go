@@ -113,10 +113,12 @@ func (e *ResourceLimitExceededException) ErrorMessage() string {
 func (e *ResourceLimitExceededException) ErrorCode() string             { return "ResourceLimitExceededException" }
 func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A requested resource does not exist on the network. It may have been deleted or
-// referenced inaccurately.
+// A requested resource does not exist. It may have been deleted or referenced
+// inaccurately.
 type ResourceNotFoundException struct {
 	Message *string
+
+	ResourceName *string
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -168,3 +170,22 @@ func (e *ThrottlingException) ErrorMessage() string {
 }
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+//
+type TooManyTagsException struct {
+	Message *string
+
+	ResourceName *string
+}
+
+func (e *TooManyTagsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyTagsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
+func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

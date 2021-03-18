@@ -28,9 +28,20 @@ func (c *Client) GetUsageTotals(ctx context.Context, params *GetUsageTotalsInput
 }
 
 type GetUsageTotalsInput struct {
+
+	// The inclusive time period to retrieve the data for. Valid values are:
+	// MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for
+	// the preceding 30 days. If you don't specify a value for this parameter, Amazon
+	// Macie provides aggregated usage data for the preceding 30 days.
+	TimeRange *string
 }
 
 type GetUsageTotalsOutput struct {
+
+	// The inclusive time period that the usage data applies to. Possible values are:
+	// MONTH_TO_DATE, for the current calendar month to date; and, PAST_30_DAYS, for
+	// the preceding 30 days.
+	TimeRange types.TimeRange
 
 	// An array of objects that contains the results of the query. Each object contains
 	// the data for a specific usage metric.

@@ -45,6 +45,12 @@ type UpdateServiceSettingInput struct {
 	// The setting ID can be one of the following.
 	//
 	// *
+	// /ssm/automation/customer-script-log-destination
+	//
+	// *
+	// /ssm/automation/customer-script-log-group-name
+	//
+	// *
 	// /ssm/parameter-store/default-parameter-tier
 	//
 	// *
@@ -69,7 +75,10 @@ type UpdateServiceSettingInput struct {
 	// For the
 	// /ssm/parameter-store/high-throughput-enabled, and
 	// /ssm/managed-instance/activation-tier setting IDs, the setting value can be true
-	// or false.
+	// or false. For the /ssm/automation/customer-script-log-destination setting ID,
+	// the setting value can be CloudWatch. For the
+	// /ssm/automation/customer-script-log-group-name setting ID, the setting value can
+	// be the name of a CloudWatch Logs log group.
 	//
 	// This member is required.
 	SettingValue *string

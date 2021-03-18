@@ -167,6 +167,11 @@ func awsRestjson1_serializeOpDocumentCreateDatasetInput(v *CreateDatasetInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Format) > 0 {
+		ok := object.Key("Format")
+		ok.String(string(v.Format))
+	}
+
 	if v.FormatOptions != nil {
 		ok := object.Key("FormatOptions")
 		if err := awsRestjson1_serializeDocumentFormatOptions(v.FormatOptions, ok); err != nil {
@@ -274,6 +279,13 @@ func awsRestjson1_serializeOpDocumentCreateProfileJobInput(v *CreateProfileJobIn
 	if len(v.EncryptionMode) > 0 {
 		ok := object.Key("EncryptionMode")
 		ok.String(string(v.EncryptionMode))
+	}
+
+	if v.JobSample != nil {
+		ok := object.Key("JobSample")
+		if err := awsRestjson1_serializeDocumentJobSample(v.JobSample, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.LogSubscription) > 0 {
@@ -1191,6 +1203,78 @@ func awsRestjson1_serializeOpHttpBindingsDescribeJobInput(v *DescribeJobInput, e
 	}
 	if v.Name != nil {
 		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeJobRun struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeJobRun) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeJobRun) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeJobRunInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/jobs/{Name}/jobRun/{RunId}")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeJobRunInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeJobRunInput(v *DescribeJobRunInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Name == nil || len(*v.Name) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Name must not be empty")}
+	}
+	if v.Name != nil {
+		if err := encoder.SetURI("Name").String(*v.Name); err != nil {
+			return err
+		}
+	}
+
+	if v.RunId == nil || len(*v.RunId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RunId must not be empty")}
+	}
+	if v.RunId != nil {
+		if err := encoder.SetURI("RunId").String(*v.RunId); err != nil {
 			return err
 		}
 	}
@@ -2569,6 +2653,11 @@ func awsRestjson1_serializeOpDocumentUpdateDatasetInput(v *UpdateDatasetInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.Format) > 0 {
+		ok := object.Key("Format")
+		ok.String(string(v.Format))
+	}
+
 	if v.FormatOptions != nil {
 		ok := object.Key("FormatOptions")
 		if err := awsRestjson1_serializeDocumentFormatOptions(v.FormatOptions, ok); err != nil {
@@ -2672,6 +2761,13 @@ func awsRestjson1_serializeOpDocumentUpdateProfileJobInput(v *UpdateProfileJobIn
 	if len(v.EncryptionMode) > 0 {
 		ok := object.Key("EncryptionMode")
 		ok.String(string(v.EncryptionMode))
+	}
+
+	if v.JobSample != nil {
+		ok := object.Key("JobSample")
+		if err := awsRestjson1_serializeDocumentJobSample(v.JobSample, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.LogSubscription) > 0 {
@@ -3157,6 +3253,35 @@ func awsRestjson1_serializeDocumentConditionExpressionList(v []types.ConditionEx
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCsvOptions(v *types.CsvOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Delimiter != nil {
+		ok := object.Key("Delimiter")
+		ok.String(*v.Delimiter)
+	}
+
+	if v.HeaderRow != nil {
+		ok := object.Key("HeaderRow")
+		ok.Boolean(*v.HeaderRow)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCsvOutputOptions(v *types.CsvOutputOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Delimiter != nil {
+		ok := object.Key("Delimiter")
+		ok.String(*v.Delimiter)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataCatalogInputDefinition(v *types.DataCatalogInputDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3190,6 +3315,11 @@ func awsRestjson1_serializeDocumentExcelOptions(v *types.ExcelOptions, value smi
 	object := value.Object()
 	defer object.Close()
 
+	if v.HeaderRow != nil {
+		ok := object.Key("HeaderRow")
+		ok.Boolean(*v.HeaderRow)
+	}
+
 	if v.SheetIndexes != nil {
 		ok := object.Key("SheetIndexes")
 		if err := awsRestjson1_serializeDocumentSheetIndexList(v.SheetIndexes, ok); err != nil {
@@ -3210,6 +3340,13 @@ func awsRestjson1_serializeDocumentExcelOptions(v *types.ExcelOptions, value smi
 func awsRestjson1_serializeDocumentFormatOptions(v *types.FormatOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Csv != nil {
+		ok := object.Key("Csv")
+		if err := awsRestjson1_serializeDocumentCsvOptions(v.Csv, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Excel != nil {
 		ok := object.Key("Excel")
@@ -3271,6 +3408,23 @@ func awsRestjson1_serializeDocumentJobNameList(v []string, value smithyjson.Valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentJobSample(v *types.JobSample, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	if v.Size != nil {
+		ok := object.Key("Size")
+		ok.Long(*v.Size)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJsonOptions(v *types.JsonOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3297,6 +3451,13 @@ func awsRestjson1_serializeDocumentOutput(v *types.Output, value smithyjson.Valu
 		ok.String(string(v.Format))
 	}
 
+	if v.FormatOptions != nil {
+		ok := object.Key("FormatOptions")
+		if err := awsRestjson1_serializeDocumentOutputFormatOptions(v.FormatOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Location != nil {
 		ok := object.Key("Location")
 		if err := awsRestjson1_serializeDocumentS3Location(v.Location, ok); err != nil {
@@ -3312,6 +3473,20 @@ func awsRestjson1_serializeDocumentOutput(v *types.Output, value smithyjson.Valu
 	if v.PartitionColumns != nil {
 		ok := object.Key("PartitionColumns")
 		if err := awsRestjson1_serializeDocumentColumnNameList(v.PartitionColumns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOutputFormatOptions(v *types.OutputFormatOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Csv != nil {
+		ok := object.Key("Csv")
+		if err := awsRestjson1_serializeDocumentCsvOutputOptions(v.Csv, ok); err != nil {
 			return err
 		}
 	}

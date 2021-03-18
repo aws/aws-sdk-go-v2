@@ -30,12 +30,12 @@ func (c *Client) DescribeAppInstanceAdmin(ctx context.Context, params *DescribeA
 
 type DescribeAppInstanceAdminInput struct {
 
-	// The ARN of the app instance administrator.
+	// The ARN of the AppInstanceAdmin.
 	//
 	// This member is required.
 	AppInstanceAdminArn *string
 
-	// The ARN of the app instance.
+	// The ARN of the AppInstance.
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -43,7 +43,7 @@ type DescribeAppInstanceAdminInput struct {
 
 type DescribeAppInstanceAdminOutput struct {
 
-	// The ARN and name of the app instance user, the ARN of the app instance, and the
+	// The ARN and name of the AppInstanceUser, the ARN of the AppInstance, and the
 	// created and last-updated timestamps. All timestamps use epoch milliseconds.
 	AppInstanceAdmin *types.AppInstanceAdmin
 

@@ -98,6 +98,7 @@ add-module-license-files:
     	go run . -skip-root \
             "cp $(LICENSE_FILE) ."
 
+sync-models: sync-endpoint-models sync-api-models
 sync-endpoint-models: clone-v1-models sync-endpoints.json gen-endpoint-prefix.json
 
 clone-v1-models:

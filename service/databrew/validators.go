@@ -290,6 +290,26 @@ func (m *validateOpDescribeJob) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeJobRun struct {
+}
+
+func (*validateOpDescribeJobRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeJobRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeJobRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeJobRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeProject struct {
 }
 
@@ -724,6 +744,10 @@ func addOpDescribeDatasetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJob{}, middleware.After)
+}
+
+func addOpDescribeJobRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeJobRun{}, middleware.After)
 }
 
 func addOpDescribeProjectValidationMiddleware(stack *middleware.Stack) error {
@@ -1301,6 +1325,24 @@ func validateOpDescribeJobInput(v *DescribeJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeJobRunInput(v *DescribeJobRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobRunInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -190,8 +190,38 @@ type OrganizationNode struct {
 // The constraints that the administrator has put on the parameter.
 type ParameterConstraints struct {
 
+	// A regular expression that represents the patterns that allow for String types.
+	// The pattern must match the entire parameter value provided.
+	AllowedPattern *string
+
 	// The values that the administrator has allowed for the parameter.
 	AllowedValues []string
+
+	// A string that explains a constraint when the constraint is violated. For
+	// example, without a constraint description, a parameter that has an allowed
+	// pattern of [A-Za-z0-9]+ displays the following error message when the user
+	// specifies an invalid value: Malformed input-Parameter MyParameter must match
+	// pattern [A-Za-z0-9]+ By adding a constraint description, such as must only
+	// contain letters (uppercase and lowercase) and numbers, you can display the
+	// following customized error message: Malformed input-Parameter MyParameter must
+	// only contain uppercase and lowercase letters and numbers.
+	ConstraintDescription *string
+
+	// An integer value that determines the largest number of characters you want to
+	// allow for String types.
+	MaxLength *string
+
+	// A numeric value that determines the largest numeric value you want to allow for
+	// Number types.
+	MaxValue *string
+
+	// An integer value that determines the smallest number of characters you want to
+	// allow for String types.
+	MinLength *string
+
+	// A numeric value that determines the smallest numeric value you want to allow for
+	// Number types.
+	MinValue *string
 }
 
 // Information about a portfolio.

@@ -77,7 +77,7 @@ func (e *DuplicateResourceException) ErrorMessage() string {
 func (e *DuplicateResourceException) ErrorCode() string             { return "DuplicateResourceException" }
 func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Request processing failed due to an error or failure with the service.
+// Request processing failed because of an error or failure with the service.
 type InternalServiceException struct {
 	Message *string
 }

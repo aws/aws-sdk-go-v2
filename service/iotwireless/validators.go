@@ -1085,6 +1085,11 @@ func validateOpAssociateAwsAccountWithPartnerAccountInput(v *AssociateAwsAccount
 	if v.Sidewalk == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sidewalk"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1252,6 +1257,11 @@ func validateOpCreateWirelessGatewayTaskDefinitionInput(v *CreateWirelessGateway
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateWirelessGatewayTaskDefinitionInput"}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

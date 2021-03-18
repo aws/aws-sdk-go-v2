@@ -14,16 +14,9 @@ import (
 // StartGameSessionPlacement requests that reference the queue will fail. To delete
 // a queue, specify the queue name. Learn more  Using Multi-Region Queues
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
-// Related operations
-//
-// * CreateGameSessionQueue
-//
-// * DescribeGameSessionQueues
-//
-// *
-// UpdateGameSessionQueue
-//
-// * DeleteGameSessionQueue
+// Related actions CreateGameSessionQueue | DescribeGameSessionQueues |
+// UpdateGameSessionQueue | DeleteGameSessionQueue | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteGameSessionQueue(ctx context.Context, params *DeleteGameSessionQueueInput, optFns ...func(*Options)) (*DeleteGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &DeleteGameSessionQueueInput{}

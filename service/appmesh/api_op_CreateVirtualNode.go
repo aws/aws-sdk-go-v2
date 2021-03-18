@@ -19,16 +19,22 @@ import (
 // Security (TLS). You define a listener for any inbound traffic that your virtual
 // node expects. Any virtual service that your virtual node expects to communicate
 // to is specified as a backend. The response metadata for your new virtual node
-// contains the arn that is associated with the virtual node. Set this value
-// (either the full ARN or the truncated resource name: for example,
-// mesh/default/virtualNode/simpleapp) as the APPMESH_VIRTUAL_NODE_NAME environment
-// variable for your task group's Envoy proxy container in your task definition or
-// pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.
-// If you require your Envoy stats or tracing to use a different name, you can
-// override the node.cluster value that is set by APPMESH_VIRTUAL_NODE_NAME with
-// the APPMESH_VIRTUAL_NODE_CLUSTER environment variable. For more information
-// about virtual nodes, see Virtual nodes
-// (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html).
+// contains the arn that is associated with the virtual node. Set this value to the
+// full ARN; for example,
+// arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the
+// APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy
+// container in your task definition or pod spec. This is then mapped to the
+// node.id and node.cluster Envoy parameters. By default, App Mesh uses the name of
+// the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to
+// itself in metrics and traces. You can override this behavior by setting the
+// APPMESH_RESOURCE_CLUSTER environment variable with your own name. AWS Cloud Map
+// is not available in the eu-south-1 Region. For more information about virtual
+// nodes, see Virtual nodes
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html). You
+// must be using 1.15.0 or later of the Envoy image when setting these variables.
+// For more information about App Mesh Envoy variables, see Envoy image
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html) in the AWS
+// App Mesh User Guide.
 func (c *Client) CreateVirtualNode(ctx context.Context, params *CreateVirtualNodeInput, optFns ...func(*Options)) (*CreateVirtualNodeOutput, error) {
 	if params == nil {
 		params = &CreateVirtualNodeInput{}

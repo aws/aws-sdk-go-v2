@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing AWS Glue DataBrew project from the current AWS account.
+// Deletes an existing DataBrew project.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}

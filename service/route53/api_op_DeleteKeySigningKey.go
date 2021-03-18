@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a key signing key (KSK). Before you can delete a KSK, you must
+// Deletes a key-signing key (KSK). Before you can delete a KSK, you must
 // deactivate it. The KSK must be deactived before you can delete it regardless of
 // whether the hosted zone is enabled for DNSSEC signing.
 func (c *Client) DeleteKeySigningKey(ctx context.Context, params *DeleteKeySigningKeyInput, optFns ...func(*Options)) (*DeleteKeySigningKeyOutput, error) {
@@ -36,7 +36,7 @@ type DeleteKeySigningKeyInput struct {
 	// This member is required.
 	HostedZoneId *string
 
-	// An alphanumeric string used to identify a key signing key (KSK).
+	// A string used to identify a key-signing key (KSK).
 	//
 	// This member is required.
 	Name *string

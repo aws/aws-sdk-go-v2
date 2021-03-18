@@ -12,7 +12,7 @@ import (
 )
 
 // Creates a listener for the specified Application Load Balancer, Network Load
-// Balancer. or Gateway Load Balancer. For more information, see the following:
+// Balancer, or Gateway Load Balancer. For more information, see the following:
 //
 // *
 // Listeners for your Application Load Balancers

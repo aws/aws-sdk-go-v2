@@ -10,10 +10,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Changes the password of the IAM user who is calling this operation. The AWS
-// account root user password is not affected by this operation. To change the
-// password for a different user, see UpdateLoginProfile. For more information
-// about modifying passwords, see Managing Passwords
+// Changes the password of the IAM user who is calling this operation. This
+// operation can be performed using the AWS CLI, the AWS API, or the My Security
+// Credentials page in the AWS Management Console. The AWS account root user
+// password is not affected by this operation. Use UpdateLoginProfile to use the
+// AWS CLI, the AWS API, or the Users page in the IAM console to change the
+// password for any IAM user. For more information about modifying passwords, see
+// Managing passwords
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html) in
 // the IAM User Guide.
 func (c *Client) ChangePassword(ctx context.Context, params *ChangePasswordInput, optFns ...func(*Options)) (*ChangePasswordOutput, error) {

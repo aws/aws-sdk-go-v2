@@ -52,6 +52,27 @@ type CreateStackSetInput struct {
 	// only if PermissionModel is SERVICE_MANAGED.
 	AutoDeployment *types.AutoDeployment
 
+	// [Service-managed permissions] Specifies whether you are acting as an account
+	// administrator in the organization's management account or as a delegated
+	// administrator in a member account. By default, SELF is specified. Use SELF for
+	// stack sets with self-managed permissions.
+	//
+	// * To create a stack set with
+	// service-managed permissions while signed in to the management account, specify
+	// SELF.
+	//
+	// * To create a stack set with service-managed permissions while signed in
+	// to a delegated administrator account, specify DELEGATED_ADMIN. Your AWS account
+	// must be registered as a delegated admin in the management account. For more
+	// information, see Register a delegated administrator
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	// in the AWS CloudFormation User Guide.
+	//
+	// Stack sets with service-managed
+	// permissions are created in the management account, including stack sets that are
+	// created by delegated administrators.
+	CallAs types.CallAs
+
 	// In some cases, you must explicitly acknowledge that your stack set template
 	// contains certain capabilities in order for AWS CloudFormation to create the
 	// stack set and related stack instances.
@@ -180,8 +201,8 @@ type CreateStackSetInput struct {
 	TemplateBody *string
 
 	// The location of the file that contains the template body. The URL must point to
-	// a template (maximum size: 460,800 bytes) that's located in an Amazon S3 bucket.
-	// For more information, see Template Anatomy
+	// a template (maximum size: 460,800 bytes) that's located in an Amazon S3 bucket
+	// or a Systems Manager document. For more information, see Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the AWS CloudFormation User Guide. Conditional: You must specify either the
 	// TemplateBody or the TemplateURL parameter, but not both.

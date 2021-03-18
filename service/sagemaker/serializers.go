@@ -11862,6 +11862,13 @@ func awsAwsjson11_serializeDocumentContainerDefinition(v *types.ContainerDefinit
 		ok.String(*v.ModelPackageName)
 	}
 
+	if v.MultiModelConfig != nil {
+		ok := object.Key("MultiModelConfig")
+		if err := awsAwsjson11_serializeDocumentMultiModelConfig(v.MultiModelConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -13268,6 +13275,18 @@ func awsAwsjson11_serializeDocumentImageDeletePropertyList(v []string, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentInferenceExecutionConfig(v *types.InferenceExecutionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInferenceSpecification(v *types.InferenceSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -13322,6 +13341,11 @@ func awsAwsjson11_serializeDocumentInputConfig(v *types.InputConfig, value smith
 	if len(v.Framework) > 0 {
 		ok := object.Key("Framework")
 		ok.String(string(v.Framework))
+	}
+
+	if v.FrameworkVersion != nil {
+		ok := object.Key("FrameworkVersion")
+		ok.String(*v.FrameworkVersion)
 	}
 
 	if v.S3Uri != nil {
@@ -14601,6 +14625,18 @@ func awsAwsjson11_serializeDocumentMonitoringStoppingCondition(v *types.Monitori
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentMultiModelConfig(v *types.MultiModelConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ModelCacheSetting) > 0 {
+		ok := object.Key("ModelCacheSetting")
+		ok.String(string(v.ModelCacheSetting))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentNestedFilters(v *types.NestedFilters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -15247,6 +15283,13 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 		ok.String(string(v.AcceleratorType))
 	}
 
+	if v.CoreDumpConfig != nil {
+		ok := object.Key("CoreDumpConfig")
+		if err := awsAwsjson11_serializeDocumentProductionVariantCoreDumpConfig(v.CoreDumpConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InitialInstanceCount != nil {
 		ok := object.Key("InitialInstanceCount")
 		ok.Integer(*v.InitialInstanceCount)
@@ -15270,6 +15313,23 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 	if v.VariantName != nil {
 		ok := object.Key("VariantName")
 		ok.String(*v.VariantName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentProductionVariantCoreDumpConfig(v *types.ProductionVariantCoreDumpConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationS3Uri != nil {
+		ok := object.Key("DestinationS3Uri")
+		ok.String(*v.DestinationS3Uri)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
 	}
 
 	return nil
@@ -15676,6 +15736,11 @@ func awsAwsjson11_serializeDocumentS3StorageConfig(v *types.S3StorageConfig, val
 	if v.KmsKeyId != nil {
 		ok := object.Key("KmsKeyId")
 		ok.String(*v.KmsKeyId)
+	}
+
+	if v.ResolvedOutputS3Uri != nil {
+		ok := object.Key("ResolvedOutputS3Uri")
+		ok.String(*v.ResolvedOutputS3Uri)
 	}
 
 	if v.S3Uri != nil {
@@ -17831,6 +17896,13 @@ func awsAwsjson11_serializeOpDocumentCreateModelInput(v *CreateModelInput, value
 		ok.String(*v.ExecutionRoleArn)
 	}
 
+	if v.InferenceExecutionConfig != nil {
+		ok := object.Key("InferenceExecutionConfig")
+		if err := awsAwsjson11_serializeDocumentInferenceExecutionConfig(v.InferenceExecutionConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelName != nil {
 		ok := object.Key("ModelName")
 		ok.String(*v.ModelName)
@@ -18224,6 +18296,11 @@ func awsAwsjson11_serializeOpDocumentCreatePresignedDomainUrlInput(v *CreatePres
 	if v.DomainId != nil {
 		ok := object.Key("DomainId")
 		ok.String(*v.DomainId)
+	}
+
+	if v.ExpiresInSeconds != nil {
+		ok := object.Key("ExpiresInSeconds")
+		ok.Integer(*v.ExpiresInSeconds)
 	}
 
 	if v.SessionExpirationDurationInSeconds != nil {

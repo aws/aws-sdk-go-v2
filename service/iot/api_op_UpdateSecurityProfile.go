@@ -38,14 +38,16 @@ type UpdateSecurityProfileInput struct {
 	// Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
 	// list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
-	// metric specified here.
+	// metric specified here. Can be used with custom metrics; cannot be used with
+	// dimensions.
 	//
 	// Deprecated: Use additionalMetricsToRetainV2.
 	AdditionalMetricsToRetain []string
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
-	// metric specified here.
+	// metric specified here. Can be used with custom metrics; cannot be used with
+	// dimensions.
 	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)
@@ -88,7 +90,8 @@ type UpdateSecurityProfileOutput struct {
 
 	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors, but it is also retained for any
-	// metric specified here.
+	// metric specified here. Can be used with custom metrics; cannot be used with
+	// dimensions.
 	AdditionalMetricsToRetainV2 []types.MetricToRetain
 
 	// Where the alerts are sent. (Alerts are always sent to the console.)

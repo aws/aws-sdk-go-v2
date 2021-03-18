@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +69,9 @@ type CreateProtectionInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// One or more tag key-value pairs for the Protection object that is created.
+	Tags []types.Tag
 }
 
 type CreateProtectionOutput struct {

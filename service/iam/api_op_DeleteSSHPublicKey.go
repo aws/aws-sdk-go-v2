@@ -13,7 +13,7 @@ import (
 // Deletes the specified SSH public key. The SSH public key deleted by this
 // operation is used only for authenticating the associated IAM user to an AWS
 // CodeCommit repository. For more information about using SSH keys to authenticate
-// to an AWS CodeCommit repository, see Set up AWS CodeCommit for SSH Connections
+// to an AWS CodeCommit repository, see Set up AWS CodeCommit for SSH connections
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the AWS CodeCommit User Guide.
 func (c *Client) DeleteSSHPublicKey(ctx context.Context, params *DeleteSSHPublicKeyInput, optFns ...func(*Options)) (*DeleteSSHPublicKeyOutput, error) {

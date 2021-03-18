@@ -22,7 +22,7 @@ import (
 // operation to create a new revision of an existing deployment. This operation
 // returns the revision number of the new deployment when you create it. For more
 // information, see the Create deployments
-// (https://docs.aws.amazon.com/greengrass/v2/latest/developerguide/create-deployments.html)
+// (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
 // in the AWS IoT Greengrass V2 Developer Guide.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
@@ -70,8 +70,8 @@ type CreateDeploymentInput struct {
 
 	// A list of key-value pairs that contain metadata for the resource. For more
 	// information, see Tag your resources
-	// (https://docs.aws.amazon.com/greengrass/v2/tag-resources.html) in the AWS IoT
-	// Greengrass V2 Developer Guide.
+	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
+	// the AWS IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 }
 

@@ -21,7 +21,7 @@ import (
 // invoke the operation.
 //
 // For more information about using a password policy, see
-// Managing an IAM Password Policy
+// Managing an IAM password policy
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingPasswordPolicies.html)
 // in the IAM User Guide.
 func (c *Client) UpdateAccountPasswordPolicy(ctx context.Context, params *UpdateAccountPasswordPolicyInput, optFns ...func(*Options)) (*UpdateAccountPasswordPolicyOutput, error) {
@@ -42,8 +42,8 @@ func (c *Client) UpdateAccountPasswordPolicy(ctx context.Context, params *Update
 type UpdateAccountPasswordPolicyInput struct {
 
 	// Allows all IAM users in your account to use the AWS Management Console to change
-	// their own passwords. For more information, see Letting IAM Users Change Their
-	// Own Passwords
+	// their own passwords. For more information, see Letting IAM users change their
+	// own passwords
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/HowToPwdIAMUser.html) in the
 	// IAM User Guide. If you do not specify a value for this parameter, then the
 	// operation uses the default value of false. The result is that IAM users in the

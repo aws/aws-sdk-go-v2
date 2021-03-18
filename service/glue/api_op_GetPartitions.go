@@ -44,6 +44,8 @@ type GetPartitionsInput struct {
 	// provided, the AWS account ID is used by default.
 	CatalogId *string
 
+	ExcludeColumnSchema *bool
+
 	// An expression that filters the partitions to be returned. The expression uses
 	// SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser
 	// JSQLParser (http://jsqlparser.sourceforge.net/home.php) parses the expression.

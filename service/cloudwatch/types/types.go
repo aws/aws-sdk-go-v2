@@ -330,6 +330,22 @@ type InsightRuleMetricDatapoint struct {
 	UniqueContributors *float64
 }
 
+// This structure includes the Timezone parameter, which you can use to specify
+// your time zone so that the labels that are associated with returned metrics
+// display the correct time for your time zone. The Timezone value affects a label
+// only if you have a time-based dynamic expression in the label. For more
+// information about dynamic expressions in labels, see Using Dynamic Labels
+// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html).
+type LabelOptions struct {
+
+	// The time zone to use for metric data return in this operation. The format is +
+	// or - followed by four digits. The first two digits indicate the number of hours
+	// ahead or behind of UTC, and the final two digits are the number of minutes. For
+	// example, +0130 indicates a time zone that is 1 hour and 30 minutes ahead of UTC.
+	// The default is +0000.
+	Timezone *string
+}
+
 // A message returned by the GetMetricDataAPI, including a code and a description.
 type MessageData struct {
 
@@ -500,7 +516,10 @@ type MetricDataQuery struct {
 	// A human-readable label for this metric or expression. This is especially useful
 	// if this is an expression, so that you know what the value represents. If the
 	// metric or expression is shown in a CloudWatch dashboard widget, the label is
-	// shown. If Label is omitted, CloudWatch generates a default.
+	// shown. If Label is omitted, CloudWatch generates a default. You can put dynamic
+	// expressions into a label, so that it is more descriptive. For more information,
+	// see Using Dynamic Labels
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/graph-dynamic-labels.html).
 	Label *string
 
 	// The metric to be returned, along with statistics, period, and units. Use this

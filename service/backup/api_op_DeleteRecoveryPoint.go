@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the recovery point specified by a recovery point ID.
+// Deletes the recovery point specified by a recovery point ID. If the recovery
+// point ID belongs to a continuous backup, calling this endpoint deletes the
+// existing continuous backup and stops future continuous backup.
 func (c *Client) DeleteRecoveryPoint(ctx context.Context, params *DeleteRecoveryPointInput, optFns ...func(*Options)) (*DeleteRecoveryPointOutput, error) {
 	if params == nil {
 		params = &DeleteRecoveryPointInput{}

@@ -1523,6 +1523,21 @@ func validateGroupIdentity(v *types.GroupIdentity) error {
 	}
 }
 
+func validateIAMRoleIdentity(v *types.IAMRoleIdentity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IAMRoleIdentity"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIAMUserIdentity(v *types.IAMUserIdentity) error {
 	if v == nil {
 		return nil
@@ -1556,6 +1571,11 @@ func validateIdentity(v *types.Identity) error {
 	if v.IamUser != nil {
 		if err := validateIAMUserIdentity(v.IamUser); err != nil {
 			invalidParams.AddNested("IamUser", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IamRole != nil {
+		if err := validateIAMRoleIdentity(v.IamRole); err != nil {
+			invalidParams.AddNested("IamRole", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -77,6 +77,9 @@ type CreateProtectionGroupInput struct {
 	// Pattern to BY_RESOURCE_TYPE and you must not set it for any other Pattern
 	// setting.
 	ResourceType types.ProtectedResourceType
+
+	// One or more tag key-value pairs for the protection group.
+	Tags []types.Tag
 }
 
 type CreateProtectionGroupOutput struct {

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about DNSSEC for a specific hosted zone, including the key
-// signing keys (KSKs) and zone signing keys (ZSKs) in the hosted zone.
+// Returns information about DNSSEC for a specific hosted zone, including the
+// key-signing keys (KSKs) in the hosted zone.
 func (c *Client) GetDNSSEC(ctx context.Context, params *GetDNSSECInput, optFns ...func(*Options)) (*GetDNSSECOutput, error) {
 	if params == nil {
 		params = &GetDNSSECInput{}
@@ -38,7 +38,7 @@ type GetDNSSECInput struct {
 
 type GetDNSSECOutput struct {
 
-	// The key signing keys (KSKs) in your account.
+	// The key-signing keys (KSKs) in your account.
 	//
 	// This member is required.
 	KeySigningKeys []types.KeySigningKey

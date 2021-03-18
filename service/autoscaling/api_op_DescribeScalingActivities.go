@@ -13,6 +13,12 @@ import (
 )
 
 // Describes one or more scaling activities for the specified Auto Scaling group.
+// To view the scaling activities from the Amazon EC2 Auto Scaling console, choose
+// the Activity tab of the Auto Scaling group. When scaling events occur, you see
+// scaling activity messages in the Activity history. For more information, see
+// Verifying a scaling activity for an Auto Scaling group
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeScalingActivities(ctx context.Context, params *DescribeScalingActivitiesInput, optFns ...func(*Options)) (*DescribeScalingActivitiesOutput, error) {
 	if params == nil {
 		params = &DescribeScalingActivitiesInput{}
@@ -38,6 +44,9 @@ type DescribeScalingActivitiesInput struct {
 
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
+
+	// Indicates whether to include scaling activity from deleted Auto Scaling groups.
+	IncludeDeletedGroups *bool
 
 	// The maximum number of items to return with this call. The default value is 100
 	// and the maximum value is 100.

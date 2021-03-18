@@ -2,6 +2,46 @@
 
 package types
 
+type AnalysisResultLevel string
+
+// Enum values for AnalysisResultLevel
+const (
+	AnalysisResultLevelInfo    AnalysisResultLevel = "INFO"
+	AnalysisResultLevelWarning AnalysisResultLevel = "WARNING"
+	AnalysisResultLevelError   AnalysisResultLevel = "ERROR"
+)
+
+// Values returns all known values for AnalysisResultLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisResultLevel) Values() []AnalysisResultLevel {
+	return []AnalysisResultLevel{
+		"INFO",
+		"WARNING",
+		"ERROR",
+	}
+}
+
+type AnalysisStatus string
+
+// Enum values for AnalysisStatus
+const (
+	AnalysisStatusRunning  AnalysisStatus = "RUNNING"
+	AnalysisStatusComplete AnalysisStatus = "COMPLETE"
+	AnalysisStatusFailed   AnalysisStatus = "FAILED"
+)
+
+// Values returns all known values for AnalysisStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AnalysisStatus) Values() []AnalysisStatus {
+	return []AnalysisStatus{
+		"RUNNING",
+		"COMPLETE",
+		"FAILED",
+	}
+}
+
 type DetectorModelVersionStatus string
 
 // Enum values for DetectorModelVersionStatus

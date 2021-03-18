@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified resources from the specified group.
+// Removes the specified resources from the specified group. Minimum permissions To
+// run this command, you must have the following permissions:
+//
+// *
+// resource-groups:UngroupResources
 func (c *Client) UngroupResources(ctx context.Context, params *UngroupResourcesInput, optFns ...func(*Options)) (*UngroupResourcesOutput, error) {
 	if params == nil {
 		params = &UngroupResourcesInput{}
@@ -42,10 +46,19 @@ type UngroupResourcesInput struct {
 
 type UngroupResourcesOutput struct {
 
-	// The resources that failed to be removed from the group.
+	// A list of any resources that failed to be removed from the group by this
+	// operation.
 	Failed []types.FailedResource
 
-	// The ARNs of the resources that were successfully removed from the group.
+	// A list of any resources that are still in the process of being removed from the
+	// group by this operation. These pending removals continue asynchronously. You can
+	// check the status of pending removals by using the ListGroupResources operation.
+	// After the resource is successfully removed, it no longer appears in the
+	// response.
+	Pending []types.PendingResource
+
+	// A list of resources that were successfully removed from the group by this
+	// operation.
 	Succeeded []string
 
 	// Metadata pertaining to the operation's result.

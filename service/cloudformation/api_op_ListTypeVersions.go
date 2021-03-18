@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summary information about the versions of a type.
+// Returns summary information about the versions of an extension.
 func (c *Client) ListTypeVersions(ctx context.Context, params *ListTypeVersionsInput, optFns ...func(*Options)) (*ListTypeVersionsOutput, error) {
 	if params == nil {
 		params = &ListTypeVersionsInput{}
@@ -30,22 +30,23 @@ func (c *Client) ListTypeVersions(ctx context.Context, params *ListTypeVersionsI
 
 type ListTypeVersionsInput struct {
 
-	// The Amazon Resource Name (ARN) of the type for which you want version summary
-	// information. Conditional: You must specify either TypeName and Type, or Arn.
+	// The Amazon Resource Name (ARN) of the extension for which you want version
+	// summary information. Conditional: You must specify either TypeName and Type, or
+	// Arn.
 	Arn *string
 
-	// The deprecation status of the type versions that you want to get summary
+	// The deprecation status of the extension versions that you want to get summary
 	// information about. Valid values include:
 	//
-	// * LIVE: The type version is registered
-	// and can be used in CloudFormation operations, dependent on its provisioning
-	// behavior and visibility scope.
+	// * LIVE: The extension version is
+	// registered and can be used in CloudFormation operations, dependent on its
+	// provisioning behavior and visibility scope.
 	//
-	// * DEPRECATED: The type version has been
-	// deregistered and can no longer be used in CloudFormation operations.
+	// * DEPRECATED: The extension version
+	// has been deregistered and can no longer be used in CloudFormation
+	// operations.
 	//
-	// The
-	// default is LIVE.
+	// The default is LIVE.
 	DeprecatedStatus types.DeprecatedStatus
 
 	// The maximum number of results to be returned with a single call. If the number
@@ -61,11 +62,11 @@ type ListTypeVersionsInput struct {
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
-	// The kind of the type. Currently the only valid value is RESOURCE. Conditional:
-	// You must specify either TypeName and Type, or Arn.
+	// The kind of the extension. Conditional: You must specify either TypeName and
+	// Type, or Arn.
 	Type types.RegistryType
 
-	// The name of the type for which you want version summary information.
+	// The name of the extension for which you want version summary information.
 	// Conditional: You must specify either TypeName and Type, or Arn.
 	TypeName *string
 }
@@ -79,7 +80,7 @@ type ListTypeVersionsOutput struct {
 	NextToken *string
 
 	// A list of TypeVersionSummary structures that contain information about the
-	// specified type's versions.
+	// specified extension's versions.
 	TypeVersionSummaries []types.TypeVersionSummary
 
 	// Metadata pertaining to the operation's result.

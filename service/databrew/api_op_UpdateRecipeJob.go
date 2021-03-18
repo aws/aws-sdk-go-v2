@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the definition of an existing AWS Glue DataBrew recipe job in the
-// current AWS account.
+// Modifies the definition of an existing DataBrew recipe job.
 func (c *Client) UpdateRecipeJob(ctx context.Context, params *UpdateRecipeJobInput, optFns ...func(*Options)) (*UpdateRecipeJobOutput, error) {
 	if params == nil {
 		params = &UpdateRecipeJobInput{}
@@ -41,7 +40,7 @@ type UpdateRecipeJobInput struct {
 	Outputs []types.Output
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role to be assumed for this request.
+	// role to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
@@ -53,15 +52,14 @@ type UpdateRecipeJobInput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// Server-side encryption with AWS KMS-managed keys.
+	// Server-side encryption with keys managed by AWS KMS.
 	//
 	// * SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
-	// A value that enables or disables Amazon CloudWatch logging for the current AWS
-	// account. If logging is enabled, CloudWatch writes one log stream for each job
-	// run.
+	// Enables or disables Amazon CloudWatch logging for the job. If logging is
+	// enabled, CloudWatch writes one log stream for each job run.
 	LogSubscription types.LogSubscription
 
 	// The maximum number of nodes that DataBrew can consume when the job processes

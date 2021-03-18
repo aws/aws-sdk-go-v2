@@ -41,7 +41,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "ecr-public.{region}.amazonaws.com",
+			Hostname:          "api.ecr-public.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -51,7 +51,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-cn",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "ecr-public.{region}.amazonaws.com.cn",
+			Hostname:          "api.ecr-public.{region}.amazonaws.com.cn",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -61,7 +61,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "ecr-public.{region}.c2s.ic.gov",
+			Hostname:          "api.ecr-public.{region}.c2s.ic.gov",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -71,7 +71,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-iso-b",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "ecr-public.{region}.sc2s.sgov.gov",
+			Hostname:          "api.ecr-public.{region}.sc2s.sgov.gov",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
@@ -81,7 +81,7 @@ var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws-us-gov",
 		Defaults: endpoints.Endpoint{
-			Hostname:          "ecr-public.{region}.amazonaws.com",
+			Hostname:          "api.ecr-public.{region}.amazonaws.com",
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},

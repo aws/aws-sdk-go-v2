@@ -4,6 +4,7 @@ package mediatailor
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
@@ -114,6 +115,91 @@ func addOperationListPlaybackConfigurationsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListPlaybackConfigurationsAPIClient is a client that implements the
+// ListPlaybackConfigurations operation.
+type ListPlaybackConfigurationsAPIClient interface {
+	ListPlaybackConfigurations(context.Context, *ListPlaybackConfigurationsInput, ...func(*Options)) (*ListPlaybackConfigurationsOutput, error)
+}
+
+var _ ListPlaybackConfigurationsAPIClient = (*Client)(nil)
+
+// ListPlaybackConfigurationsPaginatorOptions is the paginator options for
+// ListPlaybackConfigurations
+type ListPlaybackConfigurationsPaginatorOptions struct {
+	// Maximum number of records to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListPlaybackConfigurationsPaginator is a paginator for
+// ListPlaybackConfigurations
+type ListPlaybackConfigurationsPaginator struct {
+	options   ListPlaybackConfigurationsPaginatorOptions
+	client    ListPlaybackConfigurationsAPIClient
+	params    *ListPlaybackConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListPlaybackConfigurationsPaginator returns a new
+// ListPlaybackConfigurationsPaginator
+func NewListPlaybackConfigurationsPaginator(client ListPlaybackConfigurationsAPIClient, params *ListPlaybackConfigurationsInput, optFns ...func(*ListPlaybackConfigurationsPaginatorOptions)) *ListPlaybackConfigurationsPaginator {
+	if params == nil {
+		params = &ListPlaybackConfigurationsInput{}
+	}
+
+	options := ListPlaybackConfigurationsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListPlaybackConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListPlaybackConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListPlaybackConfigurations page.
+func (p *ListPlaybackConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListPlaybackConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListPlaybackConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListPlaybackConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {

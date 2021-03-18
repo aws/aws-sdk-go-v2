@@ -14,7 +14,7 @@ import (
 
 // Provides a list of steps for the cluster in reverse order unless you specify
 // stepIds with the request of filter by StepStates. You can specify a maximum of
-// ten stepIDs.
+// 10 stepIDs.
 func (c *Client) ListSteps(ctx context.Context, params *ListStepsInput, optFns ...func(*Options)) (*ListStepsOutput, error) {
 	if params == nil {
 		params = &ListStepsInput{}

@@ -66,10 +66,21 @@ type DescribeForecastOutput struct {
 	// The quantiles at which probabilistic forecasts were generated.
 	ForecastTypes []string
 
-	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
-	// inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS),
-	// and when inference is complete (status changed to ACTIVE) or fails (status
-	// changed to CREATE_FAILED).
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -85,11 +96,13 @@ type DescribeForecastOutput struct {
 	// * CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS,
-	// DELETE_FAILED
+	// * CREATE_STOPPING, CREATE_STOPPED
 	//
-	// The Status of the forecast must be ACTIVE before you can query or
-	// export the forecast.
+	// *
+	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	//
+	// The Status of the forecast
+	// must be ACTIVE before you can query or export the forecast.
 	Status *string
 
 	// Metadata pertaining to the operation's result.

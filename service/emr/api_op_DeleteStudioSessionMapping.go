@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject
-// to change. Removes a user or group from an Amazon EMR Studio.
+// Removes a user or group from an Amazon EMR Studio.
 func (c *Client) DeleteStudioSessionMapping(ctx context.Context, params *DeleteStudioSessionMappingInput, optFns ...func(*Options)) (*DeleteStudioSessionMappingOutput, error) {
 	if params == nil {
 		params = &DeleteStudioSessionMappingInput{}
@@ -30,7 +29,8 @@ func (c *Client) DeleteStudioSessionMapping(ctx context.Context, params *DeleteS
 
 type DeleteStudioSessionMappingInput struct {
 
-	// Specifies whether the identity to delete from the Studio is a user or a group.
+	// Specifies whether the identity to delete from the Amazon EMR Studio is a user or
+	// a group.
 	//
 	// This member is required.
 	IdentityType types.IdentityType
@@ -49,9 +49,9 @@ type DeleteStudioSessionMappingInput struct {
 	// must be specified.
 	IdentityId *string
 
-	// The name of the user name or group to remove from the Studio. For more
-	// information, see UserName
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// The name of the user name or group to remove from the Amazon EMR Studio. For
+	// more information, see UserName
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
 	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId

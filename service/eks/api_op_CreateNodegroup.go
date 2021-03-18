@@ -12,12 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a managed worker node group for an Amazon EKS cluster. You can only
-// create a node group for your cluster that is equal to the current Kubernetes
-// version for the cluster. All node groups are created with the latest AMI release
-// version for the respective minor Kubernetes version of the cluster, unless you
-// deploy a custom AMI using a launch template. For more information about using
-// launch templates, see Launch template support
+// Creates a managed node group for an Amazon EKS cluster. You can only create a
+// node group for your cluster that is equal to the current Kubernetes version for
+// the cluster. All node groups are created with the latest AMI release version for
+// the respective minor Kubernetes version of the cluster, unless you deploy a
+// custom AMI using a launch template. For more information about using launch
+// templates, see Launch template support
 // (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html). An
 // Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and associated
 // Amazon EC2 instances that are managed by AWS for an Amazon EKS cluster. Each
@@ -49,11 +49,10 @@ type CreateNodegroupInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role to associate with your node
 	// group. The Amazon EKS worker node kubelet daemon makes calls to AWS APIs on your
-	// behalf. Worker nodes receive permissions for these API calls through an IAM
-	// instance profile and associated policies. Before you can launch worker nodes and
-	// register them into a cluster, you must create an IAM role for those worker nodes
-	// to use when they are launched. For more information, see Amazon EKS Worker Node
-	// IAM Role
+	// behalf. Nodes receive permissions for these API calls through an IAM instance
+	// profile and associated policies. Before you can launch nodes and register them
+	// into a cluster, you must create an IAM role for those nodes to use when they are
+	// launched. For more information, see Amazon EKS node IAM role
 	// (https://docs.aws.amazon.com/eks/latest/userguide/worker_node_IAM_role.html) in
 	// the Amazon EKS User Guide . If you specify launchTemplate, then don't specify
 	// IamInstanceProfile
@@ -120,7 +119,7 @@ type CreateNodegroupInput struct {
 	// by default. If you specify Spot for capacityType, then we recommend specifying
 	// multiple values for instanceTypes. For more information, see Managed node group
 	// capacity types
-	// (https://docs.aws.amazon.com/managed-node-groups.html#managed-node-group-capacity-types)
+	// (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types)
 	// and Launch template support
 	// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
 	// Amazon EKS User Guide.

@@ -2724,6 +2724,11 @@ func awsAwsjson11_serializeDocumentS3ReportExportConfig(v *types.S3ReportExportC
 		ok.String(*v.Bucket)
 	}
 
+	if v.BucketOwner != nil {
+		ok := object.Key("bucketOwner")
+		ok.String(*v.BucketOwner)
+	}
+
 	if v.EncryptionDisabled != nil {
 		ok := object.Key("encryptionDisabled")
 		ok.Boolean(*v.EncryptionDisabled)
@@ -2993,6 +2998,11 @@ func awsAwsjson11_serializeOpDocumentCreateProjectInput(v *CreateProjectInput, v
 		if err := awsAwsjson11_serializeDocumentProjectCache(v.Cache, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ConcurrentBuildLimit != nil {
+		ok := object.Key("concurrentBuildLimit")
+		ok.Integer(*v.ConcurrentBuildLimit)
 	}
 
 	if v.Description != nil {
@@ -3777,6 +3787,11 @@ func awsAwsjson11_serializeOpDocumentStartBuildBatchInput(v *StartBuildBatchInpu
 		ok.String(string(v.ComputeTypeOverride))
 	}
 
+	if v.DebugSessionEnabled != nil {
+		ok := object.Key("debugSessionEnabled")
+		ok.Boolean(*v.DebugSessionEnabled)
+	}
+
 	if v.EncryptionKeyOverride != nil {
 		ok := object.Key("encryptionKeyOverride")
 		ok.String(*v.EncryptionKeyOverride)
@@ -4147,6 +4162,11 @@ func awsAwsjson11_serializeOpDocumentUpdateProjectInput(v *UpdateProjectInput, v
 		if err := awsAwsjson11_serializeDocumentProjectCache(v.Cache, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ConcurrentBuildLimit != nil {
+		ok := object.Key("concurrentBuildLimit")
+		ok.Integer(*v.ConcurrentBuildLimit)
 	}
 
 	if v.Description != nil {

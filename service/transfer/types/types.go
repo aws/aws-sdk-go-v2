@@ -50,6 +50,8 @@ type DescribedServer struct {
 	// when Protocols is set to FTPS.
 	Certificate *string
 
+	Domain Domain
+
 	// Specifies the virtual private cloud (VPC) endpoint settings that you configured
 	// for your server.
 	EndpointDetails *EndpointDetails
@@ -154,6 +156,8 @@ type DescribedUser struct {
 	// Specifies the name of the policy in use for the described user.
 	Policy *string
 
+	PosixProfile *PosixProfile
+
 	// Specifies the IAM role that controls your users' access to your Amazon S3
 	// bucket. The policies attached to this role will determine the level of access
 	// you want to provide your users when transferring files into and out of your
@@ -243,6 +247,8 @@ type ListedServer struct {
 	// This member is required.
 	Arn *string
 
+	Domain Domain
+
 	// Specifies the type of VPC endpoint that your server is connected to. If your
 	// server is connected to a VPC endpoint, your server isn't accessible over the
 	// public internet.
@@ -308,6 +314,17 @@ type ListedUser struct {
 	// Specifies the name of the user whose ARN was specified. User names are used for
 	// authentication purposes.
 	UserName *string
+}
+
+type PosixProfile struct {
+
+	// This member is required.
+	Gid *int64
+
+	// This member is required.
+	Uid *int64
+
+	SecondaryGids []int64
 }
 
 // Provides information about the public Secure Shell (SSH) key that is associated

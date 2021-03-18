@@ -13,7 +13,27 @@ import (
 )
 
 // Retrieves all active game sessions that match a set of search criteria and sorts
-// them in a specified order. You can search or sort by the following game session
+// them into a specified order. When searching for game sessions, you specify
+// exactly where you want to search and provide a search filter expression, a sort
+// expression, or both. A search request can search only one fleet, but it can
+// search all of a fleet's locations. This operation can be used in the following
+// ways:
+//
+// * To search all game sessions that are currently running on all locations
+// in a fleet, provide a fleet or alias ID. This approach returns game sessions in
+// the fleet's home Region and all remote locations that fit the search
+// criteria.
+//
+// * To search all game sessions that are currently running on a
+// specific fleet location, provide a fleet or alias ID and a location name. For
+// location, you can specify a fleet's home Region or any remote location.
+//
+// Use the
+// pagination parameters to retrieve results as a set of sequential pages. If
+// successful, a GameSession object is returned for each game session that matches
+// the request. Search finds game sessions that are in ACTIVE status only. To
+// retrieve information on game sessions in other statuses, use
+// DescribeGameSessions. You can search or sort by the following game session
 // attributes:
 //
 // * gameSessionId -- A unique identifier for the game session. You
@@ -53,39 +73,12 @@ import (
 // Returned values for playerSessionCount and hasAvailablePlayerSessions
 // change quickly as players join sessions and others drop out. Results should be
 // considered a snapshot in time. Be sure to refresh search results often, and
-// handle sessions that fill up before a player can join. To search or sort,
-// specify either a fleet ID or an alias ID, and provide a search filter
-// expression, a sort expression, or both. If successful, a collection of
-// GameSession objects matching the request is returned. Use the pagination
-// parameters to retrieve results as a set of sequential pages. You can search for
-// game sessions one fleet at a time only. To find game sessions across multiple
-// fleets, you must search each fleet separately and combine the results. This
-// search feature finds only game sessions that are in ACTIVE status. To locate
-// games in statuses other than active, use DescribeGameSessionDetails.
-//
-// *
-// CreateGameSession
-//
-// * DescribeGameSessions
-//
-// * DescribeGameSessionDetails
-//
-// *
-// SearchGameSessions
-//
-// * UpdateGameSession
-//
-// * GetGameSessionLogUrl
-//
-// * Game session
-// placements
-//
-// * StartGameSessionPlacement
-//
-// * DescribeGameSessionPlacement
-//
-// *
-// StopGameSessionPlacement
+// handle sessions that fill up before a player can join. Related actions
+// CreateGameSession | DescribeGameSessions | DescribeGameSessionDetails |
+// SearchGameSessions | UpdateGameSession | GetGameSessionLogUrl |
+// StartGameSessionPlacement | DescribeGameSessionPlacement |
+// StopGameSessionPlacement | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) SearchGameSessions(ctx context.Context, params *SearchGameSessionsInput, optFns ...func(*Options)) (*SearchGameSessionsOutput, error) {
 	if params == nil {
 		params = &SearchGameSessionsInput{}
@@ -104,7 +97,7 @@ func (c *Client) SearchGameSessions(ctx context.Context, params *SearchGameSessi
 // Represents the input for a request operation.
 type SearchGameSessionsInput struct {
 
-	// A unique identifier for an alias associated with the fleet to search for active
+	// A unique identifier for the alias associated with the fleet to search for active
 	// game sessions. You can use either the alias ID or ARN value. Each request must
 	// reference either a fleet ID or alias ID, but not both.
 	AliasId *string
@@ -151,9 +144,9 @@ type SearchGameSessionsInput struct {
 	// hasAvailablePlayerSessions=true".
 	FilterExpression *string
 
-	// A unique identifier for a fleet to search for active game sessions. You can use
-	// either the fleet ID or ARN value. Each request must reference either a fleet ID
-	// or alias ID, but not both.
+	// A unique identifier for the fleet to search for active game sessions. You can
+	// use either the fleet ID or ARN value. Each request must reference either a fleet
+	// ID or alias ID, but not both.
 	FleetId *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -161,7 +154,11 @@ type SearchGameSessionsInput struct {
 	// is 20, even if this value is not set or is set higher than 20.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// A fleet location to search for game sessions. You can specify a fleet's home
+	// Region or a remote location. Use the AWS Region code format, such as us-west-2.
+	Location *string
+
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
@@ -187,12 +184,13 @@ type SearchGameSessionsInput struct {
 // Represents the returned data in response to a request operation.
 type SearchGameSessionsOutput struct {
 
-	// A collection of objects containing game session properties for each session
-	// matching the request.
+	// A collection of objects containing game session properties for each session that
+	// matches the request.
 	GameSessions []types.GameSession
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

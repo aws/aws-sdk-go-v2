@@ -2051,6 +2051,17 @@ func awsRestjson1_serializeOpDocumentUpdateQueueInput(v *UpdateQueueInput, value
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOf__doubleMinNegative60Max6(v []float64, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Double(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOf__integerMin1Max2147483647(v []int32, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3011,6 +3022,13 @@ func awsRestjson1_serializeDocumentAvcIntraSettings(v *types.AvcIntraSettings, v
 		ok.String(string(v.AvcIntraClass))
 	}
 
+	if v.AvcIntraUhdSettings != nil {
+		ok := object.Key("avcIntraUhdSettings")
+		if err := awsRestjson1_serializeDocumentAvcIntraUhdSettings(v.AvcIntraUhdSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.FramerateControl) > 0 {
 		ok := object.Key("framerateControl")
 		ok.String(string(v.FramerateControl))
@@ -3036,6 +3054,11 @@ func awsRestjson1_serializeDocumentAvcIntraSettings(v *types.AvcIntraSettings, v
 		ok.String(string(v.InterlaceMode))
 	}
 
+	if len(v.ScanTypeConversionMode) > 0 {
+		ok := object.Key("scanTypeConversionMode")
+		ok.String(string(v.ScanTypeConversionMode))
+	}
+
 	if len(v.SlowPal) > 0 {
 		ok := object.Key("slowPal")
 		ok.String(string(v.SlowPal))
@@ -3044,6 +3067,18 @@ func awsRestjson1_serializeDocumentAvcIntraSettings(v *types.AvcIntraSettings, v
 	if len(v.Telecine) > 0 {
 		ok := object.Key("telecine")
 		ok.String(string(v.Telecine))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAvcIntraUhdSettings(v *types.AvcIntraUhdSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.QualityTuningLevel) > 0 {
+		ok := object.Key("qualityTuningLevel")
+		ok.String(string(v.QualityTuningLevel))
 	}
 
 	return nil
@@ -3549,6 +3584,11 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 	if len(v.AudioDuration) > 0 {
 		ok := object.Key("audioDuration")
 		ok.String(string(v.AudioDuration))
+	}
+
+	if len(v.IFrameOnlyManifest) > 0 {
+		ok := object.Key("iFrameOnlyManifest")
+		ok.String(string(v.IFrameOnlyManifest))
 	}
 
 	if len(v.Scte35Esam) > 0 {
@@ -4587,6 +4627,11 @@ func awsRestjson1_serializeDocumentH264Settings(v *types.H264Settings, value smi
 		ok.String(string(v.RepeatPps))
 	}
 
+	if len(v.ScanTypeConversionMode) > 0 {
+		ok := object.Key("scanTypeConversionMode")
+		ok.String(string(v.ScanTypeConversionMode))
+	}
+
 	if len(v.SceneChangeDetect) > 0 {
 		ok := object.Key("sceneChangeDetect")
 		ok.String(string(v.SceneChangeDetect))
@@ -4806,6 +4851,11 @@ func awsRestjson1_serializeDocumentH265Settings(v *types.H265Settings, value smi
 	if len(v.SampleAdaptiveOffsetFilterMode) > 0 {
 		ok := object.Key("sampleAdaptiveOffsetFilterMode")
 		ok.String(string(v.SampleAdaptiveOffsetFilterMode))
+	}
+
+	if len(v.ScanTypeConversionMode) > 0 {
+		ok := object.Key("scanTypeConversionMode")
+		ok.String(string(v.ScanTypeConversionMode))
 	}
 
 	if len(v.SceneChangeDetect) > 0 {
@@ -6424,6 +6474,11 @@ func awsRestjson1_serializeDocumentMpeg2Settings(v *types.Mpeg2Settings, value s
 		ok.String(string(v.RateControlMode))
 	}
 
+	if len(v.ScanTypeConversionMode) > 0 {
+		ok := object.Key("scanTypeConversionMode")
+		ok.String(string(v.ScanTypeConversionMode))
+	}
+
 	if len(v.SceneChangeDetect) > 0 {
 		ok := object.Key("sceneChangeDetect")
 		ok.String(string(v.SceneChangeDetect))
@@ -6850,6 +6905,13 @@ func awsRestjson1_serializeDocumentOutputChannelMapping(v *types.OutputChannelMa
 		}
 	}
 
+	if v.InputChannelsFineTune != nil {
+		ok := object.Key("inputChannelsFineTune")
+		if err := awsRestjson1_serializeDocument__listOf__doubleMinNegative60Max6(v.InputChannelsFineTune, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -7048,6 +7110,11 @@ func awsRestjson1_serializeDocumentProresSettings(v *types.ProresSettings, value
 	if v.ParNumerator != 0 {
 		ok := object.Key("parNumerator")
 		ok.Integer(v.ParNumerator)
+	}
+
+	if len(v.ScanTypeConversionMode) > 0 {
+		ok := object.Key("scanTypeConversionMode")
+		ok.String(string(v.ScanTypeConversionMode))
 	}
 
 	if len(v.SlowPal) > 0 {
@@ -7435,6 +7502,11 @@ func awsRestjson1_serializeDocumentVc3Settings(v *types.Vc3Settings, value smith
 	if len(v.InterlaceMode) > 0 {
 		ok := object.Key("interlaceMode")
 		ok.String(string(v.InterlaceMode))
+	}
+
+	if len(v.ScanTypeConversionMode) > 0 {
+		ok := object.Key("scanTypeConversionMode")
+		ok.String(string(v.ScanTypeConversionMode))
 	}
 
 	if len(v.SlowPal) > 0 {

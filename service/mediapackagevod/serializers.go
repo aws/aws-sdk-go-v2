@@ -14,6 +14,94 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpConfigureLogs struct {
+}
+
+func (*awsRestjson1_serializeOpConfigureLogs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpConfigureLogs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ConfigureLogsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/packaging_groups/{Id}/configure_logs")
+	request.URL.Path = opPath
+	if len(request.URL.RawQuery) > 0 {
+		request.URL.RawQuery = "&" + opQuery
+	} else {
+		request.URL.RawQuery = opQuery
+	}
+
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsConfigureLogsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentConfigureLogsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsConfigureLogsInput(v *ConfigureLogsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member Id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("Id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentConfigureLogsInput(v *ConfigureLogsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EgressAccessLogs != nil {
+		ok := object.Key("egressAccessLogs")
+		if err := awsRestjson1_serializeDocumentEgressAccessLogs(v.EgressAccessLogs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateAsset struct {
 }
 
@@ -295,6 +383,13 @@ func awsRestjson1_serializeOpDocumentCreatePackagingGroupInput(v *CreatePackagin
 	if v.Authorization != nil {
 		ok := object.Key("authorization")
 		if err := awsRestjson1_serializeDocumentAuthorization(v.Authorization, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EgressAccessLogs != nil {
+		ok := object.Key("egressAccessLogs")
+		if err := awsRestjson1_serializeDocumentEgressAccessLogs(v.EgressAccessLogs, ok); err != nil {
 			return err
 		}
 	}
@@ -1404,6 +1499,18 @@ func awsRestjson1_serializeDocumentDashPackage(v *types.DashPackage, value smith
 	if len(v.SegmentTemplateFormat) > 0 {
 		ok := object.Key("segmentTemplateFormat")
 		ok.String(string(v.SegmentTemplateFormat))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEgressAccessLogs(v *types.EgressAccessLogs, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroupName != nil {
+		ok := object.Key("logGroupName")
+		ok.String(*v.LogGroupName)
 	}
 
 	return nil

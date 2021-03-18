@@ -39,14 +39,18 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 type CreateClusterInput struct {
 
 	// The short name of one or more capacity providers to associate with the cluster.
-	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
+	// A capacity provider must be associated with a cluster before it can be included
+	// as part of the default capacity provider strategy of the cluster or used in a
+	// capacity provider strategy when calling the CreateService or RunTask actions. If
+	// specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created and not already associated with another
-	// cluster. New capacity providers can be created with the CreateCapacityProvider
-	// API operation. To use a AWS Fargate capacity provider, specify either the
-	// FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate capacity providers
-	// are available to all accounts and only need to be associated with a cluster to
-	// be used. The PutClusterCapacityProviders API operation is used to update the
-	// list of available capacity providers for a cluster after the cluster is created.
+	// cluster. New Auto Scaling group capacity providers can be created with the
+	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
+	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
+	// capacity providers are available to all accounts and only need to be associated
+	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
+	// to update the list of available capacity providers for a cluster after the
+	// cluster is created.
 	CapacityProviders []string
 
 	// The name of your cluster. If you do not specify a name for your cluster, you
@@ -54,22 +58,15 @@ type CreateClusterInput struct {
 	// numbers, and hyphens are allowed.
 	ClusterName *string
 
-	// The capacity provider strategy to use by default for the cluster. When creating
-	// a service or running a task on a cluster, if no capacity provider or launch type
-	// is specified then the default capacity provider strategy for the cluster is
-	// used. A capacity provider strategy consists of one or more capacity providers
-	// along with the base and weight to assign to them. A capacity provider must be
-	// associated with the cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders API is used to associate a capacity provider with a
-	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
-	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
-	// provider must already be created. New capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
-	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. If a default capacity provider strategy is not
-	// defined for a cluster during creation, it can be defined later with the
-	// PutClusterCapacityProviders API operation.
+	// The execute command configuration for the cluster.
+	Configuration *types.ClusterConfiguration
+
+	// The capacity provider strategy to set as the default for the cluster. When a
+	// default capacity provider strategy is set for a cluster, when calling the
+	// RunTask or CreateService APIs wtih no capacity provider strategy or launch type
+	// specified, the default capacity provider strategy for the cluster is used. If a
+	// default capacity provider strategy is not defined for a cluster during creation,
+	// it can be defined later with the PutClusterCapacityProviders API operation.
 	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The setting to use when creating a cluster. This parameter is used to enable

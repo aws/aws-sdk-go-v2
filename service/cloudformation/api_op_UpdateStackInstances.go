@@ -65,6 +65,22 @@ type UpdateStackInstancesInput struct {
 	// Regions. You can specify Accounts or DeploymentTargets, but not both.
 	Accounts []string
 
+	// [Service-managed permissions] Specifies whether you are acting as an account
+	// administrator in the organization's management account or as a delegated
+	// administrator in a member account. By default, SELF is specified. Use SELF for
+	// stack sets with self-managed permissions.
+	//
+	// * If you are signed in to the
+	// management account, specify SELF.
+	//
+	// * If you are signed in to a delegated
+	// administrator account, specify DELEGATED_ADMIN. Your AWS account must be
+	// registered as a delegated administrator in the management account. For more
+	// information, see Register a delegated administrator
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	// in the AWS CloudFormation User Guide.
+	CallAs types.CallAs
+
 	// [Service-managed permissions] The AWS Organizations accounts for which you want
 	// to update parameter values for stack instances. If your update targets OUs, the
 	// overridden parameter values only apply to the accounts that are currently in the

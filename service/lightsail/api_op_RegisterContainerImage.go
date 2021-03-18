@@ -15,7 +15,9 @@ import (
 // action is not required if you install and use the Lightsail Control
 // (lightsailctl) plugin to push container images to your Lightsail container
 // service. For more information, see Pushing and managing container images on your
-// Amazon Lightsail container services in the Lightsail Dev Guide.
+// Amazon Lightsail container services
+// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images)
+// in the Lightsail Dev Guide.
 func (c *Client) RegisterContainerImage(ctx context.Context, params *RegisterContainerImageInput, optFns ...func(*Options)) (*RegisterContainerImageOutput, error) {
 	if params == nil {
 		params = &RegisterContainerImageInput{}

@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about the Amazon Macie master account for an account.
+// (Deprecated) Retrieves information about the Amazon Macie administrator account
+// for an account. This operation has been replaced by the GetAdministratorAccount
+// operation.
 func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountInput, optFns ...func(*Options)) (*GetMasterAccountOutput, error) {
 	if params == nil {
 		params = &GetMasterAccountInput{}
@@ -32,10 +34,10 @@ type GetMasterAccountInput struct {
 
 type GetMasterAccountOutput struct {
 
-	// The AWS account ID for the master account. If the accounts are associated by a
-	// Macie membership invitation, this object also provides details about the
-	// invitation that was sent and accepted to establish the relationship between the
-	// accounts.
+	// (Deprecated) The AWS account ID for the administrator account. If the accounts
+	// are associated by a Macie membership invitation, this object also provides
+	// details about the invitation that was sent to establish the relationship between
+	// the accounts.
 	Master *types.Invitation
 
 	// Metadata pertaining to the operation's result.

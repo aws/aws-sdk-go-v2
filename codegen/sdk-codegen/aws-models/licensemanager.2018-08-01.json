@@ -4773,8 +4773,7 @@
                 "ProductInformationFilterValue": {
                     "target": "com.amazonaws.licensemanager#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter value.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Filter value.</p>"
                     }
                 },
                 "ProductInformationFilterComparator": {

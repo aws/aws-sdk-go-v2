@@ -18,18 +18,9 @@ import (
 // if the script record no longer exists, the instance will go into an error state
 // and be unable to host game sessions. Learn more Amazon GameLift Realtime Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
-// Related operations
-//
-// * CreateScript
-//
-// * ListScripts
-//
-// * DescribeScript
-//
-// *
-// UpdateScript
-//
-// * DeleteScript
+// Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
+// DeleteScript | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteScript(ctx context.Context, params *DeleteScriptInput, optFns ...func(*Options)) (*DeleteScriptOutput, error) {
 	if params == nil {
 		params = &DeleteScriptInput{}
@@ -47,7 +38,7 @@ func (c *Client) DeleteScript(ctx context.Context, params *DeleteScriptInput, op
 
 type DeleteScriptInput struct {
 
-	// A unique identifier for a Realtime script to delete. You can use either the
+	// A unique identifier for the Realtime script to delete. You can use either the
 	// script ID or ARN value.
 	//
 	// This member is required.

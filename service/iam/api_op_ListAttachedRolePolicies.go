@@ -14,8 +14,8 @@ import (
 
 // Lists all managed policies that are attached to the specified IAM role. An IAM
 // role can also have inline policies embedded with it. To list the inline policies
-// for a role, use the ListRolePolicies API. For information about policies, see
-// Managed Policies and Inline Policies
+// for a role, use ListRolePolicies. For information about policies, see Managed
+// policies and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide. You can paginate the results using the MaxItems and
 // Marker parameters. You can use the PathPrefix parameter to limit the list of

@@ -211,6 +211,9 @@
                     "target": "com.amazonaws.devopsguru#DescribeAnomaly"
                 },
                 {
+                    "target": "com.amazonaws.devopsguru#DescribeFeedback"
+                },
+                {
                     "target": "com.amazonaws.devopsguru#DescribeInsight"
                 },
                 {
@@ -396,7 +399,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The dimension of a Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in your\n\t\t\taccount for operational problems and anomalous behaviour. A dimension is a name/value pair\n\t\t\tthat is part of the identity of a metric. A metric can have up to 10 dimensions. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension\">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
+                "smithy.api#documentation": "<p> The dimension of a Amazon CloudWatch metric that is used when DevOps Guru analyzes the resources in your\n\t\t\taccount for operational problems and anomalous behavior. A dimension is a name/value pair\n\t\t\tthat is part of the identity of a metric. A metric can have up to 10 dimensions. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Dimension\">Dimensions</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
             }
         },
         "com.amazonaws.devopsguru#CloudWatchMetricsDimensionName": {
@@ -550,6 +553,13 @@
                         "smithy.api#documentation": "<p>\n   \t\tAn integer that specifies the number of metrics that have been analyzed in your AWS account.\n   \t</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ResourceHours": {
+                    "target": "com.amazonaws.devopsguru#ResourceHours",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of Amazon DevOps Guru resource analysis hours billed to the current AWS account in the last hour.\n \t\t</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -689,6 +699,59 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tAn <code>ProactiveAnomaly</code> object that represents the requested anomaly.\n\t\t</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeFeedback": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#DescribeFeedbackRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#DescribeFeedbackResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n\t\t\tReturns the most recent feedback submitted in the current AWS account and Region.\n\t\t</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/feedback",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeFeedbackRequest": {
+            "type": "structure",
+            "members": {
+                "InsightId": {
+                    "target": "com.amazonaws.devopsguru#InsightId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n\t\t\tThe ID of the insight for which the feedback was provided.\n\t\t</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#DescribeFeedbackResponse": {
+            "type": "structure",
+            "members": {
+                "InsightFeedback": {
+                    "target": "com.amazonaws.devopsguru#InsightFeedback"
                 }
             }
         },
@@ -2861,6 +2924,12 @@
                         "name": "AWS_CLOUD_FORMATION"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.devopsguru#ResourceHours": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.devopsguru#ResourceIdString": {

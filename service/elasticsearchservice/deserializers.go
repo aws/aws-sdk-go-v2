@@ -1816,6 +1816,171 @@ func awsRestjson1_deserializeOpDocumentDeletePackageOutput(v **DeletePackageOutp
 	return nil
 }
 
+type awsRestjson1_deserializeOpDescribeDomainAutoTunes struct {
+}
+
+func (*awsRestjson1_deserializeOpDescribeDomainAutoTunes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDescribeDomainAutoTunes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDescribeDomainAutoTunes(response, &metadata)
+	}
+	output := &DescribeDomainAutoTunesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentDescribeDomainAutoTunesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDescribeDomainAutoTunes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BaseException", errorCode):
+		return awsRestjson1_deserializeErrorBaseException(response, errorBody)
+
+	case strings.EqualFold("InternalException", errorCode):
+		return awsRestjson1_deserializeErrorInternalException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentDescribeDomainAutoTunesOutput(v **DescribeDomainAutoTunesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeDomainAutoTunesOutput
+	if *v == nil {
+		sv = &DescribeDomainAutoTunesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoTunes":
+			if err := awsRestjson1_deserializeDocumentAutoTuneList(&sv.AutoTunes, value); err != nil {
+				return err
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpDescribeElasticsearchDomain struct {
 }
 
@@ -6894,6 +7059,454 @@ func awsRestjson1_deserializeDocumentAdvancedSecurityOptionsStatus(v **types.Adv
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAutoTune(v **types.AutoTune, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoTune
+	if *v == nil {
+		sv = &types.AutoTune{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoTuneDetails":
+			if err := awsRestjson1_deserializeDocumentAutoTuneDetails(&sv.AutoTuneDetails, value); err != nil {
+				return err
+			}
+
+		case "AutoTuneType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoTuneType to be of type string, got %T instead", value)
+				}
+				sv.AutoTuneType = types.AutoTuneType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoTuneDetails(v **types.AutoTuneDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoTuneDetails
+	if *v == nil {
+		sv = &types.AutoTuneDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ScheduledAutoTuneDetails":
+			if err := awsRestjson1_deserializeDocumentScheduledAutoTuneDetails(&sv.ScheduledAutoTuneDetails, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoTuneList(v *[]types.AutoTune, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutoTune
+	if *v == nil {
+		cv = []types.AutoTune{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutoTune
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutoTune(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoTuneMaintenanceSchedule(v **types.AutoTuneMaintenanceSchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoTuneMaintenanceSchedule
+	if *v == nil {
+		sv = &types.AutoTuneMaintenanceSchedule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CronExpressionForRecurrence":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CronExpressionForRecurrence = ptr.String(jtv)
+			}
+
+		case "Duration":
+			if err := awsRestjson1_deserializeDocumentDuration(&sv.Duration, value); err != nil {
+				return err
+			}
+
+		case "StartAt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected StartAt to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.StartAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoTuneMaintenanceScheduleList(v *[]types.AutoTuneMaintenanceSchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutoTuneMaintenanceSchedule
+	if *v == nil {
+		cv = []types.AutoTuneMaintenanceSchedule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutoTuneMaintenanceSchedule
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAutoTuneMaintenanceSchedule(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoTuneOptions(v **types.AutoTuneOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoTuneOptions
+	if *v == nil {
+		sv = &types.AutoTuneOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DesiredState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoTuneDesiredState to be of type string, got %T instead", value)
+				}
+				sv.DesiredState = types.AutoTuneDesiredState(jtv)
+			}
+
+		case "MaintenanceSchedules":
+			if err := awsRestjson1_deserializeDocumentAutoTuneMaintenanceScheduleList(&sv.MaintenanceSchedules, value); err != nil {
+				return err
+			}
+
+		case "RollbackOnDisable":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RollbackOnDisable to be of type string, got %T instead", value)
+				}
+				sv.RollbackOnDisable = types.RollbackOnDisable(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoTuneOptionsOutput(v **types.AutoTuneOptionsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoTuneOptionsOutput
+	if *v == nil {
+		sv = &types.AutoTuneOptionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoTuneState to be of type string, got %T instead", value)
+				}
+				sv.State = types.AutoTuneState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoTuneOptionsStatus(v **types.AutoTuneOptionsStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoTuneOptionsStatus
+	if *v == nil {
+		sv = &types.AutoTuneOptionsStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Options":
+			if err := awsRestjson1_deserializeDocumentAutoTuneOptions(&sv.Options, value); err != nil {
+				return err
+			}
+
+		case "Status":
+			if err := awsRestjson1_deserializeDocumentAutoTuneStatus(&sv.Status, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAutoTuneStatus(v **types.AutoTuneStatus, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoTuneStatus
+	if *v == nil {
+		sv = &types.AutoTuneStatus{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CreationDate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UpdateTimestamp to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.CreationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "ErrorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "PendingDeletion":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.PendingDeletion = ptr.Bool(jtv)
+			}
+
+		case "State":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoTuneState to be of type string, got %T instead", value)
+				}
+				sv.State = types.AutoTuneState(jtv)
+			}
+
+		case "UpdateDate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UpdateTimestamp to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.UpdateDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "UpdateVersion":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected UIntValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.UpdateVersion = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBaseException(v **types.BaseException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7596,6 +8209,59 @@ func awsRestjson1_deserializeDocumentDomainPackageDetailsList(v *[]types.DomainP
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDuration(v **types.Duration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Duration
+	if *v == nil {
+		sv = &types.Duration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Unit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimeUnit to be of type string, got %T instead", value)
+				}
+				sv.Unit = types.TimeUnit(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DurationValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Value = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEBSOptions(v **types.EBSOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7919,6 +8585,11 @@ func awsRestjson1_deserializeDocumentElasticsearchDomainConfig(v **types.Elastic
 				return err
 			}
 
+		case "AutoTuneOptions":
+			if err := awsRestjson1_deserializeDocumentAutoTuneOptionsStatus(&sv.AutoTuneOptions, value); err != nil {
+				return err
+			}
+
 		case "CognitoOptions":
 			if err := awsRestjson1_deserializeDocumentCognitoOptionsStatus(&sv.CognitoOptions, value); err != nil {
 				return err
@@ -8026,6 +8697,11 @@ func awsRestjson1_deserializeDocumentElasticsearchDomainStatus(v **types.Elastic
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.ARN = ptr.String(jtv)
+			}
+
+		case "AutoTuneOptions":
+			if err := awsRestjson1_deserializeDocumentAutoTuneOptionsOutput(&sv.AutoTuneOptions, value); err != nil {
+				return err
 			}
 
 		case "CognitoOptions":
@@ -10345,6 +11021,77 @@ func awsRestjson1_deserializeDocumentSAMLOptionsOutput(v **types.SAMLOptionsOutp
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.SubjectKey = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScheduledAutoTuneDetails(v **types.ScheduledAutoTuneDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScheduledAutoTuneDetails
+	if *v == nil {
+		sv = &types.ScheduledAutoTuneDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduledAutoTuneDescription to be of type string, got %T instead", value)
+				}
+				sv.Action = ptr.String(jtv)
+			}
+
+		case "ActionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduledAutoTuneActionType to be of type string, got %T instead", value)
+				}
+				sv.ActionType = types.ScheduledAutoTuneActionType(jtv)
+			}
+
+		case "Date":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AutoTuneDate to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.Date = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "Severity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduledAutoTuneSeverityType to be of type string, got %T instead", value)
+				}
+				sv.Severity = types.ScheduledAutoTuneSeverityType(jtv)
 			}
 
 		default:

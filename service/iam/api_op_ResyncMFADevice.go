@@ -12,7 +12,7 @@ import (
 
 // Synchronizes the specified MFA device with its IAM resource object on the AWS
 // servers. For more information about creating and working with virtual MFA
-// devices, go to Using a Virtual MFA Device
+// devices, see Using a virtual MFA device
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the
 // IAM User Guide.
 func (c *Client) ResyncMFADevice(ctx context.Context, params *ResyncMFADeviceInput, optFns ...func(*Options)) (*ResyncMFADeviceOutput, error) {

@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the definition of an existing AWS Glue DataBrew schedule in the current
-// AWS account.
+// Modifies the definition of an existing DataBrew schedule.
 func (c *Client) UpdateSchedule(ctx context.Context, params *UpdateScheduleInput, optFns ...func(*Options)) (*UpdateScheduleOutput, error) {
 	if params == nil {
 		params = &UpdateScheduleInput{}
@@ -29,8 +28,10 @@ func (c *Client) UpdateSchedule(ctx context.Context, params *UpdateScheduleInput
 
 type UpdateScheduleInput struct {
 
-	// The date or dates and time or times, in cron format, when the jobs are to be
-	// run.
+	// The date or dates and time or times when the jobs are to be run. For more
+	// information, see Cron expressions
+	// (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html) in the AWS Glue
+	// DataBrew Developer Guide.
 	//
 	// This member is required.
 	CronExpression *string

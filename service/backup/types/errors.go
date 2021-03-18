@@ -96,6 +96,29 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// AWS Backup is already performing an action on this recovery point. It can't
+// perform the action you requested until the first action finishes. Try again
+// later.
+type InvalidResourceStateException struct {
+	Message *string
+
+	Code    *string
+	Type    *string
+	Context *string
+}
+
+func (e *InvalidResourceStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidResourceStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidResourceStateException) ErrorCode() string             { return "InvalidResourceStateException" }
+func (e *InvalidResourceStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A limit in the request has been exceeded; for example, a maximum number of items
 // allowed in a request.
 type LimitExceededException struct {

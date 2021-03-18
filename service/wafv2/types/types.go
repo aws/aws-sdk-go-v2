@@ -6,31 +6,26 @@ import (
 	"time"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// Inspect all of the elements that AWS WAF has parsed and extracted from the web
+// request JSON body that are within the JsonBodyMatchScope. This is used with the
+// FieldToMatch option JsonBody. This is used only to indicate the web request
+// component for AWS WAF to inspect, in the FieldToMatch specification.
+type All struct {
+}
+
 // Specifies that AWS WAF should allow requests. This is used only in the context
 // of other settings, for example to specify values for RuleAction and web ACL
 // DefaultAction.
 type AllowAction struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). All
-// query arguments of a web request. This is used only to indicate the web request
-// component for AWS WAF to inspect, in the FieldToMatch specification.
+// All query arguments of a web request. This is used only to indicate the web
+// request component for AWS WAF to inspect, in the FieldToMatch specification.
 type AllQueryArguments struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A
-// logical rule statement used to combine other rule statements with AND logic. You
-// provide more than one Statement within the AndStatement.
+// A logical rule statement used to combine other rule statements with AND logic.
+// You provide more than one Statement within the AndStatement.
 type AndStatement struct {
 
 	// The statements to combine with AND logic. You can use any statements that can be
@@ -40,31 +35,19 @@ type AndStatement struct {
 	Statements []Statement
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Specifies that AWS WAF should block requests. This is used only in the context
 // of other settings, for example to specify values for RuleAction and web ACL
 // DefaultAction.
 type BlockAction struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// body of a web request. This immediately follows the request headers. This is
+// The body of a web request. This immediately follows the request headers. This is
 // used only to indicate the web request component for AWS WAF to inspect, in the
 // FieldToMatch specification.
 type Body struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// statement that defines a string match search for AWS WAF to apply to web
+// A rule statement that defines a string match search for AWS WAF to apply to web
 // requests. The byte match statement provides the bytes to search for, the
 // location in requests that you want AWS WAF to search, and other settings. The
 // bytes to search for are typically a string that corresponds with ASCII
@@ -141,23 +124,15 @@ type ByteMatchStatement struct {
 	TextTransformations []TextTransformation
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Specifies that AWS WAF should count requests. This is used only in the context
 // of other settings, for example to specify values for RuleAction and web ACL
 // DefaultAction.
 type CountAction struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). In a
-// WebACL, this is the action that you want AWS WAF to perform when a web request
-// doesn't match any of the rules in the WebACL. The default action must be a
-// terminating action, so count is not allowed.
+// In a WebACL, this is the action that you want AWS WAF to perform when a web
+// request doesn't match any of the rules in the WebACL. The default action must be
+// a terminating action, so count is not allowed.
 type DefaultAction struct {
 
 	// Specifies that AWS WAF should allow requests by default.
@@ -167,10 +142,6 @@ type DefaultAction struct {
 	Block *BlockAction
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Specifies a single rule to exclude from the rule group. Excluding a rule
 // overrides its action setting for the rule group in the web ACL, setting it to
 // COUNT. This effectively excludes the rule from acting on web requests.
@@ -182,11 +153,7 @@ type ExcludedRule struct {
 	Name *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// part of a web request that you want AWS WAF to inspect. Include the single
+// The part of a web request that you want AWS WAF to inspect. Include the single
 // FieldToMatch type that you want to inspect, with additional specifications as
 // needed, according to the type. You specify a single request component in
 // FieldToMatch for each rule statement that requires it. To inspect more than one
@@ -196,18 +163,31 @@ type FieldToMatch struct {
 	// Inspect all query arguments.
 	AllQueryArguments *AllQueryArguments
 
-	// Inspect the request body, which immediately follows the request headers. This is
-	// the part of a request that contains any additional data that you want to send to
-	// your web server as the HTTP request body, such as data from a form. Note that
-	// only the first 8 KB (8192 bytes) of the request body are forwarded to AWS WAF
-	// for inspection by the underlying host service. If you don't need to inspect more
-	// than 8 KB, you can guarantee that you don't allow additional bytes in by
-	// combining a statement that inspects the body of the web request, such as
-	// ByteMatchStatement or RegexPatternSetReferenceStatement, with a
+	// Inspect the request body as plain text. The request body immediately follows the
+	// request headers. This is the part of a request that contains any additional data
+	// that you want to send to your web server as the HTTP request body, such as data
+	// from a form. Note that only the first 8 KB (8192 bytes) of the request body are
+	// forwarded to AWS WAF for inspection by the underlying host service. If you don't
+	// need to inspect more than 8 KB, you can guarantee that you don't allow
+	// additional bytes in by combining a statement that inspects the body of the web
+	// request, such as ByteMatchStatement or RegexPatternSetReferenceStatement, with a
 	// SizeConstraintStatement that enforces an 8 KB size limit on the body of the
 	// request. AWS WAF doesn't support inspecting the entire contents of web requests
 	// whose bodies exceed the 8 KB limit.
 	Body *Body
+
+	// Inspect the request body as JSON. The request body immediately follows the
+	// request headers. This is the part of a request that contains any additional data
+	// that you want to send to your web server as the HTTP request body, such as data
+	// from a form. Note that only the first 8 KB (8192 bytes) of the request body are
+	// forwarded to AWS WAF for inspection by the underlying host service. If you don't
+	// need to inspect more than 8 KB, you can guarantee that you don't allow
+	// additional bytes in by combining a statement that inspects the body of the web
+	// request, such as ByteMatchStatement or RegexPatternSetReferenceStatement, with a
+	// SizeConstraintStatement that enforces an 8 KB size limit on the body of the
+	// request. AWS WAF doesn't support inspecting the entire contents of web requests
+	// whose bodies exceed the 8 KB limit.
+	JsonBody *JsonBody
 
 	// Inspect the HTTP method. The method indicates the type of operation that the
 	// request is asking the origin to perform.
@@ -218,13 +198,15 @@ type FieldToMatch struct {
 	QueryString *QueryString
 
 	// Inspect a single header. Provide the name of the header to inspect, for example,
-	// User-Agent or Referer. This setting isn't case sensitive.
+	// User-Agent or Referer. This setting isn't case sensitive. Example JSON:
+	// "SingleHeader": { "Name": "haystack" }
 	SingleHeader *SingleHeader
 
 	// Inspect a single query argument. Provide the name of the query argument to
 	// inspect, such as UserName or SalesRegion. The name can be up to 30 characters
 	// long and isn't case sensitive. This is used only to indicate the web request
-	// component for AWS WAF to inspect, in the FieldToMatch specification.
+	// component for AWS WAF to inspect, in the FieldToMatch specification. Example
+	// JSON: "SingleQueryArgument": { "Name": "myArgument" }
 	SingleQueryArgument *SingleQueryArgument
 
 	// Inspect the request URI path. This is the part of a web request that identifies
@@ -272,10 +254,6 @@ type FirewallManagerRuleGroup struct {
 	// This member is required.
 	Priority int32
 
-	// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-	// 2019. For information, including how to migrate your AWS WAF resources from the
-	// prior release, see the AWS WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 	// Defines and enables Amazon CloudWatch metrics and web request sample collection.
 	//
 	// This member is required.
@@ -286,27 +264,19 @@ type FirewallManagerRuleGroup struct {
 // rule Statement, but it can only contain a rule group reference.
 type FirewallManagerStatement struct {
 
-	// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-	// 2019. For information, including how to migrate your AWS WAF resources from the
-	// prior release, see the AWS WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-	// statement used to run the rules that are defined in a managed rule group. To use
-	// this, provide the vendor name and the name of the rule group in this statement.
-	// You can retrieve the required names by calling ListAvailableManagedRuleGroups.
-	// You can't nest a ManagedRuleGroupStatement, for example for use inside a
-	// NotStatement or OrStatement. It can only be referenced as a top-level statement
-	// within a rule.
+	// A rule statement used to run the rules that are defined in a managed rule group.
+	// To use this, provide the vendor name and the name of the rule group in this
+	// statement. You can retrieve the required names by calling
+	// ListAvailableManagedRuleGroups. You can't nest a ManagedRuleGroupStatement, for
+	// example for use inside a NotStatement or OrStatement. It can only be referenced
+	// as a top-level statement within a rule.
 	ManagedRuleGroupStatement *ManagedRuleGroupStatement
 
-	// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-	// 2019. For information, including how to migrate your AWS WAF resources from the
-	// prior release, see the AWS WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-	// statement used to run the rules that are defined in a RuleGroup. To use this,
-	// create a rule group with your rules, then provide the ARN of the rule group in
-	// this statement. You cannot nest a RuleGroupReferenceStatement, for example for
-	// use inside a NotStatement or OrStatement. It can only be referenced as a
-	// top-level statement within a rule.
+	// A rule statement used to run the rules that are defined in a RuleGroup. To use
+	// this, create a rule group with your rules, then provide the ARN of the rule
+	// group in this statement. You cannot nest a RuleGroupReferenceStatement, for
+	// example for use inside a NotStatement or OrStatement. It can only be referenced
+	// as a top-level statement within a rule.
 	RuleGroupReferenceStatement *RuleGroupReferenceStatement
 }
 
@@ -343,11 +313,7 @@ type ForwardedIPConfig struct {
 	HeaderName *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// statement used to identify web requests based on country of origin.
+// A rule statement used to identify web requests based on country of origin.
 type GeoMatchStatement struct {
 
 	// An array of two-character country codes, for example, [ "US", "CN" ], from the
@@ -362,13 +328,9 @@ type GeoMatchStatement struct {
 	ForwardedIPConfig *ForwardedIPConfig
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). Part
-// of the response from GetSampledRequests. This is a complex type that appears as
-// Headers in the response syntax. HTTPHeader contains the names and values of all
-// of the headers that appear in one of the web requests.
+// Part of the response from GetSampledRequests. This is a complex type that
+// appears as Headers in the response syntax. HTTPHeader contains the names and
+// values of all of the headers that appear in one of the web requests.
 type HTTPHeader struct {
 
 	// The name of the HTTP header.
@@ -378,13 +340,9 @@ type HTTPHeader struct {
 	Value *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). Part
-// of the response from GetSampledRequests. This is a complex type that appears as
-// Request in the response syntax. HTTPRequest contains information about one of
-// the web requests.
+// Part of the response from GetSampledRequests. This is a complex type that
+// appears as Request in the response syntax. HTTPRequest contains information
+// about one of the web requests.
 type HTTPRequest struct {
 
 	// The IP address that the request originated from. If the web ACL is associated
@@ -418,14 +376,10 @@ type HTTPRequest struct {
 	URI *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Contains one or more IP addresses or blocks of IP addresses specified in
-// Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports any CIDR range.
-// For information about CIDR notation, see the Wikipedia entry Classless
-// Inter-Domain Routing
+// Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports all IPv4 and
+// IPv6 CIDR ranges except for /0. For information about CIDR notation, see the
+// Wikipedia entry Classless Inter-Domain Routing
 // (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). AWS WAF assigns
 // an ARN to each IPSet that you create. To use an IP set in a rule, you provide
 // the ARN to the Rule statement IPSetReferenceStatement.
@@ -438,10 +392,10 @@ type IPSet struct {
 
 	// Contains an array of strings that specify one or more IP addresses or blocks of
 	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
-	// all address ranges for IP versions IPv4 and IPv6. Examples:
+	// all IPv4 and IPv6 CIDR ranges except for /0. Examples:
 	//
-	// * To configure AWS
-	// WAF to allow, block, or count requests that originated from the IP address
+	// * To configure AWS WAF
+	// to allow, block, or count requests that originated from the IP address
 	// 192.0.2.44, specify 192.0.2.44/32.
 	//
 	// * To configure AWS WAF to allow, block, or
@@ -482,8 +436,7 @@ type IPSet struct {
 	// This member is required.
 	Name *string
 
-	// A description of the IP set that helps with identification. You cannot change
-	// the description of an IP set after you create it.
+	// A description of the IP set that helps with identification.
 	Description *string
 }
 
@@ -539,12 +492,8 @@ type IPSetForwardedIPConfig struct {
 	Position ForwardedIPPosition
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// statement used to detect web requests coming from particular IP addresses or
-// address ranges. To use this, create an IPSet that specifies the addresses you
+// A rule statement used to detect web requests coming from particular IP addresses
+// or address ranges. To use this, create an IPSet that specifies the addresses you
 // want to detect, then use the ARN of that set in this statement. To create an IP
 // set, see CreateIPSet. Each IP set rule statement references an IP set. You
 // create and maintain the set independent of your rules. This allows you to use
@@ -565,10 +514,6 @@ type IPSetReferenceStatement struct {
 	IPSetForwardedIPConfig *IPSetForwardedIPConfig
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // High-level information about an IPSet, returned by operations like create and
 // list. This provides information like the ID, that you can use to retrieve and
 // manage an IPSet, and the ARN, that you provide to the IPSetReferenceStatement to
@@ -578,8 +523,7 @@ type IPSetSummary struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string
 
-	// A description of the IP set that helps with identification. You cannot change
-	// the description of an IP set after you create it.
+	// A description of the IP set that helps with identification.
 	Description *string
 
 	// A unique identifier for the set. This ID is returned in the responses to create
@@ -600,10 +544,76 @@ type IPSetSummary struct {
 	Name *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+// The body of a web request, inspected as JSON. The body immediately follows the
+// request headers. This is used in the FieldToMatch specification. Use the
+// specifications in this object to indicate which parts of the JSON body to
+// inspect using the rule's inspection criteria. AWS WAF inspects only the parts of
+// the JSON that result from the matches that you indicate.
+type JsonBody struct {
+
+	// The patterns to look for in the JSON body. AWS WAF inspects the results of these
+	// pattern matches against the rule inspection criteria.
+	//
+	// This member is required.
+	MatchPattern *JsonMatchPattern
+
+	// The parts of the JSON to match against using the MatchPattern. If you specify
+	// All, AWS WAF matches against keys and values.
+	//
+	// This member is required.
+	MatchScope JsonMatchScope
+
+	// What AWS WAF should do if it fails to completely parse the JSON body. The
+	// options are the following:
+	//
+	// * EVALUATE_AS_STRING - Inspect the body as plain
+	// text. AWS WAF applies the text transformations and inspection criteria that you
+	// defined for the JSON inspection to the body text string.
+	//
+	// * MATCH - Treat the
+	// web request as matching the rule statement. AWS WAF applies the rule action to
+	// the request.
+	//
+	// * NO_MATCH - Treat the web request as not matching the rule
+	// statement.
+	//
+	// If you don't provide this setting, AWS WAF parses and evaluates the
+	// content only up to the first parsing failure that it encounters. AWS WAF does
+	// its best to parse the entire JSON body, but might be forced to stop for reasons
+	// such as invalid characters, duplicate keys, truncation, and any content whose
+	// root node isn't an object or an array. AWS WAF parses the JSON in the following
+	// examples as two valid key, value pairs:
+	//
+	// * Missing comma:
+	// {"key1":"value1""key2":"value2"}
+	//
+	// * Missing colon:
+	// {"key1":"value1","key2""value2"}
+	//
+	// * Extra colons:
+	// {"key1"::"value1","key2""value2"}
+	InvalidFallbackBehavior BodyParsingFallbackBehavior
+}
+
+// The patterns to look for in the JSON body. AWS WAF inspects the results of these
+// pattern matches against the rule inspection criteria. This is used with the
+// FieldToMatch option JsonBody.
+type JsonMatchPattern struct {
+
+	// Match all of the elements. See also MatchScope in JsonBody. You must specify
+	// either this setting or the IncludedPaths setting, but not both.
+	All *All
+
+	// Match only the specified include paths. See also MatchScope in JsonBody. Provide
+	// the include paths using JSON Pointer syntax. For example, "IncludedPaths":
+	// ["/dogs/0/name", "/dogs/1/name"]. For information about this syntax, see the
+	// Internet Engineering Task Force (IETF) documentation JavaScript Object Notation
+	// (JSON) Pointer (https://tools.ietf.org/html/rfc6901). You must specify either
+	// this setting or the All setting, but not both. Don't use this option to include
+	// all paths. Instead, use the All setting.
+	IncludedPaths []string
+}
+
 // Defines an association between Amazon Kinesis Data Firehose destinations and a
 // web ACL resource, for logging from AWS WAF. As part of the association, you can
 // specify parts of the standard logging fields to keep out of the logs.
@@ -632,16 +642,12 @@ type LoggingConfiguration struct {
 	RedactedFields []FieldToMatch
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// statement used to run the rules that are defined in a managed rule group. To use
-// this, provide the vendor name and the name of the rule group in this statement.
-// You can retrieve the required names by calling ListAvailableManagedRuleGroups.
-// You can't nest a ManagedRuleGroupStatement, for example for use inside a
-// NotStatement or OrStatement. It can only be referenced as a top-level statement
-// within a rule.
+// A rule statement used to run the rules that are defined in a managed rule group.
+// To use this, provide the vendor name and the name of the rule group in this
+// statement. You can retrieve the required names by calling
+// ListAvailableManagedRuleGroups. You can't nest a ManagedRuleGroupStatement, for
+// example for use inside a NotStatement or OrStatement. It can only be referenced
+// as a top-level statement within a rule.
 type ManagedRuleGroupStatement struct {
 
 	// The name of the managed rule group. You use this, along with the vendor name, to
@@ -662,10 +668,6 @@ type ManagedRuleGroupStatement struct {
 	ExcludedRules []ExcludedRule
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // High-level information about a managed rule group, returned by
 // ListAvailableManagedRuleGroups. This provides information like the name and
 // vendor name, that you provide when you add a ManagedRuleGroupStatement to a web
@@ -687,20 +689,13 @@ type ManagedRuleGroupSummary struct {
 	VendorName *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// HTTP method of a web request. The method indicates the type of operation that
-// the request is asking the origin to perform. This is used only to indicate the
-// web request component for AWS WAF to inspect, in the FieldToMatch specification.
+// The HTTP method of a web request. The method indicates the type of operation
+// that the request is asking the origin to perform. This is used only to indicate
+// the web request component for AWS WAF to inspect, in the FieldToMatch
+// specification.
 type Method struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Specifies that AWS WAF should do nothing. This is generally used to try out a
 // rule without performing any actions. You set the OverrideAction on the Rule.
 // This is used only in the context of other settings, for example to specify
@@ -708,12 +703,8 @@ type Method struct {
 type NoneAction struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A
-// logical rule statement used to negate the results of another rule statement. You
-// provide one Statement within the NotStatement.
+// A logical rule statement used to negate the results of another rule statement.
+// You provide one Statement within the NotStatement.
 type NotStatement struct {
 
 	// The statement to negate. You can use any statement that can be nested.
@@ -722,12 +713,8 @@ type NotStatement struct {
 	Statement *Statement
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A
-// logical rule statement used to combine other rule statements with OR logic. You
-// provide more than one Statement within the OrStatement.
+// A logical rule statement used to combine other rule statements with OR logic.
+// You provide more than one Statement within the OrStatement.
 type OrStatement struct {
 
 	// The statements to combine with OR logic. You can use any statements that can be
@@ -759,23 +746,15 @@ type OverrideAction struct {
 	None *NoneAction
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// query string of a web request. This is the part of a URL that appears after a ?
-// character, if any. This is used only to indicate the web request component for
-// AWS WAF to inspect, in the FieldToMatch specification.
+// The query string of a web request. This is the part of a URL that appears after
+// a ? character, if any. This is used only to indicate the web request component
+// for AWS WAF to inspect, in the FieldToMatch specification.
 type QueryString struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A
-// rate-based rule tracks the rate of requests for each originating IP address, and
-// triggers the rule action when the rate exceeds a limit that you specify on the
-// number of requests in any 5-minute time span. You can use this to put a
+// A rate-based rule tracks the rate of requests for each originating IP address,
+// and triggers the rule action when the rate exceeds a limit that you specify on
+// the number of requests in any 5-minute time span. You can use this to put a
 // temporary block on requests from an IP address that is sending excessive
 // requests. When the rule action triggers, AWS WAF blocks additional requests from
 // the IP address until the request rate falls below the limit. You can optionally
@@ -835,11 +814,7 @@ type RateBasedStatement struct {
 	ScopeDownStatement *Statement
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// set of IP addresses that are currently blocked for a rate-based statement.
+// The set of IP addresses that are currently blocked for a rate-based statement.
 type RateBasedStatementManagedKeysIPSet struct {
 
 	// The IP addresses that are currently blocked.
@@ -848,21 +823,13 @@ type RateBasedStatementManagedKeysIPSet struct {
 	IPAddressVersion IPAddressVersion
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A
-// single regular expression. This is used in a RegexPatternSet.
+// A single regular expression. This is used in a RegexPatternSet.
 type Regex struct {
 
 	// The string representing the regular expression.
 	RegexString *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Contains one or more regular expressions. AWS WAF assigns an ARN to each
 // RegexPatternSet that you create. To use a set in a rule, you provide the ARN to
 // the Rule statement RegexPatternSetReferenceStatement.
@@ -871,8 +838,7 @@ type RegexPatternSet struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string
 
-	// A description of the set that helps with identification. You cannot change the
-	// description of a set after you create it.
+	// A description of the set that helps with identification.
 	Description *string
 
 	// A unique identifier for the set. This ID is returned in the responses to create
@@ -886,11 +852,7 @@ type RegexPatternSet struct {
 	RegularExpressionList []Regex
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// statement used to search web request components for matches with regular
+// A rule statement used to search web request components for matches with regular
 // expressions. To use this, create a RegexPatternSet that specifies the
 // expressions that you want to detect, then use the ARN of that set in this
 // statement. A web request matches the pattern set rule statement if the request
@@ -923,10 +885,6 @@ type RegexPatternSetReferenceStatement struct {
 	TextTransformations []TextTransformation
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // High-level information about a RegexPatternSet, returned by operations like
 // create and list. This provides information like the ID, that you can use to
 // retrieve and manage a RegexPatternSet, and the ARN, that you provide to the
@@ -936,8 +894,7 @@ type RegexPatternSetSummary struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string
 
-	// A description of the set that helps with identification. You cannot change the
-	// description of a set after you create it.
+	// A description of the set that helps with identification.
 	Description *string
 
 	// A unique identifier for the set. This ID is returned in the responses to create
@@ -958,14 +915,10 @@ type RegexPatternSetSummary struct {
 	Name *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A
-// single rule, which you can use in a WebACL or RuleGroup to identify web requests
-// that you want to allow, block, or count. Each rule includes one top-level
-// Statement that AWS WAF uses to identify matching web requests, and parameters
-// that govern how AWS WAF handles them.
+// A single rule, which you can use in a WebACL or RuleGroup to identify web
+// requests that you want to allow, block, or count. Each rule includes one
+// top-level Statement that AWS WAF uses to identify matching web requests, and
+// parameters that govern how AWS WAF handles them.
 type Rule struct {
 
 	// The name of the rule. You can't change the name of a Rule after you create it.
@@ -1023,11 +976,7 @@ type Rule struct {
 	OverrideAction *OverrideAction
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// action that AWS WAF should take on a web request when it matches a rule's
+// The action that AWS WAF should take on a web request when it matches a rule's
 // statement. Settings at the web ACL level can override the rule action setting.
 type RuleAction struct {
 
@@ -1041,15 +990,11 @@ type RuleAction struct {
 	Count *CountAction
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// group defines a collection of rules to inspect and control web requests that you
-// can use in a WebACL. When you create a rule group, you define an immutable
-// capacity limit. If you update a rule group, you must stay within the capacity.
-// This allows others to reuse the rule group with confidence in its capacity
-// requirements.
+// A rule group defines a collection of rules to inspect and control web requests
+// that you can use in a WebACL. When you create a rule group, you define an
+// immutable capacity limit. If you update a rule group, you must stay within the
+// capacity. This allows others to reuse the rule group with confidence in its
+// capacity requirements.
 type RuleGroup struct {
 
 	// The Amazon Resource Name (ARN) of the entity.
@@ -1089,8 +1034,7 @@ type RuleGroup struct {
 	// This member is required.
 	VisibilityConfig *VisibilityConfig
 
-	// A description of the rule group that helps with identification. You cannot
-	// change the description of a rule group after you create it.
+	// A description of the rule group that helps with identification.
 	Description *string
 
 	// The Rule statements used to identify the web requests that you want to allow,
@@ -1100,15 +1044,11 @@ type RuleGroup struct {
 	Rules []Rule
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// statement used to run the rules that are defined in a RuleGroup. To use this,
-// create a rule group with your rules, then provide the ARN of the rule group in
-// this statement. You cannot nest a RuleGroupReferenceStatement, for example for
-// use inside a NotStatement or OrStatement. It can only be referenced as a
-// top-level statement within a rule.
+// A rule statement used to run the rules that are defined in a RuleGroup. To use
+// this, create a rule group with your rules, then provide the ARN of the rule
+// group in this statement. You cannot nest a RuleGroupReferenceStatement, for
+// example for use inside a NotStatement or OrStatement. It can only be referenced
+// as a top-level statement within a rule.
 type RuleGroupReferenceStatement struct {
 
 	// The Amazon Resource Name (ARN) of the entity.
@@ -1121,10 +1061,6 @@ type RuleGroupReferenceStatement struct {
 	ExcludedRules []ExcludedRule
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // High-level information about a RuleGroup, returned by operations like create and
 // list. This provides information like the ID, that you can use to retrieve and
 // manage a RuleGroup, and the ARN, that you provide to the
@@ -1134,8 +1070,7 @@ type RuleGroupSummary struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string
 
-	// A description of the rule group that helps with identification. You cannot
-	// change the description of a rule group after you create it.
+	// A description of the rule group that helps with identification.
 	Description *string
 
 	// A unique identifier for the rule group. This ID is returned in the responses to
@@ -1156,21 +1091,13 @@ type RuleGroupSummary struct {
 	Name *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // High-level information about a Rule, returned by operations like
 // DescribeManagedRuleGroup. This provides information like the ID, that you can
 // use to retrieve and manage a RuleGroup, and the ARN, that you provide to the
 // RuleGroupReferenceStatement to use the rule group in a Rule.
 type RuleSummary struct {
 
-	// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-	// 2019. For information, including how to migrate your AWS WAF resources from the
-	// prior release, see the AWS WAF Developer Guide
-	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-	// action that AWS WAF should take on a web request when it matches a rule's
+	// The action that AWS WAF should take on a web request when it matches a rule's
 	// statement. Settings at the web ACL level can override the rule action setting.
 	Action *RuleAction
 
@@ -1178,10 +1105,6 @@ type RuleSummary struct {
 	Name *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Represents a single sampled web request. The response from GetSampledRequests
 // includes a SampledHTTPRequests complex type that appears as SampledRequests in
 // the response syntax. SampledHTTPRequests contains an array of SampledHTTPRequest
@@ -1214,12 +1137,8 @@ type SampledHTTPRequest struct {
 	Timestamp *time.Time
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). One of
-// the headers in a web request, identified by name, for example, User-Agent or
-// Referer. This setting isn't case sensitive. This is used only to indicate the
+// One of the headers in a web request, identified by name, for example, User-Agent
+// or Referer. This setting isn't case sensitive. This is used only to indicate the
 // web request component for AWS WAF to inspect, in the FieldToMatch specification.
 type SingleHeader struct {
 
@@ -1229,11 +1148,7 @@ type SingleHeader struct {
 	Name *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). One
-// query argument in a web request, identified by name, for example UserName or
+// One query argument in a web request, identified by name, for example UserName or
 // SalesRegion. The name can be up to 30 characters long and isn't case sensitive.
 type SingleQueryArgument struct {
 
@@ -1243,11 +1158,7 @@ type SingleQueryArgument struct {
 	Name *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// statement that compares a number of bytes against the size of a request
+// A rule statement that compares a number of bytes against the size of a request
 // component, using a comparison operator, such as greater than (>) or less than
 // (<). For example, you can use a size constraint statement to look for query
 // strings that are longer than 100 bytes. If you configure AWS WAF to inspect the
@@ -1285,10 +1196,6 @@ type SizeConstraintStatement struct {
 	TextTransformations []TextTransformation
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Attackers sometimes insert malicious SQL code into web requests in an effort to
 // extract data from your database. To allow or block web requests that appear to
 // contain malicious SQL code, create one or more SQL injection match conditions.
@@ -1314,11 +1221,7 @@ type SqliMatchStatement struct {
 	TextTransformations []TextTransformation
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// processing guidance for a Rule, used by AWS WAF to determine whether a web
+// The processing guidance for a Rule, used by AWS WAF to determine whether a web
 // request matches the rule.
 type Statement struct {
 
@@ -1439,12 +1342,8 @@ type Statement struct {
 	XssMatchStatement *XssMatchStatement
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A tag
-// associated with an AWS resource. Tags are key:value pairs that you can use to
-// categorize and manage your resources, for purposes like billing or other
+// A tag associated with an AWS resource. Tags are key:value pairs that you can use
+// to categorize and manage your resources, for purposes like billing or other
 // management. Typically, the tag key represents a category, such as "environment",
 // and the tag value represents a specific value within that category, such as
 // "test," "development," or "production". Or you might set the tag key to
@@ -1469,14 +1368,10 @@ type Tag struct {
 	Value *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// collection of tagging definitions for an AWS resource. Tags are key:value pairs
-// that you can use to categorize and manage your resources, for purposes like
-// billing or other management. Typically, the tag key represents a category, such
-// as "environment", and the tag value represents a specific value within that
+// The collection of tagging definitions for an AWS resource. Tags are key:value
+// pairs that you can use to categorize and manage your resources, for purposes
+// like billing or other management. Typically, the tag key represents a category,
+// such as "environment", and the tag value represents a specific value within that
 // category, such as "test," "development," or "production". Or you might set the
 // tag key to "customer" and the value to the customer name or ID. You can specify
 // one or more tags to add to each AWS resource, up to 50 tags for a resource. You
@@ -1492,12 +1387,8 @@ type TagInfoForResource struct {
 	TagList []Tag
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). Text
-// transformations eliminate some of the unusual formatting that attackers use in
-// web requests in an effort to bypass detection.
+// Text transformations eliminate some of the unusual formatting that attackers use
+// in web requests in an effort to bypass detection.
 type TextTransformation struct {
 
 	// Sets the relative processing order for multiple transformations that are defined
@@ -1576,13 +1467,9 @@ type TextTransformation struct {
 	Type TextTransformationType
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). In a
-// GetSampledRequests request, the StartTime and EndTime objects specify the time
-// range for which you want AWS WAF to return a sample of web requests. You must
-// specify the times in Coordinated Universal Time (UTC) format. UTC format
+// In a GetSampledRequests request, the StartTime and EndTime objects specify the
+// time range for which you want AWS WAF to return a sample of web requests. You
+// must specify the times in Coordinated Universal Time (UTC) format. UTC format
 // includes the special designator, Z. For example, "2016-09-27T14:50Z". You can
 // specify any time range in the previous three hours. In a GetSampledRequests
 // response, the StartTime and EndTime objects specify the time range for which AWS
@@ -1613,21 +1500,13 @@ type TimeWindow struct {
 	StartTime *time.Time
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). The
-// path component of the URI of a web request. This is the part of a web request
-// that identifies a resource, for example, /images/daily-ad.jpg. This is used only
-// to indicate the web request component for AWS WAF to inspect, in the
+// The path component of the URI of a web request. This is the part of a web
+// request that identifies a resource, for example, /images/daily-ad.jpg. This is
+// used only to indicate the web request component for AWS WAF to inspect, in the
 // FieldToMatch specification.
 type UriPath struct {
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Defines and enables Amazon CloudWatch metrics and web request sample collection.
 type VisibilityConfig struct {
 
@@ -1654,18 +1533,14 @@ type VisibilityConfig struct {
 	SampledRequestsEnabled bool
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A Web
-// ACL defines a collection of rules to use to inspect and control web requests.
-// Each rule has an action defined (allow, block, or count) for requests that match
-// the statement of the rule. In the Web ACL, you assign a default action to take
-// (allow, block) for any request that does not match any of the rules. The rules
-// in a Web ACL can be a combination of the types Rule, RuleGroup, and managed rule
-// group. You can associate a Web ACL with one or more AWS resources to protect.
-// The resources can be Amazon CloudFront, an Amazon API Gateway REST API, an
-// Application Load Balancer, or an AWS AppSync GraphQL API.
+// A Web ACL defines a collection of rules to use to inspect and control web
+// requests. Each rule has an action defined (allow, block, or count) for requests
+// that match the statement of the rule. In the Web ACL, you assign a default
+// action to take (allow, block) for any request that does not match any of the
+// rules. The rules in a Web ACL can be a combination of the types Rule, RuleGroup,
+// and managed rule group. You can associate a Web ACL with one or more AWS
+// resources to protect. The resources can be Amazon CloudFront, an Amazon API
+// Gateway REST API, an Application Load Balancer, or an AWS AppSync GraphQL API.
 type WebACL struct {
 
 	// The Amazon Resource Name (ARN) of the Web ACL that you want to associate with
@@ -1707,8 +1582,7 @@ type WebACL struct {
 	// ACLs is 1,500.
 	Capacity int64
 
-	// A description of the Web ACL that helps with identification. You cannot change
-	// the description of a Web ACL after you create it.
+	// A description of the Web ACL that helps with identification.
 	Description *string
 
 	// Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then
@@ -1741,10 +1615,6 @@ type WebACL struct {
 	Rules []Rule
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // High-level information about a WebACL, returned by operations like create and
 // list. This provides information like the ID, that you can use to retrieve and
 // manage a WebACL, and the ARN, that you provide to operations like
@@ -1754,8 +1624,7 @@ type WebACLSummary struct {
 	// The Amazon Resource Name (ARN) of the entity.
 	ARN *string
 
-	// A description of the Web ACL that helps with identification. You cannot change
-	// the description of a Web ACL after you create it.
+	// A description of the Web ACL that helps with identification.
 	Description *string
 
 	// The unique identifier for the Web ACL. This ID is returned in the responses to
@@ -1776,12 +1645,8 @@ type WebACLSummary struct {
 	Name *string
 }
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). A rule
-// statement that defines a cross-site scripting (XSS) match search for AWS WAF to
-// apply to web requests. XSS attacks are those where the attacker uses
+// A rule statement that defines a cross-site scripting (XSS) match search for AWS
+// WAF to apply to web requests. XSS attacks are those where the attacker uses
 // vulnerabilities in a benign website as a vehicle to inject malicious client-site
 // scripts into other legitimate web browsers. The XSS match statement provides the
 // location in requests that you want AWS WAF to search and text transformations to

@@ -6,7 +6,8 @@ import (
 	"time"
 )
 
-// An AWS account that is the master of or a member of a behavior graph.
+// An AWS account that is the administrator account of or a member of a behavior
+// graph.
 type Account struct {
 
 	// The account identifier of the AWS account.
@@ -38,6 +39,9 @@ type MemberDetail struct {
 	// The AWS account identifier for the member account.
 	AccountId *string
 
+	// The AWS account identifier of the administrator account for the behavior graph.
+	AdministratorId *string
+
 	// For member accounts with a status of ACCEPTED_BUT_DISABLED, the reason that the
 	// member account is not enabled. The reason can have one of the following
 	// values:
@@ -61,7 +65,10 @@ type MemberDetail struct {
 	// value is in milliseconds since the epoch.
 	InvitedTime *time.Time
 
-	// The AWS account identifier of the master account for the behavior graph.
+	// Deprecated. Instead of MasterId, use AdministratorId. The AWS account identifier
+	// of the administrator account for the behavior graph.
+	//
+	// Deprecated: This property is deprecated, use AdministratorId instead.
 	MasterId *string
 
 	// The member account data volume as a percentage of the maximum allowed data

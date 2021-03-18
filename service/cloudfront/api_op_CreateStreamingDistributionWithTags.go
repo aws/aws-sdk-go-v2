@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new streaming distribution with tags.
+// This API is deprecated. Amazon CloudFront is deprecating real-time messaging
+// protocol (RTMP) distributions on December 31, 2020. For more information, read
+// the announcement (http://forums.aws.amazon.com/ann.jspa?annID=7356) on the
+// Amazon CloudFront discussion forum.
 func (c *Client) CreateStreamingDistributionWithTags(ctx context.Context, params *CreateStreamingDistributionWithTagsInput, optFns ...func(*Options)) (*CreateStreamingDistributionWithTagsOutput, error) {
 	if params == nil {
 		params = &CreateStreamingDistributionWithTagsInput{}

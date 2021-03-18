@@ -223,10 +223,10 @@ type CreateChangeSetInput struct {
 	TemplateBody *string
 
 	// The location of the file that contains the revised template. The URL must point
-	// to a template (max size: 460,800 bytes) that is located in an S3 bucket. AWS
-	// CloudFormation generates the change set by comparing this template with the
-	// stack that you specified. Conditional: You must specify only TemplateBody or
-	// TemplateURL.
+	// to a template (max size: 460,800 bytes) that is located in an S3 bucket or a
+	// Systems Manager document. AWS CloudFormation generates the change set by
+	// comparing this template with the stack that you specified. Conditional: You must
+	// specify only TemplateBody or TemplateURL.
 	TemplateURL *string
 
 	// Whether to reuse the template that is associated with the stack to create the

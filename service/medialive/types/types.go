@@ -86,6 +86,13 @@ type AncillarySourceSettings struct {
 	SourceAncillaryChannelNumber int32
 }
 
+// Archive Cdn Settings
+type ArchiveCdnSettings struct {
+
+	// Archive S3 Settings
+	ArchiveS3Settings *ArchiveS3Settings
+}
+
 // Archive Container Settings
 type ArchiveContainerSettings struct {
 
@@ -103,6 +110,9 @@ type ArchiveGroupSettings struct {
 	//
 	// This member is required.
 	Destination *OutputLocationRef
+
+	// Parameters that control interactions with the CDN.
+	ArchiveCdnSettings *ArchiveCdnSettings
 
 	// Number of seconds to write to archive file before closing and starting a new
 	// one.
@@ -124,6 +134,13 @@ type ArchiveOutputSettings struct {
 	// String concatenated to the end of the destination filename. Required for
 	// multiple outputs of the same type.
 	NameModifier *string
+}
+
+// Archive S3 Settings
+type ArchiveS3Settings struct {
+
+	// Specify the canned ACL to apply to each S3 request. Defaults to none.
+	CannedAcl S3CannedAcl
 }
 
 // Arib Destination Settings
@@ -694,6 +711,55 @@ type CaptionLanguageMapping struct {
 	LanguageDescription *string
 }
 
+// Caption Rectangle
+type CaptionRectangle struct {
+
+	// See the description in leftOffset. For height, specify the entire height of the
+	// rectangle as a percentage of the underlying frame height. For example, "80"
+	// means the rectangle height is 80% of the underlying frame height. The topOffset
+	// and rectangleHeight must add up to 100% or less. This field corresponds to
+	// tts:extent - Y in the TTML standard.
+	//
+	// This member is required.
+	Height float64
+
+	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in
+	// an output. (Make sure to leave the default if you don't have either of these
+	// formats in the output.) You can define a display rectangle for the captions that
+	// is smaller than the underlying video frame. You define the rectangle by
+	// specifying the position of the left edge, top edge, bottom edge, and right edge
+	// of the rectangle, all within the underlying video frame. The units for the
+	// measurements are percentages. If you specify a value for one of these fields,
+	// you must specify a value for all of them. For leftOffset, specify the position
+	// of the left edge of the rectangle, as a percentage of the underlying frame
+	// width, and relative to the left edge of the frame. For example, "10" means the
+	// measurement is 10% of the underlying frame width. The rectangle left edge starts
+	// at that position from the left edge of the frame. This field corresponds to
+	// tts:origin - X in the TTML standard.
+	//
+	// This member is required.
+	LeftOffset float64
+
+	// See the description in leftOffset. For topOffset, specify the position of the
+	// top edge of the rectangle, as a percentage of the underlying frame height, and
+	// relative to the top edge of the frame. For example, "10" means the measurement
+	// is 10% of the underlying frame height. The rectangle top edge starts at that
+	// position from the top edge of the frame. This field corresponds to tts:origin -
+	// Y in the TTML standard.
+	//
+	// This member is required.
+	TopOffset float64
+
+	// See the description in leftOffset. For width, specify the entire width of the
+	// rectangle as a percentage of the underlying frame width. For example, "80" means
+	// the rectangle width is 80% of the underlying frame width. The leftOffset and
+	// rectangleWidth must add up to 100% or less. This field corresponds to tts:extent
+	// - X in the TTML standard.
+	//
+	// This member is required.
+	Width float64
+}
+
 // Output groups for this Live Event. Output groups contain information about where
 // streams should be distributed.
 type CaptionSelector struct {
@@ -798,6 +864,9 @@ type Channel struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	// Settings for VPC output
+	Vpc *VpcOutputSettings
 }
 
 // Placeholder documentation for ChannelEgressEndpoint
@@ -854,6 +923,9 @@ type ChannelSummary struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	// Settings for VPC output
+	Vpc *VpcOutputSettings
 }
 
 // Passthrough applies no color space conversion to the output
@@ -1104,6 +1176,11 @@ type Eac3Settings struct {
 // Ebu Tt DDestination Settings
 type EbuTtDDestinationSettings struct {
 
+	// Applies only if you plan to convert these source captions to EBU-TT-D or TTML in
+	// an output. Complete this field if you want to include the name of the copyright
+	// holder in the copyright metadata tag in the TTML
+	CopyrightHolder *string
+
 	// Specifies how to handle the gap between the lines (in multi-line captions).
 	//
 	// *
@@ -1315,6 +1392,13 @@ type FollowModeScheduleActionStartSettings struct {
 	ReferenceActionName *string
 }
 
+// Frame Capture Cdn Settings
+type FrameCaptureCdnSettings struct {
+
+	// Frame Capture S3 Settings
+	FrameCaptureS3Settings *FrameCaptureS3Settings
+}
+
 // Frame Capture Group Settings
 type FrameCaptureGroupSettings struct {
 
@@ -1329,6 +1413,13 @@ type FrameCaptureGroupSettings struct {
 	//
 	// This member is required.
 	Destination *OutputLocationRef
+
+	// Parameters that control interactions with the CDN.
+	FrameCaptureCdnSettings *FrameCaptureCdnSettings
+}
+
+// Frame Capture Hls Settings
+type FrameCaptureHlsSettings struct {
 }
 
 // Frame Capture Output Settings
@@ -1339,14 +1430,19 @@ type FrameCaptureOutputSettings struct {
 	NameModifier *string
 }
 
+// Frame Capture S3 Settings
+type FrameCaptureS3Settings struct {
+
+	// Specify the canned ACL to apply to each S3 request. Defaults to none.
+	CannedAcl S3CannedAcl
+}
+
 // Frame Capture Settings
 type FrameCaptureSettings struct {
 
 	// The frequency at which to capture frames for inclusion in the output. May be
 	// specified in either seconds or milliseconds, as specified by
 	// captureIntervalUnits.
-	//
-	// This member is required.
 	CaptureInterval int32
 
 	// Unit for the frame capture interval.
@@ -1592,7 +1688,7 @@ type H264Settings struct {
 	Slices int32
 
 	// Softness. Selects quantizer matrix, larger values reduce high-frequency content
-	// in the encoded image.
+	// in the encoded image. If not set to zero, must be greater than 15.
 	Softness int32
 
 	// If set to enabled, adjust quantization within each frame based on spatial
@@ -1860,6 +1956,9 @@ type HlsCdnSettings struct {
 
 	// Hls Media Store Settings
 	HlsMediaStoreSettings *HlsMediaStoreSettings
+
+	// Hls S3 Settings
+	HlsS3Settings *HlsS3Settings
 
 	// Hls Webdav Settings
 	HlsWebdavSettings *HlsWebdavSettings
@@ -2169,6 +2268,13 @@ type HlsOutputSettings struct {
 	SegmentModifier *string
 }
 
+// Hls S3 Settings
+type HlsS3Settings struct {
+
+	// Specify the canned ACL to apply to each S3 request. Defaults to none.
+	CannedAcl S3CannedAcl
+}
+
 // Hls Settings
 type HlsSettings struct {
 
@@ -2177,6 +2283,9 @@ type HlsSettings struct {
 
 	// Fmp4 Hls Settings
 	Fmp4HlsSettings *Fmp4HlsSettings
+
+	// Frame Capture Hls Settings
+	FrameCaptureHlsSettings *FrameCaptureHlsSettings
 
 	// Standard Hls Settings
 	StandardHlsSettings *StandardHlsSettings
@@ -2245,6 +2354,9 @@ type Input struct {
 
 	// Settings for the input devices.
 	InputDevices []InputDeviceSettings
+
+	// A list of IDs for all Inputs which are partners of this one.
+	InputPartnerIds []string
 
 	// Certain pull input sources can be dynamic, meaning that they can have their
 	// URL's dynamically changes during input switch actions. Presently, this
@@ -4450,6 +4562,9 @@ type TeletextDestinationSettings struct {
 // Teletext Source Settings
 type TeletextSourceSettings struct {
 
+	// Optionally defines a region where TTML style captions will be displayed
+	OutputRectangle *CaptionRectangle
+
 	// Specifies the teletext page number within the data stream from which to extract
 	// captions. Range of 0x100 (256) to 0x8FF (2303). Unused for passthrough. Should
 	// be specified as a hexadecimal string with no "0x" prefix.
@@ -4709,6 +4824,27 @@ type VideoSelectorSettings struct {
 
 	// Video Selector Program Id
 	VideoSelectorProgramId *VideoSelectorProgramId
+}
+
+// The properties for a private VPC Output When this property is specified, the
+// output egress addresses will be created in a user specified VPC
+type VpcOutputSettings struct {
+
+	// A list of VPC subnet IDs from the same VPC. If STANDARD channel, subnet IDs must
+	// be mapped to two unique availability zones (AZ).
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// List of public address allocation ids to associate with ENIs that will be
+	// created in Output VPC. Must specify one for SINGLE_PIPELINE, two for STANDARD
+	// channels
+	PublicAddressAllocationIds []string
+
+	// A list of up to 5 EC2 VPC security group IDs to attach to the Output VPC network
+	// interfaces. If none are specified then the VPC default security group will be
+	// used
+	SecurityGroupIds []string
 }
 
 // Wav Settings

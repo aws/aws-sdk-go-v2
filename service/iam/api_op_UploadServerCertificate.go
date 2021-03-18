@@ -20,20 +20,19 @@ import (
 // Certificates provided by ACM are free. For more information about using ACM, see
 // the AWS Certificate Manager User Guide
 // (https://docs.aws.amazon.com/acm/latest/userguide/). For more information about
-// working with server certificates, see Working with Server Certificates
+// working with server certificates, see Working with server certificates
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
 // in the IAM User Guide. This topic includes a list of AWS services that can use
 // the server certificates that you manage with IAM. For information about the
-// number of server certificates you can upload, see Limitations on IAM Entities
-// and Objects
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-limits.html) in
+// number of server certificates you can upload, see IAM and STS quotas
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide. Because the body of the public key certificate, private key,
 // and the certificate chain can be large, you should use POST rather than GET when
 // calling UploadServerCertificate. For information about setting up signatures and
-// authorization through the API, go to Signing AWS API Requests
+// authorization through the API, see Signing AWS API requests
 // (https://docs.aws.amazon.com/general/latest/gr/signing_aws_api_requests.html) in
 // the AWS General Reference. For general information about using the Query API
-// with IAM, go to Calling the API by Making HTTP Query Requests
+// with IAM, see Calling the API by making HTTP query requests
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/programming.html) in the IAM
 // User Guide.
 func (c *Client) UploadServerCertificate(ctx context.Context, params *UploadServerCertificateInput, optFns ...func(*Options)) (*UploadServerCertificateOutput, error) {
@@ -113,7 +112,7 @@ type UploadServerCertificateInput struct {
 	CertificateChain *string
 
 	// The path for the server certificate. For more information about paths, see IAM
-	// Identifiers
+	// identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide. This parameter is optional. If it is not included, it defaults
 	// to a slash (/). This parameter allows (through its regex pattern
@@ -126,6 +125,14 @@ type UploadServerCertificateInput struct {
 	// specify a path using the path parameter. The path must begin with /cloudfront
 	// and must include a trailing slash (for example, /cloudfront/test/).
 	Path *string
+
+	// A list of tags that you want to attach to the new IAM server certificate
+	// resource. Each tag consists of a key name and an associated value. For more
+	// information about tagging, see Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
+	// number of tags, then the entire request fails and the resource is not created.
+	Tags []types.Tag
 }
 
 // Contains the response to a successful UploadServerCertificate request.
@@ -134,6 +141,13 @@ type UploadServerCertificateOutput struct {
 	// The meta information of the uploaded server certificate without its certificate
 	// body, certificate chain, and private key.
 	ServerCertificateMetadata *types.ServerCertificateMetadata
+
+	// A list of tags that are attached to the new IAM server certificate. The returned
+	// list of tags is sorted by tag key. For more information about tagging, see
+	// Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide.
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

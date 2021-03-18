@@ -458,7 +458,7 @@ func (e *InvalidInput) ErrorMessage() string {
 func (e *InvalidInput) ErrorCode() string             { return "InvalidInput" }
 func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The key signing key (KSK) name that you specified isn't a valid name.
+// The key-signing key (KSK) name that you specified isn't a valid name.
 type InvalidKeySigningKeyName struct {
 	Message *string
 }
@@ -475,7 +475,7 @@ func (e *InvalidKeySigningKeyName) ErrorMessage() string {
 func (e *InvalidKeySigningKeyName) ErrorCode() string             { return "InvalidKeySigningKeyName" }
 func (e *InvalidKeySigningKeyName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The key signing key (KSK) status isn't valid or another KSK has the status
+// The key-signing key (KSK) status isn't valid or another KSK has the status
 // INTERNAL_FAILURE.
 type InvalidKeySigningKeyStatus struct {
 	Message *string
@@ -583,8 +583,8 @@ func (e *InvalidVPCId) ErrorMessage() string {
 func (e *InvalidVPCId) ErrorCode() string             { return "InvalidVPCId" }
 func (e *InvalidVPCId) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've already created a key signing key (KSK) with this name or with the same
-// customer managed key (CMK) ARN.
+// You've already created a key-signing key (KSK) with this name or with the same
+// customer managed customer master key (CMK) ARN.
 type KeySigningKeyAlreadyExists struct {
 	Message *string
 }
@@ -601,7 +601,7 @@ func (e *KeySigningKeyAlreadyExists) ErrorMessage() string {
 func (e *KeySigningKeyAlreadyExists) ErrorCode() string             { return "KeySigningKeyAlreadyExists" }
 func (e *KeySigningKeyAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The key signing key (KSK) is specified in a parent DS record.
+// The key-signing key (KSK) is specified in a parent DS record.
 type KeySigningKeyInParentDSRecord struct {
 	Message *string
 }
@@ -618,7 +618,7 @@ func (e *KeySigningKeyInParentDSRecord) ErrorMessage() string {
 func (e *KeySigningKeyInParentDSRecord) ErrorCode() string             { return "KeySigningKeyInParentDSRecord" }
 func (e *KeySigningKeyInParentDSRecord) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The key signing key (KSK) that you specified can't be deactivated because it's
+// The key-signing key (KSK) that you specified can't be deactivated because it's
 // the only KSK for a currently-enabled DNSSEC. Disable DNSSEC signing, or add or
 // enable another KSK.
 type KeySigningKeyInUse struct {
@@ -637,7 +637,7 @@ func (e *KeySigningKeyInUse) ErrorMessage() string {
 func (e *KeySigningKeyInUse) ErrorCode() string             { return "KeySigningKeyInUse" }
 func (e *KeySigningKeyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A key signing key (KSK) with ACTIVE status wasn't found.
+// A key-signing key (KSK) with ACTIVE status wasn't found.
 type KeySigningKeyWithActiveStatusNotFound struct {
 	Message *string
 }
@@ -809,7 +809,7 @@ func (e *NoSuchHostedZone) ErrorMessage() string {
 func (e *NoSuchHostedZone) ErrorCode() string             { return "NoSuchHostedZone" }
 func (e *NoSuchHostedZone) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified key signing key (KSK) doesn't exist.
+// The specified key-signing key (KSK) doesn't exist.
 type NoSuchKeySigningKey struct {
 	Message *string
 }
@@ -1027,7 +1027,7 @@ func (e *TooManyHostedZones) ErrorMessage() string {
 func (e *TooManyHostedZones) ErrorCode() string             { return "TooManyHostedZones" }
 func (e *TooManyHostedZones) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You've reached the limit for the number of key signing keys (KSKs). Remove at
+// You've reached the limit for the number of key-signing keys (KSKs). Remove at
 // least one KSK, and then try again.
 type TooManyKeySigningKeys struct {
 	Message *string

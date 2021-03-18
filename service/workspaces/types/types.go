@@ -50,7 +50,7 @@ type ClientPropertiesResult struct {
 	ResourceId *string
 }
 
-// Describes the compute type.
+// Describes the compute type of the bundle.
 type ComputeType struct {
 
 	// The compute type.
@@ -317,10 +317,10 @@ type TerminateRequest struct {
 	WorkspaceId *string
 }
 
-// Describes the user storage for a WorkSpace bundle.
+// Describes the user volume for a WorkSpace bundle.
 type UserStorage struct {
 
-	// The size of the user storage.
+	// The size of the user volume.
 	Capacity *string
 }
 
@@ -421,17 +421,20 @@ type WorkspaceAccessProperties struct {
 // Describes a WorkSpace bundle.
 type WorkspaceBundle struct {
 
-	// The bundle identifier.
+	// The identifier of the bundle.
 	BundleId *string
 
-	// The compute type. For more information, see Amazon WorkSpaces Bundles
-	// (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
+	// The compute type of the bundle. For more information, see Amazon WorkSpaces
+	// Bundles (http://aws.amazon.com/workspaces/details/#Amazon_WorkSpaces_Bundles).
 	ComputeType *ComputeType
 
-	// A description.
+	// The time when the bundle was created.
+	CreationTime *time.Time
+
+	// The description of the bundle.
 	Description *string
 
-	// The image identifier of the bundle.
+	// The identifier of the image that was used to create the bundle.
 	ImageId *string
 
 	// The last time that the bundle was updated.
@@ -447,7 +450,7 @@ type WorkspaceBundle struct {
 	// The size of the root volume.
 	RootStorage *RootStorage
 
-	// The size of the user storage.
+	// The size of the user volume.
 	UserStorage *UserStorage
 }
 

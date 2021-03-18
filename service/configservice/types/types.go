@@ -601,7 +601,7 @@ type ConfigurationItem struct {
 	// The 12-digit AWS account ID associated with the resource.
 	AccountId *string
 
-	// accoun
+	// Amazon Resource Name (ARN) associated with the resource.
 	Arn *string
 
 	// The Availability Zone associated with the resource.
@@ -782,12 +782,11 @@ type ConformancePackDetail struct {
 	// AWS service that created the conformance pack.
 	CreatedBy *string
 
-	// Conformance pack template that is used to create a pack. The delivery bucket
-	// name should start with awsconfigconforms. For example: "Resource":
-	// "arn:aws:s3:::your_bucket_name/*".
+	// Amazon S3 bucket where AWS Config stores conformance pack templates. This field
+	// is optional.
 	DeliveryS3Bucket *string
 
-	// The prefix for the Amazon S3 bucket.
+	// The prefix for the Amazon S3 bucket. This field is optional.
 	DeliveryS3KeyPrefix *string
 
 	// Last time when conformation pack update was requested.
@@ -953,6 +952,11 @@ type DeliveryChannel struct {
 	// The prefix for the specified Amazon S3 bucket.
 	S3KeyPrefix *string
 
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) customer
+	// managed key (CMK) used to encrypt objects delivered by AWS Config. Must belong
+	// to the same Region as the destination S3 bucket.
+	S3KmsKeyArn *string
+
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends
 	// notifications about configuration changes. If you choose a topic from another
 	// account, the topic must have policies that grant access permissions to AWS
@@ -1081,6 +1085,37 @@ type ExecutionControls struct {
 
 	// A SsmControls object.
 	SsmControls *SsmControls
+}
+
+// Identifies an AWS resource and indicates whether it complies with the AWS Config
+// rule that it was evaluated against.
+type ExternalEvaluation struct {
+
+	// The evaluated compliance resource ID. AWS Config accepts only AWS account ID.
+	//
+	// This member is required.
+	ComplianceResourceId *string
+
+	// The evaluated compliance resource type. AWS Config accepts AWS::::Account
+	// resource type.
+	//
+	// This member is required.
+	ComplianceResourceType *string
+
+	// The compliance of the AWS resource. The valid values are COMPLIANT,
+	// NON_COMPLIANT,  and NOT_APPLICABLE.
+	//
+	// This member is required.
+	ComplianceType ComplianceType
+
+	// The time when the compliance was recorded.
+	//
+	// This member is required.
+	OrderingTimestamp *time.Time
+
+	// Supplementary information about the reason of compliance. For example, this task
+	// was completed on a specific date.
+	Annotation *string
 }
 
 // List of each of the failed delete remediation exceptions with specific reasons.
@@ -1332,11 +1367,12 @@ type OrganizationConformancePack struct {
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []ConformancePackInputParameter
 
-	// Location of an Amazon S3 bucket where AWS Config can deliver evaluation results
-	// and conformance pack template that is used to create a pack.
+	// Amazon S3 bucket where AWS Config stores conformance pack templates. This field
+	// is optional.
 	DeliveryS3Bucket *string
 
-	// Any folder structure you want to add to an Amazon S3 bucket.
+	// Any folder structure you want to add to an Amazon S3 bucket. This field is
+	// optional.
 	DeliveryS3KeyPrefix *string
 
 	// A comma-separated list of accounts excluded from organization conformance pack.
@@ -1684,12 +1720,12 @@ type RecordingGroup struct {
 
 	// A comma-separated list that specifies the types of AWS resources for which AWS
 	// Config records configuration changes (for example, AWS::EC2::Instance or
-	// AWS::CloudTrail::Trail). Before you can set this option to true, you must set
-	// the allSupported option to false. If you set this option to true, when AWS
-	// Config adds support for a new type of resource, it will not record resources of
-	// that type unless you manually add that type to your recording group. For a list
-	// of valid resourceTypes values, see the resourceType Value column in Supported
-	// AWS Resource Types
+	// AWS::CloudTrail::Trail). To record all configuration changes, you must set the
+	// allSupported option to false. If you set this option to true, when AWS Config
+	// adds support for a new type of resource, it will not record resources of that
+	// type unless you manually add that type to your recording group. For a list of
+	// valid resourceTypes values, see the resourceType Value column in Supported AWS
+	// Resource Types
 	// (https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources).
 	ResourceTypes []ResourceType
 }
@@ -1743,7 +1779,7 @@ type RemediationConfiguration struct {
 
 	// The maximum number of failed attempts for auto-remediation. If you do not select
 	// a number, the default is 5. For example, if you specify MaximumAutomaticAttempts
-	// as 5 with RetryAttemptsSeconds as 50 seconds, AWS Config will put a
+	// as 5 with RetryAttemptSeconds as 50 seconds, AWS Config will put a
 	// RemediationException on your behalf for the failing resource after the 5th
 	// failed attempt within 50 seconds.
 	MaximumAutomaticAttempts *int32
@@ -1756,7 +1792,7 @@ type RemediationConfiguration struct {
 
 	// Maximum time in seconds that AWS Config runs auto-remediation. If you do not
 	// select a number, the default is 60 seconds. For example, if you specify
-	// RetryAttemptsSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config
+	// RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config
 	// will run auto-remediations 5 times within 50 seconds before throwing an
 	// exception.
 	RetryAttemptSeconds *int64
@@ -2122,6 +2158,54 @@ type StatusDetailFilters struct {
 	// * UPDATE_FAILED when config rule deletion has failed in the member
 	// account.
 	MemberAccountRuleStatus MemberAccountRuleStatus
+}
+
+// Provides the details of a stored query.
+type StoredQuery struct {
+
+	// The name of the query.
+	//
+	// This member is required.
+	QueryName *string
+
+	// A unique description for the query.
+	Description *string
+
+	// The expression of the query. For example, SELECT resourceId, resourceType,
+	// supplementaryConfiguration.BucketVersioningConfiguration.status WHERE
+	// resourceType = 'AWS::S3::Bucket' AND
+	// supplementaryConfiguration.BucketVersioningConfiguration.status = 'Off'.
+	Expression *string
+
+	// Amazon Resource Name (ARN) of the query. For example,
+	// arn:partition:service:region:account-id:resource-type/resource-name/resource-id.
+	QueryArn *string
+
+	// The ID of the query.
+	QueryId *string
+}
+
+// Returns details of a specific query.
+type StoredQueryMetadata struct {
+
+	// Amazon Resource Name (ARN) of the query. For example,
+	// arn:partition:service:region:account-id:resource-type/resource-name/resource-id.
+	//
+	// This member is required.
+	QueryArn *string
+
+	// The ID of the query.
+	//
+	// This member is required.
+	QueryId *string
+
+	// The name of the query.
+	//
+	// This member is required.
+	QueryName *string
+
+	// A unique description for the query.
+	Description *string
 }
 
 // The tags for the resource. The metadata that you apply to a resource to help you

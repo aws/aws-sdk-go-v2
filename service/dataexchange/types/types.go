@@ -253,6 +253,40 @@ type ExportAssetToSignedUrlResponseDetails struct {
 	SignedUrlExpiresAt *time.Time
 }
 
+// Details of the operation to be performed by the job.
+type ExportRevisionsToS3RequestDetails struct {
+
+	// The unique identifier for the data set associated with this export job.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The destination for the revision.
+	//
+	// This member is required.
+	RevisionDestinations []RevisionDestinationEntry
+
+	// Encryption configuration for the export job.
+	Encryption *ExportServerSideEncryption
+}
+
+// Details about the export revisions to Amazon S3 response.
+type ExportRevisionsToS3ResponseDetails struct {
+
+	// The unique identifier for the data set associated with this export job.
+	//
+	// This member is required.
+	DataSetId *string
+
+	// The destination in Amazon S3 where the revision is exported.
+	//
+	// This member is required.
+	RevisionDestinations []RevisionDestinationEntry
+
+	// Encryption configuration of the export job.
+	Encryption *ExportServerSideEncryption
+}
+
 // Encryption configuration of the export job. Includes the encryption type as well
 // as the AWS KMS key. The KMS key is only necessary if you chose the KMS
 // encryption type.
@@ -462,6 +496,9 @@ type RequestDetails struct {
 	// Details about the export to Amazon S3 request.
 	ExportAssetsToS3 *ExportAssetsToS3RequestDetails
 
+	// Details about the export to Amazon S3 request.
+	ExportRevisionsToS3 *ExportRevisionsToS3RequestDetails
+
 	// Details about the import from signed URL request.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlRequestDetails
 
@@ -478,11 +515,34 @@ type ResponseDetails struct {
 	// Details for the export to Amazon S3 response.
 	ExportAssetsToS3 *ExportAssetsToS3ResponseDetails
 
+	// Details for the export revisions to Amazon S3 response.
+	ExportRevisionsToS3 *ExportRevisionsToS3ResponseDetails
+
 	// Details for the import from signed URL response.
 	ImportAssetFromSignedUrl *ImportAssetFromSignedUrlResponseDetails
 
 	// Details for the import from Amazon S3 response.
 	ImportAssetsFromS3 *ImportAssetsFromS3ResponseDetails
+}
+
+// The destination where the assets in the revision will be exported.
+type RevisionDestinationEntry struct {
+
+	// The S3 bucket that is the destination for the assets in the revision.
+	//
+	// This member is required.
+	Bucket *string
+
+	// The unique identifier for the revision.
+	//
+	// This member is required.
+	RevisionId *string
+
+	// A string representing the pattern for generated names of the individual assets
+	// in the revision. For more information about key patterns, see Key patterns when
+	// exporting revisions
+	// (https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns).
+	KeyPattern *string
 }
 
 // A revision is a container for one or more assets.

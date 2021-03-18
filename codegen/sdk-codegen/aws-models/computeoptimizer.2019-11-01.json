@@ -233,6 +233,9 @@
                     "target": "com.amazonaws.computeoptimizer#GetEnrollmentStatus"
                 },
                 {
+                    "target": "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendations"
+                },
+                {
                     "target": "com.amazonaws.computeoptimizer#GetRecommendationSummaries"
                 },
                 {
@@ -251,7 +254,7 @@
                     "name": "compute-optimizer"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your\n            AWS compute resources, such as EC2 instances, Auto Scaling groups, and Amazon EBS volumes. It\n            reports whether your resources are optimal, and generates optimization recommendations\n            to reduce the cost and improve the performance of your workloads. Compute Optimizer also provides\n            recent utilization metric data, as well as projected utilization metric data for the\n            recommendations, which you can use to evaluate which recommendation provides the best\n            price-performance trade-off. The analysis of your usage patterns can help you decide\n            when to move or resize your running resources, and still meet your performance and\n            capacity requirements. For more information about Compute Optimizer, including the required\n            permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/\">AWS Compute Optimizer User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>AWS Compute Optimizer is a service that analyzes the configuration and utilization metrics of your\n            AWS compute resources, such as EC2 instances, Auto Scaling groups, AWS Lambda functions, and\n            Amazon EBS volumes. It reports whether your resources are optimal, and generates optimization\n            recommendations to reduce the cost and improve the performance of your workloads. Compute Optimizer\n            also provides recent utilization metric data, as well as projected utilization metric\n            data for the recommendations, which you can use to evaluate which recommendation\n            provides the best price-performance trade-off. The analysis of your usage patterns can\n            help you decide when to move or resize your running resources, and still meet your\n            performance and capacity requirements. For more information about Compute Optimizer, including the\n            required permissions to use the service, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/\">AWS Compute Optimizer User Guide</a>.</p>",
                 "smithy.api#title": "AWS Compute Optimizer"
             }
         },
@@ -444,7 +447,7 @@
                 "statistic": {
                     "target": "com.amazonaws.computeoptimizer#MetricStatistic",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic of the utilization metric.</p>\n        <p>The following statistics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Average</code> - This is the value of Sum / SampleCount during the\n                    specified period, or the average value observed during the specified\n                    period.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Maximum</code> - The highest value observed during the specified period.\n                    Use this value to determine high volumes of activity for your\n                    application.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The statistic of the utilization metric.</p>\n        <p>The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and SDKs return utilization metrics using only the\n                <code>Maximum</code> statistic, which is the highest value observed during the\n            specified period.</p>\n        <p>The Compute Optimizer console displays graphs for some utilization metrics using the\n                <code>Average</code> statistic, which is the value of <code>Sum</code> /\n                <code>SampleCount</code> during the specified period. For more information, see\n                <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html\">Viewing resource\n                recommendations</a> in the <i>AWS Compute Optimizer User Guide</i>. You can\n            also get averaged utilization metric data for your resources using Amazon CloudWatch. For more\n            information, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html\">Amazon CloudWatch User\n                Guide</a>.</p>"
                     }
                 },
                 "value": {
@@ -511,7 +514,7 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to export recommendations.</p>\n        <p>This parameter cannot be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n        <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the include member accounts parameter, is omitted.</p>\n        <p>You can specify multiple account IDs per request.</p>"
+                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to export Auto Scaling group recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to export recommendations.</p>\n        <p>This parameter cannot be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n        <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the include member accounts parameter, is omitted.</p>\n        <p>You can specify multiple account IDs per request.</p>"
                     }
                 },
                 "filters": {
@@ -622,7 +625,7 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to export instance recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to export recommendations.</p>\n        <p>This parameter cannot be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n        <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the include member accounts parameter, is omitted.</p>\n        <p>You can specify multiple account IDs per request.</p>"
+                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to export instance recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to export recommendations.</p>\n        <p>This parameter cannot be specified together with the include member accounts\n            parameter. The parameters are mutually exclusive.</p>\n        <p>Recommendations for member accounts are not included in the export if this parameter,\n            or the include member accounts parameter, is omitted.</p>\n        <p>You can specify multiple account IDs per request.</p>"
                     }
                 },
                 "filters": {
@@ -1068,6 +1071,33 @@
                 ]
             }
         },
+        "com.amazonaws.computeoptimizer#FindingReasonCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MemoryOverprovisioned",
+                        "name": "MEMORY_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "MemoryUnderprovisioned",
+                        "name": "MEMORY_UNDER_PROVISIONED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#FunctionArn": {
+            "type": "string"
+        },
+        "com.amazonaws.computeoptimizer#FunctionArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#FunctionArn"
+            }
+        },
+        "com.amazonaws.computeoptimizer#FunctionVersion": {
+            "type": "string"
+        },
         "com.amazonaws.computeoptimizer#GetAutoScalingGroupRecommendations": {
             "type": "operation",
             "input": {
@@ -1112,7 +1142,7 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to return Auto Scaling group recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to return Auto Scaling group\n            recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
+                        "smithy.api#documentation": "<p>The ID of the AWS account for which to return Auto Scaling group recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return Auto Scaling group\n            recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
                     }
                 },
                 "autoScalingGroupArns": {
@@ -1232,7 +1262,7 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to return volume recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to return volume recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
+                        "smithy.api#documentation": "<p>The ID of the AWS account for which to return volume recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return volume recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
                     }
                 }
             }
@@ -1328,7 +1358,7 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to return instance recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to return instance\n            recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
+                        "smithy.api#documentation": "<p>The ID of the AWS account for which to return instance recommendations.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return instance recommendations.</p>\n        <p>Only one account ID can be specified per request.</p>"
                     }
                 }
             }
@@ -1504,6 +1534,96 @@
                 }
             }
         },
+        "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.computeoptimizer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#MissingAuthenticationToken"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#OptInRequiredException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.computeoptimizer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns AWS Lambda function recommendations.</p>\n\n        <p>AWS Compute Optimizer generates recommendations for functions that meet a specific set of\n            requirements. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                requirements</a> in the <i>AWS Compute Optimizer User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendationsRequest": {
+            "type": "structure",
+            "members": {
+                "functionArns": {
+                    "target": "com.amazonaws.computeoptimizer#FunctionArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the functions for which to return\n            recommendations.</p>\n\n        <p>You can specify a qualified or unqualified ARN. If you specify an unqualified ARN\n            without a function version suffix, Compute Optimizer will return recommendations for the latest\n                (<code>$LATEST</code>) version of the function. If you specify a qualified ARN with\n            a version suffix, Compute Optimizer will return recommendations for the specified function version.\n            For more information about using function versions, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using\">Using\n                versions</a> in the <i>AWS Lambda Developer Guide</i>.</p>"
+                    }
+                },
+                "accountIds": {
+                    "target": "com.amazonaws.computeoptimizer#AccountIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS account for which to return function recommendations.</p>\n\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return function recommendations.</p>\n\n        <p>Only one account ID can be specified per request.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe a filter that returns a more specific list of\n            function recommendations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to advance to the next page of function recommendations.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.computeoptimizer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of function recommendations to return with a single request.</p>\n\n        <p>To retrieve the remaining results, make another request with the returned\n                <code>NextToken</code> value.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.computeoptimizer#GetLambdaFunctionRecommendationsResponse": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.computeoptimizer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to advance to the next page of function recommendations.</p>\n\n        <p>This value is null when there are no more pages of function recommendations to\n            return.</p>"
+                    }
+                },
+                "lambdaFunctionRecommendations": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe function recommendations.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.computeoptimizer#GetRecommendationError": {
             "type": "structure",
             "members": {
@@ -1568,7 +1688,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the optimization findings for an account.</p>\n        <p>For example, it returns the number of Amazon EC2 instances in an account that are\n            under-provisioned, over-provisioned, or optimized. It also returns the number of Auto Scaling\n            groups in an account that are not optimized, or optimized.</p>"
+                "smithy.api#documentation": "<p>Returns the optimization findings for an account.</p>\n        <p>It returns the number of:</p>\n        <ul>\n            <li>\n                <p>Amazon EC2 instances in an account that are <code>Underprovisioned</code>,\n                        <code>Overprovisioned</code>, or <code>Optimized</code>.</p>\n            </li>\n            <li>\n                <p>Auto Scaling groups in an account that are <code>NotOptimized</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n                <p>Amazon EBS volumes in an account that are <code>NotOptimized</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n            <li>\n                <p>Lambda functions in an account that are <code>NotOptimized</code>, or\n                        <code>Optimized</code>.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.computeoptimizer#GetRecommendationSummariesRequest": {
@@ -1577,7 +1697,7 @@
                 "accountIds": {
                     "target": "com.amazonaws.computeoptimizer#AccountIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the AWS accounts for which to return recommendation summaries.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member accounts for which you want to return recommendation\n            summaries.</p>\n        <p>Only one account ID can be specified per request.</p>"
+                        "smithy.api#documentation": "<p>The ID of the AWS account for which to return recommendation summaries.</p>\n        <p>If your account is the management account of an organization, use this parameter to\n            specify the member account for which you want to return recommendation summaries.</p>\n        <p>Only one account ID can be specified per request.</p>"
                     }
                 },
                 "nextToken": {
@@ -1837,6 +1957,331 @@
                 ]
             }
         },
+        "com.amazonaws.computeoptimizer#LambdaFunctionMemoryMetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Duration",
+                        "name": "DURATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionMemoryMetricStatistic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LowerBound",
+                        "name": "LOWER_BOUND"
+                    },
+                    {
+                        "value": "UpperBound",
+                        "name": "UPPER_BOUND"
+                    },
+                    {
+                        "value": "Expected",
+                        "name": "EXPECTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionMemoryProjectedMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionMemoryMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the projected utilization metric.</p>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionMemoryMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic of the projected utilization metric.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#MetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values of the projected utilization metrics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a projected utilization metric of an AWS Lambda function recommendation\n            option.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionMemoryProjectedMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LambdaFunctionMemoryProjectedMetric"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionMemoryRecommendationOption": {
+            "type": "structure",
+            "members": {
+                "rank": {
+                    "target": "com.amazonaws.computeoptimizer#Rank",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rank of the function recommendation option.</p>\n\n        <p>The top recommendation option is ranked as <code>1</code>.</p>"
+                    }
+                },
+                "memorySize": {
+                    "target": "com.amazonaws.computeoptimizer#MemorySize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The memory size, in MB, of the function recommendation option.</p>"
+                    }
+                },
+                "projectedUtilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionMemoryProjectedMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the projected utilization metrics of the function\n            recommendation option.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a recommendation option for an AWS Lambda function.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionMemoryRecommendationOptions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LambdaFunctionMemoryRecommendationOption"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionMetricName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Duration",
+                        "name": "DURATION"
+                    },
+                    {
+                        "value": "Memory",
+                        "name": "MEMORY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionMetricStatistic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Maximum",
+                        "name": "MAXIMUM"
+                    },
+                    {
+                        "value": "Average",
+                        "name": "AVERAGE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionRecommendation": {
+            "type": "structure",
+            "members": {
+                "functionArn": {
+                    "target": "com.amazonaws.computeoptimizer#FunctionArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the current function.</p>"
+                    }
+                },
+                "functionVersion": {
+                    "target": "com.amazonaws.computeoptimizer#FunctionVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version number of the current function.</p>"
+                    }
+                },
+                "accountId": {
+                    "target": "com.amazonaws.computeoptimizer#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the function.</p>"
+                    }
+                },
+                "currentMemorySize": {
+                    "target": "com.amazonaws.computeoptimizer#MemorySize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory, in MB, that's allocated to the current function.</p>"
+                    }
+                },
+                "numberOfInvocations": {
+                    "target": "com.amazonaws.computeoptimizer#NumberOfInvocations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times your function code was executed during the look-back\n            period.</p>"
+                    }
+                },
+                "utilizationMetrics": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionUtilizationMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the utilization metrics of the function.</p>"
+                    }
+                },
+                "lookbackPeriodInDays": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodInDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which utilization metrics were analyzed for the\n            function.</p>"
+                    }
+                },
+                "lastRefreshTimestamp": {
+                    "target": "com.amazonaws.computeoptimizer#LastRefreshTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the function recommendation was last refreshed.</p>"
+                    }
+                },
+                "finding": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFinding",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The finding classification for the function.</p>\n        <p>Findings for functions include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — The function is\n                    correctly provisioned to run your workload based on its current configuration\n                    and its utilization history. This finding classification does not include\n                    finding reason codes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b> — The function is\n                    performing at a higher level (over-provisioned) or at a lower level\n                    (under-provisioned) than required for your workload because its current\n                    configuration is not optimal. Over-provisioned resources might lead to\n                    unnecessary infrastructure cost, and under-provisioned resources might lead to\n                    poor application performance. This finding classification can include the\n                        <code>MemoryUnderprovisioned</code> and <code>MemoryUnderprovisioned</code>\n                    finding reason codes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Unavailable</code>\n                  </b> — Compute Optimizer was unable to\n                    generate a recommendation for the function. This could be because the function\n                    has not accumulated sufficient metric data, or the function does not qualify for\n                    a recommendation. This finding classification can include the\n                        <code>InsufficientData</code> and <code>Inconclusive</code> finding reason\n                    codes.</p>\n                <note>\n                    <p>Functions with a finding of unavailable are not returned unless you\n                        specify the <code>filter</code> parameter with a value of\n                            <code>Unavailable</code> in your\n                            <code>GetLambdaFunctionRecommendations</code> request.</p>\n                </note>\n            </li>\n         </ul>"
+                    }
+                },
+                "findingReasonCodes": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFindingReasonCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the finding classification of the function.</p>\n        <note>\n            <p>Functions that have a finding classification of <code>Optimized</code> don't have\n                a finding reason code.</p>\n        </note>\n        <p>Reason codes include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — The\n                    function is over-provisioned when its memory configuration can be sized down\n                    while still meeting the performance requirements of your workload. An\n                    over-provisioned function might lead to unnecessary infrastructure cost. This\n                    finding reason code is part of the <code>NotOptimized</code> finding\n                    classification.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — The\n                    function is under-provisioned when its memory configuration doesn't meet the\n                    performance requirements of the workload. An under-provisioned function might\n                    lead to poor application performance. This finding reason code is part of the\n                        <code>NotOptimized</code> finding classification.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>InsufficientData</code>\n                  </b> — The function\n                    does not have sufficient metric data for Compute Optimizer to generate a recommendation. For\n                    more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                        requirements</a> in the <i>AWS Compute Optimizer User Guide</i>. This\n                    finding reason code is part of the <code>Unavailable</code> finding\n                    classification.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Inconclusive</code>\n                  </b> — The function does\n                    not qualify for a recommendation because Compute Optimizer cannot generate a recommendation\n                    with a high degree of confidence. This finding reason code is part of the\n                        <code>Unavailable</code> finding classification.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "memorySizeRecommendationOptions": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionMemoryRecommendationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that describe the memory configuration recommendation options for\n            the function.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an AWS Lambda function recommendation.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n\n        <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (e.g., <code>NotOptimized</code>).</p>\n\n        <p>Specify <code>FindingReasonCode</code> to return recommendations with a specific\n            finding reason code (e.g., <code>MemoryUnderprovisioned</code>).</p>"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.computeoptimizer#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Optimized</code>, <code>NotOptimized</code>, or\n                        <code>Unavailable</code> if you specified the <code>name</code> parameter as\n                        <code>Finding</code>.</p>\n            </li>\n            <li>\n                <p>Specify <code>MemoryOverprovisioned</code>,\n                        <code>MemoryUnderprovisioned</code>, <code>InsufficientData</code>, or\n                        <code>Inconclusive</code> if you specified the <code>name</code> parameter\n                    as <code>FindingReasonCode</code>.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of AWS Lambda function\n            recommendations.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Finding",
+                        "name": "FINDING"
+                    },
+                    {
+                        "value": "FindingReasonCode",
+                        "name": "FINDING_REASON_CODE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFilter"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFinding": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Optimized",
+                        "name": "OPTIMIZED"
+                    },
+                    {
+                        "value": "NotOptimized",
+                        "name": "NOT_OPTIMIZED"
+                    },
+                    {
+                        "value": "Unavailable",
+                        "name": "UNAVAILABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFindingReasonCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MemoryOverprovisioned",
+                        "name": "MEMORY_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "MemoryUnderprovisioned",
+                        "name": "MEMORY_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "InsufficientData",
+                        "name": "INSUFFICIENT_DATA"
+                    },
+                    {
+                        "value": "Inconclusive",
+                        "name": "INCONCLUSIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFindingReasonCodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFindingReasonCode"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionRecommendations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendation"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionUtilizationMetric": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionMetricName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n        <p>The following utilization metrics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Duration</code> - The amount of time that your function code spends\n                    processing an event.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Memory</code> - The amount of memory used per invocation.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statistic": {
+                    "target": "com.amazonaws.computeoptimizer#LambdaFunctionMetricStatistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The statistic of the utilization metric.</p>\n        <p>The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and SDKs return utilization metrics using only the\n                <code>Maximum</code> statistic, which is the highest value observed during the\n            specified period.</p>\n        <p>The Compute Optimizer console displays graphs for some utilization metrics using the\n                <code>Average</code> statistic, which is the value of <code>Sum</code> /\n                <code>SampleCount</code> during the specified period. For more information, see\n                <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html\">Viewing resource\n                recommendations</a> in the <i>AWS Compute Optimizer User Guide</i>. You can\n            also get averaged utilization metric data for your resources using Amazon CloudWatch. For more\n            information, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html\">Amazon CloudWatch User\n                Guide</a>.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#MetricValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the utilization metric.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a utilization metric of an AWS Lambda function.</p>"
+            }
+        },
+        "com.amazonaws.computeoptimizer#LambdaFunctionUtilizationMetrics": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#LambdaFunctionUtilizationMetric"
+            }
+        },
         "com.amazonaws.computeoptimizer#LastRefreshTimestamp": {
             "type": "timestamp"
         },
@@ -1870,6 +2315,9 @@
         },
         "com.amazonaws.computeoptimizer#MemberAccountsEnrolled": {
             "type": "boolean"
+        },
+        "com.amazonaws.computeoptimizer#MemorySize": {
+            "type": "integer"
         },
         "com.amazonaws.computeoptimizer#Message": {
             "type": "string"
@@ -1951,6 +2399,9 @@
         "com.amazonaws.computeoptimizer#NextToken": {
             "type": "string"
         },
+        "com.amazonaws.computeoptimizer#NumberOfInvocations": {
+            "type": "long"
+        },
         "com.amazonaws.computeoptimizer#OptInRequiredException": {
             "type": "structure",
             "members": {
@@ -2016,6 +2467,32 @@
         },
         "com.amazonaws.computeoptimizer#Rank": {
             "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#ReasonCodeSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#ReasonCodeSummary"
+            }
+        },
+        "com.amazonaws.computeoptimizer#ReasonCodeSummary": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.computeoptimizer#FindingReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the finding reason code.</p>"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.computeoptimizer#SummaryValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the finding reason code summary.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a finding reason code.</p>"
+            }
         },
         "com.amazonaws.computeoptimizer#RecommendationExportJob": {
             "type": "structure",
@@ -2117,6 +2594,10 @@
                     {
                         "value": "EbsVolume",
                         "name": "EBS_VOLUME"
+                    },
+                    {
+                        "value": "LambdaFunction",
+                        "name": "LAMBDA_FUNCTION"
                     }
                 ]
             }
@@ -2327,6 +2808,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the recommendation summary.</p>"
                     }
+                },
+                "reasonCodeSummaries": {
+                    "target": "com.amazonaws.computeoptimizer#ReasonCodeSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects that summarize a finding reason code.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2390,7 +2877,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the enrollment (opt in) status of an account to the AWS Compute Optimizer service.</p>\n        <p>If the account is a management account of an organization, this action can also be used\n            to enroll member accounts within the organization.</p>"
+                "smithy.api#documentation": "<p>Updates the enrollment (opt in and opt out) status of an account to the AWS Compute Optimizer\n            service.</p>\n\n        <p>If the account is a management account of an organization, this action can also be used\n            to enroll member accounts within the organization.</p>\n\n        <p>You must have the appropriate permissions to opt in to Compute Optimizer, to view its\n            recommendations, and to opt out. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/ug/security-iam.html\">Controlling access with AWS Identity\n                and Access Management</a> in the <i>Compute Optimizer User Guide</i>.</p>\n\n        <p>When you opt in, Compute Optimizer automatically creates a Service-Linked Role in your account to\n            access its data. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/ug/using-service-linked-roles.html\">Using Service-Linked\n                Roles for AWS Compute Optimizer</a> in the <i>Compute Optimizer User Guide</i>.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#UpdateEnrollmentStatusRequest": {
@@ -2399,14 +2886,14 @@
                 "status": {
                     "target": "com.amazonaws.computeoptimizer#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new enrollment status of the account.</p>\n        <p>Accepted options are <code>Active</code> or <code>Inactive</code>. You will get an\n            error if <code>Pending</code> or <code>Failed</code> are specified.</p>",
+                        "smithy.api#documentation": "<p>The new enrollment status of the account.</p>\n        <p>The following status options are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Active</code> - Opts in your account to the Compute Optimizer service. Compute Optimizer begins\n                    analyzing the configuration and utilization metrics of your AWS resources\n                    after you opt in. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/ug/metrics.html\">Metrics analyzed by AWS Compute Optimizer</a>\n                    in the <i>Compute Optimizer User Guide</i>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Inactive</code> - Opts out your account from the Compute Optimizer service. Your\n                    account's recommendations and related metrics data will be deleted from Compute Optimizer\n                    after you opt out.</p>\n            </li>\n         </ul>\n        <note>\n            <p>The <code>Pending</code> and <code>Failed</code> options cannot be used to update\n                the enrollment status of an account. They are returned in the response of a request\n                to update the enrollment status of an account.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "includeMemberAccounts": {
                     "target": "com.amazonaws.computeoptimizer#IncludeMemberAccounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to enroll member accounts of the organization if the your account is\n            the management account of an organization.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to enroll member accounts of the organization if the account is the\n            management account of an organization.</p>"
                     }
                 }
             }
@@ -2440,7 +2927,7 @@
                 "statistic": {
                     "target": "com.amazonaws.computeoptimizer#MetricStatistic",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic of the utilization metric.</p>\n        <p>The following statistics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Average</code> - This is the value of Sum / SampleCount during the\n                    specified period, or the average value observed during the specified\n                    period.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Maximum</code> - The highest value observed during the specified period.\n                    Use this value to determine high volumes of activity for your\n                    application.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The statistic of the utilization metric.</p>\n        <p>The Compute Optimizer API, AWS Command Line Interface (AWS CLI), and SDKs return utilization metrics using only the\n                <code>Maximum</code> statistic, which is the highest value observed during the\n            specified period.</p>\n        <p>The Compute Optimizer console displays graphs for some utilization metrics using the\n                <code>Average</code> statistic, which is the value of <code>Sum</code> /\n                <code>SampleCount</code> during the specified period. For more information, see\n                <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html\">Viewing resource\n                recommendations</a> in the <i>AWS Compute Optimizer User Guide</i>. You can\n            also get averaged utilization metric data for your resources using Amazon CloudWatch. For more\n            information, see the <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html\">Amazon CloudWatch User\n                Guide</a>.</p>"
                     }
                 },
                 "value": {

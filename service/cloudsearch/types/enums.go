@@ -178,6 +178,11 @@ const (
 	PartitionInstanceTypeSearchM3Large   PartitionInstanceType = "search.m3.large"
 	PartitionInstanceTypeSearchM3Xlarge  PartitionInstanceType = "search.m3.xlarge"
 	PartitionInstanceTypeSearchM32xlarge PartitionInstanceType = "search.m3.2xlarge"
+	PartitionInstanceTypeSearchSmall     PartitionInstanceType = "search.small"
+	PartitionInstanceTypeSearchMedium    PartitionInstanceType = "search.medium"
+	PartitionInstanceTypeSearchLarge     PartitionInstanceType = "search.large"
+	PartitionInstanceTypeSearchXlarge    PartitionInstanceType = "search.xlarge"
+	PartitionInstanceTypeSearch2xlarge   PartitionInstanceType = "search.2xlarge"
 )
 
 // Values returns all known values for PartitionInstanceType. Note that this can be
@@ -193,6 +198,11 @@ func (PartitionInstanceType) Values() []PartitionInstanceType {
 		"search.m3.large",
 		"search.m3.xlarge",
 		"search.m3.2xlarge",
+		"search.small",
+		"search.medium",
+		"search.large",
+		"search.xlarge",
+		"search.2xlarge",
 	}
 }
 

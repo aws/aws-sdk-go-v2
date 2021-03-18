@@ -12,7 +12,17 @@ import (
 )
 
 // Creates a resource group with the specified name and description. You can
-// optionally include a resource query, or a service configuration.
+// optionally include a resource query, or a service configuration. For more
+// information about constructing a resource query, see Create a tag-based group in
+// Resource Groups
+// (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag).
+// For more information about service configurations, see Service configurations
+// for resource groups
+// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html). Minimum
+// permissions To run this command, you must have the following permissions:
+//
+// *
+// resource-groups:CreateGroup
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {
 		params = &CreateGroupInput{}
@@ -41,8 +51,10 @@ type CreateGroupInput struct {
 
 	// A configuration associates the resource group with an AWS service and specifies
 	// how the service can interact with the resources in the group. A configuration is
-	// an array of GroupConfigurationItem elements. You can specify either a
-	// Configuration or a ResourceQuery in a group, but not both.
+	// an array of GroupConfigurationItem elements. For details about the syntax of
+	// service configurations, see Service configurations for resource groups
+	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html). A resource
+	// group can contain either a Configuration or a ResourceQuery, but not both.
 	Configuration []types.GroupConfigurationItem
 
 	// The description of the resource group. Descriptions can consist of letters,
@@ -50,7 +62,11 @@ type CreateGroupInput struct {
 	Description *string
 
 	// The resource query that determines which AWS resources are members of this
-	// group. You can specify either a ResourceQuery or a Configuration, but not both.
+	// group. For more information about resource queries, see Create a tag-based group
+	// in Resource Groups
+	// (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag).
+	// A resource group can contain either a ResourceQuery or a Configuration, but not
+	// both.
 	ResourceQuery *types.ResourceQuery
 
 	// The tags to add to the group. A tag is key-value pair string.
@@ -62,17 +78,14 @@ type CreateGroupOutput struct {
 	// The description of the resource group.
 	Group *types.Group
 
-	// The service configuration associated with the resource group. AWS Resource
-	// Groups supports adding service configurations for the following resource group
-	// types:
-	//
-	// * AWS::EC2::CapacityReservationPool - Amazon EC2 capacity reservation
-	// pools. For more information, see Working with capacity reservation groups
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group)
-	// in the EC2 Users Guide.
+	// The service configuration associated with the resource group. For details about
+	// the syntax of a service configuration, see Service configurations for resource
+	// groups (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
 	GroupConfiguration *types.GroupConfiguration
 
-	// The resource query associated with the group.
+	// The resource query associated with the group. For more information about
+	// resource queries, see Create a tag-based group in Resource Groups
+	// (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag).
 	ResourceQuery *types.ResourceQuery
 
 	// The tags associated with the group.

@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new IAM user for your AWS account. The number and size of IAM
-// resources in an AWS account are limited. For more information, see IAM and STS
-// Quotas
+// Creates a new IAM user for your AWS account. For information about quotas for
+// the number of IAM users you can create, see IAM and STS quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide.
 func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns ...func(*Options)) (*CreateUserOutput, error) {
@@ -41,7 +40,7 @@ type CreateUserInput struct {
 	UserName *string
 
 	// The path for the user name. For more information about paths, see IAM
-	// Identifiers
+	// identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide. This parameter is optional. If it is not included, it defaults
 	// to a slash (/). This parameter allows (through its regex pattern
@@ -55,12 +54,12 @@ type CreateUserInput struct {
 	// The ARN of the policy that is used to set the permissions boundary for the user.
 	PermissionsBoundary *string
 
-	// A list of tags that you want to attach to the newly created user. Each tag
-	// consists of a key name and an associated value. For more information about
-	// tagging, see Tagging IAM Identities
+	// A list of tags that you want to attach to the new user. Each tag consists of a
+	// key name and an associated value. For more information about tagging, see
+	// Tagging IAM resources
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
-	// Guide. If any one of the tags is invalid or if you exceed the allowed number of
-	// tags per user, then the entire request fails and the user is not created.
+	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
+	// number of tags, then the entire request fails and the resource is not created.
 	Tags []types.Tag
 }
 

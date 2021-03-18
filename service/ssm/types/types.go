@@ -600,9 +600,7 @@ type AutomationExecution struct {
 // scope of Automation execution information returned.
 type AutomationExecutionFilter struct {
 
-	// One or more keys to limit the results. Valid filter keys include the following:
-	// DocumentNamePrefix, ExecutionStatus, ExecutionId, ParentExecutionId,
-	// CurrentAction, StartTimeBefore, StartTimeAfter, TargetResourceGroup.
+	// One or more keys to limit the results.
 	//
 	// This member is required.
 	Key AutomationExecutionFilterKey
@@ -711,6 +709,52 @@ type AutomationExecutionMetadata struct {
 
 	// The targets defined by the user when starting the Automation.
 	Targets []Target
+}
+
+// Defines the basic information about a patch baseline override.
+type BaselineOverride struct {
+
+	// A set of rules defining the approval rules for a patch baseline.
+	ApprovalRules *PatchRuleGroup
+
+	// A list of explicitly approved patches for the baseline. For information about
+	// accepted formats for lists of approved patches and rejected patches, see About
+	// package name formats for approved and rejected patch lists
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
+	// in the AWS Systems Manager User Guide.
+	ApprovedPatches []string
+
+	// Defines the compliance level for approved patches. When an approved patch is
+	// reported as missing, this value describes the severity of the compliance
+	// violation.
+	ApprovedPatchesComplianceLevel PatchComplianceLevel
+
+	// Indicates whether the list of approved patches includes non-security updates
+	// that should be applied to the instances. The default value is 'false'. Applies
+	// to Linux instances only.
+	ApprovedPatchesEnableNonSecurity bool
+
+	// A set of patch filters, typically used for approval rules.
+	GlobalFilters *PatchFilterGroup
+
+	// The operating system rule used by the patch baseline override.
+	OperatingSystem OperatingSystem
+
+	// A list of explicitly rejected patches for the baseline. For information about
+	// accepted formats for lists of approved patches and rejected patches, see About
+	// package name formats for approved and rejected patch lists
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html)
+	// in the AWS Systems Manager User Guide.
+	RejectedPatches []string
+
+	// The action for Patch Manager to take on patches included in the RejectedPackages
+	// list. A patch can be allowed only if it is a dependency of another package, or
+	// blocked entirely along with packages that include it as a dependency.
+	RejectedPatchesAction PatchAction
+
+	// Information about the patches to use to update the instances, including target
+	// operating systems and source repositories. Applies to Linux instances only.
+	Sources []PatchSource
 }
 
 // Configuration options for sending command output to CloudWatch Logs.
@@ -1816,7 +1860,11 @@ type InstanceAssociation struct {
 	InstanceId *string
 }
 
-// An S3 bucket where you want to store the results of this request.
+// An S3 bucket where you want to store the results of this request. For the
+// minimal permissions required to enable Amazon S3 output for an association, see
+// Creating associations
+// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-state-assoc.html)
+// in the Systems Manager User Guide.
 type InstanceAssociationOutputLocation struct {
 
 	// An S3 bucket where you want to store the results of this request.
@@ -1981,7 +2029,10 @@ type InstanceInformationStringFilter struct {
 
 	// The filter key name to describe your instances. For example:
 	// "InstanceIds"|"AgentVersion"|"PingStatus"|"PlatformTypes"|"ActivationIds"|"IamRole"|"ResourceType"|"AssociationStatus"|"Tag
-	// Key"
+	// Key" Tag key is not a valid filter. You must specify either tag-key or
+	// tag:keyname and a string. Here are some valid examples: tag-key, tag:123,
+	// tag:al!, tag:Windows. Here are some invalid examples: tag-keys, Tag Key, tag:,
+	// tagKey, abc:keyname.
 	//
 	// This member is required.
 	Key *string
@@ -3603,12 +3654,12 @@ type PatchRule struct {
 	// The number of days after the release date of each patch matched by the rule that
 	// the patch is marked as approved in the patch baseline. For example, a value of 7
 	// means that patches are approved seven days after they are released. Not
-	// supported on Ubuntu Server.
+	// supported on Debian Server or Ubuntu Server.
 	ApproveAfterDays int32
 
 	// The cutoff date for auto approval of released patches. Any patches released on
-	// or before this date are installed automatically. Not supported on Ubuntu Server.
-	// Enter dates in the format YYYY-MM-DD. For example, 2020-12-31.
+	// or before this date are installed automatically. Not supported on Debian Server
+	// or Ubuntu Server. Enter dates in the format YYYY-MM-DD. For example, 2020-12-31.
 	ApproveUntilDate *string
 
 	// A compliance severity level for all approved patches in a patch baseline.
@@ -3635,12 +3686,13 @@ type PatchSource struct {
 
 	// The value of the yum repo configuration. For example: [main]
 	//
-	// cachedir=/var/cache/yum/$basesearch$releasever
+	// name=MyCustomRepository
 	//
-	//     keepcache=0
+	//     baseurl=https://my-custom-repository
 	//
-	//
-	// debuglevel=2
+	// enabled=1 For
+	// information about other options available for your yum repository configuration,
+	// see dnf.conf(5) (https://man7.org/linux/man-pages/man5/dnf.conf.5.html).
 	//
 	// This member is required.
 	Configuration *string
@@ -4296,7 +4348,7 @@ type Tag struct {
 // that you specify. One or more targets must be specified for maintenance window
 // Run Command-type tasks. Depending on the task, targets are optional for other
 // maintenance window task types (Automation, AWS Lambda, and AWS Step Functions).
-// For more information about running tasks that do not specify targets, see see
+// For more information about running tasks that do not specify targets, see
 // Registering maintenance window tasks without targets
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html)
 // in the AWS Systems Manager User Guide. Supported formats include the

@@ -328,6 +328,26 @@ func (AwsJobAbortCriteriaFailureType) Values() []AwsJobAbortCriteriaFailureType 
 	}
 }
 
+type BehaviorCriteriaType string
+
+// Enum values for BehaviorCriteriaType
+const (
+	BehaviorCriteriaTypeStatic          BehaviorCriteriaType = "STATIC"
+	BehaviorCriteriaTypeStatistical     BehaviorCriteriaType = "STATISTICAL"
+	BehaviorCriteriaTypeMachineLearning BehaviorCriteriaType = "MACHINE_LEARNING"
+)
+
+// Values returns all known values for BehaviorCriteriaType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BehaviorCriteriaType) Values() []BehaviorCriteriaType {
+	return []BehaviorCriteriaType{
+		"STATIC",
+		"STATISTICAL",
+		"MACHINE_LEARNING",
+	}
+}
+
 type CACertificateStatus string
 
 // Enum values for CACertificateStatus
@@ -448,6 +468,8 @@ const (
 	ComparisonOperatorNotInCidrSet      ComparisonOperator = "not-in-cidr-set"
 	ComparisonOperatorInPortSet         ComparisonOperator = "in-port-set"
 	ComparisonOperatorNotInPortSet      ComparisonOperator = "not-in-port-set"
+	ComparisonOperatorInSet             ComparisonOperator = "in-set"
+	ComparisonOperatorNotInSet          ComparisonOperator = "not-in-set"
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
@@ -463,6 +485,50 @@ func (ComparisonOperator) Values() []ComparisonOperator {
 		"not-in-cidr-set",
 		"in-port-set",
 		"not-in-port-set",
+		"in-set",
+		"not-in-set",
+	}
+}
+
+type ConfidenceLevel string
+
+// Enum values for ConfidenceLevel
+const (
+	ConfidenceLevelLow    ConfidenceLevel = "LOW"
+	ConfidenceLevelMedium ConfidenceLevel = "MEDIUM"
+	ConfidenceLevelHigh   ConfidenceLevel = "HIGH"
+)
+
+// Values returns all known values for ConfidenceLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConfidenceLevel) Values() []ConfidenceLevel {
+	return []ConfidenceLevel{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+	}
+}
+
+type CustomMetricType string
+
+// Enum values for CustomMetricType
+const (
+	CustomMetricTypeStringList    CustomMetricType = "string-list"
+	CustomMetricTypeIpAddressList CustomMetricType = "ip-address-list"
+	CustomMetricTypeNumberList    CustomMetricType = "number-list"
+	CustomMetricTypeNumber        CustomMetricType = "number"
+)
+
+// Values returns all known values for CustomMetricType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomMetricType) Values() []CustomMetricType {
+	return []CustomMetricType{
+		"string-list",
+		"ip-address-list",
+		"number-list",
+		"number",
 	}
 }
 
@@ -491,6 +557,52 @@ func (DayOfWeek) Values() []DayOfWeek {
 		"THU",
 		"FRI",
 		"SAT",
+	}
+}
+
+type DetectMitigationActionExecutionStatus string
+
+// Enum values for DetectMitigationActionExecutionStatus
+const (
+	DetectMitigationActionExecutionStatusInProgress DetectMitigationActionExecutionStatus = "IN_PROGRESS"
+	DetectMitigationActionExecutionStatusSuccessful DetectMitigationActionExecutionStatus = "SUCCESSFUL"
+	DetectMitigationActionExecutionStatusFailed     DetectMitigationActionExecutionStatus = "FAILED"
+	DetectMitigationActionExecutionStatusSkipped    DetectMitigationActionExecutionStatus = "SKIPPED"
+)
+
+// Values returns all known values for DetectMitigationActionExecutionStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DetectMitigationActionExecutionStatus) Values() []DetectMitigationActionExecutionStatus {
+	return []DetectMitigationActionExecutionStatus{
+		"IN_PROGRESS",
+		"SUCCESSFUL",
+		"FAILED",
+		"SKIPPED",
+	}
+}
+
+type DetectMitigationActionsTaskStatus string
+
+// Enum values for DetectMitigationActionsTaskStatus
+const (
+	DetectMitigationActionsTaskStatusInProgress DetectMitigationActionsTaskStatus = "IN_PROGRESS"
+	DetectMitigationActionsTaskStatusSuccessful DetectMitigationActionsTaskStatus = "SUCCESSFUL"
+	DetectMitigationActionsTaskStatusFailed     DetectMitigationActionsTaskStatus = "FAILED"
+	DetectMitigationActionsTaskStatusCanceled   DetectMitigationActionsTaskStatus = "CANCELED"
+)
+
+// Values returns all known values for DetectMitigationActionsTaskStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DetectMitigationActionsTaskStatus) Values() []DetectMitigationActionsTaskStatus {
+	return []DetectMitigationActionsTaskStatus{
+		"IN_PROGRESS",
+		"SUCCESSFUL",
+		"FAILED",
+		"CANCELED",
 	}
 }
 
@@ -857,6 +969,26 @@ func (MitigationActionType) Values() []MitigationActionType {
 	}
 }
 
+type ModelStatus string
+
+// Enum values for ModelStatus
+const (
+	ModelStatusPendingBuild ModelStatus = "PENDING_BUILD"
+	ModelStatusActive       ModelStatus = "ACTIVE"
+	ModelStatusExpired      ModelStatus = "EXPIRED"
+)
+
+// Values returns all known values for ModelStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ModelStatus) Values() []ModelStatus {
+	return []ModelStatus{
+		"PENDING_BUILD",
+		"ACTIVE",
+		"EXPIRED",
+	}
+}
+
 type OTAUpdateStatus string
 
 // Enum values for OTAUpdateStatus
@@ -1106,6 +1238,7 @@ const (
 	TopicRuleDestinationStatusInProgress TopicRuleDestinationStatus = "IN_PROGRESS"
 	TopicRuleDestinationStatusDisabled   TopicRuleDestinationStatus = "DISABLED"
 	TopicRuleDestinationStatusError      TopicRuleDestinationStatus = "ERROR"
+	TopicRuleDestinationStatusDeleting   TopicRuleDestinationStatus = "DELETING"
 )
 
 // Values returns all known values for TopicRuleDestinationStatus. Note that this
@@ -1117,6 +1250,7 @@ func (TopicRuleDestinationStatus) Values() []TopicRuleDestinationStatus {
 		"IN_PROGRESS",
 		"DISABLED",
 		"ERROR",
+		"DELETING",
 	}
 }
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new AWS Glue DataBrew project in the current AWS account.
+// Creates a new DataBrew project.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}
@@ -29,12 +29,13 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 
 type CreateProjectInput struct {
 
-	// The name of the dataset to associate this project with.
+	// The name of an existing dataset to associate this project with.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// A unique name for the new project.
+	// A unique name for the new project. Valid characters are alphanumeric (A-Z, a-z,
+	// 0-9), hyphen (-), period (.), and space.
 	//
 	// This member is required.
 	Name *string
@@ -50,8 +51,8 @@ type CreateProjectInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Represents the sample size and sampling type for AWS Glue DataBrew to use for
-	// interactive data analysis.
+	// Represents the sample size and sampling type for DataBrew to use for interactive
+	// data analysis.
 	Sample *types.Sample
 
 	// Metadata tags to apply to this project.

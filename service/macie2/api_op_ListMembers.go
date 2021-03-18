@@ -13,7 +13,7 @@ import (
 )
 
 // Retrieves information about the accounts that are associated with an Amazon
-// Macie master account.
+// Macie administrator account.
 func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optFns ...func(*Options)) (*ListMembersOutput, error) {
 	if params == nil {
 		params = &ListMembersInput{}
@@ -39,17 +39,17 @@ type ListMembersInput struct {
 	NextToken *string
 
 	// Specifies which accounts to include in the response, based on the status of an
-	// account's relationship with the master account. By default, the response
-	// includes only current member accounts. To include all accounts, set the value
-	// for this parameter to false.
+	// account's relationship with the administrator account. By default, the response
+	// includes only current member accounts. To include all accounts, set this value
+	// to false.
 	OnlyAssociated *string
 }
 
 type ListMembersOutput struct {
 
-	// An array of objects, one for each account that's associated with the master
-	// account and meets the criteria specified by the onlyAssociated request
-	// parameter.
+	// An array of objects, one for each account that's associated with the
+	// administrator account and meets the criteria specified by the onlyAssociated
+	// request parameter.
 	Members []types.Member
 
 	// The string to use in a subsequent request to get the next page of results in a

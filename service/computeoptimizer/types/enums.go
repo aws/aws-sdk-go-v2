@@ -283,6 +283,24 @@ func (Finding) Values() []Finding {
 	}
 }
 
+type FindingReasonCode string
+
+// Enum values for FindingReasonCode
+const (
+	FindingReasonCodeMemoryOverProvisioned  FindingReasonCode = "MemoryOverprovisioned"
+	FindingReasonCodeMemoryUnderProvisioned FindingReasonCode = "MemoryUnderprovisioned"
+)
+
+// Values returns all known values for FindingReasonCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingReasonCode) Values() []FindingReasonCode {
+	return []FindingReasonCode{
+		"MemoryOverprovisioned",
+		"MemoryUnderprovisioned",
+	}
+}
+
 type JobFilterName string
 
 // Enum values for JobFilterName
@@ -320,6 +338,144 @@ func (JobStatus) Values() []JobStatus {
 		"InProgress",
 		"Complete",
 		"Failed",
+	}
+}
+
+type LambdaFunctionMemoryMetricName string
+
+// Enum values for LambdaFunctionMemoryMetricName
+const (
+	LambdaFunctionMemoryMetricNameDuration LambdaFunctionMemoryMetricName = "Duration"
+)
+
+// Values returns all known values for LambdaFunctionMemoryMetricName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LambdaFunctionMemoryMetricName) Values() []LambdaFunctionMemoryMetricName {
+	return []LambdaFunctionMemoryMetricName{
+		"Duration",
+	}
+}
+
+type LambdaFunctionMemoryMetricStatistic string
+
+// Enum values for LambdaFunctionMemoryMetricStatistic
+const (
+	LambdaFunctionMemoryMetricStatisticLowerBound LambdaFunctionMemoryMetricStatistic = "LowerBound"
+	LambdaFunctionMemoryMetricStatisticUpperBound LambdaFunctionMemoryMetricStatistic = "UpperBound"
+	LambdaFunctionMemoryMetricStatisticExpected   LambdaFunctionMemoryMetricStatistic = "Expected"
+)
+
+// Values returns all known values for LambdaFunctionMemoryMetricStatistic. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LambdaFunctionMemoryMetricStatistic) Values() []LambdaFunctionMemoryMetricStatistic {
+	return []LambdaFunctionMemoryMetricStatistic{
+		"LowerBound",
+		"UpperBound",
+		"Expected",
+	}
+}
+
+type LambdaFunctionMetricName string
+
+// Enum values for LambdaFunctionMetricName
+const (
+	LambdaFunctionMetricNameDuration LambdaFunctionMetricName = "Duration"
+	LambdaFunctionMetricNameMemory   LambdaFunctionMetricName = "Memory"
+)
+
+// Values returns all known values for LambdaFunctionMetricName. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LambdaFunctionMetricName) Values() []LambdaFunctionMetricName {
+	return []LambdaFunctionMetricName{
+		"Duration",
+		"Memory",
+	}
+}
+
+type LambdaFunctionMetricStatistic string
+
+// Enum values for LambdaFunctionMetricStatistic
+const (
+	LambdaFunctionMetricStatisticMaximum LambdaFunctionMetricStatistic = "Maximum"
+	LambdaFunctionMetricStatisticAverage LambdaFunctionMetricStatistic = "Average"
+)
+
+// Values returns all known values for LambdaFunctionMetricStatistic. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LambdaFunctionMetricStatistic) Values() []LambdaFunctionMetricStatistic {
+	return []LambdaFunctionMetricStatistic{
+		"Maximum",
+		"Average",
+	}
+}
+
+type LambdaFunctionRecommendationFilterName string
+
+// Enum values for LambdaFunctionRecommendationFilterName
+const (
+	LambdaFunctionRecommendationFilterNameFinding           LambdaFunctionRecommendationFilterName = "Finding"
+	LambdaFunctionRecommendationFilterNameFindingReasonCode LambdaFunctionRecommendationFilterName = "FindingReasonCode"
+)
+
+// Values returns all known values for LambdaFunctionRecommendationFilterName. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LambdaFunctionRecommendationFilterName) Values() []LambdaFunctionRecommendationFilterName {
+	return []LambdaFunctionRecommendationFilterName{
+		"Finding",
+		"FindingReasonCode",
+	}
+}
+
+type LambdaFunctionRecommendationFinding string
+
+// Enum values for LambdaFunctionRecommendationFinding
+const (
+	LambdaFunctionRecommendationFindingOptimized    LambdaFunctionRecommendationFinding = "Optimized"
+	LambdaFunctionRecommendationFindingNotOptimized LambdaFunctionRecommendationFinding = "NotOptimized"
+	LambdaFunctionRecommendationFindingUnavailable  LambdaFunctionRecommendationFinding = "Unavailable"
+)
+
+// Values returns all known values for LambdaFunctionRecommendationFinding. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LambdaFunctionRecommendationFinding) Values() []LambdaFunctionRecommendationFinding {
+	return []LambdaFunctionRecommendationFinding{
+		"Optimized",
+		"NotOptimized",
+		"Unavailable",
+	}
+}
+
+type LambdaFunctionRecommendationFindingReasonCode string
+
+// Enum values for LambdaFunctionRecommendationFindingReasonCode
+const (
+	LambdaFunctionRecommendationFindingReasonCodeMemoryOverProvisioned  LambdaFunctionRecommendationFindingReasonCode = "MemoryOverprovisioned"
+	LambdaFunctionRecommendationFindingReasonCodeMemoryUnderProvisioned LambdaFunctionRecommendationFindingReasonCode = "MemoryUnderprovisioned"
+	LambdaFunctionRecommendationFindingReasonCodeInsufficientData       LambdaFunctionRecommendationFindingReasonCode = "InsufficientData"
+	LambdaFunctionRecommendationFindingReasonCodeInconclusive           LambdaFunctionRecommendationFindingReasonCode = "Inconclusive"
+)
+
+// Values returns all known values for
+// LambdaFunctionRecommendationFindingReasonCode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LambdaFunctionRecommendationFindingReasonCode) Values() []LambdaFunctionRecommendationFindingReasonCode {
+	return []LambdaFunctionRecommendationFindingReasonCode{
+		"MemoryOverprovisioned",
+		"MemoryUnderprovisioned",
+		"InsufficientData",
+		"Inconclusive",
 	}
 }
 
@@ -374,6 +530,7 @@ const (
 	RecommendationSourceTypeEc2Instance      RecommendationSourceType = "Ec2Instance"
 	RecommendationSourceTypeAutoScalingGroup RecommendationSourceType = "AutoScalingGroup"
 	RecommendationSourceTypeEbsVolume        RecommendationSourceType = "EbsVolume"
+	RecommendationSourceTypeLambdaFunction   RecommendationSourceType = "LambdaFunction"
 )
 
 // Values returns all known values for RecommendationSourceType. Note that this can
@@ -384,6 +541,7 @@ func (RecommendationSourceType) Values() []RecommendationSourceType {
 		"Ec2Instance",
 		"AutoScalingGroup",
 		"EbsVolume",
+		"LambdaFunction",
 	}
 }
 

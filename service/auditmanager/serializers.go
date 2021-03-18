@@ -766,6 +766,13 @@ func awsRestjson1_serializeOpDocumentCreateAssessmentFrameworkInput(v *CreateAss
 		ok.String(*v.Name)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

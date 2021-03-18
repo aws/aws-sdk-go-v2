@@ -25,7 +25,7 @@ import (
 // operation has completed, use the following actions to return drift
 // information:
 //
-// * Use DescribeStackSet to return detailed informaiton about the
+// * Use DescribeStackSet to return detailed information about the
 // stack set, including detailed information about the last completed drift
 // operation performed on the stack set. (Information about drift operations that
 // are in progress is not included.)
@@ -65,6 +65,22 @@ type DetectStackSetDriftInput struct {
 	//
 	// This member is required.
 	StackSetName *string
+
+	// [Service-managed permissions] Specifies whether you are acting as an account
+	// administrator in the organization's management account or as a delegated
+	// administrator in a member account. By default, SELF is specified. Use SELF for
+	// stack sets with self-managed permissions.
+	//
+	// * If you are signed in to the
+	// management account, specify SELF.
+	//
+	// * If you are signed in to a delegated
+	// administrator account, specify DELEGATED_ADMIN. Your AWS account must be
+	// registered as a delegated administrator in the management account. For more
+	// information, see Register a delegated administrator
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	// in the AWS CloudFormation User Guide.
+	CallAs types.CallAs
 
 	// The ID of the stack set operation.
 	OperationId *string

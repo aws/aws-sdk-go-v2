@@ -35,7 +35,7 @@ type DeleteWorkGroupInput struct {
 	WorkGroup *string
 
 	// The option to delete the workgroup and its contents even if the workgroup
-	// contains any named queries.
+	// contains any named queries or query executions.
 	RecursiveDeleteOption *bool
 }
 

@@ -135,23 +135,10 @@ type CreateServiceInput struct {
 	// This member is required.
 	ServiceName *string
 
-	// The capacity provider strategy to use for the service. A capacity provider
-	// strategy consists of one or more capacity providers along with the base and
-	// weight to assign to them. A capacity provider must be associated with the
-	// cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders API is used to associate a capacity provider with a
-	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
-	// If a capacityProviderStrategy is specified, the launchType parameter must be
-	// omitted. If no capacityProviderStrategy or launchType is specified, the
-	// defaultCapacityProviderStrategy for the cluster is used. If specifying a
-	// capacity provider that uses an Auto Scaling group, the capacity provider must
-	// already be created. New capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
-	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
-	// to update the list of available capacity providers for a cluster after the
-	// cluster is created.
+	// The capacity provider strategy to use for the service. If a
+	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
+	// If no capacityProviderStrategy or launchType is specified, the
+	// defaultCapacityProviderStrategy for the cluster is used.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
@@ -180,6 +167,11 @@ type CreateServiceInput struct {
 	// in the Amazon Elastic Container Service Developer Guide.
 	EnableECSManagedTags bool
 
+	// Whether or not the execute command functionality is enabled for the service. If
+	// true, this enables execute command functionality on all containers in the
+	// service tasks.
+	EnableExecuteCommand bool
+
 	// The period of time, in seconds, that the Amazon ECS service scheduler should
 	// ignore unhealthy Elastic Load Balancing target health checks after a task has
 	// first started. This is only used when your service is configured to use a load
@@ -193,10 +185,14 @@ type CreateServiceInput struct {
 	// up.
 	HealthCheckGracePeriodSeconds *int32
 
-	// The launch type on which to run your service. For more information, see Amazon
-	// ECS Launch Types
+	// The launch type on which to run your service. The accepted values are FARGATE
+	// and EC2. For more information, see Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
-	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
+	// in the Amazon Elastic Container Service Developer Guide. When a value of FARGATE
+	// is specified, your tasks are launched on AWS Fargate On-Demand infrastructure.
+	// To use Fargate Spot, you must use a capacity provider strategy with the
+	// FARGATE_SPOT capacity provider. When a value of EC2 is specified, your tasks are
+	// launched on Amazon EC2 instances registered to your cluster. If a launchType is
 	// specified, the capacityProviderStrategy parameter must be omitted.
 	LaunchType types.LaunchType
 
@@ -208,7 +204,7 @@ type CreateServiceInput struct {
 	// Load Balancer or Network Load Balancer, you must specify one or more target
 	// group ARNs to attach to the service. The service-linked role is required for
 	// services that make use of multiple target groups. For more information, see
-	// Using Service-Linked Roles for Amazon ECS
+	// Using service-linked roles for Amazon ECS
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide. If the service is using
 	// the CODE_DEPLOY deployment controller, the service is required to use either an
@@ -246,7 +242,7 @@ type CreateServiceInput struct {
 	// The network configuration for the service. This parameter is required for task
 	// definitions that use the awsvpc network mode to receive their own elastic
 	// network interface, and it is not supported for other network modes. For more
-	// information, see Task Networking
+	// information, see Task networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	NetworkConfiguration *types.NetworkConfiguration
@@ -263,7 +259,7 @@ type CreateServiceInput struct {
 	// The platform version that your tasks in the service are running on. A platform
 	// version is specified only for tasks using the Fargate launch type. If one isn't
 	// specified, the LATEST platform version is used by default. For more information,
-	// see AWS Fargate Platform Versions
+	// see AWS Fargate platform versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -286,13 +282,13 @@ type CreateServiceInput struct {
 	// awsvpc network mode or if the service is configured to use service discovery, an
 	// external deployment controller, multiple target groups, or Elastic Inference
 	// accelerators in which case you should not specify a role here. For more
-	// information, see Using Service-Linked Roles for Amazon ECS
+	// information, see Using service-linked roles for Amazon ECS
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide. If your specified role
 	// has a path other than /, then you must either specify the full role ARN (this is
 	// recommended) or prefix the role name with the path. For example, if a role with
 	// the name bar has a path of /foo/ then you would specify /foo/bar as the role
-	// name. For more information, see Friendly Names and Paths
+	// name. For more information, see Friendly names and paths
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-friendly-names)
 	// in the IAM User Guide.
 	Role *string
@@ -321,10 +317,10 @@ type CreateServiceInput struct {
 	SchedulingStrategy types.SchedulingStrategy
 
 	// The details of the service discovery registries to assign to this service. For
-	// more information, see Service Discovery
+	// more information, see Service discovery
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
 	// Service discovery is supported for Fargate tasks if you are using platform
-	// version v1.1.0 or later. For more information, see AWS Fargate Platform Versions
+	// version v1.1.0 or later. For more information, see AWS Fargate platform versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
 	ServiceRegistries []types.ServiceRegistry
 

@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -33,7 +34,7 @@ type GetOpenIDConnectProviderInput struct {
 	// The Amazon Resource Name (ARN) of the OIDC provider resource object in IAM to
 	// get information for. You can get a list of OIDC provider resource ARNs by using
 	// the ListOpenIDConnectProviders operation. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and AWS Service Namespaces
+	// Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -52,6 +53,13 @@ type GetOpenIDConnectProviderOutput struct {
 	// The date and time when the IAM OIDC provider resource object was created in the
 	// AWS account.
 	CreateDate *time.Time
+
+	// A list of tags that are attached to the specified IAM OIDC provider. The
+	// returned list of tags is sorted by tag key. For more information about tagging,
+	// see Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide.
+	Tags []types.Tag
 
 	// A list of certificate thumbprints that are associated with the specified IAM
 	// OIDC provider resource object. For more information, see

@@ -10,45 +10,48 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates capacity settings for a fleet. Use this operation to specify the number
-// of EC2 instances (hosts) that you want this fleet to contain. Before calling
-// this operation, you may want to call DescribeEC2InstanceLimits to get the
-// maximum capacity based on the fleet's EC2 instance type. Specify minimum and
-// maximum number of instances. Amazon GameLift will not change fleet capacity to
-// values fall outside of this range. This is particularly important when using
-// auto-scaling (see PutScalingPolicy) to allow capacity to adjust based on player
-// demand while imposing limits on automatic adjustments. To update fleet capacity,
-// specify the fleet ID and the number of instances you want the fleet to host. If
-// successful, Amazon GameLift starts or terminates instances so that the fleet's
-// active instance count matches the desired instance count. You can view a fleet's
-// current capacity information by calling DescribeFleetCapacity. If the desired
-// instance count is higher than the instance type's limit, the "Limit Exceeded"
-// exception occurs. Learn more Setting up GameLift Fleets
-// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
+// Updates capacity settings for a fleet. For fleets with multiple locations, use
+// this operation to manage capacity settings in each location individually. Fleet
+// capacity determines the number of game sessions and players that can be hosted
+// based on the fleet configuration. Use this operation to set the following fleet
+// capacity properties:
 //
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
+// * Minimum/maximum size: Set hard limits on fleet capacity.
+// GameLift cannot set the fleet's capacity to a value outside of this range,
+// whether the capacity is changed manually or through automatic scaling.
 //
 // *
-// DescribeFleetAttributes
+// Desired capacity: Manually set the number of EC2 instances to be maintained in a
+// fleet location. Before changing a fleet's desired capacity, you may want to call
+// DescribeEC2InstanceLimits to get the maximum capacity of the fleet's EC2
+// instance type. Alternatively, consider using automatic scaling to adjust
+// capacity based on player demand.
 //
-// * Update fleets:
+// This operation can be used in the following
+// ways:
 //
-// * UpdateFleetAttributes
+// * To update capacity for a fleet's home Region, or if the fleet has no
+// remote locations, omit the Location parameter. The fleet must be in ACTIVE
+// status.
 //
-// *
-// UpdateFleetCapacity
+// * To update capacity for a fleet's remote location, include the
+// Location parameter set to the location to be updated. The location must be in
+// ACTIVE status.
 //
-// * UpdateFleetPortSettings
-//
-// * UpdateRuntimeConfiguration
-//
-// *
-// StartFleetActions or StopFleetActions
+// If successful, capacity settings are updated immediately. In
+// response a change in desired capacity, GameLift initiates steps to start new
+// instances or terminate existing instances in the requested fleet location. This
+// continues until the location's active instance count matches the new desired
+// instance count. You can track a fleet's current capacity by calling
+// DescribeFleetCapacity or DescribeFleetLocationCapacity. If the requested desired
+// instance count is higher than the instance type's limit, the LimitExceeded
+// exception occurs. Learn more Scaling fleet capacity
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-manage-capacity.html)
+// Related actions CreateFleetLocations | UpdateFleetAttributes |
+// UpdateFleetCapacity | UpdateFleetPortSettings | UpdateRuntimeConfiguration |
+// StopFleetActions | StartFleetActions | PutScalingPolicy | DeleteFleet |
+// DeleteFleetLocations | DeleteScalingPolicy | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCapacityInput, optFns ...func(*Options)) (*UpdateFleetCapacityOutput, error) {
 	if params == nil {
 		params = &UpdateFleetCapacityInput{}
@@ -67,29 +70,45 @@ func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCap
 // Represents the input for a request operation.
 type UpdateFleetCapacityInput struct {
 
-	// A unique identifier for a fleet to update capacity for. You can use either the
-	// fleet ID or ARN value.
+	// A unique identifier for the fleet to update capacity settings for. You can use
+	// either the fleet ID or ARN value.
 	//
 	// This member is required.
 	FleetId *string
 
-	// Number of EC2 instances you want this fleet to host.
+	// The number of EC2 instances you want to maintain in the specified fleet
+	// location. This value must fall between the minimum and maximum size limits.
 	DesiredInstances *int32
 
-	// The maximum value allowed for the fleet's instance count. Default if not set is
-	// 1.
+	// The name of a remote location to update fleet capacity settings for, in the form
+	// of an AWS Region code such as us-west-2.
+	Location *string
+
+	// The maximum number of instances that are allowed in the specified fleet
+	// location. If this parameter is not set, the default is 1.
 	MaxSize *int32
 
-	// The minimum value allowed for the fleet's instance count. Default if not set is
-	// 0.
+	// The minimum number of instances that are allowed in the specified fleet
+	// location. If this parameter is not set, the default is 0.
 	MinSize *int32
 }
 
 // Represents the returned data in response to a request operation.
 type UpdateFleetCapacityOutput struct {
 
-	// A unique identifier for a fleet that was updated.
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
+	// assigned to a GameLift fleet resource and uniquely identifies it. ARNs are
+	// unique across all Regions. Format is
+	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912.
+	FleetArn *string
+
+	// A unique identifier for the fleet that was updated.
 	FleetId *string
+
+	// The remote location being updated, expressed as an AWS Region code, such as
+	// us-west-2.
+	Location *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

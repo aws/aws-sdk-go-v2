@@ -538,6 +538,62 @@ func addOpUpdateCertificateAuthorityValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpUpdateCertificateAuthority{}, middleware.After)
 }
 
+func validateAccessDescription(v *types.AccessDescription) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccessDescription"}
+	if v.AccessMethod == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessMethod"))
+	}
+	if v.AccessLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessLocation"))
+	} else if v.AccessLocation != nil {
+		if err := validateGeneralName(v.AccessLocation); err != nil {
+			invalidParams.AddNested("AccessLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAccessDescriptionList(v []types.AccessDescription) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AccessDescriptionList"}
+	for i := range v {
+		if err := validateAccessDescription(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApiPassthrough(v *types.ApiPassthrough) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApiPassthrough"}
+	if v.Extensions != nil {
+		if err := validateExtensions(v.Extensions); err != nil {
+			invalidParams.AddNested("Extensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCertificateAuthorityConfiguration(v *types.CertificateAuthorityConfiguration) error {
 	if v == nil {
 		return nil
@@ -552,6 +608,28 @@ func validateCertificateAuthorityConfiguration(v *types.CertificateAuthorityConf
 	if v.Subject == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Subject"))
 	}
+	if v.CsrExtensions != nil {
+		if err := validateCsrExtensions(v.CsrExtensions); err != nil {
+			invalidParams.AddNested("CsrExtensions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCertificatePolicyList(v []types.PolicyInformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CertificatePolicyList"}
+	for i := range v {
+		if err := validatePolicyInformation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -564,6 +642,191 @@ func validateCrlConfiguration(v *types.CrlConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CrlConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCsrExtensions(v *types.CsrExtensions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CsrExtensions"}
+	if v.SubjectInformationAccess != nil {
+		if err := validateAccessDescriptionList(v.SubjectInformationAccess); err != nil {
+			invalidParams.AddNested("SubjectInformationAccess", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEdiPartyName(v *types.EdiPartyName) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EdiPartyName"}
+	if v.PartyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartyName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExtensions(v *types.Extensions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Extensions"}
+	if v.CertificatePolicies != nil {
+		if err := validateCertificatePolicyList(v.CertificatePolicies); err != nil {
+			invalidParams.AddNested("CertificatePolicies", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SubjectAlternativeNames != nil {
+		if err := validateGeneralNameList(v.SubjectAlternativeNames); err != nil {
+			invalidParams.AddNested("SubjectAlternativeNames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGeneralName(v *types.GeneralName) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeneralName"}
+	if v.OtherName != nil {
+		if err := validateOtherName(v.OtherName); err != nil {
+			invalidParams.AddNested("OtherName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EdiPartyName != nil {
+		if err := validateEdiPartyName(v.EdiPartyName); err != nil {
+			invalidParams.AddNested("EdiPartyName", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGeneralNameList(v []types.GeneralName) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GeneralNameList"}
+	for i := range v {
+		if err := validateGeneralName(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOtherName(v *types.OtherName) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OtherName"}
+	if v.TypeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeId"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyInformation(v *types.PolicyInformation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyInformation"}
+	if v.CertPolicyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CertPolicyId"))
+	}
+	if v.PolicyQualifiers != nil {
+		if err := validatePolicyQualifierInfoList(v.PolicyQualifiers); err != nil {
+			invalidParams.AddNested("PolicyQualifiers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyQualifierInfo(v *types.PolicyQualifierInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyQualifierInfo"}
+	if len(v.PolicyQualifierId) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyQualifierId"))
+	}
+	if v.Qualifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Qualifier"))
+	} else if v.Qualifier != nil {
+		if err := validateQualifier(v.Qualifier); err != nil {
+			invalidParams.AddNested("Qualifier", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePolicyQualifierInfoList(v []types.PolicyQualifierInfo) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyQualifierInfoList"}
+	for i := range v {
+		if err := validatePolicyQualifierInfo(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQualifier(v *types.Qualifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Qualifier"}
+	if v.CpsUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CpsUri"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -879,6 +1142,11 @@ func validateOpIssueCertificateInput(v *IssueCertificateInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "IssueCertificateInput"}
+	if v.ApiPassthrough != nil {
+		if err := validateApiPassthrough(v.ApiPassthrough); err != nil {
+			invalidParams.AddNested("ApiPassthrough", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CertificateAuthorityArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateAuthorityArn"))
 	}
@@ -893,6 +1161,11 @@ func validateOpIssueCertificateInput(v *IssueCertificateInput) error {
 	} else if v.Validity != nil {
 		if err := validateValidity(v.Validity); err != nil {
 			invalidParams.AddNested("Validity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ValidityNotBefore != nil {
+		if err := validateValidity(v.ValidityNotBefore); err != nil {
+			invalidParams.AddNested("ValidityNotBefore", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

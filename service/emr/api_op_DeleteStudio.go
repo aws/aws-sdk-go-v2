@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject
-// to change. Removes an Amazon EMR Studio from the Studio metadata store.
+// Removes an Amazon EMR Studio from the Studio metadata store.
 func (c *Client) DeleteStudio(ctx context.Context, params *DeleteStudioInput, optFns ...func(*Options)) (*DeleteStudioOutput, error) {
 	if params == nil {
 		params = &DeleteStudioInput{}

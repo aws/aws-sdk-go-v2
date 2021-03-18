@@ -99,7 +99,7 @@ type TagResourceInput struct {
 	// environments, see Using JSON for Parameters
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
 	// in the AWS CLI User Guide. For the AWS CLI, you can also use the syntax: --Tags
-	// Key="Key1",Value="Value1",Key="Key2",Value="Value2"[,…]
+	// Key="Key1",Value="Value1" Key="Key2",Value="Value2"[,…]
 	//
 	// This member is required.
 	Tags []types.Tag

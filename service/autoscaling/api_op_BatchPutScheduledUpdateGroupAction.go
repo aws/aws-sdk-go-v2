@@ -12,8 +12,7 @@ import (
 )
 
 // Creates or updates one or more scheduled scaling actions for an Auto Scaling
-// group. If you leave a parameter unspecified when updating a scheduled scaling
-// action, the corresponding value remains unchanged.
+// group.
 func (c *Client) BatchPutScheduledUpdateGroupAction(ctx context.Context, params *BatchPutScheduledUpdateGroupActionInput, optFns ...func(*Options)) (*BatchPutScheduledUpdateGroupActionOutput, error) {
 	if params == nil {
 		params = &BatchPutScheduledUpdateGroupActionInput{}

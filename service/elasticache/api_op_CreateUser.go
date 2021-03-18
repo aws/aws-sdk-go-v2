@@ -31,12 +31,12 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// Access permissions string used for this user account.
+	// Access permissions string used for this user.
 	//
 	// This member is required.
 	AccessString *string
 
-	// Must be Redis.
+	// The current supported value is Redis.
 	//
 	// This member is required.
 	Engine *string
@@ -51,26 +51,25 @@ type CreateUserInput struct {
 	// This member is required.
 	UserName *string
 
-	// Indicates a password is not required for this user account.
+	// Indicates a password is not required for this user.
 	NoPasswordRequired *bool
 
-	// Passwords used for this user account. You can create up to two passwords for
-	// each user.
+	// Passwords used for this user. You can create up to two passwords for each user.
 	Passwords []string
 }
 
 type CreateUserOutput struct {
 
-	// The Amazon Resource Name (ARN) of the user account.
+	// The Amazon Resource Name (ARN) of the user.
 	ARN *string
 
-	// Access permissions string used for this user account.
+	// Access permissions string used for this user.
 	AccessString *string
 
 	// Denotes whether the user requires a password to authenticate.
 	Authentication *types.Authentication
 
-	// Must be Redis.
+	// The current supported value is Redis.
 	Engine *string
 
 	// Indicates the user status. Can be "active", "modifying" or "deleting".

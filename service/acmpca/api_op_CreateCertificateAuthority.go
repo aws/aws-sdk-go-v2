@@ -57,12 +57,13 @@ type CreateCertificateAuthorityInput struct {
 	// This member is required.
 	CertificateAuthorityType types.CertificateAuthorityType
 
-	// Alphanumeric string that can be used to distinguish between calls to
-	// CreateCertificateAuthority. For a given token, ACM Private CA creates exactly
-	// one CA. If you issue a subsequent call using the same token, ACM Private CA
-	// returns the ARN of the existing CA and takes no further action. If you change
-	// the idempotency token across multiple calls, ACM Private CA creates a unique CA
-	// for each unique token.
+	// Custom string that can be used to distinguish between calls to the
+	// CreateCertificateAuthority action. Idempotency tokens for
+	// CreateCertificateAuthority time out after five minutes. Therefore, if you call
+	// CreateCertificateAuthority multiple times with the same idempotency token within
+	// five minutes, ACM Private CA recognizes that you are requesting only certificate
+	// authority and will issue only one. If you change the idempotency token for each
+	// call, PCA recognizes that you are requesting multiple certificate authorities.
 	IdempotencyToken *string
 
 	// Contains a Boolean value that you can use to enable a certification revocation

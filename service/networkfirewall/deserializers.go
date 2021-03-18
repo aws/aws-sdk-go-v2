@@ -242,6 +242,9 @@ func awsAwsjson10_deserializeOpErrorAssociateSubnets(response *smithyhttp.Respon
 	}
 
 	switch {
+	case strings.EqualFold("InsufficientCapacityException", errorCode):
+		return awsAwsjson10_deserializeErrorInsufficientCapacityException(response, errorBody)
+
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
@@ -995,6 +998,9 @@ func awsAwsjson10_deserializeOpErrorDeleteResourcePolicy(response *smithyhttp.Re
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
 
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidRequestException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -1597,6 +1603,9 @@ func awsAwsjson10_deserializeOpErrorDescribeResourcePolicy(response *smithyhttp.
 	switch {
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson10_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidRequestException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -2309,6 +2318,9 @@ func awsAwsjson10_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 
 	switch {
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson10_deserializeErrorInvalidRequestException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -5528,6 +5540,15 @@ func awsAwsjson10_deserializeDocumentPerObjectStatus(v **types.PerObjectStatus, 
 					return fmt.Errorf("expected PerObjectSyncStatus to be of type string, got %T instead", value)
 				}
 				sv.SyncStatus = types.PerObjectSyncStatus(jtv)
+			}
+
+		case "UpdateToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateToken to be of type string, got %T instead", value)
+				}
+				sv.UpdateToken = ptr.String(jtv)
 			}
 
 		default:

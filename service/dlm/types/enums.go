@@ -70,6 +70,24 @@ func (IntervalUnitValues) Values() []IntervalUnitValues {
 	}
 }
 
+type LocationValues string
+
+// Enum values for LocationValues
+const (
+	LocationValuesCloud        LocationValues = "CLOUD"
+	LocationValuesOutpostLocal LocationValues = "OUTPOST_LOCAL"
+)
+
+// Values returns all known values for LocationValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LocationValues) Values() []LocationValues {
+	return []LocationValues{
+		"CLOUD",
+		"OUTPOST_LOCAL",
+	}
+}
+
 type PolicyTypeValues string
 
 // Enum values for PolicyTypeValues
@@ -87,6 +105,24 @@ func (PolicyTypeValues) Values() []PolicyTypeValues {
 		"EBS_SNAPSHOT_MANAGEMENT",
 		"IMAGE_MANAGEMENT",
 		"EVENT_BASED_POLICY",
+	}
+}
+
+type ResourceLocationValues string
+
+// Enum values for ResourceLocationValues
+const (
+	ResourceLocationValuesCloud   ResourceLocationValues = "CLOUD"
+	ResourceLocationValuesOutpost ResourceLocationValues = "OUTPOST"
+)
+
+// Values returns all known values for ResourceLocationValues. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceLocationValues) Values() []ResourceLocationValues {
+	return []ResourceLocationValues{
+		"CLOUD",
+		"OUTPOST",
 	}
 }
 

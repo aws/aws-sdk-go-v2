@@ -55,8 +55,8 @@ type GetComponentOutput struct {
 
 	// A list of key-value pairs that contain metadata for the resource. For more
 	// information, see Tag your resources
-	// (https://docs.aws.amazon.com/greengrass/v2/tag-resources.html) in the AWS IoT
-	// Greengrass V2 Developer Guide.
+	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
+	// the AWS IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

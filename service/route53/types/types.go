@@ -66,8 +66,9 @@ type AlarmIdentifier struct {
 	// For the CloudWatch alarm that you want Route 53 health checkers to use to
 	// determine whether this health check is healthy, the region that the alarm was
 	// created in. For the current list of CloudWatch regions, see Amazon CloudWatch
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#cw_region) in the AWS
-	// Service Endpoints chapter of the Amazon Web Services General Reference.
+	// endpoints and quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/cw_region.html) in the Amazon Web
+	// Services General Reference.
 	//
 	// This member is required.
 	Region CloudWatchRegion
@@ -303,17 +304,16 @@ type AliasTarget struct {
 	// CloudFront can't be created in a private zone. Elastic Beanstalk environment
 	// Specify the hosted zone ID for the region that you created the environment in.
 	// The environment must have a regionalized subdomain. For a list of regions and
-	// the corresponding hosted zone IDs, see AWS Elastic Beanstalk
-	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region)
-	// in the "AWS Service Endpoints" chapter of the Amazon Web Services General
-	// Reference. ELB load balancer Specify the value of the hosted zone ID for the
-	// load balancer. Use the following methods to get the hosted zone ID:
+	// the corresponding hosted zone IDs, see AWS Elastic Beanstalk endpoints and
+	// quotas (https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html) in
+	// the the Amazon Web Services General Reference. ELB load balancer Specify the
+	// value of the hosted zone ID for the load balancer. Use the following methods to
+	// get the hosted zone ID:
 	//
-	// * Service
-	// Endpoints (https://docs.aws.amazon.com/general/latest/gr/elb.html) table in the
-	// "Elastic Load Balancing Endpoints and Quotas" topic in the Amazon Web Services
-	// General Reference: Use the value that corresponds with the region that you
-	// created your load balancer in. Note that there are separate columns for
+	// * Elastic Load Balancing endpoints and quotas
+	// (https://docs.aws.amazon.com/general/latest/gr/elb.html) topic in the Amazon Web
+	// Services General Reference: Use the value that corresponds with the region that
+	// you created your load balancer in. Note that there are separate columns for
 	// Application and Classic Load Balancers and for Network Load Balancers.
 	//
 	// * AWS
@@ -527,13 +527,17 @@ type Dimension struct {
 // A string repesenting the status of DNSSEC signing.
 type DNSSECStatus struct {
 
-	// Indicates your hosted zone signging status: SIGNING, NOT_SIGNING, or
-	// INTERNAL_FAILURE. If the status is INTERNAL_FAILURE, see StatusMessage for
-	// information about steps that you can take to correct the problem. A status
-	// INTERNAL_FAILURE means there was an error during a request. Before you can
-	// continue to work with DNSSEC signing, including working with key signing keys
-	// (KSKs), you must correct the problem by enabling or disabling DNSSEC signing for
-	// the hosted zone.
+	// A string that represents the current hosted zone signing status. Status can have
+	// one of the following values: SIGNING DNSSEC signing is enabled for the hosted
+	// zone. NOT_SIGNING DNSSEC signing is not enabled for the hosted zone. DELETING
+	// DNSSEC signing is in the process of being removed for the hosted zone.
+	// ACTION_NEEDED There is a problem with signing in the hosted zone that requires
+	// you to take action to resolve. For example, the customer managed customer master
+	// key (CMK) might have been deleted, or the permissions for the customer managed
+	// CMK might have been changed. INTERNAL_FAILURE There was an error during a
+	// request. Before you can continue to work with DNSSEC signing, including with
+	// key-signing keys (KSKs), you must correct the problem by enabling or disabling
+	// DNSSEC signing for the hosted zone.
 	ServeSignature *string
 
 	// The status message provided for the following DNSSEC signing status:
@@ -598,8 +602,13 @@ type GeoLocationDetails struct {
 	// The name of the country.
 	CountryName *string
 
-	// The code for the subdivision. Route 53 currently supports only states in the
-	// United States.
+	// The code for the subdivision, such as a particular state within the United
+	// States. For a list of US state abbreviations, see Appendix B: Two–Letter State
+	// and Possession Abbreviations (https://pe.usps.com/text/pub28/28apb.htm) on the
+	// United States Postal Service website. For a list of all supported subdivision
+	// codes, use the ListGeoLocations
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html)
+	// API.
 	SubdivisionCode *string
 
 	// The full name of the subdivision. Route 53 currently supports only states in the
@@ -627,9 +636,9 @@ type HealthCheck struct {
 	// This member is required.
 	HealthCheckVersion *int64
 
-	// The identifier that Amazon Route 53assigned to the health check when you created
-	// it. When you add or update a resource record set, you use this value to specify
-	// which health check to use. The value can be up to 64 characters long.
+	// The identifier that Amazon Route 53 assigned to the health check when you
+	// created it. When you add or update a resource record set, you use this value to
+	// specify which health check to use. The value can be up to 64 characters long.
 	//
 	// This member is required.
 	Id *string
@@ -1055,14 +1064,14 @@ type HostedZoneSummary struct {
 	Owner *HostedZoneOwner
 }
 
-// A key signing key (KSK) is a complex type that represents a public/private key
+// A key-signing key (KSK) is a complex type that represents a public/private key
 // pair. The private key is used to generate a digital signature for the zone
 // signing key (ZSK). The public key is stored in the DNS and is used to
 // authenticate the ZSK. A KSK is always associated with a hosted zone; it cannot
 // exist by itself.
 type KeySigningKey struct {
 
-	// The date when the key signing key (KSK) was created.
+	// The date when the key-signing key (KSK) was created.
 	CreatedDate *time.Time
 
 	// A string that represents a DNSKEY record.
@@ -1086,7 +1095,7 @@ type KeySigningKey struct {
 	// that are used to secure certain kinds of information provided by the DNS system.
 	DigestValue *string
 
-	// An integer that specifies how the key is used. For key signing key (KSK), this
+	// An integer that specifies how the key is used. For key-signing key (KSK), this
 	// value is always 257.
 	Flag int32
 
@@ -1095,36 +1104,37 @@ type KeySigningKey struct {
 	// (https://tools.ietf.org/rfc/rfc4034.txt).
 	KeyTag int32
 
-	// The Amazon resource name (ARN) used to identify the customer managed key (CMK)
-	// in AWS Key Management Service (KMS). The KmsArn must be unique for each key
-	// signing key (KSK) in a single hosted zone. You must configure the CMK as
-	// follows: Status Enabled Key spec ECC_NIST_P256 Key usage Sign and verify Key
-	// policy The key policy must give permission for the following actions:
+	// The Amazon resource name (ARN) used to identify the customer managed customer
+	// master key (CMK) in AWS Key Management Service (AWS KMS). The KmsArn must be
+	// unique for each key-signing key (KSK) in a single hosted zone. You must
+	// configure the CMK as follows: Status Enabled Key spec ECC_NIST_P256 Key usage
+	// Sign and verify Key policy The key policy must give permission for the following
+	// actions:
 	//
-	// *
-	// DescribeKey
+	// * DescribeKey
 	//
 	// * GetPublicKey
 	//
 	// * Sign
 	//
-	// The key policy must also include the Amazon
-	// Route 53 service in the principal for your account. Specify the following:
+	// The key policy must also
+	// include the Amazon Route 53 service in the principal for your account. Specify
+	// the following:
 	//
-	// *
-	// "Service": "api-service.dnssec.route53.aws.internal"
+	// * "Service": "api-service.dnssec.route53.aws.internal"
 	//
-	// For more information about
-	// working with the customer managed key (CMK) in KMS, see AWS Key Management
-	// Service concepts
+	// For more
+	// information about working with the customer managed CMK in AWS KMS, see AWS Key
+	// Management Service concepts
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html).
 	KmsArn *string
 
-	// The last time that the key signing key (KSK) was changed.
+	// The last time that the key-signing key (KSK) was changed.
 	LastModifiedDate *time.Time
 
-	// An alphanumeric string used to identify a key signing key (KSK). Name must be
-	// unique for each key signing key in the same hosted zone.
+	// A string used to identify a key-signing key (KSK). Name can include numbers,
+	// letters, and underscores (_). Name must be unique for each key-signing key in
+	// the same hosted zone.
 	Name *string
 
 	// The public key, represented as a Base64 encoding, as required by  RFC-4034 Page
@@ -1141,16 +1151,19 @@ type KeySigningKey struct {
 	// (https://tools.ietf.org/html/rfc8624#section-3.1).
 	SigningAlgorithmType int32
 
-	// A string that represents the current key signing key (KSK) status. Status can
+	// A string that represents the current key-signing key (KSK) status. Status can
 	// have one of the following values: ACTIVE The KSK is being used for signing.
-	// INACTIVE The KSK is not being used for signing. ACTION_NEEDED There is an error
-	// in the KSK that requires you to take action to resolve. INTERNAL_FAILURE There
-	// was an error during a request. Before you can continue to work with DNSSEC
-	// signing, including actions that involve this KSK, you must correct the problem.
-	// For example, you may need to activate or deactivate the KSK.
+	// INACTIVE The KSK is not being used for signing. DELETING The KSK is in the
+	// process of being deleted. ACTION_NEEDED There is a problem with the KSK that
+	// requires you to take action to resolve. For example, the customer managed
+	// customer master key (CMK) might have been deleted, or the permissions for the
+	// customer managed CMK might have been changed. INTERNAL_FAILURE There was an
+	// error during a request. Before you can continue to work with DNSSEC signing,
+	// including actions that involve this KSK, you must correct the problem. For
+	// example, you may need to activate or deactivate the KSK.
 	Status *string
 
-	// The status message provided for the following key signing key (KSK) statuses:
+	// The status message provided for the following key-signing key (KSK) statuses:
 	// ACTION_NEEDED or INTERNAL_FAILURE. The status message includes information about
 	// what the problem might be and steps that you can take to correct the issue.
 	StatusMessage *string
@@ -1253,7 +1266,7 @@ type ResourceRecordSet struct {
 	// is encoded for them, see Supported DNS Resource Record Types
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html)
 	// in the Amazon Route 53 Developer Guide. Valid values for basic resource record
-	// sets: A | AAAA | CAA | CNAME | MX | NAPTR | NS | PTR | SOA | SPF | SRV | TXT
+	// sets: A | AAAA | CAA | CNAME | DS |MX | NAPTR | NS | PTR | SOA | SPF | SRV | TXT
 	// Values for weighted, latency, geolocation, and failover resource record sets: A
 	// | AAAA | CAA | CNAME | MX | NAPTR | PTR | SPF | SRV | TXT. When creating a group
 	// of weighted, latency, geolocation, or failover resource record sets, specify the

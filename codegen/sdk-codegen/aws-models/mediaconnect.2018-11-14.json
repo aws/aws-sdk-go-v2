@@ -331,6 +331,13 @@
                         "smithy.api#jsonName": "maxLatency"
                     }
                 },
+                "MinLatency": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
+                        "smithy.api#jsonName": "minLatency"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.mediaconnect#__string",
                     "traits": {
@@ -821,8 +828,7 @@
                     "target": "com.amazonaws.mediaconnect#Algorithm",
                     "traits": {
                         "smithy.api#documentation": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-                        "smithy.api#jsonName": "algorithm",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "algorithm"
                     }
                 },
                 "ConstantInitializationVector": {
@@ -1279,6 +1285,10 @@
                     {
                         "value": "static-key",
                         "name": "static_key"
+                    },
+                    {
+                        "value": "srt-password",
+                        "name": "srt_password"
                     }
                 ]
             }
@@ -2061,6 +2071,10 @@
                     {
                         "value": "rist",
                         "name": "rist"
+                    },
+                    {
+                        "value": "srt-listener",
+                        "name": "srt_listener"
                     }
                 ]
             }
@@ -2692,6 +2706,13 @@
                         "smithy.api#jsonName": "maxLatency"
                     }
                 },
+                "MinLatency": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
+                        "smithy.api#jsonName": "minLatency"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.mediaconnect#__string",
                     "traits": {
@@ -3115,6 +3136,13 @@
                         "smithy.api#jsonName": "maxLatency"
                     }
                 },
+                "MinLatency": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
+                        "smithy.api#jsonName": "minLatency"
+                    }
+                },
                 "Protocol": {
                     "target": "com.amazonaws.mediaconnect#Protocol",
                     "traits": {
@@ -3515,6 +3543,13 @@
                         "smithy.api#jsonName": "maxLatency"
                     }
                 },
+                "MinLatency": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
+                        "smithy.api#jsonName": "minLatency"
+                    }
+                },
                 "OutputArn": {
                     "target": "com.amazonaws.mediaconnect#__string",
                     "traits": {
@@ -3710,6 +3745,13 @@
                     "traits": {
                         "smithy.api#documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
                         "smithy.api#jsonName": "maxLatency"
+                    }
+                },
+                "MinLatency": {
+                    "target": "com.amazonaws.mediaconnect#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.",
+                        "smithy.api#jsonName": "minLatency"
                     }
                 },
                 "Protocol": {

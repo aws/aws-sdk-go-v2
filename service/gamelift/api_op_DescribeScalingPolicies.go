@@ -20,31 +20,11 @@ import (
 // scaling policies suspended (StopFleetActions). This operation does not affect
 // the status of the scaling policies, which remains ACTIVE. To see whether a
 // fleet's scaling policies are in force or suspended, call DescribeFleetAttributes
-// and check the stopped actions.
-//
-// * DescribeFleetCapacity
-//
-// *
-// UpdateFleetCapacity
-//
-// * DescribeEC2InstanceLimits
-//
-// * Manage scaling policies:
-//
-// *
-// PutScalingPolicy (auto-scaling)
-//
-// * DescribeScalingPolicies (auto-scaling)
-//
-// *
-// DeleteScalingPolicy (auto-scaling)
-//
-// * Manage fleet actions:
-//
-// *
-// StartFleetActions
-//
-// * StopFleetActions
+// and check the stopped actions. Related actions DescribeFleetCapacity |
+// UpdateFleetCapacity | DescribeEC2InstanceLimits | PutScalingPolicy |
+// DescribeScalingPolicies | DeleteScalingPolicy | StopFleetActions |
+// StartFleetActions | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeScalingPoliciesInput, optFns ...func(*Options)) (*DescribeScalingPoliciesOutput, error) {
 	if params == nil {
 		params = &DescribeScalingPoliciesInput{}
@@ -63,7 +43,7 @@ func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeSc
 // Represents the input for a request operation.
 type DescribeScalingPoliciesInput struct {
 
-	// A unique identifier for a fleet to retrieve scaling policies for. You can use
+	// A unique identifier for the fleet to retrieve scaling policies for. You can use
 	// either the fleet ID or ARN value.
 	//
 	// This member is required.
@@ -73,7 +53,10 @@ type DescribeScalingPoliciesInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// CONTENT TODO
+	Location *string
+
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
@@ -106,8 +89,9 @@ type DescribeScalingPoliciesInput struct {
 // Represents the returned data in response to a request operation.
 type DescribeScalingPoliciesOutput struct {
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// A collection of objects containing the scaling policies matching the request.

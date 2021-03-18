@@ -4898,6 +4898,98 @@ func awsAwsjson11_deserializeOpErrorTerminateJobFlows(response *smithyhttp.Respo
 	}
 }
 
+type awsAwsjson11_deserializeOpUpdateStudio struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateStudio) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateStudio) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateStudio(response, &metadata)
+	}
+	output := &UpdateStudioOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateStudio(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpUpdateStudioSessionMapping struct {
 }
 
@@ -9772,6 +9864,64 @@ func awsAwsjson11_deserializeDocumentNotebookExecutionSummaryList(v *[]types.Not
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOnDemandCapacityReservationOptions(v **types.OnDemandCapacityReservationOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OnDemandCapacityReservationOptions
+	if *v == nil {
+		sv = &types.OnDemandCapacityReservationOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CapacityReservationPreference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OnDemandCapacityReservationPreference to be of type string, got %T instead", value)
+				}
+				sv.CapacityReservationPreference = types.OnDemandCapacityReservationPreference(jtv)
+			}
+
+		case "CapacityReservationResourceGroupArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
+				}
+				sv.CapacityReservationResourceGroupArn = ptr.String(jtv)
+			}
+
+		case "UsageStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OnDemandCapacityReservationUsageStrategy to be of type string, got %T instead", value)
+				}
+				sv.UsageStrategy = types.OnDemandCapacityReservationUsageStrategy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOnDemandProvisioningSpecification(v **types.OnDemandProvisioningSpecification, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9801,6 +9951,11 @@ func awsAwsjson11_deserializeDocumentOnDemandProvisioningSpecification(v **types
 					return fmt.Errorf("expected OnDemandProvisioningAllocationStrategy to be of type string, got %T instead", value)
 				}
 				sv.AllocationStrategy = types.OnDemandProvisioningAllocationStrategy(jtv)
+			}
+
+		case "CapacityReservationOptions":
+			if err := awsAwsjson11_deserializeDocumentOnDemandCapacityReservationOptions(&sv.CapacityReservationOptions, value); err != nil {
+				return err
 			}
 
 		default:

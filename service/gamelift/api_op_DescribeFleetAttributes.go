@@ -12,49 +12,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves core properties, including configuration, status, and metadata, for a
-// fleet. To get attributes for one or more fleets, provide a list of fleet IDs or
-// fleet ARNs. To get attributes for all fleets, do not specify a fleet identifier.
-// When requesting attributes for multiple fleets, use the pagination parameters to
-// retrieve results as a set of sequential pages. If successful, a FleetAttributes
-// object is returned for each fleet requested, unless the fleet identifier is not
-// found. Some API operations may limit the number of fleet IDs allowed in one
-// request. If a request exceeds this limit, the request fails and the error
-// message includes the maximum allowed number. Learn more Setting up GameLift
-// Fleets
+// Retrieves core fleet-wide properties, including the computing hardware and
+// deployment configuration for all instances in the fleet. This operation can be
+// used in the following ways:
+//
+// * To get attributes for one or more specific
+// fleets, provide a list of fleet IDs or fleet ARNs.
+//
+// * To get attributes for all
+// fleets, do not provide a fleet identifier.
+//
+// When requesting attributes for
+// multiple fleets, use the pagination parameters to retrieve results as a set of
+// sequential pages. If successful, a FleetAttributes object is returned for each
+// fleet requested, unless the fleet identifier is not found. Some API operations
+// limit the number of fleet IDs that allowed in one request. If a request exceeds
+// this limit, the request fails and the error message contains the maximum allowed
+// number. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// * Describe
-// fleets:
-//
-// * DescribeFleetAttributes
-//
-// * DescribeFleetCapacity
-//
-// *
-// DescribeFleetPortSettings
-//
-// * DescribeFleetUtilization
-//
-// *
-// DescribeRuntimeConfiguration
-//
-// * DescribeEC2InstanceLimits
-//
-// *
-// DescribeFleetEvents
-//
-// * UpdateFleetAttributes
-//
-// * StartFleetActions or
-// StopFleetActions
+// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
+// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
+// | DescribeFleetPortSettings | DescribeFleetUtilization |
+// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetAttributes(ctx context.Context, params *DescribeFleetAttributesInput, optFns ...func(*Options)) (*DescribeFleetAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetAttributesInput{}
@@ -75,9 +55,7 @@ type DescribeFleetAttributesInput struct {
 
 	// A list of unique fleet identifiers to retrieve attributes for. You can use
 	// either the fleet ID or ARN value. To retrieve attributes for all current fleets,
-	// do not include this parameter. If the list of fleet identifiers includes fleets
-	// that don't currently exist, the request succeeds but no attributes for that
-	// fleet are returned.
+	// do not include this parameter.
 	FleetIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -85,7 +63,7 @@ type DescribeFleetAttributesInput struct {
 	// request specifies one or a list of fleet IDs.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value. This parameter is ignored
 	// when the request specifies one or a list of fleet IDs.
@@ -99,8 +77,9 @@ type DescribeFleetAttributesOutput struct {
 	// ID. Attribute objects are returned only for fleets that currently exist.
 	FleetAttributes []types.FleetAttributes
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

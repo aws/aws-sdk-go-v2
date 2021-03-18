@@ -45,10 +45,10 @@ type ListPredictorBacktestExportJobsInput struct {
 	// exclude matching predictor backtest export jobs, specify IS_NOT.
 	//
 	// * Key - The
-	// name of the parameter to filter on. Valid values are
-	// PredictorBacktestExportJobArn and Status.
+	// name of the parameter to filter on. Valid values are PredictorArn and Status.
 	//
-	// * Value - The value to match.
+	// *
+	// Value - The value to match.
 	Filters []types.Filter
 
 	// The number of items to return in the response.

@@ -43,6 +43,9 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	// This member is required.
 	TimePeriod *types.DateInterval
 
+	// The data type.
+	DataType []types.SavingsPlansDataType
+
 	// Filters Savings Plans utilization coverage data for active Savings Plans
 	// dimensions. You can filter data with the following dimensions:
 	//
@@ -71,6 +74,29 @@ type GetSavingsPlansUtilizationDetailsInput struct {
 	// token when the response from a previous call has more results than the maximum
 	// page size.
 	NextToken *string
+
+	// The value by which you want to sort the data. The following values are supported
+	// for Key:
+	//
+	// * UtilizationPercentage
+	//
+	// * TotalCommitment
+	//
+	// * UsedCommitment
+	//
+	// *
+	// UnusedCommitment
+	//
+	// * NetSavings
+	//
+	// * AmortizedRecurringCommitment
+	//
+	// *
+	// AmortizedUpfrontCommitment
+	//
+	// Supported values for SortOrder are ASCENDING or
+	// DESCENDING.
+	SortBy *types.SortDefinition
 }
 
 type GetSavingsPlansUtilizationDetailsOutput struct {
@@ -81,7 +107,7 @@ type GetSavingsPlansUtilizationDetailsOutput struct {
 	// This member is required.
 	SavingsPlansUtilizationDetails []types.SavingsPlansUtilizationDetail
 
-	// The time period that you want the usage and costs for.
+	// The time period of the request.
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval

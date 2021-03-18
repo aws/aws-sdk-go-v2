@@ -693,6 +693,18 @@ type Entity struct {
 	Type EntityType
 }
 
+// Specifies one of the label or labels that categorize the personally identifiable
+// information (PII) entity being analyzed.
+type EntityLabel struct {
+
+	// The name of the label.
+	Name PiiEntityType
+
+	// The level of confidence that Amazon Comprehend has in the accuracy of the
+	// detection.
+	Score *float32
+}
+
 // Describes the annotations associated with a entity recognizer.
 type EntityRecognizerAnnotations struct {
 

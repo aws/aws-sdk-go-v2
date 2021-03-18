@@ -12,7 +12,7 @@ import (
 )
 
 // Disables DNSSEC signing in a specific hosted zone. This action does not
-// deactivate any key signing keys (KSKs) that are active in the hosted zone.
+// deactivate any key-signing keys (KSKs) that are active in the hosted zone.
 func (c *Client) DisableHostedZoneDNSSEC(ctx context.Context, params *DisableHostedZoneDNSSECInput, optFns ...func(*Options)) (*DisableHostedZoneDNSSECOutput, error) {
 	if params == nil {
 		params = &DisableHostedZoneDNSSECInput{}

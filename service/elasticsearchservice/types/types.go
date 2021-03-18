@@ -128,6 +128,132 @@ type AdvancedSecurityOptionsStatus struct {
 	Status *OptionStatus
 }
 
+// Specifies Auto-Tune type and Auto-Tune action details.
+type AutoTune struct {
+
+	// Specifies details of the Auto-Tune action. See the Developer Guide
+	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// for more information.
+	AutoTuneDetails *AutoTuneDetails
+
+	// Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION.
+	AutoTuneType AutoTuneType
+}
+
+// Specifies details of the Auto-Tune action. See the Developer Guide
+// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+// for more information.
+type AutoTuneDetails struct {
+
+	// Specifies details of the scheduled Auto-Tune action. See the Developer Guide
+	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// for more information.
+	ScheduledAutoTuneDetails *ScheduledAutoTuneDetails
+}
+
+// Specifies Auto-Tune maitenance schedule. See the Developer Guide
+// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+// for more information.
+type AutoTuneMaintenanceSchedule struct {
+
+	// Specifies cron expression for a recurring maintenance schedule. See the
+	// Developer Guide
+	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// for more information.
+	CronExpressionForRecurrence *string
+
+	// Specifies maintenance schedule duration: duration value and duration unit. See
+	// the Developer Guide
+	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// for more information.
+	Duration *Duration
+
+	// Specifies timestamp at which Auto-Tune maintenance schedule start.
+	StartAt *time.Time
+}
+
+// Specifies the Auto-Tune options: the Auto-Tune desired state for the domain,
+// rollback state when disabling Auto-Tune options and list of maintenance
+// schedules.
+type AutoTuneOptions struct {
+
+	// Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.
+	DesiredState AutoTuneDesiredState
+
+	// Specifies list of maitenance schedules. See the Developer Guide
+	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// for more information.
+	MaintenanceSchedules []AutoTuneMaintenanceSchedule
+
+	// Specifies the rollback state while disabling Auto-Tune for the domain. Valid
+	// values are NO_ROLLBACK, DEFAULT_ROLLBACK.
+	RollbackOnDisable RollbackOnDisable
+}
+
+// Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and
+// list of maintenance schedules.
+type AutoTuneOptionsInput struct {
+
+	// Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.
+	DesiredState AutoTuneDesiredState
+
+	// Specifies list of maitenance schedules. See the Developer Guide
+	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// for more information.
+	MaintenanceSchedules []AutoTuneMaintenanceSchedule
+}
+
+// Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and
+// list of maintenance schedules.
+type AutoTuneOptionsOutput struct {
+
+	// Specifies the error message while enabling or disabling the Auto-Tune.
+	ErrorMessage *string
+
+	// Specifies the AutoTuneState for the Elasticsearch domain.
+	State AutoTuneState
+}
+
+// Specifies the status of Auto-Tune options for the specified Elasticsearch
+// domain.
+type AutoTuneOptionsStatus struct {
+
+	// Specifies Auto-Tune options for the specified Elasticsearch domain.
+	Options *AutoTuneOptions
+
+	// Specifies Status of the Auto-Tune options for the specified Elasticsearch
+	// domain.
+	Status *AutoTuneStatus
+}
+
+// Provides the current status of the Auto-Tune options.
+type AutoTuneStatus struct {
+
+	// Timestamp which tells Auto-Tune options creation date .
+	//
+	// This member is required.
+	CreationDate *time.Time
+
+	// Specifies the AutoTuneState for the Elasticsearch domain.
+	//
+	// This member is required.
+	State AutoTuneState
+
+	// Timestamp which tells Auto-Tune options last updated time.
+	//
+	// This member is required.
+	UpdateDate *time.Time
+
+	// Specifies the error message while enabling or disabling the Auto-Tune options.
+	ErrorMessage *string
+
+	// Indicates whether the Elasticsearch domain is being deleted.
+	PendingDeletion *bool
+
+	// Specifies the Auto-Tune options latest version.
+	UpdateVersion int32
+}
+
 // Options to specify the Cognito user and identity pools for Kibana
 // authentication. For more information, see Amazon Cognito Authentication for
 // Kibana
@@ -281,6 +407,25 @@ type DomainPackageDetails struct {
 	ReferencePath *string
 }
 
+// Specifies maintenance schedule duration: duration value and duration unit. See
+// the Developer Guide
+// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+// for more information.
+type Duration struct {
+
+	// Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See
+	// the Developer Guide
+	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// for more information.
+	Unit TimeUnit
+
+	// Integer to specify the value of a maintenance schedule duration. See the
+	// Developer Guide
+	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+	// for more information.
+	Value int64
+}
+
 // Options to enable, disable, and specify the properties of EBS storage volumes.
 // For more information, see  Configuring EBS-based Storage
 // (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-createupdatedomains.html#es-createdomain-configure-ebs).
@@ -385,6 +530,9 @@ type ElasticsearchDomainConfig struct {
 	// Specifies AdvancedSecurityOptions for the domain.
 	AdvancedSecurityOptions *AdvancedSecurityOptionsStatus
 
+	// Specifies AutoTuneOptions for the domain.
+	AutoTuneOptions *AutoTuneOptionsStatus
+
 	// The CognitoOptions for the specified domain. For more information, see Amazon
 	// Cognito Authentication for Kibana
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-cognito-auth.html).
@@ -457,6 +605,9 @@ type ElasticsearchDomainStatus struct {
 
 	// The current status of the Elasticsearch domain's advanced security options.
 	AdvancedSecurityOptions *AdvancedSecurityOptions
+
+	// The current status of the Elasticsearch domain's Auto-Tune options.
+	AutoTuneOptions *AutoTuneOptionsOutput
 
 	// The CognitoOptions for the specified domain. For more information, see Amazon
 	// Cognito Authentication for Kibana
@@ -1014,6 +1165,25 @@ type SAMLOptionsOutput struct {
 
 	// The key used for matching the SAML Subject attribute.
 	SubjectKey *string
+}
+
+// Specifies details of the scheduled Auto-Tune action. See the Developer Guide
+// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
+// for more information.
+type ScheduledAutoTuneDetails struct {
+
+	// Specifies Auto-Tune action description.
+	Action *string
+
+	// Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and
+	// JVM_YOUNG_GEN_TUNING.
+	ActionType ScheduledAutoTuneActionType
+
+	// Specifies timestamp for the Auto-Tune action scheduled for the domain.
+	Date *time.Time
+
+	// Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH.
+	Severity ScheduledAutoTuneSeverityType
 }
 
 // The current options of an Elasticsearch domain service software options.

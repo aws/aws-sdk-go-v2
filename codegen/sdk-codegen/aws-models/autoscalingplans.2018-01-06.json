@@ -64,7 +64,7 @@
                     "name": "autoscaling-plans"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Auto Scaling</fullname>\n         <p>Use AWS Auto Scaling to quickly discover all the scalable AWS resources for your application and\n         configure dynamic scaling and predictive scaling for your resources using scaling plans.\n         Use this service in conjunction with the Amazon EC2 Auto Scaling, Application Auto Scaling, Amazon CloudWatch, and AWS\n         CloudFormation services. </p>\n         <p>Currently, predictive scaling is only available for Amazon EC2 Auto Scaling groups.</p>\n         <p>For more information about AWS Auto Scaling, including information about granting IAM users\n         required permissions for AWS Auto Scaling actions, see the <a href=\"https://docs.aws.amazon.com/autoscaling/plans/userguide/what-is-aws-auto-scaling.html\">AWS Auto Scaling User Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>AWS Auto Scaling</fullname>\n\n      \n         <p>Use AWS Auto Scaling to create scaling plans for your applications to\n         automatically scale your scalable AWS resources. </p>\n         <p>\n            <b>API Summary</b>\n         </p>\n         <p>You can use the AWS Auto Scaling service API to accomplish the following tasks:</p>\n         <ul>\n            <li>\n               <p>Create and manage scaling plans</p>\n            </li>\n            <li>\n               <p>Define target tracking scaling policies to dynamically scale your resources based\n               on utilization</p>\n            </li>\n            <li>\n               <p>Scale Amazon EC2 Auto Scaling groups using predictive scaling and dynamic scaling to scale your\n               Amazon EC2 capacity faster</p>\n            </li>\n            <li>\n               <p>Set minimum and maximum capacity limits</p>\n            </li>\n            <li>\n               <p>Retrieve information on existing scaling plans</p>\n            </li>\n            <li>\n               <p>Access current forecast data and historical forecast data for up to 56 days\n               previous</p>\n            </li>\n         </ul>\n      \n         <p>To learn more about AWS Auto Scaling, including information about granting IAM users required\n         permissions for AWS Auto Scaling actions, see the <a href=\"https://docs.aws.amazon.com/autoscaling/plans/userguide/what-is-aws-auto-scaling.html\">AWS Auto Scaling User Guide</a>. </p>",
                 "smithy.api#title": "AWS Auto Scaling Plans"
             }
         },
@@ -136,7 +136,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a scaling plan.</p>"
+                "smithy.api#documentation": "<p>Creates a scaling plan. </p>"
             }
         },
         "com.amazonaws.autoscalingplans#CreateScalingPlanRequest": {
@@ -152,14 +152,14 @@
                 "ApplicationSource": {
                     "target": "com.amazonaws.autoscalingplans#ApplicationSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CloudFormation stack or set of tags. You can create one scaling plan per application\n         source.</p>",
+                        "smithy.api#documentation": "<p>A CloudFormation stack or set of tags. You can create one scaling plan per application\n         source.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html\">ApplicationSource</a> in the <i>AWS Auto Scaling API Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ScalingInstructions": {
                     "target": "com.amazonaws.autoscalingplans#ScalingInstructions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scaling instructions.</p>",
+                        "smithy.api#documentation": "<p>The scaling instructions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html\">ScalingInstruction</a> in the <i>AWS Auto Scaling API Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -171,7 +171,7 @@
                 "ScalingPlanVersion": {
                     "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the scaling plan. This value is always 1.</p>\n         <p>Currently, you cannot specify multiple scaling plan versions.</p>",
+                        "smithy.api#documentation": "<p>The version number of the scaling plan. This value is always <code>1</code>. Currently,\n         you cannot have multiple scaling plan versions.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -203,7 +203,7 @@
                 "Statistic": {
                     "target": "com.amazonaws.autoscalingplans#MetricStatistic",
                     "traits": {
-                        "smithy.api#documentation": "<p>The statistic of the metric. Currently, the value must always be <code>Sum</code>.\n      </p>",
+                        "smithy.api#documentation": "<p>The statistic of the metric. The only valid value is <code>Sum</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -215,7 +215,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing that can be used for predictive scaling. </p>\n         <p>For predictive scaling to work with a customized load metric specification, AWS Auto Scaling\n         needs access to the <code>Sum</code> and <code>Average</code> statistics that CloudWatch computes\n         from metric data. Statistics are calculations used to aggregate data over specified time\n         periods.</p>\n         <p>When you choose a load metric, make sure that the required <code>Sum</code> and\n            <code>Average</code> statistics for your metric are available in CloudWatch and that they\n         provide relevant data for predictive scaling. The <code>Sum</code> statistic must represent\n         the total load on the resource, and the <code>Average</code> statistic must represent the\n         average load per capacity unit of the resource. For example, there is a metric that counts\n         the number of requests processed by your Auto Scaling group. If the <code>Sum</code> statistic\n         represents the total request count processed by the group, then the <code>Average</code>\n         statistic for the specified metric must represent the average request count processed by\n         each instance of the group.</p>\n         <p>For information about terminology, available metrics, or how to publish new metrics, see\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            Concepts</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing that can be used for predictive scaling. </p>\n         <p>For predictive scaling to work with a customized load metric specification, AWS Auto Scaling\n         needs access to the <code>Sum</code> and <code>Average</code> statistics that CloudWatch computes\n         from metric data.</p>\n         <p>When you choose a load metric, make sure that the required <code>Sum</code> and\n            <code>Average</code> statistics for your metric are available in CloudWatch and that they\n         provide relevant data for predictive scaling. The <code>Sum</code> statistic must represent\n         the total load on the resource, and the <code>Average</code> statistic must represent the\n         average load per capacity unit of the resource. For example, there is a metric that counts\n         the number of requests processed by your Auto Scaling group. If the <code>Sum</code> statistic\n         represents the total request count processed by the group, then the <code>Average</code>\n         statistic for the specified metric must represent the average request count processed by\n         each instance of the group. </p>\n         <p>If you publish your own metrics, you can aggregate the data points at a given interval\n         and then publish the aggregated data points to CloudWatch. Before AWS Auto Scaling generates the\n         forecast, it sums up all the metric data points that occurred within each hour to match the\n         granularity period that is used in the forecast (60 minutes).</p>\n         <p>For information about terminology, available metrics, or how to publish new metrics, see\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            Concepts</a> in the <i>Amazon CloudWatch User Guide</i>. </p>\n         <p>After creating your scaling plan, you can use the AWS Auto Scaling console to visualize\n         forecasts for the specified metric. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource\">View\n            Scaling Information for a Resource</a> in the\n         <i>AWS Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscalingplans#CustomizedScalingMetricSpecification": {
@@ -256,7 +256,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing that can be used for dynamic scaling as part\n         of a target tracking scaling policy. </p>\n         <p>To create your customized scaling metric specification:</p>\n         <ul>\n            <li>\n               <p>Add values for each required parameter from CloudWatch. You can use an existing metric,\n               or a new metric that you create. To use your own metric, you must first publish the\n               metric to CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publish Custom\n                  Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n            </li>\n            <li>\n               <p>Choose a metric that changes proportionally with capacity. The value of the metric\n               should increase or decrease in inverse proportion to the number of capacity units.\n               That is, the value of the metric should decrease when capacity increases. </p>\n            </li>\n         </ul>\n         <p>For more information about CloudWatch, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            Concepts</a>. </p>"
+                "smithy.api#documentation": "<p>Represents a CloudWatch metric of your choosing that can be used for dynamic scaling as part\n         of a target tracking scaling policy. </p>\n         <p>To create your customized scaling metric specification:</p>\n         <ul>\n            <li>\n               <p>Add values for each required parameter from CloudWatch. You can use an existing metric,\n               or a new metric that you create. To use your own metric, you must first publish the\n               metric to CloudWatch. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html\">Publish Custom\n                  Metrics</a> in the <i>Amazon CloudWatch User Guide</i>.</p>\n            </li>\n            <li>\n               <p>Choose a metric that changes proportionally with capacity. The value of the metric\n               should increase or decrease in inverse proportion to the number of capacity units.\n               That is, the value of the metric should decrease when capacity increases. </p>\n            </li>\n         </ul>\n         <p>For information about terminology, available metrics, or how to publish new metrics, see\n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html\">Amazon CloudWatch\n            Concepts</a> in the <i>Amazon CloudWatch User Guide</i>. </p>"
             }
         },
         "com.amazonaws.autoscalingplans#Datapoint": {
@@ -324,7 +324,7 @@
                 "ScalingPlanVersion": {
                     "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#documentation": "<p>The version number of the scaling plan. Currently, the only valid value is\n            <code>1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -373,7 +373,7 @@
                 "ScalingPlanVersion": {
                     "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#documentation": "<p>The version number of the scaling plan. Currently, the only valid value is\n            <code>1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -446,7 +446,7 @@
                 "ScalingPlanVersion": {
                     "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the scaling plan. If you specify a scaling plan version, you must\n         also specify a scaling plan name.</p>"
+                        "smithy.api#documentation": "<p>The version number of the scaling plan. Currently, the only valid value is\n            <code>1</code>.</p>\n         <note>\n            <p>If you specify a scaling plan version, you must also specify a scaling plan\n            name.</p>\n         </note>"
                     }
                 },
                 "ApplicationSources": {
@@ -541,7 +541,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the forecast data for a scalable resource.</p>\n         <p>Capacity forecasts are represented as predicted values, or data points, that are\n         calculated using historical data points from a specified CloudWatch load metric. Data points are\n         available for up to 56 days.\n         \n      </p>"
+                "smithy.api#documentation": "<p>Retrieves the forecast data for a scalable resource.</p>\n         <p>Capacity forecasts are represented as predicted values, or data points, that are\n         calculated using historical data points from a specified CloudWatch load metric. Data points are\n         available for up to 56 days. </p>"
             }
         },
         "com.amazonaws.autoscalingplans#GetScalingPlanResourceForecastDataRequest": {
@@ -557,28 +557,28 @@
                 "ScalingPlanVersion": {
                     "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#documentation": "<p>The version number of the scaling plan. Currently, the only valid value is\n            <code>1</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ServiceNamespace": {
                     "target": "com.amazonaws.autoscalingplans#ServiceNamespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace of the AWS service.</p>",
+                        "smithy.api#documentation": "<p>The namespace of the AWS service. The only valid value is <code>autoscaling</code>.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ResourceId": {
                     "target": "com.amazonaws.autoscalingplans#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the resource. This string consists of the resource type and unique identifier.\n      </p> \n         <ul>\n            <li>\n               <p>Auto Scaling group - The resource type is <code>autoScalingGroup</code> and the unique identifier is the\n               name of the Auto Scaling group. Example: <code>autoScalingGroup/my-asg</code>.</p>\n           </li>\n            <li>\n               <p>ECS service - The resource type is <code>service</code> and the unique identifier is the cluster name  \n               and service name. Example: <code>service/default/sample-webapp</code>.</p>\n           </li>\n            <li>\n               <p>Spot Fleet request - The resource type is <code>spot-fleet-request</code> and the unique identifier is the \n               Spot Fleet request ID. Example: <code>spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE</code>.</p>\n           </li>\n            <li>\n               <p>DynamoDB table - The resource type is <code>table</code> and the unique identifier is the resource ID. \n               Example: <code>table/my-table</code>.</p>\n           </li>\n            <li>\n               <p>DynamoDB global secondary index - The resource type is <code>index</code> and the unique identifier is the resource ID. \n               Example: <code>table/my-table/index/my-table-index</code>.</p>\n           </li>\n            <li>\n               <p>Aurora DB cluster - The resource type is <code>cluster</code> and the unique identifier is the cluster name.\n               Example: <code>cluster:my-db-cluster</code>.</p>\n           </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The ID of the resource. This string consists of a prefix (<code>autoScalingGroup</code>)\n         followed by the name of a specified Auto Scaling group (<code>my-asg</code>). Example:\n            <code>autoScalingGroup/my-asg</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ScalableDimension": {
                     "target": "com.amazonaws.autoscalingplans#ScalableDimension",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scalable dimension for the resource.</p>",
+                        "smithy.api#documentation": "<p>The scalable dimension for the resource. The only valid value is\n            <code>autoscaling:autoScalingGroup:DesiredCapacity</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -811,12 +811,12 @@
                 "ResourceLabel": {
                     "target": "com.amazonaws.autoscalingplans#ResourceLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the resource associated with the metric type. You can't specify a resource\n         label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target\n         group for an Application Load Balancer attached to the Auto Scaling group.</p>\n         <p>The format is\n         app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,\n         where:</p>\n         <ul>\n            <li>\n               <p>app/<load-balancer-name>/<load-balancer-id> is the final portion of\n               the load balancer ARN.</p>\n            </li>\n            <li>\n               <p>targetgroup/<target-group-name>/<target-group-id> is the final portion\n               of the target group ARN.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Identifies the resource associated with the metric type. You can't specify a resource\n         label unless the metric type is <code>ALBTargetGroupRequestCount</code> and there is a\n         target group for an Application Load Balancer attached to the Auto Scaling group.</p>\n         <p>You create the resource label by appending the final portion of the load balancer ARN\n         and the final portion of the target group ARN into a single value, separated by a forward\n         slash (/). The format is\n         app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,\n         where:</p>\n         <ul>\n            <li>\n               <p>app/<load-balancer-name>/<load-balancer-id> is the final portion of\n               the load balancer ARN</p>\n            </li>\n            <li>\n               <p>targetgroup/<target-group-name>/<target-group-id> is the final portion\n               of the target group ARN.</p>\n            </li>\n         </ul>\n         <p>This is an example:\n         app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.</p>\n         <p>To find the ARN for an Application Load Balancer, use the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use\n         the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html\">DescribeTargetGroups</a> API operation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a predefined metric that can be used for predictive scaling. </p>"
+                "smithy.api#documentation": "<p>Represents a predefined metric that can be used for predictive scaling.</p>\n         <p>After creating your scaling plan, you can use the AWS Auto Scaling console to visualize\n         forecasts for the specified metric. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-create-scaling-plan.html#gs-view-resource\">View\n            Scaling Information for a Resource</a> in the\n         <i>AWS Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscalingplans#PredefinedScalingMetricSpecification": {
@@ -832,7 +832,7 @@
                 "ResourceLabel": {
                     "target": "com.amazonaws.autoscalingplans#ResourceLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifies the resource associated with the metric type. You can't specify a resource\n         label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target\n         group for an Application Load Balancer attached to the Auto Scaling group, Spot Fleet request, or\n         ECS service.</p>\n         <p>The format is\n         app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,\n         where:</p>\n         <ul>\n            <li>\n               <p>app/<load-balancer-name>/<load-balancer-id> is the final portion of\n               the load balancer ARN.</p>\n            </li>\n            <li>\n               <p>targetgroup/<target-group-name>/<target-group-id> is the final portion\n               of the target group ARN.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Identifies the resource associated with the metric type. You can't specify a resource\n         label unless the metric type is <code>ALBRequestCountPerTarget</code> and there is a target\n         group for an Application Load Balancer attached to the Auto Scaling group, Spot Fleet request, or\n         ECS service.</p>\n         <p>You create the resource label by appending the final portion of the load balancer ARN\n         and the final portion of the target group ARN into a single value, separated by a forward\n         slash (/). The format is\n         app/<load-balancer-name>/<load-balancer-id>/targetgroup/<target-group-name>/<target-group-id>,\n         where:</p>\n         <ul>\n            <li>\n               <p>app/<load-balancer-name>/<load-balancer-id> is the final portion of\n               the load balancer ARN</p>\n            </li>\n            <li>\n               <p>targetgroup/<target-group-name>/<target-group-id> is the final portion\n               of the target group ARN.</p>\n            </li>\n         </ul>\n         <p>This is an example:\n         app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.</p>\n         <p>To find the ARN for an Application Load Balancer, use the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> API operation. To find the ARN for the target group, use\n         the <a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html\">DescribeTargetGroups</a> API operation.</p>"
                     }
                 }
             },
@@ -979,7 +979,7 @@
                 "TargetTrackingConfigurations": {
                     "target": "com.amazonaws.autoscalingplans#TargetTrackingConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The structure that defines new target tracking configurations (up to 10). Each of these\n         structures includes a specific scaling metric and a target value for the metric, along with\n         various parameters to use with dynamic scaling. </p>\n         <p>With predictive scaling and dynamic scaling, the resource scales based on the target\n         tracking configuration that provides the largest capacity for both scale in and scale out. </p>\n         <p>Condition: The scaling metric must be unique across target tracking\n         configurations.</p>",
+                        "smithy.api#documentation": "<p>The target tracking configurations (up to 10). Each of these structures must specify a\n         unique scaling metric and a target value for the metric. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1033,7 +1033,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a scaling instruction for a scalable resource.</p>\n         <p>The scaling instruction is used in combination with a scaling plan, which is a set of\n         instructions for configuring dynamic scaling and predictive scaling for the scalable\n         resources in your application. Each scaling instruction applies to one resource.</p>\n         <p>AWS Auto Scaling creates target tracking scaling policies based on the scaling instructions.\n         Target tracking scaling policies adjust the capacity of your scalable resource as required\n         to maintain resource utilization at the target value that you specified. </p>\n         <p>AWS Auto Scaling also configures predictive scaling for your Amazon EC2 Auto Scaling groups using a subset of\n         parameters, including the load metric, the scaling metric, the target value for the scaling\n         metric, the predictive scaling mode (forecast and scale or forecast only), and the desired\n         behavior when the forecast capacity exceeds the maximum capacity of the resource. With\n         predictive scaling, AWS Auto Scaling generates forecasts with traffic predictions for the two days\n         ahead and schedules scaling actions that proactively add and remove resource capacity to\n         match the forecast. </p>\n         <p>We recommend waiting a minimum of 24 hours after creating an Auto Scaling group to configure\n         predictive scaling. At minimum, there must be 24 hours of historical data to generate a\n         forecast.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/userguide/auto-scaling-getting-started.html\">Getting Started with\n            AWS Auto Scaling</a>.</p>"
+                "smithy.api#documentation": "<p>Describes a scaling instruction for a scalable resource in a scaling plan. Each scaling\n         instruction applies to one resource.</p>\n         <p>AWS Auto Scaling creates target tracking scaling policies based on the scaling instructions.\n         Target tracking scaling policies adjust the capacity of your scalable resource as required\n         to maintain resource utilization at the target value that you specified. </p>\n         <p>AWS Auto Scaling also configures predictive scaling for your Amazon EC2 Auto Scaling groups using a subset of\n         parameters, including the load metric, the scaling metric, the target value for the scaling\n         metric, the predictive scaling mode (forecast and scale or forecast only), and the desired\n         behavior when the forecast capacity exceeds the maximum capacity of the resource. With\n         predictive scaling, AWS Auto Scaling generates forecasts with traffic predictions for the two days\n         ahead and schedules scaling actions that proactively add and remove resource capacity to\n         match the forecast. </p>\n         <important>\n            <p>We recommend waiting a minimum of 24 hours after creating an Auto Scaling group to configure\n            predictive scaling. At minimum, there must be 24 hours of historical data to generate a\n            forecast. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/userguide/gs-best-practices.html\">Best Practices for\n               AWS Auto Scaling</a> in the <i>AWS Auto Scaling User Guide</i>.</p>\n         </important>"
             }
         },
         "com.amazonaws.autoscalingplans#ScalingInstructions": {
@@ -1121,7 +1121,7 @@
                 "ApplicationSource": {
                     "target": "com.amazonaws.autoscalingplans#ApplicationSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The application source.</p>",
+                        "smithy.api#documentation": "<p>A CloudFormation stack or a set of tags. You can create one scaling plan per application\n         source.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1451,7 +1451,7 @@
                 "TargetValue": {
                     "target": "com.amazonaws.autoscalingplans#MetricScale",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target value for the metric. The range is 8.515920e-109 to 1.174271e+108 (Base 10)\n         or 2e-360 to 2e360 (Base 2).</p>",
+                        "smithy.api#documentation": "<p>The target value for the metric. Although this property accepts numbers of type Double,\n         it won't accept values that are either too small or too large. Values must be in the range\n         of -2^360 to 2^360.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1464,13 +1464,13 @@
                 "ScaleOutCooldown": {
                     "target": "com.amazonaws.autoscalingplans#Cooldown",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, after a scale-out activity completes before another\n         scale-out activity can start. This value is not used if the scalable resource is an Auto\n         Scaling group.</p>\n         <p>While the cooldown period is in effect, the capacity that has been added by the previous\n         scale-out event that initiated the cooldown is calculated as part of the desired capacity\n         for the next scale out. The intention is to continuously (but not excessively) scale\n         out.</p>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, to wait for a previous scale-out activity to take\n         effect. This property is not used if the scalable resource is an Auto Scaling\n         group.</p>\n         <p>With the <i>scale-out cooldown period</i>, the intention is to continuously\n         (but not excessively) scale out. After Auto Scaling successfully scales out using a target\n         tracking scaling policy, it starts to calculate the cooldown time. The scaling policy won't\n         increase the desired capacity again unless either a larger scale out is triggered or the\n         cooldown period ends.</p>"
                     }
                 },
                 "ScaleInCooldown": {
                     "target": "com.amazonaws.autoscalingplans#Cooldown",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of time, in seconds, after a scale in activity completes before another scale\n         in activity can start. This value is not used if the scalable resource is an Auto Scaling\n         group.</p>\n         <p>The cooldown period is used to block subsequent scale in requests until it has expired.\n         The intention is to scale in conservatively to protect your application's availability.\n         However, if another alarm triggers a scale-out policy during the cooldown period after a\n         scale-in, AWS Auto Scaling scales out your scalable target immediately.</p>"
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, after a scale-in activity completes before another\n         scale-in activity can start. This property is not used if the scalable resource is an Auto Scaling\n         group.</p>\n         <p>With the <i>scale-in cooldown period</i>, the intention is to scale in\n         conservatively to protect your application’s availability, so scale-in activities are blocked\n         until the cooldown period has expired. However, if another alarm triggers a scale-out activity\n         during the scale-in cooldown period, Auto Scaling scales out the target immediately. In this case,\n         the scale-in cooldown period stops and doesn't complete.</p>"
                     }
                 },
                 "EstimatedInstanceWarmup": {
@@ -1532,20 +1532,20 @@
                 "ScalingPlanVersion": {
                     "target": "com.amazonaws.autoscalingplans#ScalingPlanVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version number of the scaling plan.</p>",
+                        "smithy.api#documentation": "<p>The version number of the scaling plan. The only valid value is <code>1</code>.\n         Currently, you cannot have multiple scaling plan versions.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ApplicationSource": {
                     "target": "com.amazonaws.autoscalingplans#ApplicationSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CloudFormation stack or set of tags.</p>"
+                        "smithy.api#documentation": "<p>A CloudFormation stack or set of tags.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ApplicationSource.html\">ApplicationSource</a> in the <i>AWS Auto Scaling API Reference</i>.</p>"
                     }
                 },
                 "ScalingInstructions": {
                     "target": "com.amazonaws.autoscalingplans#ScalingInstructions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scaling instructions.</p>"
+                        "smithy.api#documentation": "<p>The scaling instructions.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/plans/APIReference/API_ScalingInstruction.html\">ScalingInstruction</a> in the <i>AWS Auto Scaling API Reference</i>.</p>"
                     }
                 }
             }

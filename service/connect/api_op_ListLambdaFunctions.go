@@ -12,8 +12,8 @@ import (
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
-// Returns a paginated list of all the Lambda functions that show up in the
-// drop-down options in the relevant contact flow blocks.
+// Returns a paginated list of all Lambda functions that display in the dropdown
+// options in the relevant contact flow blocks.
 func (c *Client) ListLambdaFunctions(ctx context.Context, params *ListLambdaFunctionsInput, optFns ...func(*Options)) (*ListLambdaFunctionsOutput, error) {
 	if params == nil {
 		params = &ListLambdaFunctionsInput{}
@@ -36,7 +36,7 @@ type ListLambdaFunctionsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -130,7 +130,7 @@ var _ ListLambdaFunctionsAPIClient = (*Client)(nil)
 // ListLambdaFunctionsPaginatorOptions is the paginator options for
 // ListLambdaFunctions
 type ListLambdaFunctionsPaginatorOptions struct {
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

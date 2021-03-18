@@ -430,6 +430,26 @@ func (m *validateOpUpdateBrokerStorage) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateBrokerType struct {
+}
+
+func (*validateOpUpdateBrokerType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBrokerType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBrokerTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBrokerTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateClusterConfiguration struct {
 }
 
@@ -592,6 +612,10 @@ func addOpUpdateBrokerCountValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateBrokerStorageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBrokerStorage{}, middleware.After)
+}
+
+func addOpUpdateBrokerTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBrokerType{}, middleware.After)
 }
 
 func addOpUpdateClusterConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -1222,6 +1246,27 @@ func validateOpUpdateBrokerStorageInput(v *UpdateBrokerStorageInput) error {
 		if err := validate__listOfBrokerEBSVolumeInfo(v.TargetBrokerEBSVolumeInfo); err != nil {
 			invalidParams.AddNested("TargetBrokerEBSVolumeInfo", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBrokerTypeInput(v *UpdateBrokerTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBrokerTypeInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.TargetInstanceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetInstanceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

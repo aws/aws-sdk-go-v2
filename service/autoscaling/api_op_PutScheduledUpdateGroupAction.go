@@ -11,10 +11,8 @@ import (
 	"time"
 )
 
-// Creates or updates a scheduled scaling action for an Auto Scaling group. If you
-// leave a parameter unspecified when updating a scheduled scaling action, the
-// corresponding value remains unchanged. For more information, see Scheduled
-// scaling
+// Creates or updates a scheduled scaling action for an Auto Scaling group. For
+// more information, see Scheduled scaling
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html) in
 // the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) PutScheduledUpdateGroupAction(ctx context.Context, params *PutScheduledUpdateGroupActionInput, optFns ...func(*Options)) (*PutScheduledUpdateGroupActionOutput, error) {
@@ -49,8 +47,7 @@ type PutScheduledUpdateGroupActionInput struct {
 	// beyond this capacity if you add more scaling conditions.
 	DesiredCapacity *int32
 
-	// The date and time for the recurring schedule to end. Amazon EC2 Auto Scaling
-	// does not perform the action after this time.
+	// The date and time for the recurring schedule to end, in UTC.
 	EndTime *time.Time
 
 	// The maximum size of the Auto Scaling group.
@@ -59,12 +56,13 @@ type PutScheduledUpdateGroupActionInput struct {
 	// The minimum size of the Auto Scaling group.
 	MinSize *int32
 
-	// The recurring schedule for this action, in Unix cron syntax format. This format
-	// consists of five fields separated by white spaces: [Minute] [Hour]
-	// [Day_of_Month] [Month_of_Year] [Day_of_Week]. The value must be in quotes (for
-	// example, "30 0 1 1,6,12 *"). For more information about this format, see Crontab
-	// (http://crontab.org). When StartTime and EndTime are specified with Recurrence,
-	// they form the boundaries of when the recurring action starts and stops.
+	// The recurring schedule for this action. This format consists of five fields
+	// separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year]
+	// [Day_of_Week]. The value must be in quotes (for example, "30 0 1 1,6,12 *"). For
+	// more information about this format, see Crontab (http://crontab.org). When
+	// StartTime and EndTime are specified with Recurrence, they form the boundaries of
+	// when the recurring action starts and stops. Cron expressions use Universal
+	// Coordinated Time (UTC) by default.
 	Recurrence *string
 
 	// The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in
@@ -77,6 +75,14 @@ type PutScheduledUpdateGroupActionInput struct {
 
 	// This parameter is no longer used.
 	Time *time.Time
+
+	// Specifies the time zone for a cron expression. If a time zone is not provided,
+	// UTC is used by default. Valid values are the canonical names of the IANA time
+	// zones, derived from the IANA Time Zone Database (such as Etc/GMT+9 or
+	// Pacific/Tahiti). For more information, see
+	// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+	// (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+	TimeZone *string
 }
 
 type PutScheduledUpdateGroupActionOutput struct {

@@ -86,6 +86,9 @@ type GetQuantumTaskOutput struct {
 	// The reason that a task failed.
 	FailureReason *string
 
+	// The tags that belong to this task.
+	Tags map[string]string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

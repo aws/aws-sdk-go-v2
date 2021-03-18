@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddNotificationChannels struct {
+}
+
+func (*validateOpAddNotificationChannels) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddNotificationChannels) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddNotificationChannelsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddNotificationChannelsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpBatchGetFrameMetricData struct {
+}
+
+func (*validateOpBatchGetFrameMetricData) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetFrameMetricData) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetFrameMetricDataInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetFrameMetricDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpConfigureAgent struct {
 }
 
@@ -90,6 +130,26 @@ func (m *validateOpDescribeProfilingGroup) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetNotificationConfiguration struct {
+}
+
+func (*validateOpGetNotificationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetNotificationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetNotificationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetNotificationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPolicy struct {
 }
 
@@ -130,6 +190,46 @@ func (m *validateOpGetProfile) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetRecommendations struct {
+}
+
+func (*validateOpGetRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFindingsReports struct {
+}
+
+func (*validateOpListFindingsReports) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFindingsReports) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFindingsReportsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFindingsReportsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListProfileTimes struct {
 }
 
@@ -145,6 +245,26 @@ func (m *validateOpListProfileTimes) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListProfileTimesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +310,26 @@ func (m *validateOpPutPermission) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveNotificationChannel struct {
+}
+
+func (*validateOpRemoveNotificationChannel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveNotificationChannel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveNotificationChannelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveNotificationChannelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRemovePermission struct {
 }
 
@@ -210,21 +350,61 @@ func (m *validateOpRemovePermission) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpRetrieveTimeSeries struct {
+type validateOpSubmitFeedback struct {
 }
 
-func (*validateOpRetrieveTimeSeries) ID() string {
+func (*validateOpSubmitFeedback) ID() string {
 	return "OperationInputValidation"
 }
 
-func (m *validateOpRetrieveTimeSeries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+func (m *validateOpSubmitFeedback) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {
-	input, ok := in.Parameters.(*RetrieveTimeSeriesInput)
+	input, ok := in.Parameters.(*SubmitFeedbackInput)
 	if !ok {
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
-	if err := validateOpRetrieveTimeSeriesInput(input); err != nil {
+	if err := validateOpSubmitFeedbackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +430,14 @@ func (m *validateOpUpdateProfilingGroup) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddNotificationChannelsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddNotificationChannels{}, middleware.After)
+}
+
+func addOpBatchGetFrameMetricDataValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetFrameMetricData{}, middleware.After)
+}
+
 func addOpConfigureAgentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpConfigureAgent{}, middleware.After)
 }
@@ -266,6 +454,10 @@ func addOpDescribeProfilingGroupValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeProfilingGroup{}, middleware.After)
 }
 
+func addOpGetNotificationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetNotificationConfiguration{}, middleware.After)
+}
+
 func addOpGetPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPolicy{}, middleware.After)
 }
@@ -274,8 +466,20 @@ func addOpGetProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProfile{}, middleware.After)
 }
 
+func addOpGetRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecommendations{}, middleware.After)
+}
+
+func addOpListFindingsReportsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFindingsReports{}, middleware.After)
+}
+
 func addOpListProfileTimesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListProfileTimes{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpPostAgentProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -286,12 +490,24 @@ func addOpPutPermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutPermission{}, middleware.After)
 }
 
+func addOpRemoveNotificationChannelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveNotificationChannel{}, middleware.After)
+}
+
 func addOpRemovePermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemovePermission{}, middleware.After)
 }
 
-func addOpRetrieveTimeSeriesValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpRetrieveTimeSeries{}, middleware.After)
+func addOpSubmitFeedbackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSubmitFeedback{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func addOpUpdateProfilingGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -313,6 +529,41 @@ func validateAgentOrchestrationConfig(v *types.AgentOrchestrationConfig) error {
 	}
 }
 
+func validateChannel(v *types.Channel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Channel"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if v.EventPublishers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventPublishers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateChannels(v []types.Channel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Channels"}
+	for i := range v {
+		if err := validateChannel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFrameMetric(v *types.FrameMetric) error {
 	if v == nil {
 		return nil
@@ -321,11 +572,11 @@ func validateFrameMetric(v *types.FrameMetric) error {
 	if v.FrameName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FrameName"))
 	}
-	if v.ThreadStates == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ThreadStates"))
-	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ThreadStates == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThreadStates"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -342,6 +593,48 @@ func validateFrameMetrics(v []types.FrameMetric) error {
 	for i := range v {
 		if err := validateFrameMetric(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddNotificationChannelsInput(v *AddNotificationChannelsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddNotificationChannelsInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if v.Channels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Channels"))
+	} else if v.Channels != nil {
+		if err := validateChannels(v.Channels); err != nil {
+			invalidParams.AddNested("Channels", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetFrameMetricDataInput(v *BatchGetFrameMetricDataInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetFrameMetricDataInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if v.FrameMetrics != nil {
+		if err := validateFrameMetrics(v.FrameMetrics); err != nil {
+			invalidParams.AddNested("FrameMetrics", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -371,16 +664,16 @@ func validateOpCreateProfilingGroupInput(v *CreateProfilingGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProfilingGroupInput"}
-	if v.AgentOrchestrationConfig != nil {
-		if err := validateAgentOrchestrationConfig(v.AgentOrchestrationConfig); err != nil {
-			invalidParams.AddNested("AgentOrchestrationConfig", err.(smithy.InvalidParamsError))
-		}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
-	if v.ProfilingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	if v.AgentOrchestrationConfig != nil {
+		if err := validateAgentOrchestrationConfig(v.AgentOrchestrationConfig); err != nil {
+			invalidParams.AddNested("AgentOrchestrationConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -409,6 +702,21 @@ func validateOpDescribeProfilingGroupInput(v *DescribeProfilingGroupInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeProfilingGroupInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetNotificationConfigurationInput(v *GetNotificationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetNotificationConfigurationInput"}
 	if v.ProfilingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
 	}
@@ -449,22 +757,79 @@ func validateOpGetProfileInput(v *GetProfileInput) error {
 	}
 }
 
+func validateOpGetRecommendationsInput(v *GetRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecommendationsInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFindingsReportsInput(v *ListFindingsReportsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFindingsReportsInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListProfileTimesInput(v *ListProfileTimesInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListProfileTimesInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
 	if v.EndTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if len(v.Period) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Period"))
 	}
-	if v.ProfilingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
 	}
-	if v.StartTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -478,14 +843,14 @@ func validateOpPostAgentProfileInput(v *PostAgentProfileInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PostAgentProfileInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
 	if v.AgentProfile == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentProfile"))
 	}
 	if v.ContentType == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
-	}
-	if v.ProfilingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -499,14 +864,32 @@ func validateOpPutPermissionInput(v *PutPermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutPermissionInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
 	if len(v.ActionGroup) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
 	}
 	if v.Principals == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Principals"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveNotificationChannelInput(v *RemoveNotificationChannelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveNotificationChannelInput"}
 	if v.ProfilingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if v.ChannelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -520,11 +903,11 @@ func validateOpRemovePermissionInput(v *RemovePermissionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemovePermissionInput"}
-	if len(v.ActionGroup) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
-	}
 	if v.ProfilingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if len(v.ActionGroup) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionGroup"))
 	}
 	if v.RevisionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RevisionId"))
@@ -536,18 +919,55 @@ func validateOpRemovePermissionInput(v *RemovePermissionInput) error {
 	}
 }
 
-func validateOpRetrieveTimeSeriesInput(v *RetrieveTimeSeriesInput) error {
+func validateOpSubmitFeedbackInput(v *SubmitFeedbackInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "RetrieveTimeSeriesInput"}
-	if v.FrameMetrics != nil {
-		if err := validateFrameMetrics(v.FrameMetrics); err != nil {
-			invalidParams.AddNested("FrameMetrics", err.(smithy.InvalidParamsError))
-		}
-	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubmitFeedbackInput"}
 	if v.ProfilingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
+	if v.AnomalyInstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnomalyInstanceId"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -561,15 +981,15 @@ func validateOpUpdateProfilingGroupInput(v *UpdateProfilingGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProfilingGroupInput"}
+	if v.ProfilingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
+	}
 	if v.AgentOrchestrationConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentOrchestrationConfig"))
 	} else if v.AgentOrchestrationConfig != nil {
 		if err := validateAgentOrchestrationConfig(v.AgentOrchestrationConfig); err != nil {
 			invalidParams.AddNested("AgentOrchestrationConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.ProfilingGroupName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProfilingGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

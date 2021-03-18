@@ -514,15 +514,15 @@ func validateParameterObject(v *types.ParameterObject) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ParameterObject"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
 	if v.Attributes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
 	} else if v.Attributes != nil {
 		if err := validateParameterAttributeList(v.Attributes); err != nil {
 			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -588,18 +588,18 @@ func validatePipelineObject(v *types.PipelineObject) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PipelineObject"}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
 	if v.Fields == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
 	} else if v.Fields != nil {
 		if err := validateFieldList(v.Fields); err != nil {
 			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -630,11 +630,11 @@ func validateTag(v *types.Tag) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
 	if v.Value == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -665,13 +665,13 @@ func validateOpActivatePipelineInput(v *ActivatePipelineInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ActivatePipelineInput"}
-	if v.PipelineId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
-	}
 	if v.ParameterValues != nil {
 		if err := validateParameterValueList(v.ParameterValues); err != nil {
 			invalidParams.AddNested("ParameterValues", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.PipelineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -707,16 +707,16 @@ func validateOpCreatePipelineInput(v *CreatePipelineInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePipelineInput"}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if v.UniqueId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UniqueId"))
-	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.UniqueId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UniqueId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -796,11 +796,11 @@ func validateOpEvaluateExpressionInput(v *EvaluateExpressionInput) error {
 	if v.PipelineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
 	}
-	if v.ObjectId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectId"))
-	}
 	if v.Expression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if v.ObjectId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -847,13 +847,6 @@ func validateOpPutPipelineDefinitionInput(v *PutPipelineDefinitionInput) error {
 	if v.PipelineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
 	}
-	if v.PipelineObjects == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineObjects"))
-	} else if v.PipelineObjects != nil {
-		if err := validatePipelineObjectList(v.PipelineObjects); err != nil {
-			invalidParams.AddNested("PipelineObjects", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.ParameterObjects != nil {
 		if err := validateParameterObjectList(v.ParameterObjects); err != nil {
 			invalidParams.AddNested("ParameterObjects", err.(smithy.InvalidParamsError))
@@ -862,6 +855,13 @@ func validateOpPutPipelineDefinitionInput(v *PutPipelineDefinitionInput) error {
 	if v.ParameterValues != nil {
 		if err := validateParameterValueList(v.ParameterValues); err != nil {
 			invalidParams.AddNested("ParameterValues", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PipelineObjects == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineObjects"))
+	} else if v.PipelineObjects != nil {
+		if err := validatePipelineObjectList(v.PipelineObjects); err != nil {
+			invalidParams.AddNested("PipelineObjects", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -876,11 +876,11 @@ func validateOpQueryObjectsInput(v *QueryObjectsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "QueryObjectsInput"}
-	if v.PipelineId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
-	}
 	if v.Sphere == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sphere"))
+	}
+	if v.PipelineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -894,11 +894,11 @@ func validateOpRemoveTagsInput(v *RemoveTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveTagsInput"}
-	if v.PipelineId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
-	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if v.PipelineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -950,11 +950,11 @@ func validateOpSetStatusInput(v *SetStatusInput) error {
 	if v.PipelineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
 	}
-	if v.ObjectIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ObjectIds"))
-	}
 	if v.Status == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if v.ObjectIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ObjectIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -986,6 +986,16 @@ func validateOpValidatePipelineDefinitionInput(v *ValidatePipelineDefinitionInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ValidatePipelineDefinitionInput"}
+	if v.ParameterValues != nil {
+		if err := validateParameterValueList(v.ParameterValues); err != nil {
+			invalidParams.AddNested("ParameterValues", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ParameterObjects != nil {
+		if err := validateParameterObjectList(v.ParameterObjects); err != nil {
+			invalidParams.AddNested("ParameterObjects", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.PipelineId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PipelineId"))
 	}
@@ -994,16 +1004,6 @@ func validateOpValidatePipelineDefinitionInput(v *ValidatePipelineDefinitionInpu
 	} else if v.PipelineObjects != nil {
 		if err := validatePipelineObjectList(v.PipelineObjects); err != nil {
 			invalidParams.AddNested("PipelineObjects", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ParameterObjects != nil {
-		if err := validateParameterObjectList(v.ParameterObjects); err != nil {
-			invalidParams.AddNested("ParameterObjects", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ParameterValues != nil {
-		if err := validateParameterValueList(v.ParameterValues); err != nil {
-			invalidParams.AddNested("ParameterValues", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

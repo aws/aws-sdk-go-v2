@@ -108,24 +108,27 @@ type DatasetImportJobSummary struct {
 	// The name of the dataset import job.
 	DatasetImportJobName *string
 
-	// The last time that the dataset was modified. The time depends on the status of
-	// the job, as follows:
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
 	//
-	// * CREATE_PENDING - The same time as CreationTime.
+	// * CREATE_PENDING - The CreationTime.
 	//
-	// *
-	// CREATE_IN_PROGRESS - The current timestamp.
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
 	//
-	// * ACTIVE or CREATE_FAILED - When
-	// the job finished or failed.
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
 	Message *string
 
-	// The status of the dataset import job. The status is reflected in the status of
-	// the dataset. For example, when the import job status is CREATE_IN_PROGRESS, the
-	// status of the dataset is UPDATE_IN_PROGRESS. States include:
+	// The status of the dataset import job. States include:
 	//
 	// * ACTIVE
 	//
@@ -134,6 +137,8 @@ type DatasetImportJobSummary struct {
 	//
 	// * DELETE_PENDING,
 	// DELETE_IN_PROGRESS, DELETE_FAILED
+	//
+	// * CREATE_STOPPING, CREATE_STOPPED
 	Status *string
 }
 
@@ -409,7 +414,21 @@ type ForecastExportJobSummary struct {
 	// The name of the forecast export job.
 	ForecastExportJobName *string
 
-	// When the last successful export job finished.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -422,11 +441,14 @@ type ForecastExportJobSummary struct {
 	// *
 	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	// * DELETE_PENDING,
-	// DELETE_IN_PROGRESS, DELETE_FAILED
+	// * CREATE_STOPPING,
+	// CREATE_STOPPED
 	//
-	// The Status of the forecast export job must be
-	// ACTIVE before you can access the forecast in your S3 bucket.
+	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	//
+	// The Status
+	// of the forecast export job must be ACTIVE before you can access the forecast in
+	// your S3 bucket.
 	Status *string
 }
 
@@ -448,10 +470,21 @@ type ForecastSummary struct {
 	// The name of the forecast.
 	ForecastName *string
 
-	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
-	// inference (creating the forecast) starts (status changed to CREATE_IN_PROGRESS),
-	// and when inference is complete (status changed to ACTIVE) or fails (status
-	// changed to CREATE_FAILED).
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -467,11 +500,13 @@ type ForecastSummary struct {
 	// * CREATE_PENDING,
 	// CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	// * DELETE_PENDING, DELETE_IN_PROGRESS,
-	// DELETE_FAILED
+	// * CREATE_STOPPING, CREATE_STOPPED
 	//
-	// The Status of the forecast must be ACTIVE before you can query or
-	// export the forecast.
+	// *
+	// DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
+	//
+	// The Status of the forecast
+	// must be ACTIVE before you can query or export the forecast.
 	Status *string
 }
 
@@ -589,7 +624,21 @@ type PredictorBacktestExportJobSummary struct {
 	// and an AWS Key Management Service (KMS) key (optional).
 	Destination *DataDestination
 
-	// When the last successful export job finished.
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
 	LastModificationTime *time.Time
 
 	// Information about any errors that may have occurred during the backtest export.
@@ -606,18 +655,12 @@ type PredictorBacktestExportJobSummary struct {
 	// * ACTIVE
 	//
 	// *
-	// CREATE_PENDING
+	// CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED
 	//
-	// * CREATE_IN_PROGRESS
+	// * CREATE_STOPPING,
+	// CREATE_STOPPED
 	//
-	// * CREATE_FAILED
-	//
-	// * DELETE_PENDING
-	//
-	// *
-	// DELETE_IN_PROGRESS
-	//
-	// * DELETE_FAILED
+	// * DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED
 	Status *string
 }
 
@@ -657,9 +700,21 @@ type PredictorSummary struct {
 	// to train the predictor.
 	DatasetGroupArn *string
 
-	// Initially, the same as CreationTime (status is CREATE_PENDING). Updated when
-	// training starts (status changed to CREATE_IN_PROGRESS), and when training is
-	// complete (status changed to ACTIVE) or fails (status changed to CREATE_FAILED).
+	// The last time the resource was modified. The timestamp depends on the status of
+	// the job:
+	//
+	// * CREATE_PENDING - The CreationTime.
+	//
+	// * CREATE_IN_PROGRESS - The
+	// current timestamp.
+	//
+	// * CREATE_STOPPING - The current timestamp.
+	//
+	// * CREATE_STOPPED
+	// - When the job stopped.
+	//
+	// * ACTIVE or CREATE_FAILED - When the job finished or
+	// failed.
 	LastModificationTime *time.Time
 
 	// If an error occurred, an informational message about the error.
@@ -681,11 +736,10 @@ type PredictorSummary struct {
 	// * DELETE_PENDING, DELETE_IN_PROGRESS,
 	// DELETE_FAILED
 	//
-	// * UPDATE_PENDING, UPDATE_IN_PROGRESS, UPDATE_FAILED
+	// * CREATE_STOPPING, CREATE_STOPPED
 	//
-	// The Status
-	// of the predictor must be ACTIVE before you can use the predictor to create a
-	// forecast.
+	// The Status of the predictor
+	// must be ACTIVE before you can use the predictor to create a forecast.
 	Status *string
 }
 

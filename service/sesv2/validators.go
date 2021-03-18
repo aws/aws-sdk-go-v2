@@ -970,6 +970,26 @@ func (m *validateOpPutDeliverabilityDashboardOption) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutEmailIdentityConfigurationSetAttributes struct {
+}
+
+func (*validateOpPutEmailIdentityConfigurationSetAttributes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutEmailIdentityConfigurationSetAttributes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutEmailIdentityConfigurationSetAttributesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutEmailIdentityConfigurationSetAttributesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutEmailIdentityDkimAttributes struct {
 }
 
@@ -1500,6 +1520,10 @@ func addOpPutDedicatedIpWarmupAttributesValidationMiddleware(stack *middleware.S
 
 func addOpPutDeliverabilityDashboardOptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutDeliverabilityDashboardOption{}, middleware.After)
+}
+
+func addOpPutEmailIdentityConfigurationSetAttributesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutEmailIdentityConfigurationSetAttributes{}, middleware.After)
 }
 
 func addOpPutEmailIdentityDkimAttributesValidationMiddleware(stack *middleware.Stack) error {
@@ -2934,6 +2958,21 @@ func validateOpPutDeliverabilityDashboardOptionInput(v *PutDeliverabilityDashboa
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutDeliverabilityDashboardOptionInput"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutEmailIdentityConfigurationSetAttributesInput(v *PutEmailIdentityConfigurationSetAttributesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutEmailIdentityConfigurationSetAttributesInput"}
+	if v.EmailIdentity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EmailIdentity"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

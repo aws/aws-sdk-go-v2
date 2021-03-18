@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves details for the specified phone number order, such as order creation
-// timestamp, phone numbers in E.164 format, product type, and order status.
+// Retrieves details for the specified phone number order, such as the order
+// creation timestamp, phone numbers in E.164 format, product type, and order
+// status.
 func (c *Client) GetPhoneNumberOrder(ctx context.Context, params *GetPhoneNumberOrderInput, optFns ...func(*Options)) (*GetPhoneNumberOrderOutput, error) {
 	if params == nil {
 		params = &GetPhoneNumberOrderInput{}

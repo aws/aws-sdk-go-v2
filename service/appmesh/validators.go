@@ -1050,12 +1050,41 @@ func validateClientPolicyTls(v *types.ClientPolicyTls) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ClientPolicyTls"}
+	if v.Certificate != nil {
+		if err := validateClientTlsCertificate(v.Certificate); err != nil {
+			invalidParams.AddNested("Certificate", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Validation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Validation"))
 	} else if v.Validation != nil {
 		if err := validateTlsValidationContext(v.Validation); err != nil {
 			invalidParams.AddNested("Validation", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClientTlsCertificate(v types.ClientTlsCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClientTlsCertificate"}
+	switch uv := v.(type) {
+	case *types.ClientTlsCertificateMemberFile:
+		if err := validateListenerTlsFileCertificate(&uv.Value); err != nil {
+			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ClientTlsCertificateMemberSds:
+		if err := validateListenerTlsSdsCertificate(&uv.Value); err != nil {
+			invalidParams.AddNested("[sds]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1599,6 +1628,16 @@ func validateListener(v *types.Listener) error {
 			invalidParams.AddNested("HealthCheck", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OutlierDetection != nil {
+		if err := validateOutlierDetection(v.OutlierDetection); err != nil {
+			invalidParams.AddNested("OutlierDetection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectionPool != nil {
+		if err := validateVirtualNodeConnectionPool(v.ConnectionPool); err != nil {
+			invalidParams.AddNested("ConnectionPool", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1636,6 +1675,11 @@ func validateListenerTls(v *types.ListenerTls) error {
 	} else if v.Certificate != nil {
 		if err := validateListenerTlsCertificate(v.Certificate); err != nil {
 			invalidParams.AddNested("Certificate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Validation != nil {
+		if err := validateListenerTlsValidationContext(v.Validation); err != nil {
+			invalidParams.AddNested("Validation", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1676,6 +1720,11 @@ func validateListenerTlsCertificate(v types.ListenerTlsCertificate) error {
 			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ListenerTlsCertificateMemberSds:
+		if err := validateListenerTlsSdsCertificate(&uv.Value); err != nil {
+			invalidParams.AddNested("[sds]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1694,6 +1743,69 @@ func validateListenerTlsFileCertificate(v *types.ListenerTlsFileCertificate) err
 	}
 	if v.PrivateKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListenerTlsSdsCertificate(v *types.ListenerTlsSdsCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListenerTlsSdsCertificate"}
+	if v.SecretName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListenerTlsValidationContext(v *types.ListenerTlsValidationContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListenerTlsValidationContext"}
+	if v.Trust == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Trust"))
+	} else if v.Trust != nil {
+		if err := validateListenerTlsValidationContextTrust(v.Trust); err != nil {
+			invalidParams.AddNested("Trust", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SubjectAlternativeNames != nil {
+		if err := validateSubjectAlternativeNames(v.SubjectAlternativeNames); err != nil {
+			invalidParams.AddNested("SubjectAlternativeNames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateListenerTlsValidationContextTrust(v types.ListenerTlsValidationContextTrust) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListenerTlsValidationContextTrust"}
+	switch uv := v.(type) {
+	case *types.ListenerTlsValidationContextTrustMemberFile:
+		if err := validateTlsValidationContextFileTrust(&uv.Value); err != nil {
+			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ListenerTlsValidationContextTrustMemberSds:
+		if err := validateTlsValidationContextSdsTrust(&uv.Value); err != nil {
+			invalidParams.AddNested("[sds]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1746,6 +1858,30 @@ func validateMeshSpec(v *types.MeshSpec) error {
 		if err := validateEgressFilter(v.EgressFilter); err != nil {
 			invalidParams.AddNested("EgressFilter", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOutlierDetection(v *types.OutlierDetection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OutlierDetection"}
+	if v.MaxServerErrors == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxServerErrors"))
+	}
+	if v.Interval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Interval"))
+	}
+	if v.BaseEjectionDuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaseEjectionDuration"))
+	}
+	if v.MaxEjectionPercent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxEjectionPercent"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1825,6 +1961,40 @@ func validateServiceDiscovery(v types.ServiceDiscovery) error {
 	}
 }
 
+func validateSubjectAlternativeNameMatchers(v *types.SubjectAlternativeNameMatchers) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubjectAlternativeNameMatchers"}
+	if v.Exact == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Exact"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSubjectAlternativeNames(v *types.SubjectAlternativeNames) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SubjectAlternativeNames"}
+	if v.Match == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Match"))
+	} else if v.Match != nil {
+		if err := validateSubjectAlternativeNameMatchers(v.Match); err != nil {
+			invalidParams.AddNested("Match", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTagList(v []types.TagRef) error {
 	if v == nil {
 		return nil
@@ -1849,6 +2019,9 @@ func validateTagRef(v *types.TagRef) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TagRef"}
 	if v.Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1907,6 +2080,11 @@ func validateTlsValidationContext(v *types.TlsValidationContext) error {
 			invalidParams.AddNested("Trust", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SubjectAlternativeNames != nil {
+		if err := validateSubjectAlternativeNames(v.SubjectAlternativeNames); err != nil {
+			invalidParams.AddNested("SubjectAlternativeNames", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1944,6 +2122,21 @@ func validateTlsValidationContextFileTrust(v *types.TlsValidationContextFileTrus
 	}
 }
 
+func validateTlsValidationContextSdsTrust(v *types.TlsValidationContextSdsTrust) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TlsValidationContextSdsTrust"}
+	if v.SecretName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTlsValidationContextTrust(v types.TlsValidationContextTrust) error {
 	if v == nil {
 		return nil
@@ -1958,6 +2151,11 @@ func validateTlsValidationContextTrust(v types.TlsValidationContextTrust) error 
 	case *types.TlsValidationContextTrustMemberFile:
 		if err := validateTlsValidationContextFileTrust(&uv.Value); err != nil {
 			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.TlsValidationContextTrustMemberSds:
+		if err := validateTlsValidationContextSdsTrust(&uv.Value); err != nil {
+			invalidParams.AddNested("[sds]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -2026,12 +2224,70 @@ func validateVirtualGatewayClientPolicyTls(v *types.VirtualGatewayClientPolicyTl
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayClientPolicyTls"}
+	if v.Certificate != nil {
+		if err := validateVirtualGatewayClientTlsCertificate(v.Certificate); err != nil {
+			invalidParams.AddNested("Certificate", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Validation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Validation"))
 	} else if v.Validation != nil {
 		if err := validateVirtualGatewayTlsValidationContext(v.Validation); err != nil {
 			invalidParams.AddNested("Validation", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualGatewayClientTlsCertificate(v types.VirtualGatewayClientTlsCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayClientTlsCertificate"}
+	switch uv := v.(type) {
+	case *types.VirtualGatewayClientTlsCertificateMemberFile:
+		if err := validateVirtualGatewayListenerTlsFileCertificate(&uv.Value); err != nil {
+			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.VirtualGatewayClientTlsCertificateMemberSds:
+		if err := validateVirtualGatewayListenerTlsSdsCertificate(&uv.Value); err != nil {
+			invalidParams.AddNested("[sds]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualGatewayConnectionPool(v types.VirtualGatewayConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayConnectionPool"}
+	switch uv := v.(type) {
+	case *types.VirtualGatewayConnectionPoolMemberGrpc:
+		if err := validateVirtualGatewayGrpcConnectionPool(&uv.Value); err != nil {
+			invalidParams.AddNested("[grpc]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.VirtualGatewayConnectionPoolMemberHttp:
+		if err := validateVirtualGatewayHttpConnectionPool(&uv.Value); err != nil {
+			invalidParams.AddNested("[http]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.VirtualGatewayConnectionPoolMemberHttp2:
+		if err := validateVirtualGatewayHttp2ConnectionPool(&uv.Value); err != nil {
+			invalidParams.AddNested("[http2]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2048,6 +2304,18 @@ func validateVirtualGatewayFileAccessLog(v *types.VirtualGatewayFileAccessLog) e
 	if v.Path == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Path"))
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualGatewayGrpcConnectionPool(v *types.VirtualGatewayGrpcConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayGrpcConnectionPool"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2076,6 +2344,30 @@ func validateVirtualGatewayHealthCheckPolicy(v *types.VirtualGatewayHealthCheckP
 	}
 }
 
+func validateVirtualGatewayHttp2ConnectionPool(v *types.VirtualGatewayHttp2ConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayHttp2ConnectionPool"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualGatewayHttpConnectionPool(v *types.VirtualGatewayHttpConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayHttpConnectionPool"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVirtualGatewayListener(v *types.VirtualGatewayListener) error {
 	if v == nil {
 		return nil
@@ -2096,6 +2388,11 @@ func validateVirtualGatewayListener(v *types.VirtualGatewayListener) error {
 	if v.Tls != nil {
 		if err := validateVirtualGatewayListenerTls(v.Tls); err != nil {
 			invalidParams.AddNested("Tls", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ConnectionPool != nil {
+		if err := validateVirtualGatewayConnectionPool(v.ConnectionPool); err != nil {
+			invalidParams.AddNested("ConnectionPool", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2129,6 +2426,11 @@ func validateVirtualGatewayListenerTls(v *types.VirtualGatewayListenerTls) error
 	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayListenerTls"}
 	if len(v.Mode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if v.Validation != nil {
+		if err := validateVirtualGatewayListenerTlsValidationContext(v.Validation); err != nil {
+			invalidParams.AddNested("Validation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Certificate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Certificate"))
@@ -2175,6 +2477,11 @@ func validateVirtualGatewayListenerTlsCertificate(v types.VirtualGatewayListener
 			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.VirtualGatewayListenerTlsCertificateMemberSds:
+		if err := validateVirtualGatewayListenerTlsSdsCertificate(&uv.Value); err != nil {
+			invalidParams.AddNested("[sds]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2193,6 +2500,69 @@ func validateVirtualGatewayListenerTlsFileCertificate(v *types.VirtualGatewayLis
 	}
 	if v.PrivateKey == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PrivateKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualGatewayListenerTlsSdsCertificate(v *types.VirtualGatewayListenerTlsSdsCertificate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayListenerTlsSdsCertificate"}
+	if v.SecretName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualGatewayListenerTlsValidationContext(v *types.VirtualGatewayListenerTlsValidationContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayListenerTlsValidationContext"}
+	if v.Trust == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Trust"))
+	} else if v.Trust != nil {
+		if err := validateVirtualGatewayListenerTlsValidationContextTrust(v.Trust); err != nil {
+			invalidParams.AddNested("Trust", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SubjectAlternativeNames != nil {
+		if err := validateSubjectAlternativeNames(v.SubjectAlternativeNames); err != nil {
+			invalidParams.AddNested("SubjectAlternativeNames", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualGatewayListenerTlsValidationContextTrust(v types.VirtualGatewayListenerTlsValidationContextTrust) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayListenerTlsValidationContextTrust"}
+	switch uv := v.(type) {
+	case *types.VirtualGatewayListenerTlsValidationContextTrustMemberFile:
+		if err := validateVirtualGatewayTlsValidationContextFileTrust(&uv.Value); err != nil {
+			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.VirtualGatewayListenerTlsValidationContextTrustMemberSds:
+		if err := validateVirtualGatewayTlsValidationContextSdsTrust(&uv.Value); err != nil {
+			invalidParams.AddNested("[sds]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2274,6 +2644,11 @@ func validateVirtualGatewayTlsValidationContext(v *types.VirtualGatewayTlsValida
 			invalidParams.AddNested("Trust", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SubjectAlternativeNames != nil {
+		if err := validateSubjectAlternativeNames(v.SubjectAlternativeNames); err != nil {
+			invalidParams.AddNested("SubjectAlternativeNames", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2311,6 +2686,21 @@ func validateVirtualGatewayTlsValidationContextFileTrust(v *types.VirtualGateway
 	}
 }
 
+func validateVirtualGatewayTlsValidationContextSdsTrust(v *types.VirtualGatewayTlsValidationContextSdsTrust) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualGatewayTlsValidationContextSdsTrust"}
+	if v.SecretName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVirtualGatewayTlsValidationContextTrust(v types.VirtualGatewayTlsValidationContextTrust) error {
 	if v == nil {
 		return nil
@@ -2327,7 +2717,82 @@ func validateVirtualGatewayTlsValidationContextTrust(v types.VirtualGatewayTlsVa
 			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.VirtualGatewayTlsValidationContextTrustMemberSds:
+		if err := validateVirtualGatewayTlsValidationContextSdsTrust(&uv.Value); err != nil {
+			invalidParams.AddNested("[sds]", err.(smithy.InvalidParamsError))
+		}
+
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualNodeConnectionPool(v types.VirtualNodeConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeConnectionPool"}
+	switch uv := v.(type) {
+	case *types.VirtualNodeConnectionPoolMemberGrpc:
+		if err := validateVirtualNodeGrpcConnectionPool(&uv.Value); err != nil {
+			invalidParams.AddNested("[grpc]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.VirtualNodeConnectionPoolMemberHttp:
+		if err := validateVirtualNodeHttpConnectionPool(&uv.Value); err != nil {
+			invalidParams.AddNested("[http]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.VirtualNodeConnectionPoolMemberHttp2:
+		if err := validateVirtualNodeHttp2ConnectionPool(&uv.Value); err != nil {
+			invalidParams.AddNested("[http2]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.VirtualNodeConnectionPoolMemberTcp:
+		if err := validateVirtualNodeTcpConnectionPool(&uv.Value); err != nil {
+			invalidParams.AddNested("[tcp]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualNodeGrpcConnectionPool(v *types.VirtualNodeGrpcConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeGrpcConnectionPool"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualNodeHttp2ConnectionPool(v *types.VirtualNodeHttp2ConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeHttp2ConnectionPool"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualNodeHttpConnectionPool(v *types.VirtualNodeHttpConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeHttpConnectionPool"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2380,6 +2845,18 @@ func validateVirtualNodeSpec(v *types.VirtualNodeSpec) error {
 			invalidParams.AddNested("Logging", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVirtualNodeTcpConnectionPool(v *types.VirtualNodeTcpConnectionPool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VirtualNodeTcpConnectionPool"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

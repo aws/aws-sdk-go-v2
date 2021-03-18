@@ -16590,6 +16590,23 @@ func awsAwsquery_deserializeDocumentCluster(v **types.Cluster, decoder smithyxml
 				return err
 			}
 
+		case strings.EqualFold("TotalStorageCapacityInMegaBytes", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.TotalStorageCapacityInMegaBytes = ptr.Int64(i64)
+			}
+
 		case strings.EqualFold("VpcId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -19890,7 +19907,7 @@ func awsAwsquery_deserializeDocumentEndpoint(v **types.Endpoint, decoder smithyx
 
 		case strings.EqualFold("VpcEndpoints", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsAwsquery_deserializeDocumentSpartaProxyVpcEndpointList(&sv.VpcEndpoints, nodeDecoder); err != nil {
+			if err := awsAwsquery_deserializeDocumentVpcEndpointsList(&sv.VpcEndpoints, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -23315,6 +23332,162 @@ func awsAwsquery_deserializeDocumentMaintenanceTrack(v **types.MaintenanceTrack,
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentNetworkInterface(v **types.NetworkInterface, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.NetworkInterface
+	if *v == nil {
+		sv = &types.NetworkInterface{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("AvailabilityZone", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AvailabilityZone = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("NetworkInterfaceId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NetworkInterfaceId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("PrivateIpAddress", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.PrivateIpAddress = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("SubnetId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SubnetId = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentNetworkInterfaceList(v *[]types.NetworkInterface, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.NetworkInterface
+	if *v == nil {
+		sv = make([]types.NetworkInterface, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("NetworkInterface", t.Name.Local):
+			var col types.NetworkInterface
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentNetworkInterface(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentNetworkInterfaceListUnwrapped(v *[]types.NetworkInterface, decoder smithyxml.NodeDecoder) error {
+	var sv []types.NetworkInterface
+	if *v == nil {
+		sv = make([]types.NetworkInterface, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.NetworkInterface
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentNetworkInterface(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentNodeConfigurationOption(v **types.NodeConfigurationOption, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28509,123 +28682,6 @@ func awsAwsquery_deserializeDocumentSourceNotFoundFault(v **types.SourceNotFound
 	return nil
 }
 
-func awsAwsquery_deserializeDocumentSpartaProxyVpcEndpoint(v **types.SpartaProxyVpcEndpoint, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv *types.SpartaProxyVpcEndpoint
-	if *v == nil {
-		sv = &types.SpartaProxyVpcEndpoint{}
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("VpcEndpointId", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				sv.VpcEndpointId = ptr.String(xtv)
-			}
-
-		default:
-			// Do nothing and ignore the unexpected tag element
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentSpartaProxyVpcEndpointList(v *[]types.SpartaProxyVpcEndpoint, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv []types.SpartaProxyVpcEndpoint
-	if *v == nil {
-		sv = make([]types.SpartaProxyVpcEndpoint, 0)
-	} else {
-		sv = *v
-	}
-
-	originalDecoder := decoder
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		switch {
-		case strings.EqualFold("SpartaProxyVpcEndpoint", t.Name.Local):
-			var col types.SpartaProxyVpcEndpoint
-			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			destAddr := &col
-			if err := awsAwsquery_deserializeDocumentSpartaProxyVpcEndpoint(&destAddr, nodeDecoder); err != nil {
-				return err
-			}
-			col = *destAddr
-			sv = append(sv, col)
-
-		default:
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsquery_deserializeDocumentSpartaProxyVpcEndpointListUnwrapped(v *[]types.SpartaProxyVpcEndpoint, decoder smithyxml.NodeDecoder) error {
-	var sv []types.SpartaProxyVpcEndpoint
-	if *v == nil {
-		sv = make([]types.SpartaProxyVpcEndpoint, 0)
-	} else {
-		sv = *v
-	}
-
-	switch {
-	default:
-		var mv types.SpartaProxyVpcEndpoint
-		t := decoder.StartEl
-		_ = t
-		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-		destAddr := &mv
-		if err := awsAwsquery_deserializeDocumentSpartaProxyVpcEndpoint(&destAddr, nodeDecoder); err != nil {
-			return err
-		}
-		mv = *destAddr
-		sv = append(sv, mv)
-	}
-	*v = sv
-	return nil
-}
 func awsAwsquery_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -30628,6 +30684,142 @@ func awsAwsquery_deserializeDocumentUsageLimitsUnwrapped(v *[]types.UsageLimit, 
 		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 		destAddr := &mv
 		if err := awsAwsquery_deserializeDocumentUsageLimit(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsAwsquery_deserializeDocumentVpcEndpoint(v **types.VpcEndpoint, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.VpcEndpoint
+	if *v == nil {
+		sv = &types.VpcEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("NetworkInterfaces", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentNetworkInterfaceList(&sv.NetworkInterfaces, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("VpcEndpointId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VpcEndpointId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("VpcId", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.VpcId = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentVpcEndpointsList(v *[]types.VpcEndpoint, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.VpcEndpoint
+	if *v == nil {
+		sv = make([]types.VpcEndpoint, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("VpcEndpoint", t.Name.Local):
+			var col types.VpcEndpoint
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentVpcEndpoint(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentVpcEndpointsListUnwrapped(v *[]types.VpcEndpoint, decoder smithyxml.NodeDecoder) error {
+	var sv []types.VpcEndpoint
+	if *v == nil {
+		sv = make([]types.VpcEndpoint, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.VpcEndpoint
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentVpcEndpoint(&destAddr, nodeDecoder); err != nil {
 			return err
 		}
 		mv = *destAddr

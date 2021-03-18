@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Downloads the object at the specified path.
+// Downloads the object at the specified path. If the object’s upload availability
+// is set to streaming, AWS Elemental MediaStore downloads the object even if it’s
+// still uploading the object.
 func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns ...func(*Options)) (*GetObjectOutput, error) {
 	if params == nil {
 		params = &GetObjectInput{}
@@ -50,8 +52,10 @@ type GetObjectInput struct {
 	Path *string
 
 	// The range bytes of an object to retrieve. For more information about the Range
-	// header, go to http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
-	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35).
+	// header, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
+	// (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35). AWS Elemental
+	// MediaStore ignores this header for partially uploaded objects that have
+	// streaming upload availability.
 	Range *string
 }
 

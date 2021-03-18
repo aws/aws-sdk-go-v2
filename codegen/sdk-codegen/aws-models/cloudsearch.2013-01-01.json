@@ -2791,6 +2791,26 @@
                     {
                         "value": "search.m3.2xlarge",
                         "name": "search_m3_2xlarge"
+                    },
+                    {
+                        "value": "search.small",
+                        "name": "search_small"
+                    },
+                    {
+                        "value": "search.medium",
+                        "name": "search_medium"
+                    },
+                    {
+                        "value": "search.large",
+                        "name": "search_large"
+                    },
+                    {
+                        "value": "search.xlarge",
+                        "name": "search_xlarge"
+                    },
+                    {
+                        "value": "search.2xlarge",
+                        "name": "search_2xlarge"
                     }
                 ]
             }

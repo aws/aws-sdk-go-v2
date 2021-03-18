@@ -47,8 +47,8 @@ type CreatePatchBaselineInput struct {
 	// in the AWS Systems Manager User Guide.
 	ApprovedPatches []string
 
-	// Defines the compliance level for approved patches. This means that if an
-	// approved patch is reported as missing, this is the severity of the compliance
+	// Defines the compliance level for approved patches. When an approved patch is
+	// reported as missing, this value describes the severity of the compliance
 	// violation. The default value is UNSPECIFIED.
 	ApprovedPatchesComplianceLevel types.PatchComplianceLevel
 

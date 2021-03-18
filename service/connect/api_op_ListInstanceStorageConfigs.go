@@ -42,7 +42,7 @@ type ListInstanceStorageConfigsInput struct {
 	// This member is required.
 	ResourceType types.InstanceStorageResourceType
 
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -136,7 +136,7 @@ var _ ListInstanceStorageConfigsAPIClient = (*Client)(nil)
 // ListInstanceStorageConfigsPaginatorOptions is the paginator options for
 // ListInstanceStorageConfigs
 type ListInstanceStorageConfigsPaginatorOptions struct {
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

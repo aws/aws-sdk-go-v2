@@ -6,6 +6,37 @@ import (
 	"time"
 )
 
+// Contains details about an API destination.
+type ApiDestination struct {
+
+	// The ARN of the API destination.
+	ApiDestinationArn *string
+
+	// The state of the API destination.
+	ApiDestinationState ApiDestinationState
+
+	// The ARN of the connection specified for the API destination.
+	ConnectionArn *string
+
+	// A time stamp for the time that the API destination was created.
+	CreationTime *time.Time
+
+	// The method to use to connect to the HTTP endpoint.
+	HttpMethod ApiDestinationHttpMethod
+
+	// The URL to the endpoint for the API destination.
+	InvocationEndpoint *string
+
+	// The maximum number of invocations per second to send to the HTTP endpoint.
+	InvocationRateLimitPerSecond *int32
+
+	// A time stamp for the time that the API destination was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the API destination.
+	Name *string
+}
+
 // An Archive object that contains details about an archive.
 type Archive struct {
 
@@ -134,6 +165,239 @@ type Condition struct {
 	Value *string
 }
 
+// Contains information about a connection.
+type Connection struct {
+
+	// The authorization type specified for the connection.
+	AuthorizationType ConnectionAuthorizationType
+
+	// The ARN of the connection.
+	ConnectionArn *string
+
+	// The state of the connection.
+	ConnectionState ConnectionState
+
+	// A time stamp for the time that the connection was created.
+	CreationTime *time.Time
+
+	// A time stamp for the time that the connection was last authorized.
+	LastAuthorizedTime *time.Time
+
+	// A time stamp for the time that the connection was last modified.
+	LastModifiedTime *time.Time
+
+	// The name of the connection.
+	Name *string
+
+	// The reason that the connection is in the connection state.
+	StateReason *string
+}
+
+// Contains the authorization parameters for the connection if API Key is specified
+// as the authorization type.
+type ConnectionApiKeyAuthResponseParameters struct {
+
+	// The name of the header to use for the APIKeyValue used for authorization.
+	ApiKeyName *string
+}
+
+// Contains the authorization parameters to use for the connection.
+type ConnectionAuthResponseParameters struct {
+
+	// The API Key parameters to use for authorization.
+	ApiKeyAuthParameters *ConnectionApiKeyAuthResponseParameters
+
+	// The authorization parameters for Basic authorization.
+	BasicAuthParameters *ConnectionBasicAuthResponseParameters
+
+	// Additional parameters for the connection that are passed through with every
+	// invocation to the HTTP endpoint.
+	InvocationHttpParameters *ConnectionHttpParameters
+
+	// The OAuth parameters to use for authorization.
+	OAuthParameters *ConnectionOAuthResponseParameters
+}
+
+// Contains the authorization parameters for the connection if Basic is specified
+// as the authorization type.
+type ConnectionBasicAuthResponseParameters struct {
+
+	// The user name to use for Basic authorization.
+	Username *string
+}
+
+// Additional parameter included in the body. You can include up to 100 additional
+// body parameters per request. An event payload cannot exceed 64 KB.
+type ConnectionBodyParameter struct {
+
+	// Specified whether the value is secret.
+	IsValueSecret bool
+
+	// The key for the parameter.
+	Key *string
+
+	// The value associated with the key.
+	Value *string
+}
+
+// Additional parameter included in the header. You can include up to 100
+// additional header parameters per request. An event payload cannot exceed 64 KB.
+type ConnectionHeaderParameter struct {
+
+	// Specified whether the value is a secret.
+	IsValueSecret bool
+
+	// The key for the parameter.
+	Key *string
+
+	// The value associated with the key.
+	Value *string
+}
+
+// Contains additional parameters for the connection.
+type ConnectionHttpParameters struct {
+
+	// Contains additional body string parameters for the connection.
+	BodyParameters []ConnectionBodyParameter
+
+	// Contains additional header parameters for the connection.
+	HeaderParameters []ConnectionHeaderParameter
+
+	// Contains additional query string parameters for the connection.
+	QueryStringParameters []ConnectionQueryStringParameter
+}
+
+// Contains the client response parameters for the connection when OAuth is
+// specified as the authorization type.
+type ConnectionOAuthClientResponseParameters struct {
+
+	// The client ID associated with the response to the connection request.
+	ClientID *string
+}
+
+// Contains the response parameters when OAuth is specified as the authorization
+// type.
+type ConnectionOAuthResponseParameters struct {
+
+	// The URL to the HTTP endpoint that authorized the request.
+	AuthorizationEndpoint *string
+
+	// A ConnectionOAuthClientResponseParameters object that contains details about the
+	// client parameters returned when OAuth is specified as the authorization type.
+	ClientParameters *ConnectionOAuthClientResponseParameters
+
+	// The method used to connect to the HTTP endpoint.
+	HttpMethod ConnectionOAuthHttpMethod
+
+	// The additional HTTP parameters used for the OAuth authorization request.
+	OAuthHttpParameters *ConnectionHttpParameters
+}
+
+// Additional query string parameter for the connection. You can include up to 100
+// additional query string parameters per request. Each additional parameter counts
+// towards the event payload size, which cannot exceed 64 KB.
+type ConnectionQueryStringParameter struct {
+
+	// Specifies whether the value is secret.
+	IsValueSecret bool
+
+	// The key for a query string parameter.
+	Key *string
+
+	// The value associated with the key for the query string parameter.
+	Value *string
+}
+
+// Contains the API key authorization parameters for the connection.
+type CreateConnectionApiKeyAuthRequestParameters struct {
+
+	// The name of the API key to use for authorization.
+	//
+	// This member is required.
+	ApiKeyName *string
+
+	// The value for the API key to use for authorization.
+	//
+	// This member is required.
+	ApiKeyValue *string
+}
+
+// Contains the authorization parameters for the connection.
+type CreateConnectionAuthRequestParameters struct {
+
+	// A CreateConnectionApiKeyAuthRequestParameters object that contains the API key
+	// authorization parameters to use for the connection.
+	ApiKeyAuthParameters *CreateConnectionApiKeyAuthRequestParameters
+
+	// A CreateConnectionBasicAuthRequestParameters object that contains the Basic
+	// authorization parameters to use for the connection.
+	BasicAuthParameters *CreateConnectionBasicAuthRequestParameters
+
+	// A ConnectionHttpParameters object that contains the API key authorization
+	// parameters to use for the connection. Note that if you include additional
+	// parameters for the target of a rule via HttpParameters, including query strings,
+	// the parameters added for the connection take precedence.
+	InvocationHttpParameters *ConnectionHttpParameters
+
+	// A CreateConnectionOAuthRequestParameters object that contains the OAuth
+	// authorization parameters to use for the connection.
+	OAuthParameters *CreateConnectionOAuthRequestParameters
+}
+
+// Contains the Basic authorization parameters to use for the connection.
+type CreateConnectionBasicAuthRequestParameters struct {
+
+	// The password associated with the user name to use for Basic authorization.
+	//
+	// This member is required.
+	Password *string
+
+	// The user name to use for Basic authorization.
+	//
+	// This member is required.
+	Username *string
+}
+
+// Contains the Basic authorization parameters to use for the connection.
+type CreateConnectionOAuthClientRequestParameters struct {
+
+	// The client ID to use for OAuth authorization for the connection.
+	//
+	// This member is required.
+	ClientID *string
+
+	// The client secret associated with the client ID to use for OAuth authorization
+	// for the connection.
+	//
+	// This member is required.
+	ClientSecret *string
+}
+
+// Contains the OAuth authorization parameters to use for the connection.
+type CreateConnectionOAuthRequestParameters struct {
+
+	// The URL to the authorization endpoint when OAuth is specified as the
+	// authorization type.
+	//
+	// This member is required.
+	AuthorizationEndpoint *string
+
+	// A CreateConnectionOAuthClientRequestParameters object that contains the client
+	// parameters for OAuth authorization.
+	//
+	// This member is required.
+	ClientParameters *CreateConnectionOAuthClientRequestParameters
+
+	// The method to use for the authorization request.
+	//
+	// This member is required.
+	HttpMethod ConnectionOAuthHttpMethod
+
+	// A ConnectionHttpParameters object that contains details about the additional
+	// parameters to use for the connection.
+	OAuthHttpParameters *ConnectionHttpParameters
+}
+
 // A DeadLetterConfig object that contains information about a dead-letter queue
 // configuration.
 type DeadLetterConfig struct {
@@ -231,19 +495,21 @@ type EventSource struct {
 }
 
 // These are custom parameter to be used when the target is an API Gateway REST
-// APIs.
+// APIs or EventBridge ApiDestinations. In the latter case, these are merged with
+// any InvocationParameters specified on the Connection, with any values from the
+// Connection taking precedence.
 type HttpParameters struct {
 
 	// The headers that need to be sent as part of request invoking the API Gateway
-	// REST API.
+	// REST API or EventBridge ApiDestination.
 	HeaderParameters map[string]string
 
-	// The path parameter values to be used to populate API Gateway REST API path
-	// wildcards ("*").
+	// The path parameter values to be used to populate API Gateway REST API or
+	// EventBridge ApiDestination path wildcards ("*").
 	PathParameterValues []string
 
 	// The query string keys/values that need to be sent as part of request invoking
-	// the API Gateway REST API.
+	// the API Gateway REST API or EventBridge ApiDestination.
 	QueryStringParameters map[string]string
 }
 
@@ -260,28 +526,37 @@ type InputTransformer struct {
 	// * The placeholder cannot be used as an object
 	// key.
 	//
-	// * Object values cannot include quote marks.
+	// The following example shows the syntax for using InputPathsMap and
+	// InputTemplate.  "InputTransformer":
+	//     {
 	//
-	// The following example shows
-	// the syntax for using InputPathsMap and InputTemplate.  "InputTransformer":
+	//     "InputPathsMap": {"instance":
+	// "$.detail.instance","status": "$.detail.status"},
 	//
-	// {
+	//     "InputTemplate": " is in
+	// state "
 	//
-	//     "InputPathsMap": {"instance": "$.detail.instance","status":
-	// "$.detail.status"},
+	// } To have the InputTemplate include quote marks within a JSON string,
+	// escape each quote marks with a slash, as in the following example:
+	// "InputTransformer":
+	//     {
 	//
-	//     "InputTemplate": " is in state "
+	//     "InputPathsMap": {"instance":
+	// "$.detail.instance","status": "$.detail.status"},
 	//
-	// } To have the
-	// InputTemplate include quote marks within a JSON string, escape each quote marks
-	// with a slash, as in the following example:  "InputTransformer":
+	//     "InputTemplate": " is in
+	// state """
+	//
+	// } The InputTemplate can also be valid JSON with varibles in quotes or
+	// out, as in the following example:  "InputTransformer":
 	//     {
 	//
 	//
 	// "InputPathsMap": {"instance": "$.detail.instance","status":
 	// "$.detail.status"},
 	//
-	//     "InputTemplate": " is in state """
+	//     "InputTemplate": '{"myInstance": ,"myStatus": " is in
+	// state """}'
 	//
 	//     }
 	//
@@ -291,7 +566,7 @@ type InputTransformer struct {
 	// Map of JSON paths to be extracted from the event. You can then insert these in
 	// the template in InputTemplate to produce the output you want to be sent to the
 	// target. InputPathsMap is an array key-value pairs, where each value is a valid
-	// JSON path. You can have as many as 10 key-value pairs. You must use JSON dot
+	// JSON path. You can have as many as 100 key-value pairs. You must use JSON dot
 	// notation, not bracket notation. The keys cannot start with "AWS."
 	InputPathsMap map[string]string
 }
@@ -379,6 +654,13 @@ type PutEventsRequestEntry struct {
 	// (https://www.rfc-editor.org/rfc/rfc3339.txt). If no time stamp is provided, the
 	// time stamp of the PutEvents call is used.
 	Time *time.Time
+
+	// An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that
+	// contains the trace-id associated with the event. To learn more about X-Ray trace
+	// headers, see Tracing header
+	// (https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-tracingheader)
+	// in the AWS X-Ray Developer Guide.
+	TraceHeader *string
 }
 
 // Represents an event that failed to be submitted.
@@ -674,9 +956,12 @@ type Target struct {
 	EcsParameters *EcsParameters
 
 	// Contains the HTTP parameters to use when the target is a API Gateway REST
-	// endpoint. If you specify an API Gateway REST API as a target, you can use this
-	// parameter to specify headers, path parameter, query string keys/values as part
-	// of your target invoking request.
+	// endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API
+	// or EventBridge ApiDestination as a target, you can use this parameter to specify
+	// headers, path parameters, and query string keys/values as part of your target
+	// invoking request. If you're using ApiDestinations, the corresponding Connection
+	// can also have these values configured. In case of any conflicting keys, values
+	// from the Connection take precedence.
 	HttpParameters *HttpParameters
 
 	// Valid JSON text passed to the target. In this case, nothing from the event
@@ -723,4 +1008,73 @@ type Target struct {
 	// specify an SQS FIFO queue as a target, the queue must have content-based
 	// deduplication enabled.
 	SqsParameters *SqsParameters
+}
+
+// Contains the API key authorization parameters to use to update the connection.
+type UpdateConnectionApiKeyAuthRequestParameters struct {
+
+	// The name of the API key to use for authorization.
+	ApiKeyName *string
+
+	// The value associated with teh API key to use for authorization.
+	ApiKeyValue *string
+}
+
+// Contains the additional parameters to use for the connection.
+type UpdateConnectionAuthRequestParameters struct {
+
+	// A UpdateConnectionApiKeyAuthRequestParameters object that contains the
+	// authorization parameters for API key authorization.
+	ApiKeyAuthParameters *UpdateConnectionApiKeyAuthRequestParameters
+
+	// A UpdateConnectionBasicAuthRequestParameters object that contains the
+	// authorization parameters for Basic authorization.
+	BasicAuthParameters *UpdateConnectionBasicAuthRequestParameters
+
+	// A ConnectionHttpParameters object that contains the additional parameters to use
+	// for the connection.
+	InvocationHttpParameters *ConnectionHttpParameters
+
+	// A UpdateConnectionOAuthRequestParameters object that contains the authorization
+	// parameters for OAuth authorization.
+	OAuthParameters *UpdateConnectionOAuthRequestParameters
+}
+
+// Contains the Basic authorization parameters for the connection.
+type UpdateConnectionBasicAuthRequestParameters struct {
+
+	// The password associated with the user name to use for Basic authorization.
+	Password *string
+
+	// The user name to use for Basic authorization.
+	Username *string
+}
+
+// Contains the OAuth authorization parameters to use for the connection.
+type UpdateConnectionOAuthClientRequestParameters struct {
+
+	// The client ID to use for OAuth authorization.
+	ClientID *string
+
+	// The client secret assciated with the client ID to use for OAuth authorization.
+	ClientSecret *string
+}
+
+// Contains the OAuth request parameters to use for the connection.
+type UpdateConnectionOAuthRequestParameters struct {
+
+	// The URL to the authorization endpoint when OAuth is specified as the
+	// authorization type.
+	AuthorizationEndpoint *string
+
+	// A UpdateConnectionOAuthClientRequestParameters object that contains the client
+	// parameters to use for the connection when OAuth is specified as the
+	// authorization type.
+	ClientParameters *UpdateConnectionOAuthClientRequestParameters
+
+	// The method used to connect to the HTTP endpoint.
+	HttpMethod ConnectionOAuthHttpMethod
+
+	// The additional HTTP parameters used for the OAuth authorization request.
+	OAuthHttpParameters *ConnectionHttpParameters
 }

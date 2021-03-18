@@ -7003,6 +7003,11 @@ func awsRestjson1_deserializeDocumentClientPolicyTls(v **types.ClientPolicyTls, 
 
 	for key, value := range shape {
 		switch key {
+		case "certificate":
+			if err := awsRestjson1_deserializeDocumentClientTlsCertificate(&sv.Certificate, value); err != nil {
+				return err
+			}
+
 		case "enforce":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -7028,6 +7033,56 @@ func awsRestjson1_deserializeDocumentClientPolicyTls(v **types.ClientPolicyTls, 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentClientTlsCertificate(v *types.ClientTlsCertificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ClientTlsCertificate
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "file":
+			var mv types.ListenerTlsFileCertificate
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentListenerTlsFileCertificate(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ClientTlsCertificateMemberFile{Value: mv}
+			break loop
+
+		case "sds":
+			var mv types.ListenerTlsSdsCertificate
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentListenerTlsSdsCertificate(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ClientTlsCertificateMemberSds{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -9047,8 +9102,18 @@ func awsRestjson1_deserializeDocumentListener(v **types.Listener, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "connectionPool":
+			if err := awsRestjson1_deserializeDocumentVirtualNodeConnectionPool(&sv.ConnectionPool, value); err != nil {
+				return err
+			}
+
 		case "healthCheck":
 			if err := awsRestjson1_deserializeDocumentHealthCheckPolicy(&sv.HealthCheck, value); err != nil {
+				return err
+			}
+
+		case "outlierDetection":
+			if err := awsRestjson1_deserializeDocumentOutlierDetection(&sv.OutlierDetection, value); err != nil {
 				return err
 			}
 
@@ -9216,6 +9281,11 @@ func awsRestjson1_deserializeDocumentListenerTls(v **types.ListenerTls, value in
 				sv.Mode = types.ListenerTlsMode(jtv)
 			}
 
+		case "validation":
+			if err := awsRestjson1_deserializeDocumentListenerTlsValidationContext(&sv.Validation, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9305,6 +9375,16 @@ loop:
 			uv = &types.ListenerTlsCertificateMemberFile{Value: mv}
 			break loop
 
+		case "sds":
+			var mv types.ListenerTlsSdsCertificate
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentListenerTlsSdsCertificate(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ListenerTlsCertificateMemberSds{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -9361,6 +9441,137 @@ func awsRestjson1_deserializeDocumentListenerTlsFileCertificate(v **types.Listen
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListenerTlsSdsCertificate(v **types.ListenerTlsSdsCertificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ListenerTlsSdsCertificate
+	if *v == nil {
+		sv = &types.ListenerTlsSdsCertificate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "secretName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SdsSecretName to be of type string, got %T instead", value)
+				}
+				sv.SecretName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListenerTlsValidationContext(v **types.ListenerTlsValidationContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ListenerTlsValidationContext
+	if *v == nil {
+		sv = &types.ListenerTlsValidationContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "subjectAlternativeNames":
+			if err := awsRestjson1_deserializeDocumentSubjectAlternativeNames(&sv.SubjectAlternativeNames, value); err != nil {
+				return err
+			}
+
+		case "trust":
+			if err := awsRestjson1_deserializeDocumentListenerTlsValidationContextTrust(&sv.Trust, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListenerTlsValidationContextTrust(v *types.ListenerTlsValidationContextTrust, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ListenerTlsValidationContextTrust
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "file":
+			var mv types.TlsValidationContextFileTrust
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTlsValidationContextFileTrust(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ListenerTlsValidationContextTrustMemberFile{Value: mv}
+			break loop
+
+		case "sds":
+			var mv types.TlsValidationContextSdsTrust
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTlsValidationContextSdsTrust(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ListenerTlsValidationContextTrustMemberSds{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -9757,6 +9968,73 @@ func awsRestjson1_deserializeDocumentNotFoundException(v **types.NotFoundExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentOutlierDetection(v **types.OutlierDetection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OutlierDetection
+	if *v == nil {
+		sv = &types.OutlierDetection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "baseEjectionDuration":
+			if err := awsRestjson1_deserializeDocumentDuration(&sv.BaseEjectionDuration, value); err != nil {
+				return err
+			}
+
+		case "interval":
+			if err := awsRestjson1_deserializeDocumentDuration(&sv.Interval, value); err != nil {
+				return err
+			}
+
+		case "maxEjectionPercent":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected OutlierDetectionMaxEjectionPercent to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxEjectionPercent = ptr.Int32(int32(i64))
+			}
+
+		case "maxServerErrors":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected OutlierDetectionMaxServerErrors to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxServerErrors = ptr.Int64(i64)
 			}
 
 		default:
@@ -10432,6 +10710,114 @@ func awsRestjson1_deserializeDocumentServiceUnavailableException(v **types.Servi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSubjectAlternativeNameList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SubjectAlternativeName to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubjectAlternativeNameMatchers(v **types.SubjectAlternativeNameMatchers, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubjectAlternativeNameMatchers
+	if *v == nil {
+		sv = &types.SubjectAlternativeNameMatchers{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "exact":
+			if err := awsRestjson1_deserializeDocumentSubjectAlternativeNameList(&sv.Exact, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubjectAlternativeNames(v **types.SubjectAlternativeNames, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubjectAlternativeNames
+	if *v == nil {
+		sv = &types.SubjectAlternativeNames{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "match":
+			if err := awsRestjson1_deserializeDocumentSubjectAlternativeNameMatchers(&sv.Match, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTagList(v *[]types.TagRef, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10686,6 +11072,11 @@ func awsRestjson1_deserializeDocumentTlsValidationContext(v **types.TlsValidatio
 
 	for key, value := range shape {
 		switch key {
+		case "subjectAlternativeNames":
+			if err := awsRestjson1_deserializeDocumentSubjectAlternativeNames(&sv.SubjectAlternativeNames, value); err != nil {
+				return err
+			}
+
 		case "trust":
 			if err := awsRestjson1_deserializeDocumentTlsValidationContextTrust(&sv.Trust, value); err != nil {
 				return err
@@ -10776,6 +11167,46 @@ func awsRestjson1_deserializeDocumentTlsValidationContextFileTrust(v **types.Tls
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentTlsValidationContextSdsTrust(v **types.TlsValidationContextSdsTrust, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TlsValidationContextSdsTrust
+	if *v == nil {
+		sv = &types.TlsValidationContextSdsTrust{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "secretName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SdsSecretName to be of type string, got %T instead", value)
+				}
+				sv.SecretName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentTlsValidationContextTrust(v *types.TlsValidationContextTrust, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10814,6 +11245,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.TlsValidationContextTrustMemberFile{Value: mv}
+			break loop
+
+		case "sds":
+			var mv types.TlsValidationContextSdsTrust
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentTlsValidationContextSdsTrust(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.TlsValidationContextTrustMemberSds{Value: mv}
 			break loop
 
 		default:
@@ -11076,6 +11517,11 @@ func awsRestjson1_deserializeDocumentVirtualGatewayClientPolicyTls(v **types.Vir
 
 	for key, value := range shape {
 		switch key {
+		case "certificate":
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayClientTlsCertificate(&sv.Certificate, value); err != nil {
+				return err
+			}
+
 		case "enforce":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -11101,6 +11547,116 @@ func awsRestjson1_deserializeDocumentVirtualGatewayClientPolicyTls(v **types.Vir
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualGatewayClientTlsCertificate(v *types.VirtualGatewayClientTlsCertificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.VirtualGatewayClientTlsCertificate
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "file":
+			var mv types.VirtualGatewayListenerTlsFileCertificate
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsFileCertificate(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayClientTlsCertificateMemberFile{Value: mv}
+			break loop
+
+		case "sds":
+			var mv types.VirtualGatewayListenerTlsSdsCertificate
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsSdsCertificate(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayClientTlsCertificateMemberSds{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualGatewayConnectionPool(v *types.VirtualGatewayConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.VirtualGatewayConnectionPool
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "grpc":
+			var mv types.VirtualGatewayGrpcConnectionPool
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayGrpcConnectionPool(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayConnectionPoolMemberGrpc{Value: mv}
+			break loop
+
+		case "http":
+			var mv types.VirtualGatewayHttpConnectionPool
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayHttpConnectionPool(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayConnectionPoolMemberHttp{Value: mv}
+			break loop
+
+		case "http2":
+			var mv types.VirtualGatewayHttp2ConnectionPool
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayHttp2ConnectionPool(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayConnectionPoolMemberHttp2{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -11197,6 +11753,50 @@ func awsRestjson1_deserializeDocumentVirtualGatewayFileAccessLog(v **types.Virtu
 					return fmt.Errorf("expected FilePath to be of type string, got %T instead", value)
 				}
 				sv.Path = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualGatewayGrpcConnectionPool(v **types.VirtualGatewayGrpcConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualGatewayGrpcConnectionPool
+	if *v == nil {
+		sv = &types.VirtualGatewayGrpcConnectionPool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxRequests":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxRequests to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRequests = int32(i64)
 			}
 
 		default:
@@ -11322,6 +11922,107 @@ func awsRestjson1_deserializeDocumentVirtualGatewayHealthCheckPolicy(v **types.V
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVirtualGatewayHttp2ConnectionPool(v **types.VirtualGatewayHttp2ConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualGatewayHttp2ConnectionPool
+	if *v == nil {
+		sv = &types.VirtualGatewayHttp2ConnectionPool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxRequests":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxRequests to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRequests = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualGatewayHttpConnectionPool(v **types.VirtualGatewayHttpConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualGatewayHttpConnectionPool
+	if *v == nil {
+		sv = &types.VirtualGatewayHttpConnectionPool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxConnections":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxConnections to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConnections = int32(i64)
+			}
+
+		case "maxPendingRequests":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxPendingRequests to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPendingRequests = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVirtualGatewayList(v *[]types.VirtualGatewayRef, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11378,6 +12079,11 @@ func awsRestjson1_deserializeDocumentVirtualGatewayListener(v **types.VirtualGat
 
 	for key, value := range shape {
 		switch key {
+		case "connectionPool":
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayConnectionPool(&sv.ConnectionPool, value); err != nil {
+				return err
+			}
+
 		case "healthCheck":
 			if err := awsRestjson1_deserializeDocumentVirtualGatewayHealthCheckPolicy(&sv.HealthCheck, value); err != nil {
 				return err
@@ -11472,6 +12178,11 @@ func awsRestjson1_deserializeDocumentVirtualGatewayListenerTls(v **types.Virtual
 				sv.Mode = types.VirtualGatewayListenerTlsMode(jtv)
 			}
 
+		case "validation":
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsValidationContext(&sv.Validation, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -11561,6 +12272,16 @@ loop:
 			uv = &types.VirtualGatewayListenerTlsCertificateMemberFile{Value: mv}
 			break loop
 
+		case "sds":
+			var mv types.VirtualGatewayListenerTlsSdsCertificate
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsSdsCertificate(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayListenerTlsCertificateMemberSds{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -11617,6 +12338,137 @@ func awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsFileCertificate(v 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsSdsCertificate(v **types.VirtualGatewayListenerTlsSdsCertificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualGatewayListenerTlsSdsCertificate
+	if *v == nil {
+		sv = &types.VirtualGatewayListenerTlsSdsCertificate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "secretName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VirtualGatewaySdsSecretName to be of type string, got %T instead", value)
+				}
+				sv.SecretName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsValidationContext(v **types.VirtualGatewayListenerTlsValidationContext, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualGatewayListenerTlsValidationContext
+	if *v == nil {
+		sv = &types.VirtualGatewayListenerTlsValidationContext{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "subjectAlternativeNames":
+			if err := awsRestjson1_deserializeDocumentSubjectAlternativeNames(&sv.SubjectAlternativeNames, value); err != nil {
+				return err
+			}
+
+		case "trust":
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsValidationContextTrust(&sv.Trust, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualGatewayListenerTlsValidationContextTrust(v *types.VirtualGatewayListenerTlsValidationContextTrust, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.VirtualGatewayListenerTlsValidationContextTrust
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "file":
+			var mv types.VirtualGatewayTlsValidationContextFileTrust
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContextFileTrust(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayListenerTlsValidationContextTrustMemberFile{Value: mv}
+			break loop
+
+		case "sds":
+			var mv types.VirtualGatewayTlsValidationContextSdsTrust
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContextSdsTrust(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayListenerTlsValidationContextTrustMemberSds{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -11932,6 +12784,11 @@ func awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContext(v **type
 
 	for key, value := range shape {
 		switch key {
+		case "subjectAlternativeNames":
+			if err := awsRestjson1_deserializeDocumentSubjectAlternativeNames(&sv.SubjectAlternativeNames, value); err != nil {
+				return err
+			}
+
 		case "trust":
 			if err := awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContextTrust(&sv.Trust, value); err != nil {
 				return err
@@ -12022,6 +12879,46 @@ func awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContextFileTrust
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContextSdsTrust(v **types.VirtualGatewayTlsValidationContextSdsTrust, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualGatewayTlsValidationContextSdsTrust
+	if *v == nil {
+		sv = &types.VirtualGatewayTlsValidationContextSdsTrust{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "secretName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VirtualGatewaySdsSecretName to be of type string, got %T instead", value)
+				}
+				sv.SecretName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContextTrust(v *types.VirtualGatewayTlsValidationContextTrust, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12060,6 +12957,86 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.VirtualGatewayTlsValidationContextTrustMemberFile{Value: mv}
+			break loop
+
+		case "sds":
+			var mv types.VirtualGatewayTlsValidationContextSdsTrust
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualGatewayTlsValidationContextSdsTrust(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualGatewayTlsValidationContextTrustMemberSds{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualNodeConnectionPool(v *types.VirtualNodeConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.VirtualNodeConnectionPool
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "grpc":
+			var mv types.VirtualNodeGrpcConnectionPool
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualNodeGrpcConnectionPool(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualNodeConnectionPoolMemberGrpc{Value: mv}
+			break loop
+
+		case "http":
+			var mv types.VirtualNodeHttpConnectionPool
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualNodeHttpConnectionPool(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualNodeConnectionPoolMemberHttp{Value: mv}
+			break loop
+
+		case "http2":
+			var mv types.VirtualNodeHttp2ConnectionPool
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualNodeHttp2ConnectionPool(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualNodeConnectionPoolMemberHttp2{Value: mv}
+			break loop
+
+		case "tcp":
+			var mv types.VirtualNodeTcpConnectionPool
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVirtualNodeTcpConnectionPool(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.VirtualNodeConnectionPoolMemberTcp{Value: mv}
 			break loop
 
 		default:
@@ -12125,6 +13102,151 @@ func awsRestjson1_deserializeDocumentVirtualNodeData(v **types.VirtualNodeData, 
 					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
 				}
 				sv.VirtualNodeName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualNodeGrpcConnectionPool(v **types.VirtualNodeGrpcConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualNodeGrpcConnectionPool
+	if *v == nil {
+		sv = &types.VirtualNodeGrpcConnectionPool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxRequests":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxRequests to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRequests = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualNodeHttp2ConnectionPool(v **types.VirtualNodeHttp2ConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualNodeHttp2ConnectionPool
+	if *v == nil {
+		sv = &types.VirtualNodeHttp2ConnectionPool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxRequests":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxRequests to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxRequests = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualNodeHttpConnectionPool(v **types.VirtualNodeHttpConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualNodeHttpConnectionPool
+	if *v == nil {
+		sv = &types.VirtualNodeHttpConnectionPool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxConnections":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxConnections to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConnections = int32(i64)
+			}
+
+		case "maxPendingRequests":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxPendingRequests to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPendingRequests = int32(i64)
 			}
 
 		default:
@@ -12410,6 +13532,50 @@ func awsRestjson1_deserializeDocumentVirtualNodeStatus(v **types.VirtualNodeStat
 					return fmt.Errorf("expected VirtualNodeStatusCode to be of type string, got %T instead", value)
 				}
 				sv.Status = types.VirtualNodeStatusCode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVirtualNodeTcpConnectionPool(v **types.VirtualNodeTcpConnectionPool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VirtualNodeTcpConnectionPool
+	if *v == nil {
+		sv = &types.VirtualNodeTcpConnectionPool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxConnections":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxConnections to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxConnections = int32(i64)
 			}
 
 		default:

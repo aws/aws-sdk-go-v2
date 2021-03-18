@@ -72,6 +72,12 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "ap-northeast-2",
 				},
 			},
+			"ap-northeast-3": endpoints.Endpoint{
+				Hostname: "api.ecr.ap-northeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
+				},
+			},
 			"ap-south-1": endpoints.Endpoint{
 				Hostname: "api.ecr.ap-south-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{

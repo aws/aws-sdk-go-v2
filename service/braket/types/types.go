@@ -75,6 +75,9 @@ type QuantumTaskSummary struct {
 
 	// The time at which the task finished.
 	EndedAt *time.Time
+
+	// Displays the key, value pairs of tags associated with this quantum task.
+	Tags map[string]string
 }
 
 // The filter to use for searching devices.

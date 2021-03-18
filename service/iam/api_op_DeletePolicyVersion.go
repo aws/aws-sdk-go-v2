@@ -11,10 +11,10 @@ import (
 )
 
 // Deletes the specified version from the specified managed policy. You cannot
-// delete the default version from a policy using this API. To delete the default
-// version from a policy, use DeletePolicy. To find out which version of a policy
-// is marked as the default version, use ListPolicyVersions. For information about
-// versions for managed policies, see Versioning for Managed Policies
+// delete the default version from a policy using this operation. To delete the
+// default version from a policy, use DeletePolicy. To find out which version of a
+// policy is marked as the default version, use ListPolicyVersions. For information
+// about versions for managed policies, see Versioning for managed policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 // in the IAM User Guide.
 func (c *Client) DeletePolicyVersion(ctx context.Context, params *DeletePolicyVersionInput, optFns ...func(*Options)) (*DeletePolicyVersionOutput, error) {
@@ -35,8 +35,7 @@ func (c *Client) DeletePolicyVersion(ctx context.Context, params *DeletePolicyVe
 type DeletePolicyVersionInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM policy from which you want to delete a
-	// version. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces
+	// version. For more information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -47,7 +46,7 @@ type DeletePolicyVersionInput struct {
 	// (http://wikipedia.org/wiki/regex)) a string of characters that consists of the
 	// lowercase letter 'v' followed by one or two digits, and optionally followed by a
 	// period '.' and a string of letters and digits. For more information about
-	// managed policy versions, see Versioning for Managed Policies
+	// managed policy versions, see Versioning for managed policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
 	//

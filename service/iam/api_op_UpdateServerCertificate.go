@@ -12,12 +12,12 @@ import (
 
 // Updates the name and/or the path of the specified server certificate stored in
 // IAM. For more information about working with server certificates, see Working
-// with Server Certificates
+// with server certificates
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
 // in the IAM User Guide. This topic also includes a list of AWS services that can
 // use the server certificates that you manage with IAM. You should understand the
 // implications of changing a server certificate's path or name. For more
-// information, see Renaming a Server Certificate
+// information, see Renaming a server certificate
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs_manage.html#RenamingServerCerts)
 // in the IAM User Guide. The person making the request (the principal), must have
 // permission to change the server certificate with the old name and the new name.
@@ -25,7 +25,7 @@ import (
 // principal must have a policy that allows them to update both certificates. If
 // the principal has permission to update the ProductionCert group, but not the
 // ProdCert certificate, then the update fails. For more information about
-// permissions, see Access Management
+// permissions, see Access management
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access.html) in the IAM User
 // Guide.
 func (c *Client) UpdateServerCertificate(ctx context.Context, params *UpdateServerCertificateInput, optFns ...func(*Options)) (*UpdateServerCertificateOutput, error) {

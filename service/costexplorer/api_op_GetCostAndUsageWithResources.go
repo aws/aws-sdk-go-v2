@@ -95,6 +95,10 @@ type GetCostAndUsageWithResourcesInput struct {
 
 type GetCostAndUsageWithResourcesOutput struct {
 
+	// The attributes that apply to a specific dimension value. For example, if the
+	// value is a linked account, the attribute is that account name.
+	DimensionValueAttributes []types.DimensionValuesWithAttributes
+
 	// The groups that are specified by the Filter or GroupBy parameters in the
 	// request.
 	GroupDefinitions []types.GroupDefinition

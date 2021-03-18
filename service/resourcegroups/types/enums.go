@@ -91,3 +91,19 @@ func (ResourceFilterName) Values() []ResourceFilterName {
 		"resource-type",
 	}
 }
+
+type ResourceStatusValue string
+
+// Enum values for ResourceStatusValue
+const (
+	ResourceStatusValuePending ResourceStatusValue = "PENDING"
+)
+
+// Values returns all known values for ResourceStatusValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceStatusValue) Values() []ResourceStatusValue {
+	return []ResourceStatusValue{
+		"PENDING",
+	}
+}

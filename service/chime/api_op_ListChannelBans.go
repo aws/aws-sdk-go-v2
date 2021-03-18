@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the users banned from a particular channel.
+// Lists all the users banned from a particular channel. The x-amz-chime-bearer
+// request header is mandatory. Use the AppInstanceUserArn of the user that makes
+// the API call as the value in the header.
 func (c *Client) ListChannelBans(ctx context.Context, params *ListChannelBansInput, optFns ...func(*Options)) (*ListChannelBansOutput, error) {
 	if params == nil {
 		params = &ListChannelBansInput{}
@@ -34,6 +36,9 @@ type ListChannelBansInput struct {
 	//
 	// This member is required.
 	ChannelArn *string
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 
 	// The maximum number of bans that you want returned.
 	MaxResults *int32

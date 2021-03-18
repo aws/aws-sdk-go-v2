@@ -18,18 +18,9 @@ import (
 // credentials are returned, along with the S3 storage location associated with the
 // build ID. Learn more  Create a Build with Files in S3
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-cli-uploading.html#gamelift-build-cli-uploading-create-build)
-// Related operations
-//
-// * CreateBuild
-//
-// * ListBuilds
-//
-// * DescribeBuild
-//
-// *
-// UpdateBuild
-//
-// * DeleteBuild
+// Related actions CreateBuild | ListBuilds | DescribeBuild | UpdateBuild |
+// DeleteBuild | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUploadCredentialsInput, optFns ...func(*Options)) (*RequestUploadCredentialsOutput, error) {
 	if params == nil {
 		params = &RequestUploadCredentialsInput{}
@@ -48,7 +39,7 @@ func (c *Client) RequestUploadCredentials(ctx context.Context, params *RequestUp
 // Represents the input for a request operation.
 type RequestUploadCredentialsInput struct {
 
-	// A unique identifier for a build to get credentials for. You can use either the
+	// A unique identifier for the build to get credentials for. You can use either the
 	// build ID or ARN value.
 	//
 	// This member is required.

@@ -315,13 +315,14 @@ type JobComparator string
 
 // Enum values for JobComparator
 const (
-	JobComparatorEq       JobComparator = "EQ"
-	JobComparatorGt       JobComparator = "GT"
-	JobComparatorGte      JobComparator = "GTE"
-	JobComparatorLt       JobComparator = "LT"
-	JobComparatorLte      JobComparator = "LTE"
-	JobComparatorNe       JobComparator = "NE"
-	JobComparatorContains JobComparator = "CONTAINS"
+	JobComparatorEq         JobComparator = "EQ"
+	JobComparatorGt         JobComparator = "GT"
+	JobComparatorGte        JobComparator = "GTE"
+	JobComparatorLt         JobComparator = "LT"
+	JobComparatorLte        JobComparator = "LTE"
+	JobComparatorNe         JobComparator = "NE"
+	JobComparatorContains   JobComparator = "CONTAINS"
+	JobComparatorStartsWith JobComparator = "STARTS_WITH"
 )
 
 // Values returns all known values for JobComparator. Note that this can be
@@ -336,6 +337,7 @@ func (JobComparator) Values() []JobComparator {
 		"LTE",
 		"NE",
 		"CONTAINS",
+		"STARTS_WITH",
 	}
 }
 
@@ -524,6 +526,7 @@ const (
 	ScopeFilterKeyObjectLastModifiedDate ScopeFilterKey = "OBJECT_LAST_MODIFIED_DATE"
 	ScopeFilterKeyObjectSize             ScopeFilterKey = "OBJECT_SIZE"
 	ScopeFilterKeyTag                    ScopeFilterKey = "TAG"
+	ScopeFilterKeyObjectKey              ScopeFilterKey = "OBJECT_KEY"
 )
 
 // Values returns all known values for ScopeFilterKey. Note that this can be
@@ -536,6 +539,7 @@ func (ScopeFilterKey) Values() []ScopeFilterKey {
 		"OBJECT_LAST_MODIFIED_DATE",
 		"OBJECT_SIZE",
 		"TAG",
+		"OBJECT_KEY",
 	}
 }
 
@@ -644,6 +648,44 @@ const (
 func (TagTarget) Values() []TagTarget {
 	return []TagTarget{
 		"S3_OBJECT",
+	}
+}
+
+type TimeRange string
+
+// Enum values for TimeRange
+const (
+	TimeRangeMonthToDate TimeRange = "MONTH_TO_DATE"
+	TimeRangePast30Days  TimeRange = "PAST_30_DAYS"
+)
+
+// Values returns all known values for TimeRange. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TimeRange) Values() []TimeRange {
+	return []TimeRange{
+		"MONTH_TO_DATE",
+		"PAST_30_DAYS",
+	}
+}
+
+type Type string
+
+// Enum values for Type
+const (
+	TypeNone   Type = "NONE"
+	TypeAes256 Type = "AES256"
+	TypeAwsKms Type = "aws:kms"
+)
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"NONE",
+		"AES256",
+		"aws:kms",
 	}
 }
 

@@ -34,6 +34,8 @@ type DeleteIntegrationInput struct {
 	DomainName *string
 
 	// The URI of the S3 bucket or any other type of data source.
+	//
+	// This member is required.
 	Uri *string
 }
 

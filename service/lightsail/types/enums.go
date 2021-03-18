@@ -654,6 +654,24 @@ func (InstanceSnapshotState) Values() []InstanceSnapshotState {
 	}
 }
 
+type IpAddressType string
+
+// Enum values for IpAddressType
+const (
+	IpAddressTypeDualstack IpAddressType = "dualstack"
+	IpAddressTypeIpv4      IpAddressType = "ipv4"
+)
+
+// Values returns all known values for IpAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IpAddressType) Values() []IpAddressType {
+	return []IpAddressType{
+		"dualstack",
+		"ipv4",
+	}
+}
+
 type LoadBalancerAttributeName string
 
 // Enum values for LoadBalancerAttributeName
@@ -1157,6 +1175,7 @@ const (
 	OperationTypeAttachCertificateToDistribution      OperationType = "AttachCertificateToDistribution"
 	OperationTypeDetachCertificateFromDistribution    OperationType = "DetachCertificateFromDistribution"
 	OperationTypeUpdateDistributionBundle             OperationType = "UpdateDistributionBundle"
+	OperationTypeSetIpAddressType                     OperationType = "SetIpAddressType"
 	OperationTypeCreateCertificate                    OperationType = "CreateCertificate"
 	OperationTypeDeleteCertificate                    OperationType = "DeleteCertificate"
 	OperationTypeCreateContainerService               OperationType = "CreateContainerService"
@@ -1235,6 +1254,7 @@ func (OperationType) Values() []OperationType {
 		"AttachCertificateToDistribution",
 		"DetachCertificateFromDistribution",
 		"UpdateDistributionBundle",
+		"SetIpAddressType",
 		"CreateCertificate",
 		"DeleteCertificate",
 		"CreateContainerService",

@@ -38,6 +38,9 @@ type TransferInputDeviceInput struct {
 	// The AWS account ID (12 digits) for the recipient of the device transfer.
 	TargetCustomerId *string
 
+	// The target AWS region to transfer the device.
+	TargetRegion *string
+
 	// An optional message for the recipient. Maximum 280 characters.
 	TransferMessage *string
 }

@@ -1314,6 +1314,11 @@ func awsRestjson1_deserializeOpDocumentDescribeContactOutput(v **DescribeContact
 				sv.ContactStatus = types.ContactStatus(jtv)
 			}
 
+		case "dataflowList":
+			if err := awsRestjson1_deserializeDocumentDataflowList(&sv.DataflowList, value); err != nil {
+				return err
+			}
+
 		case "endTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -2158,7 +2163,7 @@ func awsRestjson1_deserializeOpDocumentGetMissionProfileOutput(v **GetMissionPro
 				if err != nil {
 					return err
 				}
-				sv.ContactPostPassDurationSeconds = int32(i64)
+				sv.ContactPostPassDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "contactPrePassDurationSeconds":
@@ -2171,7 +2176,7 @@ func awsRestjson1_deserializeOpDocumentGetMissionProfileOutput(v **GetMissionPro
 				if err != nil {
 					return err
 				}
-				sv.ContactPrePassDurationSeconds = int32(i64)
+				sv.ContactPrePassDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "dataflowEdges":
@@ -2189,7 +2194,7 @@ func awsRestjson1_deserializeOpDocumentGetMissionProfileOutput(v **GetMissionPro
 				if err != nil {
 					return err
 				}
-				sv.MinimumViableContactDurationSeconds = int32(i64)
+				sv.MinimumViableContactDurationSeconds = ptr.Int32(int32(i64))
 			}
 
 		case "missionProfileArn":
@@ -4371,6 +4376,46 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 	return output
 }
 
+func awsRestjson1_deserializeDocumentAntennaDemodDecodeDetails(v **types.AntennaDemodDecodeDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AntennaDemodDecodeDetails
+	if *v == nil {
+		sv = &types.AntennaDemodDecodeDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "outputNode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OutputNode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAntennaDownlinkConfig(v **types.AntennaDownlinkConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4500,6 +4545,56 @@ func awsRestjson1_deserializeDocumentAntennaUplinkConfig(v **types.AntennaUplink
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentConfigDetails(v *types.ConfigDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ConfigDetails
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "antennaDemodDecodeDetails":
+			var mv types.AntennaDemodDecodeDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentAntennaDemodDecodeDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigDetailsMemberAntennaDemodDecodeDetails{Value: mv}
+			break loop
+
+		case "endpointDetails":
+			var mv types.EndpointDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentEndpointDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigDetailsMemberEndpointDetails{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -4884,6 +4979,56 @@ func awsRestjson1_deserializeDocumentContactList(v *[]types.ContactData, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDataflowDetail(v **types.DataflowDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataflowDetail
+	if *v == nil {
+		sv = &types.DataflowDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "destination":
+			if err := awsRestjson1_deserializeDocumentDestination(&sv.Destination, value); err != nil {
+				return err
+			}
+
+		case "errorMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ErrorMessage = ptr.String(jtv)
+			}
+
+		case "source":
+			if err := awsRestjson1_deserializeDocumentSource(&sv.Source, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDataflowEdge(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5151,6 +5296,40 @@ func awsRestjson1_deserializeDocumentDataflowEndpointListItem(v **types.Dataflow
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDataflowList(v *[]types.DataflowDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DataflowDetail
+	if *v == nil {
+		cv = []types.DataflowDetail{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DataflowDetail
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDataflowDetail(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDecodeConfig(v **types.DecodeConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5269,6 +5448,69 @@ func awsRestjson1_deserializeDocumentDependencyException(v **types.DependencyExc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ParameterName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDestination(v **types.Destination, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Destination
+	if *v == nil {
+		sv = &types.Destination{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configDetails":
+			if err := awsRestjson1_deserializeDocumentConfigDetails(&sv.ConfigDetails, value); err != nil {
+				return err
+			}
+
+		case "configId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ConfigId = ptr.String(jtv)
+			}
+
+		case "configType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigCapabilityType to be of type string, got %T instead", value)
+				}
+				sv.ConfigType = types.ConfigCapabilityType(jtv)
+			}
+
+		case "dataflowDestinationRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DataflowDestinationRegion = ptr.String(jtv)
 			}
 
 		default:
@@ -6163,6 +6405,69 @@ func awsRestjson1_deserializeDocumentSocketAddress(v **types.SocketAddress, valu
 					return err
 				}
 				sv.Port = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSource(v **types.Source, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Source
+	if *v == nil {
+		sv = &types.Source{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "configDetails":
+			if err := awsRestjson1_deserializeDocumentConfigDetails(&sv.ConfigDetails, value); err != nil {
+				return err
+			}
+
+		case "configId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ConfigId = ptr.String(jtv)
+			}
+
+		case "configType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConfigCapabilityType to be of type string, got %T instead", value)
+				}
+				sv.ConfigType = types.ConfigCapabilityType(jtv)
+			}
+
+		case "dataflowSourceRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.DataflowSourceRegion = ptr.String(jtv)
 			}
 
 		default:

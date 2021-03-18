@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon FSx for Windows file system.
+// Creates an endpoint for an Amazon FSx for Windows File Server file system.
 func (c *Client) CreateLocationFsxWindows(ctx context.Context, params *CreateLocationFsxWindowsInput, optFns ...func(*Options)) (*CreateLocationFsxWindowsOutput, error) {
 	if params == nil {
 		params = &CreateLocationFsxWindowsInput{}
@@ -29,35 +29,36 @@ func (c *Client) CreateLocationFsxWindows(ctx context.Context, params *CreateLoc
 
 type CreateLocationFsxWindowsInput struct {
 
-	// The Amazon Resource Name (ARN) for the FSx for Windows file system.
+	// The Amazon Resource Name (ARN) for the FSx for Windows File Server file system.
 	//
 	// This member is required.
 	FsxFilesystemArn *string
 
 	// The password of the user who has the permissions to access files and folders in
-	// the FSx for Windows file system.
+	// the FSx for Windows File Server file system.
 	//
 	// This member is required.
 	Password *string
 
 	// The Amazon Resource Names (ARNs) of the security groups that are to use to
-	// configure the FSx for Windows file system.
+	// configure the FSx for Windows File Server file system.
 	//
 	// This member is required.
 	SecurityGroupArns []string
 
 	// The user who has the permissions to access files and folders in the FSx for
-	// Windows file system.
+	// Windows File Server file system.
 	//
 	// This member is required.
 	User *string
 
-	// The name of the Windows domain that the FSx for Windows server belongs to.
+	// The name of the Windows domain that the FSx for Windows File Server belongs to.
 	Domain *string
 
 	// A subdirectory in the location’s path. This subdirectory in the Amazon FSx for
-	// Windows file system is used to read data from the Amazon FSx for Windows source
-	// location or write data to the FSx for Windows destination.
+	// Windows File Server file system is used to read data from the Amazon FSx for
+	// Windows File Server source location or write data to the FSx for Windows File
+	// Server destination.
 	Subdirectory *string
 
 	// The key-value pair that represents a tag that you want to add to the resource.
@@ -69,8 +70,8 @@ type CreateLocationFsxWindowsInput struct {
 
 type CreateLocationFsxWindowsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the FSx for Windows file system location that
-	// is created.
+	// The Amazon Resource Name (ARN) of the FSx for Windows File Server file system
+	// location that is created.
 	LocationArn *string
 
 	// Metadata pertaining to the operation's result.

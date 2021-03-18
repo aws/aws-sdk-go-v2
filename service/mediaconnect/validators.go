@@ -655,9 +655,6 @@ func validateEncryption(v *types.Encryption) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "Encryption"}
-	if len(v.Algorithm) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Algorithm"))
-	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}

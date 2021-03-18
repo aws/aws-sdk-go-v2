@@ -14,31 +14,15 @@ import (
 // rule set name. Rule sets cannot be deleted if they are currently being used by a
 // matchmaking configuration. Learn more
 //
-// * Build a Rule Set
+// * Build a rule set
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-rulesets.html)
 //
 // Related
-// operations
-//
-// * CreateMatchmakingConfiguration
-//
-// *
-// DescribeMatchmakingConfigurations
-//
-// * UpdateMatchmakingConfiguration
-//
-// *
-// DeleteMatchmakingConfiguration
-//
-// * CreateMatchmakingRuleSet
-//
-// *
-// DescribeMatchmakingRuleSets
-//
-// * ValidateMatchmakingRuleSet
-//
-// *
-// DeleteMatchmakingRuleSet
+// actions CreateMatchmakingConfiguration | DescribeMatchmakingConfigurations |
+// UpdateMatchmakingConfiguration | DeleteMatchmakingConfiguration |
+// CreateMatchmakingRuleSet | DescribeMatchmakingRuleSets |
+// ValidateMatchmakingRuleSet | DeleteMatchmakingRuleSet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMatchmakingRuleSetInput, optFns ...func(*Options)) (*DeleteMatchmakingRuleSetOutput, error) {
 	if params == nil {
 		params = &DeleteMatchmakingRuleSetInput{}
@@ -57,7 +41,7 @@ func (c *Client) DeleteMatchmakingRuleSet(ctx context.Context, params *DeleteMat
 // Represents the input for a request operation.
 type DeleteMatchmakingRuleSetInput struct {
 
-	// A unique identifier for a matchmaking rule set to be deleted. (Note: The rule
+	// A unique identifier for the matchmaking rule set to be deleted. (Note: The rule
 	// set name is different from the optional "name" field in the rule set body.) You
 	// can use either the rule set name or ARN value.
 	//

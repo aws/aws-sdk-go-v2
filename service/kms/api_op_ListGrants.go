@@ -12,11 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all grants for the specified customer master key (CMK). The
-// GranteePrincipal field in the ListGrants response usually contains the user or
-// role designated as the grantee principal in the grant. However, when the grantee
-// principal in the grant is an AWS service, the GranteePrincipal field contains
-// the service principal
+// Gets a list of all grants for the specified customer master key (CMK). You must
+// specify the CMK in all requests. You can filter the grant list by grant ID or
+// grantee principal. The GranteePrincipal field in the ListGrants response usually
+// contains the user or role designated as the grantee principal in the grant.
+// However, when the grantee principal in the grant is an AWS service, the
+// GranteePrincipal field contains the service principal
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services),
 // which might represent several different grantee principals. Cross-account use:
 // Yes. To perform this operation on a CMK in a different AWS account, specify the
@@ -50,12 +51,12 @@ func (c *Client) ListGrants(ctx context.Context, params *ListGrantsInput, optFns
 
 type ListGrantsInput struct {
 
-	// A unique identifier for the customer master key (CMK). Specify the key ID or the
-	// Amazon Resource Name (ARN) of the CMK. To specify a CMK in a different AWS
-	// account, you must use the key ARN. For example:
+	// Returns only grants for the specified customer master key (CMK). This parameter
+	// is required. Specify the key ID or the Amazon Resource Name (ARN) of the CMK. To
+	// specify a CMK in a different AWS account, you must use the key ARN. For
+	// example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
@@ -65,6 +66,14 @@ type ListGrantsInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	// Returns only the grant with the specified grant ID. The grant ID uniquely
+	// identifies the grant.
+	GrantId *string
+
+	// Returns only grants where the specified principal is the grantee principal for
+	// the grant.
+	GranteePrincipal *string
 
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, AWS KMS does not return more than the specified number of

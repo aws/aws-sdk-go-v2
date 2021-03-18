@@ -13,9 +13,10 @@ import (
 
 // Deletes an Amazon Lookout for Vision project. To delete a project, you must
 // first delete each version of the model associated with the project. To delete a
-// model use the DeleteModel operation. The training and test datasets are deleted
-// automatically for you. The images referenced by the training and test datasets
-// aren't deleted.
+// model use the DeleteModel operation. You also have to delete the dataset(s)
+// associated with the model. For more information, see DeleteDataset. The images
+// referenced by the training and test datasets aren't deleted. This operation
+// requires permissions to perform the lookoutvision:DeleteProject operation.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}

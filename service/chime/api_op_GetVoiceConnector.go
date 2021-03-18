@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves details for the specified Amazon Chime Voice Connector, such as
-// timestamps, name, outbound host, and encryption requirements.
+// timestamps,name, outbound host, and encryption requirements.
 func (c *Client) GetVoiceConnector(ctx context.Context, params *GetVoiceConnectorInput, optFns ...func(*Options)) (*GetVoiceConnectorOutput, error) {
 	if params == nil {
 		params = &GetVoiceConnectorInput{}

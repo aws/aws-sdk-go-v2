@@ -30,22 +30,11 @@ import (
 // want to peer with. This operation is asynchronous. If successful, a
 // VpcPeeringConnection request is created. You can use continuous polling to track
 // the request's status using DescribeVpcPeeringConnections, or by monitoring fleet
-// events for success or failure using DescribeFleetEvents.
-//
-// *
-// CreateVpcPeeringAuthorization
-//
-// * DescribeVpcPeeringAuthorizations
-//
-// *
-// DeleteVpcPeeringAuthorization
-//
-// * CreateVpcPeeringConnection
-//
-// *
-// DescribeVpcPeeringConnections
-//
-// * DeleteVpcPeeringConnection
+// events for success or failure using DescribeFleetEvents. Related actions
+// CreateVpcPeeringAuthorization | DescribeVpcPeeringAuthorizations |
+// DeleteVpcPeeringAuthorization | CreateVpcPeeringConnection |
+// DescribeVpcPeeringConnections | DeleteVpcPeeringConnection | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateVpcPeeringConnectionInput, optFns ...func(*Options)) (*CreateVpcPeeringConnectionOutput, error) {
 	if params == nil {
 		params = &CreateVpcPeeringConnectionInput{}
@@ -64,7 +53,7 @@ func (c *Client) CreateVpcPeeringConnection(ctx context.Context, params *CreateV
 // Represents the input for a request operation.
 type CreateVpcPeeringConnectionInput struct {
 
-	// A unique identifier for a fleet. You can use either the fleet ID or ARN value.
+	// A unique identifier for the fleet. You can use either the fleet ID or ARN value.
 	// This tells Amazon GameLift which GameLift VPC to peer with.
 	//
 	// This member is required.
@@ -77,11 +66,11 @@ type CreateVpcPeeringConnectionInput struct {
 	// This member is required.
 	PeerVpcAwsAccountId *string
 
-	// A unique identifier for a VPC with resources to be accessed by your Amazon
-	// GameLift fleet. The VPC must be in the same Region where your fleet is deployed.
-	// Look up a VPC ID using the VPC Dashboard (https://console.aws.amazon.com/vpc/)
-	// in the AWS Management Console. Learn more about VPC peering in VPC Peering with
-	// Amazon GameLift Fleets
+	// A unique identifier for a VPC with resources to be accessed by your GameLift
+	// fleet. The VPC must be in the same Region as your fleet. To look up a VPC ID,
+	// use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the AWS
+	// Management Console. Learn more about VPC peering in VPC Peering with GameLift
+	// Fleets
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html).
 	//
 	// This member is required.

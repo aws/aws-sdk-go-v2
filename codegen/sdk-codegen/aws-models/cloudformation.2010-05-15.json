@@ -151,7 +151,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p>"
+                "smithy.api#documentation": "<p>[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p>"
             }
         },
         "com.amazonaws.cloudformation#AutoDeploymentNullable": {
@@ -187,6 +187,21 @@
                 "smithy.api#documentation": "<p>An error occurred during a CloudFormation registry operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudformation#CallAs": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SELF",
+                        "name": "SELF"
+                    },
+                    {
+                        "value": "DELEGATED_ADMIN",
+                        "name": "DELEGATED_ADMIN"
+                    }
+                ]
             }
         },
         "com.amazonaws.cloudformation#CancelUpdateStack": {
@@ -842,7 +857,7 @@
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the file that contains the revised template. The URL must point to a\n         template (max size: 460,800 bytes) that is located in an S3 bucket. AWS CloudFormation\n         generates the change set by comparing this template with the stack that you\n         specified.</p>\n         <p>Conditional: You must specify only <code>TemplateBody</code> or\n            <code>TemplateURL</code>.</p>"
+                        "smithy.api#documentation": "<p>The location of the file that contains the revised template. The URL must point to a\n         template (max size: 460,800 bytes) that is located in an S3 bucket or a Systems Manager\n         document. AWS CloudFormation generates the change set by comparing this template with the\n         stack that you specified.</p>\n         <p>Conditional: You must specify only <code>TemplateBody</code> or\n            <code>TemplateURL</code>.</p>"
                     }
                 },
                 "UsePreviousTemplate": {
@@ -1000,7 +1015,7 @@
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template (max\n         size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to\n         the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify either the <code>TemplateBody</code> or the\n            <code>TemplateURL</code> parameter, but not both.</p>"
+                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template (max\n         size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document.\n         For more information, go to the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify either the <code>TemplateBody</code> or the\n            <code>TemplateURL</code> parameter, but not both.</p>"
                     }
                 },
                 "Parameters": {
@@ -1066,7 +1081,7 @@
                 "StackPolicyURL": {
                     "target": "com.amazonaws.cloudformation#StackPolicyURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of a file containing the stack policy. The URL must point to a policy\n         (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. You can\n         specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code>\n         parameter, but not both.</p>"
+                        "smithy.api#documentation": "<p>Location of a file containing the stack policy. The URL must point to a policy\n         (maximum size: 16 KB) located in an S3 bucket in the same\n         Region as the stack. You can specify either the <code>StackPolicyBody</code> or the\n            <code>StackPolicyURL</code> parameter, but not both.</p>"
                     }
                 },
                 "Tags": {
@@ -1137,13 +1152,13 @@
                 "Accounts": {
                     "target": "com.amazonaws.cloudformation#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Self-managed</code> permissions] The names of one or more AWS accounts that you want to create stack instances in the\n         specified Region(s) for.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>[Self-managed permissions] The names of one or more AWS accounts that you want to create stack instances in the\n         specified Region(s) for.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
                     }
                 },
                 "DeploymentTargets": {
                     "target": "com.amazonaws.cloudformation#DeploymentTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts for which to create stack instances in the specified Regions.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The AWS Organizations accounts for which to create stack instances in the specified Regions.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
                     }
                 },
                 "Regions": {
@@ -1170,6 +1185,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for this stack set operation. </p>\n         <p>The operation ID also functions as an idempotency token, to ensure that AWS\n         CloudFormation performs the stack set operation only once, even if you retry the request\n         multiple times. You might retry stack set operation requests to ensure that AWS\n         CloudFormation successfully received them.</p>\n         <p>If you don't specify an operation ID, the SDK generates one automatically. </p>\n         <p>Repeating this stack set operation with a new operation ID retries all stack\n         instances whose status is <code>OUTDATED</code>. </p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1247,7 +1268,7 @@
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the file that contains the template body. The URL must point to a\n         template (maximum size: 460,800 bytes) that's located in an Amazon S3 bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter,\n         but not both.</p>"
+                        "smithy.api#documentation": "<p>The location of the file that contains the template body. The URL must point to a\n         template (maximum size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems\n         Manager document. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify either the TemplateBody or the TemplateURL parameter,\n         but not both.</p>"
                     }
                 },
                 "Parameters": {
@@ -1290,6 +1311,12 @@
                     "target": "com.amazonaws.cloudformation#AutoDeployment",
                     "traits": {
                         "smithy.api#documentation": "<p>Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to the target organization or organizational unit (OU). Specify only if <code>PermissionModel</code> is <code>SERVICE_MANAGED</code>.</p>"
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>To create a stack set with service-managed permissions while signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>To create a stack set with service-managed permissions while signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated admin in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>\n         <p>Stack sets with service-managed permissions are created in the management account, including stack sets that are created by delegated administrators.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -1462,13 +1489,13 @@
                 "Accounts": {
                     "target": "com.amazonaws.cloudformation#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Self-managed</code> permissions] The names of the AWS accounts that you want to delete stack instances for.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>[Self-managed permissions] The names of the AWS accounts that you want to delete stack instances for.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
                     }
                 },
                 "DeploymentTargets": {
                     "target": "com.amazonaws.cloudformation#DeploymentTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts from which to delete stack instances.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The AWS Organizations accounts from which to delete stack instances.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
                     }
                 },
                 "Regions": {
@@ -1496,6 +1523,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for this stack set operation. </p>\n         <p>If you don't specify an operation ID, the SDK generates one automatically. </p>\n         <p>The operation ID also functions as an idempotency token, to ensure that AWS\n         CloudFormation performs the stack set operation only once, even if you retry the request\n         multiple times. You can retry stack set operation requests to ensure that AWS\n         CloudFormation successfully received them.</p>\n         <p>Repeating this stack set operation with a new operation ID retries all stack\n         instances whose status is <code>OUTDATED</code>. </p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1540,6 +1573,12 @@
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set that you're deleting. You can obtain this\n         value by running <a>ListStackSets</a>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -1567,7 +1606,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p>\n         <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>"
+                "smithy.api#documentation": "<p>[Service-managed permissions] The AWS Organizations accounts to which StackSets deploys. StackSets does not deploy stack instances to the organization management account, even if the organization management account is in your organization or in an OU in your organization.</p>\n         <p>For update operations, you can specify either <code>Accounts</code> or <code>OrganizationalUnitIds</code>. For create and delete operations, specify <code>OrganizationalUnitIds</code>.</p>"
             }
         },
         "com.amazonaws.cloudformation#DeprecatedStatus": {
@@ -1602,7 +1641,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a type or type version from active use in the CloudFormation registry. If a type or type version is deregistered, it cannot be used in CloudFormation operations.</p>\n         <p>To deregister a type, you must individually deregister all registered versions of that type. If a type has only a single registered version, deregistering that version results in the type itself being deregistered. </p>\n         <p>You cannot deregister the default version of a type, unless it is the only registered version of that type, in which case the type itself is deregistered as well. </p>",
+                "smithy.api#documentation": "<p>Marks an extension or extension version as <code>DEPRECATED</code> in the CloudFormation registry, removing it from active use. Deprecated extensions or extension versions cannot be used in CloudFormation operations.</p>\n         <p>To deregister an entire extension, you must individually deregister all active versions of that extension. If an extension has only a single active version, deregistering that version results in the extension itself being deregistered and marked as deprecated in the registry. </p>\n         <p>You cannot deregister the default version of an extension if there are other active version of that extension. If you do deregister the default version of an extension, the textensionype itself is deregistered as well and marked as deprecated. </p>\n         <p>To view the deprecation status of an extension or extension version, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1612,25 +1651,25 @@
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#PrivateTypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of type.</p>\n         <p>Currently the only valid value is <code>RESOURCE</code>.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The kind of extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "VersionId": {
                     "target": "com.amazonaws.cloudformation#TypeVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>"
+                        "smithy.api#documentation": "<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p>"
                     }
                 }
             }
@@ -2031,6 +2070,12 @@
                         "smithy.api#documentation": "<p>The name of a Region that's associated with this stack instance.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -2236,6 +2281,12 @@
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set whose description you want.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -2274,6 +2325,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ID of the stack set operation. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -2374,7 +2431,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed information about a type that has been registered.</p>\n         <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>",
+                "smithy.api#documentation": "<p>Returns detailed information about an extension that has been registered.</p>\n         <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific extension version. Otherwise, it returns information about the default extension version.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2384,25 +2441,25 @@
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of type. </p>\n         <p>Currently the only valid value is <code>RESOURCE</code>.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The kind of extension. </p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "VersionId": {
                     "target": "com.amazonaws.cloudformation#TypeVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>\n         <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific type version. Otherwise, it returns information about the default type version.</p>"
+                        "smithy.api#documentation": "<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p>\n         <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific extension version. Otherwise, it returns information about the default extension version.</p>"
                     }
                 }
             }
@@ -2413,97 +2470,97 @@
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of type. </p>\n         <p>Currently the only valid value is <code>RESOURCE</code>.</p>"
+                        "smithy.api#documentation": "<p>The kind of extension. </p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the registered type.</p>"
+                        "smithy.api#documentation": "<p>The name of the registered extension.</p>"
                     }
                 },
                 "DefaultVersionId": {
                     "target": "com.amazonaws.cloudformation#TypeVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p>\n         <p>To set the default version of a type, use <code>\n               <a>SetTypeDefaultVersion</a>\n            </code>. </p>"
+                        "smithy.api#documentation": "<p>The ID of the default version of the extension. The default version is used when the extension version is not specified.</p>\n         <p>To set the default version of an extension, use <code>\n               <a>SetTypeDefaultVersion</a>\n            </code>. </p>"
                     }
                 },
                 "IsDefaultVersion": {
                     "target": "com.amazonaws.cloudformation#IsDefaultVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the specified type version is set as the default version.</p>"
+                        "smithy.api#documentation": "<p>Whether the specified extension version is set as the default version.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.cloudformation#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the registered type.</p>"
+                        "smithy.api#documentation": "<p>The description of the registered extension.</p>"
                     }
                 },
                 "Schema": {
                     "target": "com.amazonaws.cloudformation#TypeSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schema that defines the type.</p>\n         <p>For more information on type schemas, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">Resource Provider Schema</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The schema that defines the extension.</p>\n         <p>For more information on extension schemas, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html\">Resource Provider Schema</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
                     }
                 },
                 "ProvisioningType": {
                     "target": "com.amazonaws.cloudformation#ProvisioningType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_PROVISIONABLE</code>: The type does not include all of the following handlers, and therefore cannot actually be provisioned.</p>\n               <ul>\n                  <li>\n                     <p>create</p>\n                  </li>\n                  <li>\n                     <p>read</p>\n                  </li>\n                  <li>\n                     <p>delete</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The provisioning behavior of the extension. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_PROVISIONABLE</code>: The extension does not include all of the following handlers, and therefore cannot actually be provisioned.</p>\n               <ul>\n                  <li>\n                     <p>create</p>\n                  </li>\n                  <li>\n                     <p>read</p>\n                  </li>\n                  <li>\n                     <p>delete</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "DeprecatedStatus": {
                     "target": "com.amazonaws.cloudformation#DeprecatedStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deprecation status of the type.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The type is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The deprecation status of the extension version.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The extension is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The extension has been deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "LoggingConfig": {
                     "target": "com.amazonaws.cloudformation#LoggingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains logging configuration information for a type.</p>"
+                        "smithy.api#documentation": "<p>Contains logging configuration information for an extension.</p>"
                     }
                 },
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.cloudformation#RoleARN2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to register the type. If your resource type calls AWS APIs in any of its handlers, you must create an\n         <i>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution\n            role</a>\n            </i> that includes the necessary permissions to call those\n         AWS APIs, and provision that execution role in your account. CloudFormation then\n         assumes that execution role to provide your resource type with the appropriate\n         credentials.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. If your resource type calls AWS APIs in any of its handlers, you must create an\n         <i>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution\n            role</a>\n            </i> that includes the necessary permissions to call those\n         AWS APIs, and provision that execution role in your account. CloudFormation then\n         assumes that execution role to provide your extension with the appropriate\n         credentials.</p>"
                     }
                 },
                 "Visibility": {
                     "target": "com.amazonaws.cloudformation#Visibility",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope at which the type is visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as <code>PRIVATE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The scope at which the extension is visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as <code>PRIVATE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceUrl": {
                     "target": "com.amazonaws.cloudformation#OptionalSecureUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the source code for the type.</p>"
+                        "smithy.api#documentation": "<p>The URL of the source code for the extension.</p>"
                     }
                 },
                 "DocumentationUrl": {
                     "target": "com.amazonaws.cloudformation#OptionalSecureUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of a page providing detailed documentation for this type.</p>"
+                        "smithy.api#documentation": "<p>The URL of a page providing detailed documentation for this extension.</p>"
                     }
                 },
                 "LastUpdated": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the specified type version was registered.</p>"
+                        "smithy.api#documentation": "<p>When the specified extension version was registered.</p>"
                     }
                 },
                 "TimeCreated": {
                     "target": "com.amazonaws.cloudformation#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the specified type version was registered.</p>"
+                        "smithy.api#documentation": "<p>When the specified extension version was registered.</p>"
                     }
                 }
             }
@@ -2522,7 +2579,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a type's registration, including its current status and type and version identifiers.</p>\n         <p>When you initiate a registration request using <code>\n               <a>RegisterType</a>\n            </code>, you can then use <code>\n               <a>DescribeTypeRegistration</a>\n            </code> to monitor the progress of that registration request.</p>\n         <p>Once the registration request has completed, use <code>\n               <a>DescribeType</a>\n            </code> to return detailed informaiton about a type.</p>",
+                "smithy.api#documentation": "<p>Returns information about an extension's registration, including its current status and type and version identifiers.</p>\n         <p>When you initiate a registration request using <code>\n               <a>RegisterType</a>\n            </code>, you can then use <code>\n               <a>DescribeTypeRegistration</a>\n            </code> to monitor the progress of that registration request.</p>\n         <p>Once the registration request has completed, use <code>\n               <a>DescribeType</a>\n            </code> to return detailed information about an extension.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.waiters#waitable": {
                     "TypeRegistrationComplete": {
@@ -2572,25 +2629,25 @@
                 "ProgressStatus": {
                     "target": "com.amazonaws.cloudformation#RegistrationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the type registration request.</p>"
+                        "smithy.api#documentation": "<p>The current status of the extension registration request.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.cloudformation#Description",
                     "traits": {
-                        "smithy.api#documentation": "<p>The description of the type registration request.</p>"
+                        "smithy.api#documentation": "<p>The description of the extension registration request.</p>"
                     }
                 },
                 "TypeArn": {
                     "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type being registered.</p>\n         <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension being registered.</p>\n         <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>"
                     }
                 },
                 "TypeVersionArn": {
                     "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this specific version of the type being registered.</p>\n         <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this specific version of the extension being registered.</p>\n         <p>For registration requests with a <code>ProgressStatus</code> of other than <code>COMPLETE</code>, this will be <code>null</code>.</p>"
                     }
                 }
             }
@@ -2709,7 +2766,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack\n         set, it performs drift detection on the stack associated with each stack instance in the\n         stack set. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html\">How CloudFormation\n            Performs Drift Detection on a Stack Set</a>.</p>\n         <p>\n            <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set\n         drift detection operation. Use this operation id with <code>\n               <a>DescribeStackSetOperation</a>\n            </code> to monitor the progress of the drift\n         detection operation. The drift detection operation may take some time, depending on the\n         number of stack instances included in the stack set, as well as the number of resources\n         included in each stack.</p>\n         <p>Once the operation has completed, use the following actions to return drift\n         information:</p>\n         <ul>\n            <li>\n               <p>Use <code>\n                     <a>DescribeStackSet</a>\n                  </code> to return detailed informaiton\n               about the stack set, including detailed information about the last\n               <i>completed</i> drift operation performed on the stack set.\n               (Information about drift operations that are in progress is not included.)</p>\n            </li>\n            <li>\n               <p>Use <code>\n                     <a>ListStackInstances</a>\n                  </code> to return a list of stack\n               instances belonging to the stack set, including the drift status and last drift time\n               checked of each instance.</p>\n            </li>\n            <li>\n               <p>Use <code>\n                     <a>DescribeStackInstance</a>\n                  </code> to return detailed\n               information about a specific stack instance, including its drift status and last\n               drift time checked.</p>\n            </li>\n         </ul>\n         <p>For more information on performing a drift detection operation on a stack set, see\n         <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html\">Detecting Unmanaged\n            Changes in Stack Sets</a>. </p>\n         <p>You can only run a single drift detection operation on a given stack set at one time. </p>\n         <p>To stop a drift detection stack set operation, use <code>\n               <a>StopStackSetOperation</a>\n            </code>.</p>"
+                "smithy.api#documentation": "<p>Detect drift on a stack set. When CloudFormation performs drift detection on a stack\n         set, it performs drift detection on the stack associated with each stack instance in the\n         stack set. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html\">How CloudFormation\n            Performs Drift Detection on a Stack Set</a>.</p>\n         <p>\n            <code>DetectStackSetDrift</code> returns the <code>OperationId</code> of the stack set\n         drift detection operation. Use this operation id with <code>\n               <a>DescribeStackSetOperation</a>\n            </code> to monitor the progress of the drift\n         detection operation. The drift detection operation may take some time, depending on the\n         number of stack instances included in the stack set, as well as the number of resources\n         included in each stack.</p>\n         <p>Once the operation has completed, use the following actions to return drift\n         information:</p>\n         <ul>\n            <li>\n               <p>Use <code>\n                     <a>DescribeStackSet</a>\n                  </code> to return detailed information\n               about the stack set, including detailed information about the last\n               <i>completed</i> drift operation performed on the stack set.\n               (Information about drift operations that are in progress is not included.)</p>\n            </li>\n            <li>\n               <p>Use <code>\n                     <a>ListStackInstances</a>\n                  </code> to return a list of stack\n               instances belonging to the stack set, including the drift status and last drift time\n               checked of each instance.</p>\n            </li>\n            <li>\n               <p>Use <code>\n                     <a>DescribeStackInstance</a>\n                  </code> to return detailed\n               information about a specific stack instance, including its drift status and last\n               drift time checked.</p>\n            </li>\n         </ul>\n         <p>For more information on performing a drift detection operation on a stack set, see\n         <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-drift.html\">Detecting Unmanaged\n            Changes in Stack Sets</a>. </p>\n         <p>You can only run a single drift detection operation on a given stack set at one time. </p>\n         <p>To stop a drift detection stack set operation, use <code>\n               <a>StopStackSetOperation</a>\n            </code>.</p>"
             }
         },
         "com.amazonaws.cloudformation#DetectStackSetDriftInput": {
@@ -2730,6 +2787,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            <i>The ID of the stack set operation.</i>\n         </p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -2817,7 +2880,7 @@
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template that\n         is located in an Amazon S3 bucket. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If\n         both are passed, only <code>TemplateBody</code> is used.</p>"
+                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template that\n         is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to\n            <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If\n         both are passed, only <code>TemplateBody</code> is used.</p>"
                     }
                 },
                 "Parameters": {
@@ -3162,7 +3225,7 @@
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template (max\n         size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information about\n         templates, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n            <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or\n            <code>TemplateURL</code>.</p>"
+                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template (max\n         size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document.\n         For more information about templates, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n            <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or\n            <code>TemplateURL</code>.</p>"
                     }
                 },
                 "StackName": {
@@ -3638,6 +3701,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Region where you want to list stack instances. </p>"
                     }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -3770,6 +3839,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to be returned with a single call. If the number of\n         available results exceeds this maximum, the response includes a <code>NextToken</code>\n         value that you can assign to the <code>NextToken</code> request parameter to get the next\n         set of results.</p>"
                     }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -3834,6 +3909,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of results to be returned with a single call. If the number of\n         available results exceeds this maximum, the response includes a <code>NextToken</code>\n         value that you can assign to the <code>NextToken</code> request parameter to get the next\n         set of results.</p>"
                     }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -3863,7 +3944,7 @@
                 "target": "com.amazonaws.cloudformation#ListStackSetsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about stack sets that are associated with the\n         user.</p>",
+                "smithy.api#documentation": "<p>Returns summary information about stack sets that are associated with the\n         user.</p>\n         <ul>\n            <li>\n               <p>[Self-managed permissions] If you set the <code>CallAs</code> parameter to <code>SELF</code> while signed in to your AWS account, <code>ListStackSets</code> returns all self-managed stack sets in your AWS account.</p>\n            </li>\n            <li>\n               <p>[Service-managed permissions] If you set the <code>CallAs</code> parameter to <code>SELF</code> while signed in to the organization's management account, <code>ListStackSets</code> returns all stack sets in the management account.</p>\n            </li>\n            <li>\n               <p>[Service-managed permissions] If you set the <code>CallAs</code> parameter to <code>DELEGATED_ADMIN</code> while signed in to your member account, <code>ListStackSets</code> returns all stack sets with service-managed permissions in the management account.</p>\n            </li>\n         </ul>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3891,6 +3972,12 @@
                     "target": "com.amazonaws.cloudformation#StackSetStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the stack sets that you want to get summary information\n         about.</p>"
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -3983,7 +4070,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of registration tokens for the specified type(s).</p>",
+                "smithy.api#documentation": "<p>Returns a list of registration tokens for the specified extension(s).</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -3998,25 +4085,25 @@
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of type.</p>\n         <p>Currently the only valid value is <code>RESOURCE</code>.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The kind of extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "TypeArn": {
                     "target": "com.amazonaws.cloudformation#TypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "RegistrationStatusFilter": {
                     "target": "com.amazonaws.cloudformation#RegistrationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the type registration request.</p>\n         <p>The default is <code>IN_PROGRESS</code>.</p>"
+                        "smithy.api#documentation": "<p>The current status of the extension registration request.</p>\n         <p>The default is <code>IN_PROGRESS</code>.</p>"
                     }
                 },
                 "MaxResults": {
@@ -4039,7 +4126,7 @@
                 "RegistrationTokenList": {
                     "target": "com.amazonaws.cloudformation#RegistrationTokenList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of type registration tokens.</p>\n         <p>Use <code>\n               <a>DescribeTypeRegistration</a>\n            </code> to return detailed information about a type registration request.</p>"
+                        "smithy.api#documentation": "<p> A list of extension registration tokens.</p>\n         <p>Use <code>\n               <a>DescribeTypeRegistration</a>\n            </code> to return detailed information about a type registration request.</p>"
                     }
                 },
                 "NextToken": {
@@ -4064,7 +4151,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about the versions of a type.</p>",
+                "smithy.api#documentation": "<p>Returns summary information about the versions of an extension.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -4079,19 +4166,19 @@
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of the type.</p>\n         <p>Currently the only valid value is <code>RESOURCE</code>.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The kind of the extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type for which you want version summary information.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the extension for which you want version summary information.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#PrivateTypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension for which you want version summary information.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "MaxResults": {
@@ -4109,7 +4196,7 @@
                 "DeprecatedStatus": {
                     "target": "com.amazonaws.cloudformation#DeprecatedStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deprecation status of the type versions that you want to get summary information about.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The type version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The type version has been deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>\n         <p>The default is <code>LIVE</code>.</p>"
+                        "smithy.api#documentation": "<p>The deprecation status of the extension versions that you want to get summary information about.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The extension version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The extension version has been deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>\n         <p>The default is <code>LIVE</code>.</p>"
                     }
                 }
             }
@@ -4120,7 +4207,7 @@
                 "TypeVersionSummaries": {
                     "target": "com.amazonaws.cloudformation#TypeVersionSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>TypeVersionSummary</code> structures that contain information about the specified type's versions.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>TypeVersionSummary</code> structures that contain information about the specified extension's versions.</p>"
                     }
                 },
                 "NextToken": {
@@ -4145,7 +4232,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about types that have been registered with CloudFormation.</p>",
+                "smithy.api#documentation": "<p>Returns summary information about extension that have been registered with CloudFormation.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -4160,19 +4247,19 @@
                 "Visibility": {
                     "target": "com.amazonaws.cloudformation#Visibility",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope at which the type is visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you create as <code>PRIVATE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: The type is publically visible and usable within any Amazon account.</p>\n            </li>\n         </ul>\n         <p>The default is <code>PRIVATE</code>.</p>"
+                        "smithy.api#documentation": "<p>The scope at which the extension is visible and usable in CloudFormation operations.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any extension you create as <code>PRIVATE</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p>\n            </li>\n         </ul>\n         <p>The default is <code>PRIVATE</code>.</p>"
                     }
                 },
                 "ProvisioningType": {
                     "target": "com.amazonaws.cloudformation#ProvisioningType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULLY_MUTABLE</code>: The type includes an update handler to process updates to the type during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMMUTABLE</code>: The type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_PROVISIONABLE</code>: The type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NON_PROVISIONABLE</code>: The extension does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DeprecatedStatus": {
                     "target": "com.amazonaws.cloudformation#DeprecatedStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deprecation status of the types that you want to get summary information about.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The type is registered for use in CloudFormation operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The type has been deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The deprecation status of the extension that you want to get summary information about.</p>\n         <p>Valid values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LIVE</code>: The extension is registered for use in CloudFormation operations.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPRECATED</code>: The extension has been deregistered and can no longer be used in CloudFormation operations. </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Type": {
@@ -4201,7 +4288,7 @@
                 "TypeSummaries": {
                     "target": "com.amazonaws.cloudformation#TypeSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>TypeSummary</code> structures that contain information about the specified types.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>TypeSummary</code> structures that contain information about the specified extensions.</p>"
                     }
                 },
                 "NextToken": {
@@ -4875,7 +4962,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Registers a type with the CloudFormation service. Registering a type makes it available for use in CloudFormation templates in your AWS account, and includes:</p>\n         <ul>\n            <li>\n               <p>Validating the resource schema</p>\n            </li>\n            <li>\n               <p>Determining which handlers have been specified for the resource</p>\n            </li>\n            <li>\n               <p>Making the resource type available for use in your account</p>\n            </li>\n         </ul>\n         <p>For more information on how to develop types and ready them for registeration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <p>You can have a maximum of 50 resource type versions registered at a time. This maximum is per account and per region. Use <a href=\"AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific resource type versions if necessary.</p>\n         <p>Once you have initiated a registration request using <code>\n               <a>RegisterType</a>\n            </code>, you can use <code>\n               <a>DescribeTypeRegistration</a>\n            </code> to monitor the progress of the registration request.</p>",
+                "smithy.api#documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:</p>\n         <ul>\n            <li>\n               <p>Validating the extension schema</p>\n            </li>\n            <li>\n               <p>Determining which handlers, if any, have been specified for the extension</p>\n            </li>\n            <li>\n               <p>Making the extension available for use in your account</p>\n            </li>\n         </ul>\n         <p>For more information on how to develop extensions and ready them for registeration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use <a href=\"AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p>\n         <p>Once you have initiated a registration request using <code>\n               <a>RegisterType</a>\n            </code>, you can use <code>\n               <a>DescribeTypeRegistration</a>\n            </code> to monitor the progress of the registration request.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -4885,39 +4972,39 @@
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of type.</p>\n         <p>Currently, the only valid value is <code>RESOURCE</code>.</p>"
+                        "smithy.api#documentation": "<p>The kind of extension.</p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type being registered.</p>\n         <p>We recommend that type names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p>\n         <note>\n            <p>The following organization namespaces are reserved and cannot be used in your resource type names:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>Alexa</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AMZN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Custom</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Dev</code>\n                  </p>\n               </li>\n            </ul>\n         </note>",
+                        "smithy.api#documentation": "<p>The name of the extension being registered.</p>\n      \n         <p>We recommend that extension names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p>\n         <note>\n            <p>The following organization namespaces are reserved and cannot be used in your extension names:</p>\n            <ul>\n               <li>\n                  <p>\n                     <code>Alexa</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AMZN</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Amazon</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>AWS</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Custom</code>\n                  </p>\n               </li>\n               <li>\n                  <p>\n                     <code>Dev</code>\n                  </p>\n               </li>\n            </ul>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "SchemaHandlerPackage": {
                     "target": "com.amazonaws.cloudformation#S3Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>A url to the S3 bucket containing the schema handler package that contains the schema, event handlers, and associated files for the type you want to register.</p>\n         <p>For information on generating a schema handler package for the type you want to register, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html\">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <note>\n            <p>The\n         user registering the resource provider type must be able to access the the schema\n         handler package in the S3 bucket. That is, the user needs to have <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a> permissions\n         for the schema handler package. For\n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html\">Actions, Resources, and Condition Keys for Amazon S3</a> in the\n         <i>AWS Identity and Access Management User Guide</i>.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A url to the S3 bucket containing the extension project package that contains the neccessary files for the extension you want to register.</p>\n         <p>For information on generating a schema handler package for the extension you want to register, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-cli-submit.html\">submit</a> in the <i>CloudFormation CLI User Guide</i>.</p>\n         <note>\n            <p>The\n         user registering the extension must be able to access the package in the S3 bucket. That is, the user needs to have <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a> permissions\n         for the schema handler package. For\n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html\">Actions, Resources, and Condition Keys for Amazon S3</a> in the\n         <i>AWS Identity and Access Management User Guide</i>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "LoggingConfig": {
                     "target": "com.amazonaws.cloudformation#LoggingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies logging configuration information for a type.</p>"
+                        "smithy.api#documentation": "<p>Specifies logging configuration information for an extension.</p>"
                     }
                 },
                 "ExecutionRoleArn": {
                     "target": "com.amazonaws.cloudformation#RoleARN2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the resource provider. If your resource type calls AWS APIs in any of its handlers, you must create an\n         <i>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution\n            role</a>\n            </i> that includes the necessary permissions to call those\n         AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource provider handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource provider handler, thereby supplying your resource provider with the appropriate credentials.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. If your extension calls AWS APIs in any of its handlers, you must create an\n         <i>\n               <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution\n            role</a>\n            </i> that includes the necessary permissions to call those\n         AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the extension handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the extension handler, thereby supplying your extension with the appropriate credentials.</p>"
                     }
                 },
                 "ClientRequestToken": {
                     "target": "com.amazonaws.cloudformation#RequestToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of a type from the same registeration request, even if the request is submitted multiple times. </p>"
+                        "smithy.api#documentation": "<p>A unique identifier that acts as an idempotency key for this registration request. Specifying a client request token prevents CloudFormation from generating more than one version of an extension from the same registeration request, even if the request is submitted multiple times. </p>"
                     }
                 }
             }
@@ -4928,7 +5015,7 @@
                 "RegistrationToken": {
                     "target": "com.amazonaws.cloudformation#RegistrationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for this registration request.</p>\n         <p>Use this registration token when calling <code>\n               <a>DescribeTypeRegistration</a>\n            </code>, which returns information about the status and IDs of the type registration. </p>"
+                        "smithy.api#documentation": "<p>The identifier for this registration request.</p>\n         <p>Use this registration token when calling <code>\n               <a>DescribeTypeRegistration</a>\n            </code>, which returns information about the status and IDs of the extension registration. </p>"
                     }
                 }
             }
@@ -5574,7 +5661,7 @@
                 "StackPolicyURL": {
                     "target": "com.amazonaws.cloudformation#StackPolicyURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of a file containing the stack policy. The URL must point to a policy\n         (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. You can\n         specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code>\n         parameter, but not both.</p>"
+                        "smithy.api#documentation": "<p>Location of a file containing the stack policy. The URL must point to a policy\n         (maximum size: 16 KB) located in an S3 bucket in the same\n         Region as the stack. You can specify either the <code>StackPolicyBody</code> or the\n            <code>StackPolicyURL</code> parameter, but not both.</p>"
                     }
                 }
             },
@@ -5599,7 +5686,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Specify the default version of a type. The default version of a type will be used in CloudFormation operations.</p>",
+                "smithy.api#documentation": "<p>Specify the default version of an extension. The default version of an extension will be used in CloudFormation operations.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -5609,25 +5696,25 @@
                 "Arn": {
                     "target": "com.amazonaws.cloudformation#PrivateTypeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the type for which you want version summary information.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the extension for which you want version summary information.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.cloudformation#RegistryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of type.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The kind of extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "TypeName": {
                     "target": "com.amazonaws.cloudformation#TypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the type.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the extension.</p>\n         <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
                     }
                 },
                 "VersionId": {
                     "target": "com.amazonaws.cloudformation#TypeVersionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>"
+                        "smithy.api#documentation": "<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p>"
                     }
                 }
             }
@@ -6025,7 +6112,7 @@
                 "Account": {
                     "target": "com.amazonaws.cloudformation#Account",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Self-managed</code> permissions] The name of the AWS account that the stack instance is associated with.</p>"
+                        "smithy.api#documentation": "<p>[Self-managed permissions] The name of the AWS account that the stack instance is associated with.</p>"
                     }
                 },
                 "StackId": {
@@ -6061,7 +6148,7 @@
                 "OrganizationalUnitId": {
                     "target": "com.amazonaws.cloudformation#OrganizationalUnitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
                     }
                 },
                 "DriftStatus": {
@@ -6234,7 +6321,7 @@
                 "Account": {
                     "target": "com.amazonaws.cloudformation#Account",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Self-managed</code> permissions] The name of the AWS account that the stack instance is associated with.</p>"
+                        "smithy.api#documentation": "<p>[Self-managed permissions] The name of the AWS account that the stack instance is associated with.</p>"
                     }
                 },
                 "StackId": {
@@ -6264,7 +6351,7 @@
                 "OrganizationalUnitId": {
                     "target": "com.amazonaws.cloudformation#OrganizationalUnitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
                     }
                 },
                 "DriftStatus": {
@@ -6806,7 +6893,7 @@
                 "AutoDeployment": {
                     "target": "com.amazonaws.cloudformation#AutoDeployment",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p>"
                     }
                 },
                 "PermissionModel": {
@@ -6818,7 +6905,7 @@
                 "OrganizationalUnitIds": {
                     "target": "com.amazonaws.cloudformation#OrganizationalUnitIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
                     }
                 }
             },
@@ -6993,7 +7080,7 @@
                 "Status": {
                     "target": "com.amazonaws.cloudformation#StackSetOperationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the operation. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation exceeded the specified failure tolerance.\n               The failure tolerance value that you've set for an operation is applied for each\n               Region during stack create and update operations. If the number of failed stacks\n               within a Region exceeds the failure tolerance, the status of the operation in the\n               Region is set to <code>FAILED</code>. This in turn sets the status of the operation\n               as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in\n               any remaining Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code>: [<code>Service-managed</code> permissions] For automatic deployments that\n               require a sequence of operations, the operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation is currently being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>: The user has cancelled the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: The operation is in the process of stopping, at user\n               request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation completed creating or updating all the\n               specified stacks without exceeding the failure tolerance for the operation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the operation. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation exceeded the specified failure tolerance.\n               The failure tolerance value that you've set for an operation is applied for each\n               Region during stack create and update operations. If the number of failed stacks\n               within a Region exceeds the failure tolerance, the status of the operation in the\n               Region is set to <code>FAILED</code>. This in turn sets the status of the operation\n               as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in\n               any remaining Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that\n               require a sequence of operations, the operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation is currently being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>: The user has cancelled the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: The operation is in the process of stopping, at user\n               request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation completed creating or updating all the\n               specified stacks without exceeding the failure tolerance for the operation.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "OperationPreferences": {
@@ -7035,7 +7122,7 @@
                 "DeploymentTargets": {
                     "target": "com.amazonaws.cloudformation#DeploymentTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts affected by the stack operation.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The AWS Organizations accounts affected by the stack operation.</p>"
                     }
                 },
                 "StackSetDriftDetectionDetails": {
@@ -7149,7 +7236,7 @@
                 "Account": {
                     "target": "com.amazonaws.cloudformation#Account",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Self-managed</code> permissions] The name of the AWS account for this operation result.</p>"
+                        "smithy.api#documentation": "<p>[Self-managed permissions] The name of the AWS account for this operation result.</p>"
                     }
                 },
                 "Region": {
@@ -7179,7 +7266,7 @@
                 "OrganizationalUnitId": {
                     "target": "com.amazonaws.cloudformation#OrganizationalUnitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The organization root ID or organizational unit (OU) IDs that you specified for <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html\">DeploymentTargets</a>.</p>"
                     }
                 }
             },
@@ -7242,7 +7329,7 @@
                 "Status": {
                     "target": "com.amazonaws.cloudformation#StackSetOperationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The overall status of the operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation exceeded the specified failure tolerance.\n               The failure tolerance value that you've set for an operation is applied for each\n               Region during stack create and update operations. If the number of failed stacks\n               within a Region exceeds the failure tolerance, the status of the operation in the\n               Region is set to <code>FAILED</code>. This in turn sets the status of the operation\n               as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in\n               any remaining Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code>: [<code>Service-managed</code> permissions] For automatic deployments that\n               require a sequence of operations, the operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation is currently being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>: The user has cancelled the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: The operation is in the process of stopping, at user\n               request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation completed creating or updating all the\n               specified stacks without exceeding the failure tolerance for the operation.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The overall status of the operation.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FAILED</code>: The operation exceeded the specified failure tolerance.\n               The failure tolerance value that you've set for an operation is applied for each\n               Region during stack create and update operations. If the number of failed stacks\n               within a Region exceeds the failure tolerance, the status of the operation in the\n               Region is set to <code>FAILED</code>. This in turn sets the status of the operation\n               as a whole to <code>FAILED</code>, and AWS CloudFormation cancels the operation in\n               any remaining Regions.</p>\n            </li>\n            <li>\n               <p>\n                  <code>QUEUED</code>: [Service-managed permissions] For automatic deployments that\n               require a sequence of operations, the operation is queued to be performed. For more information, see the <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-status-codes\">stack set operation status codes</a> in the AWS CloudFormation User Guide.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code>: The operation is currently being performed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code>: The user has cancelled the operation.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code>: The operation is in the process of stopping, at user\n               request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>SUCCEEDED</code>: The operation completed creating or updating all the\n               specified stacks without exceeding the failure tolerance for the operation.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "CreationTimestamp": {
@@ -7313,7 +7400,7 @@
                 "AutoDeployment": {
                     "target": "com.amazonaws.cloudformation#AutoDeployment",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organizational unit (OU).</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organizational unit (OU).</p>"
                     }
                 },
                 "PermissionModel": {
@@ -7598,6 +7685,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the stack operation. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -7976,7 +8069,7 @@
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template that\n         is located in an Amazon S3 bucket. For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n            <code>TemplateBody</code>, <code>TemplateURL</code>, or set the\n            <code>UsePreviousTemplate</code> to <code>true</code>.</p>"
+                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template that\n         is located in an Amazon S3 bucket or a Systems Manager document. For more information, go to\n            <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n            <code>TemplateBody</code>, <code>TemplateURL</code>, or set the\n            <code>UsePreviousTemplate</code> to <code>true</code>.</p>"
                     }
                 },
                 "UsePreviousTemplate": {
@@ -7994,7 +8087,7 @@
                 "StackPolicyDuringUpdateURL": {
                     "target": "com.amazonaws.cloudformation#StackPolicyDuringUpdateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of a file containing the temporary overriding stack policy. The URL must\n         point to a policy (max size: 16KB) located in an S3 bucket in the same Region as the stack.\n         You can specify either the <code>StackPolicyDuringUpdateBody</code> or the\n            <code>StackPolicyDuringUpdateURL</code> parameter, but not both.</p>\n         <p>If you want to update protected resources, specify a temporary overriding stack\n         policy during this update. If you do not specify a stack policy, the current policy that is\n         associated with the stack will be used.</p>"
+                        "smithy.api#documentation": "<p>Location of a file containing the temporary overriding stack policy. The URL must\n         point to a policy (max size: 16KB) located in an S3 bucket in\n         the same Region as the stack. You can specify either the\n            <code>StackPolicyDuringUpdateBody</code> or the <code>StackPolicyDuringUpdateURL</code>\n         parameter, but not both.</p>\n         <p>If you want to update protected resources, specify a temporary overriding stack\n         policy during this update. If you do not specify a stack policy, the current policy that is\n         associated with the stack will be used.</p>"
                     }
                 },
                 "Parameters": {
@@ -8036,7 +8129,7 @@
                 "StackPolicyURL": {
                     "target": "com.amazonaws.cloudformation#StackPolicyURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of a file containing the updated stack policy. The URL must point to a\n         policy (max size: 16KB) located in an S3 bucket in the same Region as the stack. You can\n         specify either the <code>StackPolicyBody</code> or the <code>StackPolicyURL</code>\n         parameter, but not both.</p>\n         <p>You might update the stack policy, for example, in order to protect a new resource\n         that you created during a stack update. If you do not specify a stack policy, the current\n         policy that is associated with the stack is unchanged.</p>"
+                        "smithy.api#documentation": "<p>Location of a file containing the updated stack policy. The URL must point to a\n         policy (max size: 16KB) located in an S3 bucket in the same\n         Region as the stack. You can specify either the <code>StackPolicyBody</code> or the\n            <code>StackPolicyURL</code> parameter, but not both.</p>\n         <p>You might update the stack policy, for example, in order to protect a new resource\n         that you created during a stack update. If you do not specify a stack policy, the current\n         policy that is associated with the stack is unchanged.</p>"
                     }
                 },
                 "NotificationARNs": {
@@ -8107,13 +8200,13 @@
                 "Accounts": {
                     "target": "com.amazonaws.cloudformation#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Self-managed</code> permissions] The names of one or more AWS accounts for which you want to update parameter values\n         for stack instances. The overridden parameter values will be applied to all stack instances\n         in the specified accounts and Regions.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>[Self-managed permissions] The names of one or more AWS accounts for which you want to update parameter values\n         for stack instances. The overridden parameter values will be applied to all stack instances\n         in the specified accounts and Regions.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
                     }
                 },
                 "DeploymentTargets": {
                     "target": "com.amazonaws.cloudformation#DeploymentTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts for which you want to update parameter values for stack instances. If your update targets OUs, the overridden parameter values only apply to the accounts that are currently in the target OUs and their child OUs. Accounts added to the target OUs and their child OUs in the future won't use the overridden values.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The AWS Organizations accounts for which you want to update parameter values for stack instances. If your update targets OUs, the overridden parameter values only apply to the accounts that are currently in the target OUs and their child OUs. Accounts added to the target OUs and their child OUs in the future won't use the overridden values.</p>\n         <p>You can specify <code>Accounts</code> or <code>DeploymentTargets</code>, but not both.</p>"
                     }
                 },
                 "Regions": {
@@ -8140,6 +8233,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for this stack set operation. </p>\n         <p>The operation ID also functions as an idempotency token, to ensure that AWS\n         CloudFormation performs the stack set operation only once, even if you retry the request\n         multiple times. You might retry stack set operation requests to ensure that AWS\n         CloudFormation successfully received them.</p>\n         <p>If you don't specify an operation ID, the SDK generates one automatically.\n      </p>",
                         "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -8226,7 +8325,7 @@
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the file that contains the template body. The URL must point to a\n         template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n            <code>TemplateBody</code> or <code>TemplateURL</code>—or set\n            <code>UsePreviousTemplate</code> to true. </p>"
+                        "smithy.api#documentation": "<p>The location of the file that contains the template body. The URL must point to a\n         template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems\n         Manager document. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n            <code>TemplateBody</code> or <code>TemplateURL</code>—or set\n            <code>UsePreviousTemplate</code> to true. </p>"
                     }
                 },
                 "UsePreviousTemplate": {
@@ -8274,7 +8373,7 @@
                 "DeploymentTargets": {
                     "target": "com.amazonaws.cloudformation#DeploymentTargets",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] The AWS Organizations accounts in which to update associated stack instances.</p>\n         <p>To update all the stack instances associated with this stack set, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>\n         <p>If the stack set update includes changes to the template (that is, if <code>TemplateBody</code> or <code>TemplateURL</code> is specified), or the <code>Parameters</code>, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] The AWS Organizations accounts in which to update associated stack instances.</p>\n         <p>To update all the stack instances associated with this stack set, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>\n         <p>If the stack set update includes changes to the template (that is, if <code>TemplateBody</code> or <code>TemplateURL</code> is specified), or the <code>Parameters</code>, AWS CloudFormation marks all stack instances with a status of <code>OUTDATED</code> prior to updating the stack instances in the specified accounts and Regions. If the stack set update does not include changes to the template or parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while leaving all other stack instances with their existing stack instance status.</p>"
                     }
                 },
                 "PermissionModel": {
@@ -8286,7 +8385,7 @@
                 "AutoDeployment": {
                     "target": "com.amazonaws.cloudformation#AutoDeployment",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Service-managed</code> permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p>\n         <p>If you specify <code>AutoDeployment</code>, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>"
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Describes whether StackSets automatically deploys to AWS Organizations accounts that are added to a target organization or organizational unit (OU).</p>\n         <p>If you specify <code>AutoDeployment</code>, do not specify <code>DeploymentTargets</code> or <code>Regions</code>.</p>"
                     }
                 },
                 "OperationId": {
@@ -8299,13 +8398,19 @@
                 "Accounts": {
                     "target": "com.amazonaws.cloudformation#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>[<code>Self-managed</code> permissions] The accounts in which to update associated stack instances. If you specify accounts, you\n         must also specify the Regions in which to update stack set instances.</p>\n         <p>To update <i>all</i> the stack instances associated with this stack set,\n         do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p>\n         <p>If the stack set update includes changes to the template (that is, if the\n            <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the\n            <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of\n            <code>OUTDATED</code> prior to updating the stack instances in the specified accounts\n         and Regions. If the stack set update does not include changes to the template or\n         parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while\n         leaving all other stack instances with their existing stack instance status. </p>"
+                        "smithy.api#documentation": "<p>[Self-managed permissions] The accounts in which to update associated stack instances. If you specify accounts, you\n         must also specify the Regions in which to update stack set instances.</p>\n         <p>To update <i>all</i> the stack instances associated with this stack set,\n         do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p>\n         <p>If the stack set update includes changes to the template (that is, if the\n            <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the\n            <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of\n            <code>OUTDATED</code> prior to updating the stack instances in the specified accounts\n         and Regions. If the stack set update does not include changes to the template or\n         parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while\n         leaving all other stack instances with their existing stack instance status. </p>"
                     }
                 },
                 "Regions": {
                     "target": "com.amazonaws.cloudformation#RegionList",
                     "traits": {
                         "smithy.api#documentation": "<p>The Regions in which to update associated stack instances. If you specify Regions, you\n         must also specify accounts in which to update stack set instances.</p>\n         <p>To update <i>all</i> the stack instances associated with this stack set,\n         do not specify the <code>Accounts</code> or <code>Regions</code> properties.</p>\n         <p>If the stack set update includes changes to the template (that is, if the\n            <code>TemplateBody</code> or <code>TemplateURL</code> properties are specified), or the\n            <code>Parameters</code> property, AWS CloudFormation marks all stack instances with a status of\n            <code>OUTDATED</code> prior to updating the stack instances in the specified accounts\n         and Regions. If the stack set update does not include changes to the template or\n         parameters, AWS CloudFormation updates the stack instances in the specified accounts and Regions, while\n         leaving all other stack instances with their existing stack instance status. </p>"
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -8402,7 +8507,7 @@
                 "TemplateURL": {
                     "target": "com.amazonaws.cloudformation#TemplateURL",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template (max\n         size: 460,800 bytes) that is located in an Amazon S3 bucket. For more information, go to\n            <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If\n         both are passed, only <code>TemplateBody</code> is used.</p>"
+                        "smithy.api#documentation": "<p>Location of file containing the template body. The URL must point to a template (max\n         size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems Manager document.\n         For more information, go to <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html\">Template Anatomy</a>\n         in the AWS CloudFormation User Guide.</p>\n         <p>Conditional: You must pass <code>TemplateURL</code> or <code>TemplateBody</code>. If\n         both are passed, only <code>TemplateBody</code> is used.</p>"
                     }
                 }
             },

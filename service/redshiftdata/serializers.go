@@ -468,6 +468,11 @@ func awsAwsjson11_serializeOpDocumentDescribeTableInput(v *DescribeTableInput, v
 		ok.String(*v.ClusterIdentifier)
 	}
 
+	if v.ConnectedDatabase != nil {
+		ok := object.Key("ConnectedDatabase")
+		ok.String(*v.ConnectedDatabase)
+	}
+
 	if v.Database != nil {
 		ok := object.Key("Database")
 		ok.String(*v.Database)
@@ -611,6 +616,11 @@ func awsAwsjson11_serializeOpDocumentListSchemasInput(v *ListSchemasInput, value
 		ok.String(*v.ClusterIdentifier)
 	}
 
+	if v.ConnectedDatabase != nil {
+		ok := object.Key("ConnectedDatabase")
+		ok.String(*v.ConnectedDatabase)
+	}
+
 	if v.Database != nil {
 		ok := object.Key("Database")
 		ok.String(*v.Database)
@@ -658,6 +668,11 @@ func awsAwsjson11_serializeOpDocumentListStatementsInput(v *ListStatementsInput,
 		ok.String(*v.NextToken)
 	}
 
+	if v.RoleLevel != nil {
+		ok := object.Key("RoleLevel")
+		ok.Boolean(*v.RoleLevel)
+	}
+
 	if v.StatementName != nil {
 		ok := object.Key("StatementName")
 		ok.String(*v.StatementName)
@@ -678,6 +693,11 @@ func awsAwsjson11_serializeOpDocumentListTablesInput(v *ListTablesInput, value s
 	if v.ClusterIdentifier != nil {
 		ok := object.Key("ClusterIdentifier")
 		ok.String(*v.ClusterIdentifier)
+	}
+
+	if v.ConnectedDatabase != nil {
+		ok := object.Key("ConnectedDatabase")
+		ok.String(*v.ConnectedDatabase)
 	}
 
 	if v.Database != nil {

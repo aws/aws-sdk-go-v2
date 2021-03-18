@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Moves the specified phone number into the Deletion queue. A phone number must be
+// Moves the specified phone number into the Deletionqueue. A phone number must be
 // disassociated from any users or Amazon Chime Voice Connectors before it can be
 // deleted. Deleted phone numbers remain in the Deletion queue for 7 days before
 // they are deleted permanently.

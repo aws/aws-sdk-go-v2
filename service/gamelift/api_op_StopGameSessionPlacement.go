@@ -13,30 +13,11 @@ import (
 
 // Cancels a game session placement that is in PENDING status. To stop a placement,
 // provide the placement ID values. If successful, the placement is moved to
-// CANCELLED status.
-//
-// * CreateGameSession
-//
-// * DescribeGameSessions
-//
-// *
-// DescribeGameSessionDetails
-//
-// * SearchGameSessions
-//
-// * UpdateGameSession
-//
-// *
-// GetGameSessionLogUrl
-//
-// * Game session placements
-//
-// * StartGameSessionPlacement
-//
-// *
-// DescribeGameSessionPlacement
-//
-// * StopGameSessionPlacement
+// CANCELLED status. Related actions CreateGameSession | DescribeGameSessions |
+// DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
+// GetGameSessionLogUrl | StartGameSessionPlacement | DescribeGameSessionPlacement
+// | StopGameSessionPlacement | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) StopGameSessionPlacement(ctx context.Context, params *StopGameSessionPlacementInput, optFns ...func(*Options)) (*StopGameSessionPlacementOutput, error) {
 	if params == nil {
 		params = &StopGameSessionPlacementInput{}

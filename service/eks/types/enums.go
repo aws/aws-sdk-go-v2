@@ -11,6 +11,7 @@ const (
 	AddonIssueCodeClusterUnreachable           AddonIssueCode = "ClusterUnreachable"
 	AddonIssueCodeInsufficientNumberOfReplicas AddonIssueCode = "InsufficientNumberOfReplicas"
 	AddonIssueCodeConfigurationConflict        AddonIssueCode = "ConfigurationConflict"
+	AddonIssueCodeAdmissionRequestDenied       AddonIssueCode = "AdmissionRequestDenied"
 )
 
 // Values returns all known values for AddonIssueCode. Note that this can be
@@ -23,6 +24,7 @@ func (AddonIssueCode) Values() []AddonIssueCode {
 		"ClusterUnreachable",
 		"InsufficientNumberOfReplicas",
 		"ConfigurationConflict",
+		"AdmissionRequestDenied",
 	}
 }
 
@@ -116,6 +118,26 @@ func (ClusterStatus) Values() []ClusterStatus {
 	}
 }
 
+type ConfigStatus string
+
+// Enum values for ConfigStatus
+const (
+	ConfigStatusCreating ConfigStatus = "CREATING"
+	ConfigStatusDeleting ConfigStatus = "DELETING"
+	ConfigStatusActive   ConfigStatus = "ACTIVE"
+)
+
+// Values returns all known values for ConfigStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ConfigStatus) Values() []ConfigStatus {
+	return []ConfigStatus{
+		"CREATING",
+		"DELETING",
+		"ACTIVE",
+	}
+}
+
 type ErrorCode string
 
 // Enum values for ErrorCode
@@ -134,6 +156,7 @@ const (
 	ErrorCodeClusterUnreachable           ErrorCode = "ClusterUnreachable"
 	ErrorCodeInsufficientNumberOfReplicas ErrorCode = "InsufficientNumberOfReplicas"
 	ErrorCodeConfigurationConflict        ErrorCode = "ConfigurationConflict"
+	ErrorCodeAdmissionRequestDenied       ErrorCode = "AdmissionRequestDenied"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -155,6 +178,7 @@ func (ErrorCode) Values() []ErrorCode {
 		"ClusterUnreachable",
 		"InsufficientNumberOfReplicas",
 		"ConfigurationConflict",
+		"AdmissionRequestDenied",
 	}
 }
 
@@ -306,21 +330,23 @@ type UpdateParamType string
 
 // Enum values for UpdateParamType
 const (
-	UpdateParamTypeVersion               UpdateParamType = "Version"
-	UpdateParamTypePlatformVersion       UpdateParamType = "PlatformVersion"
-	UpdateParamTypeEndpointPrivateAccess UpdateParamType = "EndpointPrivateAccess"
-	UpdateParamTypeEndpointPublicAccess  UpdateParamType = "EndpointPublicAccess"
-	UpdateParamTypeClusterLogging        UpdateParamType = "ClusterLogging"
-	UpdateParamTypeDesiredSize           UpdateParamType = "DesiredSize"
-	UpdateParamTypeLabelsToAdd           UpdateParamType = "LabelsToAdd"
-	UpdateParamTypeLabelsToRemove        UpdateParamType = "LabelsToRemove"
-	UpdateParamTypeMaxSize               UpdateParamType = "MaxSize"
-	UpdateParamTypeMinSize               UpdateParamType = "MinSize"
-	UpdateParamTypeReleaseVersion        UpdateParamType = "ReleaseVersion"
-	UpdateParamTypePublicAccessCidrs     UpdateParamType = "PublicAccessCidrs"
-	UpdateParamTypeAddonVersion          UpdateParamType = "AddonVersion"
-	UpdateParamTypeServiceAccountRoleArn UpdateParamType = "ServiceAccountRoleArn"
-	UpdateParamTypeResolveConflicts      UpdateParamType = "ResolveConflicts"
+	UpdateParamTypeVersion                UpdateParamType = "Version"
+	UpdateParamTypePlatformVersion        UpdateParamType = "PlatformVersion"
+	UpdateParamTypeEndpointPrivateAccess  UpdateParamType = "EndpointPrivateAccess"
+	UpdateParamTypeEndpointPublicAccess   UpdateParamType = "EndpointPublicAccess"
+	UpdateParamTypeClusterLogging         UpdateParamType = "ClusterLogging"
+	UpdateParamTypeDesiredSize            UpdateParamType = "DesiredSize"
+	UpdateParamTypeLabelsToAdd            UpdateParamType = "LabelsToAdd"
+	UpdateParamTypeLabelsToRemove         UpdateParamType = "LabelsToRemove"
+	UpdateParamTypeMaxSize                UpdateParamType = "MaxSize"
+	UpdateParamTypeMinSize                UpdateParamType = "MinSize"
+	UpdateParamTypeReleaseVersion         UpdateParamType = "ReleaseVersion"
+	UpdateParamTypePublicAccessCidrs      UpdateParamType = "PublicAccessCidrs"
+	UpdateParamTypeIdentityProviderConfig UpdateParamType = "IdentityProviderConfig"
+	UpdateParamTypeEncryptionConfig       UpdateParamType = "EncryptionConfig"
+	UpdateParamTypeAddonVersion           UpdateParamType = "AddonVersion"
+	UpdateParamTypeServiceAccountRoleArn  UpdateParamType = "ServiceAccountRoleArn"
+	UpdateParamTypeResolveConflicts       UpdateParamType = "ResolveConflicts"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -340,6 +366,8 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"MinSize",
 		"ReleaseVersion",
 		"PublicAccessCidrs",
+		"IdentityProviderConfig",
+		"EncryptionConfig",
 		"AddonVersion",
 		"ServiceAccountRoleArn",
 		"ResolveConflicts",
@@ -372,11 +400,14 @@ type UpdateType string
 
 // Enum values for UpdateType
 const (
-	UpdateTypeVersionUpdate        UpdateType = "VersionUpdate"
-	UpdateTypeEndpointAccessUpdate UpdateType = "EndpointAccessUpdate"
-	UpdateTypeLoggingUpdate        UpdateType = "LoggingUpdate"
-	UpdateTypeConfigUpdate         UpdateType = "ConfigUpdate"
-	UpdateTypeAddonUpdate          UpdateType = "AddonUpdate"
+	UpdateTypeVersionUpdate                      UpdateType = "VersionUpdate"
+	UpdateTypeEndpointAccessUpdate               UpdateType = "EndpointAccessUpdate"
+	UpdateTypeLoggingUpdate                      UpdateType = "LoggingUpdate"
+	UpdateTypeConfigUpdate                       UpdateType = "ConfigUpdate"
+	UpdateTypeAssociateIdentityProviderConfig    UpdateType = "AssociateIdentityProviderConfig"
+	UpdateTypeDisassociateIdentityProviderConfig UpdateType = "DisassociateIdentityProviderConfig"
+	UpdateTypeAssociateEncryptionConfig          UpdateType = "AssociateEncryptionConfig"
+	UpdateTypeAddonUpdate                        UpdateType = "AddonUpdate"
 )
 
 // Values returns all known values for UpdateType. Note that this can be expanded
@@ -388,6 +419,9 @@ func (UpdateType) Values() []UpdateType {
 		"EndpointAccessUpdate",
 		"LoggingUpdate",
 		"ConfigUpdate",
+		"AssociateIdentityProviderConfig",
+		"DisassociateIdentityProviderConfig",
+		"AssociateEncryptionConfig",
 		"AddonUpdate",
 	}
 }

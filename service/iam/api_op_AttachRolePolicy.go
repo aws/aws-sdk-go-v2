@@ -15,10 +15,13 @@ import (
 // permission (access) policy. You cannot use a managed policy as the role's trust
 // policy. The role's trust policy is created at the same time as the role, using
 // CreateRole. You can update a role's trust policy using UpdateAssumeRolePolicy.
-// Use this API to attach a managed policy to a role. To embed an inline policy in
-// a role, use PutRolePolicy. For more information about policies, see Managed
-// Policies and Inline Policies
+// Use this operation to attach a managed policy to a role. To embed an inline
+// policy in a role, use PutRolePolicy. For more information about policies, see
+// Managed policies and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
+// in the IAM User Guide. As a best practice, you can validate your IAM policies.
+// To learn more, see Validating IAM policies
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html)
 // in the IAM User Guide.
 func (c *Client) AttachRolePolicy(ctx context.Context, params *AttachRolePolicyInput, optFns ...func(*Options)) (*AttachRolePolicyOutput, error) {
 	if params == nil {
@@ -38,8 +41,7 @@ func (c *Client) AttachRolePolicy(ctx context.Context, params *AttachRolePolicyI
 type AttachRolePolicyInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM policy you want to attach. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
+	// information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//

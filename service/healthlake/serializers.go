@@ -156,6 +156,53 @@ func (m *awsAwsjson10_serializeOpDescribeFHIRDatastore) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson10_serializeOpDescribeFHIRExportJob struct {
+}
+
+func (*awsAwsjson10_serializeOpDescribeFHIRExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpDescribeFHIRExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeFHIRExportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("HealthLake.DescribeFHIRExportJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentDescribeFHIRExportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson10_serializeOpDescribeFHIRImportJob struct {
 }
 
@@ -235,6 +282,53 @@ func (m *awsAwsjson10_serializeOpListFHIRDatastores) HandleSerialize(ctx context
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson10_serializeOpDocumentListFHIRDatastoresInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson10_serializeOpStartFHIRExportJob struct {
+}
+
+func (*awsAwsjson10_serializeOpStartFHIRExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson10_serializeOpStartFHIRExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartFHIRExportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.0")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("HealthLake.StartFHIRExportJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson10_serializeOpDocumentStartFHIRExportJobInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -339,6 +433,22 @@ func awsAwsjson10_serializeDocumentInputDataConfig(v types.InputDataConfig, valu
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentOutputDataConfig(v types.OutputDataConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.OutputDataConfigMemberS3Uri:
+		av := object.Key("S3Uri")
+		av.String(uv.Value)
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentPreloadDataConfig(v *types.PreloadDataConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -404,6 +514,23 @@ func awsAwsjson10_serializeOpDocumentDescribeFHIRDatastoreInput(v *DescribeFHIRD
 	return nil
 }
 
+func awsAwsjson10_serializeOpDocumentDescribeFHIRExportJobInput(v *DescribeFHIRExportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatastoreId != nil {
+		ok := object.Key("DatastoreId")
+		ok.String(*v.DatastoreId)
+	}
+
+	if v.JobId != nil {
+		ok := object.Key("JobId")
+		ok.String(*v.JobId)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentDescribeFHIRImportJobInput(v *DescribeFHIRImportJobInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -440,6 +567,40 @@ func awsAwsjson10_serializeOpDocumentListFHIRDatastoresInput(v *ListFHIRDatastor
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeOpDocumentStartFHIRExportJobInput(v *StartFHIRExportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
+	}
+
+	if v.DatastoreId != nil {
+		ok := object.Key("DatastoreId")
+		ok.String(*v.DatastoreId)
+	}
+
+	if v.JobName != nil {
+		ok := object.Key("JobName")
+		ok.String(*v.JobName)
+	}
+
+	if v.OutputDataConfig != nil {
+		ok := object.Key("OutputDataConfig")
+		if err := awsAwsjson10_serializeDocumentOutputDataConfig(v.OutputDataConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -115,6 +115,15 @@
                     "target": "com.amazonaws.shield#ListResourcesInProtectionGroup"
                 },
                 {
+                    "target": "com.amazonaws.shield#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.shield#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.shield#UntagResource"
+                },
+                {
                     "target": "com.amazonaws.shield#UpdateEmergencyContactSettings"
                 },
                 {
@@ -813,6 +822,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.shield#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tag key-value pairs for the protection group.</p>"
+                    }
                 }
             }
         },
@@ -835,6 +850,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the resource to be protected.</p>\n         <p>The ARN should be in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>For an Application Load Balancer: <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/app/<i>load-balancer-name</i>/<i>load-balancer-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic Load Balancer (Classic Load Balancer): <code>arn:aws:elasticloadbalancing:<i>region</i>:<i>account-id</i>:loadbalancer/<i>load-balancer-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AWS CloudFront distribution: <code>arn:aws:cloudfront::<i>account-id</i>:distribution/<i>distribution-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an AWS Global Accelerator accelerator: <code>arn:aws:globalaccelerator::<i>account-id</i>:accelerator/<i>accelerator-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For Amazon Route 53: <code>arn:aws:route53:::hostedzone/<i>hosted-zone-id</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>For an Elastic IP address: <code>arn:aws:ec2:<i>region</i>:<i>account-id</i>:eip-allocation/<i>allocation-id</i>\n                  </code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.shield#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tag key-value pairs for the <a>Protection</a> object that is created.</p>"
                     }
                 }
             }
@@ -2001,6 +2022,52 @@
                 }
             }
         },
+        "com.amazonaws.shield#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.shield#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.shield#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.shield#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.shield#InvalidResourceException"
+                },
+                {
+                    "target": "com.amazonaws.shield#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS Shield.</p>"
+            }
+        },
+        "com.amazonaws.shield#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.shield#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to get tags for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.shield#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.shield#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag key and value pairs associated with the specified resource.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.shield#LockedSubscriptionException": {
             "type": "structure",
             "members": {
@@ -2178,6 +2245,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier (ID) for the Route 53 health check that's associated with the protection. </p>"
                     }
+                },
+                "ProtectionArn": {
+                    "target": "com.amazonaws.shield#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the protection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2219,6 +2292,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources to include in the protection group. You must set this when you set <code>Pattern</code> to <code>ARBITRARY</code> and you must not set it for any other <code>Pattern</code> setting. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ProtectionGroupArn": {
+                    "target": "com.amazonaws.shield#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the protection group.</p>"
                     }
                 }
             },
@@ -2554,6 +2633,12 @@
                         "smithy.api#documentation": "<p>Limits settings for your subscription. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SubscriptionArn": {
+                    "target": "com.amazonaws.shield#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the subscription.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2674,6 +2759,117 @@
                 "target": "com.amazonaws.shield#SummarizedCounter"
             }
         },
+        "com.amazonaws.shield#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.shield#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Part of the key:value pair that defines a tag. You can use a tag key to describe a category of information, such as \"customer.\" Tag keys are case-sensitive.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.shield#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Part of the key:value pair that defines a tag. You can use a tag value to describe a specific value within a category, such as \"companyA\" or \"companyB.\" Tag values are case-sensitive.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tag associated with an AWS resource. Tags are key:value pairs that you can use to categorize and manage your resources, for purposes like billing or other management. Typically, the tag key represents a category, such as \"environment\", and the tag value represents a specific value within that category, such as \"test,\" \"development,\" or \"production\". Or you might set the tag key to \"customer\" and the value to the customer name or ID. You can specify one or more tags to add to each AWS resource, up to 50 tags for a resource.</p>"
+            }
+        },
+        "com.amazonaws.shield#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.shield#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.shield#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.shield#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.shield#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.shield#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.shield#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.shield#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.shield#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.shield#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.shield#InvalidResourceException"
+                },
+                {
+                    "target": "com.amazonaws.shield#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or updates tags for a resource in AWS Shield.</p>"
+            }
+        },
+        "com.amazonaws.shield#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.shield#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to add or update tags for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.shield#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags that you want to modify or add to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.shield#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.shield#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.shield#TimeRange": {
             "type": "structure",
             "members": {
@@ -2735,6 +2931,55 @@
                     }
                 ]
             }
+        },
+        "com.amazonaws.shield#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.shield#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.shield#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.shield#InternalErrorException"
+                },
+                {
+                    "target": "com.amazonaws.shield#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.shield#InvalidResourceException"
+                },
+                {
+                    "target": "com.amazonaws.shield#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from a resource in AWS Shield.</p>"
+            }
+        },
+        "com.amazonaws.shield#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.shield#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to remove tags from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.shield#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key for each tag that you want to remove from the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.shield#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.shield#UpdateEmergencyContactSettings": {
             "type": "operation",

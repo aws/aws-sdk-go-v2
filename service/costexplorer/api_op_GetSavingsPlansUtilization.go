@@ -67,6 +67,24 @@ type GetSavingsPlansUtilizationInput struct {
 	// Plans. The GetSavingsPlansUtilization operation supports only DAILY and MONTHLY
 	// granularities.
 	Granularity types.Granularity
+
+	// The value by which you want to sort the data. The following values are supported
+	// for Key:
+	//
+	// * UtilizationPercentage
+	//
+	// * TotalCommitment
+	//
+	// * UsedCommitment
+	//
+	// *
+	// UnusedCommitment
+	//
+	// * NetSavings
+	//
+	// Supported values for SortOrder are ASCENDING or
+	// DESCENDING.
+	SortBy *types.SortDefinition
 }
 
 type GetSavingsPlansUtilizationOutput struct {

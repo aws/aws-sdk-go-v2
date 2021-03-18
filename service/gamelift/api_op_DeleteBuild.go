@@ -16,18 +16,9 @@ import (
 // build. To delete a build, specify the build ID. Learn more  Upload a Custom
 // Server Build
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html)
-// Related operations
-//
-// * CreateBuild
-//
-// * ListBuilds
-//
-// * DescribeBuild
-//
-// *
-// UpdateBuild
-//
-// * DeleteBuild
+// Related actions CreateBuild | ListBuilds | DescribeBuild | UpdateBuild |
+// DeleteBuild | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DeleteBuild(ctx context.Context, params *DeleteBuildInput, optFns ...func(*Options)) (*DeleteBuildOutput, error) {
 	if params == nil {
 		params = &DeleteBuildInput{}
@@ -46,7 +37,7 @@ func (c *Client) DeleteBuild(ctx context.Context, params *DeleteBuildInput, optF
 // Represents the input for a request operation.
 type DeleteBuildInput struct {
 
-	// A unique identifier for a build to delete. You can use either the build ID or
+	// A unique identifier for the build to delete. You can use either the build ID or
 	// ARN value.
 	//
 	// This member is required.

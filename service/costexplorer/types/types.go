@@ -113,10 +113,12 @@ type AnomalyMonitor struct {
 	// an error.  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE",
 	// "Values": [ "DataTransfer" ] } }
 	//
-	// For GetRightsizingRecommendation action, a
+	// For the GetRightsizingRecommendation action, a
 	// combination of OR and NOT is not supported. OR is not supported between
 	// different dimensions, or dimensions and tags. NOT operators aren't supported.
-	// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
+	// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For
+	// the GetReservationPurchaseRecommendation action, only NOT is supported. AND and
+	// OR are not supported. Dimensions are limited to LINKED_ACCOUNT.
 	MonitorSpecification *Expression
 }
 
@@ -277,15 +279,20 @@ type CostCategoryRule struct {
 	Value *string
 }
 
-// The Cost Categories values used for filtering the costs.
+// The Cost Categories values used for filtering the costs. If Values and Key are
+// not specified, the ABSENTMatchOption is applied to all Cost Categories. That is,
+// filtering on resources that are not mapped to any Cost Categories. If Values is
+// provided and Key is not specified, the ABSENTMatchOption is applied to the Cost
+// Categories Key only. That is, filtering on resources without the given Cost
+// Categories key.
 type CostCategoryValues struct {
 
 	// The unique name of the Cost Category.
 	Key *string
 
 	// The match options that you can use to filter your results. MatchOptions is only
-	// applicable for only applicable for actions related to cost category. The default
-	// values for MatchOptions is EQUALS and CASE_SENSITIVE.
+	// applicable for actions related to cost category. The default values for
+	// MatchOptions is EQUALS and CASE_SENSITIVE.
 	MatchOptions []MatchOption
 
 	// The specific value of the Cost Category.
@@ -405,19 +412,20 @@ type CurrentInstance struct {
 	TotalRunningHoursInLookbackPeriod *string
 }
 
-// The time period that you want the usage and costs for.
+// The time period of the request.
 type DateInterval struct {
 
-	// The end of the time period that you want the usage and costs for. The end date
-	// is exclusive. For example, if end is 2017-05-01, AWS retrieves cost and usage
-	// data from the start date up to, but not including, 2017-05-01.
+	// The end of the time period. The end date is exclusive. For example, if end is
+	// 2017-05-01, AWS retrieves cost and usage data from the start date up to, but not
+	// including, 2017-05-01.
 	//
 	// This member is required.
 	End *string
 
-	// The beginning of the time period that you want the usage and costs for. The
-	// start date is inclusive. For example, if start is 2017-01-01, AWS retrieves cost
-	// and usage data starting at 2017-01-01 up to the end date.
+	// The beginning of the time period. The start date is inclusive. For example, if
+	// start is 2017-01-01, AWS retrieves cost and usage data starting at 2017-01-01 up
+	// to the end date. The start date must be equal to or no later than the current
+	// date to avoid a validation error.
 	//
 	// This member is required.
 	Start *string
@@ -624,10 +632,12 @@ type ESInstanceDetails struct {
 // an error.  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE",
 // "Values": [ "DataTransfer" ] } }
 //
-// For GetRightsizingRecommendation action, a
+// For the GetRightsizingRecommendation action, a
 // combination of OR and NOT is not supported. OR is not supported between
 // different dimensions, or dimensions and tags. NOT operators aren't supported.
-// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE.
+// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For
+// the GetReservationPurchaseRecommendation action, only NOT is supported. AND and
+// OR are not supported. Dimensions are limited to LINKED_ACCOUNT.
 type Expression struct {
 
 	// Return results that match both Dimension objects.
@@ -810,6 +820,12 @@ type ReservationAggregates struct {
 	// November 11, 2017.
 	PurchasedUnits *string
 
+	// The cost of unused hours for your reservation.
+	RICostForUnusedHours *string
+
+	// The realized savings due to purchasing and using a reservation.
+	RealizedSavings *string
+
 	// The total number of reservation hours that you used.
 	TotalActualHours *string
 
@@ -823,6 +839,9 @@ type ReservationAggregates struct {
 
 	// How much you could save if you use your entire reservation.
 	TotalPotentialRISavings *string
+
+	// The unrealized savings due to purchasing and using a reservation.
+	UnrealizedSavings *string
 
 	// The number of reservation hours that you didn't use.
 	UnusedHours *string
@@ -1146,7 +1165,7 @@ type SavingsPlansCoverage struct {
 	// The amount of Savings Plans eligible usage that the Savings Plans covered.
 	Coverage *SavingsPlansCoverageData
 
-	// The time period that you want the usage and costs for.
+	// The time period of the request.
 	TimePeriod *DateInterval
 }
 
@@ -1393,7 +1412,7 @@ type SavingsPlansUtilizationAggregates struct {
 // The amount of Savings Plans utilization, in hours.
 type SavingsPlansUtilizationByTime struct {
 
-	// The time period that you want the usage and costs for.
+	// The time period of the request.
 	//
 	// This member is required.
 	TimePeriod *DateInterval
@@ -1447,6 +1466,18 @@ type ServiceSpecification struct {
 	EC2Specification *EC2Specification
 }
 
+// The details of how to sort the data.
+type SortDefinition struct {
+
+	// The key by which to sort the data.
+	//
+	// This member is required.
+	Key *string
+
+	// The order in which to sort the data.
+	SortOrder SortOrder
+}
+
 // The recipient of AnomalySubscription notifications.
 type Subscriber struct {
 
@@ -1460,7 +1491,11 @@ type Subscriber struct {
 	Type SubscriberType
 }
 
-// The values that are available for a tag.
+// The values that are available for a tag. If Values and Key are not specified,
+// the ABSENTMatchOption is applied to all tags. That is, filtering on resources
+// with no tags. If Values is provided and Key is not specified, the
+// ABSENTMatchOption is applied to the tag Key only. That is, filtering on
+// resources without the given tag key.
 type TagValues struct {
 
 	// The key for the tag.

@@ -133,7 +133,7 @@ type Build struct {
 	// CodePipeline, the source revision provided by AWS CodePipeline.
 	//
 	// * For Amazon
-	// Simple Storage Service (Amazon S3), this does not apply.
+	// S3, this does not apply.
 	ResolvedSourceVersion *string
 
 	// An array of ProjectArtifacts objects.
@@ -157,8 +157,8 @@ type Build struct {
 	// commit ID is used. If not specified, the default branch's HEAD commit ID is
 	// used.
 	//
-	// * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-	// object that represents the build input ZIP file to use.
+	// * For Amazon S3: the version ID of the object that represents the build
+	// input ZIP file to use.
 	SecondarySourceVersions []ProjectSourceVersion
 
 	// An array of ProjectSource objects.
@@ -258,6 +258,12 @@ type BuildBatch struct {
 	// The current phase of the batch build.
 	CurrentPhase *string
 
+	// Specifies if session debugging is enabled for this batch build. For more
+	// information, see Viewing a running build in Session Manager
+	// (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
+	// Batch session debugging is not supported for matrix batch builds.
+	DebugSessionEnabled *bool
+
 	// The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used
 	// for encrypting the batch build output artifacts. You can use a cross-account KMS
 	// key to encrypt the build output artifacts if your service role has permission to
@@ -316,7 +322,7 @@ type BuildBatch struct {
 	// AWS CodePipeline, the source revision provided by AWS CodePipeline.
 	//
 	// * For
-	// Amazon Simple Storage Service (Amazon S3), this does not apply.
+	// Amazon S3, this does not apply.
 	ResolvedSourceVersion *string
 
 	// An array of BuildArtifacts objects the define the build artifacts for this batch
@@ -341,8 +347,8 @@ type BuildBatch struct {
 	// commit ID is used. If not specified, the default branch's HEAD commit ID is
 	// used.
 	//
-	// * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-	// object that represents the build input ZIP file to use.
+	// * For Amazon S3: the version ID of the object that represents the build
+	// input ZIP file to use.
 	SecondarySourceVersions []ProjectSourceVersion
 
 	// An array of ProjectSource objects that define the sources for the batch build.
@@ -376,7 +382,7 @@ type BuildBatchFilter struct {
 type BuildBatchPhase struct {
 
 	// Additional information about the batch build phase. Especially to help
-	// troubleshoot a failed btach build.
+	// troubleshoot a failed batch build.
 	Contexts []PhaseContext
 
 	// How long, in seconds, between the starting and ending times of the batch build's
@@ -839,6 +845,12 @@ type Project struct {
 	// Information about the cache for the build project.
 	Cache *ProjectCache
 
+	// The maximum number of concurrent builds that are allowed for this project. New
+	// builds are only started if the current number of builds is less than or equal to
+	// this limit. If the current build count meets this limit, new builds are
+	// throttled and are not run.
+	ConcurrentBuildLimit *int32
+
 	// When the build project was created, expressed in Unix time format.
 	Created *time.Time
 
@@ -911,13 +923,13 @@ type Project struct {
 	// build. If a branch name is specified, the branch's HEAD commit ID is used. If
 	// not specified, the default branch's HEAD commit ID is used.
 	//
-	// * For Amazon Simple
-	// Storage Service (Amazon S3): the version ID of the object that represents the
-	// build input ZIP file to use.
+	// * For Amazon S3:
+	// the version ID of the object that represents the build input ZIP file to
+	// use.
 	//
-	// If sourceVersion is specified at the build level,
-	// then that version takes precedence over this sourceVersion (at the project
-	// level). For more information, see Source Version Sample with CodeBuild
+	// If sourceVersion is specified at the build level, then that version takes
+	// precedence over this sourceVersion (at the project level). For more information,
+	// see Source Version Sample with CodeBuild
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string
@@ -953,7 +965,7 @@ type ProjectArtifacts struct {
 	// build project does not produce any build output.
 	//
 	// * S3: The build project stores
-	// build output in Amazon Simple Storage Service (Amazon S3).
+	// build output in Amazon S3.
 	//
 	// This member is required.
 	Type ArtifactsType
@@ -962,8 +974,8 @@ type ProjectArtifacts struct {
 	ArtifactIdentifier *string
 
 	// Set to true if you do not want your output artifacts encrypted. This option is
-	// valid only if your artifacts type is Amazon Simple Storage Service (Amazon S3).
-	// If this is set with another artifacts type, an invalidInputException is thrown.
+	// valid only if your artifacts type is Amazon S3. If this is set with another
+	// artifacts type, an invalidInputException is thrown.
 	EncryptionDisabled *bool
 
 	// Information about the build output artifact location:
@@ -1091,8 +1103,7 @@ type ProjectBadge struct {
 	BadgeEnabled bool
 
 	// The publicly-accessible URL through which you can access the build badge for
-	// your project. The publicly accessible URL through which you can access the build
-	// badge for your project.
+	// your project.
 	BadgeRequestUrl *string
 }
 
@@ -1256,9 +1267,9 @@ type ProjectEnvironment struct {
 	// This member is required.
 	Type EnvironmentType
 
-	// The ARN of the Amazon Simple Storage Service (Amazon S3) bucket, path prefix,
-	// and object key that contains the PEM-encoded certificate for the build project.
-	// For more information, see certificate
+	// The ARN of the Amazon S3 bucket, path prefix, and object key that contains the
+	// PEM-encoded certificate for the build project. For more information, see
+	// certificate
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate)
 	// in the AWS CodeBuild User Guide.
 	Certificate *string
@@ -1364,8 +1375,7 @@ type ProjectSource struct {
 	// * NO_SOURCE: The project does not have input
 	// source code.
 	//
-	// * S3: The source code is in an Amazon Simple Storage Service
-	// (Amazon S3) input bucket.
+	// * S3: The source code is in an Amazon S3 bucket.
 	//
 	// This member is required.
 	Type SourceType
@@ -1416,53 +1426,62 @@ type ProjectSource struct {
 	// https://git-codecommit..amazonaws.com/v1/repos/).
 	//
 	// * For source code in an
-	// Amazon Simple Storage Service (Amazon S3) input bucket, one of the following.
+	// Amazon S3 input bucket, one of the following.
 	//
-	// *
-	// The path to the ZIP file that contains the source code (for example, //.zip).
+	// * The path to the ZIP file that
+	// contains the source code (for example, //.zip).
 	//
-	// *
-	// The path to the folder that contains the source code (for example, ///).
+	// * The path to the folder that
+	// contains the source code (for example, ///).
 	//
-	// * For
-	// source code in a GitHub repository, the HTTPS clone URL to the repository that
-	// contains the source and the buildspec file. You must connect your AWS account to
-	// your GitHub account. Use the AWS CodeBuild console to start creating a build
-	// project. When you use the console to connect (or reconnect) with GitHub, on the
-	// GitHub Authorize application page, for Organization access, choose Request
-	// access next to each repository you want to allow AWS CodeBuild to have access
-	// to, and then choose Authorize application. (After you have connected to your
-	// GitHub account, you do not need to finish creating the build project. You can
-	// leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this
-	// connection, in the source object, set the auth object's type value to OAUTH.
-	//
-	// *
-	// For source code in a Bitbucket repository, the HTTPS clone URL to the repository
-	// that contains the source and the buildspec file. You must connect your AWS
-	// account to your Bitbucket account. Use the AWS CodeBuild console to start
-	// creating a build project. When you use the console to connect (or reconnect)
-	// with Bitbucket, on the Bitbucket Confirm access to your account page, choose
-	// Grant access. (After you have connected to your Bitbucket account, you do not
-	// need to finish creating the build project. You can leave the AWS CodeBuild
+	// * For source code in a GitHub
+	// repository, the HTTPS clone URL to the repository that contains the source and
+	// the buildspec file. You must connect your AWS account to your GitHub account.
+	// Use the AWS CodeBuild console to start creating a build project. When you use
+	// the console to connect (or reconnect) with GitHub, on the GitHub Authorize
+	// application page, for Organization access, choose Request access next to each
+	// repository you want to allow AWS CodeBuild to have access to, and then choose
+	// Authorize application. (After you have connected to your GitHub account, you do
+	// not need to finish creating the build project. You can leave the AWS CodeBuild
 	// console.) To instruct AWS CodeBuild to use this connection, in the source
 	// object, set the auth object's type value to OAUTH.
+	//
+	// * For source code in a
+	// Bitbucket repository, the HTTPS clone URL to the repository that contains the
+	// source and the buildspec file. You must connect your AWS account to your
+	// Bitbucket account. Use the AWS CodeBuild console to start creating a build
+	// project. When you use the console to connect (or reconnect) with Bitbucket, on
+	// the Bitbucket Confirm access to your account page, choose Grant access. (After
+	// you have connected to your Bitbucket account, you do not need to finish creating
+	// the build project. You can leave the AWS CodeBuild console.) To instruct AWS
+	// CodeBuild to use this connection, in the source object, set the auth object's
+	// type value to OAUTH.
 	Location *string
 
 	// Set to true to report the status of a build's start and finish to your source
 	// provider. This option is valid only when your source provider is GitHub, GitHub
 	// Enterprise, or Bitbucket. If this is set and you use a different source
-	// provider, an invalidInputException is thrown. The status of a build triggered by
-	// a webhook is always reported to your source provider.
+	// provider, an invalidInputException is thrown. To be able to report the build
+	// status to the source provider, the user associated with the source provider must
+	// have write access to the repo. If the user does not have write access, the build
+	// status cannot be updated. For more information, see Source provider access
+	// (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html) in
+	// the AWS CodeBuild User Guide. The status of a build triggered by a webhook is
+	// always reported to your source provider.
 	ReportBuildStatus *bool
 
-	// An identifier for this project source.
+	// An identifier for this project source. The identifier can only contain
+	// alphanumeric characters and underscores, and must be less than 128 characters in
+	// length.
 	SourceIdentifier *string
 }
 
 // A source identifier and its corresponding version.
 type ProjectSourceVersion struct {
 
-	// An identifier for a source in the build project.
+	// An identifier for a source in the build project. The identifier can only contain
+	// alphanumeric characters and underscores, and must be less than 128 characters in
+	// length.
 	//
 	// This member is required.
 	SourceIdentifier *string
@@ -1485,11 +1504,11 @@ type ProjectSourceVersion struct {
 	// commit ID is used. If not specified, the default branch's HEAD commit ID is
 	// used.
 	//
-	// * For Amazon Simple Storage Service (Amazon S3): the version ID of the
-	// object that represents the build input ZIP file to use.
+	// * For Amazon S3: the version ID of the object that represents the build
+	// input ZIP file to use.
 	//
-	// For more information,
-	// see Source Version Sample with CodeBuild
+	// For more information, see Source Version Sample with
+	// CodeBuild
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the AWS CodeBuild User Guide.
 	//
@@ -1601,7 +1620,7 @@ type ReportFilter struct {
 // files.
 type ReportGroup struct {
 
-	// The ARN of a ReportGroup.
+	// The ARN of the ReportGroup.
 	Arn *string
 
 	// The date and time this ReportGroup was created.
@@ -1614,9 +1633,12 @@ type ReportGroup struct {
 	// The date and time this ReportGroup was last modified.
 	LastModified *time.Time
 
-	// The name of a ReportGroup.
+	// The name of the ReportGroup.
 	Name *string
 
+	// The status of the report group. This property is read-only. This can be one of
+	// the following values: ACTIVE The report group is active. DELETING The report
+	// group is in the process of being deleted.
 	Status ReportGroupStatusType
 
 	// A list of tag key and value pairs associated with this report group. These tags
@@ -1624,27 +1646,38 @@ type ReportGroup struct {
 	// tags.
 	Tags []Tag
 
-	// The type of the ReportGroup. The one valid value is TEST.
+	// The type of the ReportGroup. This can be one of the following values:
+	// CODE_COVERAGE The report group contains code coverage reports. TEST The report
+	// group contains test reports.
 	Type ReportType
 }
 
+// Contains trend statistics for a set of reports. The actual values depend on the
+// type of trend being collected. For more information, see .
 type ReportGroupTrendStats struct {
+
+	// Contains the average of all values analyzed.
 	Average *string
 
+	// Contains the maximum value analyzed.
 	Max *string
 
+	// Contains the minimum value analyzed.
 	Min *string
 }
 
+// Contains the unmodified data for the report. For more information, see .
 type ReportWithRawData struct {
+
+	// The value of the requested data field from the report.
 	Data *string
 
+	// The ARN of the report.
 	ReportArn *string
 }
 
 // Represents a resolved build artifact. A resolve artifact is an artifact that is
-// built and deployed to the destination, such as Amazon Simple Storage Service
-// (Amazon S3).
+// built and deployed to the destination, such as Amazon S3.
 type ResolvedArtifact struct {
 
 	// The identifier of the artifact.
@@ -1686,6 +1719,11 @@ type S3ReportExportConfig struct {
 
 	// The name of the S3 bucket where the raw data of a report are exported.
 	Bucket *string
+
+	// The AWS account identifier of the owner of the Amazon S3 bucket. This allows
+	// report data to be exported to an Amazon S3 bucket that is owned by an account
+	// other than the account running the build.
+	BucketOwner *string
 
 	// A boolean value that specifies if the results of a report are encrypted.
 	EncryptionDisabled *bool

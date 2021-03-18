@@ -56,13 +56,13 @@ type GetServiceLastAccessedDetailsWithEntitiesInput struct {
 
 	// The service namespace for an AWS service. Provide the service namespace to learn
 	// when the IAM entity last attempted to access the specified service. To learn the
-	// service namespace for a service, go to Actions, Resources, and Condition Keys
-	// for AWS Services
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_actions-resources-contextkeys.html)
+	// service namespace for a service, see Actions, resources, and condition keys for
+	// AWS services
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
 	// in the IAM User Guide. Choose the name of the service to view details for that
 	// service. In the first paragraph, find the service prefix. For example, (service
-	// prefix: a4b). For more information about service namespaces, see AWS Service
-	// Namespaces
+	// prefix: a4b). For more information about service namespaces, see AWS service
+	// namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the AWS General Reference.
 	//

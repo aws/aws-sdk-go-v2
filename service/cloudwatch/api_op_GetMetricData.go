@@ -119,6 +119,11 @@ type GetMetricDataInput struct {
 	// This member is required.
 	StartTime *time.Time
 
+	// This structure includes the Timezone parameter, which you can use to specify
+	// your time zone so that the labels of returned data display the correct time for
+	// your time zone.
+	LabelOptions *types.LabelOptions
+
 	// The maximum number of data points the request should return before paginating.
 	// If you omit this, the default of 100,800 is used.
 	MaxDatapoints *int32

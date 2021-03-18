@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Starts a job to create a one-time copy of the specified resource.
+// Starts a job to create a one-time copy of the specified resource. Does not
+// support continuous backups.
 func (c *Client) StartCopyJob(ctx context.Context, params *StartCopyJobInput, optFns ...func(*Options)) (*StartCopyJobOutput, error) {
 	if params == nil {
 		params = &StartCopyJobInput{}
@@ -68,7 +69,8 @@ type StartCopyJobInput struct {
 	// Therefore, on the console, the “expire after days” setting must be 90 days
 	// greater than the “transition to cold after days” setting. The “transition to
 	// cold after days” setting cannot be changed after a backup has been transitioned
-	// to cold.
+	// to cold. Only Amazon EFS file system backups can be transitioned to cold
+	// storage.
 	Lifecycle *types.Lifecycle
 }
 
@@ -77,7 +79,7 @@ type StartCopyJobOutput struct {
 	// Uniquely identifies a copy job.
 	CopyJobId *string
 
-	// The date and time that a copy job is started, in Unix format and Coordinated
+	// The date and time that a copy job is created, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
 	// example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.

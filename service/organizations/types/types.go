@@ -11,8 +11,8 @@ type Account struct {
 
 	// The Amazon Resource Name (ARN) of the account. For more information about ARNs
 	// in Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// in the AWS Service Authorization Reference.
 	Arn *string
 
 	// The email address associated with the AWS account. The regex pattern
@@ -89,15 +89,23 @@ type CreateAccountStatus struct {
 	// another AWS account with that email address already exists.
 	//
 	// *
-	// GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The account in the AWS GovCloud (US) Region
-	// could not be created because this Region already includes an account with that
-	// email address.
+	// FAILED_BUSINESS_VALIDATION: The AWS account that owns your organization failed
+	// to receive business license validation.
 	//
-	// * INVALID_ADDRESS: The account could not be created because the
-	// address you provided is not valid.
+	// * GOVCLOUD_ACCOUNT_ALREADY_EXISTS: The
+	// account in the AWS GovCloud (US) Region could not be created because this Region
+	// already includes an account with that email address.
 	//
-	// * INVALID_EMAIL: The account could not be
-	// created because the email address you provided is not valid.
+	// *
+	// IDENTITY_INVALID_BUSINESS_VALIDATION: The AWS account that owns your
+	// organization can't complete business license validation because it doesn't have
+	// valid identity data.
+	//
+	// * INVALID_ADDRESS: The account could not be created
+	// because the address you provided is not valid.
+	//
+	// * INVALID_EMAIL: The account
+	// could not be created because the email address you provided is not valid.
 	//
 	// *
 	// INTERNAL_FAILURE: The account could not be created because of an internal
@@ -109,6 +117,14 @@ type CreateAccountStatus struct {
 	//
 	// * MISSING_PAYMENT_INSTRUMENT: You must configure
 	// the management account with a valid payment method, such as a credit card.
+	//
+	// *
+	// PENDING_BUSINESS_VALIDATION: The AWS account that owns your organization is
+	// still in the process of completing business license validation.
+	//
+	// *
+	// UNKNOWN_BUSINESS_VALIDATION: The AWS account that owns your organization has an
+	// unknown issue with business license validation.
 	FailureReason CreateAccountFailureReason
 
 	// If the account was created successfully, the unique identifier (ID) of the new
@@ -233,8 +249,8 @@ type Handshake struct {
 
 	// The Amazon Resource Name (ARN) of a handshake. For more information about ARNs
 	// in Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// in the AWS Service Authorization Reference.
 	Arn *string
 
 	// The date and time that the handshake expires. If the recipient of the handshake
@@ -358,8 +374,8 @@ type Organization struct {
 
 	// The Amazon Resource Name (ARN) of an organization. For more information about
 	// ARNs in Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// in the AWS Service Authorization Reference.
 	Arn *string
 
 	// Do not use. This field is deprecated and doesn't provide complete information
@@ -385,8 +401,8 @@ type Organization struct {
 	// The Amazon Resource Name (ARN) of the account that is designated as the
 	// management account for the organization. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// in the AWS Service Authorization Reference.
 	MasterAccountArn *string
 
 	// The email address that is associated with the AWS account that is designated as
@@ -406,8 +422,8 @@ type OrganizationalUnit struct {
 
 	// The Amazon Resource Name (ARN) of this OU. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// in the AWS Service Authorization Reference.
 	Arn *string
 
 	// The unique identifier (ID) associated with this OU. The regex pattern
@@ -462,8 +478,8 @@ type PolicySummary struct {
 
 	// The Amazon Resource Name (ARN) of the policy. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// in the AWS Service Authorization Reference.
 	Arn *string
 
 	// A boolean value that indicates whether the specified policy is an AWS managed
@@ -494,8 +510,8 @@ type PolicyTargetSummary struct {
 
 	// The Amazon Resource Name (ARN) of the policy target. For more information about
 	// ARNs in Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// in the AWS Service Authorization Reference.
 	Arn *string
 
 	// The friendly name of the policy target. The regex pattern
@@ -542,8 +558,8 @@ type Root struct {
 
 	// The Amazon Resource Name (ARN) of the root. For more information about ARNs in
 	// Organizations, see ARN Formats Supported by Organizations
-	// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_permissions.html#orgs-permissions-arns)
-	// in the AWS Organizations User Guide.
+	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsorganizations.html#awsorganizations-resources-for-iam-policies)
+	// in the AWS Service Authorization Reference.
 	Arn *string
 
 	// The unique identifier (ID) for the root. The regex pattern

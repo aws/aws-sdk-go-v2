@@ -80,12 +80,6 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "cn-northwest-1",
 				},
 			},
-			"fips-aws-cn-global": endpoints.Endpoint{
-				Hostname: "organizations.cn-northwest-1.amazonaws.com.cn",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "cn-northwest-1",
-				},
-			},
 		},
 	},
 	{

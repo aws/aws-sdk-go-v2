@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Returns the definition of a specific AWS Glue DataBrew recipe that is in the
-// current AWS account.
+// Returns the definition of a specific DataBrew recipe corresponding to a
+// particular version.
 func (c *Client) DescribeRecipe(ctx context.Context, params *DescribeRecipeInput, optFns ...func(*Options)) (*DescribeRecipeOutput, error) {
 	if params == nil {
 		params = &DescribeRecipeInput{}

@@ -22,7 +22,7 @@ import (
 // types include resource-based policies, access control lists, AWS Organizations
 // policies, IAM permissions boundaries, and AWS STS assume role policies. It only
 // applies permissions policy logic. For more about the evaluation of policy types,
-// see Evaluating Policies
+// see Evaluating policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics)
 // in the IAM User Guide. For each service that the resource could access using
 // permissions policies, the operation returns details about the most recent access
@@ -53,7 +53,7 @@ import (
 // includes the most recent access attempt for each tracked action within a
 // service. Otherwise, this operation returns only service data. For more
 // information about service and action last accessed data, see Reducing
-// Permissions Using Service Last Accessed Data
+// permissions using service last accessed data
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
 // in the IAM User Guide.
 func (c *Client) GetServiceLastAccessedDetails(ctx context.Context, params *GetServiceLastAccessedDetailsInput, optFns ...func(*Options)) (*GetServiceLastAccessedDetailsOutput, error) {

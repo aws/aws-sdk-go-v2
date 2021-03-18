@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a profiling group.
+// Returns a ProfilingGroupDescription
+// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+// object that contains information about the requested profiling group.
 func (c *Client) DescribeProfilingGroup(ctx context.Context, params *DescribeProfilingGroupInput, optFns ...func(*Options)) (*DescribeProfilingGroupOutput, error) {
 	if params == nil {
 		params = &DescribeProfilingGroupInput{}
@@ -30,7 +32,7 @@ func (c *Client) DescribeProfilingGroup(ctx context.Context, params *DescribePro
 // The structure representing the describeProfilingGroupRequest.
 type DescribeProfilingGroupInput struct {
 
-	// The profiling group name.
+	// The name of the profiling group to get information about.
 	//
 	// This member is required.
 	ProfilingGroupName *string
@@ -39,7 +41,9 @@ type DescribeProfilingGroupInput struct {
 // The structure representing the describeProfilingGroupResponse.
 type DescribeProfilingGroupOutput struct {
 
-	// Information about a profiling group.
+	// The returned ProfilingGroupDescription
+	// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
+	// object that contains information about the requested profiling group.
 	//
 	// This member is required.
 	ProfilingGroup *types.ProfilingGroupDescription

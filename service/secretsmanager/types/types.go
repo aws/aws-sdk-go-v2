@@ -6,14 +6,46 @@ import (
 	"time"
 )
 
-// Allows you to filter your list of secrets.
+// Allows you to add filters when you use the search function in Secrets Manager.
 type Filter struct {
 
 	// Filters your list of secrets by a specific key.
 	Key FilterNameStringType
 
-	// Filters your list of secrets by a specific value.
+	// Filters your list of secrets by a specific value. You can prefix your search
+	// value with an exclamation mark (!) in order to perform negation filters.
 	Values []string
+}
+
+// (Optional) Custom type consisting of a Region (required) and the KmsKeyId which
+// can be an ARN, Key ID, or Alias.
+type ReplicaRegionType struct {
+
+	// Can be an ARN, Key ID, or Alias.
+	KmsKeyId *string
+
+	// Describes a single instance of Region objects.
+	Region *string
+}
+
+// A replication object consisting of a RegionReplicationStatus object and includes
+// a Region, KMSKeyId, status, and status message.
+type ReplicationStatusType struct {
+
+	// Can be an ARN, Key ID, or Alias.
+	KmsKeyId *string
+
+	// The date that you last accessed the secret in the Region.
+	LastAccessedDate *time.Time
+
+	// The Region where replication occurs.
+	Region *string
+
+	// The status can be InProgress, Failed, or InSync.
+	Status StatusType
+
+	// Status message such as "Secret with this name already exists in this region".
+	StatusMessage *string
 }
 
 // A structure that defines the rotation configuration for the secret.
@@ -65,7 +97,8 @@ type SecretListEntry struct {
 	// The last date and time that this secret was modified in any way.
 	LastChangedDate *time.Time
 
-	// The last date and time that the rotation process for this secret was invoked.
+	// The most recent date and time that the Secrets Manager rotation process was
+	// successfully completed. This value is null if the secret hasn't ever rotated.
 	LastRotatedDate *time.Time
 
 	// The friendly name of the secret. You can use forward slashes in the name to
@@ -76,6 +109,9 @@ type SecretListEntry struct {
 
 	// Returns the name of the service that created the secret.
 	OwningService *string
+
+	// The Region where Secrets Manager originated the secret.
+	PrimaryRegion *string
 
 	// Indicates whether automatic, scheduled rotation is enabled for this secret.
 	RotationEnabled bool

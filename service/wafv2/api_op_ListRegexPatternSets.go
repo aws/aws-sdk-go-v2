@@ -11,10 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Retrieves an array of RegexPatternSetSummary objects for the regex pattern sets
 // that you manage.
 func (c *Client) ListRegexPatternSets(ctx context.Context, params *ListRegexPatternSetsInput, optFns ...func(*Options)) (*ListRegexPatternSetsOutput, error) {

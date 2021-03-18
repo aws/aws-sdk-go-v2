@@ -69,6 +69,12 @@ type StartBuildBatchInput struct {
 	// in the batch build project.
 	ComputeTypeOverride types.ComputeType
 
+	// Specifies if session debugging is enabled for this batch build. For more
+	// information, see Viewing a running build in Session Manager
+	// (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
+	// Batch session debugging is not supported for matrix batch builds.
+	DebugSessionEnabled *bool
+
 	// The AWS Key Management Service (AWS KMS) customer master key (CMK) that
 	// overrides the one specified in the batch build project. The CMK key encrypts the
 	// build output artifacts. You can use a cross-account KMS key to encrypt the build
@@ -179,11 +185,10 @@ type StartBuildBatchInput struct {
 	// branch's HEAD commit ID is used. Bitbucket The commit ID, branch name, or tag
 	// name that corresponds to the version of the source code you want to build. If a
 	// branch name is specified, the branch's HEAD commit ID is used. If not specified,
-	// the default branch's HEAD commit ID is used. Amazon Simple Storage Service
-	// (Amazon S3) The version ID of the object that represents the build input ZIP
-	// file to use. If sourceVersion is specified at the project level, then this
-	// sourceVersion (at the build level) takes precedence. For more information, see
-	// Source Version Sample with CodeBuild
+	// the default branch's HEAD commit ID is used. Amazon S3 The version ID of the
+	// object that represents the build input ZIP file to use. If sourceVersion is
+	// specified at the project level, then this sourceVersion (at the build level)
+	// takes precedence. For more information, see Source Version Sample with CodeBuild
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string

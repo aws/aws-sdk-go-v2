@@ -35,3 +35,21 @@ func (StorageClass) Values() []StorageClass {
 		"TEMPORAL",
 	}
 }
+
+type UploadAvailability string
+
+// Enum values for UploadAvailability
+const (
+	UploadAvailabilityStandard  UploadAvailability = "STANDARD"
+	UploadAvailabilityStreaming UploadAvailability = "STREAMING"
+)
+
+// Values returns all known values for UploadAvailability. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UploadAvailability) Values() []UploadAvailability {
+	return []UploadAvailability{
+		"STANDARD",
+		"STREAMING",
+	}
+}

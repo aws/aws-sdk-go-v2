@@ -70,6 +70,9 @@ type CreateNetworkProfileInput struct {
 	// network changes to NextPassword.
 	NextPassword *string
 
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []types.Tag
+
 	// The root certificates of your authentication server that is installed on your
 	// devices and used to trust your authentication server during EAP negotiation.
 	TrustAnchors []string

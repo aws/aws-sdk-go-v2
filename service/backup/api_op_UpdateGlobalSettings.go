@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the current global settings for the AWS Account. Use the
+// Updates the current global settings for the AWS account. Use the
 // DescribeGlobalSettings API to determine the current settings.
 func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalSettingsInput, optFns ...func(*Options)) (*UpdateGlobalSettingsOutput, error) {
 	if params == nil {

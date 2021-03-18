@@ -36,17 +36,24 @@ type PutPlaybackConfigurationInput struct {
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
-	// The configuration for Avail Suppression. Ad suppression can be used to turn off
-	// ad personalization in a long manifest, or if a viewer joins mid-break.
+	// The configuration for avail suppression, also known as ad suppression. For more
+	// information about ad suppression, see Ad Suppression
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
 	AvailSuppression *types.AvailSuppression
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
-	// at the start or before the end of an ad break.
+	// at the start or before the end of an ad break. To learn more about bumpers, see
+	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *types.CdnConfiguration
+
+	// The player parameters and aliases used as dynamic variables during session
+	// initialization. For more information, see Domain Variables
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html).
+	ConfigurationAliases map[string]map[string]string
 
 	// The configuration for DASH content.
 	DashConfiguration *types.DashConfigurationForPut
@@ -61,7 +68,14 @@ type PutPlaybackConfigurationInput struct {
 	// The identifier for the playback configuration.
 	Name *string
 
-	// The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+	// Defines the maximum duration of underfilled ad time (in seconds) allowed in an
+	// ad break. If the duration of underfilled ad time exceeds the personalization
+	// threshold, then the personalization of the ad break is abandoned and the
+	// underlying content is shown. This feature applies to ad replacement in live and
+	// VOD streams, rather than ad insertion, because it relies on an underlying
+	// content stream. For more information about ad break behavior, including ad
+	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
 	PersonalizationThresholdSeconds int32
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
@@ -81,7 +95,7 @@ type PutPlaybackConfigurationInput struct {
 	// help of AWS Support.
 	TranscodeProfileName *string
 
-	// The URL prefix for the master playlist for the stream, minus the asset ID. The
+	// The URL prefix for the parent manifest for the stream, minus the asset ID. The
 	// maximum length is 512 characters.
 	VideoContentSourceUrl *string
 }
@@ -95,17 +109,24 @@ type PutPlaybackConfigurationOutput struct {
 	// VAST URL. The maximum length is 25,000 characters.
 	AdDecisionServerUrl *string
 
-	// The configuration for Avail Suppression. Ad suppression can be used to turn off
-	// ad personalization in a long manifest, or if a viewer joins mid-break.
+	// The configuration for avail suppression, also known as ad suppression. For more
+	// information about ad suppression, see Ad Suppression
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
 	AvailSuppression *types.AvailSuppression
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
-	// at the start or before the end of an ad break.
+	// at the start or before the end of an ad break. To learn more about bumpers, see
+	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html).
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
 	// CloudFront, for content and ad segment management.
 	CdnConfiguration *types.CdnConfiguration
+
+	// The player parameters and aliases used as dynamic variables during session
+	// initialization. For more information, see Domain Variables
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html).
+	ConfigurationAliases map[string]map[string]string
 
 	// The configuration for DASH content.
 	DashConfiguration *types.DashConfiguration
@@ -123,7 +144,14 @@ type PutPlaybackConfigurationOutput struct {
 	// The identifier for the playback configuration.
 	Name *string
 
-	// The maximum duration of underfilled ad time (in seconds) allowed in an ad break.
+	// Defines the maximum duration of underfilled ad time (in seconds) allowed in an
+	// ad break. If the duration of underfilled ad time exceeds the personalization
+	// threshold, then the personalization of the ad break is abandoned and the
+	// underlying content is shown. This feature applies to ad replacement in live and
+	// VOD streams, rather than ad insertion, because it relies on an underlying
+	// content stream. For more information about ad break behavior, including ad
+	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor
+	// (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html).
 	PersonalizationThresholdSeconds int32
 
 	// The Amazon Resource Name (ARN) for the playback configuration.
@@ -154,7 +182,7 @@ type PutPlaybackConfigurationOutput struct {
 	// help of AWS Support.
 	TranscodeProfileName *string
 
-	// The URL prefix for the master playlist for the stream, minus the asset ID. The
+	// The URL prefix for the parent manifest for the stream, minus the asset ID. The
 	// maximum length is 512 characters.
 	VideoContentSourceUrl *string
 

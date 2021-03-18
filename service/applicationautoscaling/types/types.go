@@ -86,7 +86,7 @@ type MetricDimension struct {
 // Application Auto Scaling. Only the AWS services that you're using send metrics
 // to Amazon CloudWatch. To determine whether a desired metric already exists by
 // looking up its namespace and dimension using the CloudWatch metrics dashboard in
-// the console, follow the procedure in Building Dashboards with CloudWatch
+// the console, follow the procedure in Building dashboards with CloudWatch
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html)
 // in the Application Auto Scaling User Guide.
 type PredefinedMetricSpecification struct {
@@ -760,13 +760,15 @@ type ScheduledAction struct {
 	// * Cron expressions - "cron(fields)"
 	//
 	// At expressions are useful for
-	// one-time schedules. Specify the time in UTC. For rate expressions, value is a
-	// positive integer and unit is minute | minutes | hour | hours | day | days. For
-	// more information about cron expressions, see Cron Expressions
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
-	// in the Amazon CloudWatch Events User Guide. For examples of using these
-	// expressions, see Scheduled Scaling
-	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scheduled-scaling.html)
+	// one-time schedules. Cron expressions are useful for scheduled actions that run
+	// periodically at a specified date and time, and rate expressions are useful for
+	// scheduled actions that run at a regular interval. At and cron expressions use
+	// Universal Coordinated Time (UTC) by default. The cron format consists of six
+	// fields separated by white spaces: [Minutes] [Hours] [Day_of_Month] [Month]
+	// [Day_of_Week] [Year]. For rate expressions, value is a positive integer and unit
+	// is minute | minutes | hour | hours | day | days. For more information and
+	// examples, see Example scheduled actions for Application Auto Scaling
+	// (https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html)
 	// in the Application Auto Scaling User Guide.
 	//
 	// This member is required.
@@ -788,7 +790,7 @@ type ScheduledAction struct {
 	// This member is required.
 	ServiceNamespace ServiceNamespace
 
-	// The date and time that the action is scheduled to end.
+	// The date and time that the action is scheduled to end, in UTC.
 	EndTime *time.Time
 
 	// The scalable dimension. This string consists of the service namespace, resource
@@ -862,8 +864,12 @@ type ScheduledAction struct {
 	// the maximum capacity.
 	ScalableTargetAction *ScalableTargetAction
 
-	// The date and time that the action is scheduled to begin.
+	// The date and time that the action is scheduled to begin, in UTC.
 	StartTime *time.Time
+
+	// The time zone used when referring to the date and time of a scheduled action,
+	// when the scheduled action uses an at or cron expression.
+	Timezone *string
 }
 
 // Represents a step adjustment for a StepScalingPolicyConfiguration
@@ -987,7 +993,7 @@ type StepScalingPolicyConfiguration struct {
 	// * Amazon Keyspaces tables
 	//
 	// * Amazon
-	// MSK cluster storage
+	// MSK broker storage
 	Cooldown *int32
 
 	// The aggregation type for the CloudWatch metrics. Valid values are Minimum,
@@ -1034,8 +1040,12 @@ type SuspendedState struct {
 // Application Auto Scaling.
 type TargetTrackingScalingPolicyConfiguration struct {
 
-	// The target value for the metric. The range is 8.515920e-109 to 1.174271e+108
-	// (Base 10) or 2e-360 to 2e360 (Base 2).
+	// The target value for the metric. Although this property accepts numbers of type
+	// Double, it won't accept values that are either too small or too large. Values
+	// must be in the range of -2^360 to 2^360. The value must be a valid number based
+	// on the choice of metric. For example, if the metric is CPU utilization, then the
+	// target value is a percent value that represents how much of the CPU can be used
+	// before scaling out.
 	//
 	// This member is required.
 	TargetValue *float64
@@ -1096,7 +1106,7 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	//
 	// * Amazon Keyspaces tables
 	//
-	// * Amazon MSK cluster
+	// * Amazon MSK broker
 	// storage
 	ScaleInCooldown *int32
 
@@ -1143,6 +1153,6 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	// * Amazon Keyspaces tables
 	//
 	// * Amazon
-	// MSK cluster storage
+	// MSK broker storage
 	ScaleOutCooldown *int32
 }

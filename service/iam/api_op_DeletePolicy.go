@@ -17,9 +17,9 @@ import (
 //
 // * Detach
 // the policy from all users, groups, and roles that the policy is attached to,
-// using the DetachUserPolicy, DetachGroupPolicy, or DetachRolePolicy API
-// operations. To list all the users, groups, and roles that a policy is attached
-// to, use ListEntitiesForPolicy.
+// using DetachUserPolicy, DetachGroupPolicy, or DetachRolePolicy. To list all the
+// users, groups, and roles that a policy is attached to, use
+// ListEntitiesForPolicy.
 //
 // * Delete all versions of the policy using
 // DeletePolicyVersion. To list the policy's versions, use ListPolicyVersions. You
@@ -28,10 +28,10 @@ import (
 // process.
 //
 // * Delete the policy (this automatically deletes the policy's default
-// version) using this API.
+// version) using this operation.
 //
-// For information about managed policies, see Managed
-// Policies and Inline Policies
+// For information about managed policies, see
+// Managed policies and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
@@ -52,8 +52,7 @@ func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, op
 type DeletePolicyInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM policy you want to delete. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
+	// information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//

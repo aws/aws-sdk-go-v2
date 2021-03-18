@@ -86,8 +86,9 @@ type DataCatalog struct {
 	// This member is required.
 	Name *string
 
-	// The type of data catalog: LAMBDA for a federated catalog, GLUE for AWS Glue
-	// Catalog, or HIVE for an external hive metastore.
+	// The type of data catalog: LAMBDA for a federated catalog or HIVE for an external
+	// hive metastore. GLUE refers to the AwsDataCatalog that already exists in your
+	// account, of which you can have only one.
 	//
 	// This member is required.
 	Type DataCatalogType
@@ -114,9 +115,6 @@ type DataCatalog struct {
 	// * If you
 	// have a composite Lambda function that processes both metadata and data, use the
 	// following syntax to specify your Lambda function. function=lambda_arn
-	//
-	// * The
-	// GLUE type has no parameters.
 	Parameters map[string]string
 }
 
@@ -155,6 +153,22 @@ type EncryptionConfiguration struct {
 	KmsKey *string
 }
 
+// The Athena engine version for running queries.
+type EngineVersion struct {
+
+	// Read only. The engine version on which the query runs. If the user requests a
+	// valid engine version other than Auto, the effective engine version is the same
+	// as the engine version that the user requested. If the user requests Auto, the
+	// effective engine version is chosen by Athena. When a request to update the
+	// engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the
+	// EffectiveEngineVersion field is ignored.
+	EffectiveEngineVersion *string
+
+	// The engine version requested by the user. Possible values are determined by the
+	// output of ListEngineVersions, including Auto. The default is Auto.
+	SelectedEngineVersion *string
+}
+
 // A query, where QueryString is the list of SQL query statements that comprise the
 // query.
 type NamedQuery struct {
@@ -184,8 +198,40 @@ type NamedQuery struct {
 	WorkGroup *string
 }
 
+// A prepared SQL statement for use with Athena.
+type PreparedStatement struct {
+
+	// The description of the prepared statement.
+	Description *string
+
+	// The last modified time of the prepared statement.
+	LastModifiedTime *time.Time
+
+	// The query string for the prepared statement.
+	QueryStatement *string
+
+	// The name of the prepared statement.
+	StatementName *string
+
+	// The name of the workgroup to which the prepared statement belongs.
+	WorkGroupName *string
+}
+
+// The name and last modified time of the prepared statement.
+type PreparedStatementSummary struct {
+
+	// The last modified time of the prepared statement.
+	LastModifiedTime *time.Time
+
+	// The name of the prepared statement.
+	StatementName *string
+}
+
 // Information about a single instance of a query execution.
 type QueryExecution struct {
+
+	// The engine version that executed the query.
+	EngineVersion *EngineVersion
 
 	// The SQL query statements which the query execution ran.
 	Query *string
@@ -528,6 +574,11 @@ type WorkGroupConfiguration struct {
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	EnforceWorkGroupConfiguration *bool
 
+	// The engine version that all queries running on the workgroup use. Queries on the
+	// AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless
+	// of this setting.
+	EngineVersion *EngineVersion
+
 	// Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 	PublishCloudWatchMetricsEnabled *bool
 
@@ -569,6 +620,13 @@ type WorkGroupConfigurationUpdates struct {
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	EnforceWorkGroupConfiguration *bool
 
+	// The engine version requested when a workgroup is updated. After the update, all
+	// queries on the workgroup run on the requested engine version. If no value was
+	// previously set, the default is Auto. Queries on the
+	// AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless
+	// of this setting.
+	EngineVersion *EngineVersion
+
 	// Indicates whether this workgroup enables publishing metrics to Amazon
 	// CloudWatch.
 	PublishCloudWatchMetricsEnabled *bool
@@ -601,6 +659,11 @@ type WorkGroupSummary struct {
 
 	// The workgroup description.
 	Description *string
+
+	// The engine version setting for all queries on the workgroup. Queries on the
+	// AmazonAthenaPreviewFunctionality workgroup run on the preview engine regardless
+	// of this setting.
+	EngineVersion *EngineVersion
 
 	// The name of the workgroup.
 	Name *string

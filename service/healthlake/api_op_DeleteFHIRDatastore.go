@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a datastore.
+// Deletes a Data Store.
 func (c *Client) DeleteFHIRDatastore(ctx context.Context, params *DeleteFHIRDatastoreInput, optFns ...func(*Options)) (*DeleteFHIRDatastoreOutput, error) {
 	if params == nil {
 		params = &DeleteFHIRDatastoreInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeleteFHIRDatastore(ctx context.Context, params *DeleteFHIRData
 
 type DeleteFHIRDatastoreInput struct {
 
-	// The AWS-generated ID for the datastore to be deleted.
+	// The AWS-generated ID for the Data Store to be deleted.
 	DatastoreId *string
 }
 
@@ -40,17 +40,17 @@ type DeleteFHIRDatastoreOutput struct {
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the datastore the user has requested to be deleted.
+	// The AWS endpoint for the Data Store the user has requested to be deleted.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
 
-	// The AWS-generated ID for the datastore to be deleted.
+	// The AWS-generated ID for the Data Store to be deleted.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The status of the datastore that the user has requested to be deleted.
+	// The status of the Data Store that the user has requested to be deleted.
 	//
 	// This member is required.
 	DatastoreStatus types.DatastoreStatus

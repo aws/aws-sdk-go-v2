@@ -30,7 +30,7 @@ func (c *Client) DescribeAppInstance(ctx context.Context, params *DescribeAppIns
 
 type DescribeAppInstanceInput struct {
 
-	// The ARN of the app instance.
+	// The ARN of the AppInstance.
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -38,8 +38,8 @@ type DescribeAppInstanceInput struct {
 
 type DescribeAppInstanceOutput struct {
 
-	// The ARN, metadata, created and last-updated timestamps, and the name of the app
-	// instance. All timestamps use epoch milliseconds.
+	// The ARN, metadata, created and last-updated timestamps, and the name of the
+	// AppInstance. All timestamps use epoch milliseconds.
 	AppInstance *types.AppInstance
 
 	// Metadata pertaining to the operation's result.

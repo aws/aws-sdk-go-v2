@@ -53,8 +53,9 @@ type ModifyClusterInput struct {
 	// can still create manual snapshots when you want with CreateClusterSnapshot. If
 	// you decrease the automated snapshot retention period from its current value,
 	// existing automated snapshots that fall outside of the new retention period will
-	// be immediately deleted. Default: Uses existing setting. Constraints: Must be a
-	// value from 0 to 35.
+	// be immediately deleted. You can't disable automated snapshots for RA3 node
+	// types. Set the automated retention period from 1-35 days. Default: Uses existing
+	// setting. Constraints: Must be a value from 0 to 35.
 	AutomatedSnapshotRetentionPeriod *int32
 
 	// The option to initiate relocation for an Amazon Redshift cluster to the target

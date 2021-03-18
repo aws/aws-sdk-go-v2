@@ -64,6 +64,11 @@ type UpdateFunctionInput struct {
 
 	// The Function request mapping template.
 	ResponseMappingTemplate *string
+
+	// Describes a Sync configuration for a resolver. Contains information on which
+	// Conflict Detection as well as Resolution strategy should be performed when the
+	// resolver is invoked.
+	SyncConfig *types.SyncConfig
 }
 
 type UpdateFunctionOutput struct {

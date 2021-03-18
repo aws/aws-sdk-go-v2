@@ -17,8 +17,8 @@ import (
 // CreateParticipantConnection
 // (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
 // API in the Amazon Connect Participant Service. When a new chat contact is
-// successfully created, clients need to subscribe to the participant’s connection
-// for the created chat within 5 minutes. This is achieved by invoking
+// successfully created, clients must subscribe to the participant’s connection for
+// the created chat within 5 minutes. This is achieved by invoking
 // CreateParticipantConnection
 // (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
 // with WEBSOCKET and CONNECTION_CREDENTIALS. A 429 error occurs in two
@@ -33,7 +33,7 @@ import (
 // is exceeded. Active chat throttling returns a LimitExceededException.
 //
 // For more
-// information about how chat works, see Chat
+// information about chat, see Chat
 // (https://docs.aws.amazon.com/connect/latest/adminguide/chat.html) in the Amazon
 // Connect Administrator Guide.
 func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactInput, optFns ...func(*Options)) (*StartChatContactOutput, error) {
@@ -74,7 +74,7 @@ type StartChatContactInput struct {
 	ParticipantDetails *types.ParticipantDetails
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes, and can be accessed in contact flows just like any
+	// Amazon Connect attributes. They can be accessed in contact flows just like any
 	// other contact attributes. There can be up to 32,768 UTF-8 bytes across all
 	// key-value pairs per contact. Attribute keys can include only alphanumeric, dash,
 	// and underscore characters.

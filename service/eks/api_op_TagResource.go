@@ -16,7 +16,7 @@ import (
 // resource are deleted as well. Tags that you create for Amazon EKS resources do
 // not propagate to any other resources associated with the cluster. For example,
 // if you tag a cluster with this operation, that tag does not automatically
-// propagate to the subnets and worker nodes associated with the cluster.
+// propagate to the subnets and nodes associated with the cluster.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}

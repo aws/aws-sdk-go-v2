@@ -3274,6 +3274,19 @@ func awsAwsquery_serializeDocumentBlockDeviceMappings(v []types.BlockDeviceMappi
 	return nil
 }
 
+func awsAwsquery_serializeDocumentCheckpointPercentages(v []int32, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentClassicLinkVPCSecurityGroups(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -3793,6 +3806,18 @@ func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences
 	object := value.Object()
 	_ = object
 
+	if v.CheckpointDelay != nil {
+		objectKey := object.Key("CheckpointDelay")
+		objectKey.Integer(*v.CheckpointDelay)
+	}
+
+	if v.CheckpointPercentages != nil {
+		objectKey := object.Key("CheckpointPercentages")
+		if err := awsAwsquery_serializeDocumentCheckpointPercentages(v.CheckpointPercentages, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.InstanceWarmup != nil {
 		objectKey := object.Key("InstanceWarmup")
 		objectKey.Integer(*v.InstanceWarmup)
@@ -3856,6 +3881,11 @@ func awsAwsquery_serializeDocumentScheduledUpdateGroupActionRequest(v *types.Sch
 	if v.StartTime != nil {
 		objectKey := object.Key("StartTime")
 		objectKey.String(smithytime.FormatDateTime(*v.StartTime))
+	}
+
+	if v.TimeZone != nil {
+		objectKey := object.Key("TimeZone")
+		objectKey.String(*v.TimeZone)
 	}
 
 	return nil
@@ -4797,6 +4827,11 @@ func awsAwsquery_serializeOpDocumentDescribeScalingActivitiesInput(v *DescribeSc
 		objectKey.String(*v.AutoScalingGroupName)
 	}
 
+	if v.IncludeDeletedGroups != nil {
+		objectKey := object.Key("IncludeDeletedGroups")
+		objectKey.Boolean(*v.IncludeDeletedGroups)
+	}
+
 	if v.MaxRecords != nil {
 		objectKey := object.Key("MaxRecords")
 		objectKey.Integer(*v.MaxRecords)
@@ -5247,6 +5282,11 @@ func awsAwsquery_serializeOpDocumentPutScheduledUpdateGroupActionInput(v *PutSch
 	if v.Time != nil {
 		objectKey := object.Key("Time")
 		objectKey.String(smithytime.FormatDateTime(*v.Time))
+	}
+
+	if v.TimeZone != nil {
+		objectKey := object.Key("TimeZone")
+		objectKey.String(*v.TimeZone)
 	}
 
 	return nil

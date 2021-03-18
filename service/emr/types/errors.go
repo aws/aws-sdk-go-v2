@@ -25,7 +25,8 @@ func (e *InternalServerError) ErrorMessage() string {
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// This exception occurs when there is an internal failure in the EMR service.
+// This exception occurs when there is an internal failure in the Amazon EMR
+// service.
 type InternalServerException struct {
 	Message *string
 }

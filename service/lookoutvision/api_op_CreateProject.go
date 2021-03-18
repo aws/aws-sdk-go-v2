@@ -13,7 +13,8 @@ import (
 )
 
 // Creates an empty Amazon Lookout for Vision project. After you create the
-// project, add a dataset by calling CreateDataset.
+// project, add a dataset by calling CreateDataset. This operation requires
+// permissions to perform the lookoutvision:CreateProject operation.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}
@@ -31,7 +32,7 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 
 type CreateProjectInput struct {
 
-	// S nsme for the project.
+	// The name for the project.
 	//
 	// This member is required.
 	ProjectName *string

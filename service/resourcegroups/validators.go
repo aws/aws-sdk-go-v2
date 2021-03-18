@@ -110,6 +110,26 @@ func (m *validateOpListGroups) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutGroupConfiguration struct {
+}
+
+func (*validateOpPutGroupConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutGroupConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutGroupConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutGroupConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchResources struct {
 }
 
@@ -228,6 +248,10 @@ func addOpListGroupResourcesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGroups{}, middleware.After)
+}
+
+func addOpPutGroupConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutGroupConfiguration{}, middleware.After)
 }
 
 func addOpSearchResourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -490,6 +514,23 @@ func validateOpListGroupsInput(v *ListGroupsInput) error {
 	if v.Filters != nil {
 		if err := validateGroupFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutGroupConfigurationInput(v *PutGroupConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutGroupConfigurationInput"}
+	if v.Configuration != nil {
+		if err := validateGroupConfigurationList(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

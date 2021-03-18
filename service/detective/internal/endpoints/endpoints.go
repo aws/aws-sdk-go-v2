@@ -65,9 +65,33 @@ var defaultPartitions = endpoints.Partitions{
 			"me-south-1":     endpoints.Endpoint{},
 			"sa-east-1":      endpoints.Endpoint{},
 			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"us-east-1-fips": endpoints.Endpoint{
+				Hostname: "api.detective-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"us-east-2": endpoints.Endpoint{},
+			"us-east-2-fips": endpoints.Endpoint{
+				Hostname: "api.detective-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"us-west-1": endpoints.Endpoint{},
+			"us-west-1-fips": endpoints.Endpoint{
+				Hostname: "api.detective-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"us-west-2": endpoints.Endpoint{},
+			"us-west-2-fips": endpoints.Endpoint{
+				Hostname: "api.detective-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{

@@ -124,6 +124,9 @@
                     "target": "com.amazonaws.forecast#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.forecast#StopResource"
+                },
+                {
                     "target": "com.amazonaws.forecast#TagResource"
                 },
                 {
@@ -964,7 +967,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the dataset import job. The status is reflected in the status of the\n      dataset. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the\n      status of the dataset is <code>UPDATE_IN_PROGRESS</code>. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the dataset import job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Message": {
@@ -982,7 +985,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time that the dataset was modified. The time depends on the status of the job, as\n      follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The same time as <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1496,7 +1499,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the dataset import job. The status is reflected in the status of the\n      dataset. For example, when the import job status is <code>CREATE_IN_PROGRESS</code>, the\n      status of the dataset is <code>UPDATE_IN_PROGRESS</code>. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the dataset import job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Message": {
@@ -1514,7 +1517,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time that the dataset was modified. The time depends on the status of the job, as\n      follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The same time as <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1686,7 +1689,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the forecast export job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before\n        you can access the forecast in your S3 bucket.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the forecast export job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before\n        you can access the forecast in your S3 bucket.</p>\n         </note>"
                     }
                 },
                 "CreationTime": {
@@ -1698,7 +1701,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the last successful export job finished.</p>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1751,7 +1754,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query\n        or export the forecast.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query\n        or export the forecast.</p>\n         </note>"
                     }
                 },
                 "Message": {
@@ -1769,7 +1772,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>).\n      Updated when inference (creating the forecast) starts (status changed to\n        <code>CREATE_IN_PROGRESS</code>), and when inference is complete (status changed to\n        <code>ACTIVE</code>) or fails (status changed to <code>CREATE_FAILED</code>).</p>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1861,7 +1864,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the predictor backtest export job. States include: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>ACTIVE</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_PENDING</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_IN_PROGRESS</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_FAILED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DELETE_PENDING</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DELETE_IN_PROGRESS</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DELETE_FAILED</code>\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the predictor backtest export job. States include: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n                    <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n                    <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "CreationTime": {
@@ -1873,7 +1876,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the last successful export job finished.</p>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n                    failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1992,7 +1995,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>,\n            <code>UPDATE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
                     }
                 },
                 "Message": {
@@ -2010,7 +2013,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (when the status is\n        <code>CREATE_PENDING</code>). This value is updated when training starts (when the status\n      changes to <code>CREATE_IN_PROGRESS</code>), and when training has completed (when the status\n      changes to <code>ACTIVE</code>) or fails (when the status changes to\n        <code>CREATE_FAILED</code>).</p>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -2382,7 +2385,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the forecast export job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before\n        you can access the forecast in your S3 bucket.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the forecast export job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast export job must be <code>ACTIVE</code> before\n        you can access the forecast in your S3 bucket.</p>\n         </note>"
                     }
                 },
                 "Message": {
@@ -2400,7 +2403,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the last successful export job finished.</p>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2444,7 +2447,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query\n        or export the forecast.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the forecast. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the forecast must be <code>ACTIVE</code> before you can query\n        or export the forecast.</p>\n         </note>"
                     }
                 },
                 "Message": {
@@ -2462,7 +2465,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>).\n      Updated when inference (creating the forecast) starts (status changed to\n        <code>CREATE_IN_PROGRESS</code>), and when inference is complete (status changed to\n        <code>ACTIVE</code>) or fails (status changed to <code>CREATE_FAILED</code>).</p>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3056,7 +3059,7 @@
                 "Filters": {
                     "target": "com.amazonaws.forecast#Filters",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n                condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n                include or exclude the predictor backtest export jobs that match the statement from the\n                list. The match statement consists of a key and a value.</p>\n            <p>\n                <b>Filter properties</b>\n            </p>\n            <ul>\n            <li>\n                    <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n                        <code>IS</code> and <code>IS_NOT</code>. To include the predictor backtest\n                        export jobs that match the statement, specify <code>IS</code>. To exclude matching\n                        predictor backtest export jobs, specify <code>IS_NOT</code>.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n                        <code>PredictorBacktestExportJobArn</code> and <code>Status</code>.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>Value</code> - The value to match.</p>\n                </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of filters. For each filter, provide a condition and a match statement. The\n                condition is either <code>IS</code> or <code>IS_NOT</code>, which specifies whether to\n                include or exclude the predictor backtest export jobs that match the statement from the\n                list. The match statement consists of a key and a value.</p>\n            <p>\n                <b>Filter properties</b>\n            </p>\n            <ul>\n            <li>\n                    <p>\n                  <code>Condition</code> - The condition to apply. Valid values are\n                        <code>IS</code> and <code>IS_NOT</code>. To include the predictor backtest\n                        export jobs that match the statement, specify <code>IS</code>. To exclude matching\n                        predictor backtest export jobs, specify <code>IS_NOT</code>.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>Key</code> - The name of the parameter to filter on. Valid values are\n                        <code>PredictorArn</code> and <code>Status</code>.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>Value</code> - The value to match.</p>\n                </li>\n         </ul>"
                     }
                 }
             }
@@ -3316,7 +3319,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the predictor backtest export job. States include: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>ACTIVE</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_PENDING</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_IN_PROGRESS</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_FAILED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DELETE_PENDING</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DELETE_IN_PROGRESS</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DELETE_FAILED</code>\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the predictor backtest export job. States include: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n                    <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n                    <code>DELETE_FAILED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Message": {
@@ -3334,7 +3337,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>When the last successful export job finished.</p>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n                    failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3424,7 +3427,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATE_PENDING</code>, <code>UPDATE_IN_PROGRESS</code>,\n            <code>UPDATE_FAILED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The status of the predictor. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>Status</code> of the predictor must be <code>ACTIVE</code> before you can use\n        the predictor to create a forecast.</p>\n         </note>"
                     }
                 },
                 "Message": {
@@ -3442,7 +3445,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Initially, the same as <code>CreationTime</code> (status is <code>CREATE_PENDING</code>).\n      Updated when training starts (status changed to <code>CREATE_IN_PROGRESS</code>), and when\n      training is complete (status changed to <code>ACTIVE</code>) or fails (status changed to\n        <code>CREATE_FAILED</code>).</p>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3660,6 +3663,39 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.forecast#StopResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#StopResourceRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a resource.</p>\n         <p>The resource undergoes the following states:\n         <code>CREATE_STOPPING</code> and <code>CREATE_STOPPED</code>. You cannot resume\n         a resource once it has been stopped.</p>\n         <p>This operation can be applied to the following resources (and their corresponding child\n         resources):</p>\n         <ul>\n            <li>\n               <p>Dataset Import Job</p>\n            </li>\n            <li>\n               <p>Predictor Job</p>\n            </li>\n            <li>\n               <p>Forecast Job</p>\n            </li>\n            <li>\n               <p>Forecast Export Job</p>\n            </li>\n            <li>\n               <p>Predictor Backtest Export Job</p>\n            </li>\n         </ul>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#StopResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the resource to stop. The supported ARNs\n         are <code>DatasetImportJobArn</code>, <code>PredictorArn</code>,\n            <code>PredictorBacktestExportJobArn</code>, <code>ForecastArn</code>, and\n            <code>ForecastExportJobArn</code>. </p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },

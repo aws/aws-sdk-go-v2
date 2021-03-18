@@ -2929,6 +2929,16 @@ func awsAwsjson11_serializeOpDocumentListGrantsInput(v *ListGrantsInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.GranteePrincipal != nil {
+		ok := object.Key("GranteePrincipal")
+		ok.String(*v.GranteePrincipal)
+	}
+
+	if v.GrantId != nil {
+		ok := object.Key("GrantId")
+		ok.String(*v.GrantId)
+	}
+
 	if v.KeyId != nil {
 		ok := object.Key("KeyId")
 		ok.String(*v.KeyId)

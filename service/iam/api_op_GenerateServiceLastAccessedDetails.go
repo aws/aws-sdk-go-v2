@@ -15,7 +15,7 @@ import (
 // group, role, or policy) was last used in an attempt to access AWS services.
 // Recent activity usually appears within four hours. IAM reports activity for the
 // last 365 days, or less if your Region began supporting this feature within the
-// last year. For more information, see Regions Where Data Is Tracked
+// last year. For more information, see Regions where data is tracked
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#access-advisor_tracking-period).
 // The service last accessed data includes all attempts to access an AWS API, not
 // just the successful ones. This includes all attempts that were made using the
@@ -24,7 +24,7 @@ import (
 // not mean that your account has been compromised, because the request might have
 // been denied. Refer to your CloudTrail logs as the authoritative source for
 // information about all API calls and whether they were successful or denied
-// access. For more information, see Logging IAM Events with CloudTrail
+// access. For more information, see Logging IAM events with CloudTrail
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/cloudtrail-integration.html)
 // in the IAM User Guide. The GenerateServiceLastAccessedDetails operation returns
 // a JobId. Use this parameter in the following operations to retrieve the
@@ -52,10 +52,10 @@ import (
 // service. These other policy types include resource-based policies, access
 // control lists, AWS Organizations policies, IAM permissions boundaries, and AWS
 // STS assume role policies. It only applies permissions policy logic. For more
-// about the evaluation of policy types, see Evaluating Policies
+// about the evaluation of policy types, see Evaluating policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html#policy-eval-basics)
 // in the IAM User Guide. For more information about service and action last
-// accessed data, see Reducing Permissions Using Service Last Accessed Data
+// accessed data, see Reducing permissions using service last accessed data
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
 // in the IAM User Guide.
 func (c *Client) GenerateServiceLastAccessedDetails(ctx context.Context, params *GenerateServiceLastAccessedDetailsInput, optFns ...func(*Options)) (*GenerateServiceLastAccessedDetailsOutput, error) {

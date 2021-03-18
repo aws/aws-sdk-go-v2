@@ -29,7 +29,12 @@ func (c *Client) StartAutomationExecution(ctx context.Context, params *StartAuto
 
 type StartAutomationExecutionInput struct {
 
-	// The name of the Automation document to use for this execution.
+	// The name of the Systems Manager document to run. This can be a public document
+	// or a custom document. To run a shared document belonging to another account,
+	// specify the document ARN. For more information about how to use shared
+	// documents, see Using shared SSM documents
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html)
+	// in the AWS Systems Manager User Guide.
 	//
 	// This member is required.
 	DocumentName *string

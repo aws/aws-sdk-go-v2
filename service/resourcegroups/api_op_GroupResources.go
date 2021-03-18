@@ -11,7 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified resources to the specified group.
+// Adds the specified resources to the specified group. Minimum permissions To run
+// this command, you must have the following permissions:
+//
+// *
+// resource-groups:GroupResources
 func (c *Client) GroupResources(ctx context.Context, params *GroupResourcesInput, optFns ...func(*Options)) (*GroupResourcesOutput, error) {
 	if params == nil {
 		params = &GroupResourcesInput{}
@@ -42,11 +46,18 @@ type GroupResourcesInput struct {
 
 type GroupResourcesOutput struct {
 
-	// The ARNs of the resources that failed to be added to the group by this
+	// A list of ARNs of any resources that failed to be added to the group by this
 	// operation.
 	Failed []types.FailedResource
 
-	// The ARNs of the resources that were successfully added to the group by this
+	// A list of ARNs of any resources that are still in the process of being added to
+	// the group by this operation. These pending additions continue asynchronously.
+	// You can check the status of pending additions by using the ListGroupResources
+	// operation, and checking the Resources array in the response and the Status field
+	// of each object in that array.
+	Pending []types.PendingResource
+
+	// A list of ARNs of resources that were successfully added to the group by this
 	// operation.
 	Succeeded []string
 

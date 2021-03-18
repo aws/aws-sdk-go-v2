@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new schedule for one or more AWS Glue DataBrew jobs. Jobs can be run
-// at a specific date and time, or at regular intervals.
+// Creates a new schedule for one or more DataBrew jobs. Jobs can be run at a
+// specific date and time, or at regular intervals.
 func (c *Client) CreateSchedule(ctx context.Context, params *CreateScheduleInput, optFns ...func(*Options)) (*CreateScheduleOutput, error) {
 	if params == nil {
 		params = &CreateScheduleInput{}
@@ -29,13 +29,16 @@ func (c *Client) CreateSchedule(ctx context.Context, params *CreateScheduleInput
 
 type CreateScheduleInput struct {
 
-	// The date or dates and time or times, in cron format, when the jobs are to be
-	// run.
+	// The date or dates and time or times when the jobs are to be run. For more
+	// information, see Cron expressions
+	// (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html) in the AWS Glue
+	// DataBrew Developer Guide.
 	//
 	// This member is required.
 	CronExpression *string
 
-	// A unique name for the schedule.
+	// A unique name for the schedule. Valid characters are alphanumeric (A-Z, a-z,
+	// 0-9), hyphen (-), period (.), and space.
 	//
 	// This member is required.
 	Name *string

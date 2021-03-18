@@ -65,7 +65,7 @@ type CreateDimensionInput struct {
 
 type CreateDimensionOutput struct {
 
-	// The ARN (Amazon resource name) of the created dimension.
+	// The Amazon Resource Name (ARN) of the created dimension.
 	Arn *string
 
 	// A unique identifier for the dimension.

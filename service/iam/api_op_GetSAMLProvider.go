@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -34,7 +35,7 @@ type GetSAMLProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to
 	// get information about. For more information about ARNs, see Amazon Resource
-	// Names (ARNs) and AWS Service Namespaces
+	// Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -50,6 +51,13 @@ type GetSAMLProviderOutput struct {
 
 	// The XML metadata document that includes information about an identity provider.
 	SAMLMetadataDocument *string
+
+	// A list of tags that are attached to the specified IAM SAML provider. The
+	// returned list of tags is sorted by tag key. For more information about tagging,
+	// see Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide.
+	Tags []types.Tag
 
 	// The expiration date and time for the SAML provider.
 	ValidUntil *time.Time

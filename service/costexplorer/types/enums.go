@@ -134,35 +134,37 @@ type Dimension string
 
 // Enum values for Dimension
 const (
-	DimensionAz                 Dimension = "AZ"
-	DimensionInstanceType       Dimension = "INSTANCE_TYPE"
-	DimensionLinkedAccount      Dimension = "LINKED_ACCOUNT"
-	DimensionLinkedAccountName  Dimension = "LINKED_ACCOUNT_NAME"
-	DimensionOperation          Dimension = "OPERATION"
-	DimensionPurchaseType       Dimension = "PURCHASE_TYPE"
-	DimensionRegion             Dimension = "REGION"
-	DimensionService            Dimension = "SERVICE"
-	DimensionServiceCode        Dimension = "SERVICE_CODE"
-	DimensionUsageType          Dimension = "USAGE_TYPE"
-	DimensionUsageTypeGroup     Dimension = "USAGE_TYPE_GROUP"
-	DimensionRecordType         Dimension = "RECORD_TYPE"
-	DimensionOperatingSystem    Dimension = "OPERATING_SYSTEM"
-	DimensionTenancy            Dimension = "TENANCY"
-	DimensionScope              Dimension = "SCOPE"
-	DimensionPlatform           Dimension = "PLATFORM"
-	DimensionSubscriptionId     Dimension = "SUBSCRIPTION_ID"
-	DimensionLegalEntityName    Dimension = "LEGAL_ENTITY_NAME"
-	DimensionDeploymentOption   Dimension = "DEPLOYMENT_OPTION"
-	DimensionDatabaseEngine     Dimension = "DATABASE_ENGINE"
-	DimensionCacheEngine        Dimension = "CACHE_ENGINE"
-	DimensionInstanceTypeFamily Dimension = "INSTANCE_TYPE_FAMILY"
-	DimensionBillingEntity      Dimension = "BILLING_ENTITY"
-	DimensionReservationId      Dimension = "RESERVATION_ID"
-	DimensionResourceId         Dimension = "RESOURCE_ID"
-	DimensionRightsizingType    Dimension = "RIGHTSIZING_TYPE"
-	DimensionSavingsPlansType   Dimension = "SAVINGS_PLANS_TYPE"
-	DimensionSavingsPlanArn     Dimension = "SAVINGS_PLAN_ARN"
-	DimensionPaymentOption      Dimension = "PAYMENT_OPTION"
+	DimensionAz                         Dimension = "AZ"
+	DimensionInstanceType               Dimension = "INSTANCE_TYPE"
+	DimensionLinkedAccount              Dimension = "LINKED_ACCOUNT"
+	DimensionLinkedAccountName          Dimension = "LINKED_ACCOUNT_NAME"
+	DimensionOperation                  Dimension = "OPERATION"
+	DimensionPurchaseType               Dimension = "PURCHASE_TYPE"
+	DimensionRegion                     Dimension = "REGION"
+	DimensionService                    Dimension = "SERVICE"
+	DimensionServiceCode                Dimension = "SERVICE_CODE"
+	DimensionUsageType                  Dimension = "USAGE_TYPE"
+	DimensionUsageTypeGroup             Dimension = "USAGE_TYPE_GROUP"
+	DimensionRecordType                 Dimension = "RECORD_TYPE"
+	DimensionOperatingSystem            Dimension = "OPERATING_SYSTEM"
+	DimensionTenancy                    Dimension = "TENANCY"
+	DimensionScope                      Dimension = "SCOPE"
+	DimensionPlatform                   Dimension = "PLATFORM"
+	DimensionSubscriptionId             Dimension = "SUBSCRIPTION_ID"
+	DimensionLegalEntityName            Dimension = "LEGAL_ENTITY_NAME"
+	DimensionDeploymentOption           Dimension = "DEPLOYMENT_OPTION"
+	DimensionDatabaseEngine             Dimension = "DATABASE_ENGINE"
+	DimensionCacheEngine                Dimension = "CACHE_ENGINE"
+	DimensionInstanceTypeFamily         Dimension = "INSTANCE_TYPE_FAMILY"
+	DimensionBillingEntity              Dimension = "BILLING_ENTITY"
+	DimensionReservationId              Dimension = "RESERVATION_ID"
+	DimensionResourceId                 Dimension = "RESOURCE_ID"
+	DimensionRightsizingType            Dimension = "RIGHTSIZING_TYPE"
+	DimensionSavingsPlansType           Dimension = "SAVINGS_PLANS_TYPE"
+	DimensionSavingsPlanArn             Dimension = "SAVINGS_PLAN_ARN"
+	DimensionPaymentOption              Dimension = "PAYMENT_OPTION"
+	DimensionAgreementEndDateTimeAfter  Dimension = "AGREEMENT_END_DATE_TIME_AFTER"
+	DimensionAgreementEndDateTimeBefore Dimension = "AGREEMENT_END_DATE_TIME_BEFORE"
 )
 
 // Values returns all known values for Dimension. Note that this can be expanded in
@@ -199,6 +201,8 @@ func (Dimension) Values() []Dimension {
 		"SAVINGS_PLANS_TYPE",
 		"SAVINGS_PLAN_ARN",
 		"PAYMENT_OPTION",
+		"AGREEMENT_END_DATE_TIME_AFTER",
+		"AGREEMENT_END_DATE_TIME_BEFORE",
 	}
 }
 
@@ -267,6 +271,7 @@ type MatchOption string
 // Enum values for MatchOption
 const (
 	MatchOptionEquals          MatchOption = "EQUALS"
+	MatchOptionAbsent          MatchOption = "ABSENT"
 	MatchOptionStartsWith      MatchOption = "STARTS_WITH"
 	MatchOptionEndsWith        MatchOption = "ENDS_WITH"
 	MatchOptionContains        MatchOption = "CONTAINS"
@@ -280,6 +285,7 @@ const (
 func (MatchOption) Values() []MatchOption {
 	return []MatchOption{
 		"EQUALS",
+		"ABSENT",
 		"STARTS_WITH",
 		"ENDS_WITH",
 		"CONTAINS",
@@ -453,6 +459,46 @@ func (RightsizingType) Values() []RightsizingType {
 	return []RightsizingType{
 		"TERMINATE",
 		"MODIFY",
+	}
+}
+
+type SavingsPlansDataType string
+
+// Enum values for SavingsPlansDataType
+const (
+	SavingsPlansDataTypeAttributes          SavingsPlansDataType = "ATTRIBUTES"
+	SavingsPlansDataTypeUtilization         SavingsPlansDataType = "UTILIZATION"
+	SavingsPlansDataTypeAmortizedCommitment SavingsPlansDataType = "AMORTIZED_COMMITMENT"
+	SavingsPlansDataTypeSavings             SavingsPlansDataType = "SAVINGS"
+)
+
+// Values returns all known values for SavingsPlansDataType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SavingsPlansDataType) Values() []SavingsPlansDataType {
+	return []SavingsPlansDataType{
+		"ATTRIBUTES",
+		"UTILIZATION",
+		"AMORTIZED_COMMITMENT",
+		"SAVINGS",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAscending  SortOrder = "ASCENDING"
+	SortOrderDescending SortOrder = "DESCENDING"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASCENDING",
+		"DESCENDING",
 	}
 }
 

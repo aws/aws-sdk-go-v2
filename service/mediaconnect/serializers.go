@@ -2029,6 +2029,11 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 		ok.Integer(v.MaxLatency)
 	}
 
+	if v.MinLatency != 0 {
+		ok := object.Key("minLatency")
+		ok.Integer(v.MinLatency)
+	}
+
 	if v.Port != 0 {
 		ok := object.Key("port")
 		ok.Integer(v.Port)
@@ -2183,6 +2188,11 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		ok.Integer(v.MaxLatency)
 	}
 
+	if v.MinLatency != 0 {
+		ok := object.Key("minLatency")
+		ok.Integer(v.MinLatency)
+	}
+
 	if len(v.Protocol) > 0 {
 		ok := object.Key("protocol")
 		ok.String(string(v.Protocol))
@@ -2311,6 +2321,11 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
 		ok.Integer(v.MaxLatency)
+	}
+
+	if v.MinLatency != 0 {
+		ok := object.Key("minLatency")
+		ok.Integer(v.MinLatency)
 	}
 
 	if v.Name != nil {
@@ -2497,6 +2512,11 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
 		ok.Integer(v.MaxLatency)
+	}
+
+	if v.MinLatency != 0 {
+		ok := object.Key("minLatency")
+		ok.Integer(v.MinLatency)
 	}
 
 	if v.Name != nil {

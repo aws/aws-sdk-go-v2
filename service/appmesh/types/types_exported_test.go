@@ -43,6 +43,28 @@ func ExampleBackend_outputUsage() {
 
 var _ *types.VirtualServiceBackend
 
+func ExampleClientTlsCertificate_outputUsage() {
+	var union types.ClientTlsCertificate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ClientTlsCertificateMemberFile:
+		_ = v.Value // Value is types.ListenerTlsFileCertificate
+
+	case *types.ClientTlsCertificateMemberSds:
+		_ = v.Value // Value is types.ListenerTlsSdsCertificate
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ListenerTlsSdsCertificate
+var _ *types.ListenerTlsFileCertificate
+
 func ExampleGrpcRouteMetadataMatchMethod_outputUsage() {
 	var union types.GrpcRouteMetadataMatchMethod
 	// type switches can be used to check the union value
@@ -144,6 +166,9 @@ func ExampleListenerTlsCertificate_outputUsage() {
 	case *types.ListenerTlsCertificateMemberFile:
 		_ = v.Value // Value is types.ListenerTlsFileCertificate
 
+	case *types.ListenerTlsCertificateMemberSds:
+		_ = v.Value // Value is types.ListenerTlsSdsCertificate
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -154,7 +179,30 @@ func ExampleListenerTlsCertificate_outputUsage() {
 }
 
 var _ *types.ListenerTlsAcmCertificate
+var _ *types.ListenerTlsSdsCertificate
 var _ *types.ListenerTlsFileCertificate
+
+func ExampleListenerTlsValidationContextTrust_outputUsage() {
+	var union types.ListenerTlsValidationContextTrust
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ListenerTlsValidationContextTrustMemberFile:
+		_ = v.Value // Value is types.TlsValidationContextFileTrust
+
+	case *types.ListenerTlsValidationContextTrustMemberSds:
+		_ = v.Value // Value is types.TlsValidationContextSdsTrust
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.TlsValidationContextFileTrust
+var _ *types.TlsValidationContextSdsTrust
 
 func ExampleServiceDiscovery_outputUsage() {
 	var union types.ServiceDiscovery
@@ -188,6 +236,9 @@ func ExampleTlsValidationContextTrust_outputUsage() {
 	case *types.TlsValidationContextTrustMemberFile:
 		_ = v.Value // Value is types.TlsValidationContextFileTrust
 
+	case *types.TlsValidationContextTrustMemberSds:
+		_ = v.Value // Value is types.TlsValidationContextSdsTrust
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -199,6 +250,7 @@ func ExampleTlsValidationContextTrust_outputUsage() {
 
 var _ *types.TlsValidationContextAcmTrust
 var _ *types.TlsValidationContextFileTrust
+var _ *types.TlsValidationContextSdsTrust
 
 func ExampleVirtualGatewayAccessLog_outputUsage() {
 	var union types.VirtualGatewayAccessLog
@@ -218,6 +270,54 @@ func ExampleVirtualGatewayAccessLog_outputUsage() {
 
 var _ *types.VirtualGatewayFileAccessLog
 
+func ExampleVirtualGatewayClientTlsCertificate_outputUsage() {
+	var union types.VirtualGatewayClientTlsCertificate
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.VirtualGatewayClientTlsCertificateMemberFile:
+		_ = v.Value // Value is types.VirtualGatewayListenerTlsFileCertificate
+
+	case *types.VirtualGatewayClientTlsCertificateMemberSds:
+		_ = v.Value // Value is types.VirtualGatewayListenerTlsSdsCertificate
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.VirtualGatewayListenerTlsFileCertificate
+var _ *types.VirtualGatewayListenerTlsSdsCertificate
+
+func ExampleVirtualGatewayConnectionPool_outputUsage() {
+	var union types.VirtualGatewayConnectionPool
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.VirtualGatewayConnectionPoolMemberGrpc:
+		_ = v.Value // Value is types.VirtualGatewayGrpcConnectionPool
+
+	case *types.VirtualGatewayConnectionPoolMemberHttp:
+		_ = v.Value // Value is types.VirtualGatewayHttpConnectionPool
+
+	case *types.VirtualGatewayConnectionPoolMemberHttp2:
+		_ = v.Value // Value is types.VirtualGatewayHttp2ConnectionPool
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.VirtualGatewayHttpConnectionPool
+var _ *types.VirtualGatewayHttp2ConnectionPool
+var _ *types.VirtualGatewayGrpcConnectionPool
+
 func ExampleVirtualGatewayListenerTlsCertificate_outputUsage() {
 	var union types.VirtualGatewayListenerTlsCertificate
 	// type switches can be used to check the union value
@@ -227,6 +327,9 @@ func ExampleVirtualGatewayListenerTlsCertificate_outputUsage() {
 
 	case *types.VirtualGatewayListenerTlsCertificateMemberFile:
 		_ = v.Value // Value is types.VirtualGatewayListenerTlsFileCertificate
+
+	case *types.VirtualGatewayListenerTlsCertificateMemberSds:
+		_ = v.Value // Value is types.VirtualGatewayListenerTlsSdsCertificate
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -239,6 +342,29 @@ func ExampleVirtualGatewayListenerTlsCertificate_outputUsage() {
 
 var _ *types.VirtualGatewayListenerTlsFileCertificate
 var _ *types.VirtualGatewayListenerTlsAcmCertificate
+var _ *types.VirtualGatewayListenerTlsSdsCertificate
+
+func ExampleVirtualGatewayListenerTlsValidationContextTrust_outputUsage() {
+	var union types.VirtualGatewayListenerTlsValidationContextTrust
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.VirtualGatewayListenerTlsValidationContextTrustMemberFile:
+		_ = v.Value // Value is types.VirtualGatewayTlsValidationContextFileTrust
+
+	case *types.VirtualGatewayListenerTlsValidationContextTrustMemberSds:
+		_ = v.Value // Value is types.VirtualGatewayTlsValidationContextSdsTrust
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.VirtualGatewayTlsValidationContextSdsTrust
+var _ *types.VirtualGatewayTlsValidationContextFileTrust
 
 func ExampleVirtualGatewayTlsValidationContextTrust_outputUsage() {
 	var union types.VirtualGatewayTlsValidationContextTrust
@@ -250,6 +376,9 @@ func ExampleVirtualGatewayTlsValidationContextTrust_outputUsage() {
 	case *types.VirtualGatewayTlsValidationContextTrustMemberFile:
 		_ = v.Value // Value is types.VirtualGatewayTlsValidationContextFileTrust
 
+	case *types.VirtualGatewayTlsValidationContextTrustMemberSds:
+		_ = v.Value // Value is types.VirtualGatewayTlsValidationContextSdsTrust
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -260,7 +389,38 @@ func ExampleVirtualGatewayTlsValidationContextTrust_outputUsage() {
 }
 
 var _ *types.VirtualGatewayTlsValidationContextAcmTrust
+var _ *types.VirtualGatewayTlsValidationContextSdsTrust
 var _ *types.VirtualGatewayTlsValidationContextFileTrust
+
+func ExampleVirtualNodeConnectionPool_outputUsage() {
+	var union types.VirtualNodeConnectionPool
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.VirtualNodeConnectionPoolMemberGrpc:
+		_ = v.Value // Value is types.VirtualNodeGrpcConnectionPool
+
+	case *types.VirtualNodeConnectionPoolMemberHttp:
+		_ = v.Value // Value is types.VirtualNodeHttpConnectionPool
+
+	case *types.VirtualNodeConnectionPoolMemberHttp2:
+		_ = v.Value // Value is types.VirtualNodeHttp2ConnectionPool
+
+	case *types.VirtualNodeConnectionPoolMemberTcp:
+		_ = v.Value // Value is types.VirtualNodeTcpConnectionPool
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.VirtualNodeGrpcConnectionPool
+var _ *types.VirtualNodeTcpConnectionPool
+var _ *types.VirtualNodeHttp2ConnectionPool
+var _ *types.VirtualNodeHttpConnectionPool
 
 func ExampleVirtualServiceProvider_outputUsage() {
 	var union types.VirtualServiceProvider

@@ -2,6 +2,24 @@
 
 package types
 
+type Domain string
+
+// Enum values for Domain
+const (
+	DomainS3  Domain = "S3"
+	DomainEfs Domain = "EFS"
+)
+
+// Values returns all known values for Domain. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Domain) Values() []Domain {
+	return []Domain{
+		"S3",
+		"EFS",
+	}
+}
+
 type EndpointType string
 
 // Enum values for EndpointType

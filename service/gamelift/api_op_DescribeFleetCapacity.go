@@ -12,53 +12,37 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the current capacity statistics for one or more fleets. These
-// statistics present a snapshot of the fleet's instances and provide insight on
-// current or imminent scaling activity. To get statistics on game hosting activity
-// in the fleet, see DescribeFleetUtilization. You can request capacity for all
-// fleets or specify a list of one or more fleet identifiers. When requesting
-// multiple fleets, use the pagination parameters to retrieve results as a set of
-// sequential pages. If successful, a FleetCapacity object is returned for each
-// requested fleet ID. When a list of fleet IDs is provided, attribute objects are
-// returned only for fleets that currently exist. Some API operations may limit the
-// number of fleet IDs allowed in one request. If a request exceeds this limit, the
-// request fails and the error message includes the maximum allowed. Learn more
-// Setting up GameLift Fleets
+// Retrieves the resource capacity settings for one or more fleets. The data
+// returned includes the current fleet capacity (number of EC2 instances), and
+// settings that can control how capacity scaling. For fleets with remote
+// locations, this operation retrieves data for the fleet's home Region only. See
+// DescribeFleetLocationCapacity to get capacity settings for a fleet's remote
+// locations. This operation can be used in the following ways:
+//
+// * To get capacity
+// data for one or more specific fleets, provide a list of fleet IDs or fleet
+// ARNs.
+//
+// * To get capacity data for all fleets, do not provide a fleet
+// identifier.
+//
+// When requesting multiple fleets, use the pagination parameters to
+// retrieve results as a set of sequential pages. If successful, a FleetCapacity
+// object is returned for each requested fleet ID. Each FleetCapacity object
+// includes a Location property, which is set to the fleet's home Region. When a
+// list of fleet IDs is provided, attribute objects are returned only for fleets
+// that currently exist. Some API operations may limit the number of fleet IDs that
+// are allowed in one request. If a request exceeds this limit, the request fails
+// and the error message includes the maximum allowed. Learn more Setting up
+// GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)GameLift
-// Metrics for Fleets
+// metrics for fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// * Describe
-// fleets:
-//
-// * DescribeFleetAttributes
-//
-// * DescribeFleetCapacity
-//
-// *
-// DescribeFleetPortSettings
-//
-// * DescribeFleetUtilization
-//
-// *
-// DescribeRuntimeConfiguration
-//
-// * DescribeEC2InstanceLimits
-//
-// *
-// DescribeFleetEvents
-//
-// * UpdateFleetAttributes
-//
-// * StartFleetActions or
-// StopFleetActions
+// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
+// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
+// | DescribeFleetPortSettings | DescribeFleetUtilization |
+// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFleetCapacityInput, optFns ...func(*Options)) (*DescribeFleetCapacityOutput, error) {
 	if params == nil {
 		params = &DescribeFleetCapacityInput{}
@@ -77,8 +61,9 @@ func (c *Client) DescribeFleetCapacity(ctx context.Context, params *DescribeFlee
 // Represents the input for a request operation.
 type DescribeFleetCapacityInput struct {
 
-	// A unique identifier for a fleet(s) to retrieve capacity information for. You can
-	// use either the fleet ID or ARN value.
+	// A unique identifier for the fleet(s) to retrieve capacity information for. You
+	// can use either the fleet ID or ARN value. Leave this parameter empty to retrieve
+	// capacity information for all fleets.
 	FleetIds []string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -86,7 +71,7 @@ type DescribeFleetCapacityInput struct {
 	// request specifies one or a list of fleet IDs.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value. This parameter is ignored
 	// when the request specifies one or a list of fleet IDs.
@@ -96,12 +81,13 @@ type DescribeFleetCapacityInput struct {
 // Represents the returned data in response to a request operation.
 type DescribeFleetCapacityOutput struct {
 
-	// A collection of objects containing capacity information for each requested fleet
-	// ID. Leave this parameter empty to retrieve capacity information for all fleets.
+	// A collection of objects that contains capacity information for each requested
+	// fleet ID. Capacity objects are returned only for fleets that currently exist.
 	FleetCapacity []types.FleetCapacity
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

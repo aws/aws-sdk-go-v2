@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new job for an existing AWS Glue DataBrew recipe in the current AWS
-// account. You can create a standalone job using either a project, or a
-// combination of a recipe and a dataset.
+// Creates a new job to transform input data, using steps defined in an existing
+// AWS Glue DataBrew recipe
 func (c *Client) CreateRecipeJob(ctx context.Context, params *CreateRecipeJobInput, optFns ...func(*Options)) (*CreateRecipeJobOutput, error) {
 	if params == nil {
 		params = &CreateRecipeJobInput{}
@@ -31,7 +30,8 @@ func (c *Client) CreateRecipeJob(ctx context.Context, params *CreateRecipeJobInp
 
 type CreateRecipeJobInput struct {
 
-	// A unique name for the job.
+	// A unique name for the job. Valid characters are alphanumeric (A-Z, a-z, 0-9),
+	// hyphen (-), period (.), and space.
 	//
 	// This member is required.
 	Name *string
@@ -42,7 +42,7 @@ type CreateRecipeJobInput struct {
 	Outputs []types.Output
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role to be assumed for this request.
+	// role to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
@@ -57,15 +57,14 @@ type CreateRecipeJobInput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// Server-side encryption with AWS KMS-managed keys.
+	// Server-side encryption with keys managed by AWS KMS.
 	//
 	// * SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
-	// A value that enables or disables Amazon CloudWatch logging for the current AWS
-	// account. If logging is enabled, CloudWatch writes one log stream for each job
-	// run.
+	// Enables or disables Amazon CloudWatch logging for the job. If logging is
+	// enabled, CloudWatch writes one log stream for each job run.
 	LogSubscription types.LogSubscription
 
 	// The maximum number of nodes that DataBrew can consume when the job processes
@@ -79,10 +78,10 @@ type CreateRecipeJobInput struct {
 	// dataset to associate with the recipe.
 	ProjectName *string
 
-	// Represents all of the attributes of an AWS Glue DataBrew recipe.
+	// Represents the name and version of a DataBrew recipe.
 	RecipeReference *types.RecipeReference
 
-	// Metadata tags to apply to this job dataset.
+	// Metadata tags to apply to this job.
 	Tags map[string]string
 
 	// The job's timeout in minutes. A job that attempts to run longer than this

@@ -7,6 +7,41 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You do not have access required to perform this action.
+type AccessDeniedException struct {
+	Message *string
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You are trying to update a resource or configuration that is already being
+// created or updated. Wait for the previous operation to finish and try again.
+type ConflictException struct {
+	Message *string
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // One or more of of request parameters specified is not valid.
 type InvalidArgsException struct {
 	Message *string
@@ -202,6 +237,23 @@ func (e *TagPolicyException) ErrorMessage() string {
 func (e *TagPolicyException) ErrorCode() string             { return "TagPolicyException" }
 func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request was denied because it exceeded a quota.
+type ThrottlingException struct {
+	Message *string
+}
+
+func (e *ThrottlingException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ThrottlingException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
+func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request contains too many tags. Try the request again with fewer tags.
 type TooManyTagsException struct {
 	Message *string
@@ -218,3 +270,20 @@ func (e *TooManyTagsException) ErrorMessage() string {
 }
 func (e *TooManyTagsException) ErrorCode() string             { return "TooManyTagsException" }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The supplied input failed to satisfy constraints of an AWS service.
+type ValidationException struct {
+	Message *string
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string             { return "ValidationException" }
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

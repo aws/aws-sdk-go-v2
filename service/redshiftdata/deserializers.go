@@ -463,6 +463,9 @@ func awsAwsjson11_deserializeOpErrorExecuteStatement(response *smithyhttp.Respon
 	}
 
 	switch {
+	case strings.EqualFold("ActiveStatementsExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorActiveStatementsExceededException(response, errorBody)
+
 	case strings.EqualFold("ExecuteStatementException", errorCode):
 		return awsAwsjson11_deserializeErrorExecuteStatementException(response, errorBody)
 
@@ -1052,6 +1055,41 @@ func awsAwsjson11_deserializeOpErrorListTables(response *smithyhttp.Response, me
 	}
 }
 
+func awsAwsjson11_deserializeErrorActiveStatementsExceededException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.ActiveStatementsExceededException{}
+	err := awsAwsjson11_deserializeDocumentActiveStatementsExceededException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorExecuteStatementException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1190,6 +1228,46 @@ func awsAwsjson11_deserializeErrorValidationException(response *smithyhttp.Respo
 
 	errorBody.Seek(0, io.SeekStart)
 	return output
+}
+
+func awsAwsjson11_deserializeDocumentActiveStatementsExceededException(v **types.ActiveStatementsExceededException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ActiveStatementsExceededException
+	if *v == nil {
+		sv = &types.ActiveStatementsExceededException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 func awsAwsjson11_deserializeDocumentColumnList(v *[]types.ColumnMetadata, value interface{}) error {
@@ -2202,6 +2280,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeStatementOutput(v **DescribeState
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Error = ptr.String(jtv)
+			}
+
+		case "HasResultSet":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.HasResultSet = ptr.Bool(jtv)
 			}
 
 		case "Id":

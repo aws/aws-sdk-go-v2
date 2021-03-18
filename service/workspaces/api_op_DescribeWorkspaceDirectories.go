@@ -47,8 +47,8 @@ type DescribeWorkspaceDirectoriesOutput struct {
 	// Information about the directories.
 	Directories []types.WorkspaceDirectory
 
-	// The token to use to retrieve the next set of results, or null if no more results
-	// are available.
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

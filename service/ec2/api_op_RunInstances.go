@@ -195,7 +195,7 @@ type RunInstancesInput struct {
 	// the same instance.
 	HibernationOptions *types.HibernationOptionsRequest
 
-	// The IAM instance profile.
+	// The name or Amazon Resource Name (ARN) of an IAM instance profile.
 	IamInstanceProfile *types.IamInstanceProfileSpecification
 
 	// The ID of the AMI. An AMI ID is required to launch an instance and must be

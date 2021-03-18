@@ -29,8 +29,8 @@ func (c *Client) UpdateMitigationAction(ctx context.Context, params *UpdateMitig
 
 type UpdateMitigationActionInput struct {
 
-	// The friendly name for the mitigation action. You can't change the name by using
-	// UpdateMitigationAction. Instead, you must delete and re-create the mitigation
+	// The friendly name for the mitigation action. You cannot change the name by using
+	// UpdateMitigationAction. Instead, you must delete and recreate the mitigation
 	// action with the new name.
 	//
 	// This member is required.

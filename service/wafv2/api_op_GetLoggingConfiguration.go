@@ -11,10 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Returns the LoggingConfiguration for the specified web ACL.
 func (c *Client) GetLoggingConfiguration(ctx context.Context, params *GetLoggingConfigurationInput, optFns ...func(*Options)) (*GetLoggingConfigurationOutput, error) {
 	if params == nil {

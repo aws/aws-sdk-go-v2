@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an Amazon Lookout for Vision project.
+// Describes an Amazon Lookout for Vision project. This operation requires
+// permissions to perform the lookoutvision:DescribeProject operation.
 func (c *Client) DescribeProject(ctx context.Context, params *DescribeProjectInput, optFns ...func(*Options)) (*DescribeProjectOutput, error) {
 	if params == nil {
 		params = &DescribeProjectInput{}

@@ -130,6 +130,26 @@ func (m *validateOpClassifyDocument) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpContainsPiiEntities struct {
+}
+
+func (*validateOpContainsPiiEntities) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpContainsPiiEntities) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ContainsPiiEntitiesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpContainsPiiEntitiesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDocumentClassifier struct {
 }
 
@@ -1014,6 +1034,10 @@ func addOpClassifyDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpClassifyDocument{}, middleware.After)
 }
 
+func addOpContainsPiiEntitiesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpContainsPiiEntities{}, middleware.After)
+}
+
 func addOpCreateDocumentClassifierValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDocumentClassifier{}, middleware.After)
 }
@@ -1548,6 +1572,24 @@ func validateOpClassifyDocumentInput(v *ClassifyDocumentInput) error {
 	}
 	if v.EndpointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndpointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpContainsPiiEntitiesInput(v *ContainsPiiEntitiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContainsPiiEntitiesInput"}
+	if v.Text == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if len(v.LanguageCode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

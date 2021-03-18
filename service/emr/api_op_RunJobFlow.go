@@ -154,12 +154,12 @@ type RunJobFlowInput struct {
 	// using MapR M7 Edition.
 	//
 	// * "hunk" - launch the cluster with the Hunk Big Data
-	// Analtics Platform.
+	// Analytics Platform.
 	//
 	// * "hue"- launch the cluster with Hue installed.
 	//
-	// * "spark" -
-	// launch the cluster with Apache Spark installed.
+	// * "spark"
+	// - launch the cluster with Apache Spark installed.
 	//
 	// * "ganglia" - launch the
 	// cluster with the Ganglia Monitoring System installed.
@@ -240,10 +240,10 @@ type RunJobFlowInput struct {
 // The result of the RunJobFlow operation.
 type RunJobFlowOutput struct {
 
-	// The Amazon Resource Name of the cluster.
+	// The Amazon Resource Name (ARN) of the cluster.
 	ClusterArn *string
 
-	// An unique identifier for the job flow.
+	// A unique identifier for the job flow.
 	JobFlowId *string
 
 	// Metadata pertaining to the operation's result.

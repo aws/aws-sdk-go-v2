@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Lightsail load balancer TLS certificate. TLS is just an updated, more
-// secure version of Secure Socket Layer (SSL). The
+// Creates an SSL/TLS certificate for an Amazon Lightsail load balancer. TLS is
+// just an updated, more secure version of Secure Socket Layer (SSL). The
 // CreateLoadBalancerTlsCertificate operation supports tag-based access control via
 // resource tags applied to the resource identified by load balancer name. For more
 // information, see the Lightsail Dev Guide

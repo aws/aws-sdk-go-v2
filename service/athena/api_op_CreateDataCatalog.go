@@ -37,8 +37,10 @@ type CreateDataCatalogInput struct {
 	// This member is required.
 	Name *string
 
-	// The type of data catalog to create: LAMBDA for a federated catalog, GLUE for AWS
-	// Glue Catalog, or HIVE for an external hive metastore.
+	// The type of data catalog to create: LAMBDA for a federated catalog or HIVE for
+	// an external hive metastore. Do not use the GLUE type. This refers to the
+	// AwsDataCatalog that already exists in your account, of which you can have only
+	// one. Specifying the GLUE type will result in an INVALID_INPUT error.
 	//
 	// This member is required.
 	Type types.DataCatalogType
@@ -66,8 +68,6 @@ type CreateDataCatalogInput struct {
 	// * If you have a composite Lambda function that
 	// processes both metadata and data, use the following syntax to specify your
 	// Lambda function. function=lambda_arn
-	//
-	// * The GLUE type has no parameters.
 	Parameters map[string]string
 
 	// A list of comma separated tags to add to the data catalog that is created.

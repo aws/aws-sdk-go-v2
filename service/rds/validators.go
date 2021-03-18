@@ -430,6 +430,26 @@ func (m *validateOpCreateDBParameterGroup) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDBProxyEndpoint struct {
+}
+
+func (*validateOpCreateDBProxyEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDBProxyEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDBProxyEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDBProxyEndpointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDBProxy struct {
 }
 
@@ -685,6 +705,26 @@ func (m *validateOpDeleteDBParameterGroup) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDBParameterGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDBProxyEndpoint struct {
+}
+
+func (*validateOpDeleteDBProxyEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDBProxyEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDBProxyEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDBProxyEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1190,6 +1230,26 @@ func (m *validateOpDescribeDBProxies) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDBProxyEndpoints struct {
+}
+
+func (*validateOpDescribeDBProxyEndpoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDBProxyEndpoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDBProxyEndpointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDBProxyEndpointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDBProxyTargetGroups struct {
 }
 
@@ -1670,6 +1730,26 @@ func (m *validateOpFailoverDBCluster) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpFailoverGlobalCluster struct {
+}
+
+func (*validateOpFailoverGlobalCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpFailoverGlobalCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*FailoverGlobalClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpFailoverGlobalClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportInstallationMedia struct {
 }
 
@@ -1845,6 +1925,26 @@ func (m *validateOpModifyDBParameterGroup) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpModifyDBParameterGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpModifyDBProxyEndpoint struct {
+}
+
+func (*validateOpModifyDBProxyEndpoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyDBProxyEndpoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyDBProxyEndpointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyDBProxyEndpointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2614,6 +2714,10 @@ func addOpCreateDBParameterGroupValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateDBParameterGroup{}, middleware.After)
 }
 
+func addOpCreateDBProxyEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDBProxyEndpoint{}, middleware.After)
+}
+
 func addOpCreateDBProxyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDBProxy{}, middleware.After)
 }
@@ -2664,6 +2768,10 @@ func addOpDeleteDBInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDBParameterGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDBParameterGroup{}, middleware.After)
+}
+
+func addOpDeleteDBProxyEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDBProxyEndpoint{}, middleware.After)
 }
 
 func addOpDeleteDBProxyValidationMiddleware(stack *middleware.Stack) error {
@@ -2766,6 +2874,10 @@ func addOpDescribeDBProxiesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDBProxies{}, middleware.After)
 }
 
+func addOpDescribeDBProxyEndpointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDBProxyEndpoints{}, middleware.After)
+}
+
 func addOpDescribeDBProxyTargetGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDBProxyTargetGroups{}, middleware.After)
 }
@@ -2862,6 +2974,10 @@ func addOpFailoverDBClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpFailoverDBCluster{}, middleware.After)
 }
 
+func addOpFailoverGlobalClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpFailoverGlobalCluster{}, middleware.After)
+}
+
 func addOpImportInstallationMediaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportInstallationMedia{}, middleware.After)
 }
@@ -2896,6 +3012,10 @@ func addOpModifyDBInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpModifyDBParameterGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyDBParameterGroup{}, middleware.After)
+}
+
+func addOpModifyDBProxyEndpointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyDBProxyEndpoint{}, middleware.After)
 }
 
 func addOpModifyDBProxyValidationMiddleware(stack *middleware.Stack) error {
@@ -3497,6 +3617,27 @@ func validateOpCreateDBParameterGroupInput(v *CreateDBParameterGroupInput) error
 	}
 }
 
+func validateOpCreateDBProxyEndpointInput(v *CreateDBProxyEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDBProxyEndpointInput"}
+	if v.DBProxyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBProxyName"))
+	}
+	if v.DBProxyEndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBProxyEndpointName"))
+	}
+	if v.VpcSubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcSubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDBProxyInput(v *CreateDBProxyInput) error {
 	if v == nil {
 		return nil
@@ -3720,6 +3861,21 @@ func validateOpDeleteDBParameterGroupInput(v *DeleteDBParameterGroupInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDBParameterGroupInput"}
 	if v.DBParameterGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBParameterGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDBProxyEndpointInput(v *DeleteDBProxyEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDBProxyEndpointInput"}
+	if v.DBProxyEndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBProxyEndpointName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4133,6 +4289,23 @@ func validateOpDescribeDBProxiesInput(v *DescribeDBProxiesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBProxiesInput"}
+	if v.Filters != nil {
+		if err := validateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDBProxyEndpointsInput(v *DescribeDBProxyEndpointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDBProxyEndpointsInput"}
 	if v.Filters != nil {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
@@ -4566,6 +4739,24 @@ func validateOpFailoverDBClusterInput(v *FailoverDBClusterInput) error {
 	}
 }
 
+func validateOpFailoverGlobalClusterInput(v *FailoverGlobalClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FailoverGlobalClusterInput"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.TargetDbClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetDbClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportInstallationMediaInput(v *ImportInstallationMediaInput) error {
 	if v == nil {
 		return nil
@@ -4719,6 +4910,21 @@ func validateOpModifyDBParameterGroupInput(v *ModifyDBParameterGroupInput) error
 	}
 	if v.Parameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyDBProxyEndpointInput(v *ModifyDBProxyEndpointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyDBProxyEndpointInput"}
+	if v.DBProxyEndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DBProxyEndpointName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

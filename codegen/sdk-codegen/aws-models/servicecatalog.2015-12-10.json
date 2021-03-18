@@ -456,13 +456,10 @@
                 }
             }
         },
-        "com.amazonaws.servicecatalog#AllowedValue": {
-            "type": "string"
-        },
         "com.amazonaws.servicecatalog#AllowedValues": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.servicecatalog#AllowedValue"
+                "target": "com.amazonaws.servicecatalog#String"
             }
         },
         "com.amazonaws.servicecatalog#ApproximateCount": {
@@ -5820,6 +5817,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The values that the administrator has allowed for the parameter.</p>"
                     }
+                },
+                "AllowedPattern": {
+                    "target": "com.amazonaws.servicecatalog#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A regular expression that represents the patterns that allow for <code>String</code> types. The pattern must match the entire parameter value provided.</p>"
+                    }
+                },
+                "ConstraintDescription": {
+                    "target": "com.amazonaws.servicecatalog#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that explains a constraint when the constraint is violated. For example, without a constraint description, a parameter that has an allowed pattern of <code>[A-Za-z0-9]+</code> displays the following error message when the user specifies an invalid value:</p>\n      \n         <p>\n            <code>Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+</code>\n         </p>\n      \n         <p>By adding a constraint description, such as must only contain letters (uppercase and lowercase) and numbers, you can display the following customized error message:</p>\n      \n         <p>\n            <code>Malformed input-Parameter MyParameter must only contain uppercase and lowercase letters and numbers.</code>\n         </p>"
+                    }
+                },
+                "MaxLength": {
+                    "target": "com.amazonaws.servicecatalog#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer value that determines the largest number of characters you want to allow for <code>String</code> types. </p>"
+                    }
+                },
+                "MinLength": {
+                    "target": "com.amazonaws.servicecatalog#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An integer value that determines the smallest number of characters you want to allow for <code>String</code> types.</p>"
+                    }
+                },
+                "MaxValue": {
+                    "target": "com.amazonaws.servicecatalog#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A numeric value that determines the largest numeric value you want to allow for <code>Number</code> types.</p>"
+                    }
+                },
+                "MinValue": {
+                    "target": "com.amazonaws.servicecatalog#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A numeric value that determines the smallest numeric value you want to allow for <code>Number</code> types. </p>"
+                    }
                 }
             },
             "traits": {
@@ -8896,6 +8929,9 @@
             "traits": {
                 "smithy.api#pattern": "[\\u0009\\u000a\\u000d\\u0020-\\uD7FF\\uE000-\\uFFFD]*"
             }
+        },
+        "com.amazonaws.servicecatalog#String": {
+            "type": "string"
         },
         "com.amazonaws.servicecatalog#SuccessfulShares": {
             "type": "list",

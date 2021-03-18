@@ -24,6 +24,23 @@ func (e *InvalidInputException) ErrorMessage() string {
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified resource is in use.
+type ResourceInUseException struct {
+	Message *string
+}
+
+func (e *ResourceInUseException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceInUseException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
+func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Could not find the specified resource.
 type ResourceNotFoundException struct {
 	Message *string

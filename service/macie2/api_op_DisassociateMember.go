@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates an Amazon Macie master account from a member account.
+// Disassociates an Amazon Macie administrator account from a member account.
 func (c *Client) DisassociateMember(ctx context.Context, params *DisassociateMemberInput, optFns ...func(*Options)) (*DisassociateMemberOutput, error) {
 	if params == nil {
 		params = &DisassociateMemberInput{}

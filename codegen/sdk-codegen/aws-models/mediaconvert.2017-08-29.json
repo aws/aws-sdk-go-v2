@@ -1145,7 +1145,7 @@
                     }
                 },
                 "ExternalAudioFileInput": {
-                    "target": "com.amazonaws.mediaconvert#__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE",
                     "traits": {
                         "smithy.api#documentation": "Specifies audio data from an external file source.",
                         "smithy.api#jsonName": "externalAudioFileInput"
@@ -1528,7 +1528,7 @@
         "com.amazonaws.mediaconvert#AvcIntraClass": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality.",
+                "smithy.api#documentation": "Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality. Note that for Class 4K/2K, MediaConvert supports only 4:2:2 chroma subsampling.",
                 "smithy.api#enum": [
                     {
                         "value": "CLASS_50",
@@ -1541,6 +1541,10 @@
                     {
                         "value": "CLASS_200",
                         "name": "CLASS_200"
+                    },
+                    {
+                        "value": "CLASS_4K_2K",
+                        "name": "CLASS_4K_2K"
                     }
                 ]
             }
@@ -1609,14 +1613,37 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#AvcIntraScanTypeConversionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERLACED",
+                        "name": "INTERLACED"
+                    },
+                    {
+                        "value": "INTERLACED_OPTIMIZE",
+                        "name": "INTERLACED_OPTIMIZE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#AvcIntraSettings": {
             "type": "structure",
             "members": {
                 "AvcIntraClass": {
                     "target": "com.amazonaws.mediaconvert#AvcIntraClass",
                     "traits": {
-                        "smithy.api#documentation": "Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality.",
+                        "smithy.api#documentation": "Specify the AVC-Intra class of your output. The AVC-Intra class selection determines the output video bit rate depending on the frame rate of the output. Outputs with higher class values have higher bitrates and improved image quality. Note that for Class 4K/2K, MediaConvert supports only 4:2:2 chroma subsampling.",
                         "smithy.api#jsonName": "avcIntraClass"
+                    }
+                },
+                "AvcIntraUhdSettings": {
+                    "target": "com.amazonaws.mediaconvert#AvcIntraUhdSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K (CLASS_4K_2K). When you set AVC-Intra class to a different value, this object isn't allowed.",
+                        "smithy.api#jsonName": "avcIntraUhdSettings"
                     }
                 },
                 "FramerateControl": {
@@ -1654,6 +1681,13 @@
                         "smithy.api#jsonName": "interlaceMode"
                     }
                 },
+                "ScanTypeConversionMode": {
+                    "target": "com.amazonaws.mediaconvert#AvcIntraScanTypeConversionMode",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                        "smithy.api#jsonName": "scanTypeConversionMode"
+                    }
+                },
                 "SlowPal": {
                     "target": "com.amazonaws.mediaconvert#AvcIntraSlowPal",
                     "traits": {
@@ -1670,7 +1704,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936."
+                "smithy.api#documentation": "Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf."
             }
         },
         "com.amazonaws.mediaconvert#AvcIntraSlowPal": {
@@ -1703,6 +1737,37 @@
                         "name": "HARD"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.mediaconvert#AvcIntraUhdQualityTuningLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Optional. Use Quality tuning level (qualityTuningLevel) to choose how many transcoding passes MediaConvert does with your video. When you choose Multi-pass (MULTI_PASS), your video quality is better and your output bitrate is more accurate. That is, the actual bitrate of your output is closer to the target bitrate defined in the specification. When you choose Single-pass (SINGLE_PASS), your encoding time is faster. The default behavior is Single-pass (SINGLE_PASS).",
+                "smithy.api#enum": [
+                    {
+                        "value": "SINGLE_PASS",
+                        "name": "SINGLE_PASS"
+                    },
+                    {
+                        "value": "MULTI_PASS",
+                        "name": "MULTI_PASS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediaconvert#AvcIntraUhdSettings": {
+            "type": "structure",
+            "members": {
+                "QualityTuningLevel": {
+                    "target": "com.amazonaws.mediaconvert#AvcIntraUhdQualityTuningLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Use Quality tuning level (qualityTuningLevel) to choose how many transcoding passes MediaConvert does with your video. When you choose Multi-pass (MULTI_PASS), your video quality is better and your output bitrate is more accurate. That is, the actual bitrate of your output is closer to the target bitrate defined in the specification. When you choose Single-pass (SINGLE_PASS), your encoding time is faster. The default behavior is Single-pass (SINGLE_PASS).",
+                        "smithy.api#jsonName": "qualityTuningLevel"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Optional when you set AVC-Intra class (avcIntraClass) to Class 4K/2K (CLASS_4K_2K). When you set AVC-Intra class to a different value, this object isn't allowed."
             }
         },
         "com.amazonaws.mediaconvert#BadRequestException": {
@@ -2411,6 +2476,10 @@
                         "name": "SMI"
                     },
                     {
+                        "value": "SMPTE_TT",
+                        "name": "SMPTE_TT"
+                    },
+                    {
                         "value": "TELETEXT",
                         "name": "TELETEXT"
                     },
@@ -2431,13 +2500,13 @@
                 "OutputChannels": {
                     "target": "com.amazonaws.mediaconvert#__listOfOutputChannelMapping",
                     "traits": {
-                        "smithy.api#documentation": "List of output channels",
+                        "smithy.api#documentation": "In your JSON job specification, include one child of OutputChannels for each audio channel that you want in your output. Each child should contain one instance of InputChannels or InputChannelsFineTune.",
                         "smithy.api#jsonName": "outputChannels"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification)."
+                "smithy.api#documentation": "Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel, in dB. Specify remix values to indicate how much of the content from your input audio channel you want in your output audio channels. Each instance of the InputChannels or InputChannelsFineTune array specifies these values for one output channel. Use one instance of this array for each output channel. In the console, each array corresponds to a column in the graphical depiction of the mapping matrix. The rows of the graphical matrix correspond to input channels. Valid values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification). Use InputChannels or InputChannelsFineTune to specify your remix values. Don't use both."
             }
         },
         "com.amazonaws.mediaconvert#CmafAdditionalManifest": {
@@ -2877,6 +2946,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#CmfcIFrameOnlyManifest": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).",
+                "smithy.api#enum": [
+                    {
+                        "value": "INCLUDE",
+                        "name": "INCLUDE"
+                    },
+                    {
+                        "value": "EXCLUDE",
+                        "name": "EXCLUDE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#CmfcScte35Esam": {
             "type": "string",
             "traits": {
@@ -2917,6 +3002,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec.",
                         "smithy.api#jsonName": "audioDuration"
+                    }
+                },
+                "IFrameOnlyManifest": {
+                    "target": "com.amazonaws.mediaconvert#CmfcIFrameOnlyManifest",
+                    "traits": {
+                        "smithy.api#documentation": "Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).",
+                        "smithy.api#jsonName": "iFrameOnlyManifest"
                     }
                 },
                 "Scte35Esam": {
@@ -6565,6 +6657,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#H264ScanTypeConversionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERLACED",
+                        "name": "INTERLACED"
+                    },
+                    {
+                        "value": "INTERLACED_OPTIMIZE",
+                        "name": "INTERLACED_OPTIMIZE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#H264SceneChangeDetect": {
             "type": "string",
             "traits": {
@@ -6796,6 +6904,13 @@
                     "traits": {
                         "smithy.api#documentation": "Places a PPS header on each encoded picture, even if repeated.",
                         "smithy.api#jsonName": "repeatPps"
+                    }
+                },
+                "ScanTypeConversionMode": {
+                    "target": "com.amazonaws.mediaconvert#H264ScanTypeConversionMode",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                        "smithy.api#jsonName": "scanTypeConversionMode"
                     }
                 },
                 "SceneChangeDetect": {
@@ -7351,6 +7466,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#H265ScanTypeConversionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERLACED",
+                        "name": "INTERLACED"
+                    },
+                    {
+                        "value": "INTERLACED_OPTIMIZE",
+                        "name": "INTERLACED_OPTIMIZE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#H265SceneChangeDetect": {
             "type": "string",
             "traits": {
@@ -7575,6 +7706,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify Sample Adaptive Offset (SAO) filter strength.  Adaptive mode dynamically selects best strength based on content",
                         "smithy.api#jsonName": "sampleAdaptiveOffsetFilterMode"
+                    }
+                },
+                "ScanTypeConversionMode": {
+                    "target": "com.amazonaws.mediaconvert#H265ScanTypeConversionMode",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                        "smithy.api#jsonName": "scanTypeConversionMode"
                     }
                 },
                 "SceneChangeDetect": {
@@ -8339,7 +8477,7 @@
         "com.amazonaws.mediaconvert#HlsIFrameOnlyManifest": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "When set to INCLUDE, writes I-Frame Only Manifest in addition to the HLS manifest",
+                "smithy.api#documentation": "Choose Include (INCLUDE) to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).",
                 "smithy.api#enum": [
                     {
                         "value": "INCLUDE",
@@ -8514,7 +8652,7 @@
                 "IFrameOnlyManifest": {
                     "target": "com.amazonaws.mediaconvert#HlsIFrameOnlyManifest",
                     "traits": {
-                        "smithy.api#documentation": "When set to INCLUDE, writes I-Frame Only Manifest in addition to the HLS manifest",
+                        "smithy.api#documentation": "Choose Include (INCLUDE) to have MediaConvert generate a child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).",
                         "smithy.api#jsonName": "iFrameOnlyManifest"
                     }
                 },
@@ -8716,7 +8854,7 @@
                     }
                 },
                 "FileInput": {
-                    "target": "com.amazonaws.mediaconvert#__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA",
                     "traits": {
                         "smithy.api#documentation": "Specify the source file for your transcoding job. You can use multiple inputs in a single job. The service concatenates these inputs, in the order that you specify them in the job, to create the outputs. If your input format is IMF, specify your input by providing the path to your CPL. For example, \"s3://bucket/vf/cpl.xml\". If the CPL is in an incomplete IMP, make sure to use *Supplemental IMPs* (SupplementalImps) to specify any supplemental IMPs that contain assets referenced by the CPL.",
                         "smithy.api#jsonName": "fileInput"
@@ -11800,7 +11938,7 @@
                     }
                 },
                 "Input": {
-                    "target": "com.amazonaws.mediaconvert#__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png",
+                    "target": "com.amazonaws.mediaconvert#__stringMin14PatternS3Mov09PngHttpsMov09Png",
                     "traits": {
                         "smithy.api#documentation": "Specify the .mov file or series of .png files that you want to overlay on your video. For .png files, provide the file name of the first file in the series. Make sure that the names of the .png files end with sequential numbers that specify the order that they are played in. For example, overlay_000.png, overlay_001.png, overlay_002.png, and so on. The sequence must start at zero, and each image file name must have the same number of digits. Pad your initial file names with enough zeros to complete the sequence. For example, if the first image is overlay_0.png, there can be only 10 images in the sequence, with the last image being overlay_9.png. But if the first image is overlay_00.png, there can be 100 images in the sequence.",
                         "smithy.api#jsonName": "input"
@@ -12574,7 +12712,7 @@
         "com.amazonaws.mediaconvert#Mpeg2RateControlMode": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is variable (vbr) or constant (cbr).",
+                "smithy.api#documentation": "Use Rate control mode (Mpeg2RateControlMode) to specify whether the bitrate is variable (vbr) or constant (cbr).",
                 "smithy.api#enum": [
                     {
                         "value": "VBR",
@@ -12583,6 +12721,22 @@
                     {
                         "value": "CBR",
                         "name": "CBR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediaconvert#Mpeg2ScanTypeConversionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERLACED",
+                        "name": "INTERLACED"
+                    },
+                    {
+                        "value": "INTERLACED_OPTIMIZE",
+                        "name": "INTERLACED_OPTIMIZE"
                     }
                 ]
             }
@@ -12770,8 +12924,15 @@
                 "RateControlMode": {
                     "target": "com.amazonaws.mediaconvert#Mpeg2RateControlMode",
                     "traits": {
-                        "smithy.api#documentation": "Use Rate control mode (Mpeg2RateControlMode) to specifiy whether the bitrate is variable (vbr) or constant (cbr).",
+                        "smithy.api#documentation": "Use Rate control mode (Mpeg2RateControlMode) to specify whether the bitrate is variable (vbr) or constant (cbr).",
                         "smithy.api#jsonName": "rateControlMode"
+                    }
+                },
+                "ScanTypeConversionMode": {
+                    "target": "com.amazonaws.mediaconvert#Mpeg2ScanTypeConversionMode",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                        "smithy.api#jsonName": "scanTypeConversionMode"
                     }
                 },
                 "SceneChangeDetect": {
@@ -13576,7 +13737,7 @@
                 "Preset": {
                     "target": "com.amazonaws.mediaconvert#__stringMin0",
                     "traits": {
-                        "smithy.api#documentation": "Use Preset (Preset) to specifiy a preset for your transcoding settings. Provide the system or custom preset name. You can specify either Preset (Preset) or Container settings (ContainerSettings), but not both.",
+                        "smithy.api#documentation": "Use Preset (Preset) to specify a preset for your transcoding settings. Provide the system or custom preset name. You can specify either Preset (Preset) or Container settings (ContainerSettings), but not both.",
                         "smithy.api#jsonName": "preset"
                     }
                 },
@@ -13598,8 +13759,15 @@
                 "InputChannels": {
                     "target": "com.amazonaws.mediaconvert#__listOf__integerMinNegative60Max6",
                     "traits": {
-                        "smithy.api#documentation": "List of input channels",
+                        "smithy.api#documentation": "Use this setting to specify your remix values when they are integers, such as -10, 0, or 4.",
                         "smithy.api#jsonName": "inputChannels"
+                    }
+                },
+                "InputChannelsFineTune": {
+                    "target": "com.amazonaws.mediaconvert#__listOf__doubleMinNegative60Max6",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting to specify your remix values when they have a decimal component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.",
+                        "smithy.api#jsonName": "inputChannelsFineTune"
                     }
                 }
             },
@@ -13960,7 +14128,7 @@
         "com.amazonaws.mediaconvert#ProresCodecProfile": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to use for this output.",
+                "smithy.api#documentation": "Use Profile (ProResCodecProfile) to specify the type of Apple ProRes codec to use for this output.",
                 "smithy.api#enum": [
                     {
                         "value": "APPLE_PRORES_422",
@@ -14061,13 +14229,29 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#ProresScanTypeConversionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERLACED",
+                        "name": "INTERLACED"
+                    },
+                    {
+                        "value": "INTERLACED_OPTIMIZE",
+                        "name": "INTERLACED_OPTIMIZE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#ProresSettings": {
             "type": "structure",
             "members": {
                 "CodecProfile": {
                     "target": "com.amazonaws.mediaconvert#ProresCodecProfile",
                     "traits": {
-                        "smithy.api#documentation": "Use Profile (ProResCodecProfile) to specifiy the type of Apple ProRes codec to use for this output.",
+                        "smithy.api#documentation": "Use Profile (ProResCodecProfile) to specify the type of Apple ProRes codec to use for this output.",
                         "smithy.api#jsonName": "codecProfile"
                     }
                 },
@@ -14125,6 +14309,13 @@
                     "traits": {
                         "smithy.api#documentation": "Required when you set Pixel aspect ratio (parControl) to SPECIFIED. On the console, this corresponds to any value other than Follow source. When you specify an output pixel aspect ratio (PAR) that is different from your input video PAR, provide your output PAR as a ratio. For example, for D1/DV NTSC widescreen, you would specify the ratio 40:33. In this example, the value for parNumerator is 40.",
                         "smithy.api#jsonName": "parNumerator"
+                    }
+                },
+                "ScanTypeConversionMode": {
+                    "target": "com.amazonaws.mediaconvert#ProresScanTypeConversionMode",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                        "smithy.api#jsonName": "scanTypeConversionMode"
                     }
                 },
                 "SlowPal": {
@@ -14367,21 +14558,21 @@
                 "ChannelMapping": {
                     "target": "com.amazonaws.mediaconvert#ChannelMapping",
                     "traits": {
-                        "smithy.api#documentation": "Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel. Units are in dB. Acceptable values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification).",
+                        "smithy.api#documentation": "Channel mapping (ChannelMapping) contains the group of fields that hold the remixing value for each channel, in dB. Specify remix values to indicate how much of the content from your input audio channel you want in your output audio channels. Each instance of the InputChannels or InputChannelsFineTune array specifies these values for one output channel. Use one instance of this array for each output channel. In the console, each array corresponds to a column in the graphical depiction of the mapping matrix. The rows of the graphical matrix correspond to input channels. Valid values are within the range from -60 (mute) through 6. A setting of 0 passes the input channel unchanged to the output channel (no attenuation or amplification). Use InputChannels or InputChannelsFineTune to specify your remix values. Don't use both.",
                         "smithy.api#jsonName": "channelMapping"
                     }
                 },
                 "ChannelsIn": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max64",
                     "traits": {
-                        "smithy.api#documentation": "Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different.",
+                        "smithy.api#documentation": "Specify the number of audio channels from your input that you want to use in your output. With remixing, you might combine or split the data in these channels, so the number of channels in your final output might be different. If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.",
                         "smithy.api#jsonName": "channelsIn"
                     }
                 },
                 "ChannelsOut": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max64",
                     "traits": {
-                        "smithy.api#documentation": "Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.)",
+                        "smithy.api#documentation": "Specify the number of channels in this output after remixing. Valid values: 1, 2, 4, 6, 8... 64. (1 and even numbers to 64.) If you are doing both input channel mapping and output channel mapping, the number of output channels in your input mapping must be the same as the number of input channels in your output mapping.",
                         "smithy.api#jsonName": "channelsOut"
                     }
                 }
@@ -15713,6 +15904,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#Vc3ScanTypeConversionMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                "smithy.api#enum": [
+                    {
+                        "value": "INTERLACED",
+                        "name": "INTERLACED"
+                    },
+                    {
+                        "value": "INTERLACED_OPTIMIZE",
+                        "name": "INTERLACED_OPTIMIZE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#Vc3Settings": {
             "type": "structure",
             "members": {
@@ -15749,6 +15956,13 @@
                     "traits": {
                         "smithy.api#documentation": "Optional. Choose the scan line type for this output. If you don't specify a value, MediaConvert will create a progressive output.",
                         "smithy.api#jsonName": "interlaceMode"
+                    }
+                },
+                "ScanTypeConversionMode": {
+                    "target": "com.amazonaws.mediaconvert#Vc3ScanTypeConversionMode",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting for interlaced outputs, when your output frame rate is half of your input frame rate. In this situation, choose Optimized interlacing (INTERLACED_OPTIMIZE) to create a better quality interlaced output. In this case, each progressive frame from the input corresponds to an interlaced field in the output. Keep the default value, Basic interlacing (INTERLACED), for all other output frame rates. With basic interlacing, MediaConvert performs any frame rate conversion first and then interlaces the frames. When you choose Optimized interlacing and you set your output frame rate to a value that isn't suitable for optimized interlacing, MediaConvert automatically falls back to basic interlacing. Required settings: To use optimized interlacing, you must set Telecine (telecine) to None (NONE) or Soft (SOFT). You can't use optimized interlacing for hard telecine outputs. You must also set Interlace mode (interlaceMode) to a value other than Progressive (PROGRESSIVE).",
+                        "smithy.api#jsonName": "scanTypeConversionMode"
                     }
                 },
                 "SlowPal": {
@@ -15870,7 +16084,7 @@
                 "AvcIntraSettings": {
                     "target": "com.amazonaws.mediaconvert#AvcIntraSettings",
                     "traits": {
-                        "smithy.api#documentation": "Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936.",
+                        "smithy.api#documentation": "Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.",
                         "smithy.api#jsonName": "avcIntraSettings"
                     }
                 },
@@ -16687,6 +16901,9 @@
             "type": "double"
         },
         "com.amazonaws.mediaconvert#__doubleMinNegative60Max3": {
+            "type": "double"
+        },
+        "com.amazonaws.mediaconvert#__doubleMinNegative60Max6": {
             "type": "double"
         },
         "com.amazonaws.mediaconvert#__doubleMinNegative60MaxNegative1": {
@@ -17625,6 +17842,12 @@
                 "target": "com.amazonaws.mediaconvert#TeletextPageType"
             }
         },
+        "com.amazonaws.mediaconvert#__listOf__doubleMinNegative60Max6": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#__doubleMinNegative60Max6"
+            }
+        },
         "com.amazonaws.mediaconvert#__listOf__integerMin1Max2147483647": {
             "type": "list",
             "member": {
@@ -17738,16 +17961,6 @@
                 "smithy.api#pattern": "^((([0-1]\\d)|(2[0-3]))(:[0-5]\\d){2}([:;][0-5]\\d))$"
             }
         },
-        "com.amazonaws.mediaconvert#__stringMin14Max1285PatternS3Mov09PngHttpsMov09Png": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 14,
-                    "max": 1285
-                },
-                "smithy.api#pattern": "^((s3://(.*)(\\.mov|[0-9]+\\.png))|(https?://(.*)(\\.mov|[0-9]+\\.png)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
-            }
-        },
         "com.amazonaws.mediaconvert#__stringMin14PatternS3BmpBMPPngPNGHttpsBmpBMPPngPNG": {
             "type": "string",
             "traits": {
@@ -17764,6 +17977,15 @@
                     "min": 14
                 },
                 "smithy.api#pattern": "^((s3://(.*?)\\.(bmp|BMP|png|PNG|tga|TGA))|(https?://(.*?)\\.(bmp|BMP|png|PNG|tga|TGA)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringMin14PatternS3Mov09PngHttpsMov09Png": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 14
+                },
+                "smithy.api#pattern": "^((s3://(.*)(\\.mov|[0-9]+\\.png))|(https?://(.*)(\\.mov|[0-9]+\\.png)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
             }
         },
         "com.amazonaws.mediaconvert#__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI": {
@@ -17977,16 +18199,16 @@
                 "smithy.api#pattern": "^s3:\\/\\/.*\\/(ASSETMAP.xml)?$"
             }
         },
-        "com.amazonaws.mediaconvert#__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA": {
+        "com.amazonaws.mediaconvert#__stringPatternS3MM2PPMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaAHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8WWEEBBMMLLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMXXMMLLOOGGGGaA": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^((s3://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[pP]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL]|[oO][gG][gGaA]))))|(https?://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL]|[oO][gG][gGaA])))(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
+                "smithy.api#pattern": "^((s3://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[pP]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL]|[oO][gG][gGaA]))))|(https?://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[wW][eE][bB][mM]|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[xX][mM][lL]|[oO][gG][gGaA])))(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
             }
         },
-        "com.amazonaws.mediaconvert#__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE": {
+        "com.amazonaws.mediaconvert#__stringPatternS3MM2PPWWEEBBMMMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEEHttpsMM2VVMMPPEEGGMMPP3AAVVIIMMPP4FFLLVVMMPPTTMMPPGGMM4VVTTRRPPFF4VVMM2TTSSTTSS264HH264MMKKVVMMKKAAMMOOVVMMTTSSMM2TTWWMMVVaAAASSFFVVOOBB3GGPP3GGPPPPMMXXFFDDIIVVXXXXVVIIDDRRAAWWDDVVGGXXFFMM1VV3GG2VVMMFFMM3UU8LLCCHHGGXXFFMMPPEEGG2MMXXFFMMPPEEGG2MMXXFFHHDDWWAAVVYY4MMAAAACCAAIIFFFFMMPP2AACC3EECC3DDTTSSEE": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^((s3://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[pP]|[wW][eE][bB][mM]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE]))))|(https?://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vV]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
+                "smithy.api#pattern": "^((s3://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[pP]|[wW][eE][bB][mM]|[mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE]))))|(https?://([^\\/]+\\/+)+([^\\/\\.]+|(([^\\/]*)\\.([mM]2[vV]|[mM][pP][eE][gG]|[mM][pP]3|[aA][vV][iI]|[mM][pP]4|[fF][lL][vV]|[mM][pP][tT]|[mM][pP][gG]|[mM]4[vV]|[tT][rR][pP]|[fF]4[vV]|[mM]2[tT][sS]|[tT][sS]|264|[hH]264|[mM][kK][vV]|[mM][kK][aA]|[mM][oO][vV]|[mM][tT][sS]|[mM]2[tT]|[wW][mM][vVaA]|[aA][sS][fF]|[vV][oO][bB]|3[gG][pP]|3[gG][pP][pP]|[mM][xX][fF]|[dD][iI][vV][xX]|[xX][vV][iI][dD]|[rR][aA][wW]|[dD][vV]|[gG][xX][fF]|[mM]1[vV]|3[gG]2|[vV][mM][fF]|[mM]3[uU]8|[lL][cC][hH]|[gG][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF]_[mM][pP][eE][gG]2|[mM][xX][fF][hH][dD]|[wW][aA][vV]|[yY]4[mM]|[aA][aA][cC]|[aA][iI][fF][fF]|[mM][pP]2|[aA][cC]3|[eE][cC]3|[dD][tT][sS][eE])))(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
             }
         },
         "com.amazonaws.mediaconvert#__stringPatternSNManifestConfirmConditionNotificationNS": {

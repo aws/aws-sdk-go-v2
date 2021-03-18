@@ -312,14 +312,14 @@ func awsRestjson1_serializeOpDocumentCreateMissionProfileInput(v *CreateMissionP
 	object := value.Object()
 	defer object.Close()
 
-	if v.ContactPostPassDurationSeconds != 0 {
+	if v.ContactPostPassDurationSeconds != nil {
 		ok := object.Key("contactPostPassDurationSeconds")
-		ok.Integer(v.ContactPostPassDurationSeconds)
+		ok.Integer(*v.ContactPostPassDurationSeconds)
 	}
 
-	if v.ContactPrePassDurationSeconds != 0 {
+	if v.ContactPrePassDurationSeconds != nil {
 		ok := object.Key("contactPrePassDurationSeconds")
-		ok.Integer(v.ContactPrePassDurationSeconds)
+		ok.Integer(*v.ContactPrePassDurationSeconds)
 	}
 
 	if v.DataflowEdges != nil {
@@ -329,9 +329,9 @@ func awsRestjson1_serializeOpDocumentCreateMissionProfileInput(v *CreateMissionP
 		}
 	}
 
-	{
+	if v.MinimumViableContactDurationSeconds != nil {
 		ok := object.Key("minimumViableContactDurationSeconds")
-		ok.Integer(v.MinimumViableContactDurationSeconds)
+		ok.Integer(*v.MinimumViableContactDurationSeconds)
 	}
 
 	if v.Name != nil {
@@ -1878,14 +1878,14 @@ func awsRestjson1_serializeOpDocumentUpdateMissionProfileInput(v *UpdateMissionP
 	object := value.Object()
 	defer object.Close()
 
-	if v.ContactPostPassDurationSeconds != 0 {
+	if v.ContactPostPassDurationSeconds != nil {
 		ok := object.Key("contactPostPassDurationSeconds")
-		ok.Integer(v.ContactPostPassDurationSeconds)
+		ok.Integer(*v.ContactPostPassDurationSeconds)
 	}
 
-	if v.ContactPrePassDurationSeconds != 0 {
+	if v.ContactPrePassDurationSeconds != nil {
 		ok := object.Key("contactPrePassDurationSeconds")
-		ok.Integer(v.ContactPrePassDurationSeconds)
+		ok.Integer(*v.ContactPrePassDurationSeconds)
 	}
 
 	if v.DataflowEdges != nil {
@@ -1895,9 +1895,9 @@ func awsRestjson1_serializeOpDocumentUpdateMissionProfileInput(v *UpdateMissionP
 		}
 	}
 
-	if v.MinimumViableContactDurationSeconds != 0 {
+	if v.MinimumViableContactDurationSeconds != nil {
 		ok := object.Key("minimumViableContactDurationSeconds")
-		ok.Integer(v.MinimumViableContactDurationSeconds)
+		ok.Integer(*v.MinimumViableContactDurationSeconds)
 	}
 
 	if v.Name != nil {

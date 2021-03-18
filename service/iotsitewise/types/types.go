@@ -781,6 +781,20 @@ type GroupIdentity struct {
 	Id *string
 }
 
+// Contains information about an AWS Identity and Access Management (IAM) role. For
+// more information, see IAM roles
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the IAM User
+// Guide.
+type IAMRoleIdentity struct {
+
+	// The ARN of the IAM role. For more information, see IAM ARNs
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns)
+	// in the IAM User Guide.
+	//
+	// This member is required.
+	Arn *string
+}
+
 // Contains information about an AWS Identity and Access Management (IAM) user.
 type IAMUserIdentity struct {
 
@@ -802,6 +816,9 @@ type Identity struct {
 
 	// An AWS SSO group identity.
 	Group *GroupIdentity
+
+	// An IAM role identity.
+	IamRole *IAMRoleIdentity
 
 	// An IAM user identity.
 	IamUser *IAMUserIdentity
@@ -865,8 +882,7 @@ type LoggingOptions struct {
 	Level LoggingLevel
 }
 
-// Contains an asset measurement property. This structure is empty. For more
-// information, see Measurements
+// Contains an asset measurement property. For more information, see Measurements
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements)
 // in the AWS IoT SiteWise User Guide.
 type Measurement struct {

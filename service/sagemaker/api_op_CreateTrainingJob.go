@@ -46,7 +46,7 @@ import (
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html).
 //
 // *
-// RoleArn - The Amazon Resource Number (ARN) that Amazon SageMaker assumes to
+// RoleArn - The Amazon Resource Name (ARN) that Amazon SageMaker assumes to
 // perform tasks on your behalf during model training. You must grant this role the
 // necessary permissions so that Amazon SageMaker can successfully complete model
 // training.

@@ -70,7 +70,11 @@ type CreateServiceInput struct {
 	// When you
 	// register an instance, AWS Cloud Map creates an SRV record and assigns a name to
 	// the record by concatenating the service name and the namespace name, for
-	// example: _exampleservice._tcp.example.com
+	// example: _exampleservice._tcp.example.com For a single DNS namespace, you cannot
+	// create two services with names that differ only by case (such as EXAMPLE and
+	// example). Otherwise, these services will have the same DNS name. However, you
+	// can create multiple HTTP services with names that differ only by case because
+	// HTTP services are case sensitive.
 	//
 	// This member is required.
 	Name *string
@@ -110,6 +114,11 @@ type CreateServiceInput struct {
 	// value, both of which you define. Tag keys can have a maximum character length of
 	// 128 characters, and tag values can have a maximum length of 256 characters.
 	Tags []types.Tag
+
+	// If present, specifies that the service instances are only discoverable using the
+	// DiscoverInstances API operation. No DNS records will be registered for the
+	// service instances. The only valid value is HTTP.
+	Type types.ServiceTypeOption
 }
 
 type CreateServiceOutput struct {

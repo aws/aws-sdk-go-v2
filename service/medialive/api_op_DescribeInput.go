@@ -70,6 +70,9 @@ type DescribeInputOutput struct {
 	// Settings for the input devices.
 	InputDevices []types.InputDeviceSettings
 
+	// A list of IDs for all Inputs which are partners of this one.
+	InputPartnerIds []string
+
 	// Certain pull input sources can be dynamic, meaning that they can have their
 	// URL's dynamically changes during input switch actions. Presently, this
 	// functionality only works with MP4_FILE inputs.

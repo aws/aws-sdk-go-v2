@@ -40,8 +40,8 @@ type DescribeAccountModificationsOutput struct {
 	// The list of modifications to the configuration of BYOL.
 	AccountModifications []types.AccountModification
 
-	// The token to use to retrieve the next set of results, or null if no more results
-	// are available.
+	// The token to use to retrieve the next page of results. This value is null when
+	// there are no more results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

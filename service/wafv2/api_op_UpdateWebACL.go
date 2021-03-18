@@ -11,10 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Updates the specified WebACL. A Web ACL defines a collection of rules to use to
 // inspect and control web requests. Each rule has an action defined (allow, block,
 // or count) for requests that match the statement of the rule. In the Web ACL, you
@@ -89,8 +85,7 @@ type UpdateWebACLInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
-	// A description of the Web ACL that helps with identification. You cannot change
-	// the description of a Web ACL after you create it.
+	// A description of the Web ACL that helps with identification.
 	Description *string
 
 	// The Rule statements used to identify the web requests that you want to allow,

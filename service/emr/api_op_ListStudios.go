@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject
-// to change. Returns a list of all Amazon EMR Studios associated with the AWS
-// account. The list includes details such as ID, Studio Access URL, and creation
-// time for each Studio.
+// Returns a list of all Amazon EMR Studios associated with the AWS account. The
+// list includes details such as ID, Studio Access URL, and creation time for each
+// Studio.
 func (c *Client) ListStudios(ctx context.Context, params *ListStudiosInput, optFns ...func(*Options)) (*ListStudiosOutput, error) {
 	if params == nil {
 		params = &ListStudiosInput{}

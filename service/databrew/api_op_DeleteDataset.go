@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a dataset from AWS Glue DataBrew.
+// Deletes a dataset from DataBrew.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}

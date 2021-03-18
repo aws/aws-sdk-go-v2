@@ -90,6 +90,26 @@ func (m *validateOpCreateNamedQuery) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreatePreparedStatement struct {
+}
+
+func (*validateOpCreatePreparedStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreatePreparedStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreatePreparedStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreatePreparedStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkGroup struct {
 }
 
@@ -145,6 +165,26 @@ func (m *validateOpDeleteNamedQuery) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNamedQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeletePreparedStatement struct {
+}
+
+func (*validateOpDeletePreparedStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePreparedStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePreparedStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePreparedStatementInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -225,6 +265,26 @@ func (m *validateOpGetNamedQuery) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetNamedQueryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetPreparedStatement struct {
+}
+
+func (*validateOpGetPreparedStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPreparedStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPreparedStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPreparedStatementInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -325,6 +385,26 @@ func (m *validateOpListDatabases) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListDatabasesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListPreparedStatements struct {
+}
+
+func (*validateOpListPreparedStatements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPreparedStatements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPreparedStatementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPreparedStatementsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -470,6 +550,26 @@ func (m *validateOpUpdateDataCatalog) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePreparedStatement struct {
+}
+
+func (*validateOpUpdatePreparedStatement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePreparedStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePreparedStatementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePreparedStatementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWorkGroup struct {
 }
 
@@ -506,6 +606,10 @@ func addOpCreateNamedQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNamedQuery{}, middleware.After)
 }
 
+func addOpCreatePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreatePreparedStatement{}, middleware.After)
+}
+
 func addOpCreateWorkGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkGroup{}, middleware.After)
 }
@@ -516,6 +620,10 @@ func addOpDeleteDataCatalogValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteNamedQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNamedQuery{}, middleware.After)
+}
+
+func addOpDeletePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePreparedStatement{}, middleware.After)
 }
 
 func addOpDeleteWorkGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -532,6 +640,10 @@ func addOpGetDataCatalogValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetNamedQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetNamedQuery{}, middleware.After)
+}
+
+func addOpGetPreparedStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPreparedStatement{}, middleware.After)
 }
 
 func addOpGetQueryExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -552,6 +664,10 @@ func addOpGetWorkGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListDatabasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDatabases{}, middleware.After)
+}
+
+func addOpListPreparedStatementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPreparedStatements{}, middleware.After)
 }
 
 func addOpListTableMetadataValidationMiddleware(stack *middleware.Stack) error {
@@ -580,6 +696,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDataCatalogValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDataCatalog{}, middleware.After)
+}
+
+func addOpUpdatePreparedStatementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePreparedStatement{}, middleware.After)
 }
 
 func addOpUpdateWorkGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -738,6 +858,27 @@ func validateOpCreateNamedQueryInput(v *CreateNamedQueryInput) error {
 	}
 }
 
+func validateOpCreatePreparedStatementInput(v *CreatePreparedStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreatePreparedStatementInput"}
+	if v.StatementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatementName"))
+	}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if v.QueryStatement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWorkGroupInput(v *CreateWorkGroupInput) error {
 	if v == nil {
 		return nil
@@ -780,6 +921,24 @@ func validateOpDeleteNamedQueryInput(v *DeleteNamedQueryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteNamedQueryInput"}
 	if v.NamedQueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NamedQueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeletePreparedStatementInput(v *DeletePreparedStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePreparedStatementInput"}
+	if v.StatementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatementName"))
+	}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -843,6 +1002,24 @@ func validateOpGetNamedQueryInput(v *GetNamedQueryInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetNamedQueryInput"}
 	if v.NamedQueryId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("NamedQueryId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPreparedStatementInput(v *GetPreparedStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPreparedStatementInput"}
+	if v.StatementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatementName"))
+	}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -924,6 +1101,21 @@ func validateOpListDatabasesInput(v *ListDatabasesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListDatabasesInput"}
 	if v.CatalogName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CatalogName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPreparedStatementsInput(v *ListPreparedStatementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPreparedStatementsInput"}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1046,6 +1238,27 @@ func validateOpUpdateDataCatalogInput(v *UpdateDataCatalogInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePreparedStatementInput(v *UpdatePreparedStatementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePreparedStatementInput"}
+	if v.StatementName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatementName"))
+	}
+	if v.WorkGroup == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkGroup"))
+	}
+	if v.QueryStatement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryStatement"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

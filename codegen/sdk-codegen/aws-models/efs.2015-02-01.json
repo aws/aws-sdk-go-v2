@@ -55,7 +55,14 @@
             }
         },
         "com.amazonaws.efs#AccessPointArn": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:access-point/fsap-[0-9a-f]{8,40}$"
+            }
         },
         "com.amazonaws.efs#AccessPointDescription": {
             "type": "structure",
@@ -132,7 +139,14 @@
             }
         },
         "com.amazonaws.efs#AccessPointId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:access-point/fsap-[0-9a-f]{8,40}|fsap-[0-9a-f]{8,40})$"
+            }
         },
         "com.amazonaws.efs#AccessPointLimitExceeded": {
             "type": "structure",
@@ -176,7 +190,30 @@
             "type": "string"
         },
         "com.amazonaws.efs#AvailabilityZoneName": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".+"
+            }
+        },
+        "com.amazonaws.efs#AvailabilityZonesMismatch": {
+            "type": "structure",
+            "members": {
+                "ErrorCode": {
+                    "target": "com.amazonaws.efs#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.efs#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned if the Availability Zone that was specified for a mount target is different from the Availability Zone that was specified for One Zone storage classes.\n            For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html\">Regional and One Zone storage redundancy</a>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
         },
         "com.amazonaws.efs#AwsAccountId": {
             "type": "string",
@@ -188,19 +225,25 @@
                 "smithy.api#pattern": "^(\\d{12})|(\\d{4}-\\d{4}-\\d{4})$"
             }
         },
+        "com.amazonaws.efs#Backup": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.efs#BackupPolicy": {
             "type": "structure",
             "members": {
                 "Status": {
                     "target": "com.amazonaws.efs#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the status of the file system's backup policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>\n                     <code>ENABLED</code> - EFS is automatically backing up the file system.</i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <code>ENABLING</code> - EFS is turning on automatic backups for the file system.</i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <code>DISABLED</code> - automatic back ups are turned off for the file system.</i>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <i>\n                     <code>DISABLED</code> - EFS is turning off automatic backups for the file system.</i>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Describes the status of the file system's backup policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLED</code>\n                  </b> - EFS is automatically backing up the file system.></p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLING</code>\n                  </b> - EFS is turning on automatic backups for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLED</code>\n                  </b> - automatic back ups are turned off for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLING</code>\n                  </b> - EFS is turning off automatic backups for the file system.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The backup policy for the file system, showing the curent status. If \n      <code>ENABLED</code>, the file system is being backed up.</p>"
+                "smithy.api#documentation": "<p>The backup policy for the file system used to create automatic daily backups. If status has a value of \n      <code>ENABLED</code>, the file system is being automatically backed up. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups\">Automatic backups</a>.</p>"
             }
         },
         "com.amazonaws.efs#BackupPolicyDescription": {
@@ -242,7 +285,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 64
-                }
+                },
+                "smithy.api#pattern": ".+"
             }
         },
         "com.amazonaws.efs#CreateAccessPoint": {
@@ -274,7 +318,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an EFS access point. An access point is an application-specific view into an EFS file system that applies an operating system user and\n      group, and a file system path, to any file system request made through the access point. The operating system\n      user and group override any identity information provided by the NFS client. The file system path is exposed as\n      the access point's root directory. Applications using the access point can only access data in its own directory and below. To learn more, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Mounting a File System Using EFS Access Points</a>.</p>\n         <p>This operation requires permissions for the <code>elasticfilesystem:CreateAccessPoint</code> action.</p>",
+                "smithy.api#documentation": "<p>Creates an EFS access point. An access point is an application-specific view into an EFS\n      file system that applies an operating system user and group, and a file system path, to any\n      file system request made through the access point. The operating system user and group\n      override any identity information provided by the NFS client. The file system path is exposed\n      as the access point's root directory. Applications using the access point can only access data\n      in its own directory and below. To learn more, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Mounting a file system using EFS access\n        points</a>.</p>\n         <p>This operation requires permissions for the <code>elasticfilesystem:CreateAccessPoint</code> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/access-points",
@@ -315,7 +359,7 @@
                 "RootDirectory": {
                     "target": "com.amazonaws.efs#RootDirectory",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the directory on the Amazon EFS file system that the access point exposes as\n      the root directory of your file system to NFS clients using the access point. \n      The clients using the access point can only access the root directory and below. \n      If the <code>RootDirectory</code> > <code>Path</code> specified does not exist, \n      EFS creates it and applies the <code>CreationInfo</code> settings when a client connects to an access point. \n      When specifying a <code>RootDirectory</code>, you need to provide the <code>Path</code>, and the <code>CreationInfo</code> is optional.</p>"
+                        "smithy.api#documentation": "<p>Specifies the directory on the Amazon EFS file system that the access point exposes as\n      the root directory of your file system to NFS clients using the access point. \n      The clients using the access point can only access the root directory and below. \n      If the <code>RootDirectory</code> > <code>Path</code> specified does not exist, \n      EFS creates it and applies the <code>CreationInfo</code> settings when a client connects to an access point. \n      When specifying a <code>RootDirectory</code>, you need to provide the <code>Path</code>, and the <code>CreationInfo</code>.</p>\n         <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory. \n      If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount \n      using the access point will fail.</p>"
                     }
                 }
             }
@@ -346,10 +390,13 @@
                 },
                 {
                     "target": "com.amazonaws.efs#ThroughputLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.efs#UnsupportedAvailabilityZone"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new, empty file system. The operation requires a creation token in the\n      request that Amazon EFS uses to ensure idempotent creation (calling the operation with same\n      creation token has no effect). If a file system does not currently exist that is owned by the\n      caller's AWS account with the specified creation token, this operation does the\n      following:</p>\n         <ul>\n            <li>\n               <p>Creates a new, empty file system. The file system will have an Amazon EFS assigned\n          ID, and an initial lifecycle state <code>creating</code>.</p>\n            </li>\n            <li>\n               <p>Returns with the description of the created file system.</p>\n            </li>\n         </ul>\n         <p>Otherwise, this operation returns a <code>FileSystemAlreadyExists</code> error with the\n      ID of the existing file system.</p>\n         <note>\n            <p>For basic use cases, you can use a randomly generated UUID for the creation\n        token.</p>\n         </note>\n         <p> The idempotent operation allows you to retry a <code>CreateFileSystem</code> call without\n      risk of creating an extra file system. This can happen when an initial call fails in a way\n      that leaves it uncertain whether or not a file system was actually created. An example might\n      be that a transport level timeout occurred or your connection was reset. As long as you use\n      the same creation token, if the initial call had succeeded in creating a file system, the\n      client can learn of its existence from the <code>FileSystemAlreadyExists</code> error.</p>\n\n\n         <note>\n            <p>The <code>CreateFileSystem</code> call returns while the file system's lifecycle\n        state is still <code>creating</code>. You can check the file system creation status by\n        calling the <a>DescribeFileSystems</a> operation, which among other things returns the file\n        system state.</p>\n         </note>\n\n         <p>This operation also takes an optional <code>PerformanceMode</code> parameter that you\n      choose for your file system. We recommend <code>generalPurpose</code> performance mode for\n      most file systems. File systems using the <code>maxIO</code> performance mode can scale to\n      higher levels of aggregate throughput and operations per second with a tradeoff of slightly\n      higher latencies for most file operations. The performance mode can't be changed after\n      the file system has been created. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html\">Amazon EFS: Performance\n        Modes</a>.</p>\n\n         <p>After the file system is fully created, Amazon EFS sets its lifecycle state to\n        <code>available</code>, at which point you can create one or more mount targets for the file\n      system in your VPC. For more information, see <a>CreateMountTarget</a>. You mount your Amazon EFS file system on an EC2 instances in\n      your VPC by using the mount target. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html\">Amazon EFS: How it Works</a>. </p>\n\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:CreateFileSystem</code> action. </p>",
+                "smithy.api#documentation": "<p>Creates a new, empty file system. The operation requires a creation token in the\n      request that Amazon EFS uses to ensure idempotent creation (calling the operation with same\n      creation token has no effect). If a file system does not currently exist that is owned by the\n      caller's AWS account with the specified creation token, this operation does the\n      following:</p>\n         <ul>\n            <li>\n               <p>Creates a new, empty file system. The file system will have an Amazon EFS assigned\n          ID, and an initial lifecycle state <code>creating</code>.</p>\n            </li>\n            <li>\n               <p>Returns with the description of the created file system.</p>\n            </li>\n         </ul>\n         <p>Otherwise, this operation returns a <code>FileSystemAlreadyExists</code> error with the\n      ID of the existing file system.</p>\n         <note>\n            <p>For basic use cases, you can use a randomly generated UUID for the creation\n        token.</p>\n         </note>\n         <p> The idempotent operation allows you to retry a <code>CreateFileSystem</code> call without\n      risk of creating an extra file system. This can happen when an initial call fails in a way\n      that leaves it uncertain whether or not a file system was actually created. An example might\n      be that a transport level timeout occurred or your connection was reset. As long as you use\n      the same creation token, if the initial call had succeeded in creating a file system, the\n      client can learn of its existence from the <code>FileSystemAlreadyExists</code> error.</p>\n         <p>For more information, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1\">Creating a file system</a>\n     in the <i>Amazon EFS User Guide</i>.</p>\n\n         <note>\n            <p>The <code>CreateFileSystem</code> call returns while the file system's lifecycle\n        state is still <code>creating</code>. You can check the file system creation status by\n        calling the <a>DescribeFileSystems</a> operation, which among other things returns the file\n        system state.</p>\n         </note>\n\n         <p>This operation accepts an optional <code>PerformanceMode</code> parameter that you\n      choose for your file system. We recommend <code>generalPurpose</code> performance mode for\n      most file systems. File systems using the <code>maxIO</code> performance mode can scale to\n      higher levels of aggregate throughput and operations per second with a tradeoff of slightly\n      higher latencies for most file operations. The performance mode can't be changed after\n      the file system has been created. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html\">Amazon EFS performance\n        modes</a>.</p>\n    \n         <p>You can set the throughput mode for the file system using the <code>ThroughputMode</code> parameter.</p>\n\n         <p>After the file system is fully created, Amazon EFS sets its lifecycle state to\n        <code>available</code>, at which point you can create one or more mount targets for the file\n      system in your VPC. For more information, see <a>CreateMountTarget</a>. You mount your Amazon EFS file system on an EC2 instances in\n      your VPC by using the mount target. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html\">Amazon EFS: How it Works</a>. </p>\n\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:CreateFileSystem</code> action. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/file-systems",
@@ -371,7 +418,7 @@
                 "PerformanceMode": {
                     "target": "com.amazonaws.efs#PerformanceMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The performance mode of the file system. We recommend <code>generalPurpose</code>\n      performance mode for most file systems. File systems using the <code>maxIO</code> performance\n      mode can scale to higher levels of aggregate throughput and operations per second with a\n      tradeoff of slightly higher latencies for most file operations. The performance mode\n      can't be changed after the file system has been created.</p>"
+                        "smithy.api#documentation": "<p>The performance mode of the file system. We recommend <code>generalPurpose</code>\n      performance mode for most file systems. File systems using the <code>maxIO</code> performance\n      mode can scale to higher levels of aggregate throughput and operations per second with a\n      tradeoff of slightly higher latencies for most file operations. The performance mode\n      can't be changed after the file system has been created.</p>\n         <note>\n            <p>The <code>maxIO</code> mode is not supported on file systems using One Zone storage classes.</p>\n         </note>"
                     }
                 },
                 "Encrypted": {
@@ -383,19 +430,31 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.efs#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This\n      parameter is only required if you want to use a nondefault CMK. If this parameter is not\n      specified, the default CMK for Amazon EFS is used. This ID can be in one of the following\n      formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n            <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>\n         <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>\n         <important>\n            <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This\n      parameter is only required if you want to use a non-default CMK. If this parameter is not\n      specified, the default CMK for Amazon EFS is used. This ID can be in one of the following\n      formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n            <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>\n         <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>\n         <important>\n            <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p>\n         </important>"
                     }
                 },
                 "ThroughputMode": {
                     "target": "com.amazonaws.efs#ThroughputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput mode for the file system to be created. There are two throughput modes to\n      choose from for your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, \n      you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file\n      system's throughput in Provisioned Throughput mode or change between the throughput modes\n      as long as it’s been more than 24 hours since the last decrease or throughput mode\n      change. For more, \n      see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput\">Specifying Throughput with Provisioned Mode</a>\n      in the <i>Amazon EFS User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the throughput mode for the file system, either <code>bursting</code> or\n        <code>provisioned</code>. If you set <code>ThroughputMode</code> to\n      <code>provisioned</code>, you must also set a value for\n        <code>ProvisionedThroughputInMibps</code>. After you create the file system, you can\n      decrease your file system's throughput in Provisioned Throughput mode or change between\n      the throughput modes, as long as it’s been more than 24 hours since the last decrease or\n      throughput mode change. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput\">Specifying throughput with\n        provisioned mode</a> in the <i>Amazon EFS User Guide</i>. </p>\n         <p>Default is <code>bursting</code>.</p>"
                     }
                 },
                 "ProvisionedThroughputInMibps": {
                     "target": "com.amazonaws.efs#ProvisionedThroughputInMibps",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput, measured in MiB/s, that you want to provision for a file system that\n      you're creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. \n      You can get this limit increased by contacting AWS Support. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS Limits That You Can Increase</a>\n      in the <i>Amazon EFS User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>The throughput, measured in MiB/s, that you want to provision for a file system that\n      you're creating. Valid values are 1-1024. Required if <code>ThroughputMode</code> is set\n      to <code>provisioned</code>. The upper limit for throughput is 1024 MiB/s. To increase this\n      limit, contact AWS Support. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS quotas that you can increase</a>\n      in the <i>Amazon EFS User Guide</i>.</p>"
+                    }
+                },
+                "AvailabilityZoneName": {
+                    "target": "com.amazonaws.efs#AvailabilityZoneName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to create a file system that uses One Zone storage classes. It specifies the AWS\n      Availability Zone in which to create the file system. Use the format <code>us-east-1a</code>\n      to specify the Availability Zone. For\n      more information about One Zone storage classes, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html\">Using EFS storage classes</a> in the <i>Amazon EFS User Guide</i>.</p>\n         <note>\n            <p>One Zone storage classes are not available in all Availability Zones in AWS Regions where\n        Amazon EFS is available.</p>\n         </note>"
+                    }
+                },
+                "Backup": {
+                    "target": "com.amazonaws.efs#Backup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether automatic backups are enabled on the file system that you are creating.\n      Set the value to <code>true</code> to enable automatic backups. If you are creating a file\n      system that uses One Zone storage classes, automatic backups are enabled by default. For more\n      information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups\">Automatic backups</a> in the\n        <i>Amazon EFS User Guide</i>.</p>\n         <p>Default is <code>false</code>. However, if you specify an <code>AvailabilityZoneName</code>, \n      the default is <code>true</code>.</p>\n         <note>\n            <p>AWS Backup is not available in all AWS Regions where Amazon EFS is available.</p>\n         </note>"
                     }
                 },
                 "Tags": {
@@ -415,6 +474,9 @@
                 "target": "com.amazonaws.efs#MountTargetDescription"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.efs#AvailabilityZonesMismatch"
+                },
                 {
                     "target": "com.amazonaws.efs#BadRequest"
                 },
@@ -453,7 +515,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a mount target for a file system. You can then mount the file system on EC2\n      instances by using the mount target.</p>\n         <p>You can create one mount target in each Availability Zone in your VPC. All EC2\n      instances in a VPC within a given Availability Zone share a single mount target for a given\n      file system. If you have multiple subnets in an Availability Zone, you create a mount target\n      in one of the subnets. EC2 instances do not need to be in the same subnet as the mount target\n      in order to access their file system. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html\">Amazon EFS: How it Works</a>. </p>\n         <p>In the request, you also specify a file system ID for which you are creating the mount\n      target and the file system's lifecycle state must be <code>available</code>. For more\n      information, see <a>DescribeFileSystems</a>.</p>\n         <p>In the request, you also provide a subnet ID, which determines the following:</p>\n         <ul>\n            <li>\n               <p>VPC in which Amazon EFS creates the mount target</p>\n            </li>\n            <li>\n               <p>Availability Zone in which Amazon EFS creates the mount target</p>\n            </li>\n            <li>\n               <p>IP address range from which Amazon EFS selects the IP address of the mount target\n          (if you don't specify an IP address in the request)</p>\n            </li>\n         </ul>\n\n         <p>After creating the mount target, Amazon EFS returns a response that includes, a\n        <code>MountTargetId</code> and an <code>IpAddress</code>. You use this IP address when\n      mounting the file system in an EC2 instance. You can also use the mount target's DNS name\n      when mounting the file system. The EC2 instance on which you mount the file system by using\n      the mount target can resolve the mount target's DNS name to its IP address. For more\n      information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation\">How it Works:\n        Implementation Overview</a>. </p>\n         <p>Note that you can create mount targets for a file system in only one VPC, and there can\n      be only one mount target per Availability Zone. That is, if the file system already has one or\n      more mount targets created for it, the subnet specified in the request to add another mount\n      target must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Must belong to the same VPC as the subnets of the existing mount targets</p>\n            </li>\n            <li>\n               <p>Must not be in the same Availability Zone as any of the subnets of the existing\n          mount targets</p>\n            </li>\n         </ul>\n\n         <p>If the request satisfies the requirements, Amazon EFS does the following:</p>\n         <ul>\n            <li>\n               <p>Creates a new mount target in the specified subnet.</p>\n            </li>\n            <li>\n               <p>Also creates a new network interface in the subnet as follows:</p>\n               <ul>\n                  <li>\n                     <p>If the request provides an <code>IpAddress</code>, Amazon EFS assigns that IP\n              address to the network interface. Otherwise, Amazon EFS assigns a free address in the\n              subnet (in the same way that the Amazon EC2 <code>CreateNetworkInterface</code> call\n              does when a request does not specify a primary private IP address).</p>\n                  </li>\n                  <li>\n                     <p>If the request provides <code>SecurityGroups</code>, this network interface is\n              associated with those security groups. Otherwise, it belongs to the default security\n              group for the subnet's VPC.</p>\n                  </li>\n                  <li>\n                     <p>Assigns the description <code>Mount target <i>fsmt-id</i> for\n                file system <i>fs-id</i>\n                        </code> where <code>\n                           <i>fsmt-id</i>\n                        </code> is the mount target ID, and <code>\n                           <i>fs-id</i>\n                        </code> is the <code>FileSystemId</code>.</p>\n                  </li>\n                  <li>\n                     <p>Sets the <code>requesterManaged</code> property of the network interface to\n                <code>true</code>, and the <code>requesterId</code> value to\n              <code>EFS</code>.</p>\n                  </li>\n               </ul>\n               <p>Each Amazon EFS mount target has one corresponding requester-managed EC2 network\n          interface. After the network interface is created, Amazon EFS sets the\n            <code>NetworkInterfaceId</code> field in the mount target's description to the\n          network interface ID, and the <code>IpAddress</code> field to its address. If network\n          interface creation fails, the entire <code>CreateMountTarget</code> operation\n          fails.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>CreateMountTarget</code> call returns only after creating the network\n        interface, but while the mount target state is still <code>creating</code>, you can check\n        the mount target creation status by calling the <a>DescribeMountTargets</a> operation, which among other things returns the mount\n        target state.</p>\n         </note>\n         <p>We recommend that you create a mount target in each of the Availability Zones. There\n      are cost considerations for using a file system in an Availability Zone through a mount target\n      created in another Availability Zone. For more information, see <a href=\"http://aws.amazon.com/efs/\">Amazon EFS</a>. In addition, by always using a mount target local to the\n      instance's Availability Zone, you eliminate a partial failure scenario. If the\n      Availability Zone in which your mount target is created goes down, then you can't access\n      your file system through that mount target. </p>\n         <p>This operation requires permissions for the following action on the file\n      system:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elasticfilesystem:CreateMountTarget</code>\n               </p>\n            </li>\n         </ul>\n         <p>This operation also requires permissions for the following Amazon EC2\n      actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a mount target for a file system. You can then mount the file system on EC2\n      instances by using the mount target.</p>\n         <p>You can create one mount target in each Availability Zone in your VPC. All EC2\n      instances in a VPC within a given Availability Zone share a single mount target for a given\n      file system. If you have multiple subnets in an Availability Zone, you create a mount target\n      in one of the subnets. EC2 instances do not need to be in the same subnet as the mount target\n      in order to access their file system.</p>\n         <p>You can create only one mount target for an EFS file system using One Zone storage\n      classes. You must create that mount target in the same Availability Zone in which the file\n      system is located. Use the <code>AvailabilityZoneName</code> and\n        <code>AvailabiltyZoneId</code> properties in the <a>DescribeFileSystems</a>\n      response object to get this information. Use the <code>subnetId</code> associated with the\n      file system's Availability Zone when creating the mount target.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html\">Amazon EFS: How it Works</a>. </p>\n         <p>To create a mount target for a file system, the file system's lifecycle state must be\n        <code>available</code>. For more information, see <a>DescribeFileSystems</a>.</p>\n         <p>In the request, provide the following:</p>\n         <ul>\n            <li>\n               <p>The file system ID for which you are creating the mount\n        target.</p>\n            </li>\n            <li>\n               <p>A subnet ID, which determines the following:</p>\n               <ul>\n                  <li>\n                     <p>The VPC in which Amazon EFS creates the mount target</p>\n                  </li>\n                  <li>\n                     <p>The Availability Zone in which Amazon EFS creates the mount target</p>\n                  </li>\n                  <li>\n                     <p>The IP address range from which Amazon EFS selects the IP address of the mount target\n              (if you don't specify an IP address in the request)</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n\n         <p>After creating the mount target, Amazon EFS returns a response that includes, a\n        <code>MountTargetId</code> and an <code>IpAddress</code>. You use this IP address when\n      mounting the file system in an EC2 instance. You can also use the mount target's DNS name\n      when mounting the file system. The EC2 instance on which you mount the file system by using\n      the mount target can resolve the mount target's DNS name to its IP address. For more\n      information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html#how-it-works-implementation\">How it Works:\n        Implementation Overview</a>. </p>\n         <p>Note that you can create mount targets for a file system in only one VPC, and there can\n      be only one mount target per Availability Zone. That is, if the file system already has one or\n      more mount targets created for it, the subnet specified in the request to add another mount\n      target must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Must belong to the same VPC as the subnets of the existing mount targets</p>\n            </li>\n            <li>\n               <p>Must not be in the same Availability Zone as any of the subnets of the existing\n          mount targets</p>\n            </li>\n         </ul>\n\n         <p>If the request satisfies the requirements, Amazon EFS does the following:</p>\n         <ul>\n            <li>\n               <p>Creates a new mount target in the specified subnet.</p>\n            </li>\n            <li>\n               <p>Also creates a new network interface in the subnet as follows:</p>\n               <ul>\n                  <li>\n                     <p>If the request provides an <code>IpAddress</code>, Amazon EFS assigns that IP\n              address to the network interface. Otherwise, Amazon EFS assigns a free address in the\n              subnet (in the same way that the Amazon EC2 <code>CreateNetworkInterface</code> call\n              does when a request does not specify a primary private IP address).</p>\n                  </li>\n                  <li>\n                     <p>If the request provides <code>SecurityGroups</code>, this network interface is\n              associated with those security groups. Otherwise, it belongs to the default security\n              group for the subnet's VPC.</p>\n                  </li>\n                  <li>\n                     <p>Assigns the description <code>Mount target <i>fsmt-id</i> for\n                file system <i>fs-id</i>\n                        </code> where <code>\n                           <i>fsmt-id</i>\n                        </code> is the mount target ID, and <code>\n                           <i>fs-id</i>\n                        </code> is the <code>FileSystemId</code>.</p>\n                  </li>\n                  <li>\n                     <p>Sets the <code>requesterManaged</code> property of the network interface to\n                <code>true</code>, and the <code>requesterId</code> value to\n              <code>EFS</code>.</p>\n                  </li>\n               </ul>\n               <p>Each Amazon EFS mount target has one corresponding requester-managed EC2 network\n          interface. After the network interface is created, Amazon EFS sets the\n            <code>NetworkInterfaceId</code> field in the mount target's description to the\n          network interface ID, and the <code>IpAddress</code> field to its address. If network\n          interface creation fails, the entire <code>CreateMountTarget</code> operation\n          fails.</p>\n            </li>\n         </ul>\n         <note>\n            <p>The <code>CreateMountTarget</code> call returns only after creating the network\n        interface, but while the mount target state is still <code>creating</code>, you can check\n        the mount target creation status by calling the <a>DescribeMountTargets</a> operation, which among other things returns the mount\n        target state.</p>\n         </note>\n         <p>We recommend that you create a mount target in each of the Availability Zones. There\n      are cost considerations for using a file system in an Availability Zone through a mount target\n      created in another Availability Zone. For more information, see <a href=\"http://aws.amazon.com/efs/\">Amazon EFS</a>. In addition, by always using a mount target local to the\n      instance's Availability Zone, you eliminate a partial failure scenario. If the\n      Availability Zone in which your mount target is created goes down, then you can't access\n      your file system through that mount target. </p>\n         <p>This operation requires permissions for the following action on the file\n      system:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>elasticfilesystem:CreateMountTarget</code>\n               </p>\n            </li>\n         </ul>\n         <p>This operation also requires permissions for the following Amazon EC2\n      actions:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2:DescribeSubnets</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:DescribeNetworkInterfaces</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ec2:CreateNetworkInterface</code>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/mount-targets",
@@ -474,7 +536,7 @@
                 "SubnetId": {
                     "target": "com.amazonaws.efs#SubnetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the subnet to add the mount target in.</p>",
+                        "smithy.api#documentation": "<p>The ID of the subnet to add the mount target in. For file systems that use One Zone storage classes, use the subnet \n    that is associated with the file system's Availability Zone.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -572,7 +634,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Required if the <code>RootDirectory</code> > <code>Path</code> specified does not exist. \n      Specifies the POSIX IDs and permissions to apply to the access point's <code>RootDirectory</code> > <code>Path</code>. \n      If the access point root directory does not exist, EFS creates it with these settings when a client connects to the access point. \n      When specifying <code>CreationInfo</code>, you must include values for all properties. \n   </p>\n         <important>\n            <p>If you do not provide <code>CreationInfo</code> and the specified <code>RootDirectory</code> does not exist, \n      attempts to mount the file system using the access point will fail.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Required if the <code>RootDirectory</code> > <code>Path</code> specified does not exist. \n      Specifies the POSIX IDs and permissions to apply to the access point's <code>RootDirectory</code> > <code>Path</code>. \n      If the access point root directory does not exist, EFS creates it with these settings when a client connects to the access point. \n      When specifying <code>CreationInfo</code>, you must include values for all properties. \n   </p>\n         <p>Amazon EFS creates a root directory only if you have provided the  CreationInfo: OwnUid, OwnGID, and permissions for the directory. \n      If  you do not provide this information, Amazon EFS does not create the root directory. If the root directory does not exist, attempts to mount \n      using the access point will fail.</p>\n         <important>\n            <p>If you do not provide <code>CreationInfo</code> and the specified <code>RootDirectory</code> does not exist, \n      attempts to mount the file system using the access point will fail.</p>\n         </important>"
             }
         },
         "com.amazonaws.efs#CreationToken": {
@@ -1512,13 +1574,25 @@
                 "ThroughputMode": {
                     "target": "com.amazonaws.efs#ThroughputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput mode for a file system. There are two throughput modes to choose from for\n      your file system: <code>bursting</code> and <code>provisioned</code>. If you set <code>ThroughputMode</code> to <code>provisioned</code>, \n      you must also set a value for <code>ProvisionedThroughPutInMibps</code>. You can decrease your file system's\n      throughput in Provisioned Throughput mode or change between the throughput modes as long as\n      it’s been more than 24 hours since the last decrease or throughput mode change.\n    </p>"
+                        "smithy.api#documentation": "<p>Displays the file system's throughput mode. For more information, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes\">Throughput modes</a> \n      in the <i>Amazon EFS User Guide</i>.\n    </p>"
                     }
                 },
                 "ProvisionedThroughputInMibps": {
                     "target": "com.amazonaws.efs#ProvisionedThroughputInMibps",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput, measured in MiB/s, that you want to provision for a file system. Valid values are 1-1024. \n      Required if <code>ThroughputMode</code> is set to <code>provisioned</code>. The limit\n      on throughput is 1024 MiB/s. You can get these limits increased by contacting AWS Support. For\n      more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS Limits That You Can Increase</a>\n      in the <i>Amazon EFS User Guide.</i>\n         </p>"
+                        "smithy.api#documentation": "<p>The amount of provisioned throughput, measured in MiB/s, for the file system. Valid for\n      file systems using <code>ThroughputMode</code> set to <code>provisioned</code>.</p>"
+                    }
+                },
+                "AvailabilityZoneName": {
+                    "target": "com.amazonaws.efs#AvailabilityZoneName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the AWS Availability Zone in which the file system is located, and is valid only\n      for file systems using One Zone storage classes. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html\">Using EFS storage classes</a> \n      in the <i>Amazon EFS User Guide</i>.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.efs#AvailabilityZoneId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique and consistent identifier of the Availability Zone in which the file system's\n      One Zone storage classes exist. For example, <code>use1-az1</code> is an Availability Zone ID\n      for the us-east-1 AWS Region, and it has the same location in every AWS account.</p>"
                     }
                 },
                 "Tags": {
@@ -1735,7 +1809,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if there's not enough capacity to provision additional throughput. This value\n            might be returned when you try to create a file system in provisioned throughput mode,\n            when you attempt to increase the provisioned throughput of an existing file system, or\n            when you attempt to change an existing file system from bursting to provisioned\n            throughput mode.</p>",
+                "smithy.api#documentation": "<p>Returned if there's not enough capacity to provision additional throughput. This value\n            might be returned when you try to create a file system in provisioned throughput mode,\n            when you attempt to increase the provisioned throughput of an existing file system, or\n            when you attempt to change an existing file system from bursting to provisioned\n            throughput mode. Try again later.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
             }
@@ -1837,6 +1911,10 @@
                     {
                         "value": "deleted",
                         "name": "DELETED"
+                    },
+                    {
+                        "value": "error",
+                        "name": "ERROR"
                     }
                 ]
             }
@@ -2071,6 +2149,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {},
+                "smithy.api#documentation": "Max results used for pagination.",
                 "smithy.api#range": {
                     "min": 1
                 }
@@ -2211,19 +2290,19 @@
                 "AvailabilityZoneId": {
                     "target": "com.amazonaws.efs#AvailabilityZoneId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique and consistent identifier of the Availability Zone (AZ) that the mount target resides in. \n      For example, <code>use1-az1</code> is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.</p>"
+                        "smithy.api#documentation": "<p>The unique and consistent identifier of the Availability Zone that the mount target resides in. \n      For example, <code>use1-az1</code> is an AZ ID for the us-east-1 Region and it has the same location in every AWS account.</p>"
                     }
                 },
                 "AvailabilityZoneName": {
                     "target": "com.amazonaws.efs#AvailabilityZoneName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Availability Zone (AZ) that the mount target resides in. AZs are \n      independently mapped to names for each AWS account. For example, the Availability Zone \n      <code>us-east-1a</code> for your AWS account might not be the same location as <code>us-east-1a</code> for another AWS account.</p>"
+                        "smithy.api#documentation": "<p>The name of the Availability Zone in which the mount target is located. Availability Zones are \n      independently mapped to names for each AWS account. For example, the Availability Zone \n      <code>us-east-1a</code> for your AWS account might not be the same location as <code>us-east-1a</code> for another AWS account.</p>"
                     }
                 },
                 "VpcId": {
                     "target": "com.amazonaws.efs#VpcId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Virtual Private Cloud (VPC) ID that the mount target is configured in.</p>"
+                        "smithy.api#documentation": "<p>The virtual private cloud (VPC) ID that the mount target is configured in.</p>"
                     }
                 }
             },
@@ -2336,7 +2415,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
+                },
+                "smithy.api#pattern": "^(\\/|(\\/(?!\\.)+[^$#<>;`|&?{}^*/\\n]+){1,4})$"
             }
         },
         "com.amazonaws.efs#PerformanceMode": {
@@ -2357,11 +2437,22 @@
         "com.amazonaws.efs#Permissions": {
             "type": "string",
             "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 4
+                },
                 "smithy.api#pattern": "^[0-7]{3,4}$"
             }
         },
         "com.amazonaws.efs#Policy": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20000
+                },
+                "smithy.api#pattern": "[\\s\\S]+"
+            }
         },
         "com.amazonaws.efs#PolicyNotFound": {
             "type": "structure",
@@ -2493,7 +2584,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies an Amazon EFS <code>FileSystemPolicy</code> to an Amazon EFS file system. \n      A file system policy is an IAM resource-based policy and can contain multiple policy statements. \n      A file system always has exactly one file system policy, which can be the default policy or \n      an explicit policy set or updated using this API operation.\n      When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy\">Default EFS File System Policy</a>.\n    </p>\n         <p>This operation requires permissions for the <code>elasticfilesystem:PutFileSystemPolicy</code> action.</p>",
+                "smithy.api#documentation": "<p>Applies an Amazon EFS <code>FileSystemPolicy</code> to an Amazon EFS file system. \n      A file system policy is an IAM resource-based policy and can contain multiple policy statements. \n      A file system always has exactly one file system policy, which can be the default policy or \n      an explicit policy set or updated using this API operation.\n      EFS file system policies have a 20,000 character limit.\n      When an explicit policy is set, it overrides the default policy. For more information about the default file system policy, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy\">Default EFS File System Policy</a>.\n    </p>\n         <p>EFS file system policies have a 20,000 character limit.</p>\n         <p>This operation requires permissions for the <code>elasticfilesystem:PutFileSystemPolicy</code> action.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/2015-02-01/file-systems/{FileSystemId}/policy",
@@ -2515,7 +2606,7 @@
                 "Policy": {
                     "target": "com.amazonaws.efs#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>FileSystemPolicy</code> that you're creating. Accepts a JSON formatted policy definition. \n      To find out more about the elements that make up a file system policy, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies\">EFS Resource-based Policies</a>.\n    </p>",
+                        "smithy.api#documentation": "<p>The <code>FileSystemPolicy</code> that you're creating. Accepts a JSON formatted policy definition. \n     EFS file system policies have a 20,000 character limit.\n      To find out more about the elements that make up a file system policy, see \n      <a href=\"https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies\">EFS Resource-based Policies</a>.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2579,7 +2670,14 @@
             }
         },
         "com.amazonaws.efs#ResourceId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$"
+            }
         },
         "com.amazonaws.efs#RootDirectory": {
             "type": "structure",
@@ -2871,7 +2969,15 @@
             "type": "timestamp"
         },
         "com.amazonaws.efs#Token": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Token used for pagination.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": ".+"
+            }
         },
         "com.amazonaws.efs#TooManyRequests": {
             "type": "structure",
@@ -2943,7 +3049,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>Returned if the requested Amazon EFS functionality is not available in the specified Availability Zone.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2990,7 +3096,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.efs#TagKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>The keys of the key:value tag pairs that you want to remove from the specified EFS resource.</p>",
+                        "smithy.api#documentation": "<p>The keys of the key-value tag pairs that you want to remove from the specified EFS\n      resource.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }
@@ -3051,13 +3157,13 @@
                 "ThroughputMode": {
                     "target": "com.amazonaws.efs#ThroughputMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) The throughput mode that you want your file system to use. If you're not\n      updating your throughput mode, you don't need to provide this value in your\n      request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, you must also set a value for <code>ProvisionedThroughputInMibps</code>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) Updates the file system's throughput mode. If you're not\n      updating your throughput mode, you don't need to provide this value in your\n      request. If you are changing the <code>ThroughputMode</code> to <code>provisioned</code>, \n      you must also set a value for <code>ProvisionedThroughputInMibps</code>.</p>"
                     }
                 },
                 "ProvisionedThroughputInMibps": {
                     "target": "com.amazonaws.efs#ProvisionedThroughputInMibps",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) The amount of throughput, in MiB/s, that you want to provision for your file\n      system. Valid values are 1-1024. Required if <code>ThroughputMode</code> is changed to <code>provisioned</code> on update. \n      If you're not updating the amount of provisioned throughput for your file system, you\n      don't need to provide this value in your request. </p>"
+                        "smithy.api#documentation": "<p>(Optional) Sets the amount of provisioned throughput, in MiB/s, for the file\n      system. Valid values are 1-1024. If you are changing the throughput mode to provisioned, you must also \n      provide the amount of provisioned throughput. Required if <code>ThroughputMode</code> is changed \n      to <code>provisioned</code> on update.</p>"
                     }
                 }
             }
@@ -3076,7 +3182,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returned if the AWS Backup service is not available in the region that the request was made.</p>",
+                "smithy.api#documentation": "<p>Returned if the AWS Backup service is not available in the Region in which the request was made.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

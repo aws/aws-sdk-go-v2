@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//
+// Submits profiling data to an aggregated profile of a profiling group. To get an
+// aggregated profile that is created with this profiling data, use GetProfile
+// (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_GetProfile.html).
 func (c *Client) PostAgentProfile(ctx context.Context, params *PostAgentProfileInput, optFns ...func(*Options)) (*PostAgentProfileOutput, error) {
 	if params == nil {
 		params = &PostAgentProfileInput{}
@@ -29,22 +31,33 @@ func (c *Client) PostAgentProfile(ctx context.Context, params *PostAgentProfileI
 // The structure representing the postAgentProfileRequest.
 type PostAgentProfileInput struct {
 
-	//
+	// The submitted profiling data.
 	//
 	// This member is required.
 	AgentProfile []byte
 
+	// The format of the submitted profiling data. The format maps to the Accept and
+	// Content-Type headers of the HTTP request. You can specify one of the following:
+	// or the default .
 	//
+	// * application/json — standard JSON format
+	//
+	// *
+	// application/x-amzn-ion — the Amazon Ion data format. For more information, see
+	// Amazon Ion (http://amzn.github.io/ion-docs/).
 	//
 	// This member is required.
 	ContentType *string
 
-	//
+	// The name of the profiling group with the aggregated profile that receives the
+	// submitted profiling data.
 	//
 	// This member is required.
 	ProfilingGroupName *string
 
-	//
+	// Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to
+	// prevent the accidental submission of duplicate profiling data if there are
+	// failures and retries.
 	ProfileToken *string
 }
 

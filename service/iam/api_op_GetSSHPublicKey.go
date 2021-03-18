@@ -15,7 +15,7 @@ import (
 // SSH public key retrieved by this operation is used only for authenticating the
 // associated IAM user to an AWS CodeCommit repository. For more information about
 // using SSH keys to authenticate to an AWS CodeCommit repository, see Set up AWS
-// CodeCommit for SSH Connections
+// CodeCommit for SSH connections
 // (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-credentials-ssh.html)
 // in the AWS CodeCommit User Guide.
 func (c *Client) GetSSHPublicKey(ctx context.Context, params *GetSSHPublicKeyInput, optFns ...func(*Options)) (*GetSSHPublicKeyOutput, error) {

@@ -105,6 +105,8 @@ type CreateUserInput struct {
 	// AWS Security Token Service API Reference.
 	Policy *string
 
+	PosixProfile *types.PosixProfile
+
 	// The public portion of the Secure Shell (SSH) key used to authenticate the user
 	// to the server.
 	SshPublicKeyBody *string

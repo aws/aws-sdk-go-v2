@@ -3488,6 +3488,11 @@ func awsAwsjson11_serializeOpDocumentCreateDeploymentGroupInput(v *CreateDeploym
 		}
 	}
 
+	if len(v.OutdatedInstancesStrategy) > 0 {
+		ok := object.Key("outdatedInstancesStrategy")
+		ok.String(string(v.OutdatedInstancesStrategy))
+	}
+
 	if v.ServiceRoleArn != nil {
 		ok := object.Key("serviceRoleArn")
 		ok.String(*v.ServiceRoleArn)
@@ -4272,6 +4277,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDeploymentGroupInput(v *UpdateDeploym
 		if err := awsAwsjson11_serializeDocumentOnPremisesTagSet(v.OnPremisesTagSet, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.OutdatedInstancesStrategy) > 0 {
+		ok := object.Key("outdatedInstancesStrategy")
+		ok.String(string(v.OutdatedInstancesStrategy))
 	}
 
 	if v.ServiceRoleArn != nil {

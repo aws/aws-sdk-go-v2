@@ -12,7 +12,7 @@ import (
 )
 
 // Modifies a replication group's shards (node groups) by allowing you to add
-// shards, remove shards, or rebalance the keyspaces among exisiting shards.
+// shards, remove shards, or rebalance the keyspaces among existing shards.
 func (c *Client) ModifyReplicationGroupShardConfiguration(ctx context.Context, params *ModifyReplicationGroupShardConfigurationInput, optFns ...func(*Options)) (*ModifyReplicationGroupShardConfigurationOutput, error) {
 	if params == nil {
 		params = &ModifyReplicationGroupShardConfigurationInput{}

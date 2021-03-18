@@ -66,6 +66,11 @@ type AttributeType string
 const (
 	AttributeTypeInclusive AttributeType = "INCLUSIVE"
 	AttributeTypeExclusive AttributeType = "EXCLUSIVE"
+	AttributeTypeContains  AttributeType = "CONTAINS"
+	AttributeTypeBefore    AttributeType = "BEFORE"
+	AttributeTypeAfter     AttributeType = "AFTER"
+	AttributeTypeOn        AttributeType = "ON"
+	AttributeTypeBetween   AttributeType = "BETWEEN"
 )
 
 // Values returns all known values for AttributeType. Note that this can be
@@ -75,6 +80,11 @@ func (AttributeType) Values() []AttributeType {
 	return []AttributeType{
 		"INCLUSIVE",
 		"EXCLUSIVE",
+		"CONTAINS",
+		"BEFORE",
+		"AFTER",
+		"ON",
+		"BETWEEN",
 	}
 }
 

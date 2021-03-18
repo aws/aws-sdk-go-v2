@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Creates a new game server resource and notifies GameLift FleetIQ that
 // the game server is ready to host gameplay and players. This operation is called
 // by a game server process that is running on an instance in a game server group.
@@ -26,21 +26,9 @@ import (
 // may fail if the instance it is running on is in the process of shutting down as
 // part of instance balancing or scale-down activity. Learn more GameLift FleetIQ
 // Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * RegisterGameServer
-//
-// * ListGameServers
-//
-// *
-// ClaimGameServer
-//
-// * DescribeGameServer
-//
-// * UpdateGameServer
-//
-// *
-// DeregisterGameServer
+// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
+// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) RegisterGameServer(ctx context.Context, params *RegisterGameServerInput, optFns ...func(*Options)) (*RegisterGameServerOutput, error) {
 	if params == nil {
 		params = &RegisterGameServerInput{}

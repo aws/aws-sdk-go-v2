@@ -57,8 +57,10 @@ type StartBackupJobInput struct {
 	// WindowsVSS option is not enabled by default.
 	BackupOptions map[string]string
 
-	// A value in minutes after a backup job is successfully started before it must be
-	// completed or it will be canceled by AWS Backup. This value is optional.
+	// A value in minutes during which a successfully started backup must complete, or
+	// else AWS Backup will cancel the job. This value is optional. This value begins
+	// counting down from when the backup was scheduled. It does not add additional
+	// time for StartWindowMinutes, or if the backup started later than scheduled.
 	CompleteWindowMinutes *int64
 
 	// A customer chosen string that can be used to distinguish between calls to
@@ -71,7 +73,8 @@ type StartBackupJobInput struct {
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
 	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold.
+	// after a backup has been transitioned to cold. Only Amazon EFS file system
+	// backups can be transitioned to cold storage.
 	Lifecycle *types.Lifecycle
 
 	// To help organize your resources, you can assign your own metadata to the
@@ -79,7 +82,8 @@ type StartBackupJobInput struct {
 	RecoveryPointTags map[string]string
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
-	// it doesn't start successfully. This value is optional.
+	// it doesn't start successfully. This value is optional, and the default is 8
+	// hours.
 	StartWindowMinutes *int64
 }
 
@@ -88,7 +92,7 @@ type StartBackupJobOutput struct {
 	// Uniquely identifies a request to AWS Backup to back up a resource.
 	BackupJobId *string
 
-	// The date and time that a backup job is started, in Unix format and Coordinated
+	// The date and time that a backup job is created, in Unix format and Coordinated
 	// Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For
 	// example, the value 1516925490.087 represents Friday, January 26, 2018
 	// 12:11:30.087 AM.

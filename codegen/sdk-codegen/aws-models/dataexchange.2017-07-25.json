@@ -1168,6 +1168,62 @@
                 "smithy.api#documentation": "<p>Details about the export to Amazon S3 response.</p>"
             }
         },
+        "com.amazonaws.dataexchange#ExportRevisionsToS3RequestDetails": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the data set associated with this export job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Encryption": {
+                    "target": "com.amazonaws.dataexchange#ExportServerSideEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption configuration for the export job.</p>"
+                    }
+                },
+                "RevisionDestinations": {
+                    "target": "com.amazonaws.dataexchange#ListOfRevisionDestinationEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the operation to be performed by the job.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#ExportRevisionsToS3ResponseDetails": {
+            "type": "structure",
+            "members": {
+                "DataSetId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the data set associated with this export job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Encryption": {
+                    "target": "com.amazonaws.dataexchange#ExportServerSideEncryption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption configuration of the export job.</p>"
+                    }
+                },
+                "RevisionDestinations": {
+                    "target": "com.amazonaws.dataexchange#ListOfRevisionDestinationEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination in Amazon S3 where the revision is exported.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the export revisions to Amazon S3 response.</p>"
+            }
+        },
         "com.amazonaws.dataexchange#ExportServerSideEncryption": {
             "type": "structure",
             "members": {
@@ -2301,6 +2357,15 @@
                 "target": "com.amazonaws.dataexchange#JobError"
             }
         },
+        "com.amazonaws.dataexchange#ListOfRevisionDestinationEntry": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dataexchange#RevisionDestinationEntry"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination where the assets in the revision will be exported.</p>"
+            }
+        },
         "com.amazonaws.dataexchange#ListOfRevisionEntry": {
             "type": "list",
             "member": {
@@ -2516,6 +2581,12 @@
                         "smithy.api#documentation": "<p>Details about the export to Amazon S3 request.</p>"
                     }
                 },
+                "ExportRevisionsToS3": {
+                    "target": "com.amazonaws.dataexchange#ExportRevisionsToS3RequestDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the export to Amazon S3 request.</p>"
+                    }
+                },
                 "ImportAssetFromSignedUrl": {
                     "target": "com.amazonaws.dataexchange#ImportAssetFromSignedUrlRequestDetails",
                     "traits": {
@@ -2600,6 +2671,12 @@
                         "smithy.api#documentation": "<p>Details for the export to Amazon S3 response.</p>"
                     }
                 },
+                "ExportRevisionsToS3": {
+                    "target": "com.amazonaws.dataexchange#ExportRevisionsToS3ResponseDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for the export revisions to Amazon S3 response.</p>"
+                    }
+                },
                 "ImportAssetFromSignedUrl": {
                     "target": "com.amazonaws.dataexchange#ImportAssetFromSignedUrlResponseDetails",
                     "traits": {
@@ -2615,6 +2692,34 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details for the response.</p>"
+            }
+        },
+        "com.amazonaws.dataexchange#RevisionDestinationEntry": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket that is the destination for the assets in the revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KeyPattern": {
+                    "target": "com.amazonaws.dataexchange#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see <a href=\"https://docs.aws.amazon.com/data-exchange/latest/userguide/jobs.html#revision-export-keypatterns\">Key patterns when exporting revisions</a>.</p>"
+                    }
+                },
+                "RevisionId": {
+                    "target": "com.amazonaws.dataexchange#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the revision.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The destination where the assets in the revision will be exported.</p>"
             }
         },
         "com.amazonaws.dataexchange#RevisionEntry": {
@@ -2904,6 +3009,10 @@
                     {
                         "value": "EXPORT_ASSET_TO_SIGNED_URL",
                         "name": "EXPORT_ASSET_TO_SIGNED_URL"
+                    },
+                    {
+                        "value": "EXPORT_REVISIONS_TO_S3",
+                        "name": "EXPORT_REVISIONS_TO_S3"
                     }
                 ]
             }
@@ -3382,7 +3491,7 @@
                     "min": 24,
                     "max": 24
                 },
-                "smithy.api#pattern": "/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/"
+                "smithy.api#pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
             }
         }
     }

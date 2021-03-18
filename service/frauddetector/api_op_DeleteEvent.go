@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the specified event. When you delete an event, Amazon Fraud Detector
-// permanently deletes that event from the evaluation history, and the event data
-// is no longer stored in Amazon Fraud Detector.
+// permanently deletes that event and the event data is no longer stored in Amazon
+// Fraud Detector.
 func (c *Client) DeleteEvent(ctx context.Context, params *DeleteEventInput, optFns ...func(*Options)) (*DeleteEventOutput, error) {
 	if params == nil {
 		params = &DeleteEventInput{}

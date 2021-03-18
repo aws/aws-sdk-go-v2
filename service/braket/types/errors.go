@@ -58,7 +58,7 @@ func (e *DeviceOfflineException) ErrorMessage() string {
 func (e *DeviceOfflineException) ErrorCode() string             { return "DeviceOfflineException" }
 func (e *DeviceOfflineException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request processing has failed because of an unknown error, exception or
+// The request processing has failed because of an unknown error, exception, or
 // failure.
 type InternalServiceException struct {
 	Message *string
@@ -93,7 +93,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request failed because a service quota is met.
+// The request failed because a service quota is exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
 }

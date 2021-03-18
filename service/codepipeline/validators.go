@@ -190,6 +190,26 @@ func (m *validateOpEnableStageTransition) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetActionType struct {
+}
+
+func (*validateOpGetActionType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetActionType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetActionTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetActionTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetJobDetails struct {
 }
 
@@ -630,6 +650,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateActionType struct {
+}
+
+func (*validateOpUpdateActionType) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateActionType) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateActionTypeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateActionTypeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePipeline struct {
 }
 
@@ -684,6 +724,10 @@ func addOpDisableStageTransitionValidationMiddleware(stack *middleware.Stack) er
 
 func addOpEnableStageTransitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableStageTransition{}, middleware.After)
+}
+
+func addOpGetActionTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetActionType{}, middleware.After)
 }
 
 func addOpGetJobDetailsValidationMiddleware(stack *middleware.Stack) error {
@@ -772,6 +816,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateActionTypeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateActionType{}, middleware.After)
 }
 
 func addOpUpdatePipelineValidationMiddleware(stack *middleware.Stack) error {
@@ -863,6 +911,90 @@ func validateActionRevision(v *types.ActionRevision) error {
 	}
 }
 
+func validateActionTypeArtifactDetails(v *types.ActionTypeArtifactDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionTypeArtifactDetails"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActionTypeDeclaration(v *types.ActionTypeDeclaration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionTypeDeclaration"}
+	if v.Executor == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Executor"))
+	} else if v.Executor != nil {
+		if err := validateActionTypeExecutor(v.Executor); err != nil {
+			invalidParams.AddNested("Executor", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	} else if v.Id != nil {
+		if err := validateActionTypeIdentifier(v.Id); err != nil {
+			invalidParams.AddNested("Id", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InputArtifactDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputArtifactDetails"))
+	} else if v.InputArtifactDetails != nil {
+		if err := validateActionTypeArtifactDetails(v.InputArtifactDetails); err != nil {
+			invalidParams.AddNested("InputArtifactDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputArtifactDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputArtifactDetails"))
+	} else if v.OutputArtifactDetails != nil {
+		if err := validateActionTypeArtifactDetails(v.OutputArtifactDetails); err != nil {
+			invalidParams.AddNested("OutputArtifactDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Permissions != nil {
+		if err := validateActionTypePermissions(v.Permissions); err != nil {
+			invalidParams.AddNested("Permissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Properties != nil {
+		if err := validateActionTypeProperties(v.Properties); err != nil {
+			invalidParams.AddNested("Properties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActionTypeExecutor(v *types.ActionTypeExecutor) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionTypeExecutor"}
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
+		if err := validateExecutorConfiguration(v.Configuration); err != nil {
+			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateActionTypeId(v *types.ActionTypeId) error {
 	if v == nil {
 		return nil
@@ -879,6 +1011,77 @@ func validateActionTypeId(v *types.ActionTypeId) error {
 	}
 	if v.Version == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActionTypeIdentifier(v *types.ActionTypeIdentifier) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionTypeIdentifier"}
+	if len(v.Category) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Category"))
+	}
+	if v.Owner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
+	}
+	if v.Provider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActionTypePermissions(v *types.ActionTypePermissions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionTypePermissions"}
+	if v.AllowedAccounts == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedAccounts"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActionTypeProperties(v []types.ActionTypeProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionTypeProperties"}
+	for i := range v {
+		if err := validateActionTypeProperty(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateActionTypeProperty(v *types.ActionTypeProperty) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionTypeProperty"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1012,6 +1215,23 @@ func validateEncryptionKey(v *types.EncryptionKey) error {
 	}
 }
 
+func validateExecutorConfiguration(v *types.ExecutorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecutorConfiguration"}
+	if v.LambdaExecutorConfiguration != nil {
+		if err := validateLambdaExecutorConfiguration(v.LambdaExecutorConfiguration); err != nil {
+			invalidParams.AddNested("LambdaExecutorConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFailureDetails(v *types.FailureDetails) error {
 	if v == nil {
 		return nil
@@ -1054,6 +1274,21 @@ func validateInputArtifactList(v []types.InputArtifact) error {
 		if err := validateInputArtifact(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaExecutorConfiguration(v *types.LambdaExecutorConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaExecutorConfiguration"}
+	if v.LambdaFunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LambdaFunctionArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1512,6 +1747,30 @@ func validateOpEnableStageTransitionInput(v *EnableStageTransitionInput) error {
 	}
 }
 
+func validateOpGetActionTypeInput(v *GetActionTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetActionTypeInput"}
+	if len(v.Category) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Category"))
+	}
+	if v.Owner == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Owner"))
+	}
+	if v.Provider == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetJobDetailsInput(v *GetJobDetailsInput) error {
 	if v == nil {
 		return nil
@@ -1938,6 +2197,25 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateActionTypeInput(v *UpdateActionTypeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateActionTypeInput"}
+	if v.ActionType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ActionType"))
+	} else if v.ActionType != nil {
+		if err := validateActionTypeDeclaration(v.ActionType); err != nil {
+			invalidParams.AddNested("ActionType", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

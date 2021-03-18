@@ -15,18 +15,9 @@ import (
 // Retrieves script records for all Realtime scripts that are associated with the
 // AWS account in use. Learn more Amazon GameLift Realtime Servers
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
-// Related operations
-//
-// * CreateScript
-//
-// * ListScripts
-//
-// * DescribeScript
-//
-// *
-// UpdateScript
-//
-// * DeleteScript
+// Related actions CreateScript | ListScripts | DescribeScript | UpdateScript |
+// DeleteScript | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ListScripts(ctx context.Context, params *ListScriptsInput, optFns ...func(*Options)) (*ListScriptsOutput, error) {
 	if params == nil {
 		params = &ListScriptsInput{}

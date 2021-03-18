@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Amazon Chime app instances created under a single AWS account.
+// Lists all Amazon Chime AppInstances created under a single AWS account.
 func (c *Client) ListAppInstances(ctx context.Context, params *ListAppInstancesInput, optFns ...func(*Options)) (*ListAppInstancesOutput, error) {
 	if params == nil {
 		params = &ListAppInstancesInput{}
@@ -30,21 +30,21 @@ func (c *Client) ListAppInstances(ctx context.Context, params *ListAppInstancesI
 
 type ListAppInstancesInput struct {
 
-	// The maximum number of app instances that you want to return.
+	// The maximum number of AppInstances that you want to return.
 	MaxResults *int32
 
 	// The token passed by previous API requests until you reach the maximum number of
-	// app instances.
+	// AppInstances.
 	NextToken *string
 }
 
 type ListAppInstancesOutput struct {
 
-	// The information for each app instance.
+	// The information for each AppInstance.
 	AppInstances []types.AppInstanceSummary
 
-	// The token passed by previous API requests until the maximum number of app
-	// instances is reached.
+	// The token passed by previous API requests until the maximum number of
+	// AppInstances is reached.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -151,7 +151,7 @@ var _ ListAppInstancesAPIClient = (*Client)(nil)
 
 // ListAppInstancesPaginatorOptions is the paginator options for ListAppInstances
 type ListAppInstancesPaginatorOptions struct {
-	// The maximum number of app instances that you want to return.
+	// The maximum number of AppInstances that you want to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

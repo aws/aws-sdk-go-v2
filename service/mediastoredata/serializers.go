@@ -357,5 +357,10 @@ func awsRestjson1_serializeOpHttpBindingsPutObjectInput(v *PutObjectInput, encod
 		encoder.SetHeader(locationName).String(string(v.StorageClass))
 	}
 
+	if len(v.UploadAvailability) > 0 {
+		locationName := "X-Amz-Upload-Availability"
+		encoder.SetHeader(locationName).String(string(v.UploadAvailability))
+	}
+
 	return nil
 }

@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new instance profile. For information about instance profiles, go to
-// About Instance Profiles
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/AboutInstanceProfiles.html).
-// The number and size of IAM resources in an AWS account are limited. For more
-// information, see IAM and STS Quotas
+// Creates a new instance profile. For information about instance profiles, see
+// About instance profiles
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entities).
+// For information about the number of instance profiles you can create, see IAM
+// object quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide.
 func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstanceProfileInput, optFns ...func(*Options)) (*CreateInstanceProfileOutput, error) {
@@ -54,6 +54,14 @@ type CreateInstanceProfileInput struct {
 	// through the DEL character (\u007F), including most punctuation characters,
 	// digits, and upper and lowercased letters.
 	Path *string
+
+	// A list of tags that you want to attach to the newly created IAM instance
+	// profile. Each tag consists of a key name and an associated value. For more
+	// information about tagging, see Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
+	// number of tags, then the entire request fails and the resource is not created.
+	Tags []types.Tag
 }
 
 // Contains the response to a successful CreateInstanceProfile request.

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the definition of an existing AWS Glue DataBrew job in the current AWS
-// account.
+// Modifies the definition of an existing profile job.
 func (c *Client) UpdateProfileJob(ctx context.Context, params *UpdateProfileJobInput, optFns ...func(*Options)) (*UpdateProfileJobOutput, error) {
 	if params == nil {
 		params = &UpdateProfileJobInput{}
@@ -42,7 +41,7 @@ type UpdateProfileJobInput struct {
 	OutputLocation *types.S3Location
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role to be assumed for this request.
+	// role to be assumed when DataBrew runs the job.
 	//
 	// This member is required.
 	RoleArn *string
@@ -54,18 +53,24 @@ type UpdateProfileJobInput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// Server-side encryption with AWS KMS-managed keys.
+	// Server-side encryption with keys managed by AWS KMS.
 	//
 	// * SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
 
-	// A value that enables or disables Amazon CloudWatch logging for the current AWS
-	// account. If logging is enabled, CloudWatch writes one log stream for each job
-	// run.
+	// Sample configuration for Profile Jobs only. Determines the number of rows on
+	// which the Profile job will be executed. If a JobSample value is not provided for
+	// profile jobs, the default value will be used. The default value is CUSTOM_ROWS
+	// for the mode parameter and 20000 for the size parameter.
+	JobSample *types.JobSample
+
+	// Enables or disables Amazon CloudWatch logging for the job. If logging is
+	// enabled, CloudWatch writes one log stream for each job run.
 	LogSubscription types.LogSubscription
 
-	// The maximum number of nodes that DataBrew can use when the job processes data.
+	// The maximum number of compute nodes that DataBrew can use when the job processes
+	// data.
 	MaxCapacity int32
 
 	// The maximum number of times to retry the job after a job run fails.

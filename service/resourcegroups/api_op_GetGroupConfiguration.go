@@ -12,13 +12,13 @@ import (
 )
 
 // Returns the service configuration associated with the specified resource group.
-// AWS Resource Groups supports configurations for the following resource group
-// types:
+// For details about the service configuration syntax, see Service configurations
+// for resource groups
+// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html). Minimum
+// permissions To run this command, you must have the following permissions:
 //
-// * AWS::EC2::CapacityReservationPool - Amazon EC2 capacity reservation
-// pools. For more information, see Working with capacity reservation groups
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/capacity-reservations-using.html#create-cr-group)
-// in the EC2 Users Guide.
+// *
+// resource-groups:GetGroupConfiguration
 func (c *Client) GetGroupConfiguration(ctx context.Context, params *GetGroupConfigurationInput, optFns ...func(*Options)) (*GetGroupConfigurationOutput, error) {
 	if params == nil {
 		params = &GetGroupConfigurationInput{}
@@ -42,7 +42,9 @@ type GetGroupConfigurationInput struct {
 
 type GetGroupConfigurationOutput struct {
 
-	// The configuration associated with the specified group.
+	// The service configuration associated with the specified group. For details about
+	// the service configuration syntax, see Service configurations for resource groups
+	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html).
 	GroupConfiguration *types.GroupConfiguration
 
 	// Metadata pertaining to the operation's result.

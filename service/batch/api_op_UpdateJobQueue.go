@@ -40,7 +40,7 @@ type UpdateJobQueueInput struct {
 	// to determine which compute environment should run a given job. Compute
 	// environments must be in the VALID state before you can associate them with a job
 	// queue. All of the compute environments must be either EC2 (EC2 or SPOT) or
-	// Fargate (FARGATE or FARGATE_SPOT); EC2 and Fargate compute environments can't be
+	// Fargate (FARGATE or FARGATE_SPOT). EC2 and Fargate compute environments can't be
 	// mixed. All compute environments that are associated with a job queue must share
 	// the same architecture. AWS Batch doesn't support mixing compute environment
 	// architecture types in a single job queue.
@@ -52,12 +52,12 @@ type UpdateJobQueueInput struct {
 	// for example, a job queue with a priority value of 10 is given scheduling
 	// preference over a job queue with a priority value of 1. All of the compute
 	// environments must be either EC2 (EC2 or SPOT) or Fargate (FARGATE or
-	// FARGATE_SPOT); EC2 and Fargate compute environments cannot be mixed.
+	// FARGATE_SPOT). EC2 and Fargate compute environments can't be mixed.
 	Priority int32
 
 	// Describes the queue's ability to accept new jobs. If the job queue state is
-	// ENABLED, it is able to accept jobs. If the job queue state is DISABLED, new jobs
-	// cannot be added to the queue, but jobs already in the queue can finish.
+	// ENABLED, it can accept jobs. If the job queue state is DISABLED, new jobs can't
+	// be added to the queue, but jobs already in the queue can finish.
 	State types.JQState
 }
 

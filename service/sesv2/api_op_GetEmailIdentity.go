@@ -41,6 +41,9 @@ type GetEmailIdentityInput struct {
 // Details about an email identity.
 type GetEmailIdentityOutput struct {
 
+	// The configuration set used by default when sending from this identity.
+	ConfigurationSetName *string
+
 	// An object that contains information about the DKIM attributes for the identity.
 	DkimAttributes *types.DkimAttributes
 

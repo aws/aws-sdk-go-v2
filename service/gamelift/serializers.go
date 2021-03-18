@@ -250,6 +250,53 @@ func (m *awsAwsjson11_serializeOpCreateFleet) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateFleetLocations struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateFleetLocations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateFleetLocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateFleetLocationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.CreateFleetLocations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateFleetLocationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateGameServerGroup struct {
 }
 
@@ -846,6 +893,53 @@ func (m *awsAwsjson11_serializeOpDeleteFleet) HandleSerialize(ctx context.Contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteFleetInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteFleetLocations struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteFleetLocations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteFleetLocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteFleetLocationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DeleteFleetLocations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteFleetLocationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1551,6 +1645,147 @@ func (m *awsAwsjson11_serializeOpDescribeFleetEvents) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeFleetEventsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeFleetLocationAttributes struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeFleetLocationAttributes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeFleetLocationAttributes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeFleetLocationAttributesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeFleetLocationAttributes")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeFleetLocationAttributesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeFleetLocationCapacity struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeFleetLocationCapacity) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeFleetLocationCapacity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeFleetLocationCapacityInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeFleetLocationCapacity")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeFleetLocationCapacityInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeFleetLocationUtilization struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeFleetLocationUtilization) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeFleetLocationUtilization) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeFleetLocationUtilizationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("GameLift.DescribeFleetLocationUtilization")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeFleetLocationUtilizationInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4317,6 +4552,20 @@ func awsAwsjson11_serializeDocumentDesiredPlayerSessionList(v []types.DesiredPla
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFilterConfiguration(v *types.FilterConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedLocations != nil {
+		ok := object.Key("AllowedLocations")
+		if err := awsAwsjson11_serializeDocumentLocationList(v.AllowedLocations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFleetActionList(v []types.FleetAction, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4549,6 +4798,42 @@ func awsAwsjson11_serializeDocumentLaunchTemplateSpecification(v *types.LaunchTe
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLocationConfiguration(v *types.LocationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLocationConfigurationList(v []types.LocationConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentLocationConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLocationList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentMatchmakingConfigurationNameList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4734,6 +5019,38 @@ func awsAwsjson11_serializeDocumentPlayerList(v []types.Player, value smithyjson
 		if err := awsAwsjson11_serializeDocumentPlayer(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPriorityConfiguration(v *types.PriorityConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LocationOrder != nil {
+		ok := object.Key("LocationOrder")
+		if err := awsAwsjson11_serializeDocumentLocationList(v.LocationOrder, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PriorityOrder != nil {
+		ok := object.Key("PriorityOrder")
+		if err := awsAwsjson11_serializeDocumentPriorityTypeList(v.PriorityOrder, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentPriorityTypeList(v []types.PriorityType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
 	}
 	return nil
 }
@@ -5128,6 +5445,13 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.String(*v.InstanceRoleArn)
 	}
 
+	if v.Locations != nil {
+		ok := object.Key("Locations")
+		if err := awsAwsjson11_serializeDocumentLocationConfigurationList(v.Locations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogPaths != nil {
 		ok := object.Key("LogPaths")
 		if err := awsAwsjson11_serializeDocumentStringList(v.LogPaths, ok); err != nil {
@@ -5194,6 +5518,25 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateFleetLocationsInput(v *CreateFleetLocationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FleetId != nil {
+		ok := object.Key("FleetId")
+		ok.String(*v.FleetId)
+	}
+
+	if v.Locations != nil {
+		ok := object.Key("Locations")
+		if err := awsAwsjson11_serializeDocumentLocationConfigurationList(v.Locations, ok); err != nil {
 			return err
 		}
 	}
@@ -5314,6 +5657,11 @@ func awsAwsjson11_serializeOpDocumentCreateGameSessionInput(v *CreateGameSession
 		ok.String(*v.IdempotencyToken)
 	}
 
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
 	if v.MaximumPlayerSessionCount != nil {
 		ok := object.Key("MaximumPlayerSessionCount")
 		ok.Integer(*v.MaximumPlayerSessionCount)
@@ -5338,6 +5686,13 @@ func awsAwsjson11_serializeOpDocumentCreateGameSessionQueueInput(v *CreateGameSe
 		}
 	}
 
+	if v.FilterConfiguration != nil {
+		ok := object.Key("FilterConfiguration")
+		if err := awsAwsjson11_serializeDocumentFilterConfiguration(v.FilterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -5346,6 +5701,13 @@ func awsAwsjson11_serializeOpDocumentCreateGameSessionQueueInput(v *CreateGameSe
 	if v.PlayerLatencyPolicies != nil {
 		ok := object.Key("PlayerLatencyPolicies")
 		if err := awsAwsjson11_serializeDocumentPlayerLatencyPolicyList(v.PlayerLatencyPolicies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PriorityConfiguration != nil {
+		ok := object.Key("PriorityConfiguration")
+		if err := awsAwsjson11_serializeDocumentPriorityConfiguration(v.PriorityConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -5636,6 +5998,25 @@ func awsAwsjson11_serializeOpDocumentDeleteFleetInput(v *DeleteFleetInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteFleetLocationsInput(v *DeleteFleetLocationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FleetId != nil {
+		ok := object.Key("FleetId")
+		ok.String(*v.FleetId)
+	}
+
+	if v.Locations != nil {
+		ok := object.Key("Locations")
+		if err := awsAwsjson11_serializeDocumentLocationList(v.Locations, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteGameServerGroupInput(v *DeleteGameServerGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5802,6 +6183,11 @@ func awsAwsjson11_serializeOpDocumentDescribeEC2InstanceLimitsInput(v *DescribeE
 		ok.String(string(v.EC2InstanceType))
 	}
 
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
 	return nil
 }
 
@@ -5885,6 +6271,69 @@ func awsAwsjson11_serializeOpDocumentDescribeFleetEventsInput(v *DescribeFleetEv
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeFleetLocationAttributesInput(v *DescribeFleetLocationAttributesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FleetId != nil {
+		ok := object.Key("FleetId")
+		ok.String(*v.FleetId)
+	}
+
+	if v.Limit != nil {
+		ok := object.Key("Limit")
+		ok.Integer(*v.Limit)
+	}
+
+	if v.Locations != nil {
+		ok := object.Key("Locations")
+		if err := awsAwsjson11_serializeDocumentLocationList(v.Locations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeFleetLocationCapacityInput(v *DescribeFleetLocationCapacityInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FleetId != nil {
+		ok := object.Key("FleetId")
+		ok.String(*v.FleetId)
+	}
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeFleetLocationUtilizationInput(v *DescribeFleetLocationUtilizationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FleetId != nil {
+		ok := object.Key("FleetId")
+		ok.String(*v.FleetId)
+	}
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeFleetPortSettingsInput(v *DescribeFleetPortSettingsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5892,6 +6341,11 @@ func awsAwsjson11_serializeOpDocumentDescribeFleetPortSettingsInput(v *DescribeF
 	if v.FleetId != nil {
 		ok := object.Key("FleetId")
 		ok.String(*v.FleetId)
+	}
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
 	}
 
 	return nil
@@ -6003,6 +6457,11 @@ func awsAwsjson11_serializeOpDocumentDescribeGameSessionDetailsInput(v *Describe
 		ok.Integer(*v.Limit)
 	}
 
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
@@ -6076,6 +6535,11 @@ func awsAwsjson11_serializeOpDocumentDescribeGameSessionsInput(v *DescribeGameSe
 		ok.Integer(*v.Limit)
 	}
 
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
@@ -6106,6 +6570,11 @@ func awsAwsjson11_serializeOpDocumentDescribeInstancesInput(v *DescribeInstances
 	if v.Limit != nil {
 		ok := object.Key("Limit")
 		ok.Integer(*v.Limit)
+	}
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
 	}
 
 	if v.NextToken != nil {
@@ -6244,6 +6713,11 @@ func awsAwsjson11_serializeOpDocumentDescribeScalingPoliciesInput(v *DescribeSca
 	if v.Limit != nil {
 		ok := object.Key("Limit")
 		ok.Integer(*v.Limit)
+	}
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
 	}
 
 	if v.NextToken != nil {
@@ -6626,6 +7100,11 @@ func awsAwsjson11_serializeOpDocumentSearchGameSessionsInput(v *SearchGameSessio
 		ok.Integer(*v.Limit)
 	}
 
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
@@ -6653,6 +7132,11 @@ func awsAwsjson11_serializeOpDocumentStartFleetActionsInput(v *StartFleetActions
 	if v.FleetId != nil {
 		ok := object.Key("FleetId")
 		ok.String(*v.FleetId)
+	}
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
 	}
 
 	return nil
@@ -6778,6 +7262,11 @@ func awsAwsjson11_serializeOpDocumentStopFleetActionsInput(v *StopFleetActionsIn
 	if v.FleetId != nil {
 		ok := object.Key("FleetId")
 		ok.String(*v.FleetId)
+	}
+
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
 	}
 
 	return nil
@@ -6970,6 +7459,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetCapacityInput(v *UpdateFleetCapa
 		ok.String(*v.FleetId)
 	}
 
+	if v.Location != nil {
+		ok := object.Key("Location")
+		ok.String(*v.Location)
+	}
+
 	if v.MaxSize != nil {
 		ok := object.Key("MaxSize")
 		ok.Integer(*v.MaxSize)
@@ -7118,6 +7612,13 @@ func awsAwsjson11_serializeOpDocumentUpdateGameSessionQueueInput(v *UpdateGameSe
 		}
 	}
 
+	if v.FilterConfiguration != nil {
+		ok := object.Key("FilterConfiguration")
+		if err := awsAwsjson11_serializeDocumentFilterConfiguration(v.FilterConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -7126,6 +7627,13 @@ func awsAwsjson11_serializeOpDocumentUpdateGameSessionQueueInput(v *UpdateGameSe
 	if v.PlayerLatencyPolicies != nil {
 		ok := object.Key("PlayerLatencyPolicies")
 		if err := awsAwsjson11_serializeDocumentPlayerLatencyPolicyList(v.PlayerLatencyPolicies, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PriorityConfiguration != nil {
+		ok := object.Key("PriorityConfiguration")
+		if err := awsAwsjson11_serializeDocumentPriorityConfiguration(v.PriorityConfiguration, ok); err != nil {
 			return err
 		}
 	}

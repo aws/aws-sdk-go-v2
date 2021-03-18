@@ -549,6 +549,21 @@ func validateConnectorProfileProperties(v *types.ConnectorProfileProperties) err
 	}
 }
 
+func validateCustomerProfilesDestinationProperties(v *types.CustomerProfilesDestinationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomerProfilesDestinationProperties"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatadogConnectorProfileCredentials(v *types.DatadogConnectorProfileCredentials) error {
 	if v == nil {
 		return nil
@@ -630,6 +645,16 @@ func validateDestinationConnectorProperties(v *types.DestinationConnectorPropert
 	if v.Upsolver != nil {
 		if err := validateUpsolverDestinationProperties(v.Upsolver); err != nil {
 			invalidParams.AddNested("Upsolver", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Honeycode != nil {
+		if err := validateHoneycodeDestinationProperties(v.Honeycode); err != nil {
+			invalidParams.AddNested("Honeycode", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomerProfiles != nil {
+		if err := validateCustomerProfilesDestinationProperties(v.CustomerProfiles); err != nil {
+			invalidParams.AddNested("CustomerProfiles", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -761,6 +786,21 @@ func validateGoogleAnalyticsSourceProperties(v *types.GoogleAnalyticsSourcePrope
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GoogleAnalyticsSourceProperties"}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHoneycodeDestinationProperties(v *types.HoneycodeDestinationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HoneycodeDestinationProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
 	}

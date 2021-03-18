@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the full details of a channel message.
+// Gets the full details of a channel message. The x-amz-chime-bearer request
+// header is mandatory. Use the AppInstanceUserArn of the user that makes the API
+// call as the value in the header.
 func (c *Client) GetChannelMessage(ctx context.Context, params *GetChannelMessageInput, optFns ...func(*Options)) (*GetChannelMessageOutput, error) {
 	if params == nil {
 		params = &GetChannelMessageInput{}
@@ -39,6 +41,9 @@ type GetChannelMessageInput struct {
 	//
 	// This member is required.
 	MessageId *string
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 }
 
 type GetChannelMessageOutput struct {

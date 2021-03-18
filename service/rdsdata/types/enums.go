@@ -24,6 +24,8 @@ type TypeHint string
 
 // Enum values for TypeHint
 const (
+	TypeHintJson      TypeHint = "JSON"
+	TypeHintUuid      TypeHint = "UUID"
 	TypeHintTimestamp TypeHint = "TIMESTAMP"
 	TypeHintDate      TypeHint = "DATE"
 	TypeHintTime      TypeHint = "TIME"
@@ -35,6 +37,8 @@ const (
 // slice is not guaranteed to be stable across updates.
 func (TypeHint) Values() []TypeHint {
 	return []TypeHint{
+		"JSON",
+		"UUID",
 		"TIMESTAMP",
 		"DATE",
 		"TIME",

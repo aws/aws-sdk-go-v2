@@ -145,6 +145,11 @@ type GetReservationCoverageInput struct {
 	// * TENANCY
 	GroupBy []types.GroupDefinition
 
+	// The maximum number of objects that you returned for this request. If more
+	// objects are available, in the response, AWS provides a NextPageToken value that
+	// you can use in a subsequent call to get the next batch of objects.
+	MaxResults int32
+
 	// The measurement that you want your reservation coverage reported in. Valid
 	// values are Hour, Unit, and Cost. You can use multiple values in a request.
 	Metrics []string
@@ -152,6 +157,36 @@ type GetReservationCoverageInput struct {
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
+	// The value by which you want to sort the data. The following values are supported
+	// for Key:
+	//
+	// * OnDemandCost
+	//
+	// * CoverageHoursPercentage
+	//
+	// * OnDemandHours
+	//
+	// *
+	// ReservedHours
+	//
+	// * TotalRunningHours
+	//
+	// * CoverageNormalizedUnitsPercentage
+	//
+	// *
+	// OnDemandNormalizedUnits
+	//
+	// * ReservedNormalizedUnits
+	//
+	// *
+	// TotalRunningNormalizedUnits
+	//
+	// * Time
+	//
+	// Supported values for SortOrder are
+	// ASCENDING or DESCENDING.
+	SortBy *types.SortDefinition
 }
 
 type GetReservationCoverageOutput struct {

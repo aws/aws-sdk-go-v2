@@ -19,8 +19,8 @@ import (
 // creating a IPv6 BGP peer, omit the Amazon address and customer address. IPv6
 // addresses are automatically assigned from the Amazon pool of IPv6 addresses; you
 // cannot specify custom IPv6 addresses. For a public virtual interface, the
-// Autonomous System Number (ASN) must be private or already whitelisted for the
-// virtual interface.
+// Autonomous System Number (ASN) must be private or already on the allow list for
+// the virtual interface.
 func (c *Client) CreateBGPPeer(ctx context.Context, params *CreateBGPPeerInput, optFns ...func(*Options)) (*CreateBGPPeerOutput, error) {
 	if params == nil {
 		params = &CreateBGPPeerInput{}

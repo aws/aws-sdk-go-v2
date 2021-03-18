@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Performs a recipe step within an interactive AWS Glue DataBrew session that's
-// currently open.
+// Performs a recipe step within an interactive DataBrew session that's currently
+// open.
 func (c *Client) SendProjectSessionAction(ctx context.Context, params *SendProjectSessionActionInput, optFns ...func(*Options)) (*SendProjectSessionActionOutput, error) {
 	if params == nil {
 		params = &SendProjectSessionActionInput{}
@@ -39,11 +39,10 @@ type SendProjectSessionActionInput struct {
 	// for work. The action will be performed on this session.
 	ClientSessionId *string
 
-	// Returns the result of the recipe step, without applying it. The result isn't
-	// added to the view frame stack.
+	// If true, the result of the recipe step will be returned, but not applied.
 	Preview bool
 
-	// Represents a single step to be performed in an AWS Glue DataBrew recipe.
+	// Represents a single step from a DataBrew recipe to be performed.
 	RecipeStep *types.RecipeStep
 
 	// The index from which to preview a step. This index is used to preview the result
@@ -51,8 +50,7 @@ type SendProjectSessionActionInput struct {
 	// from earlier in the view frame stack.
 	StepIndex *int32
 
-	// Represents the data being being transformed during an AWS Glue DataBrew project
-	// session.
+	// Represents the data being being transformed during an action.
 	ViewFrame *types.ViewFrame
 }
 

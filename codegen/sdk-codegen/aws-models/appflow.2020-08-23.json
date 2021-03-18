@@ -577,6 +577,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The connector metadata specific to Upsolver.\n    </p>"
                     }
+                },
+                "CustomerProfiles": {
+                    "target": "com.amazonaws.appflow#CustomerProfilesMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The connector metadata specific to Amazon Connect Customer Profiles.\n    </p>"
+                    }
+                },
+                "Honeycode": {
+                    "target": "com.amazonaws.appflow#HoneycodeMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The connector metadata specific to Amazon Honeycode.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -810,6 +822,12 @@
                         "smithy.api#documentation": "<p>\n  The connector-specific credentials required when using Google Analytics.\n</p>"
                     }
                 },
+                "Honeycode": {
+                    "target": "com.amazonaws.appflow#HoneycodeConnectorProfileCredentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The connector-specific credentials required when using Amazon Honeycode.\n    </p>"
+                    }
+                },
                 "InforNexus": {
                     "target": "com.amazonaws.appflow#InforNexusConnectorProfileCredentials",
                     "traits": {
@@ -934,6 +952,12 @@
                     "target": "com.amazonaws.appflow#GoogleAnalyticsConnectorProfileProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>\n  The connector-specific properties required Google Analytics.\n</p>"
+                    }
+                },
+                "Honeycode": {
+                    "target": "com.amazonaws.appflow#HoneycodeConnectorProfileProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The connector-specific properties required by Amazon Honeycode.\n    </p>"
                     }
                 },
                 "InforNexus": {
@@ -1093,8 +1117,20 @@
                         "name": "EVENTBRIDGE"
                     },
                     {
+                        "value": "LookoutMetrics",
+                        "name": "LOOKOUTMETRICS"
+                    },
+                    {
                         "value": "Upsolver",
                         "name": "UPSOLVER"
+                    },
+                    {
+                        "value": "Honeycode",
+                        "name": "HONEYCODE"
+                    },
+                    {
+                        "value": "CustomerProfiles",
+                        "name": "CUSTOMERPROFILES"
                     }
                 ]
             }
@@ -1318,6 +1354,34 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "\\S+"
+            }
+        },
+        "com.amazonaws.appflow#CustomerProfilesDestinationProperties": {
+            "type": "structure",
+            "members": {
+                "domainName": {
+                    "target": "com.amazonaws.appflow#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The unique name of the Amazon Connect Customer Profiles domain.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "objectTypeName": {
+                    "target": "com.amazonaws.appflow#ObjectTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The object specified in the Amazon Connect Customer Profiles flow destination.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The properties that are applied when Amazon Connect Customer Profiles is used as a destination.\n    </p>"
+            }
+        },
+        "com.amazonaws.appflow#CustomerProfilesMetadata": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The connector metadata specific to Amazon Connect Customer Profiles.\n    </p>"
             }
         },
         "com.amazonaws.appflow#DataPullMode": {
@@ -2048,10 +2112,28 @@
                         "smithy.api#documentation": "<p>\n      The properties required to query Amazon EventBridge.\n    </p>"
                     }
                 },
+                "LookoutMetrics": {
+                    "target": "com.amazonaws.appflow#LookoutMetricsDestinationProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The properties required to query Amazon Lookout for Metrics.\n    </p>"
+                    }
+                },
                 "Upsolver": {
                     "target": "com.amazonaws.appflow#UpsolverDestinationProperties",
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The properties required to query Upsolver.\n    </p>"
+                    }
+                },
+                "Honeycode": {
+                    "target": "com.amazonaws.appflow#HoneycodeDestinationProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The properties required to query Amazon Honeycode.\n    </p>"
+                    }
+                },
+                "CustomerProfiles": {
+                    "target": "com.amazonaws.appflow#CustomerProfilesDestinationProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The properties required to query Amazon Connect Customer Profiles.\n    </p>"
                     }
                 }
             },
@@ -2139,6 +2221,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.appflow#DestinationFlowConfig"
+            }
+        },
+        "com.amazonaws.appflow#DomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "\\S+"
             }
         },
         "com.amazonaws.appflow#DynatraceConnectorOperator": {
@@ -2428,6 +2520,18 @@
                     "target": "com.amazonaws.appflow#Date",
                     "traits": {
                         "smithy.api#documentation": "<p>\n  Specifies the time of the most recent update.\n</p>"
+                    }
+                },
+                "dataPullStartTime": {
+                    "target": "com.amazonaws.appflow#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp that determines the first new or updated record to be transferred in the flow run. \n</p>"
+                    }
+                },
+                "dataPullEndTime": {
+                    "target": "com.amazonaws.appflow#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\nThe timestamp that indicates the last new or updated record to be transferred in the flow run.\n</p>"
                     }
                 }
             },
@@ -2810,6 +2914,68 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "\\S+"
+            }
+        },
+        "com.amazonaws.appflow#HoneycodeConnectorProfileCredentials": {
+            "type": "structure",
+            "members": {
+                "accessToken": {
+                    "target": "com.amazonaws.appflow#AccessToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The credentials used to access protected Amazon Honeycode resources.\n    </p>"
+                    }
+                },
+                "refreshToken": {
+                    "target": "com.amazonaws.appflow#RefreshToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The credentials used to acquire new access tokens. \n    </p>"
+                    }
+                },
+                "oAuthRequest": {
+                    "target": "com.amazonaws.appflow#ConnectorOAuthRequest"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The connector-specific credentials required when using Amazon Honeycode.\n    </p>"
+            }
+        },
+        "com.amazonaws.appflow#HoneycodeConnectorProfileProperties": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The connector-specific properties required when using Amazon Honeycode.\n    </p>"
+            }
+        },
+        "com.amazonaws.appflow#HoneycodeDestinationProperties": {
+            "type": "structure",
+            "members": {
+                "object": {
+                    "target": "com.amazonaws.appflow#Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The object specified in the Amazon Honeycode flow destination.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errorHandlingConfig": {
+                    "target": "com.amazonaws.appflow#ErrorHandlingConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The properties that are applied when Amazon Honeycode is used as a destination.\n    </p>"
+            }
+        },
+        "com.amazonaws.appflow#HoneycodeMetadata": {
+            "type": "structure",
+            "members": {
+                "oAuthScopes": {
+                    "target": "com.amazonaws.appflow#OAuthScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The desired authorization scope for the Amazon Honeycode account.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The connector metadata specific to Amazon Honeycode.\n    </p>"
             }
         },
         "com.amazonaws.appflow#IdFieldNameList": {
@@ -3233,6 +3399,13 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.appflow#LookoutMetricsDestinationProperties": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The properties that are applied when Amazon Lookout for Metrics is used as a destination.\n    </p>"
+            }
+        },
         "com.amazonaws.appflow#MarketoConnectorOperator": {
             "type": "string",
             "traits": {
@@ -3441,6 +3614,16 @@
                 "smithy.api#pattern": "\\S+"
             }
         },
+        "com.amazonaws.appflow#ObjectTypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "\\S+"
+            }
+        },
         "com.amazonaws.appflow#Operator": {
             "type": "string",
             "traits": {
@@ -3612,13 +3795,13 @@
                 "prefixType": {
                     "target": "com.amazonaws.appflow#PrefixType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Determines the level of granularity that's included in the prefix.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      Determines the format of the prefix, and whether it applies to the file name, file path, or both. \n    </p>"
                     }
                 },
                 "prefixFormat": {
                     "target": "com.amazonaws.appflow#PrefixFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nDetermines the format of the prefix, and whether it applies to the file name, file path, or both.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      Determines the level of granularity that's included in the prefix.\n    </p>"
                     }
                 }
             },
@@ -4344,6 +4527,15 @@
                 ]
             }
         },
+        "com.amazonaws.appflow#ScheduleOffset": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 36000
+                }
+            }
+        },
         "com.amazonaws.appflow#ScheduledTriggerProperties": {
             "type": "structure",
             "members": {
@@ -4375,7 +4567,20 @@
                 "timezone": {
                     "target": "com.amazonaws.appflow#Timezone",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nSpecifies the time zone used when referring to the date and time of a scheduled-triggered flow. \n</p>"
+                        "smithy.api#documentation": "<p>\n  Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as <code>America/New_York</code>.\n</p>"
+                    }
+                },
+                "scheduleOffset": {
+                    "target": "com.amazonaws.appflow#ScheduleOffset",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>\nSpecifies the optional offset that is added to the time interval for a schedule-triggered flow. \n</p>"
+                    }
+                },
+                "firstExecutionFrom": {
+                    "target": "com.amazonaws.appflow#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Specifies the date range for the records to import from the connector in the first flow run.\n    </p>"
                     }
                 }
             },

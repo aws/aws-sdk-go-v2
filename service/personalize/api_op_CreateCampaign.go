@@ -23,30 +23,32 @@ import (
 // (minProvisionedTPS) specifies the baseline throughput provisioned by Amazon
 // Personalize, and thus, the minimum billing charge. If your TPS increases beyond
 // minProvisionedTPS, Amazon Personalize auto-scales the provisioned capacity up
-// and down, but never below minProvisionedTPS, to maintain a 70% utilization.
-// There's a short time delay while the capacity is increased that might cause loss
-// of transactions. It's recommended to start with a low minProvisionedTPS, track
-// your usage using Amazon CloudWatch metrics, and then increase the
-// minProvisionedTPS as necessary. Status A campaign can be in one of the following
-// states:
+// and down, but never below minProvisionedTPS. There's a short time delay while
+// the capacity is increased that might cause loss of transactions. The actual TPS
+// used is calculated as the average requests/second within a 5-minute window. You
+// pay for maximum of either the minimum provisioned TPS or the actual TPS. We
+// recommend starting with a low minProvisionedTPS, track your usage using Amazon
+// CloudWatch metrics, and then increase the minProvisionedTPS as necessary. Status
+// A campaign can be in one of the following states:
 //
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING > CREATE
+// IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-// *
-// DELETE PENDING > DELETE IN_PROGRESS
+// * DELETE PENDING > DELETE
+// IN_PROGRESS
 //
-// To get the campaign status, call
-// DescribeCampaign. Wait until the status of the campaign is ACTIVE before asking
-// the campaign for recommendations. Related APIs
+// To get the campaign status, call DescribeCampaign. Wait until the
+// status of the campaign is ACTIVE before asking the campaign for recommendations.
+// Related APIs
 //
 // * ListCampaigns
 //
-// *
-// DescribeCampaign
+// * DescribeCampaign
 //
 // * UpdateCampaign
 //
-// * DeleteCampaign
+// *
+// DeleteCampaign
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {
 	if params == nil {
 		params = &CreateCampaignInput{}

@@ -1051,9 +1051,6 @@ func validateProductInformationFilter(v *types.ProductInformationFilter) error {
 	if v.ProductInformationFilterName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterName"))
 	}
-	if v.ProductInformationFilterValue == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterValue"))
-	}
 	if v.ProductInformationFilterComparator == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProductInformationFilterComparator"))
 	}

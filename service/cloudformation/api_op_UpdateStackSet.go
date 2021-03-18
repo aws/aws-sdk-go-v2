@@ -71,6 +71,22 @@ type UpdateStackSetInput struct {
 	// DeploymentTargets or Regions.
 	AutoDeployment *types.AutoDeployment
 
+	// [Service-managed permissions] Specifies whether you are acting as an account
+	// administrator in the organization's management account or as a delegated
+	// administrator in a member account. By default, SELF is specified. Use SELF for
+	// stack sets with self-managed permissions.
+	//
+	// * If you are signed in to the
+	// management account, specify SELF.
+	//
+	// * If you are signed in to a delegated
+	// administrator account, specify DELEGATED_ADMIN. Your AWS account must be
+	// registered as a delegated administrator in the management account. For more
+	// information, see Register a delegated administrator
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
+	// in the AWS CloudFormation User Guide.
+	CallAs types.CallAs
+
 	// In some cases, you must explicitly acknowledge that your stack template contains
 	// certain capabilities in order for AWS CloudFormation to update the stack set and
 	// its associated stack instances.
@@ -254,8 +270,8 @@ type UpdateStackSetInput struct {
 	TemplateBody *string
 
 	// The location of the file that contains the template body. The URL must point to
-	// a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket.
-	// For more information, see Template Anatomy
+	// a template (maximum size: 460,800 bytes) that is located in an Amazon S3 bucket
+	// or a Systems Manager document. For more information, see Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
 	// in the AWS CloudFormation User Guide. Conditional: You must specify only one of
 	// the following parameters: TemplateBody or TemplateURL—or set UsePreviousTemplate

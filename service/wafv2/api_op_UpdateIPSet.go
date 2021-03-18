@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
-// Updates the specified IPSet.
+// Updates the specified IPSet. This operation completely replaces any IP address
+// specifications that you already have in the IP set with the ones that you
+// provide to this call. If you want to add to or modify the addresses that are
+// already in the IP set, retrieve those by calling GetIPSet, update them, and
+// provide the complete updated array of IP addresses to this call.
 func (c *Client) UpdateIPSet(ctx context.Context, params *UpdateIPSetInput, optFns ...func(*Options)) (*UpdateIPSetOutput, error) {
 	if params == nil {
 		params = &UpdateIPSetInput{}
@@ -35,10 +35,10 @@ type UpdateIPSetInput struct {
 
 	// Contains an array of strings that specify one or more IP addresses or blocks of
 	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
-	// all address ranges for IP versions IPv4 and IPv6. Examples:
+	// all IPv4 and IPv6 CIDR ranges except for /0. Examples:
 	//
-	// * To configure AWS
-	// WAF to allow, block, or count requests that originated from the IP address
+	// * To configure AWS WAF
+	// to allow, block, or count requests that originated from the IP address
 	// 192.0.2.44, specify 192.0.2.44/32.
 	//
 	// * To configure AWS WAF to allow, block, or
@@ -100,8 +100,7 @@ type UpdateIPSetInput struct {
 	// This member is required.
 	Scope types.Scope
 
-	// A description of the IP set that helps with identification. You cannot change
-	// the description of an IP set after you create it.
+	// A description of the IP set that helps with identification.
 	Description *string
 }
 

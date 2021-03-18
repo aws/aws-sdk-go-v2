@@ -90,6 +90,9 @@ type StopChannelOutput struct {
 	// A collection of key-value pairs.
 	Tags map[string]string
 
+	// Settings for VPC output
+	Vpc *types.VpcOutputSettings
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

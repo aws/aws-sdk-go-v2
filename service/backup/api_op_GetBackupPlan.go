@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Returns BackupPlan details for the specified BackupPlanId. Returns the body of a
-// backup plan in JSON format, in addition to plan metadata.
+// Returns BackupPlan details for the specified BackupPlanId. The details are the
+// body of a backup plan in JSON format, in addition to plan metadata.
 func (c *Client) GetBackupPlan(ctx context.Context, params *GetBackupPlanInput, optFns ...func(*Options)) (*GetBackupPlanOutput, error) {
 	if params == nil {
 		params = &GetBackupPlanInput{}

@@ -12,27 +12,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Retrieves information on all game servers that are currently active in a
 // specified game server group. You can opt to sort the list by game server age.
 // Use the pagination parameters to retrieve results in a set of sequential
 // segments. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * RegisterGameServer
-//
-// * ListGameServers
-//
-// *
-// ClaimGameServer
-//
-// * DescribeGameServer
-//
-// * UpdateGameServer
-//
-// *
-// DeregisterGameServer
+// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
+// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) ListGameServers(ctx context.Context, params *ListGameServersInput, optFns ...func(*Options)) (*ListGameServersOutput, error) {
 	if params == nil {
 		params = &ListGameServersInput{}
@@ -57,11 +45,11 @@ type ListGameServersInput struct {
 	GameServerGroupName *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential segments.
+	// get results as a set of sequential pages.
 	Limit *int32
 
-	// A token that indicates the start of the next sequential segment of results. Use
-	// the token returned with the previous call to this operation. To start at the
+	// A token that indicates the start of the next sequential page of results. Use the
+	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 
@@ -160,7 +148,7 @@ var _ ListGameServersAPIClient = (*Client)(nil)
 // ListGameServersPaginatorOptions is the paginator options for ListGameServers
 type ListGameServersPaginatorOptions struct {
 	// The maximum number of results to return. Use this parameter with NextToken to
-	// get results as a set of sequential segments.
+	// get results as a set of sequential pages.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

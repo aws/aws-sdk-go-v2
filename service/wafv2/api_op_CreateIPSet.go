@@ -11,10 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is the latest version of AWS WAF, named AWS WAFV2, released in November,
-// 2019. For information, including how to migrate your AWS WAF resources from the
-// prior release, see the AWS WAF Developer Guide
-// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 // Creates an IPSet, which you use to identify web requests that originate from
 // specific IP addresses or ranges of IP addresses. For example, if you're
 // receiving a lot of requests from a ranges of IP addresses, you can configure AWS
@@ -38,10 +34,10 @@ type CreateIPSetInput struct {
 
 	// Contains an array of strings that specify one or more IP addresses or blocks of
 	// IP addresses in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
-	// all address ranges for IP versions IPv4 and IPv6. Examples:
+	// all IPv4 and IPv6 CIDR ranges except for /0. Examples:
 	//
-	// * To configure AWS
-	// WAF to allow, block, or count requests that originated from the IP address
+	// * To configure AWS WAF
+	// to allow, block, or count requests that originated from the IP address
 	// 192.0.2.44, specify 192.0.2.44/32.
 	//
 	// * To configure AWS WAF to allow, block, or
@@ -91,8 +87,7 @@ type CreateIPSetInput struct {
 	// This member is required.
 	Scope types.Scope
 
-	// A description of the IP set that helps with identification. You cannot change
-	// the description of an IP set after you create it.
+	// A description of the IP set that helps with identification.
 	Description *string
 
 	// An array of key:value pairs to associate with the resource.

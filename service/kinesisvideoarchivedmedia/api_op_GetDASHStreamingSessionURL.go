@@ -54,18 +54,18 @@ import (
 // stream using the MPEG-DASH protocol. GetDASHStreamingSessionURL returns an
 // authenticated URL (that includes an encrypted session token) for the session's
 // MPEG-DASH manifest (the root resource needed for streaming with MPEG-DASH).
-// Don't share or store this token where an unauthorized entity could access it.
-// The token provides access to the content of the stream. Safeguard the token with
-// the same measures that you would use with your AWS credentials. The media that
-// is made available through the manifest consists only of the requested stream,
-// time range, and format. No other media data (such as frames outside the
-// requested window or alternate bitrates) is made available.
+// Don't share or store this token where an unauthorized entity can access it. The
+// token provides access to the content of the stream. Safeguard the token with the
+// same measures that you use with your AWS credentials. The media that is made
+// available through the manifest consists only of the requested stream, time
+// range, and format. No other media data (such as frames outside the requested
+// window or alternate bitrates) is made available.
 //
-// * Provide the URL
-// (containing the encrypted session token) for the MPEG-DASH manifest to a media
-// player that supports the MPEG-DASH protocol. Kinesis Video Streams makes the
-// initialization fragment and media fragments available through the manifest URL.
-// The initialization fragment contains the codec private data for the stream, and
+// * Provide the URL (containing
+// the encrypted session token) for the MPEG-DASH manifest to a media player that
+// supports the MPEG-DASH protocol. Kinesis Video Streams makes the initialization
+// fragment and media fragments available through the manifest URL. The
+// initialization fragment contains the codec private data for the stream, and
 // other data needed to set up the video or audio decoder and renderer. The media
 // fragments contain encoded video frames or encoded audio samples.
 //
@@ -98,26 +98,10 @@ import (
 // action is billable. See Pricing
 // (https://aws.amazon.com/kinesis/video-streams/pricing/) for details.
 //
-// The
-// following restrictions apply to MPEG-DASH sessions:
-//
-// * A streaming session URL
-// should not be shared between players. The service might throttle a session if
-// multiple media players are sharing it. For connection limits, see Kinesis Video
-// Streams Limits
-// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html).
-//
-// * A
-// Kinesis video stream can have a maximum of ten active MPEG-DASH streaming
-// sessions. If a new session is created when the maximum number of sessions is
-// already active, the oldest (earliest created) session is closed. The number of
-// active GetMedia connections on a Kinesis video stream does not count against
-// this limit, and the number of active MPEG-DASH sessions does not count against
-// the active GetMedia connection limit. The maximum limits for active HLS and
-// MPEG-DASH streaming sessions are independent of each other.
-//
-// You can monitor the
-// amount of data that the media player consumes by monitoring the
+// For
+// restrictions that apply to MPEG-DASH sessions, see Kinesis Video Streams Limits
+// (http://docs.aws.amazon.com/kinesisvideostreams/latest/dg/limits.html). You can
+// monitor the amount of data that the media player consumes by monitoring the
 // GetMP4MediaFragment.OutgoingBytes Amazon CloudWatch metric. For information
 // about using CloudWatch to monitor Kinesis Video Streams, see Monitoring Kinesis
 // Video Streams
@@ -214,7 +198,7 @@ type GetDASHStreamingSessionURLInput struct {
 	// fragments corresponds to more than 16 minutes of video on streams with 1-second
 	// fragments, and more than 2 1/2 hours of video on streams with 10-second
 	// fragments.
-	MaxManifestFragmentResults *int32
+	MaxManifestFragmentResults *int64
 
 	// Whether to retrieve live, live replay, or archived, on-demand data. Features of
 	// the three types of sessions include the following:
@@ -247,19 +231,19 @@ type GetDASHStreamingSessionURLInput struct {
 	//
 	// * ON_DEMAND :
 	// For sessions of this type, the MPEG-DASH manifest contains all the fragments for
-	// the session, up to the number that is specified in
-	// MaxMediaPlaylistFragmentResults. The manifest must be retrieved only once for
-	// each session. When this type of session is played in a media player, the user
-	// interface typically displays a scrubber control for choosing the position in the
-	// playback window to display.
+	// the session, up to the number that is specified in MaxManifestFragmentResults.
+	// The manifest must be retrieved only once for each session. When this type of
+	// session is played in a media player, the user interface typically displays a
+	// scrubber control for choosing the position in the playback window to
+	// display.
 	//
-	// In all playback modes, if FragmentSelectorType is
-	// PRODUCER_TIMESTAMP, and if there are multiple fragments with the same start
-	// timestamp, the fragment that has the larger fragment number (that is, the newer
-	// fragment) is included in the MPEG-DASH manifest. The other fragments are not
-	// included. Fragments that have different timestamps but have overlapping
-	// durations are still included in the MPEG-DASH manifest. This can lead to
-	// unexpected behavior in the media player. The default is LIVE.
+	// In all playback modes, if FragmentSelectorType is PRODUCER_TIMESTAMP,
+	// and if there are multiple fragments with the same start timestamp, the fragment
+	// that has the larger fragment number (that is, the newer fragment) is included in
+	// the MPEG-DASH manifest. The other fragments are not included. Fragments that
+	// have different timestamps but have overlapping durations are still included in
+	// the MPEG-DASH manifest. This can lead to unexpected behavior in the media
+	// player. The default is LIVE.
 	PlaybackMode types.DASHPlaybackMode
 
 	// The Amazon Resource Name (ARN) of the stream for which to retrieve the MPEG-DASH

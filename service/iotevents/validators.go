@@ -90,6 +90,26 @@ func (m *validateOpDeleteInput) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDetectorModelAnalysis struct {
+}
+
+func (*validateOpDescribeDetectorModelAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDetectorModelAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDetectorModelAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDetectorModelAnalysisInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDetectorModel struct {
 }
 
@@ -125,6 +145,26 @@ func (m *validateOpDescribeInput) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeInputInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetDetectorModelAnalysisResults struct {
+}
+
+func (*validateOpGetDetectorModelAnalysisResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDetectorModelAnalysisResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDetectorModelAnalysisResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDetectorModelAnalysisResultsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -185,6 +225,26 @@ func (m *validateOpPutLoggingOptions) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutLoggingOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartDetectorModelAnalysis struct {
+}
+
+func (*validateOpStartDetectorModelAnalysis) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartDetectorModelAnalysis) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartDetectorModelAnalysisInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartDetectorModelAnalysisInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -286,12 +346,20 @@ func addOpDeleteInputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInput{}, middleware.After)
 }
 
+func addOpDescribeDetectorModelAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDetectorModelAnalysis{}, middleware.After)
+}
+
 func addOpDescribeDetectorModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDetectorModel{}, middleware.After)
 }
 
 func addOpDescribeInputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInput{}, middleware.After)
+}
+
+func addOpGetDetectorModelAnalysisResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDetectorModelAnalysisResults{}, middleware.After)
 }
 
 func addOpListDetectorModelVersionsValidationMiddleware(stack *middleware.Stack) error {
@@ -304,6 +372,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutLoggingOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutLoggingOptions{}, middleware.After)
+}
+
+func addOpStartDetectorModelAnalysisValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartDetectorModelAnalysis{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1150,6 +1222,21 @@ func validateOpDeleteInputInput(v *DeleteInputInput) error {
 	}
 }
 
+func validateOpDescribeDetectorModelAnalysisInput(v *DescribeDetectorModelAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDetectorModelAnalysisInput"}
+	if v.AnalysisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDetectorModelInput(v *DescribeDetectorModelInput) error {
 	if v == nil {
 		return nil
@@ -1172,6 +1259,21 @@ func validateOpDescribeInputInput(v *DescribeInputInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeInputInput"}
 	if v.InputName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetDetectorModelAnalysisResultsInput(v *GetDetectorModelAnalysisResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDetectorModelAnalysisResultsInput"}
+	if v.AnalysisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1220,6 +1322,25 @@ func validateOpPutLoggingOptionsInput(v *PutLoggingOptionsInput) error {
 	} else if v.LoggingOptions != nil {
 		if err := validateLoggingOptions(v.LoggingOptions); err != nil {
 			invalidParams.AddNested("LoggingOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartDetectorModelAnalysisInput(v *StartDetectorModelAnalysisInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartDetectorModelAnalysisInput"}
+	if v.DetectorModelDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorModelDefinition"))
+	} else if v.DetectorModelDefinition != nil {
+		if err := validateDetectorModelDefinition(v.DetectorModelDefinition); err != nil {
+			invalidParams.AddNested("DetectorModelDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

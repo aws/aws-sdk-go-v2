@@ -24,29 +24,31 @@ import (
 // A recipe specifies the training algorithm and a feature transformation. You can
 // specify one of the predefined recipes provided by Amazon Personalize.
 // Alternatively, you can specify performAutoML and Amazon Personalize will analyze
-// your data and select the optimum USER_PERSONALIZATION recipe for you. Status A
-// solution can be in one of the following states:
+// your data and select the optimum USER_PERSONALIZATION recipe for you. Amazon
+// Personalize doesn't support configuring the hpoObjective for solution
+// hyperparameter optimization at this time. Status A solution can be in one of the
+// following states:
 //
-// * CREATE PENDING > CREATE
-// IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+// FAILED
 //
-// * DELETE PENDING > DELETE
-// IN_PROGRESS
+// * DELETE PENDING > DELETE IN_PROGRESS
 //
-// To get the status of the solution, call DescribeSolution. Wait
-// until the status shows as ACTIVE before calling CreateSolutionVersion. Related
-// APIs
+// To get the status of the
+// solution, call DescribeSolution. Wait until the status shows as ACTIVE before
+// calling CreateSolutionVersion. Related APIs
 //
 // * ListSolutions
 //
-// * CreateSolutionVersion
+// *
+// CreateSolutionVersion
 //
 // * DescribeSolution
 //
-// *
-// DeleteSolution
+// * DeleteSolution
 //
-// * ListSolutionVersions
+// *
+// ListSolutionVersions
 //
 // * DescribeSolutionVersion
 func (c *Client) CreateSolution(ctx context.Context, params *CreateSolutionInput, optFns ...func(*Options)) (*CreateSolutionOutput, error) {
@@ -79,7 +81,8 @@ type CreateSolutionInput struct {
 
 	// When your have multiple event types (using an EVENT_TYPE schema field), this
 	// parameter specifies which event type (for example, 'click' or 'like') is used
-	// for training the model.
+	// for training the model. If you do not provide an eventType, Amazon Personalize
+	// will use all interactions for training with equal weight regardless of type.
 	EventType *string
 
 	// Whether to perform automated machine learning (AutoML). The default is false.
@@ -102,7 +105,8 @@ type CreateSolutionInput struct {
 
 	// The configuration to use with the solution. When performAutoML is set to true,
 	// Amazon Personalize only evaluates the autoMLConfig section of the solution
-	// configuration.
+	// configuration. Amazon Personalize doesn't support configuring the hpoObjective
+	// at this time.
 	SolutionConfig *types.SolutionConfig
 }
 

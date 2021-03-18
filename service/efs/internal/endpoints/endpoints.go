@@ -52,6 +52,7 @@ var defaultPartitions = endpoints.Partitions{
 			"ap-east-1":      endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{},
 			"ap-northeast-2": endpoints.Endpoint{},
+			"ap-northeast-3": endpoints.Endpoint{},
 			"ap-south-1":     endpoints.Endpoint{},
 			"ap-southeast-1": endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},
@@ -84,6 +85,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "elasticfilesystem-fips.ap-northeast-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-northeast-2",
+				},
+			},
+			"fips-ap-northeast-3": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.ap-northeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
 				},
 			},
 			"fips-ap-south-1": endpoints.Endpoint{

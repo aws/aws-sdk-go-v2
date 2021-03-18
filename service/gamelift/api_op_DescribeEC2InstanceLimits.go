@@ -11,34 +11,58 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the following information for the specified EC2 instance type:
+// The GameLift service limits and current utilization for an AWS Region or
+// location. Instance limits control the number of instances, per instance type,
+// per location, that your AWS account can use. Learn more at Amazon EC2 Instance
+// Types (http://aws.amazon.com/ec2/instance-types/). The information returned
+// includes the maximum number of instances allowed and your account's current
+// usage across all fleets. This information can affect your ability to scale your
+// GameLift fleets. You can request a limit increase for your account by using the
+// Service limits page in the GameLift console. Instance limits differ based on
+// whether the instances are deployed in a fleet's home Region or in a remote
+// location. For remote locations, limits also differ based on the combination of
+// home Region and remote location. All requests must specify an AWS Region (either
+// explicitly or as your default settings). To get the limit for a remote location,
+// you must also specify the location. For example, the following requests all
+// return different results:
+//
+// * Request specifies the Region ap-northeast-1 with no
+// location. The result is limits and usage data on all instance types that are
+// deployed in us-east-2, by all of the fleets that reside in ap-northeast-1.
 //
 // *
-// Maximum number of instances allowed per AWS account (service limit).
+// Request specifies the Region us-east-1 with location ca-central-1. The result is
+// limits and usage data on all instance types that are deployed in ca-central-1,
+// by all of the fleets that reside in us-east-2. These limits do not affect fleets
+// in any other Regions that deploy instances to ca-central-1.
 //
-// * Current
-// usage for the AWS account.
+// * Request specifies
+// the Region eu-west-1 with location ca-central-1. The result is limits and usage
+// data on all instance types that are deployed in ca-central-1, by all of the
+// fleets that reside in eu-west-1.
 //
-// To learn more about the capabilities of each
-// instance type, see Amazon EC2 Instance Types
-// (http://aws.amazon.com/ec2/instance-types/). Note that the instance types
-// offered may vary depending on the region. Learn more Setting up GameLift Fleets
+// This operation can be used in the following
+// ways:
+//
+// * To get limit and usage data for all instance types that are deployed in
+// an AWS Region by fleets that reside in the same Region: Specify the Region only.
+// Optionally, specify a single instance type to retrieve information for.
+//
+// * To
+// get limit and usage data for all instance types that are deployed to a remote
+// location by fleets that reside in different AWS Region: Provide both the AWS
+// Region and the remote location. Optionally, specify a single instance type to
+// retrieve information for.
+//
+// If successful, an EC2InstanceLimits object is
+// returned with limits and usage data for each requested instance type. Learn more
+// Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// *
-// DescribeFleetAttributes
-//
-// * UpdateFleetAttributes
-//
-// * StartFleetActions or
-// StopFleetActions
+// Related actions CreateFleet | UpdateFleetCapacity | PutScalingPolicy |
+// DescribeEC2InstanceLimits | DescribeFleetAttributes |
+// DescribeFleetLocationAttributes | UpdateFleetAttributes | StopFleetActions |
+// DeleteFleet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *DescribeEC2InstanceLimitsInput, optFns ...func(*Options)) (*DescribeEC2InstanceLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeEC2InstanceLimitsInput{}
@@ -57,13 +81,15 @@ func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *Describe
 // Represents the input for a request operation.
 type DescribeEC2InstanceLimitsInput struct {
 
-	// Name of an EC2 instance type that is supported in Amazon GameLift. A fleet
-	// instance type determines the computing resources of each instance in the fleet,
-	// including CPU, memory, storage, and networking capacity. Amazon GameLift
-	// supports the following EC2 instance types. See Amazon EC2 Instance Types
-	// (http://aws.amazon.com/ec2/instance-types/) for detailed descriptions. Leave
-	// this parameter blank to retrieve limits for all types.
+	// Name of an EC2 instance type that is supported in GameLift. A fleet instance
+	// type determines the computing resources of each instance in the fleet, including
+	// CPU, memory, storage, and networking capacity. Do not specify a value for this
+	// parameter to retrieve limits for all instance types.
 	EC2InstanceType types.EC2InstanceType
+
+	// The name of a remote location to request instance limits for, in the form of an
+	// AWS Region code such as us-west-2.
+	Location *string
 }
 
 // Represents the returned data in response to a request operation.

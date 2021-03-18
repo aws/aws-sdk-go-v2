@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject
-// to change. Updates the session policy attached to the user or group for the
-// specified Amazon EMR Studio.
+// Updates the session policy attached to the user or group for the specified
+// Amazon EMR Studio.
 func (c *Client) UpdateStudioSessionMapping(ctx context.Context, params *UpdateStudioSessionMappingInput, optFns ...func(*Options)) (*UpdateStudioSessionMappingOutput, error) {
 	if params == nil {
 		params = &UpdateStudioSessionMappingInput{}
@@ -42,7 +41,7 @@ type UpdateStudioSessionMappingInput struct {
 	// This member is required.
 	SessionPolicyArn *string
 
-	// The ID of the EMR Studio.
+	// The ID of the Amazon EMR Studio.
 	//
 	// This member is required.
 	StudioId *string
@@ -57,7 +56,7 @@ type UpdateStudioSessionMappingInput struct {
 	IdentityId *string
 
 	// The name of the user or group to update. For more information, see UserName
-	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
+	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
 	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId

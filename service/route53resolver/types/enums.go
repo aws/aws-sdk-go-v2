@@ -36,6 +36,29 @@ func (IpAddressStatus) Values() []IpAddressStatus {
 	}
 }
 
+type ResolverDNSSECValidationStatus string
+
+// Enum values for ResolverDNSSECValidationStatus
+const (
+	ResolverDNSSECValidationStatusEnabling  ResolverDNSSECValidationStatus = "ENABLING"
+	ResolverDNSSECValidationStatusEnabled   ResolverDNSSECValidationStatus = "ENABLED"
+	ResolverDNSSECValidationStatusDisabling ResolverDNSSECValidationStatus = "DISABLING"
+	ResolverDNSSECValidationStatusDisabled  ResolverDNSSECValidationStatus = "DISABLED"
+)
+
+// Values returns all known values for ResolverDNSSECValidationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ResolverDNSSECValidationStatus) Values() []ResolverDNSSECValidationStatus {
+	return []ResolverDNSSECValidationStatus{
+		"ENABLING",
+		"ENABLED",
+		"DISABLING",
+		"DISABLED",
+	}
+}
+
 type ResolverEndpointDirection string
 
 // Enum values for ResolverEndpointDirection
@@ -252,5 +275,23 @@ func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type Validation string
+
+// Enum values for Validation
+const (
+	ValidationEnable  Validation = "ENABLE"
+	ValidationDisable Validation = "DISABLE"
+)
+
+// Values returns all known values for Validation. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Validation) Values() []Validation {
+	return []Validation{
+		"ENABLE",
+		"DISABLE",
 	}
 }

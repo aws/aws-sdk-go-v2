@@ -13,8 +13,8 @@ import (
 
 // Lists the tags that are attached to the specified role. The returned list of
 // tags is sorted by tag key. For more information about tagging, see Tagging IAM
-// Identities (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
-// the IAM User Guide.
+// resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the
+// IAM User Guide.
 func (c *Client) ListRoleTags(ctx context.Context, params *ListRoleTagsInput, optFns ...func(*Options)) (*ListRoleTagsOutput, error) {
 	if params == nil {
 		params = &ListRoleTagsInput{}
@@ -59,9 +59,9 @@ type ListRoleTagsInput struct {
 
 type ListRoleTagsOutput struct {
 
-	// The list of tags currently that is attached to the role. Each tag consists of a
-	// key name and an associated value. If no tags are attached to the specified role,
-	// the response contains an empty list.
+	// The list of tags that are currently attached to the role. Each tag consists of a
+	// key name and an associated value. If no tags are attached to the specified
+	// resource, the response contains an empty list.
 	//
 	// This member is required.
 	Tags []types.Tag

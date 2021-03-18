@@ -14,20 +14,9 @@ import (
 // Updates properties for an alias. To update properties, specify the alias ID to
 // be updated and provide the information to be changed. To reassign an alias to
 // another fleet, provide an updated routing strategy. If successful, the updated
-// alias record is returned.
-//
-// * CreateAlias
-//
-// * ListAliases
-//
-// * DescribeAlias
-//
-// *
-// UpdateAlias
-//
-// * DeleteAlias
-//
-// * ResolveAlias
+// alias record is returned. Related actions CreateAlias | ListAliases |
+// DescribeAlias | UpdateAlias | DeleteAlias | ResolveAlias | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAliasInput{}

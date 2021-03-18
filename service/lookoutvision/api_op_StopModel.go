@@ -12,8 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a running model. The operation might take a while to complete. To check
-// the current status, call DescribeModel.
+// Stops the hosting of a running model. The operation might take a while to
+// complete. To check the current status, call DescribeModel. After the model
+// hosting stops, the Status of the model is TRAINED. This operation requires
+// permissions to perform the lookoutvision:StopModel operation.
 func (c *Client) StopModel(ctx context.Context, params *StopModelInput, optFns ...func(*Options)) (*StopModelOutput, error) {
 	if params == nil {
 		params = &StopModelInput{}

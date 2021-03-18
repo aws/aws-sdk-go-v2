@@ -5929,6 +5929,21 @@ func validateImageConfig(v *types.ImageConfig) error {
 	}
 }
 
+func validateInferenceExecutionConfig(v *types.InferenceExecutionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InferenceExecutionConfig"}
+	if len(v.Mode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Mode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInferenceSpecification(v *types.InferenceSpecification) error {
 	if v == nil {
 		return nil
@@ -7340,6 +7355,26 @@ func validateProductionVariant(v *types.ProductionVariant) error {
 	}
 	if len(v.InstanceType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceType"))
+	}
+	if v.CoreDumpConfig != nil {
+		if err := validateProductionVariantCoreDumpConfig(v.CoreDumpConfig); err != nil {
+			invalidParams.AddNested("CoreDumpConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateProductionVariantCoreDumpConfig(v *types.ProductionVariantCoreDumpConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ProductionVariantCoreDumpConfig"}
+	if v.DestinationS3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationS3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9104,6 +9139,11 @@ func validateOpCreateModelInput(v *CreateModelInput) error {
 	if v.Containers != nil {
 		if err := validateContainerDefinitionList(v.Containers); err != nil {
 			invalidParams.AddNested("Containers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InferenceExecutionConfig != nil {
+		if err := validateInferenceExecutionConfig(v.InferenceExecutionConfig); err != nil {
+			invalidParams.AddNested("InferenceExecutionConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ExecutionRoleArn == nil {

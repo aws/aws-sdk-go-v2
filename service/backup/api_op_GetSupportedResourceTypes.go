@@ -46,7 +46,10 @@ type GetSupportedResourceTypesOutput struct {
 	// * RDS for Amazon Relational
 	// Database Service
 	//
-	// * Storage Gateway for AWS Storage Gateway
+	// * Aurora for Amazon Aurora
+	//
+	// * Storage Gateway for AWS Storage
+	// Gateway
 	ResourceTypes []string
 
 	// Metadata pertaining to the operation's result.

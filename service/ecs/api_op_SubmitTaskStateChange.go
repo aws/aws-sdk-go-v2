@@ -44,6 +44,9 @@ type SubmitTaskStateChangeInput struct {
 	// The Unix timestamp for when the task execution stopped.
 	ExecutionStoppedAt *time.Time
 
+	// The details for the managed agent associated with the task.
+	ManagedAgents []types.ManagedAgentStateChange
+
 	// The Unix timestamp for when the container image pull began.
 	PullStartedAt *time.Time
 

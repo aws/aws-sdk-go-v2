@@ -362,6 +362,9 @@
                     "target": "com.amazonaws.elasticsearchservice#DeletePackage"
                 },
                 {
+                    "target": "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunes"
+                },
+                {
                     "target": "com.amazonaws.elasticsearchservice#DescribeElasticsearchDomain"
                 },
                 {
@@ -535,6 +538,292 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n      Container for response returned by\n      <code>\n        <a>AssociatePackage</a>\n      </code>\n      operation.\n    </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTune": {
+            "type": "structure",
+            "members": {
+                "AutoTuneType": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>"
+                    }
+                },
+                "AutoTuneDetails": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies details of the Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies Auto-Tune type and Auto-Tune action details. </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneDate": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneDesiredState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneDetails": {
+            "type": "structure",
+            "members": {
+                "ScheduledAutoTuneDetails": {
+                    "target": "com.amazonaws.elasticsearchservice#ScheduledAutoTuneDetails"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies details of the Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticsearchservice#AutoTune"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneMaintenanceSchedule": {
+            "type": "structure",
+            "members": {
+                "StartAt": {
+                    "target": "com.amazonaws.elasticsearchservice#StartAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies timestamp at which Auto-Tune maintenance schedule start. </p>"
+                    }
+                },
+                "Duration": {
+                    "target": "com.amazonaws.elasticsearchservice#Duration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+                    }
+                },
+                "CronExpressionForRecurrence": {
+                    "target": "com.amazonaws.elasticsearchservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies cron expression for a recurring maintenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies Auto-Tune maitenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneMaintenanceScheduleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.elasticsearchservice#AutoTuneMaintenanceSchedule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneOptions": {
+            "type": "structure",
+            "members": {
+                "DesiredState": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneDesiredState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>"
+                    }
+                },
+                "RollbackOnDisable": {
+                    "target": "com.amazonaws.elasticsearchservice#RollbackOnDisable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK. </p>"
+                    }
+                },
+                "MaintenanceSchedules": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneMaintenanceScheduleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies list of maitenance schedules. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain, rollback state when disabling Auto-Tune options and list of maintenance schedules.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneOptionsInput": {
+            "type": "structure",
+            "members": {
+                "DesiredState": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneDesiredState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>"
+                    }
+                },
+                "MaintenanceSchedules": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneMaintenanceScheduleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies list of maitenance schedules. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneOptionsOutput": {
+            "type": "structure",
+            "members": {
+                "State": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.elasticsearchservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the error message while enabling or disabling the Auto-Tune.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneOptionsStatus": {
+            "type": "structure",
+            "members": {
+                "Options": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies Auto-Tune options for the specified Elasticsearch domain.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies Status of the Auto-Tune options for the specified Elasticsearch domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies the status of Auto-Tune options for the specified Elasticsearch domain.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Auto-Tune state for the Elasticsearch domain. For valid states see the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a>.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "ENABLE_IN_PROGRESS",
+                        "name": "ENABLE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "DISABLE_IN_PROGRESS",
+                        "name": "DISABLE_IN_PROGRESS"
+                    },
+                    {
+                        "value": "DISABLED_AND_ROLLBACK_SCHEDULED",
+                        "name": "DISABLED_AND_ROLLBACK_SCHEDULED"
+                    },
+                    {
+                        "value": "DISABLED_AND_ROLLBACK_IN_PROGRESS",
+                        "name": "DISABLED_AND_ROLLBACK_IN_PROGRESS"
+                    },
+                    {
+                        "value": "DISABLED_AND_ROLLBACK_COMPLETE",
+                        "name": "DISABLED_AND_ROLLBACK_COMPLETE"
+                    },
+                    {
+                        "value": "DISABLED_AND_ROLLBACK_ERROR",
+                        "name": "DISABLED_AND_ROLLBACK_ERROR"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneStatus": {
+            "type": "structure",
+            "members": {
+                "CreationDate": {
+                    "target": "com.amazonaws.elasticsearchservice#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp which tells Auto-Tune options creation date .</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateDate": {
+                    "target": "com.amazonaws.elasticsearchservice#UpdateTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp which tells Auto-Tune options last updated time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdateVersion": {
+                    "target": "com.amazonaws.elasticsearchservice#UIntValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Auto-Tune options latest version.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.elasticsearchservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the error message while enabling or disabling the Auto-Tune options.</p>"
+                    }
+                },
+                "PendingDeletion": {
+                    "target": "com.amazonaws.elasticsearchservice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the Elasticsearch domain is being deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the current status of the Auto-Tune options. </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#AutoTuneType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "SCHEDULED_ACTION",
+                        "name": "SCHEDULED_ACTION"
+                    }
+                ]
             }
         },
         "com.amazonaws.elasticsearchservice#BackendRole": {
@@ -870,6 +1159,18 @@
                     "target": "com.amazonaws.elasticsearchservice#AdvancedSecurityOptionsInput",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies advanced security options.</p>"
+                    }
+                },
+                "AutoTuneOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneOptionsInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Auto-Tune options.</p>"
+                    }
+                },
+                "TagList": {
+                    "target": "com.amazonaws.elasticsearchservice#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>Tag</code> added during domain creation.</p>"
                     }
                 }
             }
@@ -1372,6 +1673,90 @@
                         "name": "ELIGIBLE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.elasticsearchservice#BaseException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#InternalException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.elasticsearchservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides scheduled Auto-Tune action details for the Elasticsearch domain, such as Auto-Tune action type, description, severity, and scheduled date.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2015-01-01/es/domain/{DomainName}/autoTunes",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunesRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.elasticsearchservice#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the domain name for which you want Auto-Tune action details.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.elasticsearchservice#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.elasticsearchservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DescribeDomainAutoTunesResponse": {
+            "type": "structure",
+            "members": {
+                "AutoTunes": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the list of setting adjustments that Auto-Tune has made to the domain. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.elasticsearchservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an identifier to allow retrieval of paginated results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The result of <code>DescribeDomainAutoTunes</code> request. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
             }
         },
         "com.amazonaws.elasticsearchservice#DescribeElasticsearchDomain": {
@@ -2425,6 +2810,36 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.elasticsearchservice#Duration": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.elasticsearchservice#DurationValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.elasticsearchservice#TimeUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#DurationValue": {
+            "type": "long",
+            "traits": {
+                "smithy.api#documentation": "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 24
+                }
+            }
+        },
         "com.amazonaws.elasticsearchservice#EBSOptions": {
             "type": "structure",
             "members": {
@@ -2903,6 +3318,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies <code>AdvancedSecurityOptions</code> for the domain. </p>"
                     }
+                },
+                "AutoTuneOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneOptionsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies <code>AutoTuneOptions</code> for the domain. </p>"
+                    }
                 }
             },
             "traits": {
@@ -3049,6 +3470,12 @@
                     "target": "com.amazonaws.elasticsearchservice#AdvancedSecurityOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the Elasticsearch domain's advanced security options.</p>"
+                    }
+                },
+                "AutoTuneOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneOptionsOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Elasticsearch domain's Auto-Tune options.</p>"
                     }
                 }
             },
@@ -5225,6 +5652,22 @@
                 }
             }
         },
+        "com.amazonaws.elasticsearchservice#RollbackOnDisable": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "NO_ROLLBACK",
+                        "name": "NO_ROLLBACK"
+                    },
+                    {
+                        "value": "DEFAULT_ROLLBACK",
+                        "name": "DEFAULT_ROLLBACK"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.elasticsearchservice#S3BucketName": {
             "type": "string",
             "traits": {
@@ -5365,6 +5808,80 @@
                 "smithy.api#documentation": "<p>Describes the SAML application configured for the domain.</p>"
             }
         },
+        "com.amazonaws.elasticsearchservice#ScheduledAutoTuneActionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "JVM_HEAP_SIZE_TUNING",
+                        "name": "JVM_HEAP_SIZE_TUNING"
+                    },
+                    {
+                        "value": "JVM_YOUNG_GEN_TUNING",
+                        "name": "JVM_YOUNG_GEN_TUNING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ScheduledAutoTuneDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies Auto-Tune action description. </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ScheduledAutoTuneDetails": {
+            "type": "structure",
+            "members": {
+                "Date": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>"
+                    }
+                },
+                "ActionType": {
+                    "target": "com.amazonaws.elasticsearchservice#ScheduledAutoTuneActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.elasticsearchservice#ScheduledAutoTuneDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Auto-Tune action description. </p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.elasticsearchservice#ScheduledAutoTuneSeverityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies details of the scheduled Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+            }
+        },
+        "com.amazonaws.elasticsearchservice#ScheduledAutoTuneSeverityType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "LOW",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "MEDIUM",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.elasticsearchservice#ServiceSoftwareOptions": {
             "type": "structure",
             "members": {
@@ -5462,6 +5979,9 @@
             "traits": {
                 "smithy.api#documentation": "<p>Status of a daily automated snapshot.</p>"
             }
+        },
+        "com.amazonaws.elasticsearchservice#StartAt": {
+            "type": "timestamp"
         },
         "com.amazonaws.elasticsearchservice#StartElasticsearchServiceSoftwareUpdate": {
             "type": "operation",
@@ -5665,6 +6185,18 @@
                 }
             }
         },
+        "com.amazonaws.elasticsearchservice#TimeUnit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOUR. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "HOURS",
+                        "name": "HOURS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.elasticsearchservice#UIntValue": {
             "type": "integer",
             "traits": {
@@ -5779,6 +6311,24 @@
                     "target": "com.amazonaws.elasticsearchservice#AdvancedSecurityOptionsInput",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies advanced security options.</p>"
+                    }
+                },
+                "NodeToNodeEncryptionOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#NodeToNodeEncryptionOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the NodeToNodeEncryptionOptions.</p>"
+                    }
+                },
+                "EncryptionAtRestOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#EncryptionAtRestOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Encryption At Rest Options.</p>"
+                    }
+                },
+                "AutoTuneOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#AutoTuneOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Auto-Tune options.</p>"
                     }
                 }
             },

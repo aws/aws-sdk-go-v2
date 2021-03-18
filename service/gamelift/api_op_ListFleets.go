@@ -11,27 +11,36 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a collection of fleet resources for this AWS account. You can filter
-// the result set to find only those fleets that are deployed with a specific build
-// or script. Use the pagination parameters to retrieve results in sequential
-// pages. Fleet resources are not listed in a particular order. Learn more Setting
-// up GameLift Fleets
+// Retrieves a collection of fleet resources in an AWS Region. You can call this
+// operation to get fleets in a previously selected default Region (see
+// https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html
+// (https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html)or
+// specify a Region in your request. You can filter the result set to find only
+// those fleets that are deployed with a specific build or script. For fleets that
+// have multiple locations, this operation retrieves fleets based on their home
+// Region only. This operation can be used in the following ways:
+//
+// * To get a list
+// of all fleets in a Region, don't provide a build or script identifier.
+//
+// * To get
+// a list of all fleets where a specific custom game build is deployed, provide the
+// build ID.
+//
+// * To get a list of all Realtime Servers fleets with a specific
+// configuration script, provide the script ID.
+//
+// Use the pagination parameters to
+// retrieve results as a set of sequential pages. If successful, a list of fleet
+// IDs that match the request parameters is returned. A NextToken value is also
+// returned if there are more result pages to retrieve. Fleet resources are not
+// listed in a particular order. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// *
-// DescribeFleetAttributes
-//
-// * UpdateFleetAttributes
-//
-// * StartFleetActions or
-// StopFleetActions
+// Related actions CreateFleet | UpdateFleetCapacity | PutScalingPolicy |
+// DescribeEC2InstanceLimits | DescribeFleetAttributes |
+// DescribeFleetLocationAttributes | UpdateFleetAttributes | StopFleetActions |
+// DeleteFleet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}
@@ -50,37 +59,38 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 // Represents the input for a request operation.
 type ListFleetsInput struct {
 
-	// A unique identifier for a build to return fleets for. Use this parameter to
+	// A unique identifier for the build to request fleets for. Use this parameter to
 	// return only fleets using a specified build. Use either the build ID or ARN
-	// value. To retrieve all fleets, do not include either a BuildId and ScriptID
-	// parameter.
+	// value.
 	BuildId *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
 
-	// A unique identifier for a Realtime script to return fleets for. Use this
+	// A unique identifier for the Realtime script to request fleets for. Use this
 	// parameter to return only fleets using a specified script. Use either the script
-	// ID or ARN value. To retrieve all fleets, leave this parameter empty.
+	// ID or ARN value.
 	ScriptId *string
 }
 
 // Represents the returned data in response to a request operation.
 type ListFleetsOutput struct {
 
-	// Set of fleet IDs matching the list request. You can retrieve additional
-	// information about all returned fleets by passing this result set to a call to
-	// DescribeFleetAttributes, DescribeFleetCapacity, or DescribeFleetUtilization.
+	// A set of fleet IDs that match the list request. You can retrieve additional
+	// information about all returned fleets by passing this result set to a
+	// DescribeFleetAttributes, DescribeFleetCapacity, or DescribeFleetUtilization
+	// call.
 	FleetIds []string
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -22,7 +22,7 @@ type AccessLogMemberFile struct {
 func (*AccessLogMemberFile) isAccessLog() {}
 
 // An object that represents the AWS Cloud Map attribute information for your
-// virtual node.
+// virtual node. AWS Cloud Map is not available in the eu-south-1 Region.
 type AwsCloudMapInstanceAttribute struct {
 
 	// The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map
@@ -39,7 +39,7 @@ type AwsCloudMapInstanceAttribute struct {
 }
 
 // An object that represents the AWS Cloud Map service discovery information for
-// your virtual node.
+// your virtual node. AWS Cloud Map is not available in the eu-south-1 Region.
 type AwsCloudMapServiceDiscovery struct {
 
 	// The name of the AWS Cloud Map namespace to use.
@@ -68,7 +68,7 @@ type Backend interface {
 	isBackend()
 }
 
-// Specifies a virtual service to use as a backend for a virtual node.
+// Specifies a virtual service to use as a backend.
 type BackendMemberVirtualService struct {
 	Value VirtualServiceBackend
 }
@@ -90,7 +90,8 @@ type ClientPolicy struct {
 	Tls *ClientPolicyTls
 }
 
-// An object that represents a Transport Layer Security (TLS) client policy.
+// A reference to an object that represents a Transport Layer Security (TLS) client
+// policy.
 type ClientPolicyTls struct {
 
 	// A reference to an object that represents a TLS validation context.
@@ -98,12 +99,42 @@ type ClientPolicyTls struct {
 	// This member is required.
 	Validation *TlsValidationContext
 
+	// A reference to an object that represents a client's TLS certificate.
+	Certificate ClientTlsCertificate
+
 	// Whether the policy is enforced. The default is True, if a value isn't specified.
 	Enforce *bool
 
 	// One or more ports that the policy is enforced for.
 	Ports []int32
 }
+
+// An object that represents the client's certificate.
+//
+// The following types satisfy this interface:
+//  ClientTlsCertificateMemberFile
+//  ClientTlsCertificateMemberSds
+type ClientTlsCertificate interface {
+	isClientTlsCertificate()
+}
+
+// An object that represents a local file certificate. The certificate must meet
+// specific requirements and you must have proxy authorization enabled. For more
+// information, see Transport Layer Security (TLS)
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites).
+type ClientTlsCertificateMemberFile struct {
+	Value ListenerTlsFileCertificate
+}
+
+func (*ClientTlsCertificateMemberFile) isClientTlsCertificate() {}
+
+// A reference to an object that represents a client's TLS Secret Discovery Service
+// certificate.
+type ClientTlsCertificateMemberSds struct {
+	Value ListenerTlsSdsCertificate
+}
+
+func (*ClientTlsCertificateMemberSds) isClientTlsCertificate() {}
 
 // An object that represents the DNS service discovery information for your virtual
 // node.
@@ -325,7 +356,7 @@ type GrpcRetryPolicy struct {
 	// This member is required.
 	MaxRetries *int64
 
-	// An object that represents a duration of time.
+	// The timeout for each retry attempt.
 	//
 	// This member is required.
 	PerRetryTimeout *Duration
@@ -347,7 +378,9 @@ type GrpcRetryPolicy struct {
 	// stream-error – Retry on refused stream
 	HttpRetryEvents []string
 
-	// Specify a valid value.
+	// Specify a valid value. The event occurs before any processing of a request has
+	// started and is encountered when the upstream is temporarily or permanently
+	// unavailable.
 	TcpRetryEvents []TcpRetryPolicyEvent
 }
 
@@ -612,7 +645,7 @@ type HttpRetryPolicy struct {
 	// This member is required.
 	MaxRetries *int64
 
-	// An object that represents a duration of time.
+	// The timeout for each retry attempt.
 	//
 	// This member is required.
 	PerRetryTimeout *Duration
@@ -631,7 +664,9 @@ type HttpRetryPolicy struct {
 	// stream-error – Retry on refused stream
 	HttpRetryEvents []string
 
-	// Specify a valid value.
+	// Specify a valid value. The event occurs before any processing of a request has
+	// started and is encountered when the upstream is temporarily or permanently
+	// unavailable.
 	TcpRetryEvents []TcpRetryPolicyEvent
 }
 
@@ -707,10 +742,16 @@ type HttpRouteMatch struct {
 // An object that represents types of timeouts.
 type HttpTimeout struct {
 
-	// An object that represents a duration of time.
+	// An object that represents an idle timeout. An idle timeout bounds the amount of
+	// time that a connection may be idle. The default value is none.
 	Idle *Duration
 
-	// An object that represents a duration of time.
+	// An object that represents a per request timeout. The default value is 15
+	// seconds. If you set a higher timeout, then make sure that the higher value is
+	// set for each App Mesh resource in a conversation. For example, if a virtual node
+	// backend uses a virtual router provider to route to another virtual node, then
+	// the timeout should be greater than 15 seconds for the source and destination
+	// virtual node and the route.
 	PerRequest *Duration
 }
 
@@ -722,8 +763,14 @@ type Listener struct {
 	// This member is required.
 	PortMapping *PortMapping
 
+	// The connection pool information for the listener.
+	ConnectionPool VirtualNodeConnectionPool
+
 	// The health check information for the listener.
 	HealthCheck *HealthCheckPolicy
+
+	// The outlier detection information for the listener.
+	OutlierDetection *OutlierDetection
 
 	// An object that represents timeouts for different protocols.
 	Timeout ListenerTimeout
@@ -776,7 +823,8 @@ func (*ListenerTimeoutMemberGrpc) isListenerTimeout() {}
 // listener.
 type ListenerTls struct {
 
-	// A reference to an object that represents a listener's TLS certificate.
+	// A reference to an object that represents a listener's Transport Layer Security
+	// (TLS) certificate.
 	//
 	// This member is required.
 	Certificate ListenerTlsCertificate
@@ -794,6 +842,10 @@ type ListenerTls struct {
 	//
 	// This member is required.
 	Mode ListenerTlsMode
+
+	// A reference to an object that represents a listener's Transport Layer Security
+	// (TLS) validation context.
+	Validation *ListenerTlsValidationContext
 }
 
 // An object that represents an AWS Certicate Manager (ACM) certificate.
@@ -814,6 +866,7 @@ type ListenerTlsAcmCertificate struct {
 // The following types satisfy this interface:
 //  ListenerTlsCertificateMemberAcm
 //  ListenerTlsCertificateMemberFile
+//  ListenerTlsCertificateMemberSds
 type ListenerTlsCertificate interface {
 	isListenerTlsCertificate()
 }
@@ -833,6 +886,14 @@ type ListenerTlsCertificateMemberFile struct {
 
 func (*ListenerTlsCertificateMemberFile) isListenerTlsCertificate() {}
 
+// A reference to an object that represents a listener's Secret Discovery Service
+// certificate.
+type ListenerTlsCertificateMemberSds struct {
+	Value ListenerTlsSdsCertificate
+}
+
+func (*ListenerTlsCertificateMemberSds) isListenerTlsCertificate() {}
+
 // An object that represents a local file certificate. The certificate must meet
 // specific requirements and you must have proxy authorization enabled. For more
 // information, see Transport Layer Security (TLS)
@@ -850,6 +911,61 @@ type ListenerTlsFileCertificate struct {
 	// This member is required.
 	PrivateKey *string
 }
+
+// An object that represents the listener's Secret Discovery Service certificate.
+// The proxy must be configured with a local SDS provider via a Unix Domain Socket.
+// See App Mesh TLS documentation
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html) for more info.
+type ListenerTlsSdsCertificate struct {
+
+	// A reference to an object that represents the name of the secret requested from
+	// the Secret Discovery Service provider representing Transport Layer Security
+	// (TLS) materials like a certificate or certificate chain.
+	//
+	// This member is required.
+	SecretName *string
+}
+
+// An object that represents a listener's Transport Layer Security (TLS) validation
+// context.
+type ListenerTlsValidationContext struct {
+
+	// A reference to where to retrieve the trust chain when validating a peer’s
+	// Transport Layer Security (TLS) certificate.
+	//
+	// This member is required.
+	Trust ListenerTlsValidationContextTrust
+
+	// A reference to an object that represents the SANs for a listener's Transport
+	// Layer Security (TLS) validation context.
+	SubjectAlternativeNames *SubjectAlternativeNames
+}
+
+// An object that represents a listener's Transport Layer Security (TLS) validation
+// context trust.
+//
+// The following types satisfy this interface:
+//  ListenerTlsValidationContextTrustMemberFile
+//  ListenerTlsValidationContextTrustMemberSds
+type ListenerTlsValidationContextTrust interface {
+	isListenerTlsValidationContextTrust()
+}
+
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust for a local file.
+type ListenerTlsValidationContextTrustMemberFile struct {
+	Value TlsValidationContextFileTrust
+}
+
+func (*ListenerTlsValidationContextTrustMemberFile) isListenerTlsValidationContextTrust() {}
+
+// A reference to an object that represents a listener's Transport Layer Security
+// (TLS) Secret Discovery Service validation context trust.
+type ListenerTlsValidationContextTrustMemberSds struct {
+	Value TlsValidationContextSdsTrust
+}
+
+func (*ListenerTlsValidationContextTrustMemberSds) isListenerTlsValidationContextTrust() {}
 
 // An object that represents the logging information for a virtual node.
 type Logging struct {
@@ -956,6 +1072,31 @@ type MeshStatus struct {
 
 	// The current mesh status.
 	Status MeshStatusCode
+}
+
+// An object that represents the outlier detection for a virtual node's listener.
+type OutlierDetection struct {
+
+	// The base amount of time for which a host is ejected.
+	//
+	// This member is required.
+	BaseEjectionDuration *Duration
+
+	// The time interval between ejection sweep analysis.
+	//
+	// This member is required.
+	Interval *Duration
+
+	// Maximum percentage of hosts in load balancing pool for upstream service that can
+	// be ejected. Will eject at least one host regardless of the value.
+	//
+	// This member is required.
+	MaxEjectionPercent *int32
+
+	// Number of consecutive 5xx errors required for ejection.
+	//
+	// This member is required.
+	MaxServerErrors *int64
 }
 
 // An object that represents a port mapping.
@@ -1160,6 +1301,26 @@ type ServiceDiscoveryMemberAwsCloudMap struct {
 
 func (*ServiceDiscoveryMemberAwsCloudMap) isServiceDiscovery() {}
 
+// An object that represents the methods by which a subject alternative name on a
+// peer Transport Layer Security (TLS) certificate can be matched.
+type SubjectAlternativeNameMatchers struct {
+
+	// The values sent must match the specified values exactly.
+	//
+	// This member is required.
+	Exact []string
+}
+
+// An object that represents the subject alternative names secured by the
+// certificate.
+type SubjectAlternativeNames struct {
+
+	// An object that represents the criteria for determining a SANs match.
+	//
+	// This member is required.
+	Match *SubjectAlternativeNameMatchers
+}
+
 // Optional metadata that you apply to a resource to assist with categorization and
 // organization. Each tag consists of a key and an optional value, both of which
 // you define. Tag keys can have a maximum character length of 128 characters, and
@@ -1174,6 +1335,8 @@ type TagRef struct {
 
 	// The optional part of a key-value pair that make up a tag. A value acts as a
 	// descriptor within a tag category (key).
+	//
+	// This member is required.
 	Value *string
 }
 
@@ -1202,21 +1365,28 @@ type TcpRouteAction struct {
 // An object that represents types of timeouts.
 type TcpTimeout struct {
 
-	// An object that represents a duration of time.
+	// An object that represents an idle timeout. An idle timeout bounds the amount of
+	// time that a connection may be idle. The default value is none.
 	Idle *Duration
 }
 
-// An object that represents a Transport Layer Security (TLS) validation context.
+// An object that represents how the proxy will validate its peer during Transport
+// Layer Security (TLS) negotiation.
 type TlsValidationContext struct {
 
-	// A reference to an object that represents a TLS validation context trust.
+	// A reference to where to retrieve the trust chain when validating a peer’s
+	// Transport Layer Security (TLS) certificate.
 	//
 	// This member is required.
 	Trust TlsValidationContextTrust
+
+	// A reference to an object that represents the SANs for a Transport Layer Security
+	// (TLS) validation context.
+	SubjectAlternativeNames *SubjectAlternativeNames
 }
 
-// An object that represents a TLS validation context trust for an AWS Certicate
-// Manager (ACM) certificate.
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust for an AWS Certicate Manager (ACM) certificate.
 type TlsValidationContextAcmTrust struct {
 
 	// One or more ACM Amazon Resource Name (ARN)s.
@@ -1236,30 +1406,53 @@ type TlsValidationContextFileTrust struct {
 	CertificateChain *string
 }
 
+// An object that represents a Transport Layer Security (TLS) Secret Discovery
+// Service validation context trust. The proxy must be configured with a local SDS
+// provider via a Unix Domain Socket. See App Mesh TLS documentation
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html) for more info.
+type TlsValidationContextSdsTrust struct {
+
+	// A reference to an object that represents the name of the secret for a Transport
+	// Layer Security (TLS) Secret Discovery Service validation context trust.
+	//
+	// This member is required.
+	SecretName *string
+}
+
 // An object that represents a Transport Layer Security (TLS) validation context
 // trust.
 //
 // The following types satisfy this interface:
 //  TlsValidationContextTrustMemberAcm
 //  TlsValidationContextTrustMemberFile
+//  TlsValidationContextTrustMemberSds
 type TlsValidationContextTrust interface {
 	isTlsValidationContextTrust()
 }
 
-// A reference to an object that represents a TLS validation context trust for an
-// AWS Certicate Manager (ACM) certificate.
+// A reference to an object that represents a Transport Layer Security (TLS)
+// validation context trust for an AWS Certicate Manager (ACM) certificate.
 type TlsValidationContextTrustMemberAcm struct {
 	Value TlsValidationContextAcmTrust
 }
 
 func (*TlsValidationContextTrustMemberAcm) isTlsValidationContextTrust() {}
 
-// An object that represents a TLS validation context trust for a local file.
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust for a local file.
 type TlsValidationContextTrustMemberFile struct {
 	Value TlsValidationContextFileTrust
 }
 
 func (*TlsValidationContextTrustMemberFile) isTlsValidationContextTrust() {}
+
+// A reference to an object that represents a Transport Layer Security (TLS) Secret
+// Discovery Service validation context trust.
+type TlsValidationContextTrustMemberSds struct {
+	Value TlsValidationContextSdsTrust
+}
+
+func (*TlsValidationContextTrustMemberSds) isTlsValidationContextTrust() {}
 
 // The access log configuration for a virtual gateway.
 //
@@ -1294,10 +1487,15 @@ type VirtualGatewayClientPolicy struct {
 // An object that represents a Transport Layer Security (TLS) client policy.
 type VirtualGatewayClientPolicyTls struct {
 
-	// A reference to an object that represents a TLS validation context.
+	// A reference to an object that represents a Transport Layer Security (TLS)
+	// validation context.
 	//
 	// This member is required.
 	Validation *VirtualGatewayTlsValidationContext
+
+	// A reference to an object that represents a virtual gateway's client's Transport
+	// Layer Security (TLS) certificate.
+	Certificate VirtualGatewayClientTlsCertificate
 
 	// Whether the policy is enforced. The default is True, if a value isn't specified.
 	Enforce *bool
@@ -1305,6 +1503,68 @@ type VirtualGatewayClientPolicyTls struct {
 	// One or more ports that the policy is enforced for.
 	Ports []int32
 }
+
+// An object that represents the virtual gateway's client's Transport Layer
+// Security (TLS) certificate.
+//
+// The following types satisfy this interface:
+//  VirtualGatewayClientTlsCertificateMemberFile
+//  VirtualGatewayClientTlsCertificateMemberSds
+type VirtualGatewayClientTlsCertificate interface {
+	isVirtualGatewayClientTlsCertificate()
+}
+
+// An object that represents a local file certificate. The certificate must meet
+// specific requirements and you must have proxy authorization enabled. For more
+// information, see Transport Layer Security (TLS)
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html#virtual-node-tls-prerequisites).
+type VirtualGatewayClientTlsCertificateMemberFile struct {
+	Value VirtualGatewayListenerTlsFileCertificate
+}
+
+func (*VirtualGatewayClientTlsCertificateMemberFile) isVirtualGatewayClientTlsCertificate() {}
+
+// A reference to an object that represents a virtual gateway's client's Secret
+// Discovery Service certificate.
+type VirtualGatewayClientTlsCertificateMemberSds struct {
+	Value VirtualGatewayListenerTlsSdsCertificate
+}
+
+func (*VirtualGatewayClientTlsCertificateMemberSds) isVirtualGatewayClientTlsCertificate() {}
+
+// An object that represents the type of virtual gateway connection pool. Only one
+// protocol is used at a time and should be the same protocol as the one chosen
+// under port mapping. If not present the default value for maxPendingRequests is
+// 2147483647.
+//
+// The following types satisfy this interface:
+//  VirtualGatewayConnectionPoolMemberHttp
+//  VirtualGatewayConnectionPoolMemberHttp2
+//  VirtualGatewayConnectionPoolMemberGrpc
+type VirtualGatewayConnectionPool interface {
+	isVirtualGatewayConnectionPool()
+}
+
+// An object that represents a type of connection pool.
+type VirtualGatewayConnectionPoolMemberHttp struct {
+	Value VirtualGatewayHttpConnectionPool
+}
+
+func (*VirtualGatewayConnectionPoolMemberHttp) isVirtualGatewayConnectionPool() {}
+
+// An object that represents a type of connection pool.
+type VirtualGatewayConnectionPoolMemberHttp2 struct {
+	Value VirtualGatewayHttp2ConnectionPool
+}
+
+func (*VirtualGatewayConnectionPoolMemberHttp2) isVirtualGatewayConnectionPool() {}
+
+// An object that represents a type of connection pool.
+type VirtualGatewayConnectionPoolMemberGrpc struct {
+	Value VirtualGatewayGrpcConnectionPool
+}
+
+func (*VirtualGatewayConnectionPoolMemberGrpc) isVirtualGatewayConnectionPool() {}
 
 // An object that represents a virtual gateway returned by a describe operation.
 type VirtualGatewayData struct {
@@ -1346,6 +1606,16 @@ type VirtualGatewayFileAccessLog struct {
 	//
 	// This member is required.
 	Path *string
+}
+
+// An object that represents a type of connection pool.
+type VirtualGatewayGrpcConnectionPool struct {
+
+	// Maximum number of inflight requests Envoy can concurrently support across hosts
+	// in upstream cluster.
+	//
+	// This member is required.
+	MaxRequests int32
 }
 
 // An object that represents the health check policy for a virtual gateway's
@@ -1392,6 +1662,30 @@ type VirtualGatewayHealthCheckPolicy struct {
 	Port int32
 }
 
+// An object that represents a type of connection pool.
+type VirtualGatewayHttp2ConnectionPool struct {
+
+	// Maximum number of inflight requests Envoy can concurrently support across hosts
+	// in upstream cluster.
+	//
+	// This member is required.
+	MaxRequests int32
+}
+
+// An object that represents a type of connection pool.
+type VirtualGatewayHttpConnectionPool struct {
+
+	// Maximum number of outbound TCP connections Envoy can establish concurrently with
+	// all hosts in upstream cluster.
+	//
+	// This member is required.
+	MaxConnections int32
+
+	// Number of overflowing requests after max_connections Envoy will queue to
+	// upstream cluster.
+	MaxPendingRequests int32
+}
+
 // An object that represents a listener for a virtual gateway.
 type VirtualGatewayListener struct {
 
@@ -1399,6 +1693,9 @@ type VirtualGatewayListener struct {
 	//
 	// This member is required.
 	PortMapping *VirtualGatewayPortMapping
+
+	// The connection pool information for the virtual gateway listener.
+	ConnectionPool VirtualGatewayConnectionPool
 
 	// The health check information for the listener.
 	HealthCheck *VirtualGatewayHealthCheckPolicy
@@ -1430,6 +1727,10 @@ type VirtualGatewayListenerTls struct {
 	//
 	// This member is required.
 	Mode VirtualGatewayListenerTlsMode
+
+	// A reference to an object that represents a virtual gateway's listener's
+	// Transport Layer Security (TLS) validation context.
+	Validation *VirtualGatewayListenerTlsValidationContext
 }
 
 // An object that represents an AWS Certicate Manager (ACM) certificate.
@@ -1450,6 +1751,7 @@ type VirtualGatewayListenerTlsAcmCertificate struct {
 // The following types satisfy this interface:
 //  VirtualGatewayListenerTlsCertificateMemberAcm
 //  VirtualGatewayListenerTlsCertificateMemberFile
+//  VirtualGatewayListenerTlsCertificateMemberSds
 type VirtualGatewayListenerTlsCertificate interface {
 	isVirtualGatewayListenerTlsCertificate()
 }
@@ -1469,6 +1771,14 @@ type VirtualGatewayListenerTlsCertificateMemberFile struct {
 
 func (*VirtualGatewayListenerTlsCertificateMemberFile) isVirtualGatewayListenerTlsCertificate() {}
 
+// A reference to an object that represents a virtual gateway's listener's Secret
+// Discovery Service certificate.
+type VirtualGatewayListenerTlsCertificateMemberSds struct {
+	Value VirtualGatewayListenerTlsSdsCertificate
+}
+
+func (*VirtualGatewayListenerTlsCertificateMemberSds) isVirtualGatewayListenerTlsCertificate() {}
+
 // An object that represents a local file certificate. The certificate must meet
 // specific requirements and you must have proxy authorization enabled. For more
 // information, see Transport Layer Security (TLS)
@@ -1485,6 +1795,64 @@ type VirtualGatewayListenerTlsFileCertificate struct {
 	//
 	// This member is required.
 	PrivateKey *string
+}
+
+// An object that represents the virtual gateway's listener's Secret Discovery
+// Service certificate.The proxy must be configured with a local SDS provider via a
+// Unix Domain Socket. See App Mesh TLS documentation
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html) for more info.
+type VirtualGatewayListenerTlsSdsCertificate struct {
+
+	// A reference to an object that represents the name of the secret secret requested
+	// from the Secret Discovery Service provider representing Transport Layer Security
+	// (TLS) materials like a certificate or certificate chain.
+	//
+	// This member is required.
+	SecretName *string
+}
+
+// An object that represents a virtual gateway's listener's Transport Layer
+// Security (TLS) validation context.
+type VirtualGatewayListenerTlsValidationContext struct {
+
+	// A reference to where to retrieve the trust chain when validating a peer’s
+	// Transport Layer Security (TLS) certificate.
+	//
+	// This member is required.
+	Trust VirtualGatewayListenerTlsValidationContextTrust
+
+	// A reference to an object that represents the SANs for a virtual gateway
+	// listener's Transport Layer Security (TLS) validation context.
+	SubjectAlternativeNames *SubjectAlternativeNames
+}
+
+// An object that represents a virtual gateway's listener's Transport Layer
+// Security (TLS) validation context trust.
+//
+// The following types satisfy this interface:
+//  VirtualGatewayListenerTlsValidationContextTrustMemberFile
+//  VirtualGatewayListenerTlsValidationContextTrustMemberSds
+type VirtualGatewayListenerTlsValidationContextTrust interface {
+	isVirtualGatewayListenerTlsValidationContextTrust()
+}
+
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust for a local file.
+type VirtualGatewayListenerTlsValidationContextTrustMemberFile struct {
+	Value VirtualGatewayTlsValidationContextFileTrust
+}
+
+func (*VirtualGatewayListenerTlsValidationContextTrustMemberFile) isVirtualGatewayListenerTlsValidationContextTrust() {
+}
+
+// A reference to an object that represents a virtual gateway's listener's
+// Transport Layer Security (TLS) Secret Discovery Service validation context
+// trust.
+type VirtualGatewayListenerTlsValidationContextTrustMemberSds struct {
+	Value VirtualGatewayTlsValidationContextSdsTrust
+}
+
+func (*VirtualGatewayListenerTlsValidationContextTrustMemberSds) isVirtualGatewayListenerTlsValidationContextTrust() {
 }
 
 // An object that represents logging information.
@@ -1587,14 +1955,19 @@ type VirtualGatewayStatus struct {
 // An object that represents a Transport Layer Security (TLS) validation context.
 type VirtualGatewayTlsValidationContext struct {
 
-	// A reference to an object that represents a TLS validation context trust.
+	// A reference to where to retrieve the trust chain when validating a peer’s
+	// Transport Layer Security (TLS) certificate.
 	//
 	// This member is required.
 	Trust VirtualGatewayTlsValidationContextTrust
+
+	// A reference to an object that represents the SANs for a virtual gateway's
+	// listener's Transport Layer Security (TLS) validation context.
+	SubjectAlternativeNames *SubjectAlternativeNames
 }
 
-// An object that represents a TLS validation context trust for an AWS Certicate
-// Manager (ACM) certificate.
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust for an AWS Certicate Manager (ACM) certificate.
 type VirtualGatewayTlsValidationContextAcmTrust struct {
 
 	// One or more ACM Amazon Resource Name (ARN)s.
@@ -1614,18 +1987,34 @@ type VirtualGatewayTlsValidationContextFileTrust struct {
 	CertificateChain *string
 }
 
+// An object that represents a virtual gateway's listener's Transport Layer
+// Security (TLS) Secret Discovery Service validation context trust. The proxy must
+// be configured with a local SDS provider via a Unix Domain Socket. See App Mesh
+// TLS documentation
+// (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html) for more info.
+type VirtualGatewayTlsValidationContextSdsTrust struct {
+
+	// A reference to an object that represents the name of the secret for a virtual
+	// gateway's Transport Layer Security (TLS) Secret Discovery Service validation
+	// context trust.
+	//
+	// This member is required.
+	SecretName *string
+}
+
 // An object that represents a Transport Layer Security (TLS) validation context
 // trust.
 //
 // The following types satisfy this interface:
 //  VirtualGatewayTlsValidationContextTrustMemberAcm
 //  VirtualGatewayTlsValidationContextTrustMemberFile
+//  VirtualGatewayTlsValidationContextTrustMemberSds
 type VirtualGatewayTlsValidationContextTrust interface {
 	isVirtualGatewayTlsValidationContextTrust()
 }
 
-// A reference to an object that represents a TLS validation context trust for an
-// AWS Certicate Manager (ACM) certificate.
+// A reference to an object that represents a Transport Layer Security (TLS)
+// validation context trust for an AWS Certicate Manager (ACM) certificate.
 type VirtualGatewayTlsValidationContextTrustMemberAcm struct {
 	Value VirtualGatewayTlsValidationContextAcmTrust
 }
@@ -1633,13 +2022,65 @@ type VirtualGatewayTlsValidationContextTrustMemberAcm struct {
 func (*VirtualGatewayTlsValidationContextTrustMemberAcm) isVirtualGatewayTlsValidationContextTrust() {
 }
 
-// An object that represents a TLS validation context trust for a local file.
+// An object that represents a Transport Layer Security (TLS) validation context
+// trust for a local file.
 type VirtualGatewayTlsValidationContextTrustMemberFile struct {
 	Value VirtualGatewayTlsValidationContextFileTrust
 }
 
 func (*VirtualGatewayTlsValidationContextTrustMemberFile) isVirtualGatewayTlsValidationContextTrust() {
 }
+
+// A reference to an object that represents a virtual gateway's Transport Layer
+// Security (TLS) Secret Discovery Service validation context trust.
+type VirtualGatewayTlsValidationContextTrustMemberSds struct {
+	Value VirtualGatewayTlsValidationContextSdsTrust
+}
+
+func (*VirtualGatewayTlsValidationContextTrustMemberSds) isVirtualGatewayTlsValidationContextTrust() {
+}
+
+// An object that represents the type of virtual node connection pool. Only one
+// protocol is used at a time and should be the same protocol as the one chosen
+// under port mapping. If not present the default value for maxPendingRequests is
+// 2147483647.
+//
+// The following types satisfy this interface:
+//  VirtualNodeConnectionPoolMemberTcp
+//  VirtualNodeConnectionPoolMemberHttp
+//  VirtualNodeConnectionPoolMemberHttp2
+//  VirtualNodeConnectionPoolMemberGrpc
+type VirtualNodeConnectionPool interface {
+	isVirtualNodeConnectionPool()
+}
+
+// An object that represents a type of connection pool.
+type VirtualNodeConnectionPoolMemberTcp struct {
+	Value VirtualNodeTcpConnectionPool
+}
+
+func (*VirtualNodeConnectionPoolMemberTcp) isVirtualNodeConnectionPool() {}
+
+// An object that represents a type of connection pool.
+type VirtualNodeConnectionPoolMemberHttp struct {
+	Value VirtualNodeHttpConnectionPool
+}
+
+func (*VirtualNodeConnectionPoolMemberHttp) isVirtualNodeConnectionPool() {}
+
+// An object that represents a type of connection pool.
+type VirtualNodeConnectionPoolMemberHttp2 struct {
+	Value VirtualNodeHttp2ConnectionPool
+}
+
+func (*VirtualNodeConnectionPoolMemberHttp2) isVirtualNodeConnectionPool() {}
+
+// An object that represents a type of connection pool.
+type VirtualNodeConnectionPoolMemberGrpc struct {
+	Value VirtualNodeGrpcConnectionPool
+}
+
+func (*VirtualNodeConnectionPoolMemberGrpc) isVirtualNodeConnectionPool() {}
 
 // An object that represents a virtual node returned by a describe operation.
 type VirtualNodeData struct {
@@ -1668,6 +2109,40 @@ type VirtualNodeData struct {
 	//
 	// This member is required.
 	VirtualNodeName *string
+}
+
+// An object that represents a type of connection pool.
+type VirtualNodeGrpcConnectionPool struct {
+
+	// Maximum number of inflight requests Envoy can concurrently support across hosts
+	// in upstream cluster.
+	//
+	// This member is required.
+	MaxRequests int32
+}
+
+// An object that represents a type of connection pool.
+type VirtualNodeHttp2ConnectionPool struct {
+
+	// Maximum number of inflight requests Envoy can concurrently support across hosts
+	// in upstream cluster.
+	//
+	// This member is required.
+	MaxRequests int32
+}
+
+// An object that represents a type of connection pool.
+type VirtualNodeHttpConnectionPool struct {
+
+	// Maximum number of outbound TCP connections Envoy can establish concurrently with
+	// all hosts in upstream cluster.
+	//
+	// This member is required.
+	MaxConnections int32
+
+	// Number of overflowing requests after max_connections Envoy will queue to
+	// upstream cluster.
+	MaxPendingRequests int32
 }
 
 // An object that represents a virtual node returned by a list operation.
@@ -1759,6 +2234,16 @@ type VirtualNodeStatus struct {
 	//
 	// This member is required.
 	Status VirtualNodeStatusCode
+}
+
+// An object that represents a type of connection pool.
+type VirtualNodeTcpConnectionPool struct {
+
+	// Maximum number of outbound TCP connections Envoy can establish concurrently with
+	// all hosts in upstream cluster.
+	//
+	// This member is required.
+	MaxConnections int32
 }
 
 // An object that represents a virtual router returned by a describe operation.
@@ -2033,15 +2518,21 @@ type UnknownUnionMember struct {
 	Value []byte
 }
 
-func (*UnknownUnionMember) isAccessLog()                               {}
-func (*UnknownUnionMember) isBackend()                                 {}
-func (*UnknownUnionMember) isGrpcRouteMetadataMatchMethod()            {}
-func (*UnknownUnionMember) isHeaderMatchMethod()                       {}
-func (*UnknownUnionMember) isListenerTimeout()                         {}
-func (*UnknownUnionMember) isListenerTlsCertificate()                  {}
-func (*UnknownUnionMember) isServiceDiscovery()                        {}
-func (*UnknownUnionMember) isTlsValidationContextTrust()               {}
-func (*UnknownUnionMember) isVirtualGatewayAccessLog()                 {}
-func (*UnknownUnionMember) isVirtualGatewayListenerTlsCertificate()    {}
-func (*UnknownUnionMember) isVirtualGatewayTlsValidationContextTrust() {}
-func (*UnknownUnionMember) isVirtualServiceProvider()                  {}
+func (*UnknownUnionMember) isAccessLog()                                       {}
+func (*UnknownUnionMember) isBackend()                                         {}
+func (*UnknownUnionMember) isClientTlsCertificate()                            {}
+func (*UnknownUnionMember) isGrpcRouteMetadataMatchMethod()                    {}
+func (*UnknownUnionMember) isHeaderMatchMethod()                               {}
+func (*UnknownUnionMember) isListenerTimeout()                                 {}
+func (*UnknownUnionMember) isListenerTlsCertificate()                          {}
+func (*UnknownUnionMember) isListenerTlsValidationContextTrust()               {}
+func (*UnknownUnionMember) isServiceDiscovery()                                {}
+func (*UnknownUnionMember) isTlsValidationContextTrust()                       {}
+func (*UnknownUnionMember) isVirtualGatewayAccessLog()                         {}
+func (*UnknownUnionMember) isVirtualGatewayClientTlsCertificate()              {}
+func (*UnknownUnionMember) isVirtualGatewayConnectionPool()                    {}
+func (*UnknownUnionMember) isVirtualGatewayListenerTlsCertificate()            {}
+func (*UnknownUnionMember) isVirtualGatewayListenerTlsValidationContextTrust() {}
+func (*UnknownUnionMember) isVirtualGatewayTlsValidationContextTrust()         {}
+func (*UnknownUnionMember) isVirtualNodeConnectionPool()                       {}
+func (*UnknownUnionMember) isVirtualServiceProvider()                          {}

@@ -16,22 +16,26 @@ import (
 // of API operations and AWS resources to determine the policies' effective
 // permissions. The entity can be an IAM user, group, or role. If you specify a
 // user, then the simulation also includes all of the policies that are attached to
-// groups that the user belongs to. You can optionally include a list of one or
-// more additional policies specified as strings to include in the simulation. If
-// you want to simulate only policies specified as strings, use
-// SimulateCustomPolicy instead. You can also optionally include one resource-based
-// policy to be evaluated with each of the resources included in the simulation.
-// The simulation does not perform the API operations; it only checks the
-// authorization to determine if the simulated policies allow or deny the
-// operations. Note: This API discloses information about the permissions granted
-// to other users. If you do not want users to see other user's permissions, then
-// consider allowing them to use SimulateCustomPolicy instead. Context keys are
-// variables maintained by AWS and its services that provide details about the
-// context of an API query request. You can use the Condition element of an IAM
-// policy to evaluate context keys. To get the list of context keys that the
-// policies require for correct simulation, use GetContextKeysForPrincipalPolicy.
-// If the output is long, you can use the MaxItems and Marker parameters to
-// paginate the results.
+// groups that the user belongs to. You can simulate resources that don't exist in
+// your account. You can optionally include a list of one or more additional
+// policies specified as strings to include in the simulation. If you want to
+// simulate only policies specified as strings, use SimulateCustomPolicy instead.
+// You can also optionally include one resource-based policy to be evaluated with
+// each of the resources included in the simulation. The simulation does not
+// perform the API operations; it only checks the authorization to determine if the
+// simulated policies allow or deny the operations. Note: This operation discloses
+// information about the permissions granted to other users. If you do not want
+// users to see other user's permissions, then consider allowing them to use
+// SimulateCustomPolicy instead. Context keys are variables maintained by AWS and
+// its services that provide details about the context of an API query request. You
+// can use the Condition element of an IAM policy to evaluate context keys. To get
+// the list of context keys that the policies require for correct simulation, use
+// GetContextKeysForPrincipalPolicy. If the output is long, you can use the
+// MaxItems and Marker parameters to paginate the results. For more information
+// about using the policy simulator, see Testing IAM policies with the IAM policy
+// simulator
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
+// the IAM User Guide.
 func (c *Client) SimulatePrincipalPolicy(ctx context.Context, params *SimulatePrincipalPolicyInput, optFns ...func(*Options)) (*SimulatePrincipalPolicyOutput, error) {
 	if params == nil {
 		params = &SimulatePrincipalPolicyInput{}
@@ -61,7 +65,7 @@ type SimulatePrincipalPolicyInput struct {
 	// simulation includes all policies that are associated with that entity. If you
 	// specify a user, the simulation also includes all policies that are attached to
 	// any groups the user belongs to. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces
+	// Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -80,7 +84,7 @@ type SimulatePrincipalPolicyInput struct {
 	// ResourcePolicy and the PolicySourceArn is not the ARN for an IAM user. This is
 	// required so that the resource-based policy's Principal element has a value to
 	// use in evaluating the policy. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces
+	// Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	CallerArn *string
@@ -112,7 +116,7 @@ type SimulatePrincipalPolicyInput struct {
 	// permissions boundary is attached to an entity and you pass in a different
 	// permissions boundary policy using this parameter, then the new permissions
 	// boundary policy is used for the simulation. For more information about
-	// permissions boundaries, see Permissions Boundaries for IAM Entities
+	// permissions boundaries, see Permissions boundaries for IAM entities
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide. The policy input is specified as a string containing the
 	// complete, valid JSON text of a permissions boundary policy. The regex pattern
@@ -151,11 +155,11 @@ type SimulatePrincipalPolicyInput struct {
 	// is not provided, then the value defaults to * (all resources). Each API in the
 	// ActionNames parameter is evaluated for each resource in this list. The
 	// simulation determines the access result (allowed or denied) of each combination
-	// and reports it in the response. The simulation does not automatically retrieve
-	// policies for the specified resources. If you want to include a resource policy
-	// in the simulation, then you must include the policy as a string in the
-	// ResourcePolicy parameter. For more information about ARNs, see Amazon Resource
-	// Names (ARNs) and AWS Service Namespaces
+	// and reports it in the response. You can simulate resources that don't exist in
+	// your account. The simulation does not automatically retrieve policies for the
+	// specified resources. If you want to include a resource policy in the simulation,
+	// then you must include the policy as a string in the ResourcePolicy parameter.
+	// For more information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	ResourceArns []string
@@ -172,7 +176,7 @@ type SimulatePrincipalPolicyInput struct {
 	// specify that volume as a resource. If the EC2 scenario includes VPC, then you
 	// must supply the network interface resource. If it includes an IP subnet, then
 	// you must specify the subnet resource. For more information on the EC2 scenario
-	// options, see Supported Platforms
+	// options, see Supported platforms
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
 	// in the Amazon EC2 User Guide.
 	//

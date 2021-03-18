@@ -127,8 +127,8 @@ type UpdateEventSourceMappingInput struct {
 	// event source.
 	SourceAccessConfigurations []types.SourceAccessConfiguration
 
-	// (Streams) The duration of a processing window in seconds. The range is between 1
-	// second up to 15 minutes.
+	// (Streams) The duration in seconds of a processing window. The range is between 1
+	// second up to 900 seconds.
 	TumblingWindowInSeconds *int32
 }
 
@@ -210,8 +210,8 @@ type UpdateEventSourceMappingOutput struct {
 	// The name of the Kafka topic.
 	Topics []string
 
-	// (Streams) The duration of a processing window in seconds. The range is between 1
-	// second up to 15 minutes.
+	// (Streams) The duration in seconds of a processing window. The range is between 1
+	// second up to 900 seconds.
 	TumblingWindowInSeconds *int32
 
 	// The identifier of the event source mapping.

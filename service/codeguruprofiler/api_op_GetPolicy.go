@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the profiling group policy.
+// Returns the JSON-formatted resource-based policy on a profiling group.
 func (c *Client) GetPolicy(ctx context.Context, params *GetPolicyInput, optFns ...func(*Options)) (*GetPolicyOutput, error) {
 	if params == nil {
 		params = &GetPolicyInput{}
@@ -38,12 +38,12 @@ type GetPolicyInput struct {
 // The structure representing the getPolicyResponse.
 type GetPolicyOutput struct {
 
-	// The resource-based policy attached to the ProfilingGroup.
+	// The JSON-formatted resource-based policy attached to the ProfilingGroup.
 	//
 	// This member is required.
 	Policy *string
 
-	// A unique identifier for the current revision of the policy.
+	// A unique identifier for the current revision of the returned policy.
 	//
 	// This member is required.
 	RevisionId *string

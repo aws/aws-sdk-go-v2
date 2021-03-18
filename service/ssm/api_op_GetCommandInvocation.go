@@ -47,10 +47,12 @@ type GetCommandInvocationInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// (Optional) The name of the plugin for which you want detailed results. If the
-	// document contains only one plugin, the name can be omitted and the details will
-	// be returned. Plugin names are also referred to as step names in Systems Manager
-	// documents.
+	// The name of the plugin for which you want detailed results. If the document
+	// contains only one plugin, you can omit the name and details for that plugin are
+	// returned. If the document contains more than one plugin, you must specify the
+	// name of the plugin for which you want to view details. Plugin names are also
+	// referred to as step names in Systems Manager documents. For example,
+	// aws:RunShellScript is a plugin.
 	PluginName *string
 }
 
@@ -93,8 +95,8 @@ type GetCommandInvocationOutput struct {
 	// for Systems Manager.
 	InstanceId *string
 
-	// The name of the plugin for which you want detailed results. For example,
-	// aws:RunShellScript is a plugin.
+	// The name of the plugin, or step name, for which details are reported. For
+	// example, aws:RunShellScript is a plugin.
 	PluginName *string
 
 	// The error level response code for the plugin script. If the response code is -1,

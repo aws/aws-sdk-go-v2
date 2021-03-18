@@ -340,7 +340,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The specified ARN is not supported. For example, it might be an ARN for a resource that is not expected.\n        </p>",
+                "smithy.api#documentation": "<p> The specified ARN is not supported. For example, it might be an ARN for a resource\n            that is not expected. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -456,7 +456,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about one or more application revisions. The maximum number of application revisions that can be returned is 25.</p>"
+                "smithy.api#documentation": "<p>Gets information about one or more application revisions. The maximum number of\n            application revisions that can be returned is 25.</p>"
             }
         },
         "com.amazonaws.codedeploy#BatchGetApplicationRevisionsInput": {
@@ -472,7 +472,7 @@
                 "revisions": {
                     "target": "com.amazonaws.codedeploy#RevisionLocationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of <code>RevisionLocation</code> objects that specify information to get about the application revisions, including type and\n            location. The maximum number of <code>RevisionLocation</code> objects you can specify is 25.</p>",
+                        "smithy.api#documentation": "<p>An array of <code>RevisionLocation</code> objects that specify information to get\n            about the application revisions, including type and location. The maximum number of\n                <code>RevisionLocation</code> objects you can specify is 25.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -530,7 +530,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about one or more applications. The maximum number of applications that can be returned is 100.</p>"
+                "smithy.api#documentation": "<p>Gets information about one or more applications. The maximum number of applications\n            that can be returned is 100.</p>"
             }
         },
         "com.amazonaws.codedeploy#BatchGetApplicationsInput": {
@@ -539,7 +539,7 @@
                 "applicationNames": {
                     "target": "com.amazonaws.codedeploy#ApplicationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of application names separated by spaces. The maximum number of application names you can specify is 100.</p>",
+                        "smithy.api#documentation": "<p>A list of application names separated by spaces. The maximum number of application\n            names you can specify is 100.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -674,7 +674,7 @@
                 "smithy.api#deprecated": {
                     "message": "This operation is deprecated, use BatchGetDeploymentTargets instead."
                 },
-                "smithy.api#documentation": "<note>\n            <p> This method works, but is deprecated. Use <code>BatchGetDeploymentTargets</code>\n                instead. </p>\n        </note>\n        <p> Returns an array of one or more instances associated with a deployment. This method works with\n            EC2/On-premises and AWS Lambda compute platforms. The newer\n                <code>BatchGetDeploymentTargets</code> works with all compute platforms. \n            The maximum number of instances that can be returned is 25.</p>"
+                "smithy.api#documentation": "<note>\n            <p> This method works, but is deprecated. Use <code>BatchGetDeploymentTargets</code>\n                instead. </p>\n        </note>\n        <p> Returns an array of one or more instances associated with a deployment. This method\n            works with EC2/On-premises and AWS Lambda compute platforms. The newer\n                <code>BatchGetDeploymentTargets</code> works with all compute platforms. The maximum\n            number of instances that can be returned is 25.</p>"
             }
         },
         "com.amazonaws.codedeploy#BatchGetDeploymentInstancesInput": {
@@ -690,7 +690,7 @@
                 "instanceIds": {
                     "target": "com.amazonaws.codedeploy#InstancesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique IDs of instances used in the deployment. The maximum number of instance IDs you can specify is 25.</p>",
+                        "smithy.api#documentation": "<p>The unique IDs of instances used in the deployment. The maximum number of instance IDs\n            you can specify is 25.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -757,7 +757,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns an array of one or more targets associated with a deployment. This method works with all\n            compute types and should be used instead of the deprecated\n            <code>BatchGetDeploymentInstances</code>. \n            The maximum number of targets that can be returned is 25.</p>\n        <p> The type of targets returned depends on the deployment's compute platform or deployment method: </p>\n        <ul>\n            <li>\n                <p>\n                    <b>EC2/On-premises</b>: Information about EC2 instance\n                    targets. </p>\n            </li>\n            <li>\n                <p>\n                    <b>AWS Lambda</b>: Information about Lambda functions\n                    targets. </p>\n            </li>\n            <li>\n                <p>\n                    <b>Amazon ECS</b>: Information about Amazon ECS\n                    service targets. </p>\n            </li>\n            <li>\n                <p>\n                  <b>CloudFormation</b>: Information about targets of\n                    blue/green deployments initiated by a CloudFormation stack update.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p> Returns an array of one or more targets associated with a deployment. This method\n            works with all compute types and should be used instead of the deprecated\n                <code>BatchGetDeploymentInstances</code>. The maximum number of targets that can be\n            returned is 25.</p>\n        <p> The type of targets returned depends on the deployment's compute platform or\n            deployment method: </p>\n        <ul>\n            <li>\n                <p>\n                    <b>EC2/On-premises</b>: Information about EC2 instance\n                    targets. </p>\n            </li>\n            <li>\n                <p>\n                    <b>AWS Lambda</b>: Information about Lambda functions\n                    targets. </p>\n            </li>\n            <li>\n                <p>\n                    <b>Amazon ECS</b>: Information about Amazon ECS\n                    service targets. </p>\n            </li>\n            <li>\n                <p>\n                  <b>CloudFormation</b>: Information about targets of\n                    blue/green deployments initiated by a CloudFormation stack update.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.codedeploy#BatchGetDeploymentTargetsInput": {
@@ -772,7 +772,7 @@
                 "targetIds": {
                     "target": "com.amazonaws.codedeploy#TargetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique IDs of the deployment targets. The compute platform of the deployment\n            determines the type of the targets and their formats. The maximum number of deployment target IDs you can specify is 25.</p>\n        <ul>\n            <li>\n                <p> For deployments that use the EC2/On-premises compute platform, the target IDs\n                    are EC2 or on-premises instances IDs, and their target type is\n                    <code>instanceTarget</code>. </p>\n            </li>\n            <li>\n                <p> For deployments that use the AWS Lambda compute platform, the target IDs are\n                    the names of Lambda functions, and their target type is\n                    <code>instanceTarget</code>. </p>\n            </li>\n            <li>\n                <p> For deployments that use the Amazon ECS compute platform, the target IDs are\n                    pairs of Amazon ECS clusters and services specified using the format\n                    <code><clustername>:<servicename></code>. Their target type is\n                    <code>ecsTarget</code>. </p>\n            </li>\n            <li>\n                <p> For deployments that are deployed with AWS CloudFormation, the target IDs are\n                    CloudFormation stack IDs. Their target type is\n                    <code>cloudFormationTarget</code>. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The unique IDs of the deployment targets. The compute platform of the deployment\n            determines the type of the targets and their formats. The maximum number of deployment\n            target IDs you can specify is 25.</p>\n        <ul>\n            <li>\n                <p> For deployments that use the EC2/On-premises compute platform, the target IDs\n                    are EC2 or on-premises instances IDs, and their target type is\n                        <code>instanceTarget</code>. </p>\n            </li>\n            <li>\n                <p> For deployments that use the AWS Lambda compute platform, the target IDs are\n                    the names of Lambda functions, and their target type is\n                        <code>instanceTarget</code>. </p>\n            </li>\n            <li>\n                <p> For deployments that use the Amazon ECS compute platform, the target IDs are\n                    pairs of Amazon ECS clusters and services specified using the format\n                        <code><clustername>:<servicename></code>. Their target type is\n                        <code>ecsTarget</code>. </p>\n            </li>\n            <li>\n                <p> For deployments that are deployed with AWS CloudFormation, the target IDs are\n                    CloudFormation stack IDs. Their target type is\n                    <code>cloudFormationTarget</code>. </p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -808,7 +808,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about one or more deployments. The maximum number of deployments that can be returned is 25.</p>"
+                "smithy.api#documentation": "<p>Gets information about one or more deployments. The maximum number of deployments that\n            can be returned is 25.</p>"
             }
         },
         "com.amazonaws.codedeploy#BatchGetDeploymentsInput": {
@@ -817,7 +817,7 @@
                 "deploymentIds": {
                     "target": "com.amazonaws.codedeploy#DeploymentsList",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of deployment IDs, separated by spaces. The maximum number of deployment IDs you can specify is 25.</p>",
+                        "smithy.api#documentation": "<p> A list of deployment IDs, separated by spaces. The maximum number of deployment IDs\n            you can specify is 25.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -860,7 +860,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about one or more on-premises instances. The maximum number of on-premises instances that can be returned is 25.</p>"
+                "smithy.api#documentation": "<p>Gets information about one or more on-premises instances. The maximum number of\n            on-premises instances that can be returned is 25.</p>"
             }
         },
         "com.amazonaws.codedeploy#BatchGetOnPremisesInstancesInput": {
@@ -869,7 +869,7 @@
                 "instanceNames": {
                     "target": "com.amazonaws.codedeploy#InstanceNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the on-premises instances about which to get information. The maximum number of instance names you can specify is 25.</p>",
+                        "smithy.api#documentation": "<p>The names of the on-premises instances about which to get information. The maximum\n            number of instance names you can specify is 25.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -945,12 +945,12 @@
                 "terminationWaitTimeInMinutes": {
                     "target": "com.amazonaws.codedeploy#Duration",
                     "traits": {
-                        "smithy.api#documentation": "<p>For an Amazon EC2 deployment, the number of minutes to wait after a successful blue/green deployment before\n            terminating instances from the original environment.</p>\n        \n        <p>\n            For an Amazon ECS deployment, the number of minutes before deleting the original (blue) task set. During an Amazon ECS deployment, \n            CodeDeploy shifts traffic from the original (blue) task set to a replacement (green) task set. \n        </p>\n        \n        <p>\n            The maximum setting is 2880 minutes (2 days).\n        </p>"
+                        "smithy.api#documentation": "<p>For an Amazon EC2 deployment, the number of minutes to wait after a successful\n            blue/green deployment before terminating instances from the original environment.</p>\n\n        <p> For an Amazon ECS deployment, the number of minutes before deleting the original\n            (blue) task set. During an Amazon ECS deployment, CodeDeploy shifts traffic from the\n            original (blue) task set to a replacement (green) task set. </p>\n\n        <p> The maximum setting is 2880 minutes (2 days). </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about whether instances in the original environment are terminated when a\n            blue/green deployment is successful. <code>BlueInstanceTerminationOption</code> does not \n            apply to Lambda deployments.\n        </p>"
+                "smithy.api#documentation": "<p>Information about whether instances in the original environment are terminated when a\n            blue/green deployment is successful. <code>BlueInstanceTerminationOption</code> does not\n            apply to Lambda deployments. </p>"
             }
         },
         "com.amazonaws.codedeploy#Boolean": {
@@ -1031,7 +1031,7 @@
                 "status": {
                     "target": "com.amazonaws.codedeploy#TargetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> The status of an AWS CloudFormation blue/green deployment's target application. </p>"
+                        "smithy.api#documentation": "<p> The status of an AWS CloudFormation blue/green deployment's target application.\n        </p>"
                     }
                 },
                 "resourceType": {
@@ -1209,7 +1209,7 @@
                     "name": "codedeploy"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS CodeDeploy</fullname>\n        <p>AWS CodeDeploy is a deployment service that automates application deployments to\n            Amazon EC2 instances, on-premises instances running in your own facility, serverless\n            AWS Lambda functions, or applications in an Amazon ECS service.</p>\n        <p>You can deploy a nearly unlimited variety of application content, such as an updated\n            Lambda function, updated applications in an Amazon ECS service, code, web and configuration \n            files, executables, packages, scripts,\n            multimedia files, and so on. AWS CodeDeploy can deploy application content stored in\n            Amazon S3 buckets, GitHub repositories, or Bitbucket repositories. You do not need to\n            make changes to your existing code before you can use AWS CodeDeploy.</p>\n        <p>AWS CodeDeploy makes it easier for you to rapidly release new features, helps you\n            avoid downtime during application deployment, and handles the complexity of updating\n            your applications, without many of the risks associated with error-prone manual\n            deployments.</p>\n        <p>\n            <b>AWS CodeDeploy Components</b>\n        </p>\n        <p>Use the information in this guide to help you work with the following AWS CodeDeploy\n            components:</p>\n        <ul>\n            <li>\n                <p>\n                    <b>Application</b>: A name that uniquely identifies\n                    the application you want to deploy. AWS CodeDeploy uses this name, which\n                    functions as a container, to ensure the correct combination of revision,\n                    deployment configuration, and deployment group are referenced during a\n                    deployment.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Deployment group</b>: A set of individual\n                    instances, CodeDeploy Lambda deployment configuration settings, or an Amazon ECS\n                    service and network details. A Lambda deployment group specifies how to route\n                    traffic to a new version of a Lambda function. An Amazon ECS deployment group\n                    specifies the service created in Amazon ECS to deploy, a load balancer, and a\n                    listener to reroute production traffic to an updated containerized application.\n                    An EC2/On-premises deployment group contains individually tagged instances,\n                    Amazon EC2 instances in Amazon EC2 Auto Scaling groups, or both. All deployment\n                    groups can specify optional trigger, alarm, and rollback settings.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Deployment configuration</b>: A set of deployment\n                    rules and deployment success and failure conditions used by AWS CodeDeploy\n                    during a deployment.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Deployment</b>: The process and the components used\n                    when updating a Lambda function, a containerized application in an Amazon ECS\n                    service, or of installing content on one or more instances. </p>\n            </li>\n            <li>\n                <p>\n                    <b>Application revisions</b>: For an AWS Lambda\n                    deployment, this is an AppSpec file that specifies the Lambda function to be\n                    updated and one or more functions to validate deployment lifecycle events. For\n                    an Amazon ECS deployment, this is an AppSpec file that specifies the Amazon ECS\n                    task definition, container, and port where production traffic is rerouted. For\n                    an EC2/On-premises deployment, this is an archive file that contains source\n                    content—source code, webpages, executable files, and deployment scripts—along\n                    with an AppSpec file. Revisions are stored in Amazon S3 buckets or GitHub\n                    repositories. For Amazon S3, a revision is uniquely identified by its Amazon S3\n                    object key and its ETag, version, or both. For GitHub, a revision is uniquely\n                    identified by its commit ID.</p>\n            </li>\n         </ul>\n        <p>This guide also contains information to help you get details about the instances in\n            your deployments, to make on-premises instances available for AWS CodeDeploy\n            deployments, to get details about a Lambda function deployment, and to get details about\n            Amazon ECS service deployments.</p>\n        <p>\n            <b>AWS CodeDeploy Information Resources</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide\">AWS CodeDeploy\n                        User Guide</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codedeploy/latest/APIReference/\">AWS\n                        CodeDeploy API Reference Guide</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cli/latest/reference/deploy/index.html\">AWS\n                        CLI Reference for AWS CodeDeploy</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <a href=\"https://forums.aws.amazon.com/forum.jspa?forumID=179\">AWS CodeDeploy\n                        Developer Forum</a>\n                </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<fullname>AWS CodeDeploy</fullname>\n        <p>AWS CodeDeploy is a deployment service that automates application deployments to\n            Amazon EC2 instances, on-premises instances running in your own facility, serverless AWS\n            Lambda functions, or applications in an Amazon ECS service.</p>\n        <p>You can deploy a nearly unlimited variety of application content, such as an updated\n            Lambda function, updated applications in an Amazon ECS service, code, web and\n            configuration files, executables, packages, scripts, multimedia files, and so on. AWS\n            CodeDeploy can deploy application content stored in Amazon S3 buckets, GitHub\n            repositories, or Bitbucket repositories. You do not need to make changes to your\n            existing code before you can use AWS CodeDeploy.</p>\n        <p>AWS CodeDeploy makes it easier for you to rapidly release new features, helps you\n            avoid downtime during application deployment, and handles the complexity of updating\n            your applications, without many of the risks associated with error-prone manual\n            deployments.</p>\n        <p>\n            <b>AWS CodeDeploy Components</b>\n        </p>\n        <p>Use the information in this guide to help you work with the following AWS CodeDeploy\n            components:</p>\n        <ul>\n            <li>\n                <p>\n                    <b>Application</b>: A name that uniquely identifies\n                    the application you want to deploy. AWS CodeDeploy uses this name, which\n                    functions as a container, to ensure the correct combination of revision,\n                    deployment configuration, and deployment group are referenced during a\n                    deployment.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Deployment group</b>: A set of individual\n                    instances, CodeDeploy Lambda deployment configuration settings, or an Amazon ECS\n                    service and network details. A Lambda deployment group specifies how to route\n                    traffic to a new version of a Lambda function. An Amazon ECS deployment group\n                    specifies the service created in Amazon ECS to deploy, a load balancer, and a\n                    listener to reroute production traffic to an updated containerized application.\n                    An EC2/On-premises deployment group contains individually tagged instances,\n                    Amazon EC2 instances in Amazon EC2 Auto Scaling groups, or both. All deployment\n                    groups can specify optional trigger, alarm, and rollback settings.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Deployment configuration</b>: A set of deployment\n                    rules and deployment success and failure conditions used by AWS CodeDeploy\n                    during a deployment.</p>\n            </li>\n            <li>\n                <p>\n                    <b>Deployment</b>: The process and the components used\n                    when updating a Lambda function, a containerized application in an Amazon ECS\n                    service, or of installing content on one or more instances. </p>\n            </li>\n            <li>\n                <p>\n                    <b>Application revisions</b>: For an AWS Lambda\n                    deployment, this is an AppSpec file that specifies the Lambda function to be\n                    updated and one or more functions to validate deployment lifecycle events. For\n                    an Amazon ECS deployment, this is an AppSpec file that specifies the Amazon ECS\n                    task definition, container, and port where production traffic is rerouted. For\n                    an EC2/On-premises deployment, this is an archive file that contains source\n                    content—source code, webpages, executable files, and deployment scripts—along\n                    with an AppSpec file. Revisions are stored in Amazon S3 buckets or GitHub\n                    repositories. For Amazon S3, a revision is uniquely identified by its Amazon S3\n                    object key and its ETag, version, or both. For GitHub, a revision is uniquely\n                    identified by its commit ID.</p>\n            </li>\n         </ul>\n        <p>This guide also contains information to help you get details about the instances in\n            your deployments, to make on-premises instances available for AWS CodeDeploy\n            deployments, to get details about a Lambda function deployment, and to get details about\n            Amazon ECS service deployments.</p>\n        <p>\n            <b>AWS CodeDeploy Information Resources</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide\">AWS CodeDeploy\n                        User Guide</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/codedeploy/latest/APIReference/\">AWS\n                        CodeDeploy API Reference Guide</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/cli/latest/reference/deploy/index.html\">AWS\n                        CLI Reference for AWS CodeDeploy</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                    <a href=\"https://forums.aws.amazon.com/forum.jspa?forumID=179\">AWS CodeDeploy\n                        Developer Forum</a>\n                </p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS CodeDeploy",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://codedeploy.amazonaws.com/doc/2014-10-06/"
@@ -1285,7 +1285,7 @@
                 "deploymentWaitType": {
                     "target": "com.amazonaws.codedeploy#DeploymentWaitType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The status of the deployment's waiting period. <code>READY_WAIT</code> indicates that\n            the deployment is ready to start shifting traffic. <code>TERMINATION_WAIT</code>\n            indicates that the traffic is shifted, but the original target is not terminated. </p>"
+                        "smithy.api#documentation": "<p> The status of the deployment's waiting period. <code>READY_WAIT</code> indicates that\n            the deployment is ready to start shifting traffic. <code>TERMINATION_WAIT</code>\n            indicates that the traffic is shifted, but the original target is not terminated.\n        </p>"
                     }
                 }
             }
@@ -1335,13 +1335,13 @@
                 "computePlatform": {
                     "target": "com.amazonaws.codedeploy#ComputePlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p> The destination platform type for the deployment (<code>Lambda</code>, \n                <code>Server</code>, or <code>ECS</code>).</p>"
+                        "smithy.api#documentation": "<p> The destination platform type for the deployment (<code>Lambda</code>,\n                <code>Server</code>, or <code>ECS</code>).</p>"
                     }
                 },
                 "tags": {
                     "target": "com.amazonaws.codedeploy#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The metadata that you apply to CodeDeploy applications to help you organize and categorize them. Each tag \n            consists of a key and an optional value, both of which you define.\n        </p>"
+                        "smithy.api#documentation": "<p> The metadata that you apply to CodeDeploy applications to help you organize and\n            categorize them. Each tag consists of a key and an optional value, both of which you\n            define. </p>"
                     }
                 }
             },
@@ -1509,7 +1509,7 @@
                 "computePlatform": {
                     "target": "com.amazonaws.codedeploy#ComputePlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
+                        "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>,\n                <code>Server</code>, or <code>ECS</code>).</p>"
                     }
                 }
             },
@@ -1710,6 +1710,12 @@
                         "smithy.api#documentation": "<p>Configuration information for an automatic rollback that is added when a deployment\n            group is created.</p>"
                     }
                 },
+                "outdatedInstancesStrategy": {
+                    "target": "com.amazonaws.codedeploy#OutdatedInstancesStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates what happens when new EC2 instances are launched mid-deployment and do not\n            receive the deployed application revision.</p>\n        <p>If this option is set to <code>UPDATE</code> or is unspecified, CodeDeploy initiates\n            one or more 'auto-update outdated instances' deployments to apply the deployed\n            application revision to the new EC2 instances.</p>\n        <p>If this option is set to <code>IGNORE</code>, CodeDeploy does not initiate a\n            deployment to update the new EC2 instances. This may result in instances having\n            different revisions.</p>"
+                    }
+                },
                 "deploymentStyle": {
                     "target": "com.amazonaws.codedeploy#DeploymentStyle",
                     "traits": {
@@ -1737,7 +1743,7 @@
                 "ecsServices": {
                     "target": "com.amazonaws.codedeploy#ECSServiceList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
+                        "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n                <code><clustername>:<servicename></code>. </p>"
                     }
                 },
                 "onPremisesTagSet": {
@@ -1749,7 +1755,7 @@
                 "tags": {
                     "target": "com.amazonaws.codedeploy#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The metadata that you apply to CodeDeploy deployment groups to help you organize and categorize them. Each tag \n            consists of a key and an optional value, both of which you define.\n        </p>"
+                        "smithy.api#documentation": "<p> The metadata that you apply to CodeDeploy deployment groups to help you organize and\n            categorize them. Each tag consists of a key and an optional value, both of which you\n            define. </p>"
                     }
                 }
             },
@@ -1808,7 +1814,7 @@
                 "ignoreApplicationStopFailures": {
                     "target": "com.amazonaws.codedeploy#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> If true, then if an <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, or\n                <code>AfterBlockTraffic</code> deployment lifecycle event to an instance fails, then\n            the deployment continues to the next deployment lifecycle event. For example, if\n                <code>ApplicationStop</code> fails, the deployment continues with\n                <code>DownloadBundle</code>. If <code>BeforeBlockTraffic</code> fails, the\n            deployment continues with <code>BlockTraffic</code>. If <code>AfterBlockTraffic</code>\n            fails, the deployment continues with <code>ApplicationStop</code>. </p>\n        \n        <p>\n            If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. \n            If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, \n            then a deployment to the next instance is attempted.\n        </p>\n        \n        <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> in the AppSpec file from the previous successful\n            deployment. (All other scripts are run from the AppSpec file in the current deployment.)\n            If one of these scripts contains an error and does not run successfully, the deployment\n            can fail. </p>\n        \n        <p> If the cause of the failure is a script from the last successful deployment that will\n            never run successfully, create a new deployment and use\n                <code>ignoreApplicationStopFailures</code> to specify that the\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> failures should be ignored. </p>"
+                        "smithy.api#documentation": "<p> If true, then if an <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, or\n                <code>AfterBlockTraffic</code> deployment lifecycle event to an instance fails, then\n            the deployment continues to the next deployment lifecycle event. For example, if\n                <code>ApplicationStop</code> fails, the deployment continues with\n                <code>DownloadBundle</code>. If <code>BeforeBlockTraffic</code> fails, the\n            deployment continues with <code>BlockTraffic</code>. If <code>AfterBlockTraffic</code>\n            fails, the deployment continues with <code>ApplicationStop</code>. </p>\n\n        <p> If false or not specified, then if a lifecycle event fails during a deployment to an\n            instance, that deployment fails. If deployment to that instance is part of an overall\n            deployment and the number of healthy hosts is not less than the minimum number of\n            healthy hosts, then a deployment to the next instance is attempted. </p>\n\n        <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> in the AppSpec file from the previous successful\n            deployment. (All other scripts are run from the AppSpec file in the current deployment.)\n            If one of these scripts contains an error and does not run successfully, the deployment\n            can fail. </p>\n\n        <p> If the cause of the failure is a script from the last successful deployment that will\n            never run successfully, create a new deployment and use\n                <code>ignoreApplicationStopFailures</code> to specify that the\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> failures should be ignored. </p>"
                     }
                 },
                 "targetInstances": {
@@ -2169,13 +2175,13 @@
                 "computePlatform": {
                     "target": "com.amazonaws.codedeploy#ComputePlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
+                        "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>,\n                <code>Server</code>, or <code>ECS</code>).</p>"
                     }
                 },
                 "trafficRoutingConfig": {
                     "target": "com.amazonaws.codedeploy#TrafficRoutingConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration that specifies how the deployment traffic is routed. Used for \n        deployments with a Lambda or ECS compute platform only.</p>"
+                        "smithy.api#documentation": "<p>The configuration that specifies how the deployment traffic is routed. Used for\n            deployments with a Lambda or ECS compute platform only.</p>"
                     }
                 }
             },
@@ -2247,6 +2253,10 @@
                     {
                         "value": "CodeDeploy",
                         "name": "CodeDeploy"
+                    },
+                    {
+                        "value": "CodeDeployAutoUpdate",
+                        "name": "CodeDeployAutoUpdate"
                     },
                     {
                         "value": "CloudFormation",
@@ -2355,7 +2365,7 @@
                 "serviceRoleArn": {
                     "target": "com.amazonaws.codedeploy#Role",
                     "traits": {
-                        "smithy.api#documentation": "<p>A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make calls to AWS services on your behalf. \n            For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html\">Create a Service Role for AWS CodeDeploy</a> in \n            the <i>AWS CodeDeploy User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A service role Amazon Resource Name (ARN) that grants CodeDeploy permission to make\n            calls to AWS services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/getting-started-create-service-role.html\">Create a\n                Service Role for AWS CodeDeploy</a> in the <i>AWS CodeDeploy User\n                Guide</i>.</p>"
                     }
                 },
                 "targetRevision": {
@@ -2386,6 +2396,12 @@
                     "target": "com.amazonaws.codedeploy#DeploymentStyle",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the type of deployment, either in-place or blue/green, you want to\n            run and whether to route deployment traffic behind a load balancer.</p>"
+                    }
+                },
+                "outdatedInstancesStrategy": {
+                    "target": "com.amazonaws.codedeploy#OutdatedInstancesStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates what happens when new EC2 instances are launched mid-deployment and do not\n            receive the deployed application revision.</p>\n        <p>If this option is set to <code>UPDATE</code> or is unspecified, CodeDeploy initiates\n            one or more 'auto-update outdated instances' deployments to apply the deployed\n            application revision to the new EC2 instances.</p>\n        <p>If this option is set to <code>IGNORE</code>, CodeDeploy does not initiate a\n            deployment to update the new EC2 instances. This may result in instances having\n            different revisions.</p>"
                     }
                 },
                 "blueGreenDeploymentConfiguration": {
@@ -2427,13 +2443,13 @@
                 "computePlatform": {
                     "target": "com.amazonaws.codedeploy#ComputePlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
+                        "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>,\n                <code>Server</code>, or <code>ECS</code>).</p>"
                     }
                 },
                 "ecsServices": {
                     "target": "com.amazonaws.codedeploy#ECSServiceList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
+                        "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n                <code><clustername>:<servicename></code>. </p>"
                     }
                 }
             },
@@ -2594,13 +2610,13 @@
                 "creator": {
                     "target": "com.amazonaws.codedeploy#DeploymentCreator",
                     "traits": {
-                        "smithy.api#documentation": "<p>The means by which the deployment was created:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>user</code>: A user created the deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>autoscaling</code>: Amazon EC2 Auto Scaling created the\n                    deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>codeDeployRollback</code>: A rollback process created the\n                    deployment.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The means by which the deployment was created:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>user</code>: A user created the deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>autoscaling</code>: Amazon EC2 Auto Scaling created the\n                    deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>codeDeployRollback</code>: A rollback process created the\n                    deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>CodeDeployAutoUpdate</code>: An auto-update process created the\n                    deployment when it detected outdated EC2 instances.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ignoreApplicationStopFailures": {
                     "target": "com.amazonaws.codedeploy#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p> If true, then if an <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, or\n                <code>AfterBlockTraffic</code> deployment lifecycle event to an instance fails, then\n            the deployment continues to the next deployment lifecycle event. For example, if\n                <code>ApplicationStop</code> fails, the deployment continues with DownloadBundle. If\n                <code>BeforeBlockTraffic</code> fails, the deployment continues with\n                <code>BlockTraffic</code>. If <code>AfterBlockTraffic</code> fails, the deployment\n            continues with <code>ApplicationStop</code>. </p>\n        \n        <p>\n            If false or not specified, then if a lifecycle event fails during a deployment to an instance, that deployment fails. \n            If deployment to that instance is part of an overall deployment and the number of healthy hosts is not less than the minimum number of healthy hosts, \n            then a deployment to the next instance is attempted.\n        </p>\n        \n        <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> in the AppSpec file from the previous successful\n            deployment. (All other scripts are run from the AppSpec file in the current deployment.)\n            If one of these scripts contains an error and does not run successfully, the deployment\n            can fail. </p>\n        \n        <p> If the cause of the failure is a script from the last successful deployment that will\n            never run successfully, create a new deployment and use\n                <code>ignoreApplicationStopFailures</code> to specify that the\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> failures should be ignored. </p>"
+                        "smithy.api#documentation": "<p> If true, then if an <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, or\n                <code>AfterBlockTraffic</code> deployment lifecycle event to an instance fails, then\n            the deployment continues to the next deployment lifecycle event. For example, if\n                <code>ApplicationStop</code> fails, the deployment continues with DownloadBundle. If\n                <code>BeforeBlockTraffic</code> fails, the deployment continues with\n                <code>BlockTraffic</code>. If <code>AfterBlockTraffic</code> fails, the deployment\n            continues with <code>ApplicationStop</code>. </p>\n\n        <p> If false or not specified, then if a lifecycle event fails during a deployment to an\n            instance, that deployment fails. If deployment to that instance is part of an overall\n            deployment and the number of healthy hosts is not less than the minimum number of\n            healthy hosts, then a deployment to the next instance is attempted. </p>\n\n        <p> During a deployment, the AWS CodeDeploy agent runs the scripts specified for\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> in the AppSpec file from the previous successful\n            deployment. (All other scripts are run from the AppSpec file in the current deployment.)\n            If one of these scripts contains an error and does not run successfully, the deployment\n            can fail. </p>\n\n        <p> If the cause of the failure is a script from the last successful deployment that will\n            never run successfully, create a new deployment and use\n                <code>ignoreApplicationStopFailures</code> to specify that the\n                <code>ApplicationStop</code>, <code>BeforeBlockTraffic</code>, and\n                <code>AfterBlockTraffic</code> failures should be ignored. </p>"
                     }
                 },
                 "autoRollbackConfiguration": {
@@ -2672,7 +2688,7 @@
                 "computePlatform": {
                     "target": "com.amazonaws.codedeploy#ComputePlatform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>, <code>Server</code>, or <code>ECS</code>).</p>"
+                        "smithy.api#documentation": "<p>The destination platform type for the deployment (<code>Lambda</code>,\n                <code>Server</code>, or <code>ECS</code>).</p>"
                     }
                 },
                 "externalId": {
@@ -2680,6 +2696,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique ID for an external resource (for example, a CloudFormation stack ID) that\n            is linked to this deployment.</p>"
                     }
+                },
+                "relatedDeployments": {
+                    "target": "com.amazonaws.codedeploy#RelatedDeployments"
                 }
             },
             "traits": {
@@ -2902,7 +2921,7 @@
                 "deploymentTargetType": {
                     "target": "com.amazonaws.codedeploy#DeploymentTargetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment type that is specific to the deployment's compute platform or deployments initiated by a CloudFormation stack update.</p>"
+                        "smithy.api#documentation": "<p>The deployment type that is specific to the deployment's compute platform or\n            deployments initiated by a CloudFormation stack update.</p>"
                     }
                 },
                 "instanceTarget": {
@@ -3318,7 +3337,7 @@
                 "pendingCount": {
                     "target": "com.amazonaws.codedeploy#ECSTaskSetCount",
                     "traits": {
-                        "smithy.api#documentation": "<p> The number of tasks in the task set that are in the <code>PENDING</code> status\n            during an Amazon ECS deployment. A task in the <code>PENDING</code> state is preparing\n            to enter the <code>RUNNING</code> state. A task set enters the <code>PENDING</code>\n            status when it launches for the first time, or when it is restarted after being in the\n            <code>STOPPED</code> state. </p>"
+                        "smithy.api#documentation": "<p> The number of tasks in the task set that are in the <code>PENDING</code> status\n            during an Amazon ECS deployment. A task in the <code>PENDING</code> state is preparing\n            to enter the <code>RUNNING</code> state. A task set enters the <code>PENDING</code>\n            status when it launches for the first time, or when it is restarted after being in the\n                <code>STOPPED</code> state. </p>"
                     }
                 },
                 "runningCount": {
@@ -3330,7 +3349,7 @@
                 "status": {
                     "target": "com.amazonaws.codedeploy#ECSTaskSetStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> The status of the task set. There are three valid task set statuses: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>PRIMARY</code>: Indicates the task set is serving production traffic. </p>\n            </li>\n            <li>\n                <p>\n                    <code>ACTIVE</code>: Indicates the task set is not serving production traffic. </p>\n            </li>\n            <li>\n                <p>\n                    <code>DRAINING</code>: Indicates the tasks in the task set are being stopped and\n                    their corresponding targets are being deregistered from their target group. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The status of the task set. There are three valid task set statuses: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>PRIMARY</code>: Indicates the task set is serving production traffic.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>ACTIVE</code>: Indicates the task set is not serving production traffic.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DRAINING</code>: Indicates the tasks in the task set are being stopped and\n                    their corresponding targets are being deregistered from their target group.\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "trafficWeight": {
@@ -3348,7 +3367,7 @@
                 "taskSetLabel": {
                     "target": "com.amazonaws.codedeploy#TargetLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p> A label that identifies whether the ECS task set is an original target\n            (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). </p>"
+                        "smithy.api#documentation": "<p> A label that identifies whether the ECS task set is an original target\n                (<code>BLUE</code>) or a replacement target (<code>GREEN</code>). </p>"
                     }
                 }
             },
@@ -3784,7 +3803,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a deployment.</p>\n        <note>\n            <p>\n                The <code>content</code> property of the <code>appSpecContent</code> object in the returned revision is always null. \n                Use <code>GetApplicationRevision</code> and the <code>sha256</code> property of the returned <code>appSpecContent</code> \n                object to get the content of the deployment’s AppSpec file. \n            </p>\n        </note>"
+                "smithy.api#documentation": "<p>Gets information about a deployment.</p>\n        <note>\n            <p> The <code>content</code> property of the <code>appSpecContent</code> object in\n                the returned revision is always null. Use <code>GetApplicationRevision</code> and\n                the <code>sha256</code> property of the returned <code>appSpecContent</code> object\n                to get the content of the deployment’s AppSpec file. </p>\n        </note>"
             }
         },
         "com.amazonaws.codedeploy#GetDeploymentConfig": {
@@ -4688,7 +4707,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The specified ARN is not in a valid format. \n        </p>",
+                "smithy.api#documentation": "<p> The specified ARN is not in a valid format. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5348,7 +5367,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The specified tags are not valid. \n        </p>",
+                "smithy.api#documentation": "<p> The specified tags are not valid. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5469,7 +5488,7 @@
                 "functionName": {
                     "target": "com.amazonaws.codedeploy#LambdaFunctionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The name of a Lambda function.\n        </p>"
+                        "smithy.api#documentation": "<p> The name of a Lambda function. </p>"
                     }
                 },
                 "functionAlias": {
@@ -5481,24 +5500,24 @@
                 "currentVersion": {
                     "target": "com.amazonaws.codedeploy#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The version of a Lambda function that production traffic points to.\n        </p>"
+                        "smithy.api#documentation": "<p> The version of a Lambda function that production traffic points to. </p>"
                     }
                 },
                 "targetVersion": {
                     "target": "com.amazonaws.codedeploy#Version",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The version of a Lambda function that production traffic points to after the Lambda function is deployed.\n        </p>"
+                        "smithy.api#documentation": "<p> The version of a Lambda function that production traffic points to after the Lambda\n            function is deployed. </p>"
                     }
                 },
                 "targetVersionWeight": {
                     "target": "com.amazonaws.codedeploy#TrafficWeight",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The percentage of production traffic that the target version of a Lambda function receives.\n        </p>"
+                        "smithy.api#documentation": "<p> The percentage of production traffic that the target version of a Lambda function\n            receives. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            Information about a Lambda function specified in a deployment.\n        </p>"
+                "smithy.api#documentation": "<p> Information about a Lambda function specified in a deployment. </p>"
             }
         },
         "com.amazonaws.codedeploy#LambdaFunctionName": {
@@ -5546,7 +5565,7 @@
                 "lambdaFunctionInfo": {
                     "target": "com.amazonaws.codedeploy#LambdaFunctionInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A <code>LambdaFunctionInfo</code> object that describes a target Lambda function.\n        </p>"
+                        "smithy.api#documentation": "<p> A <code>LambdaFunctionInfo</code> object that describes a target Lambda function.\n        </p>"
                     }
                 }
             },
@@ -5793,7 +5812,7 @@
                 "sortBy": {
                     "target": "com.amazonaws.codedeploy#ApplicationRevisionSortBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The column name to use to sort the list results:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>registerTime</code>: Sort by the time the revisions were registered with\n                    AWS CodeDeploy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>firstUsedTime</code>: Sort by the time the revisions were first used in\n                    a deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>lastUsedTime</code>: Sort by the time the revisions were last used in a\n                    deployment.</p>\n            </li>\n         </ul>\n        <p> If not specified or set to null, the results are returned in an arbitrary order. </p>"
+                        "smithy.api#documentation": "<p>The column name to use to sort the list results:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>registerTime</code>: Sort by the time the revisions were registered with\n                    AWS CodeDeploy.</p>\n            </li>\n            <li>\n                <p>\n                  <code>firstUsedTime</code>: Sort by the time the revisions were first used in\n                    a deployment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>lastUsedTime</code>: Sort by the time the revisions were last used in a\n                    deployment.</p>\n            </li>\n         </ul>\n        <p> If not specified or set to null, the results are returned in an arbitrary order.\n        </p>"
                     }
                 },
                 "sortOrder": {
@@ -6202,7 +6221,7 @@
                 "targetFilters": {
                     "target": "com.amazonaws.codedeploy#TargetFilters",
                     "traits": {
-                        "smithy.api#documentation": "<p> A key used to filter the returned targets. The two valid values are:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>TargetStatus</code> - A <code>TargetStatus</code> filter string can be <code>Failed</code>, <code>InProgress</code>, <code>Pending</code>, \n                    <code>Ready</code>, <code>Skipped</code>, <code>Succeeded</code>, or <code>Unknown</code>.\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>ServerInstanceLabel</code> - A <code>ServerInstanceLabel</code> filter string can be <code>Blue</code> or <code>Green</code>.\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> A key used to filter the returned targets. The two valid values are:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>TargetStatus</code> - A <code>TargetStatus</code> filter string can be\n                        <code>Failed</code>, <code>InProgress</code>, <code>Pending</code>,\n                        <code>Ready</code>, <code>Skipped</code>, <code>Succeeded</code>, or\n                        <code>Unknown</code>. </p>\n            </li>\n            <li>\n                <p>\n                    <code>ServerInstanceLabel</code> - A <code>ServerInstanceLabel</code> filter\n                    string can be <code>Blue</code> or <code>Green</code>. </p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -6219,7 +6238,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.codedeploy#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p> If a large amount of information is returned, a token identifier is also  returned.\n            It can be used in a subsequent <code>ListDeploymentTargets</code> call to return the\n            next set of deployment targets in the list. </p>"
+                        "smithy.api#documentation": "<p> If a large amount of information is returned, a token identifier is also returned. It\n            can be used in a subsequent <code>ListDeploymentTargets</code> call to return the next\n            set of deployment targets in the list. </p>"
                     }
                 }
             }
@@ -6282,19 +6301,19 @@
                 "applicationName": {
                     "target": "com.amazonaws.codedeploy#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS\n            account.</p>\n        <note>\n            <p>If <code>applicationName</code> is specified, then <code>deploymentGroupName</code> must \n                be specified. If it is not specified, then <code>deploymentGroupName</code> must not \n                be specified.\n            </p>\n        </note>"
+                        "smithy.api#documentation": "<p>The name of an AWS CodeDeploy application associated with the IAM user or AWS\n            account.</p>\n        <note>\n            <p>If <code>applicationName</code> is specified, then\n                    <code>deploymentGroupName</code> must be specified. If it is not specified, then\n                    <code>deploymentGroupName</code> must not be specified. </p>\n        </note>"
                     }
                 },
                 "deploymentGroupName": {
                     "target": "com.amazonaws.codedeploy#DeploymentGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a deployment group for the specified application.</p>\n        <note>\n            <p>If <code>deploymentGroupName</code> is specified, then <code>applicationName</code> must \n                be specified. If it is not specified, then <code>applicationName</code> must not \n                be specified.\n            </p>\n        </note>"
+                        "smithy.api#documentation": "<p>The name of a deployment group for the specified application.</p>\n        <note>\n            <p>If <code>deploymentGroupName</code> is specified, then\n                    <code>applicationName</code> must be specified. If it is not specified, then\n                    <code>applicationName</code> must not be specified. </p>\n        </note>"
                     }
                 },
                 "externalId": {
                     "target": "com.amazonaws.codedeploy#ExternalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique ID of an external resource for returning deployments linked to the external resource.</p>"
+                        "smithy.api#documentation": "<p>The unique ID of an external resource for returning deployments linked to the external\n            resource.</p>"
                     }
                 },
                 "includeOnlyStatuses": {
@@ -6432,7 +6451,7 @@
                 "tagFilters": {
                     "target": "com.amazonaws.codedeploy#TagFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The on-premises instance tags that are used to restrict the  on-premises instance\n            names returned.</p>"
+                        "smithy.api#documentation": "<p>The on-premises instance tags that are used to restrict the on-premises instance names\n            returned.</p>"
                     }
                 },
                 "nextToken": {
@@ -6514,14 +6533,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.codedeploy#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The ARN of a CodeDeploy resource. <code>ListTagsForResource</code> returns all the tags associated with the \n            resource that is identified by the <code>ResourceArn</code>.\n        </p>",
+                        "smithy.api#documentation": "<p> The ARN of a CodeDeploy resource. <code>ListTagsForResource</code> returns all the\n            tags associated with the resource that is identified by the <code>ResourceArn</code>.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.codedeploy#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier returned from the previous <code>ListTagsForResource</code> call.\n                It can be used to return the next set of applications in the list.</p>"
+                        "smithy.api#documentation": "<p>An identifier returned from the previous <code>ListTagsForResource</code> call. It can\n            be used to return the next set of applications in the list.</p>"
                     }
                 }
             }
@@ -6532,7 +6551,7 @@
                 "Tags": {
                     "target": "com.amazonaws.codedeploy#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of tags returned by <code>ListTagsForResource</code>. The tags are associated with the resource \n            identified by the input <code>ResourceArn</code> parameter.\n        </p>"
+                        "smithy.api#documentation": "<p> A list of tags returned by <code>ListTagsForResource</code>. The tags are associated\n            with the resource identified by the input <code>ResourceArn</code> parameter. </p>"
                     }
                 },
                 "NextToken": {
@@ -6570,7 +6589,7 @@
                 "targetGroupPairInfoList": {
                     "target": "com.amazonaws.codedeploy#TargetGroupPairInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The target group pair information. This is an array of\n            <code>TargeGroupPairInfo</code> objects with a maximum size of one. </p>"
+                        "smithy.api#documentation": "<p> The target group pair information. This is an array of\n                <code>TargeGroupPairInfo</code> objects with a maximum size of one. </p>"
                     }
                 }
             },
@@ -6587,16 +6606,16 @@
         "com.amazonaws.codedeploy#MinimumHealthyHosts": {
             "type": "structure",
             "members": {
+                "type": {
+                    "target": "com.amazonaws.codedeploy#MinimumHealthyHostsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum healthy instance type:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>HOST_COUNT</code>: The minimum number of healthy instances as an\n                    absolute value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FLEET_PERCENT</code>: The minimum number of healthy instances as a\n                    percentage of the total number of instances in the deployment.</p>\n            </li>\n         </ul>\n        <p>In an example of nine instances, if a HOST_COUNT of six is specified, deploy to up to\n            three instances at a time. The deployment is successful if six or more instances are\n            deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is\n            specified, deploy to up to five instances at a time. The deployment is successful if\n            four or more instances are deployed to successfully. Otherwise, the deployment\n            fails.</p>\n        <note>\n            <p>In a call to the <code>GetDeploymentConfig</code>, CodeDeployDefault.OneAtATime\n                returns a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This\n                means a deployment to only one instance at a time. (You cannot set the type to\n                MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with\n                CodeDeployDefault.OneAtATime, AWS CodeDeploy attempts to ensure that all instances\n                but one are kept in a healthy state during the deployment. Although this allows one\n                instance at a time to be taken offline for a new deployment, it also means that if\n                the deployment to the last instance fails, the overall deployment is still\n                successful.</p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html\">AWS CodeDeploy Instance\n                Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>"
+                    }
+                },
                 "value": {
                     "target": "com.amazonaws.codedeploy#MinimumHealthyHostsValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum healthy instance value.</p>"
-                    }
-                },
-                "type": {
-                    "target": "com.amazonaws.codedeploy#MinimumHealthyHostsType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The minimum healthy instance type:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>HOST_COUNT</code>: The minimum number of healthy instances as an\n                    absolute value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>FLEET_PERCENT</code>: The minimum number of healthy instances as a\n                    percentage of the total number of instances in the deployment.</p>\n            </li>\n         </ul>\n        <p>In an example of nine instances, if a HOST_COUNT of six is specified, deploy to up to\n            three instances at a time. The deployment is successful if six or more instances are\n            deployed to successfully. Otherwise, the deployment fails. If a FLEET_PERCENT of 40 is\n            specified, deploy to up to five instances at a time. The deployment is successful if\n            four or more instances are deployed to successfully. Otherwise, the deployment\n            fails.</p>\n        <note>\n            <p>In a call to the <code>GetDeploymentConfig</code>,\n                CodeDeployDefault.OneAtATime returns a minimum healthy instance type of\n                MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a\n                time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or\n                FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy\n                attempts to ensure that all instances but one are kept in a healthy state during the\n                deployment. Although this allows one instance at a time to be taken offline for a\n                new deployment, it also means that if the deployment to the last instance fails, the\n                overall deployment is still successful.</p>\n        </note>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/instances-health.html\">AWS CodeDeploy Instance\n                Health</a> in the <i>AWS CodeDeploy User Guide</i>.</p>"
                     }
                 }
             },
@@ -6681,6 +6700,21 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.codedeploy#OutdatedInstancesStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UPDATE",
+                        "name": "Update"
+                    },
+                    {
+                        "value": "IGNORE",
+                        "name": "Ignore"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.codedeploy#Percentage": {
             "type": "integer"
         },
@@ -6716,7 +6750,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Sets the result of a Lambda validation function. The function validates\n            lifecycle hooks during a deployment that uses the AWS Lambda or Amazon ECS compute platform. For AWS \n            Lambda deployments, the available lifecycle hooks are <code>BeforeAllowTraffic</code> and <code>AfterAllowTraffic</code>. \n            For Amazon ECS deployments, the available lifecycle hooks are <code>BeforeInstall</code>, <code>AfterInstall</code>, \n            <code>AfterAllowTestTraffic</code>, <code>BeforeAllowTraffic</code>, and <code>AfterAllowTraffic</code>. Lambda \n            validation functions return <code>Succeeded</code> or <code>Failed</code>. For more information, \n            see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda\">AppSpec 'hooks' \n                Section for an AWS Lambda Deployment\n            </a> and <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs\">AppSpec \n                'hooks' Section for an Amazon ECS Deployment</a>.</p>"
+                "smithy.api#documentation": "<p> Sets the result of a Lambda validation function. The function validates lifecycle\n            hooks during a deployment that uses the AWS Lambda or Amazon ECS compute platform. For\n            AWS Lambda deployments, the available lifecycle hooks are\n                <code>BeforeAllowTraffic</code> and <code>AfterAllowTraffic</code>. For Amazon ECS\n            deployments, the available lifecycle hooks are <code>BeforeInstall</code>,\n                <code>AfterInstall</code>, <code>AfterAllowTestTraffic</code>,\n                <code>BeforeAllowTraffic</code>, and <code>AfterAllowTraffic</code>. Lambda\n            validation functions return <code>Succeeded</code> or <code>Failed</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda\">AppSpec 'hooks' Section for an AWS Lambda Deployment </a> and <a href=\"https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs\">AppSpec 'hooks' Section for an Amazon ECS Deployment</a>.</p>"
             }
         },
         "com.amazonaws.codedeploy#PutLifecycleEventHookExecutionStatusInput": {
@@ -6737,7 +6771,7 @@
                 "status": {
                     "target": "com.amazonaws.codedeploy#LifecycleEventStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The result of a Lambda function that validates a deployment lifecycle event\n                (<code>Succeeded</code> or <code>Failed</code>).</p>"
+                        "smithy.api#documentation": "<p>The result of a Lambda function that validates a deployment lifecycle event.\n                <code>Succeeded</code> and <code>Failed</code> are the only valid values for\n                <code>status</code>.</p>"
                     }
                 }
             }
@@ -6922,6 +6956,26 @@
                 ]
             }
         },
+        "com.amazonaws.codedeploy#RelatedDeployments": {
+            "type": "structure",
+            "members": {
+                "autoUpdateOutdatedInstancesRootDeploymentId": {
+                    "target": "com.amazonaws.codedeploy#DeploymentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment ID of the root deployment that triggered this deployment.</p>"
+                    }
+                },
+                "autoUpdateOutdatedInstancesDeploymentIds": {
+                    "target": "com.amazonaws.codedeploy#DeploymentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment IDs of 'auto-update outdated instances' deployments triggered by this\n            deployment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about deployments related to the specified deployment.</p>"
+            }
+        },
         "com.amazonaws.codedeploy#RemoveTagsFromOnPremisesInstances": {
             "type": "operation",
             "input": {
@@ -6990,7 +7044,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            The ARN of a resource is required, but was not found.\n        </p>",
+                "smithy.api#documentation": "<p> The ARN of a resource is required, but was not found. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7056,7 +7110,7 @@
                 "revisionType": {
                     "target": "com.amazonaws.codedeploy#RevisionLocationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of application revision:</p>\n        <ul>\n            <li>\n                <p>S3: An application revision stored in Amazon S3.</p>\n            </li>\n            <li>\n                <p>GitHub: An application revision stored in GitHub (EC2/On-premises deployments\n                    only).</p>\n            </li>\n            <li>\n                <p>String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments\n                    only).</p>\n            </li>\n            <li>\n                <p>AppSpecContent: An <code>AppSpecContent</code> object that contains the contents of an AppSpec file for \n                    an AWS Lambda or Amazon ECS deployment. The content is formatted as JSON or YAML \n                    stored as a RawString.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of application revision:</p>\n        <ul>\n            <li>\n                <p>S3: An application revision stored in Amazon S3.</p>\n            </li>\n            <li>\n                <p>GitHub: An application revision stored in GitHub (EC2/On-premises deployments\n                    only).</p>\n            </li>\n            <li>\n                <p>String: A YAML-formatted or JSON-formatted string (AWS Lambda deployments\n                    only).</p>\n            </li>\n            <li>\n                <p>AppSpecContent: An <code>AppSpecContent</code> object that contains the\n                    contents of an AppSpec file for an AWS Lambda or Amazon ECS deployment. The\n                    content is formatted as JSON or YAML stored as a RawString.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "s3Location": {
@@ -7517,7 +7571,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            Associates the list of tags in the input <code>Tags</code> parameter with the resource identified by the <code>ResourceArn</code> input parameter.\n        </p>"
+                "smithy.api#documentation": "<p> Associates the list of tags in the input <code>Tags</code> parameter with the\n            resource identified by the <code>ResourceArn</code> input parameter. </p>"
             }
         },
         "com.amazonaws.codedeploy#TagResourceInput": {
@@ -7526,14 +7580,14 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.codedeploy#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The ARN of a resource, such as a CodeDeploy application or deployment group.\n        </p>",
+                        "smithy.api#documentation": "<p> The ARN of a resource, such as a CodeDeploy application or deployment group. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.codedeploy#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of tags that <code>TagResource</code> associates with a resource. The resource is identified by the <code>ResourceArn</code> input parameter.\n        </p>",
+                        "smithy.api#documentation": "<p> A list of tags that <code>TagResource</code> associates with a resource. The resource\n            is identified by the <code>ResourceArn</code> input parameter. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7614,7 +7668,7 @@
                 "targetGroups": {
                     "target": "com.amazonaws.codedeploy#TargetGroupInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p> One pair of target groups. One is associated with the original task set. The second\n            is associated with the task set that serves traffic after the deployment is complete. </p>"
+                        "smithy.api#documentation": "<p> One pair of target groups. One is associated with the original task set. The second\n            is associated with the task set that serves traffic after the deployment is complete.\n        </p>"
                     }
                 },
                 "prodTrafficRoute": {
@@ -7626,7 +7680,7 @@
                 "testTrafficRoute": {
                     "target": "com.amazonaws.codedeploy#TrafficRoute",
                     "traits": {
-                        "smithy.api#documentation": "<p> An optional path used by a load balancer to route test traffic after an Amazon ECS\n            deployment. Validation can occur while test traffic is served during a deployment. </p>"
+                        "smithy.api#documentation": "<p> An optional path used by a load balancer to route test traffic after an Amazon ECS\n            deployment. Validation can occur while test traffic is served during a deployment.\n        </p>"
                     }
                 }
             },
@@ -7760,7 +7814,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task set to another\n            in two increments. The original and target Lambda function versions or ECS task sets are specified in the\n            deployment's AppSpec file.</p>"
+                "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task\n            set to another in two increments. The original and target Lambda function versions or\n            ECS task sets are specified in the deployment's AppSpec file.</p>"
             }
         },
         "com.amazonaws.codedeploy#TimeBasedLinear": {
@@ -7780,7 +7834,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task set to another\n            in equal increments, with an equal number of minutes between each increment. The\n            original and target Lambda function versions or ECS task sets are specified in the deployment's AppSpec\n            file.</p>"
+                "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task\n            set to another in equal increments, with an equal number of minutes between each\n            increment. The original and target Lambda function versions or ECS task sets are\n            specified in the deployment's AppSpec file.</p>"
             }
         },
         "com.amazonaws.codedeploy#TimeRange": {
@@ -7832,18 +7886,18 @@
                 "timeBasedCanary": {
                     "target": "com.amazonaws.codedeploy#TimeBasedCanary",
                     "traits": {
-                        "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task set to another\n            in two increments. The original and target Lambda function versions or ECS task sets are specified in the\n            deployment's AppSpec file.</p>"
+                        "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task\n            set to another in two increments. The original and target Lambda function versions or\n            ECS task sets are specified in the deployment's AppSpec file.</p>"
                     }
                 },
                 "timeBasedLinear": {
                     "target": "com.amazonaws.codedeploy#TimeBasedLinear",
                     "traits": {
-                        "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task set to another\n            in equal increments, with an equal number of minutes between each increment. The\n            original and target Lambda function versions or ECS task sets are specified in the deployment's AppSpec\n            file.</p>"
+                        "smithy.api#documentation": "<p>A configuration that shifts traffic from one version of a Lambda function or ECS task\n            set to another in equal increments, with an equal number of minutes between each\n            increment. The original and target Lambda function versions or ECS task sets are\n            specified in the deployment's AppSpec file.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that specifies how traffic is shifted from one version of a Lambda\n            function to another version during an AWS Lambda deployment, or from one Amazon ECS task \n            set to another during an Amazon ECS deployment.</p>"
+                "smithy.api#documentation": "<p>The configuration that specifies how traffic is shifted from one version of a Lambda\n            function to another version during an AWS Lambda deployment, or from one Amazon ECS task\n            set to another during an Amazon ECS deployment.</p>"
             }
         },
         "com.amazonaws.codedeploy#TrafficRoutingType": {
@@ -8040,7 +8094,7 @@
                 "TagKeys": {
                     "target": "com.amazonaws.codedeploy#TagKeyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of keys of <code>Tag</code> objects. The <code>Tag</code> objects identified by the keys are disassociated from the resource \n            specified by the <code>ResourceArn</code> input parameter.\n        </p>",
+                        "smithy.api#documentation": "<p> A list of keys of <code>Tag</code> objects. The <code>Tag</code> objects identified\n            by the keys are disassociated from the resource specified by the\n                <code>ResourceArn</code> input parameter. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8271,6 +8325,12 @@
                         "smithy.api#documentation": "<p>Information for an automatic rollback configuration that is added or changed when a\n            deployment group is updated.</p>"
                     }
                 },
+                "outdatedInstancesStrategy": {
+                    "target": "com.amazonaws.codedeploy#OutdatedInstancesStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates what happens when new EC2 instances are launched mid-deployment and do not\n            receive the deployed application revision.</p>\n        <p>If this option is set to <code>UPDATE</code> or is unspecified, CodeDeploy initiates\n            one or more 'auto-update outdated instances' deployments to apply the deployed\n            application revision to the new EC2 instances.</p>\n        <p>If this option is set to <code>IGNORE</code>, CodeDeploy does not initiate a\n            deployment to update the new EC2 instances. This may result in instances having\n            different revisions.</p>"
+                    }
+                },
                 "deploymentStyle": {
                     "target": "com.amazonaws.codedeploy#DeploymentStyle",
                     "traits": {
@@ -8298,7 +8358,7 @@
                 "ecsServices": {
                     "target": "com.amazonaws.codedeploy#ECSServiceList",
                     "traits": {
-                        "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n            <code><clustername>:<servicename></code>. </p>"
+                        "smithy.api#documentation": "<p> The target Amazon ECS services in the deployment group. This applies only to\n            deployment groups that use the Amazon ECS compute platform. A target Amazon ECS service\n            is specified as an Amazon ECS cluster and service name pair using the format\n                <code><clustername>:<servicename></code>. </p>"
                     }
                 },
                 "onPremisesTagSet": {

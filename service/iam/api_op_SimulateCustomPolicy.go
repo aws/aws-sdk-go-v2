@@ -16,14 +16,18 @@ import (
 // with a list of API operations and AWS resources to determine the policies'
 // effective permissions. The policies are provided as strings. The simulation does
 // not perform the API operations; it only checks the authorization to determine if
-// the simulated policies allow or deny the operations. If you want to simulate
-// existing policies that are attached to an IAM user, group, or role, use
-// SimulatePrincipalPolicy instead. Context keys are variables that are maintained
-// by AWS and its services and which provide details about the context of an API
-// query request. You can use the Condition element of an IAM policy to evaluate
-// context keys. To get the list of context keys that the policies require for
-// correct simulation, use GetContextKeysForCustomPolicy. If the output is long,
-// you can use MaxItems and Marker parameters to paginate the results.
+// the simulated policies allow or deny the operations. You can simulate resources
+// that don't exist in your account. If you want to simulate existing policies that
+// are attached to an IAM user, group, or role, use SimulatePrincipalPolicy
+// instead. Context keys are variables that are maintained by AWS and its services
+// and which provide details about the context of an API query request. You can use
+// the Condition element of an IAM policy to evaluate context keys. To get the list
+// of context keys that the policies require for correct simulation, use
+// GetContextKeysForCustomPolicy. If the output is long, you can use MaxItems and
+// Marker parameters to paginate the results. For more information about using the
+// policy simulator, see Testing IAM policies with the IAM policy simulator
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_testing-policies.html)in
+// the IAM User Guide.
 func (c *Client) SimulateCustomPolicy(ctx context.Context, params *SimulateCustomPolicyInput, optFns ...func(*Options)) (*SimulateCustomPolicyOutput, error) {
 	if params == nil {
 		params = &SimulateCustomPolicyInput{}
@@ -106,8 +110,8 @@ type SimulateCustomPolicyInput struct {
 	// The IAM permissions boundary policy to simulate. The permissions boundary sets
 	// the maximum permissions that an IAM entity can have. You can input only one
 	// permissions boundary when you pass a policy to this operation. For more
-	// information about permissions boundaries, see Permissions Boundaries for IAM
-	// Entities
+	// information about permissions boundaries, see Permissions boundaries for IAM
+	// entities
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html)
 	// in the IAM User Guide. The policy input is specified as a string that contains
 	// the complete, valid JSON text of a permissions boundary policy. The regex
@@ -129,13 +133,13 @@ type SimulateCustomPolicyInput struct {
 	// is not provided, then the value defaults to * (all resources). Each API in the
 	// ActionNames parameter is evaluated for each resource in this list. The
 	// simulation determines the access result (allowed or denied) of each combination
-	// and reports it in the response. The simulation does not automatically retrieve
-	// policies for the specified resources. If you want to include a resource policy
-	// in the simulation, then you must include the policy as a string in the
-	// ResourcePolicy parameter. If you include a ResourcePolicy, then it must be
-	// applicable to all of the resources included in the simulation or you receive an
-	// invalid input error. For more information about ARNs, see Amazon Resource Names
-	// (ARNs) and AWS Service Namespaces
+	// and reports it in the response. You can simulate resources that don't exist in
+	// your account. The simulation does not automatically retrieve policies for the
+	// specified resources. If you want to include a resource policy in the simulation,
+	// then you must include the policy as a string in the ResourcePolicy parameter. If
+	// you include a ResourcePolicy, then it must be applicable to all of the resources
+	// included in the simulation or you receive an invalid input error. For more
+	// information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	ResourceArns []string
@@ -152,7 +156,7 @@ type SimulateCustomPolicyInput struct {
 	// specify that volume as a resource. If the EC2 scenario includes VPC, then you
 	// must supply the network-interface resource. If it includes an IP subnet, then
 	// you must specify the subnet resource. For more information on the EC2 scenario
-	// options, see Supported Platforms
+	// options, see Supported platforms
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html)
 	// in the Amazon EC2 User Guide.
 	//

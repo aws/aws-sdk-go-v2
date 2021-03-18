@@ -289,6 +289,9 @@ type Cluster struct {
 	// The list of tags for the cluster.
 	Tags []Tag
 
+	// The total storage capacity of the cluster in megabytes.
+	TotalStorageCapacityInMegaBytes *int64
+
 	// The identifier of the VPC the cluster is in, if the cluster is in a VPC.
 	VpcId *string
 
@@ -630,7 +633,7 @@ type Endpoint struct {
 	Port int32
 
 	// Describes a connection endpoint.
-	VpcEndpoints []SpartaProxyVpcEndpoint
+	VpcEndpoints []VpcEndpoint
 }
 
 // Describes an event.
@@ -825,6 +828,22 @@ type MaintenanceTrack struct {
 	UpdateTargets []UpdateTarget
 }
 
+// Describes a network interface.
+type NetworkInterface struct {
+
+	// The Availability Zone.
+	AvailabilityZone *string
+
+	// The network interface identifier.
+	NetworkInterfaceId *string
+
+	// The IPv4 address of the network interface within the subnet.
+	PrivateIpAddress *string
+
+	// The subnet identifier.
+	SubnetId *string
+}
+
 // A list of node configurations.
 type NodeConfigurationOption struct {
 
@@ -905,7 +924,8 @@ type Parameter struct {
 	// The name of the parameter.
 	ParameterName *string
 
-	// The value of the parameter.
+	// The value of the parameter. If ParameterName is wlm_json_configuration, then the
+	// maximum size of ParameterValue is 8000 characters.
 	ParameterValue *string
 
 	// The source of the parameter value, such as "engine-default" or "user".
@@ -1458,15 +1478,6 @@ type SnapshotSortingEntity struct {
 	SortOrder SortByOrder
 }
 
-// The connection endpoint for connecting an Amazon Redshift cluster through the
-// proxy.
-type SpartaProxyVpcEndpoint struct {
-
-	// The connection endpoint ID for connecting an Amazon Redshift cluster through the
-	// proxy.
-	VpcEndpointId *string
-}
-
 // Describes a subnet.
 type Subnet struct {
 
@@ -1646,6 +1657,22 @@ type UsageLimit struct {
 
 	// The identifier of the usage limit.
 	UsageLimitId *string
+}
+
+// The connection endpoint for connecting an Amazon Redshift cluster through the
+// proxy.
+type VpcEndpoint struct {
+
+	// One or more network interfaces of the endpoint. Also known as an interface
+	// endpoint.
+	NetworkInterfaces []NetworkInterface
+
+	// The connection endpoint ID for connecting an Amazon Redshift cluster through the
+	// proxy.
+	VpcEndpointId *string
+
+	// The VPC identifier that the endpoint is associated.
+	VpcId *string
 }
 
 // Describes the members of a VPC security group.

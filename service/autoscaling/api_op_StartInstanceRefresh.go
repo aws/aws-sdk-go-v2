@@ -18,8 +18,9 @@ import (
 // the DescribeInstanceRefreshes API. To describe the instance refreshes that have
 // already run, call the DescribeInstanceRefreshes API. To cancel an instance
 // refresh operation in progress, use the CancelInstanceRefresh API. For more
-// information, see Replacing Auto Scaling Instances Based on an Instance Refresh
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html).
+// information, see Replacing Auto Scaling instances based on an instance refresh
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
+// in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) StartInstanceRefresh(ctx context.Context, params *StartInstanceRefreshInput, optFns ...func(*Options)) (*StartInstanceRefreshOutput, error) {
 	if params == nil {
 		params = &StartInstanceRefreshInput{}

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the pre-signed URL to a component artifact in an S3 bucket. Core devices
-// can call this operation to identify the URL that they can use to download an
+// Gets the pre-signed URL to download a public component artifact. Core devices
+// call this operation to identify the URL that they can use to download an
 // artifact to install.
 func (c *Client) GetComponentVersionArtifact(ctx context.Context, params *GetComponentVersionArtifactInput, optFns ...func(*Options)) (*GetComponentVersionArtifactOutput, error) {
 	if params == nil {
@@ -32,12 +32,17 @@ type GetComponentVersionArtifactInput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the component version.
+	// the component version. Specify the ARN of a public component version.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the artifact.
+	// The name of the artifact. You can use the GetComponent
+	// (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html)
+	// operation to download the component recipe, which includes the URI of the
+	// artifact. The artifact name is the section of the URI after the scheme. For
+	// example, in the artifact URI greengrass:SomeArtifact.zip, the artifact name is
+	// SomeArtifact.zip.
 	//
 	// This member is required.
 	ArtifactName *string
@@ -45,7 +50,7 @@ type GetComponentVersionArtifactInput struct {
 
 type GetComponentVersionArtifactOutput struct {
 
-	// The URL to the artifact.
+	// The URL of the artifact.
 	//
 	// This member is required.
 	PreSignedUrl *string

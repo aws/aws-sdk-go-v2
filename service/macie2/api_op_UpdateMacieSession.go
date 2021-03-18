@@ -35,9 +35,9 @@ type UpdateMacieSessionInput struct {
 	// called Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
-	// Specifies whether to change the status of the account. Valid values are:
-	// ENABLED, resume all Amazon Macie activities for the account; and, PAUSED,
-	// suspend all Macie activities for the account.
+	// Specifies a new status for the account. Valid values are: ENABLED, resume all
+	// Amazon Macie activities for the account; and, PAUSED, suspend all Macie
+	// activities for the account.
 	Status types.MacieStatus
 }
 

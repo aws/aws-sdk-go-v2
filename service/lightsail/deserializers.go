@@ -16111,6 +16111,135 @@ func awsAwsjson11_deserializeOpErrorSendContactMethodVerification(response *smit
 	}
 }
 
+type awsAwsjson11_deserializeOpSetIpAddressType struct {
+}
+
+func (*awsAwsjson11_deserializeOpSetIpAddressType) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpSetIpAddressType) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorSetIpAddressType(response, &metadata)
+	}
+	output := &SetIpAddressTypeOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentSetIpAddressTypeOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorSetIpAddressType(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("AccountSetupInProgressException", errorCode):
+		return awsAwsjson11_deserializeErrorAccountSetupInProgressException(response, errorBody)
+
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("OperationFailureException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationFailureException(response, errorBody)
+
+	case strings.EqualFold("ServiceException", errorCode):
+		return awsAwsjson11_deserializeErrorServiceException(response, errorBody)
+
+	case strings.EqualFold("UnauthenticatedException", errorCode):
+		return awsAwsjson11_deserializeErrorUnauthenticatedException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpStartInstance struct {
 }
 
@@ -23181,13 +23310,18 @@ func awsAwsjson11_deserializeDocumentInstance(v **types.Instance, value interfac
 				return err
 			}
 
-		case "ipv6Address":
+		case "ipAddressType":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected IpV6Address to be of type string, got %T instead", value)
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
 				}
-				sv.Ipv6Address = ptr.String(jtv)
+				sv.IpAddressType = types.IpAddressType(jtv)
+			}
+
+		case "ipv6Addresses":
+			if err := awsAwsjson11_deserializeDocumentIpv6AddressList(&sv.Ipv6Addresses, value); err != nil {
+				return err
 			}
 
 		case "isStaticIp":
@@ -23754,6 +23888,11 @@ func awsAwsjson11_deserializeDocumentInstancePortInfo(v **types.InstancePortInfo
 				sv.FromPort = int32(i64)
 			}
 
+		case "ipv6Cidrs":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.Ipv6Cidrs, value); err != nil {
+				return err
+			}
+
 		case "protocol":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23862,6 +24001,11 @@ func awsAwsjson11_deserializeDocumentInstancePortState(v **types.InstancePortSta
 					return err
 				}
 				sv.FromPort = int32(i64)
+			}
+
+		case "ipv6Cidrs":
+			if err := awsAwsjson11_deserializeDocumentStringList(&sv.Ipv6Cidrs, value); err != nil {
+				return err
 			}
 
 		case "protocol":
@@ -24317,6 +24461,42 @@ func awsAwsjson11_deserializeDocumentInvalidInputException(v **types.InvalidInpu
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentIpv6AddressList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Ipv6Address to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentKeyPair(v **types.KeyPair, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -24550,6 +24730,15 @@ func awsAwsjson11_deserializeDocumentLightsailDistribution(v **types.LightsailDi
 				sv.DomainName = ptr.String(jtv)
 			}
 
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
+			}
+
 		case "isEnabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -24711,6 +24900,15 @@ func awsAwsjson11_deserializeDocumentLoadBalancer(v **types.LoadBalancer, value 
 					return err
 				}
 				sv.InstancePort = ptr.Int32(int32(i64))
+			}
+
+		case "ipAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.IpAddressType(jtv)
 			}
 
 		case "location":
@@ -33314,6 +33512,42 @@ func awsAwsjson11_deserializeOpDocumentSendContactMethodVerificationOutput(v **S
 	var sv *SendContactMethodVerificationOutput
 	if *v == nil {
 		sv = &SendContactMethodVerificationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "operations":
+			if err := awsAwsjson11_deserializeDocumentOperationList(&sv.Operations, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentSetIpAddressTypeOutput(v **SetIpAddressTypeOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *SetIpAddressTypeOutput
+	if *v == nil {
+		sv = &SetIpAddressTypeOutput{}
 	} else {
 		sv = *v
 	}

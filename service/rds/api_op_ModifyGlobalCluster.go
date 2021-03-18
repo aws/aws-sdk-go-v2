@@ -34,9 +34,33 @@ func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalCl
 
 type ModifyGlobalClusterInput struct {
 
+	// A value that indicates whether major version upgrades are allowed. Constraints:
+	// You must allow major version upgrades when specifying a value for the
+	// EngineVersion parameter that is a different major version than the DB cluster's
+	// current version. If you upgrade the major version of a global database, the
+	// cluster and DB instance parameter groups are set to the default parameter groups
+	// for the new version. Apply any custom parameter groups after completing the
+	// upgrade.
+	AllowMajorVersionUpgrade *bool
+
 	// Indicates if the global database cluster has deletion protection enabled. The
 	// global database cluster can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
+
+	// The version number of the database engine to which you want to upgrade. Changing
+	// this parameter results in an outage. The change is applied during the next
+	// maintenance window unless ApplyImmediately is enabled. To list all of the
+	// available engine versions for aurora (for MySQL 5.6-compatible Aurora), use the
+	// following command: aws rds describe-db-engine-versions --engine aurora --query
+	// '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]' To list all of the
+	// available engine versions for aurora-mysql (for MySQL 5.7-compatible Aurora),
+	// use the following command: aws rds describe-db-engine-versions --engine
+	// aurora-mysql --query '*[]|[?SupportsGlobalDatabases == `true`].[EngineVersion]'
+	// To list all of the available engine versions for aurora-postgresql, use the
+	// following command: aws rds describe-db-engine-versions --engine
+	// aurora-postgresql --query '*[]|[?SupportsGlobalDatabases ==
+	// `true`].[EngineVersion]'
+	EngineVersion *string
 
 	// The DB cluster identifier for the global cluster being modified. This parameter
 	// isn't case-sensitive. Constraints:

@@ -14,8 +14,8 @@ import (
 // type in Amazon Fraud Detector. Amazon Fraud Detector automatically deletes model
 // output variables and SageMaker model output variables when you delete the model.
 // You can't delete these variables manually. When you delete a variable, Amazon
-// Fraud Detector permanently deletes that variable from the evaluation history,
-// and the data is no longer stored in Amazon Fraud Detector.
+// Fraud Detector permanently deletes that variable and the data is no longer
+// stored in Amazon Fraud Detector.
 func (c *Client) DeleteVariable(ctx context.Context, params *DeleteVariableInput, optFns ...func(*Options)) (*DeleteVariableOutput, error) {
 	if params == nil {
 		params = &DeleteVariableInput{}

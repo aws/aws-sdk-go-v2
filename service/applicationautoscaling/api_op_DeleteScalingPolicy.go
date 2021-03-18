@@ -14,10 +14,10 @@ import (
 // Deletes the specified scaling policy for an Application Auto Scaling scalable
 // target. Deleting a step scaling policy deletes the underlying alarm action, but
 // does not delete the CloudWatch alarm associated with the scaling policy, even if
-// it no longer has an associated action. For more information, see Delete a Step
-// Scaling Policy
+// it no longer has an associated action. For more information, see Delete a step
+// scaling policy
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html#delete-step-scaling-policy)
-// and Delete a Target Tracking Scaling Policy
+// and Delete a target tracking scaling policy
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html#delete-target-tracking-policy)
 // in the Application Auto Scaling User Guide.
 func (c *Client) DeleteScalingPolicy(ctx context.Context, params *DeleteScalingPolicyInput, optFns ...func(*Options)) (*DeleteScalingPolicyOutput, error) {

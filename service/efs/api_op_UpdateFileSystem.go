@@ -36,17 +36,16 @@ type UpdateFileSystemInput struct {
 	// This member is required.
 	FileSystemId *string
 
-	// (Optional) The amount of throughput, in MiB/s, that you want to provision for
-	// your file system. Valid values are 1-1024. Required if ThroughputMode is changed
-	// to provisioned on update. If you're not updating the amount of provisioned
-	// throughput for your file system, you don't need to provide this value in your
-	// request.
+	// (Optional) Sets the amount of provisioned throughput, in MiB/s, for the file
+	// system. Valid values are 1-1024. If you are changing the throughput mode to
+	// provisioned, you must also provide the amount of provisioned throughput.
+	// Required if ThroughputMode is changed to provisioned on update.
 	ProvisionedThroughputInMibps *float64
 
-	// (Optional) The throughput mode that you want your file system to use. If you're
-	// not updating your throughput mode, you don't need to provide this value in your
-	// request. If you are changing the ThroughputMode to provisioned, you must also
-	// set a value for ProvisionedThroughputInMibps.
+	// (Optional) Updates the file system's throughput mode. If you're not updating
+	// your throughput mode, you don't need to provide this value in your request. If
+	// you are changing the ThroughputMode to provisioned, you must also set a value
+	// for ProvisionedThroughputInMibps.
 	ThroughputMode types.ThroughputMode
 }
 
@@ -109,6 +108,19 @@ type UpdateFileSystemOutput struct {
 	// This member is required.
 	Tags []types.Tag
 
+	// The unique and consistent identifier of the Availability Zone in which the file
+	// system's One Zone storage classes exist. For example, use1-az1 is an
+	// Availability Zone ID for the us-east-1 AWS Region, and it has the same location
+	// in every AWS account.
+	AvailabilityZoneId *string
+
+	// Describes the AWS Availability Zone in which the file system is located, and is
+	// valid only for file systems using One Zone storage classes. For more
+	// information, see Using EFS storage classes
+	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
+	// EFS User Guide.
+	AvailabilityZoneName *string
+
 	// A Boolean value that, if true, indicates that the file system is encrypted.
 	Encrypted *bool
 
@@ -127,20 +139,14 @@ type UpdateFileSystemOutput struct {
 	// value in this field.
 	Name *string
 
-	// The throughput, measured in MiB/s, that you want to provision for a file system.
-	// Valid values are 1-1024. Required if ThroughputMode is set to provisioned. The
-	// limit on throughput is 1024 MiB/s. You can get these limits increased by
-	// contacting AWS Support. For more information, see Amazon EFS Limits That You Can
-	// Increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in
-	// the Amazon EFS User Guide.
+	// The amount of provisioned throughput, measured in MiB/s, for the file system.
+	// Valid for file systems using ThroughputMode set to provisioned.
 	ProvisionedThroughputInMibps *float64
 
-	// The throughput mode for a file system. There are two throughput modes to choose
-	// from for your file system: bursting and provisioned. If you set ThroughputMode
-	// to provisioned, you must also set a value for ProvisionedThroughPutInMibps. You
-	// can decrease your file system's throughput in Provisioned Throughput mode or
-	// change between the throughput modes as long as it’s been more than 24 hours
-	// since the last decrease or throughput mode change.
+	// Displays the file system's throughput mode. For more information, see Throughput
+	// modes
+	// (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes) in
+	// the Amazon EFS User Guide.
 	ThroughputMode types.ThroughputMode
 
 	// Metadata pertaining to the operation's result.

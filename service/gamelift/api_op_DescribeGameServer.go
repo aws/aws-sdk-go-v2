@@ -11,28 +11,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Retrieves information for a registered game server. Information includes
 // game server status, health check info, and the instance that the game server is
 // running on. To retrieve game server information, specify the game server ID. If
 // successful, the requested game server object is returned. Learn more GameLift
 // FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * RegisterGameServer
-//
-// * ListGameServers
-//
-// *
-// ClaimGameServer
-//
-// * DescribeGameServer
-//
-// * UpdateGameServer
-//
-// *
-// DeregisterGameServer
+// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
+// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) DescribeGameServer(ctx context.Context, params *DescribeGameServerInput, optFns ...func(*Options)) (*DescribeGameServerOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerInput{}

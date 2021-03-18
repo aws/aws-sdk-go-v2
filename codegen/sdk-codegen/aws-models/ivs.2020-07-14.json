@@ -614,7 +614,7 @@
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteChannel",
-                    "code": 200
+                    "code": 204
                 }
             }
         },
@@ -701,7 +701,7 @@
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteStreamKey",
-                    "code": 200
+                    "code": 204
                 }
             }
         },
@@ -1010,6 +1010,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.ivs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivs#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.ivs#ValidationException"
@@ -1817,7 +1820,10 @@
             "type": "string"
         },
         "com.amazonaws.ivs#StreamStartTime": {
-            "type": "timestamp"
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
         },
         "com.amazonaws.ivs#StreamState": {
             "type": "string",

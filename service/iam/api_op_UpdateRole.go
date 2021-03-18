@@ -46,7 +46,7 @@ type UpdateRoleInput struct {
 	// DurationSeconds parameter, their security credentials are valid for one hour by
 	// default. This applies when you use the AssumeRole* API operations or the
 	// assume-role* CLI operations but does not apply when you use those operations to
-	// create a console URL. For more information, see Using IAM Roles
+	// create a console URL. For more information, see Using IAM roles
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html) in the IAM
 	// User Guide.
 	MaxSessionDuration *int32

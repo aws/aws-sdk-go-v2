@@ -35,7 +35,7 @@ type UpdateRoutingProfileConcurrencyInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The channels agents can handle in the Contact Control Panel (CCP).
+	// The channels that agents can handle in the Contact Control Panel (CCP).
 	//
 	// This member is required.
 	MediaConcurrencies []types.MediaConcurrency

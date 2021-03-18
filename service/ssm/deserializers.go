@@ -4174,6 +4174,12 @@ func awsAwsjson11_deserializeOpErrorDescribeDocumentPermission(response *smithyh
 	case strings.EqualFold("InvalidDocument", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidDocument(response, errorBody)
 
+	case strings.EqualFold("InvalidDocumentOperation", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidDocumentOperation(response, errorBody)
+
+	case strings.EqualFold("InvalidNextToken", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidNextToken(response, errorBody)
+
 	case strings.EqualFold("InvalidPermissionType", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidPermissionType(response, errorBody)
 
@@ -40027,6 +40033,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDocumentPermissionOutput(v **Desc
 		case "AccountSharingInfoList":
 			if err := awsAwsjson11_deserializeDocumentAccountSharingInfoList(&sv.AccountSharingInfoList, value); err != nil {
 				return err
+			}
+
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:

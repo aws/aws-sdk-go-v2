@@ -782,17 +782,11 @@ func validateAwsSecurityFinding(v *types.AwsSecurityFinding) error {
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
-	if v.Types == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Types"))
-	}
 	if v.CreatedAt == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CreatedAt"))
 	}
 	if v.UpdatedAt == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UpdatedAt"))
-	}
-	if v.Severity == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Severity"))
 	}
 	if v.Title == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Title"))
@@ -837,6 +831,11 @@ func validateAwsSecurityFinding(v *types.AwsSecurityFinding) error {
 			invalidParams.AddNested("PatchSummary", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FindingProviderFields != nil {
+		if err := validateFindingProviderFields(v.FindingProviderFields); err != nil {
+			invalidParams.AddNested("FindingProviderFields", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -879,11 +878,11 @@ func validateAwsSecurityFindingIdentifierList(v []types.AwsSecurityFindingIdenti
 	}
 }
 
-func validateAwsSecurityFindingList(v []types.AwsSecurityFinding) error {
+func validateBatchImportFindingsRequestFindingList(v []types.AwsSecurityFinding) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "AwsSecurityFindingList"}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchImportFindingsRequestFindingList"}
 	for i := range v {
 		if err := validateAwsSecurityFinding(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
@@ -904,6 +903,23 @@ func validateCompliance(v *types.Compliance) error {
 	if v.StatusReasons != nil {
 		if err := validateStatusReasonsList(v.StatusReasons); err != nil {
 			invalidParams.AddNested("StatusReasons", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFindingProviderFields(v *types.FindingProviderFields) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FindingProviderFields"}
+	if v.RelatedFindings != nil {
+		if err := validateRelatedFindingList(v.RelatedFindings); err != nil {
+			invalidParams.AddNested("RelatedFindings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1245,7 +1261,7 @@ func validateOpBatchImportFindingsInput(v *BatchImportFindingsInput) error {
 	if v.Findings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Findings"))
 	} else if v.Findings != nil {
-		if err := validateAwsSecurityFindingList(v.Findings); err != nil {
+		if err := validateBatchImportFindingsRequestFindingList(v.Findings); err != nil {
 			invalidParams.AddNested("Findings", err.(smithy.InvalidParamsError))
 		}
 	}

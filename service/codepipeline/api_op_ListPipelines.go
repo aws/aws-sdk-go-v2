@@ -31,6 +31,11 @@ func (c *Client) ListPipelines(ctx context.Context, params *ListPipelinesInput, 
 // Represents the input of a ListPipelines action.
 type ListPipelinesInput struct {
 
+	// The maximum number of pipelines to return in a single call. To retrieve the
+	// remaining pipelines, make another call with the returned nextToken value. The
+	// minimum value you can specify is 1. The maximum accepted value is 1000.
+	MaxResults *int32
+
 	// An identifier that was returned from the previous list pipelines call. It can be
 	// used to return the next set of pipelines in the list.
 	NextToken *string
@@ -120,6 +125,11 @@ var _ ListPipelinesAPIClient = (*Client)(nil)
 
 // ListPipelinesPaginatorOptions is the paginator options for ListPipelines
 type ListPipelinesPaginatorOptions struct {
+	// The maximum number of pipelines to return in a single call. To retrieve the
+	// remaining pipelines, make another call with the returned nextToken value. The
+	// minimum value you can specify is 1. The maximum accepted value is 1000.
+	Limit int32
+
 	// Set to true if pagination should stop if the service returns a pagination token
 	// that matches the most recent token provided to the service.
 	StopOnDuplicateToken bool
@@ -141,6 +151,9 @@ func NewListPipelinesPaginator(client ListPipelinesAPIClient, params *ListPipeli
 	}
 
 	options := ListPipelinesPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
 
 	for _, fn := range optFns {
 		fn(&options)
@@ -167,6 +180,12 @@ func (p *ListPipelinesPaginator) NextPage(ctx context.Context, optFns ...func(*O
 
 	params := *p.params
 	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
 
 	result, err := p.client.ListPipelines(ctx, &params, optFns...)
 	if err != nil {

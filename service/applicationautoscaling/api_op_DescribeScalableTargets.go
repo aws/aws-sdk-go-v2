@@ -49,20 +49,20 @@ type DescribeScalableTargetsInput struct {
 	NextToken *string
 
 	// The identifier of the resource associated with the scalable target. This string
-	// consists of the resource type and unique identifier. If you specify a scalable
-	// dimension, you must also specify a resource ID.
+	// consists of the resource type and unique identifier.
 	//
-	// * ECS service - The resource
-	// type is service and the unique identifier is the cluster name and service name.
-	// Example: service/default/sample-webapp.
+	// * ECS service - The
+	// resource type is service and the unique identifier is the cluster name and
+	// service name. Example: service/default/sample-webapp.
 	//
-	// * Spot Fleet request - The resource
-	// type is spot-fleet-request and the unique identifier is the Spot Fleet request
-	// ID. Example: spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
+	// * Spot Fleet request -
+	// The resource type is spot-fleet-request and the unique identifier is the Spot
+	// Fleet request ID. Example:
+	// spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE.
 	//
-	// * EMR
-	// cluster - The resource type is instancegroup and the unique identifier is the
-	// cluster ID and instance group ID. Example:
+	// * EMR cluster -
+	// The resource type is instancegroup and the unique identifier is the cluster ID
+	// and instance group ID. Example:
 	// instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0.
 	//
 	// * AppStream 2.0 fleet - The

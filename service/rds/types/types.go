@@ -198,14 +198,14 @@ type CloudwatchLogsExportConfiguration struct {
 // and contains changes that will be applied during the next maintenance window.
 type ClusterPendingModifiedValues struct {
 
-	// The DBClusterIdentifier for the DB cluster.
+	// The DBClusterIdentifier value for the DB cluster.
 	DBClusterIdentifier *string
 
 	// The database engine version.
 	EngineVersion *string
 
-	// Whether mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled.
+	// A value that indicates whether mapping of AWS Identity and Access Management
+	// (IAM) accounts to database accounts is enabled.
 	IAMDatabaseAuthenticationEnabled *bool
 
 	// The master credentials for the DB cluster.
@@ -499,8 +499,8 @@ type DBCluster struct {
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
 	MultiAZ *bool
 
-	// Specifies that changes to the DB cluster are pending. This element is only
-	// included when changes are pending. Specific changes are identified by
+	// A value that specifies that changes to the DB cluster are pending. This element
+	// is only included when changes are pending. Specific changes are identified by
 	// subelements.
 	PendingModifiedValues *ClusterPendingModifiedValues
 
@@ -754,8 +754,11 @@ type DBClusterSnapshot struct {
 	// Specifies the identifier for the DB cluster snapshot.
 	DBClusterSnapshotIdentifier *string
 
-	// Specifies the name of the database engine.
+	// Specifies the name of the database engine for this DB cluster snapshot.
 	Engine *string
+
+	// Provides the engine mode of the database engine for this DB cluster snapshot.
+	EngineMode *string
 
 	// Provides the version of the database engine for this DB cluster snapshot.
 	EngineVersion *string
@@ -772,7 +775,7 @@ type DBClusterSnapshot struct {
 	// Provides the license model information for this DB cluster snapshot.
 	LicenseModel *string
 
-	// Provides the master username for the DB cluster snapshot.
+	// Provides the master username for this DB cluster snapshot.
 	MasterUsername *string
 
 	// Specifies the percentage of the estimated data that has been transferred.
@@ -924,11 +927,14 @@ type DBInstance struct {
 	// instance.
 	AssociatedRoles []DBInstanceRole
 
-	// Indicates that minor version patches are applied automatically.
+	// A value that indicates that minor version patches are applied automatically.
 	AutoMinorVersionUpgrade bool
 
 	// Specifies the name of the Availability Zone the DB instance is located in.
 	AvailabilityZone *string
+
+	// The Amazon Resource Name (ARN) of the recovery point in AWS Backup.
+	AwsBackupRecoveryPointArn *string
 
 	// Specifies the number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod int32
@@ -1100,8 +1106,8 @@ type DBInstance struct {
 	// Provides the list of option group memberships for this DB instance.
 	OptionGroupMemberships []OptionGroupMembership
 
-	// Specifies that changes to the DB instance are pending. This element is only
-	// included when changes are pending. Specific changes are identified by
+	// A value that specifies that changes to the DB instance are pending. This element
+	// is only included when changes are pending. Specific changes are identified by
 	// subelements.
 	PendingModifiedValues *PendingModifiedValues
 
@@ -1434,8 +1440,8 @@ type DBProxy struct {
 	// in the logs.
 	DebugLogging bool
 
-	// The endpoint that you can use to connect to the proxy. You include the endpoint
-	// value in the connection string for a database client application.
+	// The endpoint that you can use to connect to the DB proxy. You include the
+	// endpoint value in the connection string for a database client application.
 	Endpoint *string
 
 	// The engine family applies to MySQL and PostgreSQL for both RDS and Aurora.
@@ -1463,10 +1469,64 @@ type DBProxy struct {
 	// The date and time when the proxy was last updated.
 	UpdatedDate *time.Time
 
+	// Provides the VPC ID of the DB proxy.
+	VpcId *string
+
 	// Provides a list of VPC security groups that the proxy belongs to.
 	VpcSecurityGroupIds []string
 
 	// The EC2 subnet IDs for the proxy.
+	VpcSubnetIds []string
+}
+
+// The data structure representing an endpoint associated with a DB proxy. RDS
+// automatically creates one endpoint for each DB proxy. For Aurora DB clusters,
+// you can associate additional endpoints with the same DB proxy. These endpoints
+// can be read/write or read-only. They can also reside in different VPCs than the
+// associated DB proxy. This data type is used as a response element in the
+// DescribeDBProxyEndpoints operation.
+type DBProxyEndpoint struct {
+
+	// The date and time when the DB proxy endpoint was first created.
+	CreatedDate *time.Time
+
+	// The Amazon Resource Name (ARN) for the DB proxy endpoint.
+	DBProxyEndpointArn *string
+
+	// The name for the DB proxy endpoint. An identifier must begin with a letter and
+	// must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen
+	// or contain two consecutive hyphens.
+	DBProxyEndpointName *string
+
+	// The identifier for the DB proxy that is associated with this DB proxy endpoint.
+	DBProxyName *string
+
+	// The endpoint that you can use to connect to the DB proxy. You include the
+	// endpoint value in the connection string for a database client application.
+	Endpoint *string
+
+	// A value that indicates whether this endpoint is the default endpoint for the
+	// associated DB proxy. Default DB proxy endpoints always have read/write
+	// capability. Other endpoints that you associate with the DB proxy can be either
+	// read/write or read-only.
+	IsDefault bool
+
+	// The current status of this DB proxy endpoint. A status of available means the
+	// endpoint is ready to handle requests. Other values indicate that you must wait
+	// for the endpoint to be ready, or take some action to resolve an issue.
+	Status DBProxyEndpointStatus
+
+	// A value that indicates whether the DB proxy endpoint can be used for read/write
+	// or read-only operations.
+	TargetRole DBProxyEndpointTargetRole
+
+	// Provides the VPC ID of the DB proxy endpoint.
+	VpcId *string
+
+	// Provides a list of VPC security groups that the DB proxy endpoint belongs to.
+	VpcSecurityGroupIds []string
+
+	// The EC2 subnet IDs for the DB proxy endpoint.
 	VpcSubnetIds []string
 }
 
@@ -1486,6 +1546,10 @@ type DBProxyTarget struct {
 	// The identifier representing the target. It can be the instance identifier for an
 	// RDS DB instance, or the cluster identifier for an Aurora DB cluster.
 	RdsResourceId *string
+
+	// A value that indicates whether the target of the proxy can be used for
+	// read/write or read-only operations.
+	Role TargetRole
 
 	// The Amazon Resource Name (ARN) for the RDS DB instance or Aurora DB cluster.
 	TargetArn *string
@@ -2005,6 +2069,39 @@ type ExportTask struct {
 	WarningMessage *string
 }
 
+// Contains the state of scheduled or in-process failover operations on an Aurora
+// global database (GlobalCluster). This Data type is empty unless a failover
+// operation is scheduled or is currently underway on the Aurora global database.
+type FailoverState struct {
+
+	// The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being
+	// demoted, and which is associated with this state.
+	FromDbClusterArn *string
+
+	// The current status of the Aurora global database (GlobalCluster). Possible
+	// values are as follows:
+	//
+	// * pending  A request to fail over the Aurora global
+	// database (GlobalCluster) has been received by the service. The GlobalCluster's
+	// primary DB cluster and the specified secondary DB cluster are being verified
+	// before the failover process can start.
+	//
+	// * failing-over  This status covers the
+	// range of Aurora internal operations that take place during the failover process,
+	// such as demoting the primary Aurora DB cluster, promoting the secondary Aurora
+	// DB, and synchronizing replicas.
+	//
+	// * cancelling  The request to fail over the
+	// Aurora global database (GlobalCluster) was cancelled and the primary Aurora DB
+	// cluster and the selected secondary Aurora DB cluster are returning to their
+	// previous states.
+	Status FailoverStatus
+
+	// The Amazon Resource Name (ARN) of the Aurora DB cluster that is currently being
+	// promoted, and which is associated with this state.
+	ToDbClusterArn *string
+}
+
 // A filter name and value pair that is used to return a more specific list of
 // results from a describe operation. Filters can be used to match a set of
 // resources by specific criteria, such as IDs. The filters supported by a describe
@@ -2049,6 +2146,12 @@ type GlobalCluster struct {
 
 	// Indicates the database engine version.
 	EngineVersion *string
+
+	// A data object containing all properties for the current state of an in-process
+	// or pending failover process for this Aurora global database. This object is
+	// empty unless the FailoverGlobalCluster API operation has been called on this
+	// Aurora global database (GlobalCluster).
+	FailoverState *FailoverState
 
 	// The Amazon Resource Name (ARN) for the global database cluster.
 	GlobalClusterArn *string
@@ -2588,8 +2691,8 @@ type PendingMaintenanceAction struct {
 	OptInStatus *string
 }
 
-// This data type is used as a response element in the ModifyDBInstance action and
-// contains changes that will be applied during the next maintenance window.
+// This data type is used as a response element in the ModifyDBInstance operation
+// and contains changes that will be applied during the next maintenance window.
 type PendingModifiedValues struct {
 
 	// The allocated storage size for the DB instance specified in gibibytes .
@@ -2627,7 +2730,8 @@ type PendingModifiedValues struct {
 	// The master credentials for the DB instance.
 	MasterUserPassword *string
 
-	// Indicates that the Single-AZ DB instance will change to a Multi-AZ deployment.
+	// A value that indicates that the Single-AZ DB instance will change to a Multi-AZ
+	// deployment.
 	MultiAZ *bool
 
 	// A list of the log types whose configuration is still pending. In other words,
@@ -3005,8 +3109,20 @@ type UpgradeTarget struct {
 	// The version number of the upgrade target database engine.
 	EngineVersion *string
 
-	// A value that indicates whether a database engine is upgraded to a major version.
+	// A value that indicates whether upgrading to the target version requires
+	// upgrading the major version of the database engine.
 	IsMajorVersionUpgrade bool
+
+	// A list of the supported DB engine modes for the target engine version.
+	SupportedEngineModes []string
+
+	// A value that indicates whether you can use Aurora global databases with the
+	// target engine version.
+	SupportsGlobalDatabases *bool
+
+	// A value that indicates whether you can use Aurora parallel query with the target
+	// engine version.
+	SupportsParallelQuery *bool
 }
 
 // Specifies the details of authentication used by a proxy to log in as a specific

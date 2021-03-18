@@ -1191,11 +1191,14 @@
                     "target": "com.amazonaws.sesv2#LimitExceededException"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
                     "target": "com.amazonaws.sesv2#TooManyRequestsException"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the process of verifying an email identity. An <i>identity</i> is\n            an email address or domain that you use when you send email. Before you can use an\n            identity to send email, you first have to verify it. By verifying an identity, you\n            demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2\n            permission to send email from the identity.</p>\n        <p>When you verify an email address, Amazon SES sends an email to the address. Your email\n            address is verified as soon as you follow the link in the verification email.\n            \n        </p>\n        <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code>\n            object, this operation provides a set of DKIM tokens. You can convert these tokens into\n            CNAME records, which you then add to the DNS configuration for your domain. Your domain\n            is verified when Amazon SES detects these records in the DNS configuration for your domain.\n            This verification method is known as <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n        <p>Alternatively, you can perform the verification process by providing your own\n            public-private key pair. This verification method is known as Bring Your Own DKIM\n            (BYODKIM). To use BYODKIM, your call to the <code>CreateEmailIdentity</code> operation\n            has to include the <code>DkimSigningAttributes</code> object. When you specify this\n            object, you provide a selector (a component of the DNS record name that identifies the\n            public key that you want to use for DKIM authentication) and a private key.</p>",
+                "smithy.api#documentation": "<p>Starts the process of verifying an email identity. An <i>identity</i> is\n            an email address or domain that you use when you send email. Before you can use an\n            identity to send email, you first have to verify it. By verifying an identity, you\n            demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2\n            permission to send email from the identity.</p>\n        <p>When you verify an email address, Amazon SES sends an email to the address. Your email\n            address is verified as soon as you follow the link in the verification email.\n            \n        </p>\n        <p>When you verify a domain without specifying the <code>DkimSigningAttributes</code>\n            object, this operation provides a set of DKIM tokens. You can convert these tokens into\n            CNAME records, which you then add to the DNS configuration for your domain. Your domain\n            is verified when Amazon SES detects these records in the DNS configuration for your domain.\n            This verification method is known as <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy DKIM</a>.</p>\n        <p>Alternatively, you can perform the verification process by providing your own\n            public-private key pair. This verification method is known as Bring Your Own DKIM\n            (BYODKIM). To use BYODKIM, your call to the <code>CreateEmailIdentity</code> operation\n            has to include the <code>DkimSigningAttributes</code> object. When you specify this\n            object, you provide a selector (a component of the DNS record name that identifies the\n            public key that you want to use for DKIM authentication) and a private key.</p>\n        <p>When you verify a domain, this operation provides a set of DKIM tokens, which you can\n            convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your\n            domain. Your domain is verified when Amazon SES detects these records in the DNS\n            configuration for your domain. For some DNS providers, it can take 72 hours or more to\n            complete the domain verification process.</p>\n        <p>Additionally, you can associate an existing configuration set with the email identity that you're verifying.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v2/email/identities",
@@ -1295,6 +1298,12 @@
                     "target": "com.amazonaws.sesv2#DkimSigningAttributes",
                     "traits": {
                         "smithy.api#documentation": "<p>If your request includes this object, Amazon SES configures the identity to use Bring Your\n            Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method,\n                <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html\">Easy\n                DKIM</a>.</p>\n        <p>You can only specify this object if the email identity is a domain, as opposed to an\n            address.</p>"
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.sesv2#ConfigurationSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration set to use by default when sending from this identity.\n            Note that any configuration set defined in the email sending request takes precedence.\n        </p>"
                     }
                 }
             },
@@ -4098,6 +4107,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An array of objects that define the tags (keys and values) that are associated with\n            the email identity.</p>"
                     }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.sesv2#ConfigurationSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration set used by default when sending from this identity.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6658,6 +6673,63 @@
                 "smithy.api#documentation": "<p>A response that indicates whether the Deliverability dashboard is enabled.</p>"
             }
         },
+        "com.amazonaws.sesv2#PutEmailIdentityConfigurationSetAttributes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sesv2#PutEmailIdentityConfigurationSetAttributesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#PutEmailIdentityConfigurationSetAttributesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Used to associate a configuration set with an email identity.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v2/email/identities/{EmailIdentity}/configuration-set",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sesv2#PutEmailIdentityConfigurationSetAttributesRequest": {
+            "type": "structure",
+            "members": {
+                "EmailIdentity": {
+                    "target": "com.amazonaws.sesv2#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address or domain that you want to associate with a configuration set.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.sesv2#ConfigurationSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration set that you want to associate with an email identity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A request to associate a configuration set with an email identity.</p>"
+            }
+        },
+        "com.amazonaws.sesv2#PutEmailIdentityConfigurationSetAttributesResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>If the action is successful, the service sends back an HTTP 200 response with an empty HTTP body.</p>"
+            }
+        },
         "com.amazonaws.sesv2#PutEmailIdentityDkimAttributes": {
             "type": "operation",
             "input": {
@@ -7702,6 +7774,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutDeliverabilityDashboardOption"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#PutEmailIdentityConfigurationSetAttributes"
                 },
                 {
                     "target": "com.amazonaws.sesv2#PutEmailIdentityDkimAttributes"

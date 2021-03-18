@@ -12,9 +12,10 @@ import (
 	"time"
 )
 
-// Returns detailed information about a type that has been registered. If you
-// specify a VersionId, DescribeType returns information about that specific type
-// version. Otherwise, it returns information about the default type version.
+// Returns detailed information about an extension that has been registered. If you
+// specify a VersionId, DescribeType returns information about that specific
+// extension version. Otherwise, it returns information about the default extension
+// version.
 func (c *Client) DescribeType(ctx context.Context, params *DescribeTypeInput, optFns ...func(*Options)) (*DescribeTypeOutput, error) {
 	if params == nil {
 		params = &DescribeTypeInput{}
@@ -32,120 +33,121 @@ func (c *Client) DescribeType(ctx context.Context, params *DescribeTypeInput, op
 
 type DescribeTypeInput struct {
 
-	// The Amazon Resource Name (ARN) of the type. Conditional: You must specify either
-	// TypeName and Type, or Arn.
+	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
+	// either TypeName and Type, or Arn.
 	Arn *string
 
-	// The kind of type. Currently the only valid value is RESOURCE. Conditional: You
-	// must specify either TypeName and Type, or Arn.
+	// The kind of extension. Conditional: You must specify either TypeName and Type,
+	// or Arn.
 	Type types.RegistryType
 
-	// The name of the type. Conditional: You must specify either TypeName and Type, or
-	// Arn.
+	// The name of the extension. Conditional: You must specify either TypeName and
+	// Type, or Arn.
 	TypeName *string
 
-	// The ID of a specific version of the type. The version ID is the value at the end
-	// of the Amazon Resource Name (ARN) assigned to the type version when it is
-	// registered. If you specify a VersionId, DescribeType returns information about
-	// that specific type version. Otherwise, it returns information about the default
-	// type version.
+	// The ID of a specific version of the extension. The version ID is the value at
+	// the end of the Amazon Resource Name (ARN) assigned to the extension version when
+	// it is registered. If you specify a VersionId, DescribeType returns information
+	// about that specific extension version. Otherwise, it returns information about
+	// the default extension version.
 	VersionId *string
 }
 
 type DescribeTypeOutput struct {
 
-	// The Amazon Resource Name (ARN) of the type.
+	// The Amazon Resource Name (ARN) of the extension.
 	Arn *string
 
-	// The ID of the default version of the type. The default version is used when the
-	// type version is not specified. To set the default version of a type, use
-	// SetTypeDefaultVersion.
+	// The ID of the default version of the extension. The default version is used when
+	// the extension version is not specified. To set the default version of an
+	// extension, use SetTypeDefaultVersion.
 	DefaultVersionId *string
 
-	// The deprecation status of the type. Valid values include:
+	// The deprecation status of the extension version. Valid values include:
 	//
-	// * LIVE: The type is
-	// registered and can be used in CloudFormation operations, dependent on its
-	// provisioning behavior and visibility scope.
+	// * LIVE:
+	// The extension is registered and can be used in CloudFormation operations,
+	// dependent on its provisioning behavior and visibility scope.
 	//
-	// * DEPRECATED: The type has been
-	// deregistered and can no longer be used in CloudFormation operations.
+	// * DEPRECATED: The
+	// extension has been deregistered and can no longer be used in CloudFormation
+	// operations.
 	DeprecatedStatus types.DeprecatedStatus
 
-	// The description of the registered type.
+	// The description of the registered extension.
 	Description *string
 
-	// The URL of a page providing detailed documentation for this type.
+	// The URL of a page providing detailed documentation for this extension.
 	DocumentationUrl *string
 
 	// The Amazon Resource Name (ARN) of the IAM execution role used to register the
-	// type. If your resource type calls AWS APIs in any of its handlers, you must
+	// extension. If your resource type calls AWS APIs in any of its handlers, you must
 	// create an IAM execution role
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that includes
 	// the necessary permissions to call those AWS APIs, and provision that execution
 	// role in your account. CloudFormation then assumes that execution role to provide
-	// your resource type with the appropriate credentials.
+	// your extension with the appropriate credentials.
 	ExecutionRoleArn *string
 
-	// Whether the specified type version is set as the default version.
+	// Whether the specified extension version is set as the default version.
 	IsDefaultVersion *bool
 
-	// When the specified type version was registered.
+	// When the specified extension version was registered.
 	LastUpdated *time.Time
 
-	// Contains logging configuration information for a type.
+	// Contains logging configuration information for an extension.
 	LoggingConfig *types.LoggingConfig
 
-	// The provisioning behavior of the type. AWS CloudFormation determines the
+	// The provisioning behavior of the extension. AWS CloudFormation determines the
 	// provisioning type during registration, based on the types of handlers in the
 	// schema handler package submitted. Valid values include:
 	//
 	// * FULLY_MUTABLE: The
-	// type includes an update handler to process updates to the type during stack
-	// update operations.
+	// extension includes an update handler to process updates to the extension during
+	// stack update operations.
 	//
-	// * IMMUTABLE: The type does not include an update handler, so
-	// the type cannot be updated and must instead be replaced during stack update
-	// operations.
+	// * IMMUTABLE: The extension does not include an update
+	// handler, so the extension cannot be updated and must instead be replaced during
+	// stack update operations.
 	//
-	// * NON_PROVISIONABLE: The type does not include all of the following
-	// handlers, and therefore cannot actually be provisioned.
+	// * NON_PROVISIONABLE: The extension does not include
+	// all of the following handlers, and therefore cannot actually be provisioned.
 	//
-	// * create
+	// *
+	// create
 	//
 	// * read
 	//
-	// *
-	// delete
+	// * delete
 	ProvisioningType types.ProvisioningType
 
-	// The schema that defines the type. For more information on type schemas, see
-	// Resource Provider Schema
+	// The schema that defines the extension. For more information on extension
+	// schemas, see Resource Provider Schema
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
 	// in the CloudFormation CLI User Guide.
 	Schema *string
 
-	// The URL of the source code for the type.
+	// The URL of the source code for the extension.
 	SourceUrl *string
 
-	// When the specified type version was registered.
+	// When the specified extension version was registered.
 	TimeCreated *time.Time
 
-	// The kind of type. Currently the only valid value is RESOURCE.
+	// The kind of extension.
 	Type types.RegistryType
 
-	// The name of the registered type.
+	// The name of the registered extension.
 	TypeName *string
 
-	// The scope at which the type is visible and usable in CloudFormation operations.
-	// Valid values include:
+	// The scope at which the extension is visible and usable in CloudFormation
+	// operations. Valid values include:
 	//
-	// * PRIVATE: The type is only visible and usable within the
-	// account in which it is registered. Currently, AWS CloudFormation marks any types
-	// you register as PRIVATE.
+	// * PRIVATE: The extension is only visible and
+	// usable within the account in which it is registered. Currently, AWS
+	// CloudFormation marks any types you register as PRIVATE.
 	//
-	// * PUBLIC: The type is publically visible and usable
-	// within any Amazon account.
+	// * PUBLIC: The extension
+	// is publically visible and usable within any Amazon account.
 	Visibility types.Visibility
 
 	// Metadata pertaining to the operation's result.

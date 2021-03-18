@@ -14,10 +14,12 @@ import (
 )
 
 // List all the messages in a channel. Returns a paginated list of ChannelMessages.
-// Sorted in descending order by default, based on the creation timestamp. Redacted
-// messages appear in the results as empty, since they are only redacted, not
-// deleted. Deleted messages do not appear in the results. This action always
-// returns the latest version of an edited message.
+// By default, sorted by creation timestamp in descending order . Redacted messages
+// appear in the results as empty, since they are only redacted, not deleted.
+// Deleted messages do not appear in the results. This action always returns the
+// latest version of an edited message. Also, the x-amz-chime-bearer request header
+// is mandatory. Use the AppInstanceUserArn of the user that makes the API call as
+// the value in the header.
 func (c *Client) ListChannelMessages(ctx context.Context, params *ListChannelMessagesInput, optFns ...func(*Options)) (*ListChannelMessagesOutput, error) {
 	if params == nil {
 		params = &ListChannelMessagesInput{}
@@ -39,6 +41,9 @@ type ListChannelMessagesInput struct {
 	//
 	// This member is required.
 	ChannelArn *string
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 
 	// The maximum number of messages that you want returned.
 	MaxResults *int32
@@ -63,7 +68,7 @@ type ListChannelMessagesOutput struct {
 	// The ARN of the channel containing the requested messages.
 	ChannelArn *string
 
-	// The information about and content of each requested message.
+	// The information about, and content of, each requested message.
 	ChannelMessages []types.ChannelMessageSummary
 
 	// The token passed by previous API calls until all requested messages are

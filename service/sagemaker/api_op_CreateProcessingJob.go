@@ -53,7 +53,8 @@ type CreateProcessingJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Sets the environment variables in the Docker container.
+	// The environment variables to set in the Docker container. Up to 100 key and
+	// values entries in the map are supported.
 	Environment map[string]string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
@@ -67,10 +68,13 @@ type CreateProcessingJobInput struct {
 	// * CreateTransformJob
 	ExperimentConfig *types.ExperimentConfig
 
-	// Networking options for a processing job.
+	// Networking options for a processing job, such as whether to allow inbound and
+	// outbound network calls to and from processing containers, and the VPC subnets
+	// and security groups to use for VPC-enabled processing jobs.
 	NetworkConfig *types.NetworkConfig
 
-	// List of input configurations for the processing job.
+	// An array of inputs configuring the data to download into the processing
+	// container.
 	ProcessingInputs []types.ProcessingInput
 
 	// Output configuration for the processing job.

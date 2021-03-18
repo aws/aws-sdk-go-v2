@@ -715,6 +715,13 @@ func awsRestjson1_serializeOpDocumentCreateIntegrationInput(v *CreateIntegration
 		}
 	}
 
+	if v.ResponseParameters != nil {
+		ok := object.Key("responseParameters")
+		if err := awsRestjson1_serializeDocumentResponseParameters(v.ResponseParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TemplateSelectionExpression != nil {
 		ok := object.Key("templateSelectionExpression")
 		ok.String(*v.TemplateSelectionExpression)
@@ -5660,6 +5667,13 @@ func awsRestjson1_serializeOpDocumentUpdateIntegrationInput(v *UpdateIntegration
 		}
 	}
 
+	if v.ResponseParameters != nil {
+		ok := object.Key("responseParameters")
+		if err := awsRestjson1_serializeDocumentResponseParameters(v.ResponseParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TemplateSelectionExpression != nil {
 		ok := object.Key("templateSelectionExpression")
 		ok.String(*v.TemplateSelectionExpression)
@@ -6665,6 +6679,22 @@ func awsRestjson1_serializeDocumentParameterConstraints(v *types.ParameterConstr
 		ok.Boolean(v.Required)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResponseParameters(v map[string]map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentIntegrationParameters(v[key], om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

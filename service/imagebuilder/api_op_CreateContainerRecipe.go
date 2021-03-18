@@ -61,7 +61,7 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	ParentImage *string
 
-	// The semantic version of the container recipe (<major>.<minor>.<patch>).
+	// The semantic version of the container recipe (..).
 	//
 	// This member is required.
 	SemanticVersion *string

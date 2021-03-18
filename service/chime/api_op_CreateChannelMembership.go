@@ -34,6 +34,10 @@ import (
 //
 // *
 // Private Channels: You must be a member to list or send messages.
+//
+// The
+// x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
+// the user that makes the API call as the value in the header.
 func (c *Client) CreateChannelMembership(ctx context.Context, params *CreateChannelMembershipInput, optFns ...func(*Options)) (*CreateChannelMembershipOutput, error) {
 	if params == nil {
 		params = &CreateChannelMembershipInput{}
@@ -68,6 +72,9 @@ type CreateChannelMembershipInput struct {
 	//
 	// This member is required.
 	Type types.ChannelMembershipType
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 }
 
 type CreateChannelMembershipOutput struct {

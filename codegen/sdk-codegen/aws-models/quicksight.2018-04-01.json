@@ -346,8 +346,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                },
-                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+                }
             }
         },
         "com.amazonaws.quicksight#AnalysisSearchFilter": {
@@ -383,7 +382,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 1
                 }
             }
@@ -1655,6 +1654,12 @@
                         "smithy.api#documentation": "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
                     }
                 },
+                "FieldFolders": {
+                    "target": "com.amazonaws.quicksight#FieldFolderMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder that contains fields and nested subfolders for your dataset.</p>"
+                    }
+                },
                 "Permissions": {
                     "target": "com.amazonaws.quicksight#ResourcePermissionList",
                     "traits": {
@@ -1794,7 +1799,7 @@
                 "Type": {
                     "target": "com.amazonaws.quicksight#DataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the data source. Currently, the supported types for this operation are:\n\t\t\t<code>ATHENA, AURORA, AURORA_POSTGRESQL, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3,\n\t\t\tSNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. \n\t\t\tUse <code>ListDataSources</code> to return a\n\t\t\tlist of all data sources.</p>",
+                        "smithy.api#documentation": "<p>The type of the data source. Currently, the supported types for this operation are:\n\t\t\t<code>ATHENA, AURORA, AURORA_POSTGRESQL, AMAZON_ELASTICSEARCH, MARIADB, MYSQL, POSTGRESQL, PRESTO, REDSHIFT, S3,\n\t\t\tSNOWFLAKE, SPARK, SQLSERVER, TERADATA</code>. \n\t\t\tUse <code>ListDataSources</code> to return a\n\t\t\tlist of all data sources.</p>\n\t\t       <p>\n            <code>AMAZON_ELASTICSEARCH</code> is for Amazon managed Elasticsearch Service.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3173,8 +3178,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                },
-                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+                }
             }
         },
         "com.amazonaws.quicksight#DashboardPublishOptions": {
@@ -3237,7 +3241,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 1
                 }
             }
@@ -3572,6 +3576,12 @@
                     "target": "com.amazonaws.quicksight#ColumnGroupList",
                     "traits": {
                         "smithy.api#documentation": "<p>Groupings of columns that work together in certain Amazon QuickSight features.\n            Currently, only geospatial hierarchy is supported.</p>"
+                    }
+                },
+                "FieldFolders": {
+                    "target": "com.amazonaws.quicksight#FieldFolderMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder that contains fields and nested subfolders for your dataset.</p>"
                     }
                 },
                 "RowLevelPermissionDataSet": {
@@ -7704,6 +7714,53 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#FieldFolder": {
+            "type": "structure",
+            "members": {
+                "description": {
+                    "target": "com.amazonaws.quicksight#FieldFolderDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for a field folder.</p>"
+                    }
+                },
+                "columns": {
+                    "target": "com.amazonaws.quicksight#FolderColumnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A folder has a list of columns. A column can only be in one folder.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A FieldFolder element is a folder that contains fields and nested subfolders.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#FieldFolderDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.quicksight#FieldFolderMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.quicksight#FieldFolderPath"
+            },
+            "value": {
+                "target": "com.amazonaws.quicksight#FieldFolder"
+            }
+        },
+        "com.amazonaws.quicksight#FieldFolderPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.quicksight#FileFormat": {
             "type": "string",
             "traits": {
@@ -7759,6 +7816,18 @@
                         "name": "StringEquals"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.quicksight#FolderColumnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5000
+                }
             }
         },
         "com.amazonaws.quicksight#GeoSpatialColumnGroup": {
@@ -10682,6 +10751,11 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/themes/{ThemeId}/versions",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -10788,6 +10862,11 @@
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/themes",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -12682,26 +12761,26 @@
                 "Namespace": {
                     "target": "com.amazonaws.quicksight#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace associated with the row-level permissions dataset.</p>"
+                        "smithy.api#documentation": "<p>The namespace associated with the dataset that contains permissions for RLS.</p>"
                     }
                 },
                 "Arn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the permission dataset.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset that contains permissions for RLS.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PermissionPolicy": {
                     "target": "com.amazonaws.quicksight#RowLevelPermissionPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Permission policy.</p>",
+                        "smithy.api#documentation": "<p>The type of permissions to use when interpretting the permissions for RLS. <code>DENY_ACCESS</code> \n        is included for backward compatibility only.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The row-level security configuration for the dataset.</p>"
+                "smithy.api#documentation": "<p>Information about a dataset that contains permissions for row-level security (RLS). \n            The permissions dataset maps fields to users or groups. For more information, see \n            <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html\">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User\n                Guide</i>.</p>\n            <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is \n            not supported for new RLS datasets.</p>"
             }
         },
         "com.amazonaws.quicksight#RowLevelPermissionPolicy": {
@@ -12758,7 +12837,7 @@
                 "DataSourceArn": {
                     "target": "com.amazonaws.quicksight#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amazon Resource Name (ARN) for the data source.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the data source.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13561,8 +13640,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 2048
-                },
-                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+                }
             }
         },
         "com.amazonaws.quicksight#TemplateSourceAnalysis": {
@@ -15492,6 +15570,12 @@
                     "target": "com.amazonaws.quicksight#ColumnGroupList",
                     "traits": {
                         "smithy.api#documentation": "<p>Groupings of columns that work together in certain QuickSight features. Currently, only geospatial hierarchy is supported.</p>"
+                    }
+                },
+                "FieldFolders": {
+                    "target": "com.amazonaws.quicksight#FieldFolderMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The folder that contains fields and nested subfolders for your dataset.</p>"
                     }
                 },
                 "RowLevelPermissionDataSet": {

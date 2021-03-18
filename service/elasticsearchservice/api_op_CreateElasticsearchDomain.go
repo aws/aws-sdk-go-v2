@@ -53,6 +53,9 @@ type CreateElasticsearchDomainInput struct {
 	// Specifies advanced security options.
 	AdvancedSecurityOptions *types.AdvancedSecurityOptionsInput
 
+	// Specifies Auto-Tune options.
+	AutoTuneOptions *types.AutoTuneOptionsInput
+
 	// Options to specify the Cognito user and identity pools for Kibana
 	// authentication. For more information, see Amazon Cognito Authentication for
 	// Kibana
@@ -88,6 +91,9 @@ type CreateElasticsearchDomainInput struct {
 	// Option to set time, in UTC format, of the daily automated snapshot. Default
 	// value is 0 hours.
 	SnapshotOptions *types.SnapshotOptions
+
+	// A list of Tag added during domain creation.
+	TagList []types.Tag
 
 	// Options to specify the subnets and security groups for VPC endpoint. For more
 	// information, see Creating a VPC

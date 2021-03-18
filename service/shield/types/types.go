@@ -241,6 +241,9 @@ type Protection struct {
 	// The name of the protection. For example, My CloudFront distributions.
 	Name *string
 
+	// The ARN (Amazon Resource Name) of the protection.
+	ProtectionArn *string
+
 	// The ARN (Amazon Resource Name) of the AWS resource that is protected.
 	ResourceArn *string
 }
@@ -291,6 +294,9 @@ type ProtectionGroup struct {
 	//
 	// This member is required.
 	ProtectionGroupId *string
+
+	// The ARN (Amazon Resource Name) of the protection group.
+	ProtectionGroupArn *string
 
 	// The resource type to include in the protection group. All protected resources of
 	// this type are included in the protection group. You must set this when you set
@@ -391,6 +397,9 @@ type Subscription struct {
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types).
 	StartTime *time.Time
 
+	// The ARN (Amazon Resource Name) of the subscription.
+	SubscriptionArn *string
+
 	// The length, in seconds, of the AWS Shield Advanced subscription for the account.
 	TimeCommitmentInSeconds int64
 }
@@ -441,6 +450,25 @@ type SummarizedCounter struct {
 
 	// The unit of the counters.
 	Unit *string
+}
+
+// A tag associated with an AWS resource. Tags are key:value pairs that you can use
+// to categorize and manage your resources, for purposes like billing or other
+// management. Typically, the tag key represents a category, such as "environment",
+// and the tag value represents a specific value within that category, such as
+// "test," "development," or "production". Or you might set the tag key to
+// "customer" and the value to the customer name or ID. You can specify one or more
+// tags to add to each AWS resource, up to 50 tags for a resource.
+type Tag struct {
+
+	// Part of the key:value pair that defines a tag. You can use a tag key to describe
+	// a category of information, such as "customer." Tag keys are case-sensitive.
+	Key *string
+
+	// Part of the key:value pair that defines a tag. You can use a tag value to
+	// describe a specific value within a category, such as "companyA" or "companyB."
+	// Tag values are case-sensitive.
+	Value *string
 }
 
 // The time range.

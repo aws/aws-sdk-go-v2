@@ -11,8 +11,7 @@ import (
 	"time"
 )
 
-// Returns the definition of a specific AWS Glue DataBrew schedule that is in the
-// current AWS account.
+// Returns the definition of a specific DataBrew schedule.
 func (c *Client) DescribeSchedule(ctx context.Context, params *DescribeScheduleInput, optFns ...func(*Options)) (*DescribeScheduleOutput, error) {
 	if params == nil {
 		params = &DescribeScheduleInput{}
@@ -49,8 +48,10 @@ type DescribeScheduleOutput struct {
 	// The identifier (user name) of the user who created the schedule.
 	CreatedBy *string
 
-	// The date or dates and time or times, in cron format, when the jobs are to be run
-	// for the schedule.
+	// The date or dates and time or times when the jobs are to be run for the
+	// schedule. For more information, see Cron expressions
+	// (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html) in the AWS Glue
+	// DataBrew Developer Guide.
 	CronExpression *string
 
 	// The name or names of one or more jobs to be run by using the schedule.

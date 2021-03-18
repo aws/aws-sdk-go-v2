@@ -1,0 +1,2193 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.lexruntimev2#AWSDeepSenseRunTimeServiceApi2_0": {
+            "type": "service",
+            "version": "2020-08-07",
+            "operations": [
+                {
+                    "target": "com.amazonaws.lexruntimev2#DeleteSession"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#GetSession"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#PutSession"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#RecognizeText"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#RecognizeUtterance"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#StartConversation"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Lex Runtime V2",
+                    "arnNamespace": "lex",
+                    "cloudFormationName": "LexRuntimeV2",
+                    "cloudTrailEventSource": "lexruntimev2.amazonaws.com",
+                    "endpointPrefix": "runtime-v2-lex"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lex"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#title": "Amazon Lex Runtime V2"
+            }
+        },
+        "com.amazonaws.lexruntimev2#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.lexruntimev2#ActiveContext": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexruntimev2#ActiveContextName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the context.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeToLive": {
+                    "target": "com.amazonaws.lexruntimev2#ActiveContextTimeToLive",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the number of turns or seconds that the context is active.\n         Once the time to live expires, the context is no longer returned in a\n         response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "contextAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#ActiveContextParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A lis tof contexts active for the request. A context can be\n         activated when a previous intent is fulfilled, or by including the\n         context in the request.</p>\n         <p>If you don't specify a list of contexts, Amazon Lex will use the\n         current list of contexts for the session. If you specify an empty list,\n         all contexts for the session are cleared. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the contexts that a user is using in a\n         session. You can configure Amazon Lex to set a context when an intent is\n         fulfilled, or you can set a context using the , , or  operations.</p>\n         <p>Use a context to indicate to Amazon Lex intents that should be used as\n         follow-up intents. For example, if the active context is\n            <code>order-fulfilled</code>, only intents that have\n            <code>order-fulfilled</code> configured as a trigger are considered\n         for follow up.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ActiveContextName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^([A-Za-z]_?)+$"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ActiveContextParametersMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexruntimev2#ParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.lexruntimev2#Text"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#ActiveContextTimeToLive": {
+            "type": "structure",
+            "members": {
+                "timeToLiveInSeconds": {
+                    "target": "com.amazonaws.lexruntimev2#ActiveContextTimeToLiveInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds that the context is active. You can specify\n         between 5 and 86400 seconds (24 hours).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "turnsToLive": {
+                    "target": "com.amazonaws.lexruntimev2#ActiveContextTurnsToLive",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of turns that the context is active. You can specify up\n         to 20 turns. Each request and response from the bot is a turn.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time that a context is active. You can specify the time to live\n         in seconds or in conversation turns.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ActiveContextTimeToLiveInSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 5,
+                    "max": 86400
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#ActiveContextTurnsToLive": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#ActiveContextsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexruntimev2#ActiveContext"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#AttachmentTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#AttachmentUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#AudioChunk": {
+            "type": "blob"
+        },
+        "com.amazonaws.lexruntimev2#AudioInputEvent": {
+            "type": "structure",
+            "members": {
+                "audioChunk": {
+                    "target": "com.amazonaws.lexruntimev2#AudioChunk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An encoded stream of audio.</p>"
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encoding used for the audio chunk. You must use 8 KHz PCM 16-bit\n         mono-channel little-endian format. The value of the field should\n         be:</p>\n         <p>\n            <code>audio/lpcm; sample-rate=8000; sample-size-bits=16;\n            channel-count=1; is-big-endian=false</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that your application assigns to the event. You\n         can use this to identify events in logs.</p>"
+                    }
+                },
+                "clientTimestampMillis": {
+                    "target": "com.amazonaws.lexruntimev2#EpochMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp set by the client of the date and time that the event\n         was sent to Amazon Lex.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a chunk of audio sent from the client application to\n         Amazon Lex. The audio is all or part of an utterance from the user.</p>\n         <p>Amazon Lex accumulates audio chunks until it recognizes a natural pause\n         in speech before processing the input.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#AudioResponseEvent": {
+            "type": "structure",
+            "members": {
+                "audioChunk": {
+                    "target": "com.amazonaws.lexruntimev2#AudioChunk",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A chunk of the audio to play. </p>"
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encoding of the audio chunk. This is the same as the encoding\n         configure in the <code>contentType</code> field of the\n            <code>ConfigurationEvent</code>.</p>"
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the event sent by Amazon Lex. The identifier is in\n         the form <code>RESPONSE-N</code>, where N is a number starting with one\n         and incremented for each event sent by Amazon Lex in the current\n         session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An event sent from Amazon Lex to your client application containing audio\n         to play to the user. </p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#BadGatewayException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 502
+            }
+        },
+        "com.amazonaws.lexruntimev2#BlobStream": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.lexruntimev2#Boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.lexruntimev2#BotAliasIdentifier": {
+            "type": "string"
+        },
+        "com.amazonaws.lexruntimev2#BotIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.lexruntimev2#Button": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.lexruntimev2#ButtonText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text that is displayed on the button.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.lexruntimev2#ButtonValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value returned to Amazon Lex when a user chooses the button.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A button that appears on a response card show to the user.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ButtonText": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#ButtonValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#ButtonsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexruntimev2#Button"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#ConfidenceScore": {
+            "type": "structure",
+            "members": {
+                "score": {
+                    "target": "com.amazonaws.lexruntimev2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A score that indicates how confident Amazon Lex is that an intent\n         satisfies the user's intent. Ranges between 0.00 and 1.00. Higher\n         scores indicate higher confidence.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a score that indicates the confidence that Amazon Lex has that\n         an intent is the one that satisfies the user's intent.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ConfigurationEvent": {
+            "type": "structure",
+            "members": {
+                "requestAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request-specific information passed between the client application\n         and Amazon Lex.</p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special\n         attributes. Don't create any request attributes for prefix\n            <code>x-amz-lex:</code>.</p>"
+                    }
+                },
+                "responseContentType": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message that Amazon Lex returns in the response can be either text or\n         speech based on the <code>responseContentType</code> value.</p>\n         <ul>\n            <li>\n               <p>If the value is <code>text/plain;charset=utf-8</code>, Amazon Lex\n               returns text in the response.</p>\n            </li>\n            <li>\n               <p>If the value begins with <code>audio/</code>, Amazon Lex returns\n               speech in the response. Amazon Lex uses Amazon Polly to generate the speech\n               using the configuration that you specified in the\n                  <code>requestContentType</code> parameter. For example, if you\n               specify <code>audio/mpeg</code> as the value, Amazon Lex returns\n               speech in the MPEG format.</p>\n            </li>\n            <li>\n               <p>If the value is <code>audio/pcm</code>, the speech returned is\n               audio/pcm in 16-bit, little-endian format.</p>\n            </li>\n            <li>\n               <p>The following are the accepted values:</p>\n               <ul>\n                  <li>\n                     <p>audio/mpeg</p>\n                  </li>\n                  <li>\n                     <p>audio/ogg</p>\n                  </li>\n                  <li>\n                     <p>audio/pcm</p>\n                  </li>\n                  <li>\n                     <p>audio/* (defaults to mpeg)</p>\n                  </li>\n                  <li>\n                     <p>text/plain; charset=utf-8</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#SessionState"
+                },
+                "welcomeMessages": {
+                    "target": "com.amazonaws.lexruntimev2#Messages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of messages to send to the user.</p>"
+                    }
+                },
+                "disablePlayback": {
+                    "target": "com.amazonaws.lexruntimev2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether Amazon Lex should send audio responses to the\n      client application. When this parameter if <code>false</code>,\n      the client application needs to create responses for the user.\n      \n      </p>"
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that your application assigns to the event. You\n         can use this to identify events in logs.</p>"
+                    }
+                },
+                "clientTimestampMillis": {
+                    "target": "com.amazonaws.lexruntimev2#EpochMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp set by the client of the date and time that the event\n         was sent to Amazon Lex.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The initial event sent from the application to Amazon Lex to configure\n         the conversation, including session and request attributes and the\n         response content type.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ConfirmationState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Confirmed",
+                        "name": "CONFIRMED"
+                    },
+                    {
+                        "value": "Denied",
+                        "name": "DENIED"
+                    },
+                    {
+                        "value": "None",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexruntimev2#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.lexruntimev2#ConversationMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AUDIO",
+                        "name": "AUDIO"
+                    },
+                    {
+                        "value": "TEXT",
+                        "name": "TEXT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexruntimev2#DTMFInputEvent": {
+            "type": "structure",
+            "members": {
+                "inputCharacter": {
+                    "target": "com.amazonaws.lexruntimev2#DTMFRegex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DTMF character that the user pressed. The allowed characters are\n         A - D, 0 - 9, # and *.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that your application assigns to the event. You\n         can use this to identify events in logs.</p>"
+                    }
+                },
+                "clientTimestampMillis": {
+                    "target": "com.amazonaws.lexruntimev2#EpochMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp set by the client of the date and time that the event\n         was sent to Amazon Lex.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A DTMF character sent from the client application. DTMF characters\n         are typically sent from a phone keypad to represent numbers. For\n         example, you can have Amazon Lex process a credit card number input from a\n         phone.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#DTMFRegex": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                },
+                "smithy.api#pattern": "^[A-D0-9#*]{1}$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.lexruntimev2#DeleteSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexruntimev2#DeleteSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexruntimev2#DeleteSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexruntimev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes session information for a specified bot, alias, and user ID. </p>\n         <p>You can use this operation to restart a conversation with a bot.\n         When you remove a session, the entire history of the session is removed\n         so that you can start again.</p>\n         <p>You don't need to delete a session. Sessions have a time limit and\n         will expire. Set the session time limit when you create the bot. The\n         default is 5 minutes, but you can specify anything between 1 minute and\n         24 hours.</p>\n         <p>If you specify a bot or alias ID that doesn't exist, you receive a\n            <code>BadRequestException.</code>\n         </p>\n         <p>If the locale doesn't exist in the bot, or if the locale hasn't been\n         enables for the alias, you receive a\n         <code>BadRequestException</code>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#DeleteSessionRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexruntimev2#BotIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that contains the session data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexruntimev2#BotAliasIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias identifier in use for the bot that contains the session\n         data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexruntimev2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale where the session is in use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#DeleteSessionResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexruntimev2#BotIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that contained the session data.</p>"
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexruntimev2#BotAliasIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias identifier in use for the bot that contained the session\n         data.</p>"
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexruntimev2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale where the session was used.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the deleted session.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#DependencyFailedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 424
+            }
+        },
+        "com.amazonaws.lexruntimev2#DialogAction": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.lexruntimev2#DialogActionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next action that the bot should take in its interaction with the\n         user. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Close</code> - Indicates that there will not be a\n               response from the user. For example, the statement \"Your order\n               has been placed\" does not require a response.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConfirmIntent</code> - The next action is asking the\n               user if the intent is complete and ready to be fulfilled. This is\n               a yes/no question such as \"Place the order?\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>Delegate</code> - The next action is determined by\n               Amazon Lex.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ElicitSlot</code> - The next action is to elicit a slot\n               value from the user.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "slotToElicit": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the slot that should be elicited from the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The next action that Amazon Lex should take.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#DialogActionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Close",
+                        "name": "CLOSE"
+                    },
+                    {
+                        "value": "ConfirmIntent",
+                        "name": "CONFIRM_INTENT"
+                    },
+                    {
+                        "value": "Delegate",
+                        "name": "DELEGATE"
+                    },
+                    {
+                        "value": "ElicitIntent",
+                        "name": "ELICIT_INTENT"
+                    },
+                    {
+                        "value": "ElicitSlot",
+                        "name": "ELICIT_SLOT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexruntimev2#DisconnectionEvent": {
+            "type": "structure",
+            "members": {
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that your application assigns to the event. You\n         can use this to identify events in logs.</p>"
+                    }
+                },
+                "clientTimestampMillis": {
+                    "target": "com.amazonaws.lexruntimev2#EpochMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp set by the client of the date and time that the event\n         was sent to Amazon Lex.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A notification from the client that it is disconnecting from Amazon Lex.\n         Sending a <code>DisconnectionEvent</code> event is optional, but can\n         help identify a conversation in logs.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#Double": {
+            "type": "double"
+        },
+        "com.amazonaws.lexruntimev2#EpochMillis": {
+            "type": "long"
+        },
+        "com.amazonaws.lexruntimev2#EventId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 100
+                },
+                "smithy.api#pattern": "[0-9a-zA-Z._:-]+"
+            }
+        },
+        "com.amazonaws.lexruntimev2#GetSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexruntimev2#GetSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexruntimev2#GetSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexruntimev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns session information for a specified bot, alias, and\n         user.</p>\n         <p>For example, you can use this operation to retrieve session\n         information for a user that has left a long-running session in\n         use.</p>\n         <p>If the bot, alias, or session identifier doesn't exist, Amazon Lex\n         returns a <code>BadRequestException</code>. If the locale doesn't exist\n         or is not enabled for the alias, you receive a\n            <code>BadRequestException</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#GetSessionRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexruntimev2#BotIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that contains the session data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexruntimev2#BotAliasIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias identifier in use for the bot that contains the session\n         data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexruntimev2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale where the session is in use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session to return.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#GetSessionResponse": {
+            "type": "structure",
+            "members": {
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the returned session.</p>"
+                    }
+                },
+                "messages": {
+                    "target": "com.amazonaws.lexruntimev2#Messages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of messages that were last sent to the user. The messages are\n         ordered based on the order that your returned the messages from your\n         Lambda function or the order that messages are defined in the bot.\n      </p>"
+                    }
+                },
+                "interpretations": {
+                    "target": "com.amazonaws.lexruntimev2#Interpretations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of intents that Amazon Lex determined might satisfy the user's\n         utterance. </p>\n         <p>Each interpretation includes the intent, a score that indicates how\n         confident Amazon Lex is that the interpretation is the correct one, and an\n         optional sentiment response that indicates the sentiment expressed in\n         the utterance.</p>"
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#SessionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the current state of the dialog between the user and the\n         bot.</p>\n         <p>You can use this to determine the progress of the conversation and\n         what the next action might be.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#HeartbeatEvent": {
+            "type": "structure",
+            "members": {
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the event sent by Amazon Lex. The identifier is in\n         the form <code>RESPONSE-N</code>, where N is a number starting with one\n         and incremented for each event sent by Amazon Lex in the current\n         session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Event that Amazon Lex sends to indicate that the stream is still open\n         between the client application and Amazon Lex </p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ImageResponseCard": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "com.amazonaws.lexruntimev2#AttachmentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title to display on the response card. The format of the title\n         is determined by the platform displaying the response card.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subtitle": {
+                    "target": "com.amazonaws.lexruntimev2#AttachmentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subtitle to display on the response card. The format of the\n         subtitle is determined by the platform displaying the response\n         card.</p>"
+                    }
+                },
+                "imageUrl": {
+                    "target": "com.amazonaws.lexruntimev2#AttachmentUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of an image to display on the response card. The image URL\n         must be publicly available so that the platform displaying the response\n         card has access to the image.</p>"
+                    }
+                },
+                "buttons": {
+                    "target": "com.amazonaws.lexruntimev2#ButtonsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of buttons that should be displayed on the response card. The\n         arrangement of the buttons is determined by the platform that displays\n         the button.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A card that is shown to the user by a messaging platform. You define\n         the contents of the card, the card is displayed by the platform. </p>\n         <p>When you use a response card, the response from the user is\n         constrained to the text associated with a button on the card.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#InputMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Text",
+                        "name": "TEXT"
+                    },
+                    {
+                        "value": "Speech",
+                        "name": "SPEECH"
+                    },
+                    {
+                        "value": "DTMF",
+                        "name": "DTMF"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexruntimev2#Intent": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the intent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "slots": {
+                    "target": "com.amazonaws.lexruntimev2#Slots",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of all of the slots for the intent. The name of the slot maps\n         to the value of the slot. If a slot has not been filled, the value is\n         null.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.lexruntimev2#IntentState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains fulfillment information for the intent. </p>"
+                    }
+                },
+                "confirmationState": {
+                    "target": "com.amazonaws.lexruntimev2#ConfirmationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about whether fulfillment of the intent has\n         been confirmed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The current intent that Amazon Lex is attempting to fulfill.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#IntentResultEvent": {
+            "type": "structure",
+            "members": {
+                "inputMode": {
+                    "target": "com.amazonaws.lexruntimev2#InputMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the input to the operation was text or speech.</p>"
+                    }
+                },
+                "interpretations": {
+                    "target": "com.amazonaws.lexruntimev2#Interpretations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of intents that Amazon Lex determined might satisfy the user's\n         utterance.</p>\n\n         <p>Each interpretation includes the intent, a score that indicates how\n         confident Amazon Lex is that the interpretation is the correct one, and an\n         optional sentiment response that indicates the sentiment expressed in\n         the utterance.</p>"
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#SessionState"
+                },
+                "requestAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes sent in the request.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session in use.</p>"
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the event sent by Amazon Lex. The identifier is in\n         the form <code>RESPONSE-N</code>, where N is a number starting with one\n         and incremented for each event sent by Amazon Lex in the current\n         session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the current state of the conversation between the client\n         application and Amazon Lex.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#IntentState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Failed",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "Fulfilled",
+                        "name": "FULFILLED"
+                    },
+                    {
+                        "value": "InProgress",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "ReadyForFulfillment",
+                        "name": "READY_FOR_FULFILLMENT"
+                    },
+                    {
+                        "value": "Waiting",
+                        "name": "WAITING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexruntimev2#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.lexruntimev2#Interpretation": {
+            "type": "structure",
+            "members": {
+                "nluConfidence": {
+                    "target": "com.amazonaws.lexruntimev2#ConfidenceScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the threshold where Amazon Lex will insert the\n            <code>AMAZON.FallbackIntent</code>,\n            <code>AMAZON.KendraSearchIntent</code>, or both when returning\n         alternative intents in a response. <code>AMAZON.FallbackIntent</code>\n         and <code>AMAZON.KendraSearchIntent</code> are only inserted if they\n         are configured for the bot.</p>"
+                    }
+                },
+                "sentimentResponse": {
+                    "target": "com.amazonaws.lexruntimev2#SentimentResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sentiment expressed in an utterance. </p>\n         <p>When the bot is configured to send utterances to Amazon Comprehend\n         for sentiment analysis, this field contains the result of the\n         analysis.</p>"
+                    }
+                },
+                "intent": {
+                    "target": "com.amazonaws.lexruntimev2#Intent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of intents that might satisfy the user's utterance. The\n         intents are ordered by the confidence score.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An intent that Amazon Lex determined might satisfy the user's utterance.\n         The intents are ordered by the confidence score. </p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#Interpretations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexruntimev2#Interpretation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#LocaleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#Message": {
+            "type": "structure",
+            "members": {
+                "content": {
+                    "target": "com.amazonaws.lexruntimev2#Text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the message.</p>"
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.lexruntimev2#MessageContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of response.</p>"
+                    }
+                },
+                "imageResponseCard": {
+                    "target": "com.amazonaws.lexruntimev2#ImageResponseCard"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for text that is returned to the customer..</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#MessageContentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CustomPayload",
+                        "name": "CUSTOM_PAYLOAD"
+                    },
+                    {
+                        "value": "ImageResponseCard",
+                        "name": "IMAGE_RESPONSE_CARD"
+                    },
+                    {
+                        "value": "PlainText",
+                        "name": "PLAIN_TEXT"
+                    },
+                    {
+                        "value": "SSML",
+                        "name": "SSML"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexruntimev2#Messages": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexruntimev2#Message"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#ParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#PlaybackCompletionEvent": {
+            "type": "structure",
+            "members": {
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that your application assigns to the event. You\n         can use this to identify events in logs.</p>"
+                    }
+                },
+                "clientTimestampMillis": {
+                    "target": "com.amazonaws.lexruntimev2#EpochMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp set by the client of the date and time that the event\n         was sent to Amazon Lex.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Event sent from the client application to Amazon Lex to indicate that\n         playback of audio is complete and that Amazon Lex should start processing\n         the user's input.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#PlaybackInterruptionEvent": {
+            "type": "structure",
+            "members": {
+                "eventReason": {
+                    "target": "com.amazonaws.lexruntimev2#PlaybackInterruptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of user input that Amazon Lex detected.</p>"
+                    }
+                },
+                "causedByEventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the event that contained the audio, DTMF, or text\n         that caused the interruption.</p>"
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the event sent by Amazon Lex. The identifier is in\n         the form <code>RESPONSE-N</code>, where N is a number starting with one\n         and incremented for each event sent by Amazon Lex in the current\n         session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Event sent from Amazon Lex to indicate to the client application should\n         stop playback of audio. For example, if the client is playing a prompt\n         that asks for the user's telephone number, the user might start to say\n         the phone number before the prompt is complete. Amazon Lex sends this event\n         to the client application to indicate that the user is responding and\n         that Amazon Lex is processing their input.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#PlaybackInterruptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DTMF_START_DETECTED",
+                        "name": "DTMF_START_DETECTED"
+                    },
+                    {
+                        "value": "TEXT_DETECTED",
+                        "name": "TEXT_DETECTED"
+                    },
+                    {
+                        "value": "VOICE_START_DETECTED",
+                        "name": "VOICE_START_DETECTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexruntimev2#PutSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexruntimev2#PutSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexruntimev2#PutSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexruntimev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#DependencyFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new session or modifies an existing session with an Amazon Lex\n         bot. Use this operation to enable your application to set the state of\n         the bot.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#PutSessionRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexruntimev2#BotIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that receives the session data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexruntimev2#BotAliasIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias identifier of the bot that receives the session\n         data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexruntimev2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale where the session is in use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session that receives the session data.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "messages": {
+                    "target": "com.amazonaws.lexruntimev2#Messages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of messages to send to the user. Messages are sent in the\n         order that they are defined in the list.</p>"
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#SessionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the state of the session with the user. You can use this to set\n         the current intent, attributes, context, and dialog action. Use the\n         dialog action to determine the next step that Amazon Lex should use in the\n         conversation with the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "requestAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request-specific information passed between Amazon Lex and the client\n         application.</p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special\n         attributes. Don't create any request attributes with the prefix\n            <code>x-amz-lex:</code>.</p>"
+                    }
+                },
+                "responseContentType": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message that Amazon Lex returns in the response can be either text or\n         speech depending on the value of this parameter. </p>\n         <ul>\n            <li>\n               <p>If the value is <code>text/plain; charset=utf-8</code>, Amazon Lex\n               returns text in the response.</p>\n            </li>\n         </ul>",
+                        "smithy.api#httpHeader": "ResponseContentType"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#PutSessionResponse": {
+            "type": "structure",
+            "members": {
+                "contentType": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of response. Same as the type specified in the\n            <code>responseContentType</code> field in the request.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "messages": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of messages that were last sent to the user. The messages are\n         ordered based on how you return the messages from you Lambda function\n         or the order that the messages are defined in the bot.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-messages"
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the current state of the dialog between the user and the\n         bot.</p>\n         <p>Use this to determine the progress of the conversation and what the\n         next action may be.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-session-state"
+                    }
+                },
+                "requestAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request-specific information passed between the client application\n         and Amazon Lex. These are the same as the <code>requestAttribute</code>\n         parameter in the call to the <code>PutSession</code> operation.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-request-attributes"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session that received the data.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-session-id"
+                    }
+                },
+                "audioStream": {
+                    "target": "com.amazonaws.lexruntimev2#BlobStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the requested content type was audio, the audio version of the\n         message to convey to the user.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#RecognizeText": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexruntimev2#RecognizeTextRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexruntimev2#RecognizeTextResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexruntimev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#DependencyFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends user input to Amazon Lex. Client applications use this API to send\n         requests to Amazon Lex at runtime. Amazon Lex then interprets the user input\n         using the machine learning model that it build for the bot.</p>\n         <p>In response, Amazon Lex returns the next message to convey to the user\n         and an optional response card to display.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/text",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#RecognizeTextRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexruntimev2#BotIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that processes the request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexruntimev2#BotAliasIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias identifier in use for the bot that processes the\n         request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexruntimev2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale where the session is in use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user session that is having the\n         conversation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "text": {
+                    "target": "com.amazonaws.lexruntimev2#Text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text that the user entered. Amazon Lex interprets this text.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#SessionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the dialog between the user and the bot.</p>"
+                    }
+                },
+                "requestAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request-specific information passed between the client application\n         and Amazon Lex </p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special\n         attributes. Don't create any request attributes with the prefix\n            <code>x-amz-lex:</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#RecognizeTextResponse": {
+            "type": "structure",
+            "members": {
+                "messages": {
+                    "target": "com.amazonaws.lexruntimev2#Messages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of messages last sent to the user. The messages are ordered\n         based on the order that you returned the messages from your Lambda\n         function or the order that the messages are defined in the bot.</p>"
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#SessionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the current state of the dialog between the user and the\n         bot. </p>\n         <p>Use this to determine the progress of the conversation and what the\n         next action may be.</p>"
+                    }
+                },
+                "interpretations": {
+                    "target": "com.amazonaws.lexruntimev2#Interpretations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of intents that Amazon Lex determined might satisfy the user's\n         utterance. </p>\n         <p>Each interpretation includes the intent, a score that indicates now\n         confident Amazon Lex is that the interpretation is the correct one, and an\n         optional sentiment response that indicates the sentiment expressed in\n         the utterance.</p>"
+                    }
+                },
+                "requestAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes sent in the request.</p>"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session in use.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#RecognizeUtterance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexruntimev2#RecognizeUtteranceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexruntimev2#RecognizeUtteranceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexruntimev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#BadGatewayException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#DependencyFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.auth#unsignedPayload": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4"
+                ],
+                "smithy.api#documentation": "<p>Sends user input to Amazon Lex. You can send text or speech. Clients use\n         this API to send text and audio requests to Amazon Lex at runtime. Amazon Lex\n         interprets the user input using the machine learning model built for\n         the bot.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/utterance",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#RecognizeUtteranceRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexruntimev2#BotIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot that should receive the request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexruntimev2#BotAliasIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias identifier in use for the bot that should receive the\n         request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexruntimev2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale where the session is in use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session in use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the state of the session with the user. You can use this to set\n         the current intent, attributes, context, and dialog action. Use the\n         dialog action to determine the next step that Amazon Lex should use in the\n         conversation with the user.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-session-state"
+                    }
+                },
+                "requestAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#SensitiveNonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request-specific information passed between the client application\n         and Amazon Lex </p>\n         <p>The namespace <code>x-amz-lex:</code> is reserved for special\n         attributes. Don't create any request attributes for prefix\n            <code>x-amz-lex:</code>.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-request-attributes"
+                    }
+                },
+                "requestContentType": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the format for audio input or that the content is text.\n         The header must start with one of the following prefixes:</p>\n         <ul>\n            <li>\n               <p>PCM format, audio data must be in little-endian byte\n               order.</p>\n               <ul>\n                  <li>\n                     <p>audio/l16; rate=16000; channels=1</p>\n                  </li>\n                  <li>\n                     <p>audio/x-l16; sample-rate=16000; channel-count=1</p>\n                  </li>\n                  <li>\n                     <p>audio/lpcm; sample-rate=8000; sample-size-bits=16;\n                     channel-count=1; is-big-endian=false</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Opus format</p>\n               <ul>\n                  <li>\n                     <p>audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Text format</p>\n               <ul>\n                  <li>\n                     <p>text/plain; charset=utf-8</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#httpHeader": "Content-Type",
+                        "smithy.api#required": {}
+                    }
+                },
+                "responseContentType": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message that Amazon Lex returns in the response can be either text or\n         speech based on the <code>responseContentType</code> value.</p>\n         <ul>\n            <li>\n               <p>If the value is <code>text/plain;charset=utf-8</code>, Amazon Lex\n               returns text in the response.</p>\n            </li>\n            <li>\n               <p>If the value begins with <code>audio/</code>, Amazon Lex returns\n               speech in the response. Amazon Lex uses Amazon Polly to generate the speech\n               using the configuration that you specified in the\n                  <code>requestContentType</code> parameter. For example, if you\n               specify <code>audio/mpeg</code> as the value, Amazon Lex returns\n               speech in the MPEG format.</p>\n            </li>\n            <li>\n               <p>If the value is <code>audio/pcm</code>, the speech returned is\n                  <code>audio/pcm</code> at 16 KHz in 16-bit, little-endian\n               format.</p>\n            </li>\n            <li>\n               <p>The following are the accepted values:</p>\n               <ul>\n                  <li>\n                     <p>audio/mpeg</p>\n                  </li>\n                  <li>\n                     <p>audio/ogg</p>\n                  </li>\n                  <li>\n                     <p>audio/pcm (16 KHz)</p>\n                  </li>\n                  <li>\n                     <p>audio/* (defaults to mpeg)</p>\n                  </li>\n                  <li>\n                     <p>text/plain; charset=utf-8</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#httpHeader": "Response-Content-Type"
+                    }
+                },
+                "inputStream": {
+                    "target": "com.amazonaws.lexruntimev2#BlobStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User input in PCM or Opus audio format or text format as described\n         in the <code>requestContentType</code> parameter.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#RecognizeUtteranceResponse": {
+            "type": "structure",
+            "members": {
+                "inputMode": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the input mode to the operation was text or\n         speech. \n      </p>",
+                        "smithy.api#httpHeader": "x-amz-lex-input-mode"
+                    }
+                },
+                "contentType": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Content type as specified in the <code>responseContentType</code> in\n         the request.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                },
+                "messages": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of messages that were last sent to the user. The messages are\n         ordered based on the order that you returned the messages from your\n         Lambda function or the order that the messages are defined in the\n         bot.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-messages"
+                    }
+                },
+                "interpretations": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of intents that Amazon Lex determined might satisfy the user's\n         utterance.</p>\n         <p>Each interpretation includes the intent, a score that indicates how\n         confident Amazon Lex is that the interpretation is the correct one, and an\n         optional sentiment response that indicates the sentiment expressed in\n         the utterance.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-interpretations"
+                    }
+                },
+                "sessionState": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the current state of the dialog between the user and the\n         bot.</p>\n         <p>Use this to determine the progress of the conversation and what the\n         next action might be.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-session-state"
+                    }
+                },
+                "requestAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes sent in the request.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-request-attributes"
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session in use.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-session-id"
+                    }
+                },
+                "inputTranscript": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text used to process the request.</p>\n         <p>If the input was an audio stream, the <code>inputTranscript</code>\n         field contains the text extracted from the audio stream. This is the\n         text that is actually processed to recognize intents and slot values.\n         You can use this information to determine if Amazon Lex is correctly\n         processing the audio that you send.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-input-transcript"
+                    }
+                },
+                "audioStream": {
+                    "target": "com.amazonaws.lexruntimev2#BlobStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prompt or statement to send to the user. This is based on the\n         bot configuration and context. For example, if Amazon Lex did not understand\n         the user intent, it sends the <code>clarificationPrompt</code>\n         configured for the bot. If the intent requires confirmation before\n         taking the fulfillment action, it sends the\n            <code>confirmationPrompt</code>. Another example: Suppose that the\n         Lambda function successfully fulfilled the intent, and sent a message\n         to convey to the user. Then Amazon Lex sends that message in the\n         response.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.lexruntimev2#SensitiveNonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.lexruntimev2#SentimentResponse": {
+            "type": "structure",
+            "members": {
+                "sentiment": {
+                    "target": "com.amazonaws.lexruntimev2#SentimentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The overall sentiment expressed in the user's response. This is the\n         sentiment most likely expressed by the user based on the analysis by\n         Amazon Comprehend.</p>"
+                    }
+                },
+                "sentimentScore": {
+                    "target": "com.amazonaws.lexruntimev2#SentimentScore"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the sentiment expressed in a user's\n         response in a conversation. Sentiments are determined using Amazon\n         Comprehend. Sentiments are only returned if they are enabled for the\n         bot.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-sentiment.html\">\n            Determine Sentiment </a> in the <i>Amazon Comprehend\n            developer guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#SentimentScore": {
+            "type": "structure",
+            "members": {
+                "positive": {
+                    "target": "com.amazonaws.lexruntimev2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of confidence that Amazon Comprehend has in the accuracy\n         of its detection of the <code>POSITIVE</code> sentiment.</p>"
+                    }
+                },
+                "negative": {
+                    "target": "com.amazonaws.lexruntimev2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of confidence that Amazon Comprehend has in the accuracy\n         of its detection of the <code>NEGATIVE</code> sentiment.</p>"
+                    }
+                },
+                "neutral": {
+                    "target": "com.amazonaws.lexruntimev2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of confidence that Amazon Comprehend has in the accuracy\n         of its detection of the <code>NEUTRAL</code> sentiment.</p>"
+                    }
+                },
+                "mixed": {
+                    "target": "com.amazonaws.lexruntimev2#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The level of confidence that Amazon Comprehend has in the accuracy\n         of its detection of the <code>MIXED</code> sentiment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The individual sentiment responses for the utterance.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#SentimentType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MIXED",
+                        "name": "MIXED"
+                    },
+                    {
+                        "value": "NEGATIVE",
+                        "name": "NEGATIVE"
+                    },
+                    {
+                        "value": "NEUTRAL",
+                        "name": "NEUTRAL"
+                    },
+                    {
+                        "value": "POSITIVE",
+                        "name": "POSITIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexruntimev2#SessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 100
+                },
+                "smithy.api#pattern": "[0-9a-zA-Z._:-]+"
+            }
+        },
+        "com.amazonaws.lexruntimev2#SessionState": {
+            "type": "structure",
+            "members": {
+                "dialogAction": {
+                    "target": "com.amazonaws.lexruntimev2#DialogAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next step that Amazon Lex should take in the conversation with a\n         user.</p>"
+                    }
+                },
+                "intent": {
+                    "target": "com.amazonaws.lexruntimev2#Intent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The active intent that Amazon Lex is processing.</p>"
+                    }
+                },
+                "activeContexts": {
+                    "target": "com.amazonaws.lexruntimev2#ActiveContextsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more contexts that indicate to Amazon Lex the context of a\n         request. When a context is active, Amazon Lex considers intents with the\n         matching context as a trigger as the next intent in a session.</p>"
+                    }
+                },
+                "sessionAttributes": {
+                    "target": "com.amazonaws.lexruntimev2#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Map of key/value pairs representing session-specific context\n         information. It contains application information passed between Amazon Lex\n         and a client application.</p>"
+                    }
+                },
+                "originatingRequestId": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of the user's session with Amazon Lex.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#Slot": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.lexruntimev2#Value",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current value of the slot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A value that Amazon Lex uses to fulfill an intent. </p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#Slots": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexruntimev2#NonEmptyString"
+            },
+            "value": {
+                "target": "com.amazonaws.lexruntimev2#Slot"
+            }
+        },
+        "com.amazonaws.lexruntimev2#StartConversation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexruntimev2#StartConversationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexruntimev2#StartConversationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexruntimev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexruntimev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an HTTP/2 bidirectional event stream that enables you to send\n         audio, text, or DTMF input in real time. After your application starts\n         a conversation, users send input to Amazon Lex as a stream of events. Amazon Lex\n         processes the incoming events and responds with streaming text or audio\n         events. \n      </p>\n         <p></p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/conversation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#StartConversationRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexruntimev2#BotIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot to process the request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "botAliasId": {
+                    "target": "com.amazonaws.lexruntimev2#BotAliasIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias identifier in use for the bot that processes the\n         request.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexruntimev2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The locale where the session is in use.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.lexruntimev2#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the user session that is having the\n         conversation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "conversationMode": {
+                    "target": "com.amazonaws.lexruntimev2#ConversationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The conversation type that you are using the Amazon Lex. If the\n         conversation mode is <code>AUDIO</code> you can send both audio and\n         DTMF information. If the mode is <code>TEXT</code> you can only send\n         text.</p>",
+                        "smithy.api#httpHeader": "x-amz-lex-conversation-mode"
+                    }
+                },
+                "requestEventStream": {
+                    "target": "com.amazonaws.lexruntimev2#StartConversationRequestEventStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the stream of events to Amazon Lex from your application. The\n         events are encoded as HTTP/2 data frames.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#StartConversationRequestEventStream": {
+            "type": "union",
+            "members": {
+                "ConfigurationEvent": {
+                    "target": "com.amazonaws.lexruntimev2#ConfigurationEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information sent from your client application to\n         Amazon Lex</p>"
+                    }
+                },
+                "AudioInputEvent": {
+                    "target": "com.amazonaws.lexruntimev2#AudioInputEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Speech audio sent from your client application to Amazon Lex. Audio\n         starts accumulating when Amazon Lex identifies a voice and continues until a\n         natural pause in the speech is found before processing.</p>"
+                    }
+                },
+                "DTMFInputEvent": {
+                    "target": "com.amazonaws.lexruntimev2#DTMFInputEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>DTMF information sent to Amazon Lex by your application. Amazon Lex\n         accumulates the DMTF information from when the user sends the first\n         character and ends</p>\n         <ul>\n            <li>\n               <p>when there's a pause longer that the value configured for the\n               end timeout.</p>\n            </li>\n            <li>\n               <p>when there's a digit that is the configured end\n               character.</p>\n            </li>\n            <li>\n               <p>when Amazon Lex accumulates characters equal to the maximum DTMF\n               character configuration.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "TextInputEvent": {
+                    "target": "com.amazonaws.lexruntimev2#TextInputEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Text sent from your client application to Amazon Lex. Each\n            <code>TextInputEvent</code> is processed individually.</p>"
+                    }
+                },
+                "PlaybackCompletionEvent": {
+                    "target": "com.amazonaws.lexruntimev2#PlaybackCompletionEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event sent from the client application to Amazon Lex to indicate that it\n         has finished playing audio and that Amazon Lex should start listening for\n         user input.</p>"
+                    }
+                },
+                "DisconnectionEvent": {
+                    "target": "com.amazonaws.lexruntimev2#DisconnectionEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event sent from the client application to indicate to Amazon Lex that the\n         conversation is over.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a stream of events between your application and\n         Amazon Lex.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.lexruntimev2#StartConversationResponse": {
+            "type": "structure",
+            "members": {
+                "responseEventStream": {
+                    "target": "com.amazonaws.lexruntimev2#StartConversationResponseEventStream",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the stream of events from Amazon Lex to your application. The\n         events are encoded as HTTP/2 data frames.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexruntimev2#StartConversationResponseEventStream": {
+            "type": "union",
+            "members": {
+                "PlaybackInterruptionEvent": {
+                    "target": "com.amazonaws.lexruntimev2#PlaybackInterruptionEvent"
+                },
+                "TranscriptEvent": {
+                    "target": "com.amazonaws.lexruntimev2#TranscriptEvent"
+                },
+                "IntentResultEvent": {
+                    "target": "com.amazonaws.lexruntimev2#IntentResultEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event sent from Amazon Lex to the client application containing the\n         current state of the conversation between the user and Amazon Lex.</p>"
+                    }
+                },
+                "TextResponseEvent": {
+                    "target": "com.amazonaws.lexruntimev2#TextResponseEvent"
+                },
+                "AudioResponseEvent": {
+                    "target": "com.amazonaws.lexruntimev2#AudioResponseEvent"
+                },
+                "HeartbeatEvent": {
+                    "target": "com.amazonaws.lexruntimev2#HeartbeatEvent"
+                },
+                "AccessDeniedException": {
+                    "target": "com.amazonaws.lexruntimev2#AccessDeniedException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exception thrown when the credentials passed with the request are\n         invalid or expired. Also thrown when the credentials in the request do\n         not have permission to access the <code>StartConversation</code>\n         operation.</p>"
+                    }
+                },
+                "ResourceNotFoundException": {
+                    "target": "com.amazonaws.lexruntimev2#ResourceNotFoundException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exception thrown if one of the input parameters points to a resource\n         that does not exist. For example, if the bot ID specified does not\n         exist.</p>"
+                    }
+                },
+                "ValidationException": {
+                    "target": "com.amazonaws.lexruntimev2#ValidationException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exception thrown when one or more parameters could not be validated.\n         The <code>message</code> contains the name of the field that isn't\n         valid.</p>"
+                    }
+                },
+                "ThrottlingException": {
+                    "target": "com.amazonaws.lexruntimev2#ThrottlingException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exception thrown when your application exceeds the maximum number of\n         concurrent requests. </p>"
+                    }
+                },
+                "InternalServerException": {
+                    "target": "com.amazonaws.lexruntimev2#InternalServerException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error occurred with Amazon Lex.</p>"
+                    }
+                },
+                "ConflictException": {
+                    "target": "com.amazonaws.lexruntimev2#ConflictException",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exception thrown when two clients are using the same AWS account,\n         Amazon Lex bot, and session ID.</p>"
+                    }
+                },
+                "DependencyFailedException": {
+                    "target": "com.amazonaws.lexruntimev2#DependencyFailedException"
+                },
+                "BadGatewayException": {
+                    "target": "com.amazonaws.lexruntimev2#BadGatewayException"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a stream of events between Amazon Lex and your\n         application.</p>",
+                "smithy.api#streaming": {}
+            }
+        },
+        "com.amazonaws.lexruntimev2#String": {
+            "type": "string"
+        },
+        "com.amazonaws.lexruntimev2#StringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexruntimev2#NonEmptyString"
+            }
+        },
+        "com.amazonaws.lexruntimev2#StringMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexruntimev2#NonEmptyString"
+            },
+            "value": {
+                "target": "com.amazonaws.lexruntimev2#String"
+            }
+        },
+        "com.amazonaws.lexruntimev2#Text": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.lexruntimev2#TextInputEvent": {
+            "type": "structure",
+            "members": {
+                "text": {
+                    "target": "com.amazonaws.lexruntimev2#Text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text from the user. Amazon Lex processes this as a complete\n         statement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier that your application assigns to the event. You\n         can use this to identify events in logs.</p>"
+                    }
+                },
+                "clientTimestampMillis": {
+                    "target": "com.amazonaws.lexruntimev2#EpochMillis",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp set by the client of the date and time that the event\n         was sent to Amazon Lex.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The event sent from your client application to Amazon Lex with text input\n         from the user.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#TextResponseEvent": {
+            "type": "structure",
+            "members": {
+                "messages": {
+                    "target": "com.amazonaws.lexruntimev2#Messages",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of messages to send to the user. Messages are ordered based\n         on the order that you returned the messages from your Lambda function\n         or the order that the messages are defined in the bot.</p>"
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the event sent by Amazon Lex. The identifier is in\n         the form <code>RESPONSE-N</code>, where N is a number starting with one\n         and incremented for each event sent by Amazon Lex in the current\n         session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The event sent from Amazon Lex to your application with text to present\n         to the user.</p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.lexruntimev2#TranscriptEvent": {
+            "type": "structure",
+            "members": {
+                "transcript": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transcript of the voice audio from the user.</p>"
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.lexruntimev2#EventId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the event sent by Amazon Lex. The identifier is in\n         the form <code>RESPONSE-N</code>, where N is a number starting with one\n         and incremented for each event sent by Amazon Lex in the current\n         session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Event sent from Amazon Lex to your client application that contains a\n         transcript of voice audio. </p>"
+            }
+        },
+        "com.amazonaws.lexruntimev2#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.lexruntimev2#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.lexruntimev2#Value": {
+            "type": "structure",
+            "members": {
+                "originalValue": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text of the utterance from the user that was entered for the\n         slot.</p>"
+                    }
+                },
+                "interpretedValue": {
+                    "target": "com.amazonaws.lexruntimev2#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that Amazon Lex determines for the slot. The actual value\n         depends on the setting of the value selection strategy for the bot. You\n         can choose to use the value entered by the user, or you can have Amazon Lex\n         choose the first value in the <code>resolvedValues</code> list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resolvedValues": {
+                    "target": "com.amazonaws.lexruntimev2#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of additional values that have been recognized for the\n         slot.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value of a slot.</p>"
+            }
+        }
+    }
+}

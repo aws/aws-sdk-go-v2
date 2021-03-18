@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new AWS Glue DataBrew dataset for this AWS account.
+// Creates a new DataBrew dataset.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -29,18 +29,22 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 
 type CreateDatasetInput struct {
 
-	// Information on how AWS Glue DataBrew can find data, in either the AWS Glue Data
-	// Catalog or Amazon S3.
+	// Information on how DataBrew can find data, in either the AWS Glue Data Catalog
+	// or Amazon S3.
 	//
 	// This member is required.
 	Input *types.Input
 
-	// The name of the dataset to be created.
+	// The name of the dataset to be created. Valid characters are alphanumeric (A-Z,
+	// a-z, 0-9), hyphen (-), period (.), and space.
 	//
 	// This member is required.
 	Name *string
 
-	// Options that define how Microsoft Excel input is to be interpreted by DataBrew.
+	// Specifies the file format of a dataset created from an S3 file or folder.
+	Format types.InputFormat
+
+	// Options that define the structure of either Csv, Excel, or JSON input.
 	FormatOptions *types.FormatOptions
 
 	// Metadata tags to apply to this dataset.

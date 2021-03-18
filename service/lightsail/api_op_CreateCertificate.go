@@ -11,14 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an SSL/TLS certificate for a Amazon Lightsail content delivery network
-// (CDN) distribution. After the certificate is created, use the
-// AttachCertificateToDistribution action to attach the certificate to your
-// distribution. Only certificates created in the us-east-1 AWS Region can be
-// attached to Lightsail distributions. Lightsail distributions are global
-// resources that can reference an origin in any AWS Region, and distribute its
-// content globally. However, all distributions are located in the us-east-1
-// Region.
+// Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network
+// (CDN) distribution and a container service. After the certificate is valid, use
+// the AttachCertificateToDistribution action to use the certificate and its
+// domains with your distribution. Or use the UpdateContainerService action to use
+// the certificate and its domains with your container service. Only certificates
+// created in the us-east-1 AWS Region can be attached to Lightsail distributions.
+// Lightsail distributions are global resources that can reference an origin in any
+// AWS Region, and distribute its content globally. However, all distributions are
+// located in the us-east-1 Region.
 func (c *Client) CreateCertificate(ctx context.Context, params *CreateCertificateInput, optFns ...func(*Options)) (*CreateCertificateOutput, error) {
 	if params == nil {
 		params = &CreateCertificateInput{}

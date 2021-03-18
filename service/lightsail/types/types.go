@@ -540,13 +540,13 @@ type Certificate struct {
 	// correct the problem, search for your domain name on the VirusTotal
 	// (https://www.virustotal.com/gui/home/url) website. If your domain is reported as
 	// suspicious, see Google Help for Hacked Websites
-	// (https://www.google.com/webmasters/hacked/?hl=en) to learn what you can do. If
-	// you believe that the result is a false positive, notify the organization that is
-	// reporting the domain. VirusTotal is an aggregate of several antivirus and URL
-	// scanners and cannot remove your domain from a block list itself. After you
-	// correct the problem and the VirusTotal registry has been updated, request a new
-	// certificate. If you see this error and your domain is not included in the
-	// VirusTotal list, visit the AWS Support Center
+	// (https://developers.google.com/web/fundamentals/security/hacked) to learn what
+	// you can do. If you believe that the result is a false positive, notify the
+	// organization that is reporting the domain. VirusTotal is an aggregate of several
+	// antivirus and URL scanners and cannot remove your domain from a block list
+	// itself. After you correct the problem and the VirusTotal registry has been
+	// updated, request a new certificate. If you see this error and your domain is not
+	// included in the VirusTotal list, visit the AWS Support Center
 	// (https://console.aws.amazon.com/support/home) and create a case.
 	//
 	// *
@@ -908,14 +908,15 @@ type ContainerServiceEndpoint struct {
 type ContainerServiceHealthCheckConfig struct {
 
 	// The number of consecutive health checks successes required before moving the
-	// container to the Healthy state.
+	// container to the Healthy state. The default value is 2.
 	HealthyThreshold *int32
 
 	// The approximate interval, in seconds, between health checks of an individual
-	// container. You may specify between 5 and 300 seconds.
+	// container. You can specify between 5 and 300 seconds. The default value is 5.
 	IntervalSeconds *int32
 
-	// The path on the container on which to perform the health check.
+	// The path on the container on which to perform the health check. The default
+	// value is /.
 	Path *string
 
 	// The HTTP codes to use when checking for a successful response from a container.
@@ -923,11 +924,11 @@ type ContainerServiceHealthCheckConfig struct {
 	SuccessCodes *string
 
 	// The amount of time, in seconds, during which no response means a failed health
-	// check. You may specify between 2 and 60 seconds.
+	// check. You can specify between 2 and 60 seconds. The default value is 2.
 	TimeoutSeconds *int32
 
 	// The number of consecutive health check failures required before moving the
-	// container to the Unhealthy state.
+	// container to the Unhealthy state. The default value is 2.
 	UnhealthyThreshold *int32
 }
 
@@ -1144,7 +1145,7 @@ type DiskSnapshot struct {
 	// The name of the disk snapshot (e.g., my-disk-snapshot).
 	Name *string
 
-	// The progress of the disk snapshot operation.
+	// The progress of the snapshot.
 	Progress *string
 
 	// The Lightsail resource type (e.g., DiskSnapshot).
@@ -1476,8 +1477,12 @@ type Instance struct {
 	// The size of the vCPU and the amount of RAM for the instance.
 	Hardware *InstanceHardware
 
-	// The IPv6 address of the instance.
-	Ipv6Address *string
+	// The IP address type of the instance. The possible values are ipv4 for IPv4 only,
+	// and dualstack for IPv4 and IPv6.
+	IpAddressType IpAddressType
+
+	// The IPv6 addresses of the instance.
+	Ipv6Addresses []string
 
 	// A Boolean value indicating whether this instance has a static IP assigned to it.
 	IsStaticIp *bool
@@ -1589,19 +1594,29 @@ type InstanceEntry struct {
 	// configuration options are available:
 	//
 	// * DEFAULT - Use the default firewall
-	// settings from the Lightsail instance blueprint.
+	// settings from the Lightsail instance blueprint. If this is specified, then IPv4
+	// and IPv6 will be configured for the new instance that is created in Amazon
+	// EC2.
 	//
-	// * INSTANCE - Use the configured
-	// firewall settings from the source Lightsail instance.
+	// * INSTANCE - Use the configured firewall settings from the source
+	// Lightsail instance. If this is specified, the new instance that is created in
+	// Amazon EC2 will be configured to match the configuration of the source Lightsail
+	// instance. For example, if the source instance is configured for dual-stack (IPv4
+	// and IPv6), then IPv4 and IPv6 will be configured for the new instance that is
+	// created in Amazon EC2. If the source instance is configured for IPv4 only, then
+	// only IPv4 will be configured for the new instance that is created in Amazon
+	// EC2.
 	//
-	// * NONE - Use the default
-	// Amazon EC2 security group.
+	// * NONE - Use the default Amazon EC2 security group. If this is specified,
+	// then only IPv4 will be configured for the new instance that is created in Amazon
+	// EC2.
 	//
-	// * CLOSED - All ports closed.
+	// * CLOSED - All ports closed. If this is specified, then only IPv4 will be
+	// configured for the new instance that is created in Amazon EC2.
 	//
-	// If you configured
-	// lightsail-connect as a cidrListAliases on your instance, or if you chose to
-	// allow the Lightsail browser-based SSH or RDP clients to connect to your
+	// If you
+	// configured lightsail-connect as a cidrListAliases on your instance, or if you
+	// chose to allow the Lightsail browser-based SSH or RDP clients to connect to your
 	// instance, that configuration is not carried over to your new Amazon EC2
 	// instance.
 	//
@@ -1733,10 +1748,11 @@ type InstancePortInfo struct {
 	// instance.
 	CidrListAliases []string
 
-	// The IP address, or range of IP addresses in CIDR notation, that are allowed to
-	// connect to an instance through the ports, and the protocol. Lightsail supports
-	// IPv4 addresses. For more information about CIDR block notation, see Classless
-	// Inter-Domain Routing
+	// The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed
+	// to connect to an instance through the ports, and the protocol. The ipv6Cidrs
+	// parameter lists the IPv6 addresses that are allowed to connect to an instance.
+	// For more information about CIDR block notation, see Classless Inter-Domain
+	// Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
 	// Wikipedia.
 	Cidrs []string
@@ -1749,12 +1765,27 @@ type InstancePortInfo struct {
 	// * TCP
 	// and UDP - 0 to 65535
 	//
-	// * ICMP - The ICMP type. For example, specify 8 as the
-	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
-	// more information, see Control Messages
+	// * ICMP - The ICMP type for IPv4 addresses. For example,
+	// specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to
+	// enable ICMP Ping. For more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
+	//
+	// * ICMPv6 - The ICMP type for IPv6 addresses. For example, specify
+	// 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more
+	// information, see Internet Control Message Protocol for IPv6
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	FromPort int32
+
+	// The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed
+	// to connect to an instance through the ports, and the protocol. Only devices with
+	// an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should
+	// be used. The cidrs parameter lists the IPv4 addresses that are allowed to
+	// connect to an instance. For more information about CIDR block notation, see
+	// Classless Inter-Domain Routing
+	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
+	// Wikipedia.
+	Ipv6Cidrs []string
 
 	// The IP protocol name. The name can be one of the following:
 	//
@@ -1789,11 +1820,16 @@ type InstancePortInfo struct {
 	// * TCP and
 	// UDP - 0 to 65535
 	//
-	// * ICMP - The ICMP code. For example, specify 8 as the fromPort
-	// (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more
-	// information, see Control Messages
+	// * ICMP - The ICMP code for IPv4 addresses. For example,
+	// specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to
+	// enable ICMP Ping. For more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
+	//
+	// * ICMPv6 - The ICMP code for IPv6 addresses. For example, specify
+	// 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more
+	// information, see Internet Control Message Protocol for IPv6
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	ToPort int32
 }
 
@@ -1807,10 +1843,11 @@ type InstancePortState struct {
 	// instance.
 	CidrListAliases []string
 
-	// The IP address, or range of IP addresses in CIDR notation, that are allowed to
-	// connect to an instance through the ports, and the protocol. Lightsail supports
-	// IPv4 addresses. For more information about CIDR block notation, see Classless
-	// Inter-Domain Routing
+	// The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed
+	// to connect to an instance through the ports, and the protocol. The ipv6Cidrs
+	// parameter lists the IPv6 addresses that are allowed to connect to an instance.
+	// For more information about CIDR block notation, see Classless Inter-Domain
+	// Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
 	// Wikipedia.
 	Cidrs []string
@@ -1820,12 +1857,27 @@ type InstancePortState struct {
 	// * TCP
 	// and UDP - 0 to 65535
 	//
-	// * ICMP - The ICMP type. For example, specify 8 as the
-	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
-	// more information, see Control Messages
+	// * ICMP - The ICMP type for IPv4 addresses. For example,
+	// specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to
+	// enable ICMP Ping. For more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
+	//
+	// * ICMPv6 - The ICMP type for IPv6 addresses. For example, specify
+	// 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more
+	// information, see Internet Control Message Protocol for IPv6
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	FromPort int32
+
+	// The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed
+	// to connect to an instance through the ports, and the protocol. Only devices with
+	// an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should
+	// be used. The cidrs parameter lists the IPv4 addresses that are allowed to
+	// connect to an instance. For more information about CIDR block notation, see
+	// Classless Inter-Domain Routing
+	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
+	// Wikipedia.
+	Ipv6Cidrs []string
 
 	// The IP protocol name. The name can be one of the following:
 	//
@@ -1864,11 +1916,16 @@ type InstancePortState struct {
 	// * TCP and
 	// UDP - 0 to 65535
 	//
-	// * ICMP - The ICMP code. For example, specify 8 as the fromPort
-	// (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more
-	// information, see Control Messages
+	// * ICMP - The ICMP code for IPv4 addresses. For example,
+	// specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to
+	// enable ICMP Ping. For more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
+	//
+	// * ICMPv6 - The ICMP code for IPv6 addresses. For example, specify
+	// 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more
+	// information, see Internet Control Message Protocol for IPv6
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	ToPort int32
 }
 
@@ -1911,7 +1968,8 @@ type InstanceSnapshot struct {
 	// The name of the snapshot.
 	Name *string
 
-	// The progress of the snapshot.
+	// The progress of the snapshot. This is populated only for disk snapshots, and is
+	// null for instance snapshots.
 	Progress *string
 
 	// The type of resource (usually InstanceSnapshot).
@@ -2028,6 +2086,10 @@ type LightsailDistribution struct {
 	// The domain name of the distribution.
 	DomainName *string
 
+	// The IP address type of the distribution. The possible values are ipv4 for IPv4
+	// only, and dualstack for IPv4 and IPv6.
+	IpAddressType IpAddressType
+
 	// Indicates whether the distribution is enabled.
 	IsEnabled *bool
 
@@ -2092,6 +2154,10 @@ type LoadBalancer struct {
 	// The port where the load balancer will direct traffic to your Lightsail
 	// instances. For HTTP traffic, it's port 80. For HTTPS traffic, it's port 443.
 	InstancePort *int32
+
+	// The IP address type of the load balancer. The possible values are ipv4 for IPv4
+	// only, and dualstack for IPv4 and IPv6.
+	IpAddressType IpAddressType
 
 	// The AWS Region where your load balancer was created (e.g., us-east-2a).
 	// Lightsail automatically creates your load balancer across Availability Zones.
@@ -2168,13 +2234,13 @@ type LoadBalancerTlsCertificate struct {
 	// correct the problem, search for your domain name on the VirusTotal
 	// (https://www.virustotal.com/gui/home/url) website. If your domain is reported as
 	// suspicious, see Google Help for Hacked Websites
-	// (https://www.google.com/webmasters/hacked/?hl=en) to learn what you can do. If
-	// you believe that the result is a false positive, notify the organization that is
-	// reporting the domain. VirusTotal is an aggregate of several antivirus and URL
-	// scanners and cannot remove your domain from a block list itself. After you
-	// correct the problem and the VirusTotal registry has been updated, request a new
-	// certificate. If you see this error and your domain is not included in the
-	// VirusTotal list, visit the AWS Support Center
+	// (https://developers.google.com/web/fundamentals/security/hacked) to learn what
+	// you can do. If you believe that the result is a false positive, notify the
+	// organization that is reporting the domain. VirusTotal is an aggregate of several
+	// antivirus and URL scanners and cannot remove your domain from a block list
+	// itself. After you correct the problem and the VirusTotal registry has been
+	// updated, request a new certificate. If you see this error and your domain is not
+	// included in the VirusTotal list, visit the AWS Support Center
 	// (https://console.aws.amazon.com/support/home) and create a case.
 	//
 	// *
@@ -2561,18 +2627,19 @@ type PortInfo struct {
 	// instance.
 	CidrListAliases []string
 
-	// The IP address, or range of IP addresses in CIDR notation, that are allowed to
-	// connect to an instance through the ports, and the protocol. Lightsail supports
-	// IPv4 addresses. Examples:
+	// The IPv4 address, or range of IPv4 addresses (in CIDR notation) that are allowed
+	// to connect to an instance through the ports, and the protocol. The ipv6Cidrs
+	// parameter lists the IPv6 addresses that are allowed to connect to an instance.
+	// Examples:
 	//
-	// * To allow the IP address 192.0.2.44, specify
-	// 192.0.2.44 or 192.0.2.44/32.
+	// * To allow the IP address 192.0.2.44, specify 192.0.2.44 or
+	// 192.0.2.44/32.
 	//
-	// * To allow the IP addresses 192.0.2.0 to
-	// 192.0.2.255, specify 192.0.2.0/24.
+	// * To allow the IP addresses 192.0.2.0 to 192.0.2.255, specify
+	// 192.0.2.0/24.
 	//
-	// For more information about CIDR block
-	// notation, see Classless Inter-Domain Routing
+	// For more information about CIDR block notation, see Classless
+	// Inter-Domain Routing
 	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
 	// Wikipedia.
 	Cidrs []string
@@ -2582,12 +2649,27 @@ type PortInfo struct {
 	// * TCP
 	// and UDP - 0 to 65535
 	//
-	// * ICMP - The ICMP type. For example, specify 8 as the
-	// fromPort (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For
-	// more information, see Control Messages
+	// * ICMP - The ICMP type for IPv4 addresses. For example,
+	// specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to
+	// enable ICMP Ping. For more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
+	//
+	// * ICMPv6 - The ICMP type for IPv6 addresses. For example, specify
+	// 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more
+	// information, see Internet Control Message Protocol for IPv6
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	FromPort int32
+
+	// The IPv6 address, or range of IPv6 addresses (in CIDR notation) that are allowed
+	// to connect to an instance through the ports, and the protocol. Only devices with
+	// an IPv6 address can connect to an instance through IPv6; otherwise, IPv4 should
+	// be used. The cidrs parameter lists the IPv4 addresses that are allowed to
+	// connect to an instance. For more information about CIDR block notation, see
+	// Classless Inter-Domain Routing
+	// (https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing#CIDR_notation) on
+	// Wikipedia.
+	Ipv6Cidrs []string
 
 	// The IP protocol name. The name can be one of the following:
 	//
@@ -2622,11 +2704,16 @@ type PortInfo struct {
 	// * TCP and
 	// UDP - 0 to 65535
 	//
-	// * ICMP - The ICMP code. For example, specify 8 as the fromPort
-	// (ICMP type), and -1 as the toPort (ICMP code), to enable ICMP Ping. For more
-	// information, see Control Messages
+	// * ICMP - The ICMP code for IPv4 addresses. For example,
+	// specify 8 as the fromPort (ICMP type), and -1 as the toPort (ICMP code), to
+	// enable ICMP Ping. For more information, see Control Messages
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol#Control_messages)
 	// on Wikipedia.
+	//
+	// * ICMPv6 - The ICMP code for IPv6 addresses. For example, specify
+	// 128 as the fromPort (ICMPv6 type), and 0 as toPort (ICMPv6 code). For more
+	// information, see Internet Control Message Protocol for IPv6
+	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	ToPort int32
 }
 

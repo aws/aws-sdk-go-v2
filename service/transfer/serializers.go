@@ -1049,6 +1049,30 @@ func awsAwsjson11_serializeDocumentIdentityProviderDetails(v *types.IdentityProv
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPosixProfile(v *types.PosixProfile, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Gid != nil {
+		ok := object.Key("Gid")
+		ok.Long(*v.Gid)
+	}
+
+	if v.SecondaryGids != nil {
+		ok := object.Key("SecondaryGids")
+		if err := awsAwsjson11_serializeDocumentSecondaryGids(v.SecondaryGids, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Uid != nil {
+		ok := object.Key("Uid")
+		ok.Long(*v.Uid)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentProtocols(v []types.Protocol, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1056,6 +1080,17 @@ func awsAwsjson11_serializeDocumentProtocols(v []types.Protocol, value smithyjso
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSecondaryGids(v []int64, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Long(v[i])
 	}
 	return nil
 }
@@ -1130,6 +1165,11 @@ func awsAwsjson11_serializeOpDocumentCreateServerInput(v *CreateServerInput, val
 	if v.Certificate != nil {
 		ok := object.Key("Certificate")
 		ok.String(*v.Certificate)
+	}
+
+	if len(v.Domain) > 0 {
+		ok := object.Key("Domain")
+		ok.String(string(v.Domain))
 	}
 
 	if v.EndpointDetails != nil {
@@ -1212,6 +1252,13 @@ func awsAwsjson11_serializeOpDocumentCreateUserInput(v *CreateUserInput, value s
 	if v.Policy != nil {
 		ok := object.Key("Policy")
 		ok.String(*v.Policy)
+	}
+
+	if v.PosixProfile != nil {
+		ok := object.Key("PosixProfile")
+		if err := awsAwsjson11_serializeDocumentPosixProfile(v.PosixProfile, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Role != nil {
@@ -1612,6 +1659,13 @@ func awsAwsjson11_serializeOpDocumentUpdateUserInput(v *UpdateUserInput, value s
 	if v.Policy != nil {
 		ok := object.Key("Policy")
 		ok.String(*v.Policy)
+	}
+
+	if v.PosixProfile != nil {
+		ok := object.Key("PosixProfile")
+		if err := awsAwsjson11_serializeDocumentPosixProfile(v.PosixProfile, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Role != nil {

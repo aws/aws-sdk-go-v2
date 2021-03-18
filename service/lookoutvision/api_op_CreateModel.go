@@ -20,7 +20,10 @@ import (
 // the dataset to create a training and a test dataset. If the project has a
 // training and a test dataset, Lookout for Vision uses the respective datasets to
 // train and test the model. After training completes, the evaluation metrics are
-// stored at the location specified in OutputConfig.
+// stored at the location specified in OutputConfig. This operation requires
+// permissions to perform the lookoutvision:CreateModel operation. If you want to
+// tag your model, you also require permission to the lookoutvision:TagResource
+// operation.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -58,12 +61,17 @@ type CreateModelInput struct {
 	ClientToken *string
 
 	// A description for the version of the model.
-	Description *types.ModelDescription
+	Description *string
 
-	// The identifier of the AWS Key Management Service (AWS KMS) customer master key
-	// (CMK) to use for encypting the model. If this parameter is not specified, the
-	// model is encrypted by a key that AWS owns and manages.
+	// The identifier for your AWS Key Management Service (AWS KMS) customer master key
+	// (CMK). The key is used to encrypt training and test images copied into the
+	// service for model training. Your source images are unaffected. If this parameter
+	// is not specified, the copied images are encrypted by a key that AWS owns and
+	// manages.
 	KmsKeyId *string
+
+	// A set of tags (key-value pairs) that you want to attach to the model.
+	Tags []types.Tag
 }
 
 type CreateModelOutput struct {

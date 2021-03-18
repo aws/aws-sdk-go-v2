@@ -18,7 +18,7 @@ import (
 // operation works for access keys under the AWS account. Consequently, you can use
 // this operation to manage AWS account root user credentials even if the AWS
 // account has no associated users. For information about rotating keys, see
-// Managing Keys and Certificates
+// Managing keys and certificates
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/ManagingCredentials.html) in
 // the IAM User Guide.
 func (c *Client) UpdateAccessKey(ctx context.Context, params *UpdateAccessKeyInput, optFns ...func(*Options)) (*UpdateAccessKeyOutput, error) {
@@ -46,8 +46,8 @@ type UpdateAccessKeyInput struct {
 	AccessKeyId *string
 
 	// The status you want to assign to the secret access key. Active means that the
-	// key can be used for API calls to AWS, while Inactive means that the key cannot
-	// be used.
+	// key can be used for programmatic calls to AWS, while Inactive means that the key
+	// cannot be used.
 	//
 	// This member is required.
 	Status types.StatusType

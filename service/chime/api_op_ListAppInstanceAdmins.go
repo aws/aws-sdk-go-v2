@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the administrators in the app instance.
+// Returns a list of the administrators in the AppInstance.
 func (c *Client) ListAppInstanceAdmins(ctx context.Context, params *ListAppInstanceAdminsInput, optFns ...func(*Options)) (*ListAppInstanceAdminsOutput, error) {
 	if params == nil {
 		params = &ListAppInstanceAdminsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListAppInstanceAdmins(ctx context.Context, params *ListAppInsta
 
 type ListAppInstanceAdminsInput struct {
 
-	// The ARN of the app instance.
+	// The ARN of the AppInstance.
 	//
 	// This member is required.
 	AppInstanceArn *string
@@ -48,7 +48,7 @@ type ListAppInstanceAdminsOutput struct {
 	// The information for each administrator.
 	AppInstanceAdmins []types.AppInstanceAdminSummary
 
-	// The ARN of the app instance.
+	// The ARN of the AppInstance.
 	AppInstanceArn *string
 
 	// The token returned from previous API requests until the number of administrators

@@ -4,6 +4,7 @@ package imagebuilder
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
@@ -121,6 +122,91 @@ func addOperationListComponentBuildVersionsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// ListComponentBuildVersionsAPIClient is a client that implements the
+// ListComponentBuildVersions operation.
+type ListComponentBuildVersionsAPIClient interface {
+	ListComponentBuildVersions(context.Context, *ListComponentBuildVersionsInput, ...func(*Options)) (*ListComponentBuildVersionsOutput, error)
+}
+
+var _ ListComponentBuildVersionsAPIClient = (*Client)(nil)
+
+// ListComponentBuildVersionsPaginatorOptions is the paginator options for
+// ListComponentBuildVersions
+type ListComponentBuildVersionsPaginatorOptions struct {
+	// The maximum items to return in a request.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListComponentBuildVersionsPaginator is a paginator for
+// ListComponentBuildVersions
+type ListComponentBuildVersionsPaginator struct {
+	options   ListComponentBuildVersionsPaginatorOptions
+	client    ListComponentBuildVersionsAPIClient
+	params    *ListComponentBuildVersionsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListComponentBuildVersionsPaginator returns a new
+// ListComponentBuildVersionsPaginator
+func NewListComponentBuildVersionsPaginator(client ListComponentBuildVersionsAPIClient, params *ListComponentBuildVersionsInput, optFns ...func(*ListComponentBuildVersionsPaginatorOptions)) *ListComponentBuildVersionsPaginator {
+	if params == nil {
+		params = &ListComponentBuildVersionsInput{}
+	}
+
+	options := ListComponentBuildVersionsPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListComponentBuildVersionsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListComponentBuildVersionsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListComponentBuildVersions page.
+func (p *ListComponentBuildVersionsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListComponentBuildVersionsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.ListComponentBuildVersions(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListComponentBuildVersions(region string) *awsmiddleware.RegisterServiceMetadata {

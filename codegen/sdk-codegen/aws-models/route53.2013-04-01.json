@@ -323,7 +323,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates a key signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the \n\t\t\tKSK status to <code>ACTIVE</code>.</p>",
+                "smithy.api#documentation": "<p>Activates a key-signing key (KSK) so that it can be used for signing by DNSSEC. This operation changes the \n\t\t\tKSK status to <code>ACTIVE</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/activate",
@@ -345,7 +345,7 @@
                 "Name": {
                     "target": "com.amazonaws.route53#SigningKeyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+                        "smithy.api#documentation": "<p>A string used to identify a key-signing key (KSK). <code>Name</code> can include numbers, letters,  and underscores (_). <code>Name</code> must be unique for each key-signing key in the same \n\t\t\thosted zone.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -369,7 +369,7 @@
                 "Region": {
                     "target": "com.amazonaws.route53#CloudWatchRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, \n\t\t\tthe region that the alarm was created in.</p>\n\t\t       <p>For the current list of CloudWatch regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#cw_region\">Amazon CloudWatch</a> in \n\t\t\tthe <i>AWS Service Endpoints</i> chapter of the <i>Amazon Web Services General Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>For the CloudWatch alarm that you want Route 53 health checkers to use to determine whether this health check is healthy, \n\t\t\tthe region that the alarm was created in.</p>\n\t        <p>For the current list of CloudWatch regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/cw_region.html\">Amazon CloudWatch endpoints and quotas</a> in \n\t\t\tthe <i>Amazon Web Services General Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -403,7 +403,7 @@
                 "HostedZoneId": {
                     "target": "com.amazonaws.route53#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <i>Alias resource records sets only</i>: The value used depends on where you want to route traffic:</p>\n\t\t       <dl>\n            <dt>Amazon API Gateway custom regional APIs and edge-optimized APIs</dt>\n            <dd>\n               <p>Specify the hosted zone ID for your API. You can get the applicable value using the AWS CLI command \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html\">get-domain-names</a>:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>For regional APIs, specify the value of <code>regionalHostedZoneId</code>.</p>\n                  </li>\n                  <li>\n                     <p>For edge-optimized APIs, specify the value of <code>distributionHostedZoneId</code>.</p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n            <dt>Amazon Virtual Private Cloud interface VPC endpoint</dt>\n            <dd>\n               <p>Specify the hosted zone ID for your interface endpoint. You can get the value of <code>HostedZoneId</code> \n\t\t\t\t\tusing the AWS CLI command \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html\">describe-vpc-endpoints</a>.</p>\n\t\t\t\t        </dd>\n            <dt>CloudFront distribution</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify <code>Z2FDTNDATAQYW2</code>.</p>\n\t\t\t\t\t          <note>\n\t\t\t\t\t\t            <p>Alias resource record sets for CloudFront can't be created in a private zone.</p>\n\t\t\t\t\t          </note>\n\t\t\t\t        </dd>\n            <dt>Elastic Beanstalk environment</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify the hosted zone ID for the region that you created the environment in. The environment \n\t\t\t\t\t\tmust have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see \n\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#elasticbeanstalk_region\">AWS Elastic Beanstalk</a> in the \n\t\t\t\t\t\t\"AWS Service Endpoints\" chapter of the <i>Amazon Web Services General Reference</i>.</p>\n\t\t\t\t        </dd>\n            <dt>ELB load balancer</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify the value of the hosted zone ID for the load balancer. Use the following methods to get the \n\t\t\t\t\t\thosted zone ID:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/elb.html\">Service Endpoints</a> table \n\t\t\t\t\t\t\tin the \"Elastic Load Balancing Endpoints and Quotas\" topic in the <i>Amazon Web Services General Reference</i>: \n\t\t\t\t\t\t\tUse the value that corresponds with the region that you created your load balancer in. Note that there are \n\t\t\t\t\t\t\tseparate columns for Application and Classic Load Balancers and for Network Load Balancers.</p>\n                  </li>\n                  <li>\n\t\t\t\t\t\t\t              <p>\n                        <b>AWS Management Console</b>: Go to the Amazon EC2 page, choose \n\t\t\t\t\t\t\t\t<b>Load Balancers</b> in the navigation pane, select the load balancer, and get the value of the \n\t\t\t\t\t\t\t\t<b>Hosted zone</b> field on the <b>Description</b> tab.</p>\n\t\t\t\t\t\t            </li>\n                  <li>\n\t\t\t\t\t\t\t              <p>\n                        <b>Elastic Load Balancing API</b>: Use <code>DescribeLoadBalancers</code> to get the \n\t\t\t\t\t\t\t\tapplicable value. For more information, see the applicable guide:</p>\n\t\t\t\t\t\t\t              <ul>\n                        <li>\n                           <p>Classic Load Balancers: Use \n\t\t\t\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> \n\t\t\t\t\t\t\t\t\tto get the value of <code>CanonicalHostedZoneNameId</code>.</p>\n                        </li>\n                        <li>\n                           <p>Application and Network Load Balancers: Use \n\t\t\t\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a>\n\t\t\t\t\t\t\t\t\tto get the value of <code>CanonicalHostedZoneId</code>.</p>\n                        </li>\n                     </ul>\n\t\t\t\t\t\t            </li>\n                  <li>\n\t\t\t\t\t\t\t              <p>\n                        <b>AWS CLI</b>: Use <code>describe-load-balancers</code> to get the applicable value. \n\t\t\t\t\t\t\t\tFor more information, see the applicable guide:</p>\n\t\t\t\t\t\t\t              <ul>\n                        <li>\n                           <p>Classic Load Balancers: Use \n\t\t\t\t\t\t\t\t\t<a href=\"http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html\">describe-load-balancers</a>\n\t\t\t\t\t\t\t\t\tto get the value of <code>CanonicalHostedZoneNameId</code>.</p>\n                        </li>\n                        <li>\n                           <p>Application and Network Load Balancers: Use \n\t\t\t\t\t\t\t\t\t<a href=\"http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html\">describe-load-balancers</a>\n\t\t\t\t\t\t\t\t\tto get the value of <code>CanonicalHostedZoneId</code>.</p>\n                        </li>\n                     </ul>\n\t\t\t\t\t\t            </li>\n               </ul>\n\t\t\t\t        </dd>\n            <dt>AWS Global Accelerator accelerator</dt>\n            <dd>\n               <p>Specify <code>Z2BJ6XQ5FK7U4H</code>.</p>\n            </dd>\n            <dt>An Amazon S3 bucket configured as a static website</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify the hosted zone ID for the region that you created the bucket in. For more information about \n\t\t\t\t\t\tvalid values, see the table \n\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints\">Amazon S3 Website Endpoints</a> \n\t\t\t\t\t\tin the <i>Amazon Web Services General Reference</i>.</p>\n\t\t\t\t        </dd>\n            <dt>Another Route 53 resource record set in your hosted zone</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify the hosted zone ID of your hosted zone. (An alias resource record set\n\t\t\t\t\t\tcan't reference a resource record set in a different hosted zone.)</p>\n\t\t\t\t        </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>\n            <i>Alias resource records sets only</i>: The value used depends on where you want to route traffic:</p>\n\t\t       <dl>\n            <dt>Amazon API Gateway custom regional APIs and edge-optimized APIs</dt>\n            <dd>\n               <p>Specify the hosted zone ID for your API. You can get the applicable value using the AWS CLI command \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html\">get-domain-names</a>:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>For regional APIs, specify the value of <code>regionalHostedZoneId</code>.</p>\n                  </li>\n                  <li>\n                     <p>For edge-optimized APIs, specify the value of <code>distributionHostedZoneId</code>.</p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n            <dt>Amazon Virtual Private Cloud interface VPC endpoint</dt>\n            <dd>\n               <p>Specify the hosted zone ID for your interface endpoint. You can get the value of <code>HostedZoneId</code> \n\t\t\t\t\tusing the AWS CLI command \n\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html\">describe-vpc-endpoints</a>.</p>\n\t\t\t\t        </dd>\n            <dt>CloudFront distribution</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify <code>Z2FDTNDATAQYW2</code>.</p>\n\t\t\t\t\t          <note>\n\t\t\t\t\t\t            <p>Alias resource record sets for CloudFront can't be created in a private zone.</p>\n\t\t\t\t\t          </note>\n\t\t\t\t        </dd>\n            <dt>Elastic Beanstalk environment</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify the hosted zone ID for the region that you created the environment in. The environment \n\t\t\t\t\t\tmust have a regionalized subdomain. For a list of regions and the corresponding hosted zone IDs, see \n\t\t\t\t\t    <a href=\"https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html\">AWS Elastic Beanstalk endpoints and quotas</a> in the \n\t\t\t\t\t\t the <i>Amazon Web Services General Reference</i>.</p>\n\t\t\t\t        </dd>\n            <dt>ELB load balancer</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify the value of the hosted zone ID for the load balancer. Use the following methods to get the \n\t\t\t\t\t\thosted zone ID:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/elb.html\">Elastic Load Balancing endpoints and quotas</a> topic in the <i>Amazon Web Services General Reference</i>: \n\t\t\t\t\t\t\tUse the value that corresponds with the region that you created your load balancer in. Note that there are \n\t\t\t\t\t\t\tseparate columns for Application and Classic Load Balancers and for Network Load Balancers.</p>\n                  </li>\n                  <li>\n\t\t\t\t\t\t\t              <p>\n                        <b>AWS Management Console</b>: Go to the Amazon EC2 page, choose \n\t\t\t\t\t\t\t\t<b>Load Balancers</b> in the navigation pane, select the load balancer, and get the value of the \n\t\t\t\t\t\t\t\t<b>Hosted zone</b> field on the <b>Description</b> tab.</p>\n\t\t\t\t\t\t            </li>\n                  <li>\n\t\t\t\t\t\t\t              <p>\n                        <b>Elastic Load Balancing API</b>: Use <code>DescribeLoadBalancers</code> to get the \n\t\t\t\t\t\t\t\tapplicable value. For more information, see the applicable guide:</p>\n\t\t\t\t\t\t\t              <ul>\n                        <li>\n                           <p>Classic Load Balancers: Use \n\t\t\t\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a> \n\t\t\t\t\t\t\t\t\tto get the value of <code>CanonicalHostedZoneNameId</code>.</p>\n                        </li>\n                        <li>\n                           <p>Application and Network Load Balancers: Use \n\t\t\t\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html\">DescribeLoadBalancers</a>\n\t\t\t\t\t\t\t\t\tto get the value of <code>CanonicalHostedZoneId</code>.</p>\n                        </li>\n                     </ul>\n\t\t\t\t\t\t            </li>\n                  <li>\n\t\t\t\t\t\t\t              <p>\n                        <b>AWS CLI</b>: Use <code>describe-load-balancers</code> to get the applicable value. \n\t\t\t\t\t\t\t\tFor more information, see the applicable guide:</p>\n\t\t\t\t\t\t\t              <ul>\n                        <li>\n                           <p>Classic Load Balancers: Use \n\t\t\t\t\t\t\t\t\t<a href=\"http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html\">describe-load-balancers</a>\n\t\t\t\t\t\t\t\t\tto get the value of <code>CanonicalHostedZoneNameId</code>.</p>\n                        </li>\n                        <li>\n                           <p>Application and Network Load Balancers: Use \n\t\t\t\t\t\t\t\t\t<a href=\"http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html\">describe-load-balancers</a>\n\t\t\t\t\t\t\t\t\tto get the value of <code>CanonicalHostedZoneId</code>.</p>\n                        </li>\n                     </ul>\n\t\t\t\t\t\t            </li>\n               </ul>\n\t\t\t\t        </dd>\n            <dt>AWS Global Accelerator accelerator</dt>\n            <dd>\n               <p>Specify <code>Z2BJ6XQ5FK7U4H</code>.</p>\n            </dd>\n            <dt>An Amazon S3 bucket configured as a static website</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify the hosted zone ID for the region that you created the bucket in. For more information about \n\t\t\t\t\t\tvalid values, see the table \n\t\t\t\t\t\t<a href=\"https://docs.aws.amazon.com/general/latest/gr/s3.html#s3_website_region_endpoints\">Amazon S3 Website Endpoints</a> \n\t\t\t\t\t\tin the <i>Amazon Web Services General Reference</i>.</p>\n\t\t\t\t        </dd>\n            <dt>Another Route 53 resource record set in your hosted zone</dt>\n            <dd>\n\t\t\t\t\t          <p>Specify the hosted zone ID of your hosted zone. (An alias resource record set\n\t\t\t\t\t\tcan't reference a resource record set in a different hosted zone.)</p>\n\t\t\t\t        </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1307,7 +1307,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new key signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.</p>",
+                "smithy.api#documentation": "<p>Creates a new key-signing key (KSK) associated with a hosted zone. You can only have two KSKs per hosted zone.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/keysigningkey",
@@ -1335,21 +1335,21 @@
                 "KeyManagementServiceArn": {
                     "target": "com.amazonaws.route53#SigningKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS).\n\t\t\tThe <code>KeyManagementServiceArn</code> must be unique for each key signing key (KSK) in a single hosted zone. \n\t\t\tTo see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, \n\t\t\tscroll down to <b>Example</b>. </p>\n\t\t       <p>You must configure the CMK as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with CMK in KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) for a customer managed customer master key (CMK) in AWS Key Management Service (AWS KMS).\n\t\t\tThe <code>KeyManagementServiceArn</code> must be unique for each key-signing key (KSK) in a single hosted zone. \n\t\t\tTo see an example of <code>KeyManagementServiceArn</code> that grants the correct permissions for DNSSEC, \n\t\t\tscroll down to <b>Example</b>. </p>\n\t\t       <p>You must configure the customer managed CMK as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with a customer managed CMK in AWS KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.route53#SigningKeyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same \n\t\t\thosted zone.</p>",
+                        "smithy.api#documentation": "<p>A string used to identify a key-signing key (KSK). <code>Name</code> can include numbers, letters,  and underscores (_). <code>Name</code> must be unique for each key-signing key in the same \n\t\t\thosted zone.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.route53#SigningKeyStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string specifying the initial status of the key signing key (KSK). You can set the value to <code>ACTIVE</code> or <code>INACTIVE</code>.</p>",
+                        "smithy.api#documentation": "<p>A string specifying the initial status of the key-signing key (KSK). You can set the value to <code>ACTIVE</code> or <code>INACTIVE</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1367,14 +1367,14 @@
                 "KeySigningKey": {
                     "target": "com.amazonaws.route53#KeySigningKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key signing key (KSK) that the request creates.</p>",
+                        "smithy.api#documentation": "<p>The key-signing key (KSK) that the request creates.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Location": {
                     "target": "com.amazonaws.route53#ResourceURI",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique URL representing the new key signing key (KSK).</p>",
+                        "smithy.api#documentation": "<p>The unique URL representing the new key-signing key (KSK).</p>",
                         "smithy.api#httpHeader": "Location",
                         "smithy.api#required": {}
                     }
@@ -1913,7 +1913,7 @@
                 "ServeSignature": {
                     "target": "com.amazonaws.route53#ServeSignature",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates your hosted zone signging status: <code>SIGNING</code>, <code>NOT_SIGNING</code>, or <code>INTERNAL_FAILURE</code>.\n\t\t\tIf the status is <code>INTERNAL_FAILURE</code>, see <code>StatusMessage</code> for information about steps that you can take to\n\t\t\tcorrect the problem.</p>\n\t\t       <p>A status <code>INTERNAL_FAILURE</code> means there was an error during a request. Before you can continue to work with DNSSEC\n\t\t\tsigning, including working with key signing keys (KSKs), you must correct the problem by enabling or disabling DNSSEC \n\t\t\tsigning for the hosted zone.</p>"
+                        "smithy.api#documentation": "<p>A string that represents the current hosted zone signing status.</p>\n\t\t       <p>Status can have one of the following values:</p>\n\t\t       <dl>\n            <dt>SIGNING</dt>\n            <dd>\n               <p>DNSSEC signing is enabled for the hosted zone.</p>\n            </dd>\n            <dt>NOT_SIGNING</dt>\n            <dd>\n               <p>DNSSEC signing is not enabled for the hosted zone.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>DNSSEC signing is in the process of being removed for the hosted zone.</p>\n            </dd>\n            <dt>ACTION_NEEDED</dt>\n            <dd>\n               <p>There is a problem with signing in the hosted zone that requires you to take action to resolve.\n\t\t\t\t\tFor example, the customer managed customer master key (CMK) might have been deleted, or the\n\t\t\t\t\tpermissions for the customer managed CMK might have been changed.</p>\n            </dd>\n            <dt>INTERNAL_FAILURE</dt>\n            <dd>\n               <p>There was an error during a request. Before you can continue to work with DNSSEC\n\t\t\t\t\tsigning, including with key-signing keys (KSKs), you must correct the problem by enabling or \n\t\t\t\t\tdisabling DNSSEC signing for the hosted zone.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "StatusMessage": {
@@ -1956,7 +1956,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deactivates a key signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the \n\t\t\tKSK status to <code>INACTIVE</code>.</p>",
+                "smithy.api#documentation": "<p>Deactivates a key-signing key (KSK) so that it will not be used for signing by DNSSEC. This operation changes the \n\t\t\tKSK status to <code>INACTIVE</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}/deactivate",
@@ -1978,7 +1978,7 @@
                 "Name": {
                     "target": "com.amazonaws.route53#SigningKeyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+                        "smithy.api#documentation": "<p>A string used to identify a key-signing key (KSK).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2263,7 +2263,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a key signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be\n\t\tdeactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.</p>",
+                "smithy.api#documentation": "<p>Deletes a key-signing key (KSK). Before you can delete a KSK, you must deactivate it. The KSK must be\n\t\tdeactived before you can delete it regardless of whether the hosted zone is enabled for DNSSEC signing.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/2013-04-01/keysigningkey/{HostedZoneId}/{Name}",
@@ -2285,7 +2285,7 @@
                 "Name": {
                     "target": "com.amazonaws.route53#SigningKeyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK).</p>",
+                        "smithy.api#documentation": "<p>A string used to identify a key-signing key (KSK).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2657,7 +2657,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key signing keys (KSKs)\n\t\tthat are active in the hosted zone.</p>",
+                "smithy.api#documentation": "<p>Disables DNSSEC signing in a specific hosted zone. This action does not deactivate any key-signing keys (KSKs)\n\t\tthat are active in the hosted zone.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2013-04-01/hostedzone/{HostedZoneId}/disable-dnssec",
@@ -2981,7 +2981,7 @@
                 "SubdivisionCode": {
                     "target": "com.amazonaws.route53#GeoLocationSubdivisionCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The code for the subdivision. Route 53 currently supports only states in the United States.</p>"
+                        "smithy.api#documentation": "<p>The code for the subdivision, such as a particular state within the United States. For a list of US state abbreviations, see <a href=\"https://pe.usps.com/text/pub28/28apb.htm\">Appendix B: Two–Letter State and Possession Abbreviations</a>  on the United States Postal Service website. For a list of all supported subdivision codes, use the <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html\">ListGeoLocations</a> API.</p>"
                     }
                 },
                 "SubdivisionName": {
@@ -3147,7 +3147,7 @@
                 "target": "com.amazonaws.route53#GetCheckerIpRangesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<important>\n\t\t\t         <p>\n               <code>GetCheckerIpRanges</code> still works, but we recommend that you download \n\t\t\tip-ranges.json, which includes IP address ranges for all AWS services. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html\">IP Address Ranges of Amazon Route 53 Servers</a> \n\t\t\tin the <i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       </important>",
+                "smithy.api#documentation": "<p>Route 53 does not perform authorization for this API because it retrieves information that is already available to the public.</p>\n\t        <important>\n\t\t\t         <p>\n               <code>GetCheckerIpRanges</code> still works, but we recommend that you download \n\t\t\tip-ranges.json, which includes IP address ranges for all AWS services. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/route-53-ip-addresses.html\">IP Address Ranges of Amazon Route 53 Servers</a> \n\t\t\tin the <i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       </important>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/checkeripranges",
@@ -3194,7 +3194,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about DNSSEC for a specific hosted zone, including the key signing keys (KSKs)\n\t\t\tand zone signing keys (ZSKs) in the hosted zone.</p>",
+                "smithy.api#documentation": "<p>Returns information about DNSSEC for a specific hosted zone, including the key-signing keys (KSKs) in the hosted zone.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/hostedzone/{HostedZoneId}/dnssec",
@@ -3228,7 +3228,7 @@
                 "KeySigningKeys": {
                     "target": "com.amazonaws.route53#KeySigningKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key signing keys (KSKs) in your account.</p>",
+                        "smithy.api#documentation": "<p>The key-signing keys (KSKs) in your account.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3251,7 +3251,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation \n\t\t\tresource record sets.</p>\n\t\t\n\t\t       <p>Use the following syntax to determine whether a continent is supported for geolocation:</p>\n\t\t       <p>\n            <code>GET /2013-04-01/geolocation?continentcode=<i>two-letter abbreviation for a continent</i>\n            </code>\n         </p>\n\t\t\n\t\t       <p>Use the following syntax to determine whether a country is supported for geolocation:</p>\n\t\t       <p>\n            <code>GET /2013-04-01/geolocation?countrycode=<i>two-character country code</i>\n            </code>\n         </p>\n\t\t\n\t\t       <p>Use the following syntax to determine whether a subdivision of a country is supported for geolocation:</p>\n\t\t       <p>\n            <code>GET /2013-04-01/geolocation?countrycode=<i>two-character country code</i>&subdivisioncode=<i>subdivision code</i>\n            </code>\n         </p>",
+                "smithy.api#documentation": "<p>Gets information about whether a specified geographic location is supported for Amazon Route 53 geolocation \n\t\t\tresource record sets.</p>\n\t        <p>Route 53 does not perform authorization for this API because it retrieves information that is already available to the public.</p>\n\t\t\n\t\t       <p>Use the following syntax to determine whether a continent is supported for geolocation:</p>\n\t\t       <p>\n            <code>GET /2013-04-01/geolocation?continentcode=<i>two-letter abbreviation for a continent</i>\n            </code>\n         </p>\n\t\t\n\t\t       <p>Use the following syntax to determine whether a country is supported for geolocation:</p>\n\t\t       <p>\n            <code>GET /2013-04-01/geolocation?countrycode=<i>two-character country code</i>\n            </code>\n         </p>\n\t\t\n\t\t       <p>Use the following syntax to determine whether a subdivision of a country is supported for geolocation:</p>\n\t\t       <p>\n            <code>GET /2013-04-01/geolocation?countrycode=<i>two-character country code</i>&subdivisioncode=<i>subdivision code</i>\n            </code>\n         </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/geolocation",
@@ -3279,7 +3279,7 @@
                 "SubdivisionCode": {
                     "target": "com.amazonaws.route53#GeoLocationSubdivisionCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>For <code>SubdivisionCode</code>, Amazon Route 53 supports only states of the United States. For a list of state abbreviations, see \n\t\t\t<a href=\"https://pe.usps.com/text/pub28/28apb.htm\">Appendix B: Two–Letter State and Possession Abbreviations</a> \n\t\t\ton the United States Postal Service website. </p>\n\t\t       <p>If you specify <code>subdivisioncode</code>, you must also specify <code>US</code> for <code>CountryCode</code>. </p>",
+                        "smithy.api#documentation": "<p>The code for the subdivision, such as a particular state within the United States. For a list of US state abbreviations, see <a href=\"https://pe.usps.com/text/pub28/28apb.htm\">Appendix B: Two–Letter State and Possession Abbreviations</a>  on the United States Postal Service website. For a list of all supported subdivision codes, use the <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html\">ListGeoLocations</a> API.</p>",
                         "smithy.api#httpQuery": "subdivisioncode"
                     }
                 }
@@ -4044,7 +4044,7 @@
                 "Id": {
                     "target": "com.amazonaws.route53#HealthCheckId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier that Amazon Route 53assigned to the health check when you created it. When you add or update a resource record set, you use \n\t\t\tthis value to specify which health check to use. The value can be up to 64 characters long. </p>",
+                        "smithy.api#documentation": "<p>The identifier that Amazon Route 53 assigned to the health check when you created it. When you add or update a resource record set, you use \n\t\t\tthis value to specify which health check to use. The value can be up to 64 characters long. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4832,7 +4832,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The key signing key (KSK) name that you specified isn't a valid name.</p>",
+                "smithy.api#documentation": "<p>The key-signing key (KSK) name that you specified isn't a valid name.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4845,7 +4845,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The key signing key (KSK) status isn't valid or another KSK has the status <code>INTERNAL_FAILURE</code>.</p>",
+                "smithy.api#documentation": "<p>The key-signing key (KSK) status isn't valid or another KSK has the status <code>INTERNAL_FAILURE</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4922,19 +4922,19 @@
                 "Name": {
                     "target": "com.amazonaws.route53#SigningKeyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>An alphanumeric string used to identify a key signing key (KSK). <code>Name</code> must be unique for each key signing key in the same \n\t\t\thosted zone.</p>"
+                        "smithy.api#documentation": "<p>A string used to identify a key-signing key (KSK). <code>Name</code> can include numbers, letters,  and underscores (_). <code>Name</code> must be unique for each key-signing key in the same \n\t\t\thosted zone.</p>"
                     }
                 },
                 "KmsArn": {
                     "target": "com.amazonaws.route53#SigningKeyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) used to identify the customer managed key (CMK) in AWS Key Management Service (KMS).\n\t\t\tThe <code>KmsArn</code> must be unique for each key signing key (KSK) in a single hosted zone.</p>\n\t\t       <p>You must configure the CMK as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with the customer managed key (CMK) in KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) used to identify the customer managed customer master key (CMK) in AWS Key Management Service (AWS KMS).\n\t\t\tThe <code>KmsArn</code> must be unique for each key-signing key (KSK) in a single hosted zone.</p>\n\t\t       <p>You must configure the CMK as follows:</p>\n\t\t       <dl>\n            <dt>Status</dt>\n            <dd>\n               <p>Enabled</p>\n            </dd>\n            <dt>Key spec</dt>\n            <dd>\n               <p>ECC_NIST_P256</p>\n            </dd>\n            <dt>Key usage</dt>\n            <dd>\n               <p>Sign and verify</p>\n            </dd>\n            <dt>Key policy</dt>\n            <dd>\n               <p>The key policy must give permission for the following actions:</p>\n\t\t\t\t           <ul>\n                  <li>\n                     <p>DescribeKey</p>\n                  </li>\n                  <li>\n                     <p>GetPublicKey</p>\n                  </li>\n                  <li>\n                     <p>Sign</p>\n                  </li>\n               </ul>\n\t\t\t\t\t          <p>The key policy must also include the Amazon Route 53 service in the principal for your account. \n\t\t\t\t\t\tSpecify the following:</p>\n\t\t\t\t\t          <ul>\n                  <li>\n                     <p>\n                        <code>\"Service\": \"api-service.dnssec.route53.aws.internal\"</code>\n                     </p>\n                  </li>\n               </ul>\n\t\t\t\t        </dd>\n         </dl>\n\t\t       <p>For more information about working with the customer managed CMK in AWS KMS, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html\">AWS Key Management Service concepts</a>.</p>"
                     }
                 },
                 "Flag": {
                     "target": "com.amazonaws.route53#SigningKeyInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>An integer that specifies how the key is used. For key signing key (KSK), this value is always 257.</p>"
+                        "smithy.api#documentation": "<p>An integer that specifies how the key is used. For key-signing key (KSK), this value is always 257.</p>"
                     }
                 },
                 "SigningAlgorithmMnemonic": {
@@ -4994,30 +4994,30 @@
                 "Status": {
                     "target": "com.amazonaws.route53#SigningKeyStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string that represents the current key signing key (KSK) status.</p>\n\t\t       <p>Status can have one of the following values:</p>\n\t\t       <dl>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The KSK is being used for signing.</p>\n            </dd>\n            <dt>INACTIVE</dt>\n            <dd>\n               <p>The KSK is not being used for signing.</p>\n            </dd>\n            <dt>ACTION_NEEDED</dt>\n            <dd>\n               <p>There is an error in the KSK that requires you to take action to resolve.</p>\n            </dd>\n            <dt>INTERNAL_FAILURE</dt>\n            <dd>\n               <p>There was an error during a request. Before you can continue to work with DNSSEC\n\t\t\t\t\tsigning, including actions that involve this KSK, you must correct the problem. For example,\n\t\t\t\t\tyou may need to activate or deactivate the KSK.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>A string that represents the current key-signing key (KSK) status.</p>\n\t\t       <p>Status can have one of the following values:</p>\n\t\t       <dl>\n            <dt>ACTIVE</dt>\n            <dd>\n               <p>The KSK is being used for signing.</p>\n            </dd>\n            <dt>INACTIVE</dt>\n            <dd>\n               <p>The KSK is not being used for signing.</p>\n            </dd>\n            <dt>DELETING</dt>\n            <dd>\n               <p>The KSK is in the process of being deleted.</p>\n            </dd>\n            <dt>ACTION_NEEDED</dt>\n            <dd>\n               <p>There is a problem with the KSK that requires you to take action to resolve.\n\t\t\t\tFor example, the customer managed customer master key (CMK) might have been deleted, or the\n\t\t\t\tpermissions for the customer managed CMK might have been changed.</p>\n            </dd>\n            <dt>INTERNAL_FAILURE</dt>\n            <dd>\n               <p>There was an error during a request. Before you can continue to work with DNSSEC\n\t\t\t\t\tsigning, including actions that involve this KSK, you must correct the problem. For example,\n\t\t\t\t\tyou may need to activate or deactivate the KSK.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "StatusMessage": {
                     "target": "com.amazonaws.route53#SigningKeyStatusMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status message provided for the following key signing key (KSK) statuses: <code>ACTION_NEEDED</code> or \n\t\t\t<code>INTERNAL_FAILURE</code>. The status message includes information about what the problem might be and steps \n\t\t\tthat you can take to correct the issue.</p>"
+                        "smithy.api#documentation": "<p>The status message provided for the following key-signing key (KSK) statuses: <code>ACTION_NEEDED</code> or \n\t\t\t<code>INTERNAL_FAILURE</code>. The status message includes information about what the problem might be and steps \n\t\t\tthat you can take to correct the issue.</p>"
                     }
                 },
                 "CreatedDate": {
                     "target": "com.amazonaws.route53#TimeStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date when the key signing key (KSK) was created.</p>"
+                        "smithy.api#documentation": "<p>The date when the key-signing key (KSK) was created.</p>"
                     }
                 },
                 "LastModifiedDate": {
                     "target": "com.amazonaws.route53#TimeStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time that the key signing key (KSK) was changed.</p>"
+                        "smithy.api#documentation": "<p>The last time that the key-signing key (KSK) was changed.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key signing key (KSK) is a complex type that represents a public/private key pair. The private key is used to generate\n\t\ta digital signature for the zone signing key (ZSK). The public key is stored in the DNS and is used to authenticate the ZSK. \n\t\tA KSK is always associated with a hosted zone; it cannot exist by itself.</p>"
+                "smithy.api#documentation": "<p>A key-signing key (KSK) is a complex type that represents a public/private key pair. The private key is used to generate\n\t\ta digital signature for the zone signing key (ZSK). The public key is stored in the DNS and is used to authenticate the ZSK. \n\t\tA KSK is always associated with a hosted zone; it cannot exist by itself.</p>"
             }
         },
         "com.amazonaws.route53#KeySigningKeyAlreadyExists": {
@@ -5028,7 +5028,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You've already created a key signing key (KSK) with this name or with the same customer managed key (CMK) ARN.</p>",
+                "smithy.api#documentation": "<p>You've already created a key-signing key (KSK) with this name or with the same customer managed customer master key (CMK) ARN.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -5041,7 +5041,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The key signing key (KSK) is specified in a parent DS record.</p>",
+                "smithy.api#documentation": "<p>The key-signing key (KSK) is specified in a parent DS record.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5054,7 +5054,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The key signing key (KSK) that you specified can't be deactivated because it's the only KSK for a\n\t\tcurrently-enabled DNSSEC. Disable DNSSEC signing, or add or enable another KSK.</p>",
+                "smithy.api#documentation": "<p>The key-signing key (KSK) that you specified can't be deactivated because it's the only KSK for a\n\t\tcurrently-enabled DNSSEC. Disable DNSSEC signing, or add or enable another KSK.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5066,7 +5066,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key signing key (KSK) with <code>ACTIVE</code> status wasn't found.</p>",
+                "smithy.api#documentation": "<p>A key-signing key (KSK) with <code>ACTIVE</code> status wasn't found.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -5149,7 +5149,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of supported geographic locations.</p>\n\t\t       <p>Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), \n\t\t\tthe subdivisions for that country are listed in alphabetical order immediately after the corresponding country.</p>\n\t\t       <p>For a list of supported geolocation codes, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html\">GeoLocation</a> data type.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of supported geographic locations.</p>\n\t\t       <p>Countries are listed first, and continents are listed last. If Amazon Route 53 supports subdivisions for a country (for example, states or provinces), \n\t\t\tthe subdivisions for that country are listed in alphabetical order immediately after the corresponding country.</p>\n\t        <p>Route 53 does not perform authorization for this API because it retrieves information that is already available to the public.</p>\n\t        <p>For a list of supported geolocation codes, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html\">GeoLocation</a> data type.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2013-04-01/geolocations",
@@ -6794,7 +6794,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The specified key signing key (KSK) doesn't exist.</p>",
+                "smithy.api#documentation": "<p>The specified key-signing key (KSK) doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -7192,7 +7192,7 @@
                 "Type": {
                     "target": "com.amazonaws.route53#RRType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DNS record type. For information about different record types and how data is encoded for them, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html\">Supported DNS Resource Record Types</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>Valid values for basic resource record sets: <code>A</code> | <code>AAAA</code> | <code>CAA</code> | <code>CNAME</code> | <code>MX</code> | \n\t\t\t<code>NAPTR</code> | <code>NS</code> | <code>PTR</code> | <code>SOA</code> | <code>SPF</code> | <code>SRV</code> | <code>TXT</code>\n         </p>\n\t\t       <p>Values for weighted, latency, geolocation, and failover resource record sets: <code>A</code> | <code>AAAA</code> | <code>CAA</code> | \n\t\t\t<code>CNAME</code> | <code>MX</code> | <code>NAPTR</code> | <code>PTR</code> | <code>SPF</code> | <code>SRV</code> | <code>TXT</code>. \n\t\t\tWhen creating a group of weighted, latency, geolocation, or failover resource record sets, specify the same value for all of the \n\t\t\tresource record sets in the group.</p>\n\t\t       <p>Valid values for multivalue answer resource record sets: <code>A</code> | <code>AAAA</code> | <code>MX</code> | <code>NAPTR</code> | \n\t\t\t<code>PTR</code> | <code>SPF</code> | <code>SRV</code> | <code>TXT</code>\n         </p>\n\t\t       <note>\n\t\t\t         <p>SPF records were formerly used to verify the identity of the sender of email messages. However, we no longer recommend that you create \n\t\t\t\tresource record sets for which the value of <code>Type</code> is <code>SPF</code>. RFC 7208, <i>Sender Policy Framework (SPF) for \n\t\t\t\tAuthorizing Use of Domains in Email, Version 1</i>, has been updated to say, \"...[I]ts existence and mechanism defined in [RFC4408] \n\t\t\t\thave led to some interoperability issues. Accordingly, its use is no longer appropriate for SPF version 1; implementations are not to \n\t\t\t\tuse it.\" In RFC 7208, see section 14.1, <a href=\"http://tools.ietf.org/html/rfc7208#section-14.1\">The SPF DNS Record Type</a>.</p>\n\t\t       </note>\n\t\t       <p>Values for alias resource record sets:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Amazon API Gateway custom regional APIs and edge-optimized APIs:</b> \n                  <code>A</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>CloudFront distributions:</b> \n                  <code>A</code>\n               </p>\n\t\t\t\t           <p>If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution, \n\t\t\t\t\tone with a value of <code>A</code> and one with a value of <code>AAAA</code>. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Amazon API Gateway environment that has a regionalized subdomain</b>: <code>A</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>ELB load balancers:</b> \n                  <code>A</code> | <code>AAAA</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Amazon S3 buckets:</b> \n                  <code>A</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Amazon Virtual Private Cloud interface VPC endpoints</b> \n                  <code>A</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Another resource record set in this hosted zone:</b> Specify the type of the resource record set \n\t\t\t\t\tthat you're creating the alias for. All values are supported except <code>NS</code> and <code>SOA</code>.</p>\n\t\t\t\t           <note>\n                  <p>If you're creating an alias record that has the same name as the hosted zone (known as the zone apex), you can't \n\t\t\t\t\troute traffic to a record for which the value of <code>Type</code> is <code>CNAME</code>. This is because the alias record \n\t\t\t\t\tmust have the same type as the record you're routing traffic to, and creating a CNAME record for the zone apex \n\t\t\t\t\tisn't supported even for an alias record.</p>\n               </note>\n\t\t\t         </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The DNS record type. For information about different record types and how data is encoded for them, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html\">Supported DNS Resource Record Types</a> \n\t\t\tin the <i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t       <p>Valid values for basic resource record sets: <code>A</code> | <code>AAAA</code> | <code>CAA</code> | <code>CNAME</code> | <code>DS</code> |<code>MX</code> | \n\t\t\t<code>NAPTR</code> | <code>NS</code> | <code>PTR</code> | <code>SOA</code> | <code>SPF</code> | <code>SRV</code> | <code>TXT</code>\n         </p>\n\t\t       <p>Values for weighted, latency, geolocation, and failover resource record sets: <code>A</code> | <code>AAAA</code> | <code>CAA</code> | \n\t\t\t<code>CNAME</code> | <code>MX</code> | <code>NAPTR</code> | <code>PTR</code> | <code>SPF</code> | <code>SRV</code> | <code>TXT</code>. \n\t\t\tWhen creating a group of weighted, latency, geolocation, or failover resource record sets, specify the same value for all of the \n\t\t\tresource record sets in the group.</p>\n\t\t       <p>Valid values for multivalue answer resource record sets: <code>A</code> | <code>AAAA</code> | <code>MX</code> | <code>NAPTR</code> | \n\t\t\t<code>PTR</code> | <code>SPF</code> | <code>SRV</code> | <code>TXT</code>\n         </p>\n\t\t       <note>\n\t\t\t         <p>SPF records were formerly used to verify the identity of the sender of email messages. However, we no longer recommend that you create \n\t\t\t\tresource record sets for which the value of <code>Type</code> is <code>SPF</code>. RFC 7208, <i>Sender Policy Framework (SPF) for \n\t\t\t\tAuthorizing Use of Domains in Email, Version 1</i>, has been updated to say, \"...[I]ts existence and mechanism defined in [RFC4408] \n\t\t\t\thave led to some interoperability issues. Accordingly, its use is no longer appropriate for SPF version 1; implementations are not to \n\t\t\t\tuse it.\" In RFC 7208, see section 14.1, <a href=\"http://tools.ietf.org/html/rfc7208#section-14.1\">The SPF DNS Record Type</a>.</p>\n\t\t       </note>\n\t\t       <p>Values for alias resource record sets:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <b>Amazon API Gateway custom regional APIs and edge-optimized APIs:</b> \n                  <code>A</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>CloudFront distributions:</b> \n                  <code>A</code>\n               </p>\n\t\t\t\t           <p>If IPv6 is enabled for the distribution, create two resource record sets to route traffic to your distribution, \n\t\t\t\t\tone with a value of <code>A</code> and one with a value of <code>AAAA</code>. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Amazon API Gateway environment that has a regionalized subdomain</b>: <code>A</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>ELB load balancers:</b> \n                  <code>A</code> | <code>AAAA</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Amazon S3 buckets:</b> \n                  <code>A</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Amazon Virtual Private Cloud interface VPC endpoints</b> \n                  <code>A</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <b>Another resource record set in this hosted zone:</b> Specify the type of the resource record set \n\t\t\t\t\tthat you're creating the alias for. All values are supported except <code>NS</code> and <code>SOA</code>.</p>\n\t\t\t\t           <note>\n                  <p>If you're creating an alias record that has the same name as the hosted zone (known as the zone apex), you can't \n\t\t\t\t\troute traffic to a record for which the value of <code>Type</code> is <code>CNAME</code>. This is because the alias record \n\t\t\t\t\tmust have the same type as the record you're routing traffic to, and creating a CNAME record for the zone apex \n\t\t\t\t\tisn't supported even for an alias record.</p>\n               </note>\n\t\t\t         </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7941,7 +7941,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You've reached the limit for the number of key signing keys (KSKs). Remove at least one KSK, and then try again.</p>",
+                "smithy.api#documentation": "<p>You've reached the limit for the number of key-signing keys (KSKs). Remove at least one KSK, and then try again.</p>",
                 "smithy.api#error": "client"
             }
         },

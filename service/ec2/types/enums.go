@@ -42,6 +42,22 @@ func (ActivityStatus) Values() []ActivityStatus {
 	}
 }
 
+type AddressAttributeName string
+
+// Enum values for AddressAttributeName
+const (
+	AddressAttributeNameDomainName AddressAttributeName = "domain-name"
+)
+
+// Values returns all known values for AddressAttributeName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AddressAttributeName) Values() []AddressAttributeName {
+	return []AddressAttributeName{
+		"domain-name",
+	}
+}
+
 type Affinity string
 
 // Enum values for Affinity
@@ -90,9 +106,10 @@ type AllocationStrategy string
 
 // Enum values for AllocationStrategy
 const (
-	AllocationStrategyLowestPrice       AllocationStrategy = "lowestPrice"
-	AllocationStrategyDiversified       AllocationStrategy = "diversified"
-	AllocationStrategyCapacityOptimized AllocationStrategy = "capacityOptimized"
+	AllocationStrategyLowestPrice                  AllocationStrategy = "lowestPrice"
+	AllocationStrategyDiversified                  AllocationStrategy = "diversified"
+	AllocationStrategyCapacityOptimized            AllocationStrategy = "capacityOptimized"
+	AllocationStrategyCapacityOptimizedPrioritized AllocationStrategy = "capacityOptimizedPrioritized"
 )
 
 // Values returns all known values for AllocationStrategy. Note that this can be
@@ -103,6 +120,7 @@ func (AllocationStrategy) Values() []AllocationStrategy {
 		"lowestPrice",
 		"diversified",
 		"capacityOptimized",
+		"capacityOptimizedPrioritized",
 	}
 }
 
@@ -4150,9 +4168,10 @@ type SpotAllocationStrategy string
 
 // Enum values for SpotAllocationStrategy
 const (
-	SpotAllocationStrategyLowestPrice       SpotAllocationStrategy = "lowest-price"
-	SpotAllocationStrategyDiversified       SpotAllocationStrategy = "diversified"
-	SpotAllocationStrategyCapacityOptimized SpotAllocationStrategy = "capacity-optimized"
+	SpotAllocationStrategyLowestPrice                  SpotAllocationStrategy = "lowest-price"
+	SpotAllocationStrategyDiversified                  SpotAllocationStrategy = "diversified"
+	SpotAllocationStrategyCapacityOptimized            SpotAllocationStrategy = "capacity-optimized"
+	SpotAllocationStrategyCapacityOptimizedPrioritized SpotAllocationStrategy = "capacity-optimized-prioritized"
 )
 
 // Values returns all known values for SpotAllocationStrategy. Note that this can
@@ -4163,6 +4182,7 @@ func (SpotAllocationStrategy) Values() []SpotAllocationStrategy {
 		"lowest-price",
 		"diversified",
 		"capacity-optimized",
+		"capacity-optimized-prioritized",
 	}
 }
 

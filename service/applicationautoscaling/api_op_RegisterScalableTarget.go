@@ -193,8 +193,8 @@ type RegisterScalableTargetInput struct {
 
 	// The maximum value that you plan to scale out to. When a scaling policy is in
 	// effect, Application Auto Scaling can scale out (expand) as needed to the maximum
-	// capacity limit in response to changing demand. This parameter is required if you
-	// are registering a scalable target. Although you can specify a large maximum
+	// capacity limit in response to changing demand. This property is required when
+	// registering a new scalable target. Although you can specify a large maximum
 	// capacity, note that service quotas may impose lower limits. Each service has its
 	// own default quotas for the maximum capacity of the resource. If you want to
 	// specify a higher limit, you can request an increase. For more information,
@@ -206,11 +206,11 @@ type RegisterScalableTargetInput struct {
 
 	// The minimum value that you plan to scale in to. When a scaling policy is in
 	// effect, Application Auto Scaling can scale in (contract) as needed to the
-	// minimum capacity limit in response to changing demand. This parameter is
-	// required if you are registering a scalable target. For certain resources, the
-	// minimum value allowed is 0. This includes Lambda provisioned concurrency, Spot
-	// Fleet, ECS services, Aurora DB clusters, EMR clusters, and custom resources. For
-	// all other resources, the minimum value allowed is 1.
+	// minimum capacity limit in response to changing demand. This property is required
+	// when registering a new scalable target. For certain resources, the minimum value
+	// allowed is 0. This includes Lambda provisioned concurrency, Spot Fleet, ECS
+	// services, Aurora DB clusters, EMR clusters, and custom resources. For all other
+	// resources, the minimum value allowed is 1.
 	MinCapacity *int32
 
 	// This parameter is required for services that do not support service-linked roles
@@ -218,7 +218,7 @@ type RegisterScalableTargetInput struct {
 	// Application Auto Scaling to modify the scalable target on your behalf. If the
 	// service supports service-linked roles, Application Auto Scaling uses a
 	// service-linked role, which it creates if it does not yet exist. For more
-	// information, see Application Auto Scaling IAM Roles
+	// information, see Application Auto Scaling IAM roles
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-roles).
 	RoleARN *string
 
@@ -240,7 +240,7 @@ type RegisterScalableTargetInput struct {
 	// activities that involve scheduled actions are suspended.
 	//
 	// For more information,
-	// see Suspending and Resuming Scaling
+	// see Suspending and resuming scaling
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html)
 	// in the Application Auto Scaling User Guide.
 	SuspendedState *types.SuspendedState

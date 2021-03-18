@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game server
+// This operation is used with the GameLift FleetIQ solution and game server
 // groups. Updates information about a registered game server to help GameLift
 // FleetIQ to track game server availability. This operation is called by a game
 // server process that is running on an instance in a game server group. Use this
@@ -37,21 +37,9 @@ import (
 // Once a game server is successfully updated, the relevant statuses and
 // timestamps are updated. Learn more GameLift FleetIQ Guide
 // (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
-// Related operations
-//
-// * RegisterGameServer
-//
-// * ListGameServers
-//
-// *
-// ClaimGameServer
-//
-// * DescribeGameServer
-//
-// * UpdateGameServer
-//
-// *
-// DeregisterGameServer
+// Related actions RegisterGameServer | ListGameServers | ClaimGameServer |
+// DescribeGameServer | UpdateGameServer | DeregisterGameServer | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/reference-awssdk-fleetiq.html)
 func (c *Client) UpdateGameServer(ctx context.Context, params *UpdateGameServerInput, optFns ...func(*Options)) (*UpdateGameServerOutput, error) {
 	if params == nil {
 		params = &UpdateGameServerInput{}

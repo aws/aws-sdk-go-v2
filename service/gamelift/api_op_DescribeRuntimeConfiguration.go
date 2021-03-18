@@ -12,46 +12,19 @@ import (
 )
 
 // Retrieves a fleet's runtime configuration settings. The runtime configuration
-// tells Amazon GameLift which server processes to run (and how) on each instance
-// in the fleet. To get a runtime configuration, specify the fleet's unique
-// identifier. If successful, a RuntimeConfiguration object is returned for the
-// requested fleet. If the requested fleet has been deleted, the result set is
-// empty. Learn more Setting up GameLift Fleets
+// tells GameLift which server processes to run (and how) on each instance in the
+// fleet. To get the runtime configuration that is currently in forces for a fleet,
+// provide the fleet ID. If successful, a RuntimeConfiguration object is returned
+// for the requested fleet. If the requested fleet has been deleted, the result set
+// is empty. Learn more Setting up GameLift fleets
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)Running
-// Multiple Processes on a Fleet
+// multiple processes on a fleet
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
-// Related operations
-//
-// * CreateFleet
-//
-// * ListFleets
-//
-// * DeleteFleet
-//
-// * Describe
-// fleets:
-//
-// * DescribeFleetAttributes
-//
-// * DescribeFleetCapacity
-//
-// *
-// DescribeFleetPortSettings
-//
-// * DescribeFleetUtilization
-//
-// *
-// DescribeRuntimeConfiguration
-//
-// * DescribeEC2InstanceLimits
-//
-// *
-// DescribeFleetEvents
-//
-// * UpdateFleetAttributes
-//
-// * StartFleetActions or
-// StopFleetActions
+// Related actions ListFleets | DescribeEC2InstanceLimits | DescribeFleetAttributes
+// | DescribeFleetCapacity | DescribeFleetEvents | DescribeFleetLocationAttributes
+// | DescribeFleetPortSettings | DescribeFleetUtilization |
+// DescribeRuntimeConfiguration | DescribeScalingPolicies | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *DescribeRuntimeConfigurationInput, optFns ...func(*Options)) (*DescribeRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeRuntimeConfigurationInput{}
@@ -70,7 +43,7 @@ func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *Descr
 // Represents the input for a request operation.
 type DescribeRuntimeConfigurationInput struct {
 
-	// A unique identifier for a fleet to get the runtime configuration for. You can
+	// A unique identifier for the fleet to get the runtime configuration for. You can
 	// use either the fleet ID or ARN value.
 	//
 	// This member is required.
@@ -80,8 +53,8 @@ type DescribeRuntimeConfigurationInput struct {
 // Represents the returned data in response to a request operation.
 type DescribeRuntimeConfigurationOutput struct {
 
-	// Instructions describing how server processes should be launched and maintained
-	// on each instance in the fleet.
+	// Instructions that describe how server processes should be launched and
+	// maintained on each instance in the fleet.
 	RuntimeConfiguration *types.RuntimeConfiguration
 
 	// Metadata pertaining to the operation's result.

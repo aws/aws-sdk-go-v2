@@ -22,6 +22,24 @@ func (AccountGateStatus) Values() []AccountGateStatus {
 	}
 }
 
+type CallAs string
+
+// Enum values for CallAs
+const (
+	CallAsSelf           CallAs = "SELF"
+	CallAsDelegatedAdmin CallAs = "DELEGATED_ADMIN"
+)
+
+// Values returns all known values for CallAs. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (CallAs) Values() []CallAs {
+	return []CallAs{
+		"SELF",
+		"DELEGATED_ADMIN",
+	}
+}
+
 type Capability string
 
 // Enum values for Capability

@@ -426,11 +426,11 @@ func validateOpCreateHsmInput(v *CreateHsmInput) error {
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
 	}
-	if v.SshKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SshKey"))
-	}
 	if v.IamRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if v.SshKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SshKey"))
 	}
 	if len(v.SubscriptionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionType"))
@@ -525,11 +525,11 @@ func validateOpGetConfigInput(v *GetConfigInput) error {
 	if v.ClientArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientArn"))
 	}
-	if len(v.ClientVersion) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientVersion"))
-	}
 	if v.HapgList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HapgList"))
+	}
+	if len(v.ClientVersion) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientVersion"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -606,11 +606,11 @@ func validateOpRemoveTagsFromResourceInput(v *RemoveTagsFromResourceInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RemoveTagsFromResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
 	if v.TagKeyList == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeyList"))
+	}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

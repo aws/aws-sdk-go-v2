@@ -14,29 +14,29 @@ import (
 // Applies one or more tags to the specified resources. Note the following:
 //
 // * Not
-// all resources can have tags. For a list of services that support tagging, see
-// this list
-// (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html).
+// all resources can have tags. For a list of services with resources that support
+// tagging using this operation, see Services that support the Resource Groups
+// Tagging API
+// (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/supported-services.html).
 //
 // *
 // Each resource can have up to 50 tags. For other limits, see Tag Naming and Usage
 // Conventions
-// (http://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html#tag-conventions)
 // in the AWS General Reference.
 //
 // * You can only tag resources that are located in
-// the specified Region for the AWS account.
+// the specified AWS Region for the AWS account.
 //
-// * To add tags to a resource, you need
-// the necessary permissions for the service that the resource belongs to as well
-// as permissions for adding tags. For more information, see this list
-// (http://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/Welcome.html).
+// * To add tags to a resource, you
+// need the necessary permissions for the service that the resource belongs to as
+// well as permissions for adding tags. For more information, see the documentation
+// for each service.
 //
-// Do
-// not store personally identifiable information (PII) or other confidential or
-// sensitive information in tags. We use tags to provide you with billing and
-// administration services. Tags are not intended to be used for private or
-// sensitive data.
+// Do not store personally identifiable information (PII) or
+// other confidential or sensitive information in tags. We use tags to provide you
+// with billing and administration services. Tags are not intended to be used for
+// private or sensitive data.
 func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, optFns ...func(*Options)) (*TagResourcesOutput, error) {
 	if params == nil {
 		params = &TagResourcesInput{}
@@ -54,17 +54,17 @@ func (c *Client) TagResources(ctx context.Context, params *TagResourcesInput, op
 
 type TagResourcesInput struct {
 
-	// A list of ARNs. An ARN (Amazon Resource Name) uniquely identifies a resource.
-	// For more information, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
+	// Specifies the list of ARNs of the resources that you want to apply tags to. An
+	// ARN (Amazon Resource Name) uniquely identifies a resource. For more information,
+	// see Amazon Resource Names (ARNs) and AWS Service Namespaces
 	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
 	// This member is required.
 	ResourceARNList []string
 
-	// The tags that you want to add to the specified resources. A tag consists of a
-	// key and a value that you define.
+	// Specifies a list of tags that you want to add to the specified resources. A tag
+	// consists of a key and a value that you define.
 	//
 	// This member is required.
 	Tags map[string]string

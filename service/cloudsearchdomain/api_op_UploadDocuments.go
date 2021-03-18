@@ -23,11 +23,11 @@ import (
 // performance, group add and delete operations in batches that are close the 5 MB
 // limit. Submitting a large volume of single-document batches can overload a
 // domain's document service. The endpoint for submitting UploadDocuments requests
-// is domain-specific and requires the --endpoint-url option. To get the document
-// endpoint for your domain, use the Amazon CloudSearch configuration service
-// DescribeDomains action. The endpoints are also available on the domain dashboard
-// in the Amazon CloudSearch console. For more information about formatting your
-// data for Amazon CloudSearch, see Preparing Your Data
+// is domain-specific. To get the document endpoint for your domain, use the Amazon
+// CloudSearch configuration service DescribeDomains action. A domain's endpoints
+// are also displayed on the domain dashboard in the Amazon CloudSearch console.
+// For more information about formatting your data for Amazon CloudSearch, see
+// Preparing Your Data
 // (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/preparing-data.html)
 // in the Amazon CloudSearch Developer Guide. For more information about uploading
 // data for indexing, see Uploading Data

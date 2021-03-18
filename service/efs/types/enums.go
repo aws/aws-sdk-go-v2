@@ -11,6 +11,7 @@ const (
 	LifeCycleStateUpdating  LifeCycleState = "updating"
 	LifeCycleStateDeleting  LifeCycleState = "deleting"
 	LifeCycleStateDeleted   LifeCycleState = "deleted"
+	LifeCycleStateError     LifeCycleState = "error"
 )
 
 // Values returns all known values for LifeCycleState. Note that this can be
@@ -23,6 +24,7 @@ func (LifeCycleState) Values() []LifeCycleState {
 		"updating",
 		"deleting",
 		"deleted",
+		"error",
 	}
 }
 

@@ -5150,6 +5150,13 @@ func awsAwsjson11_serializeOpDocumentCreateAddressBookInput(v *CreateAddressBook
 		ok.String(*v.Name)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5246,6 +5253,13 @@ func awsAwsjson11_serializeOpDocumentCreateConferenceProviderInput(v *CreateConf
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5292,6 +5306,13 @@ func awsAwsjson11_serializeOpDocumentCreateContactInput(v *CreateContactInput, v
 		}
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5312,6 +5333,13 @@ func awsAwsjson11_serializeOpDocumentCreateGatewayGroupInput(v *CreateGatewayGro
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -5364,6 +5392,13 @@ func awsAwsjson11_serializeOpDocumentCreateNetworkProfileInput(v *CreateNetworkP
 	if v.Ssid != nil {
 		ok := object.Key("Ssid")
 		ok.String(*v.Ssid)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.TrustAnchors != nil {
@@ -6323,6 +6358,13 @@ func awsAwsjson11_serializeOpDocumentRegisterAVSDeviceInput(v *RegisterAVSDevice
 	if v.RoomArn != nil {
 		ok := object.Key("RoomArn")
 		ok.String(*v.RoomArn)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.UserCode != nil {

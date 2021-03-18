@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a datastore that can ingest and export FHIR data.
+// Creates a Data Store that can ingest and export FHIR formatted data.
 func (c *Client) CreateFHIRDatastore(ctx context.Context, params *CreateFHIRDatastoreInput, optFns ...func(*Options)) (*CreateFHIRDatastoreOutput, error) {
 	if params == nil {
 		params = &CreateFHIRDatastoreInput{}
@@ -30,7 +30,7 @@ func (c *Client) CreateFHIRDatastore(ctx context.Context, params *CreateFHIRData
 
 type CreateFHIRDatastoreInput struct {
 
-	// The FHIR version of the datastore. The only supported version is R4.
+	// The FHIR version of the Data Store. The only supported version is R4.
 	//
 	// This member is required.
 	DatastoreTypeVersion types.FHIRVersion
@@ -38,35 +38,35 @@ type CreateFHIRDatastoreInput struct {
 	// Optional user provided token used for ensuring idempotency.
 	ClientToken *string
 
-	// The user generated name for the datastore.
+	// The user generated name for the Data Store.
 	DatastoreName *string
 
-	// Optional parameter to preload data upon creation of the datastore. Currently,
+	// Optional parameter to preload data upon creation of the Data Store. Currently,
 	// the only supported preloaded data is synthetic data generated from Synthea.
 	PreloadDataConfig *types.PreloadDataConfig
 }
 
 type CreateFHIRDatastoreOutput struct {
 
-	// The datastore ARN is generated during the creation of the datastore and can be
-	// found in the output from the initial datastore creation call.
+	// The datastore ARN is generated during the creation of the Data Store and can be
+	// found in the output from the initial Data Store creation call.
 	//
 	// This member is required.
 	DatastoreArn *string
 
-	// The AWS endpoint for the created datastore. For preview, only US-east-1
+	// The AWS endpoint for the created Data Store. For preview, only US-east-1
 	// endpoints are supported.
 	//
 	// This member is required.
 	DatastoreEndpoint *string
 
-	// The AWS-generated datastore id. This id is in the output from the initial
-	// datastore creation call.
+	// The AWS-generated Data Store id. This id is in the output from the initial Data
+	// Store creation call.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// The status of the FHIR datastore. Possible statuses are ‘CREATING’, ‘ACTIVE’,
+	// The status of the FHIR Data Store. Possible statuses are ‘CREATING’, ‘ACTIVE’,
 	// ‘DELETING’, ‘DELETED’.
 	//
 	// This member is required.

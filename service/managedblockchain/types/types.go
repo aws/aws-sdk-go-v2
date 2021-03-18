@@ -37,6 +37,12 @@ type ApprovalThresholdPolicy struct {
 // only to Hyperledger Fabric.
 type Invitation struct {
 
+	// The Amazon Resource Name (ARN) of the invitation. For more information about
+	// ARNs and their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
+
 	// The date and time that the invitation was created.
 	CreationDate *time.Time
 
@@ -100,6 +106,12 @@ type LogConfigurations struct {
 // Member configuration properties. Applies only to Hyperledger Fabric.
 type Member struct {
 
+	// The Amazon Resource Name (ARN) of the member. For more information about ARNs
+	// and their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
+
 	// The date and time that the member was created.
 	CreationDate *time.Time
 
@@ -143,6 +155,12 @@ type Member struct {
 	// AWS account that owns the member deleted it, or the member is being deleted as
 	// the result of an APPROVEDPROPOSAL to remove the member.
 	Status MemberStatus
+
+	// Tags assigned to the member. Tags consist of a key and optional value. For more
+	// information about tags, see Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]string
 }
 
 // Configuration properties of the member. Applies only to Hyperledger Fabric.
@@ -164,6 +182,14 @@ type MemberConfiguration struct {
 	// Configuration properties for logging events associated with a member of a
 	// Managed Blockchain network.
 	LogPublishingConfiguration *MemberLogPublishingConfiguration
+
+	// Tags assigned to the member. Tags consist of a key and optional value. For more
+	// information about tags, see Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. When
+	// specifying tags during creation, you can specify multiple key-value pairs in a
+	// single request, with an overall maximum of 50 tags added to each resource.
+	Tags map[string]string
 }
 
 // Attributes of Hyperledger Fabric for a member in a Managed Blockchain network
@@ -237,6 +263,12 @@ type MemberLogPublishingConfiguration struct {
 // Fabric.
 type MemberSummary struct {
 
+	// The Amazon Resource Name (ARN) of the member. For more information about ARNs
+	// and their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
+
 	// The date and time that the member was created.
 	CreationDate *time.Time
 
@@ -279,6 +311,12 @@ type MemberSummary struct {
 // Network configuration properties.
 type Network struct {
 
+	// The Amazon Resource Name (ARN) of the network. For more information about ARNs
+	// and their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
+
 	// The date and time that the network was created.
 	CreationDate *time.Time
 
@@ -302,6 +340,14 @@ type Network struct {
 
 	// The current status of the network.
 	Status NetworkStatus
+
+	// Tags assigned to the network. Each tag consists of a key and optional value. For
+	// more information about tags, see Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]string
 
 	// The voting rules for the network to decide if a proposal is accepted.
 	VotingPolicy *VotingPolicy
@@ -374,6 +420,12 @@ type NetworkFrameworkConfiguration struct {
 // A summary of network configuration properties.
 type NetworkSummary struct {
 
+	// The Amazon Resource Name (ARN) of the network. For more information about ARNs
+	// and their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
+
 	// The date and time that the network was created.
 	CreationDate *time.Time
 
@@ -399,7 +451,13 @@ type NetworkSummary struct {
 // Configuration properties of a node.
 type Node struct {
 
-	// The Availability Zone in which the node exists.
+	// The Amazon Resource Name (ARN) of the node. For more information about ARNs and
+	// their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
+
+	// The Availability Zone in which the node exists. Required for Ethereum nodes.
 	AvailabilityZone *string
 
 	// The date and time that the node was created.
@@ -431,6 +489,14 @@ type Node struct {
 
 	// The status of the node.
 	Status NodeStatus
+
+	// Tags assigned to the node. Each tag consists of a key and optional value. For
+	// more information about tags, see Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]string
 }
 
 // Configuration properties of a node.
@@ -441,7 +507,7 @@ type NodeConfiguration struct {
 	// This member is required.
 	InstanceType *string
 
-	// The Availability Zone in which the node exists.
+	// The Availability Zone in which the node exists. Required for Ethereum nodes.
 	AvailabilityZone *string
 
 	// Configuration properties for logging events associated with a peer node on a
@@ -529,6 +595,12 @@ type NodeLogPublishingConfiguration struct {
 // A summary of configuration properties for a node.
 type NodeSummary struct {
 
+	// The Amazon Resource Name (ARN) of the node. For more information about ARNs and
+	// their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
+
 	// The Availability Zone in which the node exists.
 	AvailabilityZone *string
 
@@ -551,6 +623,12 @@ type Proposal struct {
 
 	// The actions to perform on the network if the proposal is APPROVED.
 	Actions *ProposalActions
+
+	// The Amazon Resource Name (ARN) of the proposal. For more information about ARNs
+	// and their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
 
 	// The date and time that the proposal was created.
 	CreationDate *time.Time
@@ -608,6 +686,14 @@ type Proposal struct {
 	// ProposalAction fails and other actions are successful.
 	Status ProposalStatus
 
+	// Tags assigned to the proposal. Each tag consists of a key and optional value.
+	// For more information about tags, see Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources
+	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
+	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	Tags map[string]string
+
 	// The current total of YES votes cast on the proposal by members.
 	YesVoteCount *int32
 }
@@ -628,6 +714,12 @@ type ProposalActions struct {
 
 // Properties of a proposal. Applies only to Hyperledger Fabric.
 type ProposalSummary struct {
+
+	// The Amazon Resource Name (ARN) of the proposal. For more information about ARNs
+	// and their format, see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	Arn *string
 
 	// The date and time that the proposal was created.
 	CreationDate *time.Time

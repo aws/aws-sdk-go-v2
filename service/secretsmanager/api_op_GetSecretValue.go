@@ -69,20 +69,20 @@ type GetSecretValueInput struct {
 	SecretId *string
 
 	// Specifies the unique identifier of the version of the secret that you want to
-	// retrieve. If you specify this parameter then don't specify VersionStage. If you
-	// don't specify either a VersionStage or VersionId then the default is to perform
-	// the operation on the version with the VersionStage value of AWSCURRENT. This
-	// value is typically a UUID-type
-	// (https://wikipedia.org/wiki/Universally_unique_identifier) value with 32
-	// hexadecimal digits.
+	// retrieve. If you specify both this parameter and VersionStage, the two
+	// parameters must refer to the same secret version. If you don't specify either a
+	// VersionStage or VersionId then the default is to perform the operation on the
+	// version with the VersionStage value of AWSCURRENT. This value is typically a
+	// UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier) value with
+	// 32 hexadecimal digits.
 	VersionId *string
 
 	// Specifies the secret version that you want to retrieve by the staging label
 	// attached to the version. Staging labels are used to keep track of different
-	// versions during the rotation process. If you use this parameter then don't
-	// specify VersionId. If you don't specify either a VersionStage or VersionId, then
-	// the default is to perform the operation on the version with the VersionStage
-	// value of AWSCURRENT.
+	// versions during the rotation process. If you specify both this parameter and
+	// VersionId, the two parameters must refer to the same secret version . If you
+	// don't specify either a VersionStage or VersionId, then the default is to perform
+	// the operation on the version with the VersionStage value of AWSCURRENT.
 	VersionStage *string
 }
 

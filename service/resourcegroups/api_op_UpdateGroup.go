@@ -12,7 +12,10 @@ import (
 )
 
 // Updates the description for an existing group. You cannot update the name of a
-// resource group.
+// resource group. Minimum permissions To run this command, you must have the
+// following permissions:
+//
+// * resource-groups:UpdateGroup
 func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optFns ...func(*Options)) (*UpdateGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGroupInput{}

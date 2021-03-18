@@ -12,39 +12,38 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves properties, including the protection policy in force, for one or more
-// game sessions. This operation can be used in several ways: (1) provide a
-// GameSessionId or GameSessionArn to request details for a specific game session;
-// (2) provide either a FleetId or an AliasId to request properties for all game
-// sessions running on a fleet. To get game session record(s), specify just one of
-// the following: game session ID, fleet ID, or alias ID. You can filter this
-// request by game session status. Use the pagination parameters to retrieve
-// results as a set of sequential pages. If successful, a GameSessionDetail object
-// is returned for each session matching the request.
+// Retrieves additional game session properties, including the game session
+// protection policy in force, a set of one or more game sessions in a specific
+// fleet location. You can optionally filter the results by current game session
+// status. Alternatively, use SearchGameSessions to request a set of active game
+// sessions that are filtered by certain criteria. To retrieve all game session
+// properties, use DescribeGameSessions. This operation can be used in the
+// following ways:
 //
-// * CreateGameSession
+// * To retrieve details for all game sessions that are currently
+// running on all locations in a fleet, provide a fleet or alias ID, with an
+// optional status filter. This approach returns details from the fleet's home
+// Region and all remote locations.
 //
-// *
-// DescribeGameSessions
+// * To retrieve details for all game sessions
+// that are currently running on a specific fleet location, provide a fleet or
+// alias ID and a location name, with optional status filter. The location can be
+// the fleet's home Region or any remote location.
 //
-// * DescribeGameSessionDetails
+// * To retrieve details for a
+// specific game session, provide the game session ID. This approach looks for the
+// game session ID in all fleets that reside in the AWS Region defined in the
+// request.
 //
-// * SearchGameSessions
-//
-// *
-// UpdateGameSession
-//
-// * GetGameSessionLogUrl
-//
-// * Game session placements
-//
-// *
-// StartGameSessionPlacement
-//
-// * DescribeGameSessionPlacement
-//
-// *
-// StopGameSessionPlacement
+// Use the pagination parameters to retrieve results as a set of
+// sequential pages. If successful, a GameSessionDetail object is returned for each
+// game session that matches the request. Learn more Find a game session
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-find)
+// Related actions CreateGameSession | DescribeGameSessions |
+// DescribeGameSessionDetails | SearchGameSessions | UpdateGameSession |
+// GetGameSessionLogUrl | StartGameSessionPlacement | DescribeGameSessionPlacement
+// | StopGameSessionPlacement | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribeGameSessionDetails(ctx context.Context, params *DescribeGameSessionDetailsInput, optFns ...func(*Options)) (*DescribeGameSessionDetailsOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionDetailsInput{}
@@ -63,11 +62,11 @@ func (c *Client) DescribeGameSessionDetails(ctx context.Context, params *Describ
 // Represents the input for a request operation.
 type DescribeGameSessionDetailsInput struct {
 
-	// A unique identifier for an alias associated with the fleet to retrieve all game
+	// A unique identifier for the alias associated with the fleet to retrieve all game
 	// sessions for. You can use either the alias ID or ARN value.
 	AliasId *string
 
-	// A unique identifier for a fleet to retrieve all game sessions active on the
+	// A unique identifier for the fleet to retrieve all game sessions active on the
 	// fleet. You can use either the fleet ID or ARN value.
 	FleetId *string
 
@@ -78,7 +77,11 @@ type DescribeGameSessionDetailsInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// A fleet location to get game sessions for. You can specify a fleet's home Region
+	// or a remote location. Use the AWS Region code format, such as us-west-2.
+	Location *string
+
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
@@ -91,12 +94,12 @@ type DescribeGameSessionDetailsInput struct {
 // Represents the returned data in response to a request operation.
 type DescribeGameSessionDetailsOutput struct {
 
-	// A collection of objects containing game session properties and the protection
-	// policy currently in force for each session matching the request.
+	// A collection of properties for each game session that matches the request.
 	GameSessionDetails []types.GameSessionDetail
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

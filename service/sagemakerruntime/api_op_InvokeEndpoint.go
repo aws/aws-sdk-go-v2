@@ -86,6 +86,10 @@ type InvokeEndpointInput struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html).
 	InferenceId *string
 
+	// If the endpoint hosts multiple containers and is configured to use direct
+	// invocation, this parameter specifies the host name of the container to invoke.
+	TargetContainerHostname *string
+
 	// The model to request for inference when invoking a multi-model endpoint.
 	TargetModel *string
 

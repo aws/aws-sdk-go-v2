@@ -62,6 +62,9 @@ type CreateDataSetInput struct {
 	// A set of one or more definitions of a ColumnLevelPermissionRule.
 	ColumnLevelPermissionRules []types.ColumnLevelPermissionRule
 
+	// The folder that contains fields and nested subfolders for your dataset.
+	FieldFolders map[string]types.FieldFolder
+
 	// Configures the combination and transformation of the data from the physical
 	// tables.
 	LogicalTableMap map[string]types.LogicalTable

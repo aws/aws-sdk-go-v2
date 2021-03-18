@@ -13,8 +13,9 @@ import (
 
 // This API is in preview release for Amazon Connect and is subject to change.
 // Initiates an Amazon Connect instance with all the supported channels enabled. It
-// does not attach any storage (such as Amazon S3, or Kinesis) or allow for any
-// configurations on features such as Contact Lens for Amazon Connect.
+// does not attach any storage, such as Amazon Simple Storage Service (Amazon S3)
+// or Amazon Kinesis. It also does not allow for any configurations on features,
+// such as Contact Lens for Amazon Connect.
 func (c *Client) CreateInstance(ctx context.Context, params *CreateInstanceInput, optFns ...func(*Options)) (*CreateInstanceOutput, error) {
 	if params == nil {
 		params = &CreateInstanceInput{}
@@ -37,12 +38,12 @@ type CreateInstanceInput struct {
 	// This member is required.
 	IdentityManagementType types.DirectoryType
 
-	// Whether your contact center handles incoming contacts.
+	// Your contact center handles incoming contacts.
 	//
 	// This member is required.
 	InboundCallsEnabled *bool
 
-	// Whether your contact center allows outbound calls.
+	// Your contact center allows outbound calls.
 	//
 	// This member is required.
 	OutboundCallsEnabled *bool

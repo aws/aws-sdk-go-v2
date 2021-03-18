@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Returns the definition of a specific AWS Glue DataBrew job that is in the
-// current AWS account.
+// Returns the definition of a specific DataBrew job.
 func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optFns ...func(*Options)) (*DescribeJobOutput, error) {
 	if params == nil {
 		params = &DescribeJobInput{}
@@ -60,11 +59,15 @@ type DescribeJobOutput struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// Server-side encryption with AWS KMS-managed keys.
+	// Server-side encryption with keys managed by AWS KMS.
 	//
 	// * SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
 	EncryptionMode types.EncryptionMode
+
+	// Sample configuration for profile jobs only. Determines the number of rows on
+	// which the profile job will be executed.
+	JobSample *types.JobSample
 
 	// The identifier (user name) of the user who last modified the job.
 	LastModifiedBy *string
@@ -72,11 +75,10 @@ type DescribeJobOutput struct {
 	// The date and time that the job was last modified.
 	LastModifiedDate *time.Time
 
-	// A value that indicates whether Amazon CloudWatch logging is enabled for this
-	// job.
+	// Indicates whether Amazon CloudWatch logging is enabled for this job.
 	LogSubscription types.LogSubscription
 
-	// The maximum number of nodes that AWS Glue DataBrew can consume when the job
+	// The maximum number of compute nodes that DataBrew can consume when the job
 	// processes data.
 	MaxCapacity int32
 
@@ -89,14 +91,14 @@ type DescribeJobOutput struct {
 	// The DataBrew project associated with this job.
 	ProjectName *string
 
-	// Represents all of the attributes of an AWS Glue DataBrew recipe.
+	// Represents the name and version of a DataBrew recipe.
 	RecipeReference *types.RecipeReference
 
 	// The Amazon Resource Name (ARN) of the job.
 	ResourceArn *string
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that was assumed
-	// for this request.
+	// The ARN of the AWS Identity and Access Management (IAM) role to be assumed when
+	// DataBrew runs the job.
 	RoleArn *string
 
 	// Metadata tags associated with this job.

@@ -13,11 +13,11 @@ import (
 )
 
 // A remediation exception is when a specific resource is no longer considered for
-// auto-remediation. This API adds a new exception or updates an exisiting
-// exception for a specific resource with a specific AWS Config rule. AWS Config
-// generates a remediation exception when a problem occurs executing a remediation
-// action to a specific resource. Remediation exceptions blocks auto-remediation
-// until the exception is cleared.
+// auto-remediation. This API adds a new exception or updates an existing exception
+// for a specific resource with a specific AWS Config rule. AWS Config generates a
+// remediation exception when a problem occurs executing a remediation action to a
+// specific resource. Remediation exceptions blocks auto-remediation until the
+// exception is cleared.
 func (c *Client) PutRemediationExceptions(ctx context.Context, params *PutRemediationExceptionsInput, optFns ...func(*Options)) (*PutRemediationExceptionsOutput, error) {
 	if params == nil {
 		params = &PutRemediationExceptionsInput{}

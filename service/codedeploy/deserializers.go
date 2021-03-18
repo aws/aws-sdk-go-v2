@@ -11346,6 +11346,15 @@ func awsAwsjson11_deserializeDocumentDeploymentGroupInfo(v **types.DeploymentGro
 				return err
 			}
 
+		case "outdatedInstancesStrategy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutdatedInstancesStrategy to be of type string, got %T instead", value)
+				}
+				sv.OutdatedInstancesStrategy = types.OutdatedInstancesStrategy(jtv)
+			}
+
 		case "serviceRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11757,6 +11766,11 @@ func awsAwsjson11_deserializeDocumentDeploymentInfo(v **types.DeploymentInfo, va
 
 		case "previousRevision":
 			if err := awsAwsjson11_deserializeDocumentRevisionLocation(&sv.PreviousRevision, value); err != nil {
+				return err
+			}
+
+		case "relatedDeployments":
+			if err := awsAwsjson11_deserializeDocumentRelatedDeployments(&sv.RelatedDeployments, value); err != nil {
 				return err
 			}
 
@@ -17244,6 +17258,51 @@ func awsAwsjson11_deserializeDocumentRawString(v **types.RawString, value interf
 					return fmt.Errorf("expected RawStringSha256 to be of type string, got %T instead", value)
 				}
 				sv.Sha256 = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRelatedDeployments(v **types.RelatedDeployments, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RelatedDeployments
+	if *v == nil {
+		sv = &types.RelatedDeployments{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "autoUpdateOutdatedInstancesDeploymentIds":
+			if err := awsAwsjson11_deserializeDocumentDeploymentsList(&sv.AutoUpdateOutdatedInstancesDeploymentIds, value); err != nil {
+				return err
+			}
+
+		case "autoUpdateOutdatedInstancesRootDeploymentId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeploymentId to be of type string, got %T instead", value)
+				}
+				sv.AutoUpdateOutdatedInstancesRootDeploymentId = ptr.String(jtv)
 			}
 
 		default:

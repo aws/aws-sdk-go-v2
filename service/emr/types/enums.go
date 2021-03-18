@@ -580,6 +580,42 @@ func (NotebookExecutionStatus) Values() []NotebookExecutionStatus {
 	}
 }
 
+type OnDemandCapacityReservationPreference string
+
+// Enum values for OnDemandCapacityReservationPreference
+const (
+	OnDemandCapacityReservationPreferenceOpen OnDemandCapacityReservationPreference = "open"
+	OnDemandCapacityReservationPreferenceNone OnDemandCapacityReservationPreference = "none"
+)
+
+// Values returns all known values for OnDemandCapacityReservationPreference. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OnDemandCapacityReservationPreference) Values() []OnDemandCapacityReservationPreference {
+	return []OnDemandCapacityReservationPreference{
+		"open",
+		"none",
+	}
+}
+
+type OnDemandCapacityReservationUsageStrategy string
+
+// Enum values for OnDemandCapacityReservationUsageStrategy
+const (
+	OnDemandCapacityReservationUsageStrategyUseCapacityReservationsFirst OnDemandCapacityReservationUsageStrategy = "use-capacity-reservations-first"
+)
+
+// Values returns all known values for OnDemandCapacityReservationUsageStrategy.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OnDemandCapacityReservationUsageStrategy) Values() []OnDemandCapacityReservationUsageStrategy {
+	return []OnDemandCapacityReservationUsageStrategy{
+		"use-capacity-reservations-first",
+	}
+}
+
 type OnDemandProvisioningAllocationStrategy string
 
 // Enum values for OnDemandProvisioningAllocationStrategy

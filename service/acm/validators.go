@@ -150,6 +150,26 @@ func (m *validateOpListTagsForCertificate) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountConfiguration struct {
+}
+
+func (*validateOpPutAccountConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRemoveTagsFromCertificate struct {
 }
 
@@ -276,6 +296,10 @@ func addOpImportCertificateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForCertificate{}, middleware.After)
+}
+
+func addOpPutAccountConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountConfiguration{}, middleware.After)
 }
 
 func addOpRemoveTagsFromCertificateValidationMiddleware(stack *middleware.Stack) error {
@@ -480,6 +504,21 @@ func validateOpListTagsForCertificateInput(v *ListTagsForCertificateInput) error
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForCertificateInput"}
 	if v.CertificateArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CertificateArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountConfigurationInput(v *PutAccountConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountConfigurationInput"}
+	if v.IdempotencyToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IdempotencyToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

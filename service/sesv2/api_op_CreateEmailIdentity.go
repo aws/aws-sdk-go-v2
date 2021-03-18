@@ -29,7 +29,14 @@ import (
 // DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation
 // has to include the DkimSigningAttributes object. When you specify this object,
 // you provide a selector (a component of the DNS record name that identifies the
-// public key that you want to use for DKIM authentication) and a private key.
+// public key that you want to use for DKIM authentication) and a private key. When
+// you verify a domain, this operation provides a set of DKIM tokens, which you can
+// convert into CNAME tokens. You add these CNAME tokens to the DNS configuration
+// for your domain. Your domain is verified when Amazon SES detects these records
+// in the DNS configuration for your domain. For some DNS providers, it can take 72
+// hours or more to complete the domain verification process. Additionally, you can
+// associate an existing configuration set with the email identity that you're
+// verifying.
 func (c *Client) CreateEmailIdentity(ctx context.Context, params *CreateEmailIdentityInput, optFns ...func(*Options)) (*CreateEmailIdentityOutput, error) {
 	if params == nil {
 		params = &CreateEmailIdentityInput{}
@@ -53,6 +60,11 @@ type CreateEmailIdentityInput struct {
 	//
 	// This member is required.
 	EmailIdentity *string
+
+	// The configuration set to use by default when sending from this identity. Note
+	// that any configuration set defined in the email sending request takes
+	// precedence.
+	ConfigurationSetName *string
 
 	// If your request includes this object, Amazon SES configures the identity to use
 	// Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to

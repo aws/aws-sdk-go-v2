@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an account with an Amazon Macie master account.
+// Associates an account with an Amazon Macie administrator account.
 func (c *Client) CreateMember(ctx context.Context, params *CreateMemberInput, optFns ...func(*Options)) (*CreateMemberOutput, error) {
 	if params == nil {
 		params = &CreateMemberInput{}
@@ -29,7 +29,7 @@ func (c *Client) CreateMember(ctx context.Context, params *CreateMemberInput, op
 
 type CreateMemberInput struct {
 
-	// The details for the account to associate with the master account.
+	// The details for the account to associate with the administrator account.
 	//
 	// This member is required.
 	Account *types.AccountDetail
@@ -44,7 +44,7 @@ type CreateMemberInput struct {
 type CreateMemberOutput struct {
 
 	// The Amazon Resource Name (ARN) of the account that was associated with the
-	// master account.
+	// administrator account.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.

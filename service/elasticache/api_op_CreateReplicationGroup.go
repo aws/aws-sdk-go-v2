@@ -17,16 +17,28 @@ import (
 // Datastore. A Redis (cluster mode disabled) replication group is a collection of
 // clusters, where one of the clusters is a read/write primary and the others are
 // read-only replicas. Writes to the primary are asynchronously propagated to the
-// replicas. A Redis (cluster mode enabled) replication group is a collection of 1
-// to 90 node groups (shards). Each node group (shard) has one read/write primary
-// node and up to 5 read-only replica nodes. Writes to the primary are
-// asynchronously propagated to the replicas. Redis (cluster mode enabled)
-// replication groups partition the data across node groups (shards). When a Redis
-// (cluster mode disabled) replication group has been successfully created, you can
-// add one or more read replicas to it, up to a total of 5 read replicas. If you
-// need to increase or decrease the number of node groups (console: shards), you
-// can avail yourself of ElastiCache for Redis' scaling. For more information, see
-// Scaling ElastiCache for Redis Clusters
+// replicas. A Redis cluster-mode enabled cluster is comprised of from 1 to 90
+// shards (API/CLI: node groups). Each shard has a primary node and up to 5
+// read-only replica nodes. The configuration can range from 90 shards and 0
+// replicas to 15 shards and 5 replicas, which is the maximum number or replicas
+// allowed. The node or shard limit can be increased to a maximum of 500 per
+// cluster if the Redis engine version is 5.0.6 or higher. For example, you can
+// choose to configure a 500 node cluster that ranges between 83 shards (one
+// primary and 5 replicas per shard) and 500 shards (single primary and no
+// replicas). Make sure there are enough available IP addresses to accommodate the
+// increase. Common pitfalls include the subnets in the subnet group have too small
+// a CIDR range or the subnets are shared and heavily used by other clusters. For
+// more information, see Creating a Subnet Group
+// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html).
+// For versions below 5.0.6, the limit is 250 per cluster. To request a limit
+// increase, see AWS Service Limits
+// (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and
+// choose the limit type Nodes per cluster per instance type. When a Redis (cluster
+// mode disabled) replication group has been successfully created, you can add one
+// or more read replicas to it, up to a total of 5 read replicas. If you need to
+// increase or decrease the number of node groups (console: shards), you can avail
+// yourself of ElastiCache for Redis' scaling. For more information, see Scaling
+// ElastiCache for Redis Clusters
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html) in
 // the ElastiCache User Guide. This operation is valid for Redis only.
 func (c *Client) CreateReplicationGroup(ctx context.Context, params *CreateReplicationGroupInput, optFns ...func(*Options)) (*CreateReplicationGroupOutput, error) {
@@ -112,42 +124,42 @@ type CreateReplicationGroupInput struct {
 	// * Current generation: M6g node types (available only for Redis
 	// engine version 5.0.6 onward and for Memcached engine version 1.5.16 onward).
 	// cache.m6g.large, cache.m6g.xlarge, cache.m6g.2xlarge, cache.m6g.4xlarge,
-	// cache.m6g.8xlarge, cache.m6g.12xlarge, cache.m6g.16xlarge At this time, M6g node
-	// types are available in the following regions: us-east-1, us-west-2, us-east-2,
-	// eu-central-1, eu-west-1 and ap-northeast-1. M5 node types: cache.m5.large,
-	// cache.m5.xlarge, cache.m5.2xlarge, cache.m5.4xlarge, cache.m5.12xlarge,
-	// cache.m5.24xlarge M4 node types: cache.m4.large, cache.m4.xlarge,
-	// cache.m4.2xlarge, cache.m4.4xlarge, cache.m4.10xlarge T3 node types:
-	// cache.t3.micro, cache.t3.small, cache.t3.medium T2 node types: cache.t2.micro,
-	// cache.t2.small, cache.t2.medium
+	// cache.m6g.8xlarge, cache.m6g.12xlarge, cache.m6g.16xlarge For region
+	// availability, see Supported Node Types
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	// M5 node types: cache.m5.large, cache.m5.xlarge, cache.m5.2xlarge,
+	// cache.m5.4xlarge, cache.m5.12xlarge, cache.m5.24xlarge M4 node types:
+	// cache.m4.large, cache.m4.xlarge, cache.m4.2xlarge, cache.m4.4xlarge,
+	// cache.m4.10xlarge T3 node types: cache.t3.micro, cache.t3.small, cache.t3.medium
+	// T2 node types: cache.t2.micro, cache.t2.small, cache.t2.medium
 	//
-	// * Previous generation: (not recommended) T1
-	// node types: cache.t1.micro M1 node types: cache.m1.small, cache.m1.medium,
-	// cache.m1.large, cache.m1.xlarge M3 node types: cache.m3.medium, cache.m3.large,
-	// cache.m3.xlarge, cache.m3.2xlarge
+	// * Previous
+	// generation: (not recommended) T1 node types: cache.t1.micro M1 node types:
+	// cache.m1.small, cache.m1.medium, cache.m1.large, cache.m1.xlarge M3 node types:
+	// cache.m3.medium, cache.m3.large, cache.m3.xlarge, cache.m3.2xlarge
 	//
-	// * Compute optimized:
+	// * Compute
+	// optimized:
 	//
-	// * Previous generation:
-	// (not recommended) C1 node types: cache.c1.xlarge
+	// * Previous generation: (not recommended) C1 node types:
+	// cache.c1.xlarge
 	//
 	// * Memory optimized:
 	//
-	// * Current
-	// generation: R6g node types (available only for Redis engine version 5.0.6 onward
-	// and for Memcached engine version 1.5.16 onward). cache.r6g.large,
-	// cache.r6g.xlarge, cache.r6g.2xlarge, cache.r6g.4xlarge, cache.r6g.8xlarge,
-	// cache.r6g.12xlarge, cache.r6g.16xlarge At this time, R6g node types are
-	// available in the following regions: us-east-1, us-west-2, us-east-2,
-	// eu-central-1, eu-west-1 and ap-northeast-1. R5 node types: cache.r5.large,
-	// cache.r5.xlarge, cache.r5.2xlarge, cache.r5.4xlarge, cache.r5.12xlarge,
-	// cache.r5.24xlarge R4 node types: cache.r4.large, cache.r4.xlarge,
-	// cache.r4.2xlarge, cache.r4.4xlarge, cache.r4.8xlarge, cache.r4.16xlarge
+	// * Current generation: R6g node types
+	// (available only for Redis engine version 5.0.6 onward and for Memcached engine
+	// version 1.5.16 onward). cache.r6g.large, cache.r6g.xlarge, cache.r6g.2xlarge,
+	// cache.r6g.4xlarge, cache.r6g.8xlarge, cache.r6g.12xlarge, cache.r6g.16xlarge For
+	// region availability, see Supported Node Types
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/CacheNodes.SupportedTypes.html#CacheNodes.SupportedTypesByRegion)
+	// R5 node types: cache.r5.large, cache.r5.xlarge, cache.r5.2xlarge,
+	// cache.r5.4xlarge, cache.r5.12xlarge, cache.r5.24xlarge R4 node types:
+	// cache.r4.large, cache.r4.xlarge, cache.r4.2xlarge, cache.r4.4xlarge,
+	// cache.r4.8xlarge, cache.r4.16xlarge
 	//
-	// *
-	// Previous generation: (not recommended) M2 node types: cache.m2.xlarge,
-	// cache.m2.2xlarge, cache.m2.4xlarge R3 node types: cache.r3.large,
-	// cache.r3.xlarge, cache.r3.2xlarge,
+	// * Previous generation: (not recommended) M2
+	// node types: cache.m2.xlarge, cache.m2.2xlarge, cache.m2.4xlarge R3 node types:
+	// cache.r3.large, cache.r3.xlarge, cache.r3.2xlarge,
 	//
 	// cache.r3.4xlarge,
 	// cache.r3.8xlarge
@@ -169,18 +181,15 @@ type CreateReplicationGroupInput struct {
 
 	// The name of the parameter group to associate with this replication group. If
 	// this argument is omitted, the default cache parameter group for the specified
-	// engine is used. If you are restoring to an engine version that is different than
-	// the original, you must specify the default version of that version. For example,
-	// CacheParameterGroupName=default.redis4.0. If you are running Redis version 3.2.4
-	// or later, only one node group (shard), and want to use a default parameter
-	// group, we recommend that you specify the parameter group by name.
-	//
-	// * To create a
-	// Redis (cluster mode disabled) replication group, use
-	// CacheParameterGroupName=default.redis3.2.
+	// engine is used. If you are running Redis version 3.2.4 or later, only one node
+	// group (shard), and want to use a default parameter group, we recommend that you
+	// specify the parameter group by name.
 	//
 	// * To create a Redis (cluster mode
-	// enabled) replication group, use
+	// disabled) replication group, use CacheParameterGroupName=default.redis3.2.
+	//
+	// * To
+	// create a Redis (cluster mode enabled) replication group, use
 	// CacheParameterGroupName=default.redis3.2.cluster.on.
 	CacheParameterGroupName *string
 
@@ -195,7 +204,7 @@ type CreateReplicationGroupInput struct {
 	CacheSubnetGroupName *string
 
 	// The name of the cache engine to be used for the clusters in this replication
-	// group.
+	// group. Must be Redis.
 	Engine *string
 
 	// The version number of the cache engine to be used for the clusters in this

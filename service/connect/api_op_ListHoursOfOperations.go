@@ -39,7 +39,7 @@ type ListHoursOfOperationsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	MaxResults int32
 
 	// The token for the next set of results. Use the value returned in the previous
@@ -133,7 +133,7 @@ var _ ListHoursOfOperationsAPIClient = (*Client)(nil)
 // ListHoursOfOperationsPaginatorOptions is the paginator options for
 // ListHoursOfOperations
 type ListHoursOfOperationsPaginatorOptions struct {
-	// The maximimum number of results to return per page.
+	// The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

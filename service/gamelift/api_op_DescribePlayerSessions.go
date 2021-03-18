@@ -12,33 +12,27 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves properties for one or more player sessions. This operation can be used
-// in several ways: (1) provide a PlayerSessionId to request properties for a
-// specific player session; (2) provide a GameSessionId to request properties for
-// all player sessions in the specified game session; (3) provide a PlayerId to
-// request properties for all player sessions of a specified player. To get game
-// session record(s), specify only one of the following: a player session ID, a
-// game session ID, or a player ID. You can filter this request by player session
-// status. Use the pagination parameters to retrieve results as a set of sequential
-// pages. If successful, a PlayerSession object is returned for each session
-// matching the request. Available in Amazon GameLift Local.
+// Retrieves properties for one or more player sessions. This action can be used in
+// the following ways:
 //
-// *
-// CreatePlayerSession
+// * To retrieve a specific player session, provide the player
+// session ID only.
 //
-// * CreatePlayerSessions
+// * To retrieve all player sessions in a game session, provide
+// the game session ID only.
 //
-// * DescribePlayerSessions
+// * To retrieve all player sessions for a specific
+// player, provide a player ID only.
 //
-// * Game
-// session placements
-//
-// * StartGameSessionPlacement
-//
-// *
-// DescribeGameSessionPlacement
-//
-// * StopGameSessionPlacement
+// To request player sessions, specify either a
+// player session ID, game session ID, or player ID. You can filter this request by
+// player session status. Use the pagination parameters to retrieve results as a
+// set of sequential pages. If successful, a PlayerSession object is returned for
+// each session that matches the request. Available in Amazon GameLift Local.
+// Related actions CreatePlayerSession | CreatePlayerSessions |
+// DescribePlayerSessions | StartGameSessionPlacement |
+// DescribeGameSessionPlacement | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePlayerSessionsInput, optFns ...func(*Options)) (*DescribePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &DescribePlayerSessionsInput{}
@@ -65,7 +59,7 @@ type DescribePlayerSessionsInput struct {
 	// this parameter is ignored.
 	Limit *int32
 
-	// Token that indicates the start of the next sequential page of results. Use the
+	// A token that indicates the start of the next sequential page of results. Use the
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value. If a player session ID is
 	// specified, this parameter is ignored.
@@ -98,8 +92,9 @@ type DescribePlayerSessionsInput struct {
 // Represents the returned data in response to a request operation.
 type DescribePlayerSessionsOutput struct {
 
-	// Token that indicates where to resume retrieving results on the next call to this
-	// operation. If no token is returned, these results represent the end of the list.
+	// A token that indicates where to resume retrieving results on the next call to
+	// this operation. If no token is returned, these results represent the end of the
+	// list.
 	NextToken *string
 
 	// A collection of objects containing properties for each player session that

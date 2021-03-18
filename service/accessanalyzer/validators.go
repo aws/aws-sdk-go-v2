@@ -10,6 +10,46 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpApplyArchiveRule struct {
+}
+
+func (*validateOpApplyArchiveRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpApplyArchiveRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ApplyArchiveRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpApplyArchiveRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAccessPreview struct {
+}
+
+func (*validateOpCreateAccessPreview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccessPreview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccessPreviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccessPreviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAnalyzer struct {
 }
 
@@ -90,6 +130,26 @@ func (m *validateOpDeleteArchiveRule) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAccessPreview struct {
+}
+
+func (*validateOpGetAccessPreview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAccessPreview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAccessPreviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAccessPreviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAnalyzedResource struct {
 }
 
@@ -165,6 +225,46 @@ func (m *validateOpGetFinding) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetFindingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAccessPreviewFindings struct {
+}
+
+func (*validateOpListAccessPreviewFindings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccessPreviewFindings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessPreviewFindingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessPreviewFindingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAccessPreviews struct {
+}
+
+func (*validateOpListAccessPreviews) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccessPreviews) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessPreviewsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessPreviewsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +450,34 @@ func (m *validateOpUpdateFindings) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpValidatePolicy struct {
+}
+
+func (*validateOpValidatePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpValidatePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ValidatePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpValidatePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpApplyArchiveRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpApplyArchiveRule{}, middleware.After)
+}
+
+func addOpCreateAccessPreviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccessPreview{}, middleware.After)
+}
+
 func addOpCreateAnalyzerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAnalyzer{}, middleware.After)
 }
@@ -366,6 +494,10 @@ func addOpDeleteArchiveRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteArchiveRule{}, middleware.After)
 }
 
+func addOpGetAccessPreviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAccessPreview{}, middleware.After)
+}
+
 func addOpGetAnalyzedResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnalyzedResource{}, middleware.After)
 }
@@ -380,6 +512,14 @@ func addOpGetArchiveRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetFindingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFinding{}, middleware.After)
+}
+
+func addOpListAccessPreviewFindingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccessPreviewFindings{}, middleware.After)
+}
+
+func addOpListAccessPreviewsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccessPreviews{}, middleware.After)
 }
 
 func addOpListAnalyzedResourcesValidationMiddleware(stack *middleware.Stack) error {
@@ -418,6 +558,51 @@ func addOpUpdateFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFindings{}, middleware.After)
 }
 
+func addOpValidatePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpValidatePolicy{}, middleware.After)
+}
+
+func validateConfiguration(v types.Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Configuration"}
+	switch uv := v.(type) {
+	case *types.ConfigurationMemberKmsKey:
+		if err := validateKmsKeyConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[kmsKey]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfigurationMemberS3Bucket:
+		if err := validateS3BucketConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Bucket]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConfigurationsMap(v map[string]types.Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationsMap"}
+	for key := range v {
+		if err := validateConfiguration(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInlineArchiveRule(v *types.InlineArchiveRule) error {
 	if v == nil {
 		return nil
@@ -444,6 +629,255 @@ func validateInlineArchiveRulesList(v []types.InlineArchiveRule) error {
 	for i := range v {
 		if err := validateInlineArchiveRule(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKmsGrantConfiguration(v *types.KmsGrantConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KmsGrantConfiguration"}
+	if v.Operations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Operations"))
+	}
+	if v.GranteePrincipal == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GranteePrincipal"))
+	}
+	if v.IssuingAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IssuingAccount"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKmsGrantConfigurationsList(v []types.KmsGrantConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KmsGrantConfigurationsList"}
+	for i := range v {
+		if err := validateKmsGrantConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateKmsKeyConfiguration(v *types.KmsKeyConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "KmsKeyConfiguration"}
+	if v.Grants != nil {
+		if err := validateKmsGrantConfigurationsList(v.Grants); err != nil {
+			invalidParams.AddNested("Grants", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkOriginConfiguration(v types.NetworkOriginConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkOriginConfiguration"}
+	switch uv := v.(type) {
+	case *types.NetworkOriginConfigurationMemberVpcConfiguration:
+		if err := validateVpcConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[vpcConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3AccessPointConfiguration(v *types.S3AccessPointConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3AccessPointConfiguration"}
+	if v.PublicAccessBlock != nil {
+		if err := validateS3PublicAccessBlockConfiguration(v.PublicAccessBlock); err != nil {
+			invalidParams.AddNested("PublicAccessBlock", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.NetworkOrigin != nil {
+		if err := validateNetworkOriginConfiguration(v.NetworkOrigin); err != nil {
+			invalidParams.AddNested("NetworkOrigin", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3AccessPointConfigurationsMap(v map[string]types.S3AccessPointConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3AccessPointConfigurationsMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateS3AccessPointConfiguration(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BucketAclGrantConfiguration(v *types.S3BucketAclGrantConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketAclGrantConfiguration"}
+	if len(v.Permission) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Permission"))
+	}
+	if v.Grantee == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Grantee"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BucketAclGrantConfigurationsList(v []types.S3BucketAclGrantConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketAclGrantConfigurationsList"}
+	for i := range v {
+		if err := validateS3BucketAclGrantConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3BucketConfiguration(v *types.S3BucketConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3BucketConfiguration"}
+	if v.BucketAclGrants != nil {
+		if err := validateS3BucketAclGrantConfigurationsList(v.BucketAclGrants); err != nil {
+			invalidParams.AddNested("BucketAclGrants", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BucketPublicAccessBlock != nil {
+		if err := validateS3PublicAccessBlockConfiguration(v.BucketPublicAccessBlock); err != nil {
+			invalidParams.AddNested("BucketPublicAccessBlock", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AccessPoints != nil {
+		if err := validateS3AccessPointConfigurationsMap(v.AccessPoints); err != nil {
+			invalidParams.AddNested("AccessPoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3PublicAccessBlockConfiguration(v *types.S3PublicAccessBlockConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3PublicAccessBlockConfiguration"}
+	if v.IgnorePublicAcls == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IgnorePublicAcls"))
+	}
+	if v.RestrictPublicBuckets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RestrictPublicBuckets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcConfiguration(v *types.VpcConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcConfiguration"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpApplyArchiveRuleInput(v *ApplyArchiveRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplyArchiveRuleInput"}
+	if v.AnalyzerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzerArn"))
+	}
+	if v.RuleName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAccessPreviewInput(v *CreateAccessPreviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessPreviewInput"}
+	if v.AnalyzerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzerArn"))
+	}
+	if v.Configurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configurations"))
+	} else if v.Configurations != nil {
+		if err := validateConfigurationsMap(v.Configurations); err != nil {
+			invalidParams.AddNested("Configurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -530,6 +964,24 @@ func validateOpDeleteArchiveRuleInput(v *DeleteArchiveRuleInput) error {
 	}
 }
 
+func validateOpGetAccessPreviewInput(v *GetAccessPreviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAccessPreviewInput"}
+	if v.AccessPreviewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessPreviewId"))
+	}
+	if v.AnalyzerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAnalyzedResourceInput(v *GetAnalyzedResourceInput) error {
 	if v == nil {
 		return nil
@@ -591,6 +1043,39 @@ func validateOpGetFindingInput(v *GetFindingInput) error {
 	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAccessPreviewFindingsInput(v *ListAccessPreviewFindingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessPreviewFindingsInput"}
+	if v.AccessPreviewId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessPreviewId"))
+	}
+	if v.AnalyzerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAccessPreviewsInput(v *ListAccessPreviewsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessPreviewsInput"}
+	if v.AnalyzerArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalyzerArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -744,6 +1229,24 @@ func validateOpUpdateFindingsInput(v *UpdateFindingsInput) error {
 	}
 	if len(v.Status) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Status"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpValidatePolicyInput(v *ValidatePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidatePolicyInput"}
+	if v.PolicyDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyDocument"))
+	}
+	if len(v.PolicyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

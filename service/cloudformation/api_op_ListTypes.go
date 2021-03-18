@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns summary information about types that have been registered with
+// Returns summary information about extension that have been registered with
 // CloudFormation.
 func (c *Client) ListTypes(ctx context.Context, params *ListTypesInput, optFns ...func(*Options)) (*ListTypesOutput, error) {
 	if params == nil {
@@ -31,14 +31,14 @@ func (c *Client) ListTypes(ctx context.Context, params *ListTypesInput, optFns .
 
 type ListTypesInput struct {
 
-	// The deprecation status of the types that you want to get summary information
+	// The deprecation status of the extension that you want to get summary information
 	// about. Valid values include:
 	//
-	// * LIVE: The type is registered for use in
+	// * LIVE: The extension is registered for use in
 	// CloudFormation operations.
 	//
-	// * DEPRECATED: The type has been deregistered and can
-	// no longer be used in CloudFormation operations.
+	// * DEPRECATED: The extension has been deregistered
+	// and can no longer be used in CloudFormation operations.
 	DeprecatedStatus types.DeprecatedStatus
 
 	// The maximum number of results to be returned with a single call. If the number
@@ -59,31 +59,32 @@ type ListTypesInput struct {
 	// schema handler package submitted. Valid values include:
 	//
 	// * FULLY_MUTABLE: The
-	// type includes an update handler to process updates to the type during stack
-	// update operations.
+	// extension includes an update handler to process updates to the extension during
+	// stack update operations.
 	//
-	// * IMMUTABLE: The type does not include an update handler, so
-	// the type cannot be updated and must instead be replaced during stack update
-	// operations.
+	// * IMMUTABLE: The extension does not include an update
+	// handler, so the extension cannot be updated and must instead be replaced during
+	// stack update operations.
 	//
-	// * NON_PROVISIONABLE: The type does not include create, read, and
-	// delete handlers, and therefore cannot actually be provisioned.
+	// * NON_PROVISIONABLE: The extension does not include
+	// create, read, and delete handlers, and therefore cannot actually be provisioned.
 	ProvisioningType types.ProvisioningType
 
 	// The type of extension.
 	Type types.RegistryType
 
-	// The scope at which the type is visible and usable in CloudFormation operations.
-	// Valid values include:
+	// The scope at which the extension is visible and usable in CloudFormation
+	// operations. Valid values include:
 	//
-	// * PRIVATE: The type is only visible and usable within the
-	// account in which it is registered. Currently, AWS CloudFormation marks any types
-	// you create as PRIVATE.
+	// * PRIVATE: The extension is only visible and
+	// usable within the account in which it is registered. Currently, AWS
+	// CloudFormation marks any extension you create as PRIVATE.
 	//
-	// * PUBLIC: The type is publically visible and usable
-	// within any Amazon account.
+	// * PUBLIC: The
+	// extension is publically visible and usable within any Amazon account.
 	//
-	// The default is PRIVATE.
+	// The
+	// default is PRIVATE.
 	Visibility types.Visibility
 }
 
@@ -96,7 +97,7 @@ type ListTypesOutput struct {
 	NextToken *string
 
 	// A list of TypeSummary structures that contain information about the specified
-	// types.
+	// extensions.
 	TypeSummaries []types.TypeSummary
 
 	// Metadata pertaining to the operation's result.

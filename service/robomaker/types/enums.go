@@ -310,6 +310,7 @@ const (
 	SimulationJobErrorCodeWrongRegionS3Output                        SimulationJobErrorCode = "WrongRegionS3Output"
 	SimulationJobErrorCodeWrongRegionRobotApplication                SimulationJobErrorCode = "WrongRegionRobotApplication"
 	SimulationJobErrorCodeWrongRegionSimulationApplication           SimulationJobErrorCode = "WrongRegionSimulationApplication"
+	SimulationJobErrorCodeUploadContentMismatchError                 SimulationJobErrorCode = "UploadContentMismatchError"
 )
 
 // Values returns all known values for SimulationJobErrorCode. Note that this can
@@ -344,6 +345,7 @@ func (SimulationJobErrorCode) Values() []SimulationJobErrorCode {
 		"WrongRegionS3Output",
 		"WrongRegionRobotApplication",
 		"WrongRegionSimulationApplication",
+		"UploadContentMismatchError",
 	}
 }
 
@@ -396,6 +398,24 @@ func (SimulationSoftwareSuiteType) Values() []SimulationSoftwareSuiteType {
 	return []SimulationSoftwareSuiteType{
 		"Gazebo",
 		"RosbagPlay",
+	}
+}
+
+type UploadBehavior string
+
+// Enum values for UploadBehavior
+const (
+	UploadBehaviorUploadOnTerminate       UploadBehavior = "UPLOAD_ON_TERMINATE"
+	UploadBehaviorUploadRollingAutoRemove UploadBehavior = "UPLOAD_ROLLING_AUTO_REMOVE"
+)
+
+// Values returns all known values for UploadBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (UploadBehavior) Values() []UploadBehavior {
+	return []UploadBehavior{
+		"UPLOAD_ON_TERMINATE",
+		"UPLOAD_ROLLING_AUTO_REMOVE",
 	}
 }
 

@@ -548,6 +548,23 @@ func (e *PipelineVersionNotFoundException) ErrorCode() string {
 }
 func (e *PipelineVersionNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request failed because of an unknown error, exception, or failure.
+type RequestFailedException struct {
+	Message *string
+}
+
+func (e *RequestFailedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RequestFailedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RequestFailedException) ErrorCode() string             { return "RequestFailedException" }
+func (e *RequestFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The resource was specified in an invalid format.
 type ResourceNotFoundException struct {
 	Message *string

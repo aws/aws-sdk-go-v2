@@ -1408,7 +1408,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Creates a new Amazon EMR Studio.</p>"
+                "smithy.api#documentation": "<p>Creates a new Amazon EMR Studio.</p>"
             }
         },
         "com.amazonaws.emr#CreateStudioInput": {
@@ -1424,7 +1424,7 @@
                 "Description": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed description of the Studio.</p>"
+                        "smithy.api#documentation": "<p>A detailed description of the Amazon EMR Studio.</p>"
                     }
                 },
                 "AuthMode": {
@@ -1444,7 +1444,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.emr#SubnetIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of subnet IDs to associate with the Studio. The subnets must belong to the VPC\n         specified by <code>VpcId</code>. Studio users can create a Workspace in any of the\n         specified subnets.</p>",
+                        "smithy.api#documentation": "<p>A list of subnet IDs to associate with the Amazon EMR Studio. A Studio can have a maximum of 5 subnets. The subnets must belong to the VPC\n         specified by <code>VpcId</code>. Studio users can create a Workspace in any of the\n         specified subnets.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1458,7 +1458,7 @@
                 "UserRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM user role that will be assumed by users and groups logged in to a Studio. The\n         permissions attached to this IAM role can be scoped down for each user or group using\n         session policies.</p>",
+                        "smithy.api#documentation": "<p>The IAM user role that will be assumed by users and groups logged in to an Amazon EMR Studio. The\n         permissions attached to this IAM role can be scoped down for each user or group using\n         session policies.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1479,13 +1479,14 @@
                 "DefaultS3Location": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default Amazon S3 location to back up EMR Studio Workspaces and notebook files. A\n         Studio user can select an alternative Amazon S3 location when creating a Workspace.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.emr#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags to associate with the Studio. Tags are user-defined key-value pairs that\n         consist of a required key string with a maximum of 128 characters, and an optional value\n         string with a maximum of 256 characters.</p>"
+                        "smithy.api#documentation": "<p>A list of tags to associate with the Amazon EMR Studio. Tags are user-defined key-value pairs that\n         consist of a required key string with a maximum of 128 characters, and an optional value\n         string with a maximum of 256 characters.</p>"
                     }
                 }
             }
@@ -1521,7 +1522,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Maps a user or group to the Amazon EMR Studio specified by <code>StudioId</code>, and\n         applies a session policy to refine Studio permissions for that user or group.</p>"
+                "smithy.api#documentation": "<p>Maps a user or group to the Amazon EMR Studio specified by <code>StudioId</code>, and\n         applies a session policy to refine Studio permissions for that user or group.</p>"
             }
         },
         "com.amazonaws.emr#CreateStudioSessionMappingInput": {
@@ -1543,13 +1544,13 @@
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityType": {
                     "target": "com.amazonaws.emr#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the identity to map to the Studio is a user or a group.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the identity to map to the Amazon EMR Studio is a user or a group.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1615,7 +1616,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Removes an Amazon EMR Studio from the Studio metadata store.</p>"
+                "smithy.api#documentation": "<p>Removes an Amazon EMR Studio from the Studio metadata store.</p>"
             }
         },
         "com.amazonaws.emr#DeleteStudioInput": {
@@ -1644,7 +1645,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Removes a user or group from an Amazon EMR Studio.</p>"
+                "smithy.api#documentation": "<p>Removes a user or group from an Amazon EMR Studio.</p>"
             }
         },
         "com.amazonaws.emr#DeleteStudioSessionMappingInput": {
@@ -1666,13 +1667,13 @@
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user name or group to remove from the Studio. For more information, see\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The name of the user name or group to remove from the Amazon EMR Studio. For more information, see\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityType": {
                     "target": "com.amazonaws.emr#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the identity to delete from the Studio is a user or a group.</p>",
+                        "smithy.api#documentation": "<p>Specifies whether the identity to delete from the Amazon EMR Studio is a user or a group.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2081,7 +2082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Returns details for the specified Amazon EMR Studio including ID, Name, VPC, Studio\n         access URL, and so on.</p>"
+                "smithy.api#documentation": "<p>Returns details for the specified Amazon EMR Studio including ID, Name, VPC, Studio\n         access URL, and so on.</p>"
             }
         },
         "com.amazonaws.emr#DescribeStudioInput": {
@@ -2432,6 +2433,9 @@
                     "target": "com.amazonaws.emr#TerminateJobFlows"
                 },
                 {
+                    "target": "com.amazonaws.emr#UpdateStudio"
+                },
+                {
                     "target": "com.amazonaws.emr#UpdateStudioSessionMapping"
                 }
             ],
@@ -2625,7 +2629,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Fetches mapping details for the specified Amazon EMR Studio and identity (user or\n         group).</p>"
+                "smithy.api#documentation": "<p>Fetches mapping details for the specified Amazon EMR Studio and identity (user or\n         group).</p>"
             }
         },
         "com.amazonaws.emr#GetStudioSessionMappingInput": {
@@ -2647,7 +2651,7 @@
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group to fetch. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group to fetch. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityType": {
@@ -2676,7 +2680,7 @@
                 "Properties": {
                     "target": "com.amazonaws.emr#KeyValueList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Java properties that are set when the step runs. You can use these properties\n         to pass key value pairs to your main function.</p>"
+                        "smithy.api#documentation": "<p>A list of Java properties that are set when the step runs. You can use these properties\n         to pass key-value pairs to your main function.</p>"
                     }
                 },
                 "Jar": {
@@ -2881,7 +2885,7 @@
                 "TargetSpotCapacity": {
                     "target": "com.amazonaws.emr#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target capacity of Spot units for the instance fleet, which determines how many Spot\n         instances to provision. When the instance fleet launches, Amazon EMR tries to provision\n         Spot instances as specified by <a>InstanceTypeConfig</a>. Each instance\n         configuration has a specified <code>WeightedCapacity</code>. When a Spot instance is\n         provisioned, the <code>WeightedCapacity</code> units count toward the target capacity.\n         Amazon EMR provisions instances until the target capacity is totally fulfilled, even if\n         this results in an overage. For example, if there are 2 units remaining to fulfill\n         capacity, and Amazon EMR can only provision an instance with a\n            <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target\n         capacity is exceeded by 3 units. You can use <a>InstanceFleet$ProvisionedSpotCapacity</a> to determine the Spot capacity units\n         that have been provisioned for the instance fleet.</p>\n         <note>\n            <p>If not specified or set to 0, only On-Demand instances are provisioned for the\n            instance fleet. At least one of <code>TargetSpotCapacity</code> and\n               <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance\n            fleet, only one of <code>TargetSpotCapacity</code> and\n               <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The target capacity of Spot units for the instance fleet, which determines how many Spot\n         Instances to provision. When the instance fleet launches, Amazon EMR tries to provision\n         Spot Instances as specified by <a>InstanceTypeConfig</a>. Each instance\n         configuration has a specified <code>WeightedCapacity</code>. When a Spot instance is\n         provisioned, the <code>WeightedCapacity</code> units count toward the target capacity.\n         Amazon EMR provisions instances until the target capacity is totally fulfilled, even if\n         this results in an overage. For example, if there are 2 units remaining to fulfill\n         capacity, and Amazon EMR can only provision an instance with a\n            <code>WeightedCapacity</code> of 5 units, the instance is provisioned, and the target\n         capacity is exceeded by 3 units. You can use <a>InstanceFleet$ProvisionedSpotCapacity</a> to determine the Spot capacity units\n         that have been provisioned for the instance fleet.</p>\n         <note>\n            <p>If not specified or set to 0, only On-Demand Instances are provisioned for the\n            instance fleet. At least one of <code>TargetSpotCapacity</code> and\n               <code>TargetOnDemandCapacity</code> should be greater than 0. For a master instance\n            fleet, only one of <code>TargetSpotCapacity</code> and\n               <code>TargetOnDemandCapacity</code> can be specified, and its value must be 1.</p>\n         </note>"
                     }
                 },
                 "ProvisionedOnDemandCapacity": {
@@ -2925,7 +2929,7 @@
                 "InstanceFleetType": {
                     "target": "com.amazonaws.emr#InstanceFleetType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The node type that the instance fleet hosts. Valid values are MASTER,CORE,and\n         TASK.</p>",
+                        "smithy.api#documentation": "<p>The node type that the instance fleet hosts. Valid values are MASTER, CORE, and\n         TASK.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3199,7 +3203,7 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>.\n         Expressed in USD. If neither <code>BidPrice</code> nor\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
+                        "smithy.api#documentation": "<p>If specified, indicates that the instance group uses Spot Instances. This is the maximum price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set the amount equal to the On-Demand price, or specify an amount in USD.</p>"
                     }
                 },
                 "InstanceType": {
@@ -3304,7 +3308,7 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>.\n         Expressed in USD. If neither <code>BidPrice</code> nor\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
+                        "smithy.api#documentation": "<p>If specified, indicates that the instance group uses Spot Instances. This is the maximum price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set the amount equal to the On-Demand price, or specify an amount in USD.</p>"
                     }
                 },
                 "InstanceType": {
@@ -3382,7 +3386,7 @@
                 "BidPrice": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The bid price for each EC2 Spot Instance type as defined by <code>InstanceType</code>.\n         Expressed in USD. If neither <code>BidPrice</code> nor\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> is provided,\n            <code>BidPriceAsPercentageOfOnDemandPrice</code> defaults to 100%.</p>"
+                        "smithy.api#documentation": "<p>If specified, indicates that the instance group uses Spot Instances. This is the maximum price you are willing to pay for Spot Instances. Specify <code>OnDemandPrice</code> to set the amount equal to the On-Demand price, or specify an amount in USD.</p>"
                     }
                 },
                 "InstanceType": {
@@ -4015,7 +4019,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception occurs when there is an internal failure in the EMR service.</p>",
+                "smithy.api#documentation": "<p>This exception occurs when there is an internal failure in the Amazon EMR\n         service.</p>",
                 "smithy.api#error": "server"
             }
         },
@@ -5017,7 +5021,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of steps for the cluster in reverse order unless you specify\n            <code>stepIds</code> with the request of filter by <code>StepStates</code>. You can\n         specify a maximum of ten <code>stepIDs</code>.</p>",
+                "smithy.api#documentation": "<p>Provides a list of steps for the cluster in reverse order unless you specify\n            <code>stepIds</code> with the request of filter by <code>StepStates</code>. You can\n         specify a maximum of 10 <code>stepIDs</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5095,7 +5099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Returns a list of all user or group session mappings for the EMR Studio specified by\n            <code>StudioId</code>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all user or group session mappings for the Amazon EMR Studio specified by\n            <code>StudioId</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5132,7 +5136,7 @@
                 "SessionMappings": {
                     "target": "com.amazonaws.emr#SessionMappingSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of session mapping summary objects. Each object includes session mapping details\n         such as creation time, identity type (user or group), and Studio ID.</p>"
+                        "smithy.api#documentation": "<p>A list of session mapping summary objects. Each object includes session mapping details\n         such as creation time, identity type (user or group), and Amazon EMR Studio ID.</p>"
                     }
                 },
                 "Marker": {
@@ -5160,7 +5164,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Returns a list of all Amazon EMR Studios associated with the AWS account. The list\n         includes details such as ID, Studio Access URL, and creation time for each Studio.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all Amazon EMR Studios associated with the AWS account. The list\n         includes details such as ID, Studio Access URL, and creation time for each Studio.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5290,7 +5294,7 @@
                 "StepConcurrencyLevel": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of steps that can be executed concurrently. You can specify a maximum of 256\n         steps. </p>"
+                        "smithy.api#documentation": "<p>The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256\n         steps. </p>"
                     }
                 }
             }
@@ -5574,6 +5578,58 @@
                 "target": "com.amazonaws.emr#NotebookExecutionSummary"
             }
         },
+        "com.amazonaws.emr#OnDemandCapacityReservationOptions": {
+            "type": "structure",
+            "members": {
+                "UsageStrategy": {
+                    "target": "com.amazonaws.emr#OnDemandCapacityReservationUsageStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p>\n         <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code>).</p>\n         <p>If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>"
+                    }
+                },
+                "CapacityReservationPreference": {
+                    "target": "com.amazonaws.emr#OnDemandCapacityReservationPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the instance's Capacity Reservation preferences. Possible preferences include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>open</code> - The instance can run in any open Capacity Reservation that has matching attributes (instance type, platform, Availability Zone).</p>\n            </li>\n            <li>\n               <p>\n                  <code>none</code> - The instance avoids running in a Capacity Reservation even if one is available. The instance runs as an On-Demand Instance.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CapacityReservationResourceGroupArn": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Capacity Reservation resource group in which to run the instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the strategy for using unused Capacity Reservations for fulfilling On-Demand capacity.</p>"
+            }
+        },
+        "com.amazonaws.emr#OnDemandCapacityReservationPreference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "open",
+                        "name": "OPEN"
+                    },
+                    {
+                        "value": "none",
+                        "name": "NONE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.emr#OnDemandCapacityReservationUsageStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "use-capacity-reservations-first",
+                        "name": "USE_CAPACITY_RESERVATIONS_FIRST"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.emr#OnDemandProvisioningAllocationStrategy": {
             "type": "string",
             "traits": {
@@ -5591,8 +5647,14 @@
                 "AllocationStrategy": {
                     "target": "com.amazonaws.emr#OnDemandProvisioningAllocationStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies the strategy to use in launching On-Demand Instance fleets. Currently, the\n         only option is lowest-price (the default), which launches the lowest price first. </p>",
+                        "smithy.api#documentation": "<p>Specifies the strategy to use in launching On-Demand instance fleets. Currently, the only option is <code>lowest-price</code> (the default), which launches the lowest price first.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "CapacityReservationOptions": {
+                    "target": "com.amazonaws.emr#OnDemandCapacityReservationOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch specification for On-Demand instances in the instance fleet, which determines the allocation strategy.</p>"
                     }
                 }
             },
@@ -5778,7 +5840,7 @@
                 "ClusterArn": {
                     "target": "com.amazonaws.emr#ArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of the cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
                     }
                 }
             }
@@ -6069,7 +6131,7 @@
                 "NewSupportedProducts": {
                     "target": "com.amazonaws.emr#NewSupportedProductsList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use\n            Applications.</p>\n         </note>\n         <p>A list of strings that indicates third-party software to use with the job flow that\n         accepts a user argument list. EMR accepts and forwards the argument list to the\n         corresponding installation script as bootstrap action arguments. For more information, see\n         \"Launch a Job Flow on the MapR Distribution for Hadoop\" in the <a href=\"https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR Developer Guide</a>. Supported\n         values are:</p>\n         <ul>\n            <li>\n               <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" -\n               launch the job flow using MapR M3 or M5 Edition respectively.</p>\n            </li>\n            <li>\n               <p>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</p>\n            </li>\n            <li>\n               <p>\"hunk\" - launch the cluster with the Hunk Big Data Analtics Platform.</p>\n            </li>\n            <li>\n               <p>\"hue\"- launch the cluster with Hue installed.</p>\n            </li>\n            <li>\n               <p>\"spark\" - launch the cluster with Apache Spark installed.</p>\n            </li>\n            <li>\n               <p>\"ganglia\" - launch the cluster with the Ganglia Monitoring System\n               installed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<note>\n            <p>For Amazon EMR releases 3.x and 2.x. For Amazon EMR releases 4.x and later, use\n            Applications.</p>\n         </note>\n         <p>A list of strings that indicates third-party software to use with the job flow that\n         accepts a user argument list. EMR accepts and forwards the argument list to the\n         corresponding installation script as bootstrap action arguments. For more information, see\n         \"Launch a Job Flow on the MapR Distribution for Hadoop\" in the <a href=\"https://docs.aws.amazon.com/emr/latest/DeveloperGuide/emr-dg.pdf\">Amazon EMR Developer Guide</a>. Supported\n         values are:</p>\n         <ul>\n            <li>\n               <p>\"mapr-m3\" - launch the cluster using MapR M3 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr-m5\" - launch the cluster using MapR M5 Edition.</p>\n            </li>\n            <li>\n               <p>\"mapr\" with the user arguments specifying \"--edition,m3\" or \"--edition,m5\" -\n               launch the job flow using MapR M3 or M5 Edition respectively.</p>\n            </li>\n            <li>\n               <p>\"mapr-m7\" - launch the cluster using MapR M7 Edition.</p>\n            </li>\n            <li>\n               <p>\"hunk\" - launch the cluster with the Hunk Big Data Analytics Platform.</p>\n            </li>\n            <li>\n               <p>\"hue\"- launch the cluster with Hue installed.</p>\n            </li>\n            <li>\n               <p>\"spark\" - launch the cluster with Apache Spark installed.</p>\n            </li>\n            <li>\n               <p>\"ganglia\" - launch the cluster with the Ganglia Monitoring System\n               installed.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Applications": {
@@ -6179,13 +6241,13 @@
                 "JobFlowId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>An unique identifier for the job flow.</p>"
+                        "smithy.api#documentation": "<p>A unique identifier for the job flow.</p>"
                     }
                 },
                 "ClusterArn": {
                     "target": "com.amazonaws.emr#ArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name of the cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
                     }
                 }
             },
@@ -6378,13 +6440,13 @@
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API\n         Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API\n         Reference</i>.</p>"
                     }
                 },
                 "IdentityType": {
                     "target": "com.amazonaws.emr#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the identity mapped to the Studio is a user or a group.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the identity mapped to the Amazon EMR Studio is a user or a group.</p>"
                     }
                 },
                 "SessionPolicyArn": {
@@ -6428,13 +6490,13 @@
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API\n         Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API\n         Reference</i>.</p>"
                     }
                 },
                 "IdentityType": {
                     "target": "com.amazonaws.emr#IdentityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the identity mapped to the Studio is a user or a group.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the identity mapped to the Amazon EMR Studio is a user or a group.</p>"
                     }
                 },
                 "SessionPolicyArn": {
@@ -6610,7 +6672,7 @@
                 "BlockDurationMinutes": {
                     "target": "com.amazonaws.emr#WholeNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The defined duration for Spot Instances (also known as Spot blocks) in minutes. When\n         specified, the Spot Instance does not terminate before the defined duration expires, and\n         defined duration pricing for Spot instances applies. Valid values are 60, 120, 180, 240,\n         300, or 360. The duration period starts as soon as a Spot Instance receives its instance\n         ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and\n         provides a Spot Instance termination notice, which gives the instance a two-minute warning\n         before it terminates. </p>"
+                        "smithy.api#documentation": "<p>The defined duration for Spot Instances (also known as Spot blocks) in minutes. When\n         specified, the Spot Instance does not terminate before the defined duration expires, and\n         defined duration pricing for Spot Instances applies. Valid values are 60, 120, 180, 240,\n         300, or 360. The duration period starts as soon as a Spot Instance receives its instance\n         ID. At the end of the duration, Amazon EC2 marks the Spot Instance for termination and\n         provides a Spot Instance termination notice, which gives the instance a two-minute warning\n         before it terminates. </p>"
                     }
                 },
                 "AllocationStrategy": {
@@ -7180,37 +7242,37 @@
                 "StudioId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the EMR Studio.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon EMR Studio.</p>"
                     }
                 },
                 "StudioArn": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the EMR Studio.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EMR Studio.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the EMR Studio.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon EMR Studio.</p>"
                     }
                 },
                 "Description": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detailed description of the EMR Studio.</p>"
+                        "smithy.api#documentation": "<p>The detailed description of the Amazon EMR Studio.</p>"
                     }
                 },
                 "AuthMode": {
                     "target": "com.amazonaws.emr#AuthMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the Studio authenticates users using single sign-on (SSO) or\n         IAM.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the Amazon EMR Studio authenticates users using single sign-on (SSO) or\n         IAM.</p>"
                     }
                 },
                 "VpcId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the VPC associated with the EMR Studio.</p>"
+                        "smithy.api#documentation": "<p>The ID of the VPC associated with the Amazon EMR Studio.</p>"
                     }
                 },
                 "SubnetIds": {
@@ -7258,7 +7320,7 @@
                 "DefaultS3Location": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The default Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook\n         files.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook\n         files.</p>"
                     }
                 },
                 "Tags": {
@@ -7296,7 +7358,7 @@
                 "Description": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detailed description of the EMR Studio.</p>"
+                        "smithy.api#documentation": "<p>The detailed description of the Amazon EMR Studio.</p>"
                     }
                 },
                 "Url": {
@@ -7345,7 +7407,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The list of supported product configurations which allow user-supplied arguments. EMR\n         accepts these arguments and forwards them to the corresponding installation script as\n         bootstrap action arguments.</p>"
+                "smithy.api#documentation": "<p>The list of supported product configurations that allow user-supplied arguments. EMR\n         accepts these arguments and forwards them to the corresponding installation script as\n         bootstrap action arguments.</p>"
             }
         },
         "com.amazonaws.emr#SupportedProductsList": {
@@ -7524,6 +7586,59 @@
                 ]
             }
         },
+        "com.amazonaws.emr#UpdateStudio": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#UpdateStudioInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an Amazon EMR Studio configuration, including attributes such as name, description, and subnets.</p>"
+            }
+        },
+        "com.amazonaws.emr#UpdateStudioInput": {
+            "type": "structure",
+            "members": {
+                "StudioId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon EMR Studio to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A descriptive name for the Amazon EMR Studio.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A detailed description to assign to the Amazon EMR Studio.</p>"
+                    }
+                },
+                "SubnetIds": {
+                    "target": "com.amazonaws.emr#SubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of subnet IDs to associate with the Amazon EMR Studio. The list can include new subnet IDs, but must also include all of the subnet IDs previously associated with the Studio. The list order does not matter. A Studio can have a maximum of 5 subnets. The subnets must belong to the same VPC as the Studio. </p>"
+                    }
+                },
+                "DefaultS3Location": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location to back up Workspaces and notebook files for the Amazon EMR Studio.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.emr#UpdateStudioSessionMapping": {
             "type": "operation",
             "input": {
@@ -7538,7 +7653,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>The Amazon EMR Studio APIs are in preview release for Amazon EMR and are subject to\n            change.</p>\n         </note>\n         <p>Updates the session policy attached to the user or group for the specified Amazon EMR\n         Studio.</p>"
+                "smithy.api#documentation": "<p>Updates the session policy attached to the user or group for the specified Amazon EMR\n         Studio.</p>"
             }
         },
         "com.amazonaws.emr#UpdateStudioSessionMappingInput": {
@@ -7547,7 +7662,7 @@
                 "StudioId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the EMR Studio.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon EMR Studio.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7560,7 +7675,7 @@
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group to update. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group to update. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityType": {

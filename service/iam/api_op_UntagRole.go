@@ -11,7 +11,7 @@ import (
 )
 
 // Removes the specified tags from the role. For more information about tagging,
-// see Tagging IAM Identities
+// see Tagging IAM resources
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 // Guide.
 func (c *Client) UntagRole(ctx context.Context, params *UntagRoleInput, optFns ...func(*Options)) (*UntagRoleOutput, error) {

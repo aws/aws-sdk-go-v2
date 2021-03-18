@@ -32,11 +32,11 @@ import (
 // * To retrieve the resource policy attached to a secret, use
 // GetResourcePolicy.
 //
-// * To delete the resource-based policy that's attached to a
-// secret, use DeleteResourcePolicy.
+// * To delete the resource-based policy attached to a secret,
+// use DeleteResourcePolicy.
 //
-// * To list all of the currently available
-// secrets, use ListSecrets.
+// * To list all of the currently available secrets, use
+// ListSecrets.
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -54,19 +54,19 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// A JSON-formatted string that's constructed according to the grammar and syntax
-	// for an AWS resource-based policy. The policy in the string identifies who can
-	// access or manage this secret and its versions. For information on how to format
-	// a JSON parameter for the various command line tool environments, see Using JSON
-	// for Parameters
+	// A JSON-formatted string constructed according to the grammar and syntax for an
+	// AWS resource-based policy. The policy in the string identifies who can access or
+	// manage this secret and its versions. For information on how to format a JSON
+	// parameter for the various command line tool environments, see Using JSON for
+	// Parameters
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
 	// in the AWS CLI User Guide.
 	//
 	// This member is required.
 	ResourcePolicy *string
 
-	// Specifies the secret that you want to attach the resource-based policy to. You
-	// can specify either the ARN or the friendly name of the secret. If you specify an
+	// Specifies the secret that you want to attach the resource-based policy. You can
+	// specify either the ARN or the friendly name of the secret. If you specify an
 	// ARN, we generally recommend that you specify a complete ARN. You can specify a
 	// partial ARN too—for example, if you don’t include the final hyphen and six
 	// random characters that Secrets Manager adds at the end of the ARN when you
@@ -86,8 +86,8 @@ type PutResourcePolicyInput struct {
 	// This member is required.
 	SecretId *string
 
-	// Makes an optional API call to Zelkova to validate the Resource Policy to prevent
-	// broad access to your secret.
+	// (Optional) If you set the parameter, BlockPublicPolicy to true, then you block
+	// resource-based policies that allow broad access to the secret.
 	BlockPublicPolicy bool
 }
 
@@ -96,7 +96,7 @@ type PutResourcePolicyOutput struct {
 	// The ARN of the secret retrieved by the resource-based policy.
 	ARN *string
 
-	// The friendly name of the secret that the retrieved by the resource-based policy.
+	// The friendly name of the secret retrieved by the resource-based policy.
 	Name *string
 
 	// Metadata pertaining to the operation's result.

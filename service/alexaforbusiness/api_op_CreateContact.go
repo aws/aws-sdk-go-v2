@@ -54,6 +54,9 @@ type CreateContactInput struct {
 
 	// The list of SIP addresses for the contact.
 	SipAddresses []types.SipAddress
+
+	// The tags to be added to the specified resource. Do not provide system tags.
+	Tags []types.Tag
 }
 
 type CreateContactOutput struct {

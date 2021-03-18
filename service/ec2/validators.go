@@ -4090,6 +4090,26 @@ func (m *validateOpImportVolume) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyAddressAttribute struct {
+}
+
+func (*validateOpModifyAddressAttribute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyAddressAttribute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyAddressAttributeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyAddressAttributeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyAvailabilityZoneGroup struct {
 }
 
@@ -5365,6 +5385,26 @@ func (m *validateOpRequestSpotInstances) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRequestSpotInstancesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResetAddressAttribute struct {
+}
+
+func (*validateOpResetAddressAttribute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetAddressAttribute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetAddressAttributeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetAddressAttributeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6706,6 +6746,10 @@ func addOpImportVolumeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportVolume{}, middleware.After)
 }
 
+func addOpModifyAddressAttributeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyAddressAttribute{}, middleware.After)
+}
+
 func addOpModifyAvailabilityZoneGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyAvailabilityZoneGroup{}, middleware.After)
 }
@@ -6960,6 +7004,10 @@ func addOpRequestSpotFleetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRequestSpotInstancesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRequestSpotInstances{}, middleware.After)
+}
+
+func addOpResetAddressAttributeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetAddressAttribute{}, middleware.After)
 }
 
 func addOpResetFpgaImageAttributeValidationMiddleware(stack *middleware.Stack) error {
@@ -7778,11 +7826,11 @@ func validateOpAssociateSubnetCidrBlockInput(v *AssociateSubnetCidrBlockInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AssociateSubnetCidrBlockInput"}
-	if v.Ipv6CidrBlock == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Ipv6CidrBlock"))
-	}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if v.Ipv6CidrBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Ipv6CidrBlock"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8509,11 +8557,11 @@ func validateOpCreateNatGatewayInput(v *CreateNatGatewayInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateNatGatewayInput"}
-	if v.AllocationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AllocationId"))
-	}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if v.AllocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8734,11 +8782,11 @@ func validateOpCreateSubnetInput(v *CreateSubnetInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateSubnetInput"}
-	if v.CidrBlock == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CidrBlock"))
-	}
 	if v.VpcId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.CidrBlock == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CidrBlock"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10976,6 +11024,21 @@ func validateOpImportVolumeInput(v *ImportVolumeInput) error {
 	}
 }
 
+func validateOpModifyAddressAttributeInput(v *ModifyAddressAttributeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyAddressAttributeInput"}
+	if v.AllocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpModifyAvailabilityZoneGroupInput(v *ModifyAvailabilityZoneGroupInput) error {
 	if v == nil {
 		return nil
@@ -12024,6 +12087,24 @@ func validateOpRequestSpotInstancesInput(v *RequestSpotInstancesInput) error {
 		if err := validateRequestSpotLaunchSpecification(v.LaunchSpecification); err != nil {
 			invalidParams.AddNested("LaunchSpecification", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResetAddressAttributeInput(v *ResetAddressAttributeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetAddressAttributeInput"}
+	if v.AllocationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllocationId"))
+	}
+	if len(v.Attribute) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more users to a Users dataset. For more information see
-// importing-users.
+// Adds one or more users to a Users dataset. For more information see Importing
+// Users Incrementally
+// (https://docs.aws.amazon.com/personalize/latest/dg/importing-users.html).
 func (c *Client) PutUsers(ctx context.Context, params *PutUsersInput, optFns ...func(*Options)) (*PutUsersOutput, error) {
 	if params == nil {
 		params = &PutUsersInput{}
@@ -30,7 +31,7 @@ func (c *Client) PutUsers(ctx context.Context, params *PutUsersInput, optFns ...
 
 type PutUsersInput struct {
 
-	// The Amazon Resource Number (ARN) of the Users dataset you are adding the user or
+	// The Amazon Resource Name (ARN) of the Users dataset you are adding the user or
 	// users to.
 	//
 	// This member is required.

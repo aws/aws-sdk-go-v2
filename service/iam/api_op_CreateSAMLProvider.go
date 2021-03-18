@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -23,10 +24,10 @@ import (
 // management software that is used as your organization's IdP. This operation
 // requires Signature Version 4
 // (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html). For
-// more information, see Enabling SAML 2.0 Federated Users to Access the AWS
+// more information, see Enabling SAML 2.0 federated users to access the AWS
 // Management Console
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html)
-// and About SAML 2.0-based Federation
+// and About SAML 2.0-based federation
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html)
 // in the IAM User Guide.
 func (c *Client) CreateSAMLProvider(ctx context.Context, params *CreateSAMLProviderInput, optFns ...func(*Options)) (*CreateSAMLProviderOutput, error) {
@@ -59,12 +60,20 @@ type CreateSAMLProviderInput struct {
 	// can be used to validate the SAML authentication response (assertions) that are
 	// received from the IdP. You must generate the metadata document using the
 	// identity management software that is used as your organization's IdP. For more
-	// information, see About SAML 2.0-based Federation
+	// information, see About SAML 2.0-based federation
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html)
 	// in the IAM User Guide
 	//
 	// This member is required.
 	SAMLMetadataDocument *string
+
+	// A list of tags that you want to attach to the new IAM SAML provider. Each tag
+	// consists of a key name and an associated value. For more information about
+	// tagging, see Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
+	// number of tags, then the entire request fails and the resource is not created.
+	Tags []types.Tag
 }
 
 // Contains the response to a successful CreateSAMLProvider request.
@@ -72,6 +81,12 @@ type CreateSAMLProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the new SAML provider resource in IAM.
 	SAMLProviderArn *string
+
+	// A list of tags that are attached to the new IAM SAML provider. The returned list
+	// of tags is sorted by tag key. For more information about tagging, see Tagging
+	// IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in
+	// the IAM User Guide.
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

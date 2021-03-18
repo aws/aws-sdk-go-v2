@@ -11,8 +11,9 @@ import (
 )
 
 // Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its
-// attendees are also deleted and clients can no longer join it. For more
-// information about the Amazon Chime SDK, see Using the Amazon Chime SDK
+// attendees are also deleted, clients connected to the meeting are disconnected,
+// and clients can no longer join the meeting. For more information about the
+// Amazon Chime SDK, see Using the Amazon Chime SDK
 // (https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html) in the Amazon
 // Chime Developer Guide.
 func (c *Client) DeleteMeeting(ctx context.Context, params *DeleteMeetingInput, optFns ...func(*Options)) (*DeleteMeetingOutput, error) {

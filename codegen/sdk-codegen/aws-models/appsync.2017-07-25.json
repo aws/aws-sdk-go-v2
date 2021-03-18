@@ -685,7 +685,7 @@
                 "smithy.api#documentation": "<p>Creates a cache for the GraphQL API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/ApiCaches",
+                    "uri": "/v1/apis/{apiId}/ApiCaches",
                     "code": 200
                 }
             }
@@ -788,7 +788,7 @@
                 "smithy.api#documentation": "<p>Creates a unique key that you can distribute to clients who are executing your\n         API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/apikeys",
+                    "uri": "/v1/apis/{apiId}/apikeys",
                     "code": 200
                 }
             }
@@ -858,7 +858,7 @@
                 "smithy.api#documentation": "<p>Creates a <code>DataSource</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/datasources",
+                    "uri": "/v1/apis/{apiId}/datasources",
                     "code": 200
                 }
             }
@@ -969,7 +969,7 @@
                 "smithy.api#documentation": "<p>Creates a <code>Function</code> object.</p>\n         <p>A function is a reusable entity. Multiple functions can be used to compose the resolver\n         logic.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/functions",
+                    "uri": "/v1/apis/{apiId}/functions",
                     "code": 200
                 }
             }
@@ -1023,6 +1023,9 @@
                         "smithy.api#documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value\n         is 2018-05-29. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "syncConfig": {
+                    "target": "com.amazonaws.appsync#SyncConfig"
                 }
             }
         },
@@ -1069,7 +1072,7 @@
                 "smithy.api#documentation": "<p>Creates a <code>GraphqlApi</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis",
+                    "uri": "/v1/apis",
                     "code": 200
                 }
             }
@@ -1166,7 +1169,7 @@
                 "smithy.api#documentation": "<p>Creates a <code>Resolver</code> object.</p>\n         <p>A resolver converts incoming requests into a format that a data source can understand\n         and converts the data source's responses into GraphQL.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/types/{typeName}/resolvers",
+                    "uri": "/v1/apis/{apiId}/types/{typeName}/resolvers",
                     "code": 200
                 }
             }
@@ -1281,7 +1284,7 @@
                 "smithy.api#documentation": "<p>Creates a <code>Type</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/types",
+                    "uri": "/v1/apis/{apiId}/types",
                     "code": 200
                 }
             }
@@ -1473,7 +1476,7 @@
                 "smithy.api#documentation": "<p>Deletes an <code>ApiCache</code> object.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/apis/{apiId}/ApiCaches",
+                    "uri": "/v1/apis/{apiId}/ApiCaches",
                     "code": 200
                 }
             }
@@ -1527,7 +1530,7 @@
                 "smithy.api#documentation": "<p>Deletes an API key.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/apis/{apiId}/apikeys/{id}",
+                    "uri": "/v1/apis/{apiId}/apikeys/{id}",
                     "code": 200
                 }
             }
@@ -1586,7 +1589,7 @@
                 "smithy.api#documentation": "<p>Deletes a <code>DataSource</code> object.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/apis/{apiId}/datasources/{name}",
+                    "uri": "/v1/apis/{apiId}/datasources/{name}",
                     "code": 200
                 }
             }
@@ -1642,7 +1645,7 @@
                 "smithy.api#documentation": "<p>Deletes a <code>Function</code>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/apis/{apiId}/functions/{functionId}",
+                    "uri": "/v1/apis/{apiId}/functions/{functionId}",
                     "code": 200
                 }
             }
@@ -1704,7 +1707,7 @@
                 "smithy.api#documentation": "<p>Deletes a <code>GraphqlApi</code> object.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/apis/{apiId}",
+                    "uri": "/v1/apis/{apiId}",
                     "code": 200
                 }
             }
@@ -1752,7 +1755,7 @@
                 "smithy.api#documentation": "<p>Deletes a <code>Resolver</code> object.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
+                    "uri": "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
                     "code": 200
                 }
             }
@@ -1819,7 +1822,7 @@
                 "smithy.api#documentation": "<p>Deletes a <code>Type</code> object.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/apis/{apiId}/types/{typeName}",
+                    "uri": "/v1/apis/{apiId}/types/{typeName}",
                     "code": 200
                 }
             }
@@ -1988,7 +1991,7 @@
                 "smithy.api#documentation": "<p>Flushes an <code>ApiCache</code> object.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/apis/{apiId}/FlushCache",
+                    "uri": "/v1/apis/{apiId}/FlushCache",
                     "code": 200
                 }
             }
@@ -2066,6 +2069,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the request mapping template. Currently only the 2018-05-29 version of\n         the template is supported.</p>"
                     }
+                },
+                "syncConfig": {
+                    "target": "com.amazonaws.appsync#SyncConfig"
                 }
             },
             "traits": {
@@ -2113,7 +2119,7 @@
                 "smithy.api#documentation": "<p>Retrieves an <code>ApiCache</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/ApiCaches",
+                    "uri": "/v1/apis/{apiId}/ApiCaches",
                     "code": 200
                 }
             }
@@ -2177,7 +2183,7 @@
                 "smithy.api#documentation": "<p>Retrieves a <code>DataSource</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/datasources/{name}",
+                    "uri": "/v1/apis/{apiId}/datasources/{name}",
                     "code": 200
                 }
             }
@@ -2237,7 +2243,7 @@
                 "smithy.api#documentation": "<p>Get a <code>Function</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/functions/{functionId}",
+                    "uri": "/v1/apis/{apiId}/functions/{functionId}",
                     "code": 200
                 }
             }
@@ -2303,7 +2309,7 @@
                 "smithy.api#documentation": "<p>Retrieves a <code>GraphqlApi</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}",
+                    "uri": "/v1/apis/{apiId}",
                     "code": 200
                 }
             }
@@ -2358,7 +2364,7 @@
                 "smithy.api#documentation": "<p>Retrieves the introspection schema for a GraphQL API.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/schema",
+                    "uri": "/v1/apis/{apiId}/schema",
                     "code": 200
                 }
             }
@@ -2426,7 +2432,7 @@
                 "smithy.api#documentation": "<p>Retrieves a <code>Resolver</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
+                    "uri": "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
                     "code": 200
                 }
             }
@@ -2497,7 +2503,7 @@
                 "smithy.api#documentation": "<p>Retrieves the current status of a schema creation operation.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/schemacreation",
+                    "uri": "/v1/apis/{apiId}/schemacreation",
                     "code": 200
                 }
             }
@@ -2561,7 +2567,7 @@
                 "smithy.api#documentation": "<p>Retrieves a <code>Type</code> object.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/types/{typeName}",
+                    "uri": "/v1/apis/{apiId}/types/{typeName}",
                     "code": 200
                 }
             }
@@ -2806,7 +2812,7 @@
                 "smithy.api#documentation": "<p>Lists the API keys for a given API.</p>\n         <note>\n            <p>API keys are deleted automatically 60 days after they expire. However, they may\n            still be included in the response until they have actually been deleted. You can safely\n            call <code>DeleteApiKey</code> to manually delete a key before it's automatically\n            deleted.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/apikeys",
+                    "uri": "/v1/apis/{apiId}/apikeys",
                     "code": 200
                 }
             }
@@ -2881,7 +2887,7 @@
                 "smithy.api#documentation": "<p>Lists the data sources for a given API.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/datasources",
+                    "uri": "/v1/apis/{apiId}/datasources",
                     "code": 200
                 }
             }
@@ -2956,7 +2962,7 @@
                 "smithy.api#documentation": "<p>List multiple functions.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/functions",
+                    "uri": "/v1/apis/{apiId}/functions",
                     "code": 200
                 }
             }
@@ -3028,7 +3034,7 @@
                 "smithy.api#documentation": "<p>Lists your GraphQL APIs.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis",
+                    "uri": "/v1/apis",
                     "code": 200
                 }
             }
@@ -3095,7 +3101,7 @@
                 "smithy.api#documentation": "<p>Lists the resolvers for a given API and type.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/types/{typeName}/resolvers",
+                    "uri": "/v1/apis/{apiId}/types/{typeName}/resolvers",
                     "code": 200
                 }
             }
@@ -3126,7 +3132,7 @@
                 "smithy.api#documentation": "<p>List the resolvers that are associated with a specific function.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/functions/{functionId}/resolvers",
+                    "uri": "/v1/apis/{apiId}/functions/{functionId}/resolvers",
                     "code": 200
                 }
             }
@@ -3267,7 +3273,7 @@
                 "smithy.api#documentation": "<p>Lists the tags for a resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/tags/{resourceArn}",
+                    "uri": "/v1/tags/{resourceArn}",
                     "code": 200
                 }
             }
@@ -3325,7 +3331,7 @@
                 "smithy.api#documentation": "<p>Lists the types for a given API.</p>",
                 "smithy.api#http": {
                     "method": "GET",
-                    "uri": "/apis/{apiId}/types",
+                    "uri": "/v1/apis/{apiId}/types",
                     "code": 200
                 }
             }
@@ -3763,7 +3769,7 @@
                 "smithy.api#documentation": "<p>Adds a new schema to your GraphQL API.</p>\n         <p>This operation is asynchronous. Use  to\n         determine when it has completed.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/schemacreation",
+                    "uri": "/v1/apis/{apiId}/schemacreation",
                     "code": 200
                 }
             }
@@ -3899,7 +3905,7 @@
                 "smithy.api#documentation": "<p>Tags a resource with user-supplied tags.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/tags/{resourceArn}",
+                    "uri": "/v1/tags/{resourceArn}",
                     "code": 200
                 }
             }
@@ -4042,7 +4048,7 @@
                 "smithy.api#documentation": "<p>Untags a resource.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
-                    "uri": "/tags/{resourceArn}",
+                    "uri": "/v1/tags/{resourceArn}",
                     "code": 200
                 }
             }
@@ -4101,7 +4107,7 @@
                 "smithy.api#documentation": "<p>Updates the cache for the GraphQL API.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/ApiCaches/update",
+                    "uri": "/v1/apis/{apiId}/ApiCaches/update",
                     "code": 200
                 }
             }
@@ -4189,7 +4195,7 @@
                 "smithy.api#documentation": "<p>Updates an API key. The key can be updated while it is not deleted.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/apikeys/{id}",
+                    "uri": "/v1/apis/{apiId}/apikeys/{id}",
                     "code": 200
                 }
             }
@@ -4267,7 +4273,7 @@
                 "smithy.api#documentation": "<p>Updates a <code>DataSource</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/datasources/{name}",
+                    "uri": "/v1/apis/{apiId}/datasources/{name}",
                     "code": 200
                 }
             }
@@ -4379,7 +4385,7 @@
                 "smithy.api#documentation": "<p>Updates a <code>Function</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/functions/{functionId}",
+                    "uri": "/v1/apis/{apiId}/functions/{functionId}",
                     "code": 200
                 }
             }
@@ -4441,6 +4447,9 @@
                         "smithy.api#documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value\n         is 2018-05-29. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "syncConfig": {
+                    "target": "com.amazonaws.appsync#SyncConfig"
                 }
             }
         },
@@ -4487,7 +4496,7 @@
                 "smithy.api#documentation": "<p>Updates a <code>GraphqlApi</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}",
+                    "uri": "/v1/apis/{apiId}",
                     "code": 200
                 }
             }
@@ -4585,7 +4594,7 @@
                 "smithy.api#documentation": "<p>Updates a <code>Resolver</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
+                    "uri": "/v1/apis/{apiId}/types/{typeName}/resolvers/{fieldName}",
                     "code": 200
                 }
             }
@@ -4701,7 +4710,7 @@
                 "smithy.api#documentation": "<p>Updates a <code>Type</code> object.</p>",
                 "smithy.api#http": {
                     "method": "POST",
-                    "uri": "/apis/{apiId}/types/{typeName}",
+                    "uri": "/v1/apis/{apiId}/types/{typeName}",
                     "code": 200
                 }
             }

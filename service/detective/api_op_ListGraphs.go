@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of behavior graphs that the calling account is a master of.
-// This operation can only be called by a master account. Because an account can
-// currently only be the master of one behavior graph within a Region, the results
-// always contain a single graph.
+// Returns the list of behavior graphs that the calling account is an administrator
+// account of. This operation can only be called by an administrator account.
+// Because an account can currently only be the administrator of one behavior graph
+// within a Region, the results always contain a single behavior graph.
 func (c *Client) ListGraphs(ctx context.Context, params *ListGraphsInput, optFns ...func(*Options)) (*ListGraphsOutput, error) {
 	if params == nil {
 		params = &ListGraphsInput{}
@@ -45,7 +45,7 @@ type ListGraphsInput struct {
 
 type ListGraphsOutput struct {
 
-	// A list of behavior graphs that the account is a master for.
+	// A list of behavior graphs that the account is an administrator account for.
 	GraphList []types.Graph
 
 	// If there are more behavior graphs remaining in the results, then this is the

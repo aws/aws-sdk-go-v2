@@ -15,9 +15,9 @@ import (
 // and granted access to all of the Apps and files associated with the Domain's
 // Amazon Elastic File System (EFS) volume. This operation can only be called when
 // the authentication mode equals IAM. The URL that you get from a call to
-// CreatePresignedDomainUrl is valid only for 5 minutes. If you try to use the URL
-// after the 5-minute limit expires, you are directed to the AWS console sign-in
-// page.
+// CreatePresignedDomainUrl has a default timeout of 5 minutes. You can configure
+// this value using ExpiresInSeconds. If you try to use the URL after the timeout
+// limit expires, you are directed to the AWS console sign-in page.
 func (c *Client) CreatePresignedDomainUrl(ctx context.Context, params *CreatePresignedDomainUrlInput, optFns ...func(*Options)) (*CreatePresignedDomainUrlOutput, error) {
 	if params == nil {
 		params = &CreatePresignedDomainUrlInput{}
@@ -45,7 +45,11 @@ type CreatePresignedDomainUrlInput struct {
 	// This member is required.
 	UserProfileName *string
 
-	// The session expiration duration in seconds.
+	// The number of seconds until the pre-signed URL expires. This value defaults to
+	// 300.
+	ExpiresInSeconds *int32
+
+	// The session expiration duration in seconds. This value defaults to 43200.
 	SessionExpirationDurationInSeconds *int32
 }
 

@@ -19,9 +19,12 @@ import (
 // policies in your AWS account, set Scope to Local. To list only AWS managed
 // policies, set Scope to AWS. You can paginate the results using the MaxItems and
 // Marker parameters. For more information about managed policies, see Managed
-// Policies and Inline Policies
+// policies and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
+// in the IAM User Guide. IAM resource-listing operations return a subset of the
+// available attributes for the resource. For example, this operation does not
+// return tags, even though they are an attribute of the returned object. To view
+// all of the information for a customer manged policy, see GetPolicy.
 func (c *Client) ListPolicies(ctx context.Context, params *ListPoliciesInput, optFns ...func(*Options)) (*ListPoliciesOutput, error) {
 	if params == nil {
 		params = &ListPoliciesInput{}

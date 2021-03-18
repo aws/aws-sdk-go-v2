@@ -609,11 +609,11 @@ func validateRDSDatabaseCredentials(v *types.RDSDatabaseCredentials) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RDSDatabaseCredentials"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -627,15 +627,27 @@ func validateRDSDataSpec(v *types.RDSDataSpec) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RDSDataSpec"}
+	if v.ResourceRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceRole"))
+	}
+	if v.ServiceRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
+	}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.S3StagingLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3StagingLocation"))
+	}
+	if v.SelectSqlQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectSqlQuery"))
+	}
 	if v.DatabaseInformation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseInformation"))
 	} else if v.DatabaseInformation != nil {
 		if err := validateRDSDatabase(v.DatabaseInformation); err != nil {
 			invalidParams.AddNested("DatabaseInformation", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.SelectSqlQuery == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SelectSqlQuery"))
 	}
 	if v.DatabaseCredentials == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseCredentials"))
@@ -644,20 +656,8 @@ func validateRDSDataSpec(v *types.RDSDataSpec) error {
 			invalidParams.AddNested("DatabaseCredentials", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.S3StagingLocation == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("S3StagingLocation"))
-	}
-	if v.ResourceRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceRole"))
-	}
-	if v.ServiceRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
-	}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
-	}
-	if v.SecurityGroupIds == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -671,11 +671,11 @@ func validateRedshiftDatabase(v *types.RedshiftDatabase) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftDatabase"}
-	if v.DatabaseName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
-	}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -689,11 +689,11 @@ func validateRedshiftDatabaseCredentials(v *types.RedshiftDatabaseCredentials) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftDatabaseCredentials"}
-	if v.Username == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Username"))
-	}
 	if v.Password == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -707,16 +707,6 @@ func validateRedshiftDataSpec(v *types.RedshiftDataSpec) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RedshiftDataSpec"}
-	if v.DatabaseInformation == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseInformation"))
-	} else if v.DatabaseInformation != nil {
-		if err := validateRedshiftDatabase(v.DatabaseInformation); err != nil {
-			invalidParams.AddNested("DatabaseInformation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.SelectSqlQuery == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SelectSqlQuery"))
-	}
 	if v.DatabaseCredentials == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DatabaseCredentials"))
 	} else if v.DatabaseCredentials != nil {
@@ -724,8 +714,18 @@ func validateRedshiftDataSpec(v *types.RedshiftDataSpec) error {
 			invalidParams.AddNested("DatabaseCredentials", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SelectSqlQuery == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectSqlQuery"))
+	}
 	if v.S3StagingLocation == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3StagingLocation"))
+	}
+	if v.DatabaseInformation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseInformation"))
+	} else if v.DatabaseInformation != nil {
+		if err := validateRedshiftDatabase(v.DatabaseInformation); err != nil {
+			invalidParams.AddNested("DatabaseInformation", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -754,14 +754,14 @@ func validateOpAddTagsInput(v *AddTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AddTagsInput"}
-	if v.Tags == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}
-	if len(v.ResourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -778,11 +778,11 @@ func validateOpCreateBatchPredictionInput(v *CreateBatchPredictionInput) error {
 	if v.BatchPredictionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BatchPredictionId"))
 	}
-	if v.MLModelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MLModelId"))
-	}
 	if v.BatchPredictionDataSourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BatchPredictionDataSourceId"))
+	}
+	if v.MLModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MLModelId"))
 	}
 	if v.OutputUri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputUri"))
@@ -871,14 +871,14 @@ func validateOpCreateEvaluationInput(v *CreateEvaluationInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateEvaluationInput"}
+	if v.EvaluationDataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EvaluationDataSourceId"))
+	}
 	if v.EvaluationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EvaluationId"))
 	}
 	if v.MLModelId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MLModelId"))
-	}
-	if v.EvaluationDataSourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EvaluationDataSourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1003,14 +1003,14 @@ func validateOpDeleteTagsInput(v *DeleteTagsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteTagsInput"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
-	}
-	if len(v.ResourceType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1102,14 +1102,14 @@ func validateOpPredictInput(v *PredictInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PredictInput"}
-	if v.MLModelId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MLModelId"))
-	}
 	if v.Record == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Record"))
 	}
 	if v.PredictEndpoint == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PredictEndpoint"))
+	}
+	if v.MLModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MLModelId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1141,11 +1141,11 @@ func validateOpUpdateDataSourceInput(v *UpdateDataSourceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDataSourceInput"}
-	if v.DataSourceId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
-	}
 	if v.DataSourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSourceName"))
+	}
+	if v.DataSourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSourceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

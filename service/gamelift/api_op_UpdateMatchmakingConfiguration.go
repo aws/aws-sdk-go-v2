@@ -14,29 +14,14 @@ import (
 // Updates settings for a FlexMatch matchmaking configuration. These changes affect
 // all matches and game sessions that are created after the update. To update
 // settings, specify the configuration name to be updated and provide the new
-// settings. Learn more  Design a FlexMatch Matchmaker
+// settings. Learn more  Design a FlexMatch matchmaker
 // (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
-// Related operations
-//
-// * CreateMatchmakingConfiguration
-//
-// *
-// DescribeMatchmakingConfigurations
-//
-// * UpdateMatchmakingConfiguration
-//
-// *
-// DeleteMatchmakingConfiguration
-//
-// * CreateMatchmakingRuleSet
-//
-// *
-// DescribeMatchmakingRuleSets
-//
-// * ValidateMatchmakingRuleSet
-//
-// *
-// DeleteMatchmakingRuleSet
+// Related actions CreateMatchmakingConfiguration |
+// DescribeMatchmakingConfigurations | UpdateMatchmakingConfiguration |
+// DeleteMatchmakingConfiguration | CreateMatchmakingRuleSet |
+// DescribeMatchmakingRuleSets | ValidateMatchmakingRuleSet |
+// DeleteMatchmakingRuleSet | All APIs by task
+// (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
 func (c *Client) UpdateMatchmakingConfiguration(ctx context.Context, params *UpdateMatchmakingConfigurationInput, optFns ...func(*Options)) (*UpdateMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateMatchmakingConfigurationInput{}
@@ -55,7 +40,7 @@ func (c *Client) UpdateMatchmakingConfiguration(ctx context.Context, params *Upd
 // Represents the input for a request operation.
 type UpdateMatchmakingConfigurationInput struct {
 
-	// A unique identifier for a matchmaking configuration to update. You can use
+	// A unique identifier for the matchmaking configuration to update. You can use
 	// either the configuration name or ARN value.
 	//
 	// This member is required.
@@ -68,16 +53,14 @@ type UpdateMatchmakingConfigurationInput struct {
 	AcceptanceRequired *bool
 
 	// The length of time (in seconds) to wait for players to accept a proposed match,
-	// if acceptance is required. If any player rejects the match or fails to accept
-	// before the timeout, the tickets are returned to the ticket pool and continue to
-	// be evaluated for an acceptable match.
+	// if acceptance is required.
 	AcceptanceTimeoutSeconds *int32
 
 	// The number of player slots in a match to keep open for future players. For
-	// example, assume that the configuration's rule set specifies a match for a single
-	// 12-person team. If the additional player count is set to 2, only 10 players are
-	// initially selected for the match. This parameter is not used if FlexMatchMode is
-	// set to STANDALONE.
+	// example, if the configuration's rule set specifies a match for a single
+	// 12-person team, and the additional player count is set to 2, only 10 players are
+	// selected for the match. This parameter is not used if FlexMatchMode is set to
+	// STANDALONE.
 	AdditionalPlayerCount *int32
 
 	// The method that is used to backfill game sessions created with this matchmaking
@@ -109,7 +92,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// queue to start a game session for the match.
 	FlexMatchMode types.FlexMatchMode
 
-	// A set of custom properties for a game session, formatted as key-value pairs.
+	// A set of custom properties for a game session, formatted as key:value pairs.
 	// These properties are passed to a game server process in the GameSession object
 	// with a request to start a new game session (see Start a Game Session
 	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)).
@@ -127,17 +110,18 @@ type UpdateMatchmakingConfigurationInput struct {
 	// STANDALONE.
 	GameSessionData *string
 
-	// Amazon Resource Name (ARN
-	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html))
-	// that is assigned to a GameLift game session queue resource and uniquely
-	// identifies it. ARNs are unique across all Regions. Queues can be located in any
-	// Region. Queues are used to start new GameLift-hosted game sessions for matches
-	// that are created with this matchmaking configuration. If FlexMatchMode is set to
+	// The Amazon Resource Name (ARN
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)) that is
+	// assigned to a GameLift game session queue resource and uniquely identifies it.
+	// ARNs are unique across all Regions. Format is
+	// arn:aws:gamelift:::gamesessionqueue/. Queues can be located in any Region.
+	// Queues are used to start new GameLift-hosted game sessions for matches that are
+	// created with this matchmaking configuration. If FlexMatchMode is set to
 	// STANDALONE, do not set this parameter.
 	GameSessionQueueArns []string
 
 	// An SNS topic ARN that is set up to receive matchmaking notifications. See
-	// Setting up Notifications for Matchmaking
+	// Setting up notifications for matchmaking
 	// (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
 	// for more information.
 	NotificationTarget *string
@@ -147,7 +131,7 @@ type UpdateMatchmakingConfigurationInput struct {
 	// resubmitted as needed.
 	RequestTimeoutSeconds *int32
 
-	// A unique identifier for a matchmaking rule set to use with this configuration.
+	// A unique identifier for the matchmaking rule set to use with this configuration.
 	// You can use either the rule set name or ARN value. A matchmaking configuration
 	// can only use rule sets that are defined in the same Region.
 	RuleSetName *string

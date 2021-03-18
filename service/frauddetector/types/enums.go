@@ -170,8 +170,9 @@ type ModelVersionStatus string
 
 // Enum values for ModelVersionStatus
 const (
-	ModelVersionStatusActive   ModelVersionStatus = "ACTIVE"
-	ModelVersionStatusInactive ModelVersionStatus = "INACTIVE"
+	ModelVersionStatusActive            ModelVersionStatus = "ACTIVE"
+	ModelVersionStatusInactive          ModelVersionStatus = "INACTIVE"
+	ModelVersionStatusTrainingCancelled ModelVersionStatus = "TRAINING_CANCELLED"
 )
 
 // Values returns all known values for ModelVersionStatus. Note that this can be
@@ -181,6 +182,7 @@ func (ModelVersionStatus) Values() []ModelVersionStatus {
 	return []ModelVersionStatus{
 		"ACTIVE",
 		"INACTIVE",
+		"TRAINING_CANCELLED",
 	}
 }
 

@@ -261,8 +261,8 @@ func validateCrossRegionCopyRule(v *types.CrossRegionCopyRule) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CrossRegionCopyRule"}
-	if v.TargetRegion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetRegion"))
+	if v.Encrypted == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Encrypted"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -293,6 +293,9 @@ func validateEncryptionConfiguration(v *types.EncryptionConfiguration) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfiguration"}
+	if v.Encrypted == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Encrypted"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

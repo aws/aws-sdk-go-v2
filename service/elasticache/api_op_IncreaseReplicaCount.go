@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Dynamically increases the number of replics in a Redis (cluster mode disabled)
+// Dynamically increases the number of replicas in a Redis (cluster mode disabled)
 // replication group or the number of replica nodes in one or more node groups
 // (shards) of a Redis (cluster mode enabled) replication group. This operation is
 // performed with no cluster down time.

@@ -14,7 +14,7 @@ import (
 
 // Lists information about the versions of the specified managed policy, including
 // the version that is currently set as the policy's default version. For more
-// information about managed policies, see Managed Policies and Inline Policies
+// information about managed policies, see Managed policies and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersionsInput, optFns ...func(*Options)) (*ListPolicyVersionsOutput, error) {
@@ -35,8 +35,7 @@ func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersi
 type ListPolicyVersionsInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM policy for which you want the
-	// versions. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces
+	// versions. For more information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//
@@ -75,7 +74,7 @@ type ListPolicyVersionsOutput struct {
 	Marker *string
 
 	// A list of policy versions. For more information about managed policy versions,
-	// see Versioning for Managed Policies
+	// see Versioning for managed policies
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
 	// in the IAM User Guide.
 	Versions []types.PolicyVersion

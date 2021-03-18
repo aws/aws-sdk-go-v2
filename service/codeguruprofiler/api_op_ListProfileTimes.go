@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// List the start times of the available aggregated profiles of a profiling group
+// Lists the start times of the available aggregated profiles of a profiling group
 // for an aggregation period within the specified time range.
 func (c *Client) ListProfileTimes(ctx context.Context, params *ListProfileTimesInput, optFns ...func(*Options)) (*ListProfileTimesOutput, error) {
 	if params == nil {
@@ -38,7 +38,15 @@ type ListProfileTimesInput struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The aggregation period.
+	// The aggregation period. This specifies the period during which an aggregation
+	// profile collects posted agent profiles for a profiling group. There are 3 valid
+	// values.
+	//
+	// * P1D — 1 day
+	//
+	// * PT1H — 1 hour
+	//
+	// * PT5M — 5 minutes
 	//
 	// This member is required.
 	Period types.AggregationPeriod

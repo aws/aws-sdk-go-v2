@@ -137,8 +137,14 @@ type StartBuildInput struct {
 
 	// Set to true to report to your source provider the status of a build's start and
 	// completion. If you use this option with a source provider other than GitHub,
-	// GitHub Enterprise, or Bitbucket, an invalidInputException is thrown. The status
-	// of a build triggered by a webhook is always reported to your source provider.
+	// GitHub Enterprise, or Bitbucket, an invalidInputException is thrown. To be able
+	// to report the build status to the source provider, the user associated with the
+	// source provider must have write access to the repo. If the user does not have
+	// write access, the build status cannot be updated. For more information, see
+	// Source provider access
+	// (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html) in
+	// the AWS CodeBuild User Guide. The status of a build triggered by a webhook is
+	// always reported to your source provider.
 	ReportBuildStatusOverride *bool
 
 	// An array of ProjectArtifacts objects.
@@ -178,11 +184,10 @@ type StartBuildInput struct {
 	// branch's HEAD commit ID is used. Bitbucket The commit ID, branch name, or tag
 	// name that corresponds to the version of the source code you want to build. If a
 	// branch name is specified, the branch's HEAD commit ID is used. If not specified,
-	// the default branch's HEAD commit ID is used. Amazon Simple Storage Service
-	// (Amazon S3) The version ID of the object that represents the build input ZIP
-	// file to use. If sourceVersion is specified at the project level, then this
-	// sourceVersion (at the build level) takes precedence. For more information, see
-	// Source Version Sample with CodeBuild
+	// the default branch's HEAD commit ID is used. Amazon S3 The version ID of the
+	// object that represents the build input ZIP file to use. If sourceVersion is
+	// specified at the project level, then this sourceVersion (at the build level)
+	// takes precedence. For more information, see Source Version Sample with CodeBuild
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the AWS CodeBuild User Guide.
 	SourceVersion *string

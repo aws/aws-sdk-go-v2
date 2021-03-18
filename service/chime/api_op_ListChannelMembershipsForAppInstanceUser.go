@@ -13,7 +13,9 @@ import (
 )
 
 // Lists all channels that a particular AppInstanceUser is a part of. Only an
-// AppInstanceAdmin can call the API with a user ARN that is not their own.
+// AppInstanceAdmin can call the API with a user ARN that is not their own. The
+// x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of
+// the user that makes the API call as the value in the header.
 func (c *Client) ListChannelMembershipsForAppInstanceUser(ctx context.Context, params *ListChannelMembershipsForAppInstanceUserInput, optFns ...func(*Options)) (*ListChannelMembershipsForAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &ListChannelMembershipsForAppInstanceUserInput{}
@@ -31,8 +33,11 @@ func (c *Client) ListChannelMembershipsForAppInstanceUser(ctx context.Context, p
 
 type ListChannelMembershipsForAppInstanceUserInput struct {
 
-	// The ARN of the app instance users
+	// The ARN of the AppInstanceUsers
 	AppInstanceUserArn *string
+
+	// The AppInstanceUserArn of the user that makes the API call.
+	ChimeBearer *string
 
 	// The maximum number of users that you want returned.
 	MaxResults *int32

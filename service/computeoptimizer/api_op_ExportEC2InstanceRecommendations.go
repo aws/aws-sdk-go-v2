@@ -53,7 +53,7 @@ type ExportEC2InstanceRecommendationsInput struct {
 
 	// The IDs of the AWS accounts for which to export instance recommendations. If
 	// your account is the management account of an organization, use this parameter to
-	// specify the member accounts for which you want to export recommendations. This
+	// specify the member account for which you want to export recommendations. This
 	// parameter cannot be specified together with the include member accounts
 	// parameter. The parameters are mutually exclusive. Recommendations for member
 	// accounts are not included in the export if this parameter, or the include member

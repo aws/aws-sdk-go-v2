@@ -2514,7 +2514,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new RTMP distribution. An RTMP distribution is similar to a web distribution, \n\t\t\tbut an RTMP distribution streams media files using the Adobe Real-Time Messaging Protocol \n\t\t\t(RTMP) instead of serving files using HTTP. </p> \n\t\t       <p>To create a new distribution, submit a <code>POST</code> request to the \n\t\t\t\t<i>CloudFront API version</i>/distribution resource. The request body must include a \n\t\t\tdocument with a <i>StreamingDistributionConfig</i> element. The response echoes \n\t\t\tthe <code>StreamingDistributionConfig</code> element and returns other information about the \n\t\t\tRTMP distribution.</p> \n\t\t       <p>To get the status of your request, use the <i>GET \n\t\t\t\tStreamingDistribution</i> API action. When the value of <code>Enabled</code> is \n\t\t\t\t<code>true</code> and the value of <code>Status</code> is <code>Deployed</code>, your \n\t\t\tdistribution is ready. A distribution usually deploys in less than 15 minutes.</p> \n\t\t       <p>For more information about web distributions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html\">Working with RTMP Distributions</a> in the \n\t\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p> \n\t\t       <important> \n\t\t\t         <p>Beginning with the 2012-05-05 version of the CloudFront API, we made substantial changes to \n\t\t\t\tthe format of the XML document that you include in the request body when you create or \n\t\t\t\tupdate a web distribution or an RTMP distribution, and when you invalidate objects. With \n\t\t\t\tprevious versions of the API, we discovered that it was too easy to accidentally delete one \n\t\t\t\tor more values for an element that accepts multiple values, for example, CNAMEs and trusted \n\t\t\t\tsigners. Our changes for the 2012-05-05 release are intended to prevent these accidental \n\t\t\t\tdeletions and to notify you when there's a mismatch between the number of values you say \n\t\t\t\tyou're specifying in the <code>Quantity</code> element and the number of values \n\t\t\t\tspecified.</p> \n\t\t       </important>",
+                "smithy.api#documentation": "<p>This API is deprecated.\n            Amazon CloudFront is deprecating real-time messaging protocol (RTMP) distributions on December 31, 2020.\n            For more information, <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=7356\">read the announcement</a> on the Amazon CloudFront discussion forum.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-05-31/streaming-distribution",
@@ -2617,7 +2617,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a new streaming distribution with tags.</p>",
+                "smithy.api#documentation": "<p>This API is deprecated.\n            Amazon CloudFront is deprecating real-time messaging protocol (RTMP) distributions on December 31, 2020.\n            For more information, <a href=\"http://forums.aws.amazon.com/ann.jspa?annID=7356\">read the announcement</a> on the Amazon CloudFront discussion forum.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2020-05-31/streaming-distribution?WithTags",
@@ -11702,13 +11702,13 @@
                 "IAMCertificateId": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs) and\n\t\t\tthe SSL/TLS certificate is stored in <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">AWS\n\t\t\tIdentity and Access Management (AWS IAM)</a>, provide the ID of the IAM\n\t\t\tcertificate.</p>\n\t\t       <p>If you specify an IAM certificate ID, you must also specify values for\n\t\t\t<code>MinimumProtocolVerison</code> and <code>SSLSupportMethod</code>. \n      </p>"
+                        "smithy.api#documentation": "<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs) and\n\t\t\tthe SSL/TLS certificate is stored in <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html\">AWS\n\t\t\tIdentity and Access Management (AWS IAM)</a>, provide the ID of the IAM\n\t\t\tcertificate.</p>\n\t\t       <p>If you specify an IAM certificate ID, you must also specify values for\n\t\t\t<code>MinimumProtocolVersion</code> and <code>SSLSupportMethod</code>. \n      </p>"
                     }
                 },
                 "ACMCertificateArn": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs) and\n\t\t\tthe SSL/TLS certificate is stored in <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html\">AWS Certificate Manager (ACM)</a>, provide the Amazon Resource\n\t\t\tName (ARN) of the ACM certificate. CloudFront only supports ACM certificates in the US\n\t\t\tEast (N. Virginia) Region (<code>us-east-1</code>).</p>\n\t\t       <p>If you specify an ACM certificate ARN, you must also specify values for\n\t\t\t<code>MinimumProtocolVerison</code> and <code>SSLSupportMethod</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>If the distribution uses <code>Aliases</code> (alternate domain names or CNAMEs) and\n\t\t\tthe SSL/TLS certificate is stored in <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-overview.html\">AWS Certificate Manager (ACM)</a>, provide the Amazon Resource\n\t\t\tName (ARN) of the ACM certificate. CloudFront only supports ACM certificates in the US\n\t\t\tEast (N. Virginia) Region (<code>us-east-1</code>).</p>\n\t\t       <p>If you specify an ACM certificate ARN, you must also specify values for\n\t\t\t<code>MinimumProtocolVersion</code> and <code>SSLSupportMethod</code>.\n      </p>"
                     }
                 },
                 "SSLSupportMethod": {

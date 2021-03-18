@@ -19,7 +19,7 @@ type AccessControlList struct {
 	AllowsPublicWriteAccess bool
 }
 
-// Specifies details for an account to associate with an Amazon Macie master
+// Specifies details for an account to associate with an Amazon Macie administrator
 // account.
 type AccountDetail struct {
 
@@ -34,11 +34,11 @@ type AccountDetail struct {
 	Email *string
 }
 
-// Provides information about account-level permissions settings that apply to an
-// S3 bucket.
+// Provides information about the account-level permissions settings that apply to
+// an S3 bucket.
 type AccountLevelPermissions struct {
 
-	// The block public access settings for the bucket.
+	// The block public access settings for the AWS account that owns the bucket.
 	BlockPublicAccess *BlockPublicAccess
 }
 
@@ -49,7 +49,7 @@ type AdminAccount struct {
 	// The AWS account ID for the account.
 	AccountId *string
 
-	// The current status of the account as a delegated administrator of Amazon Macie
+	// The current status of the account as the delegated administrator of Amazon Macie
 	// for the organization.
 	Status AdminStatus
 }
@@ -146,9 +146,10 @@ type BatchGetCustomDataIdentifierSummary struct {
 
 // Provides information about the block public access settings for an S3 bucket.
 // These settings can apply to a bucket at the account level or bucket level. For
-// detailed information about each setting, see Using Amazon S3 block public access
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
-// in the Amazon Simple Storage Service Developer Guide.
+// detailed information about each setting, see Blocking public access to your
+// Amazon S3 storage
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-control-block-public-access.html)
+// in the Amazon Simple Storage Service User Guide.
 type BlockPublicAccess struct {
 
 	// Specifies whether Amazon S3 blocks public access control lists (ACLs) for the
@@ -189,19 +190,20 @@ type BucketCountByEffectivePermission struct {
 }
 
 // Provides information about the number of S3 buckets that use certain types of
-// server-side encryption or don't encrypt objects by default.
+// server-side encryption by default or don't encrypt new objects by default.
 type BucketCountByEncryptionType struct {
 
 	// The total number of buckets that use an AWS Key Management Service (AWS KMS)
-	// customer master key (CMK) to encrypt objects. These buckets use AWS managed AWS
-	// KMS (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.
+	// customer master key (CMK) to encrypt new objects by default. These buckets use
+	// AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption
+	// (SSE-KMS).
 	KmsManaged int64
 
-	// The total number of buckets that use an Amazon S3 managed key to encrypt
-	// objects. These buckets use Amazon S3 managed (SSE-S3) encryption.
+	// The total number of buckets that use an Amazon S3 managed key to encrypt new
+	// objects by default. These buckets use Amazon S3 managed encryption (SSE-S3).
 	S3Managed int64
 
-	// The total number of buckets that don't encrypt objects by default. Default
+	// The total number of buckets that don't encrypt new objects by default. Default
 	// encryption is disabled for these buckets.
 	Unencrypted int64
 }
@@ -227,31 +229,31 @@ type BucketCountBySharedAccessType struct {
 	Unknown int64
 }
 
-// Specifies the operator to use in an attribute-based condition that filters the
+// Specifies the operator to use in a property-based condition that filters the
 // results of a query for information about S3 buckets.
 type BucketCriteriaAdditionalProperties struct {
 
-	// An equal to condition to apply to a specified attribute value for buckets.
+	// The value for the property matches (equals) the specified value. If you specify
+	// multiple values, Macie uses OR logic to join the values.
 	Eq []string
 
-	// A greater than condition to apply to a specified attribute value for buckets.
+	// The value for the property is greater than the specified value.
 	Gt int64
 
-	// A greater than or equal to condition to apply to a specified attribute value for
-	// buckets.
+	// The value for the property is greater than or equal to the specified value.
 	Gte int64
 
-	// A less than condition to apply to a specified attribute value for buckets.
+	// The value for the property is less than the specified value.
 	Lt int64
 
-	// A less than or equal to condition to apply to a specified attribute value for
-	// buckets.
+	// The value for the property is less than or equal to the specified value.
 	Lte int64
 
-	// A not equal to condition to apply to a specified attribute value for buckets.
+	// The value for the property doesn't match (doesn't equal) the specified value. If
+	// you specify multiple values, Amazon Macie uses OR logic to join the values.
 	Neq []string
 
-	// The prefix of the buckets to include in the results.
+	// The name of the bucket begins with the specified value.
 	Prefix *string
 }
 
@@ -294,7 +296,10 @@ type BucketMetadata struct {
 
 	// The total storage size, in bytes, of the objects that Amazon Macie can analyze
 	// in the bucket. These objects use a supported storage class and have a file name
-	// extension for a supported file or storage format.
+	// extension for a supported file or storage format. If versioning is enabled for
+	// the bucket, Macie calculates this value based on the size of the latest version
+	// of each applicable object in the bucket. This value doesn't reflect the storage
+	// size of all versions of each applicable object in the bucket.
 	ClassifiableSizeInBytes int64
 
 	// Specifies whether any one-time or recurring classification jobs are configured
@@ -303,7 +308,8 @@ type BucketMetadata struct {
 	JobDetails *JobDetails
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
-	// recently retrieved data about the bucket from Amazon S3.
+	// recently retrieved both bucket and object metadata from Amazon S3 for the
+	// bucket.
 	LastUpdated *time.Time
 
 	// The total number of objects in the bucket.
@@ -314,9 +320,9 @@ type BucketMetadata struct {
 	// objects that aren't encrypted or use client-side encryption.
 	ObjectCountByEncryptionType *ObjectCountByEncryptionType
 
-	// Specifies whether the bucket is publicly accessible. If this value is true, an
-	// access control list (ACL), bucket policy, or block public access settings allow
-	// the bucket to be accessed by the general public.
+	// Specifies whether the bucket is publicly accessible due to the combination of
+	// permissions settings that apply to the bucket, and provides information about
+	// those settings.
 	PublicAccess *BucketPublicAccess
 
 	// The AWS Region that hosts the bucket.
@@ -325,6 +331,10 @@ type BucketMetadata struct {
 	// Specifies whether the bucket is configured to replicate one or more objects to
 	// buckets for other AWS accounts and, if so, which accounts.
 	ReplicationDetails *ReplicationDetails
+
+	// Specifies whether the bucket encrypts new objects by default and, if so, the
+	// type of server-side encryption that's used.
+	ServerSideEncryption *BucketServerSideEncryption
 
 	// Specifies whether the bucket is shared with another AWS account. Possible values
 	// are:
@@ -342,10 +352,16 @@ type BucketMetadata struct {
 	// wasn't able to evaluate the shared access settings for the bucket.
 	SharedAccess SharedAccess
 
-	// The total storage size, in bytes, of the bucket.
+	// The total storage size, in bytes, of the bucket. If versioning is enabled for
+	// the bucket, Amazon Macie calculates this value based on the size of the latest
+	// version of each object in the bucket. This value doesn't reflect the storage
+	// size of all versions of each object in the bucket.
 	SizeInBytes int64
 
-	// The total compressed storage size, in bytes, of the bucket.
+	// The total compressed storage size, in bytes, of the bucket. If versioning is
+	// enabled for the bucket, Macie calculates this value based on the size of the
+	// latest version of each object in the bucket. This value doesn't reflect the
+	// storage size of all versions of each object in the bucket.
 	SizeInBytesCompressed int64
 
 	// An array that specifies the tags (keys and values) that are associated with the
@@ -411,18 +427,49 @@ type BucketPublicAccess struct {
 	PermissionConfiguration *BucketPermissionConfiguration
 }
 
+// Provides information about the default server-side encryption settings for an S3
+// bucket. For detailed information about these settings, see Setting default
+// server-side encryption behavior for Amazon S3 buckets
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
+// in the Amazon Simple Storage Service User Guide.
+type BucketServerSideEncryption struct {
+
+	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key
+	// Management Service (AWS KMS) customer master key (CMK) that's used by default to
+	// encrypt objects that are added to the bucket. This value is null if the bucket
+	// uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't
+	// encrypt new objects by default.
+	KmsMasterKeyId *string
+
+	// The type of server-side encryption that's used by default when storing new
+	// objects in the bucket. Possible values are:
+	//
+	// * AES256 - New objects are
+	// encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption
+	// (SSE-S3).
+	//
+	// * aws:kms - New objects are encrypted with an AWS KMS CMK, specified
+	// by the kmsMasterKeyId property, and use AWS managed AWS KMS encryption (AWS-KMS)
+	// or customer managed AWS KMS encryption (SSE-KMS).
+	//
+	// * NONE - New objects aren't
+	// encrypted by default. Default encryption is disabled for the bucket.
+	Type Type
+}
+
 // Specifies criteria for sorting the results of a query for information about S3
 // buckets.
 type BucketSortCriteria struct {
 
-	// The name of the attribute to sort the results by. This value can be the name of
-	// any property that Amazon Macie defines as bucket metadata, such as bucketName or
-	// accountId.
+	// The name of the bucket property to sort the results by. This value can be one of
+	// the following properties that Amazon Macie defines as bucket metadata:
+	// accountId, bucketName, classifiableObjectCount, classifiableSizeInBytes,
+	// objectCount, or sizeInBytes.
 	AttributeName *string
 
-	// The sort order to apply to the results, based on the value for the property
-	// specified by the attributeName property. Valid values are: ASC, sort the results
-	// in ascending order; and, DESC, sort the results in descending order.
+	// The sort order to apply to the results, based on the value specified by the
+	// attributeName property. Valid values are: ASC, sort the results in ascending
+	// order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
 }
 
@@ -535,35 +582,40 @@ type ClassificationResultStatus struct {
 }
 
 // Specifies the operator to use in a property-based condition that filters the
-// results of a query for findings.
+// results of a query for findings. For detailed information and examples of each
+// operator, see Fundamentals of filtering findings
+// (https://docs.aws.amazon.com/macie/latest/user/findings-filter-basics.html) in
+// the Amazon Macie User Guide.
 type CriterionAdditionalProperties struct {
 
-	// An equal to condition to apply to a specified property value for findings.
+	// The value for the property matches (equals) the specified value. If you specify
+	// multiple values, Macie uses OR logic to join the values.
 	Eq []string
 
-	// A condition that requires an array field to exactly match the specified property
-	// values. You can use this operator with the following properties:
-	// customDataIdentifiers.detections.arn, customDataIdentifiers.detections.name,
-	// resourcesAffected.s3Bucket.tags.key, resourcesAffected.s3Bucket.tags.value,
-	// resourcesAffected.s3Object.tags.key, resourcesAffected.s3Object.tags.value,
-	// sensitiveData.category, and sensitiveData.detections.type.
+	// The value for the property exclusively matches (equals an exact match for) all
+	// the specified values. If you specify multiple values, Amazon Macie uses AND
+	// logic to join the values. You can use this operator with the following
+	// properties: customDataIdentifiers.detections.arn,
+	// customDataIdentifiers.detections.name, resourcesAffected.s3Bucket.tags.key,
+	// resourcesAffected.s3Bucket.tags.value, resourcesAffected.s3Object.tags.key,
+	// resourcesAffected.s3Object.tags.value, sensitiveData.category, and
+	// sensitiveData.detections.type.
 	EqExactMatch []string
 
-	// A greater than condition to apply to a specified property value for findings.
+	// The value for the property is greater than the specified value.
 	Gt int64
 
-	// A greater than or equal to condition to apply to a specified property value for
-	// findings.
+	// The value for the property is greater than or equal to the specified value.
 	Gte int64
 
-	// A less than condition to apply to a specified property value for findings.
+	// The value for the property is less than the specified value.
 	Lt int64
 
-	// A less than or equal to condition to apply to a specified property value for
-	// findings.
+	// The value for the property is less than or equal to the specified value.
 	Lte int64
 
-	// A not equal to condition to apply to a specified property value for findings.
+	// The value for the property doesn't match (doesn't equal) the specified value. If
+	// you specify multiple values, Macie uses OR logic to join the values.
 	Neq []string
 }
 
@@ -783,8 +835,8 @@ type FindingActor struct {
 // results of a query for findings.
 type FindingCriteria struct {
 
-	// A condition that specifies the property, operator, and value to use to filter
-	// the results.
+	// A condition that specifies the property, operator, and one or more values to use
+	// to filter the results.
 	Criterion map[string]CriterionAdditionalProperties
 }
 
@@ -1046,29 +1098,29 @@ type JobSummary struct {
 	// The current status of the job. Possible values are:
 	//
 	// * CANCELLED - You cancelled
-	// the job, or you paused the job while it had a status of RUNNING and you didn't
-	// resume it within 30 days of pausing it.
+	// the job or, if it's a one-time job, you paused the job and didn't resume it
+	// within 30 days.
 	//
-	// * COMPLETE - For a one-time job, Amazon
-	// Macie finished processing the data specified for the job. This value doesn't
-	// apply to recurring jobs.
+	// * COMPLETE - For a one-time job, Amazon Macie finished
+	// processing the data specified for the job. This value doesn't apply to recurring
+	// jobs.
 	//
-	// * IDLE - For a recurring job, the previous scheduled
-	// run is complete and the next scheduled run is pending. This value doesn't apply
-	// to one-time jobs.
+	// * IDLE - For a recurring job, the previous scheduled run is complete and
+	// the next scheduled run is pending. This value doesn't apply to one-time jobs.
 	//
-	// * PAUSED - Amazon Macie started running the job but
-	// additional processing would exceed the monthly sensitive data discovery quota
-	// for your account or one or more member accounts that the job analyzes data
-	// for.
+	// *
+	// PAUSED - Amazon Macie started running the job but additional processing would
+	// exceed the monthly sensitive data discovery quota for your account or one or
+	// more member accounts that the job analyzes data for.
 	//
-	// * RUNNING - For a one-time job, the job is in progress. For a recurring
-	// job, a scheduled run is in progress.
+	// * RUNNING - For a one-time
+	// job, the job is in progress. For a recurring job, a scheduled run is in
+	// progress.
 	//
-	// * USER_PAUSED - You paused the job. If you
-	// paused the job while it had a status of RUNNING and you don't resume the job
-	// within 30 days of pausing it, the job expires and is cancelled. To check the
-	// job's expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+	// * USER_PAUSED - You paused the job. If you paused the job while it
+	// had a status of RUNNING and you don't resume it within 30 days of pausing it,
+	// the job or job run will expire and be cancelled, depending on the job's type. To
+	// check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
 	JobStatus JobStatus
 
 	// The schedule for running the job. Possible values are:
@@ -1089,8 +1141,8 @@ type JobSummary struct {
 	Name *string
 
 	// If the current status of the job is USER_PAUSED, specifies when the job was
-	// paused and when the job will expire and be cancelled if it isn't resumed. This
-	// value is present only if the value for jobStatus is USER_PAUSED.
+	// paused and when the job or job run will expire and be cancelled if it isn't
+	// resumed. This value is present only if the value for jobStatus is USER_PAUSED.
 	UserPausedDetails *UserPausedDetails
 }
 
@@ -1167,11 +1219,14 @@ type ListJobsSortCriteria struct {
 }
 
 // Provides information about an account that's associated with an Amazon Macie
-// master account.
+// administrator account.
 type Member struct {
 
 	// The AWS account ID for the account.
 	AccountId *string
+
+	// The AWS account ID for the administrator account.
+	AdministratorAccountId *string
 
 	// The Amazon Resource Name (ARN) of the account.
 	Arn *string
@@ -1184,10 +1239,12 @@ type Member struct {
 	// Macie invitation hasn't been sent to the account.
 	InvitedAt *time.Time
 
-	// The AWS account ID for the master account.
+	// (Deprecated) The AWS account ID for the administrator account. This property has
+	// been replaced by the administratorAccountId property and is retained only for
+	// backward compatibility.
 	MasterAccountId *string
 
-	// The current status of the relationship between the account and the master
+	// The current status of the relationship between the account and the administrator
 	// account.
 	RelationshipStatus RelationshipStatus
 
@@ -1196,8 +1253,8 @@ type Member struct {
 	Tags map[string]string
 
 	// The date and time, in UTC and extended ISO 8601 format, of the most recent
-	// change to the status of the relationship between the account and the master
-	// account.
+	// change to the status of the relationship between the account and the
+	// administrator account.
 	UpdatedAt *time.Time
 }
 
@@ -1206,9 +1263,10 @@ type MonthlySchedule struct {
 
 	// The numeric day of the month when Amazon Macie runs the job. This value can be
 	// an integer from 1 through 31. If this value exceeds the number of days in a
-	// certain month, Macie runs the job on the last day of that month. For example, if
-	// this value is 31 and a month has only 30 days, Macie runs the job on day 30 of
-	// that month.
+	// certain month, Macie doesn't run the job that month. Macie runs the job only
+	// during months that have the specified day. For example, if this value is 31 and
+	// a month has only 30 days, Macie doesn't run the job that month. To run the job
+	// every month, specify a value that's less than 29.
 	DayOfMonth int32
 }
 
@@ -1218,16 +1276,16 @@ type MonthlySchedule struct {
 type ObjectCountByEncryptionType struct {
 
 	// The total number of objects that are encrypted using a customer-managed key. The
-	// objects use customer-provided server-side (SSE-C) encryption.
+	// objects use customer-provided server-side encryption (SSE-C).
 	CustomerManaged int64
 
 	// The total number of objects that are encrypted using an AWS Key Management
 	// Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS
-	// (AWS-KMS) encryption or customer managed AWS KMS (SSE-KMS) encryption.
+	// encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
 	KmsManaged int64
 
 	// The total number of objects that are encrypted using an Amazon S3 managed key.
-	// The objects use Amazon S3 managed (SSE-S3) encryption.
+	// The objects use Amazon S3 managed encryption (SSE-S3).
 	S3Managed int64
 
 	// The total number of objects that aren't encrypted or use client-side encryption.
@@ -1238,7 +1296,9 @@ type ObjectCountByEncryptionType struct {
 // objects that Amazon Macie can't analyze in one or more S3 buckets. In a
 // BucketMetadata object, this data is for a specific bucket. In a
 // GetBucketStatisticsResponse object, this data is aggregated for all the buckets
-// in the query results.
+// in the query results. If versioning is enabled for a bucket, total storage size
+// values are based on the size of the latest version of each applicable object in
+// the bucket.
 type ObjectLevelStatistics struct {
 
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
@@ -1434,13 +1494,14 @@ type S3Bucket struct {
 // analyzes, and the buckets to analyze for the account.
 type S3BucketDefinitionForJob struct {
 
-	// The unique identifier for the AWS account that owns the buckets. If you specify
-	// this value and don't specify a value for the buckets array, the job analyzes
-	// objects in all the buckets that are owned by the account and meet other
-	// conditions specified for the job.
+	// The unique identifier for the AWS account that owns the buckets.
+	//
+	// This member is required.
 	AccountId *string
 
 	// An array that lists the names of the buckets.
+	//
+	// This member is required.
 	Buckets []string
 }
 
@@ -1518,7 +1579,7 @@ type S3Object struct {
 	// permissions settings that apply to the object.
 	PublicAccess bool
 
-	// The type of server-side encryption that's used for the object.
+	// The type of server-side encryption that's used to encrypt the object.
 	ServerSideEncryption *ServerSideEncryption
 
 	// The total storage size, in bytes, of the object.
@@ -1575,17 +1636,18 @@ type SensitiveDataItem struct {
 type ServerSideEncryption struct {
 
 	// The server-side encryption algorithm that's used when storing data in the bucket
-	// or object. If encryption is disabled for the bucket or object, this value is
-	// NONE.
+	// or object. If default encryption is disabled for the bucket or the object isn't
+	// encrypted using server-side encryption, this value is NONE.
 	EncryptionType EncryptionType
 
-	// The unique identifier for the AWS Key Management Service (AWS KMS) master key
-	// that's used to encrypt the bucket or object. This value is null if AWS KMS isn't
-	// used to encrypt the bucket or object.
+	// The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key
+	// Management Service (AWS KMS) customer master key (CMK) that's used to encrypt
+	// data in the bucket or the object. If an AWS KMS CMK isn't used, this value is
+	// null.
 	KmsMasterKeyId *string
 }
 
-// Specifies a current quota for an account.
+// Specifies a current quota for an Amazon Macie account.
 type ServiceLimit struct {
 
 	// Specifies whether the account has met the quota that corresponds to the metric
@@ -1671,28 +1733,36 @@ type SimpleScopeTerm struct {
 	// * OBJECT_EXTENSION - EQ (equals) or NE (not equals)
 	//
 	// *
-	// OBJECT_LAST_MODIFIED_DATE - Any operator except CONTAINS
+	// OBJECT_KEY - STARTS_WITH
 	//
-	// * OBJECT_SIZE - Any
-	// operator except CONTAINS
+	// * OBJECT_LAST_MODIFIED_DATE - Any operator except
+	// CONTAINS
 	//
-	// * TAG - EQ (equals) or NE (not equals)
+	// * OBJECT_SIZE - Any operator except CONTAINS
+	//
+	// * TAG - EQ (equals) or
+	// NE (not equals)
 	Comparator JobComparator
 
 	// The object property to use in the condition.
 	Key ScopeFilterKey
 
 	// An array that lists the values to use in the condition. If the value for the key
-	// property is OBJECT_EXTENSION, this array can specify multiple values and Amazon
-	// Macie uses an OR operator to join the values. Otherwise, this array can specify
-	// only one value. Valid values for each supported property (key) are:
+	// property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple
+	// values and Amazon Macie uses an OR operator to join the values. Otherwise, this
+	// array can specify only one value. Valid values for each supported property (key)
+	// are:
 	//
-	// *
-	// OBJECT_EXTENSION - A string that represents the file name extension of an
-	// object. For example: doc, docx, pdf
+	// * OBJECT_EXTENSION - A string that represents the file name extension of
+	// an object. For example: docx or pdf
 	//
-	// * OBJECT_LAST_MODIFIED_DATE - The date and
-	// time (in UTC and extended ISO 8601 format) when an object was created or last
+	// * OBJECT_KEY - A string that represents the
+	// key prefix (folder name or path) of an object. For example: logs or
+	// awslogs/eventlogs. This value applies a condition to objects whose keys (names)
+	// begin with the specified value.
+	//
+	// * OBJECT_LAST_MODIFIED_DATE - The date and time
+	// (in UTC and extended ISO 8601 format) when an object was created or last
 	// changed, whichever is latest. For example: 2020-09-28T14:31:13Z
 	//
 	// * OBJECT_SIZE -
@@ -1702,6 +1772,9 @@ type SimpleScopeTerm struct {
 	// string that represents a tag key for an object. For advanced options, use a
 	// TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based
 	// condition for the job.
+	//
+	// Macie doesn't support use of wildcard characters in
+	// values. Also, string values are case sensitive.
 	Values []string
 }
 
@@ -1775,8 +1848,7 @@ type UnprocessedAccount struct {
 }
 
 // Provides data for a specific usage metric and the corresponding quota for an
-// account. The value for the metric is an aggregated value that reports usage
-// during the past 30 days.
+// Amazon Macie account.
 type UsageByAccount struct {
 
 	// The type of currency that the value for the metric (estimatedCost) is reported
@@ -1791,12 +1863,12 @@ type UsageByAccount struct {
 	ServiceLimit *ServiceLimit
 
 	// The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for
-	// monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing sensitive
-	// data.
+	// monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects
+	// to detect sensitive data.
 	Type UsageType
 }
 
-// Provides quota and aggregated usage data for an account.
+// Provides quota and aggregated usage data for an Amazon Macie account.
 type UsageRecord struct {
 
 	// The unique identifier for the AWS account that the data applies to.
@@ -1812,8 +1884,8 @@ type UsageRecord struct {
 	Usage []UsageByAccount
 }
 
-// Specifies a condition for filtering the results of a query for account quotas
-// and usage data.
+// Specifies a condition for filtering the results of a query for quota and usage
+// data for one or more Amazon Macie accounts.
 type UsageStatisticsFilter struct {
 
 	// The operator to use in the condition. If the value for the key property is
@@ -1840,12 +1912,12 @@ type UsageStatisticsFilter struct {
 	// whether an account has reached its monthly quota.
 	//
 	// * total - A string that
-	// represents the current, estimated month-to-date cost for an account.
+	// represents the current estimated cost for an account.
 	Values []string
 }
 
-// Specifies criteria for sorting the results of a query for account quotas and
-// usage data.
+// Specifies criteria for sorting the results of a query for Amazon Macie account
+// quotas and usage data.
 type UsageStatisticsSortBy struct {
 
 	// The field to sort the results by.
@@ -1857,8 +1929,10 @@ type UsageStatisticsSortBy struct {
 	OrderBy OrderBy
 }
 
-// Provides aggregated data for a usage metric. The value for the metric reports
-// usage data for an account during the past 30 days.
+// Provides aggregated data for an Amazon Macie usage metric. The value for the
+// metric reports estimated usage data for an account for the preceding 30 days or
+// the current calendar month to date, depending on the time period (timeRange)
+// specified in the request.
 type UsageTotal struct {
 
 	// The type of currency that the value for the metric (estimatedCost) is reported
@@ -1869,8 +1943,8 @@ type UsageTotal struct {
 	EstimatedCost *string
 
 	// The name of the metric. Possible values are: DATA_INVENTORY_EVALUATION, for
-	// monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing sensitive
-	// data.
+	// monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects
+	// to detect sensitive data.
 	Type UsageType
 }
 
@@ -1927,20 +2001,22 @@ type UserIdentityRoot struct {
 	PrincipalId *string
 }
 
-// Provides information about when a classification job was paused and when it will
-// expire and be cancelled if it isn't resumed. This object is present only if a
-// job's current status (jobStatus) is USER_PAUSED. The information in this object
-// applies only to a job that was paused while it had a status of RUNNING.
+// Provides information about when a classification job was paused. For a one-time
+// job, this object also specifies when the job will expire and be cancelled if it
+// isn't resumed. For a recurring job, this object also specifies when the paused
+// job run will expire and be cancelled if it isn't resumed. This object is present
+// only if a job's current status (jobStatus) is USER_PAUSED. The information in
+// this object applies only to a job that was paused while it had a status of
+// RUNNING.
 type UserPausedDetails struct {
 
-	// The date and time, in UTC and extended ISO 8601 format, when the job will expire
-	// and be cancelled if you don't resume it first. If you don't resume a job within
-	// 30 days of pausing it, the job expires and Amazon Macie cancels it.
+	// The date and time, in UTC and extended ISO 8601 format, when the job or job run
+	// will expire and be cancelled if you don't resume it first.
 	JobExpiresAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to
-	// notify you of the job's pending expiration and cancellation. This value is null
-	// if a job has been paused for less than 23 days.
+	// notify you of the job or job run's pending expiration and cancellation. This
+	// value is null if a job has been paused for less than 23 days.
 	JobImminentExpirationHealthEventArn *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when you paused the job.

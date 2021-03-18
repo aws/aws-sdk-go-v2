@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deactivates a key signing key (KSK) so that it will not be used for signing by
+// Deactivates a key-signing key (KSK) so that it will not be used for signing by
 // DNSSEC. This operation changes the KSK status to INACTIVE.
 func (c *Client) DeactivateKeySigningKey(ctx context.Context, params *DeactivateKeySigningKeyInput, optFns ...func(*Options)) (*DeactivateKeySigningKeyOutput, error) {
 	if params == nil {
@@ -35,7 +35,7 @@ type DeactivateKeySigningKeyInput struct {
 	// This member is required.
 	HostedZoneId *string
 
-	// An alphanumeric string used to identify a key signing key (KSK).
+	// A string used to identify a key-signing key (KSK).
 	//
 	// This member is required.
 	Name *string

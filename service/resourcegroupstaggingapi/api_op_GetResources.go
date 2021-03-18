@@ -23,13 +23,15 @@ import (
 // * Information about compliance with
 // the account's effective tag policy. For more information on tag policies, see
 // Tag Policies
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
 // in the AWS Organizations User Guide.
 //
-// You can check the PaginationToken response
-// parameter to determine if a query is complete. Queries occasionally return fewer
-// results on a page than allowed. The PaginationToken response parameter value is
-// null only when there are no more results to display.
+// This operation supports pagination, where
+// the response can be sent in multiple pages. You should check the PaginationToken
+// response parameter to determine if there are additional results available to
+// return. Repeat the query, passing the PaginationToken response parameter value
+// as an input to the next request until you recieve a null value. A null value for
+// PaginationToken indicates that there are no more results waiting to be returned.
 func (c *Client) GetResources(ctx context.Context, params *GetResourcesInput, optFns ...func(*Options)) (*GetResourcesOutput, error) {
 	if params == nil {
 		params = &GetResourcesInput{}
@@ -58,81 +60,81 @@ type GetResourcesInput struct {
 	// the tag policy and to get details.
 	IncludeComplianceDetails *bool
 
-	// A string that indicates that additional data is available. Leave this value
-	// empty for your initial request. If the response includes a PaginationToken, use
-	// that string for this value to request an additional page of data.
+	// Specifies a PaginationToken response value from a previous request to indicate
+	// that you want the next page of results. Leave this parameter empty in your
+	// initial request.
 	PaginationToken *string
 
-	// The constraints on the resources that you want returned. The format of each
-	// resource type is service[:resourceType]. For example, specifying a resource type
-	// of ec2 returns all Amazon EC2 resources (which includes EC2 instances).
-	// Specifying a resource type of ec2:instance returns only EC2 instances. The
-	// string for each service name and resource type is the same as that embedded in a
-	// resource's Amazon Resource Name (ARN). Consult the AWS General Reference for the
-	// following:
-	//
-	// * For a list of service name strings, see AWS Service Namespaces
-	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces).
-	//
-	// *
-	// For resource type strings, see Example ARNs
-	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arns-syntax).
-	//
-	// *
-	// For more information about ARNs, see Amazon Resource Names (ARNs) and AWS
-	// Service Namespaces
-	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
-	//
-	// You
-	// can specify multiple resource types by using an array. The array can include up
-	// to 100 items. Note that the length constraint requirement applies to each
+	// Specifies a list of ARNs of resources for which you want to retrieve tag data.
+	// You can't specify both this parameter and any of the pagination parameters
+	// (ResourcesPerPage, TagsPerPage, PaginationToken) in the same request. If you
+	// specify both, you get an Invalid Parameter exception. If a resource specified by
+	// this parameter doesn't exist, it doesn't generate an error; it simply isn't
+	// included in the response. An ARN (Amazon Resource Name) uniquely identifies a
+	// resource. For more information, see Amazon Resource Names (ARNs) and AWS Service
+	// Namespaces
+	// (http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	ResourceARNList []string
+
+	// Specifies the resource types that you want included in the response. The format
+	// of each resource type is service[:resourceType]. For example, specifying a
+	// resource type of ec2 returns all Amazon EC2 resources (which includes EC2
+	// instances). Specifying a resource type of ec2:instance returns only EC2
+	// instances. The string for each service name and resource type is the same as
+	// that embedded in a resource's Amazon Resource Name (ARN). Consult the AWS
+	// General Reference for the following: For more information about ARNs, see Amazon
+	// Resource Names (ARNs) and AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
+	// You can specify multiple resource types by using an array. The array can include
+	// up to 100 items. Note that the length constraint requirement applies to each
 	// resource type filter.
 	ResourceTypeFilters []string
 
-	// A limit that restricts the number of resources returned by GetResources in
-	// paginated output. You can set ResourcesPerPage to a minimum of 1 item and the
-	// maximum of 100 items.
+	// Specifies the maximum number of results to be returned in each page. A query can
+	// return fewer than this maximum, even if there are more results still to return.
+	// You should always check the PaginationToken response value to see if there are
+	// more results. You can specify a minimum of 1 and a maximum value of 100.
 	ResourcesPerPage *int32
 
-	// A list of TagFilters (keys and values). Each TagFilter specified must contain a
-	// key with values as optional. A request can include up to 50 keys, and each key
-	// can include up to 20 values. Note the following when deciding how to use
-	// TagFilters:
+	// Specifies a list of TagFilters (keys and values) to restrict the output to only
+	// those resources that have the specified tag and, if included, the specified
+	// value. Each TagFilter must contain a key with values optional. A request can
+	// include up to 50 keys, and each key can include up to 20 values. Note the
+	// following when deciding how to use TagFilters:
 	//
-	// * If you do specify a TagFilter, the response returns only those
-	// resources that are currently associated with the specified tag.
+	// * If you don't specify a
+	// TagFilter, the response includes all resources that are currently tagged or ever
+	// had a tag. Resources that currently don't have tags are shown with an empty tag
+	// set, like this: "Tags": [].
 	//
-	// * If you don't
-	// specify a TagFilter, the response includes all resources that were ever
-	// associated with tags. Resources that currently don't have associated tags are
-	// shown with an empty tag set, like this: "Tags": [].
+	// * If you specify more than one filter in a single
+	// request, the response returns only those resources that satisfy all filters.
 	//
-	// * If you specify more than
-	// one filter in a single request, the response returns only those resources that
-	// satisfy all specified filters.
+	// *
+	// If you specify a filter that contains more than one value for a key, the
+	// response returns resources that match any of the specified values for that
+	// key.
 	//
-	// * If you specify a filter that contains more
-	// than one value for a key, the response returns resources that match any of the
-	// specified values for that key.
+	// * If you don't specify any values for a key, the response returns
+	// resources that are tagged with that key and any or no value. For example, for
+	// the following filters: filter1= {keyA,{value1}},
+	// filter2={keyB,{value2,value3,value4}}, filter3= {keyC}:
 	//
-	// * If you don't specify any values for a key, the
-	// response returns resources that are tagged with that key irrespective of the
-	// value. For example, for filters: filter1 = {key1, {value1}}, filter2 = {key2,
-	// {value2,value3,value4}} , filter3 = {key3}:
+	// *
+	// GetResources({filter1}) returns resources tagged with key1=value1
 	//
-	// * GetResources( {filter1} ) returns
-	// resources tagged with key1=value1
+	// *
+	// GetResources({filter2}) returns resources tagged with key2=value2 or key2=value3
+	// or key2=value4
 	//
-	// * GetResources( {filter2} ) returns resources
-	// tagged with key2=value2 or key2=value3 or key2=value4
+	// * GetResources({filter3}) returns resources tagged with any tag
+	// with the key key3, and with any or no value
 	//
-	// * GetResources( {filter3}
-	// ) returns resources tagged with any tag containing key3 as its tag key,
-	// irrespective of its value
-	//
-	// * GetResources( {filter1,filter2,filter3} ) returns
-	// resources tagged with ( key1=value1) and ( key2=value2 or key2=value3 or
-	// key2=value4) and (key3, irrespective of the value)
+	// *
+	// GetResources({filter1,filter2,filter3}) returns resources tagged with
+	// (key1=value1) and (key2=value2 or key2=value3 or key2=value4) and (key3, any or
+	// no value)
 	TagFilters []types.TagFilter
 
 	// AWS recommends using ResourcesPerPage instead of this parameter. A limit that
@@ -147,18 +149,19 @@ type GetResourcesInput struct {
 	// of three pages. The first page displays the first 10 resources, each with its 10
 	// tags. The second page displays the next 10 resources, each with its 10 tags. The
 	// third page displays the remaining 2 resources, each with its 10 tags. You can
-	// set TagsPerPage to a minimum of 100 items and the maximum of 500 items.
+	// set TagsPerPage to a minimum of 100 items up to a maximum of 500 items.
 	TagsPerPage *int32
 }
 
 type GetResourcesOutput struct {
 
-	// A string that indicates that the response contains more data than can be
-	// returned in a single response. To receive additional data, specify this string
-	// for the PaginationToken value in a subsequent request.
+	// A string that indicates that there is more data available than this response
+	// contains. To receive the next part of the response, specify this response value
+	// as the PaginationToken value in the request for the next page.
 	PaginationToken *string
 
-	// A list of resource ARNs and the tags (keys and values) associated with each.
+	// A list of resource ARNs and the tags (keys and values) associated with those
+	// ARNs.
 	ResourceTagMappingList []types.ResourceTagMapping
 
 	// Metadata pertaining to the operation's result.
@@ -234,9 +237,10 @@ var _ GetResourcesAPIClient = (*Client)(nil)
 
 // GetResourcesPaginatorOptions is the paginator options for GetResources
 type GetResourcesPaginatorOptions struct {
-	// A limit that restricts the number of resources returned by GetResources in
-	// paginated output. You can set ResourcesPerPage to a minimum of 1 item and the
-	// maximum of 100 items.
+	// Specifies the maximum number of results to be returned in each page. A query can
+	// return fewer than this maximum, even if there are more results still to return.
+	// You should always check the PaginationToken response value to see if there are
+	// more results. You can specify a minimum of 1 and a maximum value of 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

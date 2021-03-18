@@ -11,9 +11,12 @@ import (
 )
 
 // Attaches the specified managed policy to the specified IAM group. You use this
-// API to attach a managed policy to a group. To embed an inline policy in a group,
-// use PutGroupPolicy. For more information about policies, see Managed Policies
-// and Inline Policies
+// operation to attach a managed policy to a group. To embed an inline policy in a
+// group, use PutGroupPolicy. As a best practice, you can validate your IAM
+// policies. To learn more, see Validating IAM policies
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_policy-validator.html)
+// in the IAM User Guide. For more information about policies, see Managed policies
+// and inline policies
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
 // in the IAM User Guide.
 func (c *Client) AttachGroupPolicy(ctx context.Context, params *AttachGroupPolicyInput, optFns ...func(*Options)) (*AttachGroupPolicyOutput, error) {
@@ -42,8 +45,7 @@ type AttachGroupPolicyInput struct {
 	GroupName *string
 
 	// The Amazon Resource Name (ARN) of the IAM policy you want to attach. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces
+	// information about ARNs, see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	//

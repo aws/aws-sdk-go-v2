@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified AWS Glue DataBrew job from the current AWS account. The
-// job can be for a recipe or for a profile.
+// Deletes the specified DataBrew job.
 func (c *Client) DeleteJob(ctx context.Context, params *DeleteJobInput, optFns ...func(*Options)) (*DeleteJobOutput, error) {
 	if params == nil {
 		params = &DeleteJobInput{}

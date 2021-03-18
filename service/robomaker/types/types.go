@@ -259,7 +259,7 @@ type LaunchConfig struct {
 	// Boolean indicating whether a streaming session will be configured for the
 	// application. If True, AWS RoboMaker will configure a connection so you can
 	// interact with your application as it is running in the simulation. You must
-	// configure and luanch the component. It must have a graphical user interface.
+	// configure and launch the component. It must have a graphical user interface.
 	StreamUI bool
 }
 
@@ -399,6 +399,15 @@ type RobotApplicationConfig struct {
 
 	// The version of the robot application.
 	ApplicationVersion *string
+
+	// The upload configurations for the robot application.
+	UploadConfigurations []UploadConfiguration
+
+	// A Boolean indicating whether to use default upload configurations. By default,
+	// .ros and .gazebo files are uploaded when the application terminates and all ROS
+	// topics will be recorded. If you set this value, you must specify an
+	// outputLocation.
+	UseDefaultUploadConfigurations *bool
 }
 
 // Summary information for a robot application.
@@ -498,6 +507,15 @@ type SimulationApplicationConfig struct {
 
 	// The version of the simulation application.
 	ApplicationVersion *string
+
+	// Information about upload configurations for the simulation application.
+	UploadConfigurations []UploadConfiguration
+
+	// A Boolean indicating whether to use default upload configurations. By default,
+	// .ros and .gazebo files are uploaded when the application terminates and all ROS
+	// topics will be recorded. If you set this value, you must specify an
+	// outputLocation.
+	UseDefaultUploadConfigurations *bool
 
 	// A list of world configurations.
 	WorldConfigs []WorldConfig
@@ -685,7 +703,8 @@ type SimulationJobRequest struct {
 	// job request.
 	Tags map[string]string
 
-	// Boolean indicating whether to use default simulation tool applications.
+	// A Boolean indicating whether to use default applications in the simulation job.
+	// Default applications include Gazebo, rqt, rviz and terminal access.
 	UseDefaultApplications *bool
 
 	// If your simulation job accesses resources in a VPC, you provide this parameter
@@ -787,6 +806,41 @@ type TemplateSummary struct {
 
 	// The name of the template.
 	Name *string
+}
+
+// Provides upload configuration information. Files are uploaded from the
+// simulation job to a location you specify.
+type UploadConfiguration struct {
+
+	// A prefix that specifies where files will be uploaded in Amazon S3. It is
+	// appended to the simulation output location to determine the final path. For
+	// example, if your simulation output location is s3://my-bucket and your upload
+	// configuration name is robot-test, your files will be uploaded to
+	// s3://my-bucket///robot-test.
+	//
+	// This member is required.
+	Name *string
+
+	// Specifies the path of the file(s) to upload. Standard Unix glob matching rules
+	// are accepted, with the addition of ** as a super asterisk. For example,
+	// specifying /var/log/**.log causes all .log files in the /var/log directory tree
+	// to be collected. For more examples, see Glob Library
+	// (https://github.com/gobwas/glob).
+	//
+	// This member is required.
+	Path *string
+
+	// Specifies how to upload the files: UPLOAD_ON_TERMINATE Matching files are
+	// uploaded once the simulation enters the TERMINATING state. Matching files are
+	// not uploaded until all of your code (including tools) have stopped. If there is
+	// a problem uploading a file, the upload is retried. If problems persist, no
+	// further upload attempts will be made. UPLOAD_ROLLING_AUTO_REMOVE Matching files
+	// are uploaded as they are created. They are deleted after they are uploaded. The
+	// specified path is checked every 5 seconds. A final check is made when all of
+	// your code (including tools) have stopped.
+	//
+	// This member is required.
+	UploadBehavior UploadBehavior
 }
 
 // If your simulation job accesses resources in a VPC, you provide this parameter

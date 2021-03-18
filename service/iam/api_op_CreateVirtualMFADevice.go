@@ -13,11 +13,11 @@ import (
 
 // Creates a new virtual MFA device for the AWS account. After creating the virtual
 // MFA, use EnableMFADevice to attach the MFA device to an IAM user. For more
-// information about creating and working with virtual MFA devices, go to Using a
-// Virtual MFA Device
+// information about creating and working with virtual MFA devices, see Using a
+// virtual MFA device
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html) in the
-// IAM User Guide. The number and size of IAM resources in an AWS account are
-// limited. For more information, see IAM and STS Quotas
+// IAM User Guide. For information about the maximum number of MFA devices you can
+// create, see IAM and STS quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide. The seed information contained in the QR code and the Base32
 // string should be treated like any other secret access information. In other
@@ -51,7 +51,7 @@ type CreateVirtualMFADeviceInput struct {
 	VirtualMFADeviceName *string
 
 	// The path for the virtual MFA device. For more information about paths, see IAM
-	// Identifiers
+	// identifiers
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide. This parameter is optional. If it is not included, it defaults
 	// to a slash (/). This parameter allows (through its regex pattern
@@ -61,6 +61,14 @@ type CreateVirtualMFADeviceInput struct {
 	// through the DEL character (\u007F), including most punctuation characters,
 	// digits, and upper and lowercased letters.
 	Path *string
+
+	// A list of tags that you want to attach to the new IAM virtual MFA device. Each
+	// tag consists of a key name and an associated value. For more information about
+	// tagging, see Tagging IAM resources
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
+	// Guide. If any one of the tags is invalid or if you exceed the allowed maximum
+	// number of tags, then the entire request fails and the resource is not created.
+	Tags []types.Tag
 }
 
 // Contains the response to a successful CreateVirtualMFADevice request.

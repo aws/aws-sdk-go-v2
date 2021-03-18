@@ -122,7 +122,12 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "us-gov-east-1",
 				},
 			},
-			"us-gov-east-1": endpoints.Endpoint{},
+			"us-gov-east-1": endpoints.Endpoint{
+				Hostname: "greengrass.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+			},
 			"us-gov-west-1": endpoints.Endpoint{
 				Hostname: "greengrass.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
