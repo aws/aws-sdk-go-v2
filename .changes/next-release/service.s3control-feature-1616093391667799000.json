@@ -1,0 +1,9 @@
+{
+ "ID": "service.s3control-feature-1616093391667799000",
+ "SchemaVersion": 1,
+ "Module": "service/s3control",
+ "Type": "feature",
+ "Description": "S3 Object Lambda is a new S3 feature that enables users to apply their own custom code to process the output of a standard S3 GET request by automatically invoking a Lambda function with a GET request",
+ "MinVersion": "",
+ "AffectedModules": null
+}

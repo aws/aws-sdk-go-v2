@@ -1,0 +1,9 @@
+{
+ "ID": "feature.s3.manager-feature-1616093328620827000",
+ "SchemaVersion": 1,
+ "Module": "feature/s3/manager",
+ "Type": "feature",
+ "Description": "Updates for S3 Object Lambda feature",
+ "MinVersion": "",
+ "AffectedModules": null
+}
