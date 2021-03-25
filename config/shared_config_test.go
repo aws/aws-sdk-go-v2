@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
@@ -302,6 +303,8 @@ func TestLoadSharedConfigFromSection(t *testing.T) {
 	if err != nil {
 		t.Fatalf("failed to load test config file, %s, %v", filename, err)
 	}
+	seconds, _ := time.ParseDuration("3601s")
+
 	cases := map[string]struct {
 		Profile  string
 		Expected SharedConfig
@@ -318,6 +321,10 @@ func TestLoadSharedConfigFromSection(t *testing.T) {
 		"prefixed profile 2": {
 			Profile:  "profile short_profile_name_first",
 			Expected: SharedConfig{Region: "short_profile_name_first_alt"},
+		},
+		"profile with durations": {
+			Profile:  "profile alt_durations",
+			Expected: SharedConfig{RoleDurationSeconds: &seconds},
 		},
 		"profile with partial creds": {
 			Profile:  "profile partial_creds",

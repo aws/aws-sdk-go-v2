@@ -13,6 +13,9 @@ aws_secret_access_key = SECRET
 [profile alt_profile_name]
 region = alt_profile_name_region
 
+[profile alt_durations]
+duration_seconds=3601
+
 [profile short_profile_name_first]
 region = short_profile_name_first_short
 

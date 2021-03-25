@@ -613,8 +613,8 @@ func mergeSections(dst, src ini.Sections) error {
 
 		// role duration seconds key update
 		if srcSection.Has(roleDurationSecondsKey) {
-
-			v, err := ini.NewRawIntValue(srcSection.Raw(roleDurationSecondsKey))
+			roleDurationSeconds := srcSection.Raw(roleDurationSecondsKey)
+			v, err := ini.NewRawIntValue(roleDurationSeconds)
 			if err != nil {
 				return fmt.Errorf("error merging role duration seconds key, %w", err)
 			}
