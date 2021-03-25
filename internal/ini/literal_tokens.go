@@ -203,6 +203,11 @@ func NewIntValue(i int64) (Value, error) {
 	return newValue(IntegerType, 10, []rune{rune(i)})
 }
 
+// NewIntValue returns a Value type generated using an int64 input.
+func NewRawIntValue(i []rune) (Value, error) {
+	return newValue(IntegerType, 10, i)
+}
+
 // Append will append values and change the type to a string
 // type.
 func (v *Value) Append(tok Token) {

@@ -253,6 +253,12 @@ func (t Section) Int(k string) int64 {
 	return t.values[k].IntValue()
 }
 
+
+// Int returns an integer value at k
+func (t Section) Raw(k string) []rune {
+	return t.values[k].raw
+}
+
 // Float64 returns a float value at k
 func (t Section) Float64(k string) float64 {
 	return t.values[k].FloatValue()
