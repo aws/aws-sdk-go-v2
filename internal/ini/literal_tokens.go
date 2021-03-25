@@ -203,7 +203,7 @@ func NewIntValue(i int64) (Value, error) {
 	return newValue(IntegerType, 10, []rune{rune(i)})
 }
 
-// NewRawIntValue returns a Value type generated using an int64 input.
+// NewRawIntValue returns an Integer Value type generated using a rune input.
 func NewRawIntValue(i []rune) (Value, error) {
 	return newValue(IntegerType, 10, i)
 }
