@@ -254,7 +254,7 @@ func (t Section) Int(k string) int64 {
 }
 
 
-// Int returns an integer value at k
+// Raw returns a raw value at k
 func (t Section) Raw(k string) []rune {
 	return t.values[k].raw
 }
