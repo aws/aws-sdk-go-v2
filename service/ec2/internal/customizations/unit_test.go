@@ -60,7 +60,7 @@ func Test_EmptyResponse(t *testing.T) {
 
 			params := &ec2.DeleteFleetsInput{
 				FleetIds:           []string{"mockid"},
-				TerminateInstances: true,
+				TerminateInstances: aws.Bool(true),
 			}
 			_, err := client.DeleteFleets(ctx, params)
 			if c.expectError {
