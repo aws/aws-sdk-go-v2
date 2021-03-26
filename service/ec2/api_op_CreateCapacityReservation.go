@@ -53,7 +53,7 @@ type CreateCapacityReservationInput struct {
 	// The number of instances for which to reserve capacity.
 	//
 	// This member is required.
-	InstanceCount int32
+	InstanceCount *int32
 
 	// The type of operating system for which to reserve capacity.
 	//
@@ -83,14 +83,14 @@ type CreateCapacityReservationInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun bool
+	DryRun *bool
 
 	// Indicates whether the Capacity Reservation supports EBS-optimized instances.
 	// This optimization provides dedicated throughput to Amazon EBS and an optimized
 	// configuration stack to provide optimal I/O performance. This optimization isn't
 	// available with all instance types. Additional usage charges apply when using an
 	// EBS- optimized instance.
-	EbsOptimized bool
+	EbsOptimized *bool
 
 	// The date and time at which the Capacity Reservation expires. When a Capacity
 	// Reservation expires, the reserved capacity is released and you can no longer
@@ -117,7 +117,7 @@ type CreateCapacityReservationInput struct {
 
 	// Indicates whether the Capacity Reservation supports instances with temporary,
 	// block-level storage.
-	EphemeralStorage bool
+	EphemeralStorage *bool
 
 	// Indicates the type of instance launches that the Capacity Reservation accepts.
 	// The options include:
