@@ -35,13 +35,8 @@ func (m *awsRestjson1_serializeOpListRealtimeContactAnalysisSegments) HandleSeri
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/realtime-contact-analysis/analysis-segments")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
