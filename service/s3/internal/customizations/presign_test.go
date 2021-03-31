@@ -157,7 +157,7 @@ func TestPutObject_PresignURL(t *testing.T) {
 				func(option *s3.PresignOptions) {
 					option.ClientOptions = []func(o *s3.Options){
 						func(o *s3.Options) {
-							//o.DisableMultiRegionAccessPoints = true
+							o.DisableMultiRegionAccessPoints = true
 						},
 					}
 				},
