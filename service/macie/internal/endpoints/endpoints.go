@@ -37,6 +37,21 @@ func New() *Resolver {
 	}
 }
 
+var partitionRegexp = struct {
+	Aws      *regexp.Regexp
+	AwsCn    *regexp.Regexp
+	AwsIso   *regexp.Regexp
+	AwsIsoB  *regexp.Regexp
+	AwsUsGov *regexp.Regexp
+}{
+
+	Aws:      regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
+	AwsCn:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
+	AwsIso:   regexp.MustCompile("^us\\-iso\\-\\w+\\-\\d+$"),
+	AwsIsoB:  regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
+	AwsUsGov: regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
+}
+
 var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws",
@@ -45,7 +60,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"fips-us-east-1": endpoints.Endpoint{
@@ -71,7 +86,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
 	},
 	{
@@ -81,7 +96,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^us\\-iso\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
 	},
 	{
@@ -91,7 +106,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
 	},
 	{
@@ -101,7 +116,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
 	},
 }
