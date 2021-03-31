@@ -37,13 +37,8 @@ func (m *awsRestjson1_serializeOpAddNotificationChannels) HandleSerialize(ctx co
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/notificationConfiguration")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -125,13 +120,8 @@ func (m *awsRestjson1_serializeOpBatchGetFrameMetricData) HandleSerialize(ctx co
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/frames/-/metrics")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -229,13 +219,8 @@ func (m *awsRestjson1_serializeOpConfigureAgent) HandleSerialize(ctx context.Con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/configureAgent")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -322,13 +307,8 @@ func (m *awsRestjson1_serializeOpCreateProfilingGroup) HandleSerialize(ctx conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -422,13 +402,8 @@ func (m *awsRestjson1_serializeOpDeleteProfilingGroup) HandleSerialize(ctx conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -485,13 +460,8 @@ func (m *awsRestjson1_serializeOpDescribeProfilingGroup) HandleSerialize(ctx con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -548,13 +518,8 @@ func (m *awsRestjson1_serializeOpGetFindingsReportAccountSummary) HandleSerializ
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/internal/findingsReports")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -614,13 +579,8 @@ func (m *awsRestjson1_serializeOpGetNotificationConfiguration) HandleSerialize(c
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/notificationConfiguration")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -677,13 +637,8 @@ func (m *awsRestjson1_serializeOpGetPolicy) HandleSerialize(ctx context.Context,
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/policy")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -740,13 +695,8 @@ func (m *awsRestjson1_serializeOpGetProfile) HandleSerialize(ctx context.Context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/profile")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -824,13 +774,8 @@ func (m *awsRestjson1_serializeOpGetRecommendations) HandleSerialize(ctx context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/internal/profilingGroups/{profilingGroupName}/recommendations")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -899,13 +844,8 @@ func (m *awsRestjson1_serializeOpListFindingsReports) HandleSerialize(ctx contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/internal/profilingGroups/{profilingGroupName}/findingsReports")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -982,13 +922,8 @@ func (m *awsRestjson1_serializeOpListProfileTimes) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/profileTimes")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1069,13 +1004,8 @@ func (m *awsRestjson1_serializeOpListProfilingGroups) HandleSerialize(ctx contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1135,13 +1065,8 @@ func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/tags/{resourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1198,13 +1123,8 @@ func (m *awsRestjson1_serializeOpPostAgentProfile) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/agentProfile")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1281,13 +1201,8 @@ func (m *awsRestjson1_serializeOpPutPermission) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/policy/{actionGroup}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1383,13 +1298,8 @@ func (m *awsRestjson1_serializeOpRemoveNotificationChannel) HandleSerialize(ctx 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/notificationConfiguration/{channelId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1455,13 +1365,8 @@ func (m *awsRestjson1_serializeOpRemovePermission) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}/policy/{actionGroup}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1531,13 +1436,8 @@ func (m *awsRestjson1_serializeOpSubmitFeedback) HandleSerialize(ctx context.Con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/internal/profilingGroups/{profilingGroupName}/anomalies/{anomalyInstanceId}/feedback")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1631,13 +1531,8 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/tags/{resourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1719,13 +1614,8 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/tags/{resourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1788,13 +1678,8 @@ func (m *awsRestjson1_serializeOpUpdateProfilingGroup) HandleSerialize(ctx conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profilingGroups/{profilingGroupName}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {

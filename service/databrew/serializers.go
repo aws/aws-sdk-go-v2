@@ -36,13 +36,8 @@ func (m *awsRestjson1_serializeOpBatchDeleteRecipeVersion) HandleSerialize(ctx c
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipes/{Name}/batchDeleteRecipeVersion")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -124,13 +119,8 @@ func (m *awsRestjson1_serializeOpCreateDataset) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/datasets")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -223,13 +213,8 @@ func (m *awsRestjson1_serializeOpCreateProfileJob) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profileJobs")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -357,13 +342,8 @@ func (m *awsRestjson1_serializeOpCreateProject) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/projects")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -459,13 +439,8 @@ func (m *awsRestjson1_serializeOpCreateRecipe) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipes")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -551,13 +526,8 @@ func (m *awsRestjson1_serializeOpCreateRecipeJob) HandleSerialize(ctx context.Co
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipeJobs")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -690,13 +660,8 @@ func (m *awsRestjson1_serializeOpCreateSchedule) HandleSerialize(ctx context.Con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/schedules")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -782,13 +747,8 @@ func (m *awsRestjson1_serializeOpDeleteDataset) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/datasets/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -845,13 +805,8 @@ func (m *awsRestjson1_serializeOpDeleteJob) HandleSerialize(ctx context.Context,
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/jobs/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -908,13 +863,8 @@ func (m *awsRestjson1_serializeOpDeleteProject) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -971,13 +921,8 @@ func (m *awsRestjson1_serializeOpDeleteRecipeVersion) HandleSerialize(ctx contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipes/{Name}/recipeVersion/{RecipeVersion}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1043,13 +988,8 @@ func (m *awsRestjson1_serializeOpDeleteSchedule) HandleSerialize(ctx context.Con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/schedules/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1106,13 +1046,8 @@ func (m *awsRestjson1_serializeOpDescribeDataset) HandleSerialize(ctx context.Co
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/datasets/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1169,13 +1104,8 @@ func (m *awsRestjson1_serializeOpDescribeJob) HandleSerialize(ctx context.Contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/jobs/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1232,13 +1162,8 @@ func (m *awsRestjson1_serializeOpDescribeJobRun) HandleSerialize(ctx context.Con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/jobs/{Name}/jobRun/{RunId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1304,13 +1229,8 @@ func (m *awsRestjson1_serializeOpDescribeProject) HandleSerialize(ctx context.Co
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1367,13 +1287,8 @@ func (m *awsRestjson1_serializeOpDescribeRecipe) HandleSerialize(ctx context.Con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipes/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1434,13 +1349,8 @@ func (m *awsRestjson1_serializeOpDescribeSchedule) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/schedules/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1497,13 +1407,8 @@ func (m *awsRestjson1_serializeOpListDatasets) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/datasets")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1559,13 +1464,8 @@ func (m *awsRestjson1_serializeOpListJobRuns) HandleSerialize(ctx context.Contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/jobs/{Name}/jobRuns")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1630,13 +1530,8 @@ func (m *awsRestjson1_serializeOpListJobs) HandleSerialize(ctx context.Context, 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/jobs")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1700,13 +1595,8 @@ func (m *awsRestjson1_serializeOpListProjects) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/projects")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1762,13 +1652,8 @@ func (m *awsRestjson1_serializeOpListRecipes) HandleSerialize(ctx context.Contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipes")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1828,13 +1713,8 @@ func (m *awsRestjson1_serializeOpListRecipeVersions) HandleSerialize(ctx context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipeVersions")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1894,13 +1774,8 @@ func (m *awsRestjson1_serializeOpListSchedules) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/schedules")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1960,13 +1835,8 @@ func (m *awsRestjson1_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/tags/{ResourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2023,13 +1893,8 @@ func (m *awsRestjson1_serializeOpPublishRecipe) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipes/{Name}/publishRecipe")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2109,13 +1974,8 @@ func (m *awsRestjson1_serializeOpSendProjectSessionAction) HandleSerialize(ctx c
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{Name}/sendProjectSessionAction")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2219,13 +2079,8 @@ func (m *awsRestjson1_serializeOpStartJobRun) HandleSerialize(ctx context.Contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/jobs/{Name}/startJobRun")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2282,13 +2137,8 @@ func (m *awsRestjson1_serializeOpStartProjectSession) HandleSerialize(ctx contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{Name}/startProjectSession")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2368,13 +2218,8 @@ func (m *awsRestjson1_serializeOpStopJobRun) HandleSerialize(ctx context.Context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/jobs/{Name}/jobRun/{RunId}/stopJobRun")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2440,13 +2285,8 @@ func (m *awsRestjson1_serializeOpTagResource) HandleSerialize(ctx context.Contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/tags/{ResourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2528,13 +2368,8 @@ func (m *awsRestjson1_serializeOpUntagResource) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/tags/{ResourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2597,13 +2432,8 @@ func (m *awsRestjson1_serializeOpUpdateDataset) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/datasets/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2697,13 +2527,8 @@ func (m *awsRestjson1_serializeOpUpdateProfileJob) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/profileJobs/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2827,13 +2652,8 @@ func (m *awsRestjson1_serializeOpUpdateProject) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/projects/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2920,13 +2740,8 @@ func (m *awsRestjson1_serializeOpUpdateRecipe) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipes/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -3013,13 +2828,8 @@ func (m *awsRestjson1_serializeOpUpdateRecipeJob) HandleSerialize(ctx context.Co
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/recipeJobs/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -3136,13 +2946,8 @@ func (m *awsRestjson1_serializeOpUpdateSchedule) HandleSerialize(ctx context.Con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/schedules/{Name}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {

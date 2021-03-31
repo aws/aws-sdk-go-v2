@@ -36,13 +36,8 @@ func (m *awsRestjson1_serializeOpCreateBroker) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -217,13 +212,8 @@ func (m *awsRestjson1_serializeOpCreateConfiguration) HandleSerialize(ctx contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/configurations")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -312,13 +302,8 @@ func (m *awsRestjson1_serializeOpCreateTags) HandleSerialize(ctx context.Context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/tags/{ResourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -400,13 +385,8 @@ func (m *awsRestjson1_serializeOpCreateUser) HandleSerialize(ctx context.Context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}/users/{Username}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -507,13 +487,8 @@ func (m *awsRestjson1_serializeOpDeleteBroker) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -570,13 +545,8 @@ func (m *awsRestjson1_serializeOpDeleteTags) HandleSerialize(ctx context.Context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/tags/{ResourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -639,13 +609,8 @@ func (m *awsRestjson1_serializeOpDeleteUser) HandleSerialize(ctx context.Context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}/users/{Username}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -711,13 +676,8 @@ func (m *awsRestjson1_serializeOpDescribeBroker) HandleSerialize(ctx context.Con
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -774,13 +734,8 @@ func (m *awsRestjson1_serializeOpDescribeBrokerEngineTypes) HandleSerialize(ctx 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/broker-engine-types")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -840,13 +795,8 @@ func (m *awsRestjson1_serializeOpDescribeBrokerInstanceOptions) HandleSerialize(
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/broker-instance-options")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -914,13 +864,8 @@ func (m *awsRestjson1_serializeOpDescribeConfiguration) HandleSerialize(ctx cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/configurations/{ConfigurationId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -977,13 +922,8 @@ func (m *awsRestjson1_serializeOpDescribeConfigurationRevision) HandleSerialize(
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/configurations/{ConfigurationId}/revisions/{ConfigurationRevision}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1049,13 +989,8 @@ func (m *awsRestjson1_serializeOpDescribeUser) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}/users/{Username}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1121,13 +1056,8 @@ func (m *awsRestjson1_serializeOpListBrokers) HandleSerialize(ctx context.Contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1183,13 +1113,8 @@ func (m *awsRestjson1_serializeOpListConfigurationRevisions) HandleSerialize(ctx
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/configurations/{ConfigurationId}/revisions")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1254,13 +1179,8 @@ func (m *awsRestjson1_serializeOpListConfigurations) HandleSerialize(ctx context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/configurations")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1316,13 +1236,8 @@ func (m *awsRestjson1_serializeOpListTags) HandleSerialize(ctx context.Context, 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/tags/{ResourceArn}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1379,13 +1294,8 @@ func (m *awsRestjson1_serializeOpListUsers) HandleSerialize(ctx context.Context,
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}/users")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1450,13 +1360,8 @@ func (m *awsRestjson1_serializeOpRebootBroker) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}/reboot")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1513,13 +1418,8 @@ func (m *awsRestjson1_serializeOpUpdateBroker) HandleSerialize(ctx context.Conte
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1642,13 +1542,8 @@ func (m *awsRestjson1_serializeOpUpdateConfiguration) HandleSerialize(ctx contex
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/configurations/{ConfigurationId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1733,13 +1628,8 @@ func (m *awsRestjson1_serializeOpUpdateUser) HandleSerialize(ctx context.Context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/v1/brokers/{BrokerId}/users/{Username}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {

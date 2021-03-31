@@ -37,13 +37,8 @@ func (m *awsRestjson1_serializeOpAcceptInboundCrossClusterSearchConnection) Hand
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/ccs/inboundConnection/{CrossClusterSearchConnectionId}/accept")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -100,13 +95,8 @@ func (m *awsRestjson1_serializeOpAddTags) HandleSerialize(ctx context.Context, i
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/tags")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -180,13 +170,8 @@ func (m *awsRestjson1_serializeOpAssociatePackage) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/associate/{PackageID}/{DomainName}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -252,13 +237,8 @@ func (m *awsRestjson1_serializeOpCancelElasticsearchServiceSoftwareUpdate) Handl
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/serviceSoftwareUpdate/cancel")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -325,13 +305,8 @@ func (m *awsRestjson1_serializeOpCreateElasticsearchDomain) HandleSerialize(ctx 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/domain")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -499,13 +474,8 @@ func (m *awsRestjson1_serializeOpCreateOutboundCrossClusterSearchConnection) Han
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/ccs/outboundConnection")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -586,13 +556,8 @@ func (m *awsRestjson1_serializeOpCreatePackage) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -676,13 +641,8 @@ func (m *awsRestjson1_serializeOpDeleteElasticsearchDomain) HandleSerialize(ctx 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/domain/{DomainName}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -739,13 +699,8 @@ func (m *awsRestjson1_serializeOpDeleteElasticsearchServiceRole) HandleSerialize
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/role")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -789,13 +744,8 @@ func (m *awsRestjson1_serializeOpDeleteInboundCrossClusterSearchConnection) Hand
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/ccs/inboundConnection/{CrossClusterSearchConnectionId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -852,13 +802,8 @@ func (m *awsRestjson1_serializeOpDeleteOutboundCrossClusterSearchConnection) Han
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/ccs/outboundConnection/{CrossClusterSearchConnectionId}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -915,13 +860,8 @@ func (m *awsRestjson1_serializeOpDeletePackage) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/{PackageID}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "DELETE"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -978,13 +918,8 @@ func (m *awsRestjson1_serializeOpDescribeDomainAutoTunes) HandleSerialize(ctx co
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/domain/{DomainName}/autoTunes")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1069,13 +1004,8 @@ func (m *awsRestjson1_serializeOpDescribeElasticsearchDomain) HandleSerialize(ct
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/domain/{DomainName}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1132,13 +1062,8 @@ func (m *awsRestjson1_serializeOpDescribeElasticsearchDomainConfig) HandleSerial
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/domain/{DomainName}/config")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1195,13 +1120,8 @@ func (m *awsRestjson1_serializeOpDescribeElasticsearchDomains) HandleSerialize(c
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/domain-info")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1270,13 +1190,8 @@ func (m *awsRestjson1_serializeOpDescribeElasticsearchInstanceTypeLimits) Handle
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/instanceTypeLimits/{ElasticsearchVersion}/{InstanceType}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1346,13 +1261,8 @@ func (m *awsRestjson1_serializeOpDescribeInboundCrossClusterSearchConnections) H
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/ccs/inboundConnection/search")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1431,13 +1341,8 @@ func (m *awsRestjson1_serializeOpDescribeOutboundCrossClusterSearchConnections) 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/ccs/outboundConnection/search")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1516,13 +1421,8 @@ func (m *awsRestjson1_serializeOpDescribePackages) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/describe")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1601,13 +1501,8 @@ func (m *awsRestjson1_serializeOpDescribeReservedElasticsearchInstanceOfferings)
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/reservedInstanceOfferings")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1667,13 +1562,8 @@ func (m *awsRestjson1_serializeOpDescribeReservedElasticsearchInstances) HandleS
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/reservedInstances")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1733,13 +1623,8 @@ func (m *awsRestjson1_serializeOpDissociatePackage) HandleSerialize(ctx context.
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/dissociate/{PackageID}/{DomainName}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1805,13 +1690,8 @@ func (m *awsRestjson1_serializeOpGetCompatibleElasticsearchVersions) HandleSeria
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/compatibleVersions")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1863,13 +1743,8 @@ func (m *awsRestjson1_serializeOpGetPackageVersionHistory) HandleSerialize(ctx c
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/{PackageID}/history")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -1934,13 +1809,8 @@ func (m *awsRestjson1_serializeOpGetUpgradeHistory) HandleSerialize(ctx context.
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/upgradeDomain/{DomainName}/history")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2005,13 +1875,8 @@ func (m *awsRestjson1_serializeOpGetUpgradeStatus) HandleSerialize(ctx context.C
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/upgradeDomain/{DomainName}/status")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2068,13 +1933,8 @@ func (m *awsRestjson1_serializeOpListDomainNames) HandleSerialize(ctx context.Co
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/domain")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2118,13 +1978,8 @@ func (m *awsRestjson1_serializeOpListDomainsForPackage) HandleSerialize(ctx cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/{PackageID}/domains")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2189,13 +2044,8 @@ func (m *awsRestjson1_serializeOpListElasticsearchInstanceTypes) HandleSerialize
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/instanceTypes/{ElasticsearchVersion}")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2264,13 +2114,8 @@ func (m *awsRestjson1_serializeOpListElasticsearchVersions) HandleSerialize(ctx 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/versions")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2326,13 +2171,8 @@ func (m *awsRestjson1_serializeOpListPackagesForDomain) HandleSerialize(ctx cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/domain/{DomainName}/packages")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2397,13 +2237,8 @@ func (m *awsRestjson1_serializeOpListTags) HandleSerialize(ctx context.Context, 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/tags")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "GET"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2455,13 +2290,8 @@ func (m *awsRestjson1_serializeOpPurchaseReservedElasticsearchInstanceOffering) 
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/purchaseReservedInstanceOffering")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2538,13 +2368,8 @@ func (m *awsRestjson1_serializeOpRejectInboundCrossClusterSearchConnection) Hand
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/ccs/inboundConnection/{CrossClusterSearchConnectionId}/reject")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "PUT"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2601,13 +2426,8 @@ func (m *awsRestjson1_serializeOpRemoveTags) HandleSerialize(ctx context.Context
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/tags-removal")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2681,13 +2501,8 @@ func (m *awsRestjson1_serializeOpStartElasticsearchServiceSoftwareUpdate) Handle
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/serviceSoftwareUpdate/start")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2754,13 +2569,8 @@ func (m *awsRestjson1_serializeOpUpdateElasticsearchDomainConfig) HandleSerializ
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/domain/{DomainName}/config")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -2924,13 +2734,8 @@ func (m *awsRestjson1_serializeOpUpdatePackage) HandleSerialize(ctx context.Cont
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/packages/update")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
@@ -3014,13 +2819,8 @@ func (m *awsRestjson1_serializeOpUpgradeElasticsearchDomain) HandleSerialize(ctx
 	}
 
 	opPath, opQuery := httpbinding.SplitURI("/2015-01-01/es/upgradeDomain")
-	request.URL.Path = opPath
-	if len(request.URL.RawQuery) > 0 {
-		request.URL.RawQuery = "&" + opQuery
-	} else {
-		request.URL.RawQuery = opQuery
-	}
-
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
 	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
 	if err != nil {
