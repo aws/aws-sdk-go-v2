@@ -236,6 +236,18 @@ func TestUpdateEndpointBuild(t *testing.T) {
 	}
 }
 
+// test case struct used to test endpoint customizations
+type testCaseForEndpointCustomization struct {
+	options               s3.Options
+	bucket                string
+	operation             func(ctx context.Context, svc *s3.Client, fm *requestRetriever) (interface{}, error)
+	expectedErr           string
+	expectedReqURL        string
+	expectedSigningName   string
+	expectedSigningRegion string
+	expectedHeader        map[string]string
+}
+
 func TestEndpointWithARN(t *testing.T) {
 	// test cases
 	cases := map[string]testCaseForEndpointCustomization{
@@ -858,35 +870,13 @@ func TestEndpointWithARN(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			runValidations(t, c, func(ctx context.Context, svc *s3.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+			runValidations(t, c, func(ctx context.Context, svc *s3.Client, fetcher *requestRetriever) (interface{}, error) {
 				return svc.GetObject(ctx, &s3.GetObjectInput{
 					Bucket: ptr.String(c.bucket),
 					Key:    ptr.String("testkey"),
-				}, addRequestRetriever(fm))
+				}, addRequestRetriever(fetcher))
 			})
 		})
-	}
-}
-
-type testCaseForEndpointCustomization struct {
-	options               s3.Options
-	bucket                string
-	operation             func(ctx context.Context, svc *s3.Client, fm *requestRetrieverMiddleware) (interface{}, error)
-	expectedErr           string
-	expectedReqURL        string
-	expectedSigningName   string
-	expectedSigningRegion string
-}
-
-var addRequestRetriever = func(fm *requestRetrieverMiddleware) func(options *s3.Options) {
-	return func(options *s3.Options) {
-		// append request retriever middleware for request inspection
-		options.APIOptions = append(options.APIOptions,
-			func(stack *middleware.Stack) error {
-				// adds AFTER operation serializer middleware
-				stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
-				return nil
-			})
 	}
 }
 
@@ -935,7 +925,7 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 				}),
 				Region: "us-west-2",
 			},
-			operation: func(ctx context.Context, svc *s3.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+			operation: func(ctx context.Context, svc *s3.Client, fm *requestRetriever) (interface{}, error) {
 				return svc.ListBuckets(ctx, &s3.ListBucketsInput{}, addRequestRetriever(fm))
 			},
 			expectedReqURL:        "https://bucket.vpce-123-abc.s3.us-west-2.vpce.amazonaws.com/",
@@ -1021,7 +1011,7 @@ func TestVPC_CustomEndpoint(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			runValidations(t, c, func(ctx context.Context, svc *s3.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+			runValidations(t, c, func(ctx context.Context, svc *s3.Client, fm *requestRetriever) (interface{}, error) {
 				if c.operation != nil {
 					return c.operation(ctx, svc, fm)
 				}
@@ -1101,7 +1091,7 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			runValidations(t, c, func(ctx context.Context, client *s3.Client, retrieverMiddleware *requestRetrieverMiddleware) (interface{}, error) {
+			runValidations(t, c, func(ctx context.Context, client *s3.Client, retrieverMiddleware *requestRetriever) (interface{}, error) {
 				return client.WriteGetObjectResponse(context.Background(),
 					&s3.WriteGetObjectResponseInput{
 						RequestRoute: aws.String("test-route"),
@@ -1112,8 +1102,207 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 	}
 }
 
+func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
+	regionHeader := "x-amz-region-set"
+
+	cases := map[string]testCaseForEndpointCustomization{
+		"region as us-east-1": {
+			options: s3.Options{
+				Region: "us-east-1",
+			},
+			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/",
+			expectedHeader: map[string]string{
+				regionHeader: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+		"region as us-west-2": {
+			options: s3.Options{
+				Region: "us-west-2",
+			},
+			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/",
+			expectedHeader: map[string]string{
+				regionHeader: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+		"region as aws-global": {
+			options: s3.Options{
+				Region: "aws-global",
+			},
+			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/",
+			expectedHeader: map[string]string{
+				regionHeader: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+		"cn partition": {
+			options: s3.Options{
+				Region: "cn-north-1",
+			},
+			bucket:         "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn/",
+			expectedHeader: map[string]string{
+				regionHeader: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+		"region as us-west-2 with mrap disabled": {
+			options: s3.Options{
+				Region:                         "us-west-2",
+				DisableMultiRegionAccessPoints: true,
+			},
+			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "Multi-Region access point ARNs are disabled",
+		},
+		"region as aws-global with mrap disabled": {
+			options: s3.Options{
+				Region:                         "aws-global",
+				DisableMultiRegionAccessPoints: true,
+			},
+			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "Multi-Region access point ARNs are disabled",
+		},
+		"with dualstack": {
+			options: s3.Options{
+				Region:       "us-west-2",
+				UseDualstack: true,
+			},
+			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "client configured for S3 Dual-stack but is not supported with resource",
+		},
+		"with accelerate": {
+			options: s3.Options{
+				Region:        "us-west-2",
+				UseAccelerate: true,
+			},
+			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "client configured for S3 Accelerate but is not supported with resource",
+		},
+		"access point with no region and mrap disabled": {
+			options: s3.Options{
+				Region:                         "us-west-2",
+				DisableMultiRegionAccessPoints: true,
+			},
+			bucket:      "arn:aws:s3::123456789012:accesspoint:myendpoint",
+			expectedErr: "Multi-Region access point ARNs are disabled",
+		},
+		"endpoint with no region and disabled mrap": {
+			options: s3.Options{
+				Region:                         "us-west-2",
+				DisableMultiRegionAccessPoints: true,
+			},
+			bucket:      "arn:aws:s3::123456789012:accesspoint:myendpoint",
+			expectedErr: "Multi-Region access point ARNs are disabled",
+		},
+		"endpoint with no region": {
+			options: s3.Options{
+				Region: "us-west-2",
+			},
+			bucket:         "arn:aws:s3::123456789012:accesspoint:myendpoint",
+			expectedReqURL: "https://myendpoint.accesspoint.s3-global.amazonaws.com/",
+			expectedHeader: map[string]string{
+				regionHeader: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+		"endpoint containing dot with no region": {
+			options: s3.Options{
+				Region: "us-west-2",
+			},
+			bucket:         "arn:aws:s3::123456789012:accesspoint:my.bucket",
+			expectedReqURL: "https://my.bucket.accesspoint.s3-global.amazonaws.com/",
+			expectedHeader: map[string]string{
+				regionHeader: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+		"vpce endpoint": {
+			options: s3.Options{
+				Region: "us-west-2",
+				EndpointResolver: s3.EndpointResolverFromURL("https://vpce-123-abc.vpce.s3-global.amazonaws.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+				}),
+			},
+			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedReqURL: "https://mfzwi23gnjvgw.mrap.vpce-123-abc.vpce.s3-global.amazonaws.com/",
+			expectedHeader: map[string]string{
+				regionHeader: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+		"vpce endpoint with hostname immutable": {
+			options: s3.Options{
+				Region: "us-west-2",
+				EndpointResolver: s3.EndpointResolverFromURL("https://vpce-123-abc.vpce.s3-global.amazonaws.com", func(endpoint *aws.Endpoint) {
+					endpoint.SigningRegion = "us-west-2"
+					endpoint.HostnameImmutable = true
+				}),
+			},
+			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedReqURL: "https://vpce-123-abc.vpce.s3-global.amazonaws.com/arn%3Aaws%3As3%3A%3A123456789012%3Aaccesspoint%3Amfzwi23gnjvgw.mrap",
+			expectedHeader: map[string]string{
+				regionHeader: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+	}
+
+	for name, c := range cases {
+		t.Run(name, func(t *testing.T) {
+			runValidations(t, c, func(ctx context.Context, svc *s3.Client, reqRetriever *requestRetriever) (interface{}, error) {
+				if c.operation != nil {
+					return c.operation(ctx, svc, reqRetriever)
+				}
+
+				return svc.ListObjects(ctx, &s3.ListObjectsInput{
+					Bucket: ptr.String(c.bucket),
+				}, addRequestRetriever(reqRetriever))
+			})
+		})
+	}
+}
+
+// addRequestRetriever provides request retriever function - that can be used to fetch request from
+// various build steps. Currently we support fetching after serializing and after finalized middlewares.
+var addRequestRetriever = func(fm *requestRetriever) func(options *s3.Options) {
+	return func(options *s3.Options) {
+		// append request retriever middleware for request inspection
+		options.APIOptions = append(options.APIOptions,
+			func(stack *middleware.Stack) error {
+				// adds AFTER operation serializer middleware
+				return stack.Serialize.Insert(fm.serializedRequest, "OperationSerializer", middleware.After)
+			},
+			func(stack *middleware.Stack) error {
+				// adds AFTER operation finalize middleware
+				return stack.Finalize.Add(fm.signedRequest, middleware.After)
+			})
+	}
+}
+
+// requestRetriever can be used to fetch request within various stages of request.
+// currently we support fetching requests after serialization, and after signing.
+type requestRetriever struct {
+	// serializedRequest retriver should be used to fetch request after Operation serializers are executed.
+	serializedRequest *requestRetrieverMiddleware
+
+	// signedRequest retriever should be used to fetch request from Finalize step after
+	signedRequest *requestRetrieverMiddleware
+}
+
 func runValidations(t *testing.T, c testCaseForEndpointCustomization, operation func(
-	context.Context, *s3.Client, *requestRetrieverMiddleware) (interface{}, error)) {
+	context.Context, *s3.Client, *requestRetriever) (interface{}, error)) {
 	// options
 	opts := c.options.Copy()
 	opts.Credentials = unit.StubCredentialsProvider{}
@@ -1122,13 +1311,20 @@ func runValidations(t *testing.T, c testCaseForEndpointCustomization, operation 
 
 	// build an s3 client
 	svc := s3.New(opts)
-	// setup a request retriever middleware
-	fm := requestRetrieverMiddleware{}
+
+	// initialize request fetcher to fetch after input is serialized for request
+	serializedRequest := requestRetrieverMiddleware{}
+
+	// initialize request fetcher to fetch request after it is signed
+	signedRequest := requestRetrieverMiddleware{}
 
 	ctx := context.Background()
 
 	// call an operation
-	_, err := operation(ctx, svc, &fm)
+	_, err := operation(ctx, svc, &requestRetriever{
+		serializedRequest: &serializedRequest,
+		signedRequest:     &signedRequest,
+	})
 
 	// inspect any errors
 	if len(c.expectedErr) != 0 {
@@ -1145,21 +1341,35 @@ func runValidations(t *testing.T, c testCaseForEndpointCustomization, operation 
 	}
 
 	// build the captured request
-	req := fm.request.Build(ctx)
+	req := serializedRequest.request.Build(ctx)
 	// verify the built request is as expected
 	if e, a := c.expectedReqURL, req.URL.String(); e != a {
 		t.Fatalf("expect url %s, got %s", e, a)
 	}
 
-	if e, a := c.expectedSigningRegion, fm.signingRegion; !strings.EqualFold(e, a) {
+	if e, a := c.expectedSigningRegion, serializedRequest.signingRegion; !strings.EqualFold(e, a) {
 		t.Fatalf("expect signing region as %s, got %s", e, a)
 	}
 
-	if e, a := c.expectedSigningName, fm.signingName; !strings.EqualFold(e, a) {
+	if e, a := c.expectedSigningName, serializedRequest.signingName; !strings.EqualFold(e, a) {
 		t.Fatalf("expect signing name as %s, got %s", e, a)
+	}
+
+	// fetch signed request
+	signedReq := signedRequest.request
+	// validate if expected headers are present in request
+	for key, ev := range c.expectedHeader {
+		av := signedReq.Header.Get(key)
+		if len(av) == 0 {
+			t.Fatalf("expected header %v to be present in %v was not", key, req.Header)
+		}
+		if !strings.EqualFold(ev, av) {
+			t.Fatalf("expected header %v to be %v, got %v instead", key, ev, av)
+		}
 	}
 }
 
+// request retriever middleware is used to fetch request within a stack step.
 type requestRetrieverMiddleware struct {
 	request       *smithyhttp.Request
 	signingRegion string
@@ -1183,4 +1393,21 @@ func (rm *requestRetrieverMiddleware) HandleSerialize(
 	rm.signingRegion = awsmiddleware.GetSigningRegion(ctx)
 
 	return next.HandleSerialize(ctx, in)
+}
+
+func (rm *requestRetrieverMiddleware) HandleFinalize(
+	ctx context.Context, in middleware.FinalizeInput, next middleware.FinalizeHandler,
+) (
+	out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+) {
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown request type %T", req)
+	}
+	rm.request = req
+
+	rm.signingName = awsmiddleware.GetSigningName(ctx)
+	rm.signingRegion = awsmiddleware.GetSigningRegion(ctx)
+
+	return next.HandleFinalize(ctx, in)
 }

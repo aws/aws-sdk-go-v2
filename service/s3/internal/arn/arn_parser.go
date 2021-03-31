@@ -66,6 +66,11 @@ func parseOutpostAccessPointResource(a awsarn.ARN, resParts []string) (arn.Outpo
 	var outpostAccessPointARN = arn.OutpostAccessPointARN{}
 	switch resParts[1] {
 	case "accesspoint":
+		// Do not allow region-less outpost access-point arns.
+		if len(a.Region) == 0 {
+			return arn.OutpostAccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: "region is not set"}
+		}
+
 		accessPointARN, err := arn.ParseAccessPointResource(a, resParts[2:])
 		if err != nil {
 			return arn.OutpostAccessPointARN{}, err

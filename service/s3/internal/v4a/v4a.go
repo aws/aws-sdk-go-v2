@@ -46,6 +46,9 @@ const (
 	EmptyStringSHA256 = v4Internal.EmptyStringSHA256
 
 	authorizationHeader = "Authorization"
+
+	// Version of signing v4a
+	Version = "SigV4A"
 )
 
 var (

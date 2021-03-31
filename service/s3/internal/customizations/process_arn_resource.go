@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a"
 	"net/url"
 	"strings"
 
@@ -38,6 +39,9 @@ type processARNResource struct {
 
 	// EndpointResolverOptions used by endpoint resolver
 	EndpointResolverOptions EndpointResolverOptions
+
+	// DisableMultiRegionAccessPoints indicates multi-region access point support is disabled
+	DisableMultiRegionAccessPoints bool
 }
 
 // ID returns the middleware ID.
@@ -74,14 +78,31 @@ func (m *processARNResource) HandleSerialize(
 		PartitionID:   awsmiddleware.GetPartitionID(ctx),
 	}
 
-	// validate resource request
-	if err := validateResourceRequest(resourceRequest); err != nil {
-		return out, metadata, err
-	}
-
 	// switch to correct endpoint updater
 	switch tv := resource.(type) {
 	case arn.AccessPointARN:
+		// multi-region arns do not need to validate for cross partition request
+		if len(tv.Region) != 0 {
+			// validate resource request
+			if err := validateRegionForResourceRequest(resourceRequest); err != nil {
+				return out, metadata, err
+			}
+		}
+
+		// Special handling for region-less ap-arns.
+		if len(tv.Region) == 0 {
+			// check if multi-region arn support is disabled
+			if m.DisableMultiRegionAccessPoints {
+				return out, metadata, fmt.Errorf("Invalid configuration, Multi-Region access point ARNs are disabled")
+			}
+
+			// Do not allow dual-stack configuration with multi-region arns.
+			if m.UseDualstack {
+				return out, metadata, s3shared.NewClientConfiguredForDualStackError(tv,
+					resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
+			}
+		}
+
 		// check if accelerate
 		if m.UseAccelerate {
 			return out, metadata, s3shared.NewClientConfiguredForAccelerateError(tv,
@@ -92,6 +113,11 @@ func (m *processARNResource) HandleSerialize(
 		resolveRegion := tv.Region
 		// check if request region is FIPS
 		if resourceRequest.UseFips() {
+			// Do not allow Fips support within multi-region arns.
+			if len(resolveRegion) == 0 {
+				return out, metadata, s3shared.NewInvalidARNWithFIPSError(tv, nil)
+			}
+
 			// if use arn region is enabled and request signing region is not same as arn region
 			if m.UseARNRegion && resourceRequest.IsCrossRegion() {
 				// FIPS with cross region is not supported, the SDK must fail
@@ -105,13 +131,19 @@ func (m *processARNResource) HandleSerialize(
 						nil,
 					)
 			}
-
 			// if use arn region is NOT set, we should use the request region
 			resolveRegion = resourceRequest.RequestRegion
 		}
 
-		// build access point request
-		ctx, err = buildAccessPointRequest(ctx, accesspointOptions{
+		var requestBuilder func(context.Context, accesspointOptions) (context.Context, error)
+		if len(resolveRegion) == 0 {
+			requestBuilder = buildMultiRegionAccessPointsRequest
+		} else {
+			requestBuilder = buildAccessPointRequest
+		}
+
+		// build request as per accesspoint builder
+		ctx, err = requestBuilder(ctx, accesspointOptions{
 			processARNResource: *m,
 			request:            req,
 			resource:           tv,
@@ -124,6 +156,11 @@ func (m *processARNResource) HandleSerialize(
 		}
 
 	case arn.S3ObjectLambdaAccessPointARN:
+		// validate region for resource request
+		if err := validateRegionForResourceRequest(resourceRequest); err != nil {
+			return out, metadata, err
+		}
+
 		// check if accelerate
 		if m.UseAccelerate {
 			return out, metadata, s3shared.NewClientConfiguredForAccelerateError(tv,
@@ -173,6 +210,11 @@ func (m *processARNResource) HandleSerialize(
 
 	// process outpost accesspoint ARN
 	case arn.OutpostAccessPointARN:
+		// validate region for resource request
+		if err := validateRegionForResourceRequest(resourceRequest); err != nil {
+			return out, metadata, err
+		}
+
 		// check if accelerate
 		if m.UseAccelerate {
 			return out, metadata, s3shared.NewClientConfiguredForAccelerateError(tv,
@@ -210,8 +252,8 @@ func (m *processARNResource) HandleSerialize(
 	return next.HandleSerialize(ctx, in)
 }
 
-// validate if s3 resource and request config is compatible.
-func validateResourceRequest(resourceRequest s3shared.ResourceRequest) error {
+// validate if s3 resource and request region config is compatible.
+func validateRegionForResourceRequest(resourceRequest s3shared.ResourceRequest) error {
 	// check if resourceRequest leads to a cross partition error
 	v, err := resourceRequest.IsCrossPartition()
 	if err != nil {
@@ -364,6 +406,93 @@ func buildS3ObjectLambdaAccessPointRequest(ctx context.Context, options accesspo
 	if err != nil {
 		return ctx, err
 	}
+
+	return ctx, nil
+}
+
+func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspointOptions) (context.Context, error) {
+	tv := options.resource
+	req := options.request
+	resolveService := tv.Service
+	resolveRegion := options.requestRegion
+	arnPartition := tv.Partition
+
+	// resolve endpoint
+	endpoint, err := options.EndpointResolver.ResolveEndpoint(resolveRegion, options.EndpointResolverOptions)
+	if err != nil {
+		return ctx, s3shared.NewFailedToResolveEndpointError(
+			tv,
+			options.partitionID,
+			options.requestRegion,
+			err,
+		)
+	}
+
+	// set signing region for MRAP
+	endpoint.SigningRegion = "*"
+
+	if len(endpoint.SigningName) != 0 {
+		ctx = awsmiddleware.SetSigningName(ctx, endpoint.SigningName)
+	} else {
+		ctx = awsmiddleware.SetSigningName(ctx, resolveService)
+	}
+
+	if len(endpoint.SigningRegion) != 0 {
+		ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
+	} else {
+		ctx = awsmiddleware.SetSigningRegion(ctx, resolveRegion)
+	}
+
+	// switch to use sigv4a signer
+	ctx = SetSignerVersion(ctx, v4a.Version)
+
+	// modify endpoint host to use s3-global host prefix
+	scheme := strings.SplitN(endpoint.URL, "://", 2)
+	if endpoint.Source != aws.EndpointSourceCustom {
+		// set url as per partition
+		switch arnPartition {
+		case "aws":
+			endpoint.URL = scheme[0] + "://s3-global.amazonaws.com"
+		case "aws-cn":
+			endpoint.URL = scheme[0] + "://s3-global.amazonaws.com.cn"
+		default:
+			return ctx, fmt.Errorf("unsupported client configuration partition for mrap")
+		}
+	}
+
+	// assign resolved endpoint url to request url
+	req.URL, err = url.Parse(endpoint.URL)
+	if err != nil {
+		return ctx, fmt.Errorf("failed to parse endpoint URL: %w", err)
+	}
+
+	// skip arn processing, if arn region resolves to a immutable endpoint
+	if endpoint.HostnameImmutable {
+		return ctx, nil
+	}
+
+	accessPointHostPrefix := tv.AccessPointName + "."
+	// if not custom source attach `.accesspoint` to access-point host prefix
+	if endpoint.Source != aws.EndpointSourceCustom {
+		accessPointHostPrefix += "accesspoint."
+	}
+
+	// add host prefix
+	req.URL.Host = accessPointHostPrefix + req.URL.Host
+	if len(req.Host) > 0 {
+		req.Host = accessPointHostPrefix + req.Host
+	}
+
+	// validate the endpoint host
+	if err := http.ValidateEndpointHost(req.URL.Host); err != nil {
+		return ctx, fmt.Errorf("endpoint validation error: %w, when using arn %v", err, tv)
+	}
+
+	// disable host prefix behavior
+	ctx = http.DisableEndpointHostPrefix(ctx, true)
+
+	// remove the serialized arn in place of /{Bucket}
+	ctx = setBucketToRemoveOnContext(ctx, tv.String())
 
 	return ctx, nil
 }

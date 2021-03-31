@@ -23,14 +23,6 @@ type HTTPPresigner interface {
 	) (url string, signedHeader http.Header, err error)
 }
 
-// PresignedHTTPRequest provides the URL and signed headers that are included
-// in the presigned URL.
-type PresignedHTTPRequest struct {
-	URL          string
-	Method       string
-	SignedHeader http.Header
-}
-
 // PresignHTTPRequestMiddlewareOptions is the options for the PresignHTTPRequestMiddleware middleware.
 type PresignHTTPRequestMiddlewareOptions struct {
 	CredentialsProvider CredentialsProvider
@@ -78,7 +70,7 @@ func (s *PresignHTTPRequestMiddleware) HandleFinalize(
 
 	httpReq := req.Build(ctx)
 	if !hasCredentialProvider(s.credentialsProvider) {
-		out.Result = &PresignedHTTPRequest{
+		out.Result = &v4.PresignedHTTPRequest{
 			URL:          httpReq.URL.String(),
 			Method:       httpReq.Method,
 			SignedHeader: http.Header{},
@@ -115,7 +107,7 @@ func (s *PresignHTTPRequestMiddleware) HandleFinalize(
 		}
 	}
 
-	out.Result = &PresignedHTTPRequest{
+	out.Result = &v4.PresignedHTTPRequest{
 		URL:          u,
 		Method:       httpReq.Method,
 		SignedHeader: h,

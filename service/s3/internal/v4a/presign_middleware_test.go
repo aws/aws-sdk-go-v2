@@ -39,7 +39,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 		Creds        CredentialsProvider
 		PayloadHash  string
 		LogSigning   bool
-		ExpectResult *PresignedHTTPRequest
+		ExpectResult *v4.PresignedHTTPRequest
 		ExpectErr    string
 	}{
 		"success": {
@@ -52,7 +52,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 			},
 			Creds:       stubCredentials,
 			PayloadHash: "0123456789abcdef",
-			ExpectResult: &PresignedHTTPRequest{
+			ExpectResult: &v4.PresignedHTTPRequest{
 				URL:          "https://example.aws/path?query=foo",
 				SignedHeader: http.Header{},
 			},
@@ -76,7 +76,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 			Creds:       stubCredentials,
 			PayloadHash: "",
 			ExpectErr:   "failed to sign request",
-			ExpectResult: &PresignedHTTPRequest{
+			ExpectResult: &v4.PresignedHTTPRequest{
 				URL:          "https://example.aws/path?query=foo",
 				SignedHeader: http.Header{},
 			},
@@ -90,7 +90,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 				Header: http.Header{},
 			},
 			Creds: nil,
-			ExpectResult: &PresignedHTTPRequest{
+			ExpectResult: &v4.PresignedHTTPRequest{
 				URL:          "https://example.aws/path?query=foo",
 				SignedHeader: http.Header{},
 			},
@@ -105,7 +105,7 @@ func TestPresignHTTPRequestMiddleware(t *testing.T) {
 			},
 			Creds:       stubCredentials,
 			PayloadHash: "0123456789abcdef",
-			ExpectResult: &PresignedHTTPRequest{
+			ExpectResult: &v4.PresignedHTTPRequest{
 				URL:          "https://example.aws/path?query=foo",
 				SignedHeader: http.Header{},
 			},
