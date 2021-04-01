@@ -133,6 +133,10 @@ type Connection struct {
 	// the connection is not available.
 	ConnectionState ConnectionState
 
+	// The MAC Security (MACsec) connection encryption mode. The valid values are
+	// no_encrypt, should_encrypt, and must_encrypt.
+	EncryptionMode *string
+
 	// Indicates whether the connection supports a secondary BGP peer in the same
 	// address family (IPv4/IPv6).
 	HasLogicalRedundancy HasLogicalRedundancy
@@ -149,12 +153,23 @@ type Connection struct {
 	// The location of the connection.
 	Location *string
 
+	// Indicates whether the connection supports MAC Security (MACsec).
+	MacSecCapable *bool
+
+	// The MAC Security (MACsec) security keys associated with the connection.
+	MacSecKeys []MacSecKey
+
 	// The ID of the AWS account that owns the connection.
 	OwnerAccount *string
 
 	// The name of the AWS Direct Connect service provider associated with the
 	// connection.
 	PartnerName *string
+
+	// The MAC Security (MACsec) port link status of the connection. The valid values
+	// are Encryption Up, which means that there is an active Connection Key Name, or
+	// Encryption Down.
+	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.
 	ProviderName *string
@@ -427,6 +442,10 @@ type Lag struct {
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
 
+	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt,
+	// should_encrypt, and must_encrypt.
+	EncryptionMode *string
+
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
 	// family (IPv4/IPv6).
 	HasLogicalRedundancy HasLogicalRedundancy
@@ -466,6 +485,12 @@ type Lag struct {
 	// The location of the LAG.
 	Location *string
 
+	// Indicates whether the LAG supports MAC Security (MACsec).
+	MacSecCapable *bool
+
+	// The MAC Security (MACsec) security keys associated with the LAG.
+	MacSecKeys []MacSecKey
+
 	// The minimum number of physical dedicated connections that must be operational
 	// for the LAG itself to be operational.
 	MinimumLinks int32
@@ -502,6 +527,9 @@ type Loa struct {
 // Information about an AWS Direct Connect location.
 type Location struct {
 
+	// The available MAC Security (MACsec) port speeds for the location.
+	AvailableMacSecPortSpeeds []string
+
 	// The available port speeds for the location.
 	AvailablePortSpeeds []string
 
@@ -517,6 +545,37 @@ type Location struct {
 
 	// The AWS Region for the location.
 	Region *string
+}
+
+// Information about the MAC Security (MACsec) secret key.
+type MacSecKey struct {
+
+	// The Connection Key Name (CKN) for the MAC Security secret key.
+	Ckn *string
+
+	// The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.
+	SecretARN *string
+
+	// The date that the MAC Security (MACsec) secret key takes effect. The value is
+	// displayed in UTC format.
+	StartOn *string
+
+	// The state of the MAC Security (MACsec) secret key. The possible values are:
+	//
+	// *
+	// associating: The MAC Security (MACsec) secret key is being validated and not yet
+	// associated with the connection or LAG.
+	//
+	// * associated: The MAC Security (MACsec)
+	// secret key is validated and associated with the connection or LAG.
+	//
+	// *
+	// disassociating: The MAC Security (MACsec) secret key is being disassociated from
+	// the connection or LAG
+	//
+	// * disassociated: The MAC Security (MACsec) secret key is
+	// no longer associated with the connection or LAG.
+	State *string
 }
 
 // Information about a new BGP peer.

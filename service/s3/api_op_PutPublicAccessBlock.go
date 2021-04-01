@@ -69,7 +69,7 @@ type PutPublicAccessBlockInput struct {
 	// information about when Amazon S3 considers a bucket or object public, see The
 	// Meaning of "Public"
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration

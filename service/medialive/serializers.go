@@ -9695,6 +9695,13 @@ func awsRestjson1_serializeDocumentVideoSelector(v *types.VideoSelector, value s
 		ok.String(string(v.ColorSpace))
 	}
 
+	if v.ColorSpaceSettings != nil {
+		ok := object.Key("colorSpaceSettings")
+		if err := awsRestjson1_serializeDocumentVideoSelectorColorSpaceSettings(v.ColorSpaceSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ColorSpaceUsage) > 0 {
 		ok := object.Key("colorSpaceUsage")
 		ok.String(string(v.ColorSpaceUsage))
@@ -9703,6 +9710,20 @@ func awsRestjson1_serializeDocumentVideoSelector(v *types.VideoSelector, value s
 	if v.SelectorSettings != nil {
 		ok := object.Key("selectorSettings")
 		if err := awsRestjson1_serializeDocumentVideoSelectorSettings(v.SelectorSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVideoSelectorColorSpaceSettings(v *types.VideoSelectorColorSpaceSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Hdr10Settings != nil {
+		ok := object.Key("hdr10Settings")
+		if err := awsRestjson1_serializeDocumentHdr10Settings(v.Hdr10Settings, ok); err != nil {
 			return err
 		}
 	}

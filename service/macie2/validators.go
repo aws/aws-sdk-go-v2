@@ -430,6 +430,26 @@ func (m *validateOpPutClassificationExportConfiguration) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutFindingsPublicationConfiguration struct {
+}
+
+func (*validateOpPutFindingsPublicationConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutFindingsPublicationConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutFindingsPublicationConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutFindingsPublicationConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -654,6 +674,10 @@ func addOpPutClassificationExportConfigurationValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpPutClassificationExportConfiguration{}, middleware.After)
 }
 
+func addOpPutFindingsPublicationConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutFindingsPublicationConfiguration{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -780,6 +804,18 @@ func validateS3JobDefinition(v *types.S3JobDefinition) error {
 			invalidParams.AddNested("BucketDefinitions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecurityHubConfiguration(v *types.SecurityHubConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecurityHubConfiguration"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1120,6 +1156,23 @@ func validateOpPutClassificationExportConfigurationInput(v *PutClassificationExp
 	} else if v.Configuration != nil {
 		if err := validateClassificationExportConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutFindingsPublicationConfigurationInput(v *PutFindingsPublicationConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutFindingsPublicationConfigurationInput"}
+	if v.SecurityHubConfiguration != nil {
+		if err := validateSecurityHubConfiguration(v.SecurityHubConfiguration); err != nil {
+			invalidParams.AddNested("SecurityHubConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

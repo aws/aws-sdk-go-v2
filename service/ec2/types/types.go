@@ -2084,6 +2084,13 @@ type EbsOptimizedInfo struct {
 	MaximumThroughputInMBps *float64
 }
 
+// Describes the Elastic Fabric Adapters for the instance type.
+type EfaInfo struct {
+
+	// The maximum number of Elastic Fabric Adapters for the instance type.
+	MaximumEfaInterfaces *int32
+}
+
 // Describes an egress-only internet gateway.
 type EgressOnlyInternetGateway struct {
 
@@ -2799,7 +2806,8 @@ type FleetLaunchTemplateConfigRequest struct {
 	LaunchTemplateSpecification *FleetLaunchTemplateSpecificationRequest
 
 	// Any parameters that you specify override the same parameters in the launch
-	// template.
+	// template. For fleets of type request and maintain, a maximum of 300 items is
+	// allowed across all launch templates.
 	Overrides []FleetLaunchTemplateOverridesRequest
 }
 
@@ -3521,6 +3529,11 @@ type Image struct {
 	// Any block device mapping entries.
 	BlockDeviceMappings []BlockDeviceMapping
 
+	// The boot mode of the image. For more information, see Boot modes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
+	BootMode BootModeValues
+
 	// The date and time the image was created.
 	CreationDate *string
 
@@ -3852,6 +3865,11 @@ type Instance struct {
 	// Any block device mapping entries for the instance.
 	BlockDeviceMappings []InstanceBlockDeviceMapping
 
+	// The boot mode of the instance. For more information, see Boot modes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
+	// Amazon EC2 User Guide.
+	BootMode BootModeValues
+
 	// The ID of the Capacity Reservation.
 	CapacityReservationId *string
 
@@ -3975,13 +3993,7 @@ type Instance struct {
 	// The security groups for the instance.
 	SecurityGroups []GroupIdentifier
 
-	// Specifies whether to enable an instance launched in a VPC to perform NAT. This
-	// controls whether source/destination checking is enabled on the instance. A value
-	// of true means that checking is enabled, and false means that checking is
-	// disabled. The value must be false for the instance to perform NAT. For more
-	// information, see NAT instances
-	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html)
-	// in the Amazon VPC User Guide.
+	// Indicates whether source/destination checking is enabled.
 	SourceDestCheck bool
 
 	// If the request is a Spot Instance request, the ID of the request.
@@ -4622,6 +4634,11 @@ type InstanceTypeInfo struct {
 
 	// Describes the processor.
 	ProcessorInfo *ProcessorInfo
+
+	// The supported boot modes. For more information, see Boot modes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
+	// Amazon EC2 User Guide.
+	SupportedBootModes []BootModeType
 
 	// The supported root device types.
 	SupportedRootDeviceTypes []RootDeviceType
@@ -6289,6 +6306,9 @@ type NetworkInfo struct {
 	// The index of the default network card, starting at 0.
 	DefaultNetworkCardIndex *int32
 
+	// Describes the Elastic Fabric Adapters for the instance type.
+	EfaInfo *EfaInfo
+
 	// Indicates whether Elastic Fabric Adapter (EFA) is supported.
 	EfaSupported *bool
 
@@ -7316,6 +7336,51 @@ type RemovePrefixListEntry struct {
 	//
 	// This member is required.
 	Cidr *string
+}
+
+// Information about a root volume replacement task.
+type ReplaceRootVolumeTask struct {
+
+	// The time the task completed.
+	CompleteTime *string
+
+	// The ID of the instance for which the root volume replacement task was created.
+	InstanceId *string
+
+	// The ID of the root volume replacement task.
+	ReplaceRootVolumeTaskId *string
+
+	// The time the task was started.
+	StartTime *string
+
+	// The tags assigned to the task.
+	Tags []Tag
+
+	// The state of the task. The task can be in one of the following states:
+	//
+	// *
+	// pending - the replacement volume is being created.
+	//
+	// * in-progress - the original
+	// volume is being detached and the replacement volume is being attached.
+	//
+	// *
+	// succeeded - the replacement volume has been successfully attached to the
+	// instance and the instance is available.
+	//
+	// * failing - the replacement task is in
+	// the process of failing.
+	//
+	// * failed - the replacement task has failed but the
+	// original root volume is still attached.
+	//
+	// * failing-detached - the replacement
+	// task is in the process of failing. The instance might have no root volume
+	// attached.
+	//
+	// * failed-detached - the replacement task has failed and the instance
+	// has no root volume attached.
+	TaskState ReplaceRootVolumeTaskState
 }
 
 // The information to include in the launch template.

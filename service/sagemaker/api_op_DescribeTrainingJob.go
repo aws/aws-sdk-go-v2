@@ -217,6 +217,9 @@ type DescribeTrainingJobOutput struct {
 	// the specified VPC, but the training container does not have network access.
 	EnableNetworkIsolation bool
 
+	// The environment variables to set in the Docker container.
+	Environment map[string]string
+
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
 	//

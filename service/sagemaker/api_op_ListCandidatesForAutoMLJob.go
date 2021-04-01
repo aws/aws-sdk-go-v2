@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the Candidates created for the job.
+// List the candidates created for the job.
 func (c *Client) ListCandidatesForAutoMLJob(ctx context.Context, params *ListCandidatesForAutoMLJobInput, optFns ...func(*Options)) (*ListCandidatesForAutoMLJobOutput, error) {
 	if params == nil {
 		params = &ListCandidatesForAutoMLJobInput{}
@@ -30,15 +30,15 @@ func (c *Client) ListCandidatesForAutoMLJob(ctx context.Context, params *ListCan
 
 type ListCandidatesForAutoMLJobInput struct {
 
-	// List the Candidates created for the job by providing the job's name.
+	// List the candidates created for the job by providing the job's name.
 	//
 	// This member is required.
 	AutoMLJobName *string
 
-	// List the Candidates for the job and filter by candidate name.
+	// List the candidates for the job and filter by candidate name.
 	CandidateNameEquals *string
 
-	// List the job's Candidates up to a specified limit.
+	// List the job's candidates up to a specified limit.
 	MaxResults int32
 
 	// If the previous response was truncated, you receive this token. Use it in your
@@ -51,7 +51,7 @@ type ListCandidatesForAutoMLJobInput struct {
 	// The sort order for the results. The default is Ascending.
 	SortOrder types.AutoMLSortOrder
 
-	// List the Candidates for the job and filter by status.
+	// List the candidates for the job and filter by status.
 	StatusEquals types.CandidateStatus
 }
 
@@ -144,7 +144,7 @@ var _ ListCandidatesForAutoMLJobAPIClient = (*Client)(nil)
 // ListCandidatesForAutoMLJobPaginatorOptions is the paginator options for
 // ListCandidatesForAutoMLJob
 type ListCandidatesForAutoMLJobPaginatorOptions struct {
-	// List the job's Candidates up to a specified limit.
+	// List the job's candidates up to a specified limit.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -7,7 +7,7 @@ import (
 )
 
 // Represents an individual condition that evaluates to true or false. Conditions
-// are used with recipe actions: The action is only performed for column values
+// are used with recipe actions. The action is only performed for column values
 // where the condition evaluates to true. If a recipe requires more than one
 // condition, then the recipe must specify multiple ConditionExpression elements.
 // Each condition is applied to the rows in a dataset first, before the recipe
@@ -31,23 +31,43 @@ type ConditionExpression struct {
 	Value *string
 }
 
-// Options that define how DataBrew will read a Csv file when creating a dataset
-// from that file.
+// Represents a set of options that define how DataBrew will read a comma-separated
+// value (CSV) file when creating a dataset from that file.
 type CsvOptions struct {
 
-	// A single character that specifies the delimiter being used in the Csv file.
+	// A single character that specifies the delimiter being used in the CSV file.
 	Delimiter *string
 
-	// A variable that specifies whether the first row in the file will be parsed as
-	// the header. If false, column names will be auto-generated.
+	// A variable that specifies whether the first row in the file is parsed as the
+	// header. If this value is false, column names are auto-generated.
 	HeaderRow *bool
 }
 
-// Options that define how DataBrew will write a Csv file.
+// Represents a set of options that define how DataBrew will write a
+// comma-separated value (CSV) file.
 type CsvOutputOptions struct {
 
-	// A single character that specifies the delimiter used to create Csv job output.
+	// A single character that specifies the delimiter used to create CSV job output.
 	Delimiter *string
+}
+
+// Connection information for dataset input files stored in a database.
+type DatabaseInputDefinition struct {
+
+	// The table within the target database.
+	//
+	// This member is required.
+	DatabaseTableName *string
+
+	// The AWS Glue Connection that stores the connection information for the target
+	// database.
+	//
+	// This member is required.
+	GlueConnectionName *string
+
+	// Represents an Amazon S3 location (bucket name and object key) where DataBrew can
+	// read input data, or write output from a job.
+	TempDirectory *S3Location
 }
 
 // Represents how metadata stored in the AWS Glue Data Catalog is defined in a
@@ -96,10 +116,10 @@ type Dataset struct {
 	// The Amazon Resource Name (ARN) of the user who created the dataset.
 	CreatedBy *string
 
-	// Specifies the file format of a dataset created from an S3 file or folder.
+	// The file format of a dataset that is created from an S3 file or folder.
 	Format InputFormat
 
-	// Options that define how DataBrew interprets the data in the dataset.
+	// A set of options that define how DataBrew interprets the data in the dataset.
 	FormatOptions *FormatOptions
 
 	// The Amazon Resource Name (ARN) of the user who last modified the dataset.
@@ -107,6 +127,9 @@ type Dataset struct {
 
 	// The last modification date and time of the dataset.
 	LastModifiedDate *time.Time
+
+	// A set of options that defines how DataBrew interprets an S3 path of the dataset.
+	PathOptions *PathOptions
 
 	// The unique Amazon Resource Name (ARN) for the dataset.
 	ResourceArn *string
@@ -119,27 +142,114 @@ type Dataset struct {
 	Tags map[string]string
 }
 
-// Options that define how DataBrew will interpret a Microsoft Excel file, when
-// creating a dataset from that file.
+// Represents a dataset paramater that defines type and conditions for a parameter
+// in the S3 path of the dataset.
+type DatasetParameter struct {
+
+	// The name of the parameter that is used in the dataset's S3 path.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the dataset parameter, can be one of a 'String', 'Number' or
+	// 'Datetime'.
+	//
+	// This member is required.
+	Type ParameterType
+
+	// Optional boolean value that defines whether the captured value of this parameter
+	// should be loaded as an additional column in the dataset.
+	CreateColumn bool
+
+	// Additional parameter options such as a format and a timezone. Required for
+	// datetime parameters.
+	DatetimeOptions *DatetimeOptions
+
+	// The optional filter expression structure to apply additional matching criteria
+	// to the parameter.
+	Filter *FilterExpression
+}
+
+// Represents additional options for correct interpretation of datetime parameters
+// used in the S3 path of a dataset.
+type DatetimeOptions struct {
+
+	// Required option, that defines the datetime format used for a date parameter in
+	// the S3 path. Should use only supported datetime specifiers and separation
+	// characters, all litera a-z or A-Z character should be escaped with single
+	// quotes. E.g. "MM.dd.yyyy-'at'-HH:mm".
+	//
+	// This member is required.
+	Format *string
+
+	// Optional value for a non-US locale code, needed for correct interpretation of
+	// some date formats.
+	LocaleCode *string
+
+	// Optional value for a timezone offset of the datetime parameter value in the S3
+	// path. Shouldn't be used if Format for this parameter includes timezone fields.
+	// If no offset specified, UTC is assumed.
+	TimezoneOffset *string
+}
+
+// Represents a set of options that define how DataBrew will interpret a Microsoft
+// Excel file when creating a dataset from that file.
 type ExcelOptions struct {
 
-	// A variable that specifies whether the first row in the file will be parsed as
-	// the header. If false, column names will be auto-generated.
+	// A variable that specifies whether the first row in the file is parsed as the
+	// header. If this value is false, column names are auto-generated.
 	HeaderRow *bool
 
-	// Specifies one or more sheet numbers in the Excel file, which will be included in
-	// the dataset.
+	// One or more sheet numbers in the Excel file that will be included in the
+	// dataset.
 	SheetIndexes []int32
 
-	// Specifies one or more named sheets in the Excel file, which will be included in
-	// the dataset.
+	// One or more named sheets in the Excel file that will be included in the dataset.
 	SheetNames []string
 }
 
-// Options that define the structure of either Csv, Excel, or JSON input.
+// Represents a limit imposed on number of S3 files that should be selected for a
+// dataset from a connected S3 path.
+type FilesLimit struct {
+
+	// The number of S3 files to select.
+	//
+	// This member is required.
+	MaxFiles int32
+
+	// A criteria to use for S3 files sorting before their selection. By default uses
+	// DESCENDING order, i.e. most recent files are selected first. Anotherpossible
+	// value is ASCENDING.
+	Order Order
+
+	// A criteria to use for S3 files sorting before their selection. By default uses
+	// LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed value.
+	OrderedBy OrderedBy
+}
+
+// Represents a structure for defining parameter conditions.
+type FilterExpression struct {
+
+	// The expression which includes condition names followed by substitution
+	// variables, possibly grouped and combined with other conditions. For example,
+	// "(starts_with :prefix1 or starts_with :prefix2) and (ends_with :suffix1 or
+	// ends_with :suffix2)". Substitution variables should start with ':' symbol.
+	//
+	// This member is required.
+	Expression *string
+
+	// The map of substitution variable names to their values used in this filter
+	// expression.
+	//
+	// This member is required.
+	ValuesMap map[string]string
+}
+
+// Represents a set of options that define the structure of either comma-separated
+// value (CSV), Excel, or JSON input.
 type FormatOptions struct {
 
-	// Options that define how Csv input is to be interpreted by DataBrew.
+	// Options that define how CSV input is to be interpreted by DataBrew.
 	Csv *CsvOptions
 
 	// Options that define how Excel input is to be interpreted by DataBrew.
@@ -149,12 +259,15 @@ type FormatOptions struct {
 	Json *JsonOptions
 }
 
-// Information on how DataBrew can find data, in either the AWS Glue Data Catalog
-// or Amazon S3.
+// Represents information on how DataBrew can find data, in either the AWS Glue
+// Data Catalog or Amazon S3.
 type Input struct {
 
 	// The AWS Glue Data Catalog parameters for the data.
 	DataCatalogInputDefinition *DataCatalogInputDefinition
+
+	// Connection information for dataset input files stored in a database.
+	DatabaseInputDefinition *DatabaseInputDefinition
 
 	// The Amazon S3 location where the data is stored.
 	S3InputDefinition *S3Location
@@ -188,16 +301,16 @@ type Job struct {
 	// The encryption mode for the job, which can be one of the following:
 	//
 	// * SSE-KMS -
-	// Server-side encryption with AWS KMS-managed keys.
+	// Server-side encryption with keys managed by AWS KMS.
 	//
 	// * SSE-S3 - Server-side
 	// encryption with keys managed by Amazon S3.
 	EncryptionMode EncryptionMode
 
-	// Sample configuration for profile jobs only. Determines the number of rows on
-	// which the profile job will be executed. If a JobSample value is not provided,
-	// the default value will be used. The default value is CUSTOM_ROWS for the mode
-	// parameter and 20000 for the size parameter.
+	// A sample configuration for profile jobs only, which determines the number of
+	// rows on which the profile job is run. If a JobSample value isn't provided, the
+	// default value is used. The default value is CUSTOM_ROWS for the mode parameter
+	// and 20,000 for the size parameter.
 	JobSample *JobSample
 
 	// The Amazon Resource Name (ARN) of the user who last modified the job.
@@ -227,7 +340,7 @@ type Job struct {
 	// The unique Amazon Resource Name (ARN) for the job.
 	ResourceArn *string
 
-	// The Amazon Resource Name (ARN) of the role that will be assumed for this job.
+	// The Amazon Resource Name (ARN) of the role to be assumed for this job.
 	RoleArn *string
 
 	// Metadata tags that have been applied to the job.
@@ -268,10 +381,10 @@ type JobRun struct {
 	// The name of the job being processed during this run.
 	JobName *string
 
-	// Sample configuration for profile jobs only. Determines the number of rows on
-	// which the profile job will be executed. If a JobSample value is not provided,
-	// the default value will be used. The default value is CUSTOM_ROWS for the mode
-	// parameter and 20000 for the size parameter.
+	// A sample configuration for profile jobs only, which determines the number of
+	// rows on which the profile job is run. If a JobSample value isn't provided, the
+	// default is used. The default value is CUSTOM_ROWS for the mode parameter and
+	// 20,000 for the size parameter.
 	JobSample *JobSample
 
 	// The name of an Amazon CloudWatch log group, where the job writes diagnostic
@@ -300,24 +413,24 @@ type JobRun struct {
 	State JobRunState
 }
 
-// Sample configuration for Profile Jobs only. Determines the number of rows on
-// which the Profile job will be executed. If a JobSample value is not provided for
-// profile jobs, the default value will be used. The default value is CUSTOM_ROWS
-// for the mode parameter and 20000 for the size parameter.
+// A sample configuration for profile jobs only, which determines the number of
+// rows on which the profile job is run. If a JobSample value isn't provided, the
+// default is used. The default value is CUSTOM_ROWS for the mode parameter and
+// 20,000 for the size parameter.
 type JobSample struct {
 
-	// Determines whether the profile job will be executed on the entire dataset or on
-	// a specified number of rows. Must be one of the following:
+	// A value that determines whether the profile job is run on the entire dataset or
+	// a specified number of rows. This value must be one of the following:
 	//
-	// * FULL_DATASET:
-	// Profile job will be executed on the entire dataset.
+	// *
+	// FULL_DATASET - The profile job is run on the entire dataset.
 	//
-	// * CUSTOM_ROWS: Profile job
-	// will be executed on the number of rows specified in the Size parameter.
+	// * CUSTOM_ROWS -
+	// The profile job is run on the number of rows specified in the Size parameter.
 	Mode SampleMode
 
-	// Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will
-	// be executed on the the specified number of rows. The maximum value for size is
+	// The Size parameter is only required when the mode is CUSTOM_ROWS. The profile
+	// job is run on the specified number of rows. The maximum value for size is
 	// Long.MAX_VALUE. Long.MAX_VALUE = 9223372036854775807
 	Size *int64
 }
@@ -330,8 +443,8 @@ type JsonOptions struct {
 	MultiLine bool
 }
 
-// Parameters that specify how and where DataBrew will write the output generated
-// by recipe jobs or profile jobs.
+// Represents options that specify how and where DataBrew writes the output
+// generated by recipe jobs or profile jobs.
 type Output struct {
 
 	// The location in Amazon S3 where the job writes its output.
@@ -345,7 +458,7 @@ type Output struct {
 	// The data format of the output of the job.
 	Format OutputFormat
 
-	// Options that define how DataBrew formats job output files.
+	// Represents options that define how DataBrew formats job output files.
 	FormatOptions *OutputFormatOptions
 
 	// A value that, if true, means that any data in the location specified for output
@@ -356,11 +469,30 @@ type Output struct {
 	PartitionColumns []string
 }
 
-// Options that define the structure of Csv job output.
+// Represents a set of options that define the structure of comma-separated (CSV)
+// job output.
 type OutputFormatOptions struct {
 
-	// Options that define how DataBrew writes Csv output.
+	// Represents a set of options that define the structure of comma-separated value
+	// (CSV) job output.
 	Csv *CsvOutputOptions
+}
+
+// Represents a set of options that define how DataBrew selects files for a given
+// S3 path in a dataset.
+type PathOptions struct {
+
+	// If provided, this structure imposes a limit on a number of files that should be
+	// selected.
+	FilesLimit *FilesLimit
+
+	// If provided, this structure defines a date range for matching S3 objects based
+	// on their LastModifiedDate attribute in S3.
+	LastModifiedDateCondition *FilterExpression
+
+	// A structure that maps names of parameters used in the S3 path of a dataset to
+	// their definitions.
+	Parameters map[string]DatasetParameter
 }
 
 // Represents all of the attributes of a DataBrew project.
@@ -408,7 +540,7 @@ type Project struct {
 	RoleArn *string
 
 	// The sample size and sampling type to apply to the data. If this parameter isn't
-	// specified, then the sample will consiste of the first 500 rows from the dataset.
+	// specified, then the sample consists of the first 500 rows from the dataset.
 	Sample *Sample
 
 	// Metadata tags that have been applied to the project.
@@ -452,7 +584,7 @@ type Recipe struct {
 	// *
 	// Numeric version (X.Y) - X and Y stand for major and minor version numbers. The
 	// maximum length of each is 6 digits, and neither can be negative values. Both X
-	// and Y are required, and "0.0" is not a valid version.
+	// and Y are required, and "0.0" isn't a valid version.
 	//
 	// * LATEST_WORKING - the
 	// most recent valid version being developed in a DataBrew project.
@@ -507,9 +639,9 @@ type RecipeStep struct {
 	// This member is required.
 	Action *RecipeAction
 
-	// One or more conditions that must be met, in order for the recipe step to
-	// succeed. All of the conditions in the array must be met. In other words, all of
-	// the conditions must be combined using a logical AND operation.
+	// One or more conditions that must be met for the recipe step to succeed. All of
+	// the conditions in the array must be met. In other words, all of the conditions
+	// must be combined using a logical AND operation.
 	ConditionExpressions []ConditionExpression
 }
 
@@ -527,8 +659,8 @@ type RecipeVersionErrorDetail struct {
 	RecipeVersion *string
 }
 
-// An Amazon S3 location (bucket name an object key) where DataBrew can read input
-// data, or write output from a job.
+// Represents an Amazon S3 location (bucket name and object key) where DataBrew can
+// read input data, or write output from a job.
 type S3Location struct {
 
 	// The S3 bucket name.
@@ -570,7 +702,7 @@ type Schedule struct {
 	// The Amazon Resource Name (ARN) of the user who created the schedule.
 	CreatedBy *string
 
-	// The date(s) and time(s) when the job will run. For more information, see Cron
+	// The dates and times when the job is to run. For more information, see Cron
 	// expressions (https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html) in
 	// the AWS Glue DataBrew Developer Guide.
 	CronExpression *string
@@ -591,7 +723,7 @@ type Schedule struct {
 	Tags map[string]string
 }
 
-// Represents the data being being transformed during an action.
+// Represents the data being transformed during an action.
 type ViewFrame struct {
 
 	// The starting index for the range of columns to return in the view frame.

@@ -718,41 +718,6 @@ func validateAnomalySubscription(v *types.AnomalySubscription) error {
 	}
 }
 
-func validateCostCategoryRule(v *types.CostCategoryRule) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CostCategoryRule"}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
-	if v.Rule == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Rule"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateCostCategoryRulesList(v []types.CostCategoryRule) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CostCategoryRulesList"}
-	for i := range v {
-		if err := validateCostCategoryRule(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateDateInterval(v *types.DateInterval) error {
 	if v == nil {
 		return nil
@@ -884,10 +849,6 @@ func validateOpCreateCostCategoryDefinitionInput(v *CreateCostCategoryDefinition
 	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
-	} else if v.Rules != nil {
-		if err := validateCostCategoryRulesList(v.Rules); err != nil {
-			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1389,10 +1350,6 @@ func validateOpUpdateCostCategoryDefinitionInput(v *UpdateCostCategoryDefinition
 	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
-	} else if v.Rules != nil {
-		if err := validateCostCategoryRulesList(v.Rules); err != nil {
-			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -249,6 +249,53 @@ func (m *awsAwsjson11_serializeOpCreateGroup) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateMobileDeviceAccessRule struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateMobileDeviceAccessRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateMobileDeviceAccessRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateMobileDeviceAccessRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.CreateMobileDeviceAccessRule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateMobileDeviceAccessRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateOrganization struct {
 }
 
@@ -563,6 +610,53 @@ func (m *awsAwsjson11_serializeOpDeleteMailboxPermissions) HandleSerialize(ctx c
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteMobileDeviceAccessRule struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteMobileDeviceAccessRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteMobileDeviceAccessRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteMobileDeviceAccessRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.DeleteMobileDeviceAccessRule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteMobileDeviceAccessRuleInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1283,6 +1377,53 @@ func (m *awsAwsjson11_serializeOpGetMailboxDetails) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetMobileDeviceAccessEffect struct {
+}
+
+func (*awsAwsjson11_serializeOpGetMobileDeviceAccessEffect) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetMobileDeviceAccessEffect) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMobileDeviceAccessEffectInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.GetMobileDeviceAccessEffect")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetMobileDeviceAccessEffectInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListAccessControlRules struct {
 }
 
@@ -1550,6 +1691,53 @@ func (m *awsAwsjson11_serializeOpListMailboxPermissions) HandleSerialize(ctx con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListMailboxPermissionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListMobileDeviceAccessRules struct {
+}
+
+func (*awsAwsjson11_serializeOpListMobileDeviceAccessRules) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListMobileDeviceAccessRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMobileDeviceAccessRulesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.ListMobileDeviceAccessRules")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListMobileDeviceAccessRulesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2223,6 +2411,53 @@ func (m *awsAwsjson11_serializeOpUpdateMailboxQuota) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateMobileDeviceAccessRule struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateMobileDeviceAccessRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateMobileDeviceAccessRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateMobileDeviceAccessRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("WorkMailService.UpdateMobileDeviceAccessRule")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateMobileDeviceAccessRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdatePrimaryEmailAddress struct {
 }
 
@@ -2346,6 +2581,50 @@ func awsAwsjson11_serializeDocumentBookingOptions(v *types.BookingOptions, value
 		ok.Boolean(v.AutoDeclineRecurringRequests)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeviceModelList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeviceOperatingSystemList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeviceTypeList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeviceUserAgentList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -2593,6 +2872,94 @@ func awsAwsjson11_serializeOpDocumentCreateGroupInput(v *CreateGroupInput, value
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateMobileDeviceAccessRuleInput(v *CreateMobileDeviceAccessRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.DeviceModels != nil {
+		ok := object.Key("DeviceModels")
+		if err := awsAwsjson11_serializeDocumentDeviceModelList(v.DeviceModels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceOperatingSystems != nil {
+		ok := object.Key("DeviceOperatingSystems")
+		if err := awsAwsjson11_serializeDocumentDeviceOperatingSystemList(v.DeviceOperatingSystems, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceTypes != nil {
+		ok := object.Key("DeviceTypes")
+		if err := awsAwsjson11_serializeDocumentDeviceTypeList(v.DeviceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceUserAgents != nil {
+		ok := object.Key("DeviceUserAgents")
+		if err := awsAwsjson11_serializeDocumentDeviceUserAgentList(v.DeviceUserAgents, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Effect) > 0 {
+		ok := object.Key("Effect")
+		ok.String(string(v.Effect))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.NotDeviceModels != nil {
+		ok := object.Key("NotDeviceModels")
+		if err := awsAwsjson11_serializeDocumentDeviceModelList(v.NotDeviceModels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotDeviceOperatingSystems != nil {
+		ok := object.Key("NotDeviceOperatingSystems")
+		if err := awsAwsjson11_serializeDocumentDeviceOperatingSystemList(v.NotDeviceOperatingSystems, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotDeviceTypes != nil {
+		ok := object.Key("NotDeviceTypes")
+		if err := awsAwsjson11_serializeDocumentDeviceTypeList(v.NotDeviceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotDeviceUserAgents != nil {
+		ok := object.Key("NotDeviceUserAgents")
+		if err := awsAwsjson11_serializeDocumentDeviceUserAgentList(v.NotDeviceUserAgents, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateOrganizationInput(v *CreateOrganizationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2749,6 +3116,23 @@ func awsAwsjson11_serializeOpDocumentDeleteMailboxPermissionsInput(v *DeleteMail
 	if v.GranteeId != nil {
 		ok := object.Key("GranteeId")
 		ok.String(*v.GranteeId)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteMobileDeviceAccessRuleInput(v *DeleteMobileDeviceAccessRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MobileDeviceAccessRuleId != nil {
+		ok := object.Key("MobileDeviceAccessRuleId")
+		ok.String(*v.MobileDeviceAccessRuleId)
 	}
 
 	if v.OrganizationId != nil {
@@ -3029,6 +3413,38 @@ func awsAwsjson11_serializeOpDocumentGetMailboxDetailsInput(v *GetMailboxDetails
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetMobileDeviceAccessEffectInput(v *GetMobileDeviceAccessEffectInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeviceModel != nil {
+		ok := object.Key("DeviceModel")
+		ok.String(*v.DeviceModel)
+	}
+
+	if v.DeviceOperatingSystem != nil {
+		ok := object.Key("DeviceOperatingSystem")
+		ok.String(*v.DeviceOperatingSystem)
+	}
+
+	if v.DeviceType != nil {
+		ok := object.Key("DeviceType")
+		ok.String(*v.DeviceType)
+	}
+
+	if v.DeviceUserAgent != nil {
+		ok := object.Key("DeviceUserAgent")
+		ok.String(*v.DeviceUserAgent)
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentListAccessControlRulesInput(v *ListAccessControlRulesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3157,6 +3573,18 @@ func awsAwsjson11_serializeOpDocumentListMailboxPermissionsInput(v *ListMailboxP
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
 	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListMobileDeviceAccessRulesInput(v *ListMobileDeviceAccessRulesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
 
 	if v.OrganizationId != nil {
 		ok := object.Key("OrganizationId")
@@ -3544,6 +3972,94 @@ func awsAwsjson11_serializeOpDocumentUpdateMailboxQuotaInput(v *UpdateMailboxQuo
 	if v.UserId != nil {
 		ok := object.Key("UserId")
 		ok.String(*v.UserId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateMobileDeviceAccessRuleInput(v *UpdateMobileDeviceAccessRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.DeviceModels != nil {
+		ok := object.Key("DeviceModels")
+		if err := awsAwsjson11_serializeDocumentDeviceModelList(v.DeviceModels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceOperatingSystems != nil {
+		ok := object.Key("DeviceOperatingSystems")
+		if err := awsAwsjson11_serializeDocumentDeviceOperatingSystemList(v.DeviceOperatingSystems, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceTypes != nil {
+		ok := object.Key("DeviceTypes")
+		if err := awsAwsjson11_serializeDocumentDeviceTypeList(v.DeviceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceUserAgents != nil {
+		ok := object.Key("DeviceUserAgents")
+		if err := awsAwsjson11_serializeDocumentDeviceUserAgentList(v.DeviceUserAgents, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Effect) > 0 {
+		ok := object.Key("Effect")
+		ok.String(string(v.Effect))
+	}
+
+	if v.MobileDeviceAccessRuleId != nil {
+		ok := object.Key("MobileDeviceAccessRuleId")
+		ok.String(*v.MobileDeviceAccessRuleId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.NotDeviceModels != nil {
+		ok := object.Key("NotDeviceModels")
+		if err := awsAwsjson11_serializeDocumentDeviceModelList(v.NotDeviceModels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotDeviceOperatingSystems != nil {
+		ok := object.Key("NotDeviceOperatingSystems")
+		if err := awsAwsjson11_serializeDocumentDeviceOperatingSystemList(v.NotDeviceOperatingSystems, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotDeviceTypes != nil {
+		ok := object.Key("NotDeviceTypes")
+		if err := awsAwsjson11_serializeDocumentDeviceTypeList(v.NotDeviceTypes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NotDeviceUserAgents != nil {
+		ok := object.Key("NotDeviceUserAgents")
+		if err := awsAwsjson11_serializeDocumentDeviceUserAgentList(v.NotDeviceUserAgents, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OrganizationId != nil {
+		ok := object.Key("OrganizationId")
+		ok.String(*v.OrganizationId)
 	}
 
 	return nil

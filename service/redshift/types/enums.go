@@ -22,6 +22,24 @@ func (ActionType) Values() []ActionType {
 	}
 }
 
+type AuthorizationStatus string
+
+// Enum values for AuthorizationStatus
+const (
+	AuthorizationStatusAuthorized AuthorizationStatus = "Authorized"
+	AuthorizationStatusRevoking   AuthorizationStatus = "Revoking"
+)
+
+// Values returns all known values for AuthorizationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AuthorizationStatus) Values() []AuthorizationStatus {
+	return []AuthorizationStatus{
+		"Authorized",
+		"Revoking",
+	}
+}
+
 type Mode string
 
 // Enum values for Mode

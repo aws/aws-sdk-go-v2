@@ -100,6 +100,11 @@ type RegisterImageInput struct {
 	// in the Amazon Elastic Compute Cloud User Guide.
 	BlockDeviceMappings []types.BlockDeviceMapping
 
+	// The boot mode of the AMI. For more information, see Boot modes
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
+	BootMode types.BootModeValues
+
 	// A description for your AMI.
 	Description *string
 

@@ -118,9 +118,6 @@ type PackageDependency struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
-	//
-	// * A NuGet package does not contain a corresponding component, so
-	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// The name of the package that this package depends on.
@@ -145,8 +142,6 @@ type PackageSummary struct {
 	// * pypi
 	//
 	// * maven
-	//
-	// * nuget
 	Format PackageFormat
 
 	// The namespace of the package. The package component that specifies its namespace
@@ -160,9 +155,6 @@ type PackageSummary struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
-	//
-	// * A NuGet package does not contain a corresponding component, so
-	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// The name of the package.
@@ -187,8 +179,6 @@ type PackageVersionDescription struct {
 	//
 	// * maven: A Maven package that contains compiled code in a
 	// distributable format, such as a JAR file.
-	//
-	// * nuget: A NuGet package.
 	Format PackageFormat
 
 	// The homepage associated with the package.
@@ -208,9 +198,6 @@ type PackageVersionDescription struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
-	//
-	// * A NuGet package does not contain a corresponding component, so
-	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// The name of the requested package.
@@ -358,9 +345,6 @@ type RepositoryExternalConnectionInfo struct {
 	//
 	// * maven: A Maven package that contains
 	// compiled code in a distributable format, such as a JAR file.
-	//
-	// * nuget: A NuGet
-	// package.
 	PackageFormat PackageFormat
 
 	// The status of the external connection of a repository. There is one valid value,

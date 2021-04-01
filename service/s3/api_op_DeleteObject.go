@@ -14,14 +14,15 @@ import (
 
 // Removes the null version (if there is one) of an object and inserts a delete
 // marker, which becomes the latest version of the object. If there isn't a null
-// version, Amazon S3 does not remove any objects. To remove a specific version,
-// you must be the bucket owner and you must use the version Id subresource. Using
-// this subresource permanently deletes the version. If the object deleted is a
-// delete marker, Amazon S3 sets the response header, x-amz-delete-marker, to true.
-// If the object you want to delete is in a bucket where the bucket versioning
-// configuration is MFA Delete enabled, you must include the x-amz-mfa request
-// header in the DELETE versionId request. Requests that include x-amz-mfa must use
-// HTTPS. For more information about MFA Delete, see Using MFA Delete
+// version, Amazon S3 does not remove any objects but will still respond that the
+// command was successful. To remove a specific version, you must be the bucket
+// owner and you must use the version Id subresource. Using this subresource
+// permanently deletes the version. If the object deleted is a delete marker,
+// Amazon S3 sets the response header, x-amz-delete-marker, to true. If the object
+// you want to delete is in a bucket where the bucket versioning configuration is
+// MFA Delete enabled, you must include the x-amz-mfa request header in the DELETE
+// versionId request. Requests that include x-amz-mfa must use HTTPS. For more
+// information about MFA Delete, see Using MFA Delete
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html). To see
 // sample requests that use versioning, see Sample Request
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectDELETE.html#ExampleVersionObjectDelete).
@@ -60,15 +61,15 @@ type DeleteObjectInput struct {
 	// ARN in place of the bucket name. For more information about access point ARNs,
 	// see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon Simple Storage Service Developer Guide. When using this action
-	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
-	// hostname. The S3 on Outposts hostname takes the form
+	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
+	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
+	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
 	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
 	// bucket ARN in place of the bucket name. For more information about S3 on
 	// Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string

@@ -163,7 +163,7 @@ type SendMessageOutput struct {
 	// MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).
 	MD5OfMessageAttributes *string
 
-	// An MD5 digest of the non-URL-encoded message attribute string. You can use this
+	// An MD5 digest of the non-URL-encoded message body string. You can use this
 	// attribute to verify that Amazon SQS received the message correctly. Amazon SQS
 	// URL-decodes the message before creating the MD5 digest. For information about
 	// MD5, see RFC1321 (https://www.ietf.org/rfc/rfc1321.txt).

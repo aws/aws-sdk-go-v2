@@ -29,8 +29,8 @@ func (c *Client) UpdatePackageVersionsStatus(ctx context.Context, params *Update
 
 type UpdatePackageVersionsStatusInput struct {
 
-	// The domain that contains the repository that contains the package versions with
-	// a status to be updated.
+	// The name of the domain that contains the repository that contains the package
+	// versions with a status to be updated.
 	//
 	// This member is required.
 	Domain *string
@@ -43,8 +43,6 @@ type UpdatePackageVersionsStatusInput struct {
 	// * pypi
 	//
 	// * maven
-	//
-	// * nuget
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -91,9 +89,6 @@ type UpdatePackageVersionsStatusInput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
-	//
-	// * A NuGet package does not contain a corresponding component, so
-	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// A map of package versions and package version revisions. The map key is the

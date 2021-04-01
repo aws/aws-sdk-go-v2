@@ -29,7 +29,7 @@ import (
 //
 // The first time you create an alarm in the AWS
 // Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch
-// creates the necessary service-linked rolea for you. The service-linked roles are
+// creates the necessary service-linked role for you. The service-linked roles are
 // called AWSServiceRoleForCloudWatchEvents and
 // AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see AWS
 // service-linked role
@@ -165,7 +165,8 @@ type PutMetricAlarmInput struct {
 	// Valid Values (for use with IAM roles):
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 |
 	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 |
-	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0 |
+	// arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0
 	OKActions []string
 
 	// The length, in seconds, used each time the metric specified in MetricName is

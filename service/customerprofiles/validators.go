@@ -5,6 +5,7 @@ package customerprofiles
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -633,6 +634,266 @@ func addOpUpdateProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProfile{}, middleware.After)
 }
 
+func validateFlowDefinition(v *types.FlowDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FlowDefinition"}
+	if v.FlowName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowName"))
+	}
+	if v.KmsArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsArn"))
+	}
+	if v.SourceFlowConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFlowConfig"))
+	} else if v.SourceFlowConfig != nil {
+		if err := validateSourceFlowConfig(v.SourceFlowConfig); err != nil {
+			invalidParams.AddNested("SourceFlowConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tasks == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tasks"))
+	} else if v.Tasks != nil {
+		if err := validateTasks(v.Tasks); err != nil {
+			invalidParams.AddNested("Tasks", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TriggerConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerConfig"))
+	} else if v.TriggerConfig != nil {
+		if err := validateTriggerConfig(v.TriggerConfig); err != nil {
+			invalidParams.AddNested("TriggerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMarketoSourceProperties(v *types.MarketoSourceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MarketoSourceProperties"}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3SourceProperties(v *types.S3SourceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3SourceProperties"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSalesforceSourceProperties(v *types.SalesforceSourceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SalesforceSourceProperties"}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateScheduledTriggerProperties(v *types.ScheduledTriggerProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduledTriggerProperties"}
+	if v.ScheduleExpression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleExpression"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateServiceNowSourceProperties(v *types.ServiceNowSourceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ServiceNowSourceProperties"}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceConnectorProperties(v *types.SourceConnectorProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceConnectorProperties"}
+	if v.Marketo != nil {
+		if err := validateMarketoSourceProperties(v.Marketo); err != nil {
+			invalidParams.AddNested("Marketo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.S3 != nil {
+		if err := validateS3SourceProperties(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Salesforce != nil {
+		if err := validateSalesforceSourceProperties(v.Salesforce); err != nil {
+			invalidParams.AddNested("Salesforce", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServiceNow != nil {
+		if err := validateServiceNowSourceProperties(v.ServiceNow); err != nil {
+			invalidParams.AddNested("ServiceNow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Zendesk != nil {
+		if err := validateZendeskSourceProperties(v.Zendesk); err != nil {
+			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSourceFlowConfig(v *types.SourceFlowConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SourceFlowConfig"}
+	if len(v.ConnectorType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorType"))
+	}
+	if v.SourceConnectorProperties == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceConnectorProperties"))
+	} else if v.SourceConnectorProperties != nil {
+		if err := validateSourceConnectorProperties(v.SourceConnectorProperties); err != nil {
+			invalidParams.AddNested("SourceConnectorProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTask(v *types.Task) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Task"}
+	if v.SourceFields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFields"))
+	}
+	if len(v.TaskType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TaskType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTasks(v []types.Task) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tasks"}
+	for i := range v {
+		if err := validateTask(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerConfig(v *types.TriggerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerConfig"}
+	if len(v.TriggerType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TriggerType"))
+	}
+	if v.TriggerProperties != nil {
+		if err := validateTriggerProperties(v.TriggerProperties); err != nil {
+			invalidParams.AddNested("TriggerProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTriggerProperties(v *types.TriggerProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TriggerProperties"}
+	if v.Scheduled != nil {
+		if err := validateScheduledTriggerProperties(v.Scheduled); err != nil {
+			invalidParams.AddNested("Scheduled", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateZendeskSourceProperties(v *types.ZendeskSourceProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ZendeskSourceProperties"}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAddProfileKeyInput(v *AddProfileKeyInput) error {
 	if v == nil {
 		return nil
@@ -962,11 +1223,13 @@ func validateOpPutIntegrationInput(v *PutIntegrationInput) error {
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
-	if v.Uri == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
-	}
 	if v.ObjectTypeName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ObjectTypeName"))
+	}
+	if v.FlowDefinition != nil {
+		if err := validateFlowDefinition(v.FlowDefinition); err != nil {
+			invalidParams.AddNested("FlowDefinition", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

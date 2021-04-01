@@ -57,6 +57,10 @@ type DeleteLagOutput struct {
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
 
+	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt,
+	// should_encrypt, and must_encrypt.
+	EncryptionMode *string
+
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
 	// family (IPv4/IPv6).
 	HasLogicalRedundancy types.HasLogicalRedundancy
@@ -95,6 +99,12 @@ type DeleteLagOutput struct {
 
 	// The location of the LAG.
 	Location *string
+
+	// Indicates whether the LAG supports MAC Security (MACsec).
+	MacSecCapable *bool
+
+	// The MAC Security (MACsec) security keys associated with the LAG.
+	MacSecKeys []types.MacSecKey
 
 	// The minimum number of physical dedicated connections that must be operational
 	// for the LAG itself to be operational.

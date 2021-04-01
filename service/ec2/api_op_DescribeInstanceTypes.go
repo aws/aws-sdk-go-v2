@@ -126,6 +126,10 @@ type DescribeInstanceTypesInput struct {
 	// * memory-info.size-in-mib - The memory size.
 	//
 	// *
+	// network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic
+	// Fabric Adapters (EFAs) per instance. (true | false).
+	//
+	// *
 	// network-info.efa-supported - Indicates whether the instance type supports
 	// Elastic Fabric Adapter (EFA) (true | false).
 	//
@@ -157,30 +161,33 @@ type DescribeInstanceTypesInput struct {
 	// * processor-info.sustained-clock-speed-in-ghz - The CPU clock speed,
 	// in GHz.
 	//
-	// * supported-root-device-type - The root device type (ebs |
-	// instance-store).
-	//
-	// * supported-usage-class - The usage class (on-demand |
-	// spot).
-	//
-	// * supported-virtualization-type - The virtualization type (hvm |
-	// paravirtual).
-	//
-	// * vcpu-info.default-cores - The default number of cores for the
-	// instance type.
-	//
-	// * vcpu-info.default-threads-per-core - The default number of
-	// threads per core for the instance type.
-	//
-	// * vcpu-info.default-vcpus - The default
-	// number of vCPUs for the instance type.
-	//
-	// * vcpu-info.valid-cores - The number of
-	// cores that can be configured for the instance type.
+	// * supported-boot-mode - The boot mode (legacy-bios | uefi).
 	//
 	// *
-	// vcpu-info.valid-threads-per-core - The number of threads per core that can be
-	// configured for the instance type. For example, "1" or "1,2".
+	// supported-root-device-type - The root device type (ebs | instance-store).
+	//
+	// *
+	// supported-usage-class - The usage class (on-demand | spot).
+	//
+	// *
+	// supported-virtualization-type - The virtualization type (hvm | paravirtual).
+	//
+	// *
+	// vcpu-info.default-cores - The default number of cores for the instance type.
+	//
+	// *
+	// vcpu-info.default-threads-per-core - The default number of threads per core for
+	// the instance type.
+	//
+	// * vcpu-info.default-vcpus - The default number of vCPUs for
+	// the instance type.
+	//
+	// * vcpu-info.valid-cores - The number of cores that can be
+	// configured for the instance type.
+	//
+	// * vcpu-info.valid-threads-per-core - The
+	// number of threads per core that can be configured for the instance type. For
+	// example, "1" or "1,2".
 	Filters []types.Filter
 
 	// The instance types. For more information, see Instance types

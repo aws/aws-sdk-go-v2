@@ -24386,6 +24386,15 @@ func awsRestjson1_deserializeDocumentJourneyLimits(v **types.JourneyLimits, valu
 				sv.EndpointReentryCap = int32(i64)
 			}
 
+		case "EndpointReentryInterval":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.EndpointReentryInterval = ptr.String(jtv)
+			}
+
 		case "MessagesPerSecond":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -24548,6 +24557,15 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 				sv.RefreshFrequency = ptr.String(jtv)
 			}
 
+		case "RefreshOnSegmentUpdate":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RefreshOnSegmentUpdate = jtv
+			}
+
 		case "Schedule":
 			if err := awsRestjson1_deserializeDocumentJourneySchedule(&sv.Schedule, value); err != nil {
 				return err
@@ -24579,6 +24597,15 @@ func awsRestjson1_deserializeDocumentJourneyResponse(v **types.JourneyResponse, 
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentMapOf__string(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		case "WaitForQuietTime":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.WaitForQuietTime = jtv
 			}
 
 		default:

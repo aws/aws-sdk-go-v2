@@ -39,8 +39,6 @@ type PredictInput struct {
 	// This member is required.
 	MLModelId *string
 
-	// The predicted endpoint for the input.
-	//
 	// This member is required.
 	PredictEndpoint *string
 

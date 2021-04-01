@@ -394,6 +394,17 @@ type DocumentClassifierProperties struct {
 	// the classifier is trained.
 	Mode DocumentClassifierMode
 
+	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
+	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
+	// formats:
+	//
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// * Amazon
+	// Resource Name (ARN) of a KMS Key:
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	ModelKmsKeyId *string
+
 	// Provides output results configuration parameters for custom classifier jobs.
 	OutputDataConfig *DocumentClassifierOutputDataConfig
 
@@ -561,6 +572,11 @@ type EndpointProperties struct {
 
 	// The number of inference units currently used by the model using this endpoint.
 	CurrentInferenceUnits *int32
+
+	// The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM)
+	// role that grants Amazon Comprehend read access to trained custom models
+	// encrypted with a customer managed key (ModelKmsKeyId).
+	DataAccessRoleArn *string
 
 	// The desired number of inference units to be used by the model using this
 	// endpoint. Each inference unit represents of a throughput of 100 characters per
@@ -883,6 +899,17 @@ type EntityRecognizerProperties struct {
 
 	// A description of the status of the recognizer.
 	Message *string
+
+	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
+	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
+	// formats:
+	//
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// * Amazon
+	// Resource Name (ARN) of a KMS Key:
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	ModelKmsKeyId *string
 
 	// Provides information about an entity recognizer.
 	RecognizerMetadata *EntityRecognizerMetadata

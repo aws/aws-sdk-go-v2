@@ -54,6 +54,10 @@ type CreateWirelessDeviceInput struct {
 
 	// The name of the new resource.
 	Name *string
+
+	// The tags to attach to the new wireless device. Tags are metadata that you can
+	// use to manage a resource.
+	Tags []types.Tag
 }
 
 type CreateWirelessDeviceOutput struct {

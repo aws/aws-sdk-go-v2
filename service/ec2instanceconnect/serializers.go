@@ -13,6 +13,53 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsAwsjson11_serializeOpSendSerialConsoleSSHPublicKey struct {
+}
+
+func (*awsAwsjson11_serializeOpSendSerialConsoleSSHPublicKey) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSendSerialConsoleSSHPublicKey) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SendSerialConsoleSSHPublicKeyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSEC2InstanceConnectService.SendSerialConsoleSSHPublicKey")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSendSerialConsoleSSHPublicKeyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpSendSSHPublicKey struct {
 }
 
@@ -59,6 +106,28 @@ func (m *awsAwsjson11_serializeOpSendSSHPublicKey) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeOpDocumentSendSerialConsoleSSHPublicKeyInput(v *SendSerialConsoleSSHPublicKeyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InstanceId != nil {
+		ok := object.Key("InstanceId")
+		ok.String(*v.InstanceId)
+	}
+
+	if v.SerialPort != 0 {
+		ok := object.Key("SerialPort")
+		ok.Integer(v.SerialPort)
+	}
+
+	if v.SSHPublicKey != nil {
+		ok := object.Key("SSHPublicKey")
+		ok.String(*v.SSHPublicKey)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentSendSSHPublicKeyInput(v *SendSSHPublicKeyInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()

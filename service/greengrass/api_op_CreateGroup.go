@@ -32,14 +32,16 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 
 type CreateGroupInput struct {
 
+	// The name of the group.
+	//
+	// This member is required.
+	Name *string
+
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
 
 	// Information about the initial version of the group.
 	InitialVersion *types.GroupVersion
-
-	// The name of the group.
-	Name *string
 
 	// Tag(s) to add to the new resource.
 	Tags map[string]string
@@ -115,6 +117,9 @@ func addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpCreateGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGroup(options.Region), middleware.Before); err != nil {

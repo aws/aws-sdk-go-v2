@@ -126,15 +126,15 @@ type HeadObjectInput struct {
 	// ARN in place of the bucket name. For more information about access point ARNs,
 	// see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon Simple Storage Service Developer Guide. When using this action
-	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
-	// hostname. The S3 on Outposts hostname takes the form
+	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
+	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
+	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
 	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
 	// bucket ARN in place of the bucket name. For more information about S3 on
 	// Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -333,7 +333,7 @@ type HeadObjectOutput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html) or an
 	// archive copy is already restored. If an archive copy is already restored, the
 	// header value indicates when Amazon S3 is scheduled to delete the object copy.
-	// For example: x-amz-restore: ongoing-request="false", expiry-date="Fri, 23 Dec
+	// For example: x-amz-restore: ongoing-request="false", expiry-date="Fri, 21 Dec
 	// 2012 00:00:00 GMT" If the object restoration is in progress, the header returns
 	// the value ongoing-request="true". For more information about archiving objects,
 	// see Transitioning Objects: General Considerations

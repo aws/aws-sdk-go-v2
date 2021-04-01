@@ -83,13 +83,7 @@ type CreateAccessPointInput struct {
 	// This member is required.
 	Name *string
 
-	// The PublicAccessBlock configuration that you want to apply to this Amazon S3
-	// account. You can enable the configuration options in any combination. For more
-	// information about when Amazon S3 considers a bucket or object public, see The
-	// Meaning of "Public"
-	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon Simple Storage Service Developer Guide. This is not supported for
-	// Amazon S3 on Outposts.
+	// The PublicAccessBlock configuration that you want to apply to the access point.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
 	// If you include this field, Amazon S3 restricts access to this access point to

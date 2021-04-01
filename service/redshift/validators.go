@@ -50,6 +50,26 @@ func (m *validateOpAuthorizeClusterSecurityGroupIngress) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAuthorizeEndpointAccess struct {
+}
+
+func (*validateOpAuthorizeEndpointAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAuthorizeEndpointAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AuthorizeEndpointAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAuthorizeEndpointAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAuthorizeSnapshotAccess struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpCreateClusterSubnetGroup) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateClusterSubnetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEndpointAccess struct {
+}
+
+func (*validateOpCreateEndpointAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEndpointAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEndpointAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEndpointAccessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -485,6 +525,26 @@ func (m *validateOpDeleteClusterSubnetGroup) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteClusterSubnetGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEndpointAccess struct {
+}
+
+func (*validateOpDeleteEndpointAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEndpointAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEndpointAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEndpointAccessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1070,6 +1130,26 @@ func (m *validateOpModifyClusterSubnetGroup) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyEndpointAccess struct {
+}
+
+func (*validateOpModifyEndpointAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyEndpointAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyEndpointAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyEndpointAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyEventSubscription struct {
 }
 
@@ -1398,6 +1478,10 @@ func addOpAuthorizeClusterSecurityGroupIngressValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpAuthorizeClusterSecurityGroupIngress{}, middleware.After)
 }
 
+func addOpAuthorizeEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAuthorizeEndpointAccess{}, middleware.After)
+}
+
 func addOpAuthorizeSnapshotAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAuthorizeSnapshotAccess{}, middleware.After)
 }
@@ -1436,6 +1520,10 @@ func addOpCreateClusterSnapshotValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateClusterSubnetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateClusterSubnetGroup{}, middleware.After)
+}
+
+func addOpCreateEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEndpointAccess{}, middleware.After)
 }
 
 func addOpCreateEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
@@ -1484,6 +1572,10 @@ func addOpDeleteClusterSnapshotValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteClusterSubnetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteClusterSubnetGroup{}, middleware.After)
+}
+
+func addOpDeleteEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEndpointAccess{}, middleware.After)
 }
 
 func addOpDeleteEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
@@ -1600,6 +1692,10 @@ func addOpModifyClusterSnapshotScheduleValidationMiddleware(stack *middleware.St
 
 func addOpModifyClusterSubnetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyClusterSubnetGroup{}, middleware.After)
+}
+
+func addOpModifyEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyEndpointAccess{}, middleware.After)
 }
 
 func addOpModifyEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
@@ -1870,6 +1966,21 @@ func validateOpAuthorizeClusterSecurityGroupIngressInput(v *AuthorizeClusterSecu
 	}
 }
 
+func validateOpAuthorizeEndpointAccessInput(v *AuthorizeEndpointAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthorizeEndpointAccessInput"}
+	if v.Account == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Account"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAuthorizeSnapshotAccessInput(v *AuthorizeSnapshotAccessInput) error {
 	if v == nil {
 		return nil
@@ -2049,6 +2160,24 @@ func validateOpCreateClusterSubnetGroupInput(v *CreateClusterSubnetGroupInput) e
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEndpointAccessInput(v *CreateEndpointAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEndpointAccessInput"}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
+	}
+	if v.SubnetGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2269,6 +2398,21 @@ func validateOpDeleteClusterSubnetGroupInput(v *DeleteClusterSubnetGroupInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteClusterSubnetGroupInput"}
 	if v.ClusterSubnetGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterSubnetGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEndpointAccessInput(v *DeleteEndpointAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEndpointAccessInput"}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2729,6 +2873,21 @@ func validateOpModifyClusterSubnetGroupInput(v *ModifyClusterSubnetGroupInput) e
 	}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyEndpointAccessInput(v *ModifyEndpointAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyEndpointAccessInput"}
+	if v.EndpointName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndpointName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

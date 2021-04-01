@@ -52,6 +52,12 @@ type ListThingsInput struct {
 
 	// The name of the thing type used to search for things.
 	ThingTypeName *string
+
+	// When true, the action returns the thing resources with attribute values that
+	// start with the attributeValue provided. When false, or not present, the action
+	// returns only the thing resources with attribute values that match the entire
+	// attributeValue provided.
+	UsePrefixAttributeValue bool
 }
 
 // The output from the ListThings operation.

@@ -27295,6 +27295,11 @@ func awsAwsjson11_deserializeDocumentMetadataInfo(v **types.MetadataInfo, value 
 				sv.MetadataValue = ptr.String(jtv)
 			}
 
+		case "OtherMetadataValueList":
+			if err := awsAwsjson11_deserializeDocumentOtherMetadataValueList(&sv.OtherMetadataValueList, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -28153,6 +28158,89 @@ func awsAwsjson11_deserializeDocumentOrderList(v *[]types.Order, value interface
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOtherMetadataValueList(v *[]types.OtherMetadataValueListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.OtherMetadataValueListItem
+	if *v == nil {
+		cv = []types.OtherMetadataValueListItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.OtherMetadataValueListItem
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentOtherMetadataValueListItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOtherMetadataValueListItem(v **types.OtherMetadataValueListItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OtherMetadataValueListItem
+	if *v == nil {
+		sv = &types.OtherMetadataValueListItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CreatedTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CreatedTimestamp to be of type string, got %T instead", value)
+				}
+				sv.CreatedTime = ptr.String(jtv)
+			}
+
+		case "MetadataValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MetadataValueString to be of type string, got %T instead", value)
+				}
+				sv.MetadataValue = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

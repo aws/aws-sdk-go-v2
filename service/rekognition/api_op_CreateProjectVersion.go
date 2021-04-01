@@ -62,6 +62,9 @@ type CreateProjectVersionInput struct {
 	//
 	// This member is required.
 	VersionName *string
+
+	// A set of tags (key-value pairs) that you want to attach to the model.
+	Tags map[string]string
 }
 
 type CreateProjectVersionOutput struct {

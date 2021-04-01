@@ -1332,6 +1332,58 @@ func validateRunCommandTargets(v []types.RunCommandTarget) error {
 	}
 }
 
+func validateSageMakerPipelineParameter(v *types.SageMakerPipelineParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SageMakerPipelineParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSageMakerPipelineParameterList(v []types.SageMakerPipelineParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SageMakerPipelineParameterList"}
+	for i := range v {
+		if err := validateSageMakerPipelineParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSageMakerPipelineParameters(v *types.SageMakerPipelineParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SageMakerPipelineParameters"}
+	if v.PipelineParameterList != nil {
+		if err := validateSageMakerPipelineParameterList(v.PipelineParameterList); err != nil {
+			invalidParams.AddNested("PipelineParameterList", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTag(v *types.Tag) error {
 	if v == nil {
 		return nil
@@ -1406,6 +1458,11 @@ func validateTarget(v *types.Target) error {
 	if v.RedshiftDataParameters != nil {
 		if err := validateRedshiftDataParameters(v.RedshiftDataParameters); err != nil {
 			invalidParams.AddNested("RedshiftDataParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SageMakerPipelineParameters != nil {
+		if err := validateSageMakerPipelineParameters(v.SageMakerPipelineParameters); err != nil {
+			invalidParams.AddNested("SageMakerPipelineParameters", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

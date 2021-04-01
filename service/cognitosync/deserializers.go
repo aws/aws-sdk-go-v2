@@ -2708,9 +2708,6 @@ func awsRestjson1_deserializeOpErrorUpdateRecords(response *smithyhttp.Response,
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidParameterException(response, errorBody)
 
-	case strings.EqualFold("LambdaSocketTimeoutException", errorCode):
-		return awsRestjson1_deserializeErrorLambdaSocketTimeoutException(response, errorBody)
-
 	case strings.EqualFold("LambdaThrottledException", errorCode):
 		return awsRestjson1_deserializeErrorLambdaThrottledException(response, errorBody)
 
@@ -3011,42 +3008,6 @@ func awsRestjson1_deserializeErrorInvalidParameterException(response *smithyhttp
 	}
 
 	err := awsRestjson1_deserializeDocumentInvalidParameterException(&output, shape)
-
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	errorBody.Seek(0, io.SeekStart)
-
-	return output
-}
-
-func awsRestjson1_deserializeErrorLambdaSocketTimeoutException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	output := &types.LambdaSocketTimeoutException{}
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	var shape interface{}
-	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	err := awsRestjson1_deserializeDocumentLambdaSocketTimeoutException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -3377,15 +3338,6 @@ func awsRestjson1_deserializeDocumentCognitoStreams(v **types.CognitoStreams, va
 
 	for key, value := range shape {
 		switch key {
-		case "DisabledReason":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
-				}
-				sv.DisabledReason = ptr.String(jtv)
-			}
-
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4019,46 +3971,6 @@ func awsRestjson1_deserializeDocumentInvalidParameterException(v **types.Invalid
 	var sv *types.InvalidParameterException
 	if *v == nil {
 		sv = &types.InvalidParameterException{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "message":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
-				}
-				sv.Message = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentLambdaSocketTimeoutException(v **types.LambdaSocketTimeoutException, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.LambdaSocketTimeoutException
-	if *v == nil {
-		sv = &types.LambdaSocketTimeoutException{}
 	} else {
 		sv = *v
 	}

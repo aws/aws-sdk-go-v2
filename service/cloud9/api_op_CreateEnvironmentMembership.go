@@ -54,6 +54,8 @@ type CreateEnvironmentMembershipInput struct {
 type CreateEnvironmentMembershipOutput struct {
 
 	// Information about the environment member that was added.
+	//
+	// This member is required.
 	Membership *types.EnvironmentMember
 
 	// Metadata pertaining to the operation's result.

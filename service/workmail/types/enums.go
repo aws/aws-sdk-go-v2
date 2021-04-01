@@ -104,6 +104,24 @@ func (MemberType) Values() []MemberType {
 	}
 }
 
+type MobileDeviceAccessRuleEffect string
+
+// Enum values for MobileDeviceAccessRuleEffect
+const (
+	MobileDeviceAccessRuleEffectAllow MobileDeviceAccessRuleEffect = "ALLOW"
+	MobileDeviceAccessRuleEffectDeny  MobileDeviceAccessRuleEffect = "DENY"
+)
+
+// Values returns all known values for MobileDeviceAccessRuleEffect. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MobileDeviceAccessRuleEffect) Values() []MobileDeviceAccessRuleEffect {
+	return []MobileDeviceAccessRuleEffect{
+		"ALLOW",
+		"DENY",
+	}
+}
+
 type PermissionType string
 
 // Enum values for PermissionType

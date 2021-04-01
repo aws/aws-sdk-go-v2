@@ -54,8 +54,8 @@ type DescribeDomainOutput struct {
 	// The creation time.
 	CreationTime *time.Time
 
-	// Settings which are applied to all UserProfiles in this domain, if settings are
-	// not explicitly specified in a given UserProfile.
+	// Settings which are applied to UserProfiles in this domain if settings are not
+	// explicitly specified in a given UserProfile.
 	DefaultUserSettings *types.UserSettings
 
 	// The domain's Amazon Resource Name (ARN).

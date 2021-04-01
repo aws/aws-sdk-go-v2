@@ -80,6 +80,43 @@ func (Context) Values() []Context {
 	}
 }
 
+type CostCategoryInheritedValueDimensionName string
+
+// Enum values for CostCategoryInheritedValueDimensionName
+const (
+	CostCategoryInheritedValueDimensionNameLinkedAccountName CostCategoryInheritedValueDimensionName = "LINKED_ACCOUNT_NAME"
+	CostCategoryInheritedValueDimensionNameTag               CostCategoryInheritedValueDimensionName = "TAG"
+)
+
+// Values returns all known values for CostCategoryInheritedValueDimensionName.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CostCategoryInheritedValueDimensionName) Values() []CostCategoryInheritedValueDimensionName {
+	return []CostCategoryInheritedValueDimensionName{
+		"LINKED_ACCOUNT_NAME",
+		"TAG",
+	}
+}
+
+type CostCategoryRuleType string
+
+// Enum values for CostCategoryRuleType
+const (
+	CostCategoryRuleTypeRegular        CostCategoryRuleType = "REGULAR"
+	CostCategoryRuleTypeInheritedValue CostCategoryRuleType = "INHERITED_VALUE"
+)
+
+// Values returns all known values for CostCategoryRuleType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CostCategoryRuleType) Values() []CostCategoryRuleType {
+	return []CostCategoryRuleType{
+		"REGULAR",
+		"INHERITED_VALUE",
+	}
+}
+
 type CostCategoryRuleVersion string
 
 // Enum values for CostCategoryRuleVersion

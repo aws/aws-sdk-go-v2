@@ -5922,6 +5922,11 @@ func validateImageConfig(v *types.ImageConfig) error {
 	if len(v.RepositoryAccessMode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("RepositoryAccessMode"))
 	}
+	if v.RepositoryAuthConfig != nil {
+		if err := validateRepositoryAuthConfig(v.RepositoryAuthConfig); err != nil {
+			invalidParams.AddNested("RepositoryAuthConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7505,6 +7510,21 @@ func validateRenderableTask(v *types.RenderableTask) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RenderableTask"}
 	if v.Input == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Input"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRepositoryAuthConfig(v *types.RepositoryAuthConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RepositoryAuthConfig"}
+	if v.RepositoryCredentialsProviderArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RepositoryCredentialsProviderArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

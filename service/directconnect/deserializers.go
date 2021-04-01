@@ -956,6 +956,120 @@ func awsAwsjson11_deserializeOpErrorAssociateHostedConnection(response *smithyht
 	}
 }
 
+type awsAwsjson11_deserializeOpAssociateMacSecKey struct {
+}
+
+func (*awsAwsjson11_deserializeOpAssociateMacSecKey) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpAssociateMacSecKey) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorAssociateMacSecKey(response, &metadata)
+	}
+	output := &AssociateMacSecKeyOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentAssociateMacSecKeyOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorAssociateMacSecKey(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpAssociateVirtualInterface struct {
 }
 
@@ -5552,6 +5666,120 @@ func awsAwsjson11_deserializeOpErrorDisassociateConnectionFromLag(response *smit
 	}
 }
 
+type awsAwsjson11_deserializeOpDisassociateMacSecKey struct {
+}
+
+func (*awsAwsjson11_deserializeOpDisassociateMacSecKey) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDisassociateMacSecKey) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDisassociateMacSecKey(response, &metadata)
+	}
+	output := &DisassociateMacSecKeyOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDisassociateMacSecKeyOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDisassociateMacSecKey(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpListVirtualInterfaceTestHistory struct {
 }
 
@@ -6072,6 +6300,120 @@ func (m *awsAwsjson11_deserializeOpUntagResource) HandleDeserialize(ctx context.
 }
 
 func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("DirectConnectClientException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectClientException(response, errorBody)
+
+	case strings.EqualFold("DirectConnectServerException", errorCode):
+		return awsAwsjson11_deserializeErrorDirectConnectServerException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpUpdateConnection struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateConnection) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateConnection) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateConnection(response, &metadata)
+	}
+	output := &UpdateConnectionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateConnection(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6677,6 +7019,42 @@ func awsAwsjson11_deserializeDocumentAssociatedGateway(v **types.AssociatedGatew
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAvailableMacSecPortSpeeds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PortSpeed to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAvailablePortSpeeds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6975,6 +7353,15 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7024,6 +7411,20 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7040,6 +7441,15 @@ func awsAwsjson11_deserializeDocumentConnection(v **types.Connection, value inte
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
 				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -8009,6 +8419,15 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8061,6 +8480,20 @@ func awsAwsjson11_deserializeDocumentLag(v **types.Lag, value interface{}) error
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
 				sv.Location = ptr.String(jtv)
+			}
+
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
 			}
 
 		case "minimumLinks":
@@ -8239,6 +8672,11 @@ func awsAwsjson11_deserializeDocumentLocation(v **types.Location, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "availableMacSecPortSpeeds":
+			if err := awsAwsjson11_deserializeDocumentAvailableMacSecPortSpeeds(&sv.AvailableMacSecPortSpeeds, value); err != nil {
+				return err
+			}
+
 		case "availablePortSpeeds":
 			if err := awsAwsjson11_deserializeDocumentAvailablePortSpeeds(&sv.AvailablePortSpeeds, value); err != nil {
 				return err
@@ -8309,6 +8747,107 @@ func awsAwsjson11_deserializeDocumentLocationList(v *[]types.Location, value int
 		var col types.Location
 		destAddr := &col
 		if err := awsAwsjson11_deserializeDocumentLocation(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMacSecKey(v **types.MacSecKey, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MacSecKey
+	if *v == nil {
+		sv = &types.MacSecKey{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ckn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ckn to be of type string, got %T instead", value)
+				}
+				sv.Ckn = ptr.String(jtv)
+			}
+
+		case "secretARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretARN to be of type string, got %T instead", value)
+				}
+				sv.SecretARN = ptr.String(jtv)
+			}
+
+		case "startOn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StartOnDate to be of type string, got %T instead", value)
+				}
+				sv.StartOn = ptr.String(jtv)
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected State to be of type string, got %T instead", value)
+				}
+				sv.State = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMacSecKeyList(v *[]types.MacSecKey, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MacSecKey
+	if *v == nil {
+		cv = []types.MacSecKey{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MacSecKey
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentMacSecKey(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -9256,6 +9795,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9305,6 +9853,20 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9321,6 +9883,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateConnectionOnInterconnectOutput(v 
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
 				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -9444,6 +10015,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9493,6 +10073,20 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9509,6 +10103,15 @@ func awsAwsjson11_deserializeOpDocumentAllocateHostedConnectionOutput(v **Alloca
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
 				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -10170,6 +10773,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10219,6 +10831,20 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10235,6 +10861,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateConnectionWithLagOutput(v **Asso
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
 				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -10358,6 +10993,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10407,6 +11051,20 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10423,6 +11081,15 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
 				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -10459,6 +11126,51 @@ func awsAwsjson11_deserializeOpDocumentAssociateHostedConnectionOutput(v **Assoc
 					return err
 				}
 				sv.Vlan = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentAssociateMacSecKeyOutput(v **AssociateMacSecKeyOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *AssociateMacSecKeyOutput
+	if *v == nil {
+		sv = &AssociateMacSecKeyOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
+				}
+				sv.ConnectionId = ptr.String(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
 			}
 
 		default:
@@ -10993,6 +11705,15 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11042,6 +11763,20 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11058,6 +11793,15 @@ func awsAwsjson11_deserializeOpDocumentCreateConnectionOutput(v **CreateConnecti
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
 				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -11433,6 +12177,15 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11485,6 +12238,20 @@ func awsAwsjson11_deserializeOpDocumentCreateLagOutput(v **CreateLagOutput, valu
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
 				sv.Location = ptr.String(jtv)
+			}
+
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
 			}
 
 		case "minimumLinks":
@@ -12204,6 +12971,15 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12253,6 +13029,20 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12269,6 +13059,15 @@ func awsAwsjson11_deserializeOpDocumentDeleteConnectionOutput(v **DeleteConnecti
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
 				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -12527,6 +13326,15 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12579,6 +13387,20 @@ func awsAwsjson11_deserializeOpDocumentDeleteLagOutput(v **DeleteLagOutput, valu
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
 				sv.Location = ptr.String(jtv)
+			}
+
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
 			}
 
 		case "minimumLinks":
@@ -13393,6 +14215,15 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				sv.ConnectionState = types.ConnectionState(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13442,6 +14273,20 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 				sv.Location = ptr.String(jtv)
 			}
 
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
 		case "ownerAccount":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13458,6 +14303,15 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
 				}
 				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
 			}
 
 		case "providerName":
@@ -13494,6 +14348,51 @@ func awsAwsjson11_deserializeOpDocumentDisassociateConnectionFromLagOutput(v **D
 					return err
 				}
 				sv.Vlan = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDisassociateMacSecKeyOutput(v **DisassociateMacSecKeyOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DisassociateMacSecKeyOutput
+	if *v == nil {
+		sv = &DisassociateMacSecKeyOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "connectionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
+				}
+				sv.ConnectionId = ptr.String(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
 			}
 
 		default:
@@ -13684,6 +14583,226 @@ func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutp
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentUpdateConnectionOutput(v **UpdateConnectionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateConnectionOutput
+	if *v == nil {
+		sv = &UpdateConnectionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "awsDevice":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsDevice to be of type string, got %T instead", value)
+				}
+				sv.AwsDevice = ptr.String(jtv)
+			}
+
+		case "awsDeviceV2":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AwsDeviceV2 to be of type string, got %T instead", value)
+				}
+				sv.AwsDeviceV2 = ptr.String(jtv)
+			}
+
+		case "bandwidth":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Bandwidth to be of type string, got %T instead", value)
+				}
+				sv.Bandwidth = ptr.String(jtv)
+			}
+
+		case "connectionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionId to be of type string, got %T instead", value)
+				}
+				sv.ConnectionId = ptr.String(jtv)
+			}
+
+		case "connectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionName to be of type string, got %T instead", value)
+				}
+				sv.ConnectionName = ptr.String(jtv)
+			}
+
+		case "connectionState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionState to be of type string, got %T instead", value)
+				}
+				sv.ConnectionState = types.ConnectionState(jtv)
+			}
+
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
+		case "hasLogicalRedundancy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HasLogicalRedundancy to be of type string, got %T instead", value)
+				}
+				sv.HasLogicalRedundancy = types.HasLogicalRedundancy(jtv)
+			}
+
+		case "jumboFrameCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected JumboFrameCapable to be of type *bool, got %T instead", value)
+				}
+				sv.JumboFrameCapable = ptr.Bool(jtv)
+			}
+
+		case "lagId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LagId to be of type string, got %T instead", value)
+				}
+				sv.LagId = ptr.String(jtv)
+			}
+
+		case "loaIssueTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LoaIssueTime to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.LoaIssueTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "location":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
+				}
+				sv.Location = ptr.String(jtv)
+			}
+
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
+			}
+
+		case "ownerAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OwnerAccount to be of type string, got %T instead", value)
+				}
+				sv.OwnerAccount = ptr.String(jtv)
+			}
+
+		case "partnerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PartnerName to be of type string, got %T instead", value)
+				}
+				sv.PartnerName = ptr.String(jtv)
+			}
+
+		case "portEncryptionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PortEncryptionStatus to be of type string, got %T instead", value)
+				}
+				sv.PortEncryptionStatus = ptr.String(jtv)
+			}
+
+		case "providerName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProviderName to be of type string, got %T instead", value)
+				}
+				sv.ProviderName = ptr.String(jtv)
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Region to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsAwsjson11_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "vlan":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected VLAN to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Vlan = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentUpdateDirectConnectGatewayAssociationOutput(v **UpdateDirectConnectGatewayAssociationOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13783,6 +14902,15 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 				sv.ConnectionsBandwidth = ptr.String(jtv)
 			}
 
+		case "encryptionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionMode to be of type string, got %T instead", value)
+				}
+				sv.EncryptionMode = ptr.String(jtv)
+			}
+
 		case "hasLogicalRedundancy":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13835,6 +14963,20 @@ func awsAwsjson11_deserializeOpDocumentUpdateLagOutput(v **UpdateLagOutput, valu
 					return fmt.Errorf("expected LocationCode to be of type string, got %T instead", value)
 				}
 				sv.Location = ptr.String(jtv)
+			}
+
+		case "macSecCapable":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected MacSecCapable to be of type *bool, got %T instead", value)
+				}
+				sv.MacSecCapable = ptr.Bool(jtv)
+			}
+
+		case "macSecKeys":
+			if err := awsAwsjson11_deserializeDocumentMacSecKeyList(&sv.MacSecKeys, value); err != nil {
+				return err
 			}
 
 		case "minimumLinks":

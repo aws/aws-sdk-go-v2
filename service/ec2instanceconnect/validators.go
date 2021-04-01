@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpSendSerialConsoleSSHPublicKey struct {
+}
+
+func (*validateOpSendSerialConsoleSSHPublicKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendSerialConsoleSSHPublicKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendSerialConsoleSSHPublicKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendSerialConsoleSSHPublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendSSHPublicKey struct {
 }
 
@@ -29,8 +49,30 @@ func (m *validateOpSendSSHPublicKey) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpSendSerialConsoleSSHPublicKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendSerialConsoleSSHPublicKey{}, middleware.After)
+}
+
 func addOpSendSSHPublicKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendSSHPublicKey{}, middleware.After)
+}
+
+func validateOpSendSerialConsoleSSHPublicKeyInput(v *SendSerialConsoleSSHPublicKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendSerialConsoleSSHPublicKeyInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.SSHPublicKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SSHPublicKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpSendSSHPublicKeyInput(v *SendSSHPublicKeyInput) error {

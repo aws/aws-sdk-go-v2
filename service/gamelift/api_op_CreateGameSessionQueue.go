@@ -27,10 +27,13 @@ import (
 // FleetIQ default prioritization or provide an alternate set of priorities. To
 // create a new queue, provide a name, timeout value, and a list of destinations.
 // Optionally, specify a sort configuration and/or a filter, and define a set of
-// latency cap policies. If successful, a new GameSessionQueue object is returned
-// with an assigned queue ARN. New game session requests, which are submitted to
-// queue with StartGameSessionPlacement or StartMatchmaking, reference a queue's
-// name or ARN. Learn more  Design a game session queue
+// latency cap policies. You can also include the ARN for an Amazon Simple
+// Notification Service (SNS) topic to receive notifications of game session
+// placement activity. Notifications using SNS or CloudWatch events is the
+// preferred way to track placement activity. If successful, a new GameSessionQueue
+// object is returned with an assigned queue ARN. New game session requests, which
+// are submitted to the queue with StartGameSessionPlacement or StartMatchmaking,
+// reference a queue's name or ARN. Learn more  Design a game session queue
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html)
 // Create a game session queue
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html)
@@ -61,6 +64,10 @@ type CreateGameSessionQueueInput struct {
 	// This member is required.
 	Name *string
 
+	// Information to be added to all events that are related to this game session
+	// queue.
+	CustomEventData *string
+
 	// A list of fleets and/or fleet aliases that can be used to fulfill game session
 	// placement requests in the queue. Destinations are identified by either a fleet
 	// ARN or a fleet alias ARN, and are listed in order of placement preference.
@@ -70,6 +77,11 @@ type CreateGameSessionQueueInput struct {
 	// Locations are specified in the form of AWS Region codes, such as us-west-2. If
 	// this parameter is not set, game sessions can be placed in any queue location.
 	FilterConfiguration *types.FilterConfiguration
+
+	// An SNS topic ARN that is set up to receive game session placement notifications.
+	// See  Setting up notifications for game session placement
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html).
+	NotificationTarget *string
 
 	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
 	// deliver low latency for most players in a game session. These policies ensure

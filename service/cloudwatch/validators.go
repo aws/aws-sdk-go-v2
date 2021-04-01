@@ -90,6 +90,26 @@ func (m *validateOpDeleteInsightRules) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMetricStream struct {
+}
+
+func (*validateOpDeleteMetricStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMetricStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMetricStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMetricStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAlarmsForMetric struct {
 }
 
@@ -290,6 +310,26 @@ func (m *validateOpGetMetricStatistics) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMetricStream struct {
+}
+
+func (*validateOpGetMetricStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMetricStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMetricStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMetricStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMetricWidgetImage struct {
 }
 
@@ -470,6 +510,26 @@ func (m *validateOpPutMetricData) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutMetricStream struct {
+}
+
+func (*validateOpPutMetricStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutMetricStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutMetricStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutMetricStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetAlarmState struct {
 }
 
@@ -485,6 +545,46 @@ func (m *validateOpSetAlarmState) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSetAlarmStateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartMetricStreams struct {
+}
+
+func (*validateOpStartMetricStreams) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMetricStreams) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMetricStreamsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMetricStreamsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopMetricStreams struct {
+}
+
+func (*validateOpStopMetricStreams) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopMetricStreams) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopMetricStreamsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopMetricStreamsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -546,6 +646,10 @@ func addOpDeleteInsightRulesValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteInsightRules{}, middleware.After)
 }
 
+func addOpDeleteMetricStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMetricStream{}, middleware.After)
+}
+
 func addOpDescribeAlarmsForMetricValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAlarmsForMetric{}, middleware.After)
 }
@@ -586,6 +690,10 @@ func addOpGetMetricStatisticsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetMetricStatistics{}, middleware.After)
 }
 
+func addOpGetMetricStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMetricStream{}, middleware.After)
+}
+
 func addOpGetMetricWidgetImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMetricWidgetImage{}, middleware.After)
 }
@@ -622,8 +730,20 @@ func addOpPutMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutMetricData{}, middleware.After)
 }
 
+func addOpPutMetricStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutMetricStream{}, middleware.After)
+}
+
 func addOpSetAlarmStateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetAlarmState{}, middleware.After)
+}
+
+func addOpStartMetricStreamsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMetricStreams{}, middleware.After)
+}
+
+func addOpStopMetricStreamsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopMetricStreams{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1004,6 +1124,21 @@ func validateOpDeleteInsightRulesInput(v *DeleteInsightRulesInput) error {
 	}
 }
 
+func validateOpDeleteMetricStreamInput(v *DeleteMetricStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMetricStreamInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAlarmsForMetricInput(v *DescribeAlarmsForMetricInput) error {
 	if v == nil {
 		return nil
@@ -1192,6 +1327,21 @@ func validateOpGetMetricStatisticsInput(v *GetMetricStatisticsInput) error {
 	}
 	if v.Period == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Period"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMetricStreamInput(v *GetMetricStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMetricStreamInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1400,6 +1550,35 @@ func validateOpPutMetricDataInput(v *PutMetricDataInput) error {
 	}
 }
 
+func validateOpPutMetricStreamInput(v *PutMetricStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMetricStreamInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.FirehoseArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirehoseArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if len(v.OutputFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputFormat"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSetAlarmStateInput(v *SetAlarmStateInput) error {
 	if v == nil {
 		return nil
@@ -1413,6 +1592,36 @@ func validateOpSetAlarmStateInput(v *SetAlarmStateInput) error {
 	}
 	if v.StateReason == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StateReason"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartMetricStreamsInput(v *StartMetricStreamsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMetricStreamsInput"}
+	if v.Names == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Names"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopMetricStreamsInput(v *StopMetricStreamsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopMetricStreamsInput"}
+	if v.Names == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Names"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

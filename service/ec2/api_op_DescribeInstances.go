@@ -272,35 +272,37 @@ type DescribeInstancesInput struct {
 	// * network-interface.vpc-id - The ID of the VPC for the network
 	// interface.
 	//
-	// * owner-id - The AWS account ID of the instance owner.
+	// * outpost-arn - The Amazon Resource Name (ARN) of the Outpost.
 	//
 	// *
-	// placement-group-name - The name of the placement group for the instance.
+	// owner-id - The AWS account ID of the instance owner.
 	//
-	// *
-	// placement-partition-number - The partition in which the instance is located.
+	// * placement-group-name -
+	// The name of the placement group for the instance.
 	//
-	// *
-	// platform - The platform. To list only Windows instances, use windows.
+	// * placement-partition-number
+	// - The partition in which the instance is located.
 	//
-	// *
-	// private-dns-name - The private IPv4 DNS name of the instance.
+	// * platform - The platform. To
+	// list only Windows instances, use windows.
 	//
-	// *
-	// private-ip-address - The private IPv4 address of the instance.
+	// * private-dns-name - The private IPv4
+	// DNS name of the instance.
 	//
-	// * product-code -
-	// The product code associated with the AMI used to launch the instance.
+	// * private-ip-address - The private IPv4 address of
+	// the instance.
 	//
-	// *
-	// product-code.type - The type of product code (devpay | marketplace).
+	// * product-code - The product code associated with the AMI used to
+	// launch the instance.
 	//
-	// *
-	// ramdisk-id - The RAM disk ID.
+	// * product-code.type - The type of product code (devpay |
+	// marketplace).
 	//
-	// * reason - The reason for the current state of
-	// the instance (for example, shows "User Initiated [date]" when you stop or
-	// terminate the instance). Similar to the state-reason-code filter.
+	// * ramdisk-id - The RAM disk ID.
+	//
+	// * reason - The reason for the
+	// current state of the instance (for example, shows "User Initiated [date]" when
+	// you stop or terminate the instance). Similar to the state-reason-code filter.
 	//
 	// *
 	// requester-id - The ID of the entity that launched the instance on your behalf

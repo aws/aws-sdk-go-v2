@@ -181,6 +181,13 @@ func awsRestjson1_serializeOpDocumentCreateDatasetInput(v *CreateDatasetInput, v
 		ok.String(*v.Name)
 	}
 
+	if v.PathOptions != nil {
+		ok := object.Key("PathOptions")
+		if err := awsRestjson1_serializeDocumentPathOptions(v.PathOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -2502,6 +2509,13 @@ func awsRestjson1_serializeOpDocumentUpdateDatasetInput(v *UpdateDatasetInput, v
 		}
 	}
 
+	if v.PathOptions != nil {
+		ok := object.Key("PathOptions")
+		if err := awsRestjson1_serializeDocumentPathOptions(v.PathOptions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3087,6 +3101,30 @@ func awsRestjson1_serializeDocumentCsvOutputOptions(v *types.CsvOutputOptions, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDatabaseInputDefinition(v *types.DatabaseInputDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseTableName != nil {
+		ok := object.Key("DatabaseTableName")
+		ok.String(*v.DatabaseTableName)
+	}
+
+	if v.GlueConnectionName != nil {
+		ok := object.Key("GlueConnectionName")
+		ok.String(*v.GlueConnectionName)
+	}
+
+	if v.TempDirectory != nil {
+		ok := object.Key("TempDirectory")
+		if err := awsRestjson1_serializeDocumentS3Location(v.TempDirectory, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDataCatalogInputDefinition(v *types.DataCatalogInputDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3116,6 +3154,64 @@ func awsRestjson1_serializeDocumentDataCatalogInputDefinition(v *types.DataCatal
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDatasetParameter(v *types.DatasetParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CreateColumn {
+		ok := object.Key("CreateColumn")
+		ok.Boolean(v.CreateColumn)
+	}
+
+	if v.DatetimeOptions != nil {
+		ok := object.Key("DatetimeOptions")
+		if err := awsRestjson1_serializeDocumentDatetimeOptions(v.DatetimeOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		if err := awsRestjson1_serializeDocumentFilterExpression(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDatetimeOptions(v *types.DatetimeOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Format != nil {
+		ok := object.Key("Format")
+		ok.String(*v.Format)
+	}
+
+	if v.LocaleCode != nil {
+		ok := object.Key("LocaleCode")
+		ok.String(*v.LocaleCode)
+	}
+
+	if v.TimezoneOffset != nil {
+		ok := object.Key("TimezoneOffset")
+		ok.String(*v.TimezoneOffset)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentExcelOptions(v *types.ExcelOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3135,6 +3231,47 @@ func awsRestjson1_serializeDocumentExcelOptions(v *types.ExcelOptions, value smi
 	if v.SheetNames != nil {
 		ok := object.Key("SheetNames")
 		if err := awsRestjson1_serializeDocumentSheetNameList(v.SheetNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilesLimit(v *types.FilesLimit, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("MaxFiles")
+		ok.Integer(v.MaxFiles)
+	}
+
+	if len(v.Order) > 0 {
+		ok := object.Key("Order")
+		ok.String(string(v.Order))
+	}
+
+	if len(v.OrderedBy) > 0 {
+		ok := object.Key("OrderedBy")
+		ok.String(string(v.OrderedBy))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterExpression(v *types.FilterExpression, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		ok.String(*v.Expression)
+	}
+
+	if v.ValuesMap != nil {
+		ok := object.Key("ValuesMap")
+		if err := awsRestjson1_serializeDocumentValuesMap(v.ValuesMap, ok); err != nil {
 			return err
 		}
 	}
@@ -3184,6 +3321,13 @@ func awsRestjson1_serializeDocumentHiddenColumnList(v []string, value smithyjson
 func awsRestjson1_serializeDocumentInput(v *types.Input, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DatabaseInputDefinition != nil {
+		ok := object.Key("DatabaseInputDefinition")
+		if err := awsRestjson1_serializeDocumentDatabaseInputDefinition(v.DatabaseInputDefinition, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DataCatalogInputDefinition != nil {
 		ok := object.Key("DataCatalogInputDefinition")
@@ -3319,6 +3463,48 @@ func awsRestjson1_serializeDocumentParameterMap(v map[string]string, value smith
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPathOptions(v *types.PathOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FilesLimit != nil {
+		ok := object.Key("FilesLimit")
+		if err := awsRestjson1_serializeDocumentFilesLimit(v.FilesLimit, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LastModifiedDateCondition != nil {
+		ok := object.Key("LastModifiedDateCondition")
+		if err := awsRestjson1_serializeDocumentFilterExpression(v.LastModifiedDateCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsRestjson1_serializeDocumentPathParametersMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPathParametersMap(v map[string]types.DatasetParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentDatasetParameter(&mapVar, om); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -3461,6 +3647,17 @@ func awsRestjson1_serializeDocumentSheetNameList(v []string, value smithyjson.Va
 }
 
 func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentValuesMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

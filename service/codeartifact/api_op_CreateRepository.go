@@ -29,7 +29,7 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 
 type CreateRepositoryInput struct {
 
-	// The domain that contains the created repository.
+	// The name of the domain that contains the created repository.
 	//
 	// This member is required.
 	Domain *string

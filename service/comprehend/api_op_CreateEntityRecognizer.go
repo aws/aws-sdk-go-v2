@@ -63,6 +63,17 @@ type CreateEntityRecognizerInput struct {
 	// Amazon Comprehend generates one.
 	ClientRequestToken *string
 
+	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
+	// encrypt trained custom models. The ModelKmsKeyId can be either of the following
+	// formats
+	//
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	// * Amazon Resource
+	// Name (ARN) of a KMS Key:
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	ModelKmsKeyId *string
+
 	// Tags to be associated with the entity recognizer being created. A tag is a
 	// key-value pair that adds as a metadata to a resource used by Amazon Comprehend.
 	// For example, a tag with "Sales" as the key might be added to a resource to

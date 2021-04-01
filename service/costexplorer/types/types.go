@@ -205,12 +205,34 @@ type CostCategory struct {
 	// This member is required.
 	Rules []CostCategoryRule
 
+	// The default value for the cost category.
+	DefaultValue *string
+
 	// The Cost Category's effective end date.
 	EffectiveEnd *string
 
 	// The list of processing statuses for Cost Management products for a specific cost
 	// category.
 	ProcessingStatus []CostCategoryProcessingStatus
+}
+
+// When creating or updating a cost category, you can define the CostCategoryRule
+// rule type as INHERITED_VALUE. This rule type adds the flexibility of defining a
+// rule that dynamically inherits the cost category value from the dimension value
+// defined by CostCategoryInheritedValueDimension. For example, if you wanted to
+// dynamically group costs based on the value of a specific tag key, you would
+// first choose an inherited value rule type, then choose the tag dimension and
+// specify the tag key to use.
+type CostCategoryInheritedValueDimension struct {
+
+	// The key to extract cost category values.
+	DimensionKey *string
+
+	// The name of dimension for which to group costs. If you specify
+	// LINKED_ACCOUNT_NAME, the cost category value will be based on account name. If
+	// you specify TAG, the cost category value will be based on the value of the
+	// specified tag key.
+	DimensionName CostCategoryInheritedValueDimensionName
 }
 
 // The list of processing statuses for Cost Management products for a specific cost
@@ -231,6 +253,9 @@ type CostCategoryReference struct {
 
 	// The unique identifier for your Cost Category.
 	CostCategoryArn *string
+
+	// The default value for the cost category.
+	DefaultValue *string
 
 	// The Cost Category's effective end date.
 	EffectiveEnd *string
@@ -257,6 +282,10 @@ type CostCategoryReference struct {
 // value.
 type CostCategoryRule struct {
 
+	// The value the line item will be categorized as, if the line item contains the
+	// matched dimension.
+	InheritedValue *CostCategoryInheritedValueDimension
+
 	// An Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
 	// object used to categorize costs. This supports dimensions, tags, and nested
@@ -269,13 +298,18 @@ type CostCategoryRule struct {
 	// Comparisons
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms)
 	// in the AWS Billing and Cost Management User Guide.
-	//
-	// This member is required.
 	Rule *Expression
 
-	// The value a line item will be categorized as, if it matches the rule.
-	//
-	// This member is required.
+	// You can define the CostCategoryRule rule type as either REGULAR or
+	// INHERITED_VALUE. The INHERITED_VALUE rule type adds the flexibility of defining
+	// a rule that dynamically inherits the cost category value from the dimension
+	// value defined by CostCategoryInheritedValueDimension. For example, if you wanted
+	// to dynamically group costs based on the value of a specific tag key, you would
+	// first choose an inherited value rule type, then choose the tag dimension and
+	// specify the tag key to use.
+	Type CostCategoryRuleType
+
+	// The default value for the cost category.
 	Value *string
 }
 

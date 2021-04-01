@@ -13,10 +13,19 @@ import (
 type All struct {
 }
 
-// Specifies that AWS WAF should allow requests. This is used only in the context
-// of other settings, for example to specify values for RuleAction and web ACL
+// Specifies that AWS WAF should allow the request and optionally defines
+// additional custom handling for the request. This is used in the context of other
+// settings, for example to specify values for RuleAction and web ACL
 // DefaultAction.
 type AllowAction struct {
+
+	// Defines custom handling for the web request. For information about customizing
+	// web requests and responses, see Customizing web requests and responses in AWS
+	// WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the AWS WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	CustomRequestHandling *CustomRequestHandling
 }
 
 // All query arguments of a web request. This is used only to indicate the web
@@ -35,10 +44,19 @@ type AndStatement struct {
 	Statements []Statement
 }
 
-// Specifies that AWS WAF should block requests. This is used only in the context
-// of other settings, for example to specify values for RuleAction and web ACL
-// DefaultAction.
+// Specifies that AWS WAF should block the request and optionally defines
+// additional custom handling for the response to the web request. This is used in
+// the context of other settings, for example to specify values for RuleAction and
+// web ACL DefaultAction.
 type BlockAction struct {
+
+	// Defines a custom response for the web request. For information about customizing
+	// web requests and responses, see Customizing web requests and responses in AWS
+	// WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the AWS WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	CustomResponse *CustomResponse
 }
 
 // The body of a web request. This immediately follows the request headers. This is
@@ -124,15 +142,118 @@ type ByteMatchStatement struct {
 	TextTransformations []TextTransformation
 }
 
-// Specifies that AWS WAF should count requests. This is used only in the context
-// of other settings, for example to specify values for RuleAction and web ACL
-// DefaultAction.
+// Specifies that AWS WAF should count the request. Optionally defines additional
+// custom handling for the request. This is used in the context of other settings,
+// for example to specify values for RuleAction and web ACL DefaultAction.
 type CountAction struct {
+
+	// Defines custom handling for the web request. For information about customizing
+	// web requests and responses, see Customizing web requests and responses in AWS
+	// WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the AWS WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	CustomRequestHandling *CustomRequestHandling
+}
+
+// A custom header for custom request and response handling. This is used in
+// CustomResponse and CustomRequestHandling.
+type CustomHTTPHeader struct {
+
+	// The name of the custom header. For custom request header insertion, when AWS WAF
+	// inserts the header into the request, it prefixes this name x-amzn-waf-, to avoid
+	// confusion with the headers that are already in the request. For example, for the
+	// header name sample, AWS WAF inserts the header x-amzn-waf-sample.
+	//
+	// This member is required.
+	Name *string
+
+	// The value of the custom header.
+	//
+	// This member is required.
+	Value *string
+}
+
+// Custom request handling behavior that inserts custom headers into a web request.
+// You can add custom request handling for the rule actions allow and count. For
+// information about customizing web requests and responses, see Customizing web
+// requests and responses in AWS WAF
+// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+// in the AWS WAF Developer Guide
+// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+type CustomRequestHandling struct {
+
+	// The HTTP headers to insert into the request. Duplicate header names are not
+	// allowed. For information about the limits on count and size for custom request
+	// and response settings, see AWS WAF quotas
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the AWS
+	// WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	//
+	// This member is required.
+	InsertHeaders []CustomHTTPHeader
+}
+
+// A custom response to send to the client. You can define a custom response for
+// rule actions and default web ACL actions that are set to BlockAction. For
+// information about customizing web requests and responses, see Customizing web
+// requests and responses in AWS WAF
+// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+// in the AWS WAF Developer Guide
+// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+type CustomResponse struct {
+
+	// The HTTP status code to return to the client. For a list of status codes that
+	// you can use in your custom reqponses, see Supported status codes for custom
+	// response
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/customizing-the-response-status-codes.html)
+	// in the AWS WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	//
+	// This member is required.
+	ResponseCode *int32
+
+	// References the response body that you want AWS WAF to return to the web request
+	// client. You can define a custom response for a rule action or a default web ACL
+	// action that is set to block. To do this, you first define the response body key
+	// and value in the CustomResponseBodies setting for the WebACL or RuleGroup where
+	// you want to use it. Then, in the rule action or web ACL default action
+	// BlockAction setting, you reference the response body using this key.
+	CustomResponseBodyKey *string
+
+	// The HTTP headers to use in the response. Duplicate header names are not allowed.
+	// For information about the limits on count and size for custom request and
+	// response settings, see AWS WAF quotas
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the AWS
+	// WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	ResponseHeaders []CustomHTTPHeader
+}
+
+// The response body to use in a custom response to a web request. This is
+// referenced by key from CustomResponseCustomResponseBodyKey.
+type CustomResponseBody struct {
+
+	// The payload of the custom response. You can use JSON escape strings in JSON
+	// content. To do this, you must specify JSON content in the ContentType setting.
+	// For information about the limits on count and size for custom request and
+	// response settings, see AWS WAF quotas
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the AWS
+	// WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	//
+	// This member is required.
+	Content *string
+
+	// The type of content in the payload that you are defining in the Content string.
+	//
+	// This member is required.
+	ContentType ResponseContentType
 }
 
 // In a WebACL, this is the action that you want AWS WAF to perform when a web
 // request doesn't match any of the rules in the WebACL. The default action must be
-// a terminating action, so count is not allowed.
+// a terminating action, so you can't use count.
 type DefaultAction struct {
 
 	// Specifies that AWS WAF should allow requests by default.
@@ -563,35 +684,25 @@ type JsonBody struct {
 	// This member is required.
 	MatchScope JsonMatchScope
 
-	// What AWS WAF should do if it fails to completely parse the JSON body. The
-	// options are the following:
+	// The inspection behavior to fall back to if the JSON in the request body is
+	// invalid. For AWS WAF, invalid JSON is any content that isn't complete
+	// syntactical JSON, content whose root node isn't an object or an array, and
+	// duplicate keys in the content. You can specify the following fallback
+	// behaviors:
 	//
-	// * EVALUATE_AS_STRING - Inspect the body as plain
-	// text. AWS WAF applies the text transformations and inspection criteria that you
-	// defined for the JSON inspection to the body text string.
+	// * MATCH - Treat the web request as matching the rule statement. AWS
+	// WAF applies the rule action to the request.
 	//
-	// * MATCH - Treat the
-	// web request as matching the rule statement. AWS WAF applies the rule action to
-	// the request.
+	// * NO_MATCH - Treat the web request
+	// as not matching the rule statement.
 	//
-	// * NO_MATCH - Treat the web request as not matching the rule
-	// statement.
+	// * EVALUATE_AS_STRING - Inspect the body as
+	// plain text. This option applies the text transformations and inspection criteria
+	// that you defined for the JSON inspection to the body text string.
 	//
-	// If you don't provide this setting, AWS WAF parses and evaluates the
-	// content only up to the first parsing failure that it encounters. AWS WAF does
-	// its best to parse the entire JSON body, but might be forced to stop for reasons
-	// such as invalid characters, duplicate keys, truncation, and any content whose
-	// root node isn't an object or an array. AWS WAF parses the JSON in the following
-	// examples as two valid key, value pairs:
-	//
-	// * Missing comma:
-	// {"key1":"value1""key2":"value2"}
-	//
-	// * Missing colon:
-	// {"key1":"value1","key2""value2"}
-	//
-	// * Extra colons:
-	// {"key1"::"value1","key2""value2"}
+	// If you don't
+	// provide this setting, when AWS WAF encounters invalid JSON, it parses and
+	// inspects what it can, up to the first invalid JSON that it encounters.
 	InvalidFallbackBehavior BodyParsingFallbackBehavior
 }
 
@@ -698,8 +809,8 @@ type Method struct {
 
 // Specifies that AWS WAF should do nothing. This is generally used to try out a
 // rule without performing any actions. You set the OverrideAction on the Rule.
-// This is used only in the context of other settings, for example to specify
-// values for RuleAction and web ACL DefaultAction.
+// This is used in the context of other settings, for example to specify values for
+// RuleAction and web ACL DefaultAction.
 type NoneAction struct {
 }
 
@@ -1034,6 +1145,21 @@ type RuleGroup struct {
 	// This member is required.
 	VisibilityConfig *VisibilityConfig
 
+	// A map of custom response keys and content bodies. When you create a rule with a
+	// block action, you can send a custom response to the web request. You define
+	// these for the rule group, and then use them in the rules that you define in the
+	// rule group. For information about customizing web requests and responses, see
+	// Customizing web requests and responses in AWS WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the AWS WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). For
+	// information about the limits on count and size for custom request and response
+	// settings, see AWS WAF quotas
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the AWS
+	// WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	CustomResponseBodies map[string]CustomResponseBody
+
 	// A description of the rule group that helps with identification.
 	Description *string
 
@@ -1126,6 +1252,13 @@ type SampledHTTPRequest struct {
 
 	// The action for the Rule that the request matched: ALLOW, BLOCK, or COUNT.
 	Action *string
+
+	// Custom request headers inserted by AWS WAF into the request, according to the
+	// custom request configuration for the matching rule action.
+	RequestHeadersInserted []HTTPHeader
+
+	// The response code that was sent for the request.
+	ResponseCodeSent *int32
 
 	// The name of the Rule that the request matched. For managed rule groups, the
 	// format for this name is ##. For your own rule groups, the format for this name
@@ -1581,6 +1714,21 @@ type WebACL struct {
 	// plan their web ACL WCU usage when they use a rule group. The WCU limit for web
 	// ACLs is 1,500.
 	Capacity int64
+
+	// A map of custom response keys and content bodies. When you create a rule with a
+	// block action, you can send a custom response to the web request. You define
+	// these for the web ACL, and then use them in the rules and default actions that
+	// you define in the web ACL. For information about customizing web requests and
+	// responses, see Customizing web requests and responses in AWS WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the AWS WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). For
+	// information about the limits on count and size for custom request and response
+	// settings, see AWS WAF quotas
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the AWS
+	// WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	CustomResponseBodies map[string]CustomResponseBody
 
 	// A description of the Web ACL that helps with identification.
 	Description *string

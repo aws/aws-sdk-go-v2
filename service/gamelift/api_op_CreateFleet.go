@@ -19,16 +19,18 @@ import (
 // optional set of remote locations. Fleets that are created in the following AWS
 // Regions support multiple locations: us-east-1 (N. Virginia), us-west-2 (Oregon),
 // eu-central-1 (Frankfurt), eu-west-1 (Ireland), ap-southeast-2 (Sydney),
-// ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that created in other
-// GameLift Regions can have instances in the fleet Region only. All instances
-// deployed to fleet locations use the same configuration. To create a fleet,
-// choose the hardware for your instances, specify a game server build or Realtime
-// script to deploy, and provide a runtime configuration to direct GameLift how to
-// start and run game servers on each instance in the fleet. Set permissions for
-// inbound traffic to your game servers, and enable optional features as needed.
-// When creating a multi-location fleet, provide a list of additional remote
-// locations. If successful, this operation creates a new Fleet resource and places
-// it in NEW status, which prompts GameLift to initiate the fleet creation workflow
+// ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that are created in
+// other GameLift Regions can deploy instances in the fleet's home Region only. All
+// fleet instances use the same configuration regardless of location; however, you
+// can adjust capacity settings and turn auto-scaling on/off for each location. To
+// create a fleet, choose the hardware for your instances, specify a game server
+// build or Realtime script to deploy, and provide a runtime configuration to
+// direct GameLift how to start and run game servers on each instance in the fleet.
+// Set permissions for inbound traffic to your game servers, and enable optional
+// features as needed. When creating a multi-location fleet, provide a list of
+// additional remote locations. If successful, this operation creates a new Fleet
+// resource and places it in NEW status, which prompts GameLift to initiate the
+// fleet creation workflow
 // (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creation-workflow.html).
 // You can track fleet creation by checking fleet status using
 // DescribeFleetAttributes and DescribeFleetLocationAttributes/, or by monitoring

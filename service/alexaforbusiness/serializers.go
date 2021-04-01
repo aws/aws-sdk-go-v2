@@ -5425,6 +5425,11 @@ func awsAwsjson11_serializeOpDocumentCreateProfileInput(v *CreateProfileInput, v
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.DataRetentionOptIn != nil {
+		ok := object.Key("DataRetentionOptIn")
+		ok.Boolean(*v.DataRetentionOptIn)
+	}
+
 	if len(v.DistanceUnit) > 0 {
 		ok := object.Key("DistanceUnit")
 		ok.String(string(v.DistanceUnit))
@@ -7048,6 +7053,11 @@ func awsAwsjson11_serializeOpDocumentUpdateProfileInput(v *UpdateProfileInput, v
 	if v.Address != nil {
 		ok := object.Key("Address")
 		ok.String(*v.Address)
+	}
+
+	if v.DataRetentionOptIn != nil {
+		ok := object.Key("DataRetentionOptIn")
+		ok.Boolean(*v.DataRetentionOptIn)
 	}
 
 	if len(v.DistanceUnit) > 0 {

@@ -30,12 +30,12 @@ import (
 // object with a retention period configured using Amazon S3 Object Lock. For more
 // information about Amazon S3 Object Lock, see Amazon S3 Object Lock Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html) in
-// the Amazon Simple Storage Service Developer Guide. Server-side Encryption You
-// can optionally request server-side encryption. With server-side encryption,
-// Amazon S3 encrypts your data as it writes it to disks in its data centers and
-// decrypts the data when you access it. You have the option to provide your own
-// encryption key or use AWS managed encryption keys (SSE-S3 or SSE-KMS). For more
-// information, see Using Server-Side Encryption
+// the Amazon S3 User Guide. Server-side Encryption You can optionally request
+// server-side encryption. With server-side encryption, Amazon S3 encrypts your
+// data as it writes it to disks in its data centers and decrypts the data when you
+// access it. You have the option to provide your own encryption key or use AWS
+// managed encryption keys (SSE-S3 or SSE-KMS). For more information, see Using
+// Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html).
 // If you request server-side encryption using AWS Key Management Service
 // (SSE-KMS), you can enable an S3 Bucket Key at the object-level. For more
@@ -99,15 +99,15 @@ type PutObjectInput struct {
 	// ARN in place of the bucket name. For more information about access point ARNs,
 	// see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon Simple Storage Service Developer Guide. When using this action
-	// with Amazon S3 on Outposts, you must direct requests to the S3 on Outposts
-	// hostname. The S3 on Outposts hostname takes the form
+	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
+	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
+	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
 	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
 	// bucket ARN in place of the bucket name. For more information about S3 on
 	// Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string

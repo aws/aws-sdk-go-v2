@@ -25,6 +25,10 @@ type CLMLanguageCode string
 // Enum values for CLMLanguageCode
 const (
 	CLMLanguageCodeEnUs CLMLanguageCode = "en-US"
+	CLMLanguageCodeHiIn CLMLanguageCode = "hi-IN"
+	CLMLanguageCodeEsUs CLMLanguageCode = "es-US"
+	CLMLanguageCodeEnGb CLMLanguageCode = "en-GB"
+	CLMLanguageCodeEnAu CLMLanguageCode = "en-AU"
 )
 
 // Values returns all known values for CLMLanguageCode. Note that this can be
@@ -33,6 +37,10 @@ const (
 func (CLMLanguageCode) Values() []CLMLanguageCode {
 	return []CLMLanguageCode{
 		"en-US",
+		"hi-IN",
+		"es-US",
+		"en-GB",
+		"en-AU",
 	}
 }
 
@@ -284,6 +292,7 @@ type VocabularyFilterMethod string
 const (
 	VocabularyFilterMethodRemove VocabularyFilterMethod = "remove"
 	VocabularyFilterMethodMask   VocabularyFilterMethod = "mask"
+	VocabularyFilterMethodTag    VocabularyFilterMethod = "tag"
 )
 
 // Values returns all known values for VocabularyFilterMethod. Note that this can
@@ -293,6 +302,7 @@ func (VocabularyFilterMethod) Values() []VocabularyFilterMethod {
 	return []VocabularyFilterMethod{
 		"remove",
 		"mask",
+		"tag",
 	}
 }
 

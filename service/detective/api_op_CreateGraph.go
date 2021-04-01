@@ -40,6 +40,10 @@ func (c *Client) CreateGraph(ctx context.Context, params *CreateGraphInput, optF
 }
 
 type CreateGraphInput struct {
+
+	// The tags to assign to the new behavior graph. For each tag, you provide the tag
+	// key and the tag value.
+	Tags map[string]string
 }
 
 type CreateGraphOutput struct {

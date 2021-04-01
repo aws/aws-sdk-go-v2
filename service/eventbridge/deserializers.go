@@ -9754,6 +9754,125 @@ func awsAwsjson11_deserializeDocumentRunCommandTargetValues(v *[]string, value i
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSageMakerPipelineParameter(v **types.SageMakerPipelineParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SageMakerPipelineParameter
+	if *v == nil {
+		sv = &types.SageMakerPipelineParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SageMakerPipelineParameterName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SageMakerPipelineParameterValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSageMakerPipelineParameterList(v *[]types.SageMakerPipelineParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SageMakerPipelineParameter
+	if *v == nil {
+		cv = []types.SageMakerPipelineParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SageMakerPipelineParameter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentSageMakerPipelineParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSageMakerPipelineParameters(v **types.SageMakerPipelineParameters, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SageMakerPipelineParameters
+	if *v == nil {
+		sv = &types.SageMakerPipelineParameters{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PipelineParameterList":
+			if err := awsAwsjson11_deserializeDocumentSageMakerPipelineParameterList(&sv.PipelineParameterList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSqsParameters(v **types.SqsParameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10022,6 +10141,11 @@ func awsAwsjson11_deserializeDocumentTarget(v **types.Target, value interface{})
 
 		case "RunCommandParameters":
 			if err := awsAwsjson11_deserializeDocumentRunCommandParameters(&sv.RunCommandParameters, value); err != nil {
+				return err
+			}
+
+		case "SageMakerPipelineParameters":
+			if err := awsAwsjson11_deserializeDocumentSageMakerPipelineParameters(&sv.SageMakerPipelineParameters, value); err != nil {
 				return err
 			}
 

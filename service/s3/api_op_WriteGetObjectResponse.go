@@ -29,7 +29,28 @@ import (
 // caller, typically an AWS Lambda function, can provide the same metadata when it
 // internally invokes GetObject. When WriteGetObjectResponse is called by a
 // customer-owned Lambda function, the metadata returned to the end user GetObject
-// call might differ from what Amazon S3 would normally return.
+// call might differ from what Amazon S3 would normally return. AWS provides some
+// prebuilt Lambda functions that you can use with S3 Object Lambda to detect and
+// redact personally identifiable information (PII) and decompress S3 objects.
+// These Lambda functions are available in the AWS Serverless Application
+// Repository, and can be selected through the AWS Management Console when you
+// create your Object Lambda Access Point. Example 1: PII Access Control - This
+// Lambda function uses Amazon Comprehend, a natural language processing (NLP)
+// service using machine learning to find insights and relationships in text. It
+// automatically detects personally identifiable information (PII) such as names,
+// addresses, dates, credit card numbers, and social security numbers from
+// documents in your Amazon S3 bucket. Example 2: PII Redaction - This Lambda
+// function uses Amazon Comprehend, a natural language processing (NLP) service
+// using machine learning to find insights and relationships in text. It
+// automatically redacts personally identifiable information (PII) such as names,
+// addresses, dates, credit card numbers, and social security numbers from
+// documents in your Amazon S3 bucket. Example 3: Decompression - The Lambda
+// function S3ObjectLambdaDecompression, is equipped to decompress objects stored
+// in S3 in one of six compressed file formats including bzip2, gzip, snappy, zlib,
+// zstandard and ZIP. For information on how to view and use these functions, see
+// Using AWS built Lambda functions
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-examples.html) in
+// the Amazon S3 User Guide.
 func (c *Client) WriteGetObjectResponse(ctx context.Context, params *WriteGetObjectResponseInput, optFns ...func(*Options)) (*WriteGetObjectResponseOutput, error) {
 	if params == nil {
 		params = &WriteGetObjectResponseInput{}
@@ -102,7 +123,8 @@ type WriteGetObjectResponseInput struct {
 	// A string that uniquely identifies an error condition. Returned in the  tag of
 	// the error XML response for a corresponding GetObject call. Cannot be used with a
 	// successful StatusCode header or when the transformed object is provided in the
-	// body.
+	// body. All error codes from S3 are sentence-cased. Regex value is
+	// "^[A-Z][a-zA-Z]+$".
 	ErrorCode *string
 
 	// Contains a generic description of the error condition. Returned in the tag of

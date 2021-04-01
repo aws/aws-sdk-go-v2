@@ -1905,6 +1905,13 @@ func awsAwsjson11_serializeDocumentAllowAction(v *types.AllowAction, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomRequestHandling != nil {
+		ok := object.Key("CustomRequestHandling")
+		if err := awsAwsjson11_serializeDocumentCustomRequestHandling(v.CustomRequestHandling, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1932,6 +1939,13 @@ func awsAwsjson11_serializeDocumentAndStatement(v *types.AndStatement, value smi
 func awsAwsjson11_serializeDocumentBlockAction(v *types.BlockAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomResponse != nil {
+		ok := object.Key("CustomResponse")
+		if err := awsAwsjson11_serializeDocumentCustomResponse(v.CustomResponse, ok); err != nil {
+			return err
+		}
+	}
 
 	return nil
 }
@@ -1978,6 +1992,13 @@ func awsAwsjson11_serializeDocumentCountAction(v *types.CountAction, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomRequestHandling != nil {
+		ok := object.Key("CustomRequestHandling")
+		if err := awsAwsjson11_serializeDocumentCustomRequestHandling(v.CustomRequestHandling, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1989,6 +2010,105 @@ func awsAwsjson11_serializeDocumentCountryCodes(v []types.CountryCode, value smi
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomHTTPHeader(v *types.CustomHTTPHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomHTTPHeaders(v []types.CustomHTTPHeader, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCustomHTTPHeader(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomRequestHandling(v *types.CustomRequestHandling, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InsertHeaders != nil {
+		ok := object.Key("InsertHeaders")
+		if err := awsAwsjson11_serializeDocumentCustomHTTPHeaders(v.InsertHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomResponse(v *types.CustomResponse, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomResponseBodyKey != nil {
+		ok := object.Key("CustomResponseBodyKey")
+		ok.String(*v.CustomResponseBodyKey)
+	}
+
+	if v.ResponseCode != nil {
+		ok := object.Key("ResponseCode")
+		ok.Integer(*v.ResponseCode)
+	}
+
+	if v.ResponseHeaders != nil {
+		ok := object.Key("ResponseHeaders")
+		if err := awsAwsjson11_serializeDocumentCustomHTTPHeaders(v.ResponseHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomResponseBodies(v map[string]types.CustomResponseBody, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsAwsjson11_serializeDocumentCustomResponseBody(&mapVar, om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomResponseBody(v *types.CustomResponseBody, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("Content")
+		ok.String(*v.Content)
+	}
+
+	if len(v.ContentType) > 0 {
+		ok := object.Key("ContentType")
+		ok.String(string(v.ContentType))
+	}
+
 	return nil
 }
 
@@ -3030,6 +3150,13 @@ func awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 		ok.Long(v.Capacity)
 	}
 
+	if v.CustomResponseBodies != nil {
+		ok := object.Key("CustomResponseBodies")
+		if err := awsAwsjson11_serializeDocumentCustomResponseBodies(v.CustomResponseBodies, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -3072,6 +3199,13 @@ func awsAwsjson11_serializeOpDocumentCreateRuleGroupInput(v *CreateRuleGroupInpu
 func awsAwsjson11_serializeOpDocumentCreateWebACLInput(v *CreateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomResponseBodies != nil {
+		ok := object.Key("CustomResponseBodies")
+		if err := awsAwsjson11_serializeDocumentCustomResponseBodies(v.CustomResponseBodies, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DefaultAction != nil {
 		ok := object.Key("DefaultAction")
@@ -3809,6 +3943,13 @@ func awsAwsjson11_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomResponseBodies != nil {
+		ok := object.Key("CustomResponseBodies")
+		if err := awsAwsjson11_serializeDocumentCustomResponseBodies(v.CustomResponseBodies, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -3854,6 +3995,13 @@ func awsAwsjson11_serializeOpDocumentUpdateRuleGroupInput(v *UpdateRuleGroupInpu
 func awsAwsjson11_serializeOpDocumentUpdateWebACLInput(v *UpdateWebACLInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomResponseBodies != nil {
+		ok := object.Key("CustomResponseBodies")
+		if err := awsAwsjson11_serializeDocumentCustomResponseBodies(v.CustomResponseBodies, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DefaultAction != nil {
 		ok := object.Key("DefaultAction")

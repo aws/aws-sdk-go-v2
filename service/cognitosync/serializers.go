@@ -588,8 +588,8 @@ func awsRestjson1_serializeOpHttpBindingsListDatasetsInput(v *ListDatasetsInput,
 		}
 	}
 
-	if v.MaxResults != nil {
-		encoder.SetQuery("maxResults").String(*v.MaxResults)
+	if v.MaxResults != 0 {
+		encoder.SetQuery("maxResults").Integer(v.MaxResults)
 	}
 
 	if v.NextToken != nil {
@@ -1316,11 +1316,6 @@ func awsRestjson1_serializeDocumentApplicationArnList(v []string, value smithyjs
 func awsRestjson1_serializeDocumentCognitoStreams(v *types.CognitoStreams, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
-
-	if v.DisabledReason != nil {
-		ok := object.Key("DisabledReason")
-		ok.String(*v.DisabledReason)
-	}
 
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")

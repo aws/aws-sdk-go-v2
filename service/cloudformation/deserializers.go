@@ -7884,6 +7884,19 @@ func awsAwsquery_deserializeDocumentDeploymentTargets(v **types.DeploymentTarget
 				return err
 			}
 
+		case strings.EqualFold("AccountsUrl", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.AccountsUrl = ptr.String(xtv)
+			}
+
 		case strings.EqualFold("OrganizationalUnitIds", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentOrganizationalUnitIdList(&sv.OrganizationalUnitIds, nodeDecoder); err != nil {
@@ -13820,6 +13833,19 @@ func awsAwsquery_deserializeDocumentStackSetOperationPreferences(v **types.Stack
 					return err
 				}
 				sv.MaxConcurrentPercentage = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("RegionConcurrencyType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.RegionConcurrencyType = types.RegionConcurrencyType(xtv)
 			}
 
 		case strings.EqualFold("RegionOrder", t.Name.Local):

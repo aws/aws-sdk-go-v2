@@ -36422,6 +36422,15 @@ func awsAwsjson11_deserializeDocumentResourceDataSyncSourceWithState(v **types.R
 				return err
 			}
 
+		case "EnableAllOpsDataSources":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected ResourceDataSyncEnableAllOpsDataSources to be of type *bool, got %T instead", value)
+				}
+				sv.EnableAllOpsDataSources = jtv
+			}
+
 		case "IncludeFutureRegions":
 			if value != nil {
 				jtv, ok := value.(bool)

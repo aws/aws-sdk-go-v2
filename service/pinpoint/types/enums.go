@@ -455,6 +455,7 @@ const (
 	StateCompleted State = "COMPLETED"
 	StateCancelled State = "CANCELLED"
 	StateClosed    State = "CLOSED"
+	StatePaused    State = "PAUSED"
 )
 
 // Values returns all known values for State. Note that this can be expanded in the
@@ -467,6 +468,7 @@ func (State) Values() []State {
 		"COMPLETED",
 		"CANCELLED",
 		"CLOSED",
+		"PAUSED",
 	}
 }
 

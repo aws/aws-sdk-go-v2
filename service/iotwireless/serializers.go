@@ -700,6 +700,13 @@ func awsRestjson1_serializeOpDocumentCreateWirelessDeviceInput(v *CreateWireless
 		ok.String(*v.Name)
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("Type")
 		ok.String(string(v.Type))

@@ -110,6 +110,26 @@ func (m *validateOpCreateGroup) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMobileDeviceAccessRule struct {
+}
+
+func (*validateOpCreateMobileDeviceAccessRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMobileDeviceAccessRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMobileDeviceAccessRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMobileDeviceAccessRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateOrganization struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpDeleteMailboxPermissions) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteMailboxPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMobileDeviceAccessRule struct {
+}
+
+func (*validateOpDeleteMobileDeviceAccessRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMobileDeviceAccessRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMobileDeviceAccessRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMobileDeviceAccessRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -550,6 +590,26 @@ func (m *validateOpGetMailboxDetails) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMobileDeviceAccessEffect struct {
+}
+
+func (*validateOpGetMobileDeviceAccessEffect) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMobileDeviceAccessEffect) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMobileDeviceAccessEffectInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMobileDeviceAccessEffectInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccessControlRules struct {
 }
 
@@ -665,6 +725,26 @@ func (m *validateOpListMailboxPermissions) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListMailboxPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMobileDeviceAccessRules struct {
+}
+
+func (*validateOpListMobileDeviceAccessRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMobileDeviceAccessRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMobileDeviceAccessRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMobileDeviceAccessRulesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -930,6 +1010,26 @@ func (m *validateOpUpdateMailboxQuota) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMobileDeviceAccessRule struct {
+}
+
+func (*validateOpUpdateMobileDeviceAccessRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMobileDeviceAccessRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMobileDeviceAccessRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMobileDeviceAccessRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePrimaryEmailAddress struct {
 }
 
@@ -990,6 +1090,10 @@ func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGroup{}, middleware.After)
 }
 
+func addOpCreateMobileDeviceAccessRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMobileDeviceAccessRule{}, middleware.After)
+}
+
 func addOpCreateOrganizationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOrganization{}, middleware.After)
 }
@@ -1016,6 +1120,10 @@ func addOpDeleteGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteMailboxPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMailboxPermissions{}, middleware.After)
+}
+
+func addOpDeleteMobileDeviceAccessRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMobileDeviceAccessRule{}, middleware.After)
 }
 
 func addOpDeleteOrganizationValidationMiddleware(stack *middleware.Stack) error {
@@ -1078,6 +1186,10 @@ func addOpGetMailboxDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMailboxDetails{}, middleware.After)
 }
 
+func addOpGetMobileDeviceAccessEffectValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMobileDeviceAccessEffect{}, middleware.After)
+}
+
 func addOpListAccessControlRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessControlRules{}, middleware.After)
 }
@@ -1100,6 +1212,10 @@ func addOpListMailboxExportJobsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpListMailboxPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListMailboxPermissions{}, middleware.After)
+}
+
+func addOpListMobileDeviceAccessRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMobileDeviceAccessRules{}, middleware.After)
 }
 
 func addOpListResourceDelegatesValidationMiddleware(stack *middleware.Stack) error {
@@ -1152,6 +1268,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateMailboxQuotaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMailboxQuota{}, middleware.After)
+}
+
+func addOpUpdateMobileDeviceAccessRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMobileDeviceAccessRule{}, middleware.After)
 }
 
 func addOpUpdatePrimaryEmailAddressValidationMiddleware(stack *middleware.Stack) error {
@@ -1334,6 +1454,27 @@ func validateOpCreateGroupInput(v *CreateGroupInput) error {
 	}
 }
 
+func validateOpCreateMobileDeviceAccessRuleInput(v *CreateMobileDeviceAccessRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMobileDeviceAccessRuleInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Effect) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Effect"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateOrganizationInput(v *CreateOrganizationInput) error {
 	if v == nil {
 		return nil
@@ -1464,6 +1605,24 @@ func validateOpDeleteMailboxPermissionsInput(v *DeleteMailboxPermissionsInput) e
 	}
 	if v.GranteeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GranteeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMobileDeviceAccessRuleInput(v *DeleteMobileDeviceAccessRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMobileDeviceAccessRuleInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.MobileDeviceAccessRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MobileDeviceAccessRuleId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1745,6 +1904,21 @@ func validateOpGetMailboxDetailsInput(v *GetMailboxDetailsInput) error {
 	}
 }
 
+func validateOpGetMobileDeviceAccessEffectInput(v *GetMobileDeviceAccessEffectInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMobileDeviceAccessEffectInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccessControlRulesInput(v *ListAccessControlRulesInput) error {
 	if v == nil {
 		return nil
@@ -1836,6 +2010,21 @@ func validateOpListMailboxPermissionsInput(v *ListMailboxPermissionsInput) error
 	}
 	if v.EntityId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EntityId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMobileDeviceAccessRulesInput(v *ListMobileDeviceAccessRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMobileDeviceAccessRulesInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2108,6 +2297,30 @@ func validateOpUpdateMailboxQuotaInput(v *UpdateMailboxQuotaInput) error {
 	}
 	if v.MailboxQuota == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MailboxQuota"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMobileDeviceAccessRuleInput(v *UpdateMobileDeviceAccessRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMobileDeviceAccessRuleInput"}
+	if v.OrganizationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OrganizationId"))
+	}
+	if v.MobileDeviceAccessRuleId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MobileDeviceAccessRuleId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Effect) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Effect"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

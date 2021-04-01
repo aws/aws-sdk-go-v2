@@ -9793,6 +9793,11 @@ func awsRestjson1_serializeDocumentJourneyLimits(v *types.JourneyLimits, value s
 		ok.Integer(v.EndpointReentryCap)
 	}
 
+	if v.EndpointReentryInterval != nil {
+		ok := object.Key("EndpointReentryInterval")
+		ok.String(*v.EndpointReentryInterval)
+	}
+
 	if v.MessagesPerSecond != 0 {
 		ok := object.Key("MessagesPerSecond")
 		ok.Integer(v.MessagesPerSecond)
@@ -11696,6 +11701,11 @@ func awsRestjson1_serializeDocumentWriteJourneyRequest(v *types.WriteJourneyRequ
 		ok.String(*v.RefreshFrequency)
 	}
 
+	if v.RefreshOnSegmentUpdate {
+		ok := object.Key("RefreshOnSegmentUpdate")
+		ok.Boolean(v.RefreshOnSegmentUpdate)
+	}
+
 	if v.Schedule != nil {
 		ok := object.Key("Schedule")
 		if err := awsRestjson1_serializeDocumentJourneySchedule(v.Schedule, ok); err != nil {
@@ -11718,6 +11728,11 @@ func awsRestjson1_serializeDocumentWriteJourneyRequest(v *types.WriteJourneyRequ
 	if len(v.State) > 0 {
 		ok := object.Key("State")
 		ok.String(string(v.State))
+	}
+
+	if v.WaitForQuietTime {
+		ok := object.Key("WaitForQuietTime")
+		ok.Boolean(v.WaitForQuietTime)
 	}
 
 	return nil

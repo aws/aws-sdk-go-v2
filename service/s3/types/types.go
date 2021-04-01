@@ -11,7 +11,7 @@ import (
 // more information, see  Aborting Incomplete Multipart Uploads Using a Bucket
 // Lifecycle Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
-// in the Amazon Simple Storage Service Developer Guide.
+// in the Amazon S3 User Guide.
 type AbortIncompleteMultipartUpload struct {
 
 	// Specifies the number of days after which Amazon S3 aborts an incomplete
@@ -22,7 +22,7 @@ type AbortIncompleteMultipartUpload struct {
 // Configures the transfer acceleration state for an Amazon S3 bucket. For more
 // information, see Amazon S3 Transfer Acceleration
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html) in
-// the Amazon Simple Storage Service Developer Guide.
+// the Amazon S3 User Guide.
 type AccelerateConfiguration struct {
 
 	// Specifies the transfer acceleration status of the bucket.
@@ -166,7 +166,7 @@ type Bucket struct {
 // Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For
 // more information, see Object Lifecycle Management
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in
-// the Amazon Simple Storage Service Developer Guide.
+// the Amazon S3 User Guide.
 type BucketLifecycleConfiguration struct {
 
 	// A lifecycle rule for individual objects in an Amazon S3 bucket.
@@ -264,8 +264,8 @@ type CopyPartResult struct {
 
 // Describes the cross-origin access configuration for objects in an Amazon S3
 // bucket. For more information, see Enabling Cross-Origin Resource Sharing
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon Simple
-// Storage Service Developer Guide.
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html) in the Amazon S3
+// User Guide.
 type CORSConfiguration struct {
 
 	// A set of origins and methods (cross-origin access that you want to allow). You
@@ -394,16 +394,25 @@ type CSVOutput struct {
 
 // The container element for specifying the default Object Lock retention settings
 // for new objects placed in the specified bucket.
+//
+// * The DefaultRetention settings
+// require both a mode and a period.
+//
+// * The DefaultRetention period can be either
+// Days or Years but you must select one. You cannot specify Days and Years at the
+// same time.
 type DefaultRetention struct {
 
 	// The number of days that you want to specify for the default retention period.
+	// Must be used with Mode.
 	Days int32
 
 	// The default Object Lock retention mode you want to apply to new objects placed
-	// in the specified bucket.
+	// in the specified bucket. Must be used with either Days or Years.
 	Mode ObjectLockRetentionMode
 
 	// The number of years that you want to specify for the default retention period.
+	// Must be used with Mode.
 	Years int32
 }
 
@@ -1547,7 +1556,7 @@ type FilterRule struct {
 	// prefixes and suffixes are not supported. For more information, see Configuring
 	// Event Notifications
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	Name FilterRuleName
 
 	// The value that the filter searches for in object key names.
@@ -1855,7 +1864,7 @@ type LambdaFunctionConfiguration struct {
 	// The Amazon S3 bucket event for which to invoke the AWS Lambda function. For more
 	// information, see Supported Event Types
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	//
 	// This member is required.
 	Events []Event
@@ -1869,7 +1878,7 @@ type LambdaFunctionConfiguration struct {
 	// Specifies object key name filtering rules. For information about key name
 	// filtering, see Configuring Event Notifications
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	Filter *NotificationConfigurationFilter
 
 	// An optional unique identifier for configurations in a notification
@@ -1909,7 +1918,7 @@ type LifecycleRule struct {
 	// more information, see  Aborting Incomplete Multipart Uploads Using a Bucket
 	// Lifecycle Policy
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload
 
 	// Specifies the expiration for the lifecycle of the object in the form of date,
@@ -1917,7 +1926,8 @@ type LifecycleRule struct {
 	Expiration *LifecycleExpiration
 
 	// The Filter is used to identify objects that a Lifecycle Rule applies to. A
-	// Filter must have exactly one of Prefix, Tag, or And specified.
+	// Filter must have exactly one of Prefix, Tag, or And specified. Filter is
+	// required if the LifecycleRule does not containt a Prefix element.
 	Filter LifecycleRuleFilter
 
 	// Unique identifier for the rule. The value cannot be longer than 255 characters.
@@ -1937,7 +1947,7 @@ type LifecycleRule struct {
 	// storage class at a set period in the object's lifetime.
 	NoncurrentVersionTransitions []NoncurrentVersionTransition
 
-	// Prefix identifying one or more objects to which the rule applies. This is No
+	// Prefix identifying one or more objects to which the rule applies. This is no
 	// longer used; use Filter instead. Replacement must be made for object keys
 	// containing special characters (such as carriage returns) when using XML
 	// requests. For more information, see  XML related object key constraints
@@ -2170,7 +2180,7 @@ type NoncurrentVersionTransition struct {
 	// calculations, see How Amazon S3 Calculates How Long an Object Has Been
 	// Noncurrent
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	NoncurrentDays int32
 
 	// The class of storage used to store the object.
@@ -2197,7 +2207,7 @@ type NotificationConfiguration struct {
 // Specifies object key name filtering rules. For information about key name
 // filtering, see Configuring Event Notifications
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
-// Amazon Simple Storage Service Developer Guide.
+// Amazon S3 User Guide.
 type NotificationConfigurationFilter struct {
 
 	// A container for object key name prefix and suffix filtering rules.
@@ -2261,10 +2271,14 @@ type ObjectIdentifier struct {
 // The container element for Object Lock configuration parameters.
 type ObjectLockConfiguration struct {
 
-	// Indicates whether this bucket has an Object Lock configuration enabled.
+	// Indicates whether this bucket has an Object Lock configuration enabled. Enable
+	// ObjectLockEnabled when you apply ObjectLockConfiguration to a bucket.
 	ObjectLockEnabled ObjectLockEnabled
 
-	// The Object Lock rule in place for the specified object.
+	// Specifies the Object Lock rule for the specified object. Enable the this rule
+	// when you apply ObjectLockConfiguration to a bucket. Bucket settings require both
+	// a mode and a period. The period can be either Days or Years but you must select
+	// one. You cannot specify Days and Years at the same time.
 	Rule *ObjectLockRule
 }
 
@@ -2288,8 +2302,10 @@ type ObjectLockRetention struct {
 // The container element for an Object Lock rule.
 type ObjectLockRule struct {
 
-	// The default retention period that you want to apply to new objects placed in the
-	// specified bucket.
+	// The default Object Lock retention mode and period that you want to apply to new
+	// objects placed in the specified bucket. Bucket settings require both a mode and
+	// a period. The period can be either Days or Years but you must select one. You
+	// cannot specify Days and Years at the same time.
 	DefaultRetention *DefaultRetention
 }
 
@@ -2464,7 +2480,7 @@ type QueueConfiguration struct {
 	// Specifies object key name filtering rules. For information about key name
 	// filtering, see Configuring Event Notifications
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	Filter *NotificationConfigurationFilter
 
 	// An optional unique identifier for configurations in a notification
@@ -2545,7 +2561,7 @@ type ReplicationConfiguration struct {
 	// role that Amazon S3 assumes when replicating objects. For more information, see
 	// How to Set Up Replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-how-setup.html) in
-	// the Amazon Simple Storage Service Developer Guide.
+	// the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Role *string
@@ -2614,7 +2630,7 @@ type ReplicationRule struct {
 	// rule with the highest priority. The higher the number, the higher the priority.
 	// For more information, see Replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
-	// Simple Storage Service Developer Guide.
+	// S3 User Guide.
 	Priority int32
 
 	// A container that describes additional filters for identifying the source objects
@@ -3049,7 +3065,7 @@ type TopicConfiguration struct {
 	// Specifies object key name filtering rules. For information about key name
 	// filtering, see Configuring Event Notifications
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/NotificationHowTo.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	Filter *NotificationConfigurationFilter
 
 	// An optional unique identifier for configurations in a notification

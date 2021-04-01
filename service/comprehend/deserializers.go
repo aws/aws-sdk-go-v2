@@ -9144,6 +9144,15 @@ func awsAwsjson11_deserializeDocumentDocumentClassifierProperties(v **types.Docu
 				sv.Mode = types.DocumentClassifierMode(jtv)
 			}
 
+		case "ModelKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.ModelKmsKeyId = ptr.String(jtv)
+			}
+
 		case "OutputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentDocumentClassifierOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
 				return err
@@ -9566,6 +9575,15 @@ func awsAwsjson11_deserializeDocumentEndpointProperties(v **types.EndpointProper
 					return err
 				}
 				sv.CurrentInferenceUnits = ptr.Int32(int32(i64))
+			}
+
+		case "DataAccessRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.DataAccessRoleArn = ptr.String(jtv)
 			}
 
 		case "DesiredInferenceUnits":
@@ -10514,6 +10532,15 @@ func awsAwsjson11_deserializeDocumentEntityRecognizerProperties(v **types.Entity
 					return fmt.Errorf("expected AnyLengthString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		case "ModelKmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.ModelKmsKeyId = ptr.String(jtv)
 			}
 
 		case "RecognizerMetadata":

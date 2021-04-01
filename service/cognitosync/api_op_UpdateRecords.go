@@ -15,7 +15,7 @@ import (
 // The sync count in the record patch is your last known sync count for that
 // record. The server will reject an UpdateRecords request with a
 // ResourceConflictException if you try to patch a record with a new value but a
-// stale sync count. For example, if the sync count on the server is 5 for a key
+// stale sync count.For example, if the sync count on the server is 5 for a key
 // called highScore and you try and submit a new highScore with sync count of 4,
 // the request will be rejected. To obtain the current sync count for a record,
 // call ListRecords. On a successful update of the record, the response returns the

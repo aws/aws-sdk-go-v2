@@ -79,8 +79,10 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The input image size exceeds the allowed limit. For more information, see Limits
-// in Amazon Rekognition in the Amazon Rekognition Developer Guide.
+// The input image size exceeds the allowed limit. If you are calling
+// DetectProtectiveEquipment, the image size or resolution exceeds the allowed
+// limit. For more information, see Limits in Amazon Rekognition in the Amazon
+// Rekognition Developer Guide.
 type ImageTooLargeException struct {
 	Message *string
 
@@ -333,8 +335,9 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The size of the collection exceeds the allowed limit. For more information, see
-// Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide.
+// The size of the collection or tag list exceeds the allowed limit. For more
+// information, see Limits in Amazon Rekognition in the Amazon Rekognition
+// Developer Guide.
 type ServiceQuotaExceededException struct {
 	Message *string
 

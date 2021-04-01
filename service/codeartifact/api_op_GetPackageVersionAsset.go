@@ -37,8 +37,8 @@ type GetPackageVersionAssetInput struct {
 	// This member is required.
 	Asset *string
 
-	// The domain that contains the repository that contains the package version with
-	// the requested asset.
+	// The name of the domain that contains the repository that contains the package
+	// version with the requested asset.
 	//
 	// This member is required.
 	Domain *string
@@ -51,8 +51,6 @@ type GetPackageVersionAssetInput struct {
 	// * pypi
 	//
 	// * maven
-	//
-	// * nuget
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -87,9 +85,6 @@ type GetPackageVersionAssetInput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
-	//
-	// * A NuGet package does not contain a corresponding component, so
-	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// The name of the package version revision that contains the requested asset.

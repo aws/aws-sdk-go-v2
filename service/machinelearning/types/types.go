@@ -311,7 +311,6 @@ type MLModel struct {
 	// A user-supplied name or description of the MLModel.
 	Name *string
 
-	// The score threshold for the MLModel.
 	ScoreThreshold *float32
 
 	// The time of the most recent edit to the ScoreThreshold. The time is expressed in
@@ -357,7 +356,7 @@ type MLModel struct {
 	//
 	// * sgd.maxPasses - The number of times that the
 	// training process traverses the observations to build the MLModel. The value is
-	// an integer that ranges from 1 to 100. The default value is 10.
+	// an integer that ranges from 1 to 10000. The default value is 10.
 	//
 	// *
 	// sgd.shuffleType - Whether Amazon ML shuffles the training data. Shuffling the
@@ -402,8 +401,6 @@ type MLModel struct {
 // the Amazon Machine Learning Developer Guide
 // (https://docs.aws.amazon.com/machine-learning/latest/dg).
 type PerformanceMetrics struct {
-
-	// Specific performance metric information.
 	Properties map[string]string
 }
 
@@ -580,9 +577,9 @@ type RDSDataSpec struct {
 	// non-similar data records. The following two DataRearrangement lines are examples
 	// of non-sequentially ordered training and evaluation datasources: Datasource for
 	// evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"random", "strategyParams": {"randomSeed":"RANDOMSEED"}}} Datasource
+	// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource
 	// for training: {"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"random", "strategyParams": {"randomSeed":"RANDOMSEED"},
+	// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv",
 	// "complement":"true"}}
 	DataRearrangement *string
 
@@ -590,18 +587,16 @@ type RDSDataSpec struct {
 	// DataSchema defines the structure of the observation data in the data file(s)
 	// referenced in the DataSource. A DataSchema is not required if you specify a
 	// DataSchemaUri Define your DataSchema as a series of key-value pairs. attributes
-	// and excludedAttributeNames have an array of key-value pairs for their value. Use
+	// and excludedVariableNames have an array of key-value pairs for their value. Use
 	// the following format to define your DataSchema. { "version": "1.0",
 	// "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2",
-	// "targetAttributeName": "F3", "dataFormat": "CSV", "dataFileContainsHeader":
-	// true, "attributes": [ { "attributeName": "F1", "attributeType": "TEXT" }, {
-	// "attributeName": "F2", "attributeType": "NUMERIC" }, { "attributeName": "F3",
-	// "attributeType": "CATEGORICAL" }, { "attributeName": "F4", "attributeType":
-	// "NUMERIC" }, { "attributeName": "F5", "attributeType": "CATEGORICAL" }, {
-	// "attributeName": "F6", "attributeType": "TEXT" }, { "attributeName": "F7",
-	// "attributeType": "WEIGHTED_INT_SEQUENCE" }, { "attributeName": "F8",
-	// "attributeType": "WEIGHTED_STRING_SEQUENCE" } ], "excludedAttributeNames": [
-	// "F6" ] }
+	// "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader": true,
+	// "attributes": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2",
+	// "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, {
+	// "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType":
+	// "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName":
+	// "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType":
+	// "WEIGHTED_STRING_SEQUENCE" } ], "excludedVariableNames": [ "F6" ] }
 	DataSchema *string
 
 	// The Amazon S3 location of the DataSchema.
@@ -790,9 +785,9 @@ type RedshiftDataSpec struct {
 	// non-similar data records. The following two DataRearrangement lines are examples
 	// of non-sequentially ordered training and evaluation datasources: Datasource for
 	// evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"random", "strategyParams": {"randomSeed":"RANDOMSEED"}}} Datasource
+	// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource
 	// for training: {"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"random", "strategyParams": {"randomSeed":"RANDOMSEED"},
+	// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv",
 	// "complement":"true"}}
 	DataRearrangement *string
 
@@ -800,18 +795,16 @@ type RedshiftDataSpec struct {
 	// DataSchema defines the structure of the observation data in the data file(s)
 	// referenced in the DataSource. A DataSchema is not required if you specify a
 	// DataSchemaUri. Define your DataSchema as a series of key-value pairs. attributes
-	// and excludedAttributeNames have an array of key-value pairs for their value. Use
+	// and excludedVariableNames have an array of key-value pairs for their value. Use
 	// the following format to define your DataSchema. { "version": "1.0",
 	// "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2",
-	// "targetAttributeName": "F3", "dataFormat": "CSV", "dataFileContainsHeader":
-	// true, "attributes": [ { "attributeName": "F1", "attributeType": "TEXT" }, {
-	// "attributeName": "F2", "attributeType": "NUMERIC" }, { "attributeName": "F3",
-	// "attributeType": "CATEGORICAL" }, { "attributeName": "F4", "attributeType":
-	// "NUMERIC" }, { "attributeName": "F5", "attributeType": "CATEGORICAL" }, {
-	// "attributeName": "F6", "attributeType": "TEXT" }, { "attributeName": "F7",
-	// "attributeType": "WEIGHTED_INT_SEQUENCE" }, { "attributeName": "F8",
-	// "attributeType": "WEIGHTED_STRING_SEQUENCE" } ], "excludedAttributeNames": [
-	// "F6" ] }
+	// "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader": true,
+	// "attributes": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2",
+	// "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, {
+	// "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType":
+	// "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName":
+	// "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType":
+	// "WEIGHTED_STRING_SEQUENCE" } ], "excludedVariableNames": [ "F6" ] }
 	DataSchema *string
 
 	// Describes the schema location for an Amazon Redshift DataSource.
@@ -900,9 +893,9 @@ type S3DataSpec struct {
 	// non-similar data records. The following two DataRearrangement lines are examples
 	// of non-sequentially ordered training and evaluation datasources: Datasource for
 	// evaluation: {"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"random", "strategyParams": { "randomSeed":"RANDOMSEED"}}} Datasource
+	// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv"}} Datasource
 	// for training: {"splitting":{"percentBegin":70, "percentEnd":100,
-	// "strategy":"random", "strategyParams": {"randomSeed":"RANDOMSEED"},
+	// "strategy":"random", "randomSeed"="s3://my_s3_path/bucket/file.csv",
 	// "complement":"true"}}
 	DataRearrangement *string
 
@@ -910,18 +903,16 @@ type S3DataSpec struct {
 	// DataSchema defines the structure of the observation data in the data file(s)
 	// referenced in the DataSource. You must provide either the DataSchema or the
 	// DataSchemaLocationS3. Define your DataSchema as a series of key-value pairs.
-	// attributes and excludedAttributeNames have an array of key-value pairs for their
+	// attributes and excludedVariableNames have an array of key-value pairs for their
 	// value. Use the following format to define your DataSchema. { "version": "1.0",
 	// "recordAnnotationFieldName": "F1", "recordWeightFieldName": "F2",
-	// "targetAttributeName": "F3", "dataFormat": "CSV", "dataFileContainsHeader":
-	// true, "attributes": [ { "attributeName": "F1", "attributeType": "TEXT" }, {
-	// "attributeName": "F2", "attributeType": "NUMERIC" }, { "attributeName": "F3",
-	// "attributeType": "CATEGORICAL" }, { "attributeName": "F4", "attributeType":
-	// "NUMERIC" }, { "attributeName": "F5", "attributeType": "CATEGORICAL" }, {
-	// "attributeName": "F6", "attributeType": "TEXT" }, { "attributeName": "F7",
-	// "attributeType": "WEIGHTED_INT_SEQUENCE" }, { "attributeName": "F8",
-	// "attributeType": "WEIGHTED_STRING_SEQUENCE" } ], "excludedAttributeNames": [
-	// "F6" ] }
+	// "targetFieldName": "F3", "dataFormat": "CSV", "dataFileContainsHeader": true,
+	// "attributes": [ { "fieldName": "F1", "fieldType": "TEXT" }, { "fieldName": "F2",
+	// "fieldType": "NUMERIC" }, { "fieldName": "F3", "fieldType": "CATEGORICAL" }, {
+	// "fieldName": "F4", "fieldType": "NUMERIC" }, { "fieldName": "F5", "fieldType":
+	// "CATEGORICAL" }, { "fieldName": "F6", "fieldType": "TEXT" }, { "fieldName":
+	// "F7", "fieldType": "WEIGHTED_INT_SEQUENCE" }, { "fieldName": "F8", "fieldType":
+	// "WEIGHTED_STRING_SEQUENCE" } ], "excludedVariableNames": [ "F6" ] }
 	DataSchema *string
 
 	// Describes the schema location in Amazon S3. You must provide either the

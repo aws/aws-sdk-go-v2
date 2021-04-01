@@ -63,6 +63,9 @@ type CreateProfileInput struct {
 	// The user-specified token that is used during the creation of a profile.
 	ClientRequestToken *string
 
+	// Whether data retention of the profile is enabled.
+	DataRetentionOptIn *bool
+
 	// The locale of the room profile. (This is currently only available to a limited
 	// preview audience.)
 	Locale *string

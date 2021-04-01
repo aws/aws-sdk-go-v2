@@ -12,11 +12,8 @@ import (
 )
 
 // Creates an Autopilot job. Find the best performing model after you run an
-// Autopilot job by calling . Deploy that model by following the steps described in
-// Step 6.1: Deploy the Model to Amazon SageMaker Hosting Services
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html). For
-// information about how to use Autopilot, see  Automate Model Development with
-// Amazon SageMaker Autopilot
+// Autopilot job by calling . For information about how to use Autopilot, see
+// Automate Model Development with Amazon SageMaker Autopilot
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html).
 func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInput, optFns ...func(*Options)) (*CreateAutoMLJobOutput, error) {
 	if params == nil {
@@ -35,19 +32,21 @@ func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInp
 
 type CreateAutoMLJobInput struct {
 
-	// Identifies an Autopilot job. Must be unique to your account and is
+	// Identifies an Autopilot job. The name must be unique to your account and is
 	// case-insensitive.
 	//
 	// This member is required.
 	AutoMLJobName *string
 
-	// Similar to InputDataConfig supported by Tuning. Format(s) supported: CSV.
-	// Minimum of 500 rows.
+	// An array of channel objects that describes the input data and its location. Each
+	// channel is a named input source. Similar to InputDataConfig supported by .
+	// Format(s) supported: CSV. Minimum of 500 rows.
 	//
 	// This member is required.
 	InputDataConfig []types.AutoMLChannel
 
-	// Similar to OutputDataConfig supported by Tuning. Format(s) supported: CSV.
+	// Provides information about encryption and the Amazon S3 output path needed to
+	// store artifacts from an AutoML job. Format(s) supported: CSV.
 	//
 	// This member is required.
 	OutputDataConfig *types.AutoMLOutputDataConfig
@@ -57,21 +56,23 @@ type CreateAutoMLJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Contains CompletionCriteria and SecurityConfig.
+	// Contains CompletionCriteria and SecurityConfig settings for the AutoML job.
 	AutoMLJobConfig *types.AutoMLJobConfig
 
-	// Defines the objective of a an AutoML job. You provide a
-	// AutoMLJobObjective$MetricName and Autopilot infers whether to minimize or
-	// maximize it. If a metric is not specified, the most commonly used
-	// ObjectiveMetric for problem type is automaically selected.
+	// Defines the objective metric used to measure the predictive quality of an AutoML
+	// job. You provide a AutoMLJobObjective$MetricName and Autopilot infers whether to
+	// minimize or maximize it.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
-	// Generates possible candidates without training a model. A candidate is a
+	// Generates possible candidates without training the models. A candidate is a
 	// combination of data preprocessors, algorithms, and algorithm parameter settings.
 	GenerateCandidateDefinitionsOnly bool
 
-	// Defines the kind of preprocessing and algorithms intended for the candidates.
-	// Options include: BinaryClassification, MulticlassClassification, and Regression.
+	// Defines the type of supervised learning available for the candidates. Options
+	// include: BinaryClassification, MulticlassClassification, and Regression. For
+	// more information, see  Amazon SageMaker Autopilot problem types and algorithm
+	// support
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html).
 	ProblemType types.ProblemType
 
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
@@ -81,7 +82,7 @@ type CreateAutoMLJobInput struct {
 
 type CreateAutoMLJobOutput struct {
 
-	// When a job is created, it is assigned a unique ARN.
+	// The unique ARN that is assigned to the AutoML job when it is created.
 	//
 	// This member is required.
 	AutoMLJobArn *string

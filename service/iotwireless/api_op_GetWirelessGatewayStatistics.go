@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,6 +36,9 @@ type GetWirelessGatewayStatisticsInput struct {
 }
 
 type GetWirelessGatewayStatisticsOutput struct {
+
+	// The connection status of the wireless gateway.
+	ConnectionStatus types.ConnectionStatus
 
 	// The date and time when the most recent uplink was received.
 	LastUplinkReceivedAt *string

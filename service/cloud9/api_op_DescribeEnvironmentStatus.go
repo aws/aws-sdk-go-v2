@@ -38,6 +38,8 @@ type DescribeEnvironmentStatusInput struct {
 type DescribeEnvironmentStatusOutput struct {
 
 	// Any informational message about the status of the environment.
+	//
+	// This member is required.
 	Message *string
 
 	// The status of the environment. Available values include:
@@ -59,6 +61,8 @@ type DescribeEnvironmentStatusOutput struct {
 	// stopped.
 	//
 	// * stopping: The environment is stopping.
+	//
+	// This member is required.
 	Status types.EnvironmentStatus
 
 	// Metadata pertaining to the operation's result.

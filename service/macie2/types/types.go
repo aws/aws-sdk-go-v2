@@ -487,7 +487,9 @@ type Cell struct {
 	// identifier. For example, 1 for column A, 2 for column B, and so on.
 	Column int64
 
-	// The name of the column that contains the data, if available.
+	// The name of the column that contains the data, if available. This value is also
+	// null if Amazon Macie detects sensitive data in the name of any column in the
+	// file.
 	ColumnName *string
 
 	// The row number of the row that contains the data.
@@ -1330,9 +1332,10 @@ type Occurrences struct {
 	// Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file.
 	// Each object specifies the line that contains the data, and the position of the
 	// data on that line. This value is often null for file types that are supported by
-	// Cell, Page, or Record objects. Exceptions are the locations of: data in
+	// Cell, Page, or Record objects. Exceptions are the locations of data in:
 	// unstructured sections of an otherwise structured file, such as a comment in a
-	// file; and, data in a malformed file that Amazon Macie analyzes as plain text.
+	// file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or
+	// TSV file that has any column names that contain sensitive data.
 	LineRanges []Range
 
 	// An array of objects, one for each occurrence of sensitive data in a binary text
@@ -1422,10 +1425,12 @@ type Range struct {
 type Record struct {
 
 	// The path, as a JSONPath expression, to the field in the record that contains the
-	// data. If the name of an element exceeds 20 characters, Amazon Macie truncates
-	// the name by removing characters from the beginning of the name. If the resulting
-	// full path exceeds 250 characters, Macie also truncates the path, starting with
-	// the first element in the path, until the path contains 250 or fewer characters.
+	// data. If Amazon Macie detects sensitive data in the name of any element in the
+	// path, Macie omits this field. If the name of an element exceeds 20 characters,
+	// Macie truncates the name by removing characters from the beginning of the name.
+	// If the resulting full path exceeds 250 characters, Macie also truncates the
+	// path, starting with the first element in the path, until the path contains 250
+	// or fewer characters.
 	JsonPath *string
 
 	// The record index, starting from 0, for the record that contains the data.
@@ -1608,6 +1613,30 @@ type Scoping struct {
 	// The property- or tag-based conditions that determine which objects to include in
 	// the analysis.
 	Includes *JobScopingBlock
+}
+
+// Specifies configuration settings that determine which findings are published to
+// AWS Security Hub automatically. For information about how Macie publishes
+// findings to Security Hub, see Amazon Macie integration with Security Hub
+// (https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html) in
+// the Amazon Macie User Guide.
+type SecurityHubConfiguration struct {
+
+	// Specifies whether to publish sensitive data findings to AWS Security Hub. If you
+	// set this value to true, Amazon Macie automatically publishes all sensitive data
+	// findings that weren't suppressed by a findings filter. The default value is
+	// false.
+	//
+	// This member is required.
+	PublishClassificationFindings bool
+
+	// Specifies whether to publish policy findings to AWS Security Hub. If you set
+	// this value to true, Amazon Macie automatically publishes all new and updated
+	// policy findings that weren't suppressed by a findings filter. The default value
+	// is true.
+	//
+	// This member is required.
+	PublishPolicyFindings bool
 }
 
 // Provides information about the category, types, and occurrences of sensitive

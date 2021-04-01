@@ -426,6 +426,42 @@ func (BgpStatus) Values() []BgpStatus {
 	}
 }
 
+type BootModeType string
+
+// Enum values for BootModeType
+const (
+	BootModeTypeLegacyBios BootModeType = "legacy-bios"
+	BootModeTypeUefi       BootModeType = "uefi"
+)
+
+// Values returns all known values for BootModeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BootModeType) Values() []BootModeType {
+	return []BootModeType{
+		"legacy-bios",
+		"uefi",
+	}
+}
+
+type BootModeValues string
+
+// Enum values for BootModeValues
+const (
+	BootModeValuesLegacyBios BootModeValues = "legacy-bios"
+	BootModeValuesUefi       BootModeValues = "uefi"
+)
+
+// Values returns all known values for BootModeValues. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BootModeValues) Values() []BootModeValues {
+	return []BootModeValues{
+		"legacy-bios",
+		"uefi",
+	}
+}
+
 type BundleTaskState string
 
 // Enum values for BundleTaskState
@@ -1778,6 +1814,7 @@ const (
 	ImageAttributeNameProductCodes       ImageAttributeName = "productCodes"
 	ImageAttributeNameBlockDeviceMapping ImageAttributeName = "blockDeviceMapping"
 	ImageAttributeNameSriovNetSupport    ImageAttributeName = "sriovNetSupport"
+	ImageAttributeNameBootMode           ImageAttributeName = "bootMode"
 )
 
 // Values returns all known values for ImageAttributeName. Note that this can be
@@ -1792,6 +1829,7 @@ func (ImageAttributeName) Values() []ImageAttributeName {
 		"productCodes",
 		"blockDeviceMapping",
 		"sriovNetSupport",
+		"bootMode",
 	}
 }
 
@@ -2435,6 +2473,15 @@ const (
 	InstanceTypeM6gd12xlarge InstanceType = "m6gd.12xlarge"
 	InstanceTypeM6gd16xlarge InstanceType = "m6gd.16xlarge"
 	InstanceTypeMac1Metal    InstanceType = "mac1.metal"
+	InstanceTypeX2gdMedium   InstanceType = "x2gd.medium"
+	InstanceTypeX2gdLarge    InstanceType = "x2gd.large"
+	InstanceTypeX2gdXlarge   InstanceType = "x2gd.xlarge"
+	InstanceTypeX2gd2xlarge  InstanceType = "x2gd.2xlarge"
+	InstanceTypeX2gd4xlarge  InstanceType = "x2gd.4xlarge"
+	InstanceTypeX2gd8xlarge  InstanceType = "x2gd.8xlarge"
+	InstanceTypeX2gd12xlarge InstanceType = "x2gd.12xlarge"
+	InstanceTypeX2gd16xlarge InstanceType = "x2gd.16xlarge"
+	InstanceTypeX2gdMetal    InstanceType = "x2gd.metal"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -2831,6 +2878,15 @@ func (InstanceType) Values() []InstanceType {
 		"m6gd.12xlarge",
 		"m6gd.16xlarge",
 		"mac1.metal",
+		"x2gd.medium",
+		"x2gd.large",
+		"x2gd.xlarge",
+		"x2gd.2xlarge",
+		"x2gd.4xlarge",
+		"x2gd.8xlarge",
+		"x2gd.12xlarge",
+		"x2gd.16xlarge",
+		"x2gd.metal",
 	}
 }
 
@@ -3674,6 +3730,32 @@ const (
 func (ReplacementStrategy) Values() []ReplacementStrategy {
 	return []ReplacementStrategy{
 		"launch",
+	}
+}
+
+type ReplaceRootVolumeTaskState string
+
+// Enum values for ReplaceRootVolumeTaskState
+const (
+	ReplaceRootVolumeTaskStatePending        ReplaceRootVolumeTaskState = "pending"
+	ReplaceRootVolumeTaskStateInProgress     ReplaceRootVolumeTaskState = "in-progress"
+	ReplaceRootVolumeTaskStateFailing        ReplaceRootVolumeTaskState = "failing"
+	ReplaceRootVolumeTaskStateSucceeded      ReplaceRootVolumeTaskState = "succeeded"
+	ReplaceRootVolumeTaskStateFailed         ReplaceRootVolumeTaskState = "failed"
+	ReplaceRootVolumeTaskStateFailedDetached ReplaceRootVolumeTaskState = "failed-detached"
+)
+
+// Values returns all known values for ReplaceRootVolumeTaskState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReplaceRootVolumeTaskState) Values() []ReplaceRootVolumeTaskState {
+	return []ReplaceRootVolumeTaskState{
+		"pending",
+		"in-progress",
+		"failing",
+		"succeeded",
+		"failed",
+		"failed-detached",
 	}
 }
 

@@ -60,6 +60,9 @@ type GetWirelessDeviceOutput struct {
 	// The name of the resource.
 	Name *string
 
+	// Sidewalk device object.
+	Sidewalk *types.SidewalkDevice
+
 	// The ARN of the thing associated with the wireless device.
 	ThingArn *string
 

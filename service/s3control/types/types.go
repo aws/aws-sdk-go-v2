@@ -573,7 +573,8 @@ func (*ObjectLambdaContentTransformationMemberAwsLambda) isObjectLambdaContentTr
 // A configuration used when creating an Object Lambda Access Point transformation.
 type ObjectLambdaTransformationConfiguration struct {
 
-	// A container for the action of an Object Lambda Access Point configuration.
+	// A container for the action of an Object Lambda Access Point configuration. Valid
+	// input is GetObject.
 	//
 	// This member is required.
 	Actions []ObjectLambdaTransformationConfigurationAction

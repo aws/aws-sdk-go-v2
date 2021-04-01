@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a running App for the specified UserProfile. Supported Apps are
+// Creates a running app for the specified UserProfile. Supported apps are
 // JupyterServer and KernelGateway. This operation is automatically invoked by
 // Amazon SageMaker Studio upon access to the associated Domain, and when new
 // kernel configurations are selected by the user. A user may have multiple Apps
@@ -38,7 +38,8 @@ type CreateAppInput struct {
 	// This member is required.
 	AppName *string
 
-	// The type of app.
+	// The type of app. Supported apps are JupyterServer and KernelGateway. TensorBoard
+	// is not supported.
 	//
 	// This member is required.
 	AppType types.AppType

@@ -4786,6 +4786,9 @@ type VideoSelector struct {
 	// if any conversion will be performed.
 	ColorSpace VideoSelectorColorSpace
 
+	// Color space settings
+	ColorSpaceSettings *VideoSelectorColorSpaceSettings
+
 	// Applies only if colorSpace is a value other than follow. This field controls how
 	// the value in the colorSpace field will be used. fallback means that when the
 	// input does include color space data, that data will be used, but when the input
@@ -4798,6 +4801,13 @@ type VideoSelector struct {
 
 	// The video selector settings.
 	SelectorSettings *VideoSelectorSettings
+}
+
+// Video Selector Color Space Settings
+type VideoSelectorColorSpaceSettings struct {
+
+	// Hdr10 Settings
+	Hdr10Settings *Hdr10Settings
 }
 
 // Video Selector Pid

@@ -30,8 +30,8 @@ import (
 // conformance pack is created or updated.
 //
 // You cannot update a conformance pack
-// while it is in this state. You can create 6 conformance packs with 25 AWS Config
-// rules in each pack and 3 delegated administrator per organization.
+// while it is in this state. You can create 50 conformance packs with 25 AWS
+// Config rules in each pack and 3 delegated administrator per organization.
 func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *PutOrganizationConformancePackInput, optFns ...func(*Options)) (*PutOrganizationConformancePackOutput, error) {
 	if params == nil {
 		params = &PutOrganizationConformancePackInput{}
@@ -58,7 +58,7 @@ type PutOrganizationConformancePackInput struct {
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
 	// Amazon S3 bucket where AWS Config stores conformance pack templates. This field
-	// is optional.
+	// is optional. If used, it must be prefixed with awsconfigconforms.
 	DeliveryS3Bucket *string
 
 	// The prefix for the Amazon S3 bucket. This field is optional.

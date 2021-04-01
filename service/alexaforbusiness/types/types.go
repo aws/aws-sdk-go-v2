@@ -717,6 +717,9 @@ type Profile struct {
 	// The ARN of the address book.
 	AddressBookArn *string
 
+	// Whether data retention of the profile is enabled.
+	DataRetentionOptIn *bool
+
 	// The distance unit of a room profile.
 	DistanceUnit DistanceUnit
 

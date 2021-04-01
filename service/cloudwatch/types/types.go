@@ -685,6 +685,41 @@ type MetricStat struct {
 	Unit StandardUnit
 }
 
+// This structure contains the configuration information about one metric stream.
+type MetricStreamEntry struct {
+
+	// The ARN of the metric stream.
+	Arn *string
+
+	// The date that the metric stream was originally created.
+	CreationDate *time.Time
+
+	// The ARN of the Kinesis Firehose devlivery stream that is used for this metric
+	// stream.
+	FirehoseArn *string
+
+	// The date that the configuration of this metric stream was most recently updated.
+	LastUpdateDate *time.Time
+
+	// The name of the metric stream.
+	Name *string
+
+	// The output format of this metric stream. Valid values are json and
+	// opentelemetry0.7.
+	OutputFormat MetricStreamOutputFormat
+
+	// The current state of this stream. Valid values are running and stopped.
+	State *string
+}
+
+// This structure contains the name of one of the metric namespaces that is listed
+// in a filter of a metric stream.
+type MetricStreamFilter struct {
+
+	// The name of the metric namespace in the filter.
+	Namespace *string
+}
+
 // This array is empty if the API operation was successful for all the rules
 // specified in the request. If the operation could not process one of the rules,
 // the following data is returned for each of those rules.

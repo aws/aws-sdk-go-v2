@@ -4774,9 +4774,11 @@ type VideoSelectorColorSpace string
 
 // Enum values for VideoSelectorColorSpace
 const (
-	VideoSelectorColorSpaceFollow VideoSelectorColorSpace = "FOLLOW"
-	VideoSelectorColorSpaceRec601 VideoSelectorColorSpace = "REC_601"
-	VideoSelectorColorSpaceRec709 VideoSelectorColorSpace = "REC_709"
+	VideoSelectorColorSpaceFollow  VideoSelectorColorSpace = "FOLLOW"
+	VideoSelectorColorSpaceHdr10   VideoSelectorColorSpace = "HDR10"
+	VideoSelectorColorSpaceHlg2020 VideoSelectorColorSpace = "HLG_2020"
+	VideoSelectorColorSpaceRec601  VideoSelectorColorSpace = "REC_601"
+	VideoSelectorColorSpaceRec709  VideoSelectorColorSpace = "REC_709"
 )
 
 // Values returns all known values for VideoSelectorColorSpace. Note that this can
@@ -4785,6 +4787,8 @@ const (
 func (VideoSelectorColorSpace) Values() []VideoSelectorColorSpace {
 	return []VideoSelectorColorSpace{
 		"FOLLOW",
+		"HDR10",
+		"HLG_2020",
 		"REC_601",
 		"REC_709",
 	}

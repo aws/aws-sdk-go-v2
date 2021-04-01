@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Places an Object Retention configuration on an object. This action is not
-// supported by Amazon S3 on Outposts. Related Resources
-//
-// * Locking Objects
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
+// Places an Object Retention configuration on an object. For more information, see
+// Locking Objects
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). This action
+// is not supported by Amazon S3 on Outposts.
 func (c *Client) PutObjectRetention(ctx context.Context, params *PutObjectRetentionInput, optFns ...func(*Options)) (*PutObjectRetentionOutput, error) {
 	if params == nil {
 		params = &PutObjectRetentionInput{}
@@ -42,7 +41,7 @@ type PutObjectRetentionInput struct {
 	// ARN in place of the bucket name. For more information about access point ARNs,
 	// see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string

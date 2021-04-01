@@ -2140,6 +2140,11 @@ func awsRestjson1_deserializeOpDocumentDescribeDatasetOutput(v **DescribeDataset
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "PathOptions":
+			if err := awsRestjson1_deserializeDocumentPathOptions(&sv.PathOptions, value); err != nil {
+				return err
+			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7259,6 +7264,60 @@ func awsRestjson1_deserializeDocumentCsvOutputOptions(v **types.CsvOutputOptions
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDatabaseInputDefinition(v **types.DatabaseInputDefinition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatabaseInputDefinition
+	if *v == nil {
+		sv = &types.DatabaseInputDefinition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DatabaseTableName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseTableName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseTableName = ptr.String(jtv)
+			}
+
+		case "GlueConnectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GlueConnectionName to be of type string, got %T instead", value)
+				}
+				sv.GlueConnectionName = ptr.String(jtv)
+			}
+
+		case "TempDirectory":
+			if err := awsRestjson1_deserializeDocumentS3Location(&sv.TempDirectory, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDataCatalogInputDefinition(v **types.DataCatalogInputDefinition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7425,6 +7484,11 @@ func awsRestjson1_deserializeDocumentDataset(v **types.Dataset, value interface{
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "PathOptions":
+			if err := awsRestjson1_deserializeDocumentPathOptions(&sv.PathOptions, value); err != nil {
+				return err
+			}
+
 		case "ResourceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7491,6 +7555,132 @@ func awsRestjson1_deserializeDocumentDatasetList(v *[]types.Dataset, value inter
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDatasetParameter(v **types.DatasetParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatasetParameter
+	if *v == nil {
+		sv = &types.DatasetParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CreateColumn":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected CreateColumn to be of type *bool, got %T instead", value)
+				}
+				sv.CreateColumn = jtv
+			}
+
+		case "DatetimeOptions":
+			if err := awsRestjson1_deserializeDocumentDatetimeOptions(&sv.DatetimeOptions, value); err != nil {
+				return err
+			}
+
+		case "Filter":
+			if err := awsRestjson1_deserializeDocumentFilterExpression(&sv.Filter, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PathParameterName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParameterType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ParameterType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDatetimeOptions(v **types.DatetimeOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatetimeOptions
+	if *v == nil {
+		sv = &types.DatetimeOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Format":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatetimeFormat to be of type string, got %T instead", value)
+				}
+				sv.Format = ptr.String(jtv)
+			}
+
+		case "LocaleCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LocaleCode to be of type string, got %T instead", value)
+				}
+				sv.LocaleCode = ptr.String(jtv)
+			}
+
+		case "TimezoneOffset":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TimezoneOffset to be of type string, got %T instead", value)
+				}
+				sv.TimezoneOffset = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentExcelOptions(v **types.ExcelOptions, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7529,6 +7719,113 @@ func awsRestjson1_deserializeDocumentExcelOptions(v **types.ExcelOptions, value 
 
 		case "SheetNames":
 			if err := awsRestjson1_deserializeDocumentSheetNameList(&sv.SheetNames, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFilesLimit(v **types.FilesLimit, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FilesLimit
+	if *v == nil {
+		sv = &types.FilesLimit{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaxFiles":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaxFiles to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxFiles = int32(i64)
+			}
+
+		case "Order":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Order to be of type string, got %T instead", value)
+				}
+				sv.Order = types.Order(jtv)
+			}
+
+		case "OrderedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrderedBy to be of type string, got %T instead", value)
+				}
+				sv.OrderedBy = types.OrderedBy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFilterExpression(v **types.FilterExpression, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FilterExpression
+	if *v == nil {
+		sv = &types.FilterExpression{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Expression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Expression to be of type string, got %T instead", value)
+				}
+				sv.Expression = ptr.String(jtv)
+			}
+
+		case "ValuesMap":
+			if err := awsRestjson1_deserializeDocumentValuesMap(&sv.ValuesMap, value); err != nil {
 				return err
 			}
 
@@ -7609,6 +7906,11 @@ func awsRestjson1_deserializeDocumentInput(v **types.Input, value interface{}) e
 
 	for key, value := range shape {
 		switch key {
+		case "DatabaseInputDefinition":
+			if err := awsRestjson1_deserializeDocumentDatabaseInputDefinition(&sv.DatabaseInputDefinition, value); err != nil {
+				return err
+			}
+
 		case "DataCatalogInputDefinition":
 			if err := awsRestjson1_deserializeDocumentDataCatalogInputDefinition(&sv.DataCatalogInputDefinition, value); err != nil {
 				return err
@@ -8431,6 +8733,87 @@ func awsRestjson1_deserializeDocumentParameterMap(v *map[string]string, value in
 			}
 			parsedVal = jtv
 		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPathOptions(v **types.PathOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PathOptions
+	if *v == nil {
+		sv = &types.PathOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FilesLimit":
+			if err := awsRestjson1_deserializeDocumentFilesLimit(&sv.FilesLimit, value); err != nil {
+				return err
+			}
+
+		case "LastModifiedDateCondition":
+			if err := awsRestjson1_deserializeDocumentFilterExpression(&sv.LastModifiedDateCondition, value); err != nil {
+				return err
+			}
+
+		case "Parameters":
+			if err := awsRestjson1_deserializeDocumentPathParametersMap(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPathParametersMap(v *map[string]types.DatasetParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.DatasetParameter
+	if *v == nil {
+		mv = map[string]types.DatasetParameter{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.DatasetParameter
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentDatasetParameter(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
 		mv[key] = parsedVal
 
 	}
@@ -9566,5 +9949,41 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentValuesMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ConditionValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }

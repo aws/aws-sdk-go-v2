@@ -3533,6 +3533,10 @@ type JourneyLimits struct {
 	// number of times, set this value to 0.
 	EndpointReentryCap int32
 
+	// Minimum time that must pass before an endpoint can re-enter a given journey. The
+	// duration should use an ISO 8601 format, such as PT1H.
+	EndpointReentryInterval *string
+
 	// The maximum number of messages that the journey can send each second.
 	MessagesPerSecond int32
 }
@@ -3613,6 +3617,9 @@ type JourneyResponse struct {
 	// the journey, as a duration in ISO 8601 format.
 	RefreshFrequency *string
 
+	// Specifies whether a journey should be refreshed on segment update.
+	RefreshOnSegmentUpdate bool
+
 	// The schedule settings for the journey.
 	Schedule *JourneySchedule
 
@@ -3652,6 +3659,10 @@ type JourneyResponse struct {
 
 	// This object is not used or supported.
 	Tags map[string]string
+
+	// Specifies whether endpoints in quiet hours should enter a wait till the end of
+	// their quiet hours.
+	WaitForQuietTime bool
 }
 
 // Specifies the schedule settings for a journey.
@@ -3721,14 +3732,20 @@ type JourneysResponse struct {
 // Changes the status of a journey.
 type JourneyStateRequest struct {
 
-	// The status of the journey. Currently, the only supported value is CANCELLED. If
-	// you cancel a journey, Amazon Pinpoint continues to perform activities that are
-	// currently in progress, until those activities are complete. Amazon Pinpoint also
-	// continues to collect and aggregate analytics data for those activities, until
-	// they are complete, and any activities that were complete when you cancelled the
-	// journey. After you cancel a journey, you can't add, change, or remove any
-	// activities from the journey. In addition, Amazon Pinpoint stops evaluating the
-	// journey and doesn't perform any activities that haven't started.
+	// The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and
+	// CANCELLED If you cancel a journey, Amazon Pinpoint continues to perform
+	// activities that are currently in progress, until those activities are complete.
+	// Amazon Pinpoint also continues to collect and aggregate analytics data for those
+	// activities, until they are complete, and any activities that were complete when
+	// you cancelled the journey. After you cancel a journey, you can't add, change, or
+	// remove any activities from the journey. In addition, Amazon Pinpoint stops
+	// evaluating the journey and doesn't perform any activities that haven't started.
+	// When the journey is paused, Amazon Pinpoint continues to perform activities that
+	// are currently in progress, until those activities are complete. Endpoints will
+	// stop entering journeys when the journey is paused and will resume entering the
+	// journey after the journey is resumed. For wait activities, wait time is paused
+	// when the journey is paused. Currently, PAUSED only supports journeys with a
+	// segment refresh interval.
 	State State
 }
 
@@ -5913,6 +5930,9 @@ type WriteJourneyRequest struct {
 	// the journey, as a duration in ISO 8601 format.
 	RefreshFrequency *string
 
+	// Specifies whether a journey should be refreshed on segment update.
+	RefreshOnSegmentUpdate bool
+
 	// The schedule settings for the journey.
 	Schedule *JourneySchedule
 
@@ -5934,10 +5954,14 @@ type WriteJourneyRequest struct {
 	// scheduled start time. If a journey's status is ACTIVE, you can't add, change, or
 	// remove activities from it.
 	//
-	// The CANCELLED, COMPLETED, and CLOSED values are not
-	// supported in requests to create or update a journey. To cancel a journey, use
-	// the Journey State resource.
+	// PAUSED, CANCELLED, COMPLETED, and CLOSED states are
+	// not supported in requests to create or update a journey. To cancel, pause, or
+	// resume a journey, use the Journey State resource.
 	State State
+
+	// Specifies whether endpoints in quiet hours should enter a wait till the end of
+	// their quiet hours.
+	WaitForQuietTime bool
 }
 
 // Specifies the configuration, dimension, and other settings for a segment. A

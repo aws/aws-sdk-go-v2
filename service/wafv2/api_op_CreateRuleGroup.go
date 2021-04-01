@@ -74,6 +74,21 @@ type CreateRuleGroupInput struct {
 	// This member is required.
 	VisibilityConfig *types.VisibilityConfig
 
+	// A map of custom response keys and content bodies. When you create a rule with a
+	// block action, you can send a custom response to the web request. You define
+	// these for the rule group, and then use them in the rules that you define in the
+	// rule group. For information about customizing web requests and responses, see
+	// Customizing web requests and responses in AWS WAF
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html)
+	// in the AWS WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html). For
+	// information about the limits on count and size for custom request and response
+	// settings, see AWS WAF quotas
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the AWS
+	// WAF Developer Guide
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
+	CustomResponseBodies map[string]types.CustomResponseBody
+
 	// A description of the rule group that helps with identification.
 	Description *string
 

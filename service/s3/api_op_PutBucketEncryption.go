@@ -62,7 +62,7 @@ type PutBucketEncryptionInput struct {
 	// (SSE-KMS). For information about the Amazon S3 default encryption feature, see
 	// Amazon S3 Default Bucket Encryption
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the
-	// Amazon Simple Storage Service Developer Guide.
+	// Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string

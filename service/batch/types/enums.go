@@ -162,6 +162,42 @@ func (DeviceCgroupPermission) Values() []DeviceCgroupPermission {
 	}
 }
 
+type EFSAuthorizationConfigIAM string
+
+// Enum values for EFSAuthorizationConfigIAM
+const (
+	EFSAuthorizationConfigIAMEnabled  EFSAuthorizationConfigIAM = "ENABLED"
+	EFSAuthorizationConfigIAMDisabled EFSAuthorizationConfigIAM = "DISABLED"
+)
+
+// Values returns all known values for EFSAuthorizationConfigIAM. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EFSAuthorizationConfigIAM) Values() []EFSAuthorizationConfigIAM {
+	return []EFSAuthorizationConfigIAM{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type EFSTransitEncryption string
+
+// Enum values for EFSTransitEncryption
+const (
+	EFSTransitEncryptionEnabled  EFSTransitEncryption = "ENABLED"
+	EFSTransitEncryptionDisabled EFSTransitEncryption = "DISABLED"
+)
+
+// Values returns all known values for EFSTransitEncryption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EFSTransitEncryption) Values() []EFSTransitEncryption {
+	return []EFSTransitEncryption{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type JobDefinitionType string
 
 // Enum values for JobDefinitionType

@@ -4422,6 +4422,15 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 				sv.CostCategoryArn = ptr.String(jtv)
 			}
 
+		case "DefaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryValue to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
 		case "EffectiveEnd":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4466,6 +4475,55 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 					return fmt.Errorf("expected CostCategoryRuleVersion to be of type string, got %T instead", value)
 				}
 				sv.RuleVersion = types.CostCategoryRuleVersion(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCostCategoryInheritedValueDimension(v **types.CostCategoryInheritedValueDimension, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CostCategoryInheritedValueDimension
+	if *v == nil {
+		sv = &types.CostCategoryInheritedValueDimension{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DimensionKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.DimensionKey = ptr.String(jtv)
+			}
+
+		case "DimensionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryInheritedValueDimensionName to be of type string, got %T instead", value)
+				}
+				sv.DimensionName = types.CostCategoryInheritedValueDimensionName(jtv)
 			}
 
 		default:
@@ -4627,6 +4685,15 @@ func awsAwsjson11_deserializeDocumentCostCategoryReference(v **types.CostCategor
 				sv.CostCategoryArn = ptr.String(jtv)
 			}
 
+		case "DefaultValue":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryValue to be of type string, got %T instead", value)
+				}
+				sv.DefaultValue = ptr.String(jtv)
+			}
+
 		case "EffectiveEnd":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4742,9 +4809,23 @@ func awsAwsjson11_deserializeDocumentCostCategoryRule(v **types.CostCategoryRule
 
 	for key, value := range shape {
 		switch key {
+		case "InheritedValue":
+			if err := awsAwsjson11_deserializeDocumentCostCategoryInheritedValueDimension(&sv.InheritedValue, value); err != nil {
+				return err
+			}
+
 		case "Rule":
 			if err := awsAwsjson11_deserializeDocumentExpression(&sv.Rule, value); err != nil {
 				return err
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategoryRuleType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CostCategoryRuleType(jtv)
 			}
 
 		case "Value":
