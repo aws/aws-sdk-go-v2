@@ -1,3 +1,16 @@
+# Release 2021-04-01
+## Service Client Highlights
+* Bug Fix: Fix URL Path and RawQuery of resolved endpoint being ignored by the API client's request serialization.
+  * Fixes [issue#1191](https://github.com/aws/aws-sdk-go-v2/issues/1191)
+* Refactored internal endpoints model for accessors
+* Feature: updated to latest models
+* New services 
+  * `service/location` - v1.0.0
+  * `service/lookoutmetrics` - v1.0.0
+## Core SDK Highlights
+* Dependency Update: update smithy-go module
+* Dependency Update: Updated SDK dependencies to their latest versions.
+
 # Release 2021-03-18
 ## Service Client Highlights
 * Bug Fix: Updated presign URLs to no longer include the X-Amz-User-Agent header

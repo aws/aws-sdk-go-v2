@@ -1,9 +1,0 @@
-{
- "ID": "service.lookoutmetrics-major-1617316030898278000",
- "SchemaVersion": 1,
- "Module": "service/lookoutmetrics",
- "Type": "major",
- "Description": "new service",
- "MinVersion": "v1.0.0",
- "AffectedModules": null
-}

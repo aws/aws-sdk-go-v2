@@ -4,1694 +4,1706 @@
   "/": {
    "Module": "/",
    "ImportPath": "github.com/aws/aws-sdk-go-v2",
-   "Version": "v1.3.0",
-   "ModuleHash": "h1:j1z3nrkZyN/R/L0OKuPhj9IpT42rfu1zkHxx4tD3nIA="
+   "Version": "v1.3.1",
+   "ModuleHash": "h1:W2RhcSEjK1YwJucPTU8JSD923Qn1crKzJQHbFhsYBMg="
   },
   "config": {
    "Module": "config",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/config",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:pYDr4DTr0w4GfweXhX2ns1ZGyH46nLP/ZeQQodl1s68="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:2hjdDldmJJjb+rFieQySfOFt4WwxKZJVTEB6RBI74T4="
   },
   "credentials": {
    "Module": "credentials",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/credentials",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:Q0S5OPP4l9kWrmPNK500pdQhg81x4E3UpvugYG5Wilc="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:whYYw2srG+zUQzUw4LhML83f+xd22Vm7gv0I7aJglc8="
   },
   "example/service/s3/listObjects": {
    "Module": "example/service/s3/listObjects",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/example/service/s3/listObjects",
-   "Version": "v0.2.5",
-   "ModuleHash": "h1:WxmzZS5bE7FE1s2CrPZigmC1LJ8GsysZNQsK1vvxVC8="
+   "Version": "v0.2.6",
+   "ModuleHash": "h1:GGRi1GOhWb824SWavP85BCoxAbUc1/0XqStfDAMBWe8="
   },
   "example/service/s3/usingPrivateLink": {
    "Module": "example/service/s3/usingPrivateLink",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/example/service/s3/usingPrivateLink",
-   "Version": "v0.1.2",
-   "ModuleHash": "h1:4BKGmPGLQo/rpR73iJqQHare1ffJLZrFspaDl9uBdQ8="
+   "Version": "v0.1.3",
+   "ModuleHash": "h1:WJ1bNeQ6HP3X6rsW1ETwsYEkSo8QsShXi4vjT8SaOgE="
   },
   "feature/cloudfront/sign": {
    "Module": "feature/cloudfront/sign",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign",
-   "Version": "v1.0.4",
-   "ModuleHash": "h1:ZaMAJgF3/niHLMN4rjfiRQODezxFnuPHYowWcNdKoRU="
+   "Version": "v1.0.5",
+   "ModuleHash": "h1:UaWFThuP6I/qJxiNTR2mjX3LSU821cQv7FdQ/NXfwLY="
   },
   "feature/dynamodb/attributevalue": {
    "Module": "feature/dynamodb/attributevalue",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue",
-   "Version": "v1.0.4",
-   "ModuleHash": "h1:TerFIsXkn5l7692eDR7YG5uzxSG4AjLRf8fhutq8G/k="
+   "Version": "v1.0.5",
+   "ModuleHash": "h1:SrngP5N1dXxKQxSzx8QXKECXwVDc3coIRuafiCOBQok="
   },
   "feature/dynamodb/expression": {
    "Module": "feature/dynamodb/expression",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression",
-   "Version": "v1.0.4",
-   "ModuleHash": "h1:LO9fNH3VtHAO5TCiHsxq84RvhAh3ESE51ABLlCHWpkU="
+   "Version": "v1.0.5",
+   "ModuleHash": "h1:nFMdWpfmO0NybpRf9g8dHBisTKzJntDXSJLfB2IQ7XE="
   },
   "feature/dynamodbstreams/attributevalue": {
    "Module": "feature/dynamodbstreams/attributevalue",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue",
-   "Version": "v1.0.4",
-   "ModuleHash": "h1:/c9vASQubYJIVUCv0aRqsmJSGh2kNCtoWiXVzrW8CR8="
+   "Version": "v1.0.5",
+   "ModuleHash": "h1:BG3/DDVtvYZEImQo2vT7N6epHq2cLn1C7lAf+QHOACY="
   },
   "feature/ec2/imds": {
    "Module": "feature/ec2/imds",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/ec2/imds",
-   "Version": "v1.0.4",
-   "ModuleHash": "h1:V7DbyJMo5kq31ZiyQMmjihjexftM1oJ6luRs09M5/Uc="
+   "Version": "v1.0.5",
+   "ModuleHash": "h1:5gCrezE41xYQHWDsDkJD9nT22tUH3s+Zrvs4c3v2FGc="
   },
   "feature/s3/manager": {
    "Module": "feature/s3/manager",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/s3/manager",
-   "Version": "v1.1.0",
-   "ModuleHash": "h1:x0h5qTMX/PuZvWNGw+j54Kd90unUZ9F61V6k8xicjPg="
+   "Version": "v1.1.1",
+   "ModuleHash": "h1:jYgZQnukL5e1Pw/oxqwnDTdiViUf+K9ioiCYJem1jjk="
   },
   "internal/protocoltest/awsrestjson": {
    "Module": "internal/protocoltest/awsrestjson",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson",
-   "Version": "v0.2.5",
-   "ModuleHash": "h1:EHoqMRAcFe7qT19H6x3VZNm6Jjij7mc3FiJfKRndt/A="
+   "Version": "v0.2.6",
+   "ModuleHash": "h1:CpSEj4RcO6HfP7Mzdp9iWxnu06RgNI5nCUcsjfAK1TA="
   },
   "internal/protocoltest/ec2query": {
    "Module": "internal/protocoltest/ec2query",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query",
-   "Version": "v0.2.5",
-   "ModuleHash": "h1:0HMzG4YC6VgS09+ZKvRILasToxC5zPNUb1BBZVwxaW8="
+   "Version": "v0.2.6",
+   "ModuleHash": "h1:J6N9m/nZ/F+PrYoFtIMeuF7CnyrmLzY8ZP/fFHCix/4="
   },
   "internal/protocoltest/jsonrpc": {
    "Module": "internal/protocoltest/jsonrpc",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc",
-   "Version": "v0.2.5",
-   "ModuleHash": "h1:fOpzIfPSt2wH0CczTxu1fbBQHrcEUY6SS65yvEFx7Ms="
+   "Version": "v0.2.6",
+   "ModuleHash": "h1:vujJ5TdjVO675o4LXVeZNVODHU7QB4o86FZ0LpUHYGg="
   },
   "internal/protocoltest/jsonrpc10": {
    "Module": "internal/protocoltest/jsonrpc10",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10",
-   "Version": "v0.2.5",
-   "ModuleHash": "h1:AS9oVbbcvsdAnTR4Vx0kFLil6dJ5p667XoznSYusVjo="
+   "Version": "v0.2.6",
+   "ModuleHash": "h1:jbpjvaudm2CB9z30JEu3bN6u6izhHLE6IH+1Lfb1kRU="
   },
   "internal/protocoltest/query": {
    "Module": "internal/protocoltest/query",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/query",
-   "Version": "v0.2.5",
-   "ModuleHash": "h1:ECib5AVN3QBgjHe79J0Z4b6mHxJe9BxLl5RQ9eEm7Zw="
+   "Version": "v0.2.6",
+   "ModuleHash": "h1:gclIa7Tg9STAfKJ+rdvqpVRDSMDUKCZpER5y/JJxA+o="
   },
   "internal/protocoltest/restxml": {
    "Module": "internal/protocoltest/restxml",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml",
-   "Version": "v0.2.5",
-   "ModuleHash": "h1:uiPu4kCXvtupEuJbgGrbOJh3pVmxt0Id50ZX4vpvgZM="
+   "Version": "v0.2.6",
+   "ModuleHash": "h1:saY1PbR9GmVIjHqkMLIw1I+owIYLn07pJfZXOCO+TvQ="
   },
   "internal/protocoltest/restxmlwithnamespace": {
    "Module": "internal/protocoltest/restxmlwithnamespace",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace",
-   "Version": "v0.1.4",
-   "ModuleHash": "h1:PJTLKQFXnzHTrX2S4cbM0GdaNfFf9/ENbZ5qWRIN6bA="
+   "Version": "v0.1.5",
+   "ModuleHash": "h1:kc+x1DyB67x/WQ1p6tez/iz3jkzZy8QRDCdT+UwcY0Q="
   },
   "internal/repotools": {
    "Module": "internal/repotools",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/repotools",
-   "Version": "v0.2.0",
-   "ModuleHash": "h1:jfw4BBmPGeCqhyVUIMXK47KoloJLMIyvpdS4FXf5k6A="
+   "Version": "v0.2.1",
+   "ModuleHash": "h1:NHQX9Djw79Fsjz71/KsvvaJLc5dvuaNzOaqQGpNd5/U="
   },
   "internal/repotools/changes": {
    "Module": "internal/repotools/changes",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/repotools/changes",
-   "Version": "v0.2.5",
-   "ModuleHash": "h1:TB+SwFaAFj5Xf7jW6QJgBuBlca8kqQEQh8PwNjyKaEg="
+   "Version": "v0.2.6",
+   "ModuleHash": "h1:IrvLs6ZzkwNvKxG7NVTLyx2XiMkAz+fX1W2aMDjCYQY="
   },
   "service/accessanalyzer": {
    "Module": "service/accessanalyzer",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/accessanalyzer",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:G7NSCbvUWDp4B0ny7tjHfuZvadphb7M66/1cYN9AnAg="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Z0TVfdq04TGM2oLeYUMC+H7ZxxLcsr5e6mRkzeuo+pc="
   },
   "service/acm": {
    "Module": "service/acm",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/acm",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:KPzkpXYeG58LtHUbj1hJQotZZ/hPJZ8WSP5oWQN8XOc="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:s3Yka4ZE67lTTbSG7ZXlgwIjC122RkG6okTcrEbCBBY="
   },
   "service/acmpca": {
    "Module": "service/acmpca",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/acmpca",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:WrwlRLBSvd8ZuYN5xxb8mXfmgxdWeQGt+zmNMhZFIV4="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:n7MT9KAMDJdB8/LlWzTZneV/iz/4PDZUQwSGdHjOJ2E="
   },
   "service/alexaforbusiness": {
    "Module": "service/alexaforbusiness",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/alexaforbusiness",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:QjyHTUADAFuchzMqTULl8bDdTUVrF6lW90wlFMEaOQc="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:CdqT1DrmFF6mh1yxJOs7ocFNI2SeomavbOy63E9B3NY="
   },
   "service/amp": {
    "Module": "service/amp",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/amp",
-   "Version": "v1.0.0",
-   "ModuleHash": "h1:DG1SCaytbKUorsdeBoAvn8uU5yQbSkXEcEIA2QAkAMc="
+   "Version": "v1.0.1",
+   "ModuleHash": "h1:GShqSeURFtct3YasybNuY77TItdhHhgI9A3dZdk/Ibs="
   },
   "service/amplify": {
    "Module": "service/amplify",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/amplify",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:Ny/8PA9N48C1qW5vEBCgn4tQ6JkNh2xG/4hWv3cbUL4="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:d21f/W8RxL/Yz1e2OS88rnZYSRkul1wLrVPNFaFEM4k="
   },
   "service/amplifybackend": {
    "Module": "service/amplifybackend",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/amplifybackend",
-   "Version": "v1.0.0",
-   "ModuleHash": "h1:Oh+zlEUs7bJ1QOB08VUeNkBqxKL+pwJ3IDj/VJJ0JII="
+   "Version": "v1.0.1",
+   "ModuleHash": "h1:9Yb2scAHOOb9DetXe8KOkEBlvkRH1kO4cIvFd7Rf1M4="
   },
   "service/apigateway": {
    "Module": "service/apigateway",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/apigateway",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:YjbWtD5p+fDreRHrpIBzsh+QDABbxPgWkHS+TBvabh0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:2kxNxcT9QVSckqagWevdNOAOCOAmGHsCbkowF6Rmur8="
   },
   "service/apigatewaymanagementapi": {
    "Module": "service/apigatewaymanagementapi",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:ChVNilDwvltQxNp/zpoZxa16wfrhnRSpMi/4tvnqsR8="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:IWfCGlsj6L8kg/Jt/OW/15qHOIzN1es74BagZXUTYC8="
   },
   "service/apigatewayv2": {
    "Module": "service/apigatewayv2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/apigatewayv2",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:M7lfVYe4Lq3MRpg+Vp4/xX/eYVkIlkJo2u6p+ioZe4s="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:kltyGtKfbh34wzYhHYLv6J9kYJ7T9ITYJ+zNB7vsoDI="
   },
   "service/appconfig": {
    "Module": "service/appconfig",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appconfig",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:W0MlifhN1c+CHh1CmfcGSTB0rha7Nyyv2DKxVh94G9E="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:FqpZpvml36FTn/M39JqcFF9z02gxa5JLZnVI8gxUAAo="
   },
   "service/appflow": {
    "Module": "service/appflow",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appflow",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:1C8+Dk4MiQdUfz8poiHcKGIneyp+173+8olWauyriH8="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:YZJ+bbNT6CIh5mQRWjAHqyGgz827w0wIT/ZM+GQCF24="
   },
   "service/appintegrations": {
    "Module": "service/appintegrations",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appintegrations",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:0GiuuouHWJBaM/vTZN59zgxHyhyS24albUcDgrNHAvA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:mlYDnxIDZoXPLUxuyPjh2jswMuMxnnMOw7fmtf0iB1g="
   },
   "service/applicationautoscaling": {
    "Module": "service/applicationautoscaling",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/applicationautoscaling",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:aMJO6TnNv7Tz/mq5ui7nlZsGBXFLi+PTYJLPQQOsL9k="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:hL/5plQN2MCcADJYzTbOYIi8/5tKiTukco/2GrBuiVY="
   },
   "service/applicationdiscoveryservice": {
    "Module": "service/applicationdiscoveryservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:SP+N2nWk2T+pmTXXqVZVx7EJlh1j6TJ8dh7xO1V1ZBY="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:D8dO6yU2JLsRSnKQDJoSjhVz+jJzp/I+OCIgG59FsAE="
   },
   "service/applicationinsights": {
    "Module": "service/applicationinsights",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/applicationinsights",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:QpYeWJVq+dStQ06p2QKPEV6NFzR0jG47JXjVor0q4II="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:mvo2vjct9LjBY5XINz+qZtARHHLk6qI8AuAw2X7hDk4="
   },
   "service/appmesh": {
    "Module": "service/appmesh",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appmesh",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:8ClAYD6VNdALXtYSlqK9i1fWHiXqs4Ih7rCEnLIi0so="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:RpnzchLbHfAG3F8G+j2OVrERwNTT8TOH9sb5uLzXDW4="
   },
   "service/appstream": {
    "Module": "service/appstream",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appstream",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:OOsx3y0ZJzm9+J+u9lBPKQnQonGrsw/rGyFURdY+Mtg="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:1STSnbfq8SKMQEH3JI7ITHPxpzIxQZfO5uEfrC+h7rw="
   },
   "service/appsync": {
    "Module": "service/appsync",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/appsync",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:ElpLDRdSJr4Ptmyq5y/i+GGX1YJYm5BT451uBHbSDU8="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:qHxx2jl6nI6Sn5fuXtBQVWbhaG+fErDAB47BHm+Kw1A="
   },
   "service/athena": {
    "Module": "service/athena",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/athena",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:9mZEdVfWiVGGVp/XJQ9wLBuoiVx7UnBgp0d3oqSmtZM="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:XD0aqHoCSgpuSDu84nwZu9KCh9sHR/Cg69M0gwuqzGw="
   },
   "service/auditmanager": {
    "Module": "service/auditmanager",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/auditmanager",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Erc0aNH3BJ+14BwJkfIlF9xbaMJdDxJ01uVH02TuWXc="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:stwYcxlAz8ecg6SdnBBNN6VZN4lm4lMpCCFQDqCvP7g="
   },
   "service/autoscaling": {
    "Module": "service/autoscaling",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/autoscaling",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:7dqTi+BP80MdTWZdnYDJwkl7t/4fD51+uuTPXZ0LhE0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:imL02JGNApN3z+9u/meTDeZF37QfpqRmrDnGghGNFvY="
   },
   "service/autoscalingplans": {
    "Module": "service/autoscalingplans",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/autoscalingplans",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:4qkscyOC9HRLWZEdYFVyPnbSHZAqrZwi7GsG+CsrERQ="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:AzRmTYMv4mkqUuEdb3nbv0tMsghm6B1kjZ/+ni5KPxk="
   },
   "service/backup": {
    "Module": "service/backup",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/backup",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:7Klb9saO0kNyYuC5faVEZlpowhRwTCxpUXM3AKy6YdI="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:cCN4he7bn68I/T7oz1F9K11ftK3kiJmPu/BbUcRwIoc="
   },
   "service/batch": {
    "Module": "service/batch",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/batch",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:BLDRYwonobCYuXmhtZJ3FT56KpnwZRlVU48QY7fAUWQ="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:/9zSt4IetfWO73+FUfQ2rLZiDdX8ccIACTa5X/bT2Bk="
   },
   "service/braket": {
    "Module": "service/braket",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/braket",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:gaZDvCKmJuD6ec12XM+zmn3b3OzsmcR7JXQHnf1bch0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:YtunqacmGnAMcrHkGNjeggvle7Trdfzn9VX3tueDcCA="
   },
   "service/budgets": {
    "Module": "service/budgets",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/budgets",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:P2IXGUpF2t6gwy3QTPB82/wFarHkX6WVsHWs7nfaVWY="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:OJ8mPLrDu9t6Px8yqRJxq4qlI3aOidOhW/sxWi3UXeY="
   },
   "service/chime": {
    "Module": "service/chime",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/chime",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Ae5Z/MfyG0QI1rv/GAO5b6CC/5KdIzE2g3Xi2elsuKI="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:ln4Z3mlipA/uNlNjVKITL22Uj50DtQpTRwDjn6qi7+s="
   },
   "service/cloud9": {
    "Module": "service/cloud9",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloud9",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:I2V5IX5pwXq/+TL5QeDcoq4MIcFgzQ/yxbf5KTEqm4Q="
+   "Version": "v1.2.0",
+   "ModuleHash": "h1:FURCj1vAxCnGKxncV5PzdD3YiCqLHH6vRCRnJxC4zT0="
   },
   "service/clouddirectory": {
    "Module": "service/clouddirectory",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/clouddirectory",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:1r5r7fwGa8sKMSWTFrGYhzU3ZfghO3KUcXrHPhM4kCc="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:Z1qFfM6iXdVLEVBBpPzp+gw83OL/FEilIFsZJeBcZKc="
   },
   "service/cloudformation": {
    "Module": "service/cloudformation",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudformation",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:XREWXNvpP/7K8++qSLdDM6+nkN9oV132XK15NfSGVtA="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:+eHZIcEQ7jMuAAWL9uS9RfQz8ElLcRksWqXSIQ7essE="
   },
   "service/cloudfront": {
    "Module": "service/cloudfront",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudfront",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:3irdRInlSEoLx4RhUeJd8E5XboRPxWNNn2gR0Wn/Mu4="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:7Zh+ShMr7awq0s76kwca8efPiWOZaWV5267fa6avwOQ="
   },
   "service/cloudhsm": {
    "Module": "service/cloudhsm",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudhsm",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:0f0Fsab2AyjqhD9HthoQ+J+K6X2/CDVZcF50/XB1ajA="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:Bh3H42m11h4hmP6cU5FwWqwtSBiDfVNR1G1fKcdW2/Y="
   },
   "service/cloudhsmv2": {
    "Module": "service/cloudhsmv2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudhsmv2",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:otg0eUT5LROwUixNpOtjhYksgBurDIRi6ykUmsBBrA8="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:j+WXsiwkQ+Cd9Zg3W+1q0zqqtSeRZXKtAb66ZmDBMBg="
   },
   "service/cloudsearch": {
    "Module": "service/cloudsearch",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudsearch",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:K2M7edttmuJ06YCONKwdB2MyGOmRoP8AEktWuUK7xBY="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:eR/LzGaBQBOSyfxayScGb626gl3nuhbkuFI/l4EBvLc="
   },
   "service/cloudsearchdomain": {
    "Module": "service/cloudsearchdomain",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:GlywAbdNDYbIYVBrJbj4ZTeuPscCGDmoygDWlxibgaA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:JdDOouyg7912GsYQGqoLSDoETronurvCALSlMfmD0Tw="
   },
   "service/cloudtrail": {
    "Module": "service/cloudtrail",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudtrail",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:sSbYxtHT/7deuSXHN+1T+5ypOuQSDBYqbhu/Dv1ld+s="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:egAyiJ8xpfed+I+8t+71OxyNr4Vbw1xRA+9EjSu15tU="
   },
   "service/cloudwatch": {
    "Module": "service/cloudwatch",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudwatch",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:+QEKobG+Bl0aB9svUqPq1R4XrpybtD+omHjPcEadILU="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:fyDRD5nYw4WlTQpX7p5MjtKX1SkEs5pLHt0bt7Zn0/A="
   },
   "service/cloudwatchevents": {
    "Module": "service/cloudwatchevents",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudwatchevents",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:gXHyajuXD6lC4iaznrJcFzxOyg0E7f94MpRKmJ4hwvU="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:E6xrw1jR18J/wn5WW4TsZjhb5Mb8ZHHOqmeJkViScrA="
   },
   "service/cloudwatchlogs": {
    "Module": "service/cloudwatchlogs",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:rW8c87E/iMJ5pOT0AaJjSjbHYMR9355mDSuCg+5FI1s="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:WWUXM0mAA5ktH0Z3lM75sCg0R0BI6piPShKad3+vwzA="
   },
   "service/codeartifact": {
    "Module": "service/codeartifact",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codeartifact",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:mNGe2VWIpHd+qE386O54qiwmOL20CRnEc2eQq09z2II="
+   "Version": "v1.2.0",
+   "ModuleHash": "h1:fNFauvM+28t7PzE8Nn0CZvLYeD4pOTYhqRhcdTfhpRw="
   },
   "service/codebuild": {
    "Module": "service/codebuild",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codebuild",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:BCgx6/HRlh38HaxbXeur8+7eoiAHMEt/uGhjoXvrio8="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Kn8KgAStqC7/FMP927qsWUUQJH9gw/ubKTuMqyKUpds="
   },
   "service/codecommit": {
    "Module": "service/codecommit",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codecommit",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:Fw5BXP0L4PNdneYOv0B2znzErlgj70QNEc7HIjwJrUs="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:ltl1WkdER+wf0ZsWTI1OUEvnULxL0aV7J8jb/4luguk="
   },
   "service/codedeploy": {
    "Module": "service/codedeploy",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codedeploy",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:cA0fC3SxuuMT+055LR5XTNILD43CCDMMwZO52WcCfGA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:WEqfKQLKriwX7BQyUXfJzK/gO6wMelZxtwOHD2cyjeg="
   },
   "service/codeguruprofiler": {
    "Module": "service/codeguruprofiler",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codeguruprofiler",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:CgMRC9uAjVK0sdsJIuwJfpY7lrxyc2jR5P1GtcipGMk="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:DwpSYVh1B/olr7nPoy3NlJPD9ZF/lpdyIShwhQ4+ehQ="
   },
   "service/codegurureviewer": {
    "Module": "service/codegurureviewer",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codegurureviewer",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:sil6UaKPiiVfWc5dhwDLrj9PAR1KiTJxuJHYCdzjUJo="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:hiFX08qpwf7yfldaThMcn7i3737TcF8AXGXYQzQLsEg="
   },
   "service/codepipeline": {
    "Module": "service/codepipeline",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codepipeline",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:zoZbVrJawXjrBVJ6cOK/XgQDA5ZjOtlrhuGMhP/dDxU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:rFLNwNLEB+1wvueAOwTmuGS2WM4tc4Ly9vidfA6642Q="
   },
   "service/codestar": {
    "Module": "service/codestar",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codestar",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:jWGKG2yQtzT1Hyby5bt1g4i2Te1uPgEWo8/3r5J0/xk="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:gjt45Qn4SCZhgFKXEaTvAuEvULUcqVHUpI4yuXPriVw="
   },
   "service/codestarconnections": {
    "Module": "service/codestarconnections",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codestarconnections",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:a3pO9BMkbIX3gAan34zHqGkjvD2Wnlj5wKy/qzZl6tM="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:xOy3dz5MybU4oc8CvRFSb26niXCwN4GDha6muxmNy6Y="
   },
   "service/codestarnotifications": {
    "Module": "service/codestarnotifications",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/codestarnotifications",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:mN4hs7llrOgoIHEGaB6aeOnheEcjeLBbKfMnqIYPd2c="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:KuApG4A2xx708Xyf8+prwptzvd7pMtT9HefR04K1CeU="
   },
   "service/cognitoidentity": {
    "Module": "service/cognitoidentity",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cognitoidentity",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Jqk4L1SpVPH2T2MzlSdeCM+WnniuchkYVyCDeyqBz4Y="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:SxtoHbLsxtdUMeKD3Gdd1hCxkXlT1s2qok/k4S9arbY="
   },
   "service/cognitoidentityprovider": {
    "Module": "service/cognitoidentityprovider",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:3ooBgdhX9kQLrjwjqVre+pSTE8gthjNy7wl9NtzdzNk="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:fEO/gs2CUMpBAoOTuLRnaMGhKCgntz6ZYvmXDDY/nOc="
   },
   "service/cognitosync": {
    "Module": "service/cognitosync",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cognitosync",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:cfi6Dg3U2xHbmoSlNgoyXfbK9qt453Rr5oQ1NQItOs0="
+   "Version": "v1.2.0",
+   "ModuleHash": "h1:3DhT41Ux/NRFmZFV3tBCnR6tdMAPeLDgjiAzIbcFX3s="
   },
   "service/comprehend": {
    "Module": "service/comprehend",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/comprehend",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:KFeGVJR2WzqTE88jD38Zq3k2ml1xO712Y7uLQPpoGRI="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:96FoGwdIZFHPHM2M6ANelkkJ4rKOI2B8XLOzC0w/9qk="
   },
   "service/comprehendmedical": {
    "Module": "service/comprehendmedical",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/comprehendmedical",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:ctNLJnYbQmchxgCqbKv2XMaxs0fUNh1p+WL+XHSgMzY="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:rlUz8rakHTtssiI85rq+b63vR1K/aLrI6LahklLMfKk="
   },
   "service/computeoptimizer": {
    "Module": "service/computeoptimizer",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/computeoptimizer",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:hWH0RhFkDOqTsKxdrGCC8Wa6Ig9papdMbLP6WtssK4U="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:nVsmCdjP32bkBWWWP+gd/f5c4nvdNUKvdnd7UMMYkec="
   },
   "service/configservice": {
    "Module": "service/configservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/configservice",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:CHcFzoz6WMeUMyALVQYET/6LuGo2P4H3/UThUhGi0ew="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:F1VtAhAtPq6TxgRlBlpG4dF2BG+udfvFEiuOMSBG6Jo="
   },
   "service/connect": {
    "Module": "service/connect",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/connect",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:rZAnYJPtqrCoyjDtw5SLHNjgmcNUGwUAGWctl+j8ngc="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:4TTDcSrgIV2WyWEkp1HMKfS1BupCcRhzBTUJ7O0hcqM="
   },
   "service/connectcontactlens": {
    "Module": "service/connectcontactlens",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/connectcontactlens",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:rp5qLm4Og6AYSu33rL71pCVB/+13g/8t4c4GI0B1Je0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:XJD4Ago5SRSi5szXc5dc54+7J/x0XnhNAGFCuDgV7HQ="
   },
   "service/connectparticipant": {
    "Module": "service/connectparticipant",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/connectparticipant",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:a+5sg9X0qWdyrFd9VmePE/acvAp1ltQgA4KK2bqLEL0="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:ZGXN0+Drc4I3XR1ghba+h2wDXIUXBO0R9r4r+0NkP4c="
   },
   "service/costandusagereportservice": {
    "Module": "service/costandusagereportservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/costandusagereportservice",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:cBDRrVZ9pnL8kVGzsXfeT+mtGhyWawZVWpRLH3ZiVz0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Y/1GxGe807xpKFXP5VvuzxHmD5kf5/SdP1Zdz1JOQ0I="
   },
   "service/costexplorer": {
    "Module": "service/costexplorer",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/costexplorer",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:7nSlUlpo5D1TThljya8furkOHXTD06ukp9hkP1Dclsw="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:xD9Wub8tfdDZvf3L+rgDbf1/MzSXaQWsYL1V4dS44dw="
   },
   "service/customerprofiles": {
    "Module": "service/customerprofiles",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/customerprofiles",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:cQJEi/19pwhhKkCBvx6PUgxBosLsOG5hkmptcV8mFPo="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:iOUmOVhqbqBd6q3+M5iWjuEBzAaEl7kMqDEPDxB0pqo="
   },
   "service/databasemigrationservice": {
    "Module": "service/databasemigrationservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/databasemigrationservice",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:bS2zvVY4G3qHeIDsAiycwhGo04Uiguq/38v7gpjeo0c="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:VgiMIyOF1adU+W2cRb5QCk2oR664x+vyeCbHd5/FS3w="
   },
   "service/databrew": {
    "Module": "service/databrew",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/databrew",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:7TWYdhIPIE7KsIVWuIKm5ThcVWQGcOnKjUWpXG2UayE="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:jTxhHJkS9KAkrtxkNIzdIeaJ8luq2l74CULsrE+l/Qo="
   },
   "service/dataexchange": {
    "Module": "service/dataexchange",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dataexchange",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:MNsXQReXuqnaGoezZsguHnkAznnlYQYr+J3UDu2b398="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Dph29sM6rA5OgIGmLN4jmW3x7I++n+2R/R2yUZEZW9g="
   },
   "service/datapipeline": {
    "Module": "service/datapipeline",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/datapipeline",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:dF5BSnxQIaFmpNbi7ybcP76Aa2ODKiA2WKjXsa/tTKU="
+   "Version": "v1.2.0",
+   "ModuleHash": "h1:bA6MWMDhG3aJnI4IYiZWf9FJ4mQVzC2gaLK4w4lhVMw="
   },
   "service/datasync": {
    "Module": "service/datasync",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/datasync",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:KNukEXsQXNagdX8Z7urEeCkfGZZ3yloqKDoJw3U9Z2E="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:cYaRrIfDZODhx048sw8x9EHuFcwTFu/Vv3nuTfXEJd0="
   },
   "service/dax": {
    "Module": "service/dax",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dax",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:algEh95+LNZ6QRj5HIIDgYn7pfz/OhSSkVFIMXZffas="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:1oGLDaB86Fm/hEKoBua7X0uqgBF3SN23fTQ86T2hxMw="
   },
   "service/detective": {
    "Module": "service/detective",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/detective",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:vH7MQF1cKL9FbNWkMroQwqjAGsYx8mtqQsOKDWCO3NY="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:nOSRIWyP1Qvq72+iAn//O9iri5hhrPCZXspY0iORt6I="
   },
   "service/devicefarm": {
    "Module": "service/devicefarm",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/devicefarm",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:6y0p4RYpzNH6B8dlbNXfVyMl55EQHvJAXw33OLffA7o="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:1AZhsSXUE+Cbc7UsaeHQtMSN4XOKWaub/RWdDrF3Q8A="
   },
   "service/devopsguru": {
    "Module": "service/devopsguru",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/devopsguru",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:DA4bDzG8WwzP12TNeN1vH+MKaMyjXJXsnzG5ODk88yU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:PGdEt9TzItmqMcAj+TIrfypZS7d1OKi/xDL6zq2ZFaw="
   },
   "service/directconnect": {
    "Module": "service/directconnect",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/directconnect",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:GJo09pwpPc2QFdErjOA0vzqdplC0gm5YB5eZPiCoQos="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:8bTPEWxo2cEGbzjEFSnjtTXGmQxpTDrVmRE/+HLyW6Y="
   },
   "service/directoryservice": {
    "Module": "service/directoryservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/directoryservice",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:D++sZV9H/QBFDlONDH8S+swFqD/428rW3Mch62jG9tQ="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:efZWy449ncB9K7NOXiDFii0zu5rnO1PxL61GxUp/0kc="
   },
   "service/dlm": {
    "Module": "service/dlm",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dlm",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:1NqyPlkN0ODUYdckS5+2a+HvcKOcgt2J91UgoBCUScU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:I1l8c6sdXcnIVpEaBPHvmfn3PHlAmKzc/Xu6jiKeljc="
   },
   "service/docdb": {
    "Module": "service/docdb",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/docdb",
-   "Version": "v1.3.0",
-   "ModuleHash": "h1:eppghHp79CEzZ15+UvXbtDT6esjIWU63FKiLS9NBs1M="
+   "Version": "v1.3.1",
+   "ModuleHash": "h1:+PylC9EJyzlvg2Bkhew3PmIi7TuvEk13l4/gzwlW/CY="
   },
   "service/dynamodb": {
    "Module": "service/dynamodb",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dynamodb",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Xj/mD+Ypptg6J0Hmc4dbDehpBDHNTFjfQvzi+VAIfPo="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:NnYXRukLvkiTnNyZHCCQcZaoWJSeE5Y7tCVPgvTyWfw="
   },
   "service/dynamodbstreams": {
    "Module": "service/dynamodbstreams",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/dynamodbstreams",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:0TM1cUobEh5Waz8SSMnuGmV8Z906pe7UWyZqFVjTGD4="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:UmlbQAaEbdAQpSDc78a2ZEIGQ8lO0bEA3Rpb066Exn8="
   },
   "service/ebs": {
    "Module": "service/ebs",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ebs",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:fDcdQx/lWsVftyP7T7JlpF/trus1is2ps7QPnezvVe0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:D0skcso5y5IUoh94wmDXzsKfyJ9yLxS0SKlQIlN9/4o="
   },
   "service/ec2": {
    "Module": "service/ec2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ec2",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:9NdeHYuvWL/Phh2HsQmv8U6zAtXyfOSt+uLBPE0VUd4="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:y82WbYudKuiWx0KuKQheqTQ4RIF8ZHoHvS/rD8HCYCc="
   },
   "service/ec2instanceconnect": {
    "Module": "service/ec2instanceconnect",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:FkczPUrEWZPQVa0oUIDLh+48VJlhzPQCRn2r9IjNjF0="
+   "Version": "v1.2.0",
+   "ModuleHash": "h1:7HN6vwCpMEAqQCJVtXHDtSBw0VCvTTq5rKRtdMkAgho="
   },
   "service/ecr": {
    "Module": "service/ecr",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ecr",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:6ExOoVgntAVuVARounLgbXnMLWjy0l5iXf/wAu90NgI="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:rdvoJaE51N1tuNc2B75vNsZu2P0xV6y7ibOAwNeb1mI="
   },
   "service/ecrpublic": {
    "Module": "service/ecrpublic",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ecrpublic",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Qb0q2R4dff4/e/qvSVPyTs3ZME+zlzN8HDCm0+F1Ko0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:tT+/orSV+wjE3LuHdyVsXhjMetY/4Ez+PRpQ5Tcfnyc="
   },
   "service/ecs": {
    "Module": "service/ecs",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ecs",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:LlnxkpvIugxKNMjANn4KsD4/Vxs2yc7KHqtmGCwY+5w="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:T8CKZFKySyOivXUc/80qlvNqvX9MQvvRCxFQCL6xxQU="
   },
   "service/efs": {
    "Module": "service/efs",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/efs",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:PCLM4aShavpVcyXqUoUsQpMJ+Z/PLOFjQuV3NKxitmg="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Cm/7OSlvQVPQpksrq7FYXw75Uv1D8++CA6tcWMb6y38="
   },
   "service/eks": {
    "Module": "service/eks",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/eks",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:l8LN8xsHUSNLUmqDR1oZLOEgD7lLqNTrWfkuHnPplfE="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:eNSGiZZKcrjT1/UlxOSL/v1gjR5bePJk4xMdGBZXd1o="
   },
   "service/elasticache": {
    "Module": "service/elasticache",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticache",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Q4OtfHGFDmURYICPAxFgMTTdCRlJUk72iA3slHHv41M="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:r2GU9mRLlZtKNQiB8A6LeKMlxG0BK/LXU+86uv3zUos="
   },
   "service/elasticbeanstalk": {
    "Module": "service/elasticbeanstalk",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:vHZW6a3gZb81XNgsTL3/dnDzuPGn3+8WSr9OR2u2UIs="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:ngD2ETQ+bmpE9dXIwpovAKfEqhK0SODf0EQDMY7qkMA="
   },
   "service/elasticinference": {
    "Module": "service/elasticinference",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticinference",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:nYKI1UG1X38a1Hdh2SMlO6rnpJKOAe+Cgc4Ffw7TwMc="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:QJVUKaTTJrUOrMKisbx3tPH8Zha4d+XUCfIxYzu/anY="
   },
   "service/elasticloadbalancing": {
    "Module": "service/elasticloadbalancing",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:MPpNgWran/Z0OREv/CxOWMqRMvQAUGotSnOJdBsM9As="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:jN/we+fXuZeye2ZIPAGCI8xV6MT/JiT1JnpRUgkmG2M="
   },
   "service/elasticloadbalancingv2": {
    "Module": "service/elasticloadbalancingv2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:9lADbVulXuffsnKXULr1p82sHd9t8JiMF41jmgIRbkg="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:4fbYf4lBHxmT0r48Ll7+Ls7e68jFdAgGs/JFXYeUiJA="
   },
   "service/elasticsearchservice": {
    "Module": "service/elasticsearchservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticsearchservice",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:lNhtY/uitniw94TQFoTkkvTKFNmZjM/KHvSj+J1NWdo="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:abdGxf1AJqZJTKAV7b7RKlwG5tdB82tqcUrd4JCRop0="
   },
   "service/elastictranscoder": {
    "Module": "service/elastictranscoder",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elastictranscoder",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:ZSPkjNuUaC34IEQMf/jmbutcKlunx0PQIJBv193cNcU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:ksGPqwdxRzwSK1H3O4z4jrDbhFnsap0HvmJNK0dzdEc="
   },
   "service/emr": {
    "Module": "service/emr",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/emr",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:JwDNxHv2oazaknN1la3lskZWvOS56cpyG+JZVJc7cIA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:YHcDnfSGq/DfLqIU+qf1uZ3tXVr5kythLVet2zWQZFY="
   },
   "service/emrcontainers": {
    "Module": "service/emrcontainers",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/emrcontainers",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:ciVKUu7ZXKJh1AEaFSCJ3Vy7LcmG5yKGdRiN40UUxiY="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:XxhLi+3rfFJMnwIf50+/w3XhvUDMsqjVwadVhj8vdrA="
   },
   "service/eventbridge": {
    "Module": "service/eventbridge",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/eventbridge",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:RzEj63wHkdKnoVMCZgvtULS1E6QjxyQV2Jj2wTn7Z4c="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:QipuoylJ6QDEgxR2s5G4KCtKw+X75+JtgOJ3CMiPf5Q="
   },
   "service/firehose": {
    "Module": "service/firehose",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/firehose",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:g+CoTGwlBDgczy2Y2FUsuFADLQrAXGgLByavAhAmVo4="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:XG4P2vpReYdY920Pf0pze6O7h7SFUkyIRVNYHNWtA2Y="
   },
   "service/fis": {
    "Module": "service/fis",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/fis",
-   "Version": "v1.0.0",
-   "ModuleHash": "h1:zSMMdlyw1KZ3Mqe6a9fRmnn7dT3ucRRpt+xF6CwvpWg="
+   "Version": "v1.1.0",
+   "ModuleHash": "h1:50vjcme8BywmjaMp+ZQLRmVWsMFzwHL09Ij0kJ8TnvA="
   },
   "service/fms": {
    "Module": "service/fms",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/fms",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:56JLNJUGuGQI187fQJT581KHqJaIuSn9mIbOXoSMcWM="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:GQOo8orIydwBSZSH93Z2gHlVTjkjen5KT6OW0gJKnnQ="
   },
   "service/forecast": {
    "Module": "service/forecast",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/forecast",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:/KSCjBfq4fz8WRz3xnl2yeflUfGJriTvBeY9Wra/Bh0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:aH5+Iyz66x0B/ivAgplNODeaTT8ht6WVw9W99FTdj0I="
   },
   "service/forecastquery": {
    "Module": "service/forecastquery",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/forecastquery",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:vWRTKX0CQNvc+KPko9qpHmO8BUFl5jpAnN/HBizlylI="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:iaWjaLoManaHyCvKExoT+imqvmzb1Fe5mzot4GAY++o="
   },
   "service/frauddetector": {
    "Module": "service/frauddetector",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/frauddetector",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:rCl319z6a65u2IMiCeDRg0N6OuEs94CdA6NmAixYAXo="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:ObpmjqAG9QUAChVsWSqKPWjDK73YCeCPfFHdsYcD6DA="
   },
   "service/fsx": {
    "Module": "service/fsx",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/fsx",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:/hxERAW8wfc5F+aC8rwsB2tqMkWApAWJoaVM0cuhBg4="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:LGYEQ4uhlvWadzJybVEpQ1mpMZqL3z1X/tGMA2xQzAw="
   },
   "service/gamelift": {
    "Module": "service/gamelift",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/gamelift",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:h/y8fmf0RaG1ZXn2qVXMHIWA4+mIkzsY75jZ1OMwgN0="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:TvqEAgeFUnjagxouUM9dgIsLMIhDPw59lfUsLFidiqo="
   },
   "service/glacier": {
    "Module": "service/glacier",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/glacier",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:/w62iYSKgiy9os2DbqztSmQKPCBHXwJhc5+AeTzonZo="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:hLVuLdYBvWCMHa+fvTrQNVmAvnZpCDKqR472mafi8oM="
   },
   "service/globalaccelerator": {
    "Module": "service/globalaccelerator",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/globalaccelerator",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:JnGDUMJDywSxF1NY7ALEPqdb8khqeYTCAsTNqCeuD0w="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:V7i9hzGjSpt5trBJ/0nYkW5PFEZ4LlFNL4+z7IZEF2I="
   },
   "service/glue": {
    "Module": "service/glue",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/glue",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:0aH3dYVQWPV9SWDsSOs6i+FnED8vmx8jPxdDJzve76M="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:xnSuV0C7FGfe9+/GJ/2KOTFD3WMXtLdk8gZzxuuuIRM="
   },
   "service/greengrass": {
    "Module": "service/greengrass",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/greengrass",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:LIh8jSxkAIQDklnJvpyBvdPFgJnb6/Y/Z2d6pG8V/L4="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:bLjlXQYXsQP/3r74XcKBvBHlyMTUiCQZaqU+BfQMm7Q="
   },
   "service/greengrassv2": {
    "Module": "service/greengrassv2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/greengrassv2",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:29jZxbv3EmR+m4RbpOwcZNjXa6adAlvE/dg/TRlfIqs="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:ylasmUJxxeoMEgyXwi9BYL1/NVjVf5TacqP72U9rx8A="
   },
   "service/groundstation": {
    "Module": "service/groundstation",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/groundstation",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:dICv6xV3wbSlpA8GCvEWkiSSDkS9bFbpGfMX6IGCubk="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:wCUY0zditfULGMfm5ZPPhgvBW42RlzIvG68gn/3fnc8="
   },
   "service/guardduty": {
    "Module": "service/guardduty",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/guardduty",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:MLIEv8Hs0+v+5H5P0N0lzmfHG3EXP9xBPtgybnwfb4M="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:ah+72txVcIrXbTymv9PQox4oHMh56330R3+CSWoGWwE="
   },
   "service/health": {
    "Module": "service/health",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/health",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:RT66TXccHBKgwJSUOAfjg2WWNQcpkwYqzMhEVO6Fbh8="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:AHBUqUzswSyusXQNEBQAoje95hrTcy93cE9rMPNwoBU="
   },
   "service/healthlake": {
    "Module": "service/healthlake",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/healthlake",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:gewrnzBFMaS+BdN+OLYoA297FxWFWS8sK4baaRJ4UhE="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:S6gNoLTz0RagXykDus5N/e9QnqciHKMLu4cVdwDOzQQ="
   },
   "service/honeycode": {
    "Module": "service/honeycode",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/honeycode",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:9yeGahKJrGxM6p7Flh8AjfohhpK1LYmGz2YIg0wG9sA="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:SK2AnF0SjRt77QcIP3FEMAAKiY3oY08cYuOL/LOjSek="
   },
   "service/iam": {
    "Module": "service/iam",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iam",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:uY8XHIk4Yl1xZWhNhrM2hXsTkq5YOC8SHwk6TaRIlB0="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:V95YLxbxLGlTcFR0KMMSZEaudIxYCAhycSGcO7/Favs="
   },
   "service/identitystore": {
    "Module": "service/identitystore",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/identitystore",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:dr+uUMRUD5a/B2rf7yYphmsZkC6tBrYQgSuUZ33M+2A="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:deUdQOOkrPA09iLqpJyQHVqhQgBhCsWX0YWdnP/TCS4="
   },
   "service/imagebuilder": {
    "Module": "service/imagebuilder",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/imagebuilder",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:UtqJYYhPa4tOTREWZmLJppaaYMjdkkH9+eYIyl0Xyi8="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:uIhZQUHEeo//PfJAWNsbe+nbsoTGqHqMYm23OrquNlA="
   },
   "service/inspector": {
    "Module": "service/inspector",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/inspector",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:+qADhVH0FIHuT6wA4u5UhArdhi4ErJD+HHm6iPBYC4E="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:hWTtvY2tNftaWrExiGdFIoaMNyEVsu08NBQylEd348o="
   },
   "service/internal/accept-encoding": {
    "Module": "service/internal/accept-encoding",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding",
-   "Version": "v1.0.2",
-   "ModuleHash": "h1:GO0pL4QvQmA0fXJe3MHVO+emtg31MYq5/8sebSWgE6A="
+   "Version": "v1.0.3",
+   "ModuleHash": "h1:iLFz4nrWkXMTFeVn0n99wRyc4Xib4SlDbtAM3h2z8P8="
   },
   "service/internal/benchmark": {
    "Module": "service/internal/benchmark",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/benchmark",
-   "Version": "v0.5.0",
-   "ModuleHash": "h1:N65xPpnbeWuJvf0fudseTowJ39741gSGup88wkMhwIQ="
+   "Version": "v0.5.1",
+   "ModuleHash": "h1:ZCIdff3xRRIe54RulwLXJqLaMmYiXf4GIwGcUg67jm8="
   },
   "service/internal/integrationtest": {
    "Module": "service/internal/integrationtest",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest",
-   "Version": "v0.5.0",
-   "ModuleHash": "h1:xHlT60Ixxnx7zU3WXI3Ne4tUnqPqgsU/GfWm+5SOUgE="
+   "Version": "v0.5.1",
+   "ModuleHash": "h1:IV6A0nB5EPI8YoFQ3/R93liJPjD/Y3ssxE6tN7mDuGk="
   },
   "service/internal/presigned-url": {
    "Module": "service/internal/presigned-url",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url",
-   "Version": "v1.0.4",
-   "ModuleHash": "h1:DRIpujxvhdv3+xLXCoaKk1VB4vk/Sh8sIOBewLJJpes="
+   "Version": "v1.0.5",
+   "ModuleHash": "h1:GbW4bbc1iED64aIL203xcGSfLzWOWuIdnKV0guMcJvg="
   },
   "service/internal/s3shared": {
    "Module": "service/internal/s3shared",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/s3shared",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:UyMohSBk67eLigx1H5x7/kuy/WHnh/uh6OYMgHBRuJQ="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:wCzfVBrF1QRQFacZn1ywE/o2p92FzfpDNI2aCpIv+sY="
   },
   "service/iot": {
    "Module": "service/iot",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iot",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:OTrzh5ew69Vd6x1zruCQ7B/dtcxwCQ5ohPJWwfkydKQ="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:2XPCAh07+oDQKF9n+VPAThvhaqUuIOCIxFa9+xHnc0s="
   },
   "service/iot1clickdevicesservice": {
    "Module": "service/iot1clickdevicesservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iot1clickdevicesservice",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:jduQqpmaGUnZs66zHKbrOri7Pe0iTO3U+30rS8BYtyU="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:UThR0hqKtib9+gmb9PczwpMr4zsb+yWnSthdzsEbZE8="
   },
   "service/iot1clickprojects": {
    "Module": "service/iot1clickprojects",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iot1clickprojects",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:yJ73EF6eslgMpVdYwVlDWlLULMIUpUr+RVDVZgvS78I="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:SfIVkbjhUisynj1hNUh92XchGxpvWetb2JYyw79ULIg="
   },
   "service/iotanalytics": {
    "Module": "service/iotanalytics",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotanalytics",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:csyUQziRFsuRFhnDx1S6XhBHxupODlLm/juM/Ty7Mjo="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:lh9EwwgBCkiC/DGhZbA/115Q3W6YJGN19Db5a1Q7qrg="
   },
   "service/iotdataplane": {
    "Module": "service/iotdataplane",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotdataplane",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:mB8QIjLIIsdx0dbjOdOJ0btYFTBk1pq/qztJXYjodCc="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:rvtJLJGe/+NspUxYWqe6QTW0M50By9WBAYFHbKFlp48="
   },
   "service/iotdeviceadvisor": {
    "Module": "service/iotdeviceadvisor",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:L6Has66DzewfIfBpB7DlH+TSRbDIQ3svK7vBntlbbEk="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:bIs69rx/+eAnVQTd8DVpDx4NX593/fNYTHr3zWnGOVk="
   },
   "service/iotevents": {
    "Module": "service/iotevents",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotevents",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:6EiudlGeP/VHG+XiIQj2SJ5+iHcz2DmleFit9warNCQ="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:nI0lqxnFXSM1tPcfh+Ea2mdLQrIPqfVrndWACIJqIQU="
   },
   "service/ioteventsdata": {
    "Module": "service/ioteventsdata",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ioteventsdata",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:5fHHXFpkpfQu9AY2Ell3nz/SnpPsODCWY/WxuQT+aLg="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:SqnDox6ynTfKo280g2sRm35UZCDfQwjVL/FwJDWxTYE="
   },
   "service/iotfleethub": {
    "Module": "service/iotfleethub",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotfleethub",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:BWcuWjoyAyyDP6ITClK9o46aqQeKNzOzghCnBOUEAtA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:B8Vr8a4MMSeNMq9dr2T1xL88ueK5Wc0h35YNE4Tv3Uo="
   },
   "service/iotjobsdataplane": {
    "Module": "service/iotjobsdataplane",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:9TSurQvLrqAv64IKULVBm2+eUnil1raEOPwWN/C6iEw="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:KFPeGQrPpEhhfO5g2Y8oA1p7SA7P329cCDcbScyHQgA="
   },
   "service/iotsecuretunneling": {
    "Module": "service/iotsecuretunneling",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:Gik6scdV0FLeVUDF88+gbTVvAtXfUsOzIdwpFM9gq1Q="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:rL81wTqbHfoI86L5ZLIM7D4MIrP+ZEc3ZuloZ3JeK/4="
   },
   "service/iotsitewise": {
    "Module": "service/iotsitewise",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotsitewise",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:pEcsItsB/5mWHQM4+IAiL3zVL90VqknL5o6QwFLImoE="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:1zPVGQ8MEE64Wli9sM4zL8tjoXSYti0LWC6OFavdhVA="
   },
   "service/iotthingsgraph": {
    "Module": "service/iotthingsgraph",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotthingsgraph",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:2ijTEm842InyVZSq3lutZJuC2n/3ehuK0npv3cmh5gE="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:JXfshxoDxqT8rY8BwvLKnoLdDpaLUqrdUEMsQzlgwrw="
   },
   "service/iotwireless": {
    "Module": "service/iotwireless",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/iotwireless",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:1jTFEat886YLIhr/hUkWoGGFq+naRQX9+8s9ukjQAjk="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:PRI6nYtmkUCB3uPW2+FOkkRy8er1y/Jd++f7MI9JRgI="
   },
   "service/ivs": {
    "Module": "service/ivs",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ivs",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:RbgSkwLl5FRU8apgHkSrIsi6JCrmZrM6DSkpY1VXzT4="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:NYRIjk/Gfh6VNsToJAjtl2OzSUs3cCEu4o5RO3XEPYs="
   },
   "service/kafka": {
    "Module": "service/kafka",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kafka",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:tsy2iG0NPTFQnapL/ZNHD+Hi3crhJIruzTKk9HEy3Ks="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:70IRtg4hU1mQ5aAtjEHPQR+KCeVIDwLOpvbofiSEODE="
   },
   "service/kendra": {
    "Module": "service/kendra",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kendra",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:nvg1cSxZ+R3Vz4rSqQO7p4iej6P282zazCJ7+tednio="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:4V7Fn9vog4k77XVaqItzmmhO2nFvSHHxiZIV/HStN0A="
   },
   "service/kinesis": {
    "Module": "service/kinesis",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesis",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:7a9dT9QAhr8P3JIcp5J/UtRxY2ayq0LMdYRLvLxbyHg="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:MXy6AyLlbBYypXEsmK94l9yGjKKtxNaD/jFzVVOsnYQ="
   },
   "service/kinesisanalytics": {
    "Module": "service/kinesisanalytics",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisanalytics",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:OTh0TkdPGyT9OtAId7/wTqUR/hKSdmg8fhWRKCstZuA="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:3+ZEih+xtz8Fcqb8ZYwBCVaM8ZtK0WocL40B26yhrfQ="
   },
   "service/kinesisanalyticsv2": {
    "Module": "service/kinesisanalyticsv2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:DfNWF0/GmigdZGrVlQvI7z7yVmYIhxL0xIXbRSqglIg="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:pHxc5o+qDX9KgbVBKyUMXaTaQbrCCFzg54zAMXWezAI="
   },
   "service/kinesisvideo": {
    "Module": "service/kinesisvideo",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisvideo",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:L4OHXeCBdEbiV5fDI1WVFJ+i+A7x1+gmCccP9KirBFM="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:tWOm70WscxPN/cpQ3FfX12lLl3O/k47033DJuOkPRPM="
   },
   "service/kinesisvideoarchivedmedia": {
    "Module": "service/kinesisvideoarchivedmedia",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:DTzX1kAKNsm+nqElQ3KrNqLGK3v05YTJbBdqm9g3bl4="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Xrc0Ylhndu6NlpaYXagTDyv5NBXmTclCmIsGfYSJWRE="
   },
   "service/kinesisvideomedia": {
    "Module": "service/kinesisvideomedia",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:tTh8s2pkHJj/EkAgIHKITy3MLrZj4UCJtb5w61OKKjs="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:oEzXMnMLK5ivqlb06CKL8DwWcDdB2Y9UqQh4SArAPXU="
   },
   "service/kinesisvideosignaling": {
    "Module": "service/kinesisvideosignaling",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:T1v9TZki+wwWEp0a4Jlcg6D9BznXVU1PHcOeklpQdME="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:DlgokJJp5njI8JM1SU0KH21NrX5CstXYHHX0YuswJOk="
   },
   "service/kms": {
    "Module": "service/kms",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kms",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Ow4q8QqQsxsEwddnqY9R+VzQaCUHVrH/m8ddlk+u1DE="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:X77wgZdglt2hU9zZS3DufyJiR4ZGW4F5x72OauDMSsM="
   },
   "service/lakeformation": {
    "Module": "service/lakeformation",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lakeformation",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:w9io9zPL1wCu85t5NPoZpEg5FDzR3DG2OrueQW/9oiU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:enYIxW0Nr2PXIBXarU8ZxshW30dhlViMTtKwsfLbjss="
   },
   "service/lambda": {
    "Module": "service/lambda",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lambda",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:fCPUYx4n5xxpMNldmSOofzEQoN7db5ELgBooGfkcJjU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:U1AhnZgIHWCh6kIXuq6RkTptzU6szpDHjRbrA7g+99s="
   },
   "service/lexmodelbuildingservice": {
    "Module": "service/lexmodelbuildingservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:hXzr1ME926+ClWUX1sKQm20I2jAMMuhJf2JLCarRk2g="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:s01yF4lHBgO7YNtSofKf/kro7+K5FbCozSyD7ZOF9Rc="
   },
   "service/lexmodelsv2": {
    "Module": "service/lexmodelsv2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lexmodelsv2",
-   "Version": "v1.0.0",
-   "ModuleHash": "h1:sAeiURW34pKk2yl9RXaq0Q4gDqRPcFVu6s3f2IGMK1E="
+   "Version": "v1.0.1",
+   "ModuleHash": "h1:cgZLfBAWJBu/C0uJWFXti+coQrf1m+kt74kKnegxkAs="
   },
   "service/lexruntimeservice": {
    "Module": "service/lexruntimeservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lexruntimeservice",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:AWJzR9UJ0z8HpHEpRSBDFbIDTdKy2R2yPWjfGPnNzuw="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:9ubliWaZjw5VLcRMq0JOh/Na3VpY82/3tGBz/kQGSh0="
   },
   "service/lexruntimev2": {
    "Module": "service/lexruntimev2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lexruntimev2",
-   "Version": "v1.0.0",
-   "ModuleHash": "h1:Na92engFzK58h3S5NRr4JTTCO47ek5UtrvJmJYJ1QcQ="
+   "Version": "v1.0.1",
+   "ModuleHash": "h1:rR7DLYTSD+A6OCEELvIkxHJzm1WSWla5Fh8fj3+Ijqk="
   },
   "service/licensemanager": {
    "Module": "service/licensemanager",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/licensemanager",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:nurx4/M1ijL0xJNTwYYtcBdbQWVtGUCiZc7b73leStw="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:79Pk46d1RVONs4bxTPxQmSt9tUFVpmSrmRoP6hqVHGw="
   },
   "service/lightsail": {
    "Module": "service/lightsail",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lightsail",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:CKMx5oNJEeoLtO52rifn0/rDUJGxJQ2MebdB85gtixQ="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:KtqKLszWLiVi9BkFtXNKzhJJiaQKYWwS34/fNRFjCJ4="
+  },
+  "service/location": {
+   "Module": "service/location",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/location",
+   "Version": "v1.0.0",
+   "ModuleHash": "h1:GElVYC/WP2H+AYs9hdLhW7Sfvb+ighDAZ3VpNbxVCHY="
+  },
+  "service/lookoutmetrics": {
+   "Module": "service/lookoutmetrics",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lookoutmetrics",
+   "Version": "v1.0.0",
+   "ModuleHash": "h1:kXfBYe3dneV8ZYmCDvNHIdAhKFdZR4MgsVpn4VfeafA="
   },
   "service/lookoutvision": {
    "Module": "service/lookoutvision",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/lookoutvision",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:g1bOG0qUxarfR6KMgLEMc1L7dC72oigFdCNnMMYr3v8="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:pJ7NcnR9xnLxFbfvz7icog/EZGFVigItk8vP7QdckBM="
   },
   "service/machinelearning": {
    "Module": "service/machinelearning",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/machinelearning",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:tgJ2p/CMQ5OAzdt/o7Ec7e3Lr5kPO4UCPfzHdilrvXs="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:BJNr8yViaL0KdQgbmy7JRv+igxKAnQfPdaxg6OPmykM="
   },
   "service/macie": {
    "Module": "service/macie",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/macie",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:yA5r96+fjfZ8J/ETmFpQWrwkpHUCPF2gHRlN+SDE2D8="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:mztaducFFYst6lgq5jTzKcsvIxAxjZ0ClcIMIKYadE0="
   },
   "service/macie2": {
    "Module": "service/macie2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/macie2",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:xWNtw2fbnbQi3LJrFkp7kPN3r6WnN/h07Jsz3tYB0zE="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:phdy6vgATa+IDxv7V7sNnPnXs3WOyj4uhtultH4t1Hs="
   },
   "service/managedblockchain": {
    "Module": "service/managedblockchain",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/managedblockchain",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:kbrqwTTQLkVAXLq2zHzUk3SP38k0oUj/K2+GPw2CZv0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:um2gDMbXlnMhIqtw0tzX7tNnVKiwgNSdLejuBUAgPz8="
   },
   "service/marketplacecatalog": {
    "Module": "service/marketplacecatalog",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/marketplacecatalog",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:ayZw+xkAgsoJbxgEcOFkoHKv3uUf31PSCAclrbz0MKM="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:qzSfcLvGakwmE0M45/nMZvIo5JsCxQcLV4lyxcpeZoM="
   },
   "service/marketplacecommerceanalytics": {
    "Module": "service/marketplacecommerceanalytics",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:kX+5PZjOsvO1u0AvH4LyNAXIsCY1FVc4QlRSGeyMqsU="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:oIFkBneN5Rw6RYQXdubvSoOGVvcfrmeIY5O9NCtr9tY="
   },
   "service/marketplaceentitlementservice": {
    "Module": "service/marketplaceentitlementservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:UYepKq4CL6Jp5MEUdVbupsVYQ6hdqIroQB9DF0ksDdU="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:i94AmLG3rsWJVyN9BPy83uDp2ZrG3BsX58GfKOnZzN0="
   },
   "service/marketplacemetering": {
    "Module": "service/marketplacemetering",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/marketplacemetering",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:ChBGm+zujzowa3CVD1XzrqyOgCTyjciYO8E8hcMNiMM="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:mFR1/yiVe2b1mm+aGydQ80EESIFj7vYEqupSOu2I/L8="
   },
   "service/mediaconnect": {
    "Module": "service/mediaconnect",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediaconnect",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:COKI6dVVV+87L4TYsUEHYwIx1lOrsO+ZzjNRu3lxENM="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:4oztZA8BxgDdy2PqjlVv5dJIcAhPKe2epVr0I1tKrQg="
   },
   "service/mediaconvert": {
    "Module": "service/mediaconvert",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediaconvert",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:yze4fPtg1meJ5J5dS/YG6RRuTJvC7zVyD00hawA3Kzc="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:BJt4hXiZxFl06KKiM0NrModBhNAxeVPgCYQAuPau3uw="
   },
   "service/medialive": {
    "Module": "service/medialive",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/medialive",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:RE0ssgMiiVb3MnXodtZC8niZzRPXhQ45yOOkbjDaIRw="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:NFYyYF/VWJd4qc5+tLACVBxx/4mLE0dqHw0J+ccKNrM="
   },
   "service/mediapackage": {
    "Module": "service/mediapackage",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediapackage",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:m1aNyUDsPQNIB3lbXkAKMSDujzknohXtZvKHUyqQ2xA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:/NgTgipY3ADAqLp18q1dDomqHYULUrcD3v3XGdqIhT8="
   },
   "service/mediapackagevod": {
    "Module": "service/mediapackagevod",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediapackagevod",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:cg/2Wjffj3sCnKDKvmv5QOKK/Bl9FbEDj6tWzpOlIYU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:iG4JzHW45v3kS9Lp9ZV+yrZaLQreE+JWRwQM56mbmLE="
   },
   "service/mediastore": {
    "Module": "service/mediastore",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediastore",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:nX9GKufQhQoeBux599ThjIyQpCvKZsonBV9BxZHfFZw="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:7ho72LnawdmIm8J8KdkLoLWgcsqLcS8oKBDuT3005wg="
   },
   "service/mediastoredata": {
    "Module": "service/mediastoredata",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediastoredata",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:HkU7l+/B8ajhx/5UOBQN+jAdnGnbrjUVjDcBjeXb/9E="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:q4mlVahgTe0Pi+j0UE9HHF7MtLYjAGQXn3+eEPJjphE="
   },
   "service/mediatailor": {
    "Module": "service/mediatailor",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mediatailor",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:GZBKE6TD/aiyOk/fK7Y4seL5HFr0jxhXyy7hwQAKcyI="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:CKlduZwqNaG/b4AhjdTCe94DyVs7xOf6o5/ypbnOL5M="
   },
   "service/migrationhub": {
    "Module": "service/migrationhub",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/migrationhub",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:T0ZVtDhINmkylGGrH/9TfzynPfXzjvu4pZLZGEZ4fDk="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:XiEuLbLrrz29NJ++SjW13IV7jjHe6M7kS5ZfIiURa44="
   },
   "service/migrationhubconfig": {
    "Module": "service/migrationhubconfig",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/migrationhubconfig",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:BII2RaDb9lp4ZkkIH8piC0CVYy8Bvd3gYYXe0+GAuy4="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:tjGyYk0jtr227RjGTMnHRyQG+C+GhtvZXbNlWgskG+c="
   },
   "service/mobile": {
    "Module": "service/mobile",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mobile",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:/fQS8H+sAFlFEscFqr/10aOaEAF+2MXTPEnhH3Cb/Lw="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:vFln2csvHf4WLzNOWz4ipbPzVX0h1eWwZ8AsxjVmOEk="
   },
   "service/mq": {
    "Module": "service/mq",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mq",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:GaLGNSWgSTOoFg3C+NqRAcd5mEa04qfUkLiOG4bgwgo="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:j4D4AfYPQxA6lSwozj59RR96DAd2+H7jX9l8qML/RQM="
   },
   "service/mturk": {
    "Module": "service/mturk",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mturk",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:qAe0f9O8bpTDpNyIMFHM5R3fMUcsGwj1Jthf4hKplMk="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:440qKufVNUm/LM8O8pEdl1NDLiay5Ida1tGflxhQGbs="
   },
   "service/mwaa": {
    "Module": "service/mwaa",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/mwaa",
-   "Version": "v1.0.0",
-   "ModuleHash": "h1:SaIS1AgogxlOMaZsaZaNKXMIKHUwQr2TN8xLP6rBN1I="
+   "Version": "v1.0.1",
+   "ModuleHash": "h1:7t7s9V+wXZpiNdzA0sIXA8/v+9J9oeedwMEskITgj4o="
   },
   "service/neptune": {
    "Module": "service/neptune",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/neptune",
-   "Version": "v1.3.0",
-   "ModuleHash": "h1:mkp+2qZ/g6umQaIcyVxRqayC+vxMLjYAuzrpeI56BJo="
+   "Version": "v1.3.1",
+   "ModuleHash": "h1:DK10iA/6GnMRB91KgrfVRKK0S7wNhNuSgL4REj+CRVI="
   },
   "service/networkfirewall": {
    "Module": "service/networkfirewall",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/networkfirewall",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:08jpm5++ZpbP6z171VdoXyDRjo40iP5LhRuBETSNWfY="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:85RQFSrktPH90VsZC7azdirZcPJ2EmI4nz2Q6TKQR5Y="
   },
   "service/networkmanager": {
    "Module": "service/networkmanager",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/networkmanager",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:NBM0b7rxA33kFqSBXzwaZx0dM05zCoIzJOSg52ak4m0="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:89S0jhD/DTAQDB0ZudgLFXnuSrZ2/7hh3c1+7je19QI="
   },
   "service/opsworks": {
    "Module": "service/opsworks",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/opsworks",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:VaRHwm5+FvZ3AYrFNTkFn64IB98m8mxj15os3pguHEU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:IO7VrzPWU0y8Zv7eS28H5lbhl40SND58IAKR+jrMdy8="
   },
   "service/opsworkscm": {
    "Module": "service/opsworkscm",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/opsworkscm",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:otdvbgqeDiRCNR7CNl/JjODBQklgnAbYzMmCIl5rFrA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:BxfQId7zIyWpbztF5bSCaThC7Bs/L4gxLbfEFUJ93lg="
   },
   "service/organizations": {
    "Module": "service/organizations",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/organizations",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:mKrJKJHpd9cgzyZj6Pi5AaRIaRqu0go6EbjAkTRt9/M="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:TvDVD1mBXP60NIHrqbP8uuzTf4vu48HlOm5jtoQQcW0="
   },
   "service/outposts": {
    "Module": "service/outposts",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/outposts",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:KaGmt2JjX6CSgygc6IUUMy4u8mCZ5dkXD942jX+9zM8="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:0m28/DmdFJuLrMrEOHruD/SQcNd/hxVCjx22X+JotUI="
   },
   "service/personalize": {
    "Module": "service/personalize",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/personalize",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:I4nG2PexapAqQXP1rN83+Sec+yTd+fdao1RMU22TGsE="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:WHwyvs4DObrs9Go/gwIRQUAEOQeh+6vBnvtaZ1GCosA="
   },
   "service/personalizeevents": {
    "Module": "service/personalizeevents",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/personalizeevents",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:diGw9CsVpJSUq8iQauJDALK7ct5Hv6nWK4Gmkc1HyTE="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:6SO0qeF9Qdo/DT7PJbFSFUdxAqMeyxuur9DAH2bFPis="
   },
   "service/personalizeruntime": {
    "Module": "service/personalizeruntime",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/personalizeruntime",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:EaMlgbPo83ahlDGrP7gw7NstB0OGat/WArhemtKy8G0="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:Ej0KcBcwgC+69XqDRdclHg4SrvI2rORz+tIuTsk4Esg="
   },
   "service/pi": {
    "Module": "service/pi",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pi",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:e9eEAoUbmFuRu3ZjpPbOr9YeIeg3v1f/VAi6sUpLBfc="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:zRIVAYELkqTw85OdhHvnIxMpUTugHV2Nevo/J3up7RE="
   },
   "service/pinpoint": {
    "Module": "service/pinpoint",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pinpoint",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:9nl7NkYrli/Pmqx5F6SWBxP+LAH4pebSj8x+ScP+X70="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:KYqwfNZ1mNR2Fk+j9I3+k+HVGEqVpplIJjoaOnQrrH8="
   },
   "service/pinpointemail": {
    "Module": "service/pinpointemail",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pinpointemail",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:HDjLyAOaAbxw9ucUOn4WpzZB/kPV5Rt2vqC+t7ulUKI="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:JE2mhl2y1f8bv2juRMLLKhqCoGXfBBNBPPCpG2G75Z0="
   },
   "service/pinpointsmsvoice": {
    "Module": "service/pinpointsmsvoice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:RimznWCuV2wbo6uG5tLXUy6kCF471YgYh+RvFCZ+LpA="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:xNxbzcvfuzJCV+gfsTdshceN9LYN1RFPiMt/145Etm4="
   },
   "service/polly": {
    "Module": "service/polly",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/polly",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:CH31P1wPCKIEkwH6u8+YmaCHT4kiFvTDni7aQQBeeYY="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:XIGUxdZS9FbPX2obj+MzQBKrGKFuhNt6Xwh042yN7+o="
   },
   "service/pricing": {
    "Module": "service/pricing",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/pricing",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:n0ZcnvcjPFbwYVtTxn8nLDFf8POCvoRCa3ut3vwcdso="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:joT6DC/wWGJoTGu6os36FrZg093WJXOvPPX7kvXGmZA="
   },
   "service/qldb": {
    "Module": "service/qldb",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/qldb",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:mQUBlaWu2q7RftA5O8psLn2wQTIJAQEX0eIp3dZOtxQ="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:rQ8U/6Hn5f72u3vCOPXAoxPuKb24Rxp0kxXZYn/ew04="
   },
   "service/qldbsession": {
    "Module": "service/qldbsession",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/qldbsession",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:fY+rumWIpVfGJa6UTv1Jju9L1MC+/rQm0Ak9RpLq4Ok="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:/BV9JCZY7odb92bkRES2WfZqaOnAG4vOgvtX+ovJ1p4="
   },
   "service/quicksight": {
    "Module": "service/quicksight",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/quicksight",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:s19CE68KB8PClmGJ0m/7Y5/BQpiWvj0FrJsNW2oKe04="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:5c5pRSb8zlqXPgZ/F9eKUAecqgf2MABfNy3IoxWhXGM="
   },
   "service/ram": {
    "Module": "service/ram",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ram",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:J9s1Yz8BTKhNZFdCxGcsXLtki/AHjpP8LwBJNYXnXVc="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:aU5wjc6/Xj/KmJX0tH6VHRvlFFNKpxGVsRkwkcyK9CU="
   },
   "service/rds": {
    "Module": "service/rds",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/rds",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:nxkwQuPJC6evaf+6fLoME2vp+DBI3+0BtCdJ+DDzCko="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:nh6V70gwG0bE6Ocz34rg5VZvmthKuDSa785CBpvY2g8="
   },
   "service/rdsdata": {
    "Module": "service/rdsdata",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/rdsdata",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:GoJn1prI4jQEzbt/XgYjUYdZsNWUHl/QSsFFmp2tEfU="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:YLBhjqgxjO4kJ/DiI5bKp8mEYhD+PfU0ASR2By4Ccgg="
   },
   "service/redshift": {
    "Module": "service/redshift",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/redshift",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:hGsuBE/nQcyw/GwVf//B6EY82tx3IYbed+XYZNMHQzM="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:Eiv449szSm77R2AFB8Up0oW3DGJTuaICBkOwptibmfQ="
   },
   "service/redshiftdata": {
    "Module": "service/redshiftdata",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/redshiftdata",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:4myPSpoAtO7sQAbAwq4IqVROwyAPZzlJFQnHJpPPB/I="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:hLkonNFBNp2ITR0aTMTlO7BqzD4bk7MNFymw9GO6iv8="
   },
   "service/rekognition": {
    "Module": "service/rekognition",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/rekognition",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:6ej5Xf+W3yW7GSYXjqdt8E7vnpzvXPPjSe1SZhA9fL8="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:1+mSXr9v1G462XDMbGYMeZkrBODCEYAsQ6ylbkx0uuk="
   },
   "service/resourcegroups": {
    "Module": "service/resourcegroups",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/resourcegroups",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Fx4z3WnESkI28ddew4/qdArro4qIKtP9ImGcgVGzqZA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:36JI8JwGQEH5JcRXdpWucey2jr+mSLZWEvLWZLo73PI="
   },
   "service/resourcegroupstaggingapi": {
    "Module": "service/resourcegroupstaggingapi",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:NqtkE1agdfEGYS/0QBd/1frLZm7I5rjMUy7w2WaWzHY="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:9N3811lEDHroaPdiRe6tIliw61EcBHYcroGibAz1KqI="
   },
   "service/robomaker": {
    "Module": "service/robomaker",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/robomaker",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:Hz6g3RPdwnpSllpOQPLK+ifCr5kQv25RN1+9hYEhktk="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:wRlJAb1iGLhOjZUTiPzuTnuQ2B1LyE/BLtIEhH4jjM0="
   },
   "service/route53": {
    "Module": "service/route53",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/route53",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:lzZZUs78BQYAb0YPAstbw8ADIFLRMELU3r0BTbqjMyA="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:uwKwx0iSdZyIwQmsMPtAoBjlRC1lFUAhx2c6HGWjfPM="
   },
   "service/route53domains": {
    "Module": "service/route53domains",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/route53domains",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:y8sMl4irsYq0fKE6LwkMe0kG0Lzmyy0VFAO3M8OJQos="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:58BznccDxmfO4s499bHf80aaQZNwiWVAXDTxhkMUaBg="
   },
   "service/route53resolver": {
    "Module": "service/route53resolver",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/route53resolver",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:yPd9FpM8Z2COuUUaaBn/vh5MEbE1XJ+wqK5NWJl54Vw="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:BzXCrdOnD1N7CAxm9zTTKKwYvyWJIh83YZqQktJWFws="
   },
   "service/s3": {
    "Module": "service/s3",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/s3",
-   "Version": "v1.3.0",
-   "ModuleHash": "h1:BBDKiFdz43IZPM74E4M4SckrBMHMGaHG+JEnTQ6vWvc="
+   "Version": "v1.4.0",
+   "ModuleHash": "h1:045tK3IL+TxOSWWQyG199A0BYJ/Yhgk8XV9xo+nQkLQ="
   },
   "service/s3/internal/configtesting": {
    "Module": "service/s3/internal/configtesting",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/s3/internal/configtesting",
-   "Version": "v1.1.0",
-   "ModuleHash": "h1:e6HaHnsb1120Gh8WN6VcvTxuaiPIaTQrlhD0ZpaDswA="
+   "Version": "v1.1.1",
+   "ModuleHash": "h1:SrOnj+daZozlbIIcGFMUkdGoWcdEEBQ/EZ5QomidgTA="
   },
   "service/s3control": {
    "Module": "service/s3control",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/s3control",
-   "Version": "v1.3.0",
-   "ModuleHash": "h1:8kYH2VqbgPDkPxVrtM6QvXsOmjGQGEo2oWM/jThSuIQ="
+   "Version": "v1.4.0",
+   "ModuleHash": "h1:ohXz9w0lduYUWIEZQ0FNzGzERSyg2+ALIo3U5fS6tQA="
   },
   "service/s3outposts": {
    "Module": "service/s3outposts",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/s3outposts",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:XuCgEfVaDnP+G+PXYA13TVFgxy5wOgghIw8qHNzVAZk="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:ntszG3reLqgLxtqF79Ldcz+HQxZawv0l34qmGo/Ox68="
   },
   "service/sagemaker": {
    "Module": "service/sagemaker",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sagemaker",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:ogURBb5fDaoShufbZqVSzZJ1cPJ84TkDee+uB3KFcZY="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:qPkVtYSSqSk74C/nqgySjXxDQppfb8E4fi51Cp0bekY="
   },
   "service/sagemakera2iruntime": {
    "Module": "service/sagemakera2iruntime",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:uwHJngZh94S1fp+iwkO/YjQ8tZ4czLuwGkswUxXbYi4="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:/447MX4Uu1x8EF2+b46i+LBg4ukLHMsq0NVerLfiRmE="
   },
   "service/sagemakeredge": {
    "Module": "service/sagemakeredge",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sagemakeredge",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:86ZAPmEFdE/SGpmmDQhSFQeNJT6EOgcXCufI7xYJoSQ="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Q74rejvajR9z9SVXY9w90SD5AaBcaCpfWJxrYlSDTKo="
   },
   "service/sagemakerfeaturestoreruntime": {
    "Module": "service/sagemakerfeaturestoreruntime",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:qLD7kXS+W8nHHAO5oUEooA2ZynHIgDb3+YQ46+MkH/4="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:yYFZsQzwKiA4MRAYJDvvlQHtrIlTdYw8RzMmtic2Df8="
   },
   "service/sagemakerruntime": {
    "Module": "service/sagemakerruntime",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sagemakerruntime",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:8zD0ye1BG1uhW/8ljztSQvZd4Df93mtzDCDO2UWt7vY="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Tb95CSoEp57+E5oG/Q/C6Hts8hCWMjANwHtUVvSsz34="
   },
   "service/savingsplans": {
    "Module": "service/savingsplans",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/savingsplans",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:xmthEvQ4tBkS0luGyfq38kf00vS3eRZJVTWly2Gi2g4="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:0pUNC6IEzd/7Qzecy8DStGEutExFZ+XwnhheWj7iOLk="
   },
   "service/schemas": {
    "Module": "service/schemas",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/schemas",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:z0sAdwK0t7q7o8dMYtg/1E4iQfbGnvyE/umIHh5Y2qg="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:/asHazxY/c69MeZD3FQfIcMCY65xosEjLILTNzwRP6g="
   },
   "service/secretsmanager": {
    "Module": "service/secretsmanager",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/secretsmanager",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:1U+MX9ViDoF/ejlJI1KQn05f17k9env0tVSIXC6hifc="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:g5UomfutRdIkbsqdGr4XyuVyTZM+sp7ySmnoU8zai9s="
   },
   "service/securityhub": {
    "Module": "service/securityhub",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/securityhub",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:NiLKsyhYMliczY4FykjXLeSTmDGuflRH6rZQiDKkBvY="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:qZplAHGJFl16wbZAWEnP73dzATdJDBly6ccPfeSeffc="
   },
   "service/serverlessapplicationrepository": {
    "Module": "service/serverlessapplicationrepository",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:kQeTKN3z4idTrXaiXjgC6sk80kwmgZAkFDZ+OSkWCeY="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:8fgnRBrTPSrj+pxpRhAcRjiOEbXjioPBwUhbmvVLgns="
   },
   "service/servicecatalog": {
    "Module": "service/servicecatalog",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/servicecatalog",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:O/X9QiWd+Ci0mzN55E/MdQrZtux372EcJ+ZTeFsRwx0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:/FTF3YGI/WxRnRKhruU1nyhR/gzgfYP0kQF7yIaqEjU="
   },
   "service/servicecatalogappregistry": {
    "Module": "service/servicecatalogappregistry",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:53mdYN+K3pygDSwy0KA09AfsqCKYB520to2+OPRkAtw="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:RIjIqJGY9k7z3d4ePjbgFU7Tr1FEvseuL5xDzxZOkYU="
   },
   "service/servicediscovery": {
    "Module": "service/servicediscovery",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/servicediscovery",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:iuxOHn2MwuksXwWL+hejTBmlvBhNsOa7vcAoMD0Xz/M="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Ra8T74zzKlkt4BpBsuncFDCRJ89LJLZCZ6iSfrB+iBg="
   },
   "service/servicequotas": {
    "Module": "service/servicequotas",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/servicequotas",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:fdAzD5GdJq+1ts6VI9M+Eta7usrE8636i7oq+HK/ayQ="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:W1YSr8bNUlfZXB08556MKXn0by4C0pa7jna9TW98G84="
   },
   "service/ses": {
    "Module": "service/ses",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ses",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:rRBTnVmuMC8Tv3D36CXW2mr8QgWsYR7QW+Iipf4033I="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:hHtrVZvqyYzXYzMyZb6ww8aOI7n3X61uughtdJ8v8E8="
   },
   "service/sesv2": {
    "Module": "service/sesv2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sesv2",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:P2+F8ZsQStIqYlAU+3o2msR1bS0x48jES8c7+58lzLw="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:xt2dBYY4LCmNixarqUFTzU7aQCG9J3fXWF0aANg1J10="
   },
   "service/sfn": {
    "Module": "service/sfn",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sfn",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:bb4OM6EOwlU8j+8D7rCSPCLE7ov3GfXkWYsxOAqKeE0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:L9eiomAn2X5JnUbJs//EbLmbQAOwFIjxowjFTb1+mg0="
   },
   "service/shield": {
    "Module": "service/shield",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/shield",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:FLc0HFuXdv+gsewSotaBhs5FWU+oM5WK+qKptmH0Saw="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:2K2rtKrNrvrVp2bUtY6sTiB8qwRB0/ibzsSTgi4dptI="
   },
   "service/signer": {
    "Module": "service/signer",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/signer",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:mjt3I/jTfSnZTVyfZBSUB7UlEenpQx53bhb3HFolGDo="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:uuWmJyQSVT7gWYNf1aLlfWsnGCUW47R4HryCkPlMTlw="
   },
   "service/sms": {
    "Module": "service/sms",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sms",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:P5qE9NBDRF2oG9l1caXcUpgtmFW/81W/AF6osMiXTHA="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:D/YzXwT30LavDXfgGAiIPqosEM6TBbtccctqmRm7/K8="
   },
   "service/snowball": {
    "Module": "service/snowball",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/snowball",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:RpALeC7loGjFzuh4/w2yhwBfRqRx8ea5j8iVng8eQNY="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:QhXuQ1t+053KKanw3I+mA3wQYXAGngpx/LuPvzBU//o="
   },
   "service/sns": {
    "Module": "service/sns",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sns",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:XszPoFEFZz4PrGA+5hN5JmTJoBB7H6HMS1W+Fg1JKCM="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:IVHrunoAsIp1OV445PE84mM+WArZChXrxNbFIx4uAWQ="
   },
   "service/sqs": {
    "Module": "service/sqs",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sqs",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:G3wcPWL7v2IG8p+Kl5RlIEALCFye+JU26HfkDAp9hc4="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:iePzn4Gr4p5QKat3G7snhUvopc/lOj25ZiPJ4/PPzq8="
   },
   "service/ssm": {
    "Module": "service/ssm",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ssm",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:b6D7f7GZ9NqAQhIDR1q79PrYy5d/eTxK9w3o20BfBH8="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:0swJm4MqIjN1v1tM9GQ8hGv+KXv4smEiftpAXg84aZg="
   },
   "service/sso": {
    "Module": "service/sso",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sso",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:NVLHdz3KtZhCrX0GWZKpdINKuDh7PsaZ8Vsr4OxP88s="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:Tr/SsFDXWN8rntdzTNrDs/MvuBXRCjY6xvJrPFUPKRM="
   },
   "service/ssoadmin": {
    "Module": "service/ssoadmin",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ssoadmin",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:31mODH/3uIEeqZXLmTw1uSP2/tj87vepslH/zmjj0eg="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:rOpiqfjz3Vf2/VLRb6aityKYGCkx5DGX10G72RJt9+0="
   },
   "service/ssooidc": {
    "Module": "service/ssooidc",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/ssooidc",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:pNK9bFqgeZMF2bMFdvoODNavn+GSJRof7kn/OPEgUtM="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:Jd+sP5m/XK5HIywdPnukffWfV959s4dGU7Z1LXoB91g="
   },
   "service/storagegateway": {
    "Module": "service/storagegateway",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/storagegateway",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:q2nlCqH8DwdwTJkwUyjXicxH7K2Tz952gdB/Huq/FaI="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:NAs1Q7ONLoXb4ns06M11Cu8kitN1cBVFeWWl/ltvSmQ="
   },
   "service/sts": {
    "Module": "service/sts",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/sts",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:fGo3atNqTj3SOu1VKb52BUzRcYOhrpJ1wHrzTuMs+QA="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:1koRvKlZMN+FhTGV5f4q6vRHXNJzeZlPKzbs1/Y32Kg="
   },
   "service/support": {
    "Module": "service/support",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/support",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:FlwOZZr10PxPlBMEIQgbKphSj7jrOdZ8auiyO5uUyL4="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:vLq5jr/FPU8Lfrxh2CB6pyWJv4fqWZS0+9tfCfLGqXw="
   },
   "service/swf": {
    "Module": "service/swf",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/swf",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:PS1whaSJV8S4diBLt+IVHQxutKwxJ3vQ8GjplFYtEfw="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:oRzuG8uLuYbUysx6lSJ/h1yHItT7CCq8wNjKt2SO5Yo="
   },
   "service/synthetics": {
    "Module": "service/synthetics",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/synthetics",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:xPhpbKQcbk8gBPKvX/ejFfnF0S/QKJ6Ta7FJz6Fe8nY="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:OTpqKW13USOLDd+mybJeT4B6SL7d7EIvbxmaUg+N3x4="
   },
   "service/textract": {
    "Module": "service/textract",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/textract",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:gSyOYe1N81pqUWBl8EHB+WvGqbqZry1Oz0h4Fh7RBVM="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:RT4pvWZTtksUxN7FD6ekwsIgMqlhpscs2ljTqmY4yqw="
   },
   "service/timestreamquery": {
    "Module": "service/timestreamquery",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/timestreamquery",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:mO4oHjPCt/YjjstO2rWterrnytCoVStJIhAKD5HVkYw="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:ScBkF04xUdmZH6XAiUinO/zxl2BIE3XvsR3nVbc/Cl8="
   },
   "service/timestreamwrite": {
    "Module": "service/timestreamwrite",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/timestreamwrite",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:dOe2KH2x8vDeRok/yfjkP3xeHfVSgkXskGT3i3pxjao="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:PcLBhy8rFxO9pDJACozBcKIbN/RU8NqWMTe+b9LfWGM="
   },
   "service/transcribe": {
    "Module": "service/transcribe",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/transcribe",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:2OSMHVjCi7AKO+bOwHkVb7GK5+uuD4DiToS6RpbMFGo="
+   "Version": "v1.2.0",
+   "ModuleHash": "h1:6LIPo57QHjv09Yz8Jgipkmz+7d2NkdvNPUxwaho14S4="
   },
   "service/transfer": {
    "Module": "service/transfer",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/transfer",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:hhwm0AZgtb7m7M1cjkuXQV/6Pqbill+EJOSs0toCMN0="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:v/6bx+zqeKaMRJv+tcJ/1vMjrwXTMLWIMjsnGUFTdzU="
   },
   "service/translate": {
    "Module": "service/translate",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/translate",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:xrhu/R4WTtdtotEk9lDnzp5/Kc4Jmo8i+NpFonVCyE8="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:H3UpWG0SYq+pl/7LuX0UuLvTnGH9TR5FtWHzUHgAw9Q="
   },
   "service/waf": {
    "Module": "service/waf",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/waf",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:IEGT5besMwoerkUfEI7WD/JhCKbHMXrMmaCC8T5vTHc="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:Wh0YMwF394A9eBC8Pv8Uxk6CBx9KTWmoqyflQIBx6DU="
   },
   "service/wafregional": {
    "Module": "service/wafregional",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/wafregional",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:miEPWynIa1nDS6DE1+9/QsNRdPoqA4ZF61PlPnvRy/A="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:Re8Uwffnndo9t8V46kT3aruMvVXHXUmuYKhIF1U9CBc="
   },
   "service/wafv2": {
    "Module": "service/wafv2",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/wafv2",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:y6dvzmkusx43JxXJgYAzy4kGd4MboYYcT01VKO8gazg="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:jrCy2/SEk2lljzGMYR/ckr/ySJmJHZQgstGPjGJ/o7w="
   },
   "service/wellarchitected": {
    "Module": "service/wellarchitected",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/wellarchitected",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:dSAlP7G1kfrxxHj3LV+Y+OHbANQ0R4ZWzOM1rHzJjYY="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:TGBl/B+I2sudmlDAqhfVdwH2aJl3IXBWZPO8xc1GV2k="
   },
   "service/workdocs": {
    "Module": "service/workdocs",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/workdocs",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:3/NKCpLJ4vpTJBeNnH/2/Xi8D6kdTxTlLPul+79gEd4="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:vbJ6fJhTdIMMcpOEclGpZsvqIjU4KF5DDAYEx0UgFf0="
   },
   "service/worklink": {
    "Module": "service/worklink",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/worklink",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:uZE0O8Dce0KXaYjnVxCfBjpsxqGRlggSMNPBZBJLhKk="
+   "Version": "v1.1.4",
+   "ModuleHash": "h1:WvkzxOG0TjqioXXtmEz/ZR7gic16hFZYSVw0f8MckAs="
   },
   "service/workmail": {
    "Module": "service/workmail",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/workmail",
-   "Version": "v1.1.3",
-   "ModuleHash": "h1:YAGHD9QItlodlYsGohcAAHPkrANxqPgiSVGn3BCwHPM="
+   "Version": "v1.2.0",
+   "ModuleHash": "h1:LLnWufOy+Ne+ZfRwL3gJ9f44lSFwA6UrmXxH3R2caF8="
   },
   "service/workmailmessageflow": {
    "Module": "service/workmailmessageflow",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/workmailmessageflow",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:TCYg3JqVwBHPDo3QKk7r5nIDbnhvDPn9EIGbR8QXH4g="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:tV4XlpHsqaGWfaVAFdpilvVUQZuljVavfXHAjPVi+V8="
   },
   "service/workspaces": {
    "Module": "service/workspaces",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/workspaces",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:2KmFWoRToZth941snkCtAhfsltvDc5h8FQuJUhL5s3U="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:hSzpp50D6D37eIELSSpYwJ75e8XL9bvTzjspZgt4+5A="
   },
   "service/xray": {
    "Module": "service/xray",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/xray",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:aDM1QWrgVekkUWDVCaM5ozy07ASMc5zMP/iFpbNFlEc="
+   "Version": "v1.2.1",
+   "ModuleHash": "h1:RiTWbH90tIuJNnZZys9HeqBfpT3oSPulh7fM7anPQiY="
   }
  },
  "Packages": {
@@ -2321,6 +2333,12 @@
   "github.com/aws/aws-sdk-go-v2/service/lightsail": "service/lightsail",
   "github.com/aws/aws-sdk-go-v2/service/lightsail/internal/endpoints": "service/lightsail",
   "github.com/aws/aws-sdk-go-v2/service/lightsail/types": "service/lightsail",
+  "github.com/aws/aws-sdk-go-v2/service/location": "service/location",
+  "github.com/aws/aws-sdk-go-v2/service/location/internal/endpoints": "service/location",
+  "github.com/aws/aws-sdk-go-v2/service/location/types": "service/location",
+  "github.com/aws/aws-sdk-go-v2/service/lookoutmetrics": "service/lookoutmetrics",
+  "github.com/aws/aws-sdk-go-v2/service/lookoutmetrics/internal/endpoints": "service/lookoutmetrics",
+  "github.com/aws/aws-sdk-go-v2/service/lookoutmetrics/types": "service/lookoutmetrics",
   "github.com/aws/aws-sdk-go-v2/service/lookoutvision": "service/lookoutvision",
   "github.com/aws/aws-sdk-go-v2/service/lookoutvision/internal/endpoints": "service/lookoutvision",
   "github.com/aws/aws-sdk-go-v2/service/lookoutvision/types": "service/lookoutvision",

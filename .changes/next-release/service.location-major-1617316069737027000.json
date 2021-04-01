@@ -1,9 +1,0 @@
-{
- "ID": "service.location-major-1617316069737027000",
- "SchemaVersion": 1,
- "Module": "service/location",
- "Type": "major",
- "Description": "new service",
- "MinVersion": "v1.0.0",
- "AffectedModules": null
-}
