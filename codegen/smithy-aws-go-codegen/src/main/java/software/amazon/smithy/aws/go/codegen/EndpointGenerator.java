@@ -39,12 +39,13 @@ import software.amazon.smithy.model.node.StringNode;
 import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.utils.IoUtils;
 import software.amazon.smithy.utils.ListUtils;
+import software.amazon.smithy.utils.SmithyBuilder;
 
 /**
  * Writes out a file that resolves endpoints using endpoints.json, but the
  * created resolver resolves endpoints for a single service.
  */
-public class EndpointGenerator implements Runnable {
+public final class EndpointGenerator implements Runnable {
     public static final String MIDDLEWARE_NAME = "ResolveEndpoint";
     public static final String ADD_MIDDLEWARE_HELPER_NAME = String.format("add%sMiddleware", MIDDLEWARE_NAME);
     public static final String RESOLVER_INTERFACE_NAME = "EndpointResolver";
@@ -53,6 +54,7 @@ public class EndpointGenerator implements Runnable {
     public static final String CLIENT_CONFIG_RESOLVER = "resolveDefaultEndpointConfiguration";
     public static final String RESOLVER_CONSTRUCTOR_NAME = "NewDefaultEndpointResolver";
     public static final String AWS_ENDPOINT_RESOLVER_HELPER = "withEndpointResolver";
+
     private static final String EndpointResolverFromURL = "EndpointResolverFromURL";
     private static final String ENDPOINT_SOURCE_CUSTOM = "EndpointSourceCustom";
     private static final Symbol AWS_ENDPOINT = SymbolUtils.createPointableSymbolBuilder(
@@ -78,42 +80,36 @@ public class EndpointGenerator implements Runnable {
     private final ObjectNode endpointData;
     private final String endpointPrefix;
     private final Map<String, Partition> partitions = new TreeMap<>();
-    private final Boolean isInternalOnly;
+    private final boolean isInternalOnly;
+    private final boolean isGenerateModelQueryHelpers;
     private final String resolvedSdkID;
 
-    public EndpointGenerator(
-            GoSettings settings,
-            Model model,
-            TriConsumer<String, String, Consumer<GoWriter>> writerFactory
-    ) {
-        this(
-                settings,
-                model,
-                writerFactory,
-                settings.getService(model).expectTrait(ServiceTrait.class)
-                        .getSdkId(),
-                settings.getService(model).expectTrait(ServiceTrait.class)
-                        .getArnNamespace(),
-                false
-        );
-    }
-
-    public EndpointGenerator(
-            GoSettings settings,
-            Model model,
-            TriConsumer<String, String, Consumer<GoWriter>> writerFactory,
-            String sdkID,
-            String arnNamespace,
-            Boolean internalOnly
-    ) {
-        this.settings = settings;
-        this.model = model;
-        this.writerFactory = writerFactory;
+    private EndpointGenerator(Builder builder) {
+        settings = SmithyBuilder.requiredState("settings", builder.settings);
+        model = SmithyBuilder.requiredState("model", builder.model);
+        writerFactory = SmithyBuilder.requiredState("writerFactory", builder.writerFactory);
+        isInternalOnly = builder.internalOnly;
         serviceShape = settings.getService(model);
-        this.endpointPrefix = getEndpointPrefix(sdkID, arnNamespace);
-        this.endpointData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoints.json")).expectObjectNode();
-        this.isInternalOnly = internalOnly;
-        this.resolvedSdkID = sdkID;
+        isGenerateModelQueryHelpers = builder.modelQueryHelpers;
+
+        ServiceTrait serviceTrait = serviceShape.expectTrait(ServiceTrait.class);
+
+        if (builder.sdkID != null) {
+            resolvedSdkID = builder.sdkID;
+        } else {
+            resolvedSdkID = serviceTrait.getSdkId();
+        }
+
+        String arnNamespace;
+        if (builder.arnNamespace != null) {
+            arnNamespace = builder.arnNamespace;
+        } else {
+            arnNamespace = serviceTrait.getArnNamespace();
+        }
+
+        endpointPrefix = getEndpointPrefix(resolvedSdkID, arnNamespace);
+        endpointData = Node.parse(IoUtils.readUtf8Resource(getClass(), "endpoints.json")).expectObjectNode();
+
         validateVersion();
         loadPartitions();
     }
@@ -165,6 +161,9 @@ public class EndpointGenerator implements Runnable {
         writerFactory.accept(pkgName + "/endpoints.go", getInternalEndpointImportPath(), (writer) -> {
             generateInternalResolverImplementation(writer);
             generateInternalEndpointsModel(writer);
+            if (isGenerateModelQueryHelpers) {
+                generateInternalModelHelpers(writer);
+            }
         });
 
         if (!this.isInternalOnly) {
@@ -178,6 +177,46 @@ public class EndpointGenerator implements Runnable {
                     });
         }
 
+    }
+
+    private void generateInternalModelHelpers(GoWriter writer) {
+        generateDNSSuffixFunction(writer);
+        generateDNSSuffixFromRegionFunction(writer);
+    }
+
+    private void generateDNSSuffixFunction(GoWriter writer) {
+        writer.addUseImports(SmithyGoDependency.FMT);
+        writer.writeDocs("GetDNSSuffix returns the dnsSuffix URL component for the given partition id");
+        writer.openBlock("func GetDNSSuffix(id string) (string, error) {", "}", () -> {
+            Symbol equalFold = SymbolUtils.createValueSymbolBuilder("EqualFold", SmithyGoDependency.STRINGS)
+                    .build();
+            writer.openBlock("switch {", "}", () -> {
+                partitions.forEach((s, partition) -> {
+                    writer.openBlock("case $T(id, $S):", "", equalFold, partition.id, () -> {
+                        writer.write("return $S, nil", partition.dnsSuffix);
+                    });
+                });
+                writer.openBlock("default:", "", () -> writer.write("return \"\", fmt.Errorf(\"unknown partition\")"));
+            });
+        });
+        writer.write("");
+    }
+
+    private void generateDNSSuffixFromRegionFunction(GoWriter writer) {
+        writer.addUseImports(SmithyGoDependency.FMT);
+        writer.writeDocs("GetDNSSuffixFromRegion returns the dnsSuffix URL component for the given partition id");
+        writer.openBlock("func GetDNSSuffixFromRegion(region string) (string, error) {", "}", () -> {
+            writer.openBlock("switch {", "}", () -> {
+                getSortedPartitions().forEach(partition -> {
+                    writer.openBlock("case partitionRegexp.$L.MatchString(region):", "",
+                            getPartitionIDFieldName(partition.getId()), () -> {
+                                writer.write("return $S, nil", partition.dnsSuffix);
+                            });
+                });
+                writer.openBlock("default:", "", () -> writer.write("return \"\", fmt.Errorf(\"unknown region partition\")"));
+            });
+        });
+        writer.write("");
     }
 
     private void generateAwsEndpointResolverWrapper(GoWriter writer) {
@@ -380,9 +419,9 @@ public class EndpointGenerator implements Runnable {
 
         // Generate EndpointResolverFromURL helper
         writer.writeDocs(String.format("%s returns an EndpointResolver configured using the provided endpoint url. "
-                + "By default, the resolved endpoint resolver uses the client region as signing region, and  "
-                + "the endpoint source is set to EndpointSourceCustom."
-                + "You can provide functional options to configure endpoint values for the resolved endpoint.",
+                        + "By default, the resolved endpoint resolver uses the client region as signing region, and  "
+                        + "the endpoint source is set to EndpointSourceCustom."
+                        + "You can provide functional options to configure endpoint values for the resolved endpoint.",
                 EndpointResolverFromURL));
         writer.openBlock("func $L(url string, optFns ...func($P)) EndpointResolver {", "}",
                 EndpointResolverFromURL, AWS_ENDPOINT, () -> {
@@ -493,25 +532,64 @@ public class EndpointGenerator implements Runnable {
                 }));
     }
 
+    private static String getPartitionIDFieldName(String id) {
+        StringBuilder builder = new StringBuilder();
+
+        char[] charArray = id.toCharArray();
+        boolean capitalize = true;
+        for (int i = 0; i < charArray.length; i++) {
+            if (!Character.isAlphabetic(charArray[i])) {
+                capitalize = true;
+                continue;
+            }
+
+            if (capitalize) {
+                builder.append(Character.toUpperCase(charArray[i]));
+                capitalize = false;
+            } else {
+                builder.append(Character.toLowerCase(charArray[i]));
+            }
+        }
+
+        return builder.toString();
+    }
+
     private void generateInternalEndpointsModel(GoWriter writer) {
         writer.addUseImports(AwsGoDependency.AWS_ENDPOINTS);
+
+        List<Partition> sortedPartitions = getSortedPartitions();
+
+        writer.openBlock("var partitionRegexp = struct{", "}{", () -> {
+            sortedPartitions.forEach(partition -> {
+                writer.write("$L $P", getPartitionIDFieldName(partition.getId()),
+                        SymbolUtils.createPointableSymbolBuilder("Regexp", AwsGoDependency.REGEXP).build());
+            });
+        }).openBlock("", "}", () -> {
+            sortedPartitions.forEach(partition -> {
+                writer.write("$L: regexp.MustCompile($S),", getPartitionIDFieldName(partition.getId()),
+                        partition.getConfig().expectStringMember("regionRegex").getValue());
+            });
+        });
+        writer.write("");
 
         Symbol partitionsSymbol = SymbolUtils.createPointableSymbolBuilder("Partitions", AwsGoDependency.AWS_ENDPOINTS)
                 .build();
         writer.openBlock("var $L = $T{", "}", INTERNAL_ENDPOINTS_DATA_NAME, partitionsSymbol, () -> {
-            List<Partition> entries = partitions.entrySet().stream()
-                    .sorted((x, y) -> {
-                        // Always sort standard aws partition first
-                        if (x.getKey().equals("aws")) {
-                            return -1;
-                        }
-                        return x.getKey().compareTo(y.getKey());
-                    }).map(Map.Entry::getValue).collect(Collectors.toList());
-
-            entries.forEach(entry -> {
+            sortedPartitions.forEach(entry -> {
                 writer.openBlock("{", "},", () -> writePartition(writer, entry));
             });
         });
+    }
+
+    private List<Partition> getSortedPartitions() {
+        return partitions.entrySet().stream()
+                .sorted((x, y) -> {
+                    // Always sort standard aws partition first
+                    if (x.getKey().equals("aws")) {
+                        return -1;
+                    }
+                    return x.getKey().compareTo(y.getKey());
+                }).map(Map.Entry::getValue).collect(Collectors.toList());
     }
 
     private void writePartition(GoWriter writer, Partition partition) {
@@ -522,8 +600,7 @@ public class EndpointGenerator implements Runnable {
                 () -> writeEndpoint(writer, partition.getDefaults()));
 
         writer.addUseImports(AwsGoDependency.REGEXP);
-        writer.write("RegionRegex: regexp.MustCompile($S),", partition.getConfig().expectStringMember("regionRegex")
-                .getValue());
+        writer.write("RegionRegex: partitionRegexp.$L,", getPartitionIDFieldName(partition.getId()));
 
         Optional<String> optionalPartitionEndpoint = partition.getPartitionEndpoint();
         Symbol isRegionalizedValue = SymbolUtils.createValueSymbolBuilder(optionalPartitionEndpoint.isPresent()
@@ -692,6 +769,60 @@ public class EndpointGenerator implements Runnable {
 
         public ObjectNode getConfig() {
             return config;
+        }
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static final class Builder implements SmithyBuilder<EndpointGenerator> {
+        private GoSettings settings;
+        private Model model;
+        private TriConsumer<String, String, Consumer<GoWriter>> writerFactory;
+        private boolean internalOnly;
+        private boolean modelQueryHelpers;
+        private String sdkID;
+        private String arnNamespace;
+
+        public Builder settings(GoSettings settings) {
+            this.settings = settings;
+            return this;
+        }
+
+        public Builder model(Model model) {
+            this.model = model;
+            return this;
+        }
+
+        public Builder writerFactory(TriConsumer<String, String, Consumer<GoWriter>> writerFactory) {
+            this.writerFactory = writerFactory;
+            return this;
+        }
+
+        public Builder internalOnly(boolean internalOnly) {
+            this.internalOnly = internalOnly;
+            return this;
+        }
+
+        public Builder modelQueryHelpers(boolean modelQueryHelpers) {
+            this.modelQueryHelpers = modelQueryHelpers;
+            return this;
+        }
+
+        public Builder sdkID(String sdkID) {
+            this.sdkID = sdkID;
+            return this;
+        }
+
+        public Builder arnNamespace(String arnNamespace) {
+            this.arnNamespace = arnNamespace;
+            return this;
+        }
+
+        @Override
+        public EndpointGenerator build() {
+            return new EndpointGenerator(this);
         }
     }
 }

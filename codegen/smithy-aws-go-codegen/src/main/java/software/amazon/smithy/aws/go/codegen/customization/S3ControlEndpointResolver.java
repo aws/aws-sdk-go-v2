@@ -13,7 +13,7 @@ import software.amazon.smithy.model.Model;
  * S3ControlEndpointResolverCustomizations adds an internal endpoint resolver
  * for s3 service endpoints
  */
-public class S3ControlEndpointResolver implements GoIntegration  {
+public class S3ControlEndpointResolver implements GoIntegration {
 
     @Override
     public void writeAdditionalFiles(
@@ -22,11 +22,19 @@ public class S3ControlEndpointResolver implements GoIntegration  {
             SymbolProvider symbolProvider,
             TriConsumer<String, String, Consumer<GoWriter>> writerFactory
     ) {
-        if (!S3ModelUtils.isServiceS3Control(model, settings.getService(model))){
-           return;
+        if (!S3ModelUtils.isServiceS3Control(model, settings.getService(model))) {
+            return;
         }
 
         // Generate S3 internal endpoint resolver for S3 Control service
-        new EndpointGenerator(settings, model, writerFactory,"S3","s3", true).run();
+        EndpointGenerator.builder()
+                .settings(settings)
+                .model(model)
+                .writerFactory(writerFactory)
+                .sdkID("S3")
+                .arnNamespace("s3")
+                .internalOnly(true)
+                .build()
+                .run();
     }
 }

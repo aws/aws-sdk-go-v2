@@ -37,6 +37,21 @@ func New() *Resolver {
 	}
 }
 
+var partitionRegexp = struct {
+	Aws      *regexp.Regexp
+	AwsCn    *regexp.Regexp
+	AwsIso   *regexp.Regexp
+	AwsIsoB  *regexp.Regexp
+	AwsUsGov *regexp.Regexp
+}{
+
+	Aws:      regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
+	AwsCn:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
+	AwsIso:   regexp.MustCompile("^us\\-iso\\-\\w+\\-\\d+$"),
+	AwsIsoB:  regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
+	AwsUsGov: regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
+}
+
 var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws",
@@ -48,7 +63,7 @@ var defaultPartitions = endpoints.Partitions{
 				Service: "dynamodb",
 			},
 		},
-		RegionRegex:    regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"ap-northeast-1": endpoints.Endpoint{},
@@ -117,7 +132,7 @@ var defaultPartitions = endpoints.Partitions{
 				Service: "dynamodb",
 			},
 		},
-		RegionRegex:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"cn-north-1":     endpoints.Endpoint{},
@@ -134,7 +149,7 @@ var defaultPartitions = endpoints.Partitions{
 				Service: "dynamodb",
 			},
 		},
-		RegionRegex:    regexp.MustCompile("^us\\-iso\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"us-iso-east-1": endpoints.Endpoint{
@@ -152,7 +167,7 @@ var defaultPartitions = endpoints.Partitions{
 				Service: "dynamodb",
 			},
 		},
-		RegionRegex:    regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"us-isob-east-1": endpoints.Endpoint{},
@@ -168,7 +183,7 @@ var defaultPartitions = endpoints.Partitions{
 				Service: "dynamodb",
 			},
 		},
-		RegionRegex:    regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
+		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"us-gov-east-1": endpoints.Endpoint{},

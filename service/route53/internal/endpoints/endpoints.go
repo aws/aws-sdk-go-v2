@@ -37,6 +37,21 @@ func New() *Resolver {
 	}
 }
 
+var partitionRegexp = struct {
+	Aws      *regexp.Regexp
+	AwsCn    *regexp.Regexp
+	AwsIso   *regexp.Regexp
+	AwsIsoB  *regexp.Regexp
+	AwsUsGov *regexp.Regexp
+}{
+
+	Aws:      regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
+	AwsCn:    regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
+	AwsIso:   regexp.MustCompile("^us\\-iso\\-\\w+\\-\\d+$"),
+	AwsIsoB:  regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
+	AwsUsGov: regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
+}
+
 var defaultPartitions = endpoints.Partitions{
 	{
 		ID: "aws",
@@ -45,7 +60,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:       regexp.MustCompile("^(us|eu|ap|sa|ca|me|af)\\-\\w+\\-\\d+$"),
+		RegionRegex:       partitionRegexp.Aws,
 		IsRegionalized:    false,
 		PartitionEndpoint: "aws-global",
 		Endpoints: endpoints.Endpoints{
@@ -70,7 +85,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:       regexp.MustCompile("^cn\\-\\w+\\-\\d+$"),
+		RegionRegex:       partitionRegexp.AwsCn,
 		IsRegionalized:    false,
 		PartitionEndpoint: "aws-cn-global",
 		Endpoints: endpoints.Endpoints{
@@ -89,7 +104,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:       regexp.MustCompile("^us\\-iso\\-\\w+\\-\\d+$"),
+		RegionRegex:       partitionRegexp.AwsIso,
 		IsRegionalized:    false,
 		PartitionEndpoint: "aws-iso-global",
 		Endpoints: endpoints.Endpoints{
@@ -108,7 +123,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:       regexp.MustCompile("^us\\-isob\\-\\w+\\-\\d+$"),
+		RegionRegex:       partitionRegexp.AwsIsoB,
 		IsRegionalized:    false,
 		PartitionEndpoint: "aws-iso-b-global",
 		Endpoints: endpoints.Endpoints{
@@ -127,7 +142,7 @@ var defaultPartitions = endpoints.Partitions{
 			Protocols:         []string{"https"},
 			SignatureVersions: []string{"v4"},
 		},
-		RegionRegex:       regexp.MustCompile("^us\\-gov\\-\\w+\\-\\d+$"),
+		RegionRegex:       partitionRegexp.AwsUsGov,
 		IsRegionalized:    false,
 		PartitionEndpoint: "aws-us-gov-global",
 		Endpoints: endpoints.Endpoints{
