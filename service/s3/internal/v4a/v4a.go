@@ -29,12 +29,14 @@ import (
 )
 
 const (
-	amzRegionSetKey     = "X-Amz-Region-Set"
+	// AmzRegionSetKey represents the region set header used for sigv4a
+	AmzRegionSetKey     = "X-Amz-Region-Set"
 	amzAlgorithmKey     = v4Internal.AmzAlgorithmKey
 	amzSecurityTokenKey = v4Internal.AmzSecurityTokenKey
 	amzDateKey          = v4Internal.AmzDateKey
 	amzCredentialKey    = v4Internal.AmzCredentialKey
 	amzSignedHeadersKey = v4Internal.AmzSignedHeadersKey
+	authorizationHeader = "Authorization"
 
 	signingAlgorithm = "AWS4-ECDSA-P256-SHA256"
 
@@ -42,10 +44,7 @@ const (
 	shortTimeFormat = "20060102"
 
 	// EmptyStringSHA256 is a hex encoded SHA-256 hash of an empty string
-	// TODO: Is this a worthwhile constant?
 	EmptyStringSHA256 = v4Internal.EmptyStringSHA256
-
-	authorizationHeader = "Authorization"
 
 	// Version of signing v4a
 	Version = "SigV4A"
@@ -254,7 +253,7 @@ func (s *httpSigner) setRequiredSigningFields(headers http.Header, query url.Val
 	amzDate := s.Time.Format(timeFormat)
 
 	if s.IsPreSign {
-		query.Set(amzRegionSetKey, strings.Join(s.RegionSet, ","))
+		query.Set(AmzRegionSetKey, strings.Join(s.RegionSet, ","))
 		query.Set(amzDateKey, amzDate)
 		query.Set(amzAlgorithmKey, signingAlgorithm)
 		if len(s.Credentials.SessionToken) > 0 {
@@ -263,7 +262,7 @@ func (s *httpSigner) setRequiredSigningFields(headers http.Header, query url.Val
 		return
 	}
 
-	headers.Set(amzRegionSetKey, strings.Join(s.RegionSet, ","))
+	headers.Set(AmzRegionSetKey, strings.Join(s.RegionSet, ","))
 	headers.Set(amzDateKey, amzDate)
 	if len(s.Credentials.SessionToken) > 0 {
 		headers.Set(amzSecurityTokenKey, s.Credentials.SessionToken)

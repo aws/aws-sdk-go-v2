@@ -3,6 +3,7 @@ package customizations_test
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a"
 	"strconv"
 	"strings"
 	"testing"
@@ -1103,8 +1104,6 @@ func TestWriteGetObjectResponse_UpdateEndpoint(t *testing.T) {
 }
 
 func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
-	regionHeader := "x-amz-region-set"
-
 	cases := map[string]testCaseForEndpointCustomization{
 		"region as us-east-1": {
 			options: s3.Options{
@@ -1113,7 +1112,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
 			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/",
 			expectedHeader: map[string]string{
-				regionHeader: "*",
+				v4a.AmzRegionSetKey: "*",
 			},
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",
@@ -1125,7 +1124,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
 			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/",
 			expectedHeader: map[string]string{
-				regionHeader: "*",
+				v4a.AmzRegionSetKey: "*",
 			},
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",
@@ -1137,7 +1136,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
 			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/",
 			expectedHeader: map[string]string{
-				regionHeader: "*",
+				v4a.AmzRegionSetKey: "*",
 			},
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",
@@ -1149,7 +1148,19 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			bucket:         "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
 			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn/",
 			expectedHeader: map[string]string{
-				regionHeader: "*",
+				v4a.AmzRegionSetKey: "*",
+			},
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "*",
+		},
+		"cn partition arn with cross partition client region": {
+			options: s3.Options{
+				Region: "ap-north-1",
+			},
+			bucket:         "arn:aws-cn:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com.cn/",
+			expectedHeader: map[string]string{
+				v4a.AmzRegionSetKey: "*",
 			},
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",
@@ -1209,7 +1220,7 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			bucket:         "arn:aws:s3::123456789012:accesspoint:myendpoint",
 			expectedReqURL: "https://myendpoint.accesspoint.s3-global.amazonaws.com/",
 			expectedHeader: map[string]string{
-				regionHeader: "*",
+				v4a.AmzRegionSetKey: "*",
 			},
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",
@@ -1221,38 +1232,38 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			bucket:         "arn:aws:s3::123456789012:accesspoint:my.bucket",
 			expectedReqURL: "https://my.bucket.accesspoint.s3-global.amazonaws.com/",
 			expectedHeader: map[string]string{
-				regionHeader: "*",
+				v4a.AmzRegionSetKey: "*",
 			},
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",
 		},
-		"vpce endpoint": {
+		"custom endpoint": {
 			options: s3.Options{
 				Region: "us-west-2",
-				EndpointResolver: s3.EndpointResolverFromURL("https://vpce-123-abc.vpce.s3-global.amazonaws.com", func(endpoint *aws.Endpoint) {
+				EndpointResolver: s3.EndpointResolverFromURL("https://mockendpoint.amazonaws.com", func(endpoint *aws.Endpoint) {
 					endpoint.SigningRegion = "us-west-2"
 				}),
 			},
 			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedReqURL: "https://mfzwi23gnjvgw.mrap.vpce-123-abc.vpce.s3-global.amazonaws.com/",
+			expectedReqURL: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/",
 			expectedHeader: map[string]string{
-				regionHeader: "*",
+				v4a.AmzRegionSetKey: "*",
 			},
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",
 		},
-		"vpce endpoint with hostname immutable": {
+		"custom endpoint with hostname immutable": {
 			options: s3.Options{
 				Region: "us-west-2",
-				EndpointResolver: s3.EndpointResolverFromURL("https://vpce-123-abc.vpce.s3-global.amazonaws.com", func(endpoint *aws.Endpoint) {
+				EndpointResolver: s3.EndpointResolverFromURL("https://mockendpoint.amazonaws.com", func(endpoint *aws.Endpoint) {
 					endpoint.SigningRegion = "us-west-2"
 					endpoint.HostnameImmutable = true
 				}),
 			},
 			bucket:         "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
-			expectedReqURL: "https://vpce-123-abc.vpce.s3-global.amazonaws.com/arn%3Aaws%3As3%3A%3A123456789012%3Aaccesspoint%3Amfzwi23gnjvgw.mrap",
+			expectedReqURL: "https://mockendpoint.amazonaws.com/arn%3Aaws%3As3%3A%3A123456789012%3Aaccesspoint%3Amfzwi23gnjvgw.mrap",
 			expectedHeader: map[string]string{
-				regionHeader: "*",
+				v4a.AmzRegionSetKey: "*",
 			},
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",

@@ -3,18 +3,19 @@ package customizations
 import (
 	"context"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a"
 	"net/url"
 	"strings"
 
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/transport/http"
 
+	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared/arn"
 	s3arn "github.com/aws/aws-sdk-go-v2/service/s3/internal/arn"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/endpoints"
+	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a"
 )
 
 const (
@@ -411,6 +412,9 @@ func buildS3ObjectLambdaAccessPointRequest(ctx context.Context, options accesspo
 }
 
 func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspointOptions) (context.Context, error) {
+	const s3_global_label = "s3-global."
+	const accesspoint_label = "accesspoint."
+
 	tv := options.resource
 	req := options.request
 	resolveService := tv.Service
@@ -428,8 +432,10 @@ func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspoin
 		)
 	}
 
-	// set signing region for MRAP
+	// set signing region and version for MRAP
 	endpoint.SigningRegion = "*"
+	ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
+	ctx = SetSignerVersion(ctx, v4a.Version)
 
 	if len(endpoint.SigningName) != 0 {
 		ctx = awsmiddleware.SetSigningName(ctx, endpoint.SigningName)
@@ -437,28 +443,19 @@ func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspoin
 		ctx = awsmiddleware.SetSigningName(ctx, resolveService)
 	}
 
-	if len(endpoint.SigningRegion) != 0 {
-		ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
-	} else {
-		ctx = awsmiddleware.SetSigningRegion(ctx, resolveRegion)
+	// skip arn processing, if arn region resolves to a immutable endpoint
+	if endpoint.HostnameImmutable {
+		return ctx, nil
 	}
-
-	// switch to use sigv4a signer
-	ctx = SetSignerVersion(ctx, v4a.Version)
 
 	// modify endpoint host to use s3-global host prefix
 	scheme := strings.SplitN(endpoint.URL, "://", 2)
-	if endpoint.Source != aws.EndpointSourceCustom {
-		// set url as per partition
-		switch arnPartition {
-		case "aws":
-			endpoint.URL = scheme[0] + "://s3-global.amazonaws.com"
-		case "aws-cn":
-			endpoint.URL = scheme[0] + "://s3-global.amazonaws.com.cn"
-		default:
-			return ctx, fmt.Errorf("unsupported client configuration partition for mrap")
-		}
+	dnsSuffix, err := endpoints.GetDNSSuffix(arnPartition)
+	if err != nil {
+		return ctx, fmt.Errorf("Error determining dns suffix from arn partition, %w", err)
 	}
+	// set url as per partition
+	endpoint.URL = scheme[0] + "://" + s3_global_label + dnsSuffix
 
 	// assign resolved endpoint url to request url
 	req.URL, err = url.Parse(endpoint.URL)
@@ -466,18 +463,10 @@ func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspoin
 		return ctx, fmt.Errorf("failed to parse endpoint URL: %w", err)
 	}
 
-	// skip arn processing, if arn region resolves to a immutable endpoint
-	if endpoint.HostnameImmutable {
-		return ctx, nil
-	}
+	// build access point host prefix
+	accessPointHostPrefix := tv.AccessPointName + "." + accesspoint_label
 
-	accessPointHostPrefix := tv.AccessPointName + "."
-	// if not custom source attach `.accesspoint` to access-point host prefix
-	if endpoint.Source != aws.EndpointSourceCustom {
-		accessPointHostPrefix += "accesspoint."
-	}
-
-	// add host prefix
+	// add host prefix to url
 	req.URL.Host = accessPointHostPrefix + req.URL.Host
 	if len(req.Host) > 0 {
 		req.Host = accessPointHostPrefix + req.Host
