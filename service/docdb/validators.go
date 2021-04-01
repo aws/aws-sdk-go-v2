@@ -10,26 +10,6 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-type validateOpAddSourceIdentifierToSubscription struct {
-}
-
-func (*validateOpAddSourceIdentifierToSubscription) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpAddSourceIdentifierToSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*AddSourceIdentifierToSubscriptionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpAddSourceIdentifierToSubscriptionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpAddTagsToResource struct {
 }
 
@@ -210,26 +190,6 @@ func (m *validateOpCreateDBSubnetGroup) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpCreateEventSubscription struct {
-}
-
-func (*validateOpCreateEventSubscription) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpCreateEventSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*CreateEventSubscriptionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpCreateEventSubscriptionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDeleteDBCluster struct {
 }
 
@@ -325,26 +285,6 @@ func (m *validateOpDeleteDBSubnetGroup) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDBSubnetGroupInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpDeleteEventSubscription struct {
-}
-
-func (*validateOpDeleteEventSubscription) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDeleteEventSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DeleteEventSubscriptionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDeleteEventSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,26 +530,6 @@ func (m *validateOpDescribeEvents) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpDescribeEventSubscriptions struct {
-}
-
-func (*validateOpDescribeEventSubscriptions) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpDescribeEventSubscriptions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*DescribeEventSubscriptionsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpDescribeEventSubscriptionsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDescribeOrderableDBInstanceOptions struct {
 }
 
@@ -770,26 +690,6 @@ func (m *validateOpModifyDBSubnetGroup) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpModifyEventSubscription struct {
-}
-
-func (*validateOpModifyEventSubscription) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpModifyEventSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ModifyEventSubscriptionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpModifyEventSubscriptionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpRebootDBInstance struct {
 }
 
@@ -805,26 +705,6 @@ func (m *validateOpRebootDBInstance) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRebootDBInstanceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpRemoveSourceIdentifierFromSubscription struct {
-}
-
-func (*validateOpRemoveSourceIdentifierFromSubscription) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpRemoveSourceIdentifierFromSubscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*RemoveSourceIdentifierFromSubscriptionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpRemoveSourceIdentifierFromSubscriptionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,10 +830,6 @@ func (m *validateOpStopDBCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
-func addOpAddSourceIdentifierToSubscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpAddSourceIdentifierToSubscription{}, middleware.After)
-}
-
 func addOpAddTagsToResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddTagsToResource{}, middleware.After)
 }
@@ -990,10 +866,6 @@ func addOpCreateDBSubnetGroupValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpCreateDBSubnetGroup{}, middleware.After)
 }
 
-func addOpCreateEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpCreateEventSubscription{}, middleware.After)
-}
-
 func addOpDeleteDBClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDBCluster{}, middleware.After)
 }
@@ -1012,10 +884,6 @@ func addOpDeleteDBInstanceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDBSubnetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDBSubnetGroup{}, middleware.After)
-}
-
-func addOpDeleteEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDeleteEventSubscription{}, middleware.After)
 }
 
 func addOpDescribeCertificatesValidationMiddleware(stack *middleware.Stack) error {
@@ -1066,10 +934,6 @@ func addOpDescribeEventsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEvents{}, middleware.After)
 }
 
-func addOpDescribeEventSubscriptionsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpDescribeEventSubscriptions{}, middleware.After)
-}
-
 func addOpDescribeOrderableDBInstanceOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeOrderableDBInstanceOptions{}, middleware.After)
 }
@@ -1102,16 +966,8 @@ func addOpModifyDBSubnetGroupValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpModifyDBSubnetGroup{}, middleware.After)
 }
 
-func addOpModifyEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpModifyEventSubscription{}, middleware.After)
-}
-
 func addOpRebootDBInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRebootDBInstance{}, middleware.After)
-}
-
-func addOpRemoveSourceIdentifierFromSubscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpRemoveSourceIdentifierFromSubscription{}, middleware.After)
 }
 
 func addOpRemoveTagsFromResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1165,24 +1021,6 @@ func validateFilterList(v []types.Filter) error {
 		if err := validateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpAddSourceIdentifierToSubscriptionInput(v *AddSourceIdentifierToSubscriptionInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AddSourceIdentifierToSubscriptionInput"}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
-	}
-	if v.SourceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1377,24 +1215,6 @@ func validateOpCreateDBSubnetGroupInput(v *CreateDBSubnetGroupInput) error {
 	}
 }
 
-func validateOpCreateEventSubscriptionInput(v *CreateEventSubscriptionInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "CreateEventSubscriptionInput"}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
-	}
-	if v.SnsTopicArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SnsTopicArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDeleteDBClusterInput(v *DeleteDBClusterInput) error {
 	if v == nil {
 		return nil
@@ -1462,21 +1282,6 @@ func validateOpDeleteDBSubnetGroupInput(v *DeleteDBSubnetGroupInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDBSubnetGroupInput"}
 	if v.DBSubnetGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBSubnetGroupName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpDeleteEventSubscriptionInput(v *DeleteEventSubscriptionInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DeleteEventSubscriptionInput"}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1693,23 +1498,6 @@ func validateOpDescribeEventsInput(v *DescribeEventsInput) error {
 	}
 }
 
-func validateOpDescribeEventSubscriptionsInput(v *DescribeEventSubscriptionsInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DescribeEventSubscriptionsInput"}
-	if v.Filters != nil {
-		if err := validateFilterList(v.Filters); err != nil {
-			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpDescribeOrderableDBInstanceOptionsInput(v *DescribeOrderableDBInstanceOptionsInput) error {
 	if v == nil {
 		return nil
@@ -1851,21 +1639,6 @@ func validateOpModifyDBSubnetGroupInput(v *ModifyDBSubnetGroupInput) error {
 	}
 }
 
-func validateOpModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ModifyEventSubscriptionInput"}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpRebootDBInstanceInput(v *RebootDBInstanceInput) error {
 	if v == nil {
 		return nil
@@ -1873,24 +1646,6 @@ func validateOpRebootDBInstanceInput(v *RebootDBInstanceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RebootDBInstanceInput"}
 	if v.DBInstanceIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DBInstanceIdentifier"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpRemoveSourceIdentifierFromSubscriptionInput(v *RemoveSourceIdentifierFromSubscriptionInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RemoveSourceIdentifierFromSubscriptionInput"}
-	if v.SubscriptionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
-	}
-	if v.SourceIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("SourceIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

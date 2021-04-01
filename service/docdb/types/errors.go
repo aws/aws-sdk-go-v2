@@ -413,27 +413,6 @@ func (e *DBUpgradeDependencyFailureFault) ErrorCode() string {
 }
 func (e *DBUpgradeDependencyFailureFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have reached the maximum number of event subscriptions.
-type EventSubscriptionQuotaExceededFault struct {
-	Message *string
-}
-
-func (e *EventSubscriptionQuotaExceededFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *EventSubscriptionQuotaExceededFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *EventSubscriptionQuotaExceededFault) ErrorCode() string {
-	return "EventSubscriptionQuotaExceededFault"
-}
-func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
-	return smithy.FaultClient
-}
-
 // The request would cause you to exceed the allowed number of instances.
 type InstanceQuotaExceededFault struct {
 	Message *string
@@ -662,28 +641,6 @@ func (e *InvalidDBSubnetStateFault) ErrorMessage() string {
 func (e *InvalidDBSubnetStateFault) ErrorCode() string             { return "InvalidDBSubnetStateFault" }
 func (e *InvalidDBSubnetStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Someone else might be modifying a subscription. Wait a few seconds, and try
-// again.
-type InvalidEventSubscriptionStateFault struct {
-	Message *string
-}
-
-func (e *InvalidEventSubscriptionStateFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *InvalidEventSubscriptionStateFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *InvalidEventSubscriptionStateFault) ErrorCode() string {
-	return "InvalidEventSubscriptionStateFault"
-}
-func (e *InvalidEventSubscriptionStateFault) ErrorFault() smithy.ErrorFault {
-	return smithy.FaultClient
-}
-
 // You cannot restore from a virtual private cloud (VPC) backup to a non-VPC DB
 // instance.
 type InvalidRestoreFault struct {
@@ -809,75 +766,6 @@ func (e *SnapshotQuotaExceededFault) ErrorMessage() string {
 func (e *SnapshotQuotaExceededFault) ErrorCode() string             { return "SnapshotQuotaExceededFault" }
 func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Amazon SNS has responded that there is a problem with the specified topic.
-type SNSInvalidTopicFault struct {
-	Message *string
-}
-
-func (e *SNSInvalidTopicFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *SNSInvalidTopicFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *SNSInvalidTopicFault) ErrorCode() string             { return "SNSInvalidTopicFault" }
-func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// You do not have permission to publish to the SNS topic Amazon Resource Name
-// (ARN).
-type SNSNoAuthorizationFault struct {
-	Message *string
-}
-
-func (e *SNSNoAuthorizationFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *SNSNoAuthorizationFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *SNSNoAuthorizationFault) ErrorCode() string             { return "SNSNoAuthorizationFault" }
-func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// The SNS topic Amazon Resource Name (ARN) does not exist.
-type SNSTopicArnNotFoundFault struct {
-	Message *string
-}
-
-func (e *SNSTopicArnNotFoundFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *SNSTopicArnNotFoundFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *SNSTopicArnNotFoundFault) ErrorCode() string             { return "SNSTopicArnNotFoundFault" }
-func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// The requested source could not be found.
-type SourceNotFoundFault struct {
-	Message *string
-}
-
-func (e *SourceNotFoundFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *SourceNotFoundFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *SourceNotFoundFault) ErrorCode() string             { return "SourceNotFoundFault" }
-func (e *SourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
 // The request would cause you to exceed the allowed amount of storage available
 // across all instances.
 type StorageQuotaExceededFault struct {
@@ -929,56 +817,3 @@ func (e *SubnetAlreadyInUse) ErrorMessage() string {
 }
 func (e *SubnetAlreadyInUse) ErrorCode() string             { return "SubnetAlreadyInUse" }
 func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// The provided subscription name already exists.
-type SubscriptionAlreadyExistFault struct {
-	Message *string
-}
-
-func (e *SubscriptionAlreadyExistFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *SubscriptionAlreadyExistFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *SubscriptionAlreadyExistFault) ErrorCode() string             { return "SubscriptionAlreadyExistFault" }
-func (e *SubscriptionAlreadyExistFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// The provided category does not exist.
-type SubscriptionCategoryNotFoundFault struct {
-	Message *string
-}
-
-func (e *SubscriptionCategoryNotFoundFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *SubscriptionCategoryNotFoundFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *SubscriptionCategoryNotFoundFault) ErrorCode() string {
-	return "SubscriptionCategoryNotFoundFault"
-}
-func (e *SubscriptionCategoryNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// The subscription name does not exist.
-type SubscriptionNotFoundFault struct {
-	Message *string
-}
-
-func (e *SubscriptionNotFoundFault) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *SubscriptionNotFoundFault) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *SubscriptionNotFoundFault) ErrorCode() string             { return "SubscriptionNotFoundFault" }
-func (e *SubscriptionNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

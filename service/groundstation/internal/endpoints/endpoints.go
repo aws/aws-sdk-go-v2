@@ -65,8 +65,15 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			"af-south-1":     endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},
+			"eu-central-1":   endpoints.Endpoint{},
 			"eu-north-1":     endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "groundstation-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
 			"fips-us-east-2": endpoints.Endpoint{
 				Hostname: "groundstation-fips.us-east-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -80,6 +87,7 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			"me-south-1": endpoints.Endpoint{},
+			"us-east-1":  endpoints.Endpoint{},
 			"us-east-2":  endpoints.Endpoint{},
 			"us-west-2":  endpoints.Endpoint{},
 		},

@@ -15,62 +15,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-type awsAwsquery_serializeOpAddSourceIdentifierToSubscription struct {
-}
-
-func (*awsAwsquery_serializeOpAddSourceIdentifierToSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpAddSourceIdentifierToSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*AddSourceIdentifierToSubscriptionInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("AddSourceIdentifierToSubscription")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentAddSourceIdentifierToSubscriptionInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpAddTagsToResource struct {
 }
 
@@ -575,62 +519,6 @@ func (m *awsAwsquery_serializeOpCreateDBSubnetGroup) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpCreateEventSubscription struct {
-}
-
-func (*awsAwsquery_serializeOpCreateEventSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpCreateEventSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*CreateEventSubscriptionInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("CreateEventSubscription")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentCreateEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpDeleteDBCluster struct {
 }
 
@@ -891,62 +779,6 @@ func (m *awsAwsquery_serializeOpDeleteDBSubnetGroup) HandleSerialize(ctx context
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentDeleteDBSubnetGroupInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpDeleteEventSubscription struct {
-}
-
-func (*awsAwsquery_serializeOpDeleteEventSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpDeleteEventSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DeleteEventSubscriptionInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("DeleteEventSubscription")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentDeleteEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1639,62 +1471,6 @@ func (m *awsAwsquery_serializeOpDescribeEvents) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpDescribeEventSubscriptions struct {
-}
-
-func (*awsAwsquery_serializeOpDescribeEventSubscriptions) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpDescribeEventSubscriptions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*DescribeEventSubscriptionsInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("DescribeEventSubscriptions")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentDescribeEventSubscriptionsInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpDescribeOrderableDBInstanceOptions struct {
 }
 
@@ -2199,62 +1975,6 @@ func (m *awsAwsquery_serializeOpModifyDBSubnetGroup) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpModifyEventSubscription struct {
-}
-
-func (*awsAwsquery_serializeOpModifyEventSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpModifyEventSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*ModifyEventSubscriptionInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("ModifyEventSubscription")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentModifyEventSubscriptionInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpRebootDBInstance struct {
 }
 
@@ -2291,62 +2011,6 @@ func (m *awsAwsquery_serializeOpRebootDBInstance) HandleSerialize(ctx context.Co
 	body.Key("Version").String("2014-10-31")
 
 	if err := awsAwsquery_serializeOpDocumentRebootDBInstanceInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
-type awsAwsquery_serializeOpRemoveSourceIdentifierFromSubscription struct {
-}
-
-func (*awsAwsquery_serializeOpRemoveSourceIdentifierFromSubscription) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpRemoveSourceIdentifierFromSubscription) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*RemoveSourceIdentifierFromSubscriptionInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("RemoveSourceIdentifierFromSubscription")
-	body.Key("Version").String("2014-10-31")
-
-	if err := awsAwsquery_serializeOpDocumentRemoveSourceIdentifierFromSubscriptionInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2907,19 +2571,6 @@ func awsAwsquery_serializeDocumentParametersList(v []types.Parameter, value quer
 	return nil
 }
 
-func awsAwsquery_serializeDocumentSourceIdsList(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
-	array := value.Array("SourceId")
-
-	for i := range v {
-		av := array.Value()
-		av.String(v[i])
-	}
-	return nil
-}
-
 func awsAwsquery_serializeDocumentSubnetIdentifierList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -2975,23 +2626,6 @@ func awsAwsquery_serializeDocumentVpcSecurityGroupIdList(v []string, value query
 		av := array.Value()
 		av.String(v[i])
 	}
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentAddSourceIdentifierToSubscriptionInput(v *AddSourceIdentifierToSubscriptionInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.SourceIdentifier != nil {
-		objectKey := object.Key("SourceIdentifier")
-		objectKey.String(*v.SourceIdentifier)
-	}
-
-	if v.SubscriptionName != nil {
-		objectKey := object.Key("SubscriptionName")
-		objectKey.String(*v.SubscriptionName)
-	}
-
 	return nil
 }
 
@@ -3362,54 +2996,6 @@ func awsAwsquery_serializeOpDocumentCreateDBSubnetGroupInput(v *CreateDBSubnetGr
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentCreateEventSubscriptionInput(v *CreateEventSubscriptionInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.Enabled != nil {
-		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
-	}
-
-	if v.EventCategories != nil {
-		objectKey := object.Key("EventCategories")
-		if err := awsAwsquery_serializeDocumentEventCategoriesList(v.EventCategories, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.SnsTopicArn != nil {
-		objectKey := object.Key("SnsTopicArn")
-		objectKey.String(*v.SnsTopicArn)
-	}
-
-	if v.SourceIds != nil {
-		objectKey := object.Key("SourceIds")
-		if err := awsAwsquery_serializeDocumentSourceIdsList(v.SourceIds, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.SourceType != nil {
-		objectKey := object.Key("SourceType")
-		objectKey.String(*v.SourceType)
-	}
-
-	if v.SubscriptionName != nil {
-		objectKey := object.Key("SubscriptionName")
-		objectKey.String(*v.SubscriptionName)
-	}
-
-	if v.Tags != nil {
-		objectKey := object.Key("Tags")
-		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentDeleteDBClusterInput(v *DeleteDBClusterInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -3475,18 +3061,6 @@ func awsAwsquery_serializeOpDocumentDeleteDBSubnetGroupInput(v *DeleteDBSubnetGr
 	if v.DBSubnetGroupName != nil {
 		objectKey := object.Key("DBSubnetGroupName")
 		objectKey.String(*v.DBSubnetGroupName)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentDeleteEventSubscriptionInput(v *DeleteEventSubscriptionInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.SubscriptionName != nil {
-		objectKey := object.Key("SubscriptionName")
-		objectKey.String(*v.SubscriptionName)
 	}
 
 	return nil
@@ -3890,35 +3464,6 @@ func awsAwsquery_serializeOpDocumentDescribeEventsInput(v *DescribeEventsInput, 
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentDescribeEventSubscriptionsInput(v *DescribeEventSubscriptionsInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.Filters != nil {
-		objectKey := object.Key("Filters")
-		if err := awsAwsquery_serializeDocumentFilterList(v.Filters, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.Marker != nil {
-		objectKey := object.Key("Marker")
-		objectKey.String(*v.Marker)
-	}
-
-	if v.MaxRecords != nil {
-		objectKey := object.Key("MaxRecords")
-		objectKey.Integer(*v.MaxRecords)
-	}
-
-	if v.SubscriptionName != nil {
-		objectKey := object.Key("SubscriptionName")
-		objectKey.String(*v.SubscriptionName)
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentDescribeOrderableDBInstanceOptionsInput(v *DescribeOrderableDBInstanceOptionsInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4230,40 +3775,6 @@ func awsAwsquery_serializeOpDocumentModifyDBSubnetGroupInput(v *ModifyDBSubnetGr
 	return nil
 }
 
-func awsAwsquery_serializeOpDocumentModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.Enabled != nil {
-		objectKey := object.Key("Enabled")
-		objectKey.Boolean(*v.Enabled)
-	}
-
-	if v.EventCategories != nil {
-		objectKey := object.Key("EventCategories")
-		if err := awsAwsquery_serializeDocumentEventCategoriesList(v.EventCategories, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.SnsTopicArn != nil {
-		objectKey := object.Key("SnsTopicArn")
-		objectKey.String(*v.SnsTopicArn)
-	}
-
-	if v.SourceType != nil {
-		objectKey := object.Key("SourceType")
-		objectKey.String(*v.SourceType)
-	}
-
-	if v.SubscriptionName != nil {
-		objectKey := object.Key("SubscriptionName")
-		objectKey.String(*v.SubscriptionName)
-	}
-
-	return nil
-}
-
 func awsAwsquery_serializeOpDocumentRebootDBInstanceInput(v *RebootDBInstanceInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4276,23 +3787,6 @@ func awsAwsquery_serializeOpDocumentRebootDBInstanceInput(v *RebootDBInstanceInp
 	if v.ForceFailover != nil {
 		objectKey := object.Key("ForceFailover")
 		objectKey.Boolean(*v.ForceFailover)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentRemoveSourceIdentifierFromSubscriptionInput(v *RemoveSourceIdentifierFromSubscriptionInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if v.SourceIdentifier != nil {
-		objectKey := object.Key("SourceIdentifier")
-		objectKey.String(*v.SourceIdentifier)
-	}
-
-	if v.SubscriptionName != nil {
-		objectKey := object.Key("SubscriptionName")
-		objectKey.String(*v.SubscriptionName)
 	}
 
 	return nil

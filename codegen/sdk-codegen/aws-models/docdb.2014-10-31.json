@@ -29,56 +29,6 @@
         ]
     },
     "shapes": {
-        "com.amazonaws.docdb#AddSourceIdentifierToSubscription": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.docdb#AddSourceIdentifierToSubscriptionMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.docdb#AddSourceIdentifierToSubscriptionResult"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.docdb#SourceNotFoundFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SubscriptionNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Adds a source identifier to an existing event notification \n            subscription.</p>"
-            }
-        },
-        "com.amazonaws.docdb#AddSourceIdentifierToSubscriptionMessage": {
-            "type": "structure",
-            "members": {
-                "SubscriptionName": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you \n            want to add a source identifier to.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "SourceIdentifier": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the event source to be added:</p>\n        <ul>\n            <li>\n                <p>If the source type is an instance, a \n                    <code>DBInstanceIdentifier</code> must be provided.</p>\n            </li>\n            <li>\n                <p>If the source type is a security group, a \n                    <code>DBSecurityGroupName</code> must be provided.</p>\n            </li>\n            <li>\n                <p>If the source type is a parameter group, a\n                    <code>DBParameterGroupName</code> must be provided.</p>\n            </li>\n            <li>\n                <p>If the source type is a snapshot, a \n                    <code>DBSnapshotIdentifier</code> must be provided.</p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>AddSourceIdentifierToSubscription</a>.\n        </p>"
-            }
-        },
-        "com.amazonaws.docdb#AddSourceIdentifierToSubscriptionResult": {
-            "type": "structure",
-            "members": {
-                "EventSubscription": {
-                    "target": "com.amazonaws.docdb#EventSubscription"
-                }
-            }
-        },
         "com.amazonaws.docdb#AddTagsToResource": {
             "type": "operation",
             "input": {
@@ -126,9 +76,6 @@
             "version": "2014-10-31",
             "operations": [
                 {
-                    "target": "com.amazonaws.docdb#AddSourceIdentifierToSubscription"
-                },
-                {
                     "target": "com.amazonaws.docdb#AddTagsToResource"
                 },
                 {
@@ -156,9 +103,6 @@
                     "target": "com.amazonaws.docdb#CreateDBSubnetGroup"
                 },
                 {
-                    "target": "com.amazonaws.docdb#CreateEventSubscription"
-                },
-                {
                     "target": "com.amazonaws.docdb#DeleteDBCluster"
                 },
                 {
@@ -172,9 +116,6 @@
                 },
                 {
                     "target": "com.amazonaws.docdb#DeleteDBSubnetGroup"
-                },
-                {
-                    "target": "com.amazonaws.docdb#DeleteEventSubscription"
                 },
                 {
                     "target": "com.amazonaws.docdb#DescribeCertificates"
@@ -213,9 +154,6 @@
                     "target": "com.amazonaws.docdb#DescribeEvents"
                 },
                 {
-                    "target": "com.amazonaws.docdb#DescribeEventSubscriptions"
-                },
-                {
                     "target": "com.amazonaws.docdb#DescribeOrderableDBInstanceOptions"
                 },
                 {
@@ -243,13 +181,7 @@
                     "target": "com.amazonaws.docdb#ModifyDBSubnetGroup"
                 },
                 {
-                    "target": "com.amazonaws.docdb#ModifyEventSubscription"
-                },
-                {
                     "target": "com.amazonaws.docdb#RebootDBInstance"
-                },
-                {
-                    "target": "com.amazonaws.docdb#RemoveSourceIdentifierFromSubscription"
                 },
                 {
                     "target": "com.amazonaws.docdb#RemoveTagsFromResource"
@@ -275,7 +207,8 @@
                     "sdkId": "DocDB",
                     "arnNamespace": "rds",
                     "cloudFormationName": "DocDB",
-                    "cloudTrailEventSource": "docdb.amazonaws.com"
+                    "cloudTrailEventSource": "docdb.amazonaws.com",
+                    "endpointPrefix": "rds"
                 },
                 "aws.auth#sigv4": {
                     "name": "rds"
@@ -293,10 +226,12 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "immediate"
+                        "value": "immediate",
+                        "name": "immediate"
                     },
                     {
-                        "value": "pending-reboot"
+                        "value": "pending-reboot",
+                        "name": "pending_reboot"
                     }
                 ]
             }
@@ -1202,101 +1137,6 @@
             "members": {
                 "DBSubnetGroup": {
                     "target": "com.amazonaws.docdb#DBSubnetGroup"
-                }
-            }
-        },
-        "com.amazonaws.docdb#CreateEventSubscription": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.docdb#CreateEventSubscriptionMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.docdb#CreateEventSubscriptionResult"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.docdb#EventSubscriptionQuotaExceededFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SNSInvalidTopicFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SNSNoAuthorizationFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SNSTopicArnNotFoundFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SourceNotFoundFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SubscriptionAlreadyExistFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SubscriptionCategoryNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon DocumentDB event notification subscription. This action requires a topic\n            Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console,\n            or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in\n            Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS\n            console.</p>\n        <p>You can specify the type of source (<code>SourceType</code>) that you want to be\n            notified of. You can also provide a list of Amazon DocumentDB sources (<code>SourceIds</code>)\n            that trigger the events, and you can provide a list of event categories\n                (<code>EventCategories</code>) for events that you want to be notified of. For\n            example, you can specify <code>SourceType = db-instance</code>, <code>SourceIds =\n                mydbinstance1, mydbinstance2</code> and <code>EventCategories = Availability,\n                Backup</code>.</p>\n        <p>If you specify both the <code>SourceType</code> and <code>SourceIds</code> (such as\n                <code>SourceType = db-instance</code> and <code>SourceIdentifier =\n                myDBInstance1</code>), you are notified of all the <code>db-instance</code> events\n            for the specified source. If you specify a <code>SourceType</code> but do not specify a\n                <code>SourceIdentifier</code>, you receive notice of the events for that source type\n            for all your Amazon DocumentDB sources. If you do not specify either the <code>SourceType</code>\n            or the <code>SourceIdentifier</code>, you are notified of events generated from all\n            Amazon DocumentDB sources belonging to your customer account.</p>"
-            }
-        },
-        "com.amazonaws.docdb#CreateEventSubscriptionMessage": {
-            "type": "structure",
-            "members": {
-                "SubscriptionName": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the subscription.</p>\n        <p>Constraints: The name must be fewer than 255 characters.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "SnsTopicArn": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon\n            SNS creates the ARN when you create a topic and subscribe to it.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "SourceType": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be\n            notified of events generated by an instance, you would set this parameter to\n                <code>db-instance</code>. If this value is not specified, all events are\n            returned.</p>\n        <p>Valid values: <code>db-instance</code>, <code>db-cluster</code>,\n                <code>db-parameter-group</code>, <code>db-security-group</code>,\n                <code>db-snapshot</code>, <code>db-cluster-snapshot</code>\n        </p>"
-                    }
-                },
-                "EventCategories": {
-                    "target": "com.amazonaws.docdb#EventCategoriesList",
-                    "traits": {
-                        "smithy.api#documentation": "<p> A list of event categories for a <code>SourceType</code> that you want to subscribe\n            to. </p>"
-                    }
-                },
-                "SourceIds": {
-                    "target": "com.amazonaws.docdb#SourceIdsList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The list of identifiers of the event sources for which events are returned. If not\n            specified, then all sources are included in the response. An identifier must begin with\n            a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a\n            hyphen or contain two consecutive hyphens.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>If <code>SourceIds</code> are provided, <code>SourceType</code> must also be\n                    provided.</p>\n            </li>\n            <li>\n                <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must\n                    be provided.</p>\n            </li>\n            <li>\n                <p>If the source type is a security group, a <code>DBSecurityGroupName</code>\n                    must be provided.</p>\n            </li>\n            <li>\n                <p>If the source type is a parameter group, a\n                        <code>DBParameterGroupName</code> must be provided.</p>\n            </li>\n            <li>\n                <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must\n                    be provided.</p>\n            </li>\n         </ul>"
-                    }
-                },
-                "Enabled": {
-                    "target": "com.amazonaws.docdb#BooleanOptional",
-                    "traits": {
-                        "smithy.api#documentation": "<p> A Boolean value; set to <code>true</code> to activate the subscription, set to\n                <code>false</code> to create the subscription but not active it. </p>"
-                    }
-                },
-                "Tags": {
-                    "target": "com.amazonaws.docdb#TagList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The tags to be assigned to the event subscription.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>CreateEventSubscription</a>.</p>"
-            }
-        },
-        "com.amazonaws.docdb#CreateEventSubscriptionResult": {
-            "type": "structure",
-            "members": {
-                "EventSubscription": {
-                    "target": "com.amazonaws.docdb#EventSubscription"
                 }
             }
         },
@@ -2742,49 +2582,6 @@
                 "smithy.api#documentation": "<p>Represents the input to <a>DeleteDBSubnetGroup</a>.</p>"
             }
         },
-        "com.amazonaws.docdb#DeleteEventSubscription": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.docdb#DeleteEventSubscriptionMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.docdb#DeleteEventSubscriptionResult"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.docdb#InvalidEventSubscriptionStateFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SubscriptionNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon DocumentDB event notification subscription.</p>"
-            }
-        },
-        "com.amazonaws.docdb#DeleteEventSubscriptionMessage": {
-            "type": "structure",
-            "members": {
-                "SubscriptionName": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to\n            delete.</p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DeleteEventSubscription</a>.</p>"
-            }
-        },
-        "com.amazonaws.docdb#DeleteEventSubscriptionResult": {
-            "type": "structure",
-            "members": {
-                "EventSubscription": {
-                    "target": "com.amazonaws.docdb#EventSubscription"
-                }
-            }
-        },
         "com.amazonaws.docdb#DescribeCertificates": {
             "type": "operation",
             "input": {
@@ -3228,6 +3025,73 @@
                     "outputToken": "Marker",
                     "items": "DBInstances",
                     "pageSize": "MaxRecords"
+                },
+                "smithy.waiters#waitable": {
+                    "DBInstanceAvailable": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "available",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "deleted",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "deleting",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "failed",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "incompatible-restore",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "DBInstances[].DBInstanceStatus",
+                                        "expected": "incompatible-parameters",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30
+                    }
                 }
             }
         },
@@ -3401,61 +3265,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Represents the input to <a>DescribeEventCategories</a>.</p>"
-            }
-        },
-        "com.amazonaws.docdb#DescribeEventSubscriptions": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.docdb#DescribeEventSubscriptionsMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.docdb#EventSubscriptionsMessage"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.docdb#SubscriptionNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Lists all the subscription descriptions for a customer account. The description for a\n            subscription includes <code>SubscriptionName</code>, <code>SNSTopicARN</code>,\n                <code>CustomerID</code>, <code>SourceType</code>, <code>SourceID</code>,\n                <code>CreationTime</code>, and <code>Status</code>.</p>\n        <p>If you specify a <code>SubscriptionName</code>, lists the description for that\n            subscription.</p>",
-                "smithy.api#paginated": {
-                    "inputToken": "Marker",
-                    "outputToken": "Marker",
-                    "items": "EventSubscriptionsList",
-                    "pageSize": "MaxRecords"
-                }
-            }
-        },
-        "com.amazonaws.docdb#DescribeEventSubscriptionsMessage": {
-            "type": "structure",
-            "members": {
-                "SubscriptionName": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to\n            describe.</p>"
-                    }
-                },
-                "Filters": {
-                    "target": "com.amazonaws.docdb#FilterList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>This parameter is not currently supported.</p>"
-                    }
-                },
-                "MaxRecords": {
-                    "target": "com.amazonaws.docdb#IntegerOptional",
-                    "traits": {
-                        "smithy.api#documentation": "<p> The maximum number of records to include in the response. If more records exist than\n         the specified <code>MaxRecords</code> value, a pagination token (marker) is included\n         in the response so that the remaining results can be retrieved.</p>\n         <p>Default: 100</p>\n        <p>Constraints: Minimum 20, maximum 100.</p>"
-                    }
-                },
-                "Marker": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response\n         includes only records beyond the marker, up to the value specified by\n         <code>MaxRecords</code>.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>DescribeEventSubscriptions</a>.</p>"
             }
         },
         "com.amazonaws.docdb#DescribeEvents": {
@@ -3825,116 +3634,6 @@
                 }
             }
         },
-        "com.amazonaws.docdb#EventSubscription": {
-            "type": "structure",
-            "members": {
-                "CustomerAwsId": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The AWS customer account that is associated with the Amazon DocumentDB event notification\n            subscription.</p>"
-                    }
-                },
-                "CustSubscriptionId": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon DocumentDB event notification subscription ID.</p>"
-                    }
-                },
-                "SnsTopicArn": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The topic ARN of the Amazon DocumentDB event notification subscription.</p>"
-                    }
-                },
-                "Status": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The status of the Amazon DocumentDB event notification subscription.</p>\n        <p>Constraints:</p>\n        <p>Can be one of the following: <code>creating</code>, <code>modifying</code>,\n                <code>deleting</code>, <code>active</code>, <code>no-permission</code>,\n                <code>topic-not-exist</code>\n         </p>\n        <p>The <code>no-permission</code> status indicates that Amazon DocumentDB no longer has permission\n            to post to the SNS topic. The <code>topic-not-exist</code> status indicates that the\n            topic was deleted after the subscription was created.</p>"
-                    }
-                },
-                "SubscriptionCreationTime": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The time at which the Amazon DocumentDB event notification subscription was created.</p>"
-                    }
-                },
-                "SourceType": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The source type for the Amazon DocumentDB event notification subscription.</p>"
-                    }
-                },
-                "SourceIdsList": {
-                    "target": "com.amazonaws.docdb#SourceIdsList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A list of source IDs for the Amazon DocumentDB event notification subscription.</p>"
-                    }
-                },
-                "EventCategoriesList": {
-                    "target": "com.amazonaws.docdb#EventCategoriesList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A list of event categories for the Amazon DocumentDB event notification subscription.</p>"
-                    }
-                },
-                "Enabled": {
-                    "target": "com.amazonaws.docdb#Boolean",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value indicating whether the subscription is enabled. A value of\n                <code>true</code> indicates that the subscription is enabled.</p>"
-                    }
-                },
-                "EventSubscriptionArn": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the event subscription.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Detailed information about an event to which you have subscribed.</p>"
-            }
-        },
-        "com.amazonaws.docdb#EventSubscriptionQuotaExceededFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>You have reached the maximum number of event subscriptions. </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
-            }
-        },
-        "com.amazonaws.docdb#EventSubscriptionsList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.docdb#EventSubscription",
-                "traits": {
-                    "smithy.api#xmlName": "EventSubscription"
-                }
-            }
-        },
-        "com.amazonaws.docdb#EventSubscriptionsMessage": {
-            "type": "structure",
-            "members": {
-                "Marker": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response\n         includes only records beyond the marker, up to the value specified by\n         <code>MaxRecords</code>.</p>"
-                    }
-                },
-                "EventSubscriptionsList": {
-                    "target": "com.amazonaws.docdb#EventSubscriptionsList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A list of event subscriptions.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Represents the output of <a>DescribeEventSubscriptions</a>.</p>"
-            }
-        },
         "com.amazonaws.docdb#EventsMessage": {
             "type": "structure",
             "members": {
@@ -4210,19 +3909,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p> The subnet isn't in the <i>available</i> state. </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
-            }
-        },
-        "com.amazonaws.docdb#InvalidEventSubscriptionStateFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Someone else might be modifying a subscription. Wait a few seconds, and try\n            again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -4767,85 +4453,6 @@
                 }
             }
         },
-        "com.amazonaws.docdb#ModifyEventSubscription": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.docdb#ModifyEventSubscriptionMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.docdb#ModifyEventSubscriptionResult"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.docdb#EventSubscriptionQuotaExceededFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SNSInvalidTopicFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SNSNoAuthorizationFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SNSTopicArnNotFoundFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SubscriptionCategoryNotFoundFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SubscriptionNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Modifies an existing Amazon DocumentDB event notification subscription.</p>"
-            }
-        },
-        "com.amazonaws.docdb#ModifyEventSubscriptionMessage": {
-            "type": "structure",
-            "members": {
-                "SubscriptionName": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "SnsTopicArn": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. The\n            ARN is created by Amazon SNS when you create a topic and subscribe to it.</p>"
-                    }
-                },
-                "SourceType": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be\n            notified of events generated by an instance, set this parameter to\n                <code>db-instance</code>. If this value is not specified, all events are\n            returned.</p>\n        <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>,\n                <code>db-security-group</code>, <code>db-snapshot</code>\n         </p>"
-                    }
-                },
-                "EventCategories": {
-                    "target": "com.amazonaws.docdb#EventCategoriesList",
-                    "traits": {
-                        "smithy.api#documentation": "<p> A list of event categories for a <code>SourceType</code> that you want to subscribe\n            to.</p>"
-                    }
-                },
-                "Enabled": {
-                    "target": "com.amazonaws.docdb#BooleanOptional",
-                    "traits": {
-                        "smithy.api#documentation": "<p> A Boolean value; set to <code>true</code> to activate the subscription. </p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>ModifyEventSubscription</a>.</p>"
-            }
-        },
-        "com.amazonaws.docdb#ModifyEventSubscriptionResult": {
-            "type": "structure",
-            "members": {
-                "EventSubscription": {
-                    "target": "com.amazonaws.docdb#EventSubscription"
-                }
-            }
-        },
         "com.amazonaws.docdb#OrderableDBInstanceOption": {
             "type": "structure",
             "members": {
@@ -5236,56 +4843,6 @@
             "members": {
                 "DBInstance": {
                     "target": "com.amazonaws.docdb#DBInstance"
-                }
-            }
-        },
-        "com.amazonaws.docdb#RemoveSourceIdentifierFromSubscription": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.docdb#RemoveSourceIdentifierFromSubscriptionMessage"
-            },
-            "output": {
-                "target": "com.amazonaws.docdb#RemoveSourceIdentifierFromSubscriptionResult"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.docdb#SourceNotFoundFault"
-                },
-                {
-                    "target": "com.amazonaws.docdb#SubscriptionNotFoundFault"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Removes a source identifier from an existing Amazon DocumentDB event notification\n            subscription.</p>"
-            }
-        },
-        "com.amazonaws.docdb#RemoveSourceIdentifierFromSubscriptionMessage": {
-            "type": "structure",
-            "members": {
-                "SubscriptionName": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to remove a\n            source identifier from.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "SourceIdentifier": {
-                    "target": "com.amazonaws.docdb#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p> The source identifier to be removed from the subscription, such as the instance\n            identifier for an instance, or the name of a security group. </p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Represents the input to <a>RemoveSourceIdentifierFromSubscription</a>.</p>"
-            }
-        },
-        "com.amazonaws.docdb#RemoveSourceIdentifierFromSubscriptionResult": {
-            "type": "structure",
-            "members": {
-                "EventSubscription": {
-                    "target": "com.amazonaws.docdb#EventSubscription"
                 }
             }
         },
@@ -5701,45 +5258,6 @@
                 }
             }
         },
-        "com.amazonaws.docdb#SNSInvalidTopicFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Amazon SNS has responded that there is a problem with the specified topic. </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
-            }
-        },
-        "com.amazonaws.docdb#SNSNoAuthorizationFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>You do not have permission to publish to the SNS topic Amazon Resource Name (ARN). </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
-            }
-        },
-        "com.amazonaws.docdb#SNSTopicArnNotFoundFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The SNS topic Amazon Resource Name (ARN) does not exist. </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 404
-            }
-        },
         "com.amazonaws.docdb#SharedSnapshotQuotaExceededFault": {
             "type": "structure",
             "members": {
@@ -5766,49 +5284,33 @@
                 "smithy.api#httpError": 400
             }
         },
-        "com.amazonaws.docdb#SourceIdsList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.docdb#String",
-                "traits": {
-                    "smithy.api#xmlName": "SourceId"
-                }
-            }
-        },
-        "com.amazonaws.docdb#SourceNotFoundFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The requested source could not be found. </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 404
-            }
-        },
         "com.amazonaws.docdb#SourceType": {
             "type": "string",
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "value": "db-instance"
+                        "value": "db-instance",
+                        "name": "db_instance"
                     },
                     {
-                        "value": "db-parameter-group"
+                        "value": "db-parameter-group",
+                        "name": "db_parameter_group"
                     },
                     {
-                        "value": "db-security-group"
+                        "value": "db-security-group",
+                        "name": "db_security_group"
                     },
                     {
-                        "value": "db-snapshot"
+                        "value": "db-snapshot",
+                        "name": "db_snapshot"
                     },
                     {
-                        "value": "db-cluster"
+                        "value": "db-cluster",
+                        "name": "db_cluster"
                     },
                     {
-                        "value": "db-cluster-snapshot"
+                        "value": "db-cluster-snapshot",
+                        "name": "db_cluster_snapshot"
                     }
                 ]
             }
@@ -5983,45 +5485,6 @@
                 "traits": {
                     "smithy.api#xmlName": "Subnet"
                 }
-            }
-        },
-        "com.amazonaws.docdb#SubscriptionAlreadyExistFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The provided subscription name already exists. </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 400
-            }
-        },
-        "com.amazonaws.docdb#SubscriptionCategoryNotFoundFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The provided category does not exist. </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 404
-            }
-        },
-        "com.amazonaws.docdb#SubscriptionNotFoundFault": {
-            "type": "structure",
-            "members": {
-                "message": {
-                    "target": "com.amazonaws.docdb#ExceptionMessage"
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The subscription name does not exist. </p>",
-                "smithy.api#error": "client",
-                "smithy.api#httpError": 404
             }
         },
         "com.amazonaws.docdb#TStamp": {
