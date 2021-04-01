@@ -26797,6 +26797,11 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 				sv.ColorSpace = types.VideoSelectorColorSpace(jtv)
 			}
 
+		case "colorSpaceSettings":
+			if err := awsRestjson1_deserializeDocumentVideoSelectorColorSpaceSettings(&sv.ColorSpaceSettings, value); err != nil {
+				return err
+			}
+
 		case "colorSpaceUsage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26808,6 +26813,42 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 
 		case "selectorSettings":
 			if err := awsRestjson1_deserializeDocumentVideoSelectorSettings(&sv.SelectorSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVideoSelectorColorSpaceSettings(v **types.VideoSelectorColorSpaceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VideoSelectorColorSpaceSettings
+	if *v == nil {
+		sv = &types.VideoSelectorColorSpaceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "hdr10Settings":
+			if err := awsRestjson1_deserializeDocumentHdr10Settings(&sv.Hdr10Settings, value); err != nil {
 				return err
 			}
 

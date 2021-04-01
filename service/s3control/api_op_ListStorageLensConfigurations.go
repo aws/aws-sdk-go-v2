@@ -177,6 +177,83 @@ func addEndpointPrefix_opListStorageLensConfigurationsMiddleware(stack *middlewa
 	return stack.Serialize.Insert(&endpointPrefix_opListStorageLensConfigurationsMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
+// ListStorageLensConfigurationsAPIClient is a client that implements the
+// ListStorageLensConfigurations operation.
+type ListStorageLensConfigurationsAPIClient interface {
+	ListStorageLensConfigurations(context.Context, *ListStorageLensConfigurationsInput, ...func(*Options)) (*ListStorageLensConfigurationsOutput, error)
+}
+
+var _ ListStorageLensConfigurationsAPIClient = (*Client)(nil)
+
+// ListStorageLensConfigurationsPaginatorOptions is the paginator options for
+// ListStorageLensConfigurations
+type ListStorageLensConfigurationsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListStorageLensConfigurationsPaginator is a paginator for
+// ListStorageLensConfigurations
+type ListStorageLensConfigurationsPaginator struct {
+	options   ListStorageLensConfigurationsPaginatorOptions
+	client    ListStorageLensConfigurationsAPIClient
+	params    *ListStorageLensConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListStorageLensConfigurationsPaginator returns a new
+// ListStorageLensConfigurationsPaginator
+func NewListStorageLensConfigurationsPaginator(client ListStorageLensConfigurationsAPIClient, params *ListStorageLensConfigurationsInput, optFns ...func(*ListStorageLensConfigurationsPaginatorOptions)) *ListStorageLensConfigurationsPaginator {
+	if params == nil {
+		params = &ListStorageLensConfigurationsInput{}
+	}
+
+	options := ListStorageLensConfigurationsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListStorageLensConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListStorageLensConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListStorageLensConfigurations page.
+func (p *ListStorageLensConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListStorageLensConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.ListStorageLensConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
+}
+
 func newServiceMetadataMiddleware_opListStorageLensConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,

@@ -741,7 +741,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host your\n            custom game server or Realtime Servers. Use this operation to configure the computing resources for\n            your fleet and provide instructions for running game servers on each instance.</p>\n        <p>Most GameLift fleets can deploy instances to multiple locations, including the home\n            Region (where the fleet is created) and an optional set of remote locations. Fleets that\n            are created in the following AWS Regions support multiple locations: us-east-1 (N.\n            Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland),\n            ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that\n            created in other GameLift Regions can have instances in the fleet Region only. All\n            instances deployed to fleet locations use the same configuration.</p>\n        <p>To create a fleet, choose the hardware for your instances, specify a game server build\n            or Realtime script to deploy, and provide a runtime configuration to direct GameLift how\n            to start and run game servers on each instance in the fleet. Set permissions for inbound\n            traffic to your game servers, and enable optional features as needed. When creating a\n            multi-location fleet, provide a list of additional remote locations.</p>\n        \n        <p>If successful, this operation creates a new Fleet resource and places it in\n                <code>NEW</code> status, which prompts GameLift to initiate the <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creation-workflow.html\">fleet creation\n                workflow</a>. You can track fleet creation by checking fleet status using <a>DescribeFleetAttributes</a> and <a>DescribeFleetLocationAttributes</a>/, or by monitoring fleet creation events\n            using <a>DescribeFleetEvents</a>. As soon as the fleet status changes to\n                <code>ACTIVE</code>, you can enable automatic scaling for the fleet with <a>PutScalingPolicy</a> and set capacity for the home Region with <a>UpdateFleetCapacity</a>. When the status of each remote location reaches\n                <code>ACTIVE</code>, you can set capacity by location using <a>UpdateFleetCapacity</a>.</p>\n\n        \n        <p>\n            <b>Learn more</b>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up fleets</a>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug fleet creation issues</a>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Multi-location fleets</a>\n         </p>\n        <p>\n            <b>Related actions</b>\n         </p>\n                    <p>\n            <a>CreateFleet</a> | \n                    <a>UpdateFleetCapacity</a> | \n                    <a>PutScalingPolicy</a> | \n                    <a>DescribeEC2InstanceLimits</a> | \n                    <a>DescribeFleetAttributes</a> | \n                    <a>DescribeFleetLocationAttributes</a> | \n                    <a>UpdateFleetAttributes</a> | \n                    <a>StopFleetActions</a> | \n                    <a>DeleteFleet</a> | \n                    <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>Creates a fleet of Amazon Elastic Compute Cloud (Amazon EC2) instances to host your\n            custom game server or Realtime Servers. Use this operation to configure the computing resources for\n            your fleet and provide instructions for running game servers on each instance.</p>\n        <p>Most GameLift fleets can deploy instances to multiple locations, including the home\n            Region (where the fleet is created) and an optional set of remote locations. Fleets that\n            are created in the following AWS Regions support multiple locations: us-east-1 (N.\n            Virginia), us-west-2 (Oregon), eu-central-1 (Frankfurt), eu-west-1 (Ireland),\n            ap-southeast-2 (Sydney), ap-northeast-1 (Tokyo), and ap-northeast-2 (Seoul). Fleets that\n            are created in other GameLift Regions can deploy instances in the fleet's home Region\n            only. All fleet instances use the same configuration regardless of location; however,\n            you can adjust capacity settings and turn auto-scaling on/off for each location.</p>\n        <p>To create a fleet, choose the hardware for your instances, specify a game server build\n            or Realtime script to deploy, and provide a runtime configuration to direct GameLift how\n            to start and run game servers on each instance in the fleet. Set permissions for inbound\n            traffic to your game servers, and enable optional features as needed. When creating a\n            multi-location fleet, provide a list of additional remote locations.</p>\n        \n        <p>If successful, this operation creates a new Fleet resource and places it in\n                <code>NEW</code> status, which prompts GameLift to initiate the <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creation-workflow.html\">fleet creation\n                workflow</a>. You can track fleet creation by checking fleet status using <a>DescribeFleetAttributes</a> and <a>DescribeFleetLocationAttributes</a>/, or by monitoring fleet creation events\n            using <a>DescribeFleetEvents</a>. As soon as the fleet status changes to\n                <code>ACTIVE</code>, you can enable automatic scaling for the fleet with <a>PutScalingPolicy</a> and set capacity for the home Region with <a>UpdateFleetCapacity</a>. When the status of each remote location reaches\n                <code>ACTIVE</code>, you can set capacity by location using <a>UpdateFleetCapacity</a>.</p>\n\n        \n        <p>\n            <b>Learn more</b>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Setting up fleets</a>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html#fleets-creating-debug-creation\">Debug fleet creation issues</a>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html\">Multi-location fleets</a>\n         </p>\n        <p>\n            <b>Related actions</b>\n         </p>\n                    <p>\n            <a>CreateFleet</a> | \n                    <a>UpdateFleetCapacity</a> | \n                    <a>PutScalingPolicy</a> | \n                    <a>DescribeEC2InstanceLimits</a> | \n                    <a>DescribeFleetAttributes</a> | \n                    <a>DescribeFleetLocationAttributes</a> | \n                    <a>UpdateFleetAttributes</a> | \n                    <a>StopFleetActions</a> | \n                    <a>DeleteFleet</a> | \n                    <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#CreateFleetInput": {
@@ -1234,6 +1234,9 @@
                     "target": "com.amazonaws.gamelift#LimitExceededException"
                 },
                 {
+                    "target": "com.amazonaws.gamelift#NotFoundException"
+                },
+                {
                     "target": "com.amazonaws.gamelift#TaggingFailedException"
                 },
                 {
@@ -1241,7 +1244,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a placement queue that processes requests for new game sessions. A queue uses\n            FleetIQ algorithms to determine the best placement locations and find an\n            available game server there, then prompts the game server process to start a new game\n            session. </p>\n        <p>A game session queue is configured with a set of destinations (GameLift fleets or\n            aliases), which determine the locations where the queue can place new game sessions.\n            These destinations can span multiple fleet types (Spot and On-Demand), instance types,\n            and AWS Regions. If the queue includes multi-location fleets, the queue is able to place\n            game sessions in all of a fleet's remote locations. You can opt to filter out individual\n            locations if needed.</p>\n        <p>The queue configuration also determines how FleetIQ selects the best available placement\n            for a new game session. Before searching for an available game server, FleetIQ first\n            prioritizes the queue's destinations and locations, with the best placement locations on\n            top. You can set up the queue to use the FleetIQ default prioritization or provide an\n            alternate set of priorities.</p>\n        <p>To create a new queue, provide a name, timeout value, and a list of destinations.\n            Optionally, specify a sort configuration and/or a filter, and define a set of latency\n            cap policies.</p>\n        <p>If successful, a new <code>GameSessionQueue</code> object is returned with an assigned\n            queue ARN. New game session requests, which are submitted to queue with <a>StartGameSessionPlacement</a> or <a>StartMatchmaking</a>, reference a queue's name or ARN. </p>\n        <p>\n            <b>Learn more</b>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html\">\n            Design a game session queue</a>\n        </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html\">\n            Create a game session queue</a>\n        </p>\n        <p>\n            <b>Related actions</b>\n         </p>\n                    <p>\n            <a>CreateGameSessionQueue</a> | \n                    <a>DescribeGameSessionQueues</a> | \n                    <a>UpdateGameSessionQueue</a> | \n                    <a>DeleteGameSessionQueue</a> | \n                    <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>Creates a placement queue that processes requests for new game sessions. A queue uses\n            FleetIQ algorithms to determine the best placement locations and find an\n            available game server there, then prompts the game server process to start a new game\n            session. </p>\n        <p>A game session queue is configured with a set of destinations (GameLift fleets or\n            aliases), which determine the locations where the queue can place new game sessions.\n            These destinations can span multiple fleet types (Spot and On-Demand), instance types,\n            and AWS Regions. If the queue includes multi-location fleets, the queue is able to place\n            game sessions in all of a fleet's remote locations. You can opt to filter out individual\n            locations if needed.</p>\n        <p>The queue configuration also determines how FleetIQ selects the best available placement\n            for a new game session. Before searching for an available game server, FleetIQ first\n            prioritizes the queue's destinations and locations, with the best placement locations on\n            top. You can set up the queue to use the FleetIQ default prioritization or provide an\n            alternate set of priorities.</p>\n        <p>To create a new queue, provide a name, timeout value, and a list of destinations.\n            Optionally, specify a sort configuration and/or a filter, and define a set of latency\n            cap policies. You can also include the ARN for an Amazon Simple Notification Service\n            (SNS) topic to receive notifications of game session placement activity. Notifications\n            using SNS or CloudWatch events is the preferred way to track placement activity.</p>\n        <p>If successful, a new <code>GameSessionQueue</code> object is returned with an assigned\n            queue ARN. New game session requests, which are submitted to the  queue with <a>StartGameSessionPlacement</a> or <a>StartMatchmaking</a>,\n            reference a queue's name or ARN. </p>\n        <p>\n            <b>Learn more</b>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html\">\n            Design a game session queue</a>\n        </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html\">\n            Create a game session queue</a>\n        </p>\n        <p>\n            <b>Related actions</b>\n         </p>\n                    <p>\n            <a>CreateGameSessionQueue</a> | \n                    <a>DescribeGameSessionQueues</a> | \n                    <a>UpdateGameSessionQueue</a> | \n                    <a>DeleteGameSessionQueue</a> | \n                    <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#CreateGameSessionQueueInput": {
@@ -1282,6 +1285,18 @@
                     "target": "com.amazonaws.gamelift#PriorityConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Custom settings to use when prioritizing destinations and locations for game session placements. This \n            configuration replaces the FleetIQ default prioritization process. Priority types that are not explicitly \n            named will be automatically applied at the end of the prioritization process. </p>"
+                    }
+                },
+                "CustomEventData": {
+                    "target": "com.amazonaws.gamelift#QueueCustomEventData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information to be added to all events that are related to this game session queue.\n        </p>"
+                    }
+                },
+                "NotificationTarget": {
+                    "target": "com.amazonaws.gamelift#QueueSnsArnStringModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An SNS topic ARN that is set up to receive game session placement notifications. See <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html\">\n            Setting up notifications for game session placement</a>.</p>"
                     }
                 },
                 "Tags": {
@@ -1338,7 +1353,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Defines a new matchmaking configuration for use with FlexMatch. Whether your are using\n            FlexMatch with GameLift hosting or as a standalone matchmaking service, the matchmaking\n            configuration sets out rules for matching players and forming teams. If you're also\n            using GameLift hosting, it defines how to start game sessions for each match. Your\n            matchmaking system can use multiple configurations to handle different game scenarios.\n            All matchmaking requests (<a>StartMatchmaking</a> or <a>StartMatchBackfill</a>) identify the matchmaking configuration to use and\n            provide player attributes consistent with that configuration. </p>\n        <p>To create a matchmaking configuration, you must provide the following: configuration\n            name and FlexMatch mode (with or without GameLift hosting); a rule set that specifies how\n            to evaluate players and find acceptable matches; whether player acceptance is required;\n            and the maximum time allowed for a matchmaking attempt. When using FlexMatch with GameLift\n            hosting, you also need to identify the game session queue to use when starting a game\n            session for the match.</p>\n        <p>In addition, you must set up an Amazon Simple Notification Service (SNS) to receive matchmaking notifications, and\n            provide the topic ARN in the matchmaking configuration. An alternative method,\n            continuously polling ticket status with <a>DescribeMatchmaking</a>, is only\n            suitable for games in development with low matchmaking usage.</p>\n        <p>\n            <b>Learn more</b>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html\">\n                Design a FlexMatch matchmaker</a>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html\">\n            Set up FlexMatch event notification</a>\n         </p>\n        <p>\n            <b>Related actions</b>\n         </p>\n                    <p>\n            <a>CreateMatchmakingConfiguration</a> | \n                    <a>DescribeMatchmakingConfigurations</a> | \n                    <a>UpdateMatchmakingConfiguration</a> | \n                    <a>DeleteMatchmakingConfiguration</a> | \n                    <a>CreateMatchmakingRuleSet</a> | \n                    <a>DescribeMatchmakingRuleSets</a> | \n                    <a>ValidateMatchmakingRuleSet</a> | \n                    <a>DeleteMatchmakingRuleSet</a> | \n                    <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
+                "smithy.api#documentation": "<p>Defines a new matchmaking configuration for use with FlexMatch. Whether your are using\n            FlexMatch with GameLift hosting or as a standalone matchmaking service, the matchmaking\n            configuration sets out rules for matching players and forming teams. If you're also\n            using GameLift hosting, it defines how to start game sessions for each match. Your\n            matchmaking system can use multiple configurations to handle different game scenarios.\n            All matchmaking requests (<a>StartMatchmaking</a> or <a>StartMatchBackfill</a>) identify the matchmaking configuration to use and\n            provide player attributes consistent with that configuration. </p>\n        <p>To create a matchmaking configuration, you must provide the following: configuration\n            name and FlexMatch mode (with or without GameLift hosting); a rule set that specifies how\n            to evaluate players and find acceptable matches; whether player acceptance is required;\n            and the maximum time allowed for a matchmaking attempt. When using FlexMatch with GameLift\n            hosting, you also need to identify the game session queue to use when starting a game\n            session for the match.</p>\n        <p>In addition, you must set up an Amazon Simple Notification Service (SNS) topic to receive matchmaking notifications.\n            Provide the topic ARN in the matchmaking configuration. An alternative method,\n            continuously polling ticket status with <a>DescribeMatchmaking</a>, is only\n            suitable for games in development with low matchmaking usage.</p>\n        <p>\n            <b>Learn more</b>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html\">\n                Design a FlexMatch matchmaker</a>\n         </p>\n        <p>\n            <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html\">\n            Set up FlexMatch event notification</a>\n         </p>\n        <p>\n            <b>Related actions</b>\n         </p>\n                    <p>\n            <a>CreateMatchmakingConfiguration</a> | \n                    <a>DescribeMatchmakingConfigurations</a> | \n                    <a>UpdateMatchmakingConfiguration</a> | \n                    <a>DeleteMatchmakingConfiguration</a> | \n                    <a>CreateMatchmakingRuleSet</a> | \n                    <a>DescribeMatchmakingRuleSets</a> | \n                    <a>ValidateMatchmakingRuleSet</a> | \n                    <a>DeleteMatchmakingRuleSet</a> | \n                    <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets\">All APIs by task</a>\n         </p>"
             }
         },
         "com.amazonaws.gamelift#CreateMatchmakingConfigurationInput": {
@@ -1393,7 +1408,7 @@
                 "NotificationTarget": {
                     "target": "com.amazonaws.gamelift#SnsArnStringModel",
                     "traits": {
-                        "smithy.api#documentation": "<p>An SNS topic ARN that is set up to receive matchmaking notifications.</p>"
+                        "smithy.api#documentation": "<p>An SNS topic ARN that is set up to receive matchmaking notifications. See <a href=\"https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html\">\n            Setting up notifications for matchmaking</a> for more information.</p>"
                     }
                 },
                 "AdditionalPlayerCount": {
@@ -7072,6 +7087,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Custom settings to use when prioritizing destinations and locations for game session placements. This \n            configuration replaces the FleetIQ default prioritization process. Priority types that are not explicitly \n            named will be automatically applied at the end of the prioritization process. </p>"
                     }
+                },
+                "CustomEventData": {
+                    "target": "com.amazonaws.gamelift#QueueCustomEventData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information that is added to all events that are related to this game session queue.\n        </p>"
+                    }
+                },
+                "NotificationTarget": {
+                    "target": "com.amazonaws.gamelift#QueueSnsArnStringModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An SNS topic ARN that is set up to receive game session placement notifications. See <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html\">\n            Setting up notifications for game session placement</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9408,6 +9435,26 @@
                 "target": "com.amazonaws.gamelift#ArnStringModel"
             }
         },
+        "com.amazonaws.gamelift#QueueCustomEventData": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\s\\S]*"
+            }
+        },
+        "com.amazonaws.gamelift#QueueSnsArnStringModel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]*(\\.fifo)?"
+            }
+        },
         "com.amazonaws.gamelift#RegisterGameServer": {
             "type": "operation",
             "input": {
@@ -11709,6 +11756,18 @@
                     "target": "com.amazonaws.gamelift#PriorityConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Custom settings to use when prioritizing destinations and locations for game session placements. This \n            configuration replaces the FleetIQ default prioritization process. Priority types that are not explicitly \n            named will be automatically applied at the end of the prioritization process. To remove an existing priority configuration, pass in an empty set.</p>"
+                    }
+                },
+                "CustomEventData": {
+                    "target": "com.amazonaws.gamelift#QueueCustomEventData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Information to be added to all events that are related to this game session queue.\n        </p>"
+                    }
+                },
+                "NotificationTarget": {
+                    "target": "com.amazonaws.gamelift#QueueSnsArnStringModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An SNS topic ARN that is set up to receive game session placement notifications. See <a href=\"https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html\">\n            Setting up notifications for game session placement</a>.</p>"
                     }
                 }
             },

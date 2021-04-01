@@ -22,7 +22,7 @@ type Field struct {
 // Identity information for the EC2 instance that is hosting the task runner. You
 // can get this value by calling a metadata URI from the EC2 instance. For more
 // information, see Instance Metadata
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html)
+// (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html)
 // in the Amazon Elastic Compute Cloud User Guide. Passing in this value proves
 // that your task runner is running on an EC2 instance, and ensures the proper AWS
 // Data Pipeline service charges are applied to your pipeline.
@@ -162,7 +162,7 @@ type PipelineDescription struct {
 
 	// A list of tags to associated with a pipeline. Tags let you control access to
 	// pipelines. For more information, see Controlling User Access to Pipelines
-	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	Tags []Tag
 }
@@ -207,7 +207,7 @@ type Query struct {
 	Selectors []Selector
 }
 
-// A comparison that is used to determine whether a query should return this
+// A comparision that is used to determine whether a query should return this
 // object.
 type Selector struct {
 
@@ -225,13 +225,13 @@ type Selector struct {
 // Tags are key/value pairs defined by a user and associated with a pipeline to
 // control access. AWS Data Pipeline allows you to associate ten tags per pipeline.
 // For more information, see Controlling User Access to Pipelines
-// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 // in the AWS Data Pipeline Developer Guide.
 type Tag struct {
 
 	// The key name of a tag defined by a user. For more information, see Controlling
 	// User Access to Pipelines
-	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	//
 	// This member is required.
@@ -239,7 +239,7 @@ type Tag struct {
 
 	// The optional value portion of a tag defined by a user. For more information, see
 	// Controlling User Access to Pipelines
-	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	//
 	// This member is required.

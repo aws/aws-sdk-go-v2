@@ -170,6 +170,26 @@ func (m *validateOpAssociateHostedConnection) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateMacSecKey struct {
+}
+
+func (*validateOpAssociateMacSecKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateMacSecKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateMacSecKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateMacSecKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateVirtualInterface struct {
 }
 
@@ -710,6 +730,26 @@ func (m *validateOpDisassociateConnectionFromLag) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateMacSecKey struct {
+}
+
+func (*validateOpDisassociateMacSecKey) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateMacSecKey) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateMacSecKeyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateMacSecKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartBgpFailoverTest struct {
 }
 
@@ -790,6 +830,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateConnection struct {
+}
+
+func (*validateOpUpdateConnection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateConnection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateConnectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateConnectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLag struct {
 }
 
@@ -860,6 +920,10 @@ func addOpAssociateConnectionWithLagValidationMiddleware(stack *middleware.Stack
 
 func addOpAssociateHostedConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateHostedConnection{}, middleware.After)
+}
+
+func addOpAssociateMacSecKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateMacSecKey{}, middleware.After)
 }
 
 func addOpAssociateVirtualInterfaceValidationMiddleware(stack *middleware.Stack) error {
@@ -970,6 +1034,10 @@ func addOpDisassociateConnectionFromLagValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDisassociateConnectionFromLag{}, middleware.After)
 }
 
+func addOpDisassociateMacSecKeyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateMacSecKey{}, middleware.After)
+}
+
 func addOpStartBgpFailoverTestValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartBgpFailoverTest{}, middleware.After)
 }
@@ -984,6 +1052,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateConnectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateConnection{}, middleware.After)
 }
 
 func addOpUpdateLagValidationMiddleware(stack *middleware.Stack) error {
@@ -1317,6 +1389,21 @@ func validateOpAssociateHostedConnectionInput(v *AssociateHostedConnectionInput)
 	}
 	if v.ParentConnectionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentConnectionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateMacSecKeyInput(v *AssociateMacSecKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateMacSecKeyInput"}
+	if v.ConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1804,6 +1891,24 @@ func validateOpDisassociateConnectionFromLagInput(v *DisassociateConnectionFromL
 	}
 }
 
+func validateOpDisassociateMacSecKeyInput(v *DisassociateMacSecKeyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateMacSecKeyInput"}
+	if v.ConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
+	}
+	if v.SecretARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartBgpFailoverTestInput(v *StartBgpFailoverTestInput) error {
 	if v == nil {
 		return nil
@@ -1866,6 +1971,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateConnectionInput(v *UpdateConnectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateConnectionInput"}
+	if v.ConnectionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectionId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

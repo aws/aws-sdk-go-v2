@@ -12,11 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies a Legal Hold configuration to the specified object. This action is not
-// supported by Amazon S3 on Outposts. Related Resources
-//
-// * Locking Objects
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html)
+// Applies a Legal Hold configuration to the specified object. For more
+// information, see Locking Objects
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). This action
+// is not supported by Amazon S3 on Outposts.
 func (c *Client) PutObjectLegalHold(ctx context.Context, params *PutObjectLegalHoldInput, optFns ...func(*Options)) (*PutObjectLegalHoldOutput, error) {
 	if params == nil {
 		params = &PutObjectLegalHoldInput{}
@@ -42,7 +41,7 @@ type PutObjectLegalHoldInput struct {
 	// ARN in place of the bucket name. For more information about access point ARNs,
 	// see Using Access Points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string

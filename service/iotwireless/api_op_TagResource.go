@@ -34,8 +34,8 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Adds to or modifies the tags of the given resource. Tags are metadata that can
-	// be used to manage a resource.
+	// Adds to or modifies the tags of the given resource. Tags are metadata that you
+	// can use to manage a resource.
 	//
 	// This member is required.
 	Tags []types.Tag

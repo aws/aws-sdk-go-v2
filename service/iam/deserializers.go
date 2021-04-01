@@ -4975,6 +4975,9 @@ func awsAwsquery_deserializeOpErrorGetAccessKeyLastUsed(response *smithyhttp.Res
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
+	case strings.EqualFold("NoSuchEntityException", errorCode):
+		return awsAwsquery_deserializeErrorNoSuchEntityException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,

@@ -711,6 +711,11 @@ func awsAwsjson11_serializeOpDocumentCreateEnvironmentEC2Input(v *CreateEnvironm
 		ok.String(*v.Description)
 	}
 
+	if v.ImageId != nil {
+		ok := object.Key("imageId")
+		ok.String(*v.ImageId)
+	}
+
 	if v.InstanceType != nil {
 		ok := object.Key("instanceType")
 		ok.String(*v.InstanceType)

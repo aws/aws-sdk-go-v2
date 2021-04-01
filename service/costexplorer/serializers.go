@@ -1540,15 +1540,44 @@ func awsAwsjson11_serializeDocumentAnomalySubscription(v *types.AnomalySubscript
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCostCategoryInheritedValueDimension(v *types.CostCategoryInheritedValueDimension, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DimensionKey != nil {
+		ok := object.Key("DimensionKey")
+		ok.String(*v.DimensionKey)
+	}
+
+	if len(v.DimensionName) > 0 {
+		ok := object.Key("DimensionName")
+		ok.String(string(v.DimensionName))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCostCategoryRule(v *types.CostCategoryRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.InheritedValue != nil {
+		ok := object.Key("InheritedValue")
+		if err := awsAwsjson11_serializeDocumentCostCategoryInheritedValueDimension(v.InheritedValue, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Rule != nil {
 		ok := object.Key("Rule")
 		if err := awsAwsjson11_serializeDocumentExpression(v.Rule, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
 	}
 
 	if v.Value != nil {
@@ -1975,6 +2004,11 @@ func awsAwsjson11_serializeOpDocumentCreateAnomalySubscriptionInput(v *CreateAno
 func awsAwsjson11_serializeOpDocumentCreateCostCategoryDefinitionInput(v *CreateCostCategoryDefinitionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DefaultValue != nil {
+		ok := object.Key("DefaultValue")
+		ok.String(*v.DefaultValue)
+	}
 
 	if v.Name != nil {
 		ok := object.Key("Name")
@@ -2946,6 +2980,11 @@ func awsAwsjson11_serializeOpDocumentUpdateCostCategoryDefinitionInput(v *Update
 	if v.CostCategoryArn != nil {
 		ok := object.Key("CostCategoryArn")
 		ok.String(*v.CostCategoryArn)
+	}
+
+	if v.DefaultValue != nil {
+		ok := object.Key("DefaultValue")
+		ok.String(*v.DefaultValue)
 	}
 
 	if v.Rules != nil {

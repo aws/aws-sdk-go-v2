@@ -636,6 +636,74 @@ type Endpoint struct {
 	VpcEndpoints []VpcEndpoint
 }
 
+// Describes a Redshift-managed VPC endpoint.
+type EndpointAccess struct {
+
+	// The DNS address of the endpoint.
+	Address *string
+
+	// The cluster identifier of the cluster associated with the endpoint.
+	ClusterIdentifier *string
+
+	// The time (UTC) that the endpoint was created.
+	EndpointCreateTime *time.Time
+
+	// The name of the endpoint.
+	EndpointName *string
+
+	// The status of the endpoint.
+	EndpointStatus *string
+
+	// The port number on which the cluster accepts incoming connections.
+	Port int32
+
+	// The AWS account ID of the owner of the cluster.
+	ResourceOwner *string
+
+	// The subnet group name where Amazon Redshift chooses to deploy the endpoint.
+	SubnetGroupName *string
+
+	// The connection endpoint for connecting to an Amazon Redshift cluster through the
+	// proxy.
+	VpcEndpoint *VpcEndpoint
+
+	// The security groups associated with the endpoint.
+	VpcSecurityGroups []VpcSecurityGroupMembership
+}
+
+// Describes an endpoint authorization for authorizing Redshift-managed VPC
+// endpoint access to a cluster across AWS accounts.
+type EndpointAuthorization struct {
+
+	// Indicates whether all VPCs in the grantee account are allowed access to the
+	// cluster.
+	AllowedAllVPCs bool
+
+	// The VPCs allowed access to the cluster.
+	AllowedVPCs []string
+
+	// The time (UTC) when the authorization was created.
+	AuthorizeTime *time.Time
+
+	// The cluster identifier.
+	ClusterIdentifier *string
+
+	// The status of the cluster.
+	ClusterStatus *string
+
+	// The number of Redshift-managed VPC endpoints created for the authorization.
+	EndpointCount int32
+
+	// The AWS account ID of the grantee of the cluster.
+	Grantee *string
+
+	// The AWS account ID of the cluster owner.
+	Grantor *string
+
+	// The status of the authorization action.
+	Status AuthorizationStatus
+}
+
 // Describes an event.
 type Event struct {
 
@@ -1659,7 +1727,7 @@ type UsageLimit struct {
 	UsageLimitId *string
 }
 
-// The connection endpoint for connecting an Amazon Redshift cluster through the
+// The connection endpoint for connecting to an Amazon Redshift cluster through the
 // proxy.
 type VpcEndpoint struct {
 

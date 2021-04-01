@@ -90,6 +90,42 @@ func (EnvironmentType) Values() []EnvironmentType {
 	}
 }
 
+type ManagedCredentialsStatus string
+
+// Enum values for ManagedCredentialsStatus
+const (
+	ManagedCredentialsStatusEnabledOnCreate                   ManagedCredentialsStatus = "ENABLED_ON_CREATE"
+	ManagedCredentialsStatusEnabledByOwner                    ManagedCredentialsStatus = "ENABLED_BY_OWNER"
+	ManagedCredentialsStatusDisabledByDefault                 ManagedCredentialsStatus = "DISABLED_BY_DEFAULT"
+	ManagedCredentialsStatusDisabledByOwner                   ManagedCredentialsStatus = "DISABLED_BY_OWNER"
+	ManagedCredentialsStatusDisabledByCollaborator            ManagedCredentialsStatus = "DISABLED_BY_COLLABORATOR"
+	ManagedCredentialsStatusPendingRemovalByCollaborator      ManagedCredentialsStatus = "PENDING_REMOVAL_BY_COLLABORATOR"
+	ManagedCredentialsStatusPendingStartRemovalByCollaborator ManagedCredentialsStatus = "PENDING_START_REMOVAL_BY_COLLABORATOR"
+	ManagedCredentialsStatusPendingRemovalByOwner             ManagedCredentialsStatus = "PENDING_REMOVAL_BY_OWNER"
+	ManagedCredentialsStatusPendingStartRemovalByOwner        ManagedCredentialsStatus = "PENDING_START_REMOVAL_BY_OWNER"
+	ManagedCredentialsStatusFailedRemovalByCollaborator       ManagedCredentialsStatus = "FAILED_REMOVAL_BY_COLLABORATOR"
+	ManagedCredentialsStatusFailedRemovalByOwner              ManagedCredentialsStatus = "FAILED_REMOVAL_BY_OWNER"
+)
+
+// Values returns all known values for ManagedCredentialsStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedCredentialsStatus) Values() []ManagedCredentialsStatus {
+	return []ManagedCredentialsStatus{
+		"ENABLED_ON_CREATE",
+		"ENABLED_BY_OWNER",
+		"DISABLED_BY_DEFAULT",
+		"DISABLED_BY_OWNER",
+		"DISABLED_BY_COLLABORATOR",
+		"PENDING_REMOVAL_BY_COLLABORATOR",
+		"PENDING_START_REMOVAL_BY_COLLABORATOR",
+		"PENDING_REMOVAL_BY_OWNER",
+		"PENDING_START_REMOVAL_BY_OWNER",
+		"FAILED_REMOVAL_BY_COLLABORATOR",
+		"FAILED_REMOVAL_BY_OWNER",
+	}
+}
+
 type MemberPermissions string
 
 // Enum values for MemberPermissions

@@ -12,10 +12,12 @@ import (
 )
 
 // Creates a new instance profile. For information about instance profiles, see
-// About instance profiles
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html#reference_iam-quotas-entities).
-// For information about the number of instance profiles you can create, see IAM
-// object quotas
+// Using roles for applications on Amazon EC2
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2.html)
+// in the IAM User Guide, and Instance profiles
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/iam-roles-for-amazon-ec2.html#ec2-instance-profile)
+// in the Amazon EC2 User Guide. For information about the number of instance
+// profiles you can create, see IAM object quotas
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_iam-quotas.html) in
 // the IAM User Guide.
 func (c *Client) CreateInstanceProfile(ctx context.Context, params *CreateInstanceProfileInput, optFns ...func(*Options)) (*CreateInstanceProfileOutput, error) {

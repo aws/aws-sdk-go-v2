@@ -70,6 +70,9 @@ type CreateStreamProcessorInput struct {
 	//
 	// This member is required.
 	Settings *types.StreamProcessorSettings
+
+	// A set of tags (key-value pairs) that you want to attach to the stream processor.
+	Tags map[string]string
 }
 
 type CreateStreamProcessorOutput struct {

@@ -32,6 +32,9 @@ type UpdateProfileInput struct {
 	// The updated address for the room profile.
 	Address *string
 
+	// Whether data retention of the profile is enabled.
+	DataRetentionOptIn *bool
+
 	// The updated distance unit for the room profile.
 	DistanceUnit types.DistanceUnit
 

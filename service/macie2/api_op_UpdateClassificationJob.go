@@ -51,13 +51,13 @@ type UpdateClassificationJobInput struct {
 	// for the job.
 	//
 	// * USER_PAUSED - Pauses the job temporarily. This value is valid
-	// only if the job's current status is IDLE or RUNNING. If you specify this value
-	// and the job's current status is RUNNING, Macie immediately begins to pause all
-	// processing tasks for the job. If you pause a one-time job and you don't resume
-	// it within 30 days, the job expires and Macie cancels the job. If you pause a
-	// recurring job when its status is RUNNING and you don't resume it within 30 days,
-	// the job run expires and Macie cancels the run. To check the expiration date,
-	// refer to the UserPausedDetails.jobExpiresAt property.
+	// only if the job's current status is IDLE, PAUSED, or RUNNING. If you specify
+	// this value and the job's current status is RUNNING, Macie immediately begins to
+	// pause all processing tasks for the job. If you pause a one-time job and you
+	// don't resume it within 30 days, the job expires and Macie cancels the job. If
+	// you pause a recurring job when its status is RUNNING and you don't resume it
+	// within 30 days, the job run expires and Macie cancels the run. To check the
+	// expiration date, refer to the UserPausedDetails.jobExpiresAt property.
 	//
 	// This member is required.
 	JobStatus types.JobStatus

@@ -19,8 +19,6 @@ import (
 // * pypi
 //
 // * maven
-//
-// * nuget
 func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositoryEndpointInput, optFns ...func(*Options)) (*GetRepositoryEndpointOutput, error) {
 	if params == nil {
 		params = &GetRepositoryEndpointInput{}
@@ -51,8 +49,6 @@ type GetRepositoryEndpointInput struct {
 	// * pypi
 	//
 	// * maven
-	//
-	// * nuget
 	//
 	// This member is required.
 	Format types.PackageFormat

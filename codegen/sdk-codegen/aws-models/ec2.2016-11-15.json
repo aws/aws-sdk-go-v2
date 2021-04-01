@@ -1364,6 +1364,9 @@
                     "target": "com.amazonaws.ec2#CreatePlacementGroup"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateReplaceRootVolumeTask"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateReservedInstancesListing"
                 },
                 {
@@ -1850,6 +1853,9 @@
                     "target": "com.amazonaws.ec2#DescribeRegions"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeReplaceRootVolumeTasks"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeReservedInstances"
                 },
                 {
@@ -2015,6 +2021,9 @@
                     "target": "com.amazonaws.ec2#DisableFastSnapshotRestores"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DisableSerialConsoleAccess"
+                },
+                {
                     "target": "com.amazonaws.ec2#DisableTransitGatewayRouteTablePropagation"
                 },
                 {
@@ -2058,6 +2067,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#EnableFastSnapshotRestores"
+                },
+                {
+                    "target": "com.amazonaws.ec2#EnableSerialConsoleAccess"
                 },
                 {
                     "target": "com.amazonaws.ec2#EnableTransitGatewayRouteTablePropagation"
@@ -2133,6 +2145,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#GetReservedInstancesExchangeQuote"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetSerialConsoleAccessStatus"
                 },
                 {
                     "target": "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagations"
@@ -3335,7 +3350,7 @@
                 "target": "com.amazonaws.ec2#AssociateEnclaveCertificateIamRoleResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. \n\t\t\tThis enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html\">AWS Certificate \n\t\t\t\tManager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>\n\t\t\n\t\t       <p>When the IAM role is associated with the ACM certificate, places the certificate, certificate chain, and encrypted \n\t\t\tprivate key in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate \n\t\t\tis encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p>\n\t\t\n\t\t       <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> \n\t\t\ton the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must \n\t\t\tgrant it permission to call <code>kms:Decrypt</code> on AWS KMS CMK returned by the command. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy\">\n\t\t\t\tGrant the role permission to access the certificate and encryption key</a> in the \n\t\t\t<i>AWS Nitro Enclaves User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Associates an AWS Identity and Access Management (IAM) role with an AWS Certificate Manager (ACM) certificate. \n\t\t\tThis enables the certificate to be used by the ACM for Nitro Enclaves application inside an enclave. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html\">AWS Certificate \n\t\t\t\tManager for Nitro Enclaves</a> in the <i>AWS Nitro Enclaves User Guide</i>.</p>\n\t\t\n\t\t       <p>When the IAM role is associated with the ACM certificate, the certificate, certificate chain, and encrypted \n\t\t\tprivate key are placed in an Amazon S3 bucket that only the associated IAM role can access. The private key of the certificate \n\t\t\tis encrypted with an AWS-managed KMS customer master (CMK) that has an attached attestation-based CMK policy.</p>\n\t\t\n\t\t       <p>To enable the IAM role to access the Amazon S3 object, you must grant it permission to call <code>s3:GetObject</code> \n\t\t\ton the Amazon S3 bucket returned by the command. To enable the IAM role to access the AWS KMS CMK, you must \n\t\t\tgrant it permission to call <code>kms:Decrypt</code> on the AWS KMS CMK returned by the command. For more \n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy\">\n\t\t\t\tGrant the role permission to access the certificate and encryption key</a> in the \n\t\t\t<i>AWS Nitro Enclaves User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#AssociateEnclaveCertificateIamRoleRequest": {
@@ -4977,6 +4992,45 @@
         },
         "com.amazonaws.ec2#Boolean": {
             "type": "boolean"
+        },
+        "com.amazonaws.ec2#BootModeType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "legacy-bios",
+                        "name": "legacy_bios"
+                    },
+                    {
+                        "value": "uefi",
+                        "name": "uefi"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#BootModeTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#BootModeType",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
+        "com.amazonaws.ec2#BootModeValues": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "legacy-bios",
+                        "name": "legacy_bios"
+                    },
+                    {
+                        "value": "uefi",
+                        "name": "uefi"
+                    }
+                ]
+            }
         },
         "com.amazonaws.ec2#BundleId": {
             "type": "string"
@@ -9806,17 +9860,17 @@
                         "smithy.api#required": {}
                     }
                 },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
                 "LocalGatewayVirtualInterfaceGroupId": {
                     "target": "com.amazonaws.ec2#LocalGatewayVirtualInterfaceGroupId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the virtual interface group.</p>",
                         "smithy.api#required": {}
-                    }
-                },
-                "DryRun": {
-                    "target": "com.amazonaws.ec2#Boolean",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
                     }
                 }
             }
@@ -10534,6 +10588,69 @@
                     "traits": {
                         "aws.protocols#ec2QueryName": "PlacementGroup",
                         "smithy.api#xmlName": "placementGroup"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CreateReplaceRootVolumeTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateReplaceRootVolumeTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateReplaceRootVolumeTaskResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a root volume replacement task for an Amazon EC2 instance. The root volume \n      can either be restored to its initial launch state, or it can be restored using a \n      specific snapshot.</p>\n    \n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/\">Replace a root volume</a> \n      in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateReplaceRootVolumeTaskRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.ec2#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the instance for which to replace the root volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnapshotId": {
+                    "target": "com.amazonaws.ec2#SnapshotId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the snapshot from which to restore the replacement root volume. If you want to \n      restore the volume to the initial launch state, omit this parameter.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier you provide to ensure the idempotency of the request. \n      If you do not specify a client token, a randomly generated token is used for the request \n      to ensure idempotency. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the root volume replacement task.</p>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CreateReplaceRootVolumeTaskResult": {
+            "type": "structure",
+            "members": {
+                "ReplaceRootVolumeTask": {
+                    "target": "com.amazonaws.ec2#ReplaceRootVolumeTask",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReplaceRootVolumeTask",
+                        "smithy.api#documentation": "<p>Information about the root volume replacement task.</p>",
+                        "smithy.api#xmlName": "replaceRootVolumeTask"
                     }
                 }
             }
@@ -19589,7 +19706,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether it is a burstable\n     performance instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n                    bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n                    performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n                    operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use\n     in the free tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in\n     GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>)\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local\n     instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports\n     IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> |\n      <code>spot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be configured for the instance type.\n        For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. Filter names and values are case-sensitive.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>auto-recovery-supported</code> - Indicates whether auto recovery is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>bare-metal</code> - Indicates whether it is a bare metal instance type\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>burstable-performance-supported</code> - Indicates whether it is a burstable\n     performance instance type  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>current-generation</code> - Indicates whether this instance type is the latest\n     generation instance type of an instance family  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps</code> - The baseline\n                    bandwidth performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-iops</code> - The baseline input/output storage\n     operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.baseline-throughput-in-mbps</code> - The baseline\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps</code> - The maximum bandwidth\n                    performance for an EBS-optimized instance type, in Mbps.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-iops</code> - The maximum input/output storage\n                    operations per second for an EBS-optimized instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-info.maximum-throughput-in-mbps</code> - The maximum\n     throughput performance for an EBS-optimized instance type, in MB/s.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.ebs-optimized-support</code> - Indicates whether the instance type is\n     EBS-optimized (<code>supported</code> | <code>unsupported</code> |\n     <code>default</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.encryption-support</code> - Indicates whether EBS encryption is supported\n      (<code>supported</code> | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>ebs-info.nvme-support</code> - Indicates whether non-volatile memory express (NVMe)\n     is supported for EBS volumes (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>free-tier-eligible</code> - Indicates whether the instance type is eligible to use\n     in the free tier  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hibernation-supported</code> - Indicates whether On-Demand hibernation is supported\n      (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>hypervisor</code> - The hypervisor (<code>nitro</code> | <code>xen</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.count</code> - The number of local disks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.size-in-gb</code> - The storage size of each instance storage disk, in\n     GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.disk.type</code> - The storage technology for the local\n     instance storage disks (<code>hdd</code> | <code>ssd</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.nvme-support</code> - Indicates whether non-volatile memory\n     express (NVMe) is supported for instance store (<code>required</code> | <code>supported</code>)\n     | <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-info.total-size-in-gb</code> - The total amount of storage available from all local\n     instance storage, in GB.</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-storage-supported</code> - Indicates whether the instance type has local\n     instance storage  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>instance-type</code> - The instance type (for example <code>c5.2xlarge</code> or\n     c5*).</p>\n            </li>\n            <li>\n               <p>\n                  <code>memory-info.size-in-mib</code> - The memory size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-info.maximum-efa-interfaces</code> - The maximum number of Elastic \n     Fabric Adapters (EFAs) per instance.  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.efa-supported</code> - Indicates whether the instance type supports\n     Elastic Fabric Adapter (EFA)  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ena-support</code> - Indicates whether Elastic Network Adapter (ENA) is\n     supported or required (<code>required</code> | <code>supported</code> |\n      <code>unsupported</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv4-addresses-per-interface</code> - The maximum number of private IPv4 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-addresses-per-interface</code> - The maximum number of private IPv6 addresses per\n     network interface.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.ipv6-supported</code> - Indicates whether the instance type supports\n     IPv6  (<code>true</code> | <code>false</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.maximum-network-interfaces</code> - The maximum number of network interfaces per instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>network-info.network-performance</code> - The network performance (for example, \"25\n     Gigabit\").</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.supported-architecture</code> - The CPU architecture\n      (<code>arm64</code> | <code>i386</code> | <code>x86_64</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>processor-info.sustained-clock-speed-in-ghz</code> - The CPU clock speed, in GHz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-boot-mode</code> - The boot mode (<code>legacy-bios</code> |\n      <code>uefi</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-root-device-type</code> - The root device type (<code>ebs</code> |\n      <code>instance-store</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-usage-class</code> - The usage class (<code>on-demand</code> |\n      <code>spot</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>supported-virtualization-type</code> - The virtualization type (<code>hvm</code> |\n      <code>paravirtual</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-cores</code> - The default number of cores for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-threads-per-core</code> - The default number of threads per core for the instance\n     type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.default-vcpus</code> - The default number of vCPUs for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-cores</code> - The number of cores that can be configured for the instance type.</p>\n            </li>\n            <li>\n               <p>\n                  <code>vcpu-info.valid-threads-per-core</code> - The number of threads per core that can be configured for the instance type.\n        For example, \"1\" or \"1,2\".</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -19724,7 +19841,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n        <ul>\n            <li>\n                <p>\n                    <code>affinity</code> - The affinity setting for an instance running on a\n                    Dedicated Host (<code>default</code> | <code>host</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>architecture</code> - The instance architecture (<code>i386</code> |\n                        <code>x86_64</code> | <code>arm64</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>availability-zone</code> - The Availability Zone of the instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.attach-time</code> - The attach time for an EBS\n                    volume mapped to the instance, for example,\n                        <code>2010-09-15T17:15:20.000Z</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.delete-on-termination</code> - A Boolean that\n                    indicates whether the EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.device-name</code> - The device name specified in the\n                    block device mapping (for example, <code>/dev/sdh</code> or\n                    <code>xvdh</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.status</code> - The status for the EBS volume\n                        (<code>attaching</code> | <code>attached</code> | <code>detaching</code> |\n                        <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.volume-id</code> - The volume ID of the EBS\n                    volume.</p>\n            </li>\n            <li>\n                <p>\n                    <code>client-token</code> - The idempotency token you provided when you launched\n                    the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>dns-name</code> - The public DNS name of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>group-id</code> - The ID of the security group for the instance.\n                    EC2-Classic only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>group-name</code> - The name of the security group for the instance.\n                    EC2-Classic only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>hibernation-options.configured</code> - A Boolean that indicates whether\n                    the instance is enabled for hibernation. A value of <code>true</code> means that\n                    the instance is enabled for hibernation. </p>\n            </li>\n            <li>\n                <p>\n                  <code>host-id</code> - The ID of the Dedicated Host on which the instance is\n                    running, if applicable.</p>\n            </li>\n            <li>\n                <p>\n                  <code>hypervisor</code> - The hypervisor type of the instance\n                    (<code>ovm</code> | <code>xen</code>). The value <code>xen</code>\n                    is used for both Xen and Nitro hypervisors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>iam-instance-profile.arn</code> - The instance profile associated with\n                    the instance. Specified as an ARN.</p>\n            </li>\n            <li>\n                <p>\n                  <code>image-id</code> - The ID of the image used to launch the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-id</code> - The ID of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-lifecycle</code> - Indicates whether this is a Spot Instance or\n                    a Scheduled Instance (<code>spot</code> | <code>scheduled</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-state-code</code> - The state of the instance, as a 16-bit\n                    unsigned integer. The high byte is used for internal purposes and should be\n                    ignored. The low byte is set based on the state represented. The valid values\n                    are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64\n                    (stopping), and 80 (stopped).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-state-name</code> - The state of the instance\n                        (<code>pending</code> | <code>running</code> | <code>shutting-down</code> |\n                        <code>terminated</code> | <code>stopping</code> |\n                    <code>stopped</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-type</code> - The type of instance (for example,\n                        <code>t2.micro</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance.group-id</code> - The ID of the security group for the\n                    instance. </p>\n            </li>\n            <li>\n                <p>\n                  <code>instance.group-name</code> - The name of the security group for the\n                    instance. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-address</code> - The public IPv4 address of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n                <p>\n                  <code>key-name</code> - The name of the key pair used when the instance was\n                    launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launch-index</code> - When launching multiple instances, this is the\n                    index for the instance in the launch group (for example, 0, 1, 2, and so on). </p>\n            </li>\n            <li>\n                <p>\n                  <code>launch-time</code> - The time when the instance was launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-tokens</code> - The metadata request authorization\n                    state (<code>optional</code> | <code>required</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-put-response-hop-limit</code> - The http metadata\n                    request put response hop limit (integer, possible values <code>1</code> to\n                        <code>64</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-endpoint</code> - Enable or disable metadata\n                    access on http endpoint (<code>enabled</code> | <code>disabled</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>monitoring-state</code> - Indicates whether detailed monitoring is\n                    enabled (<code>disabled</code> | <code>enabled</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.private-ip-address</code> - The private IPv4\n                    address associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.primary</code> - Specifies whether the IPv4\n                    address of the network interface is the primary private IPv4 address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.association.public-ip</code> - The ID of the\n                    association of an Elastic IP address (IPv4) with a network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.association.ip-owner-id</code> - The owner\n                    ID of the private IPv4 address associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.public-ip</code> - The address of the\n                    Elastic IP address (IPv4) bound to the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.ip-owner-id</code> - The owner of the\n                    Elastic IP address (IPv4) associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.allocation-id</code> - The allocation ID\n                    returned when you allocated the Elastic IP address (IPv4) for your network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.association-id</code> - The association ID\n                    returned when the network interface was associated with an IPv4 address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.attachment-id</code> - The ID of the\n                    interface attachment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.instance-id</code> - The ID of the instance\n                    to which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.instance-owner-id</code> - The owner ID of\n                    the instance to which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.device-index</code> - The device index to\n                    which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.status</code> - The status of the\n                    attachment (<code>attaching</code> | <code>attached</code> |\n                        <code>detaching</code> | <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.attach-time</code> - The time that the\n                    network interface was attached to an instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.delete-on-termination</code> - Specifies\n                    whether the attachment is deleted when an instance is terminated.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.availability-zone</code> - The Availability Zone for\n                    the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.description</code> - The description of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.group-id</code> - The ID of a security group\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.group-name</code> - The name of a security group\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.ipv6-addresses.ipv6-address</code> - The IPv6 address\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.mac-address</code> - The MAC address of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.network-interface-id</code> - The ID of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.owner-id</code> - The ID of the owner of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.private-dns-name</code> - The private DNS name of the\n                    network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.requester-id</code> - The requester ID for the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.requester-managed</code> - Indicates whether the\n                    network interface is being managed by AWS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.status</code> - The status of the network interface\n                        (<code>available</code>) | <code>in-use</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.source-dest-check</code> - Whether the network\n                    interface performs source/destination checking. A value of <code>true</code>\n                    means that checking is enabled, and <code>false</code> means that checking is\n                    disabled. The value must be <code>false</code> for the network interface to\n                    perform network address translation (NAT) in your VPC.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.subnet-id</code> - The ID of the subnet for the\n                    network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.vpc-id</code> - The ID of the VPC for the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                    <code>owner-id</code> - The AWS account ID of the instance owner.</p>\n            </li>\n            <li>\n                <p>\n                    <code>placement-group-name</code> - The name of the placement group for the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>placement-partition-number</code> - The partition in which the instance is\n                    located.</p>\n            </li>\n            <li>\n                <p>\n                    <code>platform</code> - The platform. To list only Windows instances, use\n                        <code>windows</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>private-dns-name</code> - The private IPv4 DNS name of the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>private-ip-address</code> - The private IPv4 address of the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>product-code</code> - The product code associated with the AMI used to\n                    launch the instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>product-code.type</code> - The type of product code (<code>devpay</code> |\n                        <code>marketplace</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n                <p>\n                    <code>reason</code> - The reason for the current state of the instance (for\n                    example, shows \"User Initiated [date]\" when you stop or terminate the instance).\n                    Similar to the state-reason-code filter.</p>\n            </li>\n            <li>\n                <p>\n                    <code>requester-id</code> - The ID of the entity that launched the instance on\n                    your behalf (for example, AWS Management Console, Auto Scaling, and so\n                    on).</p>\n            </li>\n            <li>\n                <p>\n                    <code>reservation-id</code> - The ID of the instance's reservation. A\n                    reservation ID is created any time you launch an instance. A reservation ID has\n                    a one-to-one relationship with an instance launch request, but can be associated\n                    with more than one instance if you launch multiple instances using the same\n                    launch request. For example, if you launch one instance, you get one reservation\n                    ID. If you launch ten instances using the same launch request, you also get one\n                    reservation ID.</p>\n            </li>\n            <li>\n                <p>\n                    <code>root-device-name</code> - The device name of the root device volume (for\n                    example, <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>root-device-type</code> - The type of the root device volume\n                        (<code>ebs</code> | <code>instance-store</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>source-dest-check</code> - Indicates whether the instance performs\n                    source/destination checking. A value of <code>true</code> means that checking is\n                    enabled, and <code>false</code> means that checking is disabled. The value must\n                    be <code>false</code> for the instance to perform network address translation\n                    (NAT) in your VPC. </p>\n            </li>\n            <li>\n                <p>\n                    <code>spot-instance-request-id</code> - The ID of the Spot Instance\n                    request.</p>\n            </li>\n            <li>\n                <p>\n                    <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n                <p>\n                    <code>state-reason-message</code> - A message that describes the state\n                    change.</p>\n            </li>\n            <li>\n                <p>\n                    <code>subnet-id</code> - The ID of the subnet for the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                    <code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> |\n                        <code>default</code> | <code>host</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>virtualization-type</code> - The virtualization type of the instance\n                        (<code>paravirtual</code> | <code>hvm</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>vpc-id</code> - The ID of the VPC that the instance is running in.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The filters.</p>\n        <ul>\n            <li>\n                <p>\n                    <code>affinity</code> - The affinity setting for an instance running on a\n                    Dedicated Host (<code>default</code> | <code>host</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>architecture</code> - The instance architecture (<code>i386</code> |\n                        <code>x86_64</code> | <code>arm64</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>availability-zone</code> - The Availability Zone of the instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.attach-time</code> - The attach time for an EBS\n                    volume mapped to the instance, for example,\n                        <code>2010-09-15T17:15:20.000Z</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.delete-on-termination</code> - A Boolean that\n                    indicates whether the EBS volume is deleted on instance termination.</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.device-name</code> - The device name specified in the\n                    block device mapping (for example, <code>/dev/sdh</code> or\n                    <code>xvdh</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.status</code> - The status for the EBS volume\n                        (<code>attaching</code> | <code>attached</code> | <code>detaching</code> |\n                        <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>block-device-mapping.volume-id</code> - The volume ID of the EBS\n                    volume.</p>\n            </li>\n            <li>\n                <p>\n                    <code>client-token</code> - The idempotency token you provided when you launched\n                    the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>dns-name</code> - The public DNS name of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>group-id</code> - The ID of the security group for the instance.\n                    EC2-Classic only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>group-name</code> - The name of the security group for the instance.\n                    EC2-Classic only.</p>\n            </li>\n            <li>\n                <p>\n                  <code>hibernation-options.configured</code> - A Boolean that indicates whether\n                    the instance is enabled for hibernation. A value of <code>true</code> means that\n                    the instance is enabled for hibernation. </p>\n            </li>\n            <li>\n                <p>\n                  <code>host-id</code> - The ID of the Dedicated Host on which the instance is\n                    running, if applicable.</p>\n            </li>\n            <li>\n                <p>\n                  <code>hypervisor</code> - The hypervisor type of the instance\n                    (<code>ovm</code> | <code>xen</code>). The value <code>xen</code>\n                    is used for both Xen and Nitro hypervisors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>iam-instance-profile.arn</code> - The instance profile associated with\n                    the instance. Specified as an ARN.</p>\n            </li>\n            <li>\n                <p>\n                  <code>image-id</code> - The ID of the image used to launch the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-id</code> - The ID of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-lifecycle</code> - Indicates whether this is a Spot Instance or\n                    a Scheduled Instance (<code>spot</code> | <code>scheduled</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-state-code</code> - The state of the instance, as a 16-bit\n                    unsigned integer. The high byte is used for internal purposes and should be\n                    ignored. The low byte is set based on the state represented. The valid values\n                    are: 0 (pending), 16 (running), 32 (shutting-down), 48 (terminated), 64\n                    (stopping), and 80 (stopped).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-state-name</code> - The state of the instance\n                        (<code>pending</code> | <code>running</code> | <code>shutting-down</code> |\n                        <code>terminated</code> | <code>stopping</code> |\n                    <code>stopped</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance-type</code> - The type of instance (for example,\n                        <code>t2.micro</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>instance.group-id</code> - The ID of the security group for the\n                    instance. </p>\n            </li>\n            <li>\n                <p>\n                  <code>instance.group-name</code> - The name of the security group for the\n                    instance. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ip-address</code> - The public IPv4 address of the instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>kernel-id</code> - The kernel ID.</p>\n            </li>\n            <li>\n                <p>\n                  <code>key-name</code> - The name of the key pair used when the instance was\n                    launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>launch-index</code> - When launching multiple instances, this is the\n                    index for the instance in the launch group (for example, 0, 1, 2, and so on). </p>\n            </li>\n            <li>\n                <p>\n                  <code>launch-time</code> - The time when the instance was launched.</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-tokens</code> - The metadata request authorization\n                    state (<code>optional</code> | <code>required</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-put-response-hop-limit</code> - The http metadata\n                    request put response hop limit (integer, possible values <code>1</code> to\n                        <code>64</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>metadata-options.http-endpoint</code> - Enable or disable metadata\n                    access on http endpoint (<code>enabled</code> | <code>disabled</code>)</p>\n            </li>\n            <li>\n                <p>\n                  <code>monitoring-state</code> - Indicates whether detailed monitoring is\n                    enabled (<code>disabled</code> | <code>enabled</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.private-ip-address</code> - The private IPv4\n                    address associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.primary</code> - Specifies whether the IPv4\n                    address of the network interface is the primary private IPv4 address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.association.public-ip</code> - The ID of the\n                    association of an Elastic IP address (IPv4) with a network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.addresses.association.ip-owner-id</code> - The owner\n                    ID of the private IPv4 address associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.public-ip</code> - The address of the\n                    Elastic IP address (IPv4) bound to the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.ip-owner-id</code> - The owner of the\n                    Elastic IP address (IPv4) associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.allocation-id</code> - The allocation ID\n                    returned when you allocated the Elastic IP address (IPv4) for your network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.association.association-id</code> - The association ID\n                    returned when the network interface was associated with an IPv4 address.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.attachment-id</code> - The ID of the\n                    interface attachment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.instance-id</code> - The ID of the instance\n                    to which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.instance-owner-id</code> - The owner ID of\n                    the instance to which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.device-index</code> - The device index to\n                    which the network interface is attached.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.status</code> - The status of the\n                    attachment (<code>attaching</code> | <code>attached</code> |\n                        <code>detaching</code> | <code>detached</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.attach-time</code> - The time that the\n                    network interface was attached to an instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.attachment.delete-on-termination</code> - Specifies\n                    whether the attachment is deleted when an instance is terminated.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.availability-zone</code> - The Availability Zone for\n                    the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.description</code> - The description of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.group-id</code> - The ID of a security group\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.group-name</code> - The name of a security group\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.ipv6-addresses.ipv6-address</code> - The IPv6 address\n                    associated with the network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.mac-address</code> - The MAC address of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.network-interface-id</code> - The ID of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.owner-id</code> - The ID of the owner of the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.private-dns-name</code> - The private DNS name of the\n                    network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.requester-id</code> - The requester ID for the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.requester-managed</code> - Indicates whether the\n                    network interface is being managed by AWS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.status</code> - The status of the network interface\n                        (<code>available</code>) | <code>in-use</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.source-dest-check</code> - Whether the network\n                    interface performs source/destination checking. A value of <code>true</code>\n                    means that checking is enabled, and <code>false</code> means that checking is\n                    disabled. The value must be <code>false</code> for the network interface to\n                    perform network address translation (NAT) in your VPC.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.subnet-id</code> - The ID of the subnet for the\n                    network interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>network-interface.vpc-id</code> - The ID of the VPC for the network\n                    interface.</p>\n            </li>\n            <li>\n                <p>\n                  <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p>\n            </li>\n            <li>\n                <p>\n                    <code>owner-id</code> - The AWS account ID of the instance owner.</p>\n            </li>\n            <li>\n                <p>\n                    <code>placement-group-name</code> - The name of the placement group for the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>placement-partition-number</code> - The partition in which the instance is\n                    located.</p>\n            </li>\n            <li>\n                <p>\n                    <code>platform</code> - The platform. To list only Windows instances, use\n                        <code>windows</code>.</p>\n            </li>\n            <li>\n                <p>\n                    <code>private-dns-name</code> - The private IPv4 DNS name of the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>private-ip-address</code> - The private IPv4 address of the\n                    instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>product-code</code> - The product code associated with the AMI used to\n                    launch the instance.</p>\n            </li>\n            <li>\n                <p>\n                    <code>product-code.type</code> - The type of product code (<code>devpay</code> |\n                        <code>marketplace</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>ramdisk-id</code> - The RAM disk ID.</p>\n            </li>\n            <li>\n                <p>\n                    <code>reason</code> - The reason for the current state of the instance (for\n                    example, shows \"User Initiated [date]\" when you stop or terminate the instance).\n                    Similar to the state-reason-code filter.</p>\n            </li>\n            <li>\n                <p>\n                    <code>requester-id</code> - The ID of the entity that launched the instance on\n                    your behalf (for example, AWS Management Console, Auto Scaling, and so\n                    on).</p>\n            </li>\n            <li>\n                <p>\n                    <code>reservation-id</code> - The ID of the instance's reservation. A\n                    reservation ID is created any time you launch an instance. A reservation ID has\n                    a one-to-one relationship with an instance launch request, but can be associated\n                    with more than one instance if you launch multiple instances using the same\n                    launch request. For example, if you launch one instance, you get one reservation\n                    ID. If you launch ten instances using the same launch request, you also get one\n                    reservation ID.</p>\n            </li>\n            <li>\n                <p>\n                    <code>root-device-name</code> - The device name of the root device volume (for\n                    example, <code>/dev/sda1</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>root-device-type</code> - The type of the root device volume\n                        (<code>ebs</code> | <code>instance-store</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>source-dest-check</code> - Indicates whether the instance performs\n                    source/destination checking. A value of <code>true</code> means that checking is\n                    enabled, and <code>false</code> means that checking is disabled. The value must\n                    be <code>false</code> for the instance to perform network address translation\n                    (NAT) in your VPC. </p>\n            </li>\n            <li>\n                <p>\n                    <code>spot-instance-request-id</code> - The ID of the Spot Instance\n                    request.</p>\n            </li>\n            <li>\n                <p>\n                    <code>state-reason-code</code> - The reason code for the state change.</p>\n            </li>\n            <li>\n                <p>\n                    <code>state-reason-message</code> - A message that describes the state\n                    change.</p>\n            </li>\n            <li>\n                <p>\n                    <code>subnet-id</code> - The ID of the subnet for the instance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                    <code>tenancy</code> - The tenancy of an instance (<code>dedicated</code> |\n                        <code>default</code> | <code>host</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>virtualization-type</code> - The virtualization type of the instance\n                        (<code>paravirtual</code> | <code>hvm</code>).</p>\n            </li>\n            <li>\n                <p>\n                    <code>vpc-id</code> - The ID of the VPC that the instance is running in.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -21773,6 +21890,91 @@
                         "aws.protocols#ec2QueryName": "RegionInfo",
                         "smithy.api#documentation": "<p>Information about the Regions.</p>",
                         "smithy.api#xmlName": "regionInfo"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeReplaceRootVolumeTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeReplaceRootVolumeTasksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeReplaceRootVolumeTasksResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a root volume replacement task. For more information, see \n      <a href=\"https://docs.aws.amazon.com/\">Replace a root volume</a> in the \n      <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ReplaceRootVolumeTasks",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeReplaceRootVolumeTasksMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeReplaceRootVolumeTasksRequest": {
+            "type": "structure",
+            "members": {
+                "ReplaceRootVolumeTaskIds": {
+                    "target": "com.amazonaws.ec2#ReplaceRootVolumeTaskIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the root volume replacement task to view.</p>",
+                        "smithy.api#xmlName": "ReplaceRootVolumeTaskId"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter to use:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>instance-id</code> - The ID of the instance for which the root volume replacement task was created.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeReplaceRootVolumeTasksMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, \n      make another call with the returned <code>nextToken</code> value.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeReplaceRootVolumeTasksResult": {
+            "type": "structure",
+            "members": {
+                "ReplaceRootVolumeTasks": {
+                    "target": "com.amazonaws.ec2#ReplaceRootVolumeTasks",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReplaceRootVolumeTaskSet",
+                        "smithy.api#documentation": "<p>Information about the root volume replacement task.</p>",
+                        "smithy.api#xmlName": "replaceRootVolumeTaskSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no \n      more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
                     }
                 }
             }
@@ -26435,6 +26637,42 @@
                 }
             }
         },
+        "com.amazonaws.ec2#DisableSerialConsoleAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DisableSerialConsoleAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DisableSerialConsoleAccessResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Disables access to the EC2 serial console of all instances for your account. By default,\n\t\t\taccess to the EC2 serial console is disabled for your account. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access\">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2\n\t\t\t\tUser Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DisableSerialConsoleAccessRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DisableSerialConsoleAccessResult": {
+            "type": "structure",
+            "members": {
+                "SerialConsoleAccessEnabled": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SerialConsoleAccessEnabled",
+                        "smithy.api#documentation": "<p>If <code>true</code>, access to the EC2 serial console of all instances is enabled for\n\t\t\tyour account. If <code>false</code>, access to the EC2 serial console of all instances\n\t\t\tis disabled for your account.</p>",
+                        "smithy.api#xmlName": "serialConsoleAccessEnabled"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#DisableTransitGatewayRouteTablePropagation": {
             "type": "operation",
             "input": {
@@ -27635,6 +27873,22 @@
                 ]
             }
         },
+        "com.amazonaws.ec2#EfaInfo": {
+            "type": "structure",
+            "members": {
+                "MaximumEfaInterfaces": {
+                    "target": "com.amazonaws.ec2#MaximumEfaInterfaces",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "MaximumEfaInterfaces",
+                        "smithy.api#documentation": "<p>The maximum number of Elastic Fabric Adapters for the instance type.</p>",
+                        "smithy.api#xmlName": "maximumEfaInterfaces"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the Elastic Fabric Adapters for the instance type.</p>"
+            }
+        },
         "com.amazonaws.ec2#EfaSupportedFlag": {
             "type": "boolean",
             "traits": {
@@ -28046,7 +28300,7 @@
                 "target": "com.amazonaws.ec2#EnableEbsEncryptionByDefaultResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Enables EBS encryption by default for your account in the current Region.</p>\n         <p>After you enable encryption by default, the EBS volumes that you create are\n      are always encrypted, either using the default CMK or the CMK that you specified\n      when you created each volume. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the\n      <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a>\n      or <a>ResetEbsDefaultKmsKeyId</a>.</p>\n         <p>Enabling encryption by default has no effect on the encryption status of your \n      existing volumes.</p>\n         <p>After you enable encryption by default, you can no longer launch instances\n      using instance types that do not support encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported\n        instance types</a>.</p>"
+                "smithy.api#documentation": "<p>Enables EBS encryption by default for your account in the current Region.</p>\n         <p>After you enable encryption by default, the EBS volumes that you create are\n      always encrypted, either using the default CMK or the CMK that you specified\n      when you created each volume. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS encryption</a> in the\n      <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>You can specify the default CMK for encryption by default using <a>ModifyEbsDefaultKmsKeyId</a>\n      or <a>ResetEbsDefaultKmsKeyId</a>.</p>\n         <p>Enabling encryption by default has no effect on the encryption status of your \n      existing volumes.</p>\n         <p>After you enable encryption by default, you can no longer launch instances\n      using instance types that do not support encryption. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances\">Supported\n        instance types</a>.</p>"
             }
         },
         "com.amazonaws.ec2#EnableEbsEncryptionByDefaultRequest": {
@@ -28324,6 +28578,42 @@
                         "aws.protocols#ec2QueryName": "Unsuccessful",
                         "smithy.api#documentation": "<p>Information about the snapshots for which fast snapshot restores could not be enabled.</p>",
                         "smithy.api#xmlName": "unsuccessful"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#EnableSerialConsoleAccess": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#EnableSerialConsoleAccessRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#EnableSerialConsoleAccessResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables access to the EC2 serial console of all instances for your account. By default,\n\t\t\taccess to the EC2 serial console is disabled for your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access\">Manage account access to the EC2 serial console</a>\n\t\t\tin the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#EnableSerialConsoleAccessRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#EnableSerialConsoleAccessResult": {
+            "type": "structure",
+            "members": {
+                "SerialConsoleAccessEnabled": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SerialConsoleAccessEnabled",
+                        "smithy.api#documentation": "<p>If <code>true</code>, access to the EC2 serial console of all instances is enabled for\n\t\t\tyour account. If <code>false</code>, access to the EC2 serial console of all instances\n\t\t\tis disabled for your account.</p>",
+                        "smithy.api#xmlName": "serialConsoleAccessEnabled"
                     }
                 }
             }
@@ -30188,7 +30478,7 @@
                 "Overrides": {
                     "target": "com.amazonaws.ec2#FleetLaunchTemplateOverridesListRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any parameters that you specify override the same parameters in the launch\n         template.</p>"
+                        "smithy.api#documentation": "<p>Any parameters that you specify override the same parameters in the launch\n         template.</p>\n         <p>For fleets of type <code>request</code> and <code>maintain</code>, a maximum of 300\n         items is allowed across all launch templates.</p>"
                     }
                 }
             },
@@ -32185,6 +32475,42 @@
                 "smithy.api#documentation": "<p>Contains the output of GetReservedInstancesExchangeQuote.</p>"
             }
         },
+        "com.amazonaws.ec2#GetSerialConsoleAccessStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetSerialConsoleAccessStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetSerialConsoleAccessStatusResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the access status of your account to the EC2 serial console of all instances. By\n\t\t\tdefault, access to the EC2 serial console is disabled for your account. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/configure-access-to-serial-console.html#serial-console-account-access\">Manage account access to the EC2 serial console</a> in the <i>Amazon EC2\n\t\t\t\tUser Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#GetSerialConsoleAccessStatusRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetSerialConsoleAccessStatusResult": {
+            "type": "structure",
+            "members": {
+                "SerialConsoleAccessEnabled": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SerialConsoleAccessEnabled",
+                        "smithy.api#documentation": "<p>If <code>true</code>, access to the EC2 serial console of all instances is enabled for\n\t\t\tyour account. If <code>false</code>, access to the EC2 serial console of all instances\n\t\t\tis disabled for your account.</p>",
+                        "smithy.api#xmlName": "serialConsoleAccessEnabled"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#GetTransitGatewayAttachmentPropagations": {
             "type": "operation",
             "input": {
@@ -33843,6 +34169,14 @@
                         "smithy.api#documentation": "<p>The type of virtualization of the AMI.</p>",
                         "smithy.api#xmlName": "virtualizationType"
                     }
+                },
+                "BootMode": {
+                    "target": "com.amazonaws.ec2#BootModeValues",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "BootMode",
+                        "smithy.api#documentation": "<p>The boot mode of the image. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Boot modes</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#xmlName": "bootMode"
+                    }
                 }
             },
             "traits": {
@@ -33915,6 +34249,13 @@
                         "smithy.api#documentation": "<p>Indicates whether enhanced networking with the Intel 82599 Virtual Function interface is enabled.</p>",
                         "smithy.api#xmlName": "sriovNetSupport"
                     }
+                },
+                "BootMode": {
+                    "target": "com.amazonaws.ec2#AttributeValue",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "BootMode",
+                        "smithy.api#xmlName": "bootMode"
+                    }
                 }
             },
             "traits": {
@@ -33952,6 +34293,10 @@
                     {
                         "value": "sriovNetSupport",
                         "name": "sriovNetSupport"
+                    },
+                    {
+                        "value": "bootMode",
+                        "name": "bootMode"
                     }
                 ]
             }
@@ -35580,7 +35925,7 @@
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SourceDestCheck",
-                        "smithy.api#documentation": "<p>Specifies whether to enable an instance launched in a VPC to perform NAT. This\n            controls whether source/destination checking is enabled on the instance. A value of\n                <code>true</code> means that checking is enabled, and <code>false</code> means that\n            checking is disabled. The value must be <code>false</code> for the instance to perform\n            NAT. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_NAT_Instance.html\">NAT instances</a> in the\n                <i>Amazon VPC User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Indicates whether source/destination checking is enabled.</p>",
                         "smithy.api#xmlName": "sourceDestCheck"
                     }
                 },
@@ -35678,6 +36023,14 @@
                         "aws.protocols#ec2QueryName": "EnclaveOptions",
                         "smithy.api#documentation": "<p>Indicates whether the instance is enabled for AWS Nitro Enclaves.</p>",
                         "smithy.api#xmlName": "enclaveOptions"
+                    }
+                },
+                "BootMode": {
+                    "target": "com.amazonaws.ec2#BootModeValues",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "BootMode",
+                        "smithy.api#documentation": "<p>The boot mode of the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Boot modes</a> in the\n                <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#xmlName": "bootMode"
                     }
                 }
             },
@@ -35796,7 +36149,7 @@
                     "target": "com.amazonaws.ec2#AttributeBooleanValue",
                     "traits": {
                         "aws.protocols#ec2QueryName": "SourceDestCheck",
-                        "smithy.api#documentation": "<p>Indicates whether source/destination checking is enabled. A value of <code>true</code>\n            means that checking is enabled, and <code>false</code> means that checking is disabled.\n            This value must be <code>false</code> for a NAT instance to perform NAT.</p>",
+                        "smithy.api#documentation": "<p>Enable or disable source/destination checks, which ensure that the instance\n            is either the source or the destination of any traffic that it receives.\n            If the value is <code>true</code>, source/destination checks are enabled;\n            otherwise, they are disabled. The default value is <code>true</code>. \n            You must disable source/destination checks if the instance runs services \n            such as network address translation, routing, or firewalls.</p>",
                         "smithy.api#xmlName": "sourceDestCheck"
                     }
                 },
@@ -38832,6 +39185,42 @@
                     {
                         "value": "mac1.metal",
                         "name": "mac1_metal"
+                    },
+                    {
+                        "value": "x2gd.medium",
+                        "name": "x2gd_medium"
+                    },
+                    {
+                        "value": "x2gd.large",
+                        "name": "x2gd_large"
+                    },
+                    {
+                        "value": "x2gd.xlarge",
+                        "name": "x2gd_xlarge"
+                    },
+                    {
+                        "value": "x2gd.2xlarge",
+                        "name": "x2gd_2xlarge"
+                    },
+                    {
+                        "value": "x2gd.4xlarge",
+                        "name": "x2gd_4xlarge"
+                    },
+                    {
+                        "value": "x2gd.8xlarge",
+                        "name": "x2gd_8xlarge"
+                    },
+                    {
+                        "value": "x2gd.12xlarge",
+                        "name": "x2gd_12xlarge"
+                    },
+                    {
+                        "value": "x2gd.16xlarge",
+                        "name": "x2gd_16xlarge"
+                    },
+                    {
+                        "value": "x2gd.metal",
+                        "name": "x2gd_metal"
                     }
                 ]
             }
@@ -39036,6 +39425,14 @@
                         "aws.protocols#ec2QueryName": "AutoRecoverySupported",
                         "smithy.api#documentation": "<p>Indicates whether auto recovery is supported.</p>",
                         "smithy.api#xmlName": "autoRecoverySupported"
+                    }
+                },
+                "SupportedBootModes": {
+                    "target": "com.amazonaws.ec2#BootModeTypeList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SupportedBootModes",
+                        "smithy.api#documentation": "<p>The supported boot modes. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Boot modes</a> in the\n   <i>Amazon EC2 User Guide</i>.</p>",
+                        "smithy.api#xmlName": "supportedBootModes"
                     }
                 }
             },
@@ -42527,6 +42924,12 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.ec2#MaximumEfaInterfaces": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.ec2#MaximumIops": {
             "type": "integer",
             "traits": {
@@ -43359,7 +43762,7 @@
                 "SourceDestCheck": {
                     "target": "com.amazonaws.ec2#AttributeBooleanValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether source/destination checking is enabled. A value of <code>true</code>\n            means that checking is enabled, and <code>false</code> means that checking is disabled.\n            This value must be <code>false</code> for a NAT instance to perform NAT.</p>"
+                        "smithy.api#documentation": "<p>Enable or disable source/destination checks, which ensure that the instance\n            is either the source or the destination of any traffic that it receives.\n            If the value is <code>true</code>, source/destination checks are enabled;\n            otherwise, they are disabled. The default value is <code>true</code>. \n            You must disable source/destination checks if the instance runs services \n            such as network address translation, routing, or firewalls.</p>"
                     }
                 },
                 "Attribute": {
@@ -44825,7 +45228,7 @@
                 "Iops": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p>\n         <p>The following are the supported values for each volume type:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>gp3</code>: 3,000-16,000 IOPS</p>\n            </li>\n            <li>\n               <p>\n                  <code>io1</code>: 100-64,000 IOPS</p>\n            </li>\n            <li>\n               <p>\n                  <code>io2</code>: 100-64,000 IOPS</p>\n            </li>\n         </ul>\n         <p>Default: If no IOPS value is specified, the existing value is retained.</p>"
+                        "smithy.api#documentation": "<p>The target IOPS rate of the volume. This parameter is valid only for <code>gp3</code>, <code>io1</code>, and <code>io2</code> volumes.</p>\n         <p>The following are the supported values for each volume type:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>gp3</code>: 3,000-16,000 IOPS</p>\n            </li>\n            <li>\n               <p>\n                  <code>io1</code>: 100-64,000 IOPS</p>\n            </li>\n            <li>\n               <p>\n                  <code>io2</code>: 100-64,000 IOPS</p>\n            </li>\n         </ul>\n         <p>Default: If no IOPS value is specified, the existing value is retained, unless a volume type is modified that supports different values.</p>"
                     }
                 },
                 "Throughput": {
@@ -46396,6 +46799,14 @@
                         "aws.protocols#ec2QueryName": "EfaSupported",
                         "smithy.api#documentation": "<p>Indicates whether Elastic Fabric Adapter (EFA) is supported.</p>",
                         "smithy.api#xmlName": "efaSupported"
+                    }
+                },
+                "EfaInfo": {
+                    "target": "com.amazonaws.ec2#EfaInfo",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "EfaInfo",
+                        "smithy.api#documentation": "<p>Describes the Elastic Fabric Adapters for the instance type.</p>",
+                        "smithy.api#xmlName": "efaInfo"
                     }
                 }
             },
@@ -50038,6 +50449,12 @@
                         "smithy.api#documentation": "<p>The type of virtualization (<code>hvm</code> | <code>paravirtual</code>).</p>\n         <p>Default: <code>paravirtual</code>\n         </p>",
                         "smithy.api#xmlName": "virtualizationType"
                     }
+                },
+                "BootMode": {
+                    "target": "com.amazonaws.ec2#BootModeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The boot mode of the AMI. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html\">Boot modes</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -50777,6 +51194,114 @@
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "ruleNumber"
                     }
+                }
+            }
+        },
+        "com.amazonaws.ec2#ReplaceRootVolumeTask": {
+            "type": "structure",
+            "members": {
+                "ReplaceRootVolumeTaskId": {
+                    "target": "com.amazonaws.ec2#ReplaceRootVolumeTaskId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ReplaceRootVolumeTaskId",
+                        "smithy.api#documentation": "<p>The ID of the root volume replacement task.</p>",
+                        "smithy.api#xmlName": "replaceRootVolumeTaskId"
+                    }
+                },
+                "InstanceId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "InstanceId",
+                        "smithy.api#documentation": "<p>The ID of the instance for which the root volume replacement task was created.</p>",
+                        "smithy.api#xmlName": "instanceId"
+                    }
+                },
+                "TaskState": {
+                    "target": "com.amazonaws.ec2#ReplaceRootVolumeTaskState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TaskState",
+                        "smithy.api#documentation": "<p>The state of the task. The task can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>pending</code> - the replacement volume is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>in-progress</code> - the original volume is being detached and the \n          replacement volume is being attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>succeeded</code> - the replacement volume has been successfully attached \n          to the instance and the instance is available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failing</code> - the replacement task is in the process of failing.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed</code> - the replacement task has failed but the original root \n          volume is still attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failing-detached</code> - the replacement task is in the process of failing. \n          The instance might have no root volume attached.</p>\n            </li>\n            <li>\n               <p>\n                  <code>failed-detached</code> - the replacement task has failed and the instance \n          has no root volume attached.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "taskState"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StartTime",
+                        "smithy.api#documentation": "<p>The time the task was started.</p>",
+                        "smithy.api#xmlName": "startTime"
+                    }
+                },
+                "CompleteTime": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "CompleteTime",
+                        "smithy.api#documentation": "<p>The time the task completed.</p>",
+                        "smithy.api#xmlName": "completeTime"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ec2#TagList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TagSet",
+                        "smithy.api#documentation": "<p>The tags assigned to the task.</p>",
+                        "smithy.api#xmlName": "tagSet"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a root volume replacement task.</p>"
+            }
+        },
+        "com.amazonaws.ec2#ReplaceRootVolumeTaskId": {
+            "type": "string"
+        },
+        "com.amazonaws.ec2#ReplaceRootVolumeTaskIds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ReplaceRootVolumeTaskId",
+                "traits": {
+                    "smithy.api#xmlName": "ReplaceRootVolumeTaskId"
+                }
+            }
+        },
+        "com.amazonaws.ec2#ReplaceRootVolumeTaskState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "pending",
+                        "name": "pending"
+                    },
+                    {
+                        "value": "in-progress",
+                        "name": "in_progress"
+                    },
+                    {
+                        "value": "failing",
+                        "name": "failing"
+                    },
+                    {
+                        "value": "succeeded",
+                        "name": "succeeded"
+                    },
+                    {
+                        "value": "failed",
+                        "name": "failed"
+                    },
+                    {
+                        "value": "failed-detached",
+                        "name": "failed_detached"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#ReplaceRootVolumeTasks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ReplaceRootVolumeTask",
+                "traits": {
+                    "smithy.api#xmlName": "item"
                 }
             }
         },

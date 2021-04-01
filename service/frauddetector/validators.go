@@ -50,6 +50,46 @@ func (m *validateOpBatchGetVariable) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelBatchPredictionJob struct {
+}
+
+func (*validateOpCancelBatchPredictionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelBatchPredictionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelBatchPredictionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelBatchPredictionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateBatchPredictionJob struct {
+}
+
+func (*validateOpCreateBatchPredictionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBatchPredictionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBatchPredictionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBatchPredictionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDetectorVersion struct {
 }
 
@@ -145,6 +185,26 @@ func (m *validateOpCreateVariable) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateVariableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBatchPredictionJob struct {
+}
+
+func (*validateOpDeleteBatchPredictionJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBatchPredictionJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBatchPredictionJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBatchPredictionJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -878,6 +938,14 @@ func addOpBatchGetVariableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetVariable{}, middleware.After)
 }
 
+func addOpCancelBatchPredictionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelBatchPredictionJob{}, middleware.After)
+}
+
+func addOpCreateBatchPredictionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBatchPredictionJob{}, middleware.After)
+}
+
 func addOpCreateDetectorVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDetectorVersion{}, middleware.After)
 }
@@ -896,6 +964,10 @@ func addOpCreateRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateVariableValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVariable{}, middleware.After)
+}
+
+func addOpDeleteBatchPredictionJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBatchPredictionJob{}, middleware.After)
 }
 
 func addOpDeleteDetectorValidationMiddleware(stack *middleware.Stack) error {
@@ -1308,6 +1380,56 @@ func validateOpBatchGetVariableInput(v *BatchGetVariableInput) error {
 	}
 }
 
+func validateOpCancelBatchPredictionJobInput(v *CancelBatchPredictionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelBatchPredictionJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBatchPredictionJobInput(v *CreateBatchPredictionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBatchPredictionJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if v.InputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputPath"))
+	}
+	if v.OutputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputPath"))
+	}
+	if v.EventTypeName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventTypeName"))
+	}
+	if v.DetectorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DetectorName"))
+	}
+	if v.IamRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IamRoleArn"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateDetectorVersionInput(v *CreateDetectorVersionInput) error {
 	if v == nil {
 		return nil
@@ -1457,6 +1579,21 @@ func validateOpCreateVariableInput(v *CreateVariableInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteBatchPredictionJobInput(v *DeleteBatchPredictionJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBatchPredictionJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

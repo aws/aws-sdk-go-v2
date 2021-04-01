@@ -43,6 +43,10 @@ type UpdateGameSessionQueueInput struct {
 	// This member is required.
 	Name *string
 
+	// Information to be added to all events that are related to this game session
+	// queue.
+	CustomEventData *string
+
 	// A list of fleets and/or fleet aliases that can be used to fulfill game session
 	// placement requests in the queue. Destinations are identified by either a fleet
 	// ARN or a fleet alias ARN, and are listed in order of placement preference. When
@@ -54,6 +58,11 @@ type UpdateGameSessionQueueInput struct {
 	// this parameter is not set, game sessions can be placed in any queue location. To
 	// remove an existing filter configuration, pass in an empty set.
 	FilterConfiguration *types.FilterConfiguration
+
+	// An SNS topic ARN that is set up to receive game session placement notifications.
+	// See  Setting up notifications for game session placement
+	// (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html).
+	NotificationTarget *string
 
 	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
 	// deliver low latency for most players in a game session. These policies ensure

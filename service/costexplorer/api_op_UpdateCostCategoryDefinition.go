@@ -47,6 +47,9 @@ type UpdateCostCategoryDefinitionInput struct {
 	//
 	// This member is required.
 	Rules []types.CostCategoryRule
+
+	// The default value for the cost category.
+	DefaultValue *string
 }
 
 type UpdateCostCategoryDefinitionOutput struct {

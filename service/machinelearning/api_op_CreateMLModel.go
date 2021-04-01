@@ -81,7 +81,7 @@ type CreateMLModelInput struct {
 	//
 	// * sgd.maxPasses - The number of times that the
 	// training process traverses the observations to build the MLModel. The value is
-	// an integer that ranges from 1 to 100. The default value is 10.
+	// an integer that ranges from 1 to 10000. The default value is 10.
 	//
 	// *
 	// sgd.shuffleType - Whether Amazon ML shuffles the training data. Shuffling the

@@ -43,6 +43,9 @@ type GetWirelessDeviceStatisticsOutput struct {
 	// Information about the wireless device's operations.
 	LoRaWAN *types.LoRaWANDeviceMetadata
 
+	// MetaData for Sidewalk device.
+	Sidewalk *types.SidewalkDeviceMetadata
+
 	// The ID of the wireless device.
 	WirelessDeviceId *string
 

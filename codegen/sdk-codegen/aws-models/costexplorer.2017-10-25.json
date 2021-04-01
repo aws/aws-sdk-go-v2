@@ -545,10 +545,48 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The list of processing statuses for Cost Management products for a specific cost category.\n        </p>"
                     }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryValue"
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The structure of Cost Categories. This includes detailed metadata and the set of rules for the <code>CostCategory</code> object.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostCategoryInheritedValueDimension": {
+            "type": "structure",
+            "members": {
+                "DimensionName": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryInheritedValueDimensionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of dimension for which to group costs.</p>\n\t        <p>If you specify <code>LINKED_ACCOUNT_NAME</code>, the cost category value will be based on account name. If you specify <code>TAG</code>, the cost category value will be based on the value of the specified tag key.</p>"
+                    }
+                },
+                "DimensionKey": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key to extract cost category values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>When creating or updating a cost category, you can define the <code>CostCategoryRule</code> rule type as <code>INHERITED_VALUE</code>. This rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by <code>CostCategoryInheritedValueDimension</code>. For example, if you wanted to dynamically group costs based on the value of a specific tag key, you would first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostCategoryInheritedValueDimensionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LINKED_ACCOUNT_NAME",
+                        "name": "LINKED_ACCOUNT_NAME"
+                    },
+                    {
+                        "value": "TAG",
+                        "name": "TAG"
+                    }
+                ]
             }
         },
         "com.amazonaws.costexplorer#CostCategoryMaxResults": {
@@ -566,7 +604,7 @@
                 "smithy.api#documentation": "<p>The unique name of the Cost Category.</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 255
+                    "max": 50
                 },
                 "smithy.api#pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
             }
@@ -644,6 +682,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            A list of unique cost category values in a specific cost category.\n        </p>"
                     }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryValue"
                 }
             },
             "traits": {
@@ -660,21 +701,44 @@
             "type": "structure",
             "members": {
                 "Value": {
-                    "target": "com.amazonaws.costexplorer#CostCategoryValue",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
+                    "target": "com.amazonaws.costexplorer#CostCategoryValue"
                 },
                 "Rule": {
                     "target": "com.amazonaws.costexplorer#Expression",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n                <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and\n                <code>LINKED_ACCOUNT_NAME</code>.</p>\n        <p>Root level <code>OR</code> is not supported. We recommend that you create a separate\n            rule instead.</p>\n        \n        <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n            <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>AWS Billing and Cost Management User\n                Guide</i>.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a>\n            object used to categorize costs. This supports dimensions, tags, and nested expressions.\n            Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>,\n                <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and\n                <code>LINKED_ACCOUNT_NAME</code>.</p>\n        <p>Root level <code>OR</code> is not supported. We recommend that you create a separate\n            rule instead.</p>\n        \n        <p>\n            <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also\n            supported for Cost Category expressions. This dimension uses different terms, depending\n            on whether you're using the console or API/JSON editor. For a detailed comparison, see\n            <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>AWS Billing and Cost Management User\n                Guide</i>.</p>"
+                    }
+                },
+                "InheritedValue": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryInheritedValueDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value the line item will be categorized as, if the line item contains the matched dimension.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can define the <code>CostCategoryRule</code> rule type as either <code>REGULAR</code> or <code>INHERITED_VALUE</code>. The <code>INHERITED_VALUE</code> rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by <code>CostCategoryInheritedValueDimension</code>. For example, if you wanted to dynamically group costs based on the value of a specific tag key, you would first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostCategoryRuleType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REGULAR",
+                        "name": "REGULAR"
+                    },
+                    {
+                        "value": "INHERITED_VALUE",
+                        "name": "INHERITED_VALUE"
+                    }
+                ]
             }
         },
         "com.amazonaws.costexplorer#CostCategoryRuleVersion": {
@@ -730,10 +794,10 @@
         "com.amazonaws.costexplorer#CostCategoryValue": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The value a line item will be categorized as, if it matches the rule.</p>",
+                "smithy.api#documentation": "<p>The default value for the cost category.</p>",
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 255
+                    "max": 50
                 },
                 "smithy.api#pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
             }
@@ -1035,6 +1099,9 @@
                         "smithy.api#documentation": "<p>The Cost Category rules used to categorize costs. For more information, see\n        <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryValue"
                 }
             }
         },
@@ -6163,6 +6230,9 @@
                         "smithy.api#documentation": "<p>The <code>Expression</code> object used to categorize costs. For more information, see\n        <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule </a>. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "DefaultValue": {
+                    "target": "com.amazonaws.costexplorer#CostCategoryValue"
                 }
             }
         },

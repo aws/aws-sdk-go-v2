@@ -12,20 +12,23 @@ import (
 )
 
 // Updates the attributes of the specified link aggregation group (LAG). You can
-// update the following attributes:
+// update the following LAG attributes:
 //
 // * The name of the LAG.
 //
-// * The value for the
-// minimum number of connections that must be operational for the LAG itself to be
-// operational.
+// * The value for
+// the minimum number of connections that must be operational for the LAG itself to
+// be operational.
 //
-// When you create a LAG, the default value for the minimum number of
-// operational connections is zero (0). If you update this value and the number of
-// operational connections falls below the specified value, the LAG automatically
-// goes down to avoid over-utilization of the remaining connections. Adjust this
-// value with care, as it could force the LAG down if it is set higher than the
-// current number of operational connections.
+// * The LAG's MACsec encryption mode. AWS assigns this value to
+// each connection which is part of the LAG.
+//
+// * The tags
+//
+// If you adjust the
+// threshold value for the minimum number of operational connections, ensure that
+// the new value does not cause the LAG to fall below the threshold and become
+// non-operational.
 func (c *Client) UpdateLag(ctx context.Context, params *UpdateLagInput, optFns ...func(*Options)) (*UpdateLagOutput, error) {
 	if params == nil {
 		params = &UpdateLagInput{}
@@ -47,6 +50,10 @@ type UpdateLagInput struct {
 	//
 	// This member is required.
 	LagId *string
+
+	// The LAG MAC Security (MACsec) encryption mode. AWS applies the value to all
+	// connections which are part of the LAG.
+	EncryptionMode *string
 
 	// The name of the LAG.
 	LagName *string
@@ -76,6 +83,10 @@ type UpdateLagOutput struct {
 	// The individual bandwidth of the physical connections bundled by the LAG. The
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
+
+	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt,
+	// should_encrypt, and must_encrypt.
+	EncryptionMode *string
 
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
 	// family (IPv4/IPv6).
@@ -115,6 +126,12 @@ type UpdateLagOutput struct {
 
 	// The location of the LAG.
 	Location *string
+
+	// Indicates whether the LAG supports MAC Security (MACsec).
+	MacSecCapable *bool
+
+	// The MAC Security (MACsec) security keys associated with the LAG.
+	MacSecKeys []types.MacSecKey
 
 	// The minimum number of physical dedicated connections that must be operational
 	// for the LAG itself to be operational.

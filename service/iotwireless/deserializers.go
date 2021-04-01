@@ -3942,6 +3942,11 @@ func awsRestjson1_deserializeOpDocumentGetWirelessDeviceOutput(v **GetWirelessDe
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Sidewalk":
+			if err := awsRestjson1_deserializeDocumentSidewalkDevice(&sv.Sidewalk, value); err != nil {
+				return err
+			}
+
 		case "ThingArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4134,6 +4139,11 @@ func awsRestjson1_deserializeOpDocumentGetWirelessDeviceStatisticsOutput(v **Get
 
 		case "LoRaWAN":
 			if err := awsRestjson1_deserializeDocumentLoRaWANDeviceMetadata(&sv.LoRaWAN, value); err != nil {
+				return err
+			}
+
+		case "Sidewalk":
+			if err := awsRestjson1_deserializeDocumentSidewalkDeviceMetadata(&sv.Sidewalk, value); err != nil {
 				return err
 			}
 
@@ -4844,6 +4854,15 @@ func awsRestjson1_deserializeOpDocumentGetWirelessGatewayStatisticsOutput(v **Ge
 
 	for key, value := range shape {
 		switch key {
+		case "ConnectionStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionStatus to be of type string, got %T instead", value)
+				}
+				sv.ConnectionStatus = types.ConnectionStatus(jtv)
+			}
+
 		case "LastUplinkReceivedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7842,6 +7861,55 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCertificateList(v **types.CertificateList, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CertificateList
+	if *v == nil {
+		sv = &types.CertificateList{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SigningAlg":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SigningAlg to be of type string, got %T instead", value)
+				}
+				sv.SigningAlg = types.SigningAlg(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8016,6 +8084,40 @@ func awsRestjson1_deserializeDocumentDestinations(v **types.Destinations, value 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeviceCertificateList(v *[]types.CertificateList, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CertificateList
+	if *v == nil {
+		cv = []types.CertificateList{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CertificateList
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentCertificateList(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -9743,6 +9845,131 @@ func awsRestjson1_deserializeDocumentSidewalkAccountList(v *[]types.SidewalkAcco
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSidewalkDevice(v **types.SidewalkDevice, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SidewalkDevice
+	if *v == nil {
+		sv = &types.SidewalkDevice{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DeviceCertificates":
+			if err := awsRestjson1_deserializeDocumentDeviceCertificateList(&sv.DeviceCertificates, value); err != nil {
+				return err
+			}
+
+		case "SidewalkId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SidewalkId to be of type string, got %T instead", value)
+				}
+				sv.SidewalkId = ptr.String(jtv)
+			}
+
+		case "SidewalkManufacturingSn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SidewalkManufacturingSn to be of type string, got %T instead", value)
+				}
+				sv.SidewalkManufacturingSn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSidewalkDeviceMetadata(v **types.SidewalkDeviceMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SidewalkDeviceMetadata
+	if *v == nil {
+		sv = &types.SidewalkDeviceMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BatteryLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BatteryLevel to be of type string, got %T instead", value)
+				}
+				sv.BatteryLevel = types.BatteryLevel(jtv)
+			}
+
+		case "DeviceState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DeviceState to be of type string, got %T instead", value)
+				}
+				sv.DeviceState = types.DeviceState(jtv)
+			}
+
+		case "Event":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Event to be of type string, got %T instead", value)
+				}
+				sv.Event = types.Event(jtv)
+			}
+
+		case "Rssi":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Rssi = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSidewalkListDevice(v **types.SidewalkListDevice, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9772,6 +9999,29 @@ func awsRestjson1_deserializeDocumentSidewalkListDevice(v **types.SidewalkListDe
 					return fmt.Errorf("expected AmazonId to be of type string, got %T instead", value)
 				}
 				sv.AmazonId = ptr.String(jtv)
+			}
+
+		case "DeviceCertificates":
+			if err := awsRestjson1_deserializeDocumentDeviceCertificateList(&sv.DeviceCertificates, value); err != nil {
+				return err
+			}
+
+		case "SidewalkId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SidewalkId to be of type string, got %T instead", value)
+				}
+				sv.SidewalkId = ptr.String(jtv)
+			}
+
+		case "SidewalkManufacturingSn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SidewalkManufacturingSn to be of type string, got %T instead", value)
+				}
+				sv.SidewalkManufacturingSn = ptr.String(jtv)
 			}
 
 		default:

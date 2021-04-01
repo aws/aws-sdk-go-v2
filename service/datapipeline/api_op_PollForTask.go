@@ -22,7 +22,32 @@ import (
 // newly scheduled task is handed to the task runner. To accomodate this, set the
 // socket timeout in your task runner to 90 seconds. The task runner should not
 // call PollForTask again on the same workerGroup until it receives a response, and
-// this can take up to 90 seconds.
+// this can take up to 90 seconds. POST / HTTP/1.1 Content-Type:
+// application/x-amz-json-1.1 X-Amz-Target: DataPipeline.PollForTask
+// Content-Length: 59 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
+// 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"workerGroup":
+// "MyworkerGroup", "hostname": "example.com"} x-amzn-RequestId:
+// 41c713d2-0775-11e2-af6f-6bc7a6be60d9 Content-Type: application/x-amz-json-1.1
+// Content-Length: 39 Date: Mon, 12 Nov 2012 17:50:53 GMT {"taskObject":
+// {"attemptId": "@SayHello_2012-12-12T00:00:00_Attempt=1", "objects":
+// {"@SayHello_2012-12-12T00:00:00_Attempt=1": {"fields": [ {"key":
+// "@componentParent", "refValue": "SayHello"}, {"key": "@scheduledStartTime",
+// "stringValue": "2012-12-12T00:00:00"}, {"key": "parent", "refValue":
+// "SayHello"}, {"key": "@sphere", "stringValue": "ATTEMPT"}, {"key":
+// "workerGroup", "stringValue": "workerGroup"}, {"key": "@instanceParent",
+// "refValue": "@SayHello_2012-12-12T00:00:00"}, {"key": "type", "stringValue":
+// "ShellCommandActivity"}, {"key": "@status", "stringValue":
+// "WAITING_FOR_RUNNER"}, {"key": "@version", "stringValue": "1"}, {"key":
+// "schedule", "refValue": "Schedule"}, {"key": "@actualStartTime", "stringValue":
+// "2012-12-13T01:40:50"}, {"key": "command", "stringValue": "echo hello"}, {"key":
+// "@scheduledEndTime", "stringValue": "2012-12-12T01:00:00"}, {"key":
+// "@activeInstances", "refValue": "@SayHello_2012-12-12T00:00:00"}, {"key":
+// "@pipelineId", "stringValue": "df-0937003356ZJEXAMPLE"} ], "id":
+// "@SayHello_2012-12-12T00:00:00_Attempt=1", "name":
+// "@SayHello_2012-12-12T00:00:00_Attempt=1"} }, "pipelineId":
+// "df-0937003356ZJEXAMPLE", "taskId":
+// "2xaM4wRs5zOsIH+g9U3oVHfAgAlbSqU6XduncB0HhZ3xMnmvfePZPn4dIbYXHyWyRK+cU15MqDHwdrvftx/4wv+sNS4w34vJfv7QA9aOoOazW28l1GYSb2ZRR0N0paiQp+d1MhSKo10hOTWOsVK5S5Lnx9Qm6omFgXHyIvZRIvTlrQMpr1xuUrflyGOfbFOGpOLpvPE172MYdqpZKnbSS4TcuqgQKSWV2833fEubI57DPOP7ghWa2TcYeSIv4pdLYG53fTuwfbnbdc98g2LNUQzSVhSnt7BoqyNwht2aQ6b/UHg9A80+KVpuXuqmz3m1MXwHFgxjdmuesXNOrrlGpeLCcRWD+aGo0RN1NqhQRzNAig8V4GlaPTQzMsRCljKqvrIyAoP3Tt2XEGsHkkQo12rEX8Z90957XX2qKRwhruwYzqGkSLWjINoLdAxUJdpRXRc5DJTrBd3D5mdzn7kY1l7NEh4kFHJDt3Cx4Z3Mk8MYCACyCk/CEyy9DwuPi66cLz0NBcgbCM5LKjTBOwo1m+am+pvM1kSposE9FPP1+RFGb8k6jQBTJx3TRz1yKilnGXQTZ5xvdOFpJrklIT0OXP1MG3+auM9FlJA+1dX90QoNJE5z7axmK//MOGXUdkqFe2kiDkorqjxwDvc0Js9pVKfKvAmW8YqUbmI9l0ERpWCXXnLVHNmPWz3jaPY+OBAmuJWDmxB/Z8p94aEDg4BVXQ7LvsKQ3DLYhaB7yJ390CJT+i0mm+EBqY60V6YikPSWDFrYQ/NPi2b1DgE19mX8zHqw8qprIl4yh1Ckx2Iige4En/N5ktOoIxnASxAw/TzcE2skxdw5KlHDF+UTj71m16CR/dIaKlXijlfNlNzUBo/bNSadCQn3G5NoO501wPKI:XO50TgDNyo8EXAMPLE/g==:1"}
+// }
 func (c *Client) PollForTask(ctx context.Context, params *PollForTaskInput, optFns ...func(*Options)) (*PollForTaskOutput, error) {
 	if params == nil {
 		params = &PollForTaskInput{}
@@ -57,7 +82,7 @@ type PollForTaskInput struct {
 	// can get this value from the instance using
 	// http://169.254.169.254/latest/meta-data/instance-id. For more information, see
 	// Instance Metadata
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html)
+	// (http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html)
 	// in the Amazon Elastic Compute Cloud User Guide. Passing in this value proves
 	// that your task runner is running on an EC2 instance, and ensures the proper AWS
 	// Data Pipeline service charges are applied to your pipeline.

@@ -2195,6 +2195,15 @@ func awsAwsjson11_deserializeDocumentEnvironment(v **types.Environment, value in
 				return err
 			}
 
+		case "managedCredentialsStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedCredentialsStatus to be of type string, got %T instead", value)
+				}
+				sv.ManagedCredentialsStatus = types.ManagedCredentialsStatus(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)

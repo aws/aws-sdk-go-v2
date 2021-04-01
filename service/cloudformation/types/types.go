@@ -168,6 +168,8 @@ type DeploymentTargets struct {
 	// updates.
 	Accounts []string
 
+	AccountsUrl *string
+
 	// The organization root ID or organizational unit (OU) IDs to which StackSets
 	// deploys.
 	OrganizationalUnitIds []string
@@ -1635,6 +1637,8 @@ type StackSetOperationPreferences struct {
 	// throttling. Conditional: You must specify either MaxConcurrentCount or
 	// MaxConcurrentPercentage, but not both.
 	MaxConcurrentPercentage *int32
+
+	RegionConcurrencyType RegionConcurrencyType
 
 	// The order of the Regions in where you want to perform the stack operation.
 	RegionOrder []string

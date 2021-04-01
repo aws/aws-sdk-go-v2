@@ -3921,6 +3921,15 @@ type ResourceDataSyncSource struct {
 	// source of this type can synchronize data from AWS Organizations.
 	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource
 
+	// When you create a resource data sync, if you choose one of the AWS Organizations
+	// options, then Systems Manager automatically enables all OpsData sources in the
+	// selected AWS Regions for all AWS accounts in your organization (or in the
+	// selected organization units). For more information, see About multiple account
+	// and Region resource data syncs
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html)
+	// in the AWS Systems Manager User Guide.
+	EnableAllOpsDataSources bool
+
 	// Whether to automatically synchronize and aggregate data from new AWS Regions
 	// when those Regions come online.
 	IncludeFutureRegions bool
@@ -3938,6 +3947,15 @@ type ResourceDataSyncSourceWithState struct {
 	// The field name in SyncSource for the ResourceDataSyncAwsOrganizationsSource
 	// type.
 	AwsOrganizationsSource *ResourceDataSyncAwsOrganizationsSource
+
+	// When you create a resource data sync, if you choose one of the AWS Organizations
+	// options, then Systems Manager automatically enables all OpsData sources in the
+	// selected AWS Regions for all AWS accounts in your organization (or in the
+	// selected organization units). For more information, see About multiple account
+	// and Region resource data syncs
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html)
+	// in the AWS Systems Manager User Guide.
+	EnableAllOpsDataSources bool
 
 	// Whether to automatically synchronize and aggregate data from new AWS Regions
 	// when those Regions come online.
@@ -4416,7 +4434,9 @@ type Target struct {
 
 	// User-defined criteria that maps to Key. For example, if you specified
 	// tag:ServerRole, you could specify value:WebServer to run a command on instances
-	// that include EC2 tags of ServerRole,WebServer.
+	// that include EC2 tags of ServerRole,WebServer. Depending on the type of Target,
+	// the maximum number of values for a Key might be lower than the global maximum of
+	// 50.
 	Values []string
 }
 

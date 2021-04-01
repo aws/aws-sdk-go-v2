@@ -60,7 +60,9 @@ type CreateActivationInput struct {
 	// Systems Manager. Do not enter personally identifiable information in this field.
 	Description *string
 
-	// The date by which this activation request should expire. The default value is 24
+	// The date by which this activation request should expire, in timestamp format,
+	// such as "2021-07-07T00:00:00". You can specify a date up to 30 days in advance.
+	// If you don't provide an expiration date, the activation code expires in 24
 	// hours.
 	ExpirationDate *time.Time
 

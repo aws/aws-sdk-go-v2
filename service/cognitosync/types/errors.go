@@ -79,7 +79,6 @@ func (e *InternalErrorException) ErrorMessage() string {
 func (e *InternalErrorException) ErrorCode() string             { return "InternalErrorException" }
 func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// This exception is thrown when Amazon Cognito detects an invalid configuration.
 type InvalidConfigurationException struct {
 	Message *string
 }
@@ -133,25 +132,6 @@ func (e *InvalidParameterException) ErrorMessage() string {
 }
 func (e *InvalidParameterException) ErrorCode() string             { return "InvalidParameterException" }
 func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// This exception is thrown when your Lambda function fails to respond within 5
-// seconds. For more information, see Amazon Cognito Events
-// (http://docs.aws.amazon.com/cognito/latest/developerguide/cognito-events.html).
-type LambdaSocketTimeoutException struct {
-	Message *string
-}
-
-func (e *LambdaSocketTimeoutException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *LambdaSocketTimeoutException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *LambdaSocketTimeoutException) ErrorCode() string             { return "LambdaSocketTimeoutException" }
-func (e *LambdaSocketTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // AWS Lambda throttled your account, please contact AWS Support
 type LambdaThrottledException struct {

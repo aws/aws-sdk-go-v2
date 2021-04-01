@@ -160,10 +160,19 @@
                     "target": "com.amazonaws.detective#ListMembers"
                 },
                 {
+                    "target": "com.amazonaws.detective#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.detective#RejectInvitation"
                 },
                 {
                     "target": "com.amazonaws.detective#StartMonitoringMember"
+                },
+                {
+                    "target": "com.amazonaws.detective#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.detective#UntagResource"
                 }
             ],
             "traits": {
@@ -200,6 +209,9 @@
         },
         "com.amazonaws.detective#CreateGraph": {
             "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#CreateGraphRequest"
+            },
             "output": {
                 "target": "com.amazonaws.detective#CreateGraphResponse"
             },
@@ -220,6 +232,17 @@
                     "method": "POST",
                     "uri": "/graph",
                     "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#CreateGraphRequest": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.detective#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the new behavior graph. For each tag, you provide the tag key and\n         the tag value.</p>"
+                    }
                 }
             }
         },
@@ -790,6 +813,58 @@
                 }
             }
         },
+        "com.amazonaws.detective#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the tag values that are assigned to a behavior graph.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.detective#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph for which to retrieve the tag values.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.detective#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag values that are assigned to the behavior graph.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.detective#MemberDetail": {
             "type": "structure",
             "members": {
@@ -1056,6 +1131,104 @@
                 }
             }
         },
+        "com.amazonaws.detective#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.detective#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.detective#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.detective#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.detective#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.detective#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.detective#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Applies tag values to a behavior graph.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.detective#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph to assign the tags to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.detective#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag values to assign to the behavior graph.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.detective#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.detective#Timestamp": {
             "type": "timestamp",
             "traits": {
@@ -1090,6 +1263,59 @@
         },
         "com.amazonaws.detective#UnprocessedReason": {
             "type": "string"
+        },
+        "com.amazonaws.detective#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.detective#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.detective#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.detective#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.detective#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from a behavior graph.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{ResourceArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.detective#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.detective#GraphArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the behavior graph to remove the tags from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.detective#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys of the tags to remove from the behavior graph.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.detective#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.detective#ValidationException": {
             "type": "structure",

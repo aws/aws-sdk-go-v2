@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Pushes an SSH public key to a particular OS user on a given EC2 instance for 60
-// seconds.
+// Pushes an SSH public key to the specified EC2 instance for use by the specified
+// user. The key remains for 60 seconds. For more information, see Connect to your
+// Linux instance using EC2 Instance Connect
+// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect.html)
+// in the Amazon EC2 User Guide.
 func (c *Client) SendSSHPublicKey(ctx context.Context, params *SendSSHPublicKeyInput, optFns ...func(*Options)) (*SendSSHPublicKeyOutput, error) {
 	if params == nil {
 		params = &SendSSHPublicKeyInput{}
@@ -29,23 +32,23 @@ func (c *Client) SendSSHPublicKey(ctx context.Context, params *SendSSHPublicKeyI
 
 type SendSSHPublicKeyInput struct {
 
-	// The availability zone the EC2 instance was launched in.
+	// The Availability Zone in which the EC2 instance was launched.
 	//
 	// This member is required.
 	AvailabilityZone *string
 
-	// The EC2 instance you wish to publish the SSH key to.
+	// The ID of the EC2 instance.
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The OS user on the EC2 instance whom the key may be used to authenticate as.
+	// The OS user on the EC2 instance for whom the key can be used to authenticate.
 	//
 	// This member is required.
 	InstanceOSUser *string
 
-	// The public key to be published to the instance. To use it after publication you
-	// must have the matching private key.
+	// The public key material. To use the public key, you must have the matching
+	// private key.
 	//
 	// This member is required.
 	SSHPublicKey *string
@@ -53,11 +56,11 @@ type SendSSHPublicKeyInput struct {
 
 type SendSSHPublicKeyOutput struct {
 
-	// The request ID as logged by EC2 Connect. Please provide this when contacting AWS
-	// Support.
+	// The ID of the request. Please provide this ID when contacting AWS Support for
+	// assistance.
 	RequestId *string
 
-	// Indicates request success.
+	// Is true if the request succeeds and an error otherwise.
 	Success bool
 
 	// Metadata pertaining to the operation's result.

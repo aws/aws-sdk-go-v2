@@ -109,6 +109,16 @@
                 "target": "com.amazonaws.cloudformation#Account"
             }
         },
+        "com.amazonaws.cloudformation#AccountsUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5120
+                },
+                "smithy.api#pattern": "(s3://|http(s?)://).+"
+            }
+        },
         "com.amazonaws.cloudformation#AllowedValue": {
             "type": "string"
         },
@@ -1597,6 +1607,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The names of one or more AWS accounts for which you want to deploy stack set updates.</p>"
                     }
+                },
+                "AccountsUrl": {
+                    "target": "com.amazonaws.cloudformation#AccountsUrl"
                 },
                 "OrganizationalUnitIds": {
                     "target": "com.amazonaws.cloudformation#OrganizationalUnitIdList",
@@ -4942,6 +4955,21 @@
                 "smithy.api#pattern": "^[a-zA-Z0-9-]{1,128}$"
             }
         },
+        "com.amazonaws.cloudformation#RegionConcurrencyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SEQUENTIAL",
+                        "name": "SEQUENTIAL"
+                    },
+                    {
+                        "value": "PARALLEL",
+                        "name": "PARALLEL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.cloudformation#RegionList": {
             "type": "list",
             "member": {
@@ -7162,6 +7190,9 @@
         "com.amazonaws.cloudformation#StackSetOperationPreferences": {
             "type": "structure",
             "members": {
+                "RegionConcurrencyType": {
+                    "target": "com.amazonaws.cloudformation#RegionConcurrencyType"
+                },
                 "RegionOrder": {
                     "target": "com.amazonaws.cloudformation#RegionList",
                     "traits": {

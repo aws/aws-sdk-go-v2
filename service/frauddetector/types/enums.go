@@ -2,6 +2,32 @@
 
 package types
 
+type AsyncJobStatus string
+
+// Enum values for AsyncJobStatus
+const (
+	AsyncJobStatusInProgressInitializing AsyncJobStatus = "IN_PROGRESS_INITIALIZING"
+	AsyncJobStatusInProgress             AsyncJobStatus = "IN_PROGRESS"
+	AsyncJobStatusCancelInProgress       AsyncJobStatus = "CANCEL_IN_PROGRESS"
+	AsyncJobStatusCanceled               AsyncJobStatus = "CANCELED"
+	AsyncJobStatusComplete               AsyncJobStatus = "COMPLETE"
+	AsyncJobStatusFailed                 AsyncJobStatus = "FAILED"
+)
+
+// Values returns all known values for AsyncJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AsyncJobStatus) Values() []AsyncJobStatus {
+	return []AsyncJobStatus{
+		"IN_PROGRESS_INITIALIZING",
+		"IN_PROGRESS",
+		"CANCEL_IN_PROGRESS",
+		"CANCELED",
+		"COMPLETE",
+		"FAILED",
+	}
+}
+
 type DataSource string
 
 // Enum values for DataSource

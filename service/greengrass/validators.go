@@ -250,6 +250,26 @@ func (m *validateOpCreateGroupCertificateAuthority) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateGroup struct {
+}
+
+func (*validateOpCreateGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGroupVersion struct {
 }
 
@@ -1658,6 +1678,10 @@ func addOpCreateGroupCertificateAuthorityValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpCreateGroupCertificateAuthority{}, middleware.After)
 }
 
+func addOpCreateGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateGroup{}, middleware.After)
+}
+
 func addOpCreateGroupVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGroupVersion{}, middleware.After)
 }
@@ -2682,6 +2706,21 @@ func validateOpCreateGroupCertificateAuthorityInput(v *CreateGroupCertificateAut
 	invalidParams := smithy.InvalidParamsError{Context: "CreateGroupCertificateAuthorityInput"}
 	if v.GroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateGroupInput(v *CreateGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateGroupInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

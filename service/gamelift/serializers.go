@@ -5679,6 +5679,11 @@ func awsAwsjson11_serializeOpDocumentCreateGameSessionQueueInput(v *CreateGameSe
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomEventData != nil {
+		ok := object.Key("CustomEventData")
+		ok.String(*v.CustomEventData)
+	}
+
 	if v.Destinations != nil {
 		ok := object.Key("Destinations")
 		if err := awsAwsjson11_serializeDocumentGameSessionQueueDestinationList(v.Destinations, ok); err != nil {
@@ -5696,6 +5701,11 @@ func awsAwsjson11_serializeOpDocumentCreateGameSessionQueueInput(v *CreateGameSe
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.NotificationTarget != nil {
+		ok := object.Key("NotificationTarget")
+		ok.String(*v.NotificationTarget)
 	}
 
 	if v.PlayerLatencyPolicies != nil {
@@ -7605,6 +7615,11 @@ func awsAwsjson11_serializeOpDocumentUpdateGameSessionQueueInput(v *UpdateGameSe
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomEventData != nil {
+		ok := object.Key("CustomEventData")
+		ok.String(*v.CustomEventData)
+	}
+
 	if v.Destinations != nil {
 		ok := object.Key("Destinations")
 		if err := awsAwsjson11_serializeDocumentGameSessionQueueDestinationList(v.Destinations, ok); err != nil {
@@ -7622,6 +7637,11 @@ func awsAwsjson11_serializeOpDocumentUpdateGameSessionQueueInput(v *UpdateGameSe
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.NotificationTarget != nil {
+		ok := object.Key("NotificationTarget")
+		ok.String(*v.NotificationTarget)
 	}
 
 	if v.PlayerLatencyPolicies != nil {

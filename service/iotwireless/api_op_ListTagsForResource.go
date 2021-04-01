@@ -29,7 +29,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the resource for which to list tags.
+	// The ARN of the resource for which you want to list tags.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -37,8 +37,8 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tags attached to the specified resource. Tags are metadata that can be used
-	// to manage a resource
+	// The tags to attach to the specified resource. Tags are metadata that you can use
+	// to manage a resource.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.

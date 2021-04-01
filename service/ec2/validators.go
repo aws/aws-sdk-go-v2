@@ -1210,6 +1210,26 @@ func (m *validateOpCreateNetworkInterfacePermission) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateReplaceRootVolumeTask struct {
+}
+
+func (*validateOpCreateReplaceRootVolumeTask) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateReplaceRootVolumeTask) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateReplaceRootVolumeTaskInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateReplaceRootVolumeTaskInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReservedInstancesListing struct {
 }
 
@@ -6170,6 +6190,10 @@ func addOpCreateNetworkInterfacePermissionValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpCreateNetworkInterfacePermission{}, middleware.After)
 }
 
+func addOpCreateReplaceRootVolumeTaskValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateReplaceRootVolumeTask{}, middleware.After)
+}
+
 func addOpCreateReservedInstancesListingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReservedInstancesListing{}, middleware.After)
 }
@@ -8655,6 +8679,21 @@ func validateOpCreateNetworkInterfacePermissionInput(v *CreateNetworkInterfacePe
 	}
 	if len(v.Permission) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Permission"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateReplaceRootVolumeTaskInput(v *CreateReplaceRootVolumeTaskInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateReplaceRootVolumeTaskInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

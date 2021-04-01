@@ -11509,6 +11509,10 @@ func awsRestjson1_serializeOpHttpBindingsListThingsInput(v *ListThingsInput, enc
 		encoder.SetQuery("thingTypeName").String(*v.ThingTypeName)
 	}
 
+	if v.UsePrefixAttributeValue {
+		encoder.SetQuery("usePrefixAttributeValue").Boolean(v.UsePrefixAttributeValue)
+	}
+
 	return nil
 }
 

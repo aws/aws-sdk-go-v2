@@ -2095,6 +2095,12 @@
                         "smithy.api#documentation": "<p>Whether PSTN calling is enabled.</p>"
                     }
                 },
+                "DataRetentionOptIn": {
+                    "target": "com.amazonaws.alexaforbusiness#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether data retention of the profile is enabled.</p>"
+                    }
+                },
                 "MeetingRoomConfiguration": {
                     "target": "com.amazonaws.alexaforbusiness#CreateMeetingRoomConfiguration",
                     "traits": {
@@ -5879,6 +5885,12 @@
                         "smithy.api#documentation": "<p>The PSTN setting of a room profile.</p>"
                     }
                 },
+                "DataRetentionOptIn": {
+                    "target": "com.amazonaws.alexaforbusiness#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether data retention of the profile is enabled.</p>"
+                    }
+                },
                 "AddressBookArn": {
                     "target": "com.amazonaws.alexaforbusiness#Arn",
                     "traits": {
@@ -8818,6 +8830,12 @@
                     "target": "com.amazonaws.alexaforbusiness#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether the PSTN setting of the room profile is enabled.</p>"
+                    }
+                },
+                "DataRetentionOptIn": {
+                    "target": "com.amazonaws.alexaforbusiness#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether data retention of the profile is enabled.</p>"
                     }
                 },
                 "MeetingRoomConfiguration": {

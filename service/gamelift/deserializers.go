@@ -1135,6 +1135,9 @@ func awsAwsjson11_deserializeOpErrorCreateGameSessionQueue(response *smithyhttp.
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
 
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
+
 	case strings.EqualFold("TaggingFailedException", errorCode):
 		return awsAwsjson11_deserializeErrorTaggingFailedException(response, errorBody)
 
@@ -14661,6 +14664,15 @@ func awsAwsjson11_deserializeDocumentGameSessionQueue(v **types.GameSessionQueue
 
 	for key, value := range shape {
 		switch key {
+		case "CustomEventData":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueueCustomEventData to be of type string, got %T instead", value)
+				}
+				sv.CustomEventData = ptr.String(jtv)
+			}
+
 		case "Destinations":
 			if err := awsAwsjson11_deserializeDocumentGameSessionQueueDestinationList(&sv.Destinations, value); err != nil {
 				return err
@@ -14687,6 +14699,15 @@ func awsAwsjson11_deserializeDocumentGameSessionQueue(v **types.GameSessionQueue
 					return fmt.Errorf("expected GameSessionQueueName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "NotificationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected QueueSnsArnStringModel to be of type string, got %T instead", value)
+				}
+				sv.NotificationTarget = ptr.String(jtv)
 			}
 
 		case "PlayerLatencyPolicies":

@@ -48,8 +48,6 @@ type GetPackageVersionReadmeInput struct {
 	//
 	// * maven
 	//
-	// * nuget
-	//
 	// This member is required.
 	Format types.PackageFormat
 
@@ -83,9 +81,6 @@ type GetPackageVersionReadmeInput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
-	//
-	// * A NuGet package does not contain a corresponding component, so
-	// NuGet packages do not have a namespace.
 	Namespace *string
 }
 
@@ -99,8 +94,6 @@ type GetPackageVersionReadmeOutput struct {
 	// * pypi
 	//
 	// * maven
-	//
-	// * nuget
 	Format types.PackageFormat
 
 	// The namespace of the package. The package component that specifies its namespace
@@ -114,9 +107,6 @@ type GetPackageVersionReadmeOutput struct {
 	// * A Python package
 	// does not contain a corresponding component, so Python packages do not have a
 	// namespace.
-	//
-	// * A NuGet package does not contain a corresponding component, so
-	// NuGet packages do not have a namespace.
 	Namespace *string
 
 	// The name of the package that contains the returned readme file.

@@ -59,6 +59,13 @@ type CreateConnectionInput struct {
 	// The name of the service provider associated with the requested connection.
 	ProviderName *string
 
+	// Indicates whether you want the connection to support MAC Security (MACsec). MAC
+	// Security (MACsec) is only available on dedicated connections. For information
+	// about MAC Security (MACsec) prerequisties, see MACsec prerequisties
+	// (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites)
+	// in the AWS Direct Connect User Guide.
+	RequestMACSec *bool
+
 	// The tags to associate with the lag.
 	Tags []types.Tag
 }
@@ -115,6 +122,10 @@ type CreateConnectionOutput struct {
 	// the connection is not available.
 	ConnectionState types.ConnectionState
 
+	// The MAC Security (MACsec) connection encryption mode. The valid values are
+	// no_encrypt, should_encrypt, and must_encrypt.
+	EncryptionMode *string
+
 	// Indicates whether the connection supports a secondary BGP peer in the same
 	// address family (IPv4/IPv6).
 	HasLogicalRedundancy types.HasLogicalRedundancy
@@ -131,12 +142,23 @@ type CreateConnectionOutput struct {
 	// The location of the connection.
 	Location *string
 
+	// Indicates whether the connection supports MAC Security (MACsec).
+	MacSecCapable *bool
+
+	// The MAC Security (MACsec) security keys associated with the connection.
+	MacSecKeys []types.MacSecKey
+
 	// The ID of the AWS account that owns the connection.
 	OwnerAccount *string
 
 	// The name of the AWS Direct Connect service provider associated with the
 	// connection.
 	PartnerName *string
+
+	// The MAC Security (MACsec) port link status of the connection. The valid values
+	// are Encryption Up, which means that there is an active Connection Key Name, or
+	// Encryption Down.
+	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.
 	ProviderName *string

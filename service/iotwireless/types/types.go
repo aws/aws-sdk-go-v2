@@ -22,6 +22,20 @@ type AbpV1_1 struct {
 	SessionKeys *SessionKeysAbpV1_1
 }
 
+// List of sidewalk certificates.
+type CertificateList struct {
+
+	// The certificate chain algorithm provided by sidewalk.
+	//
+	// This member is required.
+	SigningAlg SigningAlg
+
+	// The value of the chosen sidewalk certificate.
+	//
+	// This member is required.
+	Value *string
+}
+
 // Describes a destination.
 type Destinations struct {
 
@@ -412,11 +426,49 @@ type SidewalkAccountInfoWithFingerprint struct {
 	Fingerprint *string
 }
 
+// Sidewalk device object.
+type SidewalkDevice struct {
+
+	// The sidewalk device certificates for Ed25519 and P256r1.
+	DeviceCertificates []CertificateList
+
+	// The sidewalk device identification.
+	SidewalkId *string
+
+	// The Sidewalk manufacturing series number.
+	SidewalkManufacturingSn *string
+}
+
+// MetaData for Sidewalk device.
+type SidewalkDeviceMetadata struct {
+
+	// Sidewalk device battery level.
+	BatteryLevel BatteryLevel
+
+	// Device state defines the device status of sidewalk device.
+	DeviceState DeviceState
+
+	// Sidewalk device status notification.
+	Event Event
+
+	// The RSSI value.
+	Rssi *int32
+}
+
 // Sidewalk object used by list functions.
 type SidewalkListDevice struct {
 
 	// The Sidewalk Amazon ID.
 	AmazonId *string
+
+	// The sidewalk device certificates for Ed25519 and P256r1.
+	DeviceCertificates []CertificateList
+
+	// The sidewalk device identification.
+	SidewalkId *string
+
+	// The Sidewalk manufacturing series number.
+	SidewalkManufacturingSn *string
 }
 
 // Information about a Sidewalk router.

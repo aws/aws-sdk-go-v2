@@ -485,6 +485,73 @@
                 }
             }
         },
+        "com.amazonaws.directconnect#AssociateMacSecKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#AssociateMacSecKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#AssociateMacSecKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity Association Key (CAK) pair with an  AWS Direct Connect dedicated connection.</p>\n         <p>You must supply either the <code>secretARN,</code> or the CKN/CAK (<code>ckn</code> and <code>cak</code>) pair in the request.</p>\n         <p>For information about MAC Security (MACsec) key considerations, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration\">MACsec pre-shared CKN/CAK key considerations </a> in the <i>AWS Direct Connect User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#AssociateMacSecKeyRequest": {
+            "type": "structure",
+            "members": {
+                "connectionId": {
+                    "target": "com.amazonaws.directconnect#ConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p>\n         <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve connection ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretARN": {
+                    "target": "com.amazonaws.directconnect#SecretARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key to associate with the dedicated connection.</p>\n         <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve the MAC Security (MACsec) secret key.</p>\n         <p>If you use this request parameter, you do not use the <code>ckn</code> and <code>cak</code> request parameters.</p>"
+                    }
+                },
+                "ckn": {
+                    "target": "com.amazonaws.directconnect#Ckn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MAC Security (MACsec) CKN to associate with the dedicated connection.</p>\n         <p>You can create the CKN/CAK pair using an industry standard tool.</p>\n         <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p>\n         <p>If you use this request parameter, you must use the <code>cak</code> request parameter and not use the <code>secretARN</code> request parameter.</p>"
+                    }
+                },
+                "cak": {
+                    "target": "com.amazonaws.directconnect#Cak",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MAC Security (MACsec) CAK to associate with the dedicated connection.</p>\n         <p>You can create the CKN/CAK pair using an industry standard tool.</p>\n         <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p>\n         <p>If you use this request parameter, you must use the <code>ckn</code> request parameter and not use the <code>secretARN</code> request parameter.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directconnect#AssociateMacSecKeyResponse": {
+            "type": "structure",
+            "members": {
+                "connectionId": {
+                    "target": "com.amazonaws.directconnect#ConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p>"
+                    }
+                },
+                "macSecKeys": {
+                    "target": "com.amazonaws.directconnect#MacSecKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MAC Security (MACsec) security keys associated with the dedicated connection.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.directconnect#AssociateVirtualInterface": {
             "type": "operation",
             "input": {
@@ -558,6 +625,12 @@
         },
         "com.amazonaws.directconnect#AssociatedGatewayId": {
             "type": "string"
+        },
+        "com.amazonaws.directconnect#AvailableMacSecPortSpeeds": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#PortSpeed"
+            }
         },
         "com.amazonaws.directconnect#AvailablePortSpeeds": {
             "type": "list",
@@ -707,6 +780,12 @@
             "type": "boolean"
         },
         "com.amazonaws.directconnect#CIDR": {
+            "type": "string"
+        },
+        "com.amazonaws.directconnect#Cak": {
+            "type": "string"
+        },
+        "com.amazonaws.directconnect#Ckn": {
             "type": "string"
         },
         "com.amazonaws.directconnect#ConfirmConnection": {
@@ -1004,6 +1083,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the service provider associated with the connection.</p>"
                     }
+                },
+                "macSecCapable": {
+                    "target": "com.amazonaws.directconnect#MacSecCapable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the connection supports MAC Security (MACsec).</p>"
+                    }
+                },
+                "portEncryptionStatus": {
+                    "target": "com.amazonaws.directconnect#PortEncryptionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MAC Security (MACsec) port link status of the connection.</p>\n         <p>The valid values are <code>Encryption Up</code>, which means that there is an active Connection Key Name, or <code>Encryption Down</code>.</p>"
+                    }
+                },
+                "encryptionMode": {
+                    "target": "com.amazonaws.directconnect#EncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MAC Security (MACsec) connection encryption mode.</p>\n         <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+                    }
+                },
+                "macSecKeys": {
+                    "target": "com.amazonaws.directconnect#MacSecKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MAC Security (MACsec) security keys associated with the connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1193,6 +1296,12 @@
                     "target": "com.amazonaws.directconnect#ProviderName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the service provider associated with the requested connection.</p>"
+                    }
+                },
+                "requestMACSec": {
+                    "target": "com.amazonaws.directconnect#RequestMACSec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether you want the connection to support MAC Security (MACsec).</p>\n         <p>MAC Security (MACsec) is only available on dedicated connections. For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>AWS Direct Connect User Guide</i>.</p>"
                     }
                 }
             }
@@ -1525,6 +1634,12 @@
                     "target": "com.amazonaws.directconnect#ProviderName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the service provider associated with the LAG.</p>"
+                    }
+                },
+                "requestMACSec": {
+                    "target": "com.amazonaws.directconnect#RequestMACSec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the connection will support MAC Security (MACsec).</p>\n         <note>\n            <p>All connections in the LAG must be capable of  supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see  <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>AWS Direct Connect User Guide</i>.</p>\n         </note>"
                     }
                 }
             }
@@ -3105,7 +3220,8 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A server-side error occurred.</p>",
-                "smithy.api#error": "client"
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
             }
         },
         "com.amazonaws.directconnect#DisassociateConnectionFromLag": {
@@ -3147,6 +3263,62 @@
                 }
             }
         },
+        "com.amazonaws.directconnect#DisassociateMacSecKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#DisassociateMacSecKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#DisassociateMacSecKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the association between a MAC Security (MACsec) security key and an AWS Direct Connect dedicated connection.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#DisassociateMacSecKeyRequest": {
+            "type": "structure",
+            "members": {
+                "connectionId": {
+                    "target": "com.amazonaws.directconnect#ConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p>\n         <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve connection ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "secretARN": {
+                    "target": "com.amazonaws.directconnect#SecretARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.</p>\n         <p>You can use <a>DescribeConnections</a> to retrieve the ARN of the MAC Security (MACsec) secret key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.directconnect#DisassociateMacSecKeyResponse": {
+            "type": "structure",
+            "members": {
+                "connectionId": {
+                    "target": "com.amazonaws.directconnect#ConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p>"
+                    }
+                },
+                "macSecKeys": {
+                    "target": "com.amazonaws.directconnect#MacSecKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MAC Security (MACsec) security keys no longer associated with the dedicated connection.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.directconnect#DuplicateTagKeysException": {
             "type": "structure",
             "members": {
@@ -3158,6 +3330,9 @@
                 "smithy.api#documentation": "<p>A tag key was specified more than once.</p>",
                 "smithy.api#error": "client"
             }
+        },
+        "com.amazonaws.directconnect#EncryptionMode": {
+            "type": "string"
         },
         "com.amazonaws.directconnect#EndTime": {
             "type": "timestamp"
@@ -3468,6 +3643,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the service provider associated with the LAG.</p>"
                     }
+                },
+                "macSecCapable": {
+                    "target": "com.amazonaws.directconnect#MacSecCapable",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the LAG supports MAC Security (MACsec).</p>"
+                    }
+                },
+                "encryptionMode": {
+                    "target": "com.amazonaws.directconnect#EncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The LAG MAC Security (MACsec) encryption mode.</p>\n         <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+                    }
+                },
+                "macSecKeys": {
+                    "target": "com.amazonaws.directconnect#MacSecKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MAC Security (MACsec) security keys associated with the LAG.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3679,6 +3872,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the service provider for the location.</p>"
                     }
+                },
+                "availableMacSecPortSpeeds": {
+                    "target": "com.amazonaws.directconnect#AvailableMacSecPortSpeeds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The available MAC Security (MACsec) port speeds for the location.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3718,6 +3917,50 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.directconnect#MacSecCapable": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.directconnect#MacSecKey": {
+            "type": "structure",
+            "members": {
+                "secretARN": {
+                    "target": "com.amazonaws.directconnect#SecretARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.</p>"
+                    }
+                },
+                "ckn": {
+                    "target": "com.amazonaws.directconnect#Ckn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Connection Key Name (CKN) for the MAC Security secret key.</p>"
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.directconnect#State",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the MAC Security (MACsec) secret key.</p>\n         <p>The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>associating</code>: The MAC Security (MACsec) secret key is being validated and not yet associated with the connection or LAG.</p>\n            </li>\n            <li>\n               <p>\n                  <code>associated</code>: The MAC Security (MACsec) secret key is validated and associated with the connection or LAG.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disassociating</code>: The MAC Security (MACsec) secret key is being disassociated from the connection or LAG</p>\n            </li>\n            <li>\n               <p>\n                  <code>disassociated</code>: The MAC Security (MACsec) secret key is no longer associated with the connection or LAG.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "startOn": {
+                    "target": "com.amazonaws.directconnect#StartOnDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date that the MAC Security (MACsec) secret key takes effect. The value is displayed in UTC format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the MAC Security (MACsec) secret key.</p>"
+            }
+        },
+        "com.amazonaws.directconnect#MacSecKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.directconnect#MacSecKey"
             }
         },
         "com.amazonaws.directconnect#MaxResultSetSize": {
@@ -4195,6 +4438,9 @@
                     "target": "com.amazonaws.directconnect#AssociateHostedConnection"
                 },
                 {
+                    "target": "com.amazonaws.directconnect#AssociateMacSecKey"
+                },
+                {
                     "target": "com.amazonaws.directconnect#AssociateVirtualInterface"
                 },
                 {
@@ -4315,6 +4561,9 @@
                     "target": "com.amazonaws.directconnect#DisassociateConnectionFromLag"
                 },
                 {
+                    "target": "com.amazonaws.directconnect#DisassociateMacSecKey"
+                },
+                {
                     "target": "com.amazonaws.directconnect#ListVirtualInterfaceTestHistory"
                 },
                 {
@@ -4328,6 +4577,9 @@
                 },
                 {
                     "target": "com.amazonaws.directconnect#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#UpdateConnection"
                 },
                 {
                     "target": "com.amazonaws.directconnect#UpdateDirectConnectGatewayAssociation"
@@ -4367,6 +4619,9 @@
         "com.amazonaws.directconnect#PartnerName": {
             "type": "string"
         },
+        "com.amazonaws.directconnect#PortEncryptionStatus": {
+            "type": "string"
+        },
         "com.amazonaws.directconnect#PortSpeed": {
             "type": "string"
         },
@@ -4381,6 +4636,12 @@
         },
         "com.amazonaws.directconnect#Region": {
             "type": "string"
+        },
+        "com.amazonaws.directconnect#RequestMACSec": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
         },
         "com.amazonaws.directconnect#ResourceArn": {
             "type": "string"
@@ -4440,6 +4701,9 @@
         "com.amazonaws.directconnect#RouterConfig": {
             "type": "string"
         },
+        "com.amazonaws.directconnect#SecretARN": {
+            "type": "string"
+        },
         "com.amazonaws.directconnect#StartBgpFailoverTest": {
             "type": "operation",
             "input": {
@@ -4495,8 +4759,14 @@
                 }
             }
         },
+        "com.amazonaws.directconnect#StartOnDate": {
+            "type": "string"
+        },
         "com.amazonaws.directconnect#StartTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.directconnect#State": {
+            "type": "string"
         },
         "com.amazonaws.directconnect#StateChangeError": {
             "type": "string"
@@ -4715,6 +4985,50 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.directconnect#UpdateConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.directconnect#UpdateConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.directconnect#Connection"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectClientException"
+                },
+                {
+                    "target": "com.amazonaws.directconnect#DirectConnectServerException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the AWS Direct Connect dedicated connection configuration.</p>\n         <p>You can update the following parameters for a connection:</p>\n         <ul>\n            <li>\n               <p>The connection name</p>\n            </li>\n            <li>\n               <p>The connection's MAC Security (MACsec) encryption mode.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.directconnect#UpdateConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "connectionId": {
+                    "target": "com.amazonaws.directconnect#ConnectionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the dedicated connection.</p>\n         <p>You can use <a>DescribeConnections</a> to retrieve the connection ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectionName": {
+                    "target": "com.amazonaws.directconnect#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connection.</p>"
+                    }
+                },
+                "encryptionMode": {
+                    "target": "com.amazonaws.directconnect#EncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection MAC Security (MACsec) encryption mode.</p>\n         <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.directconnect#UpdateDirectConnectGatewayAssociation": {
             "type": "operation",
             "input": {
@@ -4783,7 +5097,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the attributes of the specified link aggregation group (LAG).</p>\n         <p>You can update the following attributes:</p>\n         <ul>\n            <li>\n               <p>The name of the LAG.</p>\n            </li>\n            <li>\n               <p>The value for the minimum number of connections that must be operational\n          for the LAG itself to be operational. </p>\n            </li>\n         </ul>\n         <p>When you create a LAG, the default value for the minimum number of operational\n      connections is zero (0). If you update this value and the number of operational\n      connections falls below the specified value, the LAG automatically goes down to avoid\n      over-utilization of the remaining connections. Adjust this value with care, as it\n      could force the LAG down if it is set higher than the current number of operational \n      connections.</p>"
+                "smithy.api#documentation": "<p>Updates the attributes of the specified link aggregation group (LAG).</p>\n         <p>You can update the following LAG attributes:</p>\n         <ul>\n            <li>\n               <p>The name of the LAG.</p>\n            </li>\n            <li>\n               <p>The value for the minimum number of connections that must be operational\n          for the LAG itself to be operational. </p>\n            </li>\n            <li>\n               <p>The LAG's MACsec encryption mode.</p>\n               <p>AWS assigns this value to each connection which is part of the LAG.</p>\n            </li>\n            <li>\n               <p>The tags</p>\n            </li>\n         </ul>\n         <note>\n            <p>If you adjust the threshold value for the minimum number of operational connections, ensure\n      that the new value does not cause the LAG to fall below the threshold and become\n      non-operational.</p>\n         </note>"
             }
         },
         "com.amazonaws.directconnect#UpdateLagRequest": {
@@ -4806,6 +5120,12 @@
                     "target": "com.amazonaws.directconnect#Count",
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum number of physical connections that must be operational for the LAG itself to be operational.</p>"
+                    }
+                },
+                "encryptionMode": {
+                    "target": "com.amazonaws.directconnect#EncryptionMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The LAG MAC Security (MACsec) encryption mode.</p>\n         <p>AWS applies the value to all connections which are part of the LAG.</p>"
                     }
                 }
             }

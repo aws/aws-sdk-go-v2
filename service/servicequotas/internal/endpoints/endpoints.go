@@ -125,5 +125,9 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-gov-east-1": endpoints.Endpoint{},
+			"us-gov-west-1": endpoints.Endpoint{},
+		},
 	},
 }

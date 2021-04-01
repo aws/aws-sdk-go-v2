@@ -413,7 +413,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an individual condition that evaluates to true or false.</p>\n        <p>Conditions are used with recipe actions: The action is only performed for column values where the condition evaluates to true.</p>\n        <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>"
+                "smithy.api#documentation": "<p>Represents an individual condition that evaluates to true or false.</p>\n        <p>Conditions are used with recipe actions. The action is only performed for column values where the condition evaluates to true.</p>\n        <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>"
             }
         },
         "com.amazonaws.databrew#ConditionExpressionList": {
@@ -443,6 +443,9 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
+        },
+        "com.amazonaws.databrew#CreateColumn": {
+            "type": "boolean"
         },
         "com.amazonaws.databrew#CreateDataset": {
             "type": "operation",
@@ -488,7 +491,7 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
                     }
                 },
                 "FormatOptions": {
@@ -498,6 +501,12 @@
                     "target": "com.amazonaws.databrew#Input",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "PathOptions": {
+                    "target": "com.amazonaws.databrew#PathOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -1020,18 +1029,18 @@
                 "Delimiter": {
                     "target": "com.amazonaws.databrew#Delimiter",
                     "traits": {
-                        "smithy.api#documentation": "<p>A single character that specifies the delimiter being used in the Csv file.</p>"
+                        "smithy.api#documentation": "<p>A single character that specifies the delimiter being used in the CSV file.</p>"
                     }
                 },
                 "HeaderRow": {
                     "target": "com.amazonaws.databrew#HeaderRow",
                     "traits": {
-                        "smithy.api#documentation": "<p>A variable that specifies whether the first row in the file will be parsed as the\n            header. If false, column names will be auto-generated.</p>"
+                        "smithy.api#documentation": "<p>A variable that specifies whether the first row in the file is parsed as the\n            header. If this value is false, column names are auto-generated.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options that define how DataBrew will read a Csv file when creating a dataset from\n            that file.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew will read a comma-separated value (CSV) file when creating a dataset from that file.</p>"
             }
         },
         "com.amazonaws.databrew#CsvOutputOptions": {
@@ -1040,12 +1049,12 @@
                 "Delimiter": {
                     "target": "com.amazonaws.databrew#Delimiter",
                     "traits": {
-                        "smithy.api#documentation": "<p>A single character that specifies the delimiter used to create Csv job output.</p>"
+                        "smithy.api#documentation": "<p>A single character that specifies the delimiter used to create CSV job output.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options that define how DataBrew will write a Csv file.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew will write a comma-separated value (CSV) file.</p>"
             }
         },
         "com.amazonaws.databrew#DataCatalogInputDefinition": {
@@ -1082,7 +1091,41 @@
                 "smithy.api#documentation": "<p>Represents how metadata stored in the AWS Glue Data Catalog is defined in a DataBrew\n            dataset. </p>"
             }
         },
+        "com.amazonaws.databrew#DatabaseInputDefinition": {
+            "type": "structure",
+            "members": {
+                "GlueConnectionName": {
+                    "target": "com.amazonaws.databrew#GlueConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Glue Connection that stores the connection information for the target\n            database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseTableName": {
+                    "target": "com.amazonaws.databrew#DatabaseTableName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The table within the target database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TempDirectory": {
+                    "target": "com.amazonaws.databrew#S3Location"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Connection information for dataset input files stored in a database.</p>"
+            }
+        },
         "com.amazonaws.databrew#DatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.databrew#DatabaseTableName": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
@@ -1122,13 +1165,13 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
                     }
                 },
                 "FormatOptions": {
                     "target": "com.amazonaws.databrew#FormatOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define how DataBrew interprets the data in the dataset.</p>"
+                        "smithy.api#documentation": "<p>A set of options that define how DataBrew interprets the data in the dataset.</p>"
                     }
                 },
                 "Input": {
@@ -1154,6 +1197,12 @@
                     "target": "com.amazonaws.databrew#Source",
                     "traits": {
                         "smithy.api#documentation": "<p>The location of the data for the dataset, either Amazon S3 or the AWS Glue Data\n            Catalog.</p>"
+                    }
+                },
+                "PathOptions": {
+                    "target": "com.amazonaws.databrew#PathOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -1188,8 +1237,84 @@
                 }
             }
         },
+        "com.amazonaws.databrew#DatasetParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databrew#PathParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the parameter that is used in the dataset's S3 path.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.databrew#ParameterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the dataset parameter, can be one of a 'String', 'Number' or 'Datetime'.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatetimeOptions": {
+                    "target": "com.amazonaws.databrew#DatetimeOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional parameter options such as a format and a timezone. Required for datetime parameters.</p>"
+                    }
+                },
+                "CreateColumn": {
+                    "target": "com.amazonaws.databrew#CreateColumn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional boolean value that defines whether the captured value of this parameter should be loaded as an additional column in the dataset.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.databrew#FilterExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The optional filter expression structure to apply additional matching criteria to the parameter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a dataset paramater that defines type and conditions for a parameter in the S3 path of the dataset.</p>"
+            }
+        },
         "com.amazonaws.databrew#Date": {
             "type": "timestamp"
+        },
+        "com.amazonaws.databrew#DatetimeFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.databrew#DatetimeOptions": {
+            "type": "structure",
+            "members": {
+                "Format": {
+                    "target": "com.amazonaws.databrew#DatetimeFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required option, that defines the datetime format used for a date parameter in the S3 path. Should use only supported datetime specifiers and separation characters, all \n            litera a-z or A-Z character should be escaped with single quotes. E.g. \"MM.dd.yyyy-'at'-HH:mm\".</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimezoneOffset": {
+                    "target": "com.amazonaws.databrew#TimezoneOffset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional value for a timezone offset of the datetime parameter value in the S3 path. Shouldn't be used if Format for this parameter includes timezone fields.\n            If no offset specified, UTC is assumed.</p>"
+                    }
+                },
+                "LocaleCode": {
+                    "target": "com.amazonaws.databrew#LocaleCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional value for a non-US locale code, needed for correct interpretation of some date formats.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents additional options for correct interpretation of datetime parameters used in the S3 path of a dataset.</p>"
+            }
         },
         "com.amazonaws.databrew#DeleteDataset": {
             "type": "operation",
@@ -1540,7 +1665,7 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
                     }
                 },
                 "FormatOptions": {
@@ -1568,6 +1693,12 @@
                     "target": "com.amazonaws.databrew#Source",
                     "traits": {
                         "smithy.api#documentation": "<p>The location of the data for this dataset, Amazon S3 or the AWS Glue Data\n            Catalog.</p>"
+                    }
+                },
+                "PathOptions": {
+                    "target": "com.amazonaws.databrew#PathOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -2272,28 +2403,87 @@
                 "SheetNames": {
                     "target": "com.amazonaws.databrew#SheetNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies one or more named sheets in the Excel file, which will be included in the\n            dataset.</p>"
+                        "smithy.api#documentation": "<p>One or more named sheets in the Excel file that will be included in the dataset.</p>"
                     }
                 },
                 "SheetIndexes": {
                     "target": "com.amazonaws.databrew#SheetIndexList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies one or more sheet numbers in the Excel file, which will be included in the\n            dataset.</p>"
+                        "smithy.api#documentation": "<p>One or more sheet numbers in the Excel file that will be included in the\n            dataset.</p>"
                     }
                 },
                 "HeaderRow": {
                     "target": "com.amazonaws.databrew#HeaderRow",
                     "traits": {
-                        "smithy.api#documentation": "<p>A variable that specifies whether the first row in the file will be parsed as the\n            header. If false, column names will be auto-generated.</p>"
+                        "smithy.api#documentation": "<p>A variable that specifies whether the first row in the file is parsed as the\n            header. If this value is false, column names are auto-generated.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options that define how DataBrew will interpret a Microsoft Excel file, when creating\n            a dataset from that file.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew will interpret a Microsoft Excel file when \n            creating a dataset from that file.</p>"
             }
         },
         "com.amazonaws.databrew#ExecutionTime": {
             "type": "integer"
+        },
+        "com.amazonaws.databrew#Expression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[<>0-9A-Za-z_:)(!= ]+$"
+            }
+        },
+        "com.amazonaws.databrew#FilesLimit": {
+            "type": "structure",
+            "members": {
+                "MaxFiles": {
+                    "target": "com.amazonaws.databrew#MaxFiles",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of S3 files to select.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OrderedBy": {
+                    "target": "com.amazonaws.databrew#OrderedBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A criteria to use for S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as \n            a sorting criteria. Currently it's the only allowed value.</p>"
+                    }
+                },
+                "Order": {
+                    "target": "com.amazonaws.databrew#Order",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A criteria to use for S3 files sorting before their selection. By default uses DESCENDING order, \n            i.e. most recent files are selected first. Anotherpossible value is ASCENDING.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a limit imposed on number of S3 files that should be selected for a dataset from a connected \n            S3 path.</p>"
+            }
+        },
+        "com.amazonaws.databrew#FilterExpression": {
+            "type": "structure",
+            "members": {
+                "Expression": {
+                    "target": "com.amazonaws.databrew#Expression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expression which includes condition names followed by substitution variables, possibly grouped \n            and combined with other conditions. For example, \"(starts_with :prefix1 or starts_with :prefix2) and \n            (ends_with :suffix1 or ends_with :suffix2)\". Substitution variables should start with ':' symbol.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ValuesMap": {
+                    "target": "com.amazonaws.databrew#ValuesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map of substitution variable names to their values used in this filter expression.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a structure for defining parameter conditions.</p>"
+            }
         },
         "com.amazonaws.databrew#FormatOptions": {
             "type": "structure",
@@ -2313,12 +2503,21 @@
                 "Csv": {
                     "target": "com.amazonaws.databrew#CsvOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define how Csv input is to be interpreted by DataBrew.</p>"
+                        "smithy.api#documentation": "<p>Options that define how CSV input is to be interpreted by DataBrew.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options that define the structure of either Csv, Excel, or JSON input.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.</p>"
+            }
+        },
+        "com.amazonaws.databrew#GlueConnectionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.databrew#HeaderRow": {
@@ -2347,10 +2546,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The AWS Glue Data Catalog parameters for the data.</p>"
                     }
+                },
+                "DatabaseInputDefinition": {
+                    "target": "com.amazonaws.databrew#DatabaseInputDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Connection information for dataset input files stored in a database.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information on how DataBrew can find data, in either the AWS Glue Data Catalog or\n            Amazon S3.</p>"
+                "smithy.api#documentation": "<p>Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or\n            Amazon S3.</p>"
             }
         },
         "com.amazonaws.databrew#InputFormat": {
@@ -2425,7 +2630,7 @@
                 "EncryptionMode": {
                     "target": "com.amazonaws.databrew#EncryptionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed\n                    keys.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The encryption mode for the job, which can be one of the following:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p>\n            </li>\n            <li>\n                <p>\n                  <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon\n                    S3.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -2498,7 +2703,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that will be assumed for this job.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role to be assumed for this job.</p>"
                     }
                 },
                 "Timeout": {
@@ -2516,7 +2721,7 @@
                 "JobSample": {
                     "target": "com.amazonaws.databrew#JobSample",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sample configuration for profile jobs only. Determines the number of rows on which the\n            profile job will be executed. If a JobSample value is not provided, the default value\n            will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the\n            size parameter.</p>"
+                        "smithy.api#documentation": "<p>A sample configuration for profile jobs only, which determines the number of rows on which the\n            profile job is run. If a <code>JobSample</code> value isn't provided, the default value\n            is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the\n            size parameter.</p>"
                     }
                 }
             },
@@ -2641,7 +2846,7 @@
                 "JobSample": {
                     "target": "com.amazonaws.databrew#JobSample",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sample configuration for profile jobs only. Determines the number of rows on which the\n            profile job will be executed. If a JobSample value is not provided, the default value\n            will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the\n            size parameter.</p>"
+                        "smithy.api#documentation": "<p>A sample configuration for profile jobs only, which determines the number of rows on which the\n            profile job is run. If a <code>JobSample</code> value isn't provided, the default\n            is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the\n            size parameter.</p>"
                     }
                 }
             },
@@ -2708,18 +2913,18 @@
                 "Mode": {
                     "target": "com.amazonaws.databrew#SampleMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines whether the profile job will be executed on the entire dataset or on a\n            specified number of rows. Must be one of the following:</p>\n        <ul>\n            <li>\n                <p>FULL_DATASET: Profile job will be executed on the entire dataset.</p>\n            </li>\n            <li>\n                <p>CUSTOM_ROWS: Profile job will be executed on the number of rows specified in\n                    the Size parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A value that determines whether the profile job is run on the entire dataset or a\n            specified number of rows. This value must be one of the following:</p>\n        <ul>\n            <li>\n                <p>FULL_DATASET - The profile job is run on the entire dataset.</p>\n            </li>\n            <li>\n                <p>CUSTOM_ROWS - The profile job is run on the number of rows specified in the\n                    <code>Size</code> parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Size": {
                     "target": "com.amazonaws.databrew#JobSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be\n            executed on the the specified number of rows. The maximum value for size is\n            Long.MAX_VALUE.</p>\n        <p>Long.MAX_VALUE = 9223372036854775807</p>"
+                        "smithy.api#documentation": "<p>The <code>Size</code> parameter is only required when the mode is CUSTOM_ROWS. The\n            profile job is run on the specified number of rows. The maximum value for size is\n            Long.MAX_VALUE.</p>\n        <p>Long.MAX_VALUE = 9223372036854775807</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sample configuration for Profile Jobs only. Determines the number of rows on which the\n            Profile job will be executed. If a JobSample value is not provided for profile jobs, the\n            default value will be used. The default value is CUSTOM_ROWS for the mode parameter and\n            20000 for the size parameter.</p>"
+                "smithy.api#documentation": "<p>A sample configuration for profile jobs only, which determines the number of rows on which the\n            profile job is run. If a <code>JobSample</code> value isn't provided, the\n            default is used. The default value is CUSTOM_ROWS for the mode parameter and\n            20,000 for the size parameter.</p>"
             }
         },
         "com.amazonaws.databrew#JobSize": {
@@ -3323,6 +3528,16 @@
                 }
             }
         },
+        "com.amazonaws.databrew#LocaleCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_\\.#@\\-]+$"
+            }
+        },
         "com.amazonaws.databrew#LogGroupName": {
             "type": "string",
             "traits": {
@@ -3349,6 +3564,14 @@
         },
         "com.amazonaws.databrew#MaxCapacity": {
             "type": "integer"
+        },
+        "com.amazonaws.databrew#MaxFiles": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
         },
         "com.amazonaws.databrew#MaxResults100": {
             "type": "integer",
@@ -3396,6 +3619,32 @@
                 "smithy.api#pattern": "^[A-Z\\_]+$"
             }
         },
+        "com.amazonaws.databrew#Order": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DESCENDING",
+                        "name": "DESCENDING"
+                    },
+                    {
+                        "value": "ASCENDING",
+                        "name": "ASCENDING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.databrew#OrderedBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LAST_MODIFIED_DATE",
+                        "name": "LAST_MODIFIED_DATE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.databrew#Output": {
             "type": "structure",
             "members": {
@@ -3433,12 +3682,12 @@
                 "FormatOptions": {
                     "target": "com.amazonaws.databrew#OutputFormatOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define how DataBrew formats job output files.</p>"
+                        "smithy.api#documentation": "<p>Represents options that define how DataBrew formats job output files.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Parameters that specify how and where DataBrew will write the output generated by\n            recipe jobs or profile jobs.</p>"
+                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the output generated by\n            recipe jobs or profile jobs.</p>"
             }
         },
         "com.amazonaws.databrew#OutputFormat": {
@@ -3482,12 +3731,12 @@
                 "Csv": {
                     "target": "com.amazonaws.databrew#CsvOutputOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Options that define how DataBrew writes Csv output.</p>"
+                        "smithy.api#documentation": "<p>Represents a set of options that define the structure of comma-separated value (CSV)\n            job output.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options that define the structure of Csv job output.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define the structure of comma-separated (CSV) job output.</p>"
             }
         },
         "com.amazonaws.databrew#OutputList": {
@@ -3523,12 +3772,82 @@
                 "smithy.api#pattern": "^[A-Za-z0-9]+$"
             }
         },
+        "com.amazonaws.databrew#ParameterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Datetime",
+                        "name": "Datetime"
+                    },
+                    {
+                        "value": "Number",
+                        "name": "Number"
+                    },
+                    {
+                        "value": "String",
+                        "name": "String"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.databrew#ParameterValue": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 12288
+                }
+            }
+        },
+        "com.amazonaws.databrew#PathOptions": {
+            "type": "structure",
+            "members": {
+                "LastModifiedDateCondition": {
+                    "target": "com.amazonaws.databrew#FilterExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.</p>"
+                    }
+                },
+                "FilesLimit": {
+                    "target": "com.amazonaws.databrew#FilesLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If provided, this structure imposes a limit on a number of files that should be selected.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.databrew#PathParametersMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that maps names of parameters used in the S3 path of a dataset to their definitions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.</p>"
+            }
+        },
+        "com.amazonaws.databrew#PathParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.databrew#PathParametersMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.databrew#PathParameterName"
+            },
+            "value": {
+                "target": "com.amazonaws.databrew#DatasetParameter"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure that map names of parameters used in the S3 path of a dataset to their definitions. A definition includes parameter type and conditions.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
                 }
             }
         },
@@ -3597,7 +3916,7 @@
                 "Sample": {
                     "target": "com.amazonaws.databrew#Sample",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sample size and sampling type to apply to the data. If this parameter isn't\n            specified, then the sample will consiste of the first 500 rows from the dataset.</p>"
+                        "smithy.api#documentation": "<p>The sample size and sampling type to apply to the data. If this parameter isn't\n            specified, then the sample consists of the first 500 rows from the dataset.</p>"
                     }
                 },
                 "Tags": {
@@ -3785,7 +4104,7 @@
                 "RecipeVersion": {
                     "target": "com.amazonaws.databrew#RecipeVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the version for the recipe. Must be one of the following:</p>\n        <ul>\n            <li>\n                <p>Numeric version (<code>X.Y</code>) - <code>X</code> and <code>Y</code> stand\n                    for major and minor version numbers. The maximum length of each is 6 digits, and\n                    neither can be negative values. Both <code>X</code> and <code>Y</code> are\n                    required, and \"0.0\" is not a valid version.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LATEST_WORKING</code> - the most recent valid version being developed in\n                    a DataBrew project.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LATEST_PUBLISHED</code> - the most recent published version.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identifier for the version for the recipe. Must be one of the following:</p>\n        <ul>\n            <li>\n                <p>Numeric version (<code>X.Y</code>) - <code>X</code> and <code>Y</code> stand\n                    for major and minor version numbers. The maximum length of each is 6 digits, and\n                    neither can be negative values. Both <code>X</code> and <code>Y</code> are\n                    required, and \"0.0\" isn't a valid version.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LATEST_WORKING</code> - the most recent valid version being developed in\n                    a DataBrew project.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LATEST_PUBLISHED</code> - the most recent published version.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3881,7 +4200,7 @@
                 "ConditionExpressions": {
                     "target": "com.amazonaws.databrew#ConditionExpressionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more conditions that must be met, in order for the recipe step to\n            succeed.</p>\n        <note>\n            <p>All of the conditions in the array must be met. In other words, all of the\n                conditions must be combined using a logical AND operation.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>One or more conditions that must be met for the recipe step to succeed.</p>\n        <note>\n            <p>All of the conditions in the array must be met. In other words, all of the\n                conditions must be combined using a logical AND operation.</p>\n        </note>"
                     }
                 }
             },
@@ -3976,7 +4295,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Amazon S3 location (bucket name an object key) where DataBrew can read input data,\n            or write output from a job.</p>"
+                "smithy.api#documentation": "<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can read\n            input data, or write output from a job.</p>"
             }
         },
         "com.amazonaws.databrew#Sample": {
@@ -4092,7 +4411,7 @@
                 "CronExpression": {
                     "target": "com.amazonaws.databrew#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date(s) and time(s) when the job will run. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron\n                expressions</a> in the <i>AWS Glue DataBrew Developer\n            Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The dates and times when the job is to run. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron\n                expressions</a> in the <i>AWS Glue DataBrew Developer\n            Guide</i>.</p>"
                     }
                 },
                 "Tags": {
@@ -4331,6 +4650,10 @@
                     {
                         "value": "DATA-CATALOG",
                         "name": "DATACATALOG"
+                    },
+                    {
+                        "value": "DATABASE",
+                        "name": "DATABASE"
                     }
                 ]
             }
@@ -4661,6 +4984,16 @@
                 }
             }
         },
+        "com.amazonaws.databrew#TimezoneOffset": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 6
+                },
+                "smithy.api#pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$"
+            }
+        },
         "com.amazonaws.databrew#UntagResource": {
             "type": "operation",
             "input": {
@@ -4756,7 +5089,7 @@
                 "Format": {
                     "target": "com.amazonaws.databrew#InputFormat",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+                        "smithy.api#documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
                     }
                 },
                 "FormatOptions": {
@@ -4766,6 +5099,12 @@
                     "target": "com.amazonaws.databrew#Input",
                     "traits": {
                         "smithy.api#required": {}
+                    }
+                },
+                "PathOptions": {
+                    "target": "com.amazonaws.databrew#PathOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
                     }
                 }
             }
@@ -5200,6 +5539,25 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.databrew#ValueReference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^:[A-Za-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.databrew#ValuesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.databrew#ValueReference"
+            },
+            "value": {
+                "target": "com.amazonaws.databrew#ConditionValue"
+            }
+        },
         "com.amazonaws.databrew#ViewFrame": {
             "type": "structure",
             "members": {
@@ -5224,7 +5582,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the data being being transformed during an action.</p>"
+                "smithy.api#documentation": "<p>Represents the data being transformed during an action.</p>"
             }
         }
     }

@@ -5593,6 +5593,11 @@ func awsAwsjson11_deserializeDocumentAllowAction(v **types.AllowAction, value in
 
 	for key, value := range shape {
 		switch key {
+		case "CustomRequestHandling":
+			if err := awsAwsjson11_deserializeDocumentCustomRequestHandling(&sv.CustomRequestHandling, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5691,6 +5696,11 @@ func awsAwsjson11_deserializeDocumentBlockAction(v **types.BlockAction, value in
 
 	for key, value := range shape {
 		switch key {
+		case "CustomResponse":
+			if err := awsAwsjson11_deserializeDocumentCustomResponse(&sv.CustomResponse, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5816,6 +5826,11 @@ func awsAwsjson11_deserializeDocumentCountAction(v **types.CountAction, value in
 
 	for key, value := range shape {
 		switch key {
+		case "CustomRequestHandling":
+			if err := awsAwsjson11_deserializeDocumentCustomRequestHandling(&sv.CustomRequestHandling, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5858,6 +5873,267 @@ func awsAwsjson11_deserializeDocumentCountryCodes(v *[]types.CountryCode, value 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomHTTPHeader(v **types.CustomHTTPHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomHTTPHeader
+	if *v == nil {
+		sv = &types.CustomHTTPHeader{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomHTTPHeaderName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomHTTPHeaderValue to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomHTTPHeaders(v *[]types.CustomHTTPHeader, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomHTTPHeader
+	if *v == nil {
+		cv = []types.CustomHTTPHeader{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomHTTPHeader
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCustomHTTPHeader(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomRequestHandling(v **types.CustomRequestHandling, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomRequestHandling
+	if *v == nil {
+		sv = &types.CustomRequestHandling{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InsertHeaders":
+			if err := awsAwsjson11_deserializeDocumentCustomHTTPHeaders(&sv.InsertHeaders, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomResponse(v **types.CustomResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomResponse
+	if *v == nil {
+		sv = &types.CustomResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CustomResponseBodyKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityName to be of type string, got %T instead", value)
+				}
+				sv.CustomResponseBodyKey = ptr.String(jtv)
+			}
+
+		case "ResponseCode":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResponseStatusCode to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResponseCode = ptr.Int32(int32(i64))
+			}
+
+		case "ResponseHeaders":
+			if err := awsAwsjson11_deserializeDocumentCustomHTTPHeaders(&sv.ResponseHeaders, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomResponseBodies(v *map[string]types.CustomResponseBody, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.CustomResponseBody
+	if *v == nil {
+		mv = map[string]types.CustomResponseBody{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.CustomResponseBody
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsAwsjson11_deserializeDocumentCustomResponseBody(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomResponseBody(v **types.CustomResponseBody, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomResponseBody
+	if *v == nil {
+		sv = &types.CustomResponseBody{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Content":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResponseContent to be of type string, got %T instead", value)
+				}
+				sv.Content = ptr.String(jtv)
+			}
+
+		case "ContentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResponseContentType to be of type string, got %T instead", value)
+				}
+				sv.ContentType = types.ResponseContentType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -8033,6 +8309,11 @@ func awsAwsjson11_deserializeDocumentRuleGroup(v **types.RuleGroup, value interf
 				sv.Capacity = i64
 			}
 
+		case "CustomResponseBodies":
+			if err := awsAwsjson11_deserializeDocumentCustomResponseBodies(&sv.CustomResponseBodies, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8381,6 +8662,24 @@ func awsAwsjson11_deserializeDocumentSampledHTTPRequest(v **types.SampledHTTPReq
 		case "Request":
 			if err := awsAwsjson11_deserializeDocumentHTTPRequest(&sv.Request, value); err != nil {
 				return err
+			}
+
+		case "RequestHeadersInserted":
+			if err := awsAwsjson11_deserializeDocumentHTTPHeaders(&sv.RequestHeadersInserted, value); err != nil {
+				return err
+			}
+
+		case "ResponseCodeSent":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ResponseStatusCode to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResponseCodeSent = ptr.Int32(int32(i64))
 			}
 
 		case "RuleNameWithinRuleGroup":
@@ -9805,6 +10104,11 @@ func awsAwsjson11_deserializeDocumentWebACL(v **types.WebACL, value interface{})
 					return err
 				}
 				sv.Capacity = i64
+			}
+
+		case "CustomResponseBodies":
+			if err := awsAwsjson11_deserializeDocumentCustomResponseBodies(&sv.CustomResponseBodies, value); err != nil {
+				return err
 			}
 
 		case "DefaultAction":

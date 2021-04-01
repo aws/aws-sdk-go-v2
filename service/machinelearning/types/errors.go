@@ -70,7 +70,6 @@ func (e *InvalidInputException) ErrorMessage() string {
 func (e *InvalidInputException) ErrorCode() string             { return "InvalidInputException" }
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A submitted tag is invalid.
 type InvalidTagException struct {
 	Message *string
 }
@@ -143,7 +142,6 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The limit in the number of tags has been exceeded.
 type TagLimitExceededException struct {
 	Message *string
 }

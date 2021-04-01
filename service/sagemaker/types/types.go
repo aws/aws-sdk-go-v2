@@ -1371,6 +1371,9 @@ type AutoMLCandidate struct {
 	// This member is required.
 	ObjectiveStatus ObjectiveStatus
 
+	// The AutoML candidate's properties.
+	CandidateProperties *CandidateProperties
+
 	// The end time.
 	EndTime *time.Time
 
@@ -1403,16 +1406,17 @@ type AutoMLCandidateStep struct {
 	CandidateStepType CandidateStepType
 }
 
-// Similar to Channel. A channel is a named input source that training algorithms
-// can consume. Refer to Channel for detailed descriptions.
+// A channel is a named input source that training algorithms can consume. For more
+// information, see .
 type AutoMLChannel struct {
 
-	// The data source.
+	// The data source for an AutoML channel.
 	//
 	// This member is required.
 	DataSource *AutoMLDataSource
 
-	// The name of the target variable in supervised learning, a.k.a. 'y'.
+	// The name of the target variable in supervised learning, usually represented by
+	// 'y'.
 	//
 	// This member is required.
 	TargetAttributeName *string
@@ -1422,22 +1426,20 @@ type AutoMLChannel struct {
 }
 
 // A list of container definitions that describe the different containers that make
-// up one AutoML candidate. Refer to ContainerDefinition for more details.
+// up an AutoML candidate. For more information, see .
 type AutoMLContainerDefinition struct {
 
-	// The ECR path of the container. Refer to ContainerDefinition for more details.
+	// The ECR path of the container. For more information, see .
 	//
 	// This member is required.
 	Image *string
 
-	// The location of the model artifacts. Refer to ContainerDefinition for more
-	// details.
+	// The location of the model artifacts. For more information, see .
 	//
 	// This member is required.
 	ModelDataUrl *string
 
-	// Environment variables to set in the container. Refer to ContainerDefinition for
-	// more details.
+	// Environment variables to set in the container. For more information, see .
 	Environment map[string]string
 }
 
@@ -1476,11 +1478,11 @@ type AutoMLJobCompletionCriteria struct {
 	MaxRuntimePerTrainingJobInSeconds *int32
 }
 
-// A collection of settings used for a job.
+// A collection of settings used for an AutoML job.
 type AutoMLJobConfig struct {
 
-	// How long a job is allowed to run, or how many candidates a job is allowed to
-	// generate.
+	// How long an AutoML job is allowed to run, or how many candidates a job is
+	// allowed to generate.
 	CompletionCriteria *AutoMLJobCompletionCriteria
 
 	// Security configuration for traffic encryption or Amazon VPC settings.
@@ -1562,35 +1564,35 @@ type AutoMLJobObjective struct {
 	MetricName AutoMLMetricEnum
 }
 
-// Provides a summary about a job.
+// Provides a summary about an AutoML job.
 type AutoMLJobSummary struct {
 
-	// The ARN of the job.
+	// The ARN of the AutoML job.
 	//
 	// This member is required.
 	AutoMLJobArn *string
 
-	// The name of the object you are requesting.
+	// The name of the AutoML you are requesting.
 	//
 	// This member is required.
 	AutoMLJobName *string
 
-	// The job's secondary status.
+	// The secondary status of the AutoML job.
 	//
 	// This member is required.
 	AutoMLJobSecondaryStatus AutoMLJobSecondaryStatus
 
-	// The job's status.
+	// The status of the AutoML job.
 	//
 	// This member is required.
 	AutoMLJobStatus AutoMLJobStatus
 
-	// When the job was created.
+	// When the AutoML job was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// When the job was last modified.
+	// When the AutoML job was last modified.
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
@@ -1598,8 +1600,11 @@ type AutoMLJobSummary struct {
 	// The end time of an AutoML job.
 	EndTime *time.Time
 
-	// The failure reason of a job.
+	// The failure reason of an AutoML job.
 	FailureReason *string
+
+	// The list of reasons for partial failures within an AutoML job.
+	PartialFailureReasons []AutoMLPartialFailureReason
 }
 
 // The output data configuration.
@@ -1612,6 +1617,13 @@ type AutoMLOutputDataConfig struct {
 
 	// The AWS KMS encryption key ID.
 	KmsKeyId *string
+}
+
+// The reason for a partial failure of an AutoML job.
+type AutoMLPartialFailureReason struct {
+
+	// The message containing the reason for a partial failure of an AutoML job.
+	PartialFailureMessage *string
 }
 
 // The Amazon S3 data source.
@@ -1675,6 +1687,23 @@ type CacheHitResult struct {
 
 	// The Amazon Resource Name (ARN) of the pipeline execution.
 	SourcePipelineExecutionArn *string
+}
+
+// Location of artifacts for an AutoML candidate job.
+type CandidateArtifactLocations struct {
+
+	// The S3 prefix to the explainability artifacts generated for the AutoML
+	// candidate.
+	//
+	// This member is required.
+	Explainability *string
+}
+
+// The properties of an AutoML candidate job.
+type CandidateProperties struct {
+
+	// The S3 prefix to the artifacts generated for an AutoML candidate.
+	CandidateArtifactLocations *CandidateArtifactLocations
 }
 
 // Currently, the CapacitySize API is not supported.
@@ -5128,6 +5157,13 @@ type ImageConfig struct {
 	//
 	// This member is required.
 	RepositoryAccessMode RepositoryAccessMode
+
+	// (Optional) Specifies an authentication configuration for the private docker
+	// registry where your model image is hosted. Specify a value for this property
+	// only if you specified Vpc as the value for the RepositoryAccessMode field, and
+	// the private Docker registry where the model image is hosted requires
+	// authentication.
+	RepositoryAuthConfig *RepositoryAuthConfig
 }
 
 // A version of a SageMaker Image. A version represents an existing container
@@ -5620,7 +5656,9 @@ type LabelingJobDataSource struct {
 	// The Amazon S3 location of the input data objects.
 	S3DataSource *LabelingJobS3DataSource
 
-	// An Amazon SNS data source used for streaming labeling jobs.
+	// An Amazon SNS data source used for streaming labeling jobs. To learn more, see
+	// Send Data to a Streaming Labeling Job
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-send-data).
 	SnsDataSource *LabelingJobSnsDataSource
 }
 
@@ -5687,42 +5725,47 @@ type LabelingJobOutputConfig struct {
 	S3OutputPath *string
 
 	// The AWS Key Management Service ID of the key used to encrypt the output data, if
-	// any. If you use a KMS key ID or an alias of your master key, the Amazon
-	// SageMaker execution role must include permissions to call kms:Encrypt. If you
-	// don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon
-	// S3 for your role's account. Amazon SageMaker uses server-side encryption with
-	// KMS-managed keys for LabelingJobOutputConfig. If you use a bucket policy with an
-	// s3:PutObject permission that only allows objects with server-side encryption,
-	// set the condition key of s3:x-amz-server-side-encryption to "aws:kms". For more
-	// information, see KMS-Managed Encryption Keys
+	// any. If you provide your own KMS key ID, you must add the required permissions
+	// to your KMS key described in Encrypt Output Data and Storage Volume with AWS KMS
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security-permission.html#sms-security-kms-permissions).
+	// If you don't provide a KMS key ID, Amazon SageMaker uses the default AWS KMS key
+	// for Amazon S3 for your role's account to encrypt your output data. If you use a
+	// bucket policy with an s3:PutObject permission that only allows objects with
+	// server-side encryption, set the condition key of s3:x-amz-server-side-encryption
+	// to "aws:kms". For more information, see KMS-Managed Encryption Keys
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html) in the
-	// Amazon Simple Storage Service Developer Guide. The KMS key policy must grant
-	// permission to the IAM role that you specify in your CreateLabelingJob request.
-	// For more information, see Using Key Policies in AWS KMS
-	// (http://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-	// AWS Key Management Service Developer Guide.
+	// Amazon Simple Storage Service Developer Guide.
 	KmsKeyId *string
 
-	// An Amazon Simple Notification Service (Amazon SNS) output topic ARN. When
-	// workers complete labeling tasks, Ground Truth will send labeling task output
-	// data to the SNS output topic you specify here. You must provide a value for this
-	// parameter if you provide an Amazon SNS input topic in SnsDataSource in
-	// InputConfig.
+	// An Amazon Simple Notification Service (Amazon SNS) output topic ARN. If you
+	// provide an SnsTopicArn in OutputConfig, when workers complete labeling tasks,
+	// Ground Truth will send labeling task output data to the SNS output topic you
+	// specify here. To learn more, see Receive Output Data from a Streaming Labeling
+	// Job
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data).
 	SnsTopicArn *string
 }
 
-// Provides configuration information for labeling jobs.
+// Configure encryption on the storage volume attached to the ML compute instance
+// used to run automated data labeling model training and inference.
 type LabelingJobResourceConfig struct {
 
 	// The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
-	// run the training job. The VolumeKmsKeyId can be any of the following formats:
+	// run the training and inference jobs used for automated data labeling. You can
+	// only specify a VolumeKmsKeyId when you create a labeling job with automated data
+	// labeling enabled using the API operation CreateLabelingJob. You cannot specify
+	// an AWS KMS customer managed CMK to encrypt the storage volume used for automated
+	// data labeling model training and inference when you create a labeling job using
+	// the console. To learn more, see Output Data and Storage Volume Encryption
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html). The
+	// VolumeKmsKeyId can be any of the following formats:
 	//
-	// *
-	// // KMS Key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * // Amazon Resource Name
-	// (ARN) of a KMS Key
+	// * Amazon Resource Name (ARN) of a KMS
+	// Key
 	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 }
@@ -5757,8 +5800,6 @@ type LabelingJobSnsDataSource struct {
 
 	// The Amazon SNS input topic Amazon Resource Name (ARN). Specify the ARN of the
 	// input topic you will use to send new data objects to a streaming labeling job.
-	// If you specify an input topic for SnsTopicArn in InputConfig, you must specify a
-	// value for SnsTopicArn in OutputConfig.
 	//
 	// This member is required.
 	SnsTopicArn *string
@@ -7241,11 +7282,24 @@ type OutputConfig struct {
 	// accelerators and highly recommended for CPU compilations. For any other cases,
 	// it is optional to specify CompilerOptions.
 	//
-	// * CPU: Compilation for CPU supports
-	// the following compiler options.
+	// * DTYPE: Specifies the data type for
+	// the input. When compiling for ml_* (except for ml_inf) instances using PyTorch
+	// framework, provide the data type (dtype) of the model's input. "float32" is used
+	// if "DTYPE" is not specified. Options for data type are:
 	//
-	// * mcpu: CPU micro-architecture. For example,
-	// {'mcpu': 'skylake-avx512'}
+	// * float32: Use either
+	// "float" or "float32".
+	//
+	// * int64: Use either "int64" or "long".
+	//
+	// For example,
+	// {"dtype" : "float32"}.
+	//
+	// * CPU: Compilation for CPU supports the following
+	// compiler options.
+	//
+	// * mcpu: CPU micro-architecture. For example, {'mcpu':
+	// 'skylake-avx512'}
 	//
 	// * mattr: CPU flags. For example, {'mattr': ['+neon',
 	// '+vfpv4']}
@@ -8580,6 +8634,24 @@ type RenderingError struct {
 	Message *string
 }
 
+// Specifies an authentication configuration for the private docker registry where
+// your model image is hosted. Specify a value for this property only if you
+// specified Vpc as the value for the RepositoryAccessMode field of the ImageConfig
+// object that you passed to a call to CreateModel and the private Docker registry
+// where the model image is hosted requires authentication.
+type RepositoryAuthConfig struct {
+
+	// The Amazon Resource Name (ARN) of an AWS Lambda function that provides
+	// credentials to authenticate to the private Docker registry where your model
+	// image is hosted. For information about how to create an AWS Lambda function, see
+	// Create a Lambda function with the console
+	// (https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html)
+	// in the AWS Lambda Developer Guide.
+	//
+	// This member is required.
+	RepositoryCredentialsProviderArn *string
+}
+
 // The resolved attributes.
 type ResolvedAttributes struct {
 
@@ -9059,9 +9131,10 @@ type ServiceCatalogProvisioningDetails struct {
 	ProvisioningParameters []ProvisioningParameter
 }
 
-// Specifies options when sharing an Amazon SageMaker Studio notebook. These
-// settings are specified as part of DefaultUserSettings when the CreateDomain API
-// is called, and as part of UserSettings when the CreateUserProfile API is called.
+// Specifies options for sharing SageMaker Studio notebooks. These settings are
+// specified as part of DefaultUserSettings when the CreateDomain API is called,
+// and as part of UserSettings when the CreateUserProfile API is called. When
+// SharingSettings is not specified, notebook sharing isn't allowed.
 type SharingSettings struct {
 
 	// Whether to include the notebook cell output when sharing the notebook. The
@@ -9351,6 +9424,9 @@ type TrainingJob struct {
 	// If network isolation is enabled, nodes can't communicate beyond the VPC they run
 	// in.
 	EnableNetworkIsolation bool
+
+	// The environment variables to set in the Docker container.
+	Environment map[string]string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
@@ -10549,7 +10625,7 @@ type UserSettings struct {
 	// number shown.
 	SecurityGroups []string
 
-	// The sharing settings.
+	// Specifies options for sharing SageMaker Studio notebooks.
 	SharingSettings *SharingSettings
 
 	// The TensorBoard app settings.

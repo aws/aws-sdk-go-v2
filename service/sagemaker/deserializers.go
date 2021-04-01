@@ -26767,6 +26767,11 @@ func awsAwsjson11_deserializeDocumentAutoMLCandidate(v **types.AutoMLCandidate, 
 				sv.CandidateName = ptr.String(jtv)
 			}
 
+		case "CandidateProperties":
+			if err := awsAwsjson11_deserializeDocumentCandidateProperties(&sv.CandidateProperties, value); err != nil {
+				return err
+			}
+
 		case "CandidateStatus":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -27501,6 +27506,11 @@ func awsAwsjson11_deserializeDocumentAutoMLJobSummary(v **types.AutoMLJobSummary
 				sv.LastModifiedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "PartialFailureReasons":
+			if err := awsAwsjson11_deserializeDocumentAutoMLPartialFailureReasons(&sv.PartialFailureReasons, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -27556,6 +27566,80 @@ func awsAwsjson11_deserializeDocumentAutoMLOutputDataConfig(v **types.AutoMLOutp
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAutoMLPartialFailureReason(v **types.AutoMLPartialFailureReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AutoMLPartialFailureReason
+	if *v == nil {
+		sv = &types.AutoMLPartialFailureReason{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PartialFailureMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AutoMLFailureReason to be of type string, got %T instead", value)
+				}
+				sv.PartialFailureMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAutoMLPartialFailureReasons(v *[]types.AutoMLPartialFailureReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AutoMLPartialFailureReason
+	if *v == nil {
+		cv = []types.AutoMLPartialFailureReason{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AutoMLPartialFailureReason
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAutoMLPartialFailureReason(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -27825,6 +27909,82 @@ func awsAwsjson11_deserializeDocumentCacheHitResult(v **types.CacheHitResult, va
 					return fmt.Errorf("expected PipelineExecutionArn to be of type string, got %T instead", value)
 				}
 				sv.SourcePipelineExecutionArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCandidateArtifactLocations(v **types.CandidateArtifactLocations, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CandidateArtifactLocations
+	if *v == nil {
+		sv = &types.CandidateArtifactLocations{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Explainability":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExplainabilityLocation to be of type string, got %T instead", value)
+				}
+				sv.Explainability = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCandidateProperties(v **types.CandidateProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CandidateProperties
+	if *v == nil {
+		sv = &types.CandidateProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CandidateArtifactLocations":
+			if err := awsAwsjson11_deserializeDocumentCandidateArtifactLocations(&sv.CandidateArtifactLocations, value); err != nil {
+				return err
 			}
 
 		default:
@@ -35091,6 +35251,11 @@ func awsAwsjson11_deserializeDocumentImageConfig(v **types.ImageConfig, value in
 					return fmt.Errorf("expected RepositoryAccessMode to be of type string, got %T instead", value)
 				}
 				sv.RepositoryAccessMode = types.RepositoryAccessMode(jtv)
+			}
+
+		case "RepositoryAuthConfig":
+			if err := awsAwsjson11_deserializeDocumentRepositoryAuthConfig(&sv.RepositoryAuthConfig, value); err != nil {
+				return err
 			}
 
 		default:
@@ -44792,6 +44957,46 @@ func awsAwsjson11_deserializeDocumentRenderingErrorList(v *[]types.RenderingErro
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRepositoryAuthConfig(v **types.RepositoryAuthConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RepositoryAuthConfig
+	if *v == nil {
+		sv = &types.RepositoryAuthConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RepositoryCredentialsProviderArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryCredentialsProviderArn to be of type string, got %T instead", value)
+				}
+				sv.RepositoryCredentialsProviderArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResolvedAttributes(v **types.ResolvedAttributes, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46537,6 +46742,42 @@ func awsAwsjson11_deserializeDocumentTrafficRoutingConfig(v **types.TrafficRouti
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTrainingEnvironmentMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected TrainingEnvironmentValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTrainingInstanceTypes(v *[]types.TrainingInstanceType, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46680,6 +46921,11 @@ func awsAwsjson11_deserializeDocumentTrainingJob(v **types.TrainingJob, value in
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.EnableNetworkIsolation = jtv
+			}
+
+		case "Environment":
+			if err := awsAwsjson11_deserializeDocumentTrainingEnvironmentMap(&sv.Environment, value); err != nil {
+				return err
 			}
 
 		case "ExperimentConfig":
@@ -53269,6 +53515,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoMLJobOutput(v **DescribeAutoM
 				return err
 			}
 
+		case "PartialFailureReasons":
+			if err := awsAwsjson11_deserializeDocumentAutoMLPartialFailureReasons(&sv.PartialFailureReasons, value); err != nil {
+				return err
+			}
+
 		case "ProblemType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -57390,6 +57641,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrainingJobOutput(v **DescribeTra
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.EnableNetworkIsolation = jtv
+			}
+
+		case "Environment":
+			if err := awsAwsjson11_deserializeDocumentTrainingEnvironmentMap(&sv.Environment, value); err != nil {
+				return err
 			}
 
 		case "ExperimentConfig":

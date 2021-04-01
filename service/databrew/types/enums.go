@@ -138,6 +138,40 @@ func (LogSubscription) Values() []LogSubscription {
 	}
 }
 
+type Order string
+
+// Enum values for Order
+const (
+	OrderDescending Order = "DESCENDING"
+	OrderAscending  Order = "ASCENDING"
+)
+
+// Values returns all known values for Order. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Order) Values() []Order {
+	return []Order{
+		"DESCENDING",
+		"ASCENDING",
+	}
+}
+
+type OrderedBy string
+
+// Enum values for OrderedBy
+const (
+	OrderedByLastModifiedDate OrderedBy = "LAST_MODIFIED_DATE"
+)
+
+// Values returns all known values for OrderedBy. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (OrderedBy) Values() []OrderedBy {
+	return []OrderedBy{
+		"LAST_MODIFIED_DATE",
+	}
+}
+
 type OutputFormat string
 
 // Enum values for OutputFormat
@@ -163,6 +197,26 @@ func (OutputFormat) Values() []OutputFormat {
 		"AVRO",
 		"ORC",
 		"XML",
+	}
+}
+
+type ParameterType string
+
+// Enum values for ParameterType
+const (
+	ParameterTypeDatetime ParameterType = "Datetime"
+	ParameterTypeNumber   ParameterType = "Number"
+	ParameterTypeString   ParameterType = "String"
+)
+
+// Values returns all known values for ParameterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParameterType) Values() []ParameterType {
+	return []ParameterType{
+		"Datetime",
+		"Number",
+		"String",
 	}
 }
 
@@ -244,6 +298,7 @@ type Source string
 const (
 	SourceS3          Source = "S3"
 	SourceDatacatalog Source = "DATA-CATALOG"
+	SourceDatabase    Source = "DATABASE"
 )
 
 // Values returns all known values for Source. Note that this can be expanded in
@@ -253,5 +308,6 @@ func (Source) Values() []Source {
 	return []Source{
 		"S3",
 		"DATA-CATALOG",
+		"DATABASE",
 	}
 }

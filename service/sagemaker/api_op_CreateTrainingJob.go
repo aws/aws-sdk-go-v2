@@ -56,6 +56,9 @@ import (
 // to specify how long you are willing to wait for a managed spot training job to
 // complete.
 //
+// * Environment - The environment variables to set in the Docker
+// container.
+//
 // For more information about Amazon SageMaker, see How It Works
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 func (c *Client) CreateTrainingJob(ctx context.Context, params *CreateTrainingJobInput, optFns ...func(*Options)) (*CreateTrainingJobOutput, error) {
@@ -172,6 +175,9 @@ type CreateTrainingJobInput struct {
 	// artifacts through the specified VPC, but the training container does not have
 	// network access.
 	EnableNetworkIsolation bool
+
+	// The environment variables to set in the Docker container.
+	Environment map[string]string
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:

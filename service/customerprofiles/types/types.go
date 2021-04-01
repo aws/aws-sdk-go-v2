@@ -41,6 +41,18 @@ type Address struct {
 	State *string
 }
 
+type ConnectorOperator struct {
+	Marketo MarketoConnectorOperator
+
+	S3 S3ConnectorOperator
+
+	Salesforce SalesforceConnectorOperator
+
+	ServiceNow ServiceNowConnectorOperator
+
+	Zendesk ZendeskConnectorOperator
+}
+
 // Usage-specific statistics about the domain.
 type DomainStats struct {
 
@@ -58,6 +70,30 @@ type DomainStats struct {
 
 	// The total size, in bytes, of all objects in the domain.
 	TotalSize int64
+}
+
+type FlowDefinition struct {
+
+	// This member is required.
+	FlowName *string
+
+	// This member is required.
+	KmsArn *string
+
+	// This member is required.
+	SourceFlowConfig *SourceFlowConfig
+
+	// This member is required.
+	Tasks []Task
+
+	// This member is required.
+	TriggerConfig *TriggerConfig
+
+	Description *string
+}
+
+type IncrementalPullConfig struct {
+	DatetimeTypeFieldName *string
 }
 
 // An object in a list that represents a domain.
@@ -162,6 +198,12 @@ type ListProfileObjectTypeTemplateItem struct {
 
 	// A unique identifier for the object template.
 	TemplateId *string
+}
+
+type MarketoSourceProperties struct {
+
+	// This member is required.
+	Object *string
 }
 
 // Represents a field in a ProfileObjectType.
@@ -272,6 +314,100 @@ type Profile struct {
 	ShippingAddress *Address
 }
 
+type S3SourceProperties struct {
+
+	// This member is required.
+	BucketName *string
+
+	BucketPrefix *string
+}
+
+type SalesforceSourceProperties struct {
+
+	// This member is required.
+	Object *string
+
+	EnableDynamicFieldUpdate bool
+
+	IncludeDeletedRecords bool
+}
+
+type ScheduledTriggerProperties struct {
+
+	// This member is required.
+	ScheduleExpression *string
+
+	DataPullMode DataPullMode
+
+	FirstExecutionFrom *time.Time
+
+	ScheduleEndTime *time.Time
+
+	ScheduleOffset int64
+
+	ScheduleStartTime *time.Time
+
+	Timezone *string
+}
+
+type ServiceNowSourceProperties struct {
+
+	// This member is required.
+	Object *string
+}
+
+type SourceConnectorProperties struct {
+	Marketo *MarketoSourceProperties
+
+	S3 *S3SourceProperties
+
+	Salesforce *SalesforceSourceProperties
+
+	ServiceNow *ServiceNowSourceProperties
+
+	Zendesk *ZendeskSourceProperties
+}
+
+type SourceFlowConfig struct {
+
+	// This member is required.
+	ConnectorType SourceConnectorType
+
+	// This member is required.
+	SourceConnectorProperties *SourceConnectorProperties
+
+	ConnectorProfileName *string
+
+	IncrementalPullConfig *IncrementalPullConfig
+}
+
+type Task struct {
+
+	// This member is required.
+	SourceFields []string
+
+	// This member is required.
+	TaskType TaskType
+
+	ConnectorOperator *ConnectorOperator
+
+	DestinationField *string
+
+	TaskProperties map[string]string
+}
+
+type TriggerConfig struct {
+
+	// This member is required.
+	TriggerType TriggerType
+
+	TriggerProperties *TriggerProperties
+}
+
+type TriggerProperties struct {
+	Scheduled *ScheduledTriggerProperties
+}
+
 // Updates associated with the address properties of a customer profile.
 type UpdateAddress struct {
 
@@ -304,4 +440,10 @@ type UpdateAddress struct {
 
 	// The state in which a customer lives.
 	State *string
+}
+
+type ZendeskSourceProperties struct {
+
+	// This member is required.
+	Object *string
 }

@@ -239,6 +239,62 @@ func (m *awsAwsquery_serializeOpDeleteInsightRules) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDeleteMetricStream struct {
+}
+
+func (*awsAwsquery_serializeOpDeleteMetricStream) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeleteMetricStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteMetricStreamInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeleteMetricStream")
+	body.Key("Version").String("2010-08-01")
+
+	if err := awsAwsquery_serializeOpDocumentDeleteMetricStreamInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDescribeAlarmHistory struct {
 }
 
@@ -967,6 +1023,62 @@ func (m *awsAwsquery_serializeOpGetMetricStatistics) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpGetMetricStream struct {
+}
+
+func (*awsAwsquery_serializeOpGetMetricStream) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpGetMetricStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMetricStreamInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetMetricStream")
+	body.Key("Version").String("2010-08-01")
+
+	if err := awsAwsquery_serializeOpDocumentGetMetricStreamInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpGetMetricWidgetImage struct {
 }
 
@@ -1115,6 +1227,62 @@ func (m *awsAwsquery_serializeOpListMetrics) HandleSerialize(ctx context.Context
 	body.Key("Version").String("2010-08-01")
 
 	if err := awsAwsquery_serializeOpDocumentListMetricsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpListMetricStreams struct {
+}
+
+func (*awsAwsquery_serializeOpListMetricStreams) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListMetricStreams) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMetricStreamsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListMetricStreams")
+	body.Key("Version").String("2010-08-01")
+
+	if err := awsAwsquery_serializeOpDocumentListMetricStreamsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1527,6 +1695,62 @@ func (m *awsAwsquery_serializeOpPutMetricData) HandleSerialize(ctx context.Conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpPutMetricStream struct {
+}
+
+func (*awsAwsquery_serializeOpPutMetricStream) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpPutMetricStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutMetricStreamInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("PutMetricStream")
+	body.Key("Version").String("2010-08-01")
+
+	if err := awsAwsquery_serializeOpDocumentPutMetricStreamInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpSetAlarmState struct {
 }
 
@@ -1563,6 +1787,118 @@ func (m *awsAwsquery_serializeOpSetAlarmState) HandleSerialize(ctx context.Conte
 	body.Key("Version").String("2010-08-01")
 
 	if err := awsAwsquery_serializeOpDocumentSetAlarmStateInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpStartMetricStreams struct {
+}
+
+func (*awsAwsquery_serializeOpStartMetricStreams) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpStartMetricStreams) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartMetricStreamsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("StartMetricStreams")
+	body.Key("Version").String("2010-08-01")
+
+	if err := awsAwsquery_serializeOpDocumentStartMetricStreamsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpStopMetricStreams struct {
+}
+
+func (*awsAwsquery_serializeOpStopMetricStreams) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpStopMetricStreams) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopMetricStreamsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("StopMetricStreams")
+	body.Key("Version").String("2010-08-01")
+
+	if err := awsAwsquery_serializeOpDocumentStopMetricStreamsInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2077,6 +2413,46 @@ func awsAwsquery_serializeDocumentMetricStat(v *types.MetricStat, value query.Va
 	return nil
 }
 
+func awsAwsquery_serializeDocumentMetricStreamFilter(v *types.MetricStreamFilter, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Namespace != nil {
+		objectKey := object.Key("Namespace")
+		objectKey.String(*v.Namespace)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricStreamFilters(v []types.MetricStreamFilter, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentMetricStreamFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentMetricStreamNames(v []string, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsquery_serializeDocumentRange(v *types.Range, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -2271,6 +2647,18 @@ func awsAwsquery_serializeOpDocumentDeleteInsightRulesInput(v *DeleteInsightRule
 		if err := awsAwsquery_serializeDocumentInsightRuleNames(v.RuleNames, objectKey); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDeleteMetricStreamInput(v *DeleteMetricStreamInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Name != nil {
+		objectKey := object.Key("Name")
+		objectKey.String(*v.Name)
 	}
 
 	return nil
@@ -2692,6 +3080,18 @@ func awsAwsquery_serializeOpDocumentGetMetricStatisticsInput(v *GetMetricStatist
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentGetMetricStreamInput(v *GetMetricStreamInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Name != nil {
+		objectKey := object.Key("Name")
+		objectKey.String(*v.Name)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentGetMetricWidgetImageInput(v *GetMetricWidgetImageInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -2755,6 +3155,23 @@ func awsAwsquery_serializeOpDocumentListMetricsInput(v *ListMetricsInput, value 
 	if len(v.RecentlyActive) > 0 {
 		objectKey := object.Key("RecentlyActive")
 		objectKey.String(string(v.RecentlyActive))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListMetricStreamsInput(v *ListMetricStreamsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
 	}
 
 	return nil
@@ -3057,6 +3474,54 @@ func awsAwsquery_serializeOpDocumentPutMetricDataInput(v *PutMetricDataInput, va
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentPutMetricStreamInput(v *PutMetricStreamInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ExcludeFilters != nil {
+		objectKey := object.Key("ExcludeFilters")
+		if err := awsAwsquery_serializeDocumentMetricStreamFilters(v.ExcludeFilters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.FirehoseArn != nil {
+		objectKey := object.Key("FirehoseArn")
+		objectKey.String(*v.FirehoseArn)
+	}
+
+	if v.IncludeFilters != nil {
+		objectKey := object.Key("IncludeFilters")
+		if err := awsAwsquery_serializeDocumentMetricStreamFilters(v.IncludeFilters, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		objectKey := object.Key("Name")
+		objectKey.String(*v.Name)
+	}
+
+	if len(v.OutputFormat) > 0 {
+		objectKey := object.Key("OutputFormat")
+		objectKey.String(string(v.OutputFormat))
+	}
+
+	if v.RoleArn != nil {
+		objectKey := object.Key("RoleArn")
+		objectKey.String(*v.RoleArn)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentSetAlarmStateInput(v *SetAlarmStateInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -3079,6 +3544,34 @@ func awsAwsquery_serializeOpDocumentSetAlarmStateInput(v *SetAlarmStateInput, va
 	if len(v.StateValue) > 0 {
 		objectKey := object.Key("StateValue")
 		objectKey.String(string(v.StateValue))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentStartMetricStreamsInput(v *StartMetricStreamsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Names != nil {
+		objectKey := object.Key("Names")
+		if err := awsAwsquery_serializeDocumentMetricStreamNames(v.Names, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentStopMetricStreamsInput(v *StopMetricStreamsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.Names != nil {
+		objectKey := object.Key("Names")
+		if err := awsAwsquery_serializeDocumentMetricStreamNames(v.Names, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

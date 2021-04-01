@@ -256,6 +256,12 @@
                         "smithy.api#documentation": "<p>The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.</p>"
                     }
                 },
+                "imageId": {
+                    "target": "com.amazonaws.cloud9#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. You can specify the AMI for the instance using an AMI alias or an AWS Systems Manager (SSM) path. The default AMI is used if the parameter isn't explicitly assigned a value in the request. \n    </p>\n         <p>\n            <b>AMI aliases </b>\n         </p>\n         <ul>\n            <li>\n               <p>Amazon Linux 2: <code>amazonlinux-2-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 18.04: <code>ubuntu-18.04-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> \n               </p>\n            </li>\n         </ul>\n    \n         <p>\n            <b>SSM paths</b>\n         </p>\n         <ul>\n            <li>\n               <p>Amazon Linux 2: <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Ubuntu 18.04: <code>resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64</code>\n               </p>\n            </li>\n            <li>\n               <p>Amazon Linux (default): <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
                 "automaticStopTimeMinutes": {
                     "target": "com.amazonaws.cloud9#AutomaticStopTimeMinutes",
                     "traits": {
@@ -277,7 +283,7 @@
                 "connectionType": {
                     "target": "com.amazonaws.cloud9#ConnectionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connection type used for connecting to an Amazon EC2 environment.</p>"
+                        "smithy.api#documentation": "<p>The connection type used for connecting to an Amazon EC2 environment. Valid values are <code>CONNECT_SSH</code> (default) and <code>CONNECT_SSM</code> (connected through AWS Systems Manager).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html\">Accessing no-ingress EC2 instances with AWS Systems Manager</a> in the <i>AWS Cloud9 User Guide</i>.</p>"
                     }
                 }
             }
@@ -361,7 +367,8 @@
                 "membership": {
                     "target": "com.amazonaws.cloud9#EnvironmentMember",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the environment member that was added.</p>"
+                        "smithy.api#documentation": "<p>Information about the environment member that was added.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -622,13 +629,15 @@
                 "status": {
                     "target": "com.amazonaws.cloud9#EnvironmentStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the environment. Available values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>connecting</code>: The environment is connecting.</p>\n            </li>\n            <li>\n               <p>\n                  <code>creating</code>: The environment is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: The environment is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>error</code>: The environment is in an error state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ready</code>: The environment is ready.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stopped</code>: The environment is stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stopping</code>: The environment is stopping.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the environment. Available values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>connecting</code>: The environment is connecting.</p>\n            </li>\n            <li>\n               <p>\n                  <code>creating</code>: The environment is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>deleting</code>: The environment is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>error</code>: The environment is in an error state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ready</code>: The environment is ready.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stopped</code>: The environment is stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>stopping</code>: The environment is stopping.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
                     }
                 },
                 "message": {
                     "target": "com.amazonaws.cloud9#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any informational message about the status of the environment.</p>"
+                        "smithy.api#documentation": "<p>Any informational message about the status of the environment.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -715,31 +724,40 @@
                 "type": {
                     "target": "com.amazonaws.cloud9#EnvironmentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of environment. Valid values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ssh</code>: Your own server connects to the environment.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of environment. Valid values include the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ec2</code>: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ssh</code>: Your own server connects to the environment.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
                     }
                 },
                 "connectionType": {
                     "target": "com.amazonaws.cloud9#ConnectionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The connection type used for connecting to an Amazon EC2 environment.</p>"
+                        "smithy.api#documentation": "<p>The connection type used for connecting to an Amazon EC2 environment. <code>CONNECT_SSH</code> is selected by default.</p>"
                     }
                 },
                 "arn": {
                     "target": "com.amazonaws.cloud9#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "ownerArn": {
                     "target": "com.amazonaws.cloud9#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment owner.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment owner.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "lifecycle": {
                     "target": "com.amazonaws.cloud9#EnvironmentLifecycle",
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the environment in its creation or deletion lifecycle.</p>"
+                    }
+                },
+                "managedCredentialsStatus": {
+                    "target": "com.amazonaws.cloud9#ManagedCredentialsStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the status of AWS managed temporary credentials for the AWS Cloud9 environment. Available values\n      are:</p> \n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED_ON_CREATE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED_BY_OWNER</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED_BY_DEFAULT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED_BY_OWNER</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED_BY_COLLABORATOR</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_REMOVAL_BY_COLLABORATOR</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING_REMOVAL_BY_OWNER</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED_REMOVAL_BY_COLLABORATOR</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ENABLED_BY_OWNER</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED_BY_DEFAULT</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -750,7 +768,7 @@
         "com.amazonaws.cloud9#EnvironmentArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws:cloud9:([a-z]{2}-[a-z]+-\\d{1}):[0-9]{12}:environment:[a-zA-Z0-9]{8,32}"
+                "smithy.api#pattern": "arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):cloud9:([a-z]{2}-[a-z]+-\\d{1}):[0-9]{12}:environment:[a-zA-Z0-9]{8,32}"
             }
         },
         "com.amazonaws.cloud9#EnvironmentDescription": {
@@ -840,25 +858,29 @@
                 "permissions": {
                     "target": "com.amazonaws.cloud9#Permissions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of environment member permissions associated with this environment member. Available values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>owner</code>: Owns the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>read-only</code>: Has read-only access to the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>read-write</code>: Has read-write access to the environment.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of environment member permissions associated with this environment member. Available values include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>owner</code>: Owns the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>read-only</code>: Has read-only access to the environment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>read-write</code>: Has read-write access to the environment.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
                     }
                 },
                 "userId": {
                     "target": "com.amazonaws.cloud9#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.</p>"
+                        "smithy.api#documentation": "<p>The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "userArn": {
                     "target": "com.amazonaws.cloud9#UserArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment member.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the environment member.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "environmentId": {
                     "target": "com.amazonaws.cloud9#EnvironmentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the environment for the environment member.</p>"
+                        "smithy.api#documentation": "<p>The ID of the environment for the environment member.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "lastAccess": {
@@ -953,6 +975,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>An access permissions issue occurred.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.cloud9#ImageId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                }
             }
         },
         "com.amazonaws.cloud9#InstanceType": {
@@ -1124,6 +1155,57 @@
                 }
             }
         },
+        "com.amazonaws.cloud9#ManagedCredentialsStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED_ON_CREATE",
+                        "name": "ENABLED_ON_CREATE"
+                    },
+                    {
+                        "value": "ENABLED_BY_OWNER",
+                        "name": "ENABLED_BY_OWNER"
+                    },
+                    {
+                        "value": "DISABLED_BY_DEFAULT",
+                        "name": "DISABLED_BY_DEFAULT"
+                    },
+                    {
+                        "value": "DISABLED_BY_OWNER",
+                        "name": "DISABLED_BY_OWNER"
+                    },
+                    {
+                        "value": "DISABLED_BY_COLLABORATOR",
+                        "name": "DISABLED_BY_COLLABORATOR"
+                    },
+                    {
+                        "value": "PENDING_REMOVAL_BY_COLLABORATOR",
+                        "name": "PENDING_REMOVAL_BY_COLLABORATOR"
+                    },
+                    {
+                        "value": "PENDING_START_REMOVAL_BY_COLLABORATOR",
+                        "name": "PENDING_START_REMOVAL_BY_COLLABORATOR"
+                    },
+                    {
+                        "value": "PENDING_REMOVAL_BY_OWNER",
+                        "name": "PENDING_REMOVAL_BY_OWNER"
+                    },
+                    {
+                        "value": "PENDING_START_REMOVAL_BY_OWNER",
+                        "name": "PENDING_START_REMOVAL_BY_OWNER"
+                    },
+                    {
+                        "value": "FAILED_REMOVAL_BY_COLLABORATOR",
+                        "name": "FAILED_REMOVAL_BY_COLLABORATOR"
+                    },
+                    {
+                        "value": "FAILED_REMOVAL_BY_OWNER",
+                        "name": "FAILED_REMOVAL_BY_OWNER"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.cloud9#MaxResults": {
             "type": "integer",
             "traits": {
@@ -1199,9 +1281,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 5,
-                    "max": 30
-                }
+                    "min": 15,
+                    "max": 24
+                },
+                "smithy.api#pattern": "^(subnet-[0-9a-f]{8}|subnet-[0-9a-f]{17})$"
             }
         },
         "com.amazonaws.cloud9#Tag": {
@@ -1223,7 +1306,8 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata that is associated with AWS resources. In particular, a name-value pair that can be associated with an AWS Cloud9 development environment. There are two types of tags: <i>user tags</i> and <i>system tags</i>. A user tag is created by the user. A system tag is automatically created by AWS services. A system tag is prefixed with \"aws:\" and cannot be modified by the user.</p>"
+                "smithy.api#documentation": "<p>Metadata that is associated with AWS resources. In particular, a name-value pair that can be associated with an AWS Cloud9 development environment. There are two types of tags: <i>user tags</i> and <i>system tags</i>. A user tag is created by the user. A system tag is automatically created by AWS services. A system tag is prefixed with \"aws:\" and cannot be modified by the user.</p>",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cloud9#TagKey": {
@@ -1232,7 +1316,8 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cloud9#TagKeyList": {
@@ -1244,7 +1329,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 200
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cloud9#TagList": {
@@ -1256,7 +1342,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 200
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cloud9#TagResource": {
@@ -1314,7 +1401,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
-                }
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.cloud9#Timestamp": {
@@ -1527,7 +1615,7 @@
         "com.amazonaws.cloud9#UserArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws:(iam|sts)::\\d+:(root|(user\\/[\\w+=/:,.@-]{1,64}|federated-user\\/[\\w+=/:,.@-]{2,32}|assumed-role\\/[\\w+=:,.@-]{1,64}\\/[\\w+=,.@-]{1,64}))$"
+                "smithy.api#pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(iam|sts)::\\d+:(root|(user\\/[\\w+=/:,.@-]{1,64}|federated-user\\/[\\w+=/:,.@-]{2,32}|assumed-role\\/[\\w+=:,.@-]{1,64}\\/[\\w+=,.@-]{1,64}))$"
             }
         }
     }

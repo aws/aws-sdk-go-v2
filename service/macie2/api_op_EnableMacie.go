@@ -40,8 +40,8 @@ type EnableMacieInput struct {
 	// called Amazon CloudWatch Events).
 	FindingPublishingFrequency types.FindingPublishingFrequency
 
-	// Specifies the status for the account. To enable Amazon Macie and start all Macie
-	// activities for the account, set this value to ENABLED.
+	// Specifies the new status for the account. To enable Amazon Macie and start all
+	// Macie activities for the account, set this value to ENABLED.
 	Status types.MacieStatus
 }
 

@@ -909,6 +909,53 @@ func (m *awsAwsjson11_serializeOpDescribeAggregateComplianceByConfigRules) Handl
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeAggregateComplianceByConformancePacks struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeAggregateComplianceByConformancePacks) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeAggregateComplianceByConformancePacks) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeAggregateComplianceByConformancePacksInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StarlingDoveService.DescribeAggregateComplianceByConformancePacks")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeAggregateComplianceByConformancePacksInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeAggregationAuthorizations struct {
 }
 
@@ -2069,6 +2116,53 @@ func (m *awsAwsjson11_serializeOpGetAggregateConfigRuleComplianceSummary) Handle
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGetAggregateConfigRuleComplianceSummaryInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetAggregateConformancePackComplianceSummary struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAggregateConformancePackComplianceSummary) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAggregateConformancePackComplianceSummary) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAggregateConformancePackComplianceSummaryInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StarlingDoveService.GetAggregateConformancePackComplianceSummary")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAggregateConformancePackComplianceSummaryInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4008,6 +4102,50 @@ func awsAwsjson11_serializeDocumentAccountAggregationSourceList(v []types.Accoun
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAggregateConformancePackComplianceFilters(v *types.AggregateConformancePackComplianceFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("AccountId")
+		ok.String(*v.AccountId)
+	}
+
+	if v.AwsRegion != nil {
+		ok := object.Key("AwsRegion")
+		ok.String(*v.AwsRegion)
+	}
+
+	if len(v.ComplianceType) > 0 {
+		ok := object.Key("ComplianceType")
+		ok.String(string(v.ComplianceType))
+	}
+
+	if v.ConformancePackName != nil {
+		ok := object.Key("ConformancePackName")
+		ok.String(*v.ConformancePackName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAggregateConformancePackComplianceSummaryFilters(v *types.AggregateConformancePackComplianceSummaryFilters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("AccountId")
+		ok.String(*v.AccountId)
+	}
+
+	if v.AwsRegion != nil {
+		ok := object.Key("AwsRegion")
+		ok.String(*v.AwsRegion)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAggregatedSourceStatusTypeList(v []types.AggregatedSourceStatusType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5581,6 +5719,35 @@ func awsAwsjson11_serializeOpDocumentDescribeAggregateComplianceByConfigRulesInp
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeAggregateComplianceByConformancePacksInput(v *DescribeAggregateComplianceByConformancePacksInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationAggregatorName != nil {
+		ok := object.Key("ConfigurationAggregatorName")
+		ok.String(*v.ConfigurationAggregatorName)
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentAggregateConformancePackComplianceFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Limit != 0 {
+		ok := object.Key("Limit")
+		ok.Integer(v.Limit)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeAggregationAuthorizationsInput(v *DescribeAggregationAuthorizationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6145,6 +6312,40 @@ func awsAwsjson11_serializeOpDocumentGetAggregateConfigRuleComplianceSummaryInpu
 	if v.Filters != nil {
 		ok := object.Key("Filters")
 		if err := awsAwsjson11_serializeDocumentConfigRuleComplianceSummaryFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.GroupByKey) > 0 {
+		ok := object.Key("GroupByKey")
+		ok.String(string(v.GroupByKey))
+	}
+
+	if v.Limit != 0 {
+		ok := object.Key("Limit")
+		ok.Integer(v.Limit)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetAggregateConformancePackComplianceSummaryInput(v *GetAggregateConformancePackComplianceSummaryInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfigurationAggregatorName != nil {
+		ok := object.Key("ConfigurationAggregatorName")
+		ok.String(*v.ConfigurationAggregatorName)
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentAggregateConformancePackComplianceSummaryFilters(v.Filters, ok); err != nil {
 			return err
 		}
 	}

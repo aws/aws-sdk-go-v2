@@ -2120,6 +2120,9 @@ type MetadataInfo struct {
 
 	// The metadata key’s corresponding value.
 	MetadataValue *string
+
+	// Other metadata belonging to the same metadata key.
+	OtherMetadataValueList []OtherMetadataValueListItem
 }
 
 // A structure containing a key value pair for metadata.
@@ -2355,6 +2358,18 @@ type Order struct {
 	//
 	// This member is required.
 	SortOrder int32
+}
+
+// A structure containing other metadata for a schema version belonging to the same
+// metadata key.
+type OtherMetadataValueListItem struct {
+
+	// The time at which the entry was created.
+	CreatedTime *string
+
+	// The metadata key’s corresponding value for the other metadata belonging to the
+	// same metadata key.
+	MetadataValue *string
 }
 
 // Represents a slice of table data.

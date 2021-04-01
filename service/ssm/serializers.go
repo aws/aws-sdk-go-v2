@@ -8556,6 +8556,11 @@ func awsAwsjson11_serializeDocumentResourceDataSyncSource(v *types.ResourceDataS
 		}
 	}
 
+	if v.EnableAllOpsDataSources {
+		ok := object.Key("EnableAllOpsDataSources")
+		ok.Boolean(v.EnableAllOpsDataSources)
+	}
+
 	if v.IncludeFutureRegions {
 		ok := object.Key("IncludeFutureRegions")
 		ok.Boolean(v.IncludeFutureRegions)

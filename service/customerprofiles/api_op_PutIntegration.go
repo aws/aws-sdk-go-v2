@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,13 +42,13 @@ type PutIntegrationInput struct {
 	// This member is required.
 	ObjectTypeName *string
 
-	// The URI of the S3 bucket or any other type of data source.
-	//
-	// This member is required.
-	Uri *string
+	FlowDefinition *types.FlowDefinition
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	// The URI of the S3 bucket or any other type of data source.
+	Uri *string
 }
 
 type PutIntegrationOutput struct {

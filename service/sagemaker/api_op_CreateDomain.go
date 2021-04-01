@@ -66,7 +66,11 @@ type CreateDomainInput struct {
 	// This member is required.
 	AuthMode types.AuthMode
 
-	// The default user settings.
+	// The default settings to use to create a user profile when UserSettings isn't
+	// specified in the call to the CreateUserProfile API. SecurityGroups is aggregated
+	// when specified in both calls. For all other settings in UserSettings, the values
+	// specified in CreateUserProfile take precedence over those specified in
+	// CreateDomain.
 	//
 	// This member is required.
 	DefaultUserSettings *types.UserSettings

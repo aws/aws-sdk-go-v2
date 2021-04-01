@@ -2,6 +2,25 @@
 
 package types
 
+type AggregateConformancePackComplianceSummaryGroupKey string
+
+// Enum values for AggregateConformancePackComplianceSummaryGroupKey
+const (
+	AggregateConformancePackComplianceSummaryGroupKeyAccountId AggregateConformancePackComplianceSummaryGroupKey = "ACCOUNT_ID"
+	AggregateConformancePackComplianceSummaryGroupKeyAwsRegion AggregateConformancePackComplianceSummaryGroupKey = "AWS_REGION"
+)
+
+// Values returns all known values for
+// AggregateConformancePackComplianceSummaryGroupKey. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AggregateConformancePackComplianceSummaryGroupKey) Values() []AggregateConformancePackComplianceSummaryGroupKey {
+	return []AggregateConformancePackComplianceSummaryGroupKey{
+		"ACCOUNT_ID",
+		"AWS_REGION",
+	}
+}
+
 type AggregatedSourceStatusType string
 
 // Enum values for AggregatedSourceStatusType
@@ -624,6 +643,7 @@ const (
 	ResourceTypePatchCompliance                  ResourceType = "AWS::SSM::PatchCompliance"
 	ResourceTypeProtection                       ResourceType = "AWS::Shield::Protection"
 	ResourceTypeRegionalProtection               ResourceType = "AWS::ShieldRegional::Protection"
+	ResourceTypeConformancePackCompliance        ResourceType = "AWS::Config::ConformancePackCompliance"
 	ResourceTypeResourceCompliance               ResourceType = "AWS::Config::ResourceCompliance"
 	ResourceTypeStage                            ResourceType = "AWS::ApiGateway::Stage"
 	ResourceTypeRestApi                          ResourceType = "AWS::ApiGateway::RestApi"
@@ -727,6 +747,7 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::SSM::PatchCompliance",
 		"AWS::Shield::Protection",
 		"AWS::ShieldRegional::Protection",
+		"AWS::Config::ConformancePackCompliance",
 		"AWS::Config::ResourceCompliance",
 		"AWS::ApiGateway::Stage",
 		"AWS::ApiGateway::RestApi",

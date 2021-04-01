@@ -4091,6 +4091,131 @@ func awsRestjson1_deserializeDocumentEc2ConfigurationList(v *[]types.Ec2Configur
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEFSAuthorizationConfig(v **types.EFSAuthorizationConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EFSAuthorizationConfig
+	if *v == nil {
+		sv = &types.EFSAuthorizationConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessPointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessPointId = ptr.String(jtv)
+			}
+
+		case "iam":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EFSAuthorizationConfigIAM to be of type string, got %T instead", value)
+				}
+				sv.Iam = types.EFSAuthorizationConfigIAM(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEFSVolumeConfiguration(v **types.EFSVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EFSVolumeConfiguration
+	if *v == nil {
+		sv = &types.EFSVolumeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authorizationConfig":
+			if err := awsRestjson1_deserializeDocumentEFSAuthorizationConfig(&sv.AuthorizationConfig, value); err != nil {
+				return err
+			}
+
+		case "fileSystemId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FileSystemId = ptr.String(jtv)
+			}
+
+		case "rootDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootDirectory = ptr.String(jtv)
+			}
+
+		case "transitEncryption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EFSTransitEncryption to be of type string, got %T instead", value)
+				}
+				sv.TransitEncryption = types.EFSTransitEncryption(jtv)
+			}
+
+		case "transitEncryptionPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TransitEncryptionPort = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEnvironmentVariables(v *[]types.KeyValuePair, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6534,6 +6659,11 @@ func awsRestjson1_deserializeDocumentVolume(v **types.Volume, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "efsVolumeConfiguration":
+			if err := awsRestjson1_deserializeDocumentEFSVolumeConfiguration(&sv.EfsVolumeConfiguration, value); err != nil {
+				return err
+			}
+
 		case "host":
 			if err := awsRestjson1_deserializeDocumentHost(&sv.Host, value); err != nil {
 				return err

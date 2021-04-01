@@ -683,6 +683,10 @@ const (
 	ParameterExceptionFieldForwardedIpConfig              ParameterExceptionField = "FORWARDED_IP_CONFIG"
 	ParameterExceptionFieldIpSetForwardedIpConfig         ParameterExceptionField = "IP_SET_FORWARDED_IP_CONFIG"
 	ParameterExceptionFieldHeaderName                     ParameterExceptionField = "HEADER_NAME"
+	ParameterExceptionFieldCustomRequestHandling          ParameterExceptionField = "CUSTOM_REQUEST_HANDLING"
+	ParameterExceptionFieldResponseContentType            ParameterExceptionField = "RESPONSE_CONTENT_TYPE"
+	ParameterExceptionFieldCustomResponse                 ParameterExceptionField = "CUSTOM_RESPONSE"
+	ParameterExceptionFieldCustomResponseBody             ParameterExceptionField = "CUSTOM_RESPONSE_BODY"
 	ParameterExceptionFieldJsonMatchPattern               ParameterExceptionField = "JSON_MATCH_PATTERN"
 	ParameterExceptionFieldJsonMatchScope                 ParameterExceptionField = "JSON_MATCH_SCOPE"
 	ParameterExceptionFieldBodyParsingFallbackBehavior    ParameterExceptionField = "BODY_PARSING_FALLBACK_BEHAVIOR"
@@ -736,6 +740,10 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"FORWARDED_IP_CONFIG",
 		"IP_SET_FORWARDED_IP_CONFIG",
 		"HEADER_NAME",
+		"CUSTOM_REQUEST_HANDLING",
+		"RESPONSE_CONTENT_TYPE",
+		"CUSTOM_RESPONSE",
+		"CUSTOM_RESPONSE_BODY",
 		"JSON_MATCH_PATTERN",
 		"JSON_MATCH_SCOPE",
 		"BODY_PARSING_FALLBACK_BEHAVIOR",
@@ -802,6 +810,26 @@ func (ResourceType) Values() []ResourceType {
 		"APPLICATION_LOAD_BALANCER",
 		"API_GATEWAY",
 		"APPSYNC",
+	}
+}
+
+type ResponseContentType string
+
+// Enum values for ResponseContentType
+const (
+	ResponseContentTypeTextPlain       ResponseContentType = "TEXT_PLAIN"
+	ResponseContentTypeTextHtml        ResponseContentType = "TEXT_HTML"
+	ResponseContentTypeApplicationJson ResponseContentType = "APPLICATION_JSON"
+)
+
+// Values returns all known values for ResponseContentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResponseContentType) Values() []ResponseContentType {
+	return []ResponseContentType{
+		"TEXT_PLAIN",
+		"TEXT_HTML",
+		"APPLICATION_JSON",
 	}
 }
 

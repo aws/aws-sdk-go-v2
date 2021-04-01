@@ -4782,7 +4782,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are\n      already associated with the rule.</p>\n         <p>Targets are the resources that are invoked when a rule is triggered.</p>\n         <p>You can configure the following as targets for Events:</p>\n\n         <ul>\n            <li>\n               <p>EC2 instances</p>\n            </li>\n            <li>\n               <p>SSM Run Command</p>\n            </li>\n            <li>\n               <p>SSM Automation</p>\n            </li>\n            <li>\n               <p>AWS Lambda functions</p>\n            </li>\n            <li>\n               <p>Data streams in Amazon Kinesis Data Streams</p>\n            </li>\n            <li>\n               <p>Data delivery streams in Amazon Kinesis Data Firehose</p>\n            </li>\n            <li>\n               <p>Amazon ECS tasks</p>\n            </li>\n            <li>\n               <p>AWS Step Functions state machines</p>\n            </li>\n            <li>\n               <p>AWS Batch jobs</p>\n            </li>\n            <li>\n               <p>AWS CodeBuild projects</p>\n            </li>\n            <li>\n               <p>Pipelines in AWS CodePipeline</p>\n            </li>\n            <li>\n               <p>Amazon Inspector assessment templates</p>\n            </li>\n            <li>\n               <p>Amazon SNS topics</p>\n            </li>\n            <li>\n               <p>Amazon SQS queues, including FIFO queues</p>\n            </li>\n            <li>\n               <p>The default event bus of another AWS account</p>\n            </li>\n            <li>\n               <p>Amazon API Gateway REST APIs</p>\n            </li>\n            <li>\n               <p>Redshift Clusters to invoke Data API ExecuteStatement on</p>\n            </li>\n            <li>\n               <p>Custom/SaaS HTTPS APIs via EventBridge API Destinations</p>\n            </li>\n         </ul>\n\n\n\n         <p>Creating rules with built-in targets is supported only in the AWS Management Console. The\n      built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API\n        call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API\n        call</code>. </p>\n\n         <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the\n      target is a Kinesis data stream, you can optionally specify which shard the event goes to by\n      using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2\n      instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>\n\n         <p>To be able to make API calls against the resources that you own, Amazon EventBridge\n      (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS\n      resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data\n      streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on\n      IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication\n        and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n\n         <p>If another AWS account is in the same region and has granted you permission (using\n        <code>PutPermission</code>), you can send events to that account. Set that account's event\n      bus as a target of the rules in your account. To send the matched events to the other account,\n      specify that account's event bus as the <code>Arn</code> value when you run\n        <code>PutTargets</code>. If your account sends events to another account, your account is\n      charged for each sent event. Each event sent to another account is charged as a custom event.\n      The account receiving the event is not charged. For more information, see <a href=\"https://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge (CloudWatch Events)\n        Pricing</a>.</p>\n\n         <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not\n        available with <code>PutTarget</code> if the target is an event bus of a different AWS\n        account.</p>\n         </note>\n\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n        Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n\n         <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p>\n\n         <p>\n            <b>Input</b>, <b>InputPath</b>, and\n        <b>InputTransformer</b> are mutually exclusive and optional\n      parameters of a target. When a rule is triggered due to a matched event:</p>\n\n         <ul>\n            <li>\n               <p>If none of the following arguments are specified for a target, then the entire event\n          is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or\n          Amazon ECS task, in which case nothing from the event is passed to the target).</p>\n            </li>\n            <li>\n               <p>If <b>Input</b> is specified in the form of valid JSON, then\n          the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n               <p>If <b>InputPath</b> is specified in the form of JSONPath\n          (for example, <code>$.detail</code>), then only the part of the event specified in the\n          path is passed to the target (for example, only the detail part of the event is\n          passed).</p>\n            </li>\n            <li>\n               <p>If <b>InputTransformer</b> is specified, then one or more\n          specified JSONPaths are extracted from the event and used as values in a template that you\n          specify as the input to the target.</p>\n            </li>\n         </ul>\n\n         <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use\n      JSON dot notation, not bracket notation.</p>\n\n         <p>When you add targets to a rule and the associated rule triggers soon after, new or updated\n      targets might not be immediately invoked. Allow a short period of time for changes to take\n      effect.</p>\n\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
+                "smithy.api#documentation": "<p>Adds the specified targets to the specified rule, or updates the targets if they are\n      already associated with the rule.</p>\n         <p>Targets are the resources that are invoked when a rule is triggered.</p>\n         <p>You can configure the following as targets for Events:</p>\n\n         <ul>\n            <li>\n               <p>EC2 instances</p>\n            </li>\n            <li>\n               <p>SSM Run Command</p>\n            </li>\n            <li>\n               <p>SSM Automation</p>\n            </li>\n            <li>\n               <p>AWS Lambda functions</p>\n            </li>\n            <li>\n               <p>Data streams in Amazon Kinesis Data Streams</p>\n            </li>\n            <li>\n               <p>Data delivery streams in Amazon Kinesis Data Firehose</p>\n            </li>\n            <li>\n               <p>Amazon ECS tasks</p>\n            </li>\n            <li>\n               <p>AWS Step Functions state machines</p>\n            </li>\n            <li>\n               <p>AWS Batch jobs</p>\n            </li>\n            <li>\n               <p>AWS CodeBuild projects</p>\n            </li>\n            <li>\n               <p>Pipelines in AWS CodePipeline</p>\n            </li>\n            <li>\n               <p>Amazon Inspector assessment templates</p>\n            </li>\n            <li>\n               <p>Amazon SNS topics</p>\n            </li>\n            <li>\n               <p>Amazon SQS queues, including FIFO queues</p>\n            </li>\n            <li>\n               <p>The default event bus of another AWS account</p>\n            </li>\n            <li>\n               <p>Amazon API Gateway REST APIs</p>\n            </li>\n            <li>\n               <p>Redshift Clusters to invoke Data API ExecuteStatement on</p>\n            </li>\n            <li>\n               <p>Custom/SaaS HTTPS APIs via EventBridge API Destinations</p>\n            </li>\n            <li>\n               <p>Amazon SageMaker Model Building Pipelines</p>\n            </li>\n         </ul>\n\n\n\n         <p>Creating rules with built-in targets is supported only in the AWS Management Console. The\n      built-in targets are <code>EC2 CreateSnapshot API call</code>, <code>EC2 RebootInstances API\n        call</code>, <code>EC2 StopInstances API call</code>, and <code>EC2 TerminateInstances API\n        call</code>. </p>\n\n         <p>For some target types, <code>PutTargets</code> provides target-specific parameters. If the\n      target is a Kinesis data stream, you can optionally specify which shard the event goes to by\n      using the <code>KinesisParameters</code> argument. To invoke a command on multiple EC2\n      instances with one rule, you can use the <code>RunCommandParameters</code> field.</p>\n\n         <p>To be able to make API calls against the resources that you own, Amazon EventBridge\n      (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS\n      resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data\n      streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on\n      IAM roles that you specify in the <code>RoleARN</code> argument in <code>PutTargets</code>.\n      For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html\">Authentication\n        and Access Control</a> in the <i>Amazon EventBridge User Guide</i>.</p>\n\n         <p>If another AWS account is in the same region and has granted you permission (using\n        <code>PutPermission</code>), you can send events to that account. Set that account's event\n      bus as a target of the rules in your account. To send the matched events to the other account,\n      specify that account's event bus as the <code>Arn</code> value when you run\n        <code>PutTargets</code>. If your account sends events to another account, your account is\n      charged for each sent event. Each event sent to another account is charged as a custom event.\n      The account receiving the event is not charged. For more information, see <a href=\"https://aws.amazon.com/eventbridge/pricing/\">Amazon EventBridge (CloudWatch Events)\n        Pricing</a>.</p>\n\n         <note>\n            <p>\n               <code>Input</code>, <code>InputPath</code>, and <code>InputTransformer</code> are not\n        available with <code>PutTarget</code> if the target is an event bus of a different AWS\n        account.</p>\n         </note>\n\n         <p>If you are setting the event bus of another account as the target, and that account\n      granted permission to your account through an organization instead of directly by the account\n      ID, then you must specify a <code>RoleArn</code> with proper permissions in the\n        <code>Target</code> structure. For more information, see <a href=\"https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-cross-account-event-delivery.html\">Sending and\n        Receiving Events Between AWS Accounts</a> in the <i>Amazon EventBridge User\n        Guide</i>.</p>\n\n         <p>For more information about enabling cross-account events, see <a>PutPermission</a>.</p>\n\n         <p>\n            <b>Input</b>, <b>InputPath</b>, and\n        <b>InputTransformer</b> are mutually exclusive and optional\n      parameters of a target. When a rule is triggered due to a matched event:</p>\n\n         <ul>\n            <li>\n               <p>If none of the following arguments are specified for a target, then the entire event\n          is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or\n          Amazon ECS task, in which case nothing from the event is passed to the target).</p>\n            </li>\n            <li>\n               <p>If <b>Input</b> is specified in the form of valid JSON, then\n          the matched event is overridden with this constant.</p>\n            </li>\n            <li>\n               <p>If <b>InputPath</b> is specified in the form of JSONPath\n          (for example, <code>$.detail</code>), then only the part of the event specified in the\n          path is passed to the target (for example, only the detail part of the event is\n          passed).</p>\n            </li>\n            <li>\n               <p>If <b>InputTransformer</b> is specified, then one or more\n          specified JSONPaths are extracted from the event and used as values in a template that you\n          specify as the input to the target.</p>\n            </li>\n         </ul>\n\n         <p>When you specify <code>InputPath</code> or <code>InputTransformer</code>, you must use\n      JSON dot notation, not bracket notation.</p>\n\n         <p>When you add targets to a rule and the associated rule triggers soon after, new or updated\n      targets might not be immediately invoked. Allow a short period of time for changes to take\n      effect.</p>\n\n         <p>This action can partially fail if too many requests are made at the same time. If that\n      happens, <code>FailedEntryCount</code> is non-zero in the response and each entry in\n        <code>FailedEntries</code> provides the ID of the failed target and the error code.</p>"
             }
         },
         "com.amazonaws.cloudwatchevents#PutTargetsRequest": {
@@ -5530,6 +5530,73 @@
                 }
             }
         },
+        "com.amazonaws.cloudwatchevents#SageMakerPipelineParameter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of parameter to start execution of a SageMaker Model Building Pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value of parameter to start execution of a SageMaker Model Building Pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Name/Value pair of a parameter to start execution of a SageMaker Model Building\n      Pipeline.</p>"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
+            }
+        },
+        "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchevents#SageMakerPipelineParameters": {
+            "type": "structure",
+            "members": {
+                "PipelineParameterList": {
+                    "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of Parameter names and values for SageMaker Model Building Pipeline execution.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>These are custom parameters to use when the target is a SageMaker Model Building Pipeline\n      that starts based on EventBridge events.</p>"
+            }
+        },
         "com.amazonaws.cloudwatchevents#ScheduleExpression": {
             "type": "string",
             "traits": {
@@ -5886,6 +5953,12 @@
                     "target": "com.amazonaws.cloudwatchevents#RedshiftDataParameters",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the Redshift Data API parameters to use when the target is a Redshift\n      cluster.</p>\n         <p>If you specify a Redshift Cluster as a Target, you can use this to specify parameters to\n      invoke the Redshift Data API ExecuteStatement based on EventBridge events.</p>"
+                    }
+                },
+                "SageMakerPipelineParameters": {
+                    "target": "com.amazonaws.cloudwatchevents#SageMakerPipelineParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the SageMaker Model Building Pipeline parameters to start execution of a\n      SageMaker Model Building Pipeline.</p>\n         <p>If you specify a SageMaker Model Building Pipeline as a target, you can use this to\n      specify parameters to start a pipeline execution based on EventBridge events.</p>"
                     }
                 },
                 "DeadLetterConfig": {

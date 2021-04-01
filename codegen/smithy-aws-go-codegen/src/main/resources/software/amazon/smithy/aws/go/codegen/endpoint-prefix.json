@@ -151,6 +151,7 @@
   "License Manager": "license-manager",
   "Lightsail": "lightsail",
   "Location": "geo",
+  "LookoutMetrics": "lookoutmetrics",
   "LookoutVision": "lookoutvision",
   "MTurk": "mturk-requester",
   "MWAA": "airflow",

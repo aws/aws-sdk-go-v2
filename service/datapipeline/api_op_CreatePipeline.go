@@ -12,7 +12,14 @@ import (
 )
 
 // Creates a new, empty pipeline. Use PutPipelineDefinition to populate the
-// pipeline.
+// pipeline. POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1 X-Amz-Target:
+// DataPipeline.CreatePipeline Content-Length: 91 Host:
+// datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
+// Authorization: AuthParams {"name": "myPipeline", "uniqueId": "123456789",
+// "description": "This is my first pipeline"} HTTP/1.1 200 x-amzn-RequestId:
+// b16911ce-0774-11e2-af6f-6bc7a6be60d9 Content-Type: application/x-amz-json-1.1
+// Content-Length: 40 Date: Mon, 12 Nov 2012 17:50:53 GMT {"pipelineId":
+// "df-06372391ZG65EXAMPLE"}
 func (c *Client) CreatePipeline(ctx context.Context, params *CreatePipelineInput, optFns ...func(*Options)) (*CreatePipelineOutput, error) {
 	if params == nil {
 		params = &CreatePipelineInput{}
@@ -59,7 +66,7 @@ type CreatePipelineInput struct {
 	// A list of tags to associate with the pipeline at creation. Tags let you control
 	// access to pipelines. For more information, see Controlling User Access to
 	// Pipelines
-	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
+	// (http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-control-access.html)
 	// in the AWS Data Pipeline Developer Guide.
 	Tags []types.Tag
 }

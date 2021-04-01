@@ -628,7 +628,10 @@
                     }
                 },
                 "PublicAccessBlockConfiguration": {
-                    "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration"
+                    "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        The <code>PublicAccessBlock</code> configuration that you want to apply to the access point.\n      </p>"
+                    }
                 }
             }
         },
@@ -3649,6 +3652,10 @@
                     "method": "GET",
                     "uri": "/v20180820/storagelens",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken"
                 }
             }
         },
@@ -3984,7 +3991,7 @@
                 "Actions": {
                     "target": "com.amazonaws.s3control#ObjectLambdaTransformationConfigurationActionsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A container for the action of an Object Lambda Access Point configuration.</p>",
+                        "smithy.api#documentation": "<p>A container for the action of an Object Lambda Access Point configuration. Valid input is <code>GetObject</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },

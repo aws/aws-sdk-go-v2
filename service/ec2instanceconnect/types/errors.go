@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Indicates that either your AWS credentials are invalid or you do not have access
-// to the EC2 instance.
+// Either your AWS credentials are not valid or you do not have access to the EC2
+// instance.
 type AuthException struct {
 	Message *string
 }
@@ -25,8 +25,7 @@ func (e *AuthException) ErrorMessage() string {
 func (e *AuthException) ErrorCode() string             { return "AuthException" }
 func (e *AuthException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the instance requested was not found in the given zone. Check
-// that you have provided a valid instance ID and the correct zone.
+// The specified instance was not found.
 type EC2InstanceNotFoundException struct {
 	Message *string
 }
@@ -43,8 +42,27 @@ func (e *EC2InstanceNotFoundException) ErrorMessage() string {
 func (e *EC2InstanceNotFoundException) ErrorCode() string             { return "EC2InstanceNotFoundException" }
 func (e *EC2InstanceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that you provided bad input. Ensure you have a valid instance ID, the
-// correct zone, and a valid SSH public key.
+// The instance type is not supported for connecting via the serial console. Only
+// Nitro instance types are currently supported.
+type EC2InstanceTypeInvalidException struct {
+	Message *string
+}
+
+func (e *EC2InstanceTypeInvalidException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EC2InstanceTypeInvalidException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EC2InstanceTypeInvalidException) ErrorCode() string {
+	return "EC2InstanceTypeInvalidException"
+}
+func (e *EC2InstanceTypeInvalidException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// One of the parameters is not valid.
 type InvalidArgsException struct {
 	Message *string
 }
@@ -61,8 +79,76 @@ func (e *InvalidArgsException) ErrorMessage() string {
 func (e *InvalidArgsException) ErrorCode() string             { return "InvalidArgsException" }
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the service encountered an error. Follow the message's
-// instructions and try again.
+// Your account is not authorized to use the EC2 Serial Console. To authorize your
+// account, run the EnableSerialConsoleAccess API. For more information, see
+// EnableSerialConsoleAccess
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html)
+// in the Amazon EC2 API Reference.
+type SerialConsoleAccessDisabledException struct {
+	Message *string
+}
+
+func (e *SerialConsoleAccessDisabledException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SerialConsoleAccessDisabledException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SerialConsoleAccessDisabledException) ErrorCode() string {
+	return "SerialConsoleAccessDisabledException"
+}
+func (e *SerialConsoleAccessDisabledException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The instance currently has 1 active serial console session. Only 1 session is
+// supported at a time.
+type SerialConsoleSessionLimitExceededException struct {
+	Message *string
+}
+
+func (e *SerialConsoleSessionLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SerialConsoleSessionLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SerialConsoleSessionLimitExceededException) ErrorCode() string {
+	return "SerialConsoleSessionLimitExceededException"
+}
+func (e *SerialConsoleSessionLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// Unable to start a serial console session. Please try again.
+type SerialConsoleSessionUnavailableException struct {
+	Message *string
+}
+
+func (e *SerialConsoleSessionUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SerialConsoleSessionUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SerialConsoleSessionUnavailableException) ErrorCode() string {
+	return "SerialConsoleSessionUnavailableException"
+}
+func (e *SerialConsoleSessionUnavailableException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultServer
+}
+
+// The service encountered an error. Follow the instructions in the error message
+// and try again.
 type ServiceException struct {
 	Message *string
 }
@@ -79,9 +165,8 @@ func (e *ServiceException) ErrorMessage() string {
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Indicates you have been making requests too frequently and have been throttled.
-// Wait for a while and try again. If higher call volume is warranted contact AWS
-// Support.
+// The requests were made too frequently and have been throttled. Wait a while and
+// try again. To increase the limit on your request frequency, contact AWS Support.
 type ThrottlingException struct {
 	Message *string
 }

@@ -392,16 +392,19 @@ type AutoMLJobSecondaryStatus string
 
 // Enum values for AutoMLJobSecondaryStatus
 const (
-	AutoMLJobSecondaryStatusStarting                      AutoMLJobSecondaryStatus = "Starting"
-	AutoMLJobSecondaryStatusAnalyzingData                 AutoMLJobSecondaryStatus = "AnalyzingData"
-	AutoMLJobSecondaryStatusFeatureEngineering            AutoMLJobSecondaryStatus = "FeatureEngineering"
-	AutoMLJobSecondaryStatusModelTuning                   AutoMLJobSecondaryStatus = "ModelTuning"
-	AutoMLJobSecondaryStatusMaxCandidatesReached          AutoMLJobSecondaryStatus = "MaxCandidatesReached"
-	AutoMLJobSecondaryStatusFailed                        AutoMLJobSecondaryStatus = "Failed"
-	AutoMLJobSecondaryStatusStopped                       AutoMLJobSecondaryStatus = "Stopped"
-	AutoMLJobSecondaryStatusMaxAutoMlJobRuntimeReached    AutoMLJobSecondaryStatus = "MaxAutoMLJobRuntimeReached"
-	AutoMLJobSecondaryStatusStopping                      AutoMLJobSecondaryStatus = "Stopping"
-	AutoMLJobSecondaryStatusCandidateDefinitionsGenerated AutoMLJobSecondaryStatus = "CandidateDefinitionsGenerated"
+	AutoMLJobSecondaryStatusStarting                       AutoMLJobSecondaryStatus = "Starting"
+	AutoMLJobSecondaryStatusAnalyzingData                  AutoMLJobSecondaryStatus = "AnalyzingData"
+	AutoMLJobSecondaryStatusFeatureEngineering             AutoMLJobSecondaryStatus = "FeatureEngineering"
+	AutoMLJobSecondaryStatusModelTuning                    AutoMLJobSecondaryStatus = "ModelTuning"
+	AutoMLJobSecondaryStatusMaxCandidatesReached           AutoMLJobSecondaryStatus = "MaxCandidatesReached"
+	AutoMLJobSecondaryStatusFailed                         AutoMLJobSecondaryStatus = "Failed"
+	AutoMLJobSecondaryStatusStopped                        AutoMLJobSecondaryStatus = "Stopped"
+	AutoMLJobSecondaryStatusMaxAutoMlJobRuntimeReached     AutoMLJobSecondaryStatus = "MaxAutoMLJobRuntimeReached"
+	AutoMLJobSecondaryStatusStopping                       AutoMLJobSecondaryStatus = "Stopping"
+	AutoMLJobSecondaryStatusCandidateDefinitionsGenerated  AutoMLJobSecondaryStatus = "CandidateDefinitionsGenerated"
+	AutoMLJobSecondaryStatusGeneratingExplainabilityReport AutoMLJobSecondaryStatus = "GeneratingExplainabilityReport"
+	AutoMLJobSecondaryStatusCompleted                      AutoMLJobSecondaryStatus = "Completed"
+	AutoMLJobSecondaryStatusExplainabilityError            AutoMLJobSecondaryStatus = "ExplainabilityError"
 )
 
 // Values returns all known values for AutoMLJobSecondaryStatus. Note that this can
@@ -419,6 +422,9 @@ func (AutoMLJobSecondaryStatus) Values() []AutoMLJobSecondaryStatus {
 		"MaxAutoMLJobRuntimeReached",
 		"Stopping",
 		"CandidateDefinitionsGenerated",
+		"GeneratingExplainabilityReport",
+		"Completed",
+		"ExplainabilityError",
 	}
 }
 

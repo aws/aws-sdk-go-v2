@@ -13261,6 +13261,13 @@ func awsAwsjson11_serializeDocumentImageConfig(v *types.ImageConfig, value smith
 		ok.String(string(v.RepositoryAccessMode))
 	}
 
+	if v.RepositoryAuthConfig != nil {
+		ok := object.Key("RepositoryAuthConfig")
+		if err := awsAwsjson11_serializeDocumentRepositoryAuthConfig(v.RepositoryAuthConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -15600,6 +15607,18 @@ func awsAwsjson11_serializeDocumentRenderableTask(v *types.RenderableTask, value
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRepositoryAuthConfig(v *types.RepositoryAuthConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RepositoryCredentialsProviderArn != nil {
+		ok := object.Key("RepositoryCredentialsProviderArn")
+		ok.String(*v.RepositoryCredentialsProviderArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentResourceConfig(v *types.ResourceConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16109,6 +16128,17 @@ func awsAwsjson11_serializeDocumentTrafficRoutingConfig(v *types.TrafficRoutingC
 		ok.Integer(*v.WaitIntervalInSeconds)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTrainingEnvironmentMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 
@@ -18489,6 +18519,13 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingJobInput(v *CreateTrainingJob
 	if v.EnableNetworkIsolation {
 		ok := object.Key("EnableNetworkIsolation")
 		ok.Boolean(v.EnableNetworkIsolation)
+	}
+
+	if v.Environment != nil {
+		ok := object.Key("Environment")
+		if err := awsAwsjson11_serializeDocumentTrainingEnvironmentMap(v.Environment, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ExperimentConfig != nil {

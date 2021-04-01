@@ -1336,7 +1336,8 @@
                 "Name": {
                     "target": "com.amazonaws.greengrass#__string",
                     "traits": {
-                        "smithy.api#documentation": "The name of the group."
+                        "smithy.api#documentation": "The name of the group.",
+                        "smithy.api#required": {}
                     }
                 },
                 "tags": {

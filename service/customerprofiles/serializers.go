@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -1682,6 +1683,13 @@ func awsRestjson1_serializeOpDocumentPutIntegrationInput(v *PutIntegrationInput,
 	object := value.Object()
 	defer object.Close()
 
+	if v.FlowDefinition != nil {
+		ok := object.Key("FlowDefinition")
+		if err := awsRestjson1_serializeDocumentFlowDefinition(v.FlowDefinition, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ObjectTypeName != nil {
 		ok := object.Key("ObjectTypeName")
 		ok.String(*v.ObjectTypeName)
@@ -2524,6 +2532,38 @@ func awsRestjson1_serializeDocumentAttributes(v map[string]string, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentConnectorOperator(v *types.ConnectorOperator, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Marketo) > 0 {
+		ok := object.Key("Marketo")
+		ok.String(string(v.Marketo))
+	}
+
+	if len(v.S3) > 0 {
+		ok := object.Key("S3")
+		ok.String(string(v.S3))
+	}
+
+	if len(v.Salesforce) > 0 {
+		ok := object.Key("Salesforce")
+		ok.String(string(v.Salesforce))
+	}
+
+	if len(v.ServiceNow) > 0 {
+		ok := object.Key("ServiceNow")
+		ok.String(string(v.ServiceNow))
+	}
+
+	if len(v.Zendesk) > 0 {
+		ok := object.Key("Zendesk")
+		ok.String(string(v.Zendesk))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFieldMap(v map[string]types.ObjectTypeField, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2549,6 +2589,61 @@ func awsRestjson1_serializeDocumentFieldNameList(v []string, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFlowDefinition(v *types.FlowDefinition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.FlowName != nil {
+		ok := object.Key("FlowName")
+		ok.String(*v.FlowName)
+	}
+
+	if v.KmsArn != nil {
+		ok := object.Key("KmsArn")
+		ok.String(*v.KmsArn)
+	}
+
+	if v.SourceFlowConfig != nil {
+		ok := object.Key("SourceFlowConfig")
+		if err := awsRestjson1_serializeDocumentSourceFlowConfig(v.SourceFlowConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tasks != nil {
+		ok := object.Key("Tasks")
+		if err := awsRestjson1_serializeDocumentTasks(v.Tasks, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TriggerConfig != nil {
+		ok := object.Key("TriggerConfig")
+		if err := awsRestjson1_serializeDocumentTriggerConfig(v.TriggerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIncrementalPullConfig(v *types.IncrementalPullConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatetimeTypeFieldName != nil {
+		ok := object.Key("DatetimeTypeFieldName")
+		ok.String(*v.DatetimeTypeFieldName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentKeyMap(v map[string][]types.ObjectTypeKey, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2562,6 +2657,18 @@ func awsRestjson1_serializeDocumentKeyMap(v map[string][]types.ObjectTypeKey, va
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMarketoSourceProperties(v *types.MarketoSourceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Object != nil {
+		ok := object.Key("Object")
+		ok.String(*v.Object)
+	}
+
 	return nil
 }
 
@@ -2632,6 +2739,183 @@ func awsRestjson1_serializeDocumentRequestValueList(v []string, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3SourceProperties(v *types.S3SourceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("BucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.BucketPrefix != nil {
+		ok := object.Key("BucketPrefix")
+		ok.String(*v.BucketPrefix)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSalesforceSourceProperties(v *types.SalesforceSourceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableDynamicFieldUpdate {
+		ok := object.Key("EnableDynamicFieldUpdate")
+		ok.Boolean(v.EnableDynamicFieldUpdate)
+	}
+
+	if v.IncludeDeletedRecords {
+		ok := object.Key("IncludeDeletedRecords")
+		ok.Boolean(v.IncludeDeletedRecords)
+	}
+
+	if v.Object != nil {
+		ok := object.Key("Object")
+		ok.String(*v.Object)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentScheduledTriggerProperties(v *types.ScheduledTriggerProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataPullMode) > 0 {
+		ok := object.Key("DataPullMode")
+		ok.String(string(v.DataPullMode))
+	}
+
+	if v.FirstExecutionFrom != nil {
+		ok := object.Key("FirstExecutionFrom")
+		ok.Double(smithytime.FormatEpochSeconds(*v.FirstExecutionFrom))
+	}
+
+	if v.ScheduleEndTime != nil {
+		ok := object.Key("ScheduleEndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ScheduleEndTime))
+	}
+
+	if v.ScheduleExpression != nil {
+		ok := object.Key("ScheduleExpression")
+		ok.String(*v.ScheduleExpression)
+	}
+
+	if v.ScheduleOffset != 0 {
+		ok := object.Key("ScheduleOffset")
+		ok.Long(v.ScheduleOffset)
+	}
+
+	if v.ScheduleStartTime != nil {
+		ok := object.Key("ScheduleStartTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ScheduleStartTime))
+	}
+
+	if v.Timezone != nil {
+		ok := object.Key("Timezone")
+		ok.String(*v.Timezone)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceNowSourceProperties(v *types.ServiceNowSourceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Object != nil {
+		ok := object.Key("Object")
+		ok.String(*v.Object)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceConnectorProperties(v *types.SourceConnectorProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Marketo != nil {
+		ok := object.Key("Marketo")
+		if err := awsRestjson1_serializeDocumentMarketoSourceProperties(v.Marketo, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3 != nil {
+		ok := object.Key("S3")
+		if err := awsRestjson1_serializeDocumentS3SourceProperties(v.S3, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Salesforce != nil {
+		ok := object.Key("Salesforce")
+		if err := awsRestjson1_serializeDocumentSalesforceSourceProperties(v.Salesforce, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ServiceNow != nil {
+		ok := object.Key("ServiceNow")
+		if err := awsRestjson1_serializeDocumentServiceNowSourceProperties(v.ServiceNow, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Zendesk != nil {
+		ok := object.Key("Zendesk")
+		if err := awsRestjson1_serializeDocumentZendeskSourceProperties(v.Zendesk, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceFields(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSourceFlowConfig(v *types.SourceFlowConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectorProfileName != nil {
+		ok := object.Key("ConnectorProfileName")
+		ok.String(*v.ConnectorProfileName)
+	}
+
+	if len(v.ConnectorType) > 0 {
+		ok := object.Key("ConnectorType")
+		ok.String(string(v.ConnectorType))
+	}
+
+	if v.IncrementalPullConfig != nil {
+		ok := object.Key("IncrementalPullConfig")
+		if err := awsRestjson1_serializeDocumentIncrementalPullConfig(v.IncrementalPullConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SourceConnectorProperties != nil {
+		ok := object.Key("SourceConnectorProperties")
+		if err := awsRestjson1_serializeDocumentSourceConnectorProperties(v.SourceConnectorProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentStandardIdentifierList(v []types.StandardIdentifier, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2651,6 +2935,101 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTask(v *types.Task, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectorOperator != nil {
+		ok := object.Key("ConnectorOperator")
+		if err := awsRestjson1_serializeDocumentConnectorOperator(v.ConnectorOperator, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DestinationField != nil {
+		ok := object.Key("DestinationField")
+		ok.String(*v.DestinationField)
+	}
+
+	if v.SourceFields != nil {
+		ok := object.Key("SourceFields")
+		if err := awsRestjson1_serializeDocumentSourceFields(v.SourceFields, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TaskProperties != nil {
+		ok := object.Key("TaskProperties")
+		if err := awsRestjson1_serializeDocumentTaskPropertiesMap(v.TaskProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TaskType) > 0 {
+		ok := object.Key("TaskType")
+		ok.String(string(v.TaskType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaskPropertiesMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTasks(v []types.Task, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTask(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerConfig(v *types.TriggerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TriggerProperties != nil {
+		ok := object.Key("TriggerProperties")
+		if err := awsRestjson1_serializeDocumentTriggerProperties(v.TriggerProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.TriggerType) > 0 {
+		ok := object.Key("TriggerType")
+		ok.String(string(v.TriggerType))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTriggerProperties(v *types.TriggerProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Scheduled != nil {
+		ok := object.Key("Scheduled")
+		if err := awsRestjson1_serializeDocumentScheduledTriggerProperties(v.Scheduled, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2719,5 +3098,17 @@ func awsRestjson1_serializeDocumentUpdateAttributes(v map[string]string, value s
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentZendeskSourceProperties(v *types.ZendeskSourceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Object != nil {
+		ok := object.Key("Object")
+		ok.String(*v.Object)
+	}
+
 	return nil
 }

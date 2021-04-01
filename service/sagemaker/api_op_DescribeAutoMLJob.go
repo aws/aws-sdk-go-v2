@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns information about an Amazon SageMaker job.
+// Returns information about an Amazon SageMaker AutoML job.
 func (c *Client) DescribeAutoMLJob(ctx context.Context, params *DescribeAutoMLJobInput, optFns ...func(*Options)) (*DescribeAutoMLJobOutput, error) {
 	if params == nil {
 		params = &DescribeAutoMLJobInput{}
@@ -30,7 +30,7 @@ func (c *Client) DescribeAutoMLJob(ctx context.Context, params *DescribeAutoMLJo
 
 type DescribeAutoMLJobInput struct {
 
-	// Request information about a job using that job's unique name.
+	// Requests information about an AutoML job using its unique name.
 	//
 	// This member is required.
 	AutoMLJobName *string
@@ -38,32 +38,32 @@ type DescribeAutoMLJobInput struct {
 
 type DescribeAutoMLJobOutput struct {
 
-	// Returns the job's ARN.
+	// Returns the ARN of the AutoML job.
 	//
 	// This member is required.
 	AutoMLJobArn *string
 
-	// Returns the name of a job.
+	// Returns the name of the AutoML job.
 	//
 	// This member is required.
 	AutoMLJobName *string
 
-	// Returns the job's AutoMLJobSecondaryStatus.
+	// Returns the secondary status of the AutoML job.
 	//
 	// This member is required.
 	AutoMLJobSecondaryStatus types.AutoMLJobSecondaryStatus
 
-	// Returns the job's AutoMLJobStatus.
+	// Returns the status of the AutoML job's AutoMLJobStatus.
 	//
 	// This member is required.
 	AutoMLJobStatus types.AutoMLJobStatus
 
-	// Returns the job's creation time.
+	// Returns the creation time of the AutoML job.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// Returns the job's input data config.
+	// Returns the input data configuration for the AutoML job..
 	//
 	// This member is required.
 	InputDataConfig []types.AutoMLChannel
@@ -88,7 +88,7 @@ type DescribeAutoMLJobOutput struct {
 	// Returns information on the job's artifacts found in AutoMLJobArtifacts.
 	AutoMLJobArtifacts *types.AutoMLJobArtifacts
 
-	// Returns the job's config.
+	// Returns the configuration for the AutoML job.
 	AutoMLJobConfig *types.AutoMLJobConfig
 
 	// Returns the job's objective.
@@ -97,7 +97,7 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's BestCandidate.
 	BestCandidate *types.AutoMLCandidate
 
-	// Returns the job's end time.
+	// Returns the end time of the AutoML job.
 	EndTime *time.Time
 
 	// Returns the job's FailureReason.
@@ -106,12 +106,15 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's output from GenerateCandidateDefinitionsOnly.
 	GenerateCandidateDefinitionsOnly bool
 
+	// Returns a list of reasons for partial failures within an AutoML job.
+	PartialFailureReasons []types.AutoMLPartialFailureReason
+
 	// Returns the job's problem type.
 	ProblemType types.ProblemType
 
-	// This contains ProblemType, AutoMLJobObjective and CompletionCriteria. They're
-	// auto-inferred values, if not provided by you. If you do provide them, then
-	// they'll be the same as provided.
+	// This contains ProblemType, AutoMLJobObjective and CompletionCriteria. If you do
+	// not provide these values, they are auto-inferred. If you do provide them, they
+	// are the values you provide.
 	ResolvedAttributes *types.ResolvedAttributes
 
 	// Metadata pertaining to the operation's result.

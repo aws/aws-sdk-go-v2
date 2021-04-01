@@ -861,6 +861,29 @@ func validateConditionExpressionList(v []types.ConditionExpression) error {
 	}
 }
 
+func validateDatabaseInputDefinition(v *types.DatabaseInputDefinition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatabaseInputDefinition"}
+	if v.GlueConnectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlueConnectionName"))
+	}
+	if v.DatabaseTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseTableName"))
+	}
+	if v.TempDirectory != nil {
+		if err := validateS3Location(v.TempDirectory); err != nil {
+			invalidParams.AddNested("TempDirectory", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataCatalogInputDefinition(v *types.DataCatalogInputDefinition) error {
 	if v == nil {
 		return nil
@@ -884,6 +907,79 @@ func validateDataCatalogInputDefinition(v *types.DataCatalogInputDefinition) err
 	}
 }
 
+func validateDatasetParameter(v *types.DatasetParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatasetParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.DatetimeOptions != nil {
+		if err := validateDatetimeOptions(v.DatetimeOptions); err != nil {
+			invalidParams.AddNested("DatetimeOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Filter != nil {
+		if err := validateFilterExpression(v.Filter); err != nil {
+			invalidParams.AddNested("Filter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDatetimeOptions(v *types.DatetimeOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatetimeOptions"}
+	if v.Format == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilesLimit(v *types.FilesLimit) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilesLimit"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilterExpression(v *types.FilterExpression) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FilterExpression"}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	}
+	if v.ValuesMap == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ValuesMap"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateInput(v *types.Input) error {
 	if v == nil {
 		return nil
@@ -897,6 +993,11 @@ func validateInput(v *types.Input) error {
 	if v.DataCatalogInputDefinition != nil {
 		if err := validateDataCatalogInputDefinition(v.DataCatalogInputDefinition); err != nil {
 			invalidParams.AddNested("DataCatalogInputDefinition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DatabaseInputDefinition != nil {
+		if err := validateDatabaseInputDefinition(v.DatabaseInputDefinition); err != nil {
+			invalidParams.AddNested("DatabaseInputDefinition", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -933,6 +1034,51 @@ func validateOutputList(v []types.Output) error {
 	for i := range v {
 		if err := validateOutput(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePathOptions(v *types.PathOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PathOptions"}
+	if v.LastModifiedDateCondition != nil {
+		if err := validateFilterExpression(v.LastModifiedDateCondition); err != nil {
+			invalidParams.AddNested("LastModifiedDateCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FilesLimit != nil {
+		if err := validateFilesLimit(v.FilesLimit); err != nil {
+			invalidParams.AddNested("FilesLimit", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Parameters != nil {
+		if err := validatePathParametersMap(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePathParametersMap(v map[string]types.DatasetParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PathParametersMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateDatasetParameter(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1089,6 +1235,11 @@ func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
 	} else if v.Input != nil {
 		if err := validateInput(v.Input); err != nil {
 			invalidParams.AddNested("Input", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PathOptions != nil {
+		if err := validatePathOptions(v.PathOptions); err != nil {
+			invalidParams.AddNested("PathOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1578,6 +1729,11 @@ func validateOpUpdateDatasetInput(v *UpdateDatasetInput) error {
 	} else if v.Input != nil {
 		if err := validateInput(v.Input); err != nil {
 			invalidParams.AddNested("Input", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PathOptions != nil {
+		if err := validatePathOptions(v.PathOptions); err != nil {
+			invalidParams.AddNested("PathOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

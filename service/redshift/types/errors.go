@@ -7,6 +7,23 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// You are not authorized to access the cluster.
+type AccessToClusterDeniedFault struct {
+	Message *string
+}
+
+func (e *AccessToClusterDeniedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessToClusterDeniedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessToClusterDeniedFault) ErrorCode() string             { return "AccessToClusterDeniedFault" }
+func (e *AccessToClusterDeniedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The owner of the specified snapshot has not authorized your account to access
 // the snapshot.
 type AccessToSnapshotDeniedFault struct {
@@ -552,6 +569,147 @@ func (e *DependentServiceUnavailableFault) ErrorCode() string {
 }
 func (e *DependentServiceUnavailableFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The account already has a Redshift-managed VPC endpoint with the given
+// identifier.
+type EndpointAlreadyExistsFault struct {
+	Message *string
+}
+
+func (e *EndpointAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointAlreadyExistsFault) ErrorCode() string             { return "EndpointAlreadyExistsFault" }
+func (e *EndpointAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The authorization already exists for this endpoint.
+type EndpointAuthorizationAlreadyExistsFault struct {
+	Message *string
+}
+
+func (e *EndpointAuthorizationAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointAuthorizationAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointAuthorizationAlreadyExistsFault) ErrorCode() string {
+	return "EndpointAuthorizationAlreadyExistsFault"
+}
+func (e *EndpointAuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The authorization for this endpoint can't be found.
+type EndpointAuthorizationNotFoundFault struct {
+	Message *string
+}
+
+func (e *EndpointAuthorizationNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointAuthorizationNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointAuthorizationNotFoundFault) ErrorCode() string {
+	return "EndpointAuthorizationNotFoundFault"
+}
+func (e *EndpointAuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The number of endpoint authorizations per cluster has exceeded its limit.
+type EndpointAuthorizationsPerClusterLimitExceededFault struct {
+	Message *string
+}
+
+func (e *EndpointAuthorizationsPerClusterLimitExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointAuthorizationsPerClusterLimitExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointAuthorizationsPerClusterLimitExceededFault) ErrorCode() string {
+	return "EndpointAuthorizationsPerClusterLimitExceededFault"
+}
+func (e *EndpointAuthorizationsPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The endpoint name doesn't refer to an existing endpoint.
+type EndpointNotFoundFault struct {
+	Message *string
+}
+
+func (e *EndpointNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointNotFoundFault) ErrorCode() string             { return "EndpointNotFoundFault" }
+func (e *EndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The number of Redshift-managed VPC endpoints per authorization has exceeded its
+// limit.
+type EndpointsPerAuthorizationLimitExceededFault struct {
+	Message *string
+}
+
+func (e *EndpointsPerAuthorizationLimitExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointsPerAuthorizationLimitExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointsPerAuthorizationLimitExceededFault) ErrorCode() string {
+	return "EndpointsPerAuthorizationLimitExceededFault"
+}
+func (e *EndpointsPerAuthorizationLimitExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The number of Redshift-managed VPC endpoints per cluster has exceeded its limit.
+type EndpointsPerClusterLimitExceededFault struct {
+	Message *string
+}
+
+func (e *EndpointsPerClusterLimitExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *EndpointsPerClusterLimitExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *EndpointsPerClusterLimitExceededFault) ErrorCode() string {
+	return "EndpointsPerClusterLimitExceededFault"
+}
+func (e *EndpointsPerClusterLimitExceededFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The request would exceed the allowed number of event subscriptions for this
 // account. For information about increasing your quota, go to Limits in Amazon
 // Redshift
@@ -784,6 +942,23 @@ func (e *InsufficientS3BucketPolicyFault) ErrorCode() string {
 }
 func (e *InsufficientS3BucketPolicyFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The status of the authorization is not valid.
+type InvalidAuthorizationStateFault struct {
+	Message *string
+}
+
+func (e *InvalidAuthorizationStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidAuthorizationStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidAuthorizationStateFault) ErrorCode() string             { return "InvalidAuthorizationStateFault" }
+func (e *InvalidAuthorizationStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The cluster parameter group action can not be completed because another task is
 // in progress that involves the parameter group. Wait a few moments and try the
 // operation again.
@@ -957,6 +1132,23 @@ func (e *InvalidElasticIpFault) ErrorMessage() string {
 }
 func (e *InvalidElasticIpFault) ErrorCode() string             { return "InvalidElasticIpFault" }
 func (e *InvalidElasticIpFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The status of the endpoint is not valid.
+type InvalidEndpointStateFault struct {
+	Message *string
+}
+
+func (e *InvalidEndpointStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidEndpointStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidEndpointStateFault) ErrorCode() string             { return "InvalidEndpointStateFault" }
+func (e *InvalidEndpointStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified HSM client certificate is not in the available state, or it is
 // still in use by one or more Amazon Redshift clusters.

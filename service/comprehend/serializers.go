@@ -3713,6 +3713,11 @@ func awsAwsjson11_serializeOpDocumentCreateDocumentClassifierInput(v *CreateDocu
 		ok.String(string(v.Mode))
 	}
 
+	if v.ModelKmsKeyId != nil {
+		ok := object.Key("ModelKmsKeyId")
+		ok.String(*v.ModelKmsKeyId)
+	}
+
 	if v.OutputDataConfig != nil {
 		ok := object.Key("OutputDataConfig")
 		if err := awsAwsjson11_serializeDocumentDocumentClassifierOutputDataConfig(v.OutputDataConfig, ok); err != nil {
@@ -3749,6 +3754,11 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointInput(v *CreateEndpointInput,
 	if v.ClientRequestToken != nil {
 		ok := object.Key("ClientRequestToken")
 		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.DataAccessRoleArn != nil {
+		ok := object.Key("DataAccessRoleArn")
+		ok.String(*v.DataAccessRoleArn)
 	}
 
 	if v.DesiredInferenceUnits != nil {
@@ -3800,6 +3810,11 @@ func awsAwsjson11_serializeOpDocumentCreateEntityRecognizerInput(v *CreateEntity
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))
+	}
+
+	if v.ModelKmsKeyId != nil {
+		ok := object.Key("ModelKmsKeyId")
+		ok.String(*v.ModelKmsKeyId)
 	}
 
 	if v.RecognizerName != nil {

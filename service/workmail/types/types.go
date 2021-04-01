@@ -185,6 +185,64 @@ type Member struct {
 	Type MemberType
 }
 
+// The rule that a simulated user matches.
+type MobileDeviceAccessMatchedRule struct {
+
+	// Identifier of the rule that a simulated user matches.
+	MobileDeviceAccessRuleId *string
+
+	// Name of a rule that a simulated user matches.
+	Name *string
+}
+
+// A rule that controls access to mobile devices for an Amazon WorkMail group.
+type MobileDeviceAccessRule struct {
+
+	// The date and time at which an access rule was created.
+	DateCreated *time.Time
+
+	// The date and time at which an access rule was modified.
+	DateModified *time.Time
+
+	// The description of a mobile access rule.
+	Description *string
+
+	// Device models that a rule will match.
+	DeviceModels []string
+
+	// Device operating systems that a rule will match.
+	DeviceOperatingSystems []string
+
+	// Device types that a rule will match.
+	DeviceTypes []string
+
+	// Device user agents that a rule will match.
+	DeviceUserAgents []string
+
+	// The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+	Effect MobileDeviceAccessRuleEffect
+
+	// The ID assigned to a mobile access rule.
+	MobileDeviceAccessRuleId *string
+
+	// The name of a mobile access rule.
+	Name *string
+
+	// Device models that a rule will not match. All other device models will match.
+	NotDeviceModels []string
+
+	// Device operating systems that a rule will not match. All other device types will
+	// match.
+	NotDeviceOperatingSystems []string
+
+	// Device types that a rule will not match. All other device types will match.
+	NotDeviceTypes []string
+
+	// Device user agents that a rule will not match. All other device user agents will
+	// match.
+	NotDeviceUserAgents []string
+}
+
 // The representation of an organization.
 type OrganizationSummary struct {
 

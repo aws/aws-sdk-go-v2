@@ -39,7 +39,7 @@ func (e *DirectConnectServerException) ErrorMessage() string {
 	return *e.Message
 }
 func (e *DirectConnectServerException) ErrorCode() string             { return "DirectConnectServerException" }
-func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {

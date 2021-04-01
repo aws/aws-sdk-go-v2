@@ -40,6 +40,12 @@
                     "target": "com.amazonaws.frauddetector#BatchGetVariable"
                 },
                 {
+                    "target": "com.amazonaws.frauddetector#CancelBatchPredictionJob"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#CreateBatchPredictionJob"
+                },
+                {
                     "target": "com.amazonaws.frauddetector#CreateDetectorVersion"
                 },
                 {
@@ -53,6 +59,9 @@
                 },
                 {
                     "target": "com.amazonaws.frauddetector#CreateVariable"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#DeleteBatchPredictionJob"
                 },
                 {
                     "target": "com.amazonaws.frauddetector#DeleteDetector"
@@ -95,6 +104,9 @@
                 },
                 {
                     "target": "com.amazonaws.frauddetector#DescribeModelVersions"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#GetBatchPredictionJobs"
                 },
                 {
                     "target": "com.amazonaws.frauddetector#GetDetectors"
@@ -228,6 +240,37 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.frauddetector#AsyncJobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS_INITIALIZING",
+                        "name": "IN_PROGRESS_INITIALIZING"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "CANCEL_IN_PROGRESS",
+                        "name": "CANCEL_IN_PROGRESS"
+                    },
+                    {
+                        "value": "CANCELED",
+                        "name": "CANCELED"
+                    },
+                    {
+                        "value": "COMPLETE",
+                        "name": "COMPLETE"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.frauddetector#BatchCreateVariable": {
             "type": "operation",
             "input": {
@@ -264,7 +307,7 @@
                     }
                 },
                 "code": {
-                    "target": "com.amazonaws.frauddetector#integer",
+                    "target": "com.amazonaws.frauddetector#Integer2",
                     "traits": {
                         "smithy.api#documentation": "<p>The error code. </p>"
                     }
@@ -351,7 +394,7 @@
                     }
                 },
                 "code": {
-                    "target": "com.amazonaws.frauddetector#integer",
+                    "target": "com.amazonaws.frauddetector#Integer2",
                     "traits": {
                         "smithy.api#documentation": "<p>The error code. </p>"
                     }
@@ -402,6 +445,152 @@
                 }
             }
         },
+        "com.amazonaws.frauddetector#BatchPrediction": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID for the batch prediction.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.frauddetector#AsyncJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The batch prediction status.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.frauddetector#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason a batch prediction job failed.</p>"
+                    }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.frauddetector#time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp of when the batch prediction job started.</p>"
+                    }
+                },
+                "completionTime": {
+                    "target": "com.amazonaws.frauddetector#time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp of when the batch prediction job comleted.</p>"
+                    }
+                },
+                "lastHeartbeatTime": {
+                    "target": "com.amazonaws.frauddetector#time",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp of most recent heartbeat indicating the batch prediction job was making progress.</p>"
+                    }
+                },
+                "inputPath": {
+                    "target": "com.amazonaws.frauddetector#s3BucketLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of your training file.</p>"
+                    }
+                },
+                "outputPath": {
+                    "target": "com.amazonaws.frauddetector#s3BucketLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of your output file.</p>"
+                    }
+                },
+                "eventTypeName": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event type.</p>"
+                    }
+                },
+                "detectorName": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the detector.</p>"
+                    }
+                },
+                "detectorVersion": {
+                    "target": "com.amazonaws.frauddetector#floatVersionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detector version. </p>"
+                    }
+                },
+                "iamRoleArn": {
+                    "target": "com.amazonaws.frauddetector#iamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to use for this job request.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.frauddetector#fraudDetectorArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of batch prediction job.</p>"
+                    }
+                },
+                "processedRecordsCount": {
+                    "target": "com.amazonaws.frauddetector#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records processed by the batch prediction job.</p>"
+                    }
+                },
+                "totalRecordsCount": {
+                    "target": "com.amazonaws.frauddetector#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of records in the batch prediction job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The batch prediction details.</p>"
+            }
+        },
+        "com.amazonaws.frauddetector#BatchPredictionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.frauddetector#BatchPrediction"
+            }
+        },
+        "com.amazonaws.frauddetector#CancelBatchPredictionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.frauddetector#CancelBatchPredictionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.frauddetector#CancelBatchPredictionJobResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.frauddetector#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the specified batch prediction job.</p>"
+            }
+        },
+        "com.amazonaws.frauddetector#CancelBatchPredictionJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the batch prediction job to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.frauddetector#CancelBatchPredictionJobResult": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.frauddetector#ConflictException": {
             "type": "structure",
             "members": {
@@ -417,6 +606,92 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
+        },
+        "com.amazonaws.frauddetector#CreateBatchPredictionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.frauddetector#CreateBatchPredictionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.frauddetector#CreateBatchPredictionJobResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.frauddetector#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a batch prediction job.</p>"
+            }
+        },
+        "com.amazonaws.frauddetector#CreateBatchPredictionJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the batch prediction job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "inputPath": {
+                    "target": "com.amazonaws.frauddetector#s3BucketLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of your training file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputPath": {
+                    "target": "com.amazonaws.frauddetector#s3BucketLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location of your output file.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventTypeName": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the event type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detectorName": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the detector.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "detectorVersion": {
+                    "target": "com.amazonaws.frauddetector#wholeNumberVersionString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The detector version.</p>"
+                    }
+                },
+                "iamRoleArn": {
+                    "target": "com.amazonaws.frauddetector#iamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role to use for this job request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.frauddetector#tagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of key and value pairs.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.frauddetector#CreateBatchPredictionJobResult": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.frauddetector#CreateDetectorVersion": {
             "type": "operation",
@@ -924,6 +1199,48 @@
             "traits": {
                 "smithy.api#documentation": "<p>The model training validation messages.</p>"
             }
+        },
+        "com.amazonaws.frauddetector#DeleteBatchPredictionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.frauddetector#DeleteBatchPredictionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.frauddetector#DeleteBatchPredictionJobResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.frauddetector#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a batch prediction job.</p>"
+            }
+        },
+        "com.amazonaws.frauddetector#DeleteBatchPredictionJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the batch prediction job to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.frauddetector#DeleteBatchPredictionJobResult": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.frauddetector#DeleteDetector": {
             "type": "operation",
@@ -2079,6 +2396,77 @@
                 "smithy.api#documentation": "<p>The message details.</p>"
             }
         },
+        "com.amazonaws.frauddetector#GetBatchPredictionJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.frauddetector#GetBatchPredictionJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.frauddetector#GetBatchPredictionJobsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.frauddetector#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.frauddetector#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.frauddetector#GetBatchPredictionJobsRequest": {
+            "type": "structure",
+            "members": {
+                "jobId": {
+                    "target": "com.amazonaws.frauddetector#identifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The batch prediction job for which to get the details.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.frauddetector#batchPredictionsMaxPageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects to return for the request.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.frauddetector#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token from the previous request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.frauddetector#GetBatchPredictionJobsResult": {
+            "type": "structure",
+            "members": {
+                "batchPredictions": {
+                    "target": "com.amazonaws.frauddetector#BatchPredictionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the details of each batch prediction job.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.frauddetector#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The next token for the subsequent request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.frauddetector#GetDetectorVersion": {
             "type": "operation",
             "input": {
@@ -3114,6 +3502,15 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.frauddetector#Integer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.frauddetector#Integer2": {
+            "type": "integer"
         },
         "com.amazonaws.frauddetector#InternalServerException": {
             "type": "structure",
@@ -5351,6 +5748,16 @@
                 }
             }
         },
+        "com.amazonaws.frauddetector#batchPredictionsMaxPageSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.frauddetector#blob": {
             "type": "blob"
         },
@@ -5461,9 +5868,6 @@
                 },
                 "smithy.api#pattern": "^[0-9a-z_-]+$"
             }
-        },
-        "com.amazonaws.frauddetector#integer": {
-            "type": "integer"
         },
         "com.amazonaws.frauddetector#labelList": {
             "type": "list",
@@ -5619,7 +6023,13 @@
             }
         },
         "com.amazonaws.frauddetector#time": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 11,
+                    "max": 30
+                }
+            }
         },
         "com.amazonaws.frauddetector#variableName": {
             "type": "string",

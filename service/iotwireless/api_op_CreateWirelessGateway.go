@@ -47,8 +47,8 @@ type CreateWirelessGatewayInput struct {
 	// The name of the new resource.
 	Name *string
 
-	// The tags to attach to the new wireless gateway. Tags are metadata that can be
-	// used to manage a resource.
+	// The tags to attach to the new wireless gateway. Tags are metadata that you can
+	// use to manage a resource.
 	Tags []types.Tag
 }
 

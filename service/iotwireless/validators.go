@@ -1225,6 +1225,11 @@ func validateOpCreateWirelessDeviceInput(v *CreateWirelessDeviceInput) error {
 	if v.DestinationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationName"))
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

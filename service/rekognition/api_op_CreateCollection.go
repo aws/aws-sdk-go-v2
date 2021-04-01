@@ -39,6 +39,9 @@ type CreateCollectionInput struct {
 	//
 	// This member is required.
 	CollectionId *string
+
+	// A set of tags (key-value pairs) that you want to attach to the collection.
+	Tags map[string]string
 }
 
 type CreateCollectionOutput struct {

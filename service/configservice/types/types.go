@@ -41,6 +41,30 @@ type AggregateComplianceByConfigRule struct {
 	ConfigRuleName *string
 }
 
+// Provides aggregate compliance of the conformance pack. Indicates whether a
+// conformance pack is compliant based on the name of the conformance pack, account
+// ID, and region. A conformance pack is compliant if all of the rules in that
+// conformance packs are compliant. It is noncompliant if any of the rules are not
+// compliant. If a conformance pack has rules that return INSUFFICIENT_DATA, the
+// conformance pack returns INSUFFICIENT_DATA only if all the rules within that
+// conformance pack return INSUFFICIENT_DATA. If some of the rules in a conformance
+// pack are compliant and others return INSUFFICIENT_DATA, the conformance pack
+// shows compliant.
+type AggregateComplianceByConformancePack struct {
+
+	// The 12-digit AWS account ID of the source account.
+	AccountId *string
+
+	// The source AWS Region from where the data is aggregated.
+	AwsRegion *string
+
+	// The compliance status of the conformance pack.
+	Compliance *AggregateConformancePackCompliance
+
+	// The name of the conformance pack.
+	ConformancePackName *string
+}
+
 // Returns the number of compliant and noncompliant rules for one or more accounts
 // and regions in an aggregator.
 type AggregateComplianceCount struct {
@@ -50,6 +74,73 @@ type AggregateComplianceCount struct {
 
 	// The 12-digit account ID or region based on the GroupByKey value.
 	GroupName *string
+}
+
+// Provides the number of compliant and noncompliant rules within a conformance
+// pack. Also provides the total count of compliant rules, noncompliant rules, and
+// the rules that do not have any applicable resources to evaluate upon resulting
+// in insufficient data.
+type AggregateConformancePackCompliance struct {
+
+	// The compliance status of the conformance pack.
+	ComplianceType ConformancePackComplianceType
+
+	// The number of compliant AWS Config Rules.
+	CompliantRuleCount int32
+
+	// The number of noncompliant AWS Config Rules.
+	NonCompliantRuleCount int32
+
+	// Total number of compliant rules, noncompliant rules, and the rules that do not
+	// have any applicable resources to evaluate upon resulting in insufficient data.
+	TotalRuleCount int32
+}
+
+// The number of conformance packs that are compliant and noncompliant.
+type AggregateConformancePackComplianceCount struct {
+
+	// Number of compliant conformance packs.
+	CompliantConformancePackCount int32
+
+	// Number of noncompliant conformance packs.
+	NonCompliantConformancePackCount int32
+}
+
+// Filters the conformance packs based on an account ID, region, compliance type,
+// and the name of the conformance pack.
+type AggregateConformancePackComplianceFilters struct {
+
+	// The 12-digit AWS account ID of the source account.
+	AccountId *string
+
+	// The source AWS Region from where the data is aggregated.
+	AwsRegion *string
+
+	// The compliance status of the conformance pack.
+	ComplianceType ConformancePackComplianceType
+
+	// The name of the conformance pack.
+	ConformancePackName *string
+}
+
+// Provides a summary of compliance based on either account ID or region.
+type AggregateConformancePackComplianceSummary struct {
+
+	// Returns an AggregateConformancePackComplianceCount object.
+	ComplianceSummary *AggregateConformancePackComplianceCount
+
+	// Groups the result based on AWS Account ID or AWS Region.
+	GroupName *string
+}
+
+// Filters the results based on account ID and region.
+type AggregateConformancePackComplianceSummaryFilters struct {
+
+	// The 12-digit AWS account ID of the source account.
+	AccountId *string
+
+	// The source AWS Region from where the data is aggregated.
+	AwsRegion *string
 }
 
 // The current sync status between the source and the aggregator account.
@@ -734,7 +825,7 @@ type ConfigurationRecorderStatus struct {
 type ConformancePackComplianceFilters struct {
 
 	// Filters the results by compliance. The allowed values are COMPLIANT and
-	// NON_COMPLIANT.
+	// NON_COMPLIANT. INSUFFICIENT_DATA is not supported.
 	ComplianceType ConformancePackComplianceType
 
 	// Filters the results by AWS Config rule names.
@@ -744,8 +835,8 @@ type ConformancePackComplianceFilters struct {
 // Summary includes the name and status of the conformance pack.
 type ConformancePackComplianceSummary struct {
 
-	// The status of the conformance pack. The allowed values are COMPLIANT and
-	// NON_COMPLIANT.
+	// The status of the conformance pack. The allowed values are COMPLIANT,
+	// NON_COMPLIANT and INSUFFICIENT_DATA.
 	//
 	// This member is required.
 	ConformancePackComplianceStatus ConformancePackComplianceType
@@ -798,7 +889,7 @@ type ConformancePackDetail struct {
 type ConformancePackEvaluationFilters struct {
 
 	// Filters the results by compliance. The allowed values are COMPLIANT and
-	// NON_COMPLIANT.
+	// NON_COMPLIANT. INSUFFICIENT_DATA is not supported.
 	ComplianceType ConformancePackComplianceType
 
 	// Filters the results by AWS Config rule names.
@@ -818,6 +909,7 @@ type ConformancePackEvaluationFilters struct {
 type ConformancePackEvaluationResult struct {
 
 	// The compliance type. The allowed values are COMPLIANT and NON_COMPLIANT.
+	// INSUFFICIENT_DATA is not supported.
 	//
 	// This member is required.
 	ComplianceType ConformancePackComplianceType
@@ -861,12 +953,17 @@ type ConformancePackInputParameter struct {
 // pack. You can filter using AWS Config rule names and compliance types.
 type ConformancePackRuleCompliance struct {
 
-	// Compliance of the AWS Config rule The allowed values are COMPLIANT and
-	// NON_COMPLIANT.
+	// Compliance of the AWS Config rule. The allowed values are COMPLIANT,
+	// NON_COMPLIANT, and INSUFFICIENT_DATA.
 	ComplianceType ConformancePackComplianceType
 
 	// Name of the config rule.
 	ConfigRuleName *string
+
+	// Controls for the conformance pack. A control is a process to prevent or detect
+	// problems while meeting objectives. A control can align with a specific
+	// compliance regime or map to internal controls defined by an organization.
+	Controls []string
 }
 
 // Status details of a conformance pack.
@@ -1721,7 +1818,7 @@ type RecordingGroup struct {
 	// A comma-separated list that specifies the types of AWS resources for which AWS
 	// Config records configuration changes (for example, AWS::EC2::Instance or
 	// AWS::CloudTrail::Trail). To record all configuration changes, you must set the
-	// allSupported option to false. If you set this option to true, when AWS Config
+	// allSupported option to true. If you set this option to false, when AWS Config
 	// adds support for a new type of resource, it will not record resources of that
 	// type unless you manually add that type to your recording group. For a list of
 	// valid resourceTypes values, see the resourceType Value column in Supported AWS

@@ -34,6 +34,9 @@
             "version": "2018-04-02",
             "operations": [
                 {
+                    "target": "com.amazonaws.ec2instanceconnect#SendSerialConsoleSSHPublicKey"
+                },
+                {
                     "target": "com.amazonaws.ec2instanceconnect#SendSSHPublicKey"
                 }
             ],
@@ -49,7 +52,7 @@
                     "name": "ec2-instance-connect"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>AWS EC2 Connect Service is a service that enables system administrators to publish\n            temporary SSH keys to their EC2 instances in order to establish connections to their\n            instances without leaving a permanent authentication option.</p>",
+                "smithy.api#documentation": "<p>Amazon EC2 Instance Connect enables system administrators to publish one-time use SSH\n            public keys to EC2, providing users a simple and secure way to connect to their\n            instances.</p>",
                 "smithy.api#title": "AWS EC2 Instance Connect"
             }
         },
@@ -61,7 +64,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that either your AWS credentials are invalid or you do not have access to the EC2 instance.</p>",
+                "smithy.api#documentation": "<p>Either your AWS credentials are not valid or you do not have access to the EC2 instance.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -84,9 +87,22 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that the instance requested was not found in the given zone.  Check that you have provided a valid instance ID and the correct zone.</p>",
+                "smithy.api#documentation": "<p>The specified instance was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#EC2InstanceTypeInvalidException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instance type is not supported for connecting via the serial console. Only Nitro\n            instance types are currently supported.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.ec2instanceconnect#InstanceId": {
@@ -117,7 +133,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that you provided bad input.  Ensure you have a valid instance ID, the correct zone, and a valid SSH public key.</p>",
+                "smithy.api#documentation": "<p>One of the parameters is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -160,7 +176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Pushes an SSH public key to a particular OS user on a given EC2 instance for 60 seconds.</p>"
+                "smithy.api#documentation": "<p>Pushes an SSH public key to the specified EC2 instance for use by the specified user.\n            The key remains for 60 seconds. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect.html\">Connect to\n                your Linux instance using EC2 Instance Connect</a> in the <i>Amazon EC2\n                User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2instanceconnect#SendSSHPublicKeyRequest": {
@@ -169,28 +185,28 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ec2instanceconnect#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The EC2 instance you wish to publish the SSH key to.</p>",
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InstanceOSUser": {
                     "target": "com.amazonaws.ec2instanceconnect#InstanceOSUser",
                     "traits": {
-                        "smithy.api#documentation": "<p>The OS user on the EC2 instance whom the key may be used to authenticate as.</p>",
+                        "smithy.api#documentation": "<p>The OS user on the EC2 instance for whom the key can be used to authenticate.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SSHPublicKey": {
                     "target": "com.amazonaws.ec2instanceconnect#SSHPublicKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The public key to be published to the instance.  To use it after publication you must have the matching private key.</p>",
+                        "smithy.api#documentation": "<p>The public key material. To use the public key, you must have the matching private key.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "AvailabilityZone": {
                     "target": "com.amazonaws.ec2instanceconnect#AvailabilityZone",
                     "traits": {
-                        "smithy.api#documentation": "<p>The availability zone the EC2 instance was launched in.</p>",
+                        "smithy.api#documentation": "<p>The Availability Zone in which the EC2 instance was launched.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -202,14 +218,145 @@
                 "RequestId": {
                     "target": "com.amazonaws.ec2instanceconnect#RequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The request ID as logged by EC2 Connect.  Please provide this when contacting AWS Support.</p>"
+                        "smithy.api#documentation": "<p>The ID of the request. Please provide this ID when contacting AWS Support for assistance.</p>"
                     }
                 },
                 "Success": {
                     "target": "com.amazonaws.ec2instanceconnect#Success",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates request success.</p>"
+                        "smithy.api#documentation": "<p>Is true if the request succeeds and an error otherwise.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SendSerialConsoleSSHPublicKey": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2instanceconnect#SendSerialConsoleSSHPublicKeyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2instanceconnect#SendSerialConsoleSSHPublicKeyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#AuthException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#EC2InstanceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#EC2InstanceTypeInvalidException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#InvalidArgsException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#SerialConsoleAccessDisabledException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#SerialConsoleSessionLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#SerialConsoleSessionUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#ServiceException"
+                },
+                {
+                    "target": "com.amazonaws.ec2instanceconnect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Pushes an SSH public key to the specified EC2 instance. The key remains for 60\n            seconds, which gives you 60 seconds to establish a serial console connection to the\n            instance using SSH. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html\">EC2 Serial Console</a> in\n            the <i>Amazon EC2 User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SendSerialConsoleSSHPublicKeyRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.ec2instanceconnect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the EC2 instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SerialPort": {
+                    "target": "com.amazonaws.ec2instanceconnect#SerialPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The serial port of the EC2 instance. Currently only port 0 is supported.</p>\n        <p>Default: 0</p>"
+                    }
+                },
+                "SSHPublicKey": {
+                    "target": "com.amazonaws.ec2instanceconnect#SSHPublicKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The public key material. To use the public key, you must have the matching private\n            key. For information about the supported key formats and lengths, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws\">Requirements for key pairs</a> in the <i>Amazon EC2 User\n            Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SendSerialConsoleSSHPublicKeyResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "com.amazonaws.ec2instanceconnect#RequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request. Please provide this ID when contacting AWS Support for assistance.</p>"
+                    }
+                },
+                "Success": {
+                    "target": "com.amazonaws.ec2instanceconnect#Success",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Is true if the request succeeds and an error otherwise.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SerialConsoleAccessDisabledException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your account is not authorized to use the EC2 Serial Console. To authorize your\n            account, run the EnableSerialConsoleAccess API. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html\">EnableSerialConsoleAccess</a> in the <i>Amazon EC2 API Reference</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SerialConsoleSessionLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The instance currently has 1 active serial console session. Only 1 session is supported at a time.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SerialConsoleSessionUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ec2instanceconnect#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unable to start a serial console session. Please try again.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ec2instanceconnect#SerialPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 0
                 }
             }
         },
@@ -221,7 +368,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates that the service encountered an error.  Follow the message's instructions and try again.</p>",
+                "smithy.api#documentation": "<p>The service encountered an error. Follow the instructions in the error message and try again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
             }
@@ -240,7 +387,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Indicates you have been making requests too frequently and have been throttled.  Wait for a while and try again.  If higher call volume is warranted contact AWS Support.</p>",
+                "smithy.api#documentation": "<p>The requests were made too frequently and have been throttled. Wait a while and try again. \n            To increase the limit on your request frequency, contact AWS Support.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
             }

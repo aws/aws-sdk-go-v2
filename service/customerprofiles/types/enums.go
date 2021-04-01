@@ -2,6 +2,24 @@
 
 package types
 
+type DataPullMode string
+
+// Enum values for DataPullMode
+const (
+	DataPullModeIncremental DataPullMode = "Incremental"
+	DataPullModeComplete    DataPullMode = "Complete"
+)
+
+// Values returns all known values for DataPullMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DataPullMode) Values() []DataPullMode {
+	return []DataPullMode{
+		"Incremental",
+		"Complete",
+	}
+}
+
 type FieldContentType string
 
 // Enum values for FieldContentType
@@ -46,6 +64,94 @@ func (Gender) Values() []Gender {
 	}
 }
 
+type MarketoConnectorOperator string
+
+// Enum values for MarketoConnectorOperator
+const (
+	MarketoConnectorOperatorProjection          MarketoConnectorOperator = "PROJECTION"
+	MarketoConnectorOperatorLessThan            MarketoConnectorOperator = "LESS_THAN"
+	MarketoConnectorOperatorGreaterThan         MarketoConnectorOperator = "GREATER_THAN"
+	MarketoConnectorOperatorBetween             MarketoConnectorOperator = "BETWEEN"
+	MarketoConnectorOperatorAddition            MarketoConnectorOperator = "ADDITION"
+	MarketoConnectorOperatorMultiplication      MarketoConnectorOperator = "MULTIPLICATION"
+	MarketoConnectorOperatorDivision            MarketoConnectorOperator = "DIVISION"
+	MarketoConnectorOperatorSubtraction         MarketoConnectorOperator = "SUBTRACTION"
+	MarketoConnectorOperatorMaskAll             MarketoConnectorOperator = "MASK_ALL"
+	MarketoConnectorOperatorMaskFirstN          MarketoConnectorOperator = "MASK_FIRST_N"
+	MarketoConnectorOperatorMaskLastN           MarketoConnectorOperator = "MASK_LAST_N"
+	MarketoConnectorOperatorValidateNonNull     MarketoConnectorOperator = "VALIDATE_NON_NULL"
+	MarketoConnectorOperatorValidateNonZero     MarketoConnectorOperator = "VALIDATE_NON_ZERO"
+	MarketoConnectorOperatorValidateNonNegative MarketoConnectorOperator = "VALIDATE_NON_NEGATIVE"
+	MarketoConnectorOperatorValidateNumeric     MarketoConnectorOperator = "VALIDATE_NUMERIC"
+	MarketoConnectorOperatorNoOp                MarketoConnectorOperator = "NO_OP"
+)
+
+// Values returns all known values for MarketoConnectorOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MarketoConnectorOperator) Values() []MarketoConnectorOperator {
+	return []MarketoConnectorOperator{
+		"PROJECTION",
+		"LESS_THAN",
+		"GREATER_THAN",
+		"BETWEEN",
+		"ADDITION",
+		"MULTIPLICATION",
+		"DIVISION",
+		"SUBTRACTION",
+		"MASK_ALL",
+		"MASK_FIRST_N",
+		"MASK_LAST_N",
+		"VALIDATE_NON_NULL",
+		"VALIDATE_NON_ZERO",
+		"VALIDATE_NON_NEGATIVE",
+		"VALIDATE_NUMERIC",
+		"NO_OP",
+	}
+}
+
+type OperatorPropertiesKeys string
+
+// Enum values for OperatorPropertiesKeys
+const (
+	OperatorPropertiesKeysValue                    OperatorPropertiesKeys = "VALUE"
+	OperatorPropertiesKeysValues                   OperatorPropertiesKeys = "VALUES"
+	OperatorPropertiesKeysDataType                 OperatorPropertiesKeys = "DATA_TYPE"
+	OperatorPropertiesKeysUpperBound               OperatorPropertiesKeys = "UPPER_BOUND"
+	OperatorPropertiesKeysLowerBound               OperatorPropertiesKeys = "LOWER_BOUND"
+	OperatorPropertiesKeysSourceDataType           OperatorPropertiesKeys = "SOURCE_DATA_TYPE"
+	OperatorPropertiesKeysDestinationDataType      OperatorPropertiesKeys = "DESTINATION_DATA_TYPE"
+	OperatorPropertiesKeysValidationAction         OperatorPropertiesKeys = "VALIDATION_ACTION"
+	OperatorPropertiesKeysMaskValue                OperatorPropertiesKeys = "MASK_VALUE"
+	OperatorPropertiesKeysMaskLength               OperatorPropertiesKeys = "MASK_LENGTH"
+	OperatorPropertiesKeysTruncateLength           OperatorPropertiesKeys = "TRUNCATE_LENGTH"
+	OperatorPropertiesKeysMathOperationFieldsOrder OperatorPropertiesKeys = "MATH_OPERATION_FIELDS_ORDER"
+	OperatorPropertiesKeysConcatFormat             OperatorPropertiesKeys = "CONCAT_FORMAT"
+	OperatorPropertiesKeysSubfieldCategoryMap      OperatorPropertiesKeys = "SUBFIELD_CATEGORY_MAP"
+)
+
+// Values returns all known values for OperatorPropertiesKeys. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OperatorPropertiesKeys) Values() []OperatorPropertiesKeys {
+	return []OperatorPropertiesKeys{
+		"VALUE",
+		"VALUES",
+		"DATA_TYPE",
+		"UPPER_BOUND",
+		"LOWER_BOUND",
+		"SOURCE_DATA_TYPE",
+		"DESTINATION_DATA_TYPE",
+		"VALIDATION_ACTION",
+		"MASK_VALUE",
+		"MASK_LENGTH",
+		"TRUNCATE_LENGTH",
+		"MATH_OPERATION_FIELDS_ORDER",
+		"CONCAT_FORMAT",
+		"SUBFIELD_CATEGORY_MAP",
+	}
+}
+
 type PartyType string
 
 // Enum values for PartyType
@@ -63,6 +169,196 @@ func (PartyType) Values() []PartyType {
 		"INDIVIDUAL",
 		"BUSINESS",
 		"OTHER",
+	}
+}
+
+type S3ConnectorOperator string
+
+// Enum values for S3ConnectorOperator
+const (
+	S3ConnectorOperatorProjection           S3ConnectorOperator = "PROJECTION"
+	S3ConnectorOperatorLessThan             S3ConnectorOperator = "LESS_THAN"
+	S3ConnectorOperatorGreaterThan          S3ConnectorOperator = "GREATER_THAN"
+	S3ConnectorOperatorBetween              S3ConnectorOperator = "BETWEEN"
+	S3ConnectorOperatorLessThanOrEqualTo    S3ConnectorOperator = "LESS_THAN_OR_EQUAL_TO"
+	S3ConnectorOperatorGreaterThanOrEqualTo S3ConnectorOperator = "GREATER_THAN_OR_EQUAL_TO"
+	S3ConnectorOperatorEqualTo              S3ConnectorOperator = "EQUAL_TO"
+	S3ConnectorOperatorNotEqualTo           S3ConnectorOperator = "NOT_EQUAL_TO"
+	S3ConnectorOperatorAddition             S3ConnectorOperator = "ADDITION"
+	S3ConnectorOperatorMultiplication       S3ConnectorOperator = "MULTIPLICATION"
+	S3ConnectorOperatorDivision             S3ConnectorOperator = "DIVISION"
+	S3ConnectorOperatorSubtraction          S3ConnectorOperator = "SUBTRACTION"
+	S3ConnectorOperatorMaskAll              S3ConnectorOperator = "MASK_ALL"
+	S3ConnectorOperatorMaskFirstN           S3ConnectorOperator = "MASK_FIRST_N"
+	S3ConnectorOperatorMaskLastN            S3ConnectorOperator = "MASK_LAST_N"
+	S3ConnectorOperatorValidateNonNull      S3ConnectorOperator = "VALIDATE_NON_NULL"
+	S3ConnectorOperatorValidateNonZero      S3ConnectorOperator = "VALIDATE_NON_ZERO"
+	S3ConnectorOperatorValidateNonNegative  S3ConnectorOperator = "VALIDATE_NON_NEGATIVE"
+	S3ConnectorOperatorValidateNumeric      S3ConnectorOperator = "VALIDATE_NUMERIC"
+	S3ConnectorOperatorNoOp                 S3ConnectorOperator = "NO_OP"
+)
+
+// Values returns all known values for S3ConnectorOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (S3ConnectorOperator) Values() []S3ConnectorOperator {
+	return []S3ConnectorOperator{
+		"PROJECTION",
+		"LESS_THAN",
+		"GREATER_THAN",
+		"BETWEEN",
+		"LESS_THAN_OR_EQUAL_TO",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"EQUAL_TO",
+		"NOT_EQUAL_TO",
+		"ADDITION",
+		"MULTIPLICATION",
+		"DIVISION",
+		"SUBTRACTION",
+		"MASK_ALL",
+		"MASK_FIRST_N",
+		"MASK_LAST_N",
+		"VALIDATE_NON_NULL",
+		"VALIDATE_NON_ZERO",
+		"VALIDATE_NON_NEGATIVE",
+		"VALIDATE_NUMERIC",
+		"NO_OP",
+	}
+}
+
+type SalesforceConnectorOperator string
+
+// Enum values for SalesforceConnectorOperator
+const (
+	SalesforceConnectorOperatorProjection           SalesforceConnectorOperator = "PROJECTION"
+	SalesforceConnectorOperatorLessThan             SalesforceConnectorOperator = "LESS_THAN"
+	SalesforceConnectorOperatorContains             SalesforceConnectorOperator = "CONTAINS"
+	SalesforceConnectorOperatorGreaterThan          SalesforceConnectorOperator = "GREATER_THAN"
+	SalesforceConnectorOperatorBetween              SalesforceConnectorOperator = "BETWEEN"
+	SalesforceConnectorOperatorLessThanOrEqualTo    SalesforceConnectorOperator = "LESS_THAN_OR_EQUAL_TO"
+	SalesforceConnectorOperatorGreaterThanOrEqualTo SalesforceConnectorOperator = "GREATER_THAN_OR_EQUAL_TO"
+	SalesforceConnectorOperatorEqualTo              SalesforceConnectorOperator = "EQUAL_TO"
+	SalesforceConnectorOperatorNotEqualTo           SalesforceConnectorOperator = "NOT_EQUAL_TO"
+	SalesforceConnectorOperatorAddition             SalesforceConnectorOperator = "ADDITION"
+	SalesforceConnectorOperatorMultiplication       SalesforceConnectorOperator = "MULTIPLICATION"
+	SalesforceConnectorOperatorDivision             SalesforceConnectorOperator = "DIVISION"
+	SalesforceConnectorOperatorSubtraction          SalesforceConnectorOperator = "SUBTRACTION"
+	SalesforceConnectorOperatorMaskAll              SalesforceConnectorOperator = "MASK_ALL"
+	SalesforceConnectorOperatorMaskFirstN           SalesforceConnectorOperator = "MASK_FIRST_N"
+	SalesforceConnectorOperatorMaskLastN            SalesforceConnectorOperator = "MASK_LAST_N"
+	SalesforceConnectorOperatorValidateNonNull      SalesforceConnectorOperator = "VALIDATE_NON_NULL"
+	SalesforceConnectorOperatorValidateNonZero      SalesforceConnectorOperator = "VALIDATE_NON_ZERO"
+	SalesforceConnectorOperatorValidateNonNegative  SalesforceConnectorOperator = "VALIDATE_NON_NEGATIVE"
+	SalesforceConnectorOperatorValidateNumeric      SalesforceConnectorOperator = "VALIDATE_NUMERIC"
+	SalesforceConnectorOperatorNoOp                 SalesforceConnectorOperator = "NO_OP"
+)
+
+// Values returns all known values for SalesforceConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
+	return []SalesforceConnectorOperator{
+		"PROJECTION",
+		"LESS_THAN",
+		"CONTAINS",
+		"GREATER_THAN",
+		"BETWEEN",
+		"LESS_THAN_OR_EQUAL_TO",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"EQUAL_TO",
+		"NOT_EQUAL_TO",
+		"ADDITION",
+		"MULTIPLICATION",
+		"DIVISION",
+		"SUBTRACTION",
+		"MASK_ALL",
+		"MASK_FIRST_N",
+		"MASK_LAST_N",
+		"VALIDATE_NON_NULL",
+		"VALIDATE_NON_ZERO",
+		"VALIDATE_NON_NEGATIVE",
+		"VALIDATE_NUMERIC",
+		"NO_OP",
+	}
+}
+
+type ServiceNowConnectorOperator string
+
+// Enum values for ServiceNowConnectorOperator
+const (
+	ServiceNowConnectorOperatorProjection           ServiceNowConnectorOperator = "PROJECTION"
+	ServiceNowConnectorOperatorContains             ServiceNowConnectorOperator = "CONTAINS"
+	ServiceNowConnectorOperatorLessThan             ServiceNowConnectorOperator = "LESS_THAN"
+	ServiceNowConnectorOperatorGreaterThan          ServiceNowConnectorOperator = "GREATER_THAN"
+	ServiceNowConnectorOperatorBetween              ServiceNowConnectorOperator = "BETWEEN"
+	ServiceNowConnectorOperatorLessThanOrEqualTo    ServiceNowConnectorOperator = "LESS_THAN_OR_EQUAL_TO"
+	ServiceNowConnectorOperatorGreaterThanOrEqualTo ServiceNowConnectorOperator = "GREATER_THAN_OR_EQUAL_TO"
+	ServiceNowConnectorOperatorEqualTo              ServiceNowConnectorOperator = "EQUAL_TO"
+	ServiceNowConnectorOperatorNotEqualTo           ServiceNowConnectorOperator = "NOT_EQUAL_TO"
+	ServiceNowConnectorOperatorAddition             ServiceNowConnectorOperator = "ADDITION"
+	ServiceNowConnectorOperatorMultiplication       ServiceNowConnectorOperator = "MULTIPLICATION"
+	ServiceNowConnectorOperatorDivision             ServiceNowConnectorOperator = "DIVISION"
+	ServiceNowConnectorOperatorSubtraction          ServiceNowConnectorOperator = "SUBTRACTION"
+	ServiceNowConnectorOperatorMaskAll              ServiceNowConnectorOperator = "MASK_ALL"
+	ServiceNowConnectorOperatorMaskFirstN           ServiceNowConnectorOperator = "MASK_FIRST_N"
+	ServiceNowConnectorOperatorMaskLastN            ServiceNowConnectorOperator = "MASK_LAST_N"
+	ServiceNowConnectorOperatorValidateNonNull      ServiceNowConnectorOperator = "VALIDATE_NON_NULL"
+	ServiceNowConnectorOperatorValidateNonZero      ServiceNowConnectorOperator = "VALIDATE_NON_ZERO"
+	ServiceNowConnectorOperatorValidateNonNegative  ServiceNowConnectorOperator = "VALIDATE_NON_NEGATIVE"
+	ServiceNowConnectorOperatorValidateNumeric      ServiceNowConnectorOperator = "VALIDATE_NUMERIC"
+	ServiceNowConnectorOperatorNoOp                 ServiceNowConnectorOperator = "NO_OP"
+)
+
+// Values returns all known values for ServiceNowConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceNowConnectorOperator) Values() []ServiceNowConnectorOperator {
+	return []ServiceNowConnectorOperator{
+		"PROJECTION",
+		"CONTAINS",
+		"LESS_THAN",
+		"GREATER_THAN",
+		"BETWEEN",
+		"LESS_THAN_OR_EQUAL_TO",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"EQUAL_TO",
+		"NOT_EQUAL_TO",
+		"ADDITION",
+		"MULTIPLICATION",
+		"DIVISION",
+		"SUBTRACTION",
+		"MASK_ALL",
+		"MASK_FIRST_N",
+		"MASK_LAST_N",
+		"VALIDATE_NON_NULL",
+		"VALIDATE_NON_ZERO",
+		"VALIDATE_NON_NEGATIVE",
+		"VALIDATE_NUMERIC",
+		"NO_OP",
+	}
+}
+
+type SourceConnectorType string
+
+// Enum values for SourceConnectorType
+const (
+	SourceConnectorTypeSalesforce SourceConnectorType = "Salesforce"
+	SourceConnectorTypeMarketo    SourceConnectorType = "Marketo"
+	SourceConnectorTypeZendesk    SourceConnectorType = "Zendesk"
+	SourceConnectorTypeServicenow SourceConnectorType = "Servicenow"
+	SourceConnectorTypeS3         SourceConnectorType = "S3"
+)
+
+// Values returns all known values for SourceConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SourceConnectorType) Values() []SourceConnectorType {
+	return []SourceConnectorType{
+		"Salesforce",
+		"Marketo",
+		"Zendesk",
+		"Servicenow",
+		"S3",
 	}
 }
 
@@ -87,5 +383,95 @@ func (StandardIdentifier) Values() []StandardIdentifier {
 		"SECONDARY",
 		"LOOKUP_ONLY",
 		"NEW_ONLY",
+	}
+}
+
+type TaskType string
+
+// Enum values for TaskType
+const (
+	TaskTypeArithmetic TaskType = "Arithmetic"
+	TaskTypeFilter     TaskType = "Filter"
+	TaskTypeMap        TaskType = "Map"
+	TaskTypeMask       TaskType = "Mask"
+	TaskTypeMerge      TaskType = "Merge"
+	TaskTypeTruncate   TaskType = "Truncate"
+	TaskTypeValidate   TaskType = "Validate"
+)
+
+// Values returns all known values for TaskType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (TaskType) Values() []TaskType {
+	return []TaskType{
+		"Arithmetic",
+		"Filter",
+		"Map",
+		"Mask",
+		"Merge",
+		"Truncate",
+		"Validate",
+	}
+}
+
+type TriggerType string
+
+// Enum values for TriggerType
+const (
+	TriggerTypeScheduled TriggerType = "Scheduled"
+	TriggerTypeEvent     TriggerType = "Event"
+	TriggerTypeOndemand  TriggerType = "OnDemand"
+)
+
+// Values returns all known values for TriggerType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TriggerType) Values() []TriggerType {
+	return []TriggerType{
+		"Scheduled",
+		"Event",
+		"OnDemand",
+	}
+}
+
+type ZendeskConnectorOperator string
+
+// Enum values for ZendeskConnectorOperator
+const (
+	ZendeskConnectorOperatorProjection          ZendeskConnectorOperator = "PROJECTION"
+	ZendeskConnectorOperatorGreaterThan         ZendeskConnectorOperator = "GREATER_THAN"
+	ZendeskConnectorOperatorAddition            ZendeskConnectorOperator = "ADDITION"
+	ZendeskConnectorOperatorMultiplication      ZendeskConnectorOperator = "MULTIPLICATION"
+	ZendeskConnectorOperatorDivision            ZendeskConnectorOperator = "DIVISION"
+	ZendeskConnectorOperatorSubtraction         ZendeskConnectorOperator = "SUBTRACTION"
+	ZendeskConnectorOperatorMaskAll             ZendeskConnectorOperator = "MASK_ALL"
+	ZendeskConnectorOperatorMaskFirstN          ZendeskConnectorOperator = "MASK_FIRST_N"
+	ZendeskConnectorOperatorMaskLastN           ZendeskConnectorOperator = "MASK_LAST_N"
+	ZendeskConnectorOperatorValidateNonNull     ZendeskConnectorOperator = "VALIDATE_NON_NULL"
+	ZendeskConnectorOperatorValidateNonZero     ZendeskConnectorOperator = "VALIDATE_NON_ZERO"
+	ZendeskConnectorOperatorValidateNonNegative ZendeskConnectorOperator = "VALIDATE_NON_NEGATIVE"
+	ZendeskConnectorOperatorValidateNumeric     ZendeskConnectorOperator = "VALIDATE_NUMERIC"
+	ZendeskConnectorOperatorNoOp                ZendeskConnectorOperator = "NO_OP"
+)
+
+// Values returns all known values for ZendeskConnectorOperator. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ZendeskConnectorOperator) Values() []ZendeskConnectorOperator {
+	return []ZendeskConnectorOperator{
+		"PROJECTION",
+		"GREATER_THAN",
+		"ADDITION",
+		"MULTIPLICATION",
+		"DIVISION",
+		"SUBTRACTION",
+		"MASK_ALL",
+		"MASK_FIRST_N",
+		"MASK_LAST_N",
+		"VALIDATE_NON_NULL",
+		"VALIDATE_NON_ZERO",
+		"VALIDATE_NON_NEGATIVE",
+		"VALIDATE_NUMERIC",
+		"NO_OP",
 	}
 }

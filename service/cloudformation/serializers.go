@@ -3148,6 +3148,11 @@ func awsAwsquery_serializeDocumentDeploymentTargets(v *types.DeploymentTargets, 
 		}
 	}
 
+	if v.AccountsUrl != nil {
+		objectKey := object.Key("AccountsUrl")
+		objectKey.String(*v.AccountsUrl)
+	}
+
 	if v.OrganizationalUnitIds != nil {
 		objectKey := object.Key("OrganizationalUnitIds")
 		if err := awsAwsquery_serializeDocumentOrganizationalUnitIdList(v.OrganizationalUnitIds, objectKey); err != nil {
@@ -3484,6 +3489,11 @@ func awsAwsquery_serializeDocumentStackSetOperationPreferences(v *types.StackSet
 	if v.MaxConcurrentPercentage != nil {
 		objectKey := object.Key("MaxConcurrentPercentage")
 		objectKey.Integer(*v.MaxConcurrentPercentage)
+	}
+
+	if len(v.RegionConcurrencyType) > 0 {
+		objectKey := object.Key("RegionConcurrencyType")
+		objectKey.String(string(v.RegionConcurrencyType))
 	}
 
 	if v.RegionOrder != nil {

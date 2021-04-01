@@ -893,6 +893,30 @@ type RunCommandTarget struct {
 	Values []string
 }
 
+// Name/Value pair of a parameter to start execution of a SageMaker Model Building
+// Pipeline.
+type SageMakerPipelineParameter struct {
+
+	// Name of parameter to start execution of a SageMaker Model Building Pipeline.
+	//
+	// This member is required.
+	Name *string
+
+	// Value of parameter to start execution of a SageMaker Model Building Pipeline.
+	//
+	// This member is required.
+	Value *string
+}
+
+// These are custom parameters to use when the target is a SageMaker Model Building
+// Pipeline that starts based on EventBridge events.
+type SageMakerPipelineParameters struct {
+
+	// List of Parameter names and values for SageMaker Model Building Pipeline
+	// execution.
+	PipelineParameterList []SageMakerPipelineParameter
+}
+
 // This structure includes the custom parameter to be used when the target is an
 // SQS FIFO queue.
 type SqsParameters struct {
@@ -1003,6 +1027,12 @@ type Target struct {
 
 	// Parameters used when you are using the rule to invoke Amazon EC2 Run Command.
 	RunCommandParameters *RunCommandParameters
+
+	// Contains the SageMaker Model Building Pipeline parameters to start execution of
+	// a SageMaker Model Building Pipeline. If you specify a SageMaker Model Building
+	// Pipeline as a target, you can use this to specify parameters to start a pipeline
+	// execution based on EventBridge events.
+	SageMakerPipelineParameters *SageMakerPipelineParameters
 
 	// Contains the message group ID to use when the target is a FIFO queue. If you
 	// specify an SQS FIFO queue as a target, the queue must have content-based

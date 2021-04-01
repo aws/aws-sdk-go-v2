@@ -973,7 +973,7 @@
                 "columnName": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the column that contains the data, if available.</p>",
+                        "smithy.api#documentation": "<p>The name of the column that contains the data, if available. This value is also null if Amazon Macie detects sensitive data in the name of any column in the file.</p>",
                         "smithy.api#jsonName": "columnName"
                     }
                 },
@@ -2986,7 +2986,7 @@
                 "status": {
                     "target": "com.amazonaws.macie2#MacieStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.</p>",
+                        "smithy.api#documentation": "<p>Specifies the new status for the account. To enable Amazon Macie and start all Macie activities for the account, set this value to ENABLED.</p>",
                         "smithy.api#jsonName": "status"
                     }
                 }
@@ -3375,7 +3375,7 @@
         "com.amazonaws.macie2#FindingPublishingFrequency": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). Valid values are:</p>",
+                "smithy.api#documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html\">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>",
                 "smithy.api#enum": [
                     {
                         "value": "FIFTEEN_MINUTES",
@@ -4161,6 +4161,62 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of key-value pairs that identifies the tags (keys and values) that are associated with the filter.</p>",
                         "smithy.api#jsonName": "tags"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetFindingsPublicationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#GetFindingsPublicationConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#GetFindingsPublicationConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the configuration settings for publishing findings to AWS Security Hub.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/findings-publication-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#GetFindingsPublicationConfigurationRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.macie2#GetFindingsPublicationConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "securityHubConfiguration": {
+                    "target": "com.amazonaws.macie2#SecurityHubConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that determine which findings are published to AWS Security Hub.</p>",
+                        "smithy.api#jsonName": "securityHubConfiguration"
                     }
                 }
             }
@@ -6201,6 +6257,9 @@
                     "target": "com.amazonaws.macie2#GetFindingsFilter"
                 },
                 {
+                    "target": "com.amazonaws.macie2#GetFindingsPublicationConfiguration"
+                },
+                {
                     "target": "com.amazonaws.macie2#GetFindingStatistics"
                 },
                 {
@@ -6247,6 +6306,9 @@
                 },
                 {
                     "target": "com.amazonaws.macie2#PutClassificationExportConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.macie2#PutFindingsPublicationConfiguration"
                 },
                 {
                     "target": "com.amazonaws.macie2#TagResource"
@@ -6478,7 +6540,7 @@
                 "lineRanges": {
                     "target": "com.amazonaws.macie2#Ranges",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of: data in unstructured sections of an otherwise structured file, such as a comment in a file; and, data in a malformed file that Amazon Macie analyzes as plain text.</p>",
+                        "smithy.api#documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.</p>",
                         "smithy.api#jsonName": "lineRanges"
                     }
                 },
@@ -6648,6 +6710,70 @@
                 }
             }
         },
+        "com.amazonaws.macie2#PutFindingsPublicationConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#PutFindingsPublicationConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#PutFindingsPublicationConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration settings for publishing findings to AWS Security Hub.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/findings-publication-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.macie2#PutFindingsPublicationConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive token that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#jsonName": "clientToken"
+                    }
+                },
+                "securityHubConfiguration": {
+                    "target": "com.amazonaws.macie2#SecurityHubConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings that determine which findings to publish to AWS Security Hub.</p>",
+                        "smithy.api#jsonName": "securityHubConfiguration"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#PutFindingsPublicationConfigurationResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.macie2#Range": {
             "type": "structure",
             "members": {
@@ -6692,7 +6818,7 @@
                 "jsonPath": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path, as a JSONPath expression, to the field in the record that contains the data.</p> <p>If the name of an element exceeds 20 characters, Amazon Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>",
+                        "smithy.api#documentation": "<p>The path, as a JSONPath expression, to the field in the record that contains the data. If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field.</p> <p>If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>",
                         "smithy.api#jsonName": "jsonPath"
                     }
                 },
@@ -7133,6 +7259,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies one or more property- and tag-based conditions that refine the scope of a classification job. These conditions define criteria that determine which objects a job analyzes. Exclude conditions take precedence over include conditions.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SecurityHubConfiguration": {
+            "type": "structure",
+            "members": {
+                "publishClassificationFindings": {
+                    "target": "com.amazonaws.macie2#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to publish sensitive data findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.</p>",
+                        "smithy.api#jsonName": "publishClassificationFindings",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publishPolicyFindings": {
+                    "target": "com.amazonaws.macie2#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to publish policy findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.</p>",
+                        "smithy.api#jsonName": "publishPolicyFindings",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies configuration settings that determine which findings are published to AWS Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html\">Amazon Macie integration with Security Hub</a> in the <i>Amazon Macie User Guide</i>.</p>"
             }
         },
         "com.amazonaws.macie2#SensitiveData": {
@@ -7932,7 +8082,7 @@
                 "jobStatus": {
                     "target": "com.amazonaws.macie2#JobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p> <p>If you specify this value and the job's current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can't resume or restart a job after you cancel it.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED.</p> <p>If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job temporarily. This value is valid only if the job's current status is IDLE or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a one-time job and you don't resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don't resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The new status for the job. Valid values are:</p> <ul><li><p>CANCELLED - Stops the job permanently and cancels it. This value is valid only if the job's current status is IDLE, PAUSED, RUNNING, or USER_PAUSED.</p> <p>If you specify this value and the job's current status is RUNNING, Amazon Macie immediately begins to stop all processing tasks for the job. You can't resume or restart a job after you cancel it.</p></li> <li><p>RUNNING - Resumes the job. This value is valid only if the job's current status is USER_PAUSED.</p> <p>If you paused the job while it was actively running and you specify this value less than 30 days after you paused the job, Macie immediately resumes processing from the point where you paused the job. Otherwise, Macie resumes the job according to the schedule and other settings for the job.</p></li> <li><p>USER_PAUSED - Pauses the job temporarily. This value is valid only if the job's current status is IDLE, PAUSED, or RUNNING. If you specify this value and the job's current status is RUNNING, Macie immediately begins to pause all processing tasks for the job.</p> <p>If you pause a one-time job and you don't resume it within 30 days, the job expires and Macie cancels the job. If you pause a recurring job when its status is RUNNING and you don't resume it within 30 days, the job run expires and Macie cancels the run. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.</p></li></ul>",
                         "smithy.api#jsonName": "jobStatus",
                         "smithy.api#required": {}
                     }

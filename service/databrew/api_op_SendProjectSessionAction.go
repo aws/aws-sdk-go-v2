@@ -50,7 +50,7 @@ type SendProjectSessionActionInput struct {
 	// from earlier in the view frame stack.
 	StepIndex *int32
 
-	// Represents the data being being transformed during an action.
+	// Represents the data being transformed during an action.
 	ViewFrame *types.ViewFrame
 }
 

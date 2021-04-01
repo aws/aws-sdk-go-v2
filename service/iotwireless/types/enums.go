@@ -2,6 +2,90 @@
 
 package types
 
+type BatteryLevel string
+
+// Enum values for BatteryLevel
+const (
+	BatteryLevelNormal   BatteryLevel = "normal"
+	BatteryLevelLow      BatteryLevel = "low"
+	BatteryLevelCritical BatteryLevel = "critical"
+)
+
+// Values returns all known values for BatteryLevel. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (BatteryLevel) Values() []BatteryLevel {
+	return []BatteryLevel{
+		"normal",
+		"low",
+		"critical",
+	}
+}
+
+type ConnectionStatus string
+
+// Enum values for ConnectionStatus
+const (
+	ConnectionStatusConnected    ConnectionStatus = "Connected"
+	ConnectionStatusDisconnected ConnectionStatus = "Disconnected"
+)
+
+// Values returns all known values for ConnectionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectionStatus) Values() []ConnectionStatus {
+	return []ConnectionStatus{
+		"Connected",
+		"Disconnected",
+	}
+}
+
+type DeviceState string
+
+// Enum values for DeviceState
+const (
+	DeviceStateProvisioned           DeviceState = "Provisioned"
+	DeviceStateRegisterednotseen     DeviceState = "RegisteredNotSeen"
+	DeviceStateRegisteredreachable   DeviceState = "RegisteredReachable"
+	DeviceStateRegisteredunreachable DeviceState = "RegisteredUnreachable"
+)
+
+// Values returns all known values for DeviceState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DeviceState) Values() []DeviceState {
+	return []DeviceState{
+		"Provisioned",
+		"RegisteredNotSeen",
+		"RegisteredReachable",
+		"RegisteredUnreachable",
+	}
+}
+
+type Event string
+
+// Enum values for Event
+const (
+	EventDiscovered  Event = "discovered"
+	EventLost        Event = "lost"
+	EventAck         Event = "ack"
+	EventNack        Event = "nack"
+	EventPassthrough Event = "passthrough"
+)
+
+// Values returns all known values for Event. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Event) Values() []Event {
+	return []Event{
+		"discovered",
+		"lost",
+		"ack",
+		"nack",
+		"passthrough",
+	}
+}
+
 type ExpressionType string
 
 // Enum values for ExpressionType
@@ -33,6 +117,24 @@ const (
 func (PartnerType) Values() []PartnerType {
 	return []PartnerType{
 		"Sidewalk",
+	}
+}
+
+type SigningAlg string
+
+// Enum values for SigningAlg
+const (
+	SigningAlgEd25519 SigningAlg = "Ed25519"
+	SigningAlgP256r1  SigningAlg = "P256r1"
+)
+
+// Values returns all known values for SigningAlg. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (SigningAlg) Values() []SigningAlg {
+	return []SigningAlg{
+		"Ed25519",
+		"P256r1",
 	}
 }
 

@@ -3177,6 +3177,50 @@ func awsAwsjson11_serializeDocumentRunCommandTargetValues(v []string, value smit
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSageMakerPipelineParameter(v *types.SageMakerPipelineParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSageMakerPipelineParameterList(v []types.SageMakerPipelineParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentSageMakerPipelineParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSageMakerPipelineParameters(v *types.SageMakerPipelineParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PipelineParameterList != nil {
+		ok := object.Key("PipelineParameterList")
+		if err := awsAwsjson11_serializeDocumentSageMakerPipelineParameterList(v.PipelineParameterList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSqsParameters(v *types.SqsParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3329,6 +3373,13 @@ func awsAwsjson11_serializeDocumentTarget(v *types.Target, value smithyjson.Valu
 	if v.RunCommandParameters != nil {
 		ok := object.Key("RunCommandParameters")
 		if err := awsAwsjson11_serializeDocumentRunCommandParameters(v.RunCommandParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SageMakerPipelineParameters != nil {
+		ok := object.Key("SageMakerPipelineParameters")
+		if err := awsAwsjson11_serializeDocumentSageMakerPipelineParameters(v.SageMakerPipelineParameters, ok); err != nil {
 			return err
 		}
 	}

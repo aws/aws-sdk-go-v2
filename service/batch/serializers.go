@@ -2039,6 +2039,57 @@ func awsRestjson1_serializeDocumentEc2ConfigurationList(v []types.Ec2Configurati
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEFSAuthorizationConfig(v *types.EFSAuthorizationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessPointId != nil {
+		ok := object.Key("accessPointId")
+		ok.String(*v.AccessPointId)
+	}
+
+	if len(v.Iam) > 0 {
+		ok := object.Key("iam")
+		ok.String(string(v.Iam))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEFSVolumeConfiguration(v *types.EFSVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthorizationConfig != nil {
+		ok := object.Key("authorizationConfig")
+		if err := awsRestjson1_serializeDocumentEFSAuthorizationConfig(v.AuthorizationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FileSystemId != nil {
+		ok := object.Key("fileSystemId")
+		ok.String(*v.FileSystemId)
+	}
+
+	if v.RootDirectory != nil {
+		ok := object.Key("rootDirectory")
+		ok.String(*v.RootDirectory)
+	}
+
+	if len(v.TransitEncryption) > 0 {
+		ok := object.Key("transitEncryption")
+		ok.String(string(v.TransitEncryption))
+	}
+
+	if v.TransitEncryptionPort != 0 {
+		ok := object.Key("transitEncryptionPort")
+		ok.Integer(v.TransitEncryptionPort)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEnvironmentVariables(v []types.KeyValuePair, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2638,6 +2689,13 @@ func awsRestjson1_serializeDocumentUlimits(v []types.Ulimit, value smithyjson.Va
 func awsRestjson1_serializeDocumentVolume(v *types.Volume, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.EfsVolumeConfiguration != nil {
+		ok := object.Key("efsVolumeConfiguration")
+		if err := awsRestjson1_serializeDocumentEFSVolumeConfiguration(v.EfsVolumeConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Host != nil {
 		ok := object.Key("host")

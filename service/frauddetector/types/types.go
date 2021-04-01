@@ -28,6 +28,56 @@ type BatchGetVariableError struct {
 	Name *string
 }
 
+// The batch prediction details.
+type BatchPrediction struct {
+
+	// The ARN of batch prediction job.
+	Arn *string
+
+	// Timestamp of when the batch prediction job comleted.
+	CompletionTime *string
+
+	// The name of the detector.
+	DetectorName *string
+
+	// The detector version.
+	DetectorVersion *string
+
+	// The name of the event type.
+	EventTypeName *string
+
+	// The reason a batch prediction job failed.
+	FailureReason *string
+
+	// The ARN of the IAM role to use for this job request.
+	IamRoleArn *string
+
+	// The Amazon S3 location of your training file.
+	InputPath *string
+
+	// The job ID for the batch prediction.
+	JobId *string
+
+	// Timestamp of most recent heartbeat indicating the batch prediction job was
+	// making progress.
+	LastHeartbeatTime *string
+
+	// The Amazon S3 location of your output file.
+	OutputPath *string
+
+	// The number of records processed by the batch prediction job.
+	ProcessedRecordsCount *int32
+
+	// Timestamp of when the batch prediction job started.
+	StartTime *string
+
+	// The batch prediction status.
+	Status AsyncJobStatus
+
+	// The total number of records in the batch prediction job.
+	TotalRecordsCount *int32
+}
+
 // The model training validation messages.
 type DataValidationMetrics struct {
 

@@ -390,6 +390,26 @@ func (m *validateOpDescribeAggregateComplianceByConfigRules) HandleInitialize(ct
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAggregateComplianceByConformancePacks struct {
+}
+
+func (*validateOpDescribeAggregateComplianceByConformancePacks) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAggregateComplianceByConformancePacks) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAggregateComplianceByConformancePacksInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAggregateComplianceByConformancePacksInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeConfigurationAggregatorSourcesStatus struct {
 }
 
@@ -525,6 +545,26 @@ func (m *validateOpGetAggregateConfigRuleComplianceSummary) HandleInitialize(ctx
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAggregateConfigRuleComplianceSummaryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAggregateConformancePackComplianceSummary struct {
+}
+
+func (*validateOpGetAggregateConformancePackComplianceSummary) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAggregateConformancePackComplianceSummary) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAggregateConformancePackComplianceSummaryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAggregateConformancePackComplianceSummaryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1306,6 +1346,10 @@ func addOpDescribeAggregateComplianceByConfigRulesValidationMiddleware(stack *mi
 	return stack.Initialize.Add(&validateOpDescribeAggregateComplianceByConfigRules{}, middleware.After)
 }
 
+func addOpDescribeAggregateComplianceByConformancePacksValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAggregateComplianceByConformancePacks{}, middleware.After)
+}
+
 func addOpDescribeConfigurationAggregatorSourcesStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeConfigurationAggregatorSourcesStatus{}, middleware.After)
 }
@@ -1332,6 +1376,10 @@ func addOpGetAggregateComplianceDetailsByConfigRuleValidationMiddleware(stack *m
 
 func addOpGetAggregateConfigRuleComplianceSummaryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAggregateConfigRuleComplianceSummary{}, middleware.After)
+}
+
+func addOpGetAggregateConformancePackComplianceSummaryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAggregateConformancePackComplianceSummary{}, middleware.After)
 }
 
 func addOpGetAggregateDiscoveredResourceCountsValidationMiddleware(stack *middleware.Stack) error {
@@ -2203,6 +2251,21 @@ func validateOpDescribeAggregateComplianceByConfigRulesInput(v *DescribeAggregat
 	}
 }
 
+func validateOpDescribeAggregateComplianceByConformancePacksInput(v *DescribeAggregateComplianceByConformancePacksInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAggregateComplianceByConformancePacksInput"}
+	if v.ConfigurationAggregatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationAggregatorName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeConfigurationAggregatorSourcesStatusInput(v *DescribeConfigurationAggregatorSourcesStatusInput) error {
 	if v == nil {
 		return nil
@@ -2312,6 +2375,21 @@ func validateOpGetAggregateConfigRuleComplianceSummaryInput(v *GetAggregateConfi
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetAggregateConfigRuleComplianceSummaryInput"}
+	if v.ConfigurationAggregatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationAggregatorName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAggregateConformancePackComplianceSummaryInput(v *GetAggregateConformancePackComplianceSummaryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAggregateConformancePackComplianceSummaryInput"}
 	if v.ConfigurationAggregatorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConfigurationAggregatorName"))
 	}

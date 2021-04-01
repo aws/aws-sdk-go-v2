@@ -447,6 +447,11 @@ func validateContainerProperties(v *types.ContainerProperties) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ContainerProperties"}
+	if v.Volumes != nil {
+		if err := validateVolumes(v.Volumes); err != nil {
+			invalidParams.AddNested("Volumes", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Ulimits != nil {
 		if err := validateUlimits(v.Ulimits); err != nil {
 			invalidParams.AddNested("Ulimits", err.(smithy.InvalidParamsError))
@@ -535,6 +540,21 @@ func validateEc2ConfigurationList(v []types.Ec2Configuration) error {
 		if err := validateEc2Configuration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEFSVolumeConfiguration(v *types.EFSVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EFSVolumeConfiguration"}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -868,6 +888,40 @@ func validateUlimits(v []types.Ulimit) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Ulimits"}
 	for i := range v {
 		if err := validateUlimit(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVolume(v *types.Volume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Volume"}
+	if v.EfsVolumeConfiguration != nil {
+		if err := validateEFSVolumeConfiguration(v.EfsVolumeConfiguration); err != nil {
+			invalidParams.AddNested("EfsVolumeConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVolumes(v []types.Volume) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Volumes"}
+	for i := range v {
+		if err := validateVolume(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}

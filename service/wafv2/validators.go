@@ -946,6 +946,23 @@ func addOpUpdateWebACLValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWebACL{}, middleware.After)
 }
 
+func validateAllowAction(v *types.AllowAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowAction"}
+	if v.CustomRequestHandling != nil {
+		if err := validateCustomRequestHandling(v.CustomRequestHandling); err != nil {
+			invalidParams.AddNested("CustomRequestHandling", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAndStatement(v *types.AndStatement) error {
 	if v == nil {
 		return nil
@@ -956,6 +973,23 @@ func validateAndStatement(v *types.AndStatement) error {
 	} else if v.Statements != nil {
 		if err := validateStatements(v.Statements); err != nil {
 			invalidParams.AddNested("Statements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBlockAction(v *types.BlockAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BlockAction"}
+	if v.CustomResponse != nil {
+		if err := validateCustomResponse(v.CustomResponse); err != nil {
+			invalidParams.AddNested("CustomResponse", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -989,6 +1023,155 @@ func validateByteMatchStatement(v *types.ByteMatchStatement) error {
 	}
 	if len(v.PositionalConstraint) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PositionalConstraint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCountAction(v *types.CountAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CountAction"}
+	if v.CustomRequestHandling != nil {
+		if err := validateCustomRequestHandling(v.CustomRequestHandling); err != nil {
+			invalidParams.AddNested("CustomRequestHandling", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomHTTPHeader(v *types.CustomHTTPHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomHTTPHeader"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomHTTPHeaders(v []types.CustomHTTPHeader) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomHTTPHeaders"}
+	for i := range v {
+		if err := validateCustomHTTPHeader(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomRequestHandling(v *types.CustomRequestHandling) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomRequestHandling"}
+	if v.InsertHeaders == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsertHeaders"))
+	} else if v.InsertHeaders != nil {
+		if err := validateCustomHTTPHeaders(v.InsertHeaders); err != nil {
+			invalidParams.AddNested("InsertHeaders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomResponse(v *types.CustomResponse) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomResponse"}
+	if v.ResponseCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResponseCode"))
+	}
+	if v.ResponseHeaders != nil {
+		if err := validateCustomHTTPHeaders(v.ResponseHeaders); err != nil {
+			invalidParams.AddNested("ResponseHeaders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomResponseBodies(v map[string]types.CustomResponseBody) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomResponseBodies"}
+	for key := range v {
+		value := v[key]
+		if err := validateCustomResponseBody(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomResponseBody(v *types.CustomResponseBody) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomResponseBody"}
+	if len(v.ContentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ContentType"))
+	}
+	if v.Content == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDefaultAction(v *types.DefaultAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultAction"}
+	if v.Block != nil {
+		if err := validateBlockAction(v.Block); err != nil {
+			invalidParams.AddNested("Block", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Allow != nil {
+		if err := validateAllowAction(v.Allow); err != nil {
+			invalidParams.AddNested("Allow", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1234,6 +1417,23 @@ func validateOrStatement(v *types.OrStatement) error {
 	}
 }
 
+func validateOverrideAction(v *types.OverrideAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OverrideAction"}
+	if v.Count != nil {
+		if err := validateCountAction(v.Count); err != nil {
+			invalidParams.AddNested("Count", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRateBasedStatement(v *types.RateBasedStatement) error {
 	if v == nil {
 		return nil
@@ -1320,11 +1520,48 @@ func validateRule(v *types.Rule) error {
 			invalidParams.AddNested("Statement", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Action != nil {
+		if err := validateRuleAction(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OverrideAction != nil {
+		if err := validateOverrideAction(v.OverrideAction); err != nil {
+			invalidParams.AddNested("OverrideAction", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.VisibilityConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VisibilityConfig"))
 	} else if v.VisibilityConfig != nil {
 		if err := validateVisibilityConfig(v.VisibilityConfig); err != nil {
 			invalidParams.AddNested("VisibilityConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleAction(v *types.RuleAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleAction"}
+	if v.Block != nil {
+		if err := validateBlockAction(v.Block); err != nil {
+			invalidParams.AddNested("Block", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Allow != nil {
+		if err := validateAllowAction(v.Allow); err != nil {
+			invalidParams.AddNested("Allow", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Count != nil {
+		if err := validateCountAction(v.Count); err != nil {
+			invalidParams.AddNested("Count", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1799,6 +2036,11 @@ func validateOpCreateRuleGroupInput(v *CreateRuleGroupInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.CustomResponseBodies != nil {
+		if err := validateCustomResponseBodies(v.CustomResponseBodies); err != nil {
+			invalidParams.AddNested("CustomResponseBodies", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1819,6 +2061,10 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 	}
 	if v.DefaultAction == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultAction"))
+	} else if v.DefaultAction != nil {
+		if err := validateDefaultAction(v.DefaultAction); err != nil {
+			invalidParams.AddNested("DefaultAction", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Rules != nil {
 		if err := validateRules(v.Rules); err != nil {
@@ -1835,6 +2081,11 @@ func validateOpCreateWebACLInput(v *CreateWebACLInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomResponseBodies != nil {
+		if err := validateCustomResponseBodies(v.CustomResponseBodies); err != nil {
+			invalidParams.AddNested("CustomResponseBodies", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2470,6 +2721,11 @@ func validateOpUpdateRuleGroupInput(v *UpdateRuleGroupInput) error {
 	if v.LockToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LockToken"))
 	}
+	if v.CustomResponseBodies != nil {
+		if err := validateCustomResponseBodies(v.CustomResponseBodies); err != nil {
+			invalidParams.AddNested("CustomResponseBodies", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2493,6 +2749,10 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 	}
 	if v.DefaultAction == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultAction"))
+	} else if v.DefaultAction != nil {
+		if err := validateDefaultAction(v.DefaultAction); err != nil {
+			invalidParams.AddNested("DefaultAction", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.Rules != nil {
 		if err := validateRules(v.Rules); err != nil {
@@ -2508,6 +2768,11 @@ func validateOpUpdateWebACLInput(v *UpdateWebACLInput) error {
 	}
 	if v.LockToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LockToken"))
+	}
+	if v.CustomResponseBodies != nil {
+		if err := validateCustomResponseBodies(v.CustomResponseBodies); err != nil {
+			invalidParams.AddNested("CustomResponseBodies", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
