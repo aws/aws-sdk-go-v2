@@ -237,7 +237,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.ssm#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource ID you want to tag.</p>\n         <p>Use the ID of the resource. Here are some examples:</p>\n         <p>ManagedInstance: mi-012345abcde</p>\n         <p>MaintenanceWindow: mw-012345abcde</p>\n         <p>PatchBaseline: pb-012345abcde</p>\n         <p>OpsMetadata object: <code>ResourceID</code> for tagging is created from the Amazon Resource\n   Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from the strings that\n   come after the word <code>opsmetadata</code> in the ARN. For example, an OpsMetadata object\n   with an ARN of <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code> has a\n   <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or\n   <code>/aws/ssm/MyGroup/appmanager</code>.</p>\n         <p>For the Document and Parameter values, use the name of the resource.</p>\n  \n         <note>\n            <p>The ManagedInstance type for this API action is only for on-premises managed instances. You\n    must specify the name of the managed instance in the following format: mi-ID_number. For\n    example, mi-1a2b3c4d5e6f.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource ID you want to tag.</p>\n         <p>Use the ID of the resource. Here are some examples:</p>\n         <p>ManagedInstance: mi-012345abcde</p>\n         <p>MaintenanceWindow: mw-012345abcde</p>\n         <p>PatchBaseline: pb-012345abcde</p>\n         <p>OpsMetadata object: <code>ResourceID</code> for tagging is created from the Amazon Resource\n   Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from the strings that\n   come after the word <code>opsmetadata</code> in the ARN. For example, an OpsMetadata object with\n   an ARN of <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code>\n   has a <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or\n    <code>/aws/ssm/MyGroup/appmanager</code>.</p>\n         <p>For the Document and Parameter values, use the name of the resource.</p>\n\n         <note>\n            <p>The ManagedInstance type for this API action is only for on-premises managed instances. You\n    must specify the name of the managed instance in the following format: mi-ID_number. For\n    example, mi-1a2b3c4d5e6f.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2561,7 +2561,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 10
+                    "max": 50
                 }
             }
         },
@@ -3991,7 +3991,7 @@
                 "ExpirationDate": {
                     "target": "com.amazonaws.ssm#ExpirationDate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date by which this activation request should expire. The default value is 24\n   hours.</p>"
+                        "smithy.api#documentation": "<p>The date by which this activation request should expire, in timestamp format, such as\n   \"2021-07-07T00:00:00\". You can specify a date up to 30 days in advance. If you don't provide an\n   expiration date, the activation code expires in 24 hours.</p>"
                     }
                 },
                 "Tags": {
@@ -20371,7 +20371,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.ssm#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the resource from which you want to remove tags. For example:</p>\n         <p>ManagedInstance: mi-012345abcde</p>\n         <p>MaintenanceWindow: mw-012345abcde</p>\n         <p>PatchBaseline: pb-012345abcde</p>\n         <p>OpsMetadata object: <code>ResourceID</code> for tagging is created from the Amazon Resource\n   Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from the strings that\n   come after the word <code>opsmetadata</code> in the ARN. For example, an OpsMetadata object\n   with an ARN of <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code> has a\n   <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or\n   <code>/aws/ssm/MyGroup/appmanager</code>.</p>\n         <p>For the Document and Parameter values, use the name of the resource.</p>\n         <note>\n            <p>The ManagedInstance type for this API action is only for on-premises managed instances.\n    Specify the name of the managed instance in the following format: mi-ID_number. For example,\n    mi-1a2b3c4d5e6f.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The ID of the resource from which you want to remove tags. For example:</p>\n         <p>ManagedInstance: mi-012345abcde</p>\n         <p>MaintenanceWindow: mw-012345abcde</p>\n         <p>PatchBaseline: pb-012345abcde</p>\n         <p>OpsMetadata object: <code>ResourceID</code> for tagging is created from the Amazon Resource\n   Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from the strings that\n   come after the word <code>opsmetadata</code> in the ARN. For example, an OpsMetadata object with\n   an ARN of <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code>\n   has a <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or\n    <code>/aws/ssm/MyGroup/appmanager</code>.</p>\n         <p>For the Document and Parameter values, use the name of the resource.</p>\n         <note>\n            <p>The ManagedInstance type for this API action is only for on-premises managed instances.\n    Specify the name of the managed instance in the following format: mi-ID_number. For example,\n    mi-1a2b3c4d5e6f.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -20623,6 +20623,9 @@
                     "max": 64
                 }
             }
+        },
+        "com.amazonaws.ssm#ResourceDataSyncEnableAllOpsDataSources": {
+            "type": "boolean"
         },
         "com.amazonaws.ssm#ResourceDataSyncIncludeFutureRegions": {
             "type": "boolean"
@@ -20901,6 +20904,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to automatically synchronize and aggregate data from new AWS Regions when those\n   Regions come online.</p>"
                     }
+                },
+                "EnableAllOpsDataSources": {
+                    "target": "com.amazonaws.ssm#ResourceDataSyncEnableAllOpsDataSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager\n   automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in\n   your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the\n    <i>AWS Systems Manager User Guide</i>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20962,6 +20971,12 @@
                     "target": "com.amazonaws.ssm#ResourceDataSyncState",
                     "traits": {
                         "smithy.api#documentation": "<p>The data type name for including resource data sync state. There are four sync\n   states:</p>\n\n         <p>\n            <code>OrganizationNotExists</code>: Your organization doesn't exist.</p>\n         <p>\n            <code>NoPermissions</code>: The system can't locate the service-linked role. This role is\n   automatically created when a user creates a resource data sync in Explorer.</p>\n         <p>\n            <code>InvalidOrganizationalUnit</code>: You specified or selected an invalid unit in the\n   resource data sync configuration.</p>\n         <p>\n            <code>TrustedAccessDisabled</code>: You disabled Systems Manager access in the organization in\n   AWS Organizations.</p>"
+                    }
+                },
+                "EnableAllOpsDataSources": {
+                    "target": "com.amazonaws.ssm#ResourceDataSyncEnableAllOpsDataSources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager\n   automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in\n   your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the\n    <i>AWS Systems Manager User Guide</i>.</p>"
                     }
                 }
             },
@@ -22883,7 +22898,7 @@
                 "Values": {
                     "target": "com.amazonaws.ssm#TargetValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified\n    <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on\n   instances that include EC2 tags of <code>ServerRole,WebServer</code>. </p>"
+                        "smithy.api#documentation": "<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified\n    <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on\n   instances that include EC2 tags of <code>ServerRole,WebServer</code>. </p>\n         <p>Depending on the type of <code>Target</code>, the maximum number of values for a\n    <code>Key</code> might be lower than the global maximum of 50.</p>"
                     }
                 }
             },

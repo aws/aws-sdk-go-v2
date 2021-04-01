@@ -556,6 +556,130 @@
                 }
             }
         },
+        "com.amazonaws.workmail#CreateMobileDeviceAccessRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#CreateMobileDeviceAccessRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#CreateMobileDeviceAccessRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new mobile device access rule for the specified Amazon WorkMail organization.</p>"
+            }
+        },
+        "com.amazonaws.workmail#CreateMobileDeviceAccessRuleRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon WorkMail organization under which the rule will be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.workmail#IdempotencyClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token for the client request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule description.</p>"
+                    }
+                },
+                "Effect": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceTypes": {
+                    "target": "com.amazonaws.workmail#DeviceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device types that the rule will match.</p>"
+                    }
+                },
+                "NotDeviceTypes": {
+                    "target": "com.amazonaws.workmail#DeviceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device types that the rule <b>will not</b> match. All other device types will match.</p>"
+                    }
+                },
+                "DeviceModels": {
+                    "target": "com.amazonaws.workmail#DeviceModelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device models that the rule will match.</p>"
+                    }
+                },
+                "NotDeviceModels": {
+                    "target": "com.amazonaws.workmail#DeviceModelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device models that the rule <b>will not</b> match. All other device models will match.</p>"
+                    }
+                },
+                "DeviceOperatingSystems": {
+                    "target": "com.amazonaws.workmail#DeviceOperatingSystemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device operating systems that the rule will match.</p>"
+                    }
+                },
+                "NotDeviceOperatingSystems": {
+                    "target": "com.amazonaws.workmail#DeviceOperatingSystemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device operating systems that the rule <b>will not</b> match. All other device operating systems will match.</p>"
+                    }
+                },
+                "DeviceUserAgents": {
+                    "target": "com.amazonaws.workmail#DeviceUserAgentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device user agents that the rule will match.</p>"
+                    }
+                },
+                "NotDeviceUserAgents": {
+                    "target": "com.amazonaws.workmail#DeviceUserAgentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device user agents that the rule <b>will not</b> match. All other device user agents will match.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#CreateMobileDeviceAccessRuleResponse": {
+            "type": "structure",
+            "members": {
+                "MobileDeviceAccessRuleId": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the newly created mobile device access rule.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workmail#CreateOrganization": {
             "type": "operation",
             "input": {
@@ -1040,6 +1164,52 @@
             }
         },
         "com.amazonaws.workmail#DeleteMailboxPermissionsResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.workmail#DeleteMobileDeviceAccessRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#DeleteMobileDeviceAccessRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#DeleteMobileDeviceAccessRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a mobile device access rule for the specified Amazon WorkMail organization.</p>"
+            }
+        },
+        "com.amazonaws.workmail#DeleteMobileDeviceAccessRuleRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon WorkMail organization under which the rule will be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MobileDeviceAccessRuleId": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rule to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#DeleteMobileDeviceAccessRuleResponse": {
             "type": "structure",
             "members": {}
         },
@@ -1829,6 +1999,94 @@
                 "smithy.api#pattern": "[\\S\\s]*"
             }
         },
+        "com.amazonaws.workmail#DeviceModel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+            }
+        },
+        "com.amazonaws.workmail#DeviceModelList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#DeviceModel"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#DeviceOperatingSystem": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+            }
+        },
+        "com.amazonaws.workmail#DeviceOperatingSystemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#DeviceOperatingSystem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#DeviceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+            }
+        },
+        "com.amazonaws.workmail#DeviceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#DeviceType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#DeviceUserAgent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+            }
+        },
+        "com.amazonaws.workmail#DeviceUserAgentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#DeviceUserAgent"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.workmail#DirectoryId": {
             "type": "string",
             "traits": {
@@ -2384,6 +2642,82 @@
                     "target": "com.amazonaws.workmail#MailboxSize",
                     "traits": {
                         "smithy.api#documentation": "<p>The current mailbox size, in MB, for the specified user.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#GetMobileDeviceAccessEffect": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#GetMobileDeviceAccessEffectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#GetMobileDeviceAccessEffectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access \n         rules for the Amazon WorkMail organization for a particular user's attributes.</p>"
+            }
+        },
+        "com.amazonaws.workmail#GetMobileDeviceAccessEffectRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon WorkMail organization to simulate the access effect for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceType": {
+                    "target": "com.amazonaws.workmail#DeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device type the simulated user will report.</p>"
+                    }
+                },
+                "DeviceModel": {
+                    "target": "com.amazonaws.workmail#DeviceModel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device model the simulated user will report.</p>"
+                    }
+                },
+                "DeviceOperatingSystem": {
+                    "target": "com.amazonaws.workmail#DeviceOperatingSystem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device operating system the simulated user will report.</p>"
+                    }
+                },
+                "DeviceUserAgent": {
+                    "target": "com.amazonaws.workmail#DeviceUserAgent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device user agent the simulated user will report.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#GetMobileDeviceAccessEffectResponse": {
+            "type": "structure",
+            "members": {
+                "Effect": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated \n         user parameters.</p>"
+                    }
+                },
+                "MatchedRules": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessMatchedRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the rules which matched the simulated user input and produced the effect.</p>"
                     }
                 }
             }
@@ -2996,6 +3330,52 @@
                 }
             }
         },
+        "com.amazonaws.workmail#ListMobileDeviceAccessRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#ListMobileDeviceAccessRulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#ListMobileDeviceAccessRulesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the mobile device access rules for the specified Amazon WorkMail organization.</p>"
+            }
+        },
+        "com.amazonaws.workmail#ListMobileDeviceAccessRulesRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon WorkMail organization for which to list the rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#ListMobileDeviceAccessRulesResponse": {
+            "type": "structure",
+            "members": {
+                "Rules": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRulesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of mobile device access rules that exist under the specified Amazon WorkMail organization.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.workmail#ListOrganizations": {
             "type": "operation",
             "input": {
@@ -3535,6 +3915,187 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.workmail#Member"
+            }
+        },
+        "com.amazonaws.workmail#MobileDeviceAccessMatchedRule": {
+            "type": "structure",
+            "members": {
+                "MobileDeviceAccessRuleId": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier of the rule that a simulated user matches.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of a rule that a simulated user matches.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rule that a simulated user matches.</p>"
+            }
+        },
+        "com.amazonaws.workmail#MobileDeviceAccessMatchedRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#MobileDeviceAccessMatchedRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.workmail#MobileDeviceAccessRule": {
+            "type": "structure",
+            "members": {
+                "MobileDeviceAccessRuleId": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID assigned to a mobile access rule. </p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a mobile access rule.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of a mobile access rule.</p>"
+                    }
+                },
+                "Effect": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>"
+                    }
+                },
+                "DeviceTypes": {
+                    "target": "com.amazonaws.workmail#DeviceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device types that a rule will match. </p>"
+                    }
+                },
+                "NotDeviceTypes": {
+                    "target": "com.amazonaws.workmail#DeviceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device types that a rule <b>will not</b> match. All other device types will match.</p>"
+                    }
+                },
+                "DeviceModels": {
+                    "target": "com.amazonaws.workmail#DeviceModelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device models that a rule will match.</p>"
+                    }
+                },
+                "NotDeviceModels": {
+                    "target": "com.amazonaws.workmail#DeviceModelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device models that a rule <b>will not</b> match. All other device models will match.</p>"
+                    }
+                },
+                "DeviceOperatingSystems": {
+                    "target": "com.amazonaws.workmail#DeviceOperatingSystemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device operating systems that a rule will match.</p>"
+                    }
+                },
+                "NotDeviceOperatingSystems": {
+                    "target": "com.amazonaws.workmail#DeviceOperatingSystemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device operating systems that a rule <b>will not</b> match. All other device types will match.</p>"
+                    }
+                },
+                "DeviceUserAgents": {
+                    "target": "com.amazonaws.workmail#DeviceUserAgentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device user agents that a rule will match.</p>"
+                    }
+                },
+                "NotDeviceUserAgents": {
+                    "target": "com.amazonaws.workmail#DeviceUserAgentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device user agents that a rule <b>will not</b> match. All other device user agents will match.</p>"
+                    }
+                },
+                "DateCreated": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which an access rule was created.</p>"
+                    }
+                },
+                "DateModified": {
+                    "target": "com.amazonaws.workmail#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time at which an access rule was modified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule that controls access to mobile devices for an Amazon WorkMail group.</p>"
+            }
+        },
+        "com.amazonaws.workmail#MobileDeviceAccessRuleDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\S\\s]+"
+            }
+        },
+        "com.amazonaws.workmail#MobileDeviceAccessRuleEffect": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALLOW",
+                        "name": "ALLOW"
+                    },
+                    {
+                        "value": "DENY",
+                        "name": "DENY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.workmail#MobileDeviceAccessRuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
+            }
+        },
+        "com.amazonaws.workmail#MobileDeviceAccessRuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[\\S\\s]+"
+            }
+        },
+        "com.amazonaws.workmail#MobileDeviceAccessRulesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.workmail#MobileDeviceAccessRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.workmail#NameAvailabilityException": {
@@ -4665,6 +5226,123 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.workmail#UpdateMobileDeviceAccessRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.workmail#UpdateMobileDeviceAccessRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmail#UpdateMobileDeviceAccessRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmail#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.workmail#OrganizationStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a mobile device access rule for the specified Amazon WorkMail organization.</p>"
+            }
+        },
+        "com.amazonaws.workmail#UpdateMobileDeviceAccessRuleRequest": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.workmail#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon WorkMail organization under which the rule will be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MobileDeviceAccessRuleId": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the rule to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated rule name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated rule description.</p>"
+                    }
+                },
+                "Effect": {
+                    "target": "com.amazonaws.workmail#MobileDeviceAccessRuleEffect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeviceTypes": {
+                    "target": "com.amazonaws.workmail#DeviceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device types that the updated rule will match.</p>"
+                    }
+                },
+                "NotDeviceTypes": {
+                    "target": "com.amazonaws.workmail#DeviceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device types that the updated rule <b>will not</b> match. All other device types will match.</p>"
+                    }
+                },
+                "DeviceModels": {
+                    "target": "com.amazonaws.workmail#DeviceModelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device models that the updated rule will match.</p>"
+                    }
+                },
+                "NotDeviceModels": {
+                    "target": "com.amazonaws.workmail#DeviceModelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device models that the updated rule <b>will not</b> match. All other device models will match.</p>"
+                    }
+                },
+                "DeviceOperatingSystems": {
+                    "target": "com.amazonaws.workmail#DeviceOperatingSystemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device operating systems that the updated rule will match.</p>"
+                    }
+                },
+                "NotDeviceOperatingSystems": {
+                    "target": "com.amazonaws.workmail#DeviceOperatingSystemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device operating systems that the updated rule <b>will not</b> match. All other device operating systems will match.</p>"
+                    }
+                },
+                "DeviceUserAgents": {
+                    "target": "com.amazonaws.workmail#DeviceUserAgentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User agents that the updated rule will match.</p>"
+                    }
+                },
+                "NotDeviceUserAgents": {
+                    "target": "com.amazonaws.workmail#DeviceUserAgentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User agents that the updated rule <b>will not</b> match. All other user agents will match.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.workmail#UpdateMobileDeviceAccessRuleResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.workmail#UpdatePrimaryEmailAddress": {
             "type": "operation",
             "input": {
@@ -4955,6 +5633,9 @@
                     "target": "com.amazonaws.workmail#CreateGroup"
                 },
                 {
+                    "target": "com.amazonaws.workmail#CreateMobileDeviceAccessRule"
+                },
+                {
                     "target": "com.amazonaws.workmail#CreateOrganization"
                 },
                 {
@@ -4974,6 +5655,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#DeleteMailboxPermissions"
+                },
+                {
+                    "target": "com.amazonaws.workmail#DeleteMobileDeviceAccessRule"
                 },
                 {
                     "target": "com.amazonaws.workmail#DeleteOrganization"
@@ -5021,6 +5705,9 @@
                     "target": "com.amazonaws.workmail#GetMailboxDetails"
                 },
                 {
+                    "target": "com.amazonaws.workmail#GetMobileDeviceAccessEffect"
+                },
+                {
                     "target": "com.amazonaws.workmail#ListAccessControlRules"
                 },
                 {
@@ -5037,6 +5724,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#ListMailboxPermissions"
+                },
+                {
+                    "target": "com.amazonaws.workmail#ListMobileDeviceAccessRules"
                 },
                 {
                     "target": "com.amazonaws.workmail#ListOrganizations"
@@ -5079,6 +5769,9 @@
                 },
                 {
                     "target": "com.amazonaws.workmail#UpdateMailboxQuota"
+                },
+                {
+                    "target": "com.amazonaws.workmail#UpdateMobileDeviceAccessRule"
                 },
                 {
                     "target": "com.amazonaws.workmail#UpdatePrimaryEmailAddress"

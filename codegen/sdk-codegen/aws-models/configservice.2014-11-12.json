@@ -126,6 +126,44 @@
                 "target": "com.amazonaws.configservice#AggregateComplianceByConfigRule"
             }
         },
+        "com.amazonaws.configservice#AggregateComplianceByConformancePack": {
+            "type": "structure",
+            "members": {
+                "ConformancePackName": {
+                    "target": "com.amazonaws.configservice#ConformancePackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the conformance pack.</p>"
+                    }
+                },
+                "Compliance": {
+                    "target": "com.amazonaws.configservice#AggregateConformancePackCompliance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compliance status of the conformance pack.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.configservice#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit AWS account ID of the source account.</p>"
+                    }
+                },
+                "AwsRegion": {
+                    "target": "com.amazonaws.configservice#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source AWS Region from where the data is aggregated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p>\n\t\t       <p>A conformance pack is compliant if all of the rules in that conformance packs are compliant. It is noncompliant if any of the rules are not compliant.</p>\n\t\t       <note>\n            <p>If a conformance pack has rules that return INSUFFICIENT_DATA, the conformance pack returns INSUFFICIENT_DATA only if all the rules within that conformance pack return INSUFFICIENT_DATA.\n\t\t\tIf some of the rules in a conformance pack are compliant and others return INSUFFICIENT_DATA, the conformance pack shows compliant.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.configservice#AggregateComplianceByConformancePackList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#AggregateComplianceByConformancePack"
+            }
+        },
         "com.amazonaws.configservice#AggregateComplianceCount": {
             "type": "structure",
             "members": {
@@ -150,6 +188,151 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.configservice#AggregateComplianceCount"
+            }
+        },
+        "com.amazonaws.configservice#AggregateConformancePackCompliance": {
+            "type": "structure",
+            "members": {
+                "ComplianceType": {
+                    "target": "com.amazonaws.configservice#ConformancePackComplianceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compliance status of the conformance pack.</p>"
+                    }
+                },
+                "CompliantRuleCount": {
+                    "target": "com.amazonaws.configservice#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of compliant AWS Config Rules.</p>"
+                    }
+                },
+                "NonCompliantRuleCount": {
+                    "target": "com.amazonaws.configservice#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of noncompliant AWS Config Rules.</p>"
+                    }
+                },
+                "TotalRuleCount": {
+                    "target": "com.amazonaws.configservice#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total number of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the number of compliant and noncompliant rules within a conformance pack. \n\t\t\tAlso provides the total count of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data. \n\t\t\t</p>"
+            }
+        },
+        "com.amazonaws.configservice#AggregateConformancePackComplianceCount": {
+            "type": "structure",
+            "members": {
+                "CompliantConformancePackCount": {
+                    "target": "com.amazonaws.configservice#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of compliant conformance packs.</p>"
+                    }
+                },
+                "NonCompliantConformancePackCount": {
+                    "target": "com.amazonaws.configservice#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of noncompliant conformance packs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of conformance packs that are compliant and noncompliant.</p>"
+            }
+        },
+        "com.amazonaws.configservice#AggregateConformancePackComplianceFilters": {
+            "type": "structure",
+            "members": {
+                "ConformancePackName": {
+                    "target": "com.amazonaws.configservice#ConformancePackName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the conformance pack.</p>"
+                    }
+                },
+                "ComplianceType": {
+                    "target": "com.amazonaws.configservice#ConformancePackComplianceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The compliance status of the conformance pack.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.configservice#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit AWS account ID of the source account.</p>"
+                    }
+                },
+                "AwsRegion": {
+                    "target": "com.amazonaws.configservice#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source AWS Region from where the data is aggregated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters the conformance packs based on an account ID, region, compliance type, and the name of the conformance pack.</p>"
+            }
+        },
+        "com.amazonaws.configservice#AggregateConformancePackComplianceSummary": {
+            "type": "structure",
+            "members": {
+                "ComplianceSummary": {
+                    "target": "com.amazonaws.configservice#AggregateConformancePackComplianceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns an <code>AggregateConformancePackComplianceCount</code> object. </p>"
+                    }
+                },
+                "GroupName": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Groups the result based on AWS Account ID or AWS Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of compliance based on either account ID or region. </p>"
+            }
+        },
+        "com.amazonaws.configservice#AggregateConformancePackComplianceSummaryFilters": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.configservice#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 12-digit AWS account ID of the source account.</p>"
+                    }
+                },
+                "AwsRegion": {
+                    "target": "com.amazonaws.configservice#AwsRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source AWS Region from where the data is aggregated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters the results based on account ID and region. </p>"
+            }
+        },
+        "com.amazonaws.configservice#AggregateConformancePackComplianceSummaryGroupKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCOUNT_ID",
+                        "name": "ACCOUNT_ID"
+                    },
+                    {
+                        "value": "AWS_REGION",
+                        "name": "AWS_REGION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.configservice#AggregateConformancePackComplianceSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#AggregateConformancePackComplianceSummary"
             }
         },
         "com.amazonaws.configservice#AggregateEvaluationResult": {
@@ -1618,7 +1801,7 @@
                 "ComplianceType": {
                     "target": "com.amazonaws.configservice#ConformancePackComplianceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the results by compliance.</p>\n\t\t       <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>Filters the results by compliance.</p>\n\t\t       <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>"
                     }
                 }
             },
@@ -1651,7 +1834,7 @@
                 "ConformancePackComplianceStatus": {
                     "target": "com.amazonaws.configservice#ConformancePackComplianceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the conformance pack. The allowed values are COMPLIANT and NON_COMPLIANT. </p>",
+                        "smithy.api#documentation": "<p>The status of the conformance pack. The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code> and <code>INSUFFICIENT_DATA</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1786,7 +1969,7 @@
                 "ComplianceType": {
                     "target": "com.amazonaws.configservice#ConformancePackComplianceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the results by compliance.</p>\n\t\t       <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>Filters the results by compliance.</p>\n\t\t       <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>"
                     }
                 },
                 "ResourceType": {
@@ -1812,7 +1995,7 @@
                 "ComplianceType": {
                     "target": "com.amazonaws.configservice#ConformancePackComplianceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The compliance type. The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. </p>",
+                        "smithy.api#documentation": "<p>The compliance type. The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>. <code>INSUFFICIENT_DATA</code> is not supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1936,7 +2119,13 @@
                 "ComplianceType": {
                     "target": "com.amazonaws.configservice#ConformancePackComplianceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Compliance of the AWS Config rule</p>\n\t\t       <p>The allowed values are <code>COMPLIANT</code> and <code>NON_COMPLIANT</code>.</p>"
+                        "smithy.api#documentation": "<p>Compliance of the AWS Config rule.</p>\n\t\t       <p>The allowed values are <code>COMPLIANT</code>, <code>NON_COMPLIANT</code>, and <code>INSUFFICIENT_DATA</code>.</p>"
+                    }
+                },
+                "Controls": {
+                    "target": "com.amazonaws.configservice#ControlsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Controls for the conformance pack. A control is a process to prevent or detect problems while meeting objectives.\n\t\t\tA control can align with a specific compliance regime or map to internal controls defined by an organization.</p>"
                     }
                 }
             },
@@ -2091,6 +2280,18 @@
             "traits": {
                 "smithy.api#documentation": "<p>You have specified a template that is not valid or supported.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.configservice#ControlsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.configservice#StringWithCharLimit128"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.configservice#CosmosPageLimit": {
@@ -2870,6 +3071,79 @@
                     "target": "com.amazonaws.configservice#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use\n\t\t\tto get the next page of results in a paginated response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#InvalidLimitException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#NoSuchConfigurationAggregatorException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacksRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationAggregatorName": {
+                    "target": "com.amazonaws.configservice#ConfigurationAggregatorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration aggregator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.configservice#AggregateConformancePackComplianceFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the result by <code>AggregateConformancePackComplianceFilters</code> object.</p>"
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.configservice#Limit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of conformance packs details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacksResponse": {
+            "type": "structure",
+            "members": {
+                "AggregateComplianceByConformancePacks": {
+                    "target": "com.amazonaws.configservice#AggregateComplianceByConformancePackList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>AggregateComplianceByConformancePack</code> object.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
                     }
                 }
             }
@@ -4850,6 +5124,91 @@
                     "target": "com.amazonaws.configservice#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use\n\t\t\tto get the next page of results in a paginated response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummary": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummaryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummaryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.configservice#InvalidLimitException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#NoSuchConfigurationAggregatorException"
+                },
+                {
+                    "target": "com.amazonaws.configservice#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummaryRequest": {
+            "type": "structure",
+            "members": {
+                "ConfigurationAggregatorName": {
+                    "target": "com.amazonaws.configservice#ConfigurationAggregatorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration aggregator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.configservice#AggregateConformancePackComplianceSummaryFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results based on the <code>AggregateConformancePackComplianceSummaryFilters</code> object.</p>"
+                    }
+                },
+                "GroupByKey": {
+                    "target": "com.amazonaws.configservice#AggregateConformancePackComplianceSummaryGroupKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Groups the result based on AWS Account ID or AWS Region.</p>"
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.configservice#Limit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummaryResponse": {
+            "type": "structure",
+            "members": {
+                "AggregateConformancePackComplianceSummaries": {
+                    "target": "com.amazonaws.configservice#AggregateConformancePackComplianceSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of <code>AggregateConformancePackComplianceSummary</code> object.</p>"
+                    }
+                },
+                "GroupByKey": {
+                    "target": "com.amazonaws.configservice#StringWithCharLimit256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Groups the result based on AWS Account ID or AWS Region.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.configservice#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>nextToken</code> string returned on a previous page that you use to get the next page of results in a paginated response.</p>"
                     }
                 }
             }
@@ -8188,7 +8547,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deploys conformance packs across member accounts in an AWS Organization.</p>\n\t\t       <p>Only a master account and a delegated administrator can call this API. \n\t\t\tWhen calling this API with a delegated administrator, you must ensure AWS Organizations \n\t\t\t<code>ListDelegatedAdministrator</code> permissions are added.</p>\n\t\t       <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code>\n\t\t\tthrough the <code>EnableAWSServiceAccess</code> action and creates a \n\t\t\tservice linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. \n\t\t\tThe service linked role is created only when the role does not exist in the caller account. \n\t\t\tTo use this API with delegated administrator, register a delegated administrator by calling AWS Organization \n\t\t\t<code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> \n\n\t\t\t\n\t\t\t \n\t\t       <note>\n\t\t\t         <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p>\n\t\t\t         <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. \n\t\t\tIf you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p>\n\t\t\t         <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated.  \n\t\t\t\tYou cannot update a conformance pack while it is in this state.</p>\n\t\t\t         <p>You can create 6 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization. </p>\n         </note>"
+                "smithy.api#documentation": "<p>Deploys conformance packs across member accounts in an AWS Organization.</p>\n\t\t       <p>Only a master account and a delegated administrator can call this API. \n\t\t\tWhen calling this API with a delegated administrator, you must ensure AWS Organizations \n\t\t\t<code>ListDelegatedAdministrator</code> permissions are added.</p>\n\t\t       <p>This API enables organization service access for <code>config-multiaccountsetup.amazonaws.com</code>\n\t\t\tthrough the <code>EnableAWSServiceAccess</code> action and creates a \n\t\t\tservice linked role <code>AWSServiceRoleForConfigMultiAccountSetup</code> in the master or delegated administrator account of your organization. \n\t\t\tThe service linked role is created only when the role does not exist in the caller account. \n\t\t\tTo use this API with delegated administrator, register a delegated administrator by calling AWS Organization \n\t\t\t<code>register-delegate-admin</code> for <code>config-multiaccountsetup.amazonaws.com</code>.</p> \n\n\t\t\t\n\t\t\t \n\t\t       <note>\n\t\t\t         <p>Prerequisite: Ensure you call <code>EnableAllFeatures</code> API to enable all features in an organization.</p>\n\t\t\t         <p>You must specify either the <code>TemplateS3Uri</code> or the <code>TemplateBody</code> parameter, but not both. \n\t\t\tIf you provide both AWS Config uses the <code>TemplateS3Uri</code> parameter and ignores the <code>TemplateBody</code> parameter.</p>\n\t\t\t         <p>AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated.  \n\t\t\t\tYou cannot update a conformance pack while it is in this state.</p>\n\t\t\t         <p>You can create 50 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization. </p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#PutOrganizationConformancePackRequest": {
@@ -8216,7 +8575,7 @@
                 "DeliveryS3Bucket": {
                     "target": "com.amazonaws.configservice#DeliveryS3Bucket",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p>\n\t\t       <note>\n            <p>This field is optional.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Amazon S3 bucket where AWS Config stores conformance pack templates.</p>\n\t\t       <note>\n            <p>This field is optional. If used, it must be prefixed with <code>awsconfigconforms</code>.</p>\n         </note>"
                     }
                 },
                 "DeliveryS3KeyPrefix": {
@@ -8628,7 +8987,7 @@
                 "resourceTypes": {
                     "target": "com.amazonaws.configservice#ResourceTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comma-separated list that specifies the types of AWS\n\t\t\tresources for which AWS Config records configuration changes (for\n\t\t\texample, <code>AWS::EC2::Instance</code> or\n\t\t\t\t<code>AWS::CloudTrail::Trail</code>).</p>\n\t\t       <p>To record all configuration changes, you must\n\t\t\tset the <code>allSupported</code> option to\n\t\t\t<code>false</code>.</p>\n\t\t       <p>If you set this option to <code>true</code>, when AWS Config\n\t\t\tadds support for a new type of resource, it will not record\n\t\t\tresources of that type unless you manually add that type to your\n\t\t\trecording group.</p>\n\t\t       <p>For a list of valid <code>resourceTypes</code> values, see the\n\t\t\t\t<b>resourceType Value</b> column in\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resource Types</a>.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated list that specifies the types of AWS\n\t\t\tresources for which AWS Config records configuration changes (for\n\t\t\texample, <code>AWS::EC2::Instance</code> or\n\t\t\t\t<code>AWS::CloudTrail::Trail</code>).</p>\n\t\t       <p>To record all configuration changes, you must\n\t\t\tset the <code>allSupported</code> option to\n\t\t\t<code>true</code>.</p>\n\t\t       <p>If you set this option to <code>false</code>, when AWS Config\n\t\t\tadds support for a new type of resource, it will not record\n\t\t\tresources of that type unless you manually add that type to your\n\t\t\trecording group.</p>\n\t\t       <p>For a list of valid <code>resourceTypes</code> values, see the\n\t\t\t\t<b>resourceType Value</b> column in\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources\">Supported AWS Resource Types</a>.</p>"
                     }
                 }
             },
@@ -9663,6 +10022,10 @@
                         "name": "RegionalProtection"
                     },
                     {
+                        "value": "AWS::Config::ConformancePackCompliance",
+                        "name": "ConformancePackCompliance"
+                    },
+                    {
                         "value": "AWS::Config::ResourceCompliance",
                         "name": "ResourceCompliance"
                     },
@@ -10221,6 +10584,9 @@
                     "target": "com.amazonaws.configservice#DescribeAggregateComplianceByConfigRules"
                 },
                 {
+                    "target": "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacks"
+                },
+                {
                     "target": "com.amazonaws.configservice#DescribeAggregationAuthorizations"
                 },
                 {
@@ -10294,6 +10660,9 @@
                 },
                 {
                     "target": "com.amazonaws.configservice#GetAggregateConfigRuleComplianceSummary"
+                },
+                {
+                    "target": "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummary"
                 },
                 {
                     "target": "com.amazonaws.configservice#GetAggregateDiscoveredResourceCounts"

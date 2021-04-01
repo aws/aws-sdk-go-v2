@@ -217,6 +217,56 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.customerprofiles#BucketName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "\\S+"
+            }
+        },
+        "com.amazonaws.customerprofiles#BucketPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.customerprofiles#ConnectorOperator": {
+            "type": "structure",
+            "members": {
+                "Marketo": {
+                    "target": "com.amazonaws.customerprofiles#MarketoConnectorOperator"
+                },
+                "S3": {
+                    "target": "com.amazonaws.customerprofiles#S3ConnectorOperator"
+                },
+                "Salesforce": {
+                    "target": "com.amazonaws.customerprofiles#SalesforceConnectorOperator"
+                },
+                "ServiceNow": {
+                    "target": "com.amazonaws.customerprofiles#ServiceNowConnectorOperator"
+                },
+                "Zendesk": {
+                    "target": "com.amazonaws.customerprofiles#ZendeskConnectorOperator"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ConnectorProfileName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\w/!@#+=.-]+"
+            }
+        },
         "com.amazonaws.customerprofiles#CreateDomain": {
             "type": "operation",
             "input": {
@@ -628,6 +678,34 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides\n         information about the Amazon Connect Customer Profiles API, including supported operations,\n         data types, parameters, and schemas.</p>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center\n         that has pre-built connectors powered by AppFlow that make it easy to combine customer\n         information from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and\n         your enterprise resource planning (ERP), with contact history from your Amazon Connect\n         contact center.</p>\n         <p>If you're new to Amazon Connect, you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html\">Amazon Connect Administrator Guide</a>.</p>",
                 "smithy.api#title": "Amazon Connect Customer Profiles"
+            }
+        },
+        "com.amazonaws.customerprofiles#DataPullMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Incremental",
+                        "name": "INCREMENTAL"
+                    },
+                    {
+                        "value": "Complete",
+                        "name": "COMPLETE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#Date": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.customerprofiles#DatetimeTypeFieldName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.customerprofiles#DeleteDomain": {
@@ -1045,6 +1123,16 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#DestinationField": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.customerprofiles#DomainList": {
             "type": "list",
             "member": {
@@ -1123,6 +1211,64 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#name"
+            }
+        },
+        "com.amazonaws.customerprofiles#FlowDefinition": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.customerprofiles#FlowDescription"
+                },
+                "FlowName": {
+                    "target": "com.amazonaws.customerprofiles#FlowName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsArn": {
+                    "target": "com.amazonaws.customerprofiles#KmsArn",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceFlowConfig": {
+                    "target": "com.amazonaws.customerprofiles#SourceFlowConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tasks": {
+                    "target": "com.amazonaws.customerprofiles#Tasks",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "TriggerConfig": {
+                    "target": "com.amazonaws.customerprofiles#TriggerConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#FlowDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "[\\w!@#\\-.?,\\s]*"
+            }
+        },
+        "com.amazonaws.customerprofiles#FlowName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9][\\w!@#.-]+"
             }
         },
         "com.amazonaws.customerprofiles#Gender": {
@@ -1563,6 +1709,14 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#IncrementalPullConfig": {
+            "type": "structure",
+            "members": {
+                "DatetimeTypeFieldName": {
+                    "target": "com.amazonaws.customerprofiles#DatetimeTypeFieldName"
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#IntegrationList": {
             "type": "list",
             "member": {
@@ -1589,6 +1743,16 @@
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#ObjectTypeKeyList"
+            }
+        },
+        "com.amazonaws.customerprofiles#KmsArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:aws:kms:.*:[0-9]+:.*"
             }
         },
         "com.amazonaws.customerprofiles#ListAccountIntegrations": {
@@ -2284,6 +2448,98 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#MarketoConnectorOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROJECTION",
+                        "name": "PROJECTION"
+                    },
+                    {
+                        "value": "LESS_THAN",
+                        "name": "LESS_THAN"
+                    },
+                    {
+                        "value": "GREATER_THAN",
+                        "name": "GREATER_THAN"
+                    },
+                    {
+                        "value": "BETWEEN",
+                        "name": "BETWEEN"
+                    },
+                    {
+                        "value": "ADDITION",
+                        "name": "ADDITION"
+                    },
+                    {
+                        "value": "MULTIPLICATION",
+                        "name": "MULTIPLICATION"
+                    },
+                    {
+                        "value": "DIVISION",
+                        "name": "DIVISION"
+                    },
+                    {
+                        "value": "SUBTRACTION",
+                        "name": "SUBTRACTION"
+                    },
+                    {
+                        "value": "MASK_ALL",
+                        "name": "MASK_ALL"
+                    },
+                    {
+                        "value": "MASK_FIRST_N",
+                        "name": "MASK_FIRST_N"
+                    },
+                    {
+                        "value": "MASK_LAST_N",
+                        "name": "MASK_LAST_N"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NULL",
+                        "name": "VALIDATE_NON_NULL"
+                    },
+                    {
+                        "value": "VALIDATE_NON_ZERO",
+                        "name": "VALIDATE_NON_ZERO"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NEGATIVE",
+                        "name": "VALIDATE_NON_NEGATIVE"
+                    },
+                    {
+                        "value": "VALIDATE_NUMERIC",
+                        "name": "VALIDATE_NUMERIC"
+                    },
+                    {
+                        "value": "NO_OP",
+                        "name": "NO_OP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#MarketoSourceProperties": {
+            "type": "structure",
+            "members": {
+                "Object": {
+                    "target": "com.amazonaws.customerprofiles#Object",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#Object": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "\\S+"
+            }
+        },
         "com.amazonaws.customerprofiles#ObjectTypeField": {
             "type": "structure",
             "members": {
@@ -2334,6 +2590,69 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#ObjectTypeKey"
+            }
+        },
+        "com.amazonaws.customerprofiles#OperatorPropertiesKeys": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VALUE",
+                        "name": "VALUE"
+                    },
+                    {
+                        "value": "VALUES",
+                        "name": "VALUES"
+                    },
+                    {
+                        "value": "DATA_TYPE",
+                        "name": "DATA_TYPE"
+                    },
+                    {
+                        "value": "UPPER_BOUND",
+                        "name": "UPPER_BOUND"
+                    },
+                    {
+                        "value": "LOWER_BOUND",
+                        "name": "LOWER_BOUND"
+                    },
+                    {
+                        "value": "SOURCE_DATA_TYPE",
+                        "name": "SOURCE_DATA_TYPE"
+                    },
+                    {
+                        "value": "DESTINATION_DATA_TYPE",
+                        "name": "DESTINATION_DATA_TYPE"
+                    },
+                    {
+                        "value": "VALIDATION_ACTION",
+                        "name": "VALIDATION_ACTION"
+                    },
+                    {
+                        "value": "MASK_VALUE",
+                        "name": "MASK_VALUE"
+                    },
+                    {
+                        "value": "MASK_LENGTH",
+                        "name": "MASK_LENGTH"
+                    },
+                    {
+                        "value": "TRUNCATE_LENGTH",
+                        "name": "TRUNCATE_LENGTH"
+                    },
+                    {
+                        "value": "MATH_OPERATION_FIELDS_ORDER",
+                        "name": "MATH_OPERATION_FIELDS_ORDER"
+                    },
+                    {
+                        "value": "CONCAT_FORMAT",
+                        "name": "CONCAT_FORMAT"
+                    },
+                    {
+                        "value": "SUBFIELD_CATEGORY_MAP",
+                        "name": "SUBFIELD_CATEGORY_MAP"
+                    }
+                ]
             }
         },
         "com.amazonaws.customerprofiles#PartyType": {
@@ -2519,6 +2838,16 @@
                 "target": "com.amazonaws.customerprofiles#ListProfileObjectTypeTemplateItem"
             }
         },
+        "com.amazonaws.customerprofiles#Property": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".+"
+            }
+        },
         "com.amazonaws.customerprofiles#PutIntegration": {
             "type": "operation",
             "input": {
@@ -2567,8 +2896,7 @@
                 "Uri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The URI of the S3 bucket or any other type of data source.</p>"
                     }
                 },
                 "ObjectTypeName": {
@@ -2583,6 +2911,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
                     }
+                },
+                "FlowDefinition": {
+                    "target": "com.amazonaws.customerprofiles#FlowDefinition"
                 }
             }
         },
@@ -2894,6 +3225,266 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.customerprofiles#S3ConnectorOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROJECTION",
+                        "name": "PROJECTION"
+                    },
+                    {
+                        "value": "LESS_THAN",
+                        "name": "LESS_THAN"
+                    },
+                    {
+                        "value": "GREATER_THAN",
+                        "name": "GREATER_THAN"
+                    },
+                    {
+                        "value": "BETWEEN",
+                        "name": "BETWEEN"
+                    },
+                    {
+                        "value": "LESS_THAN_OR_EQUAL_TO",
+                        "name": "LESS_THAN_OR_EQUAL_TO"
+                    },
+                    {
+                        "value": "GREATER_THAN_OR_EQUAL_TO",
+                        "name": "GREATER_THAN_OR_EQUAL_TO"
+                    },
+                    {
+                        "value": "EQUAL_TO",
+                        "name": "EQUAL_TO"
+                    },
+                    {
+                        "value": "NOT_EQUAL_TO",
+                        "name": "NOT_EQUAL_TO"
+                    },
+                    {
+                        "value": "ADDITION",
+                        "name": "ADDITION"
+                    },
+                    {
+                        "value": "MULTIPLICATION",
+                        "name": "MULTIPLICATION"
+                    },
+                    {
+                        "value": "DIVISION",
+                        "name": "DIVISION"
+                    },
+                    {
+                        "value": "SUBTRACTION",
+                        "name": "SUBTRACTION"
+                    },
+                    {
+                        "value": "MASK_ALL",
+                        "name": "MASK_ALL"
+                    },
+                    {
+                        "value": "MASK_FIRST_N",
+                        "name": "MASK_FIRST_N"
+                    },
+                    {
+                        "value": "MASK_LAST_N",
+                        "name": "MASK_LAST_N"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NULL",
+                        "name": "VALIDATE_NON_NULL"
+                    },
+                    {
+                        "value": "VALIDATE_NON_ZERO",
+                        "name": "VALIDATE_NON_ZERO"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NEGATIVE",
+                        "name": "VALIDATE_NON_NEGATIVE"
+                    },
+                    {
+                        "value": "VALIDATE_NUMERIC",
+                        "name": "VALIDATE_NUMERIC"
+                    },
+                    {
+                        "value": "NO_OP",
+                        "name": "NO_OP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#S3SourceProperties": {
+            "type": "structure",
+            "members": {
+                "BucketName": {
+                    "target": "com.amazonaws.customerprofiles#BucketName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "BucketPrefix": {
+                    "target": "com.amazonaws.customerprofiles#BucketPrefix"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SalesforceConnectorOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROJECTION",
+                        "name": "PROJECTION"
+                    },
+                    {
+                        "value": "LESS_THAN",
+                        "name": "LESS_THAN"
+                    },
+                    {
+                        "value": "CONTAINS",
+                        "name": "CONTAINS"
+                    },
+                    {
+                        "value": "GREATER_THAN",
+                        "name": "GREATER_THAN"
+                    },
+                    {
+                        "value": "BETWEEN",
+                        "name": "BETWEEN"
+                    },
+                    {
+                        "value": "LESS_THAN_OR_EQUAL_TO",
+                        "name": "LESS_THAN_OR_EQUAL_TO"
+                    },
+                    {
+                        "value": "GREATER_THAN_OR_EQUAL_TO",
+                        "name": "GREATER_THAN_OR_EQUAL_TO"
+                    },
+                    {
+                        "value": "EQUAL_TO",
+                        "name": "EQUAL_TO"
+                    },
+                    {
+                        "value": "NOT_EQUAL_TO",
+                        "name": "NOT_EQUAL_TO"
+                    },
+                    {
+                        "value": "ADDITION",
+                        "name": "ADDITION"
+                    },
+                    {
+                        "value": "MULTIPLICATION",
+                        "name": "MULTIPLICATION"
+                    },
+                    {
+                        "value": "DIVISION",
+                        "name": "DIVISION"
+                    },
+                    {
+                        "value": "SUBTRACTION",
+                        "name": "SUBTRACTION"
+                    },
+                    {
+                        "value": "MASK_ALL",
+                        "name": "MASK_ALL"
+                    },
+                    {
+                        "value": "MASK_FIRST_N",
+                        "name": "MASK_FIRST_N"
+                    },
+                    {
+                        "value": "MASK_LAST_N",
+                        "name": "MASK_LAST_N"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NULL",
+                        "name": "VALIDATE_NON_NULL"
+                    },
+                    {
+                        "value": "VALIDATE_NON_ZERO",
+                        "name": "VALIDATE_NON_ZERO"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NEGATIVE",
+                        "name": "VALIDATE_NON_NEGATIVE"
+                    },
+                    {
+                        "value": "VALIDATE_NUMERIC",
+                        "name": "VALIDATE_NUMERIC"
+                    },
+                    {
+                        "value": "NO_OP",
+                        "name": "NO_OP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#SalesforceSourceProperties": {
+            "type": "structure",
+            "members": {
+                "Object": {
+                    "target": "com.amazonaws.customerprofiles#Object",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableDynamicFieldUpdate": {
+                    "target": "com.amazonaws.customerprofiles#boolean"
+                },
+                "IncludeDeletedRecords": {
+                    "target": "com.amazonaws.customerprofiles#boolean"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ScheduleExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.customerprofiles#ScheduleOffset": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 36000
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ScheduledTriggerProperties": {
+            "type": "structure",
+            "members": {
+                "ScheduleExpression": {
+                    "target": "com.amazonaws.customerprofiles#ScheduleExpression",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataPullMode": {
+                    "target": "com.amazonaws.customerprofiles#DataPullMode"
+                },
+                "ScheduleStartTime": {
+                    "target": "com.amazonaws.customerprofiles#Date"
+                },
+                "ScheduleEndTime": {
+                    "target": "com.amazonaws.customerprofiles#Date"
+                },
+                "Timezone": {
+                    "target": "com.amazonaws.customerprofiles#Timezone"
+                },
+                "ScheduleOffset": {
+                    "target": "com.amazonaws.customerprofiles#ScheduleOffset",
+                    "traits": {
+                        "smithy.api#box": {}
+                    }
+                },
+                "FirstExecutionFrom": {
+                    "target": "com.amazonaws.customerprofiles#Date"
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#SearchProfiles": {
             "type": "operation",
             "input": {
@@ -2982,6 +3573,184 @@
                     "target": "com.amazonaws.customerprofiles#token",
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token from the previous SearchProfiles API call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#ServiceNowConnectorOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROJECTION",
+                        "name": "PROJECTION"
+                    },
+                    {
+                        "value": "CONTAINS",
+                        "name": "CONTAINS"
+                    },
+                    {
+                        "value": "LESS_THAN",
+                        "name": "LESS_THAN"
+                    },
+                    {
+                        "value": "GREATER_THAN",
+                        "name": "GREATER_THAN"
+                    },
+                    {
+                        "value": "BETWEEN",
+                        "name": "BETWEEN"
+                    },
+                    {
+                        "value": "LESS_THAN_OR_EQUAL_TO",
+                        "name": "LESS_THAN_OR_EQUAL_TO"
+                    },
+                    {
+                        "value": "GREATER_THAN_OR_EQUAL_TO",
+                        "name": "GREATER_THAN_OR_EQUAL_TO"
+                    },
+                    {
+                        "value": "EQUAL_TO",
+                        "name": "EQUAL_TO"
+                    },
+                    {
+                        "value": "NOT_EQUAL_TO",
+                        "name": "NOT_EQUAL_TO"
+                    },
+                    {
+                        "value": "ADDITION",
+                        "name": "ADDITION"
+                    },
+                    {
+                        "value": "MULTIPLICATION",
+                        "name": "MULTIPLICATION"
+                    },
+                    {
+                        "value": "DIVISION",
+                        "name": "DIVISION"
+                    },
+                    {
+                        "value": "SUBTRACTION",
+                        "name": "SUBTRACTION"
+                    },
+                    {
+                        "value": "MASK_ALL",
+                        "name": "MASK_ALL"
+                    },
+                    {
+                        "value": "MASK_FIRST_N",
+                        "name": "MASK_FIRST_N"
+                    },
+                    {
+                        "value": "MASK_LAST_N",
+                        "name": "MASK_LAST_N"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NULL",
+                        "name": "VALIDATE_NON_NULL"
+                    },
+                    {
+                        "value": "VALIDATE_NON_ZERO",
+                        "name": "VALIDATE_NON_ZERO"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NEGATIVE",
+                        "name": "VALIDATE_NON_NEGATIVE"
+                    },
+                    {
+                        "value": "VALIDATE_NUMERIC",
+                        "name": "VALIDATE_NUMERIC"
+                    },
+                    {
+                        "value": "NO_OP",
+                        "name": "NO_OP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#ServiceNowSourceProperties": {
+            "type": "structure",
+            "members": {
+                "Object": {
+                    "target": "com.amazonaws.customerprofiles#Object",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SourceConnectorProperties": {
+            "type": "structure",
+            "members": {
+                "Marketo": {
+                    "target": "com.amazonaws.customerprofiles#MarketoSourceProperties"
+                },
+                "S3": {
+                    "target": "com.amazonaws.customerprofiles#S3SourceProperties"
+                },
+                "Salesforce": {
+                    "target": "com.amazonaws.customerprofiles#SalesforceSourceProperties"
+                },
+                "ServiceNow": {
+                    "target": "com.amazonaws.customerprofiles#ServiceNowSourceProperties"
+                },
+                "Zendesk": {
+                    "target": "com.amazonaws.customerprofiles#ZendeskSourceProperties"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SourceConnectorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Salesforce",
+                        "name": "SALESFORCE"
+                    },
+                    {
+                        "value": "Marketo",
+                        "name": "MARKETO"
+                    },
+                    {
+                        "value": "Zendesk",
+                        "name": "ZENDESK"
+                    },
+                    {
+                        "value": "Servicenow",
+                        "name": "SERVICENOW"
+                    },
+                    {
+                        "value": "S3",
+                        "name": "S3"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#SourceFields": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#stringTo2048"
+            }
+        },
+        "com.amazonaws.customerprofiles#SourceFlowConfig": {
+            "type": "structure",
+            "members": {
+                "ConnectorProfileName": {
+                    "target": "com.amazonaws.customerprofiles#ConnectorProfileName"
+                },
+                "ConnectorType": {
+                    "target": "com.amazonaws.customerprofiles#SourceConnectorType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncrementalPullConfig": {
+                    "target": "com.amazonaws.customerprofiles#IncrementalPullConfig"
+                },
+                "SourceConnectorProperties": {
+                    "target": "com.amazonaws.customerprofiles#SourceConnectorProperties",
+                    "traits": {
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -3127,6 +3896,82 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#Task": {
+            "type": "structure",
+            "members": {
+                "ConnectorOperator": {
+                    "target": "com.amazonaws.customerprofiles#ConnectorOperator"
+                },
+                "DestinationField": {
+                    "target": "com.amazonaws.customerprofiles#DestinationField"
+                },
+                "SourceFields": {
+                    "target": "com.amazonaws.customerprofiles#SourceFields",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "TaskProperties": {
+                    "target": "com.amazonaws.customerprofiles#TaskPropertiesMap"
+                },
+                "TaskType": {
+                    "target": "com.amazonaws.customerprofiles#TaskType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#TaskPropertiesMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#OperatorPropertiesKeys"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#Property"
+            }
+        },
+        "com.amazonaws.customerprofiles#TaskType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Arithmetic",
+                        "name": "ARITHMETIC"
+                    },
+                    {
+                        "value": "Filter",
+                        "name": "FILTER"
+                    },
+                    {
+                        "value": "Map",
+                        "name": "MAP"
+                    },
+                    {
+                        "value": "Mask",
+                        "name": "MASK"
+                    },
+                    {
+                        "value": "Merge",
+                        "name": "MERGE"
+                    },
+                    {
+                        "value": "Truncate",
+                        "name": "TRUNCATE"
+                    },
+                    {
+                        "value": "Validate",
+                        "name": "VALIDATE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#Tasks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#Task"
+            }
+        },
         "com.amazonaws.customerprofiles#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -3138,6 +3983,57 @@
                 "smithy.api#documentation": "<p>You exceeded the maximum number of requests.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.customerprofiles#Timezone": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.customerprofiles#TriggerConfig": {
+            "type": "structure",
+            "members": {
+                "TriggerType": {
+                    "target": "com.amazonaws.customerprofiles#TriggerType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "TriggerProperties": {
+                    "target": "com.amazonaws.customerprofiles#TriggerProperties"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#TriggerProperties": {
+            "type": "structure",
+            "members": {
+                "Scheduled": {
+                    "target": "com.amazonaws.customerprofiles#ScheduledTriggerProperties"
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#TriggerType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Scheduled",
+                        "name": "SCHEDULED"
+                    },
+                    {
+                        "value": "Event",
+                        "name": "EVENT"
+                    },
+                    {
+                        "value": "OnDemand",
+                        "name": "ONDEMAND"
+                    }
+                ]
             }
         },
         "com.amazonaws.customerprofiles#UntagResource": {
@@ -3583,6 +4479,80 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#ZendeskConnectorOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PROJECTION",
+                        "name": "PROJECTION"
+                    },
+                    {
+                        "value": "GREATER_THAN",
+                        "name": "GREATER_THAN"
+                    },
+                    {
+                        "value": "ADDITION",
+                        "name": "ADDITION"
+                    },
+                    {
+                        "value": "MULTIPLICATION",
+                        "name": "MULTIPLICATION"
+                    },
+                    {
+                        "value": "DIVISION",
+                        "name": "DIVISION"
+                    },
+                    {
+                        "value": "SUBTRACTION",
+                        "name": "SUBTRACTION"
+                    },
+                    {
+                        "value": "MASK_ALL",
+                        "name": "MASK_ALL"
+                    },
+                    {
+                        "value": "MASK_FIRST_N",
+                        "name": "MASK_FIRST_N"
+                    },
+                    {
+                        "value": "MASK_LAST_N",
+                        "name": "MASK_LAST_N"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NULL",
+                        "name": "VALIDATE_NON_NULL"
+                    },
+                    {
+                        "value": "VALIDATE_NON_ZERO",
+                        "name": "VALIDATE_NON_ZERO"
+                    },
+                    {
+                        "value": "VALIDATE_NON_NEGATIVE",
+                        "name": "VALIDATE_NON_NEGATIVE"
+                    },
+                    {
+                        "value": "VALIDATE_NUMERIC",
+                        "name": "VALIDATE_NUMERIC"
+                    },
+                    {
+                        "value": "NO_OP",
+                        "name": "NO_OP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.customerprofiles#ZendeskSourceProperties": {
+            "type": "structure",
+            "members": {
+                "Object": {
+                    "target": "com.amazonaws.customerprofiles#Object",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#boolean": {
             "type": "boolean"
         },
@@ -3680,6 +4650,16 @@
                     "min": 1,
                     "max": 255
                 }
+            }
+        },
+        "com.amazonaws.customerprofiles#stringTo2048": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.customerprofiles#stringifiedJson": {

@@ -440,7 +440,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Compares a face in the <i>source</i> input image with\n      each of the 100 largest faces detected in the <i>target</i> input image.\n    </p>\n         <note>\n            <p> If the source image contains multiple faces, the service detects the largest face\n        and compares it with each face detected in the target image. </p>\n         </note>\n\n\n         <p>You pass the input and target images either as base64-encoded image bytes or as\n      references to images in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes isn't\n      supported. The image must be formatted as a PNG or JPEG file. </p>\n         <p>In response, the operation returns an array of face matches ordered by similarity score\n      in descending order. For each face match, the response provides a bounding box of the face,\n      facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and\n      confidence value (indicating the level of confidence that the bounding box contains a face).\n      The response also provides a similarity score, which indicates how closely the faces match. </p>\n\n         <note>\n            <p>By default, only faces with a similarity score of greater than or equal to 80% are\n        returned in the response. You can change this value by specifying the\n          <code>SimilarityThreshold</code> parameter.</p>\n         </note>\n\n         <p>\n            <code>CompareFaces</code> also returns an array of faces that don't match the source image. \n      For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality.\n    The response also returns information about the face in the source image, including the bounding box\n      of the face and confidence value.</p>\n    \n         <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces\n      that don’t meet a required quality bar. The quality bar is based on a\n      variety of common use cases.  Use <code>QualityFilter</code> to set the quality bar\n      by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>.\n      If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p>\n\n         <p>If the image doesn't contain Exif metadata, <code>CompareFaces</code> returns orientation information for the\n        source and target images. Use these values to display the images with the correct image orientation.</p>\n         <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an \n    <code>InvalidParameterException</code> error. </p>\n\n\n         <note>\n            <p> This is a stateless API operation. That is, data returned by this operation doesn't persist.</p>\n         </note>\n\n      \n         <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code>\n      action.</p>"
+                "smithy.api#documentation": "<p>Compares a face in the <i>source</i> input image with\n      each of the 100 largest faces detected in the <i>target</i> input image.\n    </p>\n    \n         <p> If the source image contains multiple faces, the service detects the largest face\n        and compares it with each face detected in the target image. </p>\n   \n    \n         <note>\n            <p>CompareFaces uses machine learning algorithms, which are probabilistic. \n      A false negative is an incorrect prediction that\n      a face in the target image has a low similarity confidence score when compared to the face\n      in the source image. To reduce the probability of false negatives, \n      we recommend that you compare the target image against multiple source images.\n      If you plan to use <code>CompareFaces</code> to make a decision that impacts an individual's rights,\n      privacy, or access to services, we recommend that you pass the result to a human for review and further\n      validation before taking action.</p>\n         </note>\n\n\n         <p>You pass the input and target images either as base64-encoded image bytes or as\n      references to images in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes isn't\n      supported. The image must be formatted as a PNG or JPEG file. </p>\n         <p>In response, the operation returns an array of face matches ordered by similarity score\n      in descending order. For each face match, the response provides a bounding box of the face,\n      facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and\n      confidence value (indicating the level of confidence that the bounding box contains a face).\n      The response also provides a similarity score, which indicates how closely the faces match. </p>\n\n         <note>\n            <p>By default, only faces with a similarity score of greater than or equal to 80% are\n        returned in the response. You can change this value by specifying the\n          <code>SimilarityThreshold</code> parameter.</p>\n         </note>\n\n         <p>\n            <code>CompareFaces</code> also returns an array of faces that don't match the source image. \n      For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality.\n    The response also returns information about the face in the source image, including the bounding box\n      of the face and confidence value.</p>\n    \n         <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces\n      that don’t meet a required quality bar. The quality bar is based on a\n      variety of common use cases.  Use <code>QualityFilter</code> to set the quality bar\n      by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>.\n      If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p>\n\n         <p>If the image doesn't contain Exif metadata, <code>CompareFaces</code> returns orientation information for the\n        source and target images. Use these values to display the images with the correct image orientation.</p>\n         <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an \n    <code>InvalidParameterException</code> error. </p>\n\n\n         <note>\n            <p> This is a stateless API operation. That is, data returned by this operation doesn't persist.</p>\n         </note>\n\n      \n         <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p>\n         <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code>\n      action.</p>"
             }
         },
         "com.amazonaws.rekognition#CompareFacesMatch": {
@@ -718,6 +718,9 @@
                     "target": "com.amazonaws.rekognition#ResourceAlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.rekognition#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.rekognition#ThrottlingException"
                 }
             ],
@@ -733,6 +736,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>ID for the collection that you are creating.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rekognition#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A set of tags (key-value pairs) that you want to attach to the collection.\n    </p>"
                     }
                 }
             }
@@ -849,6 +858,9 @@
                     "target": "com.amazonaws.rekognition#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.rekognition#ServiceQuotaExceededException"
+                },
+                {
                     "target": "com.amazonaws.rekognition#ThrottlingException"
                 }
             ],
@@ -893,6 +905,12 @@
                         "smithy.api#documentation": "<p>The dataset to use for testing.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rekognition#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A set of tags (key-value pairs) that you want to attach to the model.\n    </p>"
+                    }
                 }
             }
         },
@@ -933,6 +951,9 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ServiceQuotaExceededException"
                 },
                 {
                     "target": "com.amazonaws.rekognition#ThrottlingException"
@@ -978,6 +999,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>ARN of the IAM role that allows access to the stream processor.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rekognition#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A set of tags (key-value pairs) that you want to attach to the stream processor.\n    </p>"
                     }
                 }
             }
@@ -2227,7 +2254,7 @@
                 "MinConfidence": {
                     "target": "com.amazonaws.rekognition#Percent",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets confidence of word detection. Words with detection confidence below this will be excluded \n      from the result. Values should be between 0.5 and 1 as Text in Video will not return any result below \n      0.5.</p>"
+                        "smithy.api#documentation": "<p>Sets the confidence of word detection. Words with detection confidence below this will be excluded \n      from the result. Values should be between 50 and 100 as Text in Video will not return any result below \n      50.</p>"
                     }
                 },
                 "MinBoundingBoxHeight": {
@@ -3958,7 +3985,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input image size exceeds the allowed limit. For more information, see \n      Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
+                "smithy.api#documentation": "<p>The input image size exceeds the allowed limit. If you are calling\n      DetectProtectiveEquipment, the image size or resolution exceeds the allowed limit. For more information, see \n      Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -4777,6 +4804,61 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Returns a list of tags in an Amazon Rekognition collection, stream processor, or Custom Labels model.\n    </p>"
+            }
+        },
+        "com.amazonaws.rekognition#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.rekognition#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Amazon Resource Name (ARN) of the model, collection, or stream processor that contains the tags that you want a list of.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.rekognition#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of key-value tags assigned to the resource.\n    </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.rekognition#MaxFaces": {
             "type": "integer",
             "traits": {
@@ -5479,7 +5561,7 @@
                 "PersonsWithoutRequiredEquipment": {
                     "target": "com.amazonaws.rekognition#ProtectiveEquipmentPersonIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of IDs for persons who are not wearing all of the types of PPE specified in the RequiredEquipmentTypes field of\n         the detected personal protective equipment.\n      </p>"
+                        "smithy.api#documentation": "<p>An array of IDs for persons who are not wearing all of the types of PPE specified in the <code>RequiredEquipmentTypes</code> field of\n         the detected personal protective equipment.\n      </p>"
                     }
                 },
                 "PersonsIndeterminate": {
@@ -5810,6 +5892,9 @@
                     "target": "com.amazonaws.rekognition#ListStreamProcessors"
                 },
                 {
+                    "target": "com.amazonaws.rekognition#ListTagsForResource"
+                },
+                {
                     "target": "com.amazonaws.rekognition#RecognizeCelebrities"
                 },
                 {
@@ -5853,6 +5938,12 @@
                 },
                 {
                     "target": "com.amazonaws.rekognition#StopStreamProcessor"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#UntagResource"
                 }
             ],
             "traits": {
@@ -5896,6 +5987,15 @@
             "traits": {
                 "smithy.api#documentation": "<p>A collection with the specified ID already exists.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.rekognition#ResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.rekognition#ResourceInUseException": {
@@ -6376,7 +6476,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>\n    \n      \n         <p>The size of the collection exceeds the allowed limit. For more information, see \n      Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
+                "smithy.api#documentation": "<p></p>\n    \n      \n         <p>The size of the collection or tag list exceeds the allowed limit. For more information, see \n      Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7586,6 +7686,111 @@
                 "smithy.api#mediaType": "application/json"
             }
         },
+        "com.amazonaws.rekognition#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
+            }
+        },
+        "com.amazonaws.rekognition#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.rekognition#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.rekognition#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.rekognition#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.rekognition#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.rekognition#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Adds one or more key-value tags to an Amazon Rekognition collection, stream processor, or Custom Labels model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a>.\n    </p>"
+            }
+        },
+        "com.amazonaws.rekognition#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.rekognition#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to assign the tags to.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.rekognition#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The key-value tags to assign to the resource.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.rekognition#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
         "com.amazonaws.rekognition#TechnicalCueSegment": {
             "type": "structure",
             "members": {
@@ -7872,6 +8077,61 @@
             "member": {
                 "target": "com.amazonaws.rekognition#UnindexedFace"
             }
+        },
+        "com.amazonaws.rekognition#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rekognition#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.rekognition#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rekognition#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ProvisionedThroughputExceededException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.rekognition#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Removes one or more tags from an Amazon Rekognition collection, stream processor, or Custom Labels model.\n    </p>"
+            }
+        },
+        "com.amazonaws.rekognition#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.rekognition#ResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to remove the tags from.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.rekognition#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A list of the tags that you want to remove.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.rekognition#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.rekognition#Url": {
             "type": "string"

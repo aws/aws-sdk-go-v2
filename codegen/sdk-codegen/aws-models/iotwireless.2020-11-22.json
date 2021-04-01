@@ -192,7 +192,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags attached to the specified resource. Tags are metadata that can be used to manage a resource</p>"
+                        "smithy.api#documentation": "<p>The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.</p>"
                     }
                 }
             }
@@ -407,6 +407,48 @@
         "com.amazonaws.iotwireless#AutoCreateTasks": {
             "type": "boolean"
         },
+        "com.amazonaws.iotwireless#BatteryLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk device battery level.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "normal",
+                        "name": "NORMAL"
+                    },
+                    {
+                        "value": "low",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "critical",
+                        "name": "CRITICAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#CertificateList": {
+            "type": "structure",
+            "members": {
+                "SigningAlg": {
+                    "target": "com.amazonaws.iotwireless#SigningAlg",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate chain algorithm provided by sidewalk.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.iotwireless#CertificateValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the chosen sidewalk certificate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of sidewalk certificates.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#CertificatePEM": {
             "type": "string",
             "traits": {
@@ -415,6 +457,16 @@
                     "max": 4096
                 },
                 "smithy.api#pattern": "[^-A-Za-z0-9+/=]|=[^=]|={3,}${1,4096}"
+            }
+        },
+        "com.amazonaws.iotwireless#CertificateValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Certificate value.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.iotwireless#ChannelMask": {
@@ -473,6 +525,21 @@
                 "smithy.api#documentation": "<p>Adding, updating, or deleting the resource can cause an inconsistent state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.iotwireless#ConnectionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Connected",
+                        "name": "CONNECTED"
+                    },
+                    {
+                        "value": "Disconnected",
+                        "name": "DISCONNECTED"
+                    }
+                ]
             }
         },
         "com.amazonaws.iotwireless#Crc": {
@@ -562,7 +629,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to attach to the new destination. Tags are metadata that can be used to manage a resource.</p>"
+                        "smithy.api#documentation": "<p>The tags to attach to the new destination. Tags are metadata that you can use to manage a resource.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -643,7 +710,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to attach to the new device profile Tags are metadata that can be used to manage a resource.</p>"
+                        "smithy.api#documentation": "<p>The tags to attach to the new device profile. Tags are metadata that you can use to manage a resource.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -724,7 +791,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to attach to the new service profile. Tags are metadata that can be used to manage a resource.</p>"
+                        "smithy.api#documentation": "<p>The tags to attach to the new service profile. Tags are metadata that you can use to manage a resource.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -831,6 +898,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The device configuration information to use to create the wireless device.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.iotwireless#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.</p>"
+                    }
                 }
             }
         },
@@ -910,7 +983,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to attach to the new wireless gateway. Tags are metadata that can be used to manage a resource.</p>"
+                        "smithy.api#documentation": "<p>The tags to attach to the new wireless gateway. Tags are metadata that you can use to manage a resource.</p>"
                     }
                 },
                 "ClientRequestToken": {
@@ -1045,7 +1118,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags attached to the specified resource. Tags are metadata that can be used to manage a resource</p>"
+                        "smithy.api#documentation": "<p>The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.</p>"
                     }
                 }
             }
@@ -1564,6 +1637,15 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#DeviceCertificateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#CertificateList"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of device certificate chain.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#DeviceProfile": {
             "type": "structure",
             "members": {
@@ -1615,6 +1697,30 @@
                     "min": 0,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#DeviceState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Device state defines the device status of sidewalk device.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "Provisioned",
+                        "name": "PROVISIONED"
+                    },
+                    {
+                        "value": "RegisteredNotSeen",
+                        "name": "REGISTEREDNOTSEEN"
+                    },
+                    {
+                        "value": "RegisteredReachable",
+                        "name": "REGISTEREDREACHABLE"
+                    },
+                    {
+                        "value": "RegisteredUnreachable",
+                        "name": "REGISTEREDUNREACHABLE"
+                    }
+                ]
             }
         },
         "com.amazonaws.iotwireless#DisassociateAwsAccountFromPartnerAccount": {
@@ -1892,6 +1998,34 @@
                     "min": 1,
                     "max": 256
                 }
+            }
+        },
+        "com.amazonaws.iotwireless#Event": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk device status notification.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "discovered",
+                        "name": "DISCOVERED"
+                    },
+                    {
+                        "value": "lost",
+                        "name": "LOST"
+                    },
+                    {
+                        "value": "ack",
+                        "name": "ACK"
+                    },
+                    {
+                        "value": "nack",
+                        "name": "NACK"
+                    },
+                    {
+                        "value": "passthrough",
+                        "name": "PASSTHROUGH"
+                    }
+                ]
             }
         },
         "com.amazonaws.iotwireless#Expression": {
@@ -2449,6 +2583,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the wireless device.</p>"
                     }
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkDevice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sidewalk device object.</p>"
+                    }
                 }
             }
         },
@@ -2518,6 +2658,12 @@
                     "target": "com.amazonaws.iotwireless#LoRaWANDeviceMetadata",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the wireless device's operations.</p>"
+                    }
+                },
+                "Sidewalk": {
+                    "target": "com.amazonaws.iotwireless#SidewalkDeviceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>MetaData for Sidewalk device.</p>"
                     }
                 }
             }
@@ -2806,6 +2952,12 @@
                     "target": "com.amazonaws.iotwireless#ISODateTimeString",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the most recent uplink was received.</p>"
+                    }
+                },
+                "ConnectionStatus": {
+                    "target": "com.amazonaws.iotwireless#ConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection status of the wireless gateway.</p>"
                     }
                 }
             }
@@ -3343,7 +3495,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.iotwireless#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource for which to list tags.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the resource for which you want to list tags.</p>",
                         "smithy.api#httpQuery": "resourceArn",
                         "smithy.api#required": {}
                     }
@@ -3356,7 +3508,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags attached to the specified resource. Tags are metadata that can be used to manage a resource</p>"
+                        "smithy.api#documentation": "<p>The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.</p>"
                     }
                 }
             }
@@ -4738,6 +4890,74 @@
                 "target": "com.amazonaws.iotwireless#SidewalkAccountInfoWithFingerprint"
             }
         },
+        "com.amazonaws.iotwireless#SidewalkDevice": {
+            "type": "structure",
+            "members": {
+                "SidewalkId": {
+                    "target": "com.amazonaws.iotwireless#SidewalkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sidewalk device identification.</p>"
+                    }
+                },
+                "SidewalkManufacturingSn": {
+                    "target": "com.amazonaws.iotwireless#SidewalkManufacturingSn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk manufacturing series number.</p>"
+                    }
+                },
+                "DeviceCertificates": {
+                    "target": "com.amazonaws.iotwireless#DeviceCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sidewalk device certificates for Ed25519 and P256r1.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk device object.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SidewalkDeviceMetadata": {
+            "type": "structure",
+            "members": {
+                "Rssi": {
+                    "target": "com.amazonaws.iotwireless#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RSSI value.</p>"
+                    }
+                },
+                "BatteryLevel": {
+                    "target": "com.amazonaws.iotwireless#BatteryLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sidewalk device battery level.</p>"
+                    }
+                },
+                "Event": {
+                    "target": "com.amazonaws.iotwireless#Event",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sidewalk device status notification.</p>"
+                    }
+                },
+                "DeviceState": {
+                    "target": "com.amazonaws.iotwireless#DeviceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Device state defines the device status of sidewalk device.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>MetaData for Sidewalk device.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SidewalkId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The sidewalk device identification.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.iotwireless#SidewalkListDevice": {
             "type": "structure",
             "members": {
@@ -4746,10 +4966,37 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Sidewalk Amazon ID.</p>"
                     }
+                },
+                "SidewalkId": {
+                    "target": "com.amazonaws.iotwireless#SidewalkId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sidewalk device identification.</p>"
+                    }
+                },
+                "SidewalkManufacturingSn": {
+                    "target": "com.amazonaws.iotwireless#SidewalkManufacturingSn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Sidewalk manufacturing series number.</p>"
+                    }
+                },
+                "DeviceCertificates": {
+                    "target": "com.amazonaws.iotwireless#DeviceCertificateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sidewalk device certificates for Ed25519 and P256r1.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Sidewalk object used by list functions.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SidewalkManufacturingSn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.iotwireless#SidewalkSendDataToDevice": {
@@ -4778,6 +5025,22 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Sidewalk update.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#SigningAlg": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The certificate chain algorithm provided by sidewalk.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "Ed25519",
+                        "name": "Ed25519"
+                    },
+                    {
+                        "value": "P256r1",
+                        "name": "P256r1"
+                    }
+                ]
             }
         },
         "com.amazonaws.iotwireless#Station": {
@@ -4910,7 +5173,7 @@
                 "Tags": {
                     "target": "com.amazonaws.iotwireless#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.</p>",
+                        "smithy.api#documentation": "<p>Adds to or modifies the tags of the given resource. Tags are metadata that you can use to manage a resource.</p>",
                         "smithy.api#required": {}
                     }
                 }

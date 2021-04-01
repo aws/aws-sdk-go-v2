@@ -19596,6 +19596,13 @@
                         "smithy.api#jsonName": "colorSpace"
                     }
                 },
+                "ColorSpaceSettings": {
+                    "target": "com.amazonaws.medialive#VideoSelectorColorSpaceSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Color space settings",
+                        "smithy.api#jsonName": "colorSpaceSettings"
+                    }
+                },
                 "ColorSpaceUsage": {
                     "target": "com.amazonaws.medialive#VideoSelectorColorSpaceUsage",
                     "traits": {
@@ -19625,6 +19632,14 @@
                         "name": "FOLLOW"
                     },
                     {
+                        "value": "HDR10",
+                        "name": "HDR10"
+                    },
+                    {
+                        "value": "HLG_2020",
+                        "name": "HLG_2020"
+                    },
+                    {
                         "value": "REC_601",
                         "name": "REC_601"
                     },
@@ -19633,6 +19648,20 @@
                         "name": "REC_709"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.medialive#VideoSelectorColorSpaceSettings": {
+            "type": "structure",
+            "members": {
+                "Hdr10Settings": {
+                    "target": "com.amazonaws.medialive#Hdr10Settings",
+                    "traits": {
+                        "smithy.api#jsonName": "hdr10Settings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Video Selector Color Space Settings"
             }
         },
         "com.amazonaws.medialive#VideoSelectorColorSpaceUsage": {

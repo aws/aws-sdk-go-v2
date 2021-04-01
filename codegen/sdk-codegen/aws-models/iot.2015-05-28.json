@@ -19459,6 +19459,13 @@
                         "smithy.api#documentation": "<p>The name of the thing type used to search for things.</p>",
                         "smithy.api#httpQuery": "thingTypeName"
                     }
+                },
+                "usePrefixAttributeValue": {
+                    "target": "com.amazonaws.iot#usePrefixAttributeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, the action returns the thing resources with attribute values\n                     that start with the <code>attributeValue</code> provided.</p>\n            <p>When <code>false</code>, or not present, the action returns only the thing\n\t\t\tresources with attribute values that match the entire <code>attributeValue</code>\n\t\t\tprovided. </p>",
+                        "smithy.api#httpQuery": "usePrefixAttributeValue"
+                    }
                 }
             },
             "traits": {
@@ -28427,6 +28434,9 @@
         },
         "com.amazonaws.iot#stringValue": {
             "type": "string"
+        },
+        "com.amazonaws.iot#usePrefixAttributeValue": {
+            "type": "boolean"
         }
     }
 }

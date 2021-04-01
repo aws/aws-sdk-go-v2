@@ -70,6 +70,22 @@
                     {
                         "value": "en-US",
                         "name": "EN_US"
+                    },
+                    {
+                        "value": "hi-IN",
+                        "name": "HI_IN"
+                    },
+                    {
+                        "value": "es-US",
+                        "name": "ES_US"
+                    },
+                    {
+                        "value": "en-GB",
+                        "name": "EN_GB"
+                    },
+                    {
+                        "value": "en-AU",
+                        "name": "EN_AU"
                     }
                 ]
             }
@@ -2483,7 +2499,7 @@
                 "VocabularyFilterMethod": {
                     "target": "com.amazonaws.transcribe#VocabularyFilterMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>mask</code> to remove filtered text from the transcript and replace it\n            with three asterisks (\"***\") as placeholder text. Set to <code>remove</code> to remove\n            filtered text from the transcript without using placeholder text.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>mask</code> to remove filtered text from the transcript and replace it\n            with three asterisks (\"***\") as placeholder text. Set to <code>remove</code> to remove\n            filtered text from the transcript without using placeholder text. Set to\n                <code>tag</code> to mark the word in the transcription output that matches the\n            vocabulary filter. When you set the filter method to <code>tag</code>, the words matching\n            your vocabulary filter are not masked or removed.</p>"
                     }
                 }
             },
@@ -3443,6 +3459,10 @@
                     {
                         "value": "mask",
                         "name": "MASK"
+                    },
+                    {
+                        "value": "tag",
+                        "name": "TAG"
                     }
                 ]
             }

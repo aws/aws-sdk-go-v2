@@ -9711,7 +9711,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the security configurations for the resource policies set on individual resources, and also the account-level policy.</p>\n\t\n\t        <p>This operation also returns the Data Catalog resource policy. However, if you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can't return the Data Catalog resource policy.</p>",
+                "smithy.api#documentation": "<p>Retrieves the resource policies set on individual resources by AWS Resource Access Manager\n      during cross-account permission grants. Also retrieves the Data Catalog resource\n      policy.</p>\n         <p>If you enabled metadata encryption in Data Catalog settings, and you do not have\n      permission on the AWS KMS key, the operation can't return the Data Catalog resource\n      policy.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -9792,7 +9792,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.glue#GlueResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Glue resource for the resource policy to be retrieved. For more\n      information about AWS Glue resource ARNs, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id\">AWS Glue ARN string pattern</a>\n         </p>"
+                        "smithy.api#documentation": "<p>The ARN of the AWS Glue resource for which to retrieve the resource policy. If not\n      supplied, the Data Catalog resource policy is returned. Use <code>GetResourcePolicies</code>\n      to view all existing resource policies. For more information see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html\">Specifying AWS Glue Resource ARNs</a>.\n    </p>"
                     }
                 }
             }
@@ -13400,6 +13400,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time at which the entry was created.</p>"
                     }
+                },
+                "OtherMetadataValueList": {
+                    "target": "com.amazonaws.glue#OtherMetadataValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Other metadata belonging to the same metadata key.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13714,6 +13720,32 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#Order"
+            }
+        },
+        "com.amazonaws.glue#OtherMetadataValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#OtherMetadataValueListItem"
+            }
+        },
+        "com.amazonaws.glue#OtherMetadataValueListItem": {
+            "type": "structure",
+            "members": {
+                "MetadataValue": {
+                    "target": "com.amazonaws.glue#MetadataValueString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata key’s corresponding value for the other metadata belonging to the same metadata key.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.glue#CreatedTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the entry was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure containing other metadata for a schema version belonging to the same metadata key.</p>"
             }
         },
         "com.amazonaws.glue#PageSize": {
@@ -14323,7 +14355,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.glue#GlueResourceArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Glue resource for the resource policy to be set. For more\n      information about AWS Glue resource ARNs, see the <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html#aws-glue-api-regex-aws-glue-arn-id\">AWS Glue ARN string pattern</a>\n         </p>"
+                        "smithy.api#documentation": "<p>Do not use. For internal use only.</p>"
                     }
                 },
                 "PolicyHashCondition": {
@@ -14335,13 +14367,13 @@
                 "PolicyExistsCondition": {
                     "target": "com.amazonaws.glue#ExistCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value of <code>MUST_EXIST</code> is used to update a policy. A value of\n        <code>NOT_EXIST</code> is used to create a new policy. If a value of <code>NONE</code> or a\n      null value is used, the call will not depend on the existence of a policy.</p>"
+                        "smithy.api#documentation": "<p>A value of <code>MUST_EXIST</code> is used to update a policy. A value of\n        <code>NOT_EXIST</code> is used to create a new policy. If a value of <code>NONE</code> or a\n      null value is used, the call does not depend on the existence of a policy.</p>"
                     }
                 },
                 "EnableHybrid": {
                     "target": "com.amazonaws.glue#EnableHybridValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Allows you to specify if you want to use both resource-level and account/catalog-level resource policies. A resource-level policy is a policy attached to an individual resource such as a database or a table.</p>\n\t\n\t        <p>The default value of <code>NO</code> indicates that resource-level policies cannot co-exist with an account-level policy. A value of <code>YES</code> means the use of both resource-level and account/catalog-level resource policies is allowed.</p>"
+                        "smithy.api#documentation": "<p>If <code>'TRUE'</code>, indicates that you are using both methods to grant cross-account\n      access to Data Catalog resources:</p>\n         <ul>\n            <li>\n               <p>By directly updating the resource policy with <code>PutResourePolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>By using the <b>Grant permissions</b> command on the AWS\n          Management Console.</p>\n            </li>\n         </ul>\n         <p>Must be set to <code>'TRUE'</code> if you have already used the Management Console to\n      grant cross-account access, otherwise the call fails. Default is 'FALSE'.</p>"
                     }
                 }
             }
@@ -15534,7 +15566,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-_$#]+"
+                "smithy.api#pattern": "[a-zA-Z0-9-_$#.]+"
             }
         },
         "com.amazonaws.glue#SchemaRegistryTokenString": {

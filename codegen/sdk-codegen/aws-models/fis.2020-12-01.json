@@ -667,7 +667,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 64
+                    "max": 1024
                 },
                 "smithy.api#pattern": "[\\S]+"
             }
@@ -1199,7 +1199,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 64
+                    "max": 1024
                 },
                 "smithy.api#pattern": "[\\S]+"
             }
