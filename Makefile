@@ -64,6 +64,11 @@ smithy-build-%: gen-repo-mod-replace
 smithy-clean:
 	cd codegen && ./gradlew clean
 
+smithy-go-publish-local:
+	rm -rf /tmp/smithy-go-local
+	git clone https://github.com/aws/smithy-go /tmp/smithy-go-local
+	make -C /tmp/smithy-go-local smithy-clean smithy-publish-local
+
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"
 	cd config && go generate
