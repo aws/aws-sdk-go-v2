@@ -244,7 +244,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p> One or more tags. The value parameter is required, but if you don't want the tag to have a\n   value, specify the parameter with no value, and we set the value to an empty string. </p>\n         <important>\n            <p>Do not enter personally identifiable information in this field.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>One or more tags. The value parameter is required.</p>\n         <important>\n            <p>Do not enter personally identifiable information in this field.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 }
@@ -643,6 +643,9 @@
                     "target": "com.amazonaws.ssm#TerminateSession"
                 },
                 {
+                    "target": "com.amazonaws.ssm#UnlabelParameterVersion"
+                },
+                {
                     "target": "com.amazonaws.ssm#UpdateAssociation"
                 },
                 {
@@ -778,7 +781,7 @@
                 "ScheduleExpression": {
                     "target": "com.amazonaws.ssm#ScheduleExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A cron expression that specifies a schedule when the association runs.</p>"
+                        "smithy.api#documentation": "<p>A cron expression that specifies a schedule when the association runs. The schedule runs in\n   Coordinated Universal Time (UTC).</p>"
                     }
                 },
                 "AssociationName": {
@@ -2821,6 +2824,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the maintenance window execution that has been stopped.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.ssm#ChangeDetailsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32768
                 }
             }
         },
@@ -6190,7 +6202,7 @@
                     "target": "com.amazonaws.ssm#Boolean",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>A boolean that indicates whether to list step executions in reverse order by start time. The\n   default value is false.</p>"
+                        "smithy.api#documentation": "<p>A boolean that indicates whether to list step executions in reverse order by start time. The\n   default value is 'false'.</p>"
                     }
                 }
             }
@@ -7905,6 +7917,27 @@
                         "smithy.api#box": {},
                         "smithy.api#documentation": "<p>The number of instances with <code>NotApplicable</code> patches beyond the supported limit,\n   which are not reported by name to Systems Manager Inventory.</p>"
                     }
+                },
+                "InstancesWithCriticalNonCompliantPatches": {
+                    "target": "com.amazonaws.ssm#InstancesCount",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The number of instances where patches that are specified as \"Critical\" for compliance\n   reporting in the patch baseline are not installed. These patches might be missing, have failed\n   installation, were rejected, or were installed but awaiting a required instance reboot. The\n   status of these instances is <code>NON_COMPLIANT</code>.</p>"
+                    }
+                },
+                "InstancesWithSecurityNonCompliantPatches": {
+                    "target": "com.amazonaws.ssm#InstancesCount",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The number of instances where patches that are specified as \"Security\" in a patch advisory\n   are not installed. These patches might be missing, have failed installation, were rejected, or\n   were installed but awaiting a required instance reboot. The status of these instances is\n    <code>NON_COMPLIANT</code>.</p>"
+                    }
+                },
+                "InstancesWithOtherNonCompliantPatches": {
+                    "target": "com.amazonaws.ssm#InstancesCount",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The number of instances with patches installed that are specified as other than \"Critical\"\n   or \"Security\" but are not compliant with the patch baseline. The status of these instances is\n   NON_COMPLIANT.</p>"
+                    }
                 }
             }
         },
@@ -9463,7 +9496,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed information about command execution for an invocation or plugin. </p>",
+                "smithy.api#documentation": "<p>Returns detailed information about command execution for an invocation or plugin.</p>\n         <p>\n            <code>GetCommandInvocation</code> only gives the execution status of a plugin in a document.\n   To get the command execution status on a specific instance, use <a>ListCommandInvocations</a>. To get the command execution status across instances, use\n    <a>ListCommands</a>.</p>",
                 "smithy.waiters#waitable": {
                     "CommandExecuted": {
                         "acceptors": [
@@ -9566,14 +9599,14 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Required) The ID of the managed instance targeted by the command. A managed instance can be\n   an EC2 instance or an instance in your hybrid environment that is configured for Systems\n   Manager.</p>",
+                        "smithy.api#documentation": "<p>(Required) The ID of the managed instance targeted by the command. A managed instance can be\n   an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for\n   AWS Systems Manager.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PluginName": {
                     "target": "com.amazonaws.ssm#CommandPluginName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the plugin for which you want detailed results. If the document contains only\n   one plugin, you can omit the name and details for that plugin are returned. If the document\n   contains more than one plugin, you must specify the name of the plugin for which you want to view\n   details.</p>\n         <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For\n   example, <code>aws:RunShellScript</code> is a plugin.</p>"
+                        "smithy.api#documentation": "<p>The name of the plugin for which you want detailed results. If the document contains only\n   one plugin, you can omit the name and details for that plugin. If the document contains more than\n   one plugin, you must specify the name of the plugin for which you want to view details.</p>\n         <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For\n   example, <code>aws:RunShellScript</code> is a plugin.</p>\n         <p>To find the <code>PluginName</code>, check the document content and find the name of the\n   plugin. Alternatively, use <a>ListCommandInvocations</a> with the\n    <code>CommandId</code> and <code>Details</code> parameters. The <code>PluginName</code> is the\n    <code>Name</code> attribute of the <code>CommandPlugin</code> object in the\n    <code>CommandPlugins</code> list.</p>"
                     }
                 }
             }
@@ -9602,7 +9635,7 @@
                 "DocumentName": {
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the document that was run. For example, AWS-RunShellScript.</p>"
+                        "smithy.api#documentation": "<p>The name of the document that was run. For example, <code>AWS-RunShellScript</code>.</p>"
                     }
                 },
                 "DocumentVersion": {
@@ -9620,7 +9653,7 @@
                 "ResponseCode": {
                     "target": "com.amazonaws.ssm#ResponseCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The error level response code for the plugin script. If the response code is -1, then the\n   command has not started running on the instance, or it was not received by the instance.</p>"
+                        "smithy.api#documentation": "<p>The error level response code for the plugin script. If the response code is\n   <code>-1</code>, then the command has not started running on the instance, or it was not received\n   by the instance.</p>"
                     }
                 },
                 "ExecutionStartDateTime": {
@@ -9632,49 +9665,49 @@
                 "ExecutionElapsedTime": {
                     "target": "com.amazonaws.ssm#StringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>Duration since ExecutionStartDateTime.</p>"
+                        "smithy.api#documentation": "<p>Duration since <code>ExecutionStartDateTime</code>.</p>"
                     }
                 },
                 "ExecutionEndDateTime": {
                     "target": "com.amazonaws.ssm#StringDateTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time the plugin was finished running. Date and time are written in ISO 8601\n   format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI\n   command uses the <code>InvokedAfter</code> filter.</p>\n         <p>\n            <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code>\n         </p>\n         <p>If the plugin has not started to run, the string is empty.</p>"
+                        "smithy.api#documentation": "<p>The date and time the plugin finished running. Date and time are written in ISO 8601 format.\n   For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses\n   the <code>InvokedAfter</code> filter.</p>\n         <p>\n            <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code>\n         </p>\n         <p>If the plugin has not started to run, the string is empty.</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.ssm#CommandInvocationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of this invocation plugin. This status can be different than\n   StatusDetails.</p>"
+                        "smithy.api#documentation": "<p>The status of this invocation plugin. This status can be different than\n    <code>StatusDetails</code>.</p>"
                     }
                 },
                 "StatusDetails": {
                     "target": "com.amazonaws.ssm#StatusDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed status of the command execution for an invocation. StatusDetails includes more\n   information than Status because it includes states resulting from error and concurrency control\n   parameters. StatusDetails can show different results than Status. For more information about\n   these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command\n    statuses</a> in the <i>AWS Systems Manager User Guide</i>. StatusDetails can be one of the\n   following values:</p>\n\n         <ul>\n            <li>\n               <p>Pending: The command has not been sent to the instance.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the instance but has not reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Delayed: The system attempted to send the command to the target, but the target was not\n     available. The instance might not be available because of network issues, because the instance\n     was stopped, or for similar reasons. The system will try to send the command again.</p>\n            </li>\n            <li>\n               <p>Success: The command or plugin ran successfully. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command was not delivered to the instance before the delivery\n     timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit,\n     but they do contribute to whether the parent command status is Success or Incomplete. This is a\n     terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: The command started to run on the instance, but the execution was not\n     complete before the timeout expired. Execution timeouts count against the MaxErrors limit of\n     the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates\n     that the result code was not zero. For a command invocation, this indicates that the result\n     code for one or more plugins was not zero. Invocation failures count against the MaxErrors\n     limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Canceled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the instance. The instance might not\n     exist or might not be responding. Undeliverable invocations don't count against the parent\n     command's MaxErrors limit and don't contribute to whether the parent command status is Success\n     or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command\n     invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code>\n   includes more information than <code>Status</code> because it includes states resulting from\n   error and concurrency control parameters. <code>StatusDetails</code> can show different results\n   than <code>Status</code>. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding\n    command statuses</a> in the <i>AWS Systems Manager User Guide</i>.\n    <code>StatusDetails</code> can be one of the following values:</p>\n\n         <ul>\n            <li>\n               <p>Pending: The command has not been sent to the instance.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the instance but has not reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Delayed: The system attempted to send the command to the target, but the target was not\n     available. The instance might not be available because of network issues, because the instance\n     was stopped, or for similar reasons. The system will try to send the command again.</p>\n            </li>\n            <li>\n               <p>Success: The command or plugin ran successfully. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command was not delivered to the instance before the delivery\n     timeout expired. Delivery timeouts do not count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: The command started to run on the instance, but the execution was not\n     complete before the timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates\n     that the result code was not zero. For a command invocation, this indicates that the result\n     code for one or more plugins was not zero. Invocation failures count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Canceled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the instance. The instance might not\n     exist or might not be responding. Undeliverable invocations don't count against the parent\n     command's <code>MaxErrors</code> limit and don't contribute to whether the parent command\n     status is Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its <code>MaxErrors</code> limit and subsequent\n     command invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StandardOutputContent": {
                     "target": "com.amazonaws.ssm#StandardOutputContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The first 24,000 characters written by the plugin to stdout. If the command has not finished\n   running, if ExecutionStatus is neither Succeeded nor Failed, then this string is empty.</p>"
+                        "smithy.api#documentation": "<p>The first 24,000 characters written by the plugin to <code>stdout</code>. If the command has\n   not finished running, if <code>ExecutionStatus</code> is neither Succeeded nor Failed, then this\n   string is empty.</p>"
                     }
                 },
                 "StandardOutputUrl": {
                     "target": "com.amazonaws.ssm#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL for the complete text written by the plugin to stdout in Amazon S3. If an S3 bucket was\n   not specified, then this string is empty.</p>"
+                        "smithy.api#documentation": "<p>The URL for the complete text written by the plugin to <code>stdout</code> in Amazon Simple Storage Service\n   (Amazon S3). If an S3 bucket was not specified, then this string is empty.</p>"
                     }
                 },
                 "StandardErrorContent": {
                     "target": "com.amazonaws.ssm#StandardErrorContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The first 8,000 characters written by the plugin to stderr. If the command has not finished\n   running, then this string is empty.</p>"
+                        "smithy.api#documentation": "<p>The first 8,000 characters written by the plugin to <code>stderr</code>. If the command has\n   not finished running, then this string is empty.</p>"
                     }
                 },
                 "StandardErrorUrl": {
                     "target": "com.amazonaws.ssm#Url",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL for the complete text written by the plugin to stderr. If the command has not\n   finished running, then this string is empty.</p>"
+                        "smithy.api#documentation": "<p>The URL for the complete text written by the plugin to <code>stderr</code>. If the command\n   has not finished running, then this string is empty.</p>"
                     }
                 },
                 "CloudWatchOutputConfig": {
@@ -12200,6 +12233,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the reboot option specified in the patch baseline.</p>\n         <note>\n            <p>Reboot options apply to <code>Install</code> operations only. Reboots are not attempted for\n    Patch Manager <code>Scan</code> operations.</p>\n         </note>\n         <ul>\n            <li>\n               <p>\n                  <b>RebootIfNeeded</b>: Patch Manager tries to reboot the\n     instance if it installed any patches, or if any patches are detected with a status of\n      <code>InstalledPendingReboot</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NoReboot</b>: Patch Manager attempts to install missing\n     packages without trying to reboot the system. Patches installed with this option are assigned a\n     status of <code>InstalledPendingReboot</code>. These patches might not be in effect until a\n     reboot is performed.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "CriticalNonCompliantCount": {
+                    "target": "com.amazonaws.ssm#PatchCriticalNonCompliantCount",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The number of instances where patches that are specified as \"Critical\" for compliance\n   reporting in the patch baseline are not installed. These patches might be missing, have failed\n   installation, were rejected, or were installed but awaiting a required instance reboot. The\n   status of these instances is <code>NON_COMPLIANT</code>.</p>"
+                    }
+                },
+                "SecurityNonCompliantCount": {
+                    "target": "com.amazonaws.ssm#PatchSecurityNonCompliantCount",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The number of instances where patches that are specified as \"Security\" in a patch advisory\n   are not installed. These patches might be missing, have failed installation, were rejected, or\n   were installed but awaiting a required instance reboot. The status of these instances is\n    <code>NON_COMPLIANT</code>.</p>"
+                    }
+                },
+                "OtherNonCompliantCount": {
+                    "target": "com.amazonaws.ssm#PatchOtherNonCompliantCount",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The number of instances with patches installed that are specified as other than \"Critical\"\n   or \"Security\" but are not compliant with the patch baseline. The status of these instances is\n   NON_COMPLIANT.</p>"
+                    }
                 }
             },
             "traits": {
@@ -13648,7 +13702,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A parameter label is a user-defined alias to help you manage different versions of a\n   parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments\n   the version number by one. A label can help you remember the purpose of a parameter when there\n   are multiple versions. </p>\n         <p>Parameter labels have the following requirements and restrictions.</p>\n         <ul>\n            <li>\n               <p>A version of a parameter can have a maximum of 10 labels.</p>\n            </li>\n            <li>\n               <p>You can't attach the same label to different versions of the same parameter. For example,\n     if version 1 has the label Production, then you can't attach Production to version 2.</p>\n            </li>\n            <li>\n               <p>You can move a label from one version of a parameter to another.</p>\n            </li>\n            <li>\n               <p>You can't create a label when you create a new parameter. You must attach a label to a\n     specific version of a parameter.</p>\n            </li>\n            <li>\n               <p>You can't delete a parameter label. If you no longer want to use a parameter label, then\n     you must move it to a different version of a parameter.</p>\n            </li>\n            <li>\n               <p>A label can have a maximum of 100 characters.</p>\n            </li>\n            <li>\n               <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or\n     underscores (_).</p>\n            </li>\n            <li>\n               <p>Labels can't begin with a number, \"aws,\" or \"ssm\" (not case sensitive). If a label fails\n     to meet these requirements, then the label is not associated with a parameter and the system\n     displays it in the list of InvalidLabels.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A parameter label is a user-defined alias to help you manage different versions of a\n   parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments\n   the version number by one. A label can help you remember the purpose of a parameter when there\n   are multiple versions. </p>\n         <p>Parameter labels have the following requirements and restrictions.</p>\n         <ul>\n            <li>\n               <p>A version of a parameter can have a maximum of 10 labels.</p>\n            </li>\n            <li>\n               <p>You can't attach the same label to different versions of the same parameter. For example,\n     if version 1 has the label Production, then you can't attach Production to version 2.</p>\n            </li>\n            <li>\n               <p>You can move a label from one version of a parameter to another.</p>\n            </li>\n            <li>\n               <p>You can't create a label when you create a new parameter. You must attach a label to a\n     specific version of a parameter.</p>\n            </li>\n            <li>\n               <p>If you no longer want to use a parameter label, then you can either delete it or move it\n     to a different version of a parameter.</p>\n            </li>\n            <li>\n               <p>A label can have a maximum of 100 characters.</p>\n            </li>\n            <li>\n               <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or\n     underscores (_).</p>\n            </li>\n            <li>\n               <p>Labels can't begin with a number, \"aws,\" or \"ssm\" (not case sensitive). If a label fails\n     to meet these requirements, then the label is not associated with a parameter and the system\n     displays it in the list of InvalidLabels.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.ssm#LabelParameterVersionRequest": {
@@ -13932,7 +13986,7 @@
                 "Details": {
                     "target": "com.amazonaws.ssm#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) If set this returns the response of the command executions and any command\n   output. By default this is set to False. </p>"
+                        "smithy.api#documentation": "<p>(Optional) If set this returns the response of the command executions and any command\n   output. The default value is 'false'. </p>"
                     }
                 }
             }
@@ -18880,6 +18934,9 @@
         "com.amazonaws.ssm#PatchContentUrl": {
             "type": "string"
         },
+        "com.amazonaws.ssm#PatchCriticalNonCompliantCount": {
+            "type": "integer"
+        },
         "com.amazonaws.ssm#PatchDeploymentStatus": {
             "type": "string",
             "traits": {
@@ -19238,6 +19295,9 @@
                 "target": "com.amazonaws.ssm#PatchOrchestratorFilterValue"
             }
         },
+        "com.amazonaws.ssm#PatchOtherNonCompliantCount": {
+            "type": "integer"
+        },
         "com.amazonaws.ssm#PatchProduct": {
             "type": "string"
         },
@@ -19363,6 +19423,9 @@
                     "max": 10
                 }
             }
+        },
+        "com.amazonaws.ssm#PatchSecurityNonCompliantCount": {
+            "type": "integer"
         },
         "com.amazonaws.ssm#PatchSet": {
             "type": "string",
@@ -19875,7 +19938,7 @@
                     "target": "com.amazonaws.ssm#Boolean",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>Overwrite an existing parameter. If not specified, will default to \"false\".</p>"
+                        "smithy.api#documentation": "<p>Overwrite an existing parameter. The default value is 'false'.</p>"
                     }
                 },
                 "AllowedPattern": {
@@ -22384,6 +22447,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   a change request. Tags enable you to categorize a resource in different ways, such as by\n   purpose, owner, or environment. For example, you might want to tag a change request to identify\n   an environment or target AWS Region. In this case, you could specify the following key-value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Region,Value=us-east-2</code>\n               </p>\n            </li>\n         </ul>"
                     }
+                },
+                "ScheduledEndTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the requester expects the runbook workflow related to the change request to\n   complete. The time is an estimate only that the requester provides for reviewers.</p>"
+                    }
+                },
+                "ChangeDetails": {
+                    "target": "com.amazonaws.ssm#ChangeDetailsValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User-provided details about the change. If no details are provided, content specified in the\n    <b>Template information</b> section of the associated change template\n   is added.</p>"
+                    }
                 }
             }
         },
@@ -23195,6 +23270,76 @@
                 "smithy.api#pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
             }
         },
+        "com.amazonaws.ssm#UnlabelParameterVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#UnlabelParameterVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#UnlabelParameterVersionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ParameterNotFound"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ParameterVersionNotFound"
+                },
+                {
+                    "target": "com.amazonaws.ssm#TooManyUpdates"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove a label or labels from a parameter.</p>"
+            }
+        },
+        "com.amazonaws.ssm#UnlabelParameterVersionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.ssm#PSParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameter name of which you want to delete one or more labels.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ParameterVersion": {
+                    "target": "com.amazonaws.ssm#PSParameterVersion",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The specific version of the parameter which you want to delete one or more labels from. If\n   it is not present, the call will fail.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Labels": {
+                    "target": "com.amazonaws.ssm#ParameterLabelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more labels to delete from the specified parameter version.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#UnlabelParameterVersionResult": {
+            "type": "structure",
+            "members": {
+                "RemovedLabels": {
+                    "target": "com.amazonaws.ssm#ParameterLabelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all labels deleted from the parameter.</p>"
+                    }
+                },
+                "InvalidLabels": {
+                    "target": "com.amazonaws.ssm#ParameterLabelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The labels that are not attached to the given parameter version.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#UnsupportedCalendarException": {
             "type": "structure",
             "members": {
@@ -23701,7 +23846,7 @@
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Required) The latest version of the document that you want to update. The latest document\n   version can be specified using the $LATEST variable or by the version number. Updating a previous\n   version of a document is not supported.</p>"
+                        "smithy.api#documentation": "<p>The version of the document that you want to update. Currently, Systems Manager supports updating only\n   the latest version of the document. You can specify the version number of the latest version or\n   use the <code>$LATEST</code> variable.</p>"
                     }
                 },
                 "DocumentFormat": {

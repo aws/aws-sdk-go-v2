@@ -3803,7 +3803,44 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a deployment.</p>\n        <note>\n            <p> The <code>content</code> property of the <code>appSpecContent</code> object in\n                the returned revision is always null. Use <code>GetApplicationRevision</code> and\n                the <code>sha256</code> property of the returned <code>appSpecContent</code> object\n                to get the content of the deployment’s AppSpec file. </p>\n        </note>"
+                "smithy.api#documentation": "<p>Gets information about a deployment.</p>\n        <note>\n            <p> The <code>content</code> property of the <code>appSpecContent</code> object in\n                the returned revision is always null. Use <code>GetApplicationRevision</code> and\n                the <code>sha256</code> property of the returned <code>appSpecContent</code> object\n                to get the content of the deployment’s AppSpec file. </p>\n        </note>",
+                "smithy.waiters#waitable": {
+                    "DeploymentSuccessful": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "deploymentInfo.status",
+                                        "expected": "Succeeded",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "deploymentInfo.status",
+                                        "expected": "Failed",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "deploymentInfo.status",
+                                        "expected": "Stopped",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    }
+                }
             }
         },
         "com.amazonaws.codedeploy#GetDeploymentConfig": {

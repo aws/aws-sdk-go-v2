@@ -176,6 +176,40 @@
         "com.amazonaws.wafv2#Action": {
             "type": "string"
         },
+        "com.amazonaws.wafv2#ActionCondition": {
+            "type": "structure",
+            "members": {
+                "Action": {
+                    "target": "com.amazonaws.wafv2#ActionValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action setting that a log record must contain in order to meet the condition. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single action condition for a <a>Condition</a> in a logging filter.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#ActionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALLOW",
+                        "name": "ALLOW"
+                    },
+                    {
+                        "value": "BLOCK",
+                        "name": "BLOCK"
+                    },
+                    {
+                        "value": "COUNT",
+                        "name": "COUNT"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.wafv2#All": {
             "type": "structure",
             "members": {},
@@ -452,6 +486,37 @@
                         "name": "GT"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.wafv2#Condition": {
+            "type": "structure",
+            "members": {
+                "ActionCondition": {
+                    "target": "com.amazonaws.wafv2#ActionCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single action condition.</p>"
+                    }
+                },
+                "LabelNameCondition": {
+                    "target": "com.amazonaws.wafv2#LabelNameCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A single label name condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single match condition for a <a>Filter</a>.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#Conditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#Condition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.wafv2#ConsumedCapacity": {
@@ -2570,6 +2635,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p></p>"
                     }
+                },
+                "LabelNamespace": {
+                    "target": "com.amazonaws.wafv2#LabelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label namespace prefix for this rule group. All labels added by rules in this rule group have this prefix. </p>\n         <ul>\n            <li>\n               <p>The syntax for the label namespace prefix for a managed rule group is the following: </p>\n               <p>\n                  <code>awswaf:managed:<vendor>:<rule group name></code>:</p>\n            </li>\n            <li>\n               <p>When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: </p>\n               <p>\n                  <code><label namespace>:<label from rule></code>\n               </p>\n \n            </li>\n         </ul>"
+                    }
+                },
+                "AvailableLabels": {
+                    "target": "com.amazonaws.wafv2#LabelSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The labels that one or more rules in this rule group add to matching web ACLs. These labels are defined in the <code>RuleLabels</code> for a <a>Rule</a>.</p>"
+                    }
+                },
+                "ConsumedLabels": {
+                    "target": "com.amazonaws.wafv2#LabelSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The labels that one or more rules in this rule group match against in label match statements. These labels are defined in a <code>LabelMatchStatement</code> specification, in the <a>Statement</a> definition of a rule.  </p>"
+                    }
                 }
             }
         },
@@ -2751,6 +2834,76 @@
                     "max": 64
                 },
                 "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.wafv2#Filter": {
+            "type": "structure",
+            "members": {
+                "Behavior": {
+                    "target": "com.amazonaws.wafv2#FilterBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How to handle logs that satisfy the filter's conditions and requirement. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Requirement": {
+                    "target": "com.amazonaws.wafv2#FilterRequirement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Conditions": {
+                    "target": "com.amazonaws.wafv2#Conditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Match conditions for the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single logging filter, used in <a>LoggingFilter</a>. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#FilterBehavior": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "KEEP",
+                        "name": "KEEP"
+                    },
+                    {
+                        "value": "DROP",
+                        "name": "DROP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wafv2#FilterRequirement": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MEETS_ALL",
+                        "name": "MEETS_ALL"
+                    },
+                    {
+                        "value": "MEETS_ANY",
+                        "name": "MEETS_ANY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wafv2#Filters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#Filter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.wafv2#FirewallManagerRuleGroup": {
@@ -3749,7 +3902,7 @@
                 "InvalidFallbackBehavior": {
                     "target": "com.amazonaws.wafv2#BodyParsingFallbackBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inspection behavior to fall back to if the JSON in the request body is invalid. For AWS WAF, invalid JSON is any content\n  that isn't complete syntactical JSON, content whose root node isn't an object or an array, and duplicate keys in the content. </p>\n         <p>You can specify the following fallback behaviors:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. AWS WAF applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule statement.</p>\n            </li>\n            <li>\n               <p>\n                  <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. This option applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string. </p>\n            </li>\n         </ul>\n         <p>If you don't provide this setting, when AWS WAF encounters invalid JSON, it parses and inspects what it can, up to the first\n  invalid JSON that it encounters. </p>"
+                        "smithy.api#documentation": "<p>What AWS WAF should do if it fails to completely parse the JSON body. The options are the following:</p>\n          <ul>\n            <li>\n          \t\t   <p>\n                  <code>EVALUATE_AS_STRING</code> - Inspect the body as\n          \t\t\tplain text. AWS WAF applies the text transformations and\n          \t\t\tinspection criteria that you defined for the JSON inspection to\n          \t\t\tthe body text string.</p>\n          \t</li>\n            <li>\n          \t\t   <p>\n                  <code>MATCH</code> - Treat the web request as matching\n          \t\t\tthe rule statement. AWS WAF applies the rule action to the\n          \t\t\trequest.</p>\n          \t</li>\n            <li>\n          \t\t   <p>\n                  <code>NO_MATCH</code> - Treat the web request as not\n          \t\t\tmatching the rule statement.</p>\n          \t</li>\n         </ul>\n          <p>If you don't provide this setting, AWS WAF parses and evaluates the content only up to the first parsing failure that it encounters. </p>\n          <p>AWS WAF does its best to parse the entire JSON body, but might be forced\n          \tto stop for reasons such as invalid characters, duplicate keys,\n          \ttruncation, and any content whose root node isn't an object or an array. </p>\n          <p>AWS WAF parses the JSON in the following examples as two valid key,\n          \tvalue pairs: </p>\n          <ul>\n            <li>\n          \t\t   <p>Missing comma:\n          \t\t\t<code>{\"key1\":\"value1\"\"key2\":\"value2\"}</code>\n               </p>\n          \t</li>\n            <li>\n          \t\t   <p>Missing colon:\n          \t\t\t<code>{\"key1\":\"value1\",\"key2\"\"value2\"}</code>\n               </p>\n          \t</li>\n            <li>\n          \t\t   <p>Extra colons:\n          \t\t\t<code>{\"key1\"::\"value1\",\"key2\"\"value2\"}</code>\n               </p>\n          \t</li>\n         </ul>"
                     }
                 }
             },
@@ -3815,6 +3968,119 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.wafv2#Label": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.wafv2#LabelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label string. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single label container. This is used as an element of a label array in multiple contexts, for example, in <code>RuleLabels</code> inside a <a>Rule</a> and in <code>Labels</code> inside a <a>SampledHTTPRequest</a>. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#LabelMatchKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z_\\-:]+$"
+            }
+        },
+        "com.amazonaws.wafv2#LabelMatchScope": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LABEL",
+                        "name": "LABEL"
+                    },
+                    {
+                        "value": "NAMESPACE",
+                        "name": "NAMESPACE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.wafv2#LabelMatchStatement": {
+            "type": "structure",
+            "members": {
+                "Scope": {
+                    "target": "com.amazonaws.wafv2#LabelMatchScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specify whether you want to match using the label name or just the namespace. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.wafv2#LabelMatchKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string to match against. The setting you provide for this depends on the match statement's <code>Scope</code> settings: </p>\n         <ul>\n            <li>\n               <p>If the <code>Scope</code> indicates <code>LABEL</code>, then this specification must include the name and can include any number of preceding namespace specifications and prefix up to providing the fully qualified label name. </p>\n            </li>\n            <li>\n               <p>If the <code>Scope</code> indicates <code>NAMESPACE</code>, then this specification can include any number of contiguous namespace strings, and can include the entire label namespace prefix from the rule group or web ACL where the label originates.</p>\n            </li>\n         </ul>\n         <p>Labels are case sensitive and components of a label must be separated by colon, for example <code>NS1:NS2:name</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule statement that defines a string match search against labels that have been added to the web request by rules that have already run in the web ACL. </p>\n         <p>The label match statement provides the label or namespace string to search for. The label string can represent a part or all of the fully qualified label name that had been added to the web request. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.  If you do not provide the fully qualified name in your label match string, AWS WAF performs the search for labels that were added in the same context as the label match statement. </p>"
+            }
+        },
+        "com.amazonaws.wafv2#LabelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z_\\-:]+$"
+            }
+        },
+        "com.amazonaws.wafv2#LabelNameCondition": {
+            "type": "structure",
+            "members": {
+                "LabelName": {
+                    "target": "com.amazonaws.wafv2#LabelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.  </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A single label name condition for a <a>Condition</a> in a logging filter.</p>"
+            }
+        },
+        "com.amazonaws.wafv2#LabelSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#LabelSummary"
+            }
+        },
+        "com.amazonaws.wafv2#LabelSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.wafv2#LabelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An individual label specification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of labels used by one or more of the rules of a <a>RuleGroup</a>. This summary object is used for the following rule group lists: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>AvailableLabels</code> - Labels that rules add to matching requests. These labels are defined in the <code>RuleLabels</code> for a <a>Rule</a>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConsumedLabels</code> - Labels that rules match against. These labels are defined in a <code>LabelMatchStatement</code> specification, in the <a>Statement</a> definition of a rule.  </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.wafv2#Labels": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.wafv2#Label"
             }
         },
         "com.amazonaws.wafv2#ListAvailableManagedRuleGroups": {
@@ -4387,16 +4653,44 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only \n   Firewall Manager can modify or delete the configuration. </p>"
                     }
+                },
+                "LoggingFilter": {
+                    "target": "com.amazonaws.wafv2#LoggingFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.  </p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an association between Amazon Kinesis Data Firehose destinations and a web ACL resource, for \n         logging from AWS WAF.\n         As part of the association, you can specify parts of the standard logging fields to keep out of the logs.\n         </p>"
+                "smithy.api#documentation": "<p>Defines an association between Amazon Kinesis Data Firehose destinations and a web ACL resource, for \n         logging from AWS WAF.\n      As part of the association, you can specify parts of the standard logging fields to keep out of the logs and you \n      can specify filters so that you log only a subset of the logging records. </p>"
             }
         },
         "com.amazonaws.wafv2#LoggingConfigurations": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.wafv2#LoggingConfiguration"
+            }
+        },
+        "com.amazonaws.wafv2#LoggingFilter": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.wafv2#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters that you want to apply to the logs. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultBehavior": {
+                    "target": "com.amazonaws.wafv2#FilterBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Default handling for logs that don't match any of the specified filtering conditions. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filtering that specifies which web requests are kept in the logs and which are dropped, defined for a web ACL's <a>LoggingConfiguration</a>. </p>\n         <p>You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.  </p>"
             }
         },
         "com.amazonaws.wafv2#ManagedRuleGroupStatement": {
@@ -4421,6 +4715,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The rules whose actions are set to <code>COUNT</code> by the web ACL, regardless of the action that is set on the rule. This effectively excludes the rule from acting on web requests.  </p>"
                     }
+                },
+                "ScopeDownStatement": {
+                    "target": "com.amazonaws.wafv2#Statement"
                 }
             },
             "traits": {
@@ -4630,6 +4927,10 @@
                         "name": "MANAGED_RULE_SET_STATEMENT"
                     },
                     {
+                        "value": "LABEL_MATCH_STATEMENT",
+                        "name": "LABEL_MATCH_STATEMENT"
+                    },
+                    {
                         "value": "AND_STATEMENT",
                         "name": "AND_STATEMENT"
                     },
@@ -4756,6 +5057,14 @@
                     {
                         "value": "BODY_PARSING_FALLBACK_BEHAVIOR",
                         "name": "BODY_PARSING_FALLBACK_BEHAVIOR"
+                    },
+                    {
+                        "value": "LOGGING_FILTER",
+                        "name": "LOGGING_FILTER"
+                    },
+                    {
+                        "value": "FILTER_CONDITION",
+                        "name": "FILTER_CONDITION"
                     }
                 ]
             }
@@ -5192,7 +5501,7 @@
                     "min": 1,
                     "max": 10240
                 },
-                "smithy.api#pattern": ".*"
+                "smithy.api#pattern": "[\\s\\S]*"
             }
         },
         "com.amazonaws.wafv2#ResponseContentType": {
@@ -5258,6 +5567,12 @@
                     "target": "com.amazonaws.wafv2#OverrideAction",
                     "traits": {
                         "smithy.api#documentation": "<p>The override action to apply to the rules in a rule group. Used only for rule statements that reference a rule group, \n           like <code>RuleGroupReferenceStatement</code> and <code>ManagedRuleGroupStatement</code>. </p>\n        <p>Set the override action to none to leave the rule actions in effect. Set it to count to only count matches, regardless of the rule action settings. </p> \n        <p>In a <a>Rule</a>, you must specify either this <code>OverrideAction</code> setting or the rule <code>Action</code> setting, but not both:</p>\n         <ul>\n            <li>\n               <p>If the rule statement references a rule group, use this override action setting and not the action setting.  </p>\n            </li>\n            <li>\n               <p>If the rule statement does not reference a rule group, use the rule action setting and not this rule override action setting. </p> \n            </li>\n         </ul>"
+                    }
+                },
+                "RuleLabels": {
+                    "target": "com.amazonaws.wafv2#Labels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Labels to apply to web requests that match the rule match statement. AWS WAF applies fully qualified labels to matching web requests. A fully qualified label is the concatenation of a label namespace and a rule label. The rule's rule group or web ACL defines the label namespace. </p>\n         <p>Rules that run after this rule in the web ACL can match against these labels using a <code>LabelMatchStatement</code>.</p>\n         <p>For each label, provide a case-sensitive string containing optional namespaces and a label name, according to the following guidelines:</p>\n         <ul>\n            <li>\n               <p>Separate each component of the label with a colon. </p>\n            </li>\n            <li>\n               <p>Each namespace or name can have up to 128 characters.</p>\n            </li>\n            <li>\n               <p>You can specify up to 5 namespaces in a label.</p>\n            </li>\n            <li>\n               <p>Don't use the following reserved words in your label specification: <code>aws</code>, <code>waf</code>, <code>managed</code>, <code>rulegroup</code>, <code>webacl</code>, <code>regexpatternset</code>, or <code>ipset</code>.</p>\n            </li>\n         </ul>\n         <p>For example, <code>myLabelName</code> or <code>nameSpace1:nameSpace2:myLabelName</code>.  </p>"
                     }
                 },
                 "VisibilityConfig": {
@@ -5348,10 +5663,28 @@
                         "smithy.api#required": {}
                     }
                 },
+                "LabelNamespace": {
+                    "target": "com.amazonaws.wafv2#LabelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label namespace prefix for this rule group. All labels added by rules in this rule group have this prefix. </p>\n         <ul>\n            <li>\n               <p>The syntax for the label namespace prefix for your rule groups is the following: </p>\n               <p>\n                  <code>awswaf:<account ID>:rulegroup:<rule group name>:</code>\n               </p>\n            </li>\n            <li>\n               <p>When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: </p>\n               <p>\n                  <code><label namespace>:<label from rule></code>\n               </p>\n \n            </li>\n         </ul>"
+                    }
+                },
                 "CustomResponseBodies": {
                     "target": "com.amazonaws.wafv2#CustomResponseBodies",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the rule group, and then use them in the rules that you define in the rule group. </p> \n         <p>For information about customizing web requests and responses, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-custom-request-response.html\">Customizing web requests and responses in AWS WAF</a> in the \n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">AWS WAF Developer Guide</a>. </p>\n         <p>For information about the limits on count and size for custom request and response settings, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/limits.html\">AWS WAF quotas</a> in the \n         <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">AWS WAF Developer Guide</a>. </p>"
+                    }
+                },
+                "AvailableLabels": {
+                    "target": "com.amazonaws.wafv2#LabelSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The labels that one or more rules in this rule group add to matching web ACLs. These labels are defined in the <code>RuleLabels</code> for a <a>Rule</a>.</p>"
+                    }
+                },
+                "ConsumedLabels": {
+                    "target": "com.amazonaws.wafv2#LabelSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The labels that one or more rules in this rule group match against in label match statements. These labels are defined in a <code>LabelMatchStatement</code> specification, in the <a>Statement</a> definition of a rule.  </p>"
                     }
                 }
             },
@@ -5514,6 +5847,12 @@
                     "target": "com.amazonaws.wafv2#ResponseStatusCode",
                     "traits": {
                         "smithy.api#documentation": "<p>The response code that was sent for the request.</p>"
+                    }
+                },
+                "Labels": {
+                    "target": "com.amazonaws.wafv2#Labels",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Labels applied to the web request by matching rules. AWS WAF applies fully qualified labels to matching web requests. A fully qualified label is the concatenation of a label namespace and a rule label. The rule's rule group or web ACL defines the label namespace. </p>\n         <p>For example, <code>awswaf:111122223333:myRuleGroup:testRules:testNS1:testNS2:labelNameA</code> or <code>awswaf:managed:aws:managed-rule-set:header:encoding:utf8</code>.  </p>"
                     }
                 }
             },
@@ -5721,6 +6060,12 @@
                     "target": "com.amazonaws.wafv2#ManagedRuleGroupStatement",
                     "traits": {
                         "smithy.api#documentation": "<p>A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling <a>ListAvailableManagedRuleGroups</a>.</p>\n         <p>You can't nest a <code>ManagedRuleGroupStatement</code>, for example for use inside a <code>NotStatement</code> or <code>OrStatement</code>. It can only be referenced as a top-level statement within a rule.</p>"
+                    }
+                },
+                "LabelMatchStatement": {
+                    "target": "com.amazonaws.wafv2#LabelMatchStatement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A rule statement that defines a string match search against labels that have been added to the web request by rules that have already run in the web ACL. </p>\n         <p>The label match statement provides the label or namespace string to search for. The label string can represent a part or all of the fully qualified label name that had been added to the web request. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label.  If you do not provide the fully qualified name in your label match string, AWS WAF performs the search for labels that were added in the same context as the label match statement. </p>"
                     }
                 }
             },
@@ -6063,7 +6408,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified <a>IPSet</a>.</p>"
+                "smithy.api#documentation": "<p>Updates the specified <a>IPSet</a>. </p>\n         <note>\n            <p>This operation completely replaces any IP address specifications that you already have in the IP set with the ones that you provide to this call. If you want to add to or modify the addresses that are already in the IP set, retrieve those by calling <a>GetIPSet</a>, update them, and provide the complete updated array of IP addresses to this call.</p>\n         </note>"
             }
         },
         "com.amazonaws.wafv2#UpdateIPSetRequest": {
@@ -6640,7 +6985,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>You tried to use a managed rule group that's available by subscription, but you aren't subscribed to it yet. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -6752,6 +7097,12 @@
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then only AWS Firewall Manager can delete the web ACL or any Firewall Manager rule groups in the web ACL. </p>"
+                    }
+                },
+                "LabelNamespace": {
+                    "target": "com.amazonaws.wafv2#LabelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The label namespace prefix for this web ACL. All labels added by rules in this web ACL have this prefix. </p>\n         <ul>\n            <li>\n               <p>The syntax for the label namespace prefix for a web ACL is the following: </p>\n               <p>\n                  <code>awswaf:<account ID>:webacl:<web ACL name>:</code>\n               </p>\n            </li>\n            <li>\n               <p>When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: </p>\n               <p>\n                  <code><label namespace>:<label from rule></code>\n               </p>\n \n            </li>\n         </ul>"
                     }
                 },
                 "CustomResponseBodies": {

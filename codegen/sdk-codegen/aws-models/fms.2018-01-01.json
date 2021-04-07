@@ -403,6 +403,15 @@
                 "smithy.api#documentation": "<p>Details of the rule violation in a security group when compared to the master security group of the AWS Firewall Manager policy.</p>"
             }
         },
+        "com.amazonaws.fms#BasicInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": -2147483648,
+                    "max": 2147483647
+                }
+            }
+        },
         "com.amazonaws.fms#Boolean": {
             "type": "boolean"
         },
@@ -676,6 +685,105 @@
         "com.amazonaws.fms#DisassociateAdminAccountRequest": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.fms#DnsDuplicateRuleGroupViolation": {
+            "type": "structure",
+            "members": {
+                "ViolationTarget": {
+                    "target": "com.amazonaws.fms#ViolationTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC. </p>"
+                    }
+                },
+                "ViolationTargetDescription": {
+                    "target": "com.amazonaws.fms#LengthBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the violation that specifies the rule group and VPC.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A DNS Firewall rule group that Firewall Manager \n       tried to associate with a VPC is already associated with the VPC and can't be associated again. </p>"
+            }
+        },
+        "com.amazonaws.fms#DnsRuleGroupLimitExceededViolation": {
+            "type": "structure",
+            "members": {
+                "ViolationTarget": {
+                    "target": "com.amazonaws.fms#ViolationTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC. </p>"
+                    }
+                },
+                "ViolationTargetDescription": {
+                    "target": "com.amazonaws.fms#LengthBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the violation that specifies the rule group and VPC.</p>"
+                    }
+                },
+                "NumberOfRuleGroupsAlreadyAssociated": {
+                    "target": "com.amazonaws.fms#BasicInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of rule groups currently associated with the VPC.  </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC that Firewall Manager was applying a DNS Fireall policy to reached the limit for associated DNS Firewall rule groups. Firewall Manager tried to associate another rule group with the VPC and failed due to the limit. </p>"
+            }
+        },
+        "com.amazonaws.fms#DnsRuleGroupPriorities": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.fms#DnsRuleGroupPriority"
+            }
+        },
+        "com.amazonaws.fms#DnsRuleGroupPriority": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 10000
+                }
+            }
+        },
+        "com.amazonaws.fms#DnsRuleGroupPriorityConflictViolation": {
+            "type": "structure",
+            "members": {
+                "ViolationTarget": {
+                    "target": "com.amazonaws.fms#ViolationTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC. </p>"
+                    }
+                },
+                "ViolationTargetDescription": {
+                    "target": "com.amazonaws.fms#LengthBoundedString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the violation that specifies the VPC and the rule group that's already associated with it.</p>"
+                    }
+                },
+                "ConflictingPriority": {
+                    "target": "com.amazonaws.fms#DnsRuleGroupPriority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priority setting of the two conflicting rule groups.</p>"
+                    }
+                },
+                "ConflictingPolicyId": {
+                    "target": "com.amazonaws.fms#PolicyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Firewall Manager DNS Firewall policy that was already applied to the VPC. \n       This policy contains the rule group that's already associated with the VPC. </p>"
+                    }
+                },
+                "UnavailablePriorities": {
+                    "target": "com.amazonaws.fms#DnsRuleGroupPriorities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The priorities of rule groups that are already associated with the VPC. To retry your operation, \n       choose priority settings that aren't in this list for the rule groups in your new DNS Firewall policy. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule group that Firewall Manager \n       tried to associate with a VPC has the same priority as a rule group that's already associated. </p>"
+            }
         },
         "com.amazonaws.fms#ErrorMessage": {
             "type": "string"
@@ -2751,6 +2859,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Violation detail for an Network Firewall policy that indicates that a firewall policy \n       in an individual account has been modified in a way that makes it noncompliant.  \n       For example, the individual account owner might have deleted a rule group, \n       changed the priority of a stateless rule group, or changed a policy default action.</p>"
                     }
+                },
+                "DnsRuleGroupPriorityConflictViolation": {
+                    "target": "com.amazonaws.fms#DnsRuleGroupPriorityConflictViolation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Violation detail for a DNS Firewall policy that indicates that a rule group that Firewall Manager \n       tried to associate with a VPC has the same priority as a rule group that's already associated. </p>"
+                    }
+                },
+                "DnsDuplicateRuleGroupViolation": {
+                    "target": "com.amazonaws.fms#DnsDuplicateRuleGroupViolation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Violation detail for a DNS Firewall policy that indicates that a rule group that Firewall Manager \n       tried to associate with a VPC is already associated with the VPC and can't be associated again. </p>"
+                    }
+                },
+                "DnsRuleGroupLimitExceededViolation": {
+                    "target": "com.amazonaws.fms#DnsRuleGroupLimitExceededViolation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Violation details for a DNS Firewall policy that indicates that the VPC reached the limit for associated DNS Firewall rule groups. Firewall Manager tried to associate another rule group with the VPC and failed. </p>"
+                    }
                 }
             },
             "traits": {
@@ -2897,6 +3023,10 @@
                     {
                         "value": "NETWORK_FIREWALL",
                         "name": "NETWORK_FIREWALL"
+                    },
+                    {
+                        "value": "DNS_FIREWALL",
+                        "name": "DNS_FIREWALL"
                     }
                 ]
             }
@@ -3260,6 +3390,10 @@
                         "name": "SecurityGroupRedundant"
                     },
                     {
+                        "value": "FMS_CREATED_SECURITY_GROUP_EDITED",
+                        "name": "FMSCreatedSecurityGroupEdited"
+                    },
+                    {
                         "value": "MISSING_FIREWALL",
                         "name": "MissingFirewall"
                     },
@@ -3274,6 +3408,10 @@
                     {
                         "value": "NETWORK_FIREWALL_POLICY_MODIFIED",
                         "name": "NetworkFirewallPolicyModified"
+                    },
+                    {
+                        "value": "RESOURCE_MISSING_DNS_FIREWALL",
+                        "name": "ResourceMissingDnsFirewall"
                     }
                 ]
             }

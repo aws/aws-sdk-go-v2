@@ -1370,6 +1370,9 @@
                     "target": "com.amazonaws.ec2#CreateReservedInstancesListing"
                 },
                 {
+                    "target": "com.amazonaws.ec2#CreateRestoreImageTask"
+                },
+                {
                     "target": "com.amazonaws.ec2#CreateRoute"
                 },
                 {
@@ -1386,6 +1389,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#CreateSpotDatafeedSubscription"
+                },
+                {
+                    "target": "com.amazonaws.ec2#CreateStoreImageTask"
                 },
                 {
                     "target": "com.amazonaws.ec2#CreateSubnet"
@@ -1910,6 +1916,9 @@
                     "target": "com.amazonaws.ec2#DescribeStaleSecurityGroups"
                 },
                 {
+                    "target": "com.amazonaws.ec2#DescribeStoreImageTasks"
+                },
+                {
                     "target": "com.amazonaws.ec2#DescribeSubnets"
                 },
                 {
@@ -2124,6 +2133,9 @@
                 },
                 {
                     "target": "com.amazonaws.ec2#GetEbsEncryptionByDefault"
+                },
+                {
+                    "target": "com.amazonaws.ec2#GetFlowLogsIntegrationTemplate"
                 },
                 {
                     "target": "com.amazonaws.ec2#GetGroupsForCapacityReservation"
@@ -3533,15 +3545,6 @@
         "com.amazonaws.ec2#AssociateSubnetCidrBlockRequest": {
             "type": "structure",
             "members": {
-                "SubnetId": {
-                    "target": "com.amazonaws.ec2#SubnetId",
-                    "traits": {
-                        "aws.protocols#ec2QueryName": "SubnetId",
-                        "smithy.api#documentation": "<p>The ID of your subnet.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "subnetId"
-                    }
-                },
                 "Ipv6CidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -3549,6 +3552,15 @@
                         "smithy.api#documentation": "<p>The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix\n            length.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "ipv6CidrBlock"
+                    }
+                },
+                "SubnetId": {
+                    "target": "com.amazonaws.ec2#SubnetId",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "SubnetId",
+                        "smithy.api#documentation": "<p>The ID of your subnet.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "subnetId"
                     }
                 }
             }
@@ -3916,6 +3928,55 @@
                         "name": "disassociated"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.ec2#AthenaIntegration": {
+            "type": "structure",
+            "members": {
+                "IntegrationResultS3DestinationArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location in Amazon S3 to store the generated CloudFormation template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionLoadFrequency": {
+                    "target": "com.amazonaws.ec2#PartitionLoadFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schedule for adding new partitions to the table.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartitionStartDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date for the partition.</p>"
+                    }
+                },
+                "PartitionEndDate": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date for the partition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes integration options for Amazon Athena.</p>"
+            }
+        },
+        "com.amazonaws.ec2#AthenaIntegrationsSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#AthenaIntegration",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
             }
         },
         "com.amazonaws.ec2#AttachClassicLinkVpc": {
@@ -8046,7 +8107,7 @@
                 "target": "com.amazonaws.ec2#CopyImageResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a \n   \t\tRegion to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one \n   \t\tOutpost to another, or within the same Outpost.</p>\n     \t\n     \t   <p>To copy an AMI from one Region to another, specify the source Region using the  \n     \t\t<b>SourceRegion</b> parameter, and specify the \n     \t\tdestination Region using its endpoint. Copies of encrypted backing snapshots for\n     \t\tthe AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, \n     \t\tunless you set <code>Encrypted</code> during the copy operation. You cannot \n     \t\tcreate an unencrypted copy of an encrypted backing snapshot.</p>\n   \t\n   \t     <p>To copy an AMI from a Region to an Outpost, specify the source Region using the  \n   \t\t<b>SourceRegion</b> parameter, and specify the \n   \t\tARN of the destination Outpost using <b>DestinationOutpostArn</b>. \n   \t\tBacking snapshots copied to an Outpost are encrypted by default using the default\n   \t\tencryption key for the Region, or a different key that you specify in the request using \n   \t\t<b>KmsKeyId</b>. Outposts do not support unencrypted \n   \t\tsnapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n   \t\t\tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n   \n   \t\n         <p></p>\n         <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a>\n        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a\n      Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost\n      to another, or within the same Outpost. To copy an AMI to another partition, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n     \t\n     \t   <p>To copy an AMI from one Region to another, specify the source Region using the  \n     \t\t<b>SourceRegion</b> parameter, and specify the \n     \t\tdestination Region using its endpoint. Copies of encrypted backing snapshots for\n     \t\tthe AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, \n     \t\tunless you set <code>Encrypted</code> during the copy operation. You cannot \n     \t\tcreate an unencrypted copy of an encrypted backing snapshot.</p>\n   \t\n   \t     <p>To copy an AMI from a Region to an Outpost, specify the source Region using the  \n   \t\t<b>SourceRegion</b> parameter, and specify the \n   \t\tARN of the destination Outpost using <b>DestinationOutpostArn</b>. \n   \t\tBacking snapshots copied to an Outpost are encrypted by default using the default\n   \t\tencryption key for the Region, or a different key that you specify in the request using \n   \t\t<b>KmsKeyId</b>. Outposts do not support unencrypted \n   \t\tsnapshots. For more information, <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami\">\n   \t\t\tAmazon EBS local snapshots on Outposts</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n   \n         <p>For more information about the prerequisites and limits when copying an AMI, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/CopyingAMIs.html\">Copying an AMI</a>\n        in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CopyImageRequest": {
@@ -10727,6 +10788,69 @@
                 "smithy.api#documentation": "<p>Contains the output of CreateReservedInstancesListing.</p>"
             }
         },
+        "com.amazonaws.ec2#CreateRestoreImageTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateRestoreImageTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateRestoreImageTaskResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a task that restores an AMI from an S3 object that was previously created by using\n      <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html\">CreateStoreImageTask</a>.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n      S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateRestoreImageTaskRequest": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket that contains the stored AMI object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectKey": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the stored AMI object in the bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the restored AMI. The name must be unique for AMIs in the Region for this\n      account. If you do not provide a name, the new AMI gets the same name as the original\n      AMI.</p>"
+                    }
+                },
+                "TagSpecifications": {
+                    "target": "com.amazonaws.ec2#TagSpecificationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the AMI and snapshots on restoration. You can tag the AMI, the\n      snapshots, or both.</p>\n         <ul>\n            <li>\n               <p>To tag the AMI, the value for <code>ResourceType</code> must be <code>image</code>.</p>\n            </li>\n            <li>\n               <p>To\n          tag the snapshots, the value for <code>ResourceType</code> must be <code>snapshot</code>. The\n          same tag is applied to all of the snapshots that are created.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n      Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CreateRestoreImageTaskResult": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ImageId",
+                        "smithy.api#documentation": "<p>The AMI ID.</p>",
+                        "smithy.api#xmlName": "imageId"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#CreateRoute": {
             "type": "operation",
             "input": {
@@ -11176,6 +11300,63 @@
                 "smithy.api#documentation": "<p>Contains the output of CreateSpotDatafeedSubscription.</p>"
             }
         },
+        "com.amazonaws.ec2#CreateStoreImageTask": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#CreateStoreImageTaskRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#CreateStoreImageTaskResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stores an AMI as a single object in an S3 bucket.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n        S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#CreateStoreImageTaskRequest": {
+            "type": "structure",
+            "members": {
+                "ImageId": {
+                    "target": "com.amazonaws.ec2#ImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AMI.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Bucket": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket in which the AMI object will be stored. The bucket must be in\n      the Region in which the request is being made. The AMI object appears in the bucket only after\n      the upload task has completed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3ObjectTags": {
+                    "target": "com.amazonaws.ec2#S3ObjectTagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to apply to the AMI object that will be stored in the S3 bucket. </p>",
+                        "smithy.api#xmlName": "S3ObjectTag"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n      Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#CreateStoreImageTaskResult": {
+            "type": "structure",
+            "members": {
+                "ObjectKey": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ObjectKey",
+                        "smithy.api#documentation": "<p>The name of the stored AMI object in the S3 bucket.</p>",
+                        "smithy.api#xmlName": "objectKey"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#CreateSubnet": {
             "type": "operation",
             "input": {
@@ -11210,6 +11391,13 @@
                         "smithy.api#documentation": "<p>The AZ ID or the Local Zone ID of the subnet.</p>"
                     }
                 },
+                "CidrBlock": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
                 "Ipv6CidrBlock": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
@@ -11235,13 +11423,6 @@
                         "aws.protocols#ec2QueryName": "DryRun",
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
-                    }
-                },
-                "CidrBlock": {
-                    "target": "com.amazonaws.ec2#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 network range for the subnet, in CIDR notation. For example, <code>10.0.0.0/24</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
-                        "smithy.api#required": {}
                     }
                 }
             }
@@ -23572,6 +23753,85 @@
                 }
             }
         },
+        "com.amazonaws.ec2#DescribeStoreImageTasks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#DescribeStoreImageTasksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#DescribeStoreImageTasksResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the progress of the AMI store tasks. You can describe the store tasks for\n      specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from\n      the last 31 days.</p>\n         <p>For each AMI task, the response indicates if the task is <code>InProgress</code>,\n        <code>Completed</code>, or <code>Failed</code>. For tasks <code>InProgress</code>, the\n      response shows the estimated progress as a percentage.</p>\n         <p>Tasks are listed in reverse chronological order. Currently, only tasks from the past 31\n      days can be viewed.</p>\n         <p>To use this API, you must have the required permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions\">Permissions for storing and restoring AMIs using S3</a> in the\n        <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html\">Store and restore an AMI using\n        S3</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#DescribeStoreImageTasksRequest": {
+            "type": "structure",
+            "members": {
+                "ImageIds": {
+                    "target": "com.amazonaws.ec2#ImageIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AMI IDs for which to show progress. Up to 20 AMI IDs can be included in a request.</p>",
+                        "smithy.api#xmlName": "ImageId"
+                    }
+                },
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n      and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n      Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ec2#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>task-state</code> - Returns tasks in a certain state (<code>InProgress</code> |\n            <code>Completed</code> | <code>Failed</code>)</p>\n            </li>\n            <li>\n               <p>\n                  <code>bucket</code> - Returns task information for tasks that targeted a specific\n          bucket. For the filter value, specify the bucket name.</p>\n            </li>\n         </ul>",
+                        "smithy.api#xmlName": "Filter"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ec2#DescribeStoreImageTasksRequestMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining\n      results, make another call with the returned <code>NextToken</code> value. This value can be\n      between 1 and 200. You cannot specify this parameter and the <code>ImageIDs</code> parameter\n      in the same call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeStoreImageTasksRequestMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ec2#DescribeStoreImageTasksResult": {
+            "type": "structure",
+            "members": {
+                "StoreImageTaskResults": {
+                    "target": "com.amazonaws.ec2#StoreImageTaskResultSet",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StoreImageTaskResultSet",
+                        "smithy.api#documentation": "<p>The information about the AMI store tasks.</p>",
+                        "smithy.api#xmlName": "storeImageTaskResultSet"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "NextToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code>\n      when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "nextToken"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#DescribeSubnets": {
             "type": "operation",
             "input": {
@@ -23622,7 +23882,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>availability-zone</code> - The Availability Zone for the subnet. You can also use\n                    <code>availabilityZone</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet.\n                    You can also use <code>availabilityZoneId</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>available-ip-address-count</code> - The number of IPv4 addresses in the\n                    subnet that are available.</p>\n            </li>\n            <li>\n                <p>\n                  <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you\n                    specify must exactly match the subnet's CIDR block for information to be\n                    returned for the subnet. You can also use <code>cidr</code> or\n                    <code>cidrBlock</code> as the filter names.</p>\n            </li>\n            <li>\n                <p>\n                  <code>default-for-az</code> - Indicates whether this is the default subnet for the\n                    Availability Zone. You can also use <code>defaultForAz</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR\n                    block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.association-id</code> - An association ID\n                    for an IPv6 CIDR block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR\n                    block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>owner-id</code> - The ID of the AWS account that owns the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-id</code> - The ID of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpc-id</code> - The ID of the VPC for the subnet.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>availability-zone</code> - The Availability Zone for the subnet. You can also use\n                    <code>availabilityZone</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>availability-zone-id</code> - The ID of the Availability Zone for the subnet.\n                    You can also use <code>availabilityZoneId</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>available-ip-address-count</code> - The number of IPv4 addresses in the\n                    subnet that are available.</p>\n            </li>\n            <li>\n                <p>\n                  <code>cidr-block</code> - The IPv4 CIDR block of the subnet. The CIDR block you\n                    specify must exactly match the subnet's CIDR block for information to be\n                    returned for the subnet. You can also use <code>cidr</code> or\n                    <code>cidrBlock</code> as the filter names.</p>\n            </li>\n            <li>\n                <p>\n                  <code>default-for-az</code> - Indicates whether this is the default subnet for the\n                    Availability Zone. You can also use <code>defaultForAz</code> as the filter name.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.ipv6-cidr-block</code> - An IPv6 CIDR\n                    block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.association-id</code> - An association ID\n                    for an IPv6 CIDR block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ipv6-cidr-block-association.state</code> - The state of an IPv6 CIDR\n                    block associated with the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>outpost-arn</code> - The Amazon Resource Name (ARN) of the Outpost.</p>\n            </li>\n            <li>\n                <p>\n                  <code>owner-id</code> - The ID of the AWS account that owns the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the subnet (<code>pending</code> | <code>available</code>).</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-arn</code> - The Amazon Resource Name (ARN) of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-id</code> - The ID of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>vpc-id</code> - The ID of the VPC for the subnet.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -31934,6 +32194,64 @@
                 }
             }
         },
+        "com.amazonaws.ec2#GetFlowLogsIntegrationTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a CloudFormation template that streamlines and automates the integration of VPC flow logs \n            with Amazon Athena. This make it easier for you to query and gain insights from VPC flow logs data. \n            Based on the information that you provide, we configure resources in the template to do the following:</p>\n        <ul>\n            <li>\n                <p>Create a table in Athena that maps fields to a custom log format</p>\n            </li>\n            <li>\n                <p>Create a Lambda function that updates the table with new partitions on a daily, weekly, or\n                    monthly basis</p>\n            </li>\n            <li>\n                <p>Create a table partitioned between two timestamps in the past</p>\n            </li>\n            <li>\n                <p>Create a set of named queries in Athena that you can use to get started quickly</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "DryRun": {
+                    "target": "com.amazonaws.ec2#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+                    }
+                },
+                "FlowLogId": {
+                    "target": "com.amazonaws.ec2#VpcFlowLogId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the flow log.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigDeliveryS3DestinationArn": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To store the CloudFormation template in Amazon S3, specify the location in Amazon S3.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntegrateServices": {
+                    "target": "com.amazonaws.ec2#IntegrateServices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the service integration.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "IntegrateService"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ec2#GetFlowLogsIntegrationTemplateResult": {
+            "type": "structure",
+            "members": {
+                "Result": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Result",
+                        "smithy.api#documentation": "<p>The generated CloudFormation template.</p>",
+                        "smithy.api#xmlName": "result"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ec2#GetGroupsForCapacityReservation": {
             "type": "operation",
             "input": {
@@ -34356,6 +34674,15 @@
         },
         "com.amazonaws.ec2#ImageId": {
             "type": "string"
+        },
+        "com.amazonaws.ec2#ImageIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#ImageId",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
         },
         "com.amazonaws.ec2#ImageIdStringList": {
             "type": "list",
@@ -39531,6 +39858,21 @@
         },
         "com.amazonaws.ec2#Integer": {
             "type": "integer"
+        },
+        "com.amazonaws.ec2#IntegrateServices": {
+            "type": "structure",
+            "members": {
+                "AthenaIntegrations": {
+                    "target": "com.amazonaws.ec2#AthenaIntegrationsSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the integration with Amazon Athena.</p>",
+                        "smithy.api#xmlName": "AthenaIntegration"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes service integrations with VPC Flow logs.</p>"
+            }
         },
         "com.amazonaws.ec2#InterfacePermissionType": {
             "type": "string",
@@ -47944,6 +48286,29 @@
                 }
             }
         },
+        "com.amazonaws.ec2#PartitionLoadFrequency": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "none",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "daily",
+                        "name": "DAILY"
+                    },
+                    {
+                        "value": "weekly",
+                        "name": "WEEKLY"
+                    },
+                    {
+                        "value": "monthly",
+                        "name": "MONTHLY"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ec2#PathComponent": {
             "type": "structure",
             "members": {
@@ -55055,6 +55420,35 @@
                 "smithy.api#documentation": "<p>Contains the output of RunScheduledInstances.</p>"
             }
         },
+        "com.amazonaws.ec2#S3ObjectTag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag.</p>\n         <p>Constraints: Tag keys are case-sensitive and can be up to 128 Unicode characters in\n      length. May not begin with <code>aws</code>:.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag.</p>\n         <p>Constraints: Tag values are case-sensitive and can be up to 256 Unicode characters in\n      length.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The tags to apply to the AMI object that will be stored in the S3 bucket. For more\n      information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html\">Categorizing your storage using\n        tags</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.ec2#S3ObjectTagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#S3ObjectTag",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
+            }
+        },
         "com.amazonaws.ec2#S3Storage": {
             "type": "structure",
             "members": {
@@ -58806,6 +59200,79 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes a storage location in Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.ec2#StoreImageTaskResult": {
+            "type": "structure",
+            "members": {
+                "AmiId": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "AmiId",
+                        "smithy.api#documentation": "<p>The ID of the AMI that is being stored.</p>",
+                        "smithy.api#xmlName": "amiId"
+                    }
+                },
+                "TaskStartTime": {
+                    "target": "com.amazonaws.ec2#MillisecondDateTime",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "TaskStartTime",
+                        "smithy.api#documentation": "<p>The time the task started.</p>",
+                        "smithy.api#xmlName": "taskStartTime"
+                    }
+                },
+                "Bucket": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Bucket",
+                        "smithy.api#documentation": "<p>The name of the S3 bucket that contains the stored AMI object.</p>",
+                        "smithy.api#xmlName": "bucket"
+                    }
+                },
+                "S3objectKey": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "S3objectKey",
+                        "smithy.api#documentation": "<p>The name of the stored AMI object in the bucket.</p>",
+                        "smithy.api#xmlName": "s3objectKey"
+                    }
+                },
+                "ProgressPercentage": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ProgressPercentage",
+                        "smithy.api#documentation": "<p>The progress of the task as a percentage.</p>",
+                        "smithy.api#xmlName": "progressPercentage"
+                    }
+                },
+                "StoreTaskState": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StoreTaskState",
+                        "smithy.api#documentation": "<p>The state of the store task (<code>InProgress</code>, <code>Completed</code>, or\n        <code>Failed</code>).</p>",
+                        "smithy.api#xmlName": "storeTaskState"
+                    }
+                },
+                "StoreTaskFailureReason": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "StoreTaskFailureReason",
+                        "smithy.api#documentation": "<p>If the tasks fails, the reason for the failure is returned. If the task succeeds,\n        <code>null</code> is returned.</p>",
+                        "smithy.api#xmlName": "storeTaskFailureReason"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about the AMI store task, including the progress of the task.</p>"
+            }
+        },
+        "com.amazonaws.ec2#StoreImageTaskResultSet": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ec2#StoreImageTaskResult",
+                "traits": {
+                    "smithy.api#xmlName": "item"
+                }
             }
         },
         "com.amazonaws.ec2#String": {
@@ -62784,15 +63251,6 @@
         "com.amazonaws.ec2#UnassignIpv6AddressesRequest": {
             "type": "structure",
             "members": {
-                "Ipv6Addresses": {
-                    "target": "com.amazonaws.ec2#Ipv6AddressList",
-                    "traits": {
-                        "aws.protocols#ec2QueryName": "Ipv6Addresses",
-                        "smithy.api#documentation": "<p>The IPv6 addresses to unassign from the network interface.</p>",
-                        "smithy.api#required": {},
-                        "smithy.api#xmlName": "ipv6Addresses"
-                    }
-                },
                 "NetworkInterfaceId": {
                     "target": "com.amazonaws.ec2#NetworkInterfaceId",
                     "traits": {
@@ -62800,6 +63258,15 @@
                         "smithy.api#documentation": "<p>The ID of the network interface.</p>",
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "networkInterfaceId"
+                    }
+                },
+                "Ipv6Addresses": {
+                    "target": "com.amazonaws.ec2#Ipv6AddressList",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "Ipv6Addresses",
+                        "smithy.api#documentation": "<p>The IPv6 addresses to unassign from the network interface.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "ipv6Addresses"
                     }
                 }
             }

@@ -2135,6 +2135,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      The properties required to query Amazon Connect Customer Profiles.\n    </p>"
                     }
+                },
+                "Zendesk": {
+                    "target": "com.amazonaws.appflow#ZendeskDestinationProperties"
                 }
             },
             "traits": {
@@ -6481,6 +6484,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n  The connector-specific profile properties required when using Zendesk.\n</p>"
+            }
+        },
+        "com.amazonaws.appflow#ZendeskDestinationProperties": {
+            "type": "structure",
+            "members": {
+                "object": {
+                    "target": "com.amazonaws.appflow#Object",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "idFieldNames": {
+                    "target": "com.amazonaws.appflow#IdFieldNameList"
+                },
+                "errorHandlingConfig": {
+                    "target": "com.amazonaws.appflow#ErrorHandlingConfig"
+                },
+                "writeOperationType": {
+                    "target": "com.amazonaws.appflow#WriteOperationType"
+                }
             }
         },
         "com.amazonaws.appflow#ZendeskMetadata": {

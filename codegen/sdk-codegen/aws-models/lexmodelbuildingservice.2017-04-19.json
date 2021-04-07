@@ -3996,6 +3996,10 @@
                     {
                         "value": "it-IT",
                         "name": "IT_IT"
+                    },
+                    {
+                        "value": "ja-JP",
+                        "name": "JA_JP"
                     }
                 ]
             }

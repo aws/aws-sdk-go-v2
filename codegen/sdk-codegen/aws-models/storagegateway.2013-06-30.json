@@ -283,7 +283,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures one or more gateway local disks as upload buffer for a specified gateway.\n         This operation is supported for the stored volume, cached volume and tape gateway\n         types.</p>\n\n         <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to\n         add upload buffer, and one or more disk IDs that you want to configure as upload\n         buffer.</p>"
+                "smithy.api#documentation": "<p>Configures one or more gateway local disks as upload buffer for a specified gateway.\n         This operation is supported for the stored volume, cached volume, and tape gateway\n         types.</p>\n\n         <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to\n         add upload buffer, and one or more disk IDs that you want to configure as upload\n         buffer.</p>"
             }
         },
         "com.amazonaws.storagegateway#AddUploadBufferInput": {
@@ -416,6 +416,91 @@
                     "target": "com.amazonaws.storagegateway#TapeARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique Amazon Resource Names (ARN) of the virtual tape that was added to the tape\n         pool.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#AssociateFileSystem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#AssociateFileSystemInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#AssociateFileSystemOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate an Amazon FSx file system with the Amazon FSx file gateway. After the\n         association process is complete, the file shares on the Amazon FSx file system are\n         available for access through the gateway. This operation only supports the Amazon FSx file\n         gateway type.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#AssociateFileSystemInput": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.storagegateway#DomainUserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name of the user credential that has permission to access the root share D$ of\n         the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin\n         user group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Password": {
+                    "target": "com.amazonaws.storagegateway#DomainUserPassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password of the user credential.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.storagegateway#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string value that you supply that is used by the file gateway to ensure\n         idempotent file system association creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GatewayARN": {
+                    "target": "com.amazonaws.storagegateway#GatewayARN",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "LocationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemLocationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the\n         Amazon FSx file gateway.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.storagegateway#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 50 tags that can be assigned to the file system association. Each tag is a key-value pair.</p>"
+                    }
+                },
+                "AuditDestinationARN": {
+                    "target": "com.amazonaws.storagegateway#AuditDestinationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+                    }
+                },
+                "CacheAttributes": {
+                    "target": "com.amazonaws.storagegateway#CacheAttributes"
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#AssociateFileSystemOutput": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the newly created file system association.</p>"
                     }
                 }
             }
@@ -659,7 +744,7 @@
                 "DaysOfWeek": {
                     "target": "com.amazonaws.storagegateway#DaysOfWeek",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The days of the week component of the bandwidth rate limit interval, \n         represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday. \n      </p>",
+                        "smithy.api#documentation": "<p> The days of the week component of the bandwidth rate limit interval, represented as\n         ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -725,12 +810,12 @@
                 "CacheStaleTimeoutInSeconds": {
                     "target": "com.amazonaws.storagegateway#CacheStaleTimeoutInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of\n         time since the last refresh after which access to the directory would cause the file\n         gateway to first refresh that directory's contents from the Amazon S3 bucket. The TTL\n         duration is in seconds.</p>\n\n         <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>"
+                        "smithy.api#documentation": "<p>Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of\n         time since the last refresh after which access to the directory would cause the file\n         gateway to first refresh that directory's contents from the Amazon S3 bucket or Amazon FSx file system. The TTL\n         duration is in seconds.</p>\n\n         <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists refresh cache information.</p>"
+                "smithy.api#documentation": "<p>The refresh cache information for the file share.</p>"
             }
         },
         "com.amazonaws.storagegateway#CacheStaleTimeoutInSeconds": {
@@ -1251,13 +1336,13 @@
                 "CacheAttributes": {
                     "target": "com.amazonaws.storagegateway#CacheAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refresh cache information.</p>"
+                        "smithy.api#documentation": "<p>Specifies refresh cache information for the file share.</p>"
                     }
                 },
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share.</p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 }
             },
@@ -1385,19 +1470,19 @@
                     }
                 },
                 "AdminUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that will be granted administrator\n         privileges on the file share. These users can do all file operations as the super-user.\n         Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>,\n            <code>@group1</code>, and <code>@DOMAIN\\group1</code>.</p>\n\n         <important>\n            <p>Use this option very carefully, because any user in this list can do anything they\n            like on the file share, regardless of file permissions.</p>\n         </important>"
                     }
                 },
                 "ValidUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that are allowed to access the file\n            <a href=\"\"></a> share. A group must be prefixed with the @ character. Acceptable formats\n         include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and\n            <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to\n            <code>ActiveDirectory</code>.</p>"
                     }
                 },
                 "InvalidUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the\n         file share. A group must be prefixed with the @ character. Acceptable formats include:\n            <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and\n            <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to\n            <code>ActiveDirectory</code>.</p>"
                     }
@@ -1405,7 +1490,7 @@
                 "AuditDestinationARN": {
                     "target": "com.amazonaws.storagegateway#AuditDestinationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
                     }
                 },
                 "Authentication": {
@@ -1435,13 +1520,13 @@
                 "CacheAttributes": {
                     "target": "com.amazonaws.storagegateway#CacheAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refresh cache information.</p>"
+                        "smithy.api#documentation": "<p>Specifies refresh cache information for the file share.</p>"
                     }
                 },
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share.</p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 }
             },
@@ -1483,7 +1568,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Initiates a snapshot of a volume.</p>\n\n         <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data\n         to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the\n         data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2).\n         You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API\n         enables you to take an ad hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a\n            snapshot schedule</a>.</p>\n\n         <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its\n         Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS\n         Storage Gateway takes the snapshot of specified volume, the snapshot and description\n         appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a\n         snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it\n         when you want to create a volume from a snapshot. This operation is only supported in\n         stored and cached volume gateway type.</p>\n\n         <note>\n            <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a>\n            or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API\n               Reference</i>.</p>\n         </note>\n\n         <important>\n            <p>Volume and snapshot IDs are changing to a longer length ID format. For more\n            information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Initiates a snapshot of a volume.</p>\n\n         <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data\n         to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the\n         data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2).\n         You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API\n         enables you to take an ad hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a\n            snapshot schedule</a>.</p>\n\n         <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its\n         Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS\n         Storage Gateway takes the snapshot of specified volume, the snapshot and description\n         appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a\n         snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it\n         when you want to create a volume from a snapshot. This operation is only supported in\n         stored and cached volume gateway type.</p>\n\n         <note>\n            <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a>\n            or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API\n               Reference</i>.</p>\n         </note>\n\n         <important>\n            <p>Volume and snapshot IDs are changing to a longer length ID format. For more\n            information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p>\n         </important>"
             }
         },
         "com.amazonaws.storagegateway#CreateSnapshotFromVolumeRecoveryPoint": {
@@ -1644,13 +1729,13 @@
                 "SnapshotId": {
                     "target": "com.amazonaws.storagegateway#SnapshotId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore as the new stored\n         volume. Specify this field if you want to create the iSCSI storage volume from a snapshot;\n         otherwise, do not include this field. To list snapshots for your account use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API\n            Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The snapshot ID (e.g., \"snap-1122aabb\") of the snapshot to restore as the new stored\n         volume. Specify this field if you want to create the iSCSI storage volume from a snapshot;\n         otherwise, do not include this field. To list snapshots for your account use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API\n            Reference</i>.</p>"
                     }
                 },
                 "PreserveExistingData": {
                     "target": "com.amazonaws.storagegateway#Boolean2",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to true <code>true</code> if you want to preserve the data on the local disk.\n         Otherwise, set to <code>false</code> to create an empty volume.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Set to <code>true</code> if you want to preserve the data on the local disk. Otherwise,\n         set to <code>false</code> to create an empty volume.</p>\n\n         <p>Valid Values: <code>true</code> | <code>false</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1932,7 +2017,7 @@
                 "TapeBarcodePrefix": {
                     "target": "com.amazonaws.storagegateway#TapeBarcodePrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>A prefix that you append to the barcode of the virtual tape you are creating. This\n         prefix makes the barcode unique.</p>\n\n         <note>\n            <p>The prefix must be 1 to 4 characters in length and must be one of the uppercase\n            letters from A to Z.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>A prefix that you append to the barcode of the virtual tape you are creating. This\n         prefix makes the barcode unique.</p>\n\n         <note>\n            <p>The prefix must be 1-4 characters in length and must be one of the uppercase letters\n            from A to Z.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2551,7 +2636,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the most recent High Availability monitoring test that was\n         performed on the host in a cluster. If a test isn't performed, the status and start\n         time in the response would be null.</p>"
+                "smithy.api#documentation": "<p>Returns information about the most recent high availability monitoring test that was\n         performed on the host in a cluster. If a test isn't performed, the status and start\n         time in the response would be null.</p>"
             }
         },
         "com.amazonaws.storagegateway#DescribeAvailabilityMonitorTestInput": {
@@ -2574,13 +2659,13 @@
                 "Status": {
                     "target": "com.amazonaws.storagegateway#AvailabilityMonitorTestStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the High Availability monitoring test. If a test hasn't been\n         performed, the value of this field is null.</p>"
+                        "smithy.api#documentation": "<p>The status of the high availability monitoring test. If a test hasn't been\n         performed, the value of this field is null.</p>"
                     }
                 },
                 "StartTime": {
                     "target": "com.amazonaws.storagegateway#Time",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time the High Availability monitoring test was started. If a test hasn't been\n         performed, the value of this field is null.</p>"
+                        "smithy.api#documentation": "<p>The time the high availability monitoring test was started. If a test hasn't been\n         performed, the value of this field is null.</p>"
                     }
                 }
             }
@@ -2855,6 +2940,49 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A JSON object containing the following fields:</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#DescribeFileSystemAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#DescribeFileSystemAssociationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#DescribeFileSystemAssociationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the file system association information. This operation is only supported for\n         Amazon FSx file gateways.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#DescribeFileSystemAssociationsInput": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationARNList": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the Amazon Resource Name (ARN) of each file system association to be described.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#DescribeFileSystemAssociationsOutput": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationInfoList": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array containing the <code>FileSystemAssociationInfo</code> data type of each file system association to be described. \n         </p>"
+                    }
+                }
             }
         },
         "com.amazonaws.storagegateway#DescribeGatewayInformation": {
@@ -3585,7 +3713,7 @@
                 "Marker": {
                     "target": "com.amazonaws.storagegateway#Marker",
                     "traits": {
-                        "smithy.api#documentation": "<p>An opaque string which can be used as part of a subsequent DescribeTapes call to\n         retrieve the next page of results.</p>\n\n         <p>If a response does not contain a marker, then there are no more results to be\n         retrieved.</p>"
+                        "smithy.api#documentation": "<p>An opaque string that can be used as part of a subsequent <code>DescribeTapes</code>\n         call to retrieve the next page of results.</p>\n\n         <p>If a response does not contain a marker, then there are no more results to be\n         retrieved.</p>"
                     }
                 }
             },
@@ -3945,6 +4073,55 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>DisableGatewayOutput</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#DisassociateFileSystem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#DisassociateFileSystemInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#DisassociateFileSystemOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociates an Amazon FSx file system from the specified gateway. After the\n         disassociation process finishes, the gateway can no longer access the Amazon FSx file\n         system. This operation is only supported in the Amazon FSx file gateway type.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#DisassociateFileSystemInput": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the file system association to be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForceDelete": {
+                    "target": "com.amazonaws.storagegateway#Boolean2",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this value is set to true, the operation disassociates an Amazon FSx file system\n         immediately. It ends all data uploads to the file system, and the file system association\n         enters the <code>FORCE_DELETING</code> status. If this value is set to false, the Amazon\n         FSx file system does not disassociate until all data is uploaded.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#DisassociateFileSystemOutput": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted file system association.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.storagegateway#Disk": {
@@ -4466,24 +4643,136 @@
                 ]
             }
         },
-        "com.amazonaws.storagegateway#FileShareUser": {
+        "com.amazonaws.storagegateway#FileSystemAssociationARN": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 64
+                    "min": 50,
+                    "max": 500
                 }
             }
         },
-        "com.amazonaws.storagegateway#FileShareUserList": {
+        "com.amazonaws.storagegateway#FileSystemAssociationARNList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.storagegateway#FileShareUser"
+                "target": "com.amazonaws.storagegateway#FileSystemAssociationARN"
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
-                    "max": 100
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#FileSystemAssociationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 10,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#FileSystemAssociationInfo": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the file system association.</p>"
+                    }
+                },
+                "LocationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemLocationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the backend Amazon FSx file system used for storing file data. For\n         information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html\">FileSystem</a> in the <i>Amazon FSx\n               API Reference</i>.</p>"
+                    }
+                },
+                "FileSystemAssociationStatus": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the file system association. \n         Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | \n         <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code>\n         </p>"
+                    }
+                },
+                "AuditDestinationARN": {
+                    "target": "com.amazonaws.storagegateway#AuditDestinationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+                    }
+                },
+                "GatewayARN": {
+                    "target": "com.amazonaws.storagegateway#GatewayARN"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.storagegateway#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair.</p>"
+                    }
+                },
+                "CacheAttributes": {
+                    "target": "com.amazonaws.storagegateway#CacheAttributes"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the object returned by <code>DescribeFileSystemAssociations</code> that\n         describes a created file system association.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#FileSystemAssociationInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.storagegateway#FileSystemAssociationInfo"
+            }
+        },
+        "com.amazonaws.storagegateway#FileSystemAssociationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#FileSystemAssociationSummary": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationId": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the file system association.</p>"
+                    }
+                },
+                "FileSystemAssociationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the file system association.</p>"
+                    }
+                },
+                "FileSystemAssociationStatus": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the file share. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | \n         <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code>\n         </p>"
+                    }
+                },
+                "GatewayARN": {
+                    "target": "com.amazonaws.storagegateway#GatewayARN"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the summary returned by <code>ListFileSystemAssociation</code>, which is a summary\n         of a created file system association.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#FileSystemAssociationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.storagegateway#FileSystemAssociationSummary"
+            }
+        },
+        "com.amazonaws.storagegateway#FileSystemLocationARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 512
                 }
             }
         },
@@ -4993,6 +5282,75 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>ListFileShareOutput</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#ListFileSystemAssociations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#ListFileSystemAssociationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#ListFileSystemAssociationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of <code>FileSystemAssociationSummary</code> objects. Each object contains a\n         summary of a file system association. This operation is only supported for Amazon FSx file\n         gateways.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "NextMarker",
+                    "items": "FileSystemAssociationSummaryList",
+                    "pageSize": "Limit"
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#ListFileSystemAssociationsInput": {
+            "type": "structure",
+            "members": {
+                "GatewayARN": {
+                    "target": "com.amazonaws.storagegateway#GatewayARN"
+                },
+                "Limit": {
+                    "target": "com.amazonaws.storagegateway#PositiveIntObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of file system associations to return in the response. If present, <code>Limit</code> must be an integer with a value greater than zero. Optional.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.storagegateway#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Opaque pagination token returned from a previous <code>ListFileSystemAssociations</code> operation. If present, <code>Marker</code> specifies where to continue the list from after a previous call to <code>ListFileSystemAssociations</code>. Optional.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#ListFileSystemAssociationsOutput": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.storagegateway#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the request includes <code>Marker</code>, the response returns that value in this field.</p>"
+                    }
+                },
+                "NextMarker": {
+                    "target": "com.amazonaws.storagegateway#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a value is present, there are more file system associations to return. \n         In a subsequent request, use <code>NextMarker</code> as the value for <code>Marker</code> to retrieve the next set of file system associations.</p>"
+                    }
+                },
+                "FileSystemAssociationSummaryList": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of information about the Amazon FSx gateway's file system associations.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.storagegateway#ListGateways": {
@@ -5658,13 +6016,13 @@
                 "CacheAttributes": {
                     "target": "com.amazonaws.storagegateway#CacheAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refresh cache information.</p>"
+                        "smithy.api#documentation": "<p>Refresh cache information for the file share.</p>"
                     }
                 },
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share.</p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 }
             },
@@ -5997,7 +6355,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Refreshes the cache for the specified file share. This operation finds objects in the\n         Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the\n         bucket's contents and cached the results. This operation is only supported in the file\n         gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your\n         RefreshCache operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>\n\n         <p>When this API is called, it only initiates the refresh operation. When the API call\n         completes and returns a success code, it doesn't necessarily mean that the file\n         refresh has completed. You should use the refresh-complete notification to determine that\n         the operation has completed before you check for new files on the gateway file share. You\n         can subscribe to be notified through an CloudWatch event when your\n            <code>RefreshCache</code> operation completes.</p>\n\n         <p>Throttle limit: This API is asynchronous so the gateway will accept no more than two\n         refreshes at any time. We recommend using the refresh-complete CloudWatch event\n         notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>\n\n         <p>If you invoke the RefreshCache API when two requests are already being processed, any\n         new request will cause an <code>InvalidGatewayRequestException</code> error because too\n         many requests were sent to the server.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Refreshes the cached inventory of objects for the specified file share. This operation\n         finds objects in the Amazon S3 bucket that were added, removed, or replaced since the\n         gateway last listed the bucket's contents and cached the results. This operation does\n         not import files into the file gateway cache storage. It only updates the cached inventory\n         to reflect changes in the inventory of the objects in the S3 bucket. This operation is only\n         supported in the file gateway type. You can subscribe to be notified through an Amazon\n         CloudWatch event when your <code>RefreshCache</code> operation completes. For more\n         information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>\n\n         <p>When this API is called, it only initiates the refresh operation. When the API call\n         completes and returns a success code, it doesn't necessarily mean that the file\n         refresh has completed. You should use the refresh-complete notification to determine that\n         the operation has completed before you check for new files on the gateway file share. You\n         can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code>\n         operation completes.</p>\n\n         <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two\n         refreshes at any time. We recommend using the refresh-complete CloudWatch event\n         notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>\n\n         <p>If you invoke the RefreshCache API when two requests are already being processed, any\n         new request will cause an <code>InvalidGatewayRequestException</code> error because too\n         many requests were sent to the server.</p>\n\n      \n\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway\n            User Guide</i>.</p>"
             }
         },
         "com.amazonaws.storagegateway#RefreshCacheInput": {
@@ -6381,19 +6739,19 @@
                     }
                 },
                 "AdminUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that have administrator rights to the\n         file share. A group must be prefixed with the @ character. Acceptable formats include:\n            <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and\n            <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to\n            <code>ActiveDirectory</code>.</p>"
                     }
                 },
                 "ValidUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that are allowed to access the file\n         share. A group must be prefixed with the @ character. Acceptable formats include:\n            <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and\n            <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to\n            <code>ActiveDirectory</code>.</p>"
                     }
                 },
                 "InvalidUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the\n         file share. A group must be prefixed with the @ character. Acceptable formats include:\n            <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and\n            <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to\n            <code>ActiveDirectory</code>.</p>"
                     }
@@ -6401,7 +6759,7 @@
                 "AuditDestinationARN": {
                     "target": "com.amazonaws.storagegateway#AuditDestinationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
                     }
                 },
                 "Authentication": {
@@ -6428,13 +6786,13 @@
                 "CacheAttributes": {
                     "target": "com.amazonaws.storagegateway#CacheAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refresh cache information.</p>"
+                        "smithy.api#documentation": "<p>Refresh cache information for the file share.</p>"
                     }
                 },
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share.</p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 }
             },
@@ -6815,6 +7173,9 @@
                     "target": "com.amazonaws.storagegateway#AssignTapePool"
                 },
                 {
+                    "target": "com.amazonaws.storagegateway#AssociateFileSystem"
+                },
+                {
                     "target": "com.amazonaws.storagegateway#AttachVolume"
                 },
                 {
@@ -6899,6 +7260,9 @@
                     "target": "com.amazonaws.storagegateway#DescribeChapCredentials"
                 },
                 {
+                    "target": "com.amazonaws.storagegateway#DescribeFileSystemAssociations"
+                },
+                {
                     "target": "com.amazonaws.storagegateway#DescribeGatewayInformation"
                 },
                 {
@@ -6944,6 +7308,9 @@
                     "target": "com.amazonaws.storagegateway#DisableGateway"
                 },
                 {
+                    "target": "com.amazonaws.storagegateway#DisassociateFileSystem"
+                },
+                {
                     "target": "com.amazonaws.storagegateway#JoinDomain"
                 },
                 {
@@ -6951,6 +7318,9 @@
                 },
                 {
                     "target": "com.amazonaws.storagegateway#ListFileShares"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#ListFileSystemAssociations"
                 },
                 {
                     "target": "com.amazonaws.storagegateway#ListGateways"
@@ -7020,6 +7390,9 @@
                 },
                 {
                     "target": "com.amazonaws.storagegateway#UpdateChapCredentials"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#UpdateFileSystemAssociation"
                 },
                 {
                     "target": "com.amazonaws.storagegateway#UpdateGatewayInformation"
@@ -7843,6 +8216,70 @@
                 "smithy.api#documentation": "<p>A JSON object containing the following fields:</p>"
             }
         },
+        "com.amazonaws.storagegateway#UpdateFileSystemAssociation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.storagegateway#UpdateFileSystemAssociationInput"
+            },
+            "output": {
+                "target": "com.amazonaws.storagegateway#UpdateFileSystemAssociationOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.storagegateway#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.storagegateway#InvalidGatewayRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a file system association. This operation is only supported in the Amazon FSx\n         file gateway type.</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#UpdateFileSystemAssociationInput": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the file system association that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserName": {
+                    "target": "com.amazonaws.storagegateway#DomainUserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name of the user credential that has permission to access the root share D$ of\n         the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin\n         user group.</p>"
+                    }
+                },
+                "Password": {
+                    "target": "com.amazonaws.storagegateway#DomainUserPassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password of the user credential.</p>"
+                    }
+                },
+                "AuditDestinationARN": {
+                    "target": "com.amazonaws.storagegateway#AuditDestinationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+                    }
+                },
+                "CacheAttributes": {
+                    "target": "com.amazonaws.storagegateway#CacheAttributes"
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#UpdateFileSystemAssociationOutput": {
+            "type": "structure",
+            "members": {
+                "FileSystemAssociationARN": {
+                    "target": "com.amazonaws.storagegateway#FileSystemAssociationARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the updated file system association.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.storagegateway#UpdateGatewayInformation": {
             "type": "operation",
             "input": {
@@ -8121,13 +8558,13 @@
                 "CacheAttributes": {
                     "target": "com.amazonaws.storagegateway#CacheAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refresh cache information.</p>"
+                        "smithy.api#documentation": "<p>specifies refresh cache information for the file share.</p>"
                     }
                 },
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share.</p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 }
             },
@@ -8234,19 +8671,19 @@
                     }
                 },
                 "AdminUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that have administrator rights to the\n         file share. A group must be prefixed with the @ character. Acceptable formats include:\n            <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and\n            <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to\n            <code>ActiveDirectory</code>.</p>"
                     }
                 },
                 "ValidUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that are allowed to access the file\n         share. A group must be prefixed with the @ character. Acceptable formats include:\n            <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and\n            <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to\n            <code>ActiveDirectory</code>.</p>"
                     }
                 },
                 "InvalidUserList": {
-                    "target": "com.amazonaws.storagegateway#FileShareUserList",
+                    "target": "com.amazonaws.storagegateway#UserList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the\n         file share. A group must be prefixed with the @ character. Acceptable formats include:\n            <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and\n            <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to\n            <code>ActiveDirectory</code>.</p>"
                     }
@@ -8254,7 +8691,7 @@
                 "AuditDestinationARN": {
                     "target": "com.amazonaws.storagegateway#AuditDestinationARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
                     }
                 },
                 "CaseSensitivity": {
@@ -8272,13 +8709,13 @@
                 "CacheAttributes": {
                     "target": "com.amazonaws.storagegateway#CacheAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Refresh cache information.</p>"
+                        "smithy.api#documentation": "<p>Specifies refresh cache information for the file share.</p>"
                     }
                 },
                 "NotificationPolicy": {
                     "target": "com.amazonaws.storagegateway#NotificationPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The notification policy of the file share.</p>"
+                        "smithy.api#documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls\n         the number of seconds to wait after the last point in time a client wrote to a file before\n         generating an <code>ObjectUploaded</code> notification. Because clients can make many small\n         writes to files, it's best to set this parameter for as long as possible to avoid\n         generating multiple notifications for the same file in a small time period.</p>\n\n         <note>\n            <p>\n               <code>SettlingTimeInSeconds</code> has no effect on the timing of the object\n            uploading to Amazon S3, only the timing of the notification.</p>\n         </note>\n\n         <p>The following example sets <code>NotificationPolicy</code> on with\n            <code>SettlingTimeInSeconds</code> set to 60.</p>\n\n         <p>\n            <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code>\n         </p>\n\n         <p>The following example sets <code>NotificationPolicy</code> off.</p>\n\n         <p>\n            <code>{}</code>\n         </p>"
                     }
                 }
             },
@@ -8518,6 +8955,27 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>UpdateVTLDeviceTypeOutput</p>"
+            }
+        },
+        "com.amazonaws.storagegateway#UserList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.storagegateway#UserListUser"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.storagegateway#UserListUser": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
             }
         },
         "com.amazonaws.storagegateway#VTLDevice": {

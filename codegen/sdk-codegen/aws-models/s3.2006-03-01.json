@@ -1923,13 +1923,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "CreateBucketConfiguration": {
-                    "target": "com.amazonaws.s3#CreateBucketConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the bucket.</p>",
-                        "smithy.api#httpPayload": {}
-                    }
-                },
                 "GrantFullControl": {
                     "target": "com.amazonaws.s3#GrantFullControl",
                     "traits": {
@@ -1970,6 +1963,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether you want S3 Object Lock to be enabled for the new bucket.</p>",
                         "smithy.api#httpHeader": "x-amz-bucket-object-lock-enabled"
+                    }
+                },
+                "CreateBucketConfiguration": {
+                    "target": "com.amazonaws.s3#CreateBucketConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the bucket.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "CreateBucketConfiguration"
                     }
                 }
             }
@@ -3112,14 +3113,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "Delete": {
-                    "target": "com.amazonaws.s3#Delete",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for the request.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "MFA": {
                     "target": "com.amazonaws.s3#MFA",
                     "traits": {
@@ -3145,6 +3138,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "Delete": {
+                    "target": "com.amazonaws.s3#Delete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the request.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Delete"
                     }
                 }
             }
@@ -9163,19 +9165,20 @@
                         "smithy.api#required": {}
                     }
                 },
-                "AccelerateConfiguration": {
-                    "target": "com.amazonaws.s3#AccelerateConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for setting the transfer acceleration state.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "AccelerateConfiguration": {
+                    "target": "com.amazonaws.s3#AccelerateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for setting the transfer acceleration state.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "AccelerateConfiguration"
                     }
                 }
             }
@@ -9203,13 +9206,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The canned ACL to apply to the bucket.</p>",
                         "smithy.api#httpHeader": "x-amz-acl"
-                    }
-                },
-                "AccessControlPolicy": {
-                    "target": "com.amazonaws.s3#AccessControlPolicy",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>",
-                        "smithy.api#httpPayload": {}
                     }
                 },
                 "Bucket": {
@@ -9268,6 +9264,14 @@
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
+                },
+                "AccessControlPolicy": {
+                    "target": "com.amazonaws.s3#AccessControlPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "AccessControlPolicy"
+                    }
                 }
             }
         },
@@ -9304,19 +9308,20 @@
                         "smithy.api#required": {}
                     }
                 },
-                "AnalyticsConfiguration": {
-                    "target": "com.amazonaws.s3#AnalyticsConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The configuration and any analyses for the analytics filter.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "AnalyticsConfiguration": {
+                    "target": "com.amazonaws.s3#AnalyticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration and any analyses for the analytics filter.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "AnalyticsConfiguration"
                     }
                 }
             }
@@ -9347,14 +9352,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "CORSConfiguration": {
-                    "target": "com.amazonaws.s3#CORSConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html\">Enabling Cross-Origin Resource\n            Sharing</a> in the <i>Amazon S3 User Guide</i>.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ContentMD5": {
                     "target": "com.amazonaws.s3#ContentMD5",
                     "traits": {
@@ -9367,6 +9364,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "CORSConfiguration": {
+                    "target": "com.amazonaws.s3#CORSConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the cross-origin access configuration for objects in an Amazon S3 bucket. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/cors.html\">Enabling Cross-Origin Resource\n            Sharing</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CORSConfiguration"
                     }
                 }
             }
@@ -9404,18 +9410,19 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "ServerSideEncryptionConfiguration": {
-                    "target": "com.amazonaws.s3#ServerSideEncryptionConfiguration",
-                    "traits": {
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "ServerSideEncryptionConfiguration": {
+                    "target": "com.amazonaws.s3#ServerSideEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "ServerSideEncryptionConfiguration"
                     }
                 }
             }
@@ -9458,7 +9465,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Container for S3 Intelligent-Tiering configuration.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "IntelligentTieringConfiguration"
                     }
                 }
             }
@@ -9496,19 +9504,20 @@
                         "smithy.api#required": {}
                     }
                 },
-                "InventoryConfiguration": {
-                    "target": "com.amazonaws.s3#InventoryConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies the inventory configuration.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "InventoryConfiguration": {
+                    "target": "com.amazonaws.s3#InventoryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the inventory configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "InventoryConfiguration"
                     }
                 }
             }
@@ -9539,18 +9548,19 @@
                         "smithy.api#required": {}
                     }
                 },
-                "LifecycleConfiguration": {
-                    "target": "com.amazonaws.s3#BucketLifecycleConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for lifecycle rules. You can add as many as 1,000 rules.</p>",
-                        "smithy.api#httpPayload": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "LifecycleConfiguration": {
+                    "target": "com.amazonaws.s3#BucketLifecycleConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for lifecycle rules. You can add as many as 1,000 rules.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "LifecycleConfiguration"
                     }
                 }
             }
@@ -9581,14 +9591,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "BucketLoggingStatus": {
-                    "target": "com.amazonaws.s3#BucketLoggingStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for logging status information.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ContentMD5": {
                     "target": "com.amazonaws.s3#ContentMD5",
                     "traits": {
@@ -9601,6 +9603,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "BucketLoggingStatus": {
+                    "target": "com.amazonaws.s3#BucketLoggingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for logging status information.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "BucketLoggingStatus"
                     }
                 }
             }
@@ -9638,19 +9649,20 @@
                         "smithy.api#required": {}
                     }
                 },
-                "MetricsConfiguration": {
-                    "target": "com.amazonaws.s3#MetricsConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies the metrics configuration.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "MetricsConfiguration": {
+                    "target": "com.amazonaws.s3#MetricsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the metrics configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "MetricsConfiguration"
                     }
                 }
             }
@@ -9680,18 +9692,19 @@
                         "smithy.api#required": {}
                     }
                 },
-                "NotificationConfiguration": {
-                    "target": "com.amazonaws.s3#NotificationConfiguration",
-                    "traits": {
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "NotificationConfiguration": {
+                    "target": "com.amazonaws.s3#NotificationConfiguration",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "NotificationConfiguration"
                     }
                 }
             }
@@ -9741,7 +9754,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>OwnershipControls</code> (BucketOwnerPreferred or ObjectWriter) that you want\n         to apply to this Amazon S3 bucket.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "OwnershipControls"
                     }
                 }
             }
@@ -9836,13 +9850,6 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "ReplicationConfiguration": {
-                    "target": "com.amazonaws.s3#ReplicationConfiguration",
-                    "traits": {
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Token": {
                     "target": "com.amazonaws.s3#ObjectLockToken",
                     "traits": {
@@ -9855,6 +9862,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "ReplicationConfiguration": {
+                    "target": "com.amazonaws.s3#ReplicationConfiguration",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "ReplicationConfiguration"
                     }
                 }
             }
@@ -9892,19 +9907,20 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "RequestPaymentConfiguration": {
-                    "target": "com.amazonaws.s3#RequestPaymentConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for Payer.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "RequestPaymentConfiguration": {
+                    "target": "com.amazonaws.s3#RequestPaymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for Payer.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "RequestPaymentConfiguration"
                     }
                 }
             }
@@ -9942,19 +9958,20 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "Tagging": {
-                    "target": "com.amazonaws.s3#Tagging",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for the <code>TagSet</code> and <code>Tag</code> elements.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "Tagging": {
+                    "target": "com.amazonaws.s3#Tagging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the <code>TagSet</code> and <code>Tag</code> elements.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Tagging"
                     }
                 }
             }
@@ -9999,19 +10016,20 @@
                         "smithy.api#httpHeader": "x-amz-mfa"
                     }
                 },
-                "VersioningConfiguration": {
-                    "target": "com.amazonaws.s3#VersioningConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for setting the versioning state.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "VersioningConfiguration": {
+                    "target": "com.amazonaws.s3#VersioningConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for setting the versioning state.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "VersioningConfiguration"
                     }
                 }
             }
@@ -10049,19 +10067,20 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "WebsiteConfiguration": {
-                    "target": "com.amazonaws.s3#WebsiteConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for the request.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "WebsiteConfiguration": {
+                    "target": "com.amazonaws.s3#WebsiteConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the request.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "WebsiteConfiguration"
                     }
                 }
             }
@@ -10125,13 +10144,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The canned ACL to apply to the object. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL\">Canned ACL</a>.</p>",
                         "smithy.api#httpHeader": "x-amz-acl"
-                    }
-                },
-                "AccessControlPolicy": {
-                    "target": "com.amazonaws.s3#AccessControlPolicy",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>",
-                        "smithy.api#httpPayload": {}
                     }
                 },
                 "Bucket": {
@@ -10211,6 +10223,14 @@
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
                     }
+                },
+                "AccessControlPolicy": {
+                    "target": "com.amazonaws.s3#AccessControlPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the elements that set the ACL permissions for an object per grantee.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "AccessControlPolicy"
+                    }
                 }
             }
         },
@@ -10262,13 +10282,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "LegalHold": {
-                    "target": "com.amazonaws.s3#ObjectLockLegalHold",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container element for the Legal Hold configuration you want to apply to the specified\n         object.</p>",
-                        "smithy.api#httpPayload": {}
-                    }
-                },
                 "RequestPayer": {
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
@@ -10294,6 +10307,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "LegalHold": {
+                    "target": "com.amazonaws.s3#ObjectLockLegalHold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container element for the Legal Hold configuration you want to apply to the specified\n         object.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "LegalHold"
                     }
                 }
             }
@@ -10338,13 +10359,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "ObjectLockConfiguration": {
-                    "target": "com.amazonaws.s3#ObjectLockConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Object Lock configuration that you want to apply to the specified bucket.</p>",
-                        "smithy.api#httpPayload": {}
-                    }
-                },
                 "RequestPayer": {
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
@@ -10370,6 +10384,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "ObjectLockConfiguration": {
+                    "target": "com.amazonaws.s3#ObjectLockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Object Lock configuration that you want to apply to the specified bucket.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "ObjectLockConfiguration"
                     }
                 }
             }
@@ -10726,13 +10748,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "Retention": {
-                    "target": "com.amazonaws.s3#ObjectLockRetention",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The container element for the Object Retention configuration.</p>",
-                        "smithy.api#httpPayload": {}
-                    }
-                },
                 "RequestPayer": {
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
@@ -10765,6 +10780,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "Retention": {
+                    "target": "com.amazonaws.s3#ObjectLockRetention",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container element for the Object Retention configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "Retention"
                     }
                 }
             }
@@ -10832,14 +10855,6 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "Tagging": {
-                    "target": "com.amazonaws.s3#Tagging",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Container for the <code>TagSet</code> and <code>Tag</code> elements</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
@@ -10851,6 +10866,15 @@
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
                         "smithy.api#httpHeader": "x-amz-request-payer"
+                    }
+                },
+                "Tagging": {
+                    "target": "com.amazonaws.s3#Tagging",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container for the <code>TagSet</code> and <code>Tag</code> elements</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Tagging"
                     }
                 }
             }
@@ -10888,19 +10912,20 @@
                         "smithy.api#httpHeader": "Content-MD5"
                     }
                 },
-                "PublicAccessBlockConfiguration": {
-                    "target": "com.amazonaws.s3#PublicAccessBlockConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3\n         bucket. You can enable the configuration options in any combination. For more information\n         about when Amazon S3 considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the <i>Amazon S3 User Guide</i>.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "ExpectedBucketOwner": {
                     "target": "com.amazonaws.s3#AccountId",
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "PublicAccessBlockConfiguration": {
+                    "target": "com.amazonaws.s3#PublicAccessBlockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to this Amazon S3\n         bucket. You can enable the configuration options in any combination. For more information\n         about when Amazon S3 considers a bucket or object public, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status\">The Meaning of \"Public\"</a> in the <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "PublicAccessBlockConfiguration"
                     }
                 }
             }
@@ -11463,12 +11488,6 @@
                         "smithy.api#httpQuery": "versionId"
                     }
                 },
-                "RestoreRequest": {
-                    "target": "com.amazonaws.s3#RestoreRequest",
-                    "traits": {
-                        "smithy.api#httpPayload": {}
-                    }
-                },
                 "RequestPayer": {
                     "target": "com.amazonaws.s3#RequestPayer",
                     "traits": {
@@ -11480,6 +11499,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the expected bucket owner. If the bucket is owned by a different account, the request will fail with an HTTP <code>403 (Access Denied)</code> error.</p>",
                         "smithy.api#httpHeader": "x-amz-expected-bucket-owner"
+                    }
+                },
+                "RestoreRequest": {
+                    "target": "com.amazonaws.s3#RestoreRequest",
+                    "traits": {
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "RestoreRequest"
                     }
                 }
             }
