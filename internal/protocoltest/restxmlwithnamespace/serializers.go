@@ -157,6 +157,11 @@ func awsRestxml_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalarPr
 	if v.Nested != nil {
 		rootAttr := []smithyxml.Attr{}
 		rootAttr = append(rootAttr, smithyxml.NewNamespaceAttribute("xsi", "https://example.com"))
+		if v.Nested.AttrField != nil {
+			var av string
+			av = *v.Nested.AttrField
+			rootAttr = append(rootAttr, smithyxml.NewAttribute("xsi:someName", av))
+		}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
 				Local: "Nested",
