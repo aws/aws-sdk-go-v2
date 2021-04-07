@@ -22,8 +22,6 @@ import (
 )
 
 func TestClient_SimpleScalarProperties_awsRestxmlSerialize(t *testing.T) {
-	t.Skip("disabled test aws.protocoltests.restxml.xmlns#RestXmlWithNamespace aws.protocoltests.restxml.xmlns#SimpleScalarProperties")
-
 	cases := map[string]struct {
 		Params        *SimpleScalarPropertiesInput
 		ExpectMethod  string

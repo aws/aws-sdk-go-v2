@@ -9030,6 +9030,11 @@ func awsRestxml_serializeDocumentGrant(v *types.Grant, value smithyxml.Value) er
 	defer value.Close()
 	if v.Grantee != nil {
 		rootAttr := []smithyxml.Attr{}
+		if len(v.Grantee.Type) > 0 {
+			var av string
+			av = string(v.Grantee.Type)
+			rootAttr = append(rootAttr, smithyxml.NewAttribute("xsi:type", av))
+		}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
 				Local: "Grantee",
@@ -11605,6 +11610,11 @@ func awsRestxml_serializeDocumentTargetGrant(v *types.TargetGrant, value smithyx
 	defer value.Close()
 	if v.Grantee != nil {
 		rootAttr := []smithyxml.Attr{}
+		if len(v.Grantee.Type) > 0 {
+			var av string
+			av = string(v.Grantee.Type)
+			rootAttr = append(rootAttr, smithyxml.NewAttribute("xsi:type", av))
+		}
 		root := smithyxml.StartElement{
 			Name: smithyxml.Name{
 				Local: "Grantee",
