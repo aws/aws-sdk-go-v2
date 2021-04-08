@@ -704,13 +704,6 @@
                         "smithy.api#required": {}
                     }
                 },
-                "CreateBucketConfiguration": {
-                    "target": "com.amazonaws.s3control#CreateBucketConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the bucket.</p>\n         <note>\n            <p>This is not supported by Amazon S3 on Outposts buckets.</p>\n         </note>",
-                        "smithy.api#httpPayload": {}
-                    }
-                },
                 "GrantFullControl": {
                     "target": "com.amazonaws.s3control#GrantFullControl",
                     "traits": {
@@ -758,6 +751,14 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the Outposts where the bucket is being created.</p>\n         <note>\n            <p>This is required by Amazon S3 on Outposts buckets.</p> \n         </note>",
                         "smithy.api#httpHeader": "x-amz-outpost-id"
+                    }
+                },
+                "CreateBucketConfiguration": {
+                    "target": "com.amazonaws.s3control#CreateBucketConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the bucket.</p>\n         <note>\n            <p>This is not supported by Amazon S3 on Outposts buckets.</p>\n         </note>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "CreateBucketConfiguration"
                     }
                 }
             }
@@ -4361,7 +4362,8 @@
                     "target": "com.amazonaws.s3control#LifecycleConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Container for lifecycle rules. You can add as many as 1,000 rules.</p>",
-                        "smithy.api#httpPayload": {}
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#xmlName": "LifecycleConfiguration"
                     }
                 }
             }
@@ -4463,7 +4465,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p></p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Tagging"
                     }
                 }
             }
@@ -4555,14 +4558,6 @@
         "com.amazonaws.s3control#PutPublicAccessBlockRequest": {
             "type": "structure",
             "members": {
-                "PublicAccessBlockConfiguration": {
-                    "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to the specified AWS\n         account.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
@@ -4570,6 +4565,15 @@
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
+                    }
+                },
+                "PublicAccessBlockConfiguration": {
+                    "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to the specified AWS\n         account.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "PublicAccessBlockConfiguration"
                     }
                 }
             }

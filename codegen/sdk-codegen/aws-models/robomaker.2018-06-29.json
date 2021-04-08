@@ -2455,8 +2455,24 @@
                         "name": "DownloadConditionFailed"
                     },
                     {
+                        "value": "BadLambdaAssociated",
+                        "name": "BadLambdaAssociated"
+                    },
+                    {
                         "value": "InternalServerError",
                         "name": "InternalServerError"
+                    },
+                    {
+                        "value": "RobotApplicationDoesNotExist",
+                        "name": "RobotApplicationDoesNotExist"
+                    },
+                    {
+                        "value": "DeploymentFleetDoesNotExist",
+                        "name": "DeploymentFleetDoesNotExist"
+                    },
+                    {
+                        "value": "FleetDeploymentTimeout",
+                        "name": "FleetDeploymentTimeout"
                     }
                 ]
             }
@@ -3860,6 +3876,21 @@
                     "max": 1024
                 },
                 "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.robomaker#ExitBehavior": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FAIL",
+                        "name": "FAIL"
+                    },
+                    {
+                        "value": "RESTART",
+                        "name": "RESTART"
+                    }
+                ]
             }
         },
         "com.amazonaws.robomaker#FailedAt": {
@@ -5688,6 +5719,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A Boolean indicating whether to use default upload configurations. By default,\n            <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application\n         terminates and all ROS topics will be recorded.</p>\n         <p>If you set this value, you must specify an <code>outputLocation</code>. </p>"
                     }
+                },
+                "tools": {
+                    "target": "com.amazonaws.robomaker#Tools",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about tools configured for the robot application.</p>"
+                    }
+                },
+                "useDefaultTools": {
+                    "target": "com.amazonaws.robomaker#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default robot application tools. \n        The default tools are rviz, rqt, terminal and rosbag record. \n        The default is <code>False</code>.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -6108,6 +6151,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A Boolean indicating whether to use default upload configurations. By default,\n            <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application\n         terminates and all ROS topics will be recorded.</p>\n         <p>If you set this value, you must specify an <code>outputLocation</code>. </p>"
                     }
+                },
+                "tools": {
+                    "target": "com.amazonaws.robomaker#Tools",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about tools configured for the simulation application.</p>"
+                    }
+                },
+                "useDefaultTools": {
+                    "target": "com.amazonaws.robomaker#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean indicating whether to use default simulation application tools. \n        The default tools are rviz, rqt, terminal and rosbag record.\n        The default is <code>False</code>.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -6449,6 +6504,14 @@
                         "name": "SimulationApplicationCrash"
                     },
                     {
+                        "value": "RobotApplicationHealthCheckFailure",
+                        "name": "RobotApplicationHealthCheckFailure"
+                    },
+                    {
+                        "value": "SimulationApplicationHealthCheckFailure",
+                        "name": "SimulationApplicationHealthCheckFailure"
+                    },
+                    {
                         "value": "BadPermissionsRobotApplication",
                         "name": "BadPermissionsRobotApplication"
                     },
@@ -6491,6 +6554,10 @@
                     {
                         "value": "InvalidS3Resource",
                         "name": "InvalidS3Resource"
+                    },
+                    {
+                        "value": "ThrottlingError",
+                        "name": "ThrottlingError"
                     },
                     {
                         "value": "LimitExceeded",
@@ -7306,6 +7373,68 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.robomaker#Tool": {
+            "type": "structure",
+            "members": {
+                "streamUI": {
+                    "target": "com.amazonaws.robomaker#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean indicating whether a streaming session will be configured for the tool.\n         If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with\n         the tool as it is running in the simulation. It must have a graphical user interface. \n         The default is <code>False</code>.\n      </p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.robomaker#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tool.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "command": {
+                    "target": "com.amazonaws.robomaker#UnrestrictedCommand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Command-line arguments for the tool. It must include the tool executable name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "streamOutputToCloudWatch": {
+                    "target": "com.amazonaws.robomaker#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Boolean indicating whether logs will be recorded in CloudWatch for the tool.\n      The default is <code>False</code>.\n      </p>"
+                    }
+                },
+                "exitBehavior": {
+                    "target": "com.amazonaws.robomaker#ExitBehavior",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Exit behavior determines what happens when your tool quits running. \n        <code>RESTART</code> will cause your tool to be restarted. <code>FAIL</code>\n        will cause your job to exit. The default is <code>RESTART</code>.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a tool. Tools are used in a simulation job.</p>"
+            }
+        },
+        "com.amazonaws.robomaker#Tools": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.robomaker#Tool"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.robomaker#UnrestrictedCommand": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
         "com.amazonaws.robomaker#UntagResource": {
             "type": "operation",
             "input": {
@@ -7738,7 +7867,7 @@
                 "uploadBehavior": {
                     "target": "com.amazonaws.robomaker#UploadBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how to upload the files:</p>\n         <dl>\n            <dt>UPLOAD_ON_TERMINATE</dt>\n            <dd>\n               <p>Matching files are uploaded once the simulation enters the\n                     <code>TERMINATING</code> state. Matching files are not uploaded until all of\n                  your code (including tools) have stopped. </p>\n               <p>If there is a problem uploading a file, the upload is retried. If problems\n                  persist, no further upload attempts will be made.</p>\n            </dd>\n            <dt>UPLOAD_ROLLING_AUTO_REMOVE</dt>\n            <dd>\n               <p>Matching files are uploaded as they are created. They are deleted after they\n                  are uploaded. The specified path is checked every 5 seconds. A final check is made\n                  when all of your code (including tools) have stopped. </p>\n            </dd>\n         </dl>",
+                        "smithy.api#documentation": "<p>Specifies when to upload the files:</p>\n         <dl>\n            <dt>UPLOAD_ON_TERMINATE</dt>\n            <dd>\n               <p>Matching files are uploaded once the simulation enters the\n                     <code>TERMINATING</code> state. Matching files are not uploaded until all of\n                  your code (including tools) have stopped. </p>\n               <p>If there is a problem uploading a file, the upload is retried. If problems\n                  persist, no further upload attempts will be made.</p>\n            </dd>\n            <dt>UPLOAD_ROLLING_AUTO_REMOVE</dt>\n            <dd>\n               <p>Matching files are uploaded as they are created. They are deleted after they\n                  are uploaded. The specified path is checked every 5 seconds. A final check is made\n                  when all of your code (including tools) have stopped. </p>\n            </dd>\n         </dl>",
                         "smithy.api#required": {}
                     }
                 }

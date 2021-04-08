@@ -1213,6 +1213,98 @@
                 }
             }
         },
+        "com.amazonaws.appstream#CreateUpdatedImage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.appstream#CreateUpdatedImageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.appstream#CreateUpdatedImageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.appstream#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#IncompatibleImageException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#InvalidAccountStatusException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#OperationNotPermittedException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.appstream#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software.</p>\n        \n        <p>For more information, see the \"Update an Image by Using\n            Managed AppStream 2.0 Image Updates\" section in <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html\">Administer Your AppStream 2.0 Images</a>, in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.appstream#CreateUpdatedImageRequest": {
+            "type": "structure",
+            "members": {
+                "existingImageName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the image to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "newImageName": {
+                    "target": "com.amazonaws.appstream#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the new image. The name must be unique within the AWS account and Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "newImageDescription": {
+                    "target": "com.amazonaws.appstream#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description to display for the new image.</p>"
+                    }
+                },
+                "newImageDisplayName": {
+                    "target": "com.amazonaws.appstream#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name to display for the new image.</p>"
+                    }
+                },
+                "newImageTags": {
+                    "target": "com.amazonaws.appstream#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to associate with the new image. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=. </p>\n        <p>Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters: </p>\n        <p>_ . : / = + \\ - @</p>\n        <p>If you do not specify a value, the value is set to an empty string.</p>\n        <p>For more information about tags, see <a href=\"https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html\">Tagging Your Resources</a> in the <i>Amazon AppStream 2.0 Administration Guide</i>.</p>"
+                    }
+                },
+                "dryRun": {
+                    "target": "com.amazonaws.appstream#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to <code>true</code>, AppStream 2.0 displays whether image updates are available. If this value is set to <code>false</code>, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.appstream#CreateUpdatedImageResult": {
+            "type": "structure",
+            "members": {
+                "image": {
+                    "target": "com.amazonaws.appstream#Image"
+                },
+                "canUpdateImage": {
+                    "target": "com.amazonaws.appstream#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether a new image can be created.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.appstream#CreateUsageReportSubscription": {
             "type": "operation",
             "input": {
@@ -3132,6 +3224,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The permissions to provide to the destination AWS account for the specified image.</p>"
                     }
+                },
+                "ImageErrors": {
+                    "target": "com.amazonaws.appstream#ResourceErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the errors that are returned when a new image can't be created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3297,6 +3395,14 @@
                     {
                         "value": "FAILED",
                         "name": "FAILED"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "PENDING_QUALIFICATION",
+                        "name": "PENDING_QUALIFICATION"
                     }
                 ]
             }
@@ -3444,7 +3550,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The image does not support storage connectors.</p>",
+                "smithy.api#documentation": "<p>The image can't be updated because it's not compatible for updates.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -3809,6 +3915,9 @@
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateStreamingURL"
+                },
+                {
+                    "target": "com.amazonaws.appstream#CreateUpdatedImage"
                 },
                 {
                     "target": "com.amazonaws.appstream#CreateUsageReportSubscription"

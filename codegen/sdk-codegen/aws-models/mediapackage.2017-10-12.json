@@ -1530,6 +1530,30 @@
                 "smithy.api#documentation": "Configure egress access logging."
             }
         },
+        "com.amazonaws.mediapackage#EncryptionContractConfiguration": {
+            "type": "structure",
+            "members": {
+                "PresetSpeke20Audio": {
+                    "target": "com.amazonaws.mediapackage#PresetSpeke20Audio",
+                    "traits": {
+                        "smithy.api#documentation": "A collection of audio encryption presets.",
+                        "smithy.api#jsonName": "presetSpeke20Audio",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PresetSpeke20Video": {
+                    "target": "com.amazonaws.mediapackage#PresetSpeke20Video",
+                    "traits": {
+                        "smithy.api#documentation": "A collection of video encryption presets.",
+                        "smithy.api#jsonName": "presetSpeke20Video",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use encryptionContractConfiguration to configure one or more content encryption keys for your endpoints that use SPEKE 2.0. \nThe encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. \nTo configure the encryption contract, specify which audio and video encryption presets to use.\nNote the following considerations when using encryptionContractConfiguration:\nencryptionContractConfiguration can be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.\nYou must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0."
+            }
+        },
         "com.amazonaws.mediapackage#EncryptionMethod": {
             "type": "string",
             "traits": {
@@ -2590,6 +2614,28 @@
                 ]
             }
         },
+        "com.amazonaws.mediapackage#PresetSpeke20Audio": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PRESET-AUDIO-1",
+                        "name": "PRESET_AUDIO_1"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediapackage#PresetSpeke20Video": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PRESET-VIDEO-1",
+                        "name": "PRESET_VIDEO_1"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediapackage#Profile": {
             "type": "string",
             "traits": {
@@ -2897,6 +2943,12 @@
                     "traits": {
                         "smithy.api#documentation": "An Amazon Resource Name (ARN) of a Certificate Manager certificate\nthat MediaPackage will use for enforcing secure end-to-end data\ntransfer with the key provider service.",
                         "smithy.api#jsonName": "certificateArn"
+                    }
+                },
+                "EncryptionContractConfiguration": {
+                    "target": "com.amazonaws.mediapackage#EncryptionContractConfiguration",
+                    "traits": {
+                        "smithy.api#jsonName": "encryptionContractConfiguration"
                     }
                 },
                 "ResourceId": {

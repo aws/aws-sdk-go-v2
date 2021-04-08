@@ -241,20 +241,38 @@
             "type": "structure",
             "members": {
                 "Marketo": {
-                    "target": "com.amazonaws.customerprofiles#MarketoConnectorOperator"
+                    "target": "com.amazonaws.customerprofiles#MarketoConnectorOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to be performed on the provided Marketo source fields.</p>"
+                    }
                 },
                 "S3": {
-                    "target": "com.amazonaws.customerprofiles#S3ConnectorOperator"
+                    "target": "com.amazonaws.customerprofiles#S3ConnectorOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to be performed on the provided Amazon S3 source fields.</p>"
+                    }
                 },
                 "Salesforce": {
-                    "target": "com.amazonaws.customerprofiles#SalesforceConnectorOperator"
+                    "target": "com.amazonaws.customerprofiles#SalesforceConnectorOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to be performed on the provided Salesforce source fields.</p>"
+                    }
                 },
                 "ServiceNow": {
-                    "target": "com.amazonaws.customerprofiles#ServiceNowConnectorOperator"
+                    "target": "com.amazonaws.customerprofiles#ServiceNowConnectorOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to be performed on the provided ServiceNow source fields.</p>"
+                    }
                 },
                 "Zendesk": {
-                    "target": "com.amazonaws.customerprofiles#ZendeskConnectorOperator"
+                    "target": "com.amazonaws.customerprofiles#ZendeskConnectorOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to be performed on the provided Zendesk source fields.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The operation to be performed on the provided source fields.</p>"
             }
         },
         "com.amazonaws.customerprofiles#ConnectorProfileName": {
@@ -293,7 +311,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon\n         Connect instances can be associated with one domain.</p>",
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can\n         be associated with one domain.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}",
@@ -328,7 +346,7 @@
                 "DeadLetterQueueUrl": {
                     "target": "com.amazonaws.customerprofiles#sqsQueueUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications. You must set up a policy on the\n         DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to\n         send messages to the DeadLetterQueue.</p>"
+                        "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications. You must set up a policy on the\n         DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send\n         messages to the DeadLetterQueue.</p>"
                     }
                 },
                 "Tags": {
@@ -676,7 +694,7 @@
                     "name": "profile"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides\n         information about the Amazon Connect Customer Profiles API, including supported operations,\n         data types, parameters, and schemas.</p>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center\n         that has pre-built connectors powered by AppFlow that make it easy to combine customer\n         information from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and\n         your enterprise resource planning (ERP), with contact history from your Amazon Connect\n         contact center.</p>\n         <p>If you're new to Amazon Connect, you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html\">Amazon Connect Administrator Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <p>Welcome to the Amazon Connect Customer Profiles API Reference. This guide provides information\n         about the Amazon Connect Customer Profiles API, including supported operations, data types,\n         parameters, and schemas.</p>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact center that has\n         pre-built connectors powered by AppFlow that make it easy to combine customer information\n         from third party applications, such as Salesforce (CRM), ServiceNow (ITSM), and your\n         enterprise resource planning (ERP), with contact history from your Amazon Connect contact\n         center.</p>\n         <p>If you're new to Amazon Connect , you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/what-is-amazon-connect.html\">Amazon Connect Administrator Guide</a>.</p>",
                 "smithy.api#title": "Amazon Connect Customer Profiles"
             }
         },
@@ -1217,38 +1235,49 @@
             "type": "structure",
             "members": {
                 "Description": {
-                    "target": "com.amazonaws.customerprofiles#FlowDescription"
+                    "target": "com.amazonaws.customerprofiles#FlowDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the flow you want to create.</p>"
+                    }
                 },
                 "FlowName": {
                     "target": "com.amazonaws.customerprofiles#FlowName",
                     "traits": {
+                        "smithy.api#documentation": "<p>The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not\n         allowed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "KmsArn": {
                     "target": "com.amazonaws.customerprofiles#KmsArn",
                     "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "SourceFlowConfig": {
                     "target": "com.amazonaws.customerprofiles#SourceFlowConfig",
                     "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls how Customer Profiles retrieves data from the\n         source.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Tasks": {
                     "target": "com.amazonaws.customerprofiles#Tasks",
                     "traits": {
+                        "smithy.api#documentation": "<p>A list of tasks that Customer Profiles performs while transferring the data in the flow\n         run.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TriggerConfig": {
                     "target": "com.amazonaws.customerprofiles#TriggerConfig",
                     "traits": {
+                        "smithy.api#documentation": "<p>The trigger settings that determine how and when the flow runs.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configurations that control how Customer Profiles retrieves data from the source,\n         Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf\n         of customers.</p>"
             }
         },
         "com.amazonaws.customerprofiles#FlowDescription": {
@@ -1713,8 +1742,14 @@
             "type": "structure",
             "members": {
                 "DatetimeTypeFieldName": {
-                    "target": "com.amazonaws.customerprofiles#DatetimeTypeFieldName"
+                    "target": "com.amazonaws.customerprofiles#DatetimeTypeFieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field that specifies the date time or timestamp field as the criteria to use when\n         importing incremental records from the source.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration used when importing incremental records from the\n         source.</p>"
             }
         },
         "com.amazonaws.customerprofiles#IntegrationList": {
@@ -2416,7 +2451,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Displays the tags associated with an Amazon Connect Customer Profiles resource. In\n         Connect Customer Profiles, domains, profile object types, and integrations can be\n         tagged.</p>",
+                "smithy.api#documentation": "<p>Displays the tags associated with an Amazon Connect Customer Profiles resource. In Connect\n         Customer Profiles, domains, profile object types, and integrations can be tagged.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}",
@@ -2525,9 +2560,13 @@
                 "Object": {
                     "target": "com.amazonaws.customerprofiles#Object",
                     "traits": {
+                        "smithy.api#documentation": "<p>The object specified in the Marketo flow source.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties that are applied when Marketo is being used as a source.</p>"
             }
         },
         "com.amazonaws.customerprofiles#Object": {
@@ -2874,7 +2913,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an integration between the service and a third-party service, which includes Amazon\n         AppFlow and Amazon Connect.</p>\n         <p>An integration can belong to only one domain.</p>",
+                "smithy.api#documentation": "<p>Adds an integration between the service and a third-party service, which includes\n         Amazon AppFlow and Amazon Connect.</p>\n         <p>An integration can belong to only one domain.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}/integrations",
@@ -2913,7 +2952,10 @@
                     }
                 },
                 "FlowDefinition": {
-                    "target": "com.amazonaws.customerprofiles#FlowDefinition"
+                    "target": "com.amazonaws.customerprofiles#FlowDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration that controls how Customer Profiles retrieves data from the\n         source.</p>"
+                    }
                 }
             }
         },
@@ -3318,12 +3360,19 @@
                 "BucketName": {
                     "target": "com.amazonaws.customerprofiles#BucketName",
                     "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket name where the source files are stored.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "BucketPrefix": {
-                    "target": "com.amazonaws.customerprofiles#BucketPrefix"
+                    "target": "com.amazonaws.customerprofiles#BucketPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key for the Amazon S3 bucket in which the source files are stored.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties that are applied when Amazon S3 is being used as the flow source.</p>"
             }
         },
         "com.amazonaws.customerprofiles#SalesforceConnectorOperator": {
@@ -3423,15 +3472,25 @@
                 "Object": {
                     "target": "com.amazonaws.customerprofiles#Object",
                     "traits": {
+                        "smithy.api#documentation": "<p>The object specified in the Salesforce flow source.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "EnableDynamicFieldUpdate": {
-                    "target": "com.amazonaws.customerprofiles#boolean"
+                    "target": "com.amazonaws.customerprofiles#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flag that enables dynamic fetching of new (recently added) fields in the Salesforce\n         objects while running a flow.</p>"
+                    }
                 },
                 "IncludeDeletedRecords": {
-                    "target": "com.amazonaws.customerprofiles#boolean"
+                    "target": "com.amazonaws.customerprofiles#boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Amazon AppFlow includes deleted files in the flow run.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties that are applied when Salesforce is being used as a source.</p>"
             }
         },
         "com.amazonaws.customerprofiles#ScheduleExpression": {
@@ -3459,30 +3518,50 @@
                 "ScheduleExpression": {
                     "target": "com.amazonaws.customerprofiles#ScheduleExpression",
                     "traits": {
+                        "smithy.api#documentation": "<p>The scheduling expression that determines the rate at which the schedule will run, for\n         example rate (5 minutes).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DataPullMode": {
-                    "target": "com.amazonaws.customerprofiles#DataPullMode"
+                    "target": "com.amazonaws.customerprofiles#DataPullMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether a scheduled flow has an incremental data transfer or a complete data\n         transfer for each flow run.</p>"
+                    }
                 },
                 "ScheduleStartTime": {
-                    "target": "com.amazonaws.customerprofiles#Date"
+                    "target": "com.amazonaws.customerprofiles#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the scheduled start time for a scheduled-trigger flow.</p>"
+                    }
                 },
                 "ScheduleEndTime": {
-                    "target": "com.amazonaws.customerprofiles#Date"
+                    "target": "com.amazonaws.customerprofiles#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the scheduled end time for a scheduled-trigger flow.</p>"
+                    }
                 },
                 "Timezone": {
-                    "target": "com.amazonaws.customerprofiles#Timezone"
+                    "target": "com.amazonaws.customerprofiles#Timezone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time zone used when referring to the date and time of a\n         scheduled-triggered flow, such as America/New_York.</p>"
+                    }
                 },
                 "ScheduleOffset": {
                     "target": "com.amazonaws.customerprofiles#ScheduleOffset",
                     "traits": {
-                        "smithy.api#box": {}
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>Specifies the optional offset that is added to the time interval for a\n         schedule-triggered flow.</p>"
                     }
                 },
                 "FirstExecutionFrom": {
-                    "target": "com.amazonaws.customerprofiles#Date"
+                    "target": "com.amazonaws.customerprofiles#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the date range for the records to import from the connector in the first flow\n         run.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration details of a scheduled-trigger flow that you define.\n         Currently, these settings only apply to the scheduled-trigger type.</p>"
             }
         },
         "com.amazonaws.customerprofiles#SearchProfiles": {
@@ -3674,29 +3753,51 @@
                 "Object": {
                     "target": "com.amazonaws.customerprofiles#Object",
                     "traits": {
+                        "smithy.api#documentation": "<p>The object specified in the ServiceNow flow source.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties that are applied when ServiceNow is being used as a source.</p>"
             }
         },
         "com.amazonaws.customerprofiles#SourceConnectorProperties": {
             "type": "structure",
             "members": {
                 "Marketo": {
-                    "target": "com.amazonaws.customerprofiles#MarketoSourceProperties"
+                    "target": "com.amazonaws.customerprofiles#MarketoSourceProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties that are applied when Marketo is being used as a source.</p>"
+                    }
                 },
                 "S3": {
-                    "target": "com.amazonaws.customerprofiles#S3SourceProperties"
+                    "target": "com.amazonaws.customerprofiles#S3SourceProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties that are applied when Amazon S3 is being used as the flow source.</p>"
+                    }
                 },
                 "Salesforce": {
-                    "target": "com.amazonaws.customerprofiles#SalesforceSourceProperties"
+                    "target": "com.amazonaws.customerprofiles#SalesforceSourceProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties that are applied when Salesforce is being used as a source.</p>"
+                    }
                 },
                 "ServiceNow": {
-                    "target": "com.amazonaws.customerprofiles#ServiceNowSourceProperties"
+                    "target": "com.amazonaws.customerprofiles#ServiceNowSourceProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties that are applied when ServiceNow is being used as a source.</p>"
+                    }
                 },
                 "Zendesk": {
-                    "target": "com.amazonaws.customerprofiles#ZendeskSourceProperties"
+                    "target": "com.amazonaws.customerprofiles#ZendeskSourceProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The properties that are applied when using Zendesk as a flow source.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the information that is required to query a particular Amazon AppFlow connector.\n         Customer Profiles supports Salesforce, Zendesk, Marketo, ServiceNow and Amazon S3.</p>"
             }
         },
         "com.amazonaws.customerprofiles#SourceConnectorType": {
@@ -3736,23 +3837,34 @@
             "type": "structure",
             "members": {
                 "ConnectorProfileName": {
-                    "target": "com.amazonaws.customerprofiles#ConnectorProfileName"
+                    "target": "com.amazonaws.customerprofiles#ConnectorProfileName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AppFlow connector profile. This name must be unique for each connector\n         profile in the AWS account.</p>"
+                    }
                 },
                 "ConnectorType": {
                     "target": "com.amazonaws.customerprofiles#SourceConnectorType",
                     "traits": {
+                        "smithy.api#documentation": "<p>The type of connector, such as Salesforce, Marketo, and so on.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IncrementalPullConfig": {
-                    "target": "com.amazonaws.customerprofiles#IncrementalPullConfig"
+                    "target": "com.amazonaws.customerprofiles#IncrementalPullConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the configuration for a scheduled incremental data pull. If a valid\n         configuration is provided, the fields specified in the configuration are used when querying\n         for the incremental data pull.</p>"
+                    }
                 },
                 "SourceConnectorProperties": {
                     "target": "com.amazonaws.customerprofiles#SourceConnectorProperties",
                     "traits": {
+                        "smithy.api#documentation": "<p>Specifies the information that is required to query a particular source\n         connector.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the configuration of the source connector used in the\n         flow.</p>"
             }
         },
         "com.amazonaws.customerprofiles#StandardIdentifier": {
@@ -3855,7 +3967,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon Connect Customer\n         Profiles resource. Tags can help you organize and categorize your resources. You can also\n         use them to scope user permissions by granting a user permission to access or change only\n         resources with certain tag values. In Connect Customer Profiles, domains, profile object\n         types, and integrations can be tagged.</p>\n         <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of\n         characters.</p>\n         <p>You can use the TagResource action with a resource that already has tags. If you specify\n         a new tag key, this tag is appended to the list of tags associated with the resource. If\n         you specify a tag key that is already associated with the resource, the new tag value that\n         you specify replaces the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>",
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified Amazon Connect Customer Profiles\n         resource. Tags can help you organize and categorize your resources. You can also use them\n         to scope user permissions by granting a user permission to access or change only resources\n         with certain tag values. In Connect Customer Profiles, domains, profile object types, and\n         integrations can be tagged.</p>\n         <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of\n         characters.</p>\n         <p>You can use the TagResource action with a resource that already has tags. If you specify\n         a new tag key, this tag is appended to the list of tags associated with the resource. If\n         you specify a tag key that is already associated with the resource, the new tag value that\n         you specify replaces the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -3900,26 +4012,40 @@
             "type": "structure",
             "members": {
                 "ConnectorOperator": {
-                    "target": "com.amazonaws.customerprofiles#ConnectorOperator"
+                    "target": "com.amazonaws.customerprofiles#ConnectorOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operation to be performed on the provided source fields.</p>"
+                    }
                 },
                 "DestinationField": {
-                    "target": "com.amazonaws.customerprofiles#DestinationField"
+                    "target": "com.amazonaws.customerprofiles#DestinationField",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A field in a destination connector, or a field value against which Amazon AppFlow validates a\n         source field.</p>"
+                    }
                 },
                 "SourceFields": {
                     "target": "com.amazonaws.customerprofiles#SourceFields",
                     "traits": {
+                        "smithy.api#documentation": "<p>The source fields to which a particular task is applied.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TaskProperties": {
-                    "target": "com.amazonaws.customerprofiles#TaskPropertiesMap"
+                    "target": "com.amazonaws.customerprofiles#TaskPropertiesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map used to store task-related information. The service looks for particular\n         information based on the TaskType.</p>"
+                    }
                 },
                 "TaskType": {
                     "target": "com.amazonaws.customerprofiles#TaskType",
                     "traits": {
+                        "smithy.api#documentation": "<p>Specifies the particular task implementation that Amazon AppFlow performs.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A class for modeling different type of tasks. Task implementation varies based on the\n         TaskType.</p>"
             }
         },
         "com.amazonaws.customerprofiles#TaskPropertiesMap": {
@@ -4001,20 +4127,33 @@
                 "TriggerType": {
                     "target": "com.amazonaws.customerprofiles#TriggerType",
                     "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of flow trigger. It can be OnDemand, Scheduled, or Event.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "TriggerProperties": {
-                    "target": "com.amazonaws.customerprofiles#TriggerProperties"
+                    "target": "com.amazonaws.customerprofiles#TriggerProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration details of a schedule-triggered flow that you define.\n         Currently, these settings only apply to the Scheduled trigger type.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The trigger settings that determine how and when Amazon AppFlow runs the specified\n         flow.</p>"
             }
         },
         "com.amazonaws.customerprofiles#TriggerProperties": {
             "type": "structure",
             "members": {
                 "Scheduled": {
-                    "target": "com.amazonaws.customerprofiles#ScheduledTriggerProperties"
+                    "target": "com.amazonaws.customerprofiles#ScheduledTriggerProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the configuration details of a schedule-triggered flow that you define.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the configuration details that control the trigger for a flow. Currently,\n         these settings only apply to the Scheduled trigger type.</p>"
             }
         },
         "com.amazonaws.customerprofiles#TriggerType": {
@@ -4056,7 +4195,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes one or more tags from the specified Amazon Connect Customer Profiles resource.\n         In Connect Customer Profiles, domains, profile object types, and integrations can be\n         tagged.</p>",
+                "smithy.api#documentation": "<p>Removes one or more tags from the specified Amazon Connect Customer Profiles resource. In Connect\n         Customer Profiles, domains, profile object types, and integrations can be tagged.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
@@ -4548,9 +4687,13 @@
                 "Object": {
                     "target": "com.amazonaws.customerprofiles#Object",
                     "traits": {
+                        "smithy.api#documentation": "<p>The object specified in the Zendesk flow source.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The properties that are applied when using Zendesk as a flow source.</p>"
             }
         },
         "com.amazonaws.customerprofiles#boolean": {

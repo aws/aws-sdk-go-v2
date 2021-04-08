@@ -2644,7 +2644,7 @@
                     }
                 },
                 "Vpc": {
-                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "target": "com.amazonaws.medialive#VpcOutputSettingsDescription",
                     "traits": {
                         "smithy.api#documentation": "Settings for VPC output",
                         "smithy.api#jsonName": "vpc"
@@ -2839,7 +2839,7 @@
                     }
                 },
                 "Vpc": {
-                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "target": "com.amazonaws.medialive#VpcOutputSettingsDescription",
                     "traits": {
                         "smithy.api#documentation": "Settings for VPC output",
                         "smithy.api#jsonName": "vpc"
@@ -3758,7 +3758,7 @@
                     }
                 },
                 "Vpc": {
-                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "target": "com.amazonaws.medialive#VpcOutputSettingsDescription",
                     "traits": {
                         "smithy.api#documentation": "Settings for VPC output",
                         "smithy.api#jsonName": "vpc"
@@ -4762,7 +4762,7 @@
                     }
                 },
                 "Vpc": {
-                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "target": "com.amazonaws.medialive#VpcOutputSettingsDescription",
                     "traits": {
                         "smithy.api#documentation": "Settings for VPC output",
                         "smithy.api#jsonName": "vpc"
@@ -7281,6 +7281,13 @@
                     "traits": {
                         "smithy.api#documentation": "Configuration settings that apply to the event as a whole.",
                         "smithy.api#jsonName": "globalConfiguration"
+                    }
+                },
+                "MotionGraphicsConfiguration": {
+                    "target": "com.amazonaws.medialive#MotionGraphicsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Settings for motion graphics.",
+                        "smithy.api#jsonName": "motionGraphicsConfiguration"
                     }
                 },
                 "NielsenConfiguration": {
@@ -10282,6 +10289,13 @@
             },
             "traits": {
                 "smithy.api#documentation": "Hls Webdav Settings"
+            }
+        },
+        "com.amazonaws.medialive#HtmlMotionGraphicsSettings": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Html Motion Graphics Settings"
             }
         },
         "com.amazonaws.medialive#IFrameOnlyPlaylistType": {
@@ -13984,6 +13998,101 @@
                 "smithy.api#documentation": "Media Package Output Settings"
             }
         },
+        "com.amazonaws.medialive#MotionGraphicsActivateScheduleActionSettings": {
+            "type": "structure",
+            "members": {
+                "Duration": {
+                    "target": "com.amazonaws.medialive#__longMin0Max86400000",
+                    "traits": {
+                        "smithy.api#documentation": "Duration (in milliseconds) that motion graphics should render on to the video stream. Leaving out this property or setting to 0 will result in rendering continuing until a deactivate action is processed.",
+                        "smithy.api#jsonName": "duration"
+                    }
+                },
+                "PasswordParam": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Key used to extract the password from EC2 Parameter store",
+                        "smithy.api#jsonName": "passwordParam"
+                    }
+                },
+                "Url": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "URI of the HTML5 content to be rendered into the live stream.",
+                        "smithy.api#jsonName": "url"
+                    }
+                },
+                "Username": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Documentation update needed",
+                        "smithy.api#jsonName": "username"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Settings to specify the rendering of motion graphics into the video stream."
+            }
+        },
+        "com.amazonaws.medialive#MotionGraphicsConfiguration": {
+            "type": "structure",
+            "members": {
+                "MotionGraphicsInsertion": {
+                    "target": "com.amazonaws.medialive#MotionGraphicsInsertion",
+                    "traits": {
+                        "smithy.api#jsonName": "motionGraphicsInsertion"
+                    }
+                },
+                "MotionGraphicsSettings": {
+                    "target": "com.amazonaws.medialive#MotionGraphicsSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Motion Graphics Settings",
+                        "smithy.api#jsonName": "motionGraphicsSettings",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Motion Graphics Configuration"
+            }
+        },
+        "com.amazonaws.medialive#MotionGraphicsDeactivateScheduleActionSettings": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "Settings to specify the ending of rendering motion graphics into the video stream."
+            }
+        },
+        "com.amazonaws.medialive#MotionGraphicsInsertion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Motion Graphics Insertion",
+                "smithy.api#enum": [
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.medialive#MotionGraphicsSettings": {
+            "type": "structure",
+            "members": {
+                "HtmlMotionGraphicsSettings": {
+                    "target": "com.amazonaws.medialive#HtmlMotionGraphicsSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "htmlMotionGraphicsSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Motion Graphics Settings"
+            }
+        },
         "com.amazonaws.medialive#Mp2CodingMode": {
             "type": "string",
             "traits": {
@@ -15602,6 +15711,20 @@
                         "smithy.api#jsonName": "activeInputSwitchActionName"
                     }
                 },
+                "ActiveMotionGraphicsActionName": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the motion graphics activate action that occurred most recently and that resulted in the current graphics URI for this pipeline.",
+                        "smithy.api#jsonName": "activeMotionGraphicsActionName"
+                    }
+                },
+                "ActiveMotionGraphicsUri": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The current URI being used for HTML5 motion graphics for this pipeline.",
+                        "smithy.api#jsonName": "activeMotionGraphicsUri"
+                    }
+                },
                 "PipelineId": {
                     "target": "com.amazonaws.medialive#__string",
                     "traits": {
@@ -16516,6 +16639,20 @@
                     "traits": {
                         "smithy.api#documentation": "Action to switch the input",
                         "smithy.api#jsonName": "inputSwitchSettings"
+                    }
+                },
+                "MotionGraphicsImageActivateSettings": {
+                    "target": "com.amazonaws.medialive#MotionGraphicsActivateScheduleActionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Action to activate a motion graphics image overlay",
+                        "smithy.api#jsonName": "motionGraphicsImageActivateSettings"
+                    }
+                },
+                "MotionGraphicsImageDeactivateSettings": {
+                    "target": "com.amazonaws.medialive#MotionGraphicsDeactivateScheduleActionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Action to deactivate a motion graphics image overlay",
+                        "smithy.api#jsonName": "motionGraphicsImageDeactivateSettings"
                     }
                 },
                 "PauseStateSettings": {
@@ -17439,7 +17576,7 @@
                     }
                 },
                 "Vpc": {
-                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "target": "com.amazonaws.medialive#VpcOutputSettingsDescription",
                     "traits": {
                         "smithy.api#documentation": "Settings for VPC output",
                         "smithy.api#jsonName": "vpc"
@@ -17899,7 +18036,7 @@
                     }
                 },
                 "Vpc": {
-                    "target": "com.amazonaws.medialive#VpcOutputSettings",
+                    "target": "com.amazonaws.medialive#VpcOutputSettingsDescription",
                     "traits": {
                         "smithy.api#documentation": "Settings for VPC output",
                         "smithy.api#jsonName": "vpc"
@@ -19760,6 +19897,42 @@
                 "smithy.api#documentation": "The properties for a private VPC Output\nWhen this property is specified, the output egress addresses will be created in a user specified VPC"
             }
         },
+        "com.amazonaws.medialive#VpcOutputSettingsDescription": {
+            "type": "structure",
+            "members": {
+                "AvailabilityZones": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "The Availability Zones where the vpc subnets are located.\nThe first Availability Zone applies to the first subnet in the list of subnets.\nThe second Availability Zone applies to the second subnet.",
+                        "smithy.api#jsonName": "availabilityZones"
+                    }
+                },
+                "NetworkInterfaceIds": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Elastic Network Interfaces created by MediaLive in the customer's VPC",
+                        "smithy.api#jsonName": "networkInterfaceIds"
+                    }
+                },
+                "SecurityGroupIds": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "A list of up EC2 VPC security group IDs attached to the Output VPC network interfaces.",
+                        "smithy.api#jsonName": "securityGroupIds"
+                    }
+                },
+                "SubnetIds": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "A list of VPC subnet IDs from the same VPC.\nIf STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).",
+                        "smithy.api#jsonName": "subnetIds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The properties for a private VPC Output"
+            }
+        },
         "com.amazonaws.medialive#WavCodingMode": {
             "type": "string",
             "traits": {
@@ -20830,6 +21003,16 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 8589934591
+                }
+            }
+        },
+        "com.amazonaws.medialive#__longMin0Max86400000": {
+            "type": "long",
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __longMin0Max86400000",
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 86400000
                 }
             }
         },
