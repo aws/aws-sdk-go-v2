@@ -1854,7 +1854,13 @@
                 "state": {
                     "target": "com.amazonaws.lightsail#ContainerServiceState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current state of the container service.</p>\n         <p>The state can be:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Pending</code> - The container service is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Ready</code> - The container service is created but does not have a container\n          deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Disabled</code> - The container service is disabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Updating</code> - The container service capacity or other setting is being\n          updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Deploying</code> - The container service is launching a container\n          deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Running</code> - The container service is created and it has a container\n          deployment.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The current state of the container service.</p>\n         <p>The following container service states are possible:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PENDING</code> - The container service is being created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>READY</code> - The container service is running but it does not have an active\n          container deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DEPLOYING</code> - The container service is launching a container\n          deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> - The container service is running and it has an active container\n          deployment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code> - The container service capacity or its custom domains are being\n          updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETING</code> - The container service is being deleted.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DISABLED</code> - The container service is disabled, and its active deployment\n          and containers, if any, are shut down.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "stateDetail": {
+                    "target": "com.amazonaws.lightsail#ContainerServiceStateDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the current state of the container service.</p>\n         <note>\n            <p>The state detail is populated only when a container service is in a\n        <code>PENDING</code>, <code>DEPLOYING</code>, or <code>UPDATING</code> state.</p>\n         </note>"
                     }
                 },
                 "scale": {
@@ -2327,6 +2333,73 @@
                     {
                         "value": "DISABLED",
                         "name": "DISABLED"
+                    },
+                    {
+                        "value": "DEPLOYING",
+                        "name": "DEPLOYING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lightsail#ContainerServiceStateDetail": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.lightsail#ContainerServiceStateDetailCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state code of the container service.</p>\n         <p>The following state codes are possible:</p>\n         <ul>\n            <li>\n               <p>The following state codes are possible if your container service is in a\n            <code>DEPLOYING</code> or <code>UPDATING</code> state:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>CREATING_SYSTEM_RESOURCES</code> - The system resources for your container\n              service are being created.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CREATING_NETWORK_INFRASTRUCTURE</code> - The network infrastructure for your\n              container service are being created.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>PROVISIONING_CERTIFICATE</code> - The SSL/TLS certificate for your container\n              service is being created.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>PROVISIONING_SERVICE</code> - Your container service is being\n              provisioned.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>CREATING_DEPLOYMENT</code> - Your deployment is being created on your\n              container service.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>EVALUATING_HEALTH_CHECK</code> - The health of your deployment is being\n              evaluated.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ACTIVATING_DEPLOYMENT</code> - Your deployment is being activated.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The following state codes are possible if your container service is in a\n            <code>PENDING</code> state:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>CERTIFICATE_LIMIT_EXCEEDED</code> - The SSL/TLS certificate required for\n              your container service exceeds the maximum number of certificates allowed for your\n              account.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>UNKNOWN_ERROR</code> - An error was experienced when your container service\n              was being created.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides more information for the state code.</p>\n         <note>\n            <p>The state detail is populated only when a container service is in a\n        <code>PENDING</code>, <code>DEPLOYING</code>, or <code>UPDATING</code> state.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the current state of a container service.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#ContainerServiceStateDetailCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING_SYSTEM_RESOURCES",
+                        "name": "CREATING_SYSTEM_RESOURCES"
+                    },
+                    {
+                        "value": "CREATING_NETWORK_INFRASTRUCTURE",
+                        "name": "CREATING_NETWORK_INFRASTRUCTURE"
+                    },
+                    {
+                        "value": "PROVISIONING_CERTIFICATE",
+                        "name": "PROVISIONING_CERTIFICATE"
+                    },
+                    {
+                        "value": "PROVISIONING_SERVICE",
+                        "name": "PROVISIONING_SERVICE"
+                    },
+                    {
+                        "value": "CREATING_DEPLOYMENT",
+                        "name": "CREATING_DEPLOYMENT"
+                    },
+                    {
+                        "value": "EVALUATING_HEALTH_CHECK",
+                        "name": "EVALUATING_HEALTH_CHECK"
+                    },
+                    {
+                        "value": "ACTIVATING_DEPLOYMENT",
+                        "name": "ACTIVATING_DEPLOYMENT"
+                    },
+                    {
+                        "value": "CERTIFICATE_LIMIT_EXCEEDED",
+                        "name": "CERTIFICATE_LIMIT_EXCEEDED"
+                    },
+                    {
+                        "value": "UNKNOWN_ERROR",
+                        "name": "UNKNOWN_ERROR"
                     }
                 ]
             }

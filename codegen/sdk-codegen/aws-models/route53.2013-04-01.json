@@ -3104,6 +3104,23 @@
                     "method": "GET",
                     "uri": "/2013-04-01/change/{Id}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "ResourceRecordSetsChanged": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ChangeInfo.Status",
+                                        "expected": "INSYNC",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30
+                    }
                 }
             }
         },

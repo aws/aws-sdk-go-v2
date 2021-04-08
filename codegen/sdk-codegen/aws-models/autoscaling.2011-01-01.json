@@ -539,6 +539,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether Capacity Rebalancing is enabled.</p>"
                     }
+                },
+                "WarmPoolConfiguration": {
+                    "target": "com.amazonaws.autoscaling#WarmPoolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The warm pool for the group.</p>"
+                    }
+                },
+                "WarmPoolSize": {
+                    "target": "com.amazonaws.autoscaling#WarmPoolSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current size of the warm pool.</p>"
+                    }
                 }
             },
             "traits": {
@@ -658,7 +670,7 @@
                 "LifecycleState": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen32",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used.\n            For information about lifecycle states, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Instance\n                lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>\n        <p>Valid Values: <code>Pending</code> | <code>Pending:Wait</code> |\n                <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> |\n                <code>Terminating</code> | <code>Terminating:Wait</code> |\n                <code>Terminating:Proceed</code> | <code>Terminated</code> | <code>Detaching</code>\n            | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The lifecycle state for the instance. The <code>Quarantined</code> state is not used.\n            For information about lifecycle states, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Instance\n                lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>. </p>\n        <p>Valid Values: <code>Pending</code> | <code>Pending:Wait</code> |\n                <code>Pending:Proceed</code> | <code>Quarantined</code> | <code>InService</code> |\n                <code>Terminating</code> | <code>Terminating:Wait</code> |\n                <code>Terminating:Proceed</code> | <code>Terminated</code> | <code>Detaching</code>\n            | <code>Detached</code> | <code>EnteringStandby</code> | <code>Standby</code> |\n                <code>Warmed:Pending</code> | <code>Warmed:Pending:Wait</code> |\n                <code>Warmed:Pending:Proceed</code> | <code>Warmed:Terminating</code> |\n                <code>Warmed:Terminating:Wait</code> | <code>Warmed:Terminating:Proceed</code> |\n                <code>Warmed:Terminated</code> | <code>Warmed:Stopped</code> |\n                <code>Warmed:Running</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -784,6 +796,9 @@
                     "target": "com.amazonaws.autoscaling#DeleteTags"
                 },
                 {
+                    "target": "com.amazonaws.autoscaling#DeleteWarmPool"
+                },
+                {
                     "target": "com.amazonaws.autoscaling#DescribeAccountLimits"
                 },
                 {
@@ -841,6 +856,9 @@
                     "target": "com.amazonaws.autoscaling#DescribeTerminationPolicyTypes"
                 },
                 {
+                    "target": "com.amazonaws.autoscaling#DescribeWarmPool"
+                },
+                {
                     "target": "com.amazonaws.autoscaling#DetachInstances"
                 },
                 {
@@ -875,6 +893,9 @@
                 },
                 {
                     "target": "com.amazonaws.autoscaling#PutScheduledUpdateGroupAction"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#PutWarmPool"
                 },
                 {
                     "target": "com.amazonaws.autoscaling#RecordLifecycleActionHeartbeat"
@@ -1406,7 +1427,7 @@
                 "ServiceLinkedRoleARN": {
                     "target": "com.amazonaws.autoscaling#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to\n            call other AWS services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked role\n            named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked\n                roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling group uses to\n            call other AWS services on your behalf. By default, Amazon EC2 Auto Scaling uses a service-linked\n            role named AWSServiceRoleForAutoScaling, which it creates if it does not exist. For more\n            information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/autoscaling-service-linked-role.html\">Service-linked\n                roles</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "MaxInstanceLifetime": {
@@ -1666,7 +1687,7 @@
                 "ForceDelete": {
                     "target": "com.amazonaws.autoscaling#ForceDelete",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies that the group is to be deleted along with all instances associated with the\n            group, without waiting for all instances to be terminated. This parameter also deletes\n            any lifecycle actions associated with the group.</p>"
+                        "smithy.api#documentation": "<p>Specifies that the group is to be deleted along with all instances associated with the\n            group, without waiting for all instances to be terminated. This parameter also deletes\n            any outstanding lifecycle actions associated with the group.</p>"
                     }
                 }
             }
@@ -1858,6 +1879,54 @@
                 }
             }
         },
+        "com.amazonaws.autoscaling#DeleteWarmPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscaling#DeleteWarmPoolType"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscaling#DeleteWarmPoolAnswer"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscaling#LimitExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#ResourceContentionFault"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#ResourceInUseFault"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#ScalingActivityInProgressFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the warm pool for the specified Auto Scaling group.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#DeleteWarmPoolAnswer": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.autoscaling#DeleteWarmPoolType": {
+            "type": "structure",
+            "members": {
+                "AutoScalingGroupName": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForceDelete": {
+                    "target": "com.amazonaws.autoscaling#ForceDelete",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies that the warm pool is to be deleted along with all instances associated with\n            the warm pool, without waiting for all instances to be terminated. This parameter also\n            deletes any outstanding lifecycle actions associated with the warm pool\n            instances.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.autoscaling#DescribeAccountLimits": {
             "type": "operation",
             "output": {
@@ -1884,7 +1953,7 @@
                 "MaxNumberOfLaunchConfigurations": {
                     "target": "com.amazonaws.autoscaling#MaxNumberOfLaunchConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of launch configurations allowed for your AWS account. The default\n            is 200 launch configurations per AWS Region.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of launch configurations allowed for your AWS account. The\n            default is 200 launch configurations per AWS Region.</p>"
                     }
                 },
                 "NumberOfAutoScalingGroups": {
@@ -2761,6 +2830,76 @@
                 }
             }
         },
+        "com.amazonaws.autoscaling#DescribeWarmPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscaling#DescribeWarmPoolType"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscaling#DescribeWarmPoolAnswer"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscaling#InvalidNextToken"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#LimitExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#ResourceContentionFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a warm pool and its instances.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#DescribeWarmPoolAnswer": {
+            "type": "structure",
+            "members": {
+                "WarmPoolConfiguration": {
+                    "target": "com.amazonaws.autoscaling#WarmPoolConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The warm pool configuration details. </p>"
+                    }
+                },
+                "Instances": {
+                    "target": "com.amazonaws.autoscaling#Instances",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instances that are currently in the warm pool.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.autoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a\n            previous call.)</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#DescribeWarmPoolType": {
+            "type": "structure",
+            "members": {
+                "AutoScalingGroupName": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.autoscaling#MaxRecords",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of instances to return with this call. The maximum value is\n                <code>50</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.autoscaling#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of instances to return. (You received this token from a\n            previous call.)</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.autoscaling#DetachInstances": {
             "type": "operation",
             "input": {
@@ -2921,7 +3060,7 @@
                 "Metrics": {
                     "target": "com.amazonaws.autoscaling#Metrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies one or more of the following metrics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupMinSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupMaxSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalCapacity</code>\n                </p>\n            </li>\n         </ul>\n        <p>If you omit this parameter, all metrics are disabled. </p>"
+                        "smithy.api#documentation": "<p>Specifies one or more of the following metrics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupMinSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupMaxSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolWarmedCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolTotalCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupAndWarmPoolDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupAndWarmPoolTotalCapacity</code>\n                </p>\n            </li>\n         </ul>\n        <p>If you omit this parameter, all metrics are disabled. </p>"
                     }
                 }
             }
@@ -3009,7 +3148,7 @@
                 "Metrics": {
                     "target": "com.amazonaws.autoscaling#Metrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies which group-level metrics to start collecting. You can specify one or more\n            of the following metrics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupMinSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupMaxSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalInstances</code>\n                </p>\n            </li>\n         </ul>\n        <p>The instance weighting feature supports the following additional metrics: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupInServiceCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalCapacity</code>\n                </p>\n            </li>\n         </ul>\n        <p>If you omit this parameter, all metrics are enabled. </p>"
+                        "smithy.api#documentation": "<p>Specifies which group-level metrics to start collecting. You can specify one or more\n            of the following metrics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupMinSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupMaxSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalInstances</code>\n                </p>\n            </li>\n         </ul>\n        <p>The instance weighting feature supports the following additional metrics: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupInServiceCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalCapacity</code>\n                </p>\n            </li>\n         </ul>\n        <p>The warm pools feature supports the following additional metrics: </p>\n        <ul>\n            <li>\n                <p>\n                    <code>WarmPoolDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolWarmedCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolTotalCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupAndWarmPoolDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupAndWarmPoolTotalCapacity</code>\n                </p>\n            </li>\n         </ul>\n        <p>If you omit this parameter, all metrics are enabled. </p>"
                     }
                 },
                 "Granularity": {
@@ -3027,7 +3166,7 @@
                 "Metric": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>One of the following metrics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupMinSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupMaxSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalCapacity</code>\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One of the following metrics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupMinSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupMaxSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolWarmedCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolTotalCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupAndWarmPoolDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupAndWarmPoolTotalCapacity</code>\n                </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Granularity": {
@@ -3509,6 +3648,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The number of instances remaining to update before the instance refresh is\n            complete.</p>"
                     }
+                },
+                "ProgressDetails": {
+                    "target": "com.amazonaws.autoscaling#InstanceRefreshProgressDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional progress details for an Auto Scaling group that has a warm pool.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3532,6 +3677,46 @@
                 "smithy.api#documentation": "<p>The request failed because an active instance refresh operation already exists for the\n            specified Auto Scaling group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.autoscaling#InstanceRefreshLivePoolProgress": {
+            "type": "structure",
+            "members": {
+                "PercentageComplete": {
+                    "target": "com.amazonaws.autoscaling#IntPercent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of instances in the Auto Scaling group that have been replaced. For each\n            instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time.\n            When the instance's health status changes to healthy and the specified warm-up time\n            passes, the instance is considered updated and added to the percentage complete.</p>"
+                    }
+                },
+                "InstancesToUpdate": {
+                    "target": "com.amazonaws.autoscaling#InstancesToUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances remaining to update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Reports the progress of an instance fresh on instances that are in the Auto Scaling\n            group.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#InstanceRefreshProgressDetails": {
+            "type": "structure",
+            "members": {
+                "LivePoolProgress": {
+                    "target": "com.amazonaws.autoscaling#InstanceRefreshLivePoolProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the progress of an instance fresh on instances that are in the Auto Scaling\n            group.</p>"
+                    }
+                },
+                "WarmPoolProgress": {
+                    "target": "com.amazonaws.autoscaling#InstanceRefreshWarmPoolProgress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the progress of an instance fresh on instances that are in the warm\n            pool.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Reports the progress of an instance refresh on an Auto Scaling group that has a warm pool.\n            This includes separate details for instances in the warm pool and instances in the Auto Scaling\n            group (the live pool).</p>"
             }
         },
         "com.amazonaws.autoscaling#InstanceRefreshStatus": {
@@ -3563,6 +3748,26 @@
                         "name": "Cancelled"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.autoscaling#InstanceRefreshWarmPoolProgress": {
+            "type": "structure",
+            "members": {
+                "PercentageComplete": {
+                    "target": "com.amazonaws.autoscaling#IntPercent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of instances in the warm pool that have been replaced. For each\n            instance replacement, Amazon EC2 Auto Scaling tracks the instance's health status and warm-up time.\n            When the instance's health status changes to healthy and the specified warm-up time\n            passes, the instance is considered updated and added to the percentage complete.</p>"
+                    }
+                },
+                "InstancesToUpdate": {
+                    "target": "com.amazonaws.autoscaling#InstancesToUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of instances remaining to update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Reports the progress of an instance fresh on instances that are in the warm\n            pool.</p>"
             }
         },
         "com.amazonaws.autoscaling#InstanceRefreshes": {
@@ -4140,6 +4345,42 @@
                     {
                         "value": "Standby",
                         "name": "STANDBY"
+                    },
+                    {
+                        "value": "Warmed:Pending",
+                        "name": "WARMED_PENDING"
+                    },
+                    {
+                        "value": "Warmed:Pending:Wait",
+                        "name": "WARMED_PENDING_WAIT"
+                    },
+                    {
+                        "value": "Warmed:Pending:Proceed",
+                        "name": "WARMED_PENDING_PROCEED"
+                    },
+                    {
+                        "value": "Warmed:Terminating",
+                        "name": "WARMED_TERMINATING"
+                    },
+                    {
+                        "value": "Warmed:Terminating:Wait",
+                        "name": "WARMED_TERMINATING_WAIT"
+                    },
+                    {
+                        "value": "Warmed:Terminating:Proceed",
+                        "name": "WARMED_TERMINATING_PROCEED"
+                    },
+                    {
+                        "value": "Warmed:Terminated",
+                        "name": "WARMED_TERMINATED"
+                    },
+                    {
+                        "value": "Warmed:Stopped",
+                        "name": "WARMED_STOPPED"
+                    },
+                    {
+                        "value": "Warmed:Running",
+                        "name": "WARMED_RUNNING"
                     }
                 ]
             }
@@ -4221,6 +4462,15 @@
                 "target": "com.amazonaws.autoscaling#LoadBalancerTargetGroupState"
             }
         },
+        "com.amazonaws.autoscaling#MaxGroupPreparedCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": -1
+                }
+            }
+        },
         "com.amazonaws.autoscaling#MaxInstanceLifetime": {
             "type": "integer",
             "traits": {
@@ -4251,7 +4501,7 @@
                 "Metric": {
                     "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
                     "traits": {
-                        "smithy.api#documentation": "<p>One of the following metrics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupMinSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupMaxSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalCapacity</code>\n                </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>One of the following metrics:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>GroupMinSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupMaxSize</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupInServiceCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupStandbyCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupTotalCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolWarmedCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolPendingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolTerminatingCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>WarmPoolTotalCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupAndWarmPoolDesiredCapacity</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>GroupAndWarmPoolTotalCapacity</code>\n                </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -4975,6 +5225,60 @@
                 }
             }
         },
+        "com.amazonaws.autoscaling#PutWarmPool": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.autoscaling#PutWarmPoolType"
+            },
+            "output": {
+                "target": "com.amazonaws.autoscaling#PutWarmPoolAnswer"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.autoscaling#LimitExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.autoscaling#ResourceContentionFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a warm pool to the specified Auto Scaling group. A warm pool is a pool of pre-initialized\n            EC2 instances that sits alongside the Auto Scaling group. Whenever your application needs to\n            scale out, the Auto Scaling group can draw on the warm pool to meet its new desired capacity.\n            For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html\">Warm pools for\n                Amazon EC2 Auto Scaling</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>This operation must be called from the Region in which the Auto Scaling group was created.\n            This operation cannot be called on an Auto Scaling group that has a mixed instances policy or a\n            launch template or launch configuration that requests Spot Instances.</p>\n        <p>You can view the instances in the warm pool using the <a>DescribeWarmPool</a> API call. If you are no longer using a warm pool, you can delete it by calling the\n                <a>DeleteWarmPool</a> API.</p>"
+            }
+        },
+        "com.amazonaws.autoscaling#PutWarmPoolAnswer": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.autoscaling#PutWarmPoolType": {
+            "type": "structure",
+            "members": {
+                "AutoScalingGroupName": {
+                    "target": "com.amazonaws.autoscaling#XmlStringMaxLen255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Auto Scaling group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxGroupPreparedCapacity": {
+                    "target": "com.amazonaws.autoscaling#MaxGroupPreparedCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the total maximum number of instances that are allowed to be in the warm\n            pool or in any state except <code>Terminated</code> for the Auto Scaling group. This is an\n            optional property. Specify it only if the warm pool size should not be determined by the\n            difference between the group's maximum capacity and its desired capacity. </p>\n        <important>\n            <p>Amazon EC2 Auto Scaling will launch and maintain either the difference between the group's\n                maximum capacity and its desired capacity, if a value for\n                    <code>MaxGroupPreparedCapacity</code> is not specified, or the difference\n                between the <code>MaxGroupPreparedCapacity</code> and the desired capacity, if a\n                value for <code>MaxGroupPreparedCapacity</code> is specified. </p>\n            <p>The size of the warm pool is dynamic. Only when\n                    <code>MaxGroupPreparedCapacity</code> and <code>MinSize</code> are set to the\n                same value does the warm pool have an absolute size.</p>\n        </important>\n        <p>If the desired capacity of the Auto Scaling group is higher than the\n                <code>MaxGroupPreparedCapacity</code>, the capacity of the warm pool is 0. To remove\n            a value that you previously set, include the property but specify -1 for the value.\n        </p>"
+                    }
+                },
+                "MinSize": {
+                    "target": "com.amazonaws.autoscaling#WarmPoolMinSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the minimum number of instances to maintain in the warm pool. This helps you\n            to ensure that there is always a certain number of warmed instances available to handle\n            traffic spikes. Defaults to 0 if not specified.</p>"
+                    }
+                },
+                "PoolState": {
+                    "target": "com.amazonaws.autoscaling#WarmPoolState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets the instance state to transition to after the lifecycle hooks finish. Valid\n            values are: <code>Stopped</code> (default) or <code>Running</code>.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.autoscaling#RecordLifecycleActionHeartbeat": {
             "type": "operation",
             "input": {
@@ -4989,7 +5293,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Records a heartbeat for the lifecycle action associated with the specified token or\n            instance. This extends the timeout by the length of time defined using the <a>PutLifecycleHook</a> API call.</p>\n\n        <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling\n            group:</p>\n        <ol>\n            <li>\n                <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to\n                    invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates\n                    instances.</p>\n            </li>\n            <li>\n                <p>(Optional) Create a notification target and an IAM role. The target can be\n                    either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to\n                    publish lifecycle notifications to the target.</p>\n            </li>\n            <li>\n                <p>Create the lifecycle hook. Specify whether the hook is used when the instances\n                    launch or terminate.</p>\n            </li>\n            <li>\n                <p>\n                  <b>If you need more time, record the lifecycle action\n                        heartbeat to keep the instance in a pending state.</b>\n               </p>\n            </li>\n            <li>\n                <p>If you finish before the timeout period ends, complete the lifecycle\n                    action.</p>\n            </li>\n         </ol>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/AutoScalingGroupLifecycle.html\">Auto Scaling\n                lifecycle</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Records a heartbeat for the lifecycle action associated with the specified token or\n            instance. This extends the timeout by the length of time defined using the <a>PutLifecycleHook</a> API call.</p>\n\n        <p>This step is a part of the procedure for adding a lifecycle hook to an Auto Scaling\n            group:</p>\n        <ol>\n            <li>\n                <p>(Optional) Create a Lambda function and a rule that allows CloudWatch Events to\n                    invoke your Lambda function when Amazon EC2 Auto Scaling launches or terminates\n                    instances.</p>\n            </li>\n            <li>\n                <p>(Optional) Create a notification target and an IAM role. The target can be\n                    either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2 Auto Scaling to\n                    publish lifecycle notifications to the target.</p>\n            </li>\n            <li>\n                <p>Create the lifecycle hook. Specify whether the hook is used when the instances\n                    launch or terminate.</p>\n            </li>\n            <li>\n                <p>\n                  <b>If you need more time, record the lifecycle action\n                        heartbeat to keep the instance in a pending state.</b>\n               </p>\n            </li>\n            <li>\n                <p>If you finish before the timeout period ends, complete the lifecycle\n                    action.</p>\n            </li>\n         </ol>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html\">Amazon EC2 Auto Scaling lifecycle\n                hooks</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#RecordLifecycleActionHeartbeatAnswer": {
@@ -5054,7 +5358,7 @@
                 "CheckpointPercentages": {
                     "target": "com.amazonaws.autoscaling#CheckpointPercentages",
                     "traits": {
-                        "smithy.api#documentation": "<p>Threshold values for each checkpoint in ascending order. Each number must be unique.\n            To replace all instances in the Auto Scaling group, the last number in the array must be\n            <code>100</code>.</p>\n        <p>For usage examples, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-adding-checkpoints-instance-refresh.html\">Adding\n                checkpoints to an instance refresh</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Threshold values for each checkpoint in ascending order. Each number must be unique.\n            To replace all instances in the Auto Scaling group, the last number in the array must be\n                <code>100</code>.</p>\n        <p>For usage examples, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-adding-checkpoints-instance-refresh.html\">Adding\n                checkpoints to an instance refresh</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
                     }
                 },
                 "CheckpointDelay": {
@@ -5620,7 +5924,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the instance protection settings of the specified instances.</p>\n        <p>For more information about preventing instances that are part of an Auto Scaling group from\n            terminating on scale in, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance scale-in protection</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>If you exceed your maximum limit of instance IDs, which is 50 per Auto Scaling group, the call\n            fails.</p>"
+                "smithy.api#documentation": "<p>Updates the instance protection settings of the specified instances. This operation\n            cannot be called on instances in a warm pool.</p>\n        <p>For more information about preventing instances that are part of an Auto Scaling group from\n            terminating on scale in, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-instance-termination.html#instance-protection\">Instance scale-in protection</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>\n        <p>If you exceed your maximum limit of instance IDs, which is 50 per Auto Scaling group, the call\n            fails.</p>"
             }
         },
         "com.amazonaws.autoscaling#SetInstanceProtectionAnswer": {
@@ -5700,7 +6004,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a new instance refresh operation, which triggers a rolling replacement of all\n            previously launched instances in the Auto Scaling group with a new group of instances.</p>\n        <p>If successful, this call creates a new instance refresh request with a unique ID that\n            you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that\n            have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an\n            instance refresh operation in progress, use the <a>CancelInstanceRefresh</a>\n            API. </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">Replacing Auto Scaling instances\n                based on an instance refresh</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Starts a new instance refresh operation, which triggers a rolling replacement of\n            previously launched instances in the Auto Scaling group with a new group of instances.</p>\n        <p>If successful, this call creates a new instance refresh request with a unique ID that\n            you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that\n            have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an\n            instance refresh operation in progress, use the <a>CancelInstanceRefresh</a>\n            API. </p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">Replacing Auto Scaling instances\n                based on an instance refresh</a> in the\n            <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#StartInstanceRefreshAnswer": {
@@ -5996,7 +6300,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. </p>\n        <p>This call simply makes a termination request. The instance is not terminated\n            immediately. When an instance is terminated, the instance status changes to\n                <code>terminated</code>. You can't connect to or start an instance after you've\n            terminated it.</p>\n        <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches\n            instances to replace the ones that are terminated. </p>\n        <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you\n            decrement the desired capacity, your Auto Scaling group can become unbalanced between\n            Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might\n            terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage\">Rebalancing activities</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Terminates the specified instance and optionally adjusts the desired group size. This\n            operation cannot be called on instances in a warm pool.</p>\n        <p>This call simply makes a termination request. The instance is not terminated\n            immediately. When an instance is terminated, the instance status changes to\n                <code>terminated</code>. You can't connect to or start an instance after you've\n            terminated it.</p>\n        <p>If you do not specify the option to decrement the desired capacity, Amazon EC2 Auto Scaling launches\n            instances to replace the ones that are terminated. </p>\n        <p>By default, Amazon EC2 Auto Scaling balances instances across all Availability Zones. If you\n            decrement the desired capacity, your Auto Scaling group can become unbalanced between\n            Availability Zones. Amazon EC2 Auto Scaling tries to rebalance the group, and rebalancing might\n            terminate instances in other zones. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/auto-scaling-benefits.html#AutoScalingBehavior.InstanceUsage\">Rebalancing activities</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#TerminateInstanceInAutoScalingGroupType": {
@@ -6165,6 +6469,79 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.autoscaling#XmlString"
+            }
+        },
+        "com.amazonaws.autoscaling#WarmPoolConfiguration": {
+            "type": "structure",
+            "members": {
+                "MaxGroupPreparedCapacity": {
+                    "target": "com.amazonaws.autoscaling#MaxGroupPreparedCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total maximum number of instances that are allowed to be in the warm pool or in\n            any state except <code>Terminated</code> for the Auto Scaling group.</p>"
+                    }
+                },
+                "MinSize": {
+                    "target": "com.amazonaws.autoscaling#WarmPoolMinSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of instances to maintain in the warm pool.</p>"
+                    }
+                },
+                "PoolState": {
+                    "target": "com.amazonaws.autoscaling#WarmPoolState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance state to transition to after the lifecycle actions are complete:\n                <code>Stopped</code> or <code>Running</code>.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.autoscaling#WarmPoolStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a warm pool that is marked for deletion.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a warm pool configuration. </p>"
+            }
+        },
+        "com.amazonaws.autoscaling#WarmPoolMinSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.autoscaling#WarmPoolSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.autoscaling#WarmPoolState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Stopped",
+                        "name": "Stopped"
+                    },
+                    {
+                        "value": "Running",
+                        "name": "Running"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.autoscaling#WarmPoolStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PendingDelete",
+                        "name": "PendingDelete"
+                    }
+                ]
             }
         },
         "com.amazonaws.autoscaling#XmlString": {

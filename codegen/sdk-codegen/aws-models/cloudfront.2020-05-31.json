@@ -1312,7 +1312,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A cache policy configuration.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CachePolicyConfig"
                     }
                 }
             }
@@ -1385,7 +1386,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current configuration information for the identity.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CloudFrontOriginAccessIdentityConfig"
                     }
                 }
             },
@@ -1605,7 +1607,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The distribution's configuration information.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "DistributionConfig"
                     }
                 }
             },
@@ -1828,7 +1831,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The distribution's configuration information. </p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "DistributionConfigWithTags"
                     }
                 }
             },
@@ -1916,7 +1920,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The request to create a new field-level encryption configuration.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "FieldLevelEncryptionConfig"
                     }
                 }
             }
@@ -1998,7 +2003,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The request to create a field-level encryption profile.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "FieldLevelEncryptionProfileConfig"
                     }
                 }
             }
@@ -2085,7 +2091,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The batch information for the invalidation.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "InvalidationBatch"
                     }
                 }
             },
@@ -2154,7 +2161,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A key group configuration.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "KeyGroupConfig"
                     }
                 }
             }
@@ -2226,7 +2234,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A monitoring subscription. This structure contains information about whether additional\n\t\t\tCloudWatch metrics are enabled for a given CloudFront distribution.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "MonitoringSubscription"
                     }
                 }
             }
@@ -2294,7 +2303,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>An origin request policy configuration.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "OriginRequestPolicyConfig"
                     }
                 }
             }
@@ -2361,7 +2371,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A CloudFront public key configuration.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "PublicKeyConfig"
                     }
                 }
             }
@@ -2530,7 +2541,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The streaming distribution's configuration information.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "StreamingDistributionConfig"
                     }
                 }
             },
@@ -2633,7 +2645,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The streaming distribution's configuration information. </p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "StreamingDistributionConfigWithTags"
                     }
                 }
             },
@@ -9903,7 +9916,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p> A complex type that contains zero or more <code>Tag</code> elements.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "Tags"
                     }
                 }
             },
@@ -10603,7 +10617,8 @@
                     "traits": {
                         "smithy.api#documentation": "<p> A complex type that contains zero or more <code>Tag</code> key elements.</p>",
                         "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "TagKeys"
                     }
                 }
             },
@@ -10666,14 +10681,6 @@
         "com.amazonaws.cloudfront#UpdateCachePolicyRequest": {
             "type": "structure",
             "members": {
-                "CachePolicyConfig": {
-                    "target": "com.amazonaws.cloudfront#CachePolicyConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A cache policy configuration.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -10687,6 +10694,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the cache policy that you are updating. The version is returned in the cache\n\t\t\tpolicy’s <code>ETag</code> field in the response to\n\t\t\t<code>GetCachePolicyConfig</code>.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "CachePolicyConfig": {
+                    "target": "com.amazonaws.cloudfront#CachePolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cache policy configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CachePolicyConfig"
                     }
                 }
             }
@@ -10756,14 +10772,6 @@
         "com.amazonaws.cloudfront#UpdateCloudFrontOriginAccessIdentityRequest": {
             "type": "structure",
             "members": {
-                "CloudFrontOriginAccessIdentityConfig": {
-                    "target": "com.amazonaws.cloudfront#CloudFrontOriginAccessIdentityConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The identity's configuration information.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -10777,6 +10785,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the \n\t\t\tidentity's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "CloudFrontOriginAccessIdentityConfig": {
+                    "target": "com.amazonaws.cloudfront#CloudFrontOriginAccessIdentityConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity's configuration information.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "CloudFrontOriginAccessIdentityConfig"
                     }
                 }
             },
@@ -10984,14 +11001,6 @@
         "com.amazonaws.cloudfront#UpdateDistributionRequest": {
             "type": "structure",
             "members": {
-                "DistributionConfig": {
-                    "target": "com.amazonaws.cloudfront#DistributionConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The distribution's configuration information.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -11005,6 +11014,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the \n\t\t\tdistribution's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "DistributionConfig": {
+                    "target": "com.amazonaws.cloudfront#DistributionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The distribution's configuration information.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "DistributionConfig"
                     }
                 }
             },
@@ -11089,14 +11107,6 @@
         "com.amazonaws.cloudfront#UpdateFieldLevelEncryptionConfigRequest": {
             "type": "structure",
             "members": {
-                "FieldLevelEncryptionConfig": {
-                    "target": "com.amazonaws.cloudfront#FieldLevelEncryptionConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Request to update a field-level encryption configuration. </p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -11110,6 +11120,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the configuration identity to update. \n\t\t\tFor example: <code>E2QWRUHAPOMQZL</code>.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "FieldLevelEncryptionConfig": {
+                    "target": "com.amazonaws.cloudfront#FieldLevelEncryptionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to update a field-level encryption configuration. </p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "FieldLevelEncryptionConfig"
                     }
                 }
             }
@@ -11191,14 +11210,6 @@
         "com.amazonaws.cloudfront#UpdateFieldLevelEncryptionProfileRequest": {
             "type": "structure",
             "members": {
-                "FieldLevelEncryptionProfileConfig": {
-                    "target": "com.amazonaws.cloudfront#FieldLevelEncryptionProfileConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Request to update a field-level encryption profile. </p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -11212,6 +11223,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the profile identity to update. \n\t\t\tFor example: <code>E2QWRUHAPOMQZL</code>.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "FieldLevelEncryptionProfileConfig": {
+                    "target": "com.amazonaws.cloudfront#FieldLevelEncryptionProfileConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Request to update a field-level encryption profile. </p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "FieldLevelEncryptionProfileConfig"
                     }
                 }
             }
@@ -11275,14 +11295,6 @@
         "com.amazonaws.cloudfront#UpdateKeyGroupRequest": {
             "type": "structure",
             "members": {
-                "KeyGroupConfig": {
-                    "target": "com.amazonaws.cloudfront#KeyGroupConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The key group configuration.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -11296,6 +11308,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the key group that you are updating. The version is the key group’s\n\t\t\t<code>ETag</code> value.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "KeyGroupConfig": {
+                    "target": "com.amazonaws.cloudfront#KeyGroupConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key group configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "KeyGroupConfig"
                     }
                 }
             }
@@ -11374,14 +11395,6 @@
         "com.amazonaws.cloudfront#UpdateOriginRequestPolicyRequest": {
             "type": "structure",
             "members": {
-                "OriginRequestPolicyConfig": {
-                    "target": "com.amazonaws.cloudfront#OriginRequestPolicyConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>An origin request policy configuration.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -11395,6 +11408,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version of the origin request policy that you are updating. The version is returned in\n\t\t\tthe origin request policy’s <code>ETag</code> field in the response to\n\t\t\t<code>GetOriginRequestPolicyConfig</code>.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "OriginRequestPolicyConfig": {
+                    "target": "com.amazonaws.cloudfront#OriginRequestPolicyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An origin request policy configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "OriginRequestPolicyConfig"
                     }
                 }
             }
@@ -11461,14 +11483,6 @@
         "com.amazonaws.cloudfront#UpdatePublicKeyRequest": {
             "type": "structure",
             "members": {
-                "PublicKeyConfig": {
-                    "target": "com.amazonaws.cloudfront#PublicKeyConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>A public key configuration.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -11482,6 +11496,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the public key to update. \n\t\t\tFor example: <code>E2QWRUHAPOMQZL</code>.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "PublicKeyConfig": {
+                    "target": "com.amazonaws.cloudfront#PublicKeyConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A public key configuration.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "PublicKeyConfig"
                     }
                 }
             }
@@ -11640,14 +11663,6 @@
         "com.amazonaws.cloudfront#UpdateStreamingDistributionRequest": {
             "type": "structure",
             "members": {
-                "StreamingDistributionConfig": {
-                    "target": "com.amazonaws.cloudfront#StreamingDistributionConfig",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The streaming distribution's configuration information.</p>",
-                        "smithy.api#httpPayload": {},
-                        "smithy.api#required": {}
-                    }
-                },
                 "Id": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -11661,6 +11676,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The value of the <code>ETag</code> header that you received when retrieving the \n\t\t\tstreaming distribution's configuration. For example: <code>E2QWRUHAPOMQZL</code>.</p>",
                         "smithy.api#httpHeader": "If-Match"
+                    }
+                },
+                "StreamingDistributionConfig": {
+                    "target": "com.amazonaws.cloudfront#StreamingDistributionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The streaming distribution's configuration information.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {},
+                        "smithy.api#xmlName": "StreamingDistributionConfig"
                     }
                 }
             },

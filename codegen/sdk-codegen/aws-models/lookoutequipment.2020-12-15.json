@@ -1,0 +1,3062 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.lookoutequipment#AWSLookoutEquipmentFrontendService": {
+            "type": "service",
+            "version": "2020-12-15",
+            "operations": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#CreateDataset"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#CreateInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#CreateModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DeleteDataset"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DeleteInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DeleteModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeDataIngestionJob"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeDataset"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#DescribeModel"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ListDataIngestionJobs"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ListDatasets"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ListInferenceExecutions"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ListInferenceSchedulers"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ListModels"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#StartDataIngestionJob"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#StartInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#StopInferenceScheduler"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#UpdateInferenceScheduler"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "LookoutEquipment",
+                    "arnNamespace": "lookoutequipment",
+                    "cloudFormationName": "LookoutEquipment",
+                    "cloudTrailEventSource": "lookoutequipment.amazonaws.com",
+                    "endpointPrefix": "lookoutequipment"
+                },
+                "aws.auth#sigv4": {
+                    "name": "lookoutequipment"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<p>Amazon Lookout for Equipment is a machine learning service that uses advanced analytics to identify\n         anomalies in machines from sensor data for use in predictive maintenance. </p>",
+                "smithy.api#title": "Amazon Lookout for Equipment"
+            }
+        },
+        "com.amazonaws.lookoutequipment#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request could not be completed because you do not have access to the resource.\n      </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.lookoutequipment#AmazonResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#BoundedLengthString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5000
+                },
+                "smithy.api#pattern": "[\\P{M}\\p{M}]{1,5000}"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ComponentTimestampDelimiter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                },
+                "smithy.api#pattern": "^(\\-|\\_|\\s)?$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The request could not be completed due to a conflict with the current state of the\n         target resource. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#CreateDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#CreateDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a container for a collection of data being ingested for analysis. The dataset\n         contains the metadata describing where the data is and what the data actually looks like.\n         In other words, it contains the location of the data source, the data schema, and other\n         information. A dataset also contains any tags associated with the ingested data. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset being created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetSchema": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON description of the data that is in each time series dataset, including names,\n         column names, and data types. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#NameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier for the request. If you do not set the client request token, Amazon\n         Lookout for Equipment generates one. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lookoutequipment#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags associated with the ingested data described in the dataset. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset being created. </p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset being created. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the <code>CreateDataset</code> operation. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateInferenceScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#CreateInferenceSchedulerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#CreateInferenceSchedulerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Creates a scheduled inference. Scheduling an inference is setting up a continuous\n         real-time inference plan to analyze new measurement data. When setting up the schedule, you\n         provide an S3 bucket location for the input data, assign it a delimiter between separate\n         entries in the data, set an offset delay if desired, and set the frequency of inferencing.\n         You must also provide an S3 bucket location for the output data. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateInferenceSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the previously trained ML model being used to create the inference\n         scheduler. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler being created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataDelayOffsetInMinutes": {
+                    "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if you select an offset delay time of five minutes, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data. </p>"
+                    }
+                },
+                "DataUploadFrequency": {
+                    "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p> How often data is uploaded to the source S3 bucket for the input data. The value chosen\n         is the length of time between data uploads. For instance, if you select 5 minutes, Amazon\n         Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency\n         also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this\n         example, it starts once every 5 minutes. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for the input data for the inference scheduler,\n         including delimiter, format, and dataset location. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information for the output results for the inference scheduler,\n         including the S3 location for the output. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role with permission to access the data source being\n         used for the inference. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#NameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier for the request. If you do not set the client request token, Amazon\n         Lookout for Equipment generates one. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lookoutequipment#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Any tags associated with the inference scheduler. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateInferenceSchedulerResponse": {
+            "type": "structure",
+            "members": {
+                "InferenceSchedulerArn": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the inference scheduler being created. </p>"
+                    }
+                },
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of inference scheduler being created. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the <code>CreateInferenceScheduler</code> operation. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#CreateModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#CreateModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an ML model for data inference. </p>\n         <p>A machine-learning (ML) model is a mathematical model that finds patterns in your data.\n         In Amazon Lookout for Equipment, the model learns the patterns of normal behavior and detects abnormal\n         behavior that could be potential equipment failure (or maintenance events). The models are\n         made by analyzing normal data and abnormalities in machine behavior that have already\n         occurred.</p>\n         <p>Your model is trained using a portion of the data from your dataset and uses that data\n         to learn patterns of normal behavior and abnormal patterns that lead to equipment failure.\n         Another portion of the data is used to evaluate the model's accuracy. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateModelRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the ML model to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset for the ML model being created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatasetSchema": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data schema for the ML model being created. </p>"
+                    }
+                },
+                "LabelsInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#LabelsInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The input configuration for the labels being used for the ML model that's being created.\n      </p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the request. If you do not set the client request token, Amazon\n         Lookout for Equipment generates one. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "TrainingDataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to begin the subset of\n         training data for the ML model. </p>"
+                    }
+                },
+                "TrainingDataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to end the subset of\n         training data for the ML model. </p>"
+                    }
+                },
+                "EvaluationDataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset that should be used to begin the subset of\n         evaluation data for the ML model. </p>"
+                    }
+                },
+                "EvaluationDataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that should be used to end the subset of\n         evaluation data for the ML model. </p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source\n         being used to create the ML model. </p>"
+                    }
+                },
+                "DataPreProcessingConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#DataPreProcessingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of \n         the data after post processing by \n         Amazon Lookout for Equipment. For example, if you provide data that \n         has been collected at a 1 second level and you want the system to resample \n         the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must \n            attach the prefix \"PT\" to the rate you want.  The value for a 1 second rate \n            is therefore <i>PT1S</i>, the value for a 15 minute rate \n            is <i>PT15M</i>, and the value for a 1 hour rate \n            is <i>PT1H</i>\n         </p>"
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#NameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lookoutequipment#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Any tags associated with the ML model being created. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#CreateModelResponse": {
+            "type": "structure",
+            "members": {
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model being created. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#ModelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the <code>CreateModel</code> operation. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 60
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DataIngestionJobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#DataIngestionJobSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DataIngestionJobSummary": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the job ID of the data ingestion job. </p>"
+                    }
+                },
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset used for the data ingestion job. </p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset used in the data ingestion job. </p>"
+                    }
+                },
+                "IngestionInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies information for the input data for the data inference job, including data S3\n         location parameters. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the data ingestion job. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a specified data ingestion job, including dataset\n         information, data ingestion configuration, and status. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DataPreProcessingConfiguration": {
+            "type": "structure",
+            "members": {
+                "TargetSamplingRate": {
+                    "target": "com.amazonaws.lookoutequipment#TargetSamplingRate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sampling rate of the data after post processing by Amazon Lookout for Equipment. \n         For example, if you provide data that has been collected at a 1 second level and \n         you want the system to resample the data at a 1 minute rate before training, \n         the <code>TargetSamplingRate</code> is 1 minute.</p>\n         <p>When providing a value for the <code>TargetSamplingRate</code>, you must attach \n            the prefix \"PT\" to the rate you want.  The value for a 1 second rate is \n            therefore <i>PT1S</i>, the value for a 15 minute \n            rate is <i>PT15M</i>, and the value for a 1 hour rate \n            is <i>PT1H</i>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of \n         the data after post processing by \n         Amazon Lookout for Equipment. For example, if you provide data that \n         has been collected at a 1 second level and you want the system to resample \n         the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p>\n            <p>When providing a value for the <code>TargetSamplingRate</code>, you must \n               attach the prefix \"PT\" to the rate you want.  The value for a 1 second rate \n               is therefore <i>PT1S</i>, the value for a 15 minute rate \n               is <i>PT15M</i>, and the value for a 1 hour rate \n               is <i>PT1H</i>\n         </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DataUploadFrequency": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PT5M",
+                        "name": "PT5M"
+                    },
+                    {
+                        "value": "PT10M",
+                        "name": "PT10M"
+                    },
+                    {
+                        "value": "PT15M",
+                        "name": "PT15M"
+                    },
+                    {
+                        "value": "PT30M",
+                        "name": "PT30M"
+                    },
+                    {
+                        "value": "PT1H",
+                        "name": "PT1H"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#DatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:dataset\\/.+"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DatasetIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_-]{1,200}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DatasetName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_-]{1,200}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DatasetSchema": {
+            "type": "structure",
+            "members": {
+                "InlineDataSchema": {
+                    "target": "com.amazonaws.lookoutequipment#SynthesizedJsonInlineDataSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the data schema used with the given dataset. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DatasetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "INGESTION_IN_PROGRESS",
+                        "name": "INGESTION_IN_PROGRESS"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#DatasetSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#DatasetSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DatasetSummary": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset. </p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specified dataset. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the dataset. </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the dataset was created in Amazon Lookout for Equipment. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the specific data set, including name, ARN, and status.\n      </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DeleteDatasetRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Deletes a dataset and associated artifacts. The operation will check to see if any\n         inference scheduler or data ingestion job is currently using the dataset, and if there\n         isn't, the dataset, its metadata, and any associated data stored in S3 will be deleted.\n         This does not affect any models that used this dataset for training and evaluation, but\n         does prevent it from being used in the future. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset to be deleted. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteInferenceScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DeleteInferenceSchedulerRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an inference scheduler that has been set up. Already processed output results\n         are not affected. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteInferenceSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler to be deleted. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DeleteModelRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an ML model currently available for Amazon Lookout for Equipment. This will prevent it from\n         being used with an inference scheduler, even one that is already set up. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DeleteModelRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model to be deleted. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeDataIngestionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeDataIngestionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeDataIngestionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information on a specific data ingestion job such as creation time, dataset\n         ARN, status, and so on. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeDataIngestionJobRequest": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job ID of the data ingestion job. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeDataIngestionJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the job ID of the data ingestion job. </p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset being used in the data ingestion job.\n      </p>"
+                    }
+                },
+                "IngestionInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the S3 location configuration for the data input for the data ingestion job.\n      </p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role with permission to access the data source\n         being ingested. </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the data ingestion job was created. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the <code>DataIngestionJob</code> operation. </p>"
+                    }
+                },
+                "FailedReason": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the reason for failure when a data ingestion job has failed. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information on a specified dataset such as the schema location, status, and so\n         on.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset to be described. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset being described. </p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset being described. </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time the dataset was created in Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time the dataset was last updated, if it was. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the dataset. </p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.lookoutequipment#SynthesizedJsonInlineDataSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON description of the data that is in each time series dataset, including names,\n         column names, and data types. </p>"
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "IngestionInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the S3 location configuration for the data input for the data ingestion job. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeInferenceScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeInferenceSchedulerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeInferenceSchedulerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies information about the inference scheduler being used, including name, model,\n         status, and associated metadata </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeInferenceSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler being described. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeInferenceSchedulerResponse": {
+            "type": "structure",
+            "members": {
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model of the inference scheduler being\n         described. </p>"
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model of the inference scheduler being described. </p>"
+                    }
+                },
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler being described. </p>"
+                    }
+                },
+                "InferenceSchedulerArn": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the inference scheduler being described. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
+                    }
+                },
+                "DataDelayOffsetInMinutes": {
+                    "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if you select an offset delay time of five minutes, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data.</p>"
+                    }
+                },
+                "DataUploadFrequency": {
+                    "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how often data is uploaded to the source S3 bucket for the input data. This\n         value is the length of time between data uploads. For instance, if you select 5 minutes,\n         Amazon Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This\n         frequency also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data.\n         In this example, it starts once every 5 minutes. </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time at which the inference scheduler was created. </p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the time at which the inference scheduler was last updated, if it was. </p>"
+                    }
+                },
+                "DataInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies configuration information for the input data for the inference scheduler,\n         including delimiter, format, and dataset location. </p>"
+                    }
+                },
+                "DataOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies information for the output results for the inference scheduler, \n         including the output S3 location. </p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source for\n         the inference scheduler being described. </p>"
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#DescribeModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#DescribeModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides overall information about a specific ML model, including model name and ARN,\n         dataset, training and evaluation information, status, and so on. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeModelRequest": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model to be described. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#DescribeModelResponse": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model being described. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model being described. </p>"
+                    }
+                },
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset being used by the ML being described. </p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resouce Name (ARN) of the dataset used to create the ML model being\n         described. </p>"
+                    }
+                },
+                "Schema": {
+                    "target": "com.amazonaws.lookoutequipment#SynthesizedJsonInlineDataSchema",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON description of the data that is in each time series dataset, including names,\n         column names, and data types. </p>"
+                    }
+                },
+                "LabelsInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#LabelsInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies configuration information about the labels input, including its S3 location.\n      </p>"
+                    }
+                },
+                "TrainingDataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to begin the subset of\n         training data for the ML model. </p>"
+                    }
+                },
+                "TrainingDataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to end the subset of training\n         data for the ML model. </p>"
+                    }
+                },
+                "EvaluationDataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to begin the subset of\n         evaluation data for the ML model. </p>"
+                    }
+                },
+                "EvaluationDataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Indicates the time reference in the dataset that was used to end the subset of\n         evaluation data for the ML model. </p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source for\n         the ML model being described. </p>"
+                    }
+                },
+                "DataPreProcessingConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#DataPreProcessingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration is the <code>TargetSamplingRate</code>, which is the sampling rate of \n         the data after post processing by \n         Amazon Lookout for Equipment. For example, if you provide data that \n         has been collected at a 1 second level and you want the system to resample \n         the data at a 1 minute rate before training, the <code>TargetSamplingRate</code> is 1 minute.</p>\n            <p>When providing a value for the <code>TargetSamplingRate</code>, you must \n               attach the prefix \"PT\" to the rate you want.  The value for a 1 second rate \n               is therefore <i>PT1S</i>, the value for a 15 minute rate \n               is <i>PT15M</i>, and the value for a 1 hour rate \n               is <i>PT1H</i>\n         </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#ModelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the current status of the model being described. Status describes the status\n         of the most recent action of the model. </p>"
+                    }
+                },
+                "TrainingExecutionStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time at which the training of the ML model began. </p>"
+                    }
+                },
+                "TrainingExecutionEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time at which the training of the ML model was completed. </p>"
+                    }
+                },
+                "FailedReason": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the training of the ML model failed, this indicates the reason for that failure.\n      </p>"
+                    }
+                },
+                "ModelMetrics": {
+                    "target": "com.amazonaws.lookoutequipment#SynthesizedJsonModelMetrics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Model Metrics show an aggregated summary of the model's performance within the evaluation time \n         range. This is the JSON content of the metrics created when evaluating the model. </p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the last time the ML model was updated. The type of update is not specified.\n      </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time and date at which the ML model was created. </p>"
+                    }
+                },
+                "ServerSideKmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#FileNameTimestampFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^EPOCH|yyyy-MM-dd-HH-mm-ss|yyyyMMddHHmmss$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#IamRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"
+            }
+        },
+        "com.amazonaws.lookoutequipment#IdempotenceToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "\\p{ASCII}{1,256}"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceExecutionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceExecutionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#InferenceExecutionSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceExecutionSummary": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model being used for the inference execution. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model used for the inference execution. </p>"
+                    }
+                },
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler being used for the inference execution. </p>"
+                    }
+                },
+                "InferenceSchedulerArn": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the inference scheduler being used for the inference\n         execution. </p>"
+                    }
+                },
+                "ScheduledStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the start time at which the inference scheduler began the specific inference\n         execution. </p>"
+                    }
+                },
+                "DataStartTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset at which the inference execution began.\n      </p>"
+                    }
+                },
+                "DataEndTime": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the time reference in the dataset at which the inference execution stopped.\n      </p>"
+                    }
+                },
+                "DataInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies configuration information for the input data for the inference scheduler,\n         including delimiter, format, and dataset location. </p>"
+                    }
+                },
+                "DataOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies configuration information for the output results from for the inference\n         execution, including the output S3 location. </p>"
+                    }
+                },
+                "CustomerResultObject": {
+                    "target": "com.amazonaws.lookoutequipment#S3Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the inference execution. </p>"
+                    }
+                },
+                "FailedReason": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the reason for failure when an inference execution has failed. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the specific inference execution, including input and output\n         data configuration, inference scheduling information, status, and so on. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3InputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceS3InputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies configuration information for the input data for the inference, including S3\n         location of input data.. </p>"
+                    }
+                },
+                "InputTimeZoneOffset": {
+                    "target": "com.amazonaws.lookoutequipment#TimeZoneOffset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the difference between your time zone and Greenwich Mean Time (GMT). </p>"
+                    }
+                },
+                "InferenceInputNameConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceInputNameConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>> Specifies configuration information for the input data for the inference, including\n         timestamp format and delimiter. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>> Specifies configuration information for the input data for the inference, including S3\n         location of input data.. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceInputNameConfiguration": {
+            "type": "structure",
+            "members": {
+                "TimestampFormat": {
+                    "target": "com.amazonaws.lookoutequipment#FileNameTimestampFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the timestamp, whether Epoch time, or standard, with or without hyphens\n         (-). </p>"
+                    }
+                },
+                "ComponentTimestampDelimiter": {
+                    "target": "com.amazonaws.lookoutequipment#ComponentTimestampDelimiter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the delimiter character used between items in the data. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>>> Specifies configuration information for the input data for the inference, including\n         timestamp format and delimiter. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3OutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceS3OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies configuration information for the output results from for the inference,\n         output S3 location. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#NameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID number for the AWS KMS key used to encrypt the inference output. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies configuration information for the output results from for the inference,\n         including KMS key ID and output S3 location. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceS3InputConfiguration": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutequipment#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bucket containing the input dataset for the inference. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.lookoutequipment#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix for the S3 bucket used for the input data for the inference. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies configuration information for the input data for the inference, including\n         input data S3 location. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceS3OutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutequipment#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The bucket containing the output results from the inference </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.lookoutequipment#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The prefix for the S3 bucket used for the output results from the inference. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies configuration information for the output results from the inference,\n         including output S3 location. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceSchedulerArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_-]{1,200}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceSchedulerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_-]{1,200}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceSchedulerStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceSchedulerSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#InferenceSchedulerSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InferenceSchedulerSummary": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model used for the inference scheduler. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the ML model used by the inference scheduler. </p>"
+                    }
+                },
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler. </p>"
+                    }
+                },
+                "InferenceSchedulerArn": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the inference scheduler. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
+                    }
+                },
+                "DataDelayOffsetInMinutes": {
+                    "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>> A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if an offset delay time of five minutes was selected, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data.\n      </p>"
+                    }
+                },
+                "DataUploadFrequency": {
+                    "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How often data is uploaded to the source S3 bucket for the input data. This value is the\n         length of time between data uploads. For instance, if you select 5 minutes, Amazon Lookout for Equipment\n         will upload the real-time data to the source bucket once every 5 minutes. This frequency also\n         determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this\n         example, it starts once every 5 minutes. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the specific inference scheduler, including data delay\n         offset, model name and ARN, status, and so on. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#IngestionInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3InputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionS3InputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location information for the S3 bucket used for input data for the data ingestion.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies configuration information for the input data for the data ingestion job,\n         including input data S3 location. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#IngestionJobId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 32
+                },
+                "smithy.api#pattern": "[A-Fa-f0-9]{0,32}"
+            }
+        },
+        "com.amazonaws.lookoutequipment#IngestionJobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#IngestionS3InputConfiguration": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutequipment#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket used for the input data for the data ingestion. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.lookoutequipment#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix for the S3 location being used for the input data for the data ingestion.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Specifies S3 configuration information for the input data for the data ingestion job.\n      </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Processing of the request has failed because of an unknown error, exception or failure.\n      </p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.lookoutequipment#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "arn:aws[a-z\\-]*:kms:[a-z0-9\\-]*:\\d{12}:[\\w\\-\\/]+"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelsInputConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3InputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#LabelsS3InputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains location information for the S3 location being used for label data. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration information for the S3 location being used to hold label\n         data. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#LabelsS3InputConfiguration": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutequipment#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket holding the label data. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.lookoutequipment#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The prefix for the S3 bucket used for the label data. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The location information (prefix and bucket name) for the s3 location being used for\n         label data. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListDataIngestionJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListDataIngestionJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListDataIngestionJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a list of all data ingestion jobs, including dataset name and ARN, S3 location\n         of the input data, status, and so on. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListDataIngestionJobsRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset being used for the data ingestion job. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of data ingestion\n         jobs. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the maximum number of data ingestion jobs to list. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the data ingestion job. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListDataIngestionJobsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of data ingestion\n         jobs. </p>"
+                    }
+                },
+                "DataIngestionJobSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#DataIngestionJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies information about the specific data ingestion job, including dataset name and\n         status. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListDatasets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListDatasetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListDatasetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all datasets currently available in your account, filtering on the dataset name.\n      </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListDatasetsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of datasets.\n      </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the maximum number of datasets to list. </p>"
+                    }
+                },
+                "DatasetNameBeginsWith": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning of the name of the datasets to be listed. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListDatasetsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of datasets.\n      </p>"
+                    }
+                },
+                "DatasetSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the specified dataset, including creation time, dataset ARN,\n         and status. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListInferenceExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListInferenceExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListInferenceExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p> Lists all inference executions that have been performed by the specified inference\n         scheduler. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListInferenceExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An opaque pagination token indicating where to continue the listing of inference\n         executions.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of inference executions to list. </p>"
+                    }
+                },
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler for the inference execution listed. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataStartTimeAfter": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time reference in the inferenced dataset after which Amazon Lookout for Equipment started the\n         inference execution. </p>"
+                    }
+                },
+                "DataEndTimeBefore": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time reference in the inferenced dataset before which Amazon Lookout for Equipment stopped the\n         inference execution. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the inference execution. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListInferenceExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of inference\n         executions. </p>"
+                    }
+                },
+                "InferenceExecutionSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceExecutionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides an array of information about the individual inference executions returned from\n         the <code>ListInferenceExecutions</code> operation, including model used, inference\n         scheduler, data configuration, and so on. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListInferenceSchedulers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListInferenceSchedulersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListInferenceSchedulersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of all inference schedulers currently available for your account.\n      </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListInferenceSchedulersRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of inference\n         schedulers. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the maximum number of inference schedulers to list. </p>"
+                    }
+                },
+                "InferenceSchedulerNameBeginsWith": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning of the name of the inference schedulers to be listed. </p>"
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model used by the inference scheduler to be listed. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListInferenceSchedulersResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of inference\n         schedulers. </p>"
+                    }
+                },
+                "InferenceSchedulerSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the specified inference scheduler, including data upload\n         frequency, model name and ARN, and status. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListModels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListModelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListModelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Generates a list of all models in the account, including model name and ARN, dataset,\n         and status. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListModelsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of ML models.\n      </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.lookoutequipment#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies the maximum number of ML models to list. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#ModelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the ML model. </p>"
+                    }
+                },
+                "ModelNameBeginsWith": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning of the name of the ML models being listed. </p>"
+                    }
+                },
+                "DatasetNameBeginsWith": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning of the name of the dataset of the ML models to be listed. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListModelsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.lookoutequipment#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> An opaque pagination token indicating where to continue the listing of ML models.\n      </p>"
+                    }
+                },
+                "ModelSummaries": {
+                    "target": "com.amazonaws.lookoutequipment#ModelSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information on the specified model, including created time, model and dataset\n         ARNs, and status. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the tags for a specified resource, including key and value. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lookoutequipment#AmazonResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource (such as the dataset or model) that is\n         the focus of the <code>ListTagsForResource</code> operation. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.lookoutequipment#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Any tags associated with the resource. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:model\\/.+"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_-]{1,200}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#ModelSummary"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelSummary": {
+            "type": "structure",
+            "members": {
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model. </p>"
+                    }
+                },
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the ML model. </p>"
+                    }
+                },
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset being used for the ML model. </p>"
+                    }
+                },
+                "DatasetArn": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset used to create the model. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#ModelStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the ML model. </p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.lookoutequipment#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the specific model was created. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the specified ML model, including dataset and model names and\n         ARNs, as well as status. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#NameOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "\\p{ASCII}{0,8192}"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The resource requested could not be found. Verify the resource ID and retry your\n         request. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.lookoutequipment#S3Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#S3Key": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "[\\P{M}\\p{M}]{1,1024}[^/]$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#S3Object": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutequipment#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the specific S3 bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.lookoutequipment#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key being used to encrypt the S3 object.\n         Without this key, data in the bucket is not accessible. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an S3 bucket. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#S3Prefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "(^$)|([\\P{M}\\p{M}]{1,1023}/$)"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Resource limitations have been exceeded. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartDataIngestionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#StartDataIngestionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#StartDataIngestionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a data ingestion job. Amazon Lookout for Equipment returns the job status. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartDataIngestionJobRequest": {
+            "type": "structure",
+            "members": {
+                "DatasetName": {
+                    "target": "com.amazonaws.lookoutequipment#DatasetIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the dataset being used by the data ingestion job. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IngestionInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies information for the input data for the data ingestion job, including dataset\n         S3 location. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source for\n         the data ingestion job. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.lookoutequipment#IdempotenceToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A unique identifier for the request. If you do not set the client request token, Amazon\n         Lookout for Equipment generates one. </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartDataIngestionJobResponse": {
+            "type": "structure",
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the job ID of the data ingestion job. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#IngestionJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the <code>StartDataIngestionJob</code> operation. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartInferenceScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#StartInferenceSchedulerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#StartInferenceSchedulerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an inference scheduler. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartInferenceSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler to be started. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#StartInferenceSchedulerResponse": {
+            "type": "structure",
+            "members": {
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model being used by the inference scheduler.\n      </p>"
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model being used by the inference scheduler. </p>"
+                    }
+                },
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler being started. </p>"
+                    }
+                },
+                "InferenceSchedulerArn": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the inference scheduler being started. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#StopInferenceScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#StopInferenceSchedulerRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#StopInferenceSchedulerResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops an inference scheduler. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#StopInferenceSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler to be stopped. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#StopInferenceSchedulerResponse": {
+            "type": "structure",
+            "members": {
+                "ModelArn": {
+                    "target": "com.amazonaws.lookoutequipment#ModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the ML model used by the inference scheduler being\n         stopped. </p>"
+                    }
+                },
+                "ModelName": {
+                    "target": "com.amazonaws.lookoutequipment#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ML model used by the inference scheduler being stopped. </p>"
+                    }
+                },
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler being stopped. </p>"
+                    }
+                },
+                "InferenceSchedulerArn": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the inference schedule being stopped. </p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the status of the inference scheduler. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#SynthesizedJsonInlineDataSchema": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000000
+                },
+                "smithy.api#mediaType": "application/json"
+            }
+        },
+        "com.amazonaws.lookoutequipment#SynthesizedJsonModelMetrics": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50000
+                },
+                "smithy.api#mediaType": "application/json"
+            }
+        },
+        "com.amazonaws.lookoutequipment#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.lookoutequipment#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key for the specified tag. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.lookoutequipment#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the specified tag. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A tag is a key-value pair that can be added to a resource as metadata. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lookoutequipment#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a given tag to a resource in your account. A tag is a key-value pair which\n         can be added to an Amazon Lookout for Equipment resource as metadata. Tags can be used for organizing your\n         resources as well as helping you to search and filter by tag. Multiple tags can be added to\n         a resource, either when you create it, or later. Up to 50 tags can be associated with each\n         resource. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lookoutequipment#AmazonResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the specific resource to which the tag should be\n         associated. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.lookoutequipment#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag or tags to be associated with a specific resource. Both the tag key and value\n         are specified. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.lookoutequipment#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "[\\s\\w+-=\\.:/@]*"
+            }
+        },
+        "com.amazonaws.lookoutequipment#TargetSamplingRate": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PT1S",
+                        "name": "PT1S"
+                    },
+                    {
+                        "value": "PT5S",
+                        "name": "PT5S"
+                    },
+                    {
+                        "value": "PT10S",
+                        "name": "PT10S"
+                    },
+                    {
+                        "value": "PT15S",
+                        "name": "PT15S"
+                    },
+                    {
+                        "value": "PT30S",
+                        "name": "PT30S"
+                    },
+                    {
+                        "value": "PT1M",
+                        "name": "PT1M"
+                    },
+                    {
+                        "value": "PT5M",
+                        "name": "PT5M"
+                    },
+                    {
+                        "value": "PT10M",
+                        "name": "PT10M"
+                    },
+                    {
+                        "value": "PT15M",
+                        "name": "PT15M"
+                    },
+                    {
+                        "value": "PT30M",
+                        "name": "PT30M"
+                    },
+                    {
+                        "value": "PT1H",
+                        "name": "PT1H"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lookoutequipment#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.lookoutequipment#TimeZoneOffset": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(\\+|\\-)[0-9]{2}\\:[0-9]{2}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.lookoutequipment#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lookoutequipment#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a specific tag from a given resource. The tag is specified by its key. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.lookoutequipment#AmazonResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the tag is currently associated.\n      </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.lookoutequipment#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the key of the tag to be removed from a specified resource. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.lookoutequipment#UpdateInferenceScheduler": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lookoutequipment#UpdateInferenceSchedulerRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lookoutequipment#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lookoutequipment#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an inference scheduler. </p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#UpdateInferenceSchedulerRequest": {
+            "type": "structure",
+            "members": {
+                "InferenceSchedulerName": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the inference scheduler to be updated. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataDelayOffsetInMinutes": {
+                    "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>> A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if you select an offset delay time of five minutes, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data.</p>"
+                    }
+                },
+                "DataUploadFrequency": {
+                    "target": "com.amazonaws.lookoutequipment#DataUploadFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How often data is uploaded to the source S3 bucket for the input data. The value chosen\n         is the length of time between data uploads. For instance, if you select 5 minutes, Amazon\n         Lookout for Equipment will upload the real-time data to the source bucket once every 5 minutes. This frequency\n         also determines how often Amazon Lookout for Equipment starts a scheduled inference on your data. In this\n         example, it starts once every 5 minutes. </p>"
+                    }
+                },
+                "DataInputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceInputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies information for the input data for the inference scheduler, including\n         delimiter, format, and dataset location. </p>"
+                    }
+                },
+                "DataOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#InferenceOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p> Specifies information for the output results from the inference scheduler, including the output S3 location. </p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.lookoutequipment#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of a role with permission to access the data source for\n         the inference scheduler. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.lookoutequipment#BoundedLengthString",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The input fails to satisfy constraints specified by Amazon Lookout for Equipment or a related AWS\n         service that's being utilized. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

@@ -76,17 +76,41 @@
                     "target": "com.amazonaws.elasticache#CacheClusterNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#CacheParameterGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#CacheSecurityGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ReplicationGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ReservedCacheNodeNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.elasticache#SnapshotNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#UserGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#UserNotFoundFault"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds up to 50 cost allocation tags to the named resource.\n            A cost allocation tag is a key-value pair where the key and value are case-sensitive.            \n            You can use cost allocation tags to categorize and track your AWS costs.</p>\n        <p>\n            When you apply tags to your ElastiCache resources, \n            AWS generates a cost allocation report as a comma-separated value (CSV) file \n            with your usage and costs aggregated by your tags. \n            You can apply tags that represent business categories (such as cost centers, application names, or owners) \n            to organize your costs across multiple services.\n            For more information, \n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html\">Using Cost Allocation Tags in Amazon ElastiCache</a> \n            in the <i>ElastiCache User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A  tag is a key-value pair where the key and value are case-sensitive.            \n            You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. \n          For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n        <p>\n            For example, you can use cost-allocation tags to your ElastiCache resources, \n            AWS generates a cost allocation report as a comma-separated value (CSV) file \n            with your usage and costs aggregated by your tags. \n            You can apply tags that represent business categories (such as cost centers, application names, or owners) \n            to organize your costs across multiple services.</p>\n            <p>For more information, \n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html\">Using Cost Allocation Tags in Amazon ElastiCache</a> \n            in the <i>ElastiCache User Guide</i>.</p>"
             }
         },
         "com.amazonaws.elasticache#AddTagsToResourceMessage": {
@@ -102,7 +126,7 @@
                 "Tags": {
                     "target": "com.amazonaws.elasticache#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cost allocation tags to be added to this resource. A tag is a key-value pair. \n          A tag key must be accompanied by a tag value.</p>",
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. \n          A tag key must be accompanied by a tag value, although null is accepted.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1237,7 +1261,7 @@
                 "IsGlobal": {
                     "target": "com.amazonaws.elasticache#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the parameter group is associated with a Global Datastore</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the parameter group is associated with a Global datastore</p>"
                     }
                 },
                 "ARN": {
@@ -1807,6 +1831,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#SnapshotQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -1833,13 +1860,19 @@
                 "TargetBucket": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket to which the snapshot is exported.\n            This parameter is used only when exporting a snapshot for external access.</p>\n        <p>When using this parameter to export a snapshot, \n            be sure Amazon ElastiCache has the needed permissions to this S3 bucket. \n            For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access\">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html\">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket to which the snapshot is exported.\n            This parameter is used only when exporting a snapshot for external access.</p>\n        <p>When using this parameter to export a snapshot, \n            be sure Amazon ElastiCache has the needed permissions to this S3 bucket. \n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access\">Step 2: Grant ElastiCache Access to Your Amazon S3 Bucket</a> in the <i>Amazon ElastiCache User Guide</i>.</p>\n        \n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html\">Exporting a Snapshot</a> in the <i>Amazon ElastiCache User Guide</i>.</p>"
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the KMS key used to encrypt the target snapshot.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -1996,7 +2029,7 @@
                 "Tags": {
                     "target": "com.amazonaws.elasticache#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cost allocation tags to be added to this resource.</p>"
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource.</p>"
                     }
                 },
                 "SnapshotArns": {
@@ -2107,6 +2140,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -2135,6 +2171,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A user-specified description for the cache parameter group.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -2170,6 +2212,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -2191,6 +2236,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description for the cache security group.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -2229,6 +2280,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#SubnetNotAllowedFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -2257,6 +2311,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of VPC subnet IDs for the cache subnet group.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -2298,7 +2358,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Global Datastore for Redis offers fully managed, fast, \n            reliable and secure cross-region replication.\n            Using Global Datastore for Redis, you can create cross-region\n            read replica clusters for ElastiCache for Redis to enable low-latency reads\n            and disaster recovery across regions. For more information,\n\n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html\">Replication Across Regions Using Global Datastore</a>. </p>\n\n         <ul>\n            <li>\n               <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global Datastore.</p>\n            </li>\n            <li>\n               <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Global Datastore for Redis offers fully managed, fast, \n            reliable and secure cross-region replication.\n            Using Global Datastore for Redis, you can create cross-region\n            read replica clusters for ElastiCache for Redis to enable low-latency reads\n            and disaster recovery across regions. For more information,\n\n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html\">Replication Across Regions Using Global Datastore</a>. </p>\n\n         <ul>\n            <li>\n               <p>The <b>GlobalReplicationGroupIdSuffix</b> is the name of the Global datastore.</p>\n            </li>\n            <li>\n               <p>The <b>PrimaryReplicationGroupId</b> represents the name of the primary cluster that accepts writes and will replicate updates to the secondary cluster.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.elasticache#CreateGlobalReplicationGroupMessage": {
@@ -2307,14 +2367,14 @@
                 "GlobalReplicationGroupIdSuffix": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The suffix name of a Global Datastore. Amazon ElastiCache automatically applies a prefix \n            to the Global Datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global Datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global Datastore name across multiple regions.  </p>\n        <p>For a full list of AWS Regions and their respective Global Datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html\">Using the AWS CLI with Global Datastores </a>.</p>",
+                        "smithy.api#documentation": "<p>The suffix name of a Global datastore. Amazon ElastiCache automatically applies a prefix \n            to the Global datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global datastore name across multiple regions.  </p>\n        <p>For a full list of AWS Regions and their respective Global datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html\">Using the AWS CLI with Global datastores </a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "GlobalReplicationGroupDescription": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides details of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>Provides details of the Global datastore</p>"
                     }
                 },
                 "PrimaryReplicationGroupId": {
@@ -2402,7 +2462,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p>\n        <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global Datastore.</p>\n        <p>A Redis (cluster mode disabled) replication group is a collection of clusters, \n            where one of the clusters is a read/write primary and the others are read-only replicas. \n            Writes to the primary are asynchronously propagated to the replicas.</p>\n        <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). \n            Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.\n            \n        </p>\n        <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between \n            83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. \n            Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html\">Creating a Subnet Group</a>. For versions below 5.0.6, \n            the limit is 250 per cluster.</p>\n        <p>To request a limit increase, see \n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">AWS Service Limits</a> \n            and choose the limit type <b>Nodes per cluster per instance type</b>. </p>\n        <p>When a Redis (cluster mode disabled) replication group has been successfully created, \n            you can add one or more read replicas to it, up to a total of 5 read replicas. \n            If you need to increase or decrease the number of node groups (console: shards), \n            you can avail yourself of ElastiCache for Redis' scaling. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html\">Scaling ElastiCache for Redis Clusters</a> in the <i>ElastiCache User Guide</i>.</p>\n        \n       \n        <note>\n            <p>This operation is valid for Redis only.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p>\n        <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global datastore.</p>\n        <p>A Redis (cluster mode disabled) replication group is a collection of clusters, \n            where one of the clusters is a read/write primary and the others are read-only replicas. \n            Writes to the primary are asynchronously propagated to the replicas.</p>\n        <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). \n            Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.\n            \n        </p>\n        <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between \n            83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. \n            Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html\">Creating a Subnet Group</a>. For versions below 5.0.6, \n            the limit is 250 per cluster.</p>\n        <p>To request a limit increase, see \n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">AWS Service Limits</a> \n            and choose the limit type <b>Nodes per cluster per instance type</b>. </p>\n        <p>When a Redis (cluster mode disabled) replication group has been successfully created, \n            you can add one or more read replicas to it, up to a total of 5 read replicas. \n            If you need to increase or decrease the number of node groups (console: shards), \n            you can avail yourself of ElastiCache for Redis' scaling. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html\">Scaling ElastiCache for Redis Clusters</a> in the <i>ElastiCache User Guide</i>.</p>\n        \n       \n        <note>\n            <p>This operation is valid for Redis only.</p>\n         </note>"
             }
         },
         "com.amazonaws.elasticache#CreateReplicationGroupMessage": {
@@ -2425,7 +2485,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>"
                     }
                 },
                 "PrimaryClusterId": {
@@ -2521,7 +2581,7 @@
                 "Tags": {
                     "target": "com.amazonaws.elasticache#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cost allocation tags to be added to this resource. \n          Tags are comma-separated key,value pairs (e.g. Key=<code>myKey</code>, Value=<code>myKeyValue</code>. You can include multiple tags as shown following: \n          Key=<code>myKey</code>, Value=<code>myKeyValue</code> Key=<code>mySecondKey</code>, Value=<code>mySecondKeyValue</code>.</p>"
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. \n          Tags are comma-separated key,value pairs (e.g. Key=<code>myKey</code>, Value=<code>myKeyValue</code>. You can include multiple tags as shown following: \n          Key=<code>myKey</code>, Value=<code>myKeyValue</code> Key=<code>mySecondKey</code>, Value=<code>mySecondKeyValue</code>. Tags on replication groups will be replicated to all nodes.</p>"
                     }
                 },
                 "SnapshotArns": {
@@ -2650,6 +2710,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#SnapshotQuotaExceededFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -2682,6 +2745,12 @@
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the KMS key used to encrypt the snapshot.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -2716,6 +2785,9 @@
                     "target": "com.amazonaws.elasticache#InvalidParameterValueException"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
+                },
+                {
                     "target": "com.amazonaws.elasticache#UserAlreadyExistsFault"
                 },
                 {
@@ -2743,6 +2815,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 },
                 {
                     "target": "com.amazonaws.elasticache#UserGroupAlreadyExistsFault"
@@ -2779,6 +2854,12 @@
                     "target": "com.amazonaws.elasticache#UserIdListInput",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of user IDs that belong to the user group.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             }
@@ -2824,6 +2905,12 @@
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates a password is not required for this user.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             }
@@ -2877,7 +2964,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Decreases the number of node groups in a Global Datastore</p>"
+                "smithy.api#documentation": "<p>Decreases the number of node groups in a Global datastore</p>"
             }
         },
         "com.amazonaws.elasticache#DecreaseNodeGroupsInGlobalReplicationGroupMessage": {
@@ -2886,7 +2973,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3239,7 +3326,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deleting a Global Datastore is a two-step process: </p>\n            <ul>\n            <li>\n               <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global Datastore.</p>\n            </li>\n            <li>\n               <p>Once the Global Datastore contains only the primary cluster, you can use DeleteGlobalReplicationGroup API to delete the Global Datastore while retainining the primary cluster using Retain…= true.</p>\n            </li>\n         </ul>\n          \n          <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore\n             while retaining the primary by setting <code>RetainPrimaryCluster=true</code>.</p>\n        <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; \n            you cannot cancel or revert this operation.</p>"
+                "smithy.api#documentation": "<p>Deleting a Global datastore is a two-step process: </p>\n            <ul>\n            <li>\n               <p>First, you must <a>DisassociateGlobalReplicationGroup</a> to remove the secondary clusters in the Global datastore.</p>\n            </li>\n            <li>\n               <p>Once the Global datastore contains only the primary cluster, you can use the <code>DeleteGlobalReplicationGroup</code> API to delete the Global datastore while retainining the primary cluster using <code>RetainPrimaryReplicationGroup=true</code>.</p>\n            </li>\n         </ul>\n          \n\n          <p>Since the Global Datastore has only a primary cluster, you can delete the Global Datastore\n             while retaining the primary by setting <code>RetainPrimaryReplicationGroup=true</code>. The primary cluster is never deleted when deleting a \n          Global Datastore. It can only be deleted when it no longer is associated with any Global Datastore.</p>\n\n        <p>When you receive a successful response from this operation, Amazon ElastiCache immediately begins deleting the selected resources; \n            you cannot cancel or revert this operation.</p>"
             }
         },
         "com.amazonaws.elasticache#DeleteGlobalReplicationGroupMessage": {
@@ -3248,7 +3335,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4026,7 +4113,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a particular global replication group. If no identifier is specified, returns information about all Global Datastores. </p>",
+                "smithy.api#documentation": "<p>Returns information about a particular global replication group. If no identifier is specified, returns information about all Global datastores. </p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -4041,7 +4128,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>"
                     }
                 },
                 "MaxRecords": {
@@ -4059,7 +4146,7 @@
                 "ShowMemberInfo": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the list of members that comprise the Global Datastore.</p>"
+                        "smithy.api#documentation": "<p>Returns the list of members that comprise the Global datastore.</p>"
                     }
                 }
             }
@@ -4778,7 +4865,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove a secondary cluster from the Global Datastore using the Global Datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.</p>"
+                "smithy.api#documentation": "<p>Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.</p>"
             }
         },
         "com.amazonaws.elasticache#DisassociateGlobalReplicationGroupMessage": {
@@ -4787,21 +4874,21 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the secondary cluster you wish to remove from the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The name of the secondary cluster you wish to remove from the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ReplicationGroupRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region of secondary cluster you wish to remove from the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The AWS region of secondary cluster you wish to remove from the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5020,14 +5107,14 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "PrimaryRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region of the primary cluster of the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The AWS region of the primary cluster of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5143,25 +5230,25 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>"
                     }
                 },
                 "GlobalReplicationGroupDescription": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional description of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>The optional description of the Global datastore</p>"
                     }
                 },
                 "Status": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>The status of the Global datastore</p>"
                     }
                 },
                 "CacheNodeType": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cache node type of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>The cache node type of the Global datastore</p>"
                     }
                 },
                 "Engine": {
@@ -5179,13 +5266,13 @@
                 "Members": {
                     "target": "com.amazonaws.elasticache#GlobalReplicationGroupMemberList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The replication groups that comprise the Global Datastore.</p>"
+                        "smithy.api#documentation": "<p>The replication groups that comprise the Global datastore.</p>"
                     }
                 },
                 "ClusterEnabled": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag that indicates whether the Global Datastore is cluster enabled.</p>"
+                        "smithy.api#documentation": "<p>A flag that indicates whether the Global datastore is cluster enabled.</p>"
                     }
                 },
                 "GlobalNodeGroups": {
@@ -5220,7 +5307,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary\n        cluster automatically replicates updates to the secondary cluster.</p>\n        \n        \n        <ul>\n            <li>\n               <p>The <b>GlobalReplicationGroupIdSuffix</b> represents the name of the Global Datastore,\n            which is what you use to associate a secondary cluster.</p> \n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary\n        cluster automatically replicates updates to the secondary cluster.</p>\n        \n        \n        <ul>\n            <li>\n               <p>The <b>GlobalReplicationGroupIdSuffix</b> represents the name of the Global datastore,\n            which is what you use to associate a secondary cluster.</p> \n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.elasticache#GlobalReplicationGroupAlreadyExistsFault": {
@@ -5231,7 +5318,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Global Datastore name already exists.</p>",
+                "smithy.api#documentation": "<p>The Global datastore name already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5242,18 +5329,18 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>"
                     }
                 },
                 "GlobalReplicationGroupMemberRole": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The role of the replication group in a Global Datastore. Can be primary or secondary.</p>"
+                        "smithy.api#documentation": "<p>The role of the replication group in a Global datastore. Can be primary or secondary.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The name of the Global Datastore and role of this replication group in the Global Datastore.</p>"
+                "smithy.api#documentation": "<p>The name of the Global datastore and role of this replication group in the Global datastore.</p>"
             }
         },
         "com.amazonaws.elasticache#GlobalReplicationGroupList": {
@@ -5271,13 +5358,13 @@
                 "ReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The replication group id of the Global Datastore member.</p>"
+                        "smithy.api#documentation": "<p>The replication group id of the Global datastore member.</p>"
                     }
                 },
                 "ReplicationGroupRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region of the Global Datastore member.</p>"
+                        "smithy.api#documentation": "<p>The AWS region of the Global datastore member.</p>"
                     }
                 },
                 "Role": {
@@ -5300,7 +5387,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A member of a Global Datastore. It contains the Replication Group Id, the AWS region and the role of the replication group. </p>"
+                "smithy.api#documentation": "<p>A member of a Global datastore. It contains the Replication Group Id, the AWS region and the role of the replication group. </p>"
             }
         },
         "com.amazonaws.elasticache#GlobalReplicationGroupMemberList": {
@@ -5320,7 +5407,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Global Datastore does not exist</p>",
+                "smithy.api#documentation": "<p>The Global datastore does not exist</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -5345,7 +5432,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Increase the number of node groups in the Global Datastore</p>"
+                "smithy.api#documentation": "<p>Increase the number of node groups in the Global datastore</p>"
             }
         },
         "com.amazonaws.elasticache#IncreaseNodeGroupsInGlobalReplicationGroupMessage": {
@@ -5354,7 +5441,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5368,7 +5455,7 @@
                 "RegionalConfigurations": {
                     "target": "com.amazonaws.elasticache#RegionalConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global datastore</p>"
                     }
                 },
                 "ApplyImmediately": {
@@ -5559,7 +5646,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Global Datastore is not available or in primary-only state.</p>",
+                "smithy.api#documentation": "<p>The Global datastore is not available or in primary-only state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -5752,14 +5839,38 @@
                     "target": "com.amazonaws.elasticache#CacheClusterNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#CacheParameterGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#CacheSecurityGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ReplicationGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ReservedCacheNodeNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#SnapshotNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#UserGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#UserNotFoundFault"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all cost allocation tags currently on the named resource.\n            A <code>cost allocation tag</code> is a key-value pair where the key is case-sensitive and the value is optional.\n            You can use cost allocation tags to categorize and track your AWS costs.</p>\n        <p>If the cluster is not in the <i>available</i> state, <code>ListTagsForResource</code>\n            returns an error.</p>\n        \n        <p>You can have a maximum of 50 cost allocation tags on an ElastiCache resource.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html\">Monitoring Costs with Tags</a>.</p>"
+                "smithy.api#documentation": "<p>Lists all tags currently on a  named resource.</p> \n         <p>    A  tag is a key-value pair where the key and value are case-sensitive.            \n            You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. \n     For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n           \n        <p>If the cluster is not in the <i>available</i> state, <code>ListTagsForResource</code>\n            returns an error.</p>"
             }
         },
         "com.amazonaws.elasticache#ListTagsForResourceMessage": {
@@ -6090,7 +6201,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the settings for a Global Datastore.</p>"
+                "smithy.api#documentation": "<p>Modifies the settings for a Global datastore.</p>"
             }
         },
         "com.amazonaws.elasticache#ModifyGlobalReplicationGroupMessage": {
@@ -6099,7 +6210,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6113,13 +6224,13 @@
                 "CacheNodeType": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A valid cache node type that you want to scale this Global Datastore to.</p>"
+                        "smithy.api#documentation": "<p>A valid cache node type that you want to scale this Global datastore to.</p>"
                     }
                 },
                 "EngineVersion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The upgraded version of the cache engine to be run on the clusters in the Global Datastore. </p>"
+                        "smithy.api#documentation": "<p>The upgraded version of the cache engine to be run on the clusters in the Global datastore. </p>"
                     }
                 },
                 "CacheParameterGroupName": {
@@ -6131,7 +6242,7 @@
                 "GlobalReplicationGroupDescription": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A description of the Global Datastore</p>"
+                        "smithy.api#documentation": "<p>A description of the Global datastore</p>"
                     }
                 },
                 "AutomaticFailoverEnabled": {
@@ -6249,7 +6360,7 @@
                 "MultiAZEnabled": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html\">Minimizing Downtime: Multi-AZ</a>.</p>"
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 },
                 "NodeGroupId": {
@@ -7358,6 +7469,9 @@
                 },
                 {
                     "target": "com.amazonaws.elasticache#ReservedCacheNodesOfferingNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#TagQuotaPerResourceExceeded"
                 }
             ],
             "traits": {
@@ -7384,6 +7498,12 @@
                     "target": "com.amazonaws.elasticache#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of cache node instances to reserve.</p>\n        <p>Default: <code>1</code>\n         </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.elasticache#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
                     }
                 }
             },
@@ -7428,7 +7548,7 @@
                 "GlobalReplicationGroupId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore</p>",
+                        "smithy.api#documentation": "<p>The name of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7585,17 +7705,41 @@
                     "target": "com.amazonaws.elasticache#CacheClusterNotFoundFault"
                 },
                 {
+                    "target": "com.amazonaws.elasticache#CacheParameterGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#CacheSecurityGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#CacheSubnetGroupNotFoundFault"
+                },
+                {
                     "target": "com.amazonaws.elasticache#InvalidARNFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#InvalidReplicationGroupStateFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ReplicationGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#ReservedCacheNodeNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.elasticache#SnapshotNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.elasticache#TagNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#UserGroupNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.elasticache#UserNotFoundFault"
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the tags identified by the <code>TagKeys</code> \n            list from the named resource.</p>"
+                "smithy.api#documentation": "<p>Removes the tags identified by the <code>TagKeys</code> \n            list from the named resource. A  tag is a key-value pair where the key and value are case-sensitive.            \n            You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. \n        For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>"
             }
         },
         "com.amazonaws.elasticache#RemoveTagsFromResourceMessage": {
@@ -7647,7 +7791,7 @@
                 "GlobalReplicationGroupInfo": {
                     "target": "com.amazonaws.elasticache#GlobalReplicationGroupInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Global Datastore and role of this replication group in the Global Datastore.</p>"
+                        "smithy.api#documentation": "<p>The name of the Global datastore and role of this replication group in the Global datastore.</p>"
                     }
                 },
                 "Status": {
@@ -9032,7 +9176,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A cost allocation Tag that can be added to an ElastiCache cluster or replication group. \n            Tags are composed of a Key/Value pair. A tag with a null Value is permitted.</p>"
+                "smithy.api#documentation": "<p>A tag that can be added to an ElastiCache cluster or replication group. \n            Tags are composed of a Key/Value pair. You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. A tag with a null Value is permitted.</p>"
             }
         },
         "com.amazonaws.elasticache#TagList": {
@@ -9050,7 +9194,7 @@
                 "TagList": {
                     "target": "com.amazonaws.elasticache#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of cost allocation tags as key-value pairs.</p>"
+                        "smithy.api#documentation": "<p>A list of tags as key-value pairs.</p>"
                     }
                 }
             },
