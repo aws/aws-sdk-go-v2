@@ -1,9 +1,0 @@
-{
- "ID": "service.lookoutequipment-major-1617910916305435000",
- "SchemaVersion": 1,
- "Module": "service/lookoutequipment",
- "Type": "major",
- "Description": "new service client",
- "MinVersion": "v1.0.0",
- "AffectedModules": null
-}

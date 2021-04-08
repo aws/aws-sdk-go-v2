@@ -1,3 +1,14 @@
+# Release 2021-04-08
+## Service Client Highlights
+* Feature: API model sync
+* `service/lookoutequipment` - v1.0.0
+  * v1 Release: new service client
+* `service/mgn` - v1.0.0
+  * v1 Release: new service client
+## Core SDK Highlights
+* Dependency Update: smithy-go version bump
+* Dependency Update: Updated SDK dependencies to their latest versions.
+
 # Release 2021-04-01
 ## Service Client Highlights
 * Bug Fix: Fix URL Path and RawQuery of resolved endpoint being ignored by the API client's request serialization.
