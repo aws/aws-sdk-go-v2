@@ -116,7 +116,7 @@ type PutParameterInput struct {
 	// ID parameter.
 	KeyId *string
 
-	// Overwrite an existing parameter. If not specified, will default to "false".
+	// Overwrite an existing parameter. The default value is 'false'.
 	Overwrite bool
 
 	// One or more policies to apply to a parameter. This action takes a JSON array.

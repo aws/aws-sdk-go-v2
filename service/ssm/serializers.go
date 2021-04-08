@@ -5514,6 +5514,53 @@ func (m *awsAwsjson11_serializeOpTerminateSession) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUnlabelParameterVersion struct {
+}
+
+func (*awsAwsjson11_serializeOpUnlabelParameterVersion) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUnlabelParameterVersion) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UnlabelParameterVersionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonSSM.UnlabelParameterVersion")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUnlabelParameterVersionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateAssociation struct {
 }
 
@@ -12163,6 +12210,11 @@ func awsAwsjson11_serializeOpDocumentStartChangeRequestExecutionInput(v *StartCh
 	object := value.Object()
 	defer object.Close()
 
+	if v.ChangeDetails != nil {
+		ok := object.Key("ChangeDetails")
+		ok.String(*v.ChangeDetails)
+	}
+
 	if v.ChangeRequestName != nil {
 		ok := object.Key("ChangeRequestName")
 		ok.String(*v.ChangeRequestName)
@@ -12195,6 +12247,11 @@ func awsAwsjson11_serializeOpDocumentStartChangeRequestExecutionInput(v *StartCh
 		if err := awsAwsjson11_serializeDocumentRunbooks(v.Runbooks, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ScheduledEndTime != nil {
+		ok := object.Key("ScheduledEndTime")
+		ok.Double(smithytime.FormatEpochSeconds(*v.ScheduledEndTime))
 	}
 
 	if v.ScheduledTime != nil {
@@ -12260,6 +12317,30 @@ func awsAwsjson11_serializeOpDocumentTerminateSessionInput(v *TerminateSessionIn
 	if v.SessionId != nil {
 		ok := object.Key("SessionId")
 		ok.String(*v.SessionId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUnlabelParameterVersionInput(v *UnlabelParameterVersionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Labels != nil {
+		ok := object.Key("Labels")
+		if err := awsAwsjson11_serializeDocumentParameterLabelList(v.Labels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	{
+		ok := object.Key("ParameterVersion")
+		ok.Long(v.ParameterVersion)
 	}
 
 	return nil

@@ -39,6 +39,13 @@ type DescribePatchGroupStateOutput struct {
 	// The number of instances in the patch group.
 	Instances int32
 
+	// The number of instances where patches that are specified as "Critical" for
+	// compliance reporting in the patch baseline are not installed. These patches
+	// might be missing, have failed installation, were rejected, or were installed but
+	// awaiting a required instance reboot. The status of these instances is
+	// NON_COMPLIANT.
+	InstancesWithCriticalNonCompliantPatches int32
+
 	// The number of instances with patches from the patch baseline that failed to
 	// install.
 	InstancesWithFailedPatches int32
@@ -67,6 +74,17 @@ type DescribePatchGroupStateOutput struct {
 
 	// The number of instances with patches that aren't applicable.
 	InstancesWithNotApplicablePatches int32
+
+	// The number of instances with patches installed that are specified as other than
+	// "Critical" or "Security" but are not compliant with the patch baseline. The
+	// status of these instances is NON_COMPLIANT.
+	InstancesWithOtherNonCompliantPatches int32
+
+	// The number of instances where patches that are specified as "Security" in a
+	// patch advisory are not installed. These patches might be missing, have failed
+	// installation, were rejected, or were installed but awaiting a required instance
+	// reboot. The status of these instances is NON_COMPLIANT.
+	InstancesWithSecurityNonCompliantPatches int32
 
 	// The number of instances with NotApplicable patches beyond the supported limit,
 	// which are not reported by name to Systems Manager Inventory.

@@ -431,7 +431,7 @@ type CacheParameterGroup struct {
 	// The description for this cache parameter group.
 	Description *string
 
-	// Indicates whether the parameter group is associated with a Global Datastore
+	// Indicates whether the parameter group is associated with a Global datastore
 	IsGlobal bool
 }
 
@@ -659,7 +659,7 @@ type GlobalNodeGroup struct {
 // secondary cluster.
 //
 // * The GlobalReplicationGroupIdSuffix represents the name of
-// the Global Datastore, which is what you use to associate a secondary cluster.
+// the Global datastore, which is what you use to associate a secondary cluster.
 type GlobalReplicationGroup struct {
 
 	// The ARN (Amazon Resource Name) of the global replication group.
@@ -677,10 +677,10 @@ type GlobalReplicationGroup struct {
 	// Default: false
 	AuthTokenEnabled *bool
 
-	// The cache node type of the Global Datastore
+	// The cache node type of the Global datastore
 	CacheNodeType *string
 
-	// A flag that indicates whether the Global Datastore is cluster enabled.
+	// A flag that indicates whether the Global datastore is cluster enabled.
 	ClusterEnabled *bool
 
 	// The Elasticache engine. For Redis only.
@@ -692,16 +692,16 @@ type GlobalReplicationGroup struct {
 	// Indicates the slot configuration and global identifier for each slice group.
 	GlobalNodeGroups []GlobalNodeGroup
 
-	// The optional description of the Global Datastore
+	// The optional description of the Global datastore
 	GlobalReplicationGroupDescription *string
 
-	// The name of the Global Datastore
+	// The name of the Global datastore
 	GlobalReplicationGroupId *string
 
-	// The replication groups that comprise the Global Datastore.
+	// The replication groups that comprise the Global datastore.
 	Members []GlobalReplicationGroupMember
 
-	// The status of the Global Datastore
+	// The status of the Global datastore
 	Status *string
 
 	// A flag that enables in-transit encryption when set to true. You cannot modify
@@ -712,29 +712,29 @@ type GlobalReplicationGroup struct {
 	TransitEncryptionEnabled *bool
 }
 
-// The name of the Global Datastore and role of this replication group in the
-// Global Datastore.
+// The name of the Global datastore and role of this replication group in the
+// Global datastore.
 type GlobalReplicationGroupInfo struct {
 
-	// The name of the Global Datastore
+	// The name of the Global datastore
 	GlobalReplicationGroupId *string
 
-	// The role of the replication group in a Global Datastore. Can be primary or
+	// The role of the replication group in a Global datastore. Can be primary or
 	// secondary.
 	GlobalReplicationGroupMemberRole *string
 }
 
-// A member of a Global Datastore. It contains the Replication Group Id, the AWS
+// A member of a Global datastore. It contains the Replication Group Id, the AWS
 // region and the role of the replication group.
 type GlobalReplicationGroupMember struct {
 
 	// Indicates whether automatic failover is enabled for the replication group.
 	AutomaticFailover AutomaticFailoverStatus
 
-	// The replication group id of the Global Datastore member.
+	// The replication group id of the Global datastore member.
 	ReplicationGroupId *string
 
-	// The AWS region of the Global Datastore member.
+	// The AWS region of the Global datastore member.
 	ReplicationGroupRegion *string
 
 	// Indicates the role of the replication group, primary or secondary.
@@ -1069,8 +1069,8 @@ type ReplicationGroup struct {
 	// The user supplied description of the replication group.
 	Description *string
 
-	// The name of the Global Datastore and role of this replication group in the
-	// Global Datastore.
+	// The name of the Global datastore and role of this replication group in the
+	// Global datastore.
 	GlobalReplicationGroupInfo *GlobalReplicationGroupInfo
 
 	// The ID of the KMS key used to encrypt the disk in the cluster.
@@ -1639,9 +1639,11 @@ type SubnetOutpost struct {
 	SubnetOutpostArn *string
 }
 
-// A cost allocation Tag that can be added to an ElastiCache cluster or replication
-// group. Tags are composed of a Key/Value pair. A tag with a null Value is
-// permitted.
+// A tag that can be added to an ElastiCache cluster or replication group. Tags are
+// composed of a Key/Value pair. You can use tags to categorize and track all your
+// ElastiCache resources, with the exception of global replication group. When you
+// add or remove tags on replication groups, those actions will be replicated to
+// all nodes in the replication group. A tag with a null Value is permitted.
 type Tag struct {
 
 	// The key for the tag. May not be null.

@@ -50,7 +50,7 @@ type UpdateNFSFileShareInput struct {
 	// This member is required.
 	FileShareARN *string
 
-	// Refresh cache information.
+	// specifies refresh cache information for the file share.
 	CacheAttributes *types.CacheAttributes
 
 	// The list of clients that are allowed to access the file gateway. The list must
@@ -83,7 +83,16 @@ type UpdateNFSFileShareInput struct {
 	// The default values for the file share. Optional.
 	NFSFileShareDefaults *types.NFSFileShareDefaults
 
-	// The notification policy of the file share.
+	// The notification policy of the file share. SettlingTimeInSeconds controls the
+	// number of seconds to wait after the last point in time a client wrote to a file
+	// before generating an ObjectUploaded notification. Because clients can make many
+	// small writes to files, it's best to set this parameter for as long as possible
+	// to avoid generating multiple notifications for the same file in a small time
+	// period. SettlingTimeInSeconds has no effect on the timing of the object
+	// uploading to Amazon S3, only the timing of the notification. The following
+	// example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.
+	// {"Upload": {"SettlingTimeInSeconds": 60}} The following example sets
+	// NotificationPolicy off. {}
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3

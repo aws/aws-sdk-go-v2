@@ -400,8 +400,15 @@ type RobotApplicationConfig struct {
 	// The version of the robot application.
 	ApplicationVersion *string
 
+	// Information about tools configured for the robot application.
+	Tools []Tool
+
 	// The upload configurations for the robot application.
 	UploadConfigurations []UploadConfiguration
+
+	// A Boolean indicating whether to use default robot application tools. The default
+	// tools are rviz, rqt, terminal and rosbag record. The default is False.
+	UseDefaultTools *bool
 
 	// A Boolean indicating whether to use default upload configurations. By default,
 	// .ros and .gazebo files are uploaded when the application terminates and all ROS
@@ -508,8 +515,15 @@ type SimulationApplicationConfig struct {
 	// The version of the simulation application.
 	ApplicationVersion *string
 
+	// Information about tools configured for the simulation application.
+	Tools []Tool
+
 	// Information about upload configurations for the simulation application.
 	UploadConfigurations []UploadConfiguration
+
+	// A Boolean indicating whether to use default simulation application tools. The
+	// default tools are rviz, rqt, terminal and rosbag record. The default is False.
+	UseDefaultTools *bool
 
 	// A Boolean indicating whether to use default upload configurations. By default,
 	// .ros and .gazebo files are uploaded when the application terminates and all ROS
@@ -808,6 +822,35 @@ type TemplateSummary struct {
 	Name *string
 }
 
+// Information about a tool. Tools are used in a simulation job.
+type Tool struct {
+
+	// Command-line arguments for the tool. It must include the tool executable name.
+	//
+	// This member is required.
+	Command *string
+
+	// The name of the tool.
+	//
+	// This member is required.
+	Name *string
+
+	// Exit behavior determines what happens when your tool quits running. RESTART will
+	// cause your tool to be restarted. FAIL will cause your job to exit. The default
+	// is RESTART.
+	ExitBehavior ExitBehavior
+
+	// Boolean indicating whether logs will be recorded in CloudWatch for the tool. The
+	// default is False.
+	StreamOutputToCloudWatch *bool
+
+	// Boolean indicating whether a streaming session will be configured for the tool.
+	// If True, AWS RoboMaker will configure a connection so you can interact with the
+	// tool as it is running in the simulation. It must have a graphical user
+	// interface. The default is False.
+	StreamUI *bool
+}
+
 // Provides upload configuration information. Files are uploaded from the
 // simulation job to a location you specify.
 type UploadConfiguration struct {
@@ -830,7 +873,7 @@ type UploadConfiguration struct {
 	// This member is required.
 	Path *string
 
-	// Specifies how to upload the files: UPLOAD_ON_TERMINATE Matching files are
+	// Specifies when to upload the files: UPLOAD_ON_TERMINATE Matching files are
 	// uploaded once the simulation enters the TERMINATING state. Matching files are
 	// not uploaded until all of your code (including tools) have stopped. If there is
 	// a problem uploading a file, the upload is retried. If problems persist, no

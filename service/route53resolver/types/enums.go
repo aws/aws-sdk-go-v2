@@ -2,6 +2,183 @@
 
 package types
 
+type Action string
+
+// Enum values for Action
+const (
+	ActionAllow Action = "ALLOW"
+	ActionBlock Action = "BLOCK"
+	ActionAlert Action = "ALERT"
+)
+
+// Values returns all known values for Action. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Action) Values() []Action {
+	return []Action{
+		"ALLOW",
+		"BLOCK",
+		"ALERT",
+	}
+}
+
+type BlockOverrideDnsType string
+
+// Enum values for BlockOverrideDnsType
+const (
+	BlockOverrideDnsTypeCname BlockOverrideDnsType = "CNAME"
+)
+
+// Values returns all known values for BlockOverrideDnsType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BlockOverrideDnsType) Values() []BlockOverrideDnsType {
+	return []BlockOverrideDnsType{
+		"CNAME",
+	}
+}
+
+type BlockResponse string
+
+// Enum values for BlockResponse
+const (
+	BlockResponseNodata   BlockResponse = "NODATA"
+	BlockResponseNxdomain BlockResponse = "NXDOMAIN"
+	BlockResponseOverride BlockResponse = "OVERRIDE"
+)
+
+// Values returns all known values for BlockResponse. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BlockResponse) Values() []BlockResponse {
+	return []BlockResponse{
+		"NODATA",
+		"NXDOMAIN",
+		"OVERRIDE",
+	}
+}
+
+type FirewallDomainImportOperation string
+
+// Enum values for FirewallDomainImportOperation
+const (
+	FirewallDomainImportOperationReplace FirewallDomainImportOperation = "REPLACE"
+)
+
+// Values returns all known values for FirewallDomainImportOperation. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FirewallDomainImportOperation) Values() []FirewallDomainImportOperation {
+	return []FirewallDomainImportOperation{
+		"REPLACE",
+	}
+}
+
+type FirewallDomainListStatus string
+
+// Enum values for FirewallDomainListStatus
+const (
+	FirewallDomainListStatusComplete             FirewallDomainListStatus = "COMPLETE"
+	FirewallDomainListStatusCompleteImportFailed FirewallDomainListStatus = "COMPLETE_IMPORT_FAILED"
+	FirewallDomainListStatusImporting            FirewallDomainListStatus = "IMPORTING"
+	FirewallDomainListStatusDeleting             FirewallDomainListStatus = "DELETING"
+	FirewallDomainListStatusUpdating             FirewallDomainListStatus = "UPDATING"
+)
+
+// Values returns all known values for FirewallDomainListStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallDomainListStatus) Values() []FirewallDomainListStatus {
+	return []FirewallDomainListStatus{
+		"COMPLETE",
+		"COMPLETE_IMPORT_FAILED",
+		"IMPORTING",
+		"DELETING",
+		"UPDATING",
+	}
+}
+
+type FirewallDomainUpdateOperation string
+
+// Enum values for FirewallDomainUpdateOperation
+const (
+	FirewallDomainUpdateOperationAdd     FirewallDomainUpdateOperation = "ADD"
+	FirewallDomainUpdateOperationRemove  FirewallDomainUpdateOperation = "REMOVE"
+	FirewallDomainUpdateOperationReplace FirewallDomainUpdateOperation = "REPLACE"
+)
+
+// Values returns all known values for FirewallDomainUpdateOperation. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FirewallDomainUpdateOperation) Values() []FirewallDomainUpdateOperation {
+	return []FirewallDomainUpdateOperation{
+		"ADD",
+		"REMOVE",
+		"REPLACE",
+	}
+}
+
+type FirewallFailOpenStatus string
+
+// Enum values for FirewallFailOpenStatus
+const (
+	FirewallFailOpenStatusEnabled  FirewallFailOpenStatus = "ENABLED"
+	FirewallFailOpenStatusDisabled FirewallFailOpenStatus = "DISABLED"
+)
+
+// Values returns all known values for FirewallFailOpenStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallFailOpenStatus) Values() []FirewallFailOpenStatus {
+	return []FirewallFailOpenStatus{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type FirewallRuleGroupAssociationStatus string
+
+// Enum values for FirewallRuleGroupAssociationStatus
+const (
+	FirewallRuleGroupAssociationStatusComplete FirewallRuleGroupAssociationStatus = "COMPLETE"
+	FirewallRuleGroupAssociationStatusDeleting FirewallRuleGroupAssociationStatus = "DELETING"
+	FirewallRuleGroupAssociationStatusUpdating FirewallRuleGroupAssociationStatus = "UPDATING"
+)
+
+// Values returns all known values for FirewallRuleGroupAssociationStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (FirewallRuleGroupAssociationStatus) Values() []FirewallRuleGroupAssociationStatus {
+	return []FirewallRuleGroupAssociationStatus{
+		"COMPLETE",
+		"DELETING",
+		"UPDATING",
+	}
+}
+
+type FirewallRuleGroupStatus string
+
+// Enum values for FirewallRuleGroupStatus
+const (
+	FirewallRuleGroupStatusComplete FirewallRuleGroupStatus = "COMPLETE"
+	FirewallRuleGroupStatusDeleting FirewallRuleGroupStatus = "DELETING"
+	FirewallRuleGroupStatusUpdating FirewallRuleGroupStatus = "UPDATING"
+)
+
+// Values returns all known values for FirewallRuleGroupStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FirewallRuleGroupStatus) Values() []FirewallRuleGroupStatus {
+	return []FirewallRuleGroupStatus{
+		"COMPLETE",
+		"DELETING",
+		"UPDATING",
+	}
+}
+
 type IpAddressStatus string
 
 // Enum values for IpAddressStatus
@@ -33,6 +210,24 @@ func (IpAddressStatus) Values() []IpAddressStatus {
 		"FAILED_RESOURCE_GONE",
 		"DELETING",
 		"DELETE_FAILED_FAS_EXPIRED",
+	}
+}
+
+type MutationProtectionStatus string
+
+// Enum values for MutationProtectionStatus
+const (
+	MutationProtectionStatusEnabled  MutationProtectionStatus = "ENABLED"
+	MutationProtectionStatusDisabled MutationProtectionStatus = "DISABLED"
+)
+
+// Values returns all known values for MutationProtectionStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MutationProtectionStatus) Values() []MutationProtectionStatus {
+	return []MutationProtectionStatus{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 

@@ -172,6 +172,7 @@ const (
 	LocaleFrFr  Locale = "fr-FR"
 	LocaleFrCa  Locale = "fr-CA"
 	LocaleItIt  Locale = "it-IT"
+	LocaleJaJp  Locale = "ja-JP"
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
@@ -189,6 +190,7 @@ func (Locale) Values() []Locale {
 		"fr-FR",
 		"fr-CA",
 		"it-IT",
+		"ja-JP",
 	}
 }
 

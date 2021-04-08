@@ -130,6 +130,26 @@ func (m *validateOpAssignTapePool) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateFileSystem struct {
+}
+
+func (*validateOpAssociateFileSystem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateFileSystem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateFileSystemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateFileSystemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAttachVolume struct {
 }
 
@@ -690,6 +710,26 @@ func (m *validateOpDescribeChapCredentials) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFileSystemAssociations struct {
+}
+
+func (*validateOpDescribeFileSystemAssociations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFileSystemAssociations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFileSystemAssociationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFileSystemAssociationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeGatewayInformation struct {
 }
 
@@ -965,6 +1005,26 @@ func (m *validateOpDisableGateway) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisableGatewayInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateFileSystem struct {
+}
+
+func (*validateOpDisassociateFileSystem) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateFileSystem) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateFileSystemInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateFileSystemInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1370,6 +1430,26 @@ func (m *validateOpUpdateChapCredentials) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFileSystemAssociation struct {
+}
+
+func (*validateOpUpdateFileSystemAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFileSystemAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFileSystemAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFileSystemAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateGatewayInformation struct {
 }
 
@@ -1574,6 +1654,10 @@ func addOpAssignTapePoolValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssignTapePool{}, middleware.After)
 }
 
+func addOpAssociateFileSystemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateFileSystem{}, middleware.After)
+}
+
 func addOpAttachVolumeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAttachVolume{}, middleware.After)
 }
@@ -1686,6 +1770,10 @@ func addOpDescribeChapCredentialsValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDescribeChapCredentials{}, middleware.After)
 }
 
+func addOpDescribeFileSystemAssociationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFileSystemAssociations{}, middleware.After)
+}
+
 func addOpDescribeGatewayInformationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeGatewayInformation{}, middleware.After)
 }
@@ -1740,6 +1828,10 @@ func addOpDetachVolumeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDisableGatewayValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableGateway{}, middleware.After)
+}
+
+func addOpDisassociateFileSystemValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateFileSystem{}, middleware.After)
 }
 
 func addOpJoinDomainValidationMiddleware(stack *middleware.Stack) error {
@@ -1820,6 +1912,10 @@ func addOpUpdateBandwidthRateLimitScheduleValidationMiddleware(stack *middleware
 
 func addOpUpdateChapCredentialsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChapCredentials{}, middleware.After)
+}
+
+func addOpUpdateFileSystemAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFileSystemAssociation{}, middleware.After)
 }
 
 func addOpUpdateGatewayInformationValidationMiddleware(stack *middleware.Stack) error {
@@ -2093,6 +2189,38 @@ func validateOpAssignTapePoolInput(v *AssignTapePoolInput) error {
 	}
 	if v.PoolId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PoolId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateFileSystemInput(v *AssociateFileSystemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateFileSystemInput"}
+	if v.UserName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.GatewayARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if v.LocationARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LocationARN"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2650,6 +2778,21 @@ func validateOpDescribeChapCredentialsInput(v *DescribeChapCredentialsInput) err
 	}
 }
 
+func validateOpDescribeFileSystemAssociationsInput(v *DescribeFileSystemAssociationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFileSystemAssociationsInput"}
+	if v.FileSystemAssociationARNList == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemAssociationARNList"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeGatewayInformationInput(v *DescribeGatewayInformationInput) error {
 	if v == nil {
 		return nil
@@ -2852,6 +2995,21 @@ func validateOpDisableGatewayInput(v *DisableGatewayInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DisableGatewayInput"}
 	if v.GatewayARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GatewayARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateFileSystemInput(v *DisassociateFileSystemInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateFileSystemInput"}
+	if v.FileSystemAssociationARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemAssociationARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3196,6 +3354,21 @@ func validateOpUpdateChapCredentialsInput(v *UpdateChapCredentialsInput) error {
 	}
 	if v.InitiatorName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InitiatorName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFileSystemAssociationInput(v *UpdateFileSystemAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFileSystemAssociationInput"}
+	if v.FileSystemAssociationARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemAssociationARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

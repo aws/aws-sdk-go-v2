@@ -36,14 +36,20 @@ type UpdateChannelInput struct {
 	// This member is required.
 	Arn *string
 
-	// Whether the channel is authorized. Default: false.
+	// Whether the channel is private (enabled for playback authorization).
 	Authorized bool
 
-	// Channel latency mode. Default: LOW.
+	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
+	// HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon
+	// IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
 	LatencyMode types.ChannelLatencyMode
 
 	// Channel name.
 	Name *string
+
+	// Recording-configuration ARN. If this is set to an empty string, recording is
+	// disabled. A value other than an empty string indicates that recording is enabled
+	RecordingConfigurationArn *string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
@@ -56,10 +62,7 @@ type UpdateChannelInput struct {
 	//
 	// * BASIC: Amazon IVS delivers the original input
 	// to viewers. The viewer’s video-quality choice is limited to the original input.
-	// Vertical resolution can be up to 480 and bitrate can be up to 1.5
-	// Mbps.
-	//
-	// Default: STANDARD.
+	// Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.
 	Type types.ChannelType
 }
 

@@ -550,6 +550,16 @@ func awsRestjson1_deserializeOpHttpBindingsPostContentOutput(v *PostContentOutpu
 		v.DialogState = types.DialogState(headerValues[0])
 	}
 
+	if headerValues := response.Header.Values("x-amz-lex-encoded-input-transcript"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.EncodedInputTranscript = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-encoded-message"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.EncodedMessage = ptr.String(headerValues[0])
+	}
+
 	if headerValues := response.Header.Values("x-amz-lex-input-transcript"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.InputTranscript = ptr.String(headerValues[0])
@@ -1020,6 +1030,11 @@ func awsRestjson1_deserializeOpHttpBindingsPutSessionOutput(v *PutSessionOutput,
 	if headerValues := response.Header.Values("x-amz-lex-dialog-state"); len(headerValues) != 0 {
 		headerValues[0] = strings.TrimSpace(headerValues[0])
 		v.DialogState = types.DialogState(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amz-lex-encoded-message"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.EncodedMessage = ptr.String(headerValues[0])
 	}
 
 	if headerValues := response.Header.Values("x-amz-lex-intent-name"); len(headerValues) != 0 {

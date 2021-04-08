@@ -70,7 +70,8 @@ type AutomaticTapeCreationRule struct {
 type BandwidthRateLimitInterval struct {
 
 	// The days of the week component of the bandwidth rate limit interval, represented
-	// as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday.
+	// as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents
+	// Saturday.
 	//
 	// This member is required.
 	DaysOfWeek []int32
@@ -110,14 +111,14 @@ type BandwidthRateLimitInterval struct {
 	AverageUploadRateLimitInBitsPerSec *int64
 }
 
-// Lists refresh cache information.
+// The refresh cache information for the file share.
 type CacheAttributes struct {
 
 	// Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of
 	// time since the last refresh after which access to the directory would cause the
 	// file gateway to first refresh that directory's contents from the Amazon S3
-	// bucket. The TTL duration is in seconds. Valid Values: 300 to 2,592,000 seconds
-	// (5 minutes to 30 days)
+	// bucket or Amazon FSx file system. The TTL duration is in seconds. Valid Values:
+	// 300 to 2,592,000 seconds (5 minutes to 30 days)
 	CacheStaleTimeoutInSeconds *int32
 }
 
@@ -274,6 +275,57 @@ type FileShareInfo struct {
 	GatewayARN *string
 }
 
+// Describes the object returned by DescribeFileSystemAssociations that describes a
+// created file system association.
+type FileSystemAssociationInfo struct {
+
+	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
+	AuditDestinationARN *string
+
+	// The refresh cache information for the file share.
+	CacheAttributes *CacheAttributes
+
+	// The Amazon Resource Name (ARN) of the file system association.
+	FileSystemAssociationARN *string
+
+	// The status of the file system association. Valid Values: AVAILABLE | CREATING |
+	// DELETING | FORCE_DELETING | MISCONFIGURED | UPDATING | UNAVAILABLE
+	FileSystemAssociationStatus *string
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
+	GatewayARN *string
+
+	// The ARN of the backend Amazon FSx file system used for storing file data. For
+	// information, see FileSystem
+	// (https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html) in the
+	// Amazon FSx API Reference.
+	LocationARN *string
+
+	// A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by
+	// key name. Each tag is a key-value pair.
+	Tags []Tag
+}
+
+// Gets the summary returned by ListFileSystemAssociation, which is a summary of a
+// created file system association.
+type FileSystemAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the file system association.
+	FileSystemAssociationARN *string
+
+	// The ID of the file system association.
+	FileSystemAssociationId *string
+
+	// The status of the file share. Valid Values: AVAILABLE | CREATING | DELETING |
+	// FORCE_DELETING | MISCONFIGURED | UPDATING | UNAVAILABLE
+	FileSystemAssociationStatus *string
+
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
+	// return a list of gateways for your account and AWS Region.
+	GatewayARN *string
+}
+
 // Describes a gateway object.
 type GatewayInfo struct {
 
@@ -347,7 +399,7 @@ type NFSFileShareDefaults struct {
 // is only supported in file gateways.
 type NFSFileShareInfo struct {
 
-	// Refresh cache information.
+	// Refresh cache information for the file share.
 	CacheAttributes *CacheAttributes
 
 	// The list of clients that are allowed to access the file gateway. The list must
@@ -402,7 +454,16 @@ type NFSFileShareInfo struct {
 	// permissions. This operation is only supported for file gateways.
 	NFSFileShareDefaults *NFSFileShareDefaults
 
-	// The notification policy of the file share.
+	// The notification policy of the file share. SettlingTimeInSeconds controls the
+	// number of seconds to wait after the last point in time a client wrote to a file
+	// before generating an ObjectUploaded notification. Because clients can make many
+	// small writes to files, it's best to set this parameter for as long as possible
+	// to avoid generating multiple notifications for the same file in a small time
+	// period. SettlingTimeInSeconds has no effect on the timing of the object
+	// uploading to Amazon S3, only the timing of the notification. The following
+	// example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.
+	// {"Upload": {"SettlingTimeInSeconds": 60}} The following example sets
+	// NotificationPolicy off. {}
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3
@@ -493,14 +554,14 @@ type SMBFileShareInfo struct {
 	// set if Authentication is set to ActiveDirectory.
 	AdminUserList []string
 
-	// The Amazon Resource Name (ARN) of the storage used for the audit logs.
+	// The Amazon Resource Name (ARN) of the storage used for audit logs.
 	AuditDestinationARN *string
 
 	// The authentication method of the file share. The default is ActiveDirectory.
 	// Valid Values: ActiveDirectory | GuestAccess
 	Authentication *string
 
-	// Refresh cache information.
+	// Refresh cache information for the file share.
 	CacheAttributes *CacheAttributes
 
 	// The case of an object name in an Amazon S3 bucket. For ClientSpecified, the
@@ -555,7 +616,16 @@ type SMBFileShareInfo struct {
 	// added to the S3 bucket name. It must end with a "/".
 	LocationARN *string
 
-	// The notification policy of the file share.
+	// The notification policy of the file share. SettlingTimeInSeconds controls the
+	// number of seconds to wait after the last point in time a client wrote to a file
+	// before generating an ObjectUploaded notification. Because clients can make many
+	// small writes to files, it's best to set this parameter for as long as possible
+	// to avoid generating multiple notifications for the same file in a small time
+	// period. SettlingTimeInSeconds has no effect on the timing of the object
+	// uploading to Amazon S3, only the timing of the notification. The following
+	// example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.
+	// {"Upload": {"SettlingTimeInSeconds": 60}} The following example sets
+	// NotificationPolicy off. {}
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the S3

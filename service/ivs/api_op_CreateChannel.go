@@ -29,33 +29,38 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 type CreateChannelInput struct {
 
-	// Whether the channel is authorized. Default: false.
+	// Whether the channel is private (enabled for playback authorization). Default:
+	// false.
 	Authorized bool
 
-	// Channel latency mode. Default: LOW.
+	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
+	// HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon
+	// IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
+	// Default: LOW.
 	LatencyMode types.ChannelLatencyMode
 
 	// Channel name.
 	Name *string
 
-	// See Channel$tags.
+	// Recording-configuration ARN. Default: "" (empty string, recording is disabled).
+	RecordingConfigurationArn *string
+
+	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
-	// immediately. Valid values:
+	// immediately. Default: STANDARD. Valid values:
 	//
-	// * STANDARD: Multiple qualities are generated from
-	// the original input, to automatically give viewers the best experience for their
-	// devices and network conditions. Vertical resolution can be up to 1080 and
-	// bitrate can be up to 8.5 Mbps.
+	// * STANDARD: Multiple qualities
+	// are generated from the original input, to automatically give viewers the best
+	// experience for their devices and network conditions. Vertical resolution can be
+	// up to 1080 and bitrate can be up to 8.5 Mbps.
 	//
-	// * BASIC: Amazon IVS delivers the original input
-	// to viewers. The viewer’s video-quality choice is limited to the original input.
-	// Vertical resolution can be up to 480 and bitrate can be up to 1.5
-	// Mbps.
-	//
-	// Default: STANDARD.
+	// * BASIC: Amazon IVS delivers the
+	// original input to viewers. The viewer’s video-quality choice is limited to the
+	// original input. Vertical resolution can be up to 480 and bitrate can be up to
+	// 1.5 Mbps.
 	Type types.ChannelType
 }
 

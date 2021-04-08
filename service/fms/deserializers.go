@@ -3798,6 +3798,233 @@ func awsAwsjson11_deserializeDocumentCustomerPolicyScopeMap(v *map[string][]stri
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDnsDuplicateRuleGroupViolation(v **types.DnsDuplicateRuleGroupViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DnsDuplicateRuleGroupViolation
+	if *v == nil {
+		sv = &types.DnsDuplicateRuleGroupViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ViolationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViolationTarget to be of type string, got %T instead", value)
+				}
+				sv.ViolationTarget = ptr.String(jtv)
+			}
+
+		case "ViolationTargetDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.ViolationTargetDescription = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDnsRuleGroupLimitExceededViolation(v **types.DnsRuleGroupLimitExceededViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DnsRuleGroupLimitExceededViolation
+	if *v == nil {
+		sv = &types.DnsRuleGroupLimitExceededViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NumberOfRuleGroupsAlreadyAssociated":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BasicInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfRuleGroupsAlreadyAssociated = int32(i64)
+			}
+
+		case "ViolationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViolationTarget to be of type string, got %T instead", value)
+				}
+				sv.ViolationTarget = ptr.String(jtv)
+			}
+
+		case "ViolationTargetDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.ViolationTargetDescription = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDnsRuleGroupPriorities(v *[]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int32
+	if *v == nil {
+		cv = []int32{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected DnsRuleGroupPriority to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = int32(i64)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDnsRuleGroupPriorityConflictViolation(v **types.DnsRuleGroupPriorityConflictViolation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DnsRuleGroupPriorityConflictViolation
+	if *v == nil {
+		sv = &types.DnsRuleGroupPriorityConflictViolation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ConflictingPolicyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyId to be of type string, got %T instead", value)
+				}
+				sv.ConflictingPolicyId = ptr.String(jtv)
+			}
+
+		case "ConflictingPriority":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected DnsRuleGroupPriority to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ConflictingPriority = int32(i64)
+			}
+
+		case "UnavailablePriorities":
+			if err := awsAwsjson11_deserializeDocumentDnsRuleGroupPriorities(&sv.UnavailablePriorities, value); err != nil {
+				return err
+			}
+
+		case "ViolationTarget":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ViolationTarget to be of type string, got %T instead", value)
+				}
+				sv.ViolationTarget = ptr.String(jtv)
+			}
+
+		case "ViolationTargetDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LengthBoundedString to be of type string, got %T instead", value)
+				}
+				sv.ViolationTargetDescription = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEvaluationResult(v **types.EvaluationResult, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5564,6 +5791,21 @@ func awsAwsjson11_deserializeDocumentResourceViolation(v **types.ResourceViolati
 
 		case "AwsVPCSecurityGroupViolation":
 			if err := awsAwsjson11_deserializeDocumentAwsVPCSecurityGroupViolation(&sv.AwsVPCSecurityGroupViolation, value); err != nil {
+				return err
+			}
+
+		case "DnsDuplicateRuleGroupViolation":
+			if err := awsAwsjson11_deserializeDocumentDnsDuplicateRuleGroupViolation(&sv.DnsDuplicateRuleGroupViolation, value); err != nil {
+				return err
+			}
+
+		case "DnsRuleGroupLimitExceededViolation":
+			if err := awsAwsjson11_deserializeDocumentDnsRuleGroupLimitExceededViolation(&sv.DnsRuleGroupLimitExceededViolation, value); err != nil {
+				return err
+			}
+
+		case "DnsRuleGroupPriorityConflictViolation":
+			if err := awsAwsjson11_deserializeDocumentDnsRuleGroupPriorityConflictViolation(&sv.DnsRuleGroupPriorityConflictViolation, value); err != nil {
 				return err
 			}
 

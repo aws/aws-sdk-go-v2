@@ -11,13 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all cost allocation tags currently on the named resource. A cost
-// allocation tag is a key-value pair where the key is case-sensitive and the value
-// is optional. You can use cost allocation tags to categorize and track your AWS
-// costs. If the cluster is not in the available state, ListTagsForResource returns
-// an error. You can have a maximum of 50 cost allocation tags on an ElastiCache
-// resource. For more information, see Monitoring Costs with Tags
-// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html).
+// Lists all tags currently on a named resource. A tag is a key-value pair where
+// the key and value are case-sensitive. You can use tags to categorize and track
+// all your ElastiCache resources, with the exception of global replication group.
+// When you add or remove tags on replication groups, those actions will be
+// replicated to all nodes in the replication group. For more information, see
+// Resource-level permissions
+// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html).
+// If the cluster is not in the available state, ListTagsForResource returns an
+// error.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -51,7 +53,7 @@ type ListTagsForResourceInput struct {
 // RemoveTagsFromResource operations.
 type ListTagsForResourceOutput struct {
 
-	// A list of cost allocation tags as key-value pairs.
+	// A list of tags as key-value pairs.
 	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.

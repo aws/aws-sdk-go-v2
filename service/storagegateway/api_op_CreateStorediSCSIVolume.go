@@ -74,8 +74,8 @@ type CreateStorediSCSIVolumeInput struct {
 	// This member is required.
 	NetworkInterfaceId *string
 
-	// Set to true true if you want to preserve the data on the local disk. Otherwise,
-	// set to false to create an empty volume. Valid Values: true | false
+	// Set to true if you want to preserve the data on the local disk. Otherwise, set
+	// to false to create an empty volume. Valid Values: true | false
 	//
 	// This member is required.
 	PreserveExistingData bool
@@ -100,7 +100,7 @@ type CreateStorediSCSIVolumeInput struct {
 	// CMKs. This value can only be set when KMSEncrypted is true. Optional.
 	KMSKey *string
 
-	// The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new
+	// The snapshot ID (e.g., "snap-1122aabb") of the snapshot to restore as the new
 	// stored volume. Specify this field if you want to create the iSCSI storage volume
 	// from a snapshot; otherwise, do not include this field. To list snapshots for
 	// your account use DescribeSnapshots

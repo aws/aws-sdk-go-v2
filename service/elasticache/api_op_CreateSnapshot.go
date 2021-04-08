@@ -46,6 +46,10 @@ type CreateSnapshotInput struct {
 	// The identifier of an existing replication group. The snapshot is created from
 	// this replication group.
 	ReplicationGroupId *string
+
+	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
+	// key must be accompanied by a tag value, although null is accepted.
+	Tags []types.Tag
 }
 
 type CreateSnapshotOutput struct {

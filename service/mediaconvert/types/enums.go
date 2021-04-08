@@ -193,6 +193,33 @@ func (Ac3CodingMode) Values() []Ac3CodingMode {
 	}
 }
 
+type Ac3DynamicRangeCompressionLine string
+
+// Enum values for Ac3DynamicRangeCompressionLine
+const (
+	Ac3DynamicRangeCompressionLineFilmStandard  Ac3DynamicRangeCompressionLine = "FILM_STANDARD"
+	Ac3DynamicRangeCompressionLineFilmLight     Ac3DynamicRangeCompressionLine = "FILM_LIGHT"
+	Ac3DynamicRangeCompressionLineMusicStandard Ac3DynamicRangeCompressionLine = "MUSIC_STANDARD"
+	Ac3DynamicRangeCompressionLineMusicLight    Ac3DynamicRangeCompressionLine = "MUSIC_LIGHT"
+	Ac3DynamicRangeCompressionLineSpeech        Ac3DynamicRangeCompressionLine = "SPEECH"
+	Ac3DynamicRangeCompressionLineNone          Ac3DynamicRangeCompressionLine = "NONE"
+)
+
+// Values returns all known values for Ac3DynamicRangeCompressionLine. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (Ac3DynamicRangeCompressionLine) Values() []Ac3DynamicRangeCompressionLine {
+	return []Ac3DynamicRangeCompressionLine{
+		"FILM_STANDARD",
+		"FILM_LIGHT",
+		"MUSIC_STANDARD",
+		"MUSIC_LIGHT",
+		"SPEECH",
+		"NONE",
+	}
+}
+
 type Ac3DynamicRangeCompressionProfile string
 
 // Enum values for Ac3DynamicRangeCompressionProfile
@@ -208,6 +235,32 @@ const (
 func (Ac3DynamicRangeCompressionProfile) Values() []Ac3DynamicRangeCompressionProfile {
 	return []Ac3DynamicRangeCompressionProfile{
 		"FILM_STANDARD",
+		"NONE",
+	}
+}
+
+type Ac3DynamicRangeCompressionRf string
+
+// Enum values for Ac3DynamicRangeCompressionRf
+const (
+	Ac3DynamicRangeCompressionRfFilmStandard  Ac3DynamicRangeCompressionRf = "FILM_STANDARD"
+	Ac3DynamicRangeCompressionRfFilmLight     Ac3DynamicRangeCompressionRf = "FILM_LIGHT"
+	Ac3DynamicRangeCompressionRfMusicStandard Ac3DynamicRangeCompressionRf = "MUSIC_STANDARD"
+	Ac3DynamicRangeCompressionRfMusicLight    Ac3DynamicRangeCompressionRf = "MUSIC_LIGHT"
+	Ac3DynamicRangeCompressionRfSpeech        Ac3DynamicRangeCompressionRf = "SPEECH"
+	Ac3DynamicRangeCompressionRfNone          Ac3DynamicRangeCompressionRf = "NONE"
+)
+
+// Values returns all known values for Ac3DynamicRangeCompressionRf. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Ac3DynamicRangeCompressionRf) Values() []Ac3DynamicRangeCompressionRf {
+	return []Ac3DynamicRangeCompressionRf{
+		"FILM_STANDARD",
+		"FILM_LIGHT",
+		"MUSIC_STANDARD",
+		"MUSIC_LIGHT",
+		"SPEECH",
 		"NONE",
 	}
 }
@@ -1081,6 +1134,7 @@ const (
 	CaptionSourceTypeTeletext   CaptionSourceType = "TELETEXT"
 	CaptionSourceTypeNullSource CaptionSourceType = "NULL_SOURCE"
 	CaptionSourceTypeImsc       CaptionSourceType = "IMSC"
+	CaptionSourceTypeWebvtt     CaptionSourceType = "WEBVTT"
 )
 
 // Values returns all known values for CaptionSourceType. Note that this can be
@@ -1101,6 +1155,7 @@ func (CaptionSourceType) Values() []CaptionSourceType {
 		"TELETEXT",
 		"NULL_SOURCE",
 		"IMSC",
+		"WEBVTT",
 	}
 }
 
@@ -1249,6 +1304,25 @@ func (CmafMpdProfile) Values() []CmafMpdProfile {
 	}
 }
 
+type CmafPtsOffsetHandlingForBFrames string
+
+// Enum values for CmafPtsOffsetHandlingForBFrames
+const (
+	CmafPtsOffsetHandlingForBFramesZeroBased       CmafPtsOffsetHandlingForBFrames = "ZERO_BASED"
+	CmafPtsOffsetHandlingForBFramesMatchInitialPts CmafPtsOffsetHandlingForBFrames = "MATCH_INITIAL_PTS"
+)
+
+// Values returns all known values for CmafPtsOffsetHandlingForBFrames. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CmafPtsOffsetHandlingForBFrames) Values() []CmafPtsOffsetHandlingForBFrames {
+	return []CmafPtsOffsetHandlingForBFrames{
+		"ZERO_BASED",
+		"MATCH_INITIAL_PTS",
+	}
+}
+
 type CmafSegmentControl string
 
 // Enum values for CmafSegmentControl
@@ -1355,6 +1429,45 @@ func (CmfcAudioDuration) Values() []CmfcAudioDuration {
 	return []CmfcAudioDuration{
 		"DEFAULT_CODEC_DURATION",
 		"MATCH_VIDEO_DURATION",
+	}
+}
+
+type CmfcAudioTrackType string
+
+// Enum values for CmfcAudioTrackType
+const (
+	CmfcAudioTrackTypeAlternateAudioAutoSelectDefault CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT"
+	CmfcAudioTrackTypeAlternateAudioAutoSelect        CmfcAudioTrackType = "ALTERNATE_AUDIO_AUTO_SELECT"
+	CmfcAudioTrackTypeAlternateAudioNotAutoSelect     CmfcAudioTrackType = "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+)
+
+// Values returns all known values for CmfcAudioTrackType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmfcAudioTrackType) Values() []CmfcAudioTrackType {
+	return []CmfcAudioTrackType{
+		"ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT",
+		"ALTERNATE_AUDIO_AUTO_SELECT",
+		"ALTERNATE_AUDIO_NOT_AUTO_SELECT",
+	}
+}
+
+type CmfcDescriptiveVideoServiceFlag string
+
+// Enum values for CmfcDescriptiveVideoServiceFlag
+const (
+	CmfcDescriptiveVideoServiceFlagDontFlag CmfcDescriptiveVideoServiceFlag = "DONT_FLAG"
+	CmfcDescriptiveVideoServiceFlagFlag     CmfcDescriptiveVideoServiceFlag = "FLAG"
+)
+
+// Values returns all known values for CmfcDescriptiveVideoServiceFlag. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CmfcDescriptiveVideoServiceFlag) Values() []CmfcDescriptiveVideoServiceFlag {
+	return []CmfcDescriptiveVideoServiceFlag{
+		"DONT_FLAG",
+		"FLAG",
 	}
 }
 
@@ -1548,6 +1661,25 @@ func (ContainerType) Values() []ContainerType {
 	}
 }
 
+type DashIsoGroupAudioChannelConfigSchemeIdUri string
+
+// Enum values for DashIsoGroupAudioChannelConfigSchemeIdUri
+const (
+	DashIsoGroupAudioChannelConfigSchemeIdUriMpegChannelConfiguration  DashIsoGroupAudioChannelConfigSchemeIdUri = "MPEG_CHANNEL_CONFIGURATION"
+	DashIsoGroupAudioChannelConfigSchemeIdUriDolbyChannelConfiguration DashIsoGroupAudioChannelConfigSchemeIdUri = "DOLBY_CHANNEL_CONFIGURATION"
+)
+
+// Values returns all known values for DashIsoGroupAudioChannelConfigSchemeIdUri.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DashIsoGroupAudioChannelConfigSchemeIdUri) Values() []DashIsoGroupAudioChannelConfigSchemeIdUri {
+	return []DashIsoGroupAudioChannelConfigSchemeIdUri{
+		"MPEG_CHANNEL_CONFIGURATION",
+		"DOLBY_CHANNEL_CONFIGURATION",
+	}
+}
+
 type DashIsoHbbtvCompliance string
 
 // Enum values for DashIsoHbbtvCompliance
@@ -1600,6 +1732,25 @@ func (DashIsoPlaybackDeviceCompatibility) Values() []DashIsoPlaybackDeviceCompat
 	return []DashIsoPlaybackDeviceCompatibility{
 		"CENC_V1",
 		"UNENCRYPTED_SEI",
+	}
+}
+
+type DashIsoPtsOffsetHandlingForBFrames string
+
+// Enum values for DashIsoPtsOffsetHandlingForBFrames
+const (
+	DashIsoPtsOffsetHandlingForBFramesZeroBased       DashIsoPtsOffsetHandlingForBFrames = "ZERO_BASED"
+	DashIsoPtsOffsetHandlingForBFramesMatchInitialPts DashIsoPtsOffsetHandlingForBFrames = "MATCH_INITIAL_PTS"
+)
+
+// Values returns all known values for DashIsoPtsOffsetHandlingForBFrames. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (DashIsoPtsOffsetHandlingForBFrames) Values() []DashIsoPtsOffsetHandlingForBFrames {
+	return []DashIsoPtsOffsetHandlingForBFrames{
+		"ZERO_BASED",
+		"MATCH_INITIAL_PTS",
 	}
 }
 
@@ -3634,6 +3785,25 @@ func (HlsCodecSpecification) Values() []HlsCodecSpecification {
 	return []HlsCodecSpecification{
 		"RFC_6381",
 		"RFC_4281",
+	}
+}
+
+type HlsDescriptiveVideoServiceFlag string
+
+// Enum values for HlsDescriptiveVideoServiceFlag
+const (
+	HlsDescriptiveVideoServiceFlagDontFlag HlsDescriptiveVideoServiceFlag = "DONT_FLAG"
+	HlsDescriptiveVideoServiceFlagFlag     HlsDescriptiveVideoServiceFlag = "FLAG"
+)
+
+// Values returns all known values for HlsDescriptiveVideoServiceFlag. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (HlsDescriptiveVideoServiceFlag) Values() []HlsDescriptiveVideoServiceFlag {
+	return []HlsDescriptiveVideoServiceFlag{
+		"DONT_FLAG",
+		"FLAG",
 	}
 }
 
@@ -6674,5 +6844,23 @@ func (WavFormat) Values() []WavFormat {
 	return []WavFormat{
 		"RIFF",
 		"RF64",
+	}
+}
+
+type WebvttStylePassthrough string
+
+// Enum values for WebvttStylePassthrough
+const (
+	WebvttStylePassthroughEnabled  WebvttStylePassthrough = "ENABLED"
+	WebvttStylePassthroughDisabled WebvttStylePassthrough = "DISABLED"
+)
+
+// Values returns all known values for WebvttStylePassthrough. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WebvttStylePassthrough) Values() []WebvttStylePassthrough {
+	return []WebvttStylePassthrough{
+		"ENABLED",
+		"DISABLED",
 	}
 }

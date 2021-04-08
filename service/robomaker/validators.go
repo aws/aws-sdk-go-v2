@@ -1326,6 +1326,11 @@ func validateRobotApplicationConfig(v *types.RobotApplicationConfig) error {
 			invalidParams.AddNested("UploadConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tools != nil {
+		if err := validateTools(v.Tools); err != nil {
+			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1386,6 +1391,11 @@ func validateSimulationApplicationConfig(v *types.SimulationApplicationConfig) e
 	if v.UploadConfigurations != nil {
 		if err := validateUploadConfigurations(v.UploadConfigurations); err != nil {
 			invalidParams.AddNested("UploadConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tools != nil {
+		if err := validateTools(v.Tools); err != nil {
+			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1459,6 +1469,41 @@ func validateTemplateLocation(v *types.TemplateLocation) error {
 	}
 	if v.S3Key == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTool(v *types.Tool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tool"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Command == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Command"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTools(v []types.Tool) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tools"}
+	for i := range v {
+		if err := validateTool(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

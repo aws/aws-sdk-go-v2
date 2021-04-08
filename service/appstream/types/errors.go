@@ -26,7 +26,7 @@ func (e *ConcurrentModificationException) ErrorCode() string {
 }
 func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The image does not support storage connectors.
+// The image can't be updated because it's not compatible for updates.
 type IncompatibleImageException struct {
 	Message *string
 }

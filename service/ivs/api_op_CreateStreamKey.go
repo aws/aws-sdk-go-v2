@@ -38,7 +38,7 @@ type CreateStreamKeyInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// See Channel$tags.
+	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
 }
 

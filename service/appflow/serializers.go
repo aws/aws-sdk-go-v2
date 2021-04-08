@@ -1969,6 +1969,13 @@ func awsRestjson1_serializeDocumentDestinationConnectorProperties(v *types.Desti
 		}
 	}
 
+	if v.Zendesk != nil {
+		ok := object.Key("Zendesk")
+		if err := awsRestjson1_serializeDocumentZendeskDestinationProperties(v.Zendesk, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3245,6 +3252,37 @@ func awsRestjson1_serializeDocumentZendeskConnectorProfileProperties(v *types.Ze
 	if v.InstanceUrl != nil {
 		ok := object.Key("instanceUrl")
 		ok.String(*v.InstanceUrl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentZendeskDestinationProperties(v *types.ZendeskDestinationProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ErrorHandlingConfig != nil {
+		ok := object.Key("errorHandlingConfig")
+		if err := awsRestjson1_serializeDocumentErrorHandlingConfig(v.ErrorHandlingConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IdFieldNames != nil {
+		ok := object.Key("idFieldNames")
+		if err := awsRestjson1_serializeDocumentIdFieldNameList(v.IdFieldNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Object != nil {
+		ok := object.Key("object")
+		ok.String(*v.Object)
+	}
+
+	if len(v.WriteOperationType) > 0 {
+		ok := object.Key("writeOperationType")
+		ok.String(string(v.WriteOperationType))
 	}
 
 	return nil

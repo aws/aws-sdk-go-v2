@@ -4819,11 +4819,23 @@ func awsRestjson1_serializeDocumentRobotApplicationConfig(v *types.RobotApplicat
 		}
 	}
 
+	if v.Tools != nil {
+		ok := object.Key("tools")
+		if err := awsRestjson1_serializeDocumentTools(v.Tools, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UploadConfigurations != nil {
 		ok := object.Key("uploadConfigurations")
 		if err := awsRestjson1_serializeDocumentUploadConfigurations(v.UploadConfigurations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.UseDefaultTools != nil {
+		ok := object.Key("useDefaultTools")
+		ok.Boolean(*v.UseDefaultTools)
 	}
 
 	if v.UseDefaultUploadConfigurations != nil {
@@ -4929,11 +4941,23 @@ func awsRestjson1_serializeDocumentSimulationApplicationConfig(v *types.Simulati
 		}
 	}
 
+	if v.Tools != nil {
+		ok := object.Key("tools")
+		if err := awsRestjson1_serializeDocumentTools(v.Tools, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.UploadConfigurations != nil {
 		ok := object.Key("uploadConfigurations")
 		if err := awsRestjson1_serializeDocumentUploadConfigurations(v.UploadConfigurations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.UseDefaultTools != nil {
+		ok := object.Key("useDefaultTools")
+		ok.Boolean(*v.UseDefaultTools)
 	}
 
 	if v.UseDefaultUploadConfigurations != nil {
@@ -5135,6 +5159,51 @@ func awsRestjson1_serializeDocumentTemplateLocation(v *types.TemplateLocation, v
 		ok.String(*v.S3Key)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTool(v *types.Tool, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Command != nil {
+		ok := object.Key("command")
+		ok.String(*v.Command)
+	}
+
+	if len(v.ExitBehavior) > 0 {
+		ok := object.Key("exitBehavior")
+		ok.String(string(v.ExitBehavior))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.StreamOutputToCloudWatch != nil {
+		ok := object.Key("streamOutputToCloudWatch")
+		ok.Boolean(*v.StreamOutputToCloudWatch)
+	}
+
+	if v.StreamUI != nil {
+		ok := object.Key("streamUI")
+		ok.Boolean(*v.StreamUI)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTools(v []types.Tool, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTool(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

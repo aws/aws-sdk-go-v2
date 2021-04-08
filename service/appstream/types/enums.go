@@ -206,15 +206,17 @@ type ImageBuilderState string
 
 // Enum values for ImageBuilderState
 const (
-	ImageBuilderStatePending       ImageBuilderState = "PENDING"
-	ImageBuilderStateUpdatingAgent ImageBuilderState = "UPDATING_AGENT"
-	ImageBuilderStateRunning       ImageBuilderState = "RUNNING"
-	ImageBuilderStateStopping      ImageBuilderState = "STOPPING"
-	ImageBuilderStateStopped       ImageBuilderState = "STOPPED"
-	ImageBuilderStateRebooting     ImageBuilderState = "REBOOTING"
-	ImageBuilderStateSnapshotting  ImageBuilderState = "SNAPSHOTTING"
-	ImageBuilderStateDeleting      ImageBuilderState = "DELETING"
-	ImageBuilderStateFailed        ImageBuilderState = "FAILED"
+	ImageBuilderStatePending              ImageBuilderState = "PENDING"
+	ImageBuilderStateUpdatingAgent        ImageBuilderState = "UPDATING_AGENT"
+	ImageBuilderStateRunning              ImageBuilderState = "RUNNING"
+	ImageBuilderStateStopping             ImageBuilderState = "STOPPING"
+	ImageBuilderStateStopped              ImageBuilderState = "STOPPED"
+	ImageBuilderStateRebooting            ImageBuilderState = "REBOOTING"
+	ImageBuilderStateSnapshotting         ImageBuilderState = "SNAPSHOTTING"
+	ImageBuilderStateDeleting             ImageBuilderState = "DELETING"
+	ImageBuilderStateFailed               ImageBuilderState = "FAILED"
+	ImageBuilderStateUpdating             ImageBuilderState = "UPDATING"
+	ImageBuilderStatePendingQualification ImageBuilderState = "PENDING_QUALIFICATION"
 )
 
 // Values returns all known values for ImageBuilderState. Note that this can be
@@ -231,6 +233,8 @@ func (ImageBuilderState) Values() []ImageBuilderState {
 		"SNAPSHOTTING",
 		"DELETING",
 		"FAILED",
+		"UPDATING",
+		"PENDING_QUALIFICATION",
 	}
 }
 

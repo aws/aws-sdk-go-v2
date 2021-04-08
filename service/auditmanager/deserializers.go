@@ -2540,6 +2540,11 @@ func awsRestjson1_deserializeOpDocumentGetAssessmentOutput(v **GetAssessmentOutp
 				return err
 			}
 
+		case "userRole":
+			if err := awsRestjson1_deserializeDocumentRole(&sv.UserRole, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

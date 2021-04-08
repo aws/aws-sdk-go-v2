@@ -350,6 +350,26 @@ func (m *validateOpDeleteTags) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteWarmPool struct {
+}
+
+func (*validateOpDeleteWarmPool) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWarmPool) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWarmPoolInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWarmPoolInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeInstanceRefreshes struct {
 }
 
@@ -425,6 +445,26 @@ func (m *validateOpDescribeLoadBalancerTargetGroups) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeLoadBalancerTargetGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeWarmPool struct {
+}
+
+func (*validateOpDescribeWarmPool) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWarmPool) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWarmPoolInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWarmPoolInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -665,6 +705,26 @@ func (m *validateOpPutScheduledUpdateGroupAction) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPutScheduledUpdateGroupActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutWarmPool struct {
+}
+
+func (*validateOpPutWarmPool) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutWarmPool) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutWarmPoolInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutWarmPoolInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -918,6 +978,10 @@ func addOpDeleteTagsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTags{}, middleware.After)
 }
 
+func addOpDeleteWarmPoolValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWarmPool{}, middleware.After)
+}
+
 func addOpDescribeInstanceRefreshesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInstanceRefreshes{}, middleware.After)
 }
@@ -932,6 +996,10 @@ func addOpDescribeLoadBalancersValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeLoadBalancerTargetGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeLoadBalancerTargetGroups{}, middleware.After)
+}
+
+func addOpDescribeWarmPoolValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWarmPool{}, middleware.After)
 }
 
 func addOpDetachInstancesValidationMiddleware(stack *middleware.Stack) error {
@@ -980,6 +1048,10 @@ func addOpPutScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutScheduledUpdateGroupActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutScheduledUpdateGroupAction{}, middleware.After)
+}
+
+func addOpPutWarmPoolValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutWarmPool{}, middleware.After)
 }
 
 func addOpRecordLifecycleActionHeartbeatValidationMiddleware(stack *middleware.Stack) error {
@@ -1597,6 +1669,21 @@ func validateOpDeleteTagsInput(v *DeleteTagsInput) error {
 	}
 }
 
+func validateOpDeleteWarmPoolInput(v *DeleteWarmPoolInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWarmPoolInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeInstanceRefreshesInput(v *DescribeInstanceRefreshesInput) error {
 	if v == nil {
 		return nil
@@ -1647,6 +1734,21 @@ func validateOpDescribeLoadBalancerTargetGroupsInput(v *DescribeLoadBalancerTarg
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeLoadBalancerTargetGroupsInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeWarmPoolInput(v *DescribeWarmPoolInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWarmPoolInput"}
 	if v.AutoScalingGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
@@ -1869,6 +1971,21 @@ func validateOpPutScheduledUpdateGroupActionInput(v *PutScheduledUpdateGroupActi
 	}
 	if v.ScheduledActionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ScheduledActionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutWarmPoolInput(v *PutWarmPoolInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutWarmPoolInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

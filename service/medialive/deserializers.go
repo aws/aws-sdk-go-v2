@@ -2286,7 +2286,7 @@ func awsRestjson1_deserializeOpDocumentDeleteChannelOutput(v **DeleteChannelOutp
 			}
 
 		case "vpc":
-			if err := awsRestjson1_deserializeDocumentVpcOutputSettings(&sv.Vpc, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentVpcOutputSettingsDescription(&sv.Vpc, value); err != nil {
 				return err
 			}
 
@@ -3745,7 +3745,7 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 			}
 
 		case "vpc":
-			if err := awsRestjson1_deserializeDocumentVpcOutputSettings(&sv.Vpc, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentVpcOutputSettingsDescription(&sv.Vpc, value); err != nil {
 				return err
 			}
 
@@ -8096,7 +8096,7 @@ func awsRestjson1_deserializeOpDocumentStartChannelOutput(v **StartChannelOutput
 			}
 
 		case "vpc":
-			if err := awsRestjson1_deserializeDocumentVpcOutputSettings(&sv.Vpc, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentVpcOutputSettingsDescription(&sv.Vpc, value); err != nil {
 				return err
 			}
 
@@ -8625,7 +8625,7 @@ func awsRestjson1_deserializeOpDocumentStopChannelOutput(v **StopChannelOutput, 
 			}
 
 		case "vpc":
-			if err := awsRestjson1_deserializeDocumentVpcOutputSettings(&sv.Vpc, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentVpcOutputSettingsDescription(&sv.Vpc, value); err != nil {
 				return err
 			}
 
@@ -14827,7 +14827,7 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 			}
 
 		case "vpc":
-			if err := awsRestjson1_deserializeDocumentVpcOutputSettings(&sv.Vpc, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentVpcOutputSettingsDescription(&sv.Vpc, value); err != nil {
 				return err
 			}
 
@@ -15009,7 +15009,7 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 			}
 
 		case "vpc":
-			if err := awsRestjson1_deserializeDocumentVpcOutputSettings(&sv.Vpc, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentVpcOutputSettingsDescription(&sv.Vpc, value); err != nil {
 				return err
 			}
 
@@ -16027,6 +16027,11 @@ func awsRestjson1_deserializeDocumentEncoderSettings(v **types.EncoderSettings, 
 
 		case "globalConfiguration":
 			if err := awsRestjson1_deserializeDocumentGlobalConfiguration(&sv.GlobalConfiguration, value); err != nil {
+				return err
+			}
+
+		case "motionGraphicsConfiguration":
+			if err := awsRestjson1_deserializeDocumentMotionGraphicsConfiguration(&sv.MotionGraphicsConfiguration, value); err != nil {
 				return err
 			}
 
@@ -18985,6 +18990,37 @@ func awsRestjson1_deserializeDocumentHlsWebdavSettings(v **types.HlsWebdavSettin
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentHtmlMotionGraphicsSettings(v **types.HtmlMotionGraphicsSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.HtmlMotionGraphicsSettings
+	if *v == nil {
+		sv = &types.HtmlMotionGraphicsSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentImmediateModeScheduleActionStartSettings(v **types.ImmediateModeScheduleActionStartSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -21442,6 +21478,189 @@ func awsRestjson1_deserializeDocumentMediaPackageOutputSettings(v **types.MediaP
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMotionGraphicsActivateScheduleActionSettings(v **types.MotionGraphicsActivateScheduleActionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MotionGraphicsActivateScheduleActionSettings
+	if *v == nil {
+		sv = &types.MotionGraphicsActivateScheduleActionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "duration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __longMin0Max86400000 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Duration = i64
+			}
+
+		case "passwordParam":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.PasswordParam = ptr.String(jtv)
+			}
+
+		case "url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		case "username":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Username = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMotionGraphicsConfiguration(v **types.MotionGraphicsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MotionGraphicsConfiguration
+	if *v == nil {
+		sv = &types.MotionGraphicsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "motionGraphicsInsertion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MotionGraphicsInsertion to be of type string, got %T instead", value)
+				}
+				sv.MotionGraphicsInsertion = types.MotionGraphicsInsertion(jtv)
+			}
+
+		case "motionGraphicsSettings":
+			if err := awsRestjson1_deserializeDocumentMotionGraphicsSettings(&sv.MotionGraphicsSettings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMotionGraphicsDeactivateScheduleActionSettings(v **types.MotionGraphicsDeactivateScheduleActionSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MotionGraphicsDeactivateScheduleActionSettings
+	if *v == nil {
+		sv = &types.MotionGraphicsDeactivateScheduleActionSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMotionGraphicsSettings(v **types.MotionGraphicsSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MotionGraphicsSettings
+	if *v == nil {
+		sv = &types.MotionGraphicsSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "htmlMotionGraphicsSettings":
+			if err := awsRestjson1_deserializeDocumentHtmlMotionGraphicsSettings(&sv.HtmlMotionGraphicsSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -23913,6 +24132,24 @@ func awsRestjson1_deserializeDocumentPipelineDetail(v **types.PipelineDetail, va
 				sv.ActiveInputSwitchActionName = ptr.String(jtv)
 			}
 
+		case "activeMotionGraphicsActionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ActiveMotionGraphicsActionName = ptr.String(jtv)
+			}
+
+		case "activeMotionGraphicsUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ActiveMotionGraphicsUri = ptr.String(jtv)
+			}
+
 		case "pipelineId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24719,6 +24956,16 @@ func awsRestjson1_deserializeDocumentScheduleActionSettings(v **types.ScheduleAc
 
 		case "inputSwitchSettings":
 			if err := awsRestjson1_deserializeDocumentInputSwitchScheduleActionSettings(&sv.InputSwitchSettings, value); err != nil {
+				return err
+			}
+
+		case "motionGraphicsImageActivateSettings":
+			if err := awsRestjson1_deserializeDocumentMotionGraphicsActivateScheduleActionSettings(&sv.MotionGraphicsImageActivateSettings, value); err != nil {
+				return err
+			}
+
+		case "motionGraphicsImageDeactivateSettings":
+			if err := awsRestjson1_deserializeDocumentMotionGraphicsDeactivateScheduleActionSettings(&sv.MotionGraphicsImageDeactivateSettings, value); err != nil {
 				return err
 			}
 
@@ -26990,7 +27237,7 @@ func awsRestjson1_deserializeDocumentVideoSelectorSettings(v **types.VideoSelect
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentVpcOutputSettings(v **types.VpcOutputSettings, value interface{}) error {
+func awsRestjson1_deserializeDocumentVpcOutputSettingsDescription(v **types.VpcOutputSettingsDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -27003,17 +27250,22 @@ func awsRestjson1_deserializeDocumentVpcOutputSettings(v **types.VpcOutputSettin
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var sv *types.VpcOutputSettings
+	var sv *types.VpcOutputSettingsDescription
 	if *v == nil {
-		sv = &types.VpcOutputSettings{}
+		sv = &types.VpcOutputSettingsDescription{}
 	} else {
 		sv = *v
 	}
 
 	for key, value := range shape {
 		switch key {
-		case "publicAddressAllocationIds":
-			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.PublicAddressAllocationIds, value); err != nil {
+		case "availabilityZones":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.AvailabilityZones, value); err != nil {
+				return err
+			}
+
+		case "networkInterfaceIds":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.NetworkInterfaceIds, value); err != nil {
 				return err
 			}
 

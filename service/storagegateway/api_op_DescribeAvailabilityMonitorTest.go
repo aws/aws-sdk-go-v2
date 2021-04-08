@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Returns information about the most recent High Availability monitoring test that
+// Returns information about the most recent high availability monitoring test that
 // was performed on the host in a cluster. If a test isn't performed, the status
 // and start time in the response would be null.
 func (c *Client) DescribeAvailabilityMonitorTest(ctx context.Context, params *DescribeAvailabilityMonitorTestInput, optFns ...func(*Options)) (*DescribeAvailabilityMonitorTestOutput, error) {
@@ -45,11 +45,11 @@ type DescribeAvailabilityMonitorTestOutput struct {
 	// return a list of gateways for your account and AWS Region.
 	GatewayARN *string
 
-	// The time the High Availability monitoring test was started. If a test hasn't
+	// The time the high availability monitoring test was started. If a test hasn't
 	// been performed, the value of this field is null.
 	StartTime *time.Time
 
-	// The status of the High Availability monitoring test. If a test hasn't been
+	// The status of the high availability monitoring test. If a test hasn't been
 	// performed, the value of this field is null.
 	Status types.AvailabilityMonitorTestStatus
 

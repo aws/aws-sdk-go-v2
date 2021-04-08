@@ -10415,6 +10415,11 @@ func awsRestjson1_deserializeDocumentContainerRecipe(v **types.ContainerRecipe, 
 				sv.Encrypted = ptr.Bool(jtv)
 			}
 
+		case "instanceConfiguration":
+			if err := awsRestjson1_deserializeDocumentInstanceConfiguration(&sv.InstanceConfiguration, value); err != nil {
+				return err
+			}
+
 		case "kmsKeyId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10659,6 +10664,11 @@ func awsRestjson1_deserializeDocumentDistribution(v **types.Distribution, value 
 
 		case "containerDistributionConfiguration":
 			if err := awsRestjson1_deserializeDocumentContainerDistributionConfiguration(&sv.ContainerDistributionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "launchTemplateConfigurations":
+			if err := awsRestjson1_deserializeDocumentLaunchTemplateConfigurationList(&sv.LaunchTemplateConfigurations, value); err != nil {
 				return err
 			}
 
@@ -12598,6 +12608,51 @@ func awsRestjson1_deserializeDocumentInstanceBlockDeviceMappings(v *[]types.Inst
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInstanceConfiguration(v **types.InstanceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InstanceConfiguration
+	if *v == nil {
+		sv = &types.InstanceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "blockDeviceMappings":
+			if err := awsRestjson1_deserializeDocumentInstanceBlockDeviceMappings(&sv.BlockDeviceMappings, value); err != nil {
+				return err
+			}
+
+		case "image":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Image = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInstanceTypeList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12912,6 +12967,98 @@ func awsRestjson1_deserializeDocumentLaunchPermissionConfiguration(v **types.Lau
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLaunchTemplateConfiguration(v **types.LaunchTemplateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LaunchTemplateConfiguration
+	if *v == nil {
+		sv = &types.LaunchTemplateConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "launchTemplateId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LaunchTemplateId to be of type string, got %T instead", value)
+				}
+				sv.LaunchTemplateId = ptr.String(jtv)
+			}
+
+		case "setDefaultVersion":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.SetDefaultVersion = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLaunchTemplateConfigurationList(v *[]types.LaunchTemplateConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.LaunchTemplateConfiguration
+	if *v == nil {
+		cv = []types.LaunchTemplateConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.LaunchTemplateConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentLaunchTemplateConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

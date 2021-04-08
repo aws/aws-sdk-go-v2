@@ -400,7 +400,7 @@ func (e *DuplicateUserNameFault) ErrorMessage() string {
 func (e *DuplicateUserNameFault) ErrorCode() string             { return "DuplicateUserNameFault" }
 func (e *DuplicateUserNameFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Global Datastore name already exists.
+// The Global datastore name already exists.
 type GlobalReplicationGroupAlreadyExistsFault struct {
 	Message *string
 }
@@ -421,7 +421,7 @@ func (e *GlobalReplicationGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFaul
 	return smithy.FaultClient
 }
 
-// The Global Datastore does not exist
+// The Global datastore does not exist
 type GlobalReplicationGroupNotFoundFault struct {
 	Message *string
 }
@@ -543,7 +543,7 @@ func (e *InvalidCacheSecurityGroupStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The Global Datastore is not available or in primary-only state.
+// The Global datastore is not available or in primary-only state.
 type InvalidGlobalReplicationGroupStateFault struct {
 	Message *string
 }

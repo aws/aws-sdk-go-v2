@@ -2,6 +2,26 @@
 
 package types
 
+type ActionValue string
+
+// Enum values for ActionValue
+const (
+	ActionValueAllow ActionValue = "ALLOW"
+	ActionValueBlock ActionValue = "BLOCK"
+	ActionValueCount ActionValue = "COUNT"
+)
+
+// Values returns all known values for ActionValue. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ActionValue) Values() []ActionValue {
+	return []ActionValue{
+		"ALLOW",
+		"BLOCK",
+		"COUNT",
+	}
+}
+
 type BodyParsingFallbackBehavior string
 
 // Enum values for BodyParsingFallbackBehavior
@@ -578,6 +598,42 @@ func (FallbackBehavior) Values() []FallbackBehavior {
 	}
 }
 
+type FilterBehavior string
+
+// Enum values for FilterBehavior
+const (
+	FilterBehaviorKeep FilterBehavior = "KEEP"
+	FilterBehaviorDrop FilterBehavior = "DROP"
+)
+
+// Values returns all known values for FilterBehavior. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterBehavior) Values() []FilterBehavior {
+	return []FilterBehavior{
+		"KEEP",
+		"DROP",
+	}
+}
+
+type FilterRequirement string
+
+// Enum values for FilterRequirement
+const (
+	FilterRequirementMeetsAll FilterRequirement = "MEETS_ALL"
+	FilterRequirementMeetsAny FilterRequirement = "MEETS_ANY"
+)
+
+// Values returns all known values for FilterRequirement. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FilterRequirement) Values() []FilterRequirement {
+	return []FilterRequirement{
+		"MEETS_ALL",
+		"MEETS_ANY",
+	}
+}
+
 type ForwardedIPPosition string
 
 // Enum values for ForwardedIPPosition
@@ -636,6 +692,24 @@ func (JsonMatchScope) Values() []JsonMatchScope {
 	}
 }
 
+type LabelMatchScope string
+
+// Enum values for LabelMatchScope
+const (
+	LabelMatchScopeLabel     LabelMatchScope = "LABEL"
+	LabelMatchScopeNamespace LabelMatchScope = "NAMESPACE"
+)
+
+// Values returns all known values for LabelMatchScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (LabelMatchScope) Values() []LabelMatchScope {
+	return []LabelMatchScope{
+		"LABEL",
+		"NAMESPACE",
+	}
+}
+
 type ParameterExceptionField string
 
 // Enum values for ParameterExceptionField
@@ -658,6 +732,7 @@ const (
 	ParameterExceptionFieldRegexPatternReferenceStatement ParameterExceptionField = "REGEX_PATTERN_REFERENCE_STATEMENT"
 	ParameterExceptionFieldIpSetReferenceStatement        ParameterExceptionField = "IP_SET_REFERENCE_STATEMENT"
 	ParameterExceptionFieldManagedRuleSetStatement        ParameterExceptionField = "MANAGED_RULE_SET_STATEMENT"
+	ParameterExceptionFieldLabelMatchStatement            ParameterExceptionField = "LABEL_MATCH_STATEMENT"
 	ParameterExceptionFieldAndStatement                   ParameterExceptionField = "AND_STATEMENT"
 	ParameterExceptionFieldOrStatement                    ParameterExceptionField = "OR_STATEMENT"
 	ParameterExceptionFieldNotStatement                   ParameterExceptionField = "NOT_STATEMENT"
@@ -690,6 +765,8 @@ const (
 	ParameterExceptionFieldJsonMatchPattern               ParameterExceptionField = "JSON_MATCH_PATTERN"
 	ParameterExceptionFieldJsonMatchScope                 ParameterExceptionField = "JSON_MATCH_SCOPE"
 	ParameterExceptionFieldBodyParsingFallbackBehavior    ParameterExceptionField = "BODY_PARSING_FALLBACK_BEHAVIOR"
+	ParameterExceptionFieldLoggingFilter                  ParameterExceptionField = "LOGGING_FILTER"
+	ParameterExceptionFieldFilterCondition                ParameterExceptionField = "FILTER_CONDITION"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -715,6 +792,7 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"REGEX_PATTERN_REFERENCE_STATEMENT",
 		"IP_SET_REFERENCE_STATEMENT",
 		"MANAGED_RULE_SET_STATEMENT",
+		"LABEL_MATCH_STATEMENT",
 		"AND_STATEMENT",
 		"OR_STATEMENT",
 		"NOT_STATEMENT",
@@ -747,6 +825,8 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"JSON_MATCH_PATTERN",
 		"JSON_MATCH_SCOPE",
 		"BODY_PARSING_FALLBACK_BEHAVIOR",
+		"LOGGING_FILTER",
+		"FILTER_CONDITION",
 	}
 }
 

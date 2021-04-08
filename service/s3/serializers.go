@@ -5533,7 +5533,7 @@ func (m *awsRestxml_serializeOpPutBucketLifecycleConfiguration) HandleSerialize(
 		payloadRootAttr := []smithyxml.Attr{}
 		payloadRoot := smithyxml.StartElement{
 			Name: smithyxml.Name{
-				Local: "BucketLifecycleConfiguration",
+				Local: "LifecycleConfiguration",
 			},
 			Attr: payloadRootAttr,
 		}
@@ -6892,7 +6892,7 @@ func (m *awsRestxml_serializeOpPutObjectLegalHold) HandleSerialize(ctx context.C
 		payloadRootAttr := []smithyxml.Attr{}
 		payloadRoot := smithyxml.StartElement{
 			Name: smithyxml.Name{
-				Local: "ObjectLockLegalHold",
+				Local: "LegalHold",
 			},
 			Attr: payloadRootAttr,
 		}
@@ -7102,7 +7102,7 @@ func (m *awsRestxml_serializeOpPutObjectRetention) HandleSerialize(ctx context.C
 		payloadRootAttr := []smithyxml.Attr{}
 		payloadRoot := smithyxml.StartElement{
 			Name: smithyxml.Name{
-				Local: "ObjectLockRetention",
+				Local: "Retention",
 			},
 			Attr: payloadRootAttr,
 		}

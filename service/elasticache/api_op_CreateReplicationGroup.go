@@ -14,7 +14,7 @@ import (
 // Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled)
 // replication group. This API can be used to create a standalone regional
 // replication group or a secondary replication group associated with a Global
-// Datastore. A Redis (cluster mode disabled) replication group is a collection of
+// datastore. A Redis (cluster mode disabled) replication group is a collection of
 // clusters, where one of the clusters is a read/write primary and the others are
 // read-only replicas. Writes to the primary are asynchronously propagated to the
 // replicas. A Redis cluster-mode enabled cluster is comprised of from 1 to 90
@@ -218,7 +218,7 @@ type CreateReplicationGroupInput struct {
 	// version.
 	EngineVersion *string
 
-	// The name of the Global Datastore
+	// The name of the Global datastore
 	GlobalReplicationGroupId *string
 
 	// The ID of the KMS key used to encrypt the disk in the cluster.
@@ -340,10 +340,10 @@ type CreateReplicationGroupInput struct {
 	// this parameter, ElastiCache automatically chooses an appropriate time range.
 	SnapshotWindow *string
 
-	// A list of cost allocation tags to be added to this resource. Tags are
-	// comma-separated key,value pairs (e.g. Key=myKey, Value=myKeyValue. You can
-	// include multiple tags as shown following: Key=myKey, Value=myKeyValue
-	// Key=mySecondKey, Value=mySecondKeyValue.
+	// A list of tags to be added to this resource. Tags are comma-separated key,value
+	// pairs (e.g. Key=myKey, Value=myKeyValue. You can include multiple tags as shown
+	// following: Key=myKey, Value=myKeyValue Key=mySecondKey, Value=mySecondKeyValue.
+	// Tags on replication groups will be replicated to all nodes.
 	Tags []types.Tag
 
 	// A flag that enables in-transit encryption when set to true. You cannot modify

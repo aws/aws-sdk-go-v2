@@ -17,7 +17,10 @@ import (
 )
 
 // Returns detailed information about command execution for an invocation or
-// plugin.
+// plugin. GetCommandInvocation only gives the execution status of a plugin in a
+// document. To get the command execution status on a specific instance, use
+// ListCommandInvocations. To get the command execution status across instances,
+// use ListCommands.
 func (c *Client) GetCommandInvocation(ctx context.Context, params *GetCommandInvocationInput, optFns ...func(*Options)) (*GetCommandInvocationOutput, error) {
 	if params == nil {
 		params = &GetCommandInvocationInput{}
@@ -41,18 +44,21 @@ type GetCommandInvocationInput struct {
 	CommandId *string
 
 	// (Required) The ID of the managed instance targeted by the command. A managed
-	// instance can be an EC2 instance or an instance in your hybrid environment that
-	// is configured for Systems Manager.
+	// instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an
+	// instance in your hybrid environment that is configured for AWS Systems Manager.
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The name of the plugin for which you want detailed results. If the document
-	// contains only one plugin, you can omit the name and details for that plugin are
-	// returned. If the document contains more than one plugin, you must specify the
-	// name of the plugin for which you want to view details. Plugin names are also
-	// referred to as step names in Systems Manager documents. For example,
-	// aws:RunShellScript is a plugin.
+	// contains only one plugin, you can omit the name and details for that plugin. If
+	// the document contains more than one plugin, you must specify the name of the
+	// plugin for which you want to view details. Plugin names are also referred to as
+	// step names in Systems Manager documents. For example, aws:RunShellScript is a
+	// plugin. To find the PluginName, check the document content and find the name of
+	// the plugin. Alternatively, use ListCommandInvocations with the CommandId and
+	// Details parameters. The PluginName is the Name attribute of the CommandPlugin
+	// object in the CommandPlugins list.
 	PluginName *string
 }
 
@@ -76,8 +82,8 @@ type GetCommandInvocationOutput struct {
 	// Duration since ExecutionStartDateTime.
 	ExecutionElapsedTime *string
 
-	// The date and time the plugin was finished running. Date and time are written in
-	// ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The
+	// The date and time the plugin finished running. Date and time are written in ISO
+	// 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The
 	// following sample AWS CLI command uses the InvokedAfter filter. aws ssm
 	// list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z If the
 	// plugin has not started to run, the string is empty.
@@ -117,8 +123,9 @@ type GetCommandInvocationOutput struct {
 	// this string is empty.
 	StandardOutputContent *string
 
-	// The URL for the complete text written by the plugin to stdout in Amazon S3. If
-	// an S3 bucket was not specified, then this string is empty.
+	// The URL for the complete text written by the plugin to stdout in Amazon Simple
+	// Storage Service (Amazon S3). If an S3 bucket was not specified, then this string
+	// is empty.
 	StandardOutputUrl *string
 
 	// The status of this invocation plugin. This status can be different than

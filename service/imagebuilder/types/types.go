@@ -167,7 +167,7 @@ type ComponentVersion struct {
 	// The platform of the component.
 	Platform Platform
 
-	// The operating system (OS) version supported by the component. If the OS
+	// he operating system (OS) version supported by the component. If the OS
 	// information is available, a prefix match is performed against the parent image
 	// OS version during image recipe creation.
 	SupportedOsVersions []string
@@ -234,6 +234,10 @@ type ContainerRecipe struct {
 	// A flag that indicates if the target container is encrypted.
 	Encrypted *bool
 
+	// A group of options that can be used to configure an instance for building and
+	// testing container images.
+	InstanceConfiguration *InstanceConfiguration
+
 	// Identifies which KMS key is used to encrypt the container image for distribution
 	// to the target Region.
 	KmsKeyId *string
@@ -299,12 +303,16 @@ type Distribution struct {
 	// This member is required.
 	Region *string
 
-	// The specific AMI settings (for example, launch permissions, AMI tags).
+	// The specific AMI settings; for example, launch permissions or AMI tags.
 	AmiDistributionConfiguration *AmiDistributionConfiguration
 
 	// Container distribution settings for encryption, licensing, and sharing in a
 	// specific Region.
 	ContainerDistributionConfiguration *ContainerDistributionConfiguration
+
+	// A group of launchTemplateConfiguration settings that apply to image distribution
+	// for specified accounts.
+	LaunchTemplateConfigurations []LaunchTemplateConfiguration
 
 	// The License Manager Configuration to associate with the AMI in the specified
 	// Region.
@@ -331,7 +339,8 @@ type DistributionConfiguration struct {
 	// The description of the distribution configuration.
 	Description *string
 
-	// The distributions of the distribution configuration.
+	// The distribution objects that apply Region-specific settings for the deployment
+	// of the image to targeted Regions.
 	Distributions []Distribution
 
 	// The name of the distribution configuration.
@@ -788,6 +797,20 @@ type InstanceBlockDeviceMapping struct {
 	VirtualName *string
 }
 
+// Defines a custom source AMI and block device mapping configurations of an
+// instance used for building and testing container images.
+type InstanceConfiguration struct {
+
+	// Defines the block devices to attach for building an instance from this Image
+	// Builder AMI.
+	BlockDeviceMappings []InstanceBlockDeviceMapping
+
+	// The AMI ID to use as the base image for a container build and test instance. If
+	// not specified, Image Builder will use the appropriate ECS-optimized AMI as a
+	// base image.
+	Image *string
+}
+
 // Describes the configuration for a launch permission. The launch permission
 // modification request is sent to the EC2 ModifyImageAttribute
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html)
@@ -802,6 +825,22 @@ type LaunchPermissionConfiguration struct {
 
 	// The AWS account ID.
 	UserIds []string
+}
+
+// Identifies an EC2 launch template to use for a specific account.
+type LaunchTemplateConfiguration struct {
+
+	// Identifies the EC2 launch template to use.
+	//
+	// This member is required.
+	LaunchTemplateId *string
+
+	// The account ID that this configuration applies to.
+	AccountId *string
+
+	// Set the specified EC2 launch template as the default launch template for the
+	// specified account.
+	SetDefaultVersion bool
 }
 
 // Logging configuration defines where Image Builder uploads your logs.

@@ -84,7 +84,8 @@ type Association struct {
 	// Information about the association.
 	Overview *AssociationOverview
 
-	// A cron expression that specifies a schedule when the association runs.
+	// A cron expression that specifies a schedule when the association runs. The
+	// schedule runs in Coordinated Universal Time (UTC).
 	ScheduleExpression *string
 
 	// The instances targeted by the request to create an association.
@@ -2081,6 +2082,13 @@ type InstancePatchState struct {
 	// This member is required.
 	PatchGroup *string
 
+	// The number of instances where patches that are specified as "Critical" for
+	// compliance reporting in the patch baseline are not installed. These patches
+	// might be missing, have failed installation, were rejected, or were installed but
+	// awaiting a required instance reboot. The status of these instances is
+	// NON_COMPLIANT.
+	CriticalNonCompliantCount int32
+
 	// The number of patches from the patch baseline that were attempted to be
 	// installed during the last patching operation, but failed to install.
 	FailedCount int32
@@ -2127,6 +2135,11 @@ type InstancePatchState struct {
 	// this limit are reported in UnreportedNotApplicableCount.
 	NotApplicableCount int32
 
+	// The number of instances with patches installed that are specified as other than
+	// "Critical" or "Security" but are not compliant with the patch baseline. The
+	// status of these instances is NON_COMPLIANT.
+	OtherNonCompliantCount int32
+
 	// Placeholder information. This field will always be empty in the current release
 	// of the service.
 	OwnerInformation *string
@@ -2144,6 +2157,12 @@ type InstancePatchState struct {
 	// are assigned a status of InstalledPendingReboot. These patches might not be in
 	// effect until a reboot is performed.
 	RebootOption RebootOption
+
+	// The number of instances where patches that are specified as "Security" in a
+	// patch advisory are not installed. These patches might be missing, have failed
+	// installation, were rejected, or were installed but awaiting a required instance
+	// reboot. The status of these instances is NON_COMPLIANT.
+	SecurityNonCompliantCount int32
 
 	// The ID of the patch baseline snapshot used during the patching operation when
 	// this compliance data was collected.

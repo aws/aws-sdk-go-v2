@@ -657,6 +657,11 @@ func validateDestinationConnectorProperties(v *types.DestinationConnectorPropert
 			invalidParams.AddNested("CustomerProfiles", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Zendesk != nil {
+		if err := validateZendeskDestinationProperties(v.Zendesk); err != nil {
+			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1544,6 +1549,21 @@ func validateZendeskConnectorProfileProperties(v *types.ZendeskConnectorProfileP
 	invalidParams := smithy.InvalidParamsError{Context: "ZendeskConnectorProfileProperties"}
 	if v.InstanceUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateZendeskDestinationProperties(v *types.ZendeskDestinationProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ZendeskDestinationProperties"}
+	if v.Object == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Object"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

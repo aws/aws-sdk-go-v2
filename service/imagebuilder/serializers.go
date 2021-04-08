@@ -306,6 +306,13 @@ func awsRestjson1_serializeOpDocumentCreateContainerRecipeInput(v *CreateContain
 		ok.String(*v.ImageOsVersionOverride)
 	}
 
+	if v.InstanceConfiguration != nil {
+		ok := object.Key("instanceConfiguration")
+		if err := awsRestjson1_serializeDocumentInstanceConfiguration(v.InstanceConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KmsKeyId != nil {
 		ok := object.Key("kmsKeyId")
 		ok.String(*v.KmsKeyId)
@@ -3964,6 +3971,13 @@ func awsRestjson1_serializeDocumentDistribution(v *types.Distribution, value smi
 		}
 	}
 
+	if v.LaunchTemplateConfigurations != nil {
+		ok := object.Key("launchTemplateConfigurations")
+		if err := awsRestjson1_serializeDocumentLaunchTemplateConfigurationList(v.LaunchTemplateConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LicenseConfigurationArns != nil {
 		ok := object.Key("licenseConfigurationArns")
 		if err := awsRestjson1_serializeDocumentLicenseConfigurationArnList(v.LicenseConfigurationArns, ok); err != nil {
@@ -4136,6 +4150,25 @@ func awsRestjson1_serializeDocumentInstanceBlockDeviceMappings(v []types.Instanc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInstanceConfiguration(v *types.InstanceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BlockDeviceMappings != nil {
+		ok := object.Key("blockDeviceMappings")
+		if err := awsRestjson1_serializeDocumentInstanceBlockDeviceMappings(v.BlockDeviceMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Image != nil {
+		ok := object.Key("image")
+		ok.String(*v.Image)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentInstanceTypeList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -4165,6 +4198,41 @@ func awsRestjson1_serializeDocumentLaunchPermissionConfiguration(v *types.Launch
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLaunchTemplateConfiguration(v *types.LaunchTemplateConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountId != nil {
+		ok := object.Key("accountId")
+		ok.String(*v.AccountId)
+	}
+
+	if v.LaunchTemplateId != nil {
+		ok := object.Key("launchTemplateId")
+		ok.String(*v.LaunchTemplateId)
+	}
+
+	if v.SetDefaultVersion {
+		ok := object.Key("setDefaultVersion")
+		ok.Boolean(v.SetDefaultVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLaunchTemplateConfigurationList(v []types.LaunchTemplateConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLaunchTemplateConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

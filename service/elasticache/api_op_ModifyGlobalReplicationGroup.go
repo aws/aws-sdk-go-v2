@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the settings for a Global Datastore.
+// Modifies the settings for a Global datastore.
 func (c *Client) ModifyGlobalReplicationGroup(ctx context.Context, params *ModifyGlobalReplicationGroupInput, optFns ...func(*Options)) (*ModifyGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &ModifyGlobalReplicationGroupInput{}
@@ -37,7 +37,7 @@ type ModifyGlobalReplicationGroupInput struct {
 	// This member is required.
 	ApplyImmediately bool
 
-	// The name of the Global Datastore
+	// The name of the Global datastore
 	//
 	// This member is required.
 	GlobalReplicationGroupId *string
@@ -46,7 +46,7 @@ type ModifyGlobalReplicationGroupInput struct {
 	// primary if the existing primary encounters a failure.
 	AutomaticFailoverEnabled *bool
 
-	// A valid cache node type that you want to scale this Global Datastore to.
+	// A valid cache node type that you want to scale this Global datastore to.
 	CacheNodeType *string
 
 	// The name of the cache parameter group to use with the Global datastore. It must
@@ -54,10 +54,10 @@ type ModifyGlobalReplicationGroupInput struct {
 	CacheParameterGroupName *string
 
 	// The upgraded version of the cache engine to be run on the clusters in the Global
-	// Datastore.
+	// datastore.
 	EngineVersion *string
 
-	// A description of the Global Datastore
+	// A description of the Global datastore
 	GlobalReplicationGroupDescription *string
 }
 
@@ -69,7 +69,7 @@ type ModifyGlobalReplicationGroupOutput struct {
 	// secondary cluster.
 	//
 	// * The GlobalReplicationGroupIdSuffix represents the name of
-	// the Global Datastore, which is what you use to associate a secondary cluster.
+	// the Global datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

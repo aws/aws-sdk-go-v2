@@ -333,6 +333,26 @@ type AssociationStatus struct {
 	Message *string
 }
 
+// Describes integration options for Amazon Athena.
+type AthenaIntegration struct {
+
+	// The location in Amazon S3 to store the generated CloudFormation template.
+	//
+	// This member is required.
+	IntegrationResultS3DestinationArn *string
+
+	// The schedule for adding new partitions to the table.
+	//
+	// This member is required.
+	PartitionLoadFrequency PartitionLoadFrequency
+
+	// The end date for the partition.
+	PartitionEndDate *time.Time
+
+	// The start date for the partition.
+	PartitionStartDate *time.Time
+}
+
 // Describes a value for a resource attribute that is a Boolean value.
 type AttributeBooleanValue struct {
 
@@ -4681,6 +4701,13 @@ type InstanceUsage struct {
 	UsedInstanceCount int32
 }
 
+// Describes service integrations with VPC Flow logs.
+type IntegrateServices struct {
+
+	// Information about the integration with Amazon Athena.
+	AthenaIntegrations []AthenaIntegration
+}
+
 // Describes an internet gateway.
 type InternetGateway struct {
 
@@ -8113,6 +8140,21 @@ type RunInstancesMonitoringEnabled struct {
 	Enabled bool
 }
 
+// The tags to apply to the AMI object that will be stored in the S3 bucket. For
+// more information, see Categorizing your storage using tags
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html) in
+// the Amazon Simple Storage Service User Guide.
+type S3ObjectTag struct {
+
+	// The key of the tag. Constraints: Tag keys are case-sensitive and can be up to
+	// 128 Unicode characters in length. May not begin with aws:.
+	Key *string
+
+	// The value of the tag. Constraints: Tag values are case-sensitive and can be up
+	// to 256 Unicode characters in length.
+	Value *string
+}
+
 // Describes the storage parameters for S3 and S3 buckets for an instance
 // store-backed AMI.
 type S3Storage struct {
@@ -9608,6 +9650,32 @@ type StorageLocation struct {
 
 	// The key.
 	Key *string
+}
+
+// The information about the AMI store task, including the progress of the task.
+type StoreImageTaskResult struct {
+
+	// The ID of the AMI that is being stored.
+	AmiId *string
+
+	// The name of the S3 bucket that contains the stored AMI object.
+	Bucket *string
+
+	// The progress of the task as a percentage.
+	ProgressPercentage int32
+
+	// The name of the stored AMI object in the bucket.
+	S3objectKey *string
+
+	// If the tasks fails, the reason for the failure is returned. If the task
+	// succeeds, null is returned.
+	StoreTaskFailureReason *string
+
+	// The state of the store task (InProgress, Completed, or Failed).
+	StoreTaskState *string
+
+	// The time the task started.
+	TaskStartTime *time.Time
 }
 
 // Describes a subnet.

@@ -13,22 +13,24 @@ import (
 // Initiates the copy of an AMI. You can copy an AMI from one Region to another, or
 // from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a
 // Region, from one Outpost to another, or within the same Outpost. To copy an AMI
-// from one Region to another, specify the source Region using the
+// to another partition, see CreateStoreImageTask
+// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html).
+// To copy an AMI from one Region to another, specify the source Region using
+// the
 //
-// SourceRegion
-// parameter, and specify the destination Region using its endpoint. Copies of
-// encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted
-// backing snapshots remain unencrypted, unless you set Encrypted during the copy
-// operation. You cannot create an unencrypted copy of an encrypted backing
-// snapshot. To copy an AMI from a Region to an Outpost, specify the source Region
-// using the
+// SourceRegion parameter, and specify the destination Region using its
+// endpoint. Copies of encrypted backing snapshots for the AMI are encrypted.
+// Copies of unencrypted backing snapshots remain unencrypted, unless you set
+// Encrypted during the copy operation. You cannot create an unencrypted copy of an
+// encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify
+// the source Region using the
 //
-// SourceRegion parameter, and specify the ARN of the destination
-// Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are
-// encrypted by default using the default encryption key for the Region, or a
-// different key that you specify in the request using KmsKeyId. Outposts do not
-// support unencrypted snapshots. For more information,  Amazon EBS local snapshots
-// on Outposts
+// SourceRegion parameter, and specify the ARN of the
+// destination Outpost using DestinationOutpostArn. Backing snapshots copied to an
+// Outpost are encrypted by default using the default encryption key for the
+// Region, or a different key that you specify in the request using KmsKeyId.
+// Outposts do not support unencrypted snapshots. For more information,  Amazon EBS
+// local snapshots on Outposts
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#ami)
 // in the Amazon Elastic Compute Cloud User Guide. For more information about the
 // prerequisites and limits when copying an AMI, see Copying an AMI

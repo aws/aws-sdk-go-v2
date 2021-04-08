@@ -91,7 +91,7 @@ type StopChannelOutput struct {
 	Tags map[string]string
 
 	// Settings for VPC output
-	Vpc *types.VpcOutputSettings
+	Vpc *types.VpcOutputSettingsDescription
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

@@ -1878,6 +1878,11 @@ func validateEncoderSettings(v *types.EncoderSettings) error {
 			invalidParams.AddNested("GlobalConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MotionGraphicsConfiguration != nil {
+		if err := validateMotionGraphicsConfiguration(v.MotionGraphicsConfiguration); err != nil {
+			invalidParams.AddNested("MotionGraphicsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.OutputGroups == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputGroups"))
 	} else if v.OutputGroups != nil {
@@ -2309,6 +2314,21 @@ func validateMediaPackageGroupSettings(v *types.MediaPackageGroupSettings) error
 	invalidParams := smithy.InvalidParamsError{Context: "MediaPackageGroupSettings"}
 	if v.Destination == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMotionGraphicsConfiguration(v *types.MotionGraphicsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MotionGraphicsConfiguration"}
+	if v.MotionGraphicsSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MotionGraphicsSettings"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -38,6 +38,26 @@ func (ChannelType) Values() []ChannelType {
 	}
 }
 
+type RecordingConfigurationState string
+
+// Enum values for RecordingConfigurationState
+const (
+	RecordingConfigurationStateCreating     RecordingConfigurationState = "CREATING"
+	RecordingConfigurationStateCreateFailed RecordingConfigurationState = "CREATE_FAILED"
+	RecordingConfigurationStateActive       RecordingConfigurationState = "ACTIVE"
+)
+
+// Values returns all known values for RecordingConfigurationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecordingConfigurationState) Values() []RecordingConfigurationState {
+	return []RecordingConfigurationState{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+	}
+}
+
 type StreamHealth string
 
 // Enum values for StreamHealth

@@ -521,7 +521,8 @@ type ControlMappingSource struct {
 	// The unique identifier for the specified source.
 	SourceId *string
 
-	// The keyword to search for in AWS CloudTrail logs.
+	// The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security
+	// Hub checks, and AWS API names.
 	SourceKeyword *SourceKeyword
 
 	// The name of the specified source.
@@ -606,7 +607,8 @@ type CreateControlMappingSource struct {
 	// The frequency of evidence collection for the specified control mapping source.
 	SourceFrequency SourceFrequency
 
-	// The keyword to search for in AWS CloudTrail logs.
+	// The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security
+	// Hub checks, and AWS API names.
 	SourceKeyword *SourceKeyword
 
 	// The name of the control mapping data source.
@@ -873,8 +875,8 @@ type Resource struct {
 	Value *string
 }
 
-// The wrapper that contains AWS Audit Manager role information, such as the role
-// type and IAM Amazon Resource Name (ARN).
+// The wrapper that contains the AWS Audit Manager role information of the current
+// user, such as the role type and IAM Amazon Resource Name (ARN).
 type Role struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role.
@@ -933,14 +935,15 @@ type Settings struct {
 	SnsTopic *string
 }
 
-// The keyword to search for in AWS CloudTrail logs.
+// The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security
+// Hub checks, and AWS API names.
 type SourceKeyword struct {
 
 	// The method of input for the specified keyword.
 	KeywordInputType KeywordInputType
 
-	// The value of the keyword used to search AWS CloudTrail logs when mapping a
-	// control data source.
+	// The value of the keyword used to search AWS CloudTrail logs, AWS Config rules,
+	// AWS Security Hub checks, and AWS API names when mapping a control data source.
 	KeywordValue *string
 }
 

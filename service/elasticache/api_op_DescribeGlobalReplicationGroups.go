@@ -13,7 +13,7 @@ import (
 )
 
 // Returns information about a particular global replication group. If no
-// identifier is specified, returns information about all Global Datastores.
+// identifier is specified, returns information about all Global datastores.
 func (c *Client) DescribeGlobalReplicationGroups(ctx context.Context, params *DescribeGlobalReplicationGroupsInput, optFns ...func(*Options)) (*DescribeGlobalReplicationGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeGlobalReplicationGroupsInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeGlobalReplicationGroups(ctx context.Context, params *De
 
 type DescribeGlobalReplicationGroupsInput struct {
 
-	// The name of the Global Datastore
+	// The name of the Global datastore
 	GlobalReplicationGroupId *string
 
 	// An optional marker returned from a prior request. Use this marker for pagination
@@ -45,7 +45,7 @@ type DescribeGlobalReplicationGroupsInput struct {
 	// that the remaining results can be retrieved.
 	MaxRecords *int32
 
-	// Returns the list of members that comprise the Global Datastore.
+	// Returns the list of members that comprise the Global datastore.
 	ShowMemberInfo *bool
 }
 

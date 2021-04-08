@@ -13913,6 +13913,126 @@ func awsAwsjson11_deserializeOpErrorTerminateSession(response *smithyhttp.Respon
 	}
 }
 
+type awsAwsjson11_deserializeOpUnlabelParameterVersion struct {
+}
+
+func (*awsAwsjson11_deserializeOpUnlabelParameterVersion) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUnlabelParameterVersion) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUnlabelParameterVersion(response, &metadata)
+	}
+	output := &UnlabelParameterVersionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUnlabelParameterVersionOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUnlabelParameterVersion(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("ParameterNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorParameterNotFound(response, errorBody)
+
+	case strings.EqualFold("ParameterVersionNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorParameterVersionNotFound(response, errorBody)
+
+	case strings.EqualFold("TooManyUpdates", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyUpdates(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpUpdateAssociation struct {
 }
 
@@ -26396,6 +26516,19 @@ func awsAwsjson11_deserializeDocumentInstancePatchState(v **types.InstancePatchS
 				sv.BaselineId = ptr.String(jtv)
 			}
 
+		case "CriticalNonCompliantCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PatchCriticalNonCompliantCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CriticalNonCompliantCount = int32(i64)
+			}
+
 		case "FailedCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -26553,6 +26686,19 @@ func awsAwsjson11_deserializeDocumentInstancePatchState(v **types.InstancePatchS
 				sv.OperationStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "OtherNonCompliantCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PatchOtherNonCompliantCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.OtherNonCompliantCount = int32(i64)
+			}
+
 		case "OwnerInformation":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26578,6 +26724,19 @@ func awsAwsjson11_deserializeDocumentInstancePatchState(v **types.InstancePatchS
 					return fmt.Errorf("expected RebootOption to be of type string, got %T instead", value)
 				}
 				sv.RebootOption = types.RebootOption(jtv)
+			}
+
+		case "SecurityNonCompliantCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PatchSecurityNonCompliantCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SecurityNonCompliantCount = int32(i64)
 			}
 
 		case "SnapshotId":
@@ -40997,6 +41156,19 @@ func awsAwsjson11_deserializeOpDocumentDescribePatchGroupStateOutput(v **Describ
 				sv.Instances = int32(i64)
 			}
 
+		case "InstancesWithCriticalNonCompliantPatches":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InstancesCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstancesWithCriticalNonCompliantPatches = int32(i64)
+			}
+
 		case "InstancesWithFailedPatches":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -41086,6 +41258,32 @@ func awsAwsjson11_deserializeOpDocumentDescribePatchGroupStateOutput(v **Describ
 					return err
 				}
 				sv.InstancesWithNotApplicablePatches = int32(i64)
+			}
+
+		case "InstancesWithOtherNonCompliantPatches":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InstancesCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstancesWithOtherNonCompliantPatches = int32(i64)
+			}
+
+		case "InstancesWithSecurityNonCompliantPatches":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected InstancesCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.InstancesWithSecurityNonCompliantPatches = int32(i64)
 			}
 
 		case "InstancesWithUnreportedNotApplicablePatches":
@@ -44647,6 +44845,47 @@ func awsAwsjson11_deserializeOpDocumentTerminateSessionOutput(v **TerminateSessi
 					return fmt.Errorf("expected SessionId to be of type string, got %T instead", value)
 				}
 				sv.SessionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUnlabelParameterVersionOutput(v **UnlabelParameterVersionOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UnlabelParameterVersionOutput
+	if *v == nil {
+		sv = &UnlabelParameterVersionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "InvalidLabels":
+			if err := awsAwsjson11_deserializeDocumentParameterLabelList(&sv.InvalidLabels, value); err != nil {
+				return err
+			}
+
+		case "RemovedLabels":
+			if err := awsAwsjson11_deserializeDocumentParameterLabelList(&sv.RemovedLabels, value); err != nil {
+				return err
 			}
 
 		default:

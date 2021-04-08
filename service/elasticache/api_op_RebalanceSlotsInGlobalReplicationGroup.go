@@ -35,7 +35,7 @@ type RebalanceSlotsInGlobalReplicationGroupInput struct {
 	// This member is required.
 	ApplyImmediately bool
 
-	// The name of the Global Datastore
+	// The name of the Global datastore
 	//
 	// This member is required.
 	GlobalReplicationGroupId *string
@@ -49,7 +49,7 @@ type RebalanceSlotsInGlobalReplicationGroupOutput struct {
 	// secondary cluster.
 	//
 	// * The GlobalReplicationGroupIdSuffix represents the name of
-	// the Global Datastore, which is what you use to associate a secondary cluster.
+	// the Global datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

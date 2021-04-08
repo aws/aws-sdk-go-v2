@@ -41,15 +41,22 @@ type Address struct {
 	State *string
 }
 
+// The operation to be performed on the provided source fields.
 type ConnectorOperator struct {
+
+	// The operation to be performed on the provided Marketo source fields.
 	Marketo MarketoConnectorOperator
 
+	// The operation to be performed on the provided Amazon S3 source fields.
 	S3 S3ConnectorOperator
 
+	// The operation to be performed on the provided Salesforce source fields.
 	Salesforce SalesforceConnectorOperator
 
+	// The operation to be performed on the provided ServiceNow source fields.
 	ServiceNow ServiceNowConnectorOperator
 
+	// The operation to be performed on the provided Zendesk source fields.
 	Zendesk ZendeskConnectorOperator
 }
 
@@ -72,27 +79,50 @@ type DomainStats struct {
 	TotalSize int64
 }
 
+// The configurations that control how Customer Profiles retrieves data from the
+// source, Amazon AppFlow. Customer Profiles uses this information to create an
+// AppFlow flow on behalf of customers.
 type FlowDefinition struct {
 
+	// The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces
+	// are not allowed.
+	//
 	// This member is required.
 	FlowName *string
 
+	// The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide
+	// for encryption.
+	//
 	// This member is required.
 	KmsArn *string
 
+	// The configuration that controls how Customer Profiles retrieves data from the
+	// source.
+	//
 	// This member is required.
 	SourceFlowConfig *SourceFlowConfig
 
+	// A list of tasks that Customer Profiles performs while transferring the data in
+	// the flow run.
+	//
 	// This member is required.
 	Tasks []Task
 
+	// The trigger settings that determine how and when the flow runs.
+	//
 	// This member is required.
 	TriggerConfig *TriggerConfig
 
+	// A description of the flow you want to create.
 	Description *string
 }
 
+// Specifies the configuration used when importing incremental records from the
+// source.
 type IncrementalPullConfig struct {
+
+	// A field that specifies the date time or timestamp field as the criteria to use
+	// when importing incremental records from the source.
 	DatetimeTypeFieldName *string
 }
 
@@ -200,8 +230,11 @@ type ListProfileObjectTypeTemplateItem struct {
 	TemplateId *string
 }
 
+// The properties that are applied when Marketo is being used as a source.
 type MarketoSourceProperties struct {
 
+	// The object specified in the Marketo flow source.
+	//
 	// This member is required.
 	Object *string
 }
@@ -314,97 +347,168 @@ type Profile struct {
 	ShippingAddress *Address
 }
 
+// The properties that are applied when Amazon S3 is being used as the flow source.
 type S3SourceProperties struct {
 
+	// The Amazon S3 bucket name where the source files are stored.
+	//
 	// This member is required.
 	BucketName *string
 
+	// The object key for the Amazon S3 bucket in which the source files are stored.
 	BucketPrefix *string
 }
 
+// The properties that are applied when Salesforce is being used as a source.
 type SalesforceSourceProperties struct {
 
+	// The object specified in the Salesforce flow source.
+	//
 	// This member is required.
 	Object *string
 
+	// The flag that enables dynamic fetching of new (recently added) fields in the
+	// Salesforce objects while running a flow.
 	EnableDynamicFieldUpdate bool
 
+	// Indicates whether Amazon AppFlow includes deleted files in the flow run.
 	IncludeDeletedRecords bool
 }
 
+// Specifies the configuration details of a scheduled-trigger flow that you define.
+// Currently, these settings only apply to the scheduled-trigger type.
 type ScheduledTriggerProperties struct {
 
+	// The scheduling expression that determines the rate at which the schedule will
+	// run, for example rate (5 minutes).
+	//
 	// This member is required.
 	ScheduleExpression *string
 
+	// Specifies whether a scheduled flow has an incremental data transfer or a
+	// complete data transfer for each flow run.
 	DataPullMode DataPullMode
 
+	// Specifies the date range for the records to import from the connector in the
+	// first flow run.
 	FirstExecutionFrom *time.Time
 
+	// Specifies the scheduled end time for a scheduled-trigger flow.
 	ScheduleEndTime *time.Time
 
+	// Specifies the optional offset that is added to the time interval for a
+	// schedule-triggered flow.
 	ScheduleOffset int64
 
+	// Specifies the scheduled start time for a scheduled-trigger flow.
 	ScheduleStartTime *time.Time
 
+	// Specifies the time zone used when referring to the date and time of a
+	// scheduled-triggered flow, such as America/New_York.
 	Timezone *string
 }
 
+// The properties that are applied when ServiceNow is being used as a source.
 type ServiceNowSourceProperties struct {
 
+	// The object specified in the ServiceNow flow source.
+	//
 	// This member is required.
 	Object *string
 }
 
+// Specifies the information that is required to query a particular Amazon AppFlow
+// connector. Customer Profiles supports Salesforce, Zendesk, Marketo, ServiceNow
+// and Amazon S3.
 type SourceConnectorProperties struct {
+
+	// The properties that are applied when Marketo is being used as a source.
 	Marketo *MarketoSourceProperties
 
+	// The properties that are applied when Amazon S3 is being used as the flow source.
 	S3 *S3SourceProperties
 
+	// The properties that are applied when Salesforce is being used as a source.
 	Salesforce *SalesforceSourceProperties
 
+	// The properties that are applied when ServiceNow is being used as a source.
 	ServiceNow *ServiceNowSourceProperties
 
+	// The properties that are applied when using Zendesk as a flow source.
 	Zendesk *ZendeskSourceProperties
 }
 
+// Contains information about the configuration of the source connector used in the
+// flow.
 type SourceFlowConfig struct {
 
+	// The type of connector, such as Salesforce, Marketo, and so on.
+	//
 	// This member is required.
 	ConnectorType SourceConnectorType
 
+	// Specifies the information that is required to query a particular source
+	// connector.
+	//
 	// This member is required.
 	SourceConnectorProperties *SourceConnectorProperties
 
+	// The name of the AppFlow connector profile. This name must be unique for each
+	// connector profile in the AWS account.
 	ConnectorProfileName *string
 
+	// Defines the configuration for a scheduled incremental data pull. If a valid
+	// configuration is provided, the fields specified in the configuration are used
+	// when querying for the incremental data pull.
 	IncrementalPullConfig *IncrementalPullConfig
 }
 
+// A class for modeling different type of tasks. Task implementation varies based
+// on the TaskType.
 type Task struct {
 
+	// The source fields to which a particular task is applied.
+	//
 	// This member is required.
 	SourceFields []string
 
+	// Specifies the particular task implementation that Amazon AppFlow performs.
+	//
 	// This member is required.
 	TaskType TaskType
 
+	// The operation to be performed on the provided source fields.
 	ConnectorOperator *ConnectorOperator
 
+	// A field in a destination connector, or a field value against which Amazon
+	// AppFlow validates a source field.
 	DestinationField *string
 
+	// A map used to store task-related information. The service looks for particular
+	// information based on the TaskType.
 	TaskProperties map[string]string
 }
 
+// The trigger settings that determine how and when Amazon AppFlow runs the
+// specified flow.
 type TriggerConfig struct {
 
+	// Specifies the type of flow trigger. It can be OnDemand, Scheduled, or Event.
+	//
 	// This member is required.
 	TriggerType TriggerType
 
+	// Specifies the configuration details of a schedule-triggered flow that you
+	// define. Currently, these settings only apply to the Scheduled trigger type.
 	TriggerProperties *TriggerProperties
 }
 
+// Specifies the configuration details that control the trigger for a flow.
+// Currently, these settings only apply to the Scheduled trigger type.
 type TriggerProperties struct {
+
+	// Specifies the configuration details of a schedule-triggered flow that you
+	// define.
 	Scheduled *ScheduledTriggerProperties
 }
 
@@ -442,8 +546,11 @@ type UpdateAddress struct {
 	State *string
 }
 
+// The properties that are applied when using Zendesk as a flow source.
 type ZendeskSourceProperties struct {
 
+	// The object specified in the Zendesk flow source.
+	//
 	// This member is required.
 	Object *string
 }

@@ -197,6 +197,309 @@ type Filter struct {
 	Values []string
 }
 
+// Configuration of the firewall behavior provided by DNS Firewall for a single
+// Amazon virtual private cloud (VPC).
+type FirewallConfig struct {
+
+	// Determines how DNS Firewall operates during failures, for example when all
+	// traffic that is sent to DNS Firewall fails to receive a reply.
+	//
+	// * By default,
+	// fail open is disabled, which means the failure mode is closed. This approach
+	// favors security over availability. DNS Firewall returns a failure error when it
+	// is unable to properly evaluate a query.
+	//
+	// * If you enable this option, the
+	// failure mode is open. This approach favors availability over security. DNS
+	// Firewall allows queries to proceed if it is unable to properly evaluate
+	// them.
+	//
+	// This behavior is only enforced for VPCs that have at least one DNS
+	// Firewall rule group association.
+	FirewallFailOpen FirewallFailOpenStatus
+
+	// The Id of the firewall configuration.
+	Id *string
+
+	// The AWS account ID of the owner of the VPC that this firewall configuration
+	// applies to.
+	OwnerId *string
+
+	// The ID of the VPC that this firewall configuration applies to.
+	ResourceId *string
+}
+
+// High level information about a list of firewall domains for use in a
+// FirewallRule. This is returned by GetFirewallDomainList. To retrieve the domains
+// that are defined for this domain list, call ListFirewallDomains.
+type FirewallDomainList struct {
+
+	// The Amazon Resource Name (ARN) of the firewall domain list.
+	Arn *string
+
+	// The date and time that the domain list was created, in Unix time format and
+	// Coordinated Universal Time (UTC).
+	CreationTime *string
+
+	// A unique string defined by you to identify the request. This allows you to retry
+	// failed requests without the risk of executing the operation twice. This can be
+	// any unique string, for example, a timestamp.
+	CreatorRequestId *string
+
+	// The number of domain names that are specified in the domain list.
+	DomainCount *int32
+
+	// The ID of the domain list.
+	Id *string
+
+	// The owner of the list, used only for lists that are not managed by you. For
+	// example, the managed domain list AWSManagedDomainsMalwareDomainList has the
+	// managed owner name Route 53 Resolver DNS Firewall.
+	ManagedOwnerName *string
+
+	// The date and time that the domain list was last modified, in Unix time format
+	// and Coordinated Universal Time (UTC).
+	ModificationTime *string
+
+	// The name of the domain list.
+	Name *string
+
+	// The status of the domain list.
+	Status FirewallDomainListStatus
+
+	// Additional information about the status of the list, if available.
+	StatusMessage *string
+}
+
+// Minimal high-level information for a firewall domain list. The action
+// ListFirewallDomainLists returns an array of these objects. To retrieve full
+// information for a firewall domain list, call GetFirewallDomainList and
+// ListFirewallDomains.
+type FirewallDomainListMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the firewall domain list metadata.
+	Arn *string
+
+	// A unique string defined by you to identify the request. This allows you to retry
+	// failed requests without the risk of executing the operation twice. This can be
+	// any unique string, for example, a timestamp.
+	CreatorRequestId *string
+
+	// The ID of the domain list.
+	Id *string
+
+	// The owner of the list, used only for lists that are not managed by you. For
+	// example, the managed domain list AWSManagedDomainsMalwareDomainList has the
+	// managed owner name Route 53 Resolver DNS Firewall.
+	ManagedOwnerName *string
+
+	// The name of the domain list.
+	Name *string
+}
+
+// A single firewall rule in a rule group.
+type FirewallRule struct {
+
+	// The action that DNS Firewall should take on a DNS query when it matches one of
+	// the domains in the rule's domain list:
+	//
+	// * ALLOW - Permit the request to go
+	// through.
+	//
+	// * ALERT - Permit the request to go through but send an alert to the
+	// logs.
+	//
+	// * BLOCK - Disallow the request. If this is specified, additional handling
+	// details are provided in the rule's BlockResponse setting.
+	Action Action
+
+	// The DNS record's type. This determines the format of the record value that you
+	// provided in BlockOverrideDomain. Used for the rule action BLOCK with a
+	// BlockResponse setting of OVERRIDE.
+	BlockOverrideDnsType BlockOverrideDnsType
+
+	// The custom DNS record to send back in response to the query. Used for the rule
+	// action BLOCK with a BlockResponse setting of OVERRIDE.
+	BlockOverrideDomain *string
+
+	// The recommended amount of time, in seconds, for the DNS resolver or web browser
+	// to cache the provided override record. Used for the rule action BLOCK with a
+	// BlockResponse setting of OVERRIDE.
+	BlockOverrideTtl *int32
+
+	// The way that you want DNS Firewall to block the request. Used for the rule
+	// action setting BLOCK.
+	//
+	// * NODATA - Respond indicating that the query was
+	// successful, but no response is available for it.
+	//
+	// * NXDOMAIN - Respond
+	// indicating that the domain name that's in the query doesn't exist.
+	//
+	// * OVERRIDE -
+	// Provide a custom override in the response. This option requires custom handling
+	// details in the rule's BlockOverride* settings.
+	BlockResponse BlockResponse
+
+	// The date and time that the rule was created, in Unix time format and Coordinated
+	// Universal Time (UTC).
+	CreationTime *string
+
+	// A unique string defined by you to identify the request. This allows you to retry
+	// failed requests without the risk of executing the operation twice. This can be
+	// any unique string, for example, a timestamp.
+	CreatorRequestId *string
+
+	// The ID of the domain list that's used in the rule.
+	FirewallDomainListId *string
+
+	// The unique identifier of the firewall rule group of the rule.
+	FirewallRuleGroupId *string
+
+	// The date and time that the rule was last modified, in Unix time format and
+	// Coordinated Universal Time (UTC).
+	ModificationTime *string
+
+	// The name of the rule.
+	Name *string
+
+	// The priority of the rule in the rule group. This value must be unique within the
+	// rule group. DNS Firewall processes the rules in a rule group by order of
+	// priority, starting from the lowest setting.
+	Priority *int32
+}
+
+// High-level information for a firewall rule group. A firewall rule group is a
+// collection of rules that DNS Firewall uses to filter DNS network traffic for a
+// VPC. To retrieve the rules for the rule group, call ListFirewallRules.
+type FirewallRuleGroup struct {
+
+	// The ARN (Amazon Resource Name) of the rule group.
+	Arn *string
+
+	// The date and time that the rule group was created, in Unix time format and
+	// Coordinated Universal Time (UTC).
+	CreationTime *string
+
+	// A unique string defined by you to identify the request. This allows you to retry
+	// failed requests without the risk of executing the operation twice. This can be
+	// any unique string, for example, a timestamp.
+	CreatorRequestId *string
+
+	// The ID of the rule group.
+	Id *string
+
+	// The date and time that the rule group was last modified, in Unix time format and
+	// Coordinated Universal Time (UTC).
+	ModificationTime *string
+
+	// The name of the rule group.
+	Name *string
+
+	// The AWS account ID for the account that created the rule group. When a rule
+	// group is shared with your account, this is the account that has shared the rule
+	// group with you.
+	OwnerId *string
+
+	// The number of rules in the rule group.
+	RuleCount *int32
+
+	// Whether the rule group is shared with other AWS accounts, or was shared with the
+	// current account by another AWS account. Sharing is configured through AWS
+	// Resource Access Manager (AWS RAM).
+	ShareStatus ShareStatus
+
+	// The status of the domain list.
+	Status FirewallRuleGroupStatus
+
+	// Additional information about the status of the rule group, if available.
+	StatusMessage *string
+}
+
+// An association between a firewall rul group and a VPC, which enables DNS
+// filtering for the VPC.
+type FirewallRuleGroupAssociation struct {
+
+	// The Amazon Resource Name (ARN) of the firewall rule group association.
+	Arn *string
+
+	// The date and time that the association was created, in Unix time format and
+	// Coordinated Universal Time (UTC).
+	CreationTime *string
+
+	// A unique string defined by you to identify the request. This allows you to retry
+	// failed requests without the risk of executing the operation twice. This can be
+	// any unique string, for example, a timestamp.
+	CreatorRequestId *string
+
+	// The unique identifier of the firewall rule group.
+	FirewallRuleGroupId *string
+
+	// The identifier for the association.
+	Id *string
+
+	// The owner of the association, used only for associations that are not managed by
+	// you. If you use AWS Firewall Manager to manage your DNS Firewalls, then this
+	// reports Firewall Manager as the managed owner.
+	ManagedOwnerName *string
+
+	// The date and time that the association was last modified, in Unix time format
+	// and Coordinated Universal Time (UTC).
+	ModificationTime *string
+
+	// If enabled, this setting disallows modification or removal of the association,
+	// to help prevent against accidentally altering DNS firewall protections.
+	MutationProtection MutationProtectionStatus
+
+	// The name of the association.
+	Name *string
+
+	// The setting that determines the processing order of the rule group among the
+	// rule groups that are associated with a single VPC. DNS Firewall filters VPC
+	// traffic starting from rule group with the lowest numeric priority setting.
+	Priority *int32
+
+	// The current status of the association.
+	Status FirewallRuleGroupAssociationStatus
+
+	// Additional information about the status of the response, if available.
+	StatusMessage *string
+
+	// The unique identifier of the VPC that is associated with the rule group.
+	VpcId *string
+}
+
+// Minimal high-level information for a firewall rule group. The action
+// ListFirewallRuleGroups returns an array of these objects. To retrieve full
+// information for a firewall rule group, call GetFirewallRuleGroup and
+// ListFirewallRules.
+type FirewallRuleGroupMetadata struct {
+
+	// The ARN (Amazon Resource Name) of the rule group.
+	Arn *string
+
+	// A unique string defined by you to identify the request. This allows you to retry
+	// failed requests without the risk of executing the operation twice. This can be
+	// any unique string, for example, a timestamp.
+	CreatorRequestId *string
+
+	// The ID of the rule group.
+	Id *string
+
+	// The name of the rule group.
+	Name *string
+
+	// The AWS account ID for the account that created the rule group. When a rule
+	// group is shared with your account, this is the account that has shared the rule
+	// group with you.
+	OwnerId *string
+
+	// Whether the rule group is shared with other AWS accounts, or was shared with the
+	// current account by another AWS account. Sharing is configured through AWS
+	// Resource Access Manager (AWS RAM).
+	ShareStatus ShareStatus
+}
+
 // In a CreateResolverEndpoint
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverEndpoint.html)
 // request, the IP address that DNS queries originate from (for outbound endpoints)

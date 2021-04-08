@@ -107,15 +107,19 @@ type CopySnapshotInput struct {
 	// The ID of the KMS key used to encrypt the target snapshot.
 	KmsKeyId *string
 
+	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
+	// key must be accompanied by a tag value, although null is accepted.
+	Tags []types.Tag
+
 	// The Amazon S3 bucket to which the snapshot is exported. This parameter is used
 	// only when exporting a snapshot for external access. When using this parameter to
 	// export a snapshot, be sure Amazon ElastiCache has the needed permissions to this
 	// S3 bucket. For more information, see Step 2: Grant ElastiCache Access to Your
 	// Amazon S3 Bucket
-	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html#backups-exporting-grant-access)
 	// in the Amazon ElastiCache User Guide. For more information, see Exporting a
 	// Snapshot
-	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Snapshots.Exporting.html)
+	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html)
 	// in the Amazon ElastiCache User Guide.
 	TargetBucket *string
 }

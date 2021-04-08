@@ -70,19 +70,28 @@ type LifecycleState string
 
 // Enum values for LifecycleState
 const (
-	LifecycleStatePending            LifecycleState = "Pending"
-	LifecycleStatePendingWait        LifecycleState = "Pending:Wait"
-	LifecycleStatePendingProceed     LifecycleState = "Pending:Proceed"
-	LifecycleStateQuarantined        LifecycleState = "Quarantined"
-	LifecycleStateInService          LifecycleState = "InService"
-	LifecycleStateTerminating        LifecycleState = "Terminating"
-	LifecycleStateTerminatingWait    LifecycleState = "Terminating:Wait"
-	LifecycleStateTerminatingProceed LifecycleState = "Terminating:Proceed"
-	LifecycleStateTerminated         LifecycleState = "Terminated"
-	LifecycleStateDetaching          LifecycleState = "Detaching"
-	LifecycleStateDetached           LifecycleState = "Detached"
-	LifecycleStateEnteringStandby    LifecycleState = "EnteringStandby"
-	LifecycleStateStandby            LifecycleState = "Standby"
+	LifecycleStatePending                  LifecycleState = "Pending"
+	LifecycleStatePendingWait              LifecycleState = "Pending:Wait"
+	LifecycleStatePendingProceed           LifecycleState = "Pending:Proceed"
+	LifecycleStateQuarantined              LifecycleState = "Quarantined"
+	LifecycleStateInService                LifecycleState = "InService"
+	LifecycleStateTerminating              LifecycleState = "Terminating"
+	LifecycleStateTerminatingWait          LifecycleState = "Terminating:Wait"
+	LifecycleStateTerminatingProceed       LifecycleState = "Terminating:Proceed"
+	LifecycleStateTerminated               LifecycleState = "Terminated"
+	LifecycleStateDetaching                LifecycleState = "Detaching"
+	LifecycleStateDetached                 LifecycleState = "Detached"
+	LifecycleStateEnteringStandby          LifecycleState = "EnteringStandby"
+	LifecycleStateStandby                  LifecycleState = "Standby"
+	LifecycleStateWarmedPending            LifecycleState = "Warmed:Pending"
+	LifecycleStateWarmedPendingWait        LifecycleState = "Warmed:Pending:Wait"
+	LifecycleStateWarmedPendingProceed     LifecycleState = "Warmed:Pending:Proceed"
+	LifecycleStateWarmedTerminating        LifecycleState = "Warmed:Terminating"
+	LifecycleStateWarmedTerminatingWait    LifecycleState = "Warmed:Terminating:Wait"
+	LifecycleStateWarmedTerminatingProceed LifecycleState = "Warmed:Terminating:Proceed"
+	LifecycleStateWarmedTerminated         LifecycleState = "Warmed:Terminated"
+	LifecycleStateWarmedStopped            LifecycleState = "Warmed:Stopped"
+	LifecycleStateWarmedRunning            LifecycleState = "Warmed:Running"
 )
 
 // Values returns all known values for LifecycleState. Note that this can be
@@ -103,6 +112,15 @@ func (LifecycleState) Values() []LifecycleState {
 		"Detached",
 		"EnteringStandby",
 		"Standby",
+		"Warmed:Pending",
+		"Warmed:Pending:Wait",
+		"Warmed:Pending:Proceed",
+		"Warmed:Terminating",
+		"Warmed:Terminating:Wait",
+		"Warmed:Terminating:Proceed",
+		"Warmed:Terminated",
+		"Warmed:Stopped",
+		"Warmed:Running",
 	}
 }
 
@@ -203,5 +221,39 @@ func (ScalingActivityStatusCode) Values() []ScalingActivityStatusCode {
 		"Successful",
 		"Failed",
 		"Cancelled",
+	}
+}
+
+type WarmPoolState string
+
+// Enum values for WarmPoolState
+const (
+	WarmPoolStateStopped WarmPoolState = "Stopped"
+	WarmPoolStateRunning WarmPoolState = "Running"
+)
+
+// Values returns all known values for WarmPoolState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WarmPoolState) Values() []WarmPoolState {
+	return []WarmPoolState{
+		"Stopped",
+		"Running",
+	}
+}
+
+type WarmPoolStatus string
+
+// Enum values for WarmPoolStatus
+const (
+	WarmPoolStatusPendingDelete WarmPoolStatus = "PendingDelete"
+)
+
+// Values returns all known values for WarmPoolStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WarmPoolStatus) Values() []WarmPoolStatus {
+	return []WarmPoolStatus{
+		"PendingDelete",
 	}
 }

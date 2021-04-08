@@ -183,6 +183,12 @@ type AutoScalingGroup struct {
 
 	// One or more subnet IDs, if applicable, separated by commas.
 	VPCZoneIdentifier *string
+
+	// The warm pool for the group.
+	WarmPoolConfiguration *WarmPoolConfiguration
+
+	// The current size of the warm pool.
+	WarmPoolSize *int32
 }
 
 // Describes an EC2 instance associated with an Auto Scaling group.
@@ -217,7 +223,9 @@ type AutoScalingInstanceDetails struct {
 	// in the Amazon EC2 Auto Scaling User Guide. Valid Values: Pending | Pending:Wait
 	// | Pending:Proceed | Quarantined | InService | Terminating | Terminating:Wait |
 	// Terminating:Proceed | Terminated | Detaching | Detached | EnteringStandby |
-	// Standby
+	// Standby | Warmed:Pending | Warmed:Pending:Wait | Warmed:Pending:Proceed |
+	// Warmed:Terminating | Warmed:Terminating:Wait | Warmed:Terminating:Proceed |
+	// Warmed:Terminated | Warmed:Stopped | Warmed:Running
 	//
 	// This member is required.
 	LifecycleState *string
@@ -413,6 +421,23 @@ type EnabledMetric struct {
 	// GroupTerminatingCapacity
 	//
 	// * GroupTotalCapacity
+	//
+	// * WarmPoolDesiredCapacity
+	//
+	// *
+	// WarmPoolWarmedCapacity
+	//
+	// * WarmPoolPendingCapacity
+	//
+	// *
+	// WarmPoolTerminatingCapacity
+	//
+	// * WarmPoolTotalCapacity
+	//
+	// *
+	// GroupAndWarmPoolDesiredCapacity
+	//
+	// * GroupAndWarmPoolTotalCapacity
 	Metric *string
 }
 
@@ -553,6 +578,9 @@ type InstanceRefresh struct {
 	// the percentage complete.
 	PercentageComplete *int32
 
+	// Additional progress details for an Auto Scaling group that has a warm pool.
+	ProgressDetails *InstanceRefreshProgressDetails
+
 	// The date and time at which the instance refresh began.
 	StartTime *time.Time
 
@@ -580,6 +608,50 @@ type InstanceRefresh struct {
 
 	// Provides more details about the current status of the instance refresh.
 	StatusReason *string
+}
+
+// Reports the progress of an instance fresh on instances that are in the Auto
+// Scaling group.
+type InstanceRefreshLivePoolProgress struct {
+
+	// The number of instances remaining to update.
+	InstancesToUpdate *int32
+
+	// The percentage of instances in the Auto Scaling group that have been replaced.
+	// For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's
+	// health status and warm-up time. When the instance's health status changes to
+	// healthy and the specified warm-up time passes, the instance is considered
+	// updated and added to the percentage complete.
+	PercentageComplete *int32
+}
+
+// Reports the progress of an instance refresh on an Auto Scaling group that has a
+// warm pool. This includes separate details for instances in the warm pool and
+// instances in the Auto Scaling group (the live pool).
+type InstanceRefreshProgressDetails struct {
+
+	// Indicates the progress of an instance fresh on instances that are in the Auto
+	// Scaling group.
+	LivePoolProgress *InstanceRefreshLivePoolProgress
+
+	// Indicates the progress of an instance fresh on instances that are in the warm
+	// pool.
+	WarmPoolProgress *InstanceRefreshWarmPoolProgress
+}
+
+// Reports the progress of an instance fresh on instances that are in the warm
+// pool.
+type InstanceRefreshWarmPoolProgress struct {
+
+	// The number of instances remaining to update.
+	InstancesToUpdate *int32
+
+	// The percentage of instances in the warm pool that have been replaced. For each
+	// instance replacement, Amazon EC2 Auto Scaling tracks the instance's health
+	// status and warm-up time. When the instance's health status changes to healthy
+	// and the specified warm-up time passes, the instance is considered updated and
+	// added to the percentage complete.
+	PercentageComplete *int32
 }
 
 // Describes an instances distribution for an Auto Scaling group with a
@@ -1100,6 +1172,23 @@ type MetricCollectionType struct {
 	// GroupTerminatingCapacity
 	//
 	// * GroupTotalCapacity
+	//
+	// * WarmPoolDesiredCapacity
+	//
+	// *
+	// WarmPoolWarmedCapacity
+	//
+	// * WarmPoolPendingCapacity
+	//
+	// *
+	// WarmPoolTerminatingCapacity
+	//
+	// * WarmPoolTotalCapacity
+	//
+	// *
+	// GroupAndWarmPoolDesiredCapacity
+	//
+	// * GroupAndWarmPoolTotalCapacity
 	Metric *string
 }
 
@@ -1582,4 +1671,22 @@ type TargetTrackingConfiguration struct {
 	// A predefined metric. You must specify either a predefined metric or a customized
 	// metric.
 	PredefinedMetricSpecification *PredefinedMetricSpecification
+}
+
+// Describes a warm pool configuration.
+type WarmPoolConfiguration struct {
+
+	// The total maximum number of instances that are allowed to be in the warm pool or
+	// in any state except Terminated for the Auto Scaling group.
+	MaxGroupPreparedCapacity *int32
+
+	// The minimum number of instances to maintain in the warm pool.
+	MinSize *int32
+
+	// The instance state to transition to after the lifecycle actions are complete:
+	// Stopped or Running.
+	PoolState WarmPoolState
+
+	// The status of a warm pool that is marked for deletion.
+	Status WarmPoolStatus
 }

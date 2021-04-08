@@ -681,6 +681,24 @@ func (ScoreConfidence) Values() []ScoreConfidence {
 	}
 }
 
+type ServiceNowAuthenticationType string
+
+// Enum values for ServiceNowAuthenticationType
+const (
+	ServiceNowAuthenticationTypeHttpBasic ServiceNowAuthenticationType = "HTTP_BASIC"
+	ServiceNowAuthenticationTypeOauth2    ServiceNowAuthenticationType = "OAUTH2"
+)
+
+// Values returns all known values for ServiceNowAuthenticationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServiceNowAuthenticationType) Values() []ServiceNowAuthenticationType {
+	return []ServiceNowAuthenticationType{
+		"HTTP_BASIC",
+		"OAUTH2",
+	}
+}
+
 type ServiceNowBuildVersionType string
 
 // Enum values for ServiceNowBuildVersionType

@@ -45,6 +45,11 @@ type StartChangeRequestExecutionInput struct {
 	// This member is required.
 	Runbooks []types.Runbook
 
+	// User-provided details about the change. If no details are provided, content
+	// specified in the Template information section of the associated change template
+	// is added.
+	ChangeDetails *string
+
 	// The name of the change request associated with the runbook workflow to be run.
 	ChangeRequestName *string
 
@@ -58,6 +63,11 @@ type StartChangeRequestExecutionInput struct {
 	// A key-value map of parameters that match the declared parameters in the change
 	// template document.
 	Parameters map[string][]string
+
+	// The time that the requester expects the runbook workflow related to the change
+	// request to complete. The time is an estimate only that the requester provides
+	// for reviewers.
+	ScheduledEndTime *time.Time
 
 	// The date and time specified in the change request to run the Automation
 	// runbooks. The Automation runbooks specified for the runbook workflow can't run

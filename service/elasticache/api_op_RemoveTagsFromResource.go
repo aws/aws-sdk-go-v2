@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the tags identified by the TagKeys list from the named resource.
+// Removes the tags identified by the TagKeys list from the named resource. A tag
+// is a key-value pair where the key and value are case-sensitive. You can use tags
+// to categorize and track all your ElastiCache resources, with the exception of
+// global replication group. When you add or remove tags on replication groups,
+// those actions will be replicated to all nodes in the replication group. For more
+// information, see Resource-level permissions
+// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html).
 func (c *Client) RemoveTagsFromResource(ctx context.Context, params *RemoveTagsFromResourceInput, optFns ...func(*Options)) (*RemoveTagsFromResourceOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromResourceInput{}
@@ -50,7 +56,7 @@ type RemoveTagsFromResourceInput struct {
 // RemoveTagsFromResource operations.
 type RemoveTagsFromResourceOutput struct {
 
-	// A list of cost allocation tags as key-value pairs.
+	// A list of tags as key-value pairs.
 	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.

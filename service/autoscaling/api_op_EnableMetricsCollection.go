@@ -79,8 +79,28 @@ type EnableMetricsCollectionInput struct {
 	//
 	// * GroupTotalCapacity
 	//
-	// If you omit this parameter, all
-	// metrics are enabled.
+	// The warm pools feature supports
+	// the following additional metrics:
+	//
+	// * WarmPoolDesiredCapacity
+	//
+	// *
+	// WarmPoolWarmedCapacity
+	//
+	// * WarmPoolPendingCapacity
+	//
+	// *
+	// WarmPoolTerminatingCapacity
+	//
+	// * WarmPoolTotalCapacity
+	//
+	// *
+	// GroupAndWarmPoolDesiredCapacity
+	//
+	// * GroupAndWarmPoolTotalCapacity
+	//
+	// If you omit
+	// this parameter, all metrics are enabled.
 	Metrics []string
 }
 

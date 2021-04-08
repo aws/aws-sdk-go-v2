@@ -11,15 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds up to 50 cost allocation tags to the named resource. A cost allocation tag
-// is a key-value pair where the key and value are case-sensitive. You can use cost
-// allocation tags to categorize and track your AWS costs. When you apply tags to
-// your ElastiCache resources, AWS generates a cost allocation report as a
-// comma-separated value (CSV) file with your usage and costs aggregated by your
-// tags. You can apply tags that represent business categories (such as cost
-// centers, application names, or owners) to organize your costs across multiple
-// services. For more information, see Using Cost Allocation Tags in Amazon
-// ElastiCache
+// A tag is a key-value pair where the key and value are case-sensitive. You can
+// use tags to categorize and track all your ElastiCache resources, with the
+// exception of global replication group. When you add or remove tags on
+// replication groups, those actions will be replicated to all nodes in the
+// replication group. For more information, see Resource-level permissions
+// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html).
+// For example, you can use cost-allocation tags to your ElastiCache resources, AWS
+// generates a cost allocation report as a comma-separated value (CSV) file with
+// your usage and costs aggregated by your tags. You can apply tags that represent
+// business categories (such as cost centers, application names, or owners) to
+// organize your costs across multiple services. For more information, see Using
+// Cost Allocation Tags in Amazon ElastiCache
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html) in
 // the ElastiCache User Guide.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
@@ -50,8 +53,8 @@ type AddTagsToResourceInput struct {
 	// This member is required.
 	ResourceName *string
 
-	// A list of cost allocation tags to be added to this resource. A tag is a
-	// key-value pair. A tag key must be accompanied by a tag value.
+	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
+	// key must be accompanied by a tag value, although null is accepted.
 	//
 	// This member is required.
 	Tags []types.Tag
@@ -61,7 +64,7 @@ type AddTagsToResourceInput struct {
 // RemoveTagsFromResource operations.
 type AddTagsToResourceOutput struct {
 
-	// A list of cost allocation tags as key-value pairs.
+	// A list of tags as key-value pairs.
 	TagList []types.Tag
 
 	// Metadata pertaining to the operation's result.

@@ -11,22 +11,24 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deleting a Global Datastore is a two-step process:
+// Deleting a Global datastore is a two-step process:
 //
 // * First, you must
 // DisassociateGlobalReplicationGroup to remove the secondary clusters in the
-// Global Datastore.
+// Global datastore.
 //
-// * Once the Global Datastore contains only the primary
-// cluster, you can use DeleteGlobalReplicationGroup API to delete the Global
-// Datastore while retainining the primary cluster using Retain…= true.
+// * Once the Global datastore contains only the primary
+// cluster, you can use the DeleteGlobalReplicationGroup API to delete the Global
+// datastore while retainining the primary cluster using
+// RetainPrimaryReplicationGroup=true.
 //
-// Since the
-// Global Datastore has only a primary cluster, you can delete the Global Datastore
-// while retaining the primary by setting RetainPrimaryCluster=true. When you
-// receive a successful response from this operation, Amazon ElastiCache
-// immediately begins deleting the selected resources; you cannot cancel or revert
-// this operation.
+// Since the Global Datastore has only a
+// primary cluster, you can delete the Global Datastore while retaining the primary
+// by setting RetainPrimaryReplicationGroup=true. The primary cluster is never
+// deleted when deleting a Global Datastore. It can only be deleted when it no
+// longer is associated with any Global Datastore. When you receive a successful
+// response from this operation, Amazon ElastiCache immediately begins deleting the
+// selected resources; you cannot cancel or revert this operation.
 func (c *Client) DeleteGlobalReplicationGroup(ctx context.Context, params *DeleteGlobalReplicationGroupInput, optFns ...func(*Options)) (*DeleteGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &DeleteGlobalReplicationGroupInput{}
@@ -44,7 +46,7 @@ func (c *Client) DeleteGlobalReplicationGroup(ctx context.Context, params *Delet
 
 type DeleteGlobalReplicationGroupInput struct {
 
-	// The name of the Global Datastore
+	// The name of the Global datastore
 	//
 	// This member is required.
 	GlobalReplicationGroupId *string
@@ -63,7 +65,7 @@ type DeleteGlobalReplicationGroupOutput struct {
 	// secondary cluster.
 	//
 	// * The GlobalReplicationGroupIdSuffix represents the name of
-	// the Global Datastore, which is what you use to associate a secondary cluster.
+	// the Global datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

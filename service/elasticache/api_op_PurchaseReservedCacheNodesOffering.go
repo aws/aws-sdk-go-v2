@@ -50,6 +50,10 @@ type PurchaseReservedCacheNodesOfferingInput struct {
 	// this parameter is not specified, ElastiCache automatically generates an
 	// identifier for the reservation. Example: myreservationID
 	ReservedCacheNodeId *string
+
+	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
+	// key must be accompanied by a tag value, although null is accepted.
+	Tags []types.Tag
 }
 
 type PurchaseReservedCacheNodesOfferingOutput struct {

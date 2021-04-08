@@ -5,6 +5,7 @@ package ivs
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -44,6 +45,26 @@ func (m *validateOpBatchGetStreamKey) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchGetStreamKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRecordingConfiguration struct {
+}
+
+func (*validateOpCreateRecordingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRecordingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRecordingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRecordingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -109,6 +130,26 @@ func (m *validateOpDeletePlaybackKeyPair) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteRecordingConfiguration struct {
+}
+
+func (*validateOpDeleteRecordingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRecordingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRecordingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRecordingConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteStreamKey struct {
 }
 
@@ -164,6 +205,26 @@ func (m *validateOpGetPlaybackKeyPair) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetPlaybackKeyPairInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRecordingConfiguration struct {
+}
+
+func (*validateOpGetRecordingConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecordingConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecordingConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecordingConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -377,6 +438,10 @@ func addOpBatchGetStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetStreamKey{}, middleware.After)
 }
 
+func addOpCreateRecordingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRecordingConfiguration{}, middleware.After)
+}
+
 func addOpCreateStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStreamKey{}, middleware.After)
 }
@@ -389,6 +454,10 @@ func addOpDeletePlaybackKeyPairValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeletePlaybackKeyPair{}, middleware.After)
 }
 
+func addOpDeleteRecordingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRecordingConfiguration{}, middleware.After)
+}
+
 func addOpDeleteStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStreamKey{}, middleware.After)
 }
@@ -399,6 +468,10 @@ func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetPlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPlaybackKeyPair{}, middleware.After)
+}
+
+func addOpGetRecordingConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecordingConfiguration{}, middleware.After)
 }
 
 func addOpGetStreamValidationMiddleware(stack *middleware.Stack) error {
@@ -441,6 +514,38 @@ func addOpUpdateChannelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateChannel{}, middleware.After)
 }
 
+func validateDestinationConfiguration(v *types.DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationConfiguration"}
+	if v.S3 != nil {
+		if err := validateS3DestinationConfiguration(v.S3); err != nil {
+			invalidParams.AddNested("S3", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3DestinationConfiguration(v *types.S3DestinationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3DestinationConfiguration"}
+	if v.BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetChannelInput(v *BatchGetChannelInput) error {
 	if v == nil {
 		return nil
@@ -463,6 +568,25 @@ func validateOpBatchGetStreamKeyInput(v *BatchGetStreamKeyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "BatchGetStreamKeyInput"}
 	if v.Arns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRecordingConfigurationInput(v *CreateRecordingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRecordingConfigurationInput"}
+	if v.DestinationConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationConfiguration"))
+	} else if v.DestinationConfiguration != nil {
+		if err := validateDestinationConfiguration(v.DestinationConfiguration); err != nil {
+			invalidParams.AddNested("DestinationConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -516,6 +640,21 @@ func validateOpDeletePlaybackKeyPairInput(v *DeletePlaybackKeyPairInput) error {
 	}
 }
 
+func validateOpDeleteRecordingConfigurationInput(v *DeleteRecordingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecordingConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteStreamKeyInput(v *DeleteStreamKeyInput) error {
 	if v == nil {
 		return nil
@@ -551,6 +690,21 @@ func validateOpGetPlaybackKeyPairInput(v *GetPlaybackKeyPairInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetPlaybackKeyPairInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRecordingConfigurationInput(v *GetRecordingConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecordingConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}

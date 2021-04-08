@@ -42,6 +42,8 @@ type PutIntegrationInput struct {
 	// This member is required.
 	ObjectTypeName *string
 
+	// The configuration that controls how Customer Profiles retrieves data from the
+	// source.
 	FlowDefinition *types.FlowDefinition
 
 	// The tags used to organize, track, or control access for this resource.

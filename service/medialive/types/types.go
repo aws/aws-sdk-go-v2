@@ -866,7 +866,7 @@ type Channel struct {
 	Tags map[string]string
 
 	// Settings for VPC output
-	Vpc *VpcOutputSettings
+	Vpc *VpcOutputSettingsDescription
 }
 
 // Placeholder documentation for ChannelEgressEndpoint
@@ -925,7 +925,7 @@ type ChannelSummary struct {
 	Tags map[string]string
 
 	// Settings for VPC output
-	Vpc *VpcOutputSettings
+	Vpc *VpcOutputSettingsDescription
 }
 
 // Passthrough applies no color space conversion to the output
@@ -1289,6 +1289,9 @@ type EncoderSettings struct {
 
 	// Configuration settings that apply to the event as a whole.
 	GlobalConfiguration *GlobalConfiguration
+
+	// Settings for motion graphics.
+	MotionGraphicsConfiguration *MotionGraphicsConfiguration
 
 	// Nielsen configuration settings.
 	NielsenConfiguration *NielsenConfiguration
@@ -2323,6 +2326,10 @@ type HlsWebdavSettings struct {
 	RestartDelay int32
 }
 
+// Html Motion Graphics Settings
+type HtmlMotionGraphicsSettings struct {
+}
+
 // Settings to configure an action so that it occurs as soon as possible.
 type ImmediateModeScheduleActionStartSettings struct {
 }
@@ -3213,6 +3220,48 @@ type MediaPackageOutputDestinationSettings struct {
 type MediaPackageOutputSettings struct {
 }
 
+// Settings to specify the rendering of motion graphics into the video stream.
+type MotionGraphicsActivateScheduleActionSettings struct {
+
+	// Duration (in milliseconds) that motion graphics should render on to the video
+	// stream. Leaving out this property or setting to 0 will result in rendering
+	// continuing until a deactivate action is processed.
+	Duration int64
+
+	// Key used to extract the password from EC2 Parameter store
+	PasswordParam *string
+
+	// URI of the HTML5 content to be rendered into the live stream.
+	Url *string
+
+	// Documentation update needed
+	Username *string
+}
+
+// Motion Graphics Configuration
+type MotionGraphicsConfiguration struct {
+
+	// Motion Graphics Settings
+	//
+	// This member is required.
+	MotionGraphicsSettings *MotionGraphicsSettings
+
+	// Motion Graphics Insertion
+	MotionGraphicsInsertion MotionGraphicsInsertion
+}
+
+// Settings to specify the ending of rendering motion graphics into the video
+// stream.
+type MotionGraphicsDeactivateScheduleActionSettings struct {
+}
+
+// Motion Graphics Settings
+type MotionGraphicsSettings struct {
+
+	// Html Motion Graphics Settings
+	HtmlMotionGraphicsSettings *HtmlMotionGraphicsSettings
+}
+
 // Mp2 Settings
 type Mp2Settings struct {
 
@@ -3952,6 +4001,13 @@ type PipelineDetail struct {
 	// that resulted in the switch to the current input attachment for this pipeline.
 	ActiveInputSwitchActionName *string
 
+	// The name of the motion graphics activate action that occurred most recently and
+	// that resulted in the current graphics URI for this pipeline.
+	ActiveMotionGraphicsActionName *string
+
+	// The current URI being used for HTML5 motion graphics for this pipeline.
+	ActiveMotionGraphicsUri *string
+
 	// Pipeline ID
 	PipelineId *string
 }
@@ -4189,6 +4245,12 @@ type ScheduleActionSettings struct {
 
 	// Action to switch the input
 	InputSwitchSettings *InputSwitchScheduleActionSettings
+
+	// Action to activate a motion graphics image overlay
+	MotionGraphicsImageActivateSettings *MotionGraphicsActivateScheduleActionSettings
+
+	// Action to deactivate a motion graphics image overlay
+	MotionGraphicsImageDeactivateSettings *MotionGraphicsDeactivateScheduleActionSettings
 
 	// Action to pause or unpause one or both channel pipelines
 	PauseStateSettings *PauseStateScheduleActionSettings
@@ -4855,6 +4917,26 @@ type VpcOutputSettings struct {
 	// interfaces. If none are specified then the VPC default security group will be
 	// used
 	SecurityGroupIds []string
+}
+
+// The properties for a private VPC Output
+type VpcOutputSettingsDescription struct {
+
+	// The Availability Zones where the vpc subnets are located. The first Availability
+	// Zone applies to the first subnet in the list of subnets. The second Availability
+	// Zone applies to the second subnet.
+	AvailabilityZones []string
+
+	// A list of Elastic Network Interfaces created by MediaLive in the customer's VPC
+	NetworkInterfaceIds []string
+
+	// A list of up EC2 VPC security group IDs attached to the Output VPC network
+	// interfaces.
+	SecurityGroupIds []string
+
+	// A list of VPC subnet IDs from the same VPC. If STANDARD channel, subnet IDs must
+	// be mapped to two unique availability zones (AZ).
+	SubnetIds []string
 }
 
 // Wav Settings

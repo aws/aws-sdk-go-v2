@@ -30,20 +30,19 @@ import (
 // when you create a new parameter. You must attach a label to a specific version
 // of a parameter.
 //
-// * You can't delete a parameter label. If you no longer want to
-// use a parameter label, then you must move it to a different version of a
-// parameter.
+// * If you no longer want to use a parameter label, then you can
+// either delete it or move it to a different version of a parameter.
 //
-// * A label can have a maximum of 100 characters.
+// * A label
+// can have a maximum of 100 characters.
 //
-// * Labels can
-// contain letters (case sensitive), numbers, periods (.), hyphens (-), or
-// underscores (_).
+// * Labels can contain letters (case
+// sensitive), numbers, periods (.), hyphens (-), or underscores (_).
 //
-// * Labels can't begin with a number, "aws," or "ssm" (not case
-// sensitive). If a label fails to meet these requirements, then the label is not
-// associated with a parameter and the system displays it in the list of
-// InvalidLabels.
+// * Labels
+// can't begin with a number, "aws," or "ssm" (not case sensitive). If a label
+// fails to meet these requirements, then the label is not associated with a
+// parameter and the system displays it in the list of InvalidLabels.
 func (c *Client) LabelParameterVersion(ctx context.Context, params *LabelParameterVersionInput, optFns ...func(*Options)) (*LabelParameterVersionOutput, error) {
 	if params == nil {
 		params = &LabelParameterVersionInput{}

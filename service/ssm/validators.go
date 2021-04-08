@@ -2050,6 +2050,26 @@ func (m *validateOpTerminateSession) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUnlabelParameterVersion struct {
+}
+
+func (*validateOpUnlabelParameterVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUnlabelParameterVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UnlabelParameterVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUnlabelParameterVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAssociation struct {
 }
 
@@ -2736,6 +2756,10 @@ func addOpStopAutomationExecutionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpTerminateSessionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTerminateSession{}, middleware.After)
+}
+
+func addOpUnlabelParameterVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUnlabelParameterVersion{}, middleware.After)
 }
 
 func addOpUpdateAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -5997,6 +6021,24 @@ func validateOpTerminateSessionInput(v *TerminateSessionInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TerminateSessionInput"}
 	if v.SessionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUnlabelParameterVersionInput(v *UnlabelParameterVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UnlabelParameterVersionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Labels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Labels"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -39,7 +39,9 @@ type AssociateResourceShareInput struct {
 	// of the request.
 	ClientToken *string
 
-	// The principals.
+	// The principals to associate with the resource share. The possible values are IDs
+	// of AWS accounts, and the ARNs of organizational units (OU) or organizations from
+	// AWS Organizations.
 	Principals []string
 
 	// The Amazon Resource Names (ARN) of the resources.

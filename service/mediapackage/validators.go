@@ -506,6 +506,24 @@ func validateDashPackage(v *types.DashPackage) error {
 	}
 }
 
+func validateEncryptionContractConfiguration(v *types.EncryptionContractConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncryptionContractConfiguration"}
+	if len(v.PresetSpeke20Audio) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PresetSpeke20Audio"))
+	}
+	if len(v.PresetSpeke20Video) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PresetSpeke20Video"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHlsEncryption(v *types.HlsEncryption) error {
 	if v == nil {
 		return nil
@@ -619,6 +637,11 @@ func validateSpekeKeyProvider(v *types.SpekeKeyProvider) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SpekeKeyProvider"}
+	if v.EncryptionContractConfiguration != nil {
+		if err := validateEncryptionContractConfiguration(v.EncryptionContractConfiguration); err != nil {
+			invalidParams.AddNested("EncryptionContractConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ResourceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
 	}

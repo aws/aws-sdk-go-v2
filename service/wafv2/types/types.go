@@ -6,6 +6,16 @@ import (
 	"time"
 )
 
+// A single action condition for a Condition in a logging filter.
+type ActionCondition struct {
+
+	// The action setting that a log record must contain in order to meet the
+	// condition.
+	//
+	// This member is required.
+	Action ActionValue
+}
+
 // Inspect all of the elements that AWS WAF has parsed and extracted from the web
 // request JSON body that are within the JsonBodyMatchScope. This is used with the
 // FieldToMatch option JsonBody. This is used only to indicate the web request
@@ -140,6 +150,16 @@ type ByteMatchStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+}
+
+// A single match condition for a Filter.
+type Condition struct {
+
+	// A single action condition.
+	ActionCondition *ActionCondition
+
+	// A single label name condition.
+	LabelNameCondition *LabelNameCondition
 }
 
 // Specifies that AWS WAF should count the request. Optionally defines additional
@@ -333,6 +353,27 @@ type FieldToMatch struct {
 	// Inspect the request URI path. This is the part of a web request that identifies
 	// a resource, for example, /images/daily-ad.jpg.
 	UriPath *UriPath
+}
+
+// A single logging filter, used in LoggingFilter.
+type Filter struct {
+
+	// How to handle logs that satisfy the filter's conditions and requirement.
+	//
+	// This member is required.
+	Behavior FilterBehavior
+
+	// Match conditions for the filter.
+	//
+	// This member is required.
+	Conditions []Condition
+
+	// Logic to apply to the filtering conditions. You can specify that, in order to
+	// satisfy the filter, a log must match all conditions or must match at least one
+	// condition.
+	//
+	// This member is required.
+	Requirement FilterRequirement
 }
 
 // A rule group that's defined for an AWS Firewall Manager WAF policy.
@@ -684,25 +725,35 @@ type JsonBody struct {
 	// This member is required.
 	MatchScope JsonMatchScope
 
-	// The inspection behavior to fall back to if the JSON in the request body is
-	// invalid. For AWS WAF, invalid JSON is any content that isn't complete
-	// syntactical JSON, content whose root node isn't an object or an array, and
-	// duplicate keys in the content. You can specify the following fallback
-	// behaviors:
+	// What AWS WAF should do if it fails to completely parse the JSON body. The
+	// options are the following:
 	//
-	// * MATCH - Treat the web request as matching the rule statement. AWS
-	// WAF applies the rule action to the request.
+	// * EVALUATE_AS_STRING - Inspect the body as plain
+	// text. AWS WAF applies the text transformations and inspection criteria that you
+	// defined for the JSON inspection to the body text string.
 	//
-	// * NO_MATCH - Treat the web request
-	// as not matching the rule statement.
+	// * MATCH - Treat the
+	// web request as matching the rule statement. AWS WAF applies the rule action to
+	// the request.
 	//
-	// * EVALUATE_AS_STRING - Inspect the body as
-	// plain text. This option applies the text transformations and inspection criteria
-	// that you defined for the JSON inspection to the body text string.
+	// * NO_MATCH - Treat the web request as not matching the rule
+	// statement.
 	//
-	// If you don't
-	// provide this setting, when AWS WAF encounters invalid JSON, it parses and
-	// inspects what it can, up to the first invalid JSON that it encounters.
+	// If you don't provide this setting, AWS WAF parses and evaluates the
+	// content only up to the first parsing failure that it encounters. AWS WAF does
+	// its best to parse the entire JSON body, but might be forced to stop for reasons
+	// such as invalid characters, duplicate keys, truncation, and any content whose
+	// root node isn't an object or an array. AWS WAF parses the JSON in the following
+	// examples as two valid key, value pairs:
+	//
+	// * Missing comma:
+	// {"key1":"value1""key2":"value2"}
+	//
+	// * Missing colon:
+	// {"key1":"value1","key2""value2"}
+	//
+	// * Extra colons:
+	// {"key1"::"value1","key2""value2"}
 	InvalidFallbackBehavior BodyParsingFallbackBehavior
 }
 
@@ -725,9 +776,85 @@ type JsonMatchPattern struct {
 	IncludedPaths []string
 }
 
+// A single label container. This is used as an element of a label array in
+// multiple contexts, for example, in RuleLabels inside a Rule and in Labels inside
+// a SampledHTTPRequest.
+type Label struct {
+
+	// The label string.
+	//
+	// This member is required.
+	Name *string
+}
+
+// A rule statement that defines a string match search against labels that have
+// been added to the web request by rules that have already run in the web ACL. The
+// label match statement provides the label or namespace string to search for. The
+// label string can represent a part or all of the fully qualified label name that
+// had been added to the web request. Fully qualified labels have a prefix,
+// optional namespaces, and label name. The prefix identifies the rule group or web
+// ACL context of the rule that added the label. If you do not provide the fully
+// qualified name in your label match string, AWS WAF performs the search for
+// labels that were added in the same context as the label match statement.
+type LabelMatchStatement struct {
+
+	// The string to match against. The setting you provide for this depends on the
+	// match statement's Scope settings:
+	//
+	// * If the Scope indicates LABEL, then this
+	// specification must include the name and can include any number of preceding
+	// namespace specifications and prefix up to providing the fully qualified label
+	// name.
+	//
+	// * If the Scope indicates NAMESPACE, then this specification can include
+	// any number of contiguous namespace strings, and can include the entire label
+	// namespace prefix from the rule group or web ACL where the label
+	// originates.
+	//
+	// Labels are case sensitive and components of a label must be
+	// separated by colon, for example NS1:NS2:name.
+	//
+	// This member is required.
+	Key *string
+
+	// Specify whether you want to match using the label name or just the namespace.
+	//
+	// This member is required.
+	Scope LabelMatchScope
+}
+
+// A single label name condition for a Condition in a logging filter.
+type LabelNameCondition struct {
+
+	// The label name that a log record must contain in order to meet the condition.
+	// This must be a fully qualified label name. Fully qualified labels have a prefix,
+	// optional namespaces, and label name. The prefix identifies the rule group or web
+	// ACL context of the rule that added the label.
+	//
+	// This member is required.
+	LabelName *string
+}
+
+// List of labels used by one or more of the rules of a RuleGroup. This summary
+// object is used for the following rule group lists:
+//
+// * AvailableLabels - Labels
+// that rules add to matching requests. These labels are defined in the RuleLabels
+// for a Rule.
+//
+// * ConsumedLabels - Labels that rules match against. These labels
+// are defined in a LabelMatchStatement specification, in the Statement definition
+// of a rule.
+type LabelSummary struct {
+
+	// An individual label specification.
+	Name *string
+}
+
 // Defines an association between Amazon Kinesis Data Firehose destinations and a
 // web ACL resource, for logging from AWS WAF. As part of the association, you can
-// specify parts of the standard logging fields to keep out of the logs.
+// specify parts of the standard logging fields to keep out of the logs and you can
+// specify filters so that you log only a subset of the logging records.
 type LoggingConfiguration struct {
 
 	// The Amazon Kinesis Data Firehose Amazon Resource Name (ARNs) that you want to
@@ -742,6 +869,11 @@ type LoggingConfiguration struct {
 	// This member is required.
 	ResourceArn *string
 
+	// Filtering that specifies which web requests are kept in the logs and which are
+	// dropped. You can filter on the rule action and on the web request labels that
+	// were applied by matching rules during web ACL evaluation.
+	LoggingFilter *LoggingFilter
+
 	// Indicates whether the logging configuration was created by AWS Firewall Manager,
 	// as part of an AWS WAF policy configuration. If true, only Firewall Manager can
 	// modify or delete the configuration.
@@ -751,6 +883,24 @@ type LoggingConfiguration struct {
 	// you redact the HEADER field, the HEADER field in the firehose will be xxx. You
 	// must use one of the following values: URI, QUERY_STRING, HEADER, or METHOD.
 	RedactedFields []FieldToMatch
+}
+
+// Filtering that specifies which web requests are kept in the logs and which are
+// dropped, defined for a web ACL's LoggingConfiguration. You can filter on the
+// rule action and on the web request labels that were applied by matching rules
+// during web ACL evaluation.
+type LoggingFilter struct {
+
+	// Default handling for logs that don't match any of the specified filtering
+	// conditions.
+	//
+	// This member is required.
+	DefaultBehavior FilterBehavior
+
+	// The filters that you want to apply to the logs.
+	//
+	// This member is required.
+	Filters []Filter
 }
 
 // A rule statement used to run the rules that are defined in a managed rule group.
@@ -777,6 +927,10 @@ type ManagedRuleGroupStatement struct {
 	// action that is set on the rule. This effectively excludes the rule from acting
 	// on web requests.
 	ExcludedRules []ExcludedRule
+
+	// The processing guidance for a Rule, used by AWS WAF to determine whether a web
+	// request matches the rule.
+	ScopeDownStatement *Statement
 }
 
 // High-level information about a managed rule group, returned by
@@ -1085,6 +1239,30 @@ type Rule struct {
 	// the rule statement does not reference a rule group, use the rule action setting
 	// and not this rule override action setting.
 	OverrideAction *OverrideAction
+
+	// Labels to apply to web requests that match the rule match statement. AWS WAF
+	// applies fully qualified labels to matching web requests. A fully qualified label
+	// is the concatenation of a label namespace and a rule label. The rule's rule
+	// group or web ACL defines the label namespace. Rules that run after this rule in
+	// the web ACL can match against these labels using a LabelMatchStatement. For each
+	// label, provide a case-sensitive string containing optional namespaces and a
+	// label name, according to the following guidelines:
+	//
+	// * Separate each component of
+	// the label with a colon.
+	//
+	// * Each namespace or name can have up to 128
+	// characters.
+	//
+	// * You can specify up to 5 namespaces in a label.
+	//
+	// * Don't use the
+	// following reserved words in your label specification: aws, waf, managed,
+	// rulegroup, webacl, regexpatternset, or ipset.
+	//
+	// For example, myLabelName or
+	// nameSpace1:nameSpace2:myLabelName.
+	RuleLabels []Label
 }
 
 // The action that AWS WAF should take on a web request when it matches a rule's
@@ -1145,6 +1323,15 @@ type RuleGroup struct {
 	// This member is required.
 	VisibilityConfig *VisibilityConfig
 
+	// The labels that one or more rules in this rule group add to matching web ACLs.
+	// These labels are defined in the RuleLabels for a Rule.
+	AvailableLabels []LabelSummary
+
+	// The labels that one or more rules in this rule group match against in label
+	// match statements. These labels are defined in a LabelMatchStatement
+	// specification, in the Statement definition of a rule.
+	ConsumedLabels []LabelSummary
+
 	// A map of custom response keys and content bodies. When you create a rule with a
 	// block action, you can send a custom response to the web request. You define
 	// these for the rule group, and then use them in the rules that you define in the
@@ -1162,6 +1349,19 @@ type RuleGroup struct {
 
 	// A description of the rule group that helps with identification.
 	Description *string
+
+	// The label namespace prefix for this rule group. All labels added by rules in
+	// this rule group have this prefix.
+	//
+	// * The syntax for the label namespace prefix
+	// for your rule groups is the following: awswaf::rulegroup::
+	//
+	// * When a rule with a
+	// label matches a web request, AWS WAF adds the fully qualified label to the
+	// request. A fully qualified label is made up of the label namespace from the rule
+	// group or web ACL where the rule is defined and the label from the rule,
+	// separated by a colon: :
+	LabelNamespace *string
 
 	// The Rule statements used to identify the web requests that you want to allow,
 	// block, or count. Each rule includes one top-level statement that AWS WAF uses to
@@ -1252,6 +1452,14 @@ type SampledHTTPRequest struct {
 
 	// The action for the Rule that the request matched: ALLOW, BLOCK, or COUNT.
 	Action *string
+
+	// Labels applied to the web request by matching rules. AWS WAF applies fully
+	// qualified labels to matching web requests. A fully qualified label is the
+	// concatenation of a label namespace and a rule label. The rule's rule group or
+	// web ACL defines the label namespace. For example,
+	// awswaf:111122223333:myRuleGroup:testRules:testNS1:testNS2:labelNameA or
+	// awswaf:managed:aws:managed-rule-set:header:encoding:utf8.
+	Labels []Label
 
 	// Custom request headers inserted by AWS WAF into the request, according to the
 	// custom request configuration for the matching rule action.
@@ -1381,6 +1589,17 @@ type Statement struct {
 	// the single set in multiple rules. When you update the referenced set, AWS WAF
 	// automatically updates all rules that reference it.
 	IPSetReferenceStatement *IPSetReferenceStatement
+
+	// A rule statement that defines a string match search against labels that have
+	// been added to the web request by rules that have already run in the web ACL. The
+	// label match statement provides the label or namespace string to search for. The
+	// label string can represent a part or all of the fully qualified label name that
+	// had been added to the web request. Fully qualified labels have a prefix,
+	// optional namespaces, and label name. The prefix identifies the rule group or web
+	// ACL context of the rule that added the label. If you do not provide the fully
+	// qualified name in your label match string, AWS WAF performs the search for
+	// labels that were added in the same context as the label match statement.
+	LabelMatchStatement *LabelMatchStatement
 
 	// A rule statement used to run the rules that are defined in a managed rule group.
 	// To use this, provide the vendor name and the name of the rule group in this
@@ -1732,6 +1951,18 @@ type WebACL struct {
 
 	// A description of the Web ACL that helps with identification.
 	Description *string
+
+	// The label namespace prefix for this web ACL. All labels added by rules in this
+	// web ACL have this prefix.
+	//
+	// * The syntax for the label namespace prefix for a web
+	// ACL is the following: awswaf::webacl::
+	//
+	// * When a rule with a label matches a web
+	// request, AWS WAF adds the fully qualified label to the request. A fully
+	// qualified label is made up of the label namespace from the rule group or web ACL
+	// where the rule is defined and the label from the rule, separated by a colon: :
+	LabelNamespace *string
 
 	// Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then
 	// only AWS Firewall Manager can delete the web ACL or any Firewall Manager rule

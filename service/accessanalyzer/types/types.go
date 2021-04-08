@@ -360,6 +360,58 @@ type ArchiveRuleSummary struct {
 	UpdatedAt *time.Time
 }
 
+// Contains information about CloudTrail access.
+type CloudTrailDetails struct {
+
+	// The ARN of the service role that Access Analyzer uses to access your CloudTrail
+	// trail and service last accessed information.
+	//
+	// This member is required.
+	AccessRole *string
+
+	// The start of the time range for which Access Analyzer reviews your CloudTrail
+	// events. Events with a timestamp before this time are not considered to generate
+	// a policy.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// A Trail object that contains settings for a trail.
+	//
+	// This member is required.
+	Trails []Trail
+
+	// The end of the time range for which Access Analyzer reviews your CloudTrail
+	// events. Events with a timestamp after this time are not considered to generate a
+	// policy. If this is not included in the request, the default value is the current
+	// time.
+	EndTime *time.Time
+}
+
+// Contains information about CloudTrail access.
+type CloudTrailProperties struct {
+
+	// The end of the time range for which Access Analyzer reviews your CloudTrail
+	// events. Events with a timestamp after this time are not considered to generate a
+	// policy. If this is not included in the request, the default value is the current
+	// time.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The start of the time range for which Access Analyzer reviews your CloudTrail
+	// events. Events with a timestamp before this time are not considered to generate
+	// a policy.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// A TrailProperties object that contains settings for trail properties.
+	//
+	// This member is required.
+	TrailProperties []TrailProperties
+}
+
 // Access control configuration structures for your resource. You specify the
 // configuration as a type-value pair. You can specify only one type of access
 // control configuration.
@@ -578,6 +630,51 @@ type FindingSummary struct {
 	Sources []FindingSource
 }
 
+// Contains the text for the generated policy.
+type GeneratedPolicy struct {
+
+	// The text to use as the content for the new policy. The policy is created using
+	// the CreatePolicy
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html)
+	// action.
+	//
+	// This member is required.
+	Policy *string
+}
+
+// Contains the generated policy details.
+type GeneratedPolicyProperties struct {
+
+	// The ARN of the IAM entity (user or role) for which you are generating a policy.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	// Lists details about the Trail used to generated policy.
+	CloudTrailProperties *CloudTrailProperties
+
+	// This value is set to true if the generated policy contains all possible actions
+	// for a service that Access Analyzer identified from the CloudTrail trail that you
+	// specified, and false otherwise.
+	IsComplete *bool
+}
+
+// Contains the text for the generated policy and its details.
+type GeneratedPolicyResult struct {
+
+	// A GeneratedPolicyProperties object that contains properties of the generated
+	// policy.
+	//
+	// This member is required.
+	Properties *GeneratedPolicyProperties
+
+	// The text to use as the content for the new policy. The policy is created using
+	// the CreatePolicy
+	// (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreatePolicy.html)
+	// action.
+	GeneratedPolicies []GeneratedPolicy
+}
+
 // The proposed access control configuration for an IAM role. You can propose a
 // configuration for a new IAM role or an existing IAM role that you own by
 // specifying the trust policy. If the configuration is for a new IAM role, you
@@ -610,6 +707,48 @@ type InlineArchiveRule struct {
 
 // This configuration sets the Amazon S3 access point network origin to Internet.
 type InternetConfiguration struct {
+}
+
+// Contains details about the policy generation request.
+type JobDetails struct {
+
+	// The JobId that is returned by the StartPolicyGeneration operation. The JobId can
+	// be used with GetGeneratedPolicy to retrieve the generated policies or used with
+	// CancelPolicyGeneration to cancel the policy generation request.
+	//
+	// This member is required.
+	JobId *string
+
+	// A timestamp of when the job was started.
+	//
+	// This member is required.
+	StartedOn *time.Time
+
+	// The status of the job request.
+	//
+	// This member is required.
+	Status JobStatus
+
+	// A timestamp of when the job was completed.
+	CompletedOn *time.Time
+
+	// Contains the details about the policy generation error.
+	JobError *JobError
+}
+
+// Contains the details about the policy generation error.
+type JobError struct {
+
+	// The job error code.
+	//
+	// This member is required.
+	Code JobErrorCode
+
+	// Specific information about the error. For example, which service quota was
+	// exceeded or which resource was not found.
+	//
+	// This member is required.
+	Message *string
 }
 
 // A proposed grant configuration for a KMS key. For more information, see
@@ -781,6 +920,44 @@ type PathElementMemberValue struct {
 }
 
 func (*PathElementMemberValue) isPathElement() {}
+
+// Contains details about the policy generation status and properties.
+type PolicyGeneration struct {
+
+	// The JobId that is returned by the StartPolicyGeneration operation. The JobId can
+	// be used with GetGeneratedPolicy to retrieve the generated policies or used with
+	// CancelPolicyGeneration to cancel the policy generation request.
+	//
+	// This member is required.
+	JobId *string
+
+	// The ARN of the IAM entity (user or role) for which you are generating a policy.
+	//
+	// This member is required.
+	PrincipalArn *string
+
+	// A timestamp of when the policy generation started.
+	//
+	// This member is required.
+	StartedOn *time.Time
+
+	// The status of the policy generation request.
+	//
+	// This member is required.
+	Status JobStatus
+
+	// A timestamp of when the policy generation was completed.
+	CompletedOn *time.Time
+}
+
+// Contains the ARN details about the IAM entity for which the policy is generated.
+type PolicyGenerationDetails struct {
+
+	// The ARN of the IAM entity (user or role) for which you are generating a policy.
+	//
+	// This member is required.
+	PrincipalArn *string
+}
 
 // A position in a policy.
 type Position struct {
@@ -988,6 +1165,40 @@ type Substring struct {
 	//
 	// This member is required.
 	Start *int32
+}
+
+// Contains details about the CloudTrail trail being analyzed to generate a policy.
+type Trail struct {
+
+	// Specifies the ARN of the trail. The format of a trail ARN is
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail.
+	//
+	// This member is required.
+	CloudTrailArn *string
+
+	// Possible values are true or false. If set to true, Access Analyzer retrieves
+	// CloudTrail data from all regions to analyze and generate a policy.
+	AllRegions *bool
+
+	// A list of regions to get CloudTrail data from and analyze to generate a policy.
+	Regions []string
+}
+
+// Contains details about the CloudTrail trail being analyzed to generate a policy.
+type TrailProperties struct {
+
+	// Specifies the ARN of the trail. The format of a trail ARN is
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail.
+	//
+	// This member is required.
+	CloudTrailArn *string
+
+	// Possible values are true or false. If set to true, Access Analyzer retrieves
+	// CloudTrail data from all regions to analyze and generate a policy.
+	AllRegions *bool
+
+	// A list of regions to get CloudTrail data from and analyze to generate a policy.
+	Regions []string
 }
 
 // A finding in a policy. Each finding is an actionable recommendation that can be

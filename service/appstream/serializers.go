@@ -484,6 +484,53 @@ func (m *awsAwsjson11_serializeOpCreateStreamingURL) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateUpdatedImage struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateUpdatedImage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateUpdatedImage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateUpdatedImageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PhotonAdminProxyService.CreateUpdatedImage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateUpdatedImageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateUsageReportSubscription struct {
 }
 
@@ -3004,6 +3051,45 @@ func awsAwsjson11_serializeOpDocumentCreateStreamingURLInput(v *CreateStreamingU
 	if v.Validity != nil {
 		ok := object.Key("Validity")
 		ok.Long(*v.Validity)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateUpdatedImageInput(v *CreateUpdatedImageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DryRun {
+		ok := object.Key("dryRun")
+		ok.Boolean(v.DryRun)
+	}
+
+	if v.ExistingImageName != nil {
+		ok := object.Key("existingImageName")
+		ok.String(*v.ExistingImageName)
+	}
+
+	if v.NewImageDescription != nil {
+		ok := object.Key("newImageDescription")
+		ok.String(*v.NewImageDescription)
+	}
+
+	if v.NewImageDisplayName != nil {
+		ok := object.Key("newImageDisplayName")
+		ok.String(*v.NewImageDisplayName)
+	}
+
+	if v.NewImageName != nil {
+		ok := object.Key("newImageName")
+		ok.String(*v.NewImageName)
+	}
+
+	if v.NewImageTags != nil {
+		ok := object.Key("newImageTags")
+		if err := awsAwsjson11_serializeDocumentTags(v.NewImageTags, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

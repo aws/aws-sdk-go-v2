@@ -45,7 +45,11 @@ const (
 	DeploymentJobErrorCodePostLaunchFileFailure               DeploymentJobErrorCode = "PostLaunchFileFailure"
 	DeploymentJobErrorCodeBadPermissionError                  DeploymentJobErrorCode = "BadPermissionError"
 	DeploymentJobErrorCodeDownloadConditionFailed             DeploymentJobErrorCode = "DownloadConditionFailed"
+	DeploymentJobErrorCodeBadLambdaAssociated                 DeploymentJobErrorCode = "BadLambdaAssociated"
 	DeploymentJobErrorCodeInternalServerError                 DeploymentJobErrorCode = "InternalServerError"
+	DeploymentJobErrorCodeRobotApplicationDoesNotExist        DeploymentJobErrorCode = "RobotApplicationDoesNotExist"
+	DeploymentJobErrorCodeDeploymentFleetDoesNotExist         DeploymentJobErrorCode = "DeploymentFleetDoesNotExist"
+	DeploymentJobErrorCodeFleetDeploymentTimeout              DeploymentJobErrorCode = "FleetDeploymentTimeout"
 )
 
 // Values returns all known values for DeploymentJobErrorCode. Note that this can
@@ -72,7 +76,11 @@ func (DeploymentJobErrorCode) Values() []DeploymentJobErrorCode {
 		"PostLaunchFileFailure",
 		"BadPermissionError",
 		"DownloadConditionFailed",
+		"BadLambdaAssociated",
 		"InternalServerError",
+		"RobotApplicationDoesNotExist",
+		"DeploymentFleetDoesNotExist",
+		"FleetDeploymentTimeout",
 	}
 }
 
@@ -99,6 +107,24 @@ func (DeploymentStatus) Values() []DeploymentStatus {
 		"Failed",
 		"Succeeded",
 		"Canceled",
+	}
+}
+
+type ExitBehavior string
+
+// Enum values for ExitBehavior
+const (
+	ExitBehaviorFail    ExitBehavior = "FAIL"
+	ExitBehaviorRestart ExitBehavior = "RESTART"
+)
+
+// Values returns all known values for ExitBehavior. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExitBehavior) Values() []ExitBehavior {
+	return []ExitBehavior{
+		"FAIL",
+		"RESTART",
 	}
 }
 
@@ -286,6 +312,8 @@ const (
 	SimulationJobErrorCodeInternalServiceError                       SimulationJobErrorCode = "InternalServiceError"
 	SimulationJobErrorCodeRobotApplicationCrash                      SimulationJobErrorCode = "RobotApplicationCrash"
 	SimulationJobErrorCodeSimulationApplicationCrash                 SimulationJobErrorCode = "SimulationApplicationCrash"
+	SimulationJobErrorCodeRobotApplicationHealthCheckFailure         SimulationJobErrorCode = "RobotApplicationHealthCheckFailure"
+	SimulationJobErrorCodeSimulationApplicationHealthCheckFailure    SimulationJobErrorCode = "SimulationApplicationHealthCheckFailure"
 	SimulationJobErrorCodeBadPermissionsRobotApplication             SimulationJobErrorCode = "BadPermissionsRobotApplication"
 	SimulationJobErrorCodeBadPermissionsSimulationApplication        SimulationJobErrorCode = "BadPermissionsSimulationApplication"
 	SimulationJobErrorCodeBadPermissionsS3Object                     SimulationJobErrorCode = "BadPermissionsS3Object"
@@ -297,6 +325,7 @@ const (
 	SimulationJobErrorCodeInvalidBundleRobotApplication              SimulationJobErrorCode = "InvalidBundleRobotApplication"
 	SimulationJobErrorCodeInvalidBundleSimulationApplication         SimulationJobErrorCode = "InvalidBundleSimulationApplication"
 	SimulationJobErrorCodeInvalidS3Resource                          SimulationJobErrorCode = "InvalidS3Resource"
+	SimulationJobErrorCodeThrottlingError                            SimulationJobErrorCode = "ThrottlingError"
 	SimulationJobErrorCodeLimitExceeded                              SimulationJobErrorCode = "LimitExceeded"
 	SimulationJobErrorCodeMismatchedEtag                             SimulationJobErrorCode = "MismatchedEtag"
 	SimulationJobErrorCodeRobotApplicationVersionMismatchedEtag      SimulationJobErrorCode = "RobotApplicationVersionMismatchedEtag"
@@ -321,6 +350,8 @@ func (SimulationJobErrorCode) Values() []SimulationJobErrorCode {
 		"InternalServiceError",
 		"RobotApplicationCrash",
 		"SimulationApplicationCrash",
+		"RobotApplicationHealthCheckFailure",
+		"SimulationApplicationHealthCheckFailure",
 		"BadPermissionsRobotApplication",
 		"BadPermissionsSimulationApplication",
 		"BadPermissionsS3Object",
@@ -332,6 +363,7 @@ func (SimulationJobErrorCode) Values() []SimulationJobErrorCode {
 		"InvalidBundleRobotApplication",
 		"InvalidBundleSimulationApplication",
 		"InvalidS3Resource",
+		"ThrottlingError",
 		"LimitExceeded",
 		"MismatchedEtag",
 		"RobotApplicationVersionMismatchedEtag",

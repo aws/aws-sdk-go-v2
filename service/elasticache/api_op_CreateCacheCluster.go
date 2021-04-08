@@ -262,7 +262,7 @@ type CreateCacheClusterInput struct {
 	// This parameter is only valid if the Engine parameter is redis.
 	SnapshotWindow *string
 
-	// A list of cost allocation tags to be added to this resource.
+	// A list of tags to be added to this resource.
 	Tags []types.Tag
 }
 

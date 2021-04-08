@@ -3072,6 +3072,11 @@ func awsAwsjson11_serializeDocumentServiceNowConfiguration(v *types.ServiceNowCo
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AuthenticationType) > 0 {
+		ok := object.Key("AuthenticationType")
+		ok.String(string(v.AuthenticationType))
+	}
+
 	if v.HostUrl != nil {
 		ok := object.Key("HostUrl")
 		ok.String(*v.HostUrl)
@@ -3135,6 +3140,11 @@ func awsAwsjson11_serializeDocumentServiceNowKnowledgeArticleConfiguration(v *ty
 		if err := awsAwsjson11_serializeDocumentDataSourceToIndexFieldMappingList(v.FieldMappings, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.FilterQuery != nil {
+		ok := object.Key("FilterQuery")
+		ok.String(*v.FilterQuery)
 	}
 
 	if v.IncludeAttachmentFilePatterns != nil {

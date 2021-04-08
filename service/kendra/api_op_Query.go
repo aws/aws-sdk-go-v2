@@ -46,7 +46,7 @@ func (c *Client) Query(ctx context.Context, params *QueryInput, optFns ...func(*
 type QueryInput struct {
 
 	// The unique identifier of the index to search. The identifier is returned in the
-	// response from the operation.
+	// response from the CreateIndex operation.
 	//
 	// This member is required.
 	IndexId *string

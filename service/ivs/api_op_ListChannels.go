@@ -14,7 +14,9 @@ import (
 
 // Gets summary information about all channels in your account, in the AWS region
 // where the API request is processed. This list can be filtered to match a
-// specified string.
+// specified name or recording-configuration ARN. Filters are mutually exclusive
+// and cannot be used together. If you try to use both filters, you will get an
+// error (409 ConflictException).
 func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, optFns ...func(*Options)) (*ListChannelsOutput, error) {
 	if params == nil {
 		params = &ListChannelsInput{}
@@ -35,7 +37,10 @@ type ListChannelsInput struct {
 	// Filters the channel list to match the specified name.
 	FilterByName *string
 
-	// Maximum number of channels to return.
+	// Filters the channel list to match the specified recording-configuration ARN.
+	FilterByRecordingConfigurationArn *string
+
+	// Maximum number of channels to return. Default: 50.
 	MaxResults int32
 
 	// The first channel to retrieve. This is used for pagination; see the nextToken
@@ -127,7 +132,7 @@ var _ ListChannelsAPIClient = (*Client)(nil)
 
 // ListChannelsPaginatorOptions is the paginator options for ListChannels
 type ListChannelsPaginatorOptions struct {
-	// Maximum number of channels to return.
+	// Maximum number of channels to return. Default: 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

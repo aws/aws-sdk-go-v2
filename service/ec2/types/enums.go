@@ -3471,6 +3471,28 @@ func (OperationType) Values() []OperationType {
 	}
 }
 
+type PartitionLoadFrequency string
+
+// Enum values for PartitionLoadFrequency
+const (
+	PartitionLoadFrequencyNone    PartitionLoadFrequency = "none"
+	PartitionLoadFrequencyDaily   PartitionLoadFrequency = "daily"
+	PartitionLoadFrequencyWeekly  PartitionLoadFrequency = "weekly"
+	PartitionLoadFrequencyMonthly PartitionLoadFrequency = "monthly"
+)
+
+// Values returns all known values for PartitionLoadFrequency. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PartitionLoadFrequency) Values() []PartitionLoadFrequency {
+	return []PartitionLoadFrequency{
+		"none",
+		"daily",
+		"weekly",
+		"monthly",
+	}
+}
+
 type PaymentOption string
 
 // Enum values for PaymentOption

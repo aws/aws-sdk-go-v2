@@ -12526,9 +12526,23 @@ func awsRestjson1_deserializeDocumentRobotApplicationConfig(v **types.RobotAppli
 				return err
 			}
 
+		case "tools":
+			if err := awsRestjson1_deserializeDocumentTools(&sv.Tools, value); err != nil {
+				return err
+			}
+
 		case "uploadConfigurations":
 			if err := awsRestjson1_deserializeDocumentUploadConfigurations(&sv.UploadConfigurations, value); err != nil {
 				return err
+			}
+
+		case "useDefaultTools":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseDefaultTools = ptr.Bool(jtv)
 			}
 
 		case "useDefaultUploadConfigurations":
@@ -13242,9 +13256,23 @@ func awsRestjson1_deserializeDocumentSimulationApplicationConfig(v **types.Simul
 				return err
 			}
 
+		case "tools":
+			if err := awsRestjson1_deserializeDocumentTools(&sv.Tools, value); err != nil {
+				return err
+			}
+
 		case "uploadConfigurations":
 			if err := awsRestjson1_deserializeDocumentUploadConfigurations(&sv.UploadConfigurations, value); err != nil {
 				return err
+			}
+
+		case "useDefaultTools":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseDefaultTools = ptr.Bool(jtv)
 			}
 
 		case "useDefaultUploadConfigurations":
@@ -14436,6 +14464,116 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTool(v **types.Tool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Tool
+	if *v == nil {
+		sv = &types.Tool{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "command":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UnrestrictedCommand to be of type string, got %T instead", value)
+				}
+				sv.Command = ptr.String(jtv)
+			}
+
+		case "exitBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExitBehavior to be of type string, got %T instead", value)
+				}
+				sv.ExitBehavior = types.ExitBehavior(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "streamOutputToCloudWatch":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.StreamOutputToCloudWatch = ptr.Bool(jtv)
+			}
+
+		case "streamUI":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.StreamUI = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTools(v *[]types.Tool, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Tool
+	if *v == nil {
+		cv = []types.Tool{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Tool
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTool(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -113,6 +113,7 @@ const (
 	SecurityServiceTypeSecurityGroupsContentAudit SecurityServiceType = "SECURITY_GROUPS_CONTENT_AUDIT"
 	SecurityServiceTypeSecurityGroupsUsageAudit   SecurityServiceType = "SECURITY_GROUPS_USAGE_AUDIT"
 	SecurityServiceTypeNetworkFirewall            SecurityServiceType = "NETWORK_FIREWALL"
+	SecurityServiceTypeDnsFirewall                SecurityServiceType = "DNS_FIREWALL"
 )
 
 // Values returns all known values for SecurityServiceType. Note that this can be
@@ -127,6 +128,7 @@ func (SecurityServiceType) Values() []SecurityServiceType {
 		"SECURITY_GROUPS_CONTENT_AUDIT",
 		"SECURITY_GROUPS_USAGE_AUDIT",
 		"NETWORK_FIREWALL",
+		"DNS_FIREWALL",
 	}
 }
 
@@ -143,10 +145,12 @@ const (
 	ViolationReasonResourceViolatesAuditSecurityGroup      ViolationReason = "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"
 	ViolationReasonSecurityGroupUnused                     ViolationReason = "SECURITY_GROUP_UNUSED"
 	ViolationReasonSecurityGroupRedundant                  ViolationReason = "SECURITY_GROUP_REDUNDANT"
+	ViolationReasonFMSCreatedSecurityGroupEdited           ViolationReason = "FMS_CREATED_SECURITY_GROUP_EDITED"
 	ViolationReasonMissingFirewall                         ViolationReason = "MISSING_FIREWALL"
 	ViolationReasonMissingFirewallSubnetInAZ               ViolationReason = "MISSING_FIREWALL_SUBNET_IN_AZ"
 	ViolationReasonMissingExpectedRouteTable               ViolationReason = "MISSING_EXPECTED_ROUTE_TABLE"
 	ViolationReasonNetworkFirewallPolicyModified           ViolationReason = "NETWORK_FIREWALL_POLICY_MODIFIED"
+	ViolationReasonResourceMissingDnsFirewall              ViolationReason = "RESOURCE_MISSING_DNS_FIREWALL"
 )
 
 // Values returns all known values for ViolationReason. Note that this can be
@@ -163,9 +167,11 @@ func (ViolationReason) Values() []ViolationReason {
 		"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP",
 		"SECURITY_GROUP_UNUSED",
 		"SECURITY_GROUP_REDUNDANT",
+		"FMS_CREATED_SECURITY_GROUP_EDITED",
 		"MISSING_FIREWALL",
 		"MISSING_FIREWALL_SUBNET_IN_AZ",
 		"MISSING_EXPECTED_ROUTE_TABLE",
 		"NETWORK_FIREWALL_POLICY_MODIFIED",
+		"RESOURCE_MISSING_DNS_FIREWALL",
 	}
 }

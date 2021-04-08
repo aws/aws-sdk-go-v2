@@ -165,6 +165,50 @@ func (FindingStatusUpdate) Values() []FindingStatusUpdate {
 	}
 }
 
+type JobErrorCode string
+
+// Enum values for JobErrorCode
+const (
+	JobErrorCodeAuthorizationError        JobErrorCode = "AUTHORIZATION_ERROR"
+	JobErrorCodeResourceNotFoundError     JobErrorCode = "RESOURCE_NOT_FOUND_ERROR"
+	JobErrorCodeServiceQuotaExceededError JobErrorCode = "SERVICE_QUOTA_EXCEEDED_ERROR"
+	JobErrorCodeServiceError              JobErrorCode = "SERVICE_ERROR"
+)
+
+// Values returns all known values for JobErrorCode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (JobErrorCode) Values() []JobErrorCode {
+	return []JobErrorCode{
+		"AUTHORIZATION_ERROR",
+		"RESOURCE_NOT_FOUND_ERROR",
+		"SERVICE_QUOTA_EXCEEDED_ERROR",
+		"SERVICE_ERROR",
+	}
+}
+
+type JobStatus string
+
+// Enum values for JobStatus
+const (
+	JobStatusInProgress JobStatus = "IN_PROGRESS"
+	JobStatusSucceeded  JobStatus = "SUCCEEDED"
+	JobStatusFailed     JobStatus = "FAILED"
+	JobStatusCanceled   JobStatus = "CANCELED"
+)
+
+// Values returns all known values for JobStatus. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+		"CANCELED",
+	}
+}
+
 type KmsGrantOperation string
 
 // Enum values for KmsGrantOperation

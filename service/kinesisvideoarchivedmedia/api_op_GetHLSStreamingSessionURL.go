@@ -202,7 +202,7 @@ type GetHLSStreamingSessionURLInput struct {
 	// media player timeline most accurately maps to the producer timestamps.
 	//
 	// *
-	// ON_DISCONTIUNITY: a discontinuity marker is placed between fragments that have a
+	// ON_DISCONTINUITY: a discontinuity marker is placed between fragments that have a
 	// gap or overlap of more than 50 milliseconds. For most playback scenarios, it is
 	// recommended to use a value of ON_DISCONTINUITY so that the media player timeline
 	// is only reset when there is a significant issue with the media timeline (e.g. a

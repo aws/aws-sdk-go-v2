@@ -13,7 +13,10 @@ import (
 
 // Imports the public portion of a new key pair and returns its arn and
 // fingerprint. The privateKey can then be used to generate viewer authorization
-// tokens, to grant viewers access to authorized channels.
+// tokens, to grant viewers access to private channels. For more information, see
+// Setting Up Private Channels
+// (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the
+// Amazon IVS User Guide.
 func (c *Client) ImportPlaybackKeyPair(ctx context.Context, params *ImportPlaybackKeyPairInput, optFns ...func(*Options)) (*ImportPlaybackKeyPairOutput, error) {
 	if params == nil {
 		params = &ImportPlaybackKeyPairInput{}

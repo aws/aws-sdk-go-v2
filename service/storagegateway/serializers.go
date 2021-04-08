@@ -296,6 +296,53 @@ func (m *awsAwsjson11_serializeOpAssignTapePool) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpAssociateFileSystem struct {
+}
+
+func (*awsAwsjson11_serializeOpAssociateFileSystem) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpAssociateFileSystem) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateFileSystemInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.AssociateFileSystem")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentAssociateFileSystemInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpAttachVolume struct {
 }
 
@@ -1612,6 +1659,53 @@ func (m *awsAwsjson11_serializeOpDescribeChapCredentials) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeFileSystemAssociations struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeFileSystemAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeFileSystemAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeFileSystemAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.DescribeFileSystemAssociations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeFileSystemAssociationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeGatewayInformation struct {
 }
 
@@ -2317,6 +2411,53 @@ func (m *awsAwsjson11_serializeOpDisableGateway) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDisassociateFileSystem struct {
+}
+
+func (*awsAwsjson11_serializeOpDisassociateFileSystem) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDisassociateFileSystem) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateFileSystemInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.DisassociateFileSystem")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDisassociateFileSystemInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpJoinDomain struct {
 }
 
@@ -2443,6 +2584,53 @@ func (m *awsAwsjson11_serializeOpListFileShares) HandleSerialize(ctx context.Con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListFileSharesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListFileSystemAssociations struct {
+}
+
+func (*awsAwsjson11_serializeOpListFileSystemAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListFileSystemAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListFileSystemAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.ListFileSystemAssociations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListFileSystemAssociationsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -3539,6 +3727,53 @@ func (m *awsAwsjson11_serializeOpUpdateChapCredentials) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateFileSystemAssociation struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateFileSystemAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateFileSystemAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateFileSystemAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("StorageGateway_20130630.UpdateFileSystemAssociation")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateFileSystemAssociationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateGatewayInformation struct {
 }
 
@@ -4119,7 +4354,7 @@ func awsAwsjson11_serializeDocumentFileShareClientList(v []string, value smithyj
 	return nil
 }
 
-func awsAwsjson11_serializeDocumentFileShareUserList(v []string, value smithyjson.Value) error {
+func awsAwsjson11_serializeDocumentFileSystemAssociationARNList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -4232,6 +4467,17 @@ func awsAwsjson11_serializeDocumentTags(v []types.Tag, value smithyjson.Value) e
 }
 
 func awsAwsjson11_serializeDocumentTapeARNs(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUserList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -4406,6 +4652,57 @@ func awsAwsjson11_serializeOpDocumentAssignTapePoolInput(v *AssignTapePoolInput,
 	if v.TapeARN != nil {
 		ok := object.Key("TapeARN")
 		ok.String(*v.TapeARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentAssociateFileSystemInput(v *AssociateFileSystemInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditDestinationARN != nil {
+		ok := object.Key("AuditDestinationARN")
+		ok.String(*v.AuditDestinationARN)
+	}
+
+	if v.CacheAttributes != nil {
+		ok := object.Key("CacheAttributes")
+		if err := awsAwsjson11_serializeDocumentCacheAttributes(v.CacheAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.GatewayARN != nil {
+		ok := object.Key("GatewayARN")
+		ok.String(*v.GatewayARN)
+	}
+
+	if v.LocationARN != nil {
+		ok := object.Key("LocationARN")
+		ok.String(*v.LocationARN)
+	}
+
+	if v.Password != nil {
+		ok := object.Key("Password")
+		ok.String(*v.Password)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.UserName != nil {
+		ok := object.Key("UserName")
+		ok.String(*v.UserName)
 	}
 
 	return nil
@@ -4652,7 +4949,7 @@ func awsAwsjson11_serializeOpDocumentCreateSMBFileShareInput(v *CreateSMBFileSha
 
 	if v.AdminUserList != nil {
 		ok := object.Key("AdminUserList")
-		if err := awsAwsjson11_serializeDocumentFileShareUserList(v.AdminUserList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentUserList(v.AdminUserList, ok); err != nil {
 			return err
 		}
 	}
@@ -4706,7 +5003,7 @@ func awsAwsjson11_serializeOpDocumentCreateSMBFileShareInput(v *CreateSMBFileSha
 
 	if v.InvalidUserList != nil {
 		ok := object.Key("InvalidUserList")
-		if err := awsAwsjson11_serializeDocumentFileShareUserList(v.InvalidUserList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentUserList(v.InvalidUserList, ok); err != nil {
 			return err
 		}
 	}
@@ -4765,7 +5062,7 @@ func awsAwsjson11_serializeOpDocumentCreateSMBFileShareInput(v *CreateSMBFileSha
 
 	if v.ValidUserList != nil {
 		ok := object.Key("ValidUserList")
-		if err := awsAwsjson11_serializeDocumentFileShareUserList(v.ValidUserList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentUserList(v.ValidUserList, ok); err != nil {
 			return err
 		}
 	}
@@ -5241,6 +5538,20 @@ func awsAwsjson11_serializeOpDocumentDescribeChapCredentialsInput(v *DescribeCha
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeFileSystemAssociationsInput(v *DescribeFileSystemAssociationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileSystemAssociationARNList != nil {
+		ok := object.Key("FileSystemAssociationARNList")
+		if err := awsAwsjson11_serializeDocumentFileSystemAssociationARNList(v.FileSystemAssociationARNList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeGatewayInformationInput(v *DescribeGatewayInformationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5488,6 +5799,23 @@ func awsAwsjson11_serializeOpDocumentDisableGatewayInput(v *DisableGatewayInput,
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDisassociateFileSystemInput(v *DisassociateFileSystemInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileSystemAssociationARN != nil {
+		ok := object.Key("FileSystemAssociationARN")
+		ok.String(*v.FileSystemAssociationARN)
+	}
+
+	if v.ForceDelete {
+		ok := object.Key("ForceDelete")
+		ok.Boolean(v.ForceDelete)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentJoinDomainInput(v *JoinDomainInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5545,6 +5873,28 @@ func awsAwsjson11_serializeOpDocumentListAutomaticTapeCreationPoliciesInput(v *L
 }
 
 func awsAwsjson11_serializeOpDocumentListFileSharesInput(v *ListFileSharesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GatewayARN != nil {
+		ok := object.Key("GatewayARN")
+		ok.String(*v.GatewayARN)
+	}
+
+	if v.Limit != nil {
+		ok := object.Key("Limit")
+		ok.Integer(*v.Limit)
+	}
+
+	if v.Marker != nil {
+		ok := object.Key("Marker")
+		ok.String(*v.Marker)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListFileSystemAssociationsInput(v *ListFileSystemAssociationsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 
@@ -5969,6 +6319,40 @@ func awsAwsjson11_serializeOpDocumentUpdateChapCredentialsInput(v *UpdateChapCre
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentUpdateFileSystemAssociationInput(v *UpdateFileSystemAssociationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuditDestinationARN != nil {
+		ok := object.Key("AuditDestinationARN")
+		ok.String(*v.AuditDestinationARN)
+	}
+
+	if v.CacheAttributes != nil {
+		ok := object.Key("CacheAttributes")
+		if err := awsAwsjson11_serializeDocumentCacheAttributes(v.CacheAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FileSystemAssociationARN != nil {
+		ok := object.Key("FileSystemAssociationARN")
+		ok.String(*v.FileSystemAssociationARN)
+	}
+
+	if v.Password != nil {
+		ok := object.Key("Password")
+		ok.String(*v.Password)
+	}
+
+	if v.UserName != nil {
+		ok := object.Key("UserName")
+		ok.String(*v.UserName)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentUpdateGatewayInformationInput(v *UpdateGatewayInformationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6134,7 +6518,7 @@ func awsAwsjson11_serializeOpDocumentUpdateSMBFileShareInput(v *UpdateSMBFileSha
 
 	if v.AdminUserList != nil {
 		ok := object.Key("AdminUserList")
-		if err := awsAwsjson11_serializeDocumentFileShareUserList(v.AdminUserList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentUserList(v.AdminUserList, ok); err != nil {
 			return err
 		}
 	}
@@ -6178,7 +6562,7 @@ func awsAwsjson11_serializeOpDocumentUpdateSMBFileShareInput(v *UpdateSMBFileSha
 
 	if v.InvalidUserList != nil {
 		ok := object.Key("InvalidUserList")
-		if err := awsAwsjson11_serializeDocumentFileShareUserList(v.InvalidUserList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentUserList(v.InvalidUserList, ok); err != nil {
 			return err
 		}
 	}
@@ -6220,7 +6604,7 @@ func awsAwsjson11_serializeOpDocumentUpdateSMBFileShareInput(v *UpdateSMBFileSha
 
 	if v.ValidUserList != nil {
 		ok := object.Key("ValidUserList")
-		if err := awsAwsjson11_serializeDocumentFileShareUserList(v.ValidUserList, ok); err != nil {
+		if err := awsAwsjson11_serializeDocumentUserList(v.ValidUserList, ok); err != nil {
 			return err
 		}
 	}

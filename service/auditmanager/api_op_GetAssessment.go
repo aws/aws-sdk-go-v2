@@ -42,6 +42,10 @@ type GetAssessmentOutput struct {
 	// Manager framework.
 	Assessment *types.Assessment
 
+	// The wrapper that contains the AWS Audit Manager role information of the current
+	// user, such as the role type and IAM Amazon Resource Name (ARN).
+	UserRole *types.Role
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

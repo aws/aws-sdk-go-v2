@@ -60,6 +60,10 @@ type DescribeManagedRuleGroupInput struct {
 
 type DescribeManagedRuleGroupOutput struct {
 
+	// The labels that one or more rules in this rule group add to matching web ACLs.
+	// These labels are defined in the RuleLabels for a Rule.
+	AvailableLabels []types.LabelSummary
+
 	// The web ACL capacity units (WCUs) required for this rule group. AWS WAF uses web
 	// ACL capacity units (WCU) to calculate and control the operating resources that
 	// are used to run your rules, rule groups, and web ACLs. AWS WAF calculates
@@ -67,6 +71,24 @@ type DescribeManagedRuleGroupOutput struct {
 	// Rule group capacity is fixed at creation, so users can plan their web ACL WCU
 	// usage when they use a rule group. The WCU limit for web ACLs is 1,500.
 	Capacity int64
+
+	// The labels that one or more rules in this rule group match against in label
+	// match statements. These labels are defined in a LabelMatchStatement
+	// specification, in the Statement definition of a rule.
+	ConsumedLabels []types.LabelSummary
+
+	// The label namespace prefix for this rule group. All labels added by rules in
+	// this rule group have this prefix.
+	//
+	// * The syntax for the label namespace prefix
+	// for a managed rule group is the following: awswaf:managed:::
+	//
+	// * When a rule with
+	// a label matches a web request, AWS WAF adds the fully qualified label to the
+	// request. A fully qualified label is made up of the label namespace from the rule
+	// group or web ACL where the rule is defined and the label from the rule,
+	// separated by a colon: :
+	LabelNamespace *string
 
 	//
 	Rules []types.RuleSummary

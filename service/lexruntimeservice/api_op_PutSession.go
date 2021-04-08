@@ -149,10 +149,21 @@ type PutSessionOutput struct {
 	// Conveys that the client has to fulfill the intent.
 	DialogState types.DialogState
 
+	// The next message that should be presented to the user. The encodedMessage field
+	// is base-64 encoded. You must decode the field before you can use the value.
+	EncodedMessage *string
+
 	// The name of the current intent.
 	IntentName *string
 
-	// The next message that should be presented to the user.
+	// The next message that should be presented to the user. You can only use this
+	// field in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR, and
+	// it-IT locales. In all other locales, the message field is null. You should use
+	// the encodedMessage field instead.
+	//
+	// Deprecated: The message field is deprecated, use the encodedMessage field
+	// instead. The message field is available only in the de-DE, en-AU, en-GB, en-US,
+	// es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales.
 	Message *string
 
 	// The format of the response message. One of the following values:

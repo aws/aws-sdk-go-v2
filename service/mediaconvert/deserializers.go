@@ -5407,6 +5407,15 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 				sv.Dialnorm = int32(i64)
 			}
 
+		case "dynamicRangeCompressionLine":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac3DynamicRangeCompressionLine to be of type string, got %T instead", value)
+				}
+				sv.DynamicRangeCompressionLine = types.Ac3DynamicRangeCompressionLine(jtv)
+			}
+
 		case "dynamicRangeCompressionProfile":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5414,6 +5423,15 @@ func awsRestjson1_deserializeDocumentAc3Settings(v **types.Ac3Settings, value in
 					return fmt.Errorf("expected Ac3DynamicRangeCompressionProfile to be of type string, got %T instead", value)
 				}
 				sv.DynamicRangeCompressionProfile = types.Ac3DynamicRangeCompressionProfile(jtv)
+			}
+
+		case "dynamicRangeCompressionRf":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Ac3DynamicRangeCompressionRf to be of type string, got %T instead", value)
+				}
+				sv.DynamicRangeCompressionRf = types.Ac3DynamicRangeCompressionRf(jtv)
 			}
 
 		case "lfeFilter":
@@ -7114,6 +7132,11 @@ func awsRestjson1_deserializeDocumentCaptionDestinationSettings(v **types.Captio
 				return err
 			}
 
+		case "webvttDestinationSettings":
+			if err := awsRestjson1_deserializeDocumentWebvttDestinationSettings(&sv.WebvttDestinationSettings, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -7601,6 +7624,15 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				sv.MpdProfile = types.CmafMpdProfile(jtv)
 			}
 
+		case "ptsOffsetHandlingForBFrames":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafPtsOffsetHandlingForBFrames to be of type string, got %T instead", value)
+				}
+				sv.PtsOffsetHandlingForBFrames = types.CmafPtsOffsetHandlingForBFrames(jtv)
+			}
+
 		case "segmentControl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7697,6 +7729,42 @@ func awsRestjson1_deserializeDocumentCmfcSettings(v **types.CmfcSettings, value 
 					return fmt.Errorf("expected CmfcAudioDuration to be of type string, got %T instead", value)
 				}
 				sv.AudioDuration = types.CmfcAudioDuration(jtv)
+			}
+
+		case "audioGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AudioGroupId = ptr.String(jtv)
+			}
+
+		case "audioRenditionSets":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AudioRenditionSets = ptr.String(jtv)
+			}
+
+		case "audioTrackType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcAudioTrackType to be of type string, got %T instead", value)
+				}
+				sv.AudioTrackType = types.CmfcAudioTrackType(jtv)
+			}
+
+		case "descriptiveVideoServiceFlag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmfcDescriptiveVideoServiceFlag to be of type string, got %T instead", value)
+				}
+				sv.DescriptiveVideoServiceFlag = types.CmfcDescriptiveVideoServiceFlag(jtv)
 			}
 
 		case "iFrameOnlyManifest":
@@ -8069,6 +8137,15 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 				return err
 			}
 
+		case "audioChannelConfigSchemeIdUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashIsoGroupAudioChannelConfigSchemeIdUri to be of type string, got %T instead", value)
+				}
+				sv.AudioChannelConfigSchemeIdUri = types.DashIsoGroupAudioChannelConfigSchemeIdUri(jtv)
+			}
+
 		case "baseUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8152,6 +8229,15 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 					return fmt.Errorf("expected DashIsoMpdProfile to be of type string, got %T instead", value)
 				}
 				sv.MpdProfile = types.DashIsoMpdProfile(jtv)
+			}
+
+		case "ptsOffsetHandlingForBFrames":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashIsoPtsOffsetHandlingForBFrames to be of type string, got %T instead", value)
+				}
+				sv.PtsOffsetHandlingForBFrames = types.DashIsoPtsOffsetHandlingForBFrames(jtv)
 			}
 
 		case "segmentControl":
@@ -9730,7 +9816,7 @@ func awsRestjson1_deserializeDocumentFileSourceSettings(v **types.FileSourceSett
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI to be of type string, got %T instead", value)
+					return fmt.Errorf("expected __stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT to be of type string, got %T instead", value)
 				}
 				sv.SourceFile = ptr.String(jtv)
 			}
@@ -11628,6 +11714,15 @@ func awsRestjson1_deserializeDocumentHlsSettings(v **types.HlsSettings, value in
 					return fmt.Errorf("expected HlsAudioTrackType to be of type string, got %T instead", value)
 				}
 				sv.AudioTrackType = types.HlsAudioTrackType(jtv)
+			}
+
+		case "descriptiveVideoServiceFlag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsDescriptiveVideoServiceFlag to be of type string, got %T instead", value)
+				}
+				sv.DescriptiveVideoServiceFlag = types.HlsDescriptiveVideoServiceFlag(jtv)
 			}
 
 		case "iFrameOnlyManifest":
@@ -18718,6 +18813,46 @@ func awsRestjson1_deserializeDocumentWavSettings(v **types.WavSettings, value in
 					return err
 				}
 				sv.SampleRate = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWebvttDestinationSettings(v **types.WebvttDestinationSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WebvttDestinationSettings
+	if *v == nil {
+		sv = &types.WebvttDestinationSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "stylePassthrough":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebvttStylePassthrough to be of type string, got %T instead", value)
+				}
+				sv.StylePassthrough = types.WebvttStylePassthrough(jtv)
 			}
 
 		default:

@@ -25,14 +25,18 @@ type Channel struct {
 	// Channel ARN.
 	Arn *string
 
-	// Whether the channel is authorized.
+	// Whether the channel is private (enabled for playback authorization). Default:
+	// false.
 	Authorized bool
 
 	// Channel ingest endpoint, part of the definition of an ingest server, used when
 	// you set up streaming software.
 	IngestEndpoint *string
 
-	// Channel latency mode. Default: LOW.
+	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
+	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In
+	// the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard,
+	// respectively.)
 	LatencyMode ChannelLatencyMode
 
 	// Channel name.
@@ -41,24 +45,26 @@ type Channel struct {
 	// Channel playback URL.
 	PlaybackUrl *string
 
+	// Recording-configuration ARN. A value other than an empty string indicates that
+	// recording is enabled. Default: "" (empty string, recording is disabled).
+	RecordingConfigurationArn *string
+
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable resolution or bitrate, the stream probably will disconnect
-	// immediately. Valid values:
+	// immediately. Default: STANDARD. Valid values:
 	//
-	// * STANDARD: Multiple qualities are generated from
-	// the original input, to automatically give viewers the best experience for their
-	// devices and network conditions. Vertical resolution can be up to 1080 and
-	// bitrate can be up to 8.5 Mbps.
+	// * STANDARD: Multiple qualities
+	// are generated from the original input, to automatically give viewers the best
+	// experience for their devices and network conditions. Vertical resolution can be
+	// up to 1080 and bitrate can be up to 8.5 Mbps.
 	//
-	// * BASIC: Amazon IVS delivers the original input
-	// to viewers. The viewer’s video-quality choice is limited to the original input.
-	// Vertical resolution can be up to 480 and bitrate can be up to 1.5
-	// Mbps.
-	//
-	// Default: STANDARD.
+	// * BASIC: Amazon IVS delivers the
+	// original input to viewers. The viewer’s video-quality choice is limited to the
+	// original input. Vertical resolution can be up to 480 and bitrate can be up to
+	// 1.5 Mbps.
 	Type ChannelType
 }
 
@@ -68,17 +74,34 @@ type ChannelSummary struct {
 	// Channel ARN.
 	Arn *string
 
-	// Whether the channel is authorized.
+	// Whether the channel is private (enabled for playback authorization). Default:
+	// false.
 	Authorized bool
 
-	// Channel latency mode. Default: LOW.
+	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
+	// HD. Use LOW for near-real-time interaction with viewers. Default: LOW. (Note: In
+	// the Amazon IVS console, LOW and NORMAL correspond to Ultra-low and Standard,
+	// respectively.)
 	LatencyMode ChannelLatencyMode
 
 	// Channel name.
 	Name *string
 
+	// Recording-configuration ARN. A value other than an empty string indicates that
+	// recording is enabled. Default: "" (empty string, recording is disabled).
+	RecordingConfigurationArn *string
+
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+}
+
+// A complex type that describes a location where recorded videos will be stored.
+// Each member represents a type of destination configuration. For recording, you
+// define one and only one type of destination configuration.
+type DestinationConfiguration struct {
+
+	// An S3 destination configuration where recorded videos will be stored.
+	S3 *S3DestinationConfiguration
 }
 
 // A key pair used to sign and validate a playback authorization token.
@@ -90,7 +113,8 @@ type PlaybackKeyPair struct {
 	// Key-pair identifier.
 	Fingerprint *string
 
-	// Key-pair name.
+	// An arbitrary string (a nickname) assigned to a playback key pair that helps the
+	// customer identify that resource. The value does not need to be unique.
 	Name *string
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
@@ -103,11 +127,78 @@ type PlaybackKeyPairSummary struct {
 	// Key-pair ARN.
 	Arn *string
 
-	// Key-pair name.
+	// An arbitrary string (a nickname) assigned to a playback key pair that helps the
+	// customer identify that resource. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value)
+	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+}
+
+// An object representing a configuration to record a channel stream.
+type RecordingConfiguration struct {
+
+	// Recording-configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// A complex type that contains information about where recorded video will be
+	// stored.
+	//
+	// This member is required.
+	DestinationConfiguration *DestinationConfiguration
+
+	// Indicates the current state of the recording configuration. When the state is
+	// ACTIVE, the configuration is ready for recording a channel stream.
+	//
+	// This member is required.
+	State RecordingConfigurationState
+
+	// An arbitrary string (a nickname) assigned to a recording configuration that
+	// helps the customer identify that resource. The value does not need to be unique.
+	Name *string
+
+	// Array of 1-50 maps, each of the form string:string (key:value).
+	Tags map[string]string
+}
+
+// Summary information about a RecordingConfiguration.
+type RecordingConfigurationSummary struct {
+
+	// Recording-configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// A complex type that contains information about where recorded video will be
+	// stored.
+	//
+	// This member is required.
+	DestinationConfiguration *DestinationConfiguration
+
+	// Indicates the current state of the recording configuration. When the state is
+	// ACTIVE, the configuration is ready for recording a channel stream.
+	//
+	// This member is required.
+	State RecordingConfigurationState
+
+	// An arbitrary string (a nickname) assigned to a recording configuration that
+	// helps the customer identify that resource. The value does not need to be unique.
+	Name *string
+
+	// Array of 1-50 maps, each of the form string:string (key:value).
+	Tags map[string]string
+}
+
+// A complex type that describes an S3 location where recorded videos will be
+// stored.
+type S3DestinationConfiguration struct {
+
+	// Location (S3 bucket name) where recorded videos will be stored.
+	//
+	// This member is required.
+	BucketName *string
 }
 
 // Specifies a live video stream that has been ingested and distributed.
@@ -119,8 +210,7 @@ type Stream struct {
 	// The stream’s health.
 	Health StreamHealth
 
-	// URL of the video master manifest, required by the video player to play the HLS
-	// stream.
+	// URL of the master playlist, required by the video player to play the HLS stream.
 	PlaybackUrl *string
 
 	// ISO-8601 formatted timestamp of the stream’s start.
@@ -129,7 +219,8 @@ type Stream struct {
 	// The stream’s state.
 	State StreamState
 
-	// Number of current viewers of the stream.
+	// Number of current viewers of the stream. A value of -1 indicates that the
+	// request timed out; in this case, retry.
 	ViewerCount int64
 }
 
@@ -177,6 +268,7 @@ type StreamSummary struct {
 	// The stream’s state.
 	State StreamState
 
-	// Number of current viewers of the stream.
+	// Number of current viewers of the stream. A value of -1 indicates that the
+	// request timed out; in this case, retry.
 	ViewerCount int64
 }

@@ -82,9 +82,38 @@ type Ac3Settings struct {
 	// dialnorm will be passed through.
 	Dialnorm int32
 
-	// If set to FILM_STANDARD, adds dynamic range compression signaling to the output
-	// bitstream as defined in the Dolby Digital specification.
+	// Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert
+	// uses when encoding the metadata in the Dolby Digital stream for the line
+	// operating mode. Related setting: When you use this setting, MediaConvert ignores
+	// any value you provide for Dynamic range compression profile
+	// (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC
+	// operating modes and profiles, see the Dynamic Range Control chapter of the Dolby
+	// Metadata Guide at
+	// https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
+	DynamicRangeCompressionLine Ac3DynamicRangeCompressionLine
+
+	// When you want to add Dolby dynamic range compression (DRC) signaling to your
+	// output stream, we recommend that you use the mode-specific settings instead of
+	// Dynamic range compression profile (DynamicRangeCompressionProfile). The
+	// mode-specific settings are Dynamic range compression profile, line mode
+	// (dynamicRangeCompressionLine) and Dynamic range compression profile, RF mode
+	// (dynamicRangeCompressionRf). Note that when you specify values for all three
+	// settings, MediaConvert ignores the value of this setting in favor of the
+	// mode-specific settings. If you do use this setting instead of the mode-specific
+	// settings, choose None (NONE) to leave out DRC signaling. Keep the default Film
+	// standard (FILM_STANDARD) to set the profile to Dolby's film standard profile for
+	// all operating modes.
 	DynamicRangeCompressionProfile Ac3DynamicRangeCompressionProfile
+
+	// Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert
+	// uses when encoding the metadata in the Dolby Digital stream for the RF operating
+	// mode. Related setting: When you use this setting, MediaConvert ignores any value
+	// you provide for Dynamic range compression profile
+	// (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC
+	// operating modes and profiles, see the Dynamic Range Control chapter of the Dolby
+	// Metadata Guide at
+	// https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
+	DynamicRangeCompressionRf Ac3DynamicRangeCompressionRf
 
 	// Applies a 120Hz lowpass filter to the LFE channel prior to encoding. Only valid
 	// with 3_2_LFE coding mode.
@@ -908,6 +937,9 @@ type CaptionDestinationSettings struct {
 	// Settings specific to TTML caption outputs, including Pass style information
 	// (TtmlStylePassthrough).
 	TtmlDestinationSettings *TtmlDestinationSettings
+
+	// WEBVTT Destination Settings
+	WebvttDestinationSettings *WebvttDestinationSettings
 }
 
 // Set up captions in your outputs by first selecting them from your input here.
@@ -970,9 +1002,10 @@ type CaptionSourceSettings struct {
 	// Settings for embedded captions Source
 	EmbeddedSourceSettings *EmbeddedSourceSettings
 
-	// If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file,
-	// specify the URI of the input caption source file. If your caption source is IMSC
-	// in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
+	// If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an
+	// xml file, specify the URI of the input caption source file. If your caption
+	// source is IMSC in an IMF package, use TrackSourceSettings instead of
+	// FileSoureSettings.
 	FileSourceSettings *FileSourceSettings
 
 	// Use Source (SourceType) to identify the format of your input captions. The
@@ -1140,6 +1173,17 @@ type CmafGroupSettings struct {
 	// (SegmentControl) to Single file (SINGLE_FILE).
 	MpdProfile CmafMpdProfile
 
+	// Use this setting only when your output video stream has B-frames, which causes
+	// the initial presentation time stamp (PTS) to be offset from the initial decode
+	// time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps
+	// in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you
+	// want MediaConvert to use the initial PTS as the first time stamp in the
+	// manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial
+	// PTS in the video stream and instead write the initial time stamp as zero in the
+	// manifest. For outputs that don't have B-frames, the time stamps in your DASH
+	// manifests start at zero regardless of your choice here.
+	PtsOffsetHandlingForBFrames CmafPtsOffsetHandlingForBFrames
+
 	// When set to SINGLE_FILE, a single output file is generated, which is internally
 	// segmented using the Fragment Length and Segment Length. When set to
 	// SEGMENTED_FILES, separate segment files will be created.
@@ -1192,6 +1236,62 @@ type CmfcSettings struct {
 	// the file. When you keep the default value, any minor discrepancies between audio
 	// and video duration will depend on your output audio codec.
 	AudioDuration CmfcAudioDuration
+
+	// Specify the audio rendition group for this audio rendition. Specify up to one
+	// value for each audio output in your output group. This value appears in your HLS
+	// parent manifest in the EXT-X-MEDIA tag of TYPE=AUDIO, as the value for the
+	// GROUP-ID attribute. For example, if you specify "audio_aac_1" for Audio group
+	// ID, it appears in your manifest like this:
+	// #EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID="audio_aac_1". Related setting: To associate
+	// the rendition group that this audio track belongs to with a video rendition,
+	// include the same value that you provide here for that video output's setting
+	// Audio rendition sets (audioRenditionSets).
+	AudioGroupId *string
+
+	// List the audio rendition groups that you want included with this video
+	// rendition. Use a comma-separated list. For example, say you want to include the
+	// audio rendition groups that have the audio group IDs "audio_aac_1" and
+	// "audio_dolby". Then you would specify this value: "audio_aac_1, audio_dolby".
+	// Related setting: The rendition groups that you include in your comma-separated
+	// list should all match values that you specify in the setting Audio group ID
+	// (AudioGroupId) for audio renditions in the same output group as this video
+	// rendition. Default behavior: If you don't specify anything here and for Audio
+	// group ID, MediaConvert puts each audio variant in its own audio rendition group
+	// and associates it with every video variant. Each value in your list appears in
+	// your HLS parent manifest in the EXT-X-STREAM-INF tag as the value for the AUDIO
+	// attribute. To continue the previous example, say that the file name for the
+	// child manifest for your video rendition is "amazing_video_1.m3u8". Then, in your
+	// parent manifest, each value will appear on separate lines, like this:
+	// #EXT-X-STREAM-INF:AUDIO="audio_aac_1"... amazing_video_1.m3u8
+	// #EXT-X-STREAM-INF:AUDIO="audio_dolby"... amazing_video_1.m3u8
+	AudioRenditionSets *string
+
+	// Use this setting to control the values that MediaConvert puts in your HLS parent
+	// playlist to control how the client player selects which audio track to play. The
+	// other options for this setting determine the values that MediaConvert writes for
+	// the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio
+	// variant. For more information about these attributes, see the Apple
+	// documentation article
+	// https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist.
+	// Choose Alternate audio, auto select, default
+	// (ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT) to set DEFAULT=YES and AUTOSELECT=YES.
+	// Choose this value for only one variant in your output group. Choose Alternate
+	// audio, auto select, not default (ALTERNATE_AUDIO_AUTO_SELECT) to set DEFAULT=NO
+	// and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO
+	// and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert
+	// defaults to Alternate audio, auto select, default. When there is more than one
+	// variant in your output group, you must explicitly choose a value for this
+	// setting.
+	AudioTrackType CmfcAudioTrackType
+
+	// Specify whether to flag this audio track as descriptive video service (DVS) in
+	// your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the
+	// parameter CHARACTERISTICS="public.accessibility.describes-video" in the
+	// EXT-X-MEDIA entry for this track. When you keep the default choice, Don't flag
+	// (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with
+	// accessibility on Apple devices. For more information, see the Apple
+	// documentation.
+	DescriptiveVideoServiceFlag CmfcDescriptiveVideoServiceFlag
 
 	// Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest
 	// that lists only the I-frames for this rendition, in addition to your regular
@@ -1338,6 +1438,17 @@ type DashIsoGroupSettings struct {
 	// outputs in the output group, specify a list of them here.
 	AdditionalManifests []DashAdditionalManifest
 
+	// Use this setting only when your audio codec is a Dolby one (AC3, EAC3, or Atmos)
+	// and your downstream workflow requires that your DASH manifest use the Dolby
+	// channel configuration tag, rather than the MPEG one. For example, you might need
+	// to use this to make dynamic ad insertion work. Specify which audio channel
+	// configuration scheme ID URI MediaConvert writes in your DASH manifest. Keep the
+	// default value, MPEG channel configuration (MPEG_CHANNEL_CONFIGURATION), to have
+	// MediaConvert write this: urn:mpeg:mpegB:cicp:ChannelConfiguration. Choose Dolby
+	// channel configuration (DOLBY_CHANNEL_CONFIGURATION) to have MediaConvert write
+	// this instead: tag:dolby.com,2014:dash:audio_channel_configuration:2011.
+	AudioChannelConfigSchemeIdUri DashIsoGroupAudioChannelConfigSchemeIdUri
+
 	// A partial URI prefix that will be put in the manifest (.mpd) file at the top
 	// level BaseURL element. Can be used if streams are delivered from a different URL
 	// than the manifest file.
@@ -1393,6 +1504,17 @@ type DashIsoGroupSettings struct {
 	// On-demand, you must also set the output group setting Segment control
 	// (SegmentControl) to Single file (SINGLE_FILE).
 	MpdProfile DashIsoMpdProfile
+
+	// Use this setting only when your output video stream has B-frames, which causes
+	// the initial presentation time stamp (PTS) to be offset from the initial decode
+	// time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps
+	// in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you
+	// want MediaConvert to use the initial PTS as the first time stamp in the
+	// manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial
+	// PTS in the video stream and instead write the initial time stamp as zero in the
+	// manifest. For outputs that don't have B-frames, the time stamps in your DASH
+	// manifests start at zero regardless of your choice here.
+	PtsOffsetHandlingForBFrames DashIsoPtsOffsetHandlingForBFrames
 
 	// When set to SINGLE_FILE, a single output file is generated, which is internally
 	// segmented using the Fragment Length and Segment Length. When set to
@@ -1746,11 +1868,24 @@ type Eac3Settings struct {
 	// Plus, dialnorm will be passed through.
 	Dialnorm int32
 
-	// Specify the absolute peak level for a signal with dynamic range compression.
+	// Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert
+	// uses when encoding the metadata in the Dolby Digital stream for the line
+	// operating mode. Related setting: When you use this setting, MediaConvert ignores
+	// any value you provide for Dynamic range compression profile
+	// (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC
+	// operating modes and profiles, see the Dynamic Range Control chapter of the Dolby
+	// Metadata Guide at
+	// https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
 	DynamicRangeCompressionLine Eac3DynamicRangeCompressionLine
 
-	// Specify how the service limits the audio dynamic range when compressing the
-	// audio.
+	// Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert
+	// uses when encoding the metadata in the Dolby Digital stream for the RF operating
+	// mode. Related setting: When you use this setting, MediaConvert ignores any value
+	// you provide for Dynamic range compression profile
+	// (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC
+	// operating modes and profiles, see the Dynamic Range Control chapter of the Dolby
+	// Metadata Guide at
+	// https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.
 	DynamicRangeCompressionRf Eac3DynamicRangeCompressionRf
 
 	// When encoding 3/2 audio, controls whether the LFE channel is enabled
@@ -1957,9 +2092,10 @@ type FileGroupSettings struct {
 	DestinationSettings *DestinationSettings
 }
 
-// If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file,
-// specify the URI of the input caption source file. If your caption source is IMSC
-// in an IMF package, use TrackSourceSettings instead of FileSoureSettings.
+// If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an
+// xml file, specify the URI of the input caption source file. If your caption
+// source is IMSC in an IMF package, use TrackSourceSettings instead of
+// FileSoureSettings.
 type FileSourceSettings struct {
 
 	// Specify whether this set of input captions appears in your outputs in both 608
@@ -1979,7 +2115,7 @@ type FileSourceSettings struct {
 	Framerate *CaptionSourceFramerate
 
 	// External caption file used for loading captions. Accepted file extensions are
-	// 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', and 'smi'.
+	// 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', 'smi', and 'vtt'.
 	SourceFile *string
 
 	// Specifies a time delta in seconds to offset the captions from the source file.
@@ -2954,7 +3090,7 @@ type HlsGroupSettings struct {
 // Settings for HLS output groups
 type HlsSettings struct {
 
-	// Specifies the group to which the audio Rendition belongs.
+	// Specifies the group to which the audio rendition belongs.
 	AudioGroupId *string
 
 	// Use this setting only in audio-only outputs. Choose MPEG-2 Transport Stream
@@ -2980,6 +3116,15 @@ type HlsSettings struct {
 	// default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO,
 	// AUTOSELECT=NO
 	AudioTrackType HlsAudioTrackType
+
+	// Specify whether to flag this audio track as descriptive video service (DVS) in
+	// your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the
+	// parameter CHARACTERISTICS="public.accessibility.describes-video" in the
+	// EXT-X-MEDIA entry for this track. When you keep the default choice, Don't flag
+	// (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with
+	// accessibility on Apple devices. For more information, see the Apple
+	// documentation.
+	DescriptiveVideoServiceFlag HlsDescriptiveVideoServiceFlag
 
 	// Choose Include (INCLUDE) to have MediaConvert generate a child manifest that
 	// lists only the I-frames for this rendition, in addition to your regular manifest
@@ -5621,7 +5766,7 @@ type TrackSourceSettings struct {
 type TtmlDestinationSettings struct {
 
 	// Pass through style and position information from a TTML-like input source (TTML,
-	// SMPTE-TT) to the TTML output.
+	// IMSC, SMPTE-TT) to the TTML output.
 	StylePassthrough TtmlStylePassthrough
 }
 
@@ -6222,4 +6367,13 @@ type WavSettings struct {
 
 	// Sample rate in Hz.
 	SampleRate int32
+}
+
+// WEBVTT Destination Settings
+type WebvttDestinationSettings struct {
+
+	// If your input captions format is teletext or teletext inside of STL, enable this
+	// setting to pass through style, color, and position information to your WebVTT
+	// output captions.
+	StylePassthrough WebvttStylePassthrough
 }

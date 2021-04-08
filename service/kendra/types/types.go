@@ -204,11 +204,12 @@ type ConfluenceAttachmentConfiguration struct {
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
-// Kendra index field. You must first create the index field using the operation.
+// Kendra index field. You must first create the index field using the UpdateIndex
+// operation.
 type ConfluenceAttachmentToIndexFieldMapping struct {
 
 	// The name of the field in the data source. You must first create the index field
-	// using the operation.
+	// using the UpdateIndex operation.
 	DataSourceFieldName ConfluenceAttachmentFieldName
 
 	// The format for date fields in the data source. If the field specified in
@@ -223,7 +224,7 @@ type ConfluenceAttachmentToIndexFieldMapping struct {
 
 // Specifies the blog settings for the Confluence data source. Blogs are always
 // indexed unless filtered from the index by the ExclusionPatterns or
-// InclusionPatterns fields in the data type.
+// InclusionPatterns fields in the ConfluenceConfiguration type.
 type ConfluenceBlogConfiguration struct {
 
 	// Defines how blog metadata fields should be mapped to index fields. Before you
@@ -235,7 +236,7 @@ type ConfluenceBlogConfiguration struct {
 
 // Defines the mapping between a blog field in the Confluence data source to a
 // Amazon Kendra index field. You must first create the index field using the
-// operation.
+// UpdateIndex operation.
 type ConfluenceBlogToIndexFieldMapping struct {
 
 	// The name of the field in the data source.
@@ -324,7 +325,8 @@ type ConfluencePageConfiguration struct {
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
-// Kendra index field. You must first create the index field using the operation.
+// Kendra index field. You must first create the index field using the UpdateIndex
+// operation.
 type ConfluencePageToIndexFieldMapping struct {
 
 	// The name of the field in the data source.
@@ -373,7 +375,8 @@ type ConfluenceSpaceConfiguration struct {
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
-// Kendra index field. You must first create the index field using the operation.
+// Kendra index field. You must first create the index field using the UpdateIndex
+// operation.
 type ConfluenceSpaceToIndexFieldMapping struct {
 
 	// The name of the field in the data source.
@@ -487,7 +490,8 @@ type DataSourceConfiguration struct {
 	SharePointConfiguration *SharePointConfiguration
 }
 
-// Summary information for a Amazon Kendra data source. Returned in a call to .
+// Summary information for a Amazon Kendra data source. Returned in a call to the
+// DescribeDataSource operation.
 type DataSourceSummary struct {
 
 	// The UNIX datetime that the data source was created.
@@ -499,8 +503,8 @@ type DataSourceSummary struct {
 	// The name of the data source.
 	Name *string
 
-	// The status of the data source. When the status is ATIVE the data source is ready
-	// to use.
+	// The status of the data source. When the status is ACTIVE the data source is
+	// ready to use.
 	Status DataSourceStatus
 
 	// The type of the data source.
@@ -1279,7 +1283,7 @@ type SalesforceConfiguration struct {
 	// name of the attached file.
 	IncludeAttachmentFilePatterns []string
 
-	// Specifies configuration information for the knowlege article types that Amazon
+	// Specifies configuration information for the knowledge article types that Amazon
 	// Kendra indexes. Amazon Kendra indexes standard knowledge articles and the
 	// standard fields of knowledge articles, or the custom fields of custom knowledge
 	// articles, but not both.
@@ -1316,7 +1320,7 @@ type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
 	FieldMappings []DataSourceToIndexFieldMapping
 }
 
-// Specifies configuration information for the knowlege article types that Amazon
+// Specifies configuration information for the knowledge article types that Amazon
 // Kendra indexes. Amazon Kendra indexes standard knowledge articles and the
 // standard fields of knowledge articles, or the custom fields of custom knowledge
 // articles, but not both
@@ -1364,7 +1368,7 @@ type SalesforceStandardObjectAttachmentConfiguration struct {
 	FieldMappings []DataSourceToIndexFieldMapping
 }
 
-// Specifies confguration information for indexing a single standard object.
+// Specifies configuration information for indexing a single standard object.
 type SalesforceStandardObjectConfiguration struct {
 
 	// The name of the field in the standard object table that contains the document
@@ -1379,7 +1383,7 @@ type SalesforceStandardObjectConfiguration struct {
 	Name SalesforceStandardObjectName
 
 	// The name of the field in the standard object table that contains the document
-	// titleB.
+	// title.
 	DocumentTitleFieldName *string
 
 	// One or more objects that map fields in the standard object to Amazon Kendra
@@ -1450,6 +1454,18 @@ type ServiceNowConfiguration struct {
 	// This member is required.
 	ServiceNowBuildVersion ServiceNowBuildVersionType
 
+	// Determines the type of authentication used to connect to the ServiceNow
+	// instance. If you choose HTTP_BASIC, Amazon Kendra is authenticated using the
+	// user name and password provided in the AWS Secrets Manager secret in the
+	// SecretArn field. When you choose OAUTH2, Amazon Kendra is authenticated using
+	// the OAuth token and secret provided in the Secrets Manager secret, and the user
+	// name and password are used to determine which information Amazon Kendra has
+	// access to. When you use OAUTH2 authentication, you must generate a token and a
+	// client secret using the ServiceNow console. For more information, see Using a
+	// ServiceNow data source
+	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html).
+	AuthenticationType ServiceNowAuthenticationType
+
 	// Provides configuration information for crawling knowledge articles in the
 	// ServiceNow site.
 	KnowledgeArticleConfiguration *ServiceNowKnowledgeArticleConfiguration
@@ -1485,6 +1501,13 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// create the index field before you map the field.
 	FieldMappings []DataSourceToIndexFieldMapping
 
+	// A query that selects the knowledge articles to index. The query can return
+	// articles from multiple knowledge bases, and the knowledge bases can be public or
+	// private. The query string must be one generated by the ServiceNow console. For
+	// more information, see Specifying documents to index with a query
+	// (https://docs.aws.amazon.com/kendra/latest/dg/servicenow-query.html).
+	FilterQuery *string
+
 	// List of regular expressions applied to knowledge articles. Items that don't
 	// match the inclusion pattern are not indexed. The regex is applied to the field
 	// specified in the PatternTargetField.
@@ -1509,14 +1532,22 @@ type ServiceNowServiceCatalogConfiguration struct {
 	// field.
 	DocumentTitleFieldName *string
 
-	// Determines the types of file attachments that are excluded from the index.
+	// A list of regular expression patterns. Documents that match the patterns are
+	// excluded from the index. Documents that don't match the patterns are included in
+	// the index. If a document matches both an exclusion pattern and an inclusion
+	// pattern, the document is not included in the index. The regex is applied to the
+	// file name of the attachment.
 	ExcludeAttachmentFilePatterns []string
 
 	// Mapping between ServiceNow fields and Amazon Kendra index fields. You must
 	// create the index field before you map the field.
 	FieldMappings []DataSourceToIndexFieldMapping
 
-	// Determines the types of file attachments that are included in the index.
+	// A list of regular expression patterns. Documents that match the patterns are
+	// included in the index. Documents that don't match the patterns are excluded from
+	// the index. If a document matches both an exclusion pattern and an inclusion
+	// pattern, the document is not included in the index. The regex is applied to the
+	// file name of the attachment.
 	IncludeAttachmentFilePatterns []string
 }
 
@@ -1567,8 +1598,8 @@ type SharePointConfiguration struct {
 
 	// A list of DataSourceToIndexFieldMapping objects that map Microsoft SharePoint
 	// attributes to custom fields in the Amazon Kendra index. You must first create
-	// the index fields using the operation before you map SharePoint attributes. For
-	// more information, see Mapping Data Source Fields
+	// the index fields using the UpdateIndex operation before you map SharePoint
+	// attributes. For more information, see Mapping Data Source Fields
 	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html).
 	FieldMappings []DataSourceToIndexFieldMapping
 

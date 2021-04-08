@@ -3661,6 +3661,24 @@ func (M3u8TimedMetadataBehavior) Values() []M3u8TimedMetadataBehavior {
 	}
 }
 
+type MotionGraphicsInsertion string
+
+// Enum values for MotionGraphicsInsertion
+const (
+	MotionGraphicsInsertionDisabled MotionGraphicsInsertion = "DISABLED"
+	MotionGraphicsInsertionEnabled  MotionGraphicsInsertion = "ENABLED"
+)
+
+// Values returns all known values for MotionGraphicsInsertion. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MotionGraphicsInsertion) Values() []MotionGraphicsInsertion {
+	return []MotionGraphicsInsertion{
+		"DISABLED",
+		"ENABLED",
+	}
+}
+
 type Mp2CodingMode string
 
 // Enum values for Mp2CodingMode

@@ -296,14 +296,12 @@ type PostContentOutput struct {
 	DialogState types.DialogState
 
 	// The text used to process the request. If the input was an audio stream, the
-	// inputTranscript field contains the text extracted from the audio stream. This is
-	// the text that is actually processed to recognize intents and slot values. You
-	// can use this information to determine if Amazon Lex is correctly processing the
-	// audio that you send.
-	InputTranscript *string
-
-	// Current user intent that Amazon Lex is aware of.
-	IntentName *string
+	// encodedInputTranscript field contains the text extracted from the audio stream.
+	// This is the text that is actually processed to recognize intents and slot
+	// values. You can use this information to determine if Amazon Lex is correctly
+	// processing the audio that you send. The encodedInputTranscript field is base-64
+	// encoded. You must decode the field before you can use the value.
+	EncodedInputTranscript *string
 
 	// The message to convey to the user. The message can come from the bot's
 	// configuration or from a Lambda function. If the intent is not configured with a
@@ -317,7 +315,47 @@ type PostContentOutput struct {
 	// message field is an escaped JSON string containing the messages. For more
 	// information about the structure of the JSON string returned, see
 	// msg-prompts-formats. If the Lambda function returns a message, Amazon Lex passes
-	// it to the client in its response.
+	// it to the client in its response. The encodedMessage field is base-64 encoded.
+	// You must decode the field before you can use the value.
+	EncodedMessage *string
+
+	// The text used to process the request. You can use this field only in the de-DE,
+	// en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR, and it-IT locales. In
+	// all other locales, the inputTranscript field is null. You should use the
+	// encodedInputTranscript field instead. If the input was an audio stream, the
+	// inputTranscript field contains the text extracted from the audio stream. This is
+	// the text that is actually processed to recognize intents and slot values. You
+	// can use this information to determine if Amazon Lex is correctly processing the
+	// audio that you send.
+	//
+	// Deprecated: The inputTranscript field is deprecated, use the
+	// encodedInputTranscript field instead. The inputTranscript field is available
+	// only in the de-DE, en-AU, en-GB, en-US, es-419, es-ES, es-US, fr-CA, fr-FR and
+	// it-IT locales.
+	InputTranscript *string
+
+	// Current user intent that Amazon Lex is aware of.
+	IntentName *string
+
+	// You can only use this field in the de-DE, en-AU, en-GB, en-US, es-419, es-ES,
+	// es-US, fr-CA, fr-FR, and it-IT locales. In all other locales, the message field
+	// is null. You should use the encodedMessage field instead. The message to convey
+	// to the user. The message can come from the bot's configuration or from a Lambda
+	// function. If the intent is not configured with a Lambda function, or if the
+	// Lambda function returned Delegate as the dialogAction.type in its response,
+	// Amazon Lex decides on the next course of action and selects an appropriate
+	// message from the bot's configuration based on the current interaction context.
+	// For example, if Amazon Lex isn't able to understand user input, it uses a
+	// clarification prompt message. When you create an intent you can assign messages
+	// to groups. When messages are assigned to groups Amazon Lex returns one message
+	// from each group in the response. The message field is an escaped JSON string
+	// containing the messages. For more information about the structure of the JSON
+	// string returned, see msg-prompts-formats. If the Lambda function returns a
+	// message, Amazon Lex passes it to the client in its response.
+	//
+	// Deprecated: The message field is deprecated, use the encodedMessage field
+	// instead. The message field is available only in the de-DE, en-AU, en-GB, en-US,
+	// es-419, es-ES, es-US, fr-CA, fr-FR and it-IT locales.
 	Message *string
 
 	// The format of the response message. One of the following values:

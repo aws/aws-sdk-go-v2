@@ -210,6 +210,26 @@ func (m *validateOpCreateStreamingURL) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateUpdatedImage struct {
+}
+
+func (*validateOpCreateUpdatedImage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateUpdatedImage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateUpdatedImageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateUpdatedImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateUser struct {
 }
 
@@ -810,6 +830,10 @@ func addOpCreateStreamingURLValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateStreamingURL{}, middleware.After)
 }
 
+func addOpCreateUpdatedImageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateUpdatedImage{}, middleware.After)
+}
+
 func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
 }
@@ -1315,6 +1339,24 @@ func validateOpCreateStreamingURLInput(v *CreateStreamingURLInput) error {
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateUpdatedImageInput(v *CreateUpdatedImageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateUpdatedImageInput"}
+	if v.ExistingImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExistingImageName"))
+	}
+	if v.NewImageName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NewImageName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

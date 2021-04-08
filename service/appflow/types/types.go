@@ -487,6 +487,8 @@ type DestinationConnectorProperties struct {
 
 	// The properties required to query Upsolver.
 	Upsolver *UpsolverDestinationProperties
+
+	Zendesk *ZendeskDestinationProperties
 }
 
 // The properties that can be applied to a field when connector is being used as a
@@ -1634,6 +1636,27 @@ type ZendeskConnectorProfileProperties struct {
 	//
 	// This member is required.
 	InstanceUrl *string
+}
+
+type ZendeskDestinationProperties struct {
+
+	// This member is required.
+	Object *string
+
+	// The settings that determine how Amazon AppFlow handles an error when placing
+	// data in the destination. For example, this setting would determine if the flow
+	// should fail after one insertion error, or continue and attempt to insert every
+	// record regardless of the initial failure. ErrorHandlingConfig is a part of the
+	// destination connector details.
+	ErrorHandlingConfig *ErrorHandlingConfig
+
+	// A list of field names that can be used as an ID field when performing a write
+	// operation.
+	IdFieldNames []string
+
+	// The possible write operations in the destination connector. When this value is
+	// not provided, this defaults to the INSERT operation.
+	WriteOperationType WriteOperationType
 }
 
 // The connector metadata specific to Zendesk.

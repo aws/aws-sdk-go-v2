@@ -14,9 +14,9 @@ import (
 
 // Creates a new Amazon Kendra index. Index creation is an asynchronous operation.
 // To determine if index creation has completed, check the Status field returned
-// from a call to . The Status field is set to ACTIVE when the index is ready to
-// use. Once the index is active you can index your documents using the operation
-// or using one of the supported data sources.
+// from a call to DescribeIndex. The Status field is set to ACTIVE when the index
+// is ready to use. Once the index is active you can index your documents using the
+// BatchPutDocument operation or using one of the supported data sources.
 func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optFns ...func(*Options)) (*CreateIndexOutput, error) {
 	if params == nil {
 		params = &CreateIndexInput{}

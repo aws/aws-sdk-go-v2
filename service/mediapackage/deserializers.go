@@ -4612,6 +4612,55 @@ func awsRestjson1_deserializeDocumentEgressAccessLogs(v **types.EgressAccessLogs
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEncryptionContractConfiguration(v **types.EncryptionContractConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EncryptionContractConfiguration
+	if *v == nil {
+		sv = &types.EncryptionContractConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "presetSpeke20Audio":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PresetSpeke20Audio to be of type string, got %T instead", value)
+				}
+				sv.PresetSpeke20Audio = types.PresetSpeke20Audio(jtv)
+			}
+
+		case "presetSpeke20Video":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PresetSpeke20Video to be of type string, got %T instead", value)
+				}
+				sv.PresetSpeke20Video = types.PresetSpeke20Video(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5685,6 +5734,11 @@ func awsRestjson1_deserializeDocumentSpekeKeyProvider(v **types.SpekeKeyProvider
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.CertificateArn = ptr.String(jtv)
+			}
+
+		case "encryptionContractConfiguration":
+			if err := awsRestjson1_deserializeDocumentEncryptionContractConfiguration(&sv.EncryptionContractConfiguration, value); err != nil {
+				return err
 			}
 
 		case "resourceId":

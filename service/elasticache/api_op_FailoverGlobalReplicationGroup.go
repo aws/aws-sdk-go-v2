@@ -31,12 +31,12 @@ func (c *Client) FailoverGlobalReplicationGroup(ctx context.Context, params *Fai
 
 type FailoverGlobalReplicationGroupInput struct {
 
-	// The name of the Global Datastore
+	// The name of the Global datastore
 	//
 	// This member is required.
 	GlobalReplicationGroupId *string
 
-	// The AWS region of the primary cluster of the Global Datastore
+	// The AWS region of the primary cluster of the Global datastore
 	//
 	// This member is required.
 	PrimaryRegion *string
@@ -55,7 +55,7 @@ type FailoverGlobalReplicationGroupOutput struct {
 	// secondary cluster.
 	//
 	// * The GlobalReplicationGroupIdSuffix represents the name of
-	// the Global Datastore, which is what you use to associate a secondary cluster.
+	// the Global datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

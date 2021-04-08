@@ -384,6 +384,9 @@ type Image struct {
 	// Indicates whether an image builder can be launched from this image.
 	ImageBuilderSupported bool
 
+	// Describes the errors that are returned when a new image can't be created.
+	ImageErrors []ResourceError
+
 	// The permissions to provide to the destination AWS account for the specified
 	// image.
 	ImagePermissions *ImagePermissions

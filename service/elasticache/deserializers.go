@@ -121,14 +121,38 @@ func awsAwsquery_deserializeOpErrorAddTagsToResource(response *smithyhttp.Respon
 	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("InvalidARNFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
+
+	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
+
+	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("ReservedCacheNodeNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorReservedCacheNodeNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
 		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
+
+	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UserNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -709,6 +733,9 @@ func awsAwsquery_deserializeOpErrorCopySnapshot(response *smithyhttp.Response, m
 	case strings.EqualFold("SnapshotQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -976,6 +1003,9 @@ func awsAwsquery_deserializeOpErrorCreateCacheParameterGroup(response *smithyhtt
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
 
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1092,6 +1122,9 @@ func awsAwsquery_deserializeOpErrorCreateCacheSecurityGroup(response *smithyhttp
 
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1212,6 +1245,9 @@ func awsAwsquery_deserializeOpErrorCreateCacheSubnetGroup(response *smithyhttp.R
 
 	case strings.EqualFold("SubnetNotAllowedFault", errorCode):
 		return awsAwsquery_deserializeErrorSubnetNotAllowedFault(response, errorBody)
+
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1627,6 +1663,9 @@ func awsAwsquery_deserializeOpErrorCreateSnapshot(response *smithyhttp.Response,
 	case strings.EqualFold("SnapshotQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotQuotaExceededFault(response, errorBody)
 
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -1740,6 +1779,9 @@ func awsAwsquery_deserializeOpErrorCreateUser(response *smithyhttp.Response, met
 
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
 	case strings.EqualFold("UserAlreadyExistsFault", errorCode):
 		return awsAwsquery_deserializeErrorUserAlreadyExistsFault(response, errorBody)
@@ -1860,6 +1902,9 @@ func awsAwsquery_deserializeOpErrorCreateUserGroup(response *smithyhttp.Response
 
 	case strings.EqualFold("InvalidParameterValueException", errorCode):
 		return awsAwsquery_deserializeErrorInvalidParameterValueException(response, errorBody)
+
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
 
 	case strings.EqualFold("UserGroupAlreadyExistsFault", errorCode):
 		return awsAwsquery_deserializeErrorUserGroupAlreadyExistsFault(response, errorBody)
@@ -5707,11 +5752,35 @@ func awsAwsquery_deserializeOpErrorListTagsForResource(response *smithyhttp.Resp
 	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("InvalidARNFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
 
+	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
+
+	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("ReservedCacheNodeNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorReservedCacheNodeNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("SnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UserNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -6856,6 +6925,9 @@ func awsAwsquery_deserializeOpErrorPurchaseReservedCacheNodesOffering(response *
 	case strings.EqualFold("ReservedCacheNodesOfferingNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorReservedCacheNodesOfferingNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("TagQuotaPerResourceExceeded", errorCode):
+		return awsAwsquery_deserializeErrorTagQuotaPerResourceExceeded(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -7189,14 +7261,38 @@ func awsAwsquery_deserializeOpErrorRemoveTagsFromResource(response *smithyhttp.R
 	case strings.EqualFold("CacheClusterNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorCacheClusterNotFoundFault(response, errorBody)
 
+	case strings.EqualFold("CacheParameterGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheParameterGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CacheSecurityGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheSecurityGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("CacheSubnetGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorCacheSubnetGroupNotFoundFault(response, errorBody)
+
 	case strings.EqualFold("InvalidARNFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidARNFault(response, errorBody)
+
+	case strings.EqualFold("InvalidReplicationGroupStateFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidReplicationGroupStateFault(response, errorBody)
+
+	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("ReservedCacheNodeNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorReservedCacheNodeNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("SnapshotNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorSnapshotNotFoundFault(response, errorBody)
 
 	case strings.EqualFold("TagNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorTagNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UserGroupNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorUserGroupNotFoundFault(response, errorBody)
+
+	case strings.EqualFold("UserNotFoundFault", errorCode):
+		return awsAwsquery_deserializeErrorUserNotFoundFault(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

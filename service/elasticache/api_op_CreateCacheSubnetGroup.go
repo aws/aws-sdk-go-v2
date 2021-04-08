@@ -47,6 +47,10 @@ type CreateCacheSubnetGroupInput struct {
 	//
 	// This member is required.
 	SubnetIds []string
+
+	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
+	// key must be accompanied by a tag value, although null is accepted.
+	Tags []types.Tag
 }
 
 type CreateCacheSubnetGroupOutput struct {

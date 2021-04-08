@@ -46,11 +46,6 @@ type CreateContainerRecipeInput struct {
 	// This member is required.
 	ContainerType types.ContainerType
 
-	// The Dockerfile template used to build your image as an inline data blob.
-	//
-	// This member is required.
-	DockerfileTemplateData *string
-
 	// The name of the container recipe.
 	//
 	// This member is required.
@@ -74,11 +69,18 @@ type CreateContainerRecipeInput struct {
 	// The description of the container recipe.
 	Description *string
 
+	// The Dockerfile template used to build your image as an inline data blob.
+	DockerfileTemplateData *string
+
 	// The S3 URI for the Dockerfile that will be used to build your container image.
 	DockerfileTemplateUri *string
 
 	// Specifies the operating system version for the source image.
 	ImageOsVersionOverride *string
+
+	// A group of options that can be used to configure an instance for building and
+	// testing container images.
+	InstanceConfiguration *types.InstanceConfiguration
 
 	// Identifies which KMS key is used to encrypt the container image.
 	KmsKeyId *string

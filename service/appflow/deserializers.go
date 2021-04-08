@@ -4517,6 +4517,11 @@ func awsRestjson1_deserializeDocumentDestinationConnectorProperties(v **types.De
 				return err
 			}
 
+		case "Zendesk":
+			if err := awsRestjson1_deserializeDocumentZendeskDestinationProperties(&sv.Zendesk, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -8630,6 +8635,65 @@ func awsRestjson1_deserializeDocumentZendeskConnectorProfileProperties(v **types
 					return fmt.Errorf("expected InstanceUrl to be of type string, got %T instead", value)
 				}
 				sv.InstanceUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentZendeskDestinationProperties(v **types.ZendeskDestinationProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ZendeskDestinationProperties
+	if *v == nil {
+		sv = &types.ZendeskDestinationProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "errorHandlingConfig":
+			if err := awsRestjson1_deserializeDocumentErrorHandlingConfig(&sv.ErrorHandlingConfig, value); err != nil {
+				return err
+			}
+
+		case "idFieldNames":
+			if err := awsRestjson1_deserializeDocumentIdFieldNameList(&sv.IdFieldNames, value); err != nil {
+				return err
+			}
+
+		case "object":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
+				}
+				sv.Object = ptr.String(jtv)
+			}
+
+		case "writeOperationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WriteOperationType to be of type string, got %T instead", value)
+				}
+				sv.WriteOperationType = types.WriteOperationType(jtv)
 			}
 
 		default:

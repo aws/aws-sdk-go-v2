@@ -257,7 +257,8 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-//
+// You tried to use a managed rule group that's available by subscription, but you
+// aren't subscribed to it yet.
 type WAFSubscriptionNotFoundException struct {
 	Message *string
 }

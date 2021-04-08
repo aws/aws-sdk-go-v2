@@ -1894,6 +1894,18 @@ func (m *awsAwsjson11_serializeOpUpdateWebACL) HandleSerialize(ctx context.Conte
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentActionCondition(v *types.ActionCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Action) > 0 {
+		ok := object.Key("Action")
+		ok.String(string(v.Action))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAll(v *types.All, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1985,6 +1997,40 @@ func awsAwsjson11_serializeDocumentByteMatchStatement(v *types.ByteMatchStatemen
 		}
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCondition(v *types.Condition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActionCondition != nil {
+		ok := object.Key("ActionCondition")
+		if err := awsAwsjson11_serializeDocumentActionCondition(v.ActionCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LabelNameCondition != nil {
+		ok := object.Key("LabelNameCondition")
+		if err := awsAwsjson11_serializeDocumentLabelNameCondition(v.LabelNameCondition, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentConditions(v []types.Condition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCondition(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -2221,6 +2267,43 @@ func awsAwsjson11_serializeDocumentFieldToMatch(v *types.FieldToMatch, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFilter(v *types.Filter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Behavior) > 0 {
+		ok := object.Key("Behavior")
+		ok.String(string(v.Behavior))
+	}
+
+	if v.Conditions != nil {
+		ok := object.Key("Conditions")
+		if err := awsAwsjson11_serializeDocumentConditions(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Requirement) > 0 {
+		ok := object.Key("Requirement")
+		ok.String(string(v.Requirement))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentFilters(v []types.Filter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentForwardedIPConfig(v *types.ForwardedIPConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2367,6 +2450,60 @@ func awsAwsjson11_serializeDocumentJsonPointerPaths(v []string, value smithyjson
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLabel(v *types.Label, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLabelMatchStatement(v *types.LabelMatchStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("Key")
+		ok.String(*v.Key)
+	}
+
+	if len(v.Scope) > 0 {
+		ok := object.Key("Scope")
+		ok.String(string(v.Scope))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLabelNameCondition(v *types.LabelNameCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LabelName != nil {
+		ok := object.Key("LabelName")
+		ok.String(*v.LabelName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLabels(v []types.Label, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentLabel(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentLogDestinationConfigs(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2385,6 +2522,13 @@ func awsAwsjson11_serializeDocumentLoggingConfiguration(v *types.LoggingConfigur
 	if v.LogDestinationConfigs != nil {
 		ok := object.Key("LogDestinationConfigs")
 		if err := awsAwsjson11_serializeDocumentLogDestinationConfigs(v.LogDestinationConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LoggingFilter != nil {
+		ok := object.Key("LoggingFilter")
+		if err := awsAwsjson11_serializeDocumentLoggingFilter(v.LoggingFilter, ok); err != nil {
 			return err
 		}
 	}
@@ -2409,6 +2553,25 @@ func awsAwsjson11_serializeDocumentLoggingConfiguration(v *types.LoggingConfigur
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentLoggingFilter(v *types.LoggingFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DefaultBehavior) > 0 {
+		ok := object.Key("DefaultBehavior")
+		ok.String(string(v.DefaultBehavior))
+	}
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentManagedRuleGroupStatement(v *types.ManagedRuleGroupStatement, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2423,6 +2586,13 @@ func awsAwsjson11_serializeDocumentManagedRuleGroupStatement(v *types.ManagedRul
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.ScopeDownStatement != nil {
+		ok := object.Key("ScopeDownStatement")
+		if err := awsAwsjson11_serializeDocumentStatement(v.ScopeDownStatement, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.VendorName != nil {
@@ -2626,6 +2796,13 @@ func awsAwsjson11_serializeDocumentRule(v *types.Rule, value smithyjson.Value) e
 		ok.Integer(v.Priority)
 	}
 
+	if v.RuleLabels != nil {
+		ok := object.Key("RuleLabels")
+		if err := awsAwsjson11_serializeDocumentLabels(v.RuleLabels, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Statement != nil {
 		ok := object.Key("Statement")
 		if err := awsAwsjson11_serializeDocumentStatement(v.Statement, ok); err != nil {
@@ -2807,6 +2984,13 @@ func awsAwsjson11_serializeDocumentStatement(v *types.Statement, value smithyjso
 	if v.IPSetReferenceStatement != nil {
 		ok := object.Key("IPSetReferenceStatement")
 		if err := awsAwsjson11_serializeDocumentIPSetReferenceStatement(v.IPSetReferenceStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LabelMatchStatement != nil {
+		ok := object.Key("LabelMatchStatement")
+		if err := awsAwsjson11_serializeDocumentLabelMatchStatement(v.LabelMatchStatement, ok); err != nil {
 			return err
 		}
 	}

@@ -1082,6 +1082,11 @@ func validateDistribution(v *types.Distribution) error {
 			invalidParams.AddNested("ContainerDistributionConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LaunchTemplateConfigurations != nil {
+		if err := validateLaunchTemplateConfigurationList(v.LaunchTemplateConfigurations); err != nil {
+			invalidParams.AddNested("LaunchTemplateConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1096,6 +1101,38 @@ func validateDistributionList(v []types.Distribution) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DistributionList"}
 	for i := range v {
 		if err := validateDistribution(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLaunchTemplateConfiguration(v *types.LaunchTemplateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LaunchTemplateConfiguration"}
+	if v.LaunchTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LaunchTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLaunchTemplateConfigurationList(v []types.LaunchTemplateConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LaunchTemplateConfigurationList"}
+	for i := range v {
+		if err := validateLaunchTemplateConfiguration(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1186,9 +1223,6 @@ func validateOpCreateContainerRecipeInput(v *CreateContainerRecipeInput) error {
 		if err := validateComponentConfigurationList(v.Components); err != nil {
 			invalidParams.AddNested("Components", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.DockerfileTemplateData == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DockerfileTemplateData"))
 	}
 	if v.ParentImage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ParentImage"))

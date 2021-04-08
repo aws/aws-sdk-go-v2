@@ -2748,11 +2748,11 @@ func validateOpPutPublicAccessBlockInput(v *PutPublicAccessBlockInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PutPublicAccessBlockInput"}
-	if v.PublicAccessBlockConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("PublicAccessBlockConfiguration"))
-	}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.PublicAccessBlockConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PublicAccessBlockConfiguration"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

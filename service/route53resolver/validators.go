@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAssociateFirewallRuleGroup struct {
+}
+
+func (*validateOpAssociateFirewallRuleGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateFirewallRuleGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateFirewallRuleGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateFirewallRuleGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateResolverEndpointIpAddress struct {
 }
 
@@ -65,6 +85,66 @@ func (m *validateOpAssociateResolverRule) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAssociateResolverRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFirewallDomainList struct {
+}
+
+func (*validateOpCreateFirewallDomainList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFirewallDomainList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFirewallDomainListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFirewallDomainListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFirewallRuleGroup struct {
+}
+
+func (*validateOpCreateFirewallRuleGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFirewallRuleGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFirewallRuleGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFirewallRuleGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFirewallRule struct {
+}
+
+func (*validateOpCreateFirewallRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFirewallRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFirewallRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFirewallRuleInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -130,6 +210,66 @@ func (m *validateOpCreateResolverRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFirewallDomainList struct {
+}
+
+func (*validateOpDeleteFirewallDomainList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFirewallDomainList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFirewallDomainListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFirewallDomainListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFirewallRuleGroup struct {
+}
+
+func (*validateOpDeleteFirewallRuleGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFirewallRuleGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFirewallRuleGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFirewallRuleGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFirewallRule struct {
+}
+
+func (*validateOpDeleteFirewallRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFirewallRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFirewallRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFirewallRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteResolverEndpoint struct {
 }
 
@@ -190,6 +330,26 @@ func (m *validateOpDeleteResolverRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateFirewallRuleGroup struct {
+}
+
+func (*validateOpDisassociateFirewallRuleGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateFirewallRuleGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateFirewallRuleGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateFirewallRuleGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisassociateResolverEndpointIpAddress struct {
 }
 
@@ -245,6 +405,106 @@ func (m *validateOpDisassociateResolverRule) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisassociateResolverRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFirewallConfig struct {
+}
+
+func (*validateOpGetFirewallConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFirewallConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFirewallConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFirewallConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFirewallDomainList struct {
+}
+
+func (*validateOpGetFirewallDomainList) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFirewallDomainList) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFirewallDomainListInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFirewallDomainListInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFirewallRuleGroupAssociation struct {
+}
+
+func (*validateOpGetFirewallRuleGroupAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFirewallRuleGroupAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFirewallRuleGroupAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFirewallRuleGroupAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFirewallRuleGroup struct {
+}
+
+func (*validateOpGetFirewallRuleGroup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFirewallRuleGroup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFirewallRuleGroupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFirewallRuleGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFirewallRuleGroupPolicy struct {
+}
+
+func (*validateOpGetFirewallRuleGroupPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFirewallRuleGroupPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFirewallRuleGroupPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFirewallRuleGroupPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +670,66 @@ func (m *validateOpGetResolverRulePolicy) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportFirewallDomains struct {
+}
+
+func (*validateOpImportFirewallDomains) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportFirewallDomains) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportFirewallDomainsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportFirewallDomainsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFirewallDomains struct {
+}
+
+func (*validateOpListFirewallDomains) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFirewallDomains) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFirewallDomainsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFirewallDomainsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListFirewallRules struct {
+}
+
+func (*validateOpListFirewallRules) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListFirewallRules) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListFirewallRulesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListFirewallRulesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListResolverEndpointIpAddresses struct {
 }
 
@@ -445,6 +765,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutFirewallRuleGroupPolicy struct {
+}
+
+func (*validateOpPutFirewallRuleGroupPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutFirewallRuleGroupPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutFirewallRuleGroupPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutFirewallRuleGroupPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +870,86 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFirewallConfig struct {
+}
+
+func (*validateOpUpdateFirewallConfig) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFirewallConfig) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFirewallConfigInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFirewallConfigInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateFirewallDomains struct {
+}
+
+func (*validateOpUpdateFirewallDomains) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFirewallDomains) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFirewallDomainsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFirewallDomainsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateFirewallRuleGroupAssociation struct {
+}
+
+func (*validateOpUpdateFirewallRuleGroupAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFirewallRuleGroupAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFirewallRuleGroupAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFirewallRuleGroupAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateFirewallRule struct {
+}
+
+func (*validateOpUpdateFirewallRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFirewallRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFirewallRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFirewallRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateResolverDnssecConfig struct {
 }
 
@@ -590,6 +1010,10 @@ func (m *validateOpUpdateResolverRule) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAssociateFirewallRuleGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateFirewallRuleGroup{}, middleware.After)
+}
+
 func addOpAssociateResolverEndpointIpAddressValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateResolverEndpointIpAddress{}, middleware.After)
 }
@@ -600,6 +1024,18 @@ func addOpAssociateResolverQueryLogConfigValidationMiddleware(stack *middleware.
 
 func addOpAssociateResolverRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateResolverRule{}, middleware.After)
+}
+
+func addOpCreateFirewallDomainListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFirewallDomainList{}, middleware.After)
+}
+
+func addOpCreateFirewallRuleGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFirewallRuleGroup{}, middleware.After)
+}
+
+func addOpCreateFirewallRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFirewallRule{}, middleware.After)
 }
 
 func addOpCreateResolverEndpointValidationMiddleware(stack *middleware.Stack) error {
@@ -614,6 +1050,18 @@ func addOpCreateResolverRuleValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpCreateResolverRule{}, middleware.After)
 }
 
+func addOpDeleteFirewallDomainListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFirewallDomainList{}, middleware.After)
+}
+
+func addOpDeleteFirewallRuleGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFirewallRuleGroup{}, middleware.After)
+}
+
+func addOpDeleteFirewallRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFirewallRule{}, middleware.After)
+}
+
 func addOpDeleteResolverEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteResolverEndpoint{}, middleware.After)
 }
@@ -626,6 +1074,10 @@ func addOpDeleteResolverRuleValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpDeleteResolverRule{}, middleware.After)
 }
 
+func addOpDisassociateFirewallRuleGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateFirewallRuleGroup{}, middleware.After)
+}
+
 func addOpDisassociateResolverEndpointIpAddressValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateResolverEndpointIpAddress{}, middleware.After)
 }
@@ -636,6 +1088,26 @@ func addOpDisassociateResolverQueryLogConfigValidationMiddleware(stack *middlewa
 
 func addOpDisassociateResolverRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisassociateResolverRule{}, middleware.After)
+}
+
+func addOpGetFirewallConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFirewallConfig{}, middleware.After)
+}
+
+func addOpGetFirewallDomainListValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFirewallDomainList{}, middleware.After)
+}
+
+func addOpGetFirewallRuleGroupAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFirewallRuleGroupAssociation{}, middleware.After)
+}
+
+func addOpGetFirewallRuleGroupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFirewallRuleGroup{}, middleware.After)
+}
+
+func addOpGetFirewallRuleGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFirewallRuleGroupPolicy{}, middleware.After)
 }
 
 func addOpGetResolverDnssecConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -670,12 +1142,28 @@ func addOpGetResolverRulePolicyValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpGetResolverRulePolicy{}, middleware.After)
 }
 
+func addOpImportFirewallDomainsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportFirewallDomains{}, middleware.After)
+}
+
+func addOpListFirewallDomainsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFirewallDomains{}, middleware.After)
+}
+
+func addOpListFirewallRulesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListFirewallRules{}, middleware.After)
+}
+
 func addOpListResolverEndpointIpAddressesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListResolverEndpointIpAddresses{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutFirewallRuleGroupPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutFirewallRuleGroupPolicy{}, middleware.After)
 }
 
 func addOpPutResolverQueryLogConfigPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -692,6 +1180,22 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateFirewallConfigValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFirewallConfig{}, middleware.After)
+}
+
+func addOpUpdateFirewallDomainsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFirewallDomains{}, middleware.After)
+}
+
+func addOpUpdateFirewallRuleGroupAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFirewallRuleGroupAssociation{}, middleware.After)
+}
+
+func addOpUpdateFirewallRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFirewallRule{}, middleware.After)
 }
 
 func addOpUpdateResolverDnssecConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -822,6 +1326,38 @@ func validateTargetList(v []types.TargetAddress) error {
 	}
 }
 
+func validateOpAssociateFirewallRuleGroupInput(v *AssociateFirewallRuleGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateFirewallRuleGroupInput"}
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	}
+	if v.FirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateResolverEndpointIpAddressInput(v *AssociateResolverEndpointIpAddressInput) error {
 	if v == nil {
 		return nil
@@ -868,6 +1404,82 @@ func validateOpAssociateResolverRuleInput(v *AssociateResolverRuleInput) error {
 	}
 	if v.VPCId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VPCId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFirewallDomainListInput(v *CreateFirewallDomainListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFirewallDomainListInput"}
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFirewallRuleGroupInput(v *CreateFirewallRuleGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFirewallRuleGroupInput"}
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFirewallRuleInput(v *CreateFirewallRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFirewallRuleInput"}
+	if v.CreatorRequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CreatorRequestId"))
+	}
+	if v.FirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
+	}
+	if v.FirewallDomainListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if v.Priority == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Priority"))
+	}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -966,6 +1578,54 @@ func validateOpCreateResolverRuleInput(v *CreateResolverRuleInput) error {
 	}
 }
 
+func validateOpDeleteFirewallDomainListInput(v *DeleteFirewallDomainListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFirewallDomainListInput"}
+	if v.FirewallDomainListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFirewallRuleGroupInput(v *DeleteFirewallRuleGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFirewallRuleGroupInput"}
+	if v.FirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFirewallRuleInput(v *DeleteFirewallRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFirewallRuleInput"}
+	if v.FirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
+	}
+	if v.FirewallDomainListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteResolverEndpointInput(v *DeleteResolverEndpointInput) error {
 	if v == nil {
 		return nil
@@ -1003,6 +1663,21 @@ func validateOpDeleteResolverRuleInput(v *DeleteResolverRuleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteResolverRuleInput"}
 	if v.ResolverRuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateFirewallRuleGroupInput(v *DisassociateFirewallRuleGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateFirewallRuleGroupInput"}
+	if v.FirewallRuleGroupAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupAssociationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1057,6 +1732,81 @@ func validateOpDisassociateResolverRuleInput(v *DisassociateResolverRuleInput) e
 	}
 	if v.ResolverRuleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResolverRuleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFirewallConfigInput(v *GetFirewallConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFirewallConfigInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFirewallDomainListInput(v *GetFirewallDomainListInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFirewallDomainListInput"}
+	if v.FirewallDomainListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFirewallRuleGroupAssociationInput(v *GetFirewallRuleGroupAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFirewallRuleGroupAssociationInput"}
+	if v.FirewallRuleGroupAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFirewallRuleGroupInput(v *GetFirewallRuleGroupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFirewallRuleGroupInput"}
+	if v.FirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFirewallRuleGroupPolicyInput(v *GetFirewallRuleGroupPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFirewallRuleGroupPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1185,6 +1935,57 @@ func validateOpGetResolverRulePolicyInput(v *GetResolverRulePolicyInput) error {
 	}
 }
 
+func validateOpImportFirewallDomainsInput(v *ImportFirewallDomainsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportFirewallDomainsInput"}
+	if v.FirewallDomainListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
+	if v.DomainFileUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainFileUrl"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFirewallDomainsInput(v *ListFirewallDomainsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFirewallDomainsInput"}
+	if v.FirewallDomainListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListFirewallRulesInput(v *ListFirewallRulesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListFirewallRulesInput"}
+	if v.FirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListResolverEndpointIpAddressesInput(v *ListResolverEndpointIpAddressesInput) error {
 	if v == nil {
 		return nil
@@ -1207,6 +2008,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutFirewallRuleGroupPolicyInput(v *PutFirewallRuleGroupPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutFirewallRuleGroupPolicyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.FirewallRuleGroupPolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupPolicy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1283,6 +2102,78 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFirewallConfigInput(v *UpdateFirewallConfigInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallConfigInput"}
+	if v.ResourceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceId"))
+	}
+	if len(v.FirewallFailOpen) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallFailOpen"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFirewallDomainsInput(v *UpdateFirewallDomainsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallDomainsInput"}
+	if v.FirewallDomainListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
+	}
+	if len(v.Operation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operation"))
+	}
+	if v.Domains == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domains"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFirewallRuleGroupAssociationInput(v *UpdateFirewallRuleGroupAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallRuleGroupAssociationInput"}
+	if v.FirewallRuleGroupAssociationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupAssociationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFirewallRuleInput(v *UpdateFirewallRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFirewallRuleInput"}
+	if v.FirewallRuleGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallRuleGroupId"))
+	}
+	if v.FirewallDomainListId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FirewallDomainListId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

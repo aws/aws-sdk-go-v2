@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets summary information about playback key pairs.
+// Gets summary information about playback key pairs. For more information, see
+// Setting Up Private Channels
+// (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html) in the
+// Amazon IVS User Guide.
 func (c *Client) ListPlaybackKeyPairs(ctx context.Context, params *ListPlaybackKeyPairsInput, optFns ...func(*Options)) (*ListPlaybackKeyPairsOutput, error) {
 	if params == nil {
 		params = &ListPlaybackKeyPairsInput{}
@@ -31,7 +34,7 @@ func (c *Client) ListPlaybackKeyPairs(ctx context.Context, params *ListPlaybackK
 type ListPlaybackKeyPairsInput struct {
 
 	// The first key pair to retrieve. This is used for pagination; see the nextToken
-	// response field.
+	// response field. Default: 50.
 	MaxResults int32
 
 	// Maximum number of key pairs to return.
@@ -125,7 +128,7 @@ var _ ListPlaybackKeyPairsAPIClient = (*Client)(nil)
 // ListPlaybackKeyPairs
 type ListPlaybackKeyPairsPaginatorOptions struct {
 	// The first key pair to retrieve. This is used for pagination; see the nextToken
-	// response field.
+	// response field. Default: 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

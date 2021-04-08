@@ -38,9 +38,9 @@ type DescribeIndexInput struct {
 
 type DescribeIndexOutput struct {
 
-	// For enterprise edtion indexes, you can choose to use additional capacity to meet
-	// the needs of your application. This contains the capacity units used for the
-	// index. A 0 for the query capacity or the storage capacity indicates that the
+	// For Enterprise edition indexes, you can choose to use additional capacity to
+	// meet the needs of your application. This contains the capacity units used for
+	// the index. A 0 for the query capacity or the storage capacity indicates that the
 	// index is using the default capacity for the index.
 	CapacityUnits *types.CapacityUnitsConfiguration
 

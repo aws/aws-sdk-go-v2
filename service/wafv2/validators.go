@@ -946,6 +946,21 @@ func addOpUpdateWebACLValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWebACL{}, middleware.After)
 }
 
+func validateActionCondition(v *types.ActionCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ActionCondition"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAllowAction(v *types.AllowAction) error {
 	if v == nil {
 		return nil
@@ -1023,6 +1038,45 @@ func validateByteMatchStatement(v *types.ByteMatchStatement) error {
 	}
 	if len(v.PositionalConstraint) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PositionalConstraint"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCondition(v *types.Condition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Condition"}
+	if v.ActionCondition != nil {
+		if err := validateActionCondition(v.ActionCondition); err != nil {
+			invalidParams.AddNested("ActionCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LabelNameCondition != nil {
+		if err := validateLabelNameCondition(v.LabelNameCondition); err != nil {
+			invalidParams.AddNested("LabelNameCondition", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateConditions(v []types.Condition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Conditions"}
+	for i := range v {
+		if err := validateCondition(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1239,6 +1293,48 @@ func validateFieldToMatch(v *types.FieldToMatch) error {
 	}
 }
 
+func validateFilter(v *types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filter"}
+	if len(v.Behavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Behavior"))
+	}
+	if len(v.Requirement) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Requirement"))
+	}
+	if v.Conditions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Conditions"))
+	} else if v.Conditions != nil {
+		if err := validateConditions(v.Conditions); err != nil {
+			invalidParams.AddNested("Conditions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFilters(v []types.Filter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Filters"}
+	for i := range v {
+		if err := validateFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateForwardedIPConfig(v *types.ForwardedIPConfig) error {
 	if v == nil {
 		return nil
@@ -1333,6 +1429,71 @@ func validateJsonBody(v *types.JsonBody) error {
 	}
 }
 
+func validateLabel(v *types.Label) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Label"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLabelMatchStatement(v *types.LabelMatchStatement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LabelMatchStatement"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLabelNameCondition(v *types.LabelNameCondition) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LabelNameCondition"}
+	if v.LabelName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LabelName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLabels(v []types.Label) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Labels"}
+	for i := range v {
+		if err := validateLabel(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLoggingConfiguration(v *types.LoggingConfiguration) error {
 	if v == nil {
 		return nil
@@ -1348,6 +1509,33 @@ func validateLoggingConfiguration(v *types.LoggingConfiguration) error {
 		if err := validateRedactedFields(v.RedactedFields); err != nil {
 			invalidParams.AddNested("RedactedFields", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.LoggingFilter != nil {
+		if err := validateLoggingFilter(v.LoggingFilter); err != nil {
+			invalidParams.AddNested("LoggingFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLoggingFilter(v *types.LoggingFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LoggingFilter"}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.DefaultBehavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultBehavior"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1370,6 +1558,11 @@ func validateManagedRuleGroupStatement(v *types.ManagedRuleGroupStatement) error
 	if v.ExcludedRules != nil {
 		if err := validateExcludedRules(v.ExcludedRules); err != nil {
 			invalidParams.AddNested("ExcludedRules", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ScopeDownStatement != nil {
+		if err := validateStatement(v.ScopeDownStatement); err != nil {
+			invalidParams.AddNested("ScopeDownStatement", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1528,6 +1721,11 @@ func validateRule(v *types.Rule) error {
 	if v.OverrideAction != nil {
 		if err := validateOverrideAction(v.OverrideAction); err != nil {
 			invalidParams.AddNested("OverrideAction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RuleLabels != nil {
+		if err := validateLabels(v.RuleLabels); err != nil {
+			invalidParams.AddNested("RuleLabels", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.VisibilityConfig == nil {
@@ -1761,6 +1959,11 @@ func validateStatement(v *types.Statement) error {
 	if v.ManagedRuleGroupStatement != nil {
 		if err := validateManagedRuleGroupStatement(v.ManagedRuleGroupStatement); err != nil {
 			invalidParams.AddNested("ManagedRuleGroupStatement", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LabelMatchStatement != nil {
+		if err := validateLabelMatchStatement(v.LabelMatchStatement); err != nil {
+			invalidParams.AddNested("LabelMatchStatement", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

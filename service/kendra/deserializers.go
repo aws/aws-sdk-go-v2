@@ -8564,6 +8564,15 @@ func awsAwsjson11_deserializeDocumentServiceNowConfiguration(v **types.ServiceNo
 
 	for key, value := range shape {
 		switch key {
+		case "AuthenticationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceNowAuthenticationType to be of type string, got %T instead", value)
+				}
+				sv.AuthenticationType = types.ServiceNowAuthenticationType(jtv)
+			}
+
 		case "HostUrl":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8667,6 +8676,15 @@ func awsAwsjson11_deserializeDocumentServiceNowKnowledgeArticleConfiguration(v *
 		case "FieldMappings":
 			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.FieldMappings, value); err != nil {
 				return err
+			}
+
+		case "FilterQuery":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServiceNowKnowledgeArticleFilterQuery to be of type string, got %T instead", value)
+				}
+				sv.FilterQuery = ptr.String(jtv)
 			}
 
 		case "IncludeAttachmentFilePatterns":

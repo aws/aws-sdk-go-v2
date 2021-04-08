@@ -59,7 +59,7 @@ type DescribeTapesInput struct {
 // DescribeTapesOutput
 type DescribeTapesOutput struct {
 
-	// An opaque string which can be used as part of a subsequent DescribeTapes call to
+	// An opaque string that can be used as part of a subsequent DescribeTapes call to
 	// retrieve the next page of results. If a response does not contain a marker, then
 	// there are no more results to be retrieved.
 	Marker *string

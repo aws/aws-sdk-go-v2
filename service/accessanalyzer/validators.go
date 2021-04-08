@@ -30,6 +30,26 @@ func (m *validateOpApplyArchiveRule) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelPolicyGeneration struct {
+}
+
+func (*validateOpCancelPolicyGeneration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelPolicyGeneration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelPolicyGenerationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelPolicyGenerationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAccessPreview struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpGetFinding) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetGeneratedPolicy struct {
+}
+
+func (*validateOpGetGeneratedPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetGeneratedPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetGeneratedPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetGeneratedPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAccessPreviewFindings struct {
 }
 
@@ -345,6 +385,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartPolicyGeneration struct {
+}
+
+func (*validateOpStartPolicyGeneration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartPolicyGeneration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartPolicyGenerationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartPolicyGenerationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -474,6 +534,10 @@ func addOpApplyArchiveRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpApplyArchiveRule{}, middleware.After)
 }
 
+func addOpCancelPolicyGenerationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelPolicyGeneration{}, middleware.After)
+}
+
 func addOpCreateAccessPreviewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAccessPreview{}, middleware.After)
 }
@@ -514,6 +578,10 @@ func addOpGetFindingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFinding{}, middleware.After)
 }
 
+func addOpGetGeneratedPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetGeneratedPolicy{}, middleware.After)
+}
+
 func addOpListAccessPreviewFindingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccessPreviewFindings{}, middleware.After)
 }
@@ -538,6 +606,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpStartPolicyGenerationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartPolicyGeneration{}, middleware.After)
+}
+
 func addOpStartResourceScanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartResourceScan{}, middleware.After)
 }
@@ -560,6 +632,31 @@ func addOpUpdateFindingsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpValidatePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpValidatePolicy{}, middleware.After)
+}
+
+func validateCloudTrailDetails(v *types.CloudTrailDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CloudTrailDetails"}
+	if v.Trails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Trails"))
+	} else if v.Trails != nil {
+		if err := validateTrailList(v.Trails); err != nil {
+			invalidParams.AddNested("Trails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AccessRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccessRole"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateConfiguration(v types.Configuration) error {
@@ -712,6 +809,21 @@ func validateNetworkOriginConfiguration(v types.NetworkOriginConfiguration) erro
 	}
 }
 
+func validatePolicyGenerationDetails(v *types.PolicyGenerationDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PolicyGenerationDetails"}
+	if v.PrincipalArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrincipalArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3AccessPointConfiguration(v *types.S3AccessPointConfiguration) error {
 	if v == nil {
 		return nil
@@ -832,6 +944,38 @@ func validateS3PublicAccessBlockConfiguration(v *types.S3PublicAccessBlockConfig
 	}
 }
 
+func validateTrail(v *types.Trail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Trail"}
+	if v.CloudTrailArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CloudTrailArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrailList(v []types.Trail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrailList"}
+	for i := range v {
+		if err := validateTrail(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVpcConfiguration(v *types.VpcConfiguration) error {
 	if v == nil {
 		return nil
@@ -857,6 +1001,21 @@ func validateOpApplyArchiveRuleInput(v *ApplyArchiveRuleInput) error {
 	}
 	if v.RuleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelPolicyGenerationInput(v *CancelPolicyGenerationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelPolicyGenerationInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1051,6 +1210,21 @@ func validateOpGetFindingInput(v *GetFindingInput) error {
 	}
 }
 
+func validateOpGetGeneratedPolicyInput(v *GetGeneratedPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetGeneratedPolicyInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAccessPreviewFindingsInput(v *ListAccessPreviewFindingsInput) error {
 	if v == nil {
 		return nil
@@ -1136,6 +1310,30 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartPolicyGenerationInput(v *StartPolicyGenerationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartPolicyGenerationInput"}
+	if v.PolicyGenerationDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyGenerationDetails"))
+	} else if v.PolicyGenerationDetails != nil {
+		if err := validatePolicyGenerationDetails(v.PolicyGenerationDetails); err != nil {
+			invalidParams.AddNested("PolicyGenerationDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CloudTrailDetails != nil {
+		if err := validateCloudTrailDetails(v.CloudTrailDetails); err != nil {
+			invalidParams.AddNested("CloudTrailDetails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

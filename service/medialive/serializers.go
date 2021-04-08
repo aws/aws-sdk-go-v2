@@ -5968,6 +5968,13 @@ func awsRestjson1_serializeDocumentEncoderSettings(v *types.EncoderSettings, val
 		}
 	}
 
+	if v.MotionGraphicsConfiguration != nil {
+		ok := object.Key("motionGraphicsConfiguration")
+		if err := awsRestjson1_serializeDocumentMotionGraphicsConfiguration(v.MotionGraphicsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NielsenConfiguration != nil {
 		ok := object.Key("nielsenConfiguration")
 		if err := awsRestjson1_serializeDocumentNielsenConfiguration(v.NielsenConfiguration, ok); err != nil {
@@ -7257,6 +7264,13 @@ func awsRestjson1_serializeDocumentHlsWebdavSettings(v *types.HlsWebdavSettings,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHtmlMotionGraphicsSettings(v *types.HtmlMotionGraphicsSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentImmediateModeScheduleActionStartSettings(v *types.ImmediateModeScheduleActionStartSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8048,6 +8062,73 @@ func awsRestjson1_serializeDocumentMediaPackageOutputDestinationSettings(v *type
 func awsRestjson1_serializeDocumentMediaPackageOutputSettings(v *types.MediaPackageOutputSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMotionGraphicsActivateScheduleActionSettings(v *types.MotionGraphicsActivateScheduleActionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Duration != 0 {
+		ok := object.Key("duration")
+		ok.Long(v.Duration)
+	}
+
+	if v.PasswordParam != nil {
+		ok := object.Key("passwordParam")
+		ok.String(*v.PasswordParam)
+	}
+
+	if v.Url != nil {
+		ok := object.Key("url")
+		ok.String(*v.Url)
+	}
+
+	if v.Username != nil {
+		ok := object.Key("username")
+		ok.String(*v.Username)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMotionGraphicsConfiguration(v *types.MotionGraphicsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.MotionGraphicsInsertion) > 0 {
+		ok := object.Key("motionGraphicsInsertion")
+		ok.String(string(v.MotionGraphicsInsertion))
+	}
+
+	if v.MotionGraphicsSettings != nil {
+		ok := object.Key("motionGraphicsSettings")
+		if err := awsRestjson1_serializeDocumentMotionGraphicsSettings(v.MotionGraphicsSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMotionGraphicsDeactivateScheduleActionSettings(v *types.MotionGraphicsDeactivateScheduleActionSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMotionGraphicsSettings(v *types.MotionGraphicsSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HtmlMotionGraphicsSettings != nil {
+		ok := object.Key("htmlMotionGraphicsSettings")
+		if err := awsRestjson1_serializeDocumentHtmlMotionGraphicsSettings(v.HtmlMotionGraphicsSettings, ok); err != nil {
+			return err
+		}
+	}
 
 	return nil
 }
@@ -8962,6 +9043,20 @@ func awsRestjson1_serializeDocumentScheduleActionSettings(v *types.ScheduleActio
 	if v.InputSwitchSettings != nil {
 		ok := object.Key("inputSwitchSettings")
 		if err := awsRestjson1_serializeDocumentInputSwitchScheduleActionSettings(v.InputSwitchSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MotionGraphicsImageActivateSettings != nil {
+		ok := object.Key("motionGraphicsImageActivateSettings")
+		if err := awsRestjson1_serializeDocumentMotionGraphicsActivateScheduleActionSettings(v.MotionGraphicsImageActivateSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MotionGraphicsImageDeactivateSettings != nil {
+		ok := object.Key("motionGraphicsImageDeactivateSettings")
+		if err := awsRestjson1_serializeDocumentMotionGraphicsDeactivateScheduleActionSettings(v.MotionGraphicsImageDeactivateSettings, ok); err != nil {
 			return err
 		}
 	}

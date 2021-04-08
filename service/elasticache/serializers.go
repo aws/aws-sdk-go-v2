@@ -4404,6 +4404,13 @@ func awsAwsquery_serializeOpDocumentCopySnapshotInput(v *CopySnapshotInput, valu
 		objectKey.String(*v.SourceSnapshotName)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.TargetBucket != nil {
 		objectKey := object.Key("TargetBucket")
 		objectKey.String(*v.TargetBucket)
@@ -4585,6 +4592,13 @@ func awsAwsquery_serializeOpDocumentCreateCacheParameterGroupInput(v *CreateCach
 		objectKey.String(*v.Description)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4600,6 +4614,13 @@ func awsAwsquery_serializeOpDocumentCreateCacheSecurityGroupInput(v *CreateCache
 	if v.Description != nil {
 		objectKey := object.Key("Description")
 		objectKey.String(*v.Description)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4622,6 +4643,13 @@ func awsAwsquery_serializeOpDocumentCreateCacheSubnetGroupInput(v *CreateCacheSu
 	if v.SubnetIds != nil {
 		objectKey := object.Key("SubnetIds")
 		if err := awsAwsquery_serializeDocumentSubnetIdentifierList(v.SubnetIds, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
 			return err
 		}
 	}
@@ -4856,6 +4884,13 @@ func awsAwsquery_serializeOpDocumentCreateSnapshotInput(v *CreateSnapshotInput, 
 		objectKey.String(*v.SnapshotName)
 	}
 
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4866,6 +4901,13 @@ func awsAwsquery_serializeOpDocumentCreateUserGroupInput(v *CreateUserGroupInput
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.UserGroupId != nil {
@@ -4905,6 +4947,13 @@ func awsAwsquery_serializeOpDocumentCreateUserInput(v *CreateUserInput, value qu
 	if v.Passwords != nil {
 		objectKey := object.Key("Passwords")
 		if err := awsAwsquery_serializeDocumentPasswordListInput(v.Passwords, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
 			return err
 		}
 	}
@@ -6261,6 +6310,13 @@ func awsAwsquery_serializeOpDocumentPurchaseReservedCacheNodesOfferingInput(v *P
 	if v.ReservedCacheNodesOfferingId != nil {
 		objectKey := object.Key("ReservedCacheNodesOfferingId")
 		objectKey.String(*v.ReservedCacheNodesOfferingId)
+	}
+
+	if v.Tags != nil {
+		objectKey := object.Key("Tags")
+		if err := awsAwsquery_serializeDocumentTagList(v.Tags, objectKey); err != nil {
+			return err
+		}
 	}
 
 	return nil

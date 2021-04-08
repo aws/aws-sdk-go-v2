@@ -31,7 +31,7 @@ func (c *Client) ListStreams(ctx context.Context, params *ListStreamsInput, optF
 
 type ListStreamsInput struct {
 
-	// Maximum number of streams to return.
+	// Maximum number of streams to return. Default: 50.
 	MaxResults int32
 
 	// The first stream to retrieve. This is used for pagination; see the nextToken
@@ -123,7 +123,7 @@ var _ ListStreamsAPIClient = (*Client)(nil)
 
 // ListStreamsPaginatorOptions is the paginator options for ListStreams
 type ListStreamsPaginatorOptions struct {
-	// Maximum number of streams to return.
+	// Maximum number of streams to return. Default: 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

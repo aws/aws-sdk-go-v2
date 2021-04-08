@@ -35,7 +35,7 @@ type ListStreamKeysInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// Maximum number of streamKeys to return.
+	// Maximum number of streamKeys to return. Default: 50.
 	MaxResults int32
 
 	// The first stream key to retrieve. This is used for pagination; see the nextToken
@@ -131,7 +131,7 @@ var _ ListStreamKeysAPIClient = (*Client)(nil)
 
 // ListStreamKeysPaginatorOptions is the paginator options for ListStreamKeys
 type ListStreamKeysPaginatorOptions struct {
-	// Maximum number of streamKeys to return.
+	// Maximum number of streamKeys to return. Default: 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

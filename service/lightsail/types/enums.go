@@ -329,12 +329,13 @@ type ContainerServiceState string
 
 // Enum values for ContainerServiceState
 const (
-	ContainerServiceStatePending  ContainerServiceState = "PENDING"
-	ContainerServiceStateReady    ContainerServiceState = "READY"
-	ContainerServiceStateRunning  ContainerServiceState = "RUNNING"
-	ContainerServiceStateUpdating ContainerServiceState = "UPDATING"
-	ContainerServiceStateDeleting ContainerServiceState = "DELETING"
-	ContainerServiceStateDisabled ContainerServiceState = "DISABLED"
+	ContainerServiceStatePending   ContainerServiceState = "PENDING"
+	ContainerServiceStateReady     ContainerServiceState = "READY"
+	ContainerServiceStateRunning   ContainerServiceState = "RUNNING"
+	ContainerServiceStateUpdating  ContainerServiceState = "UPDATING"
+	ContainerServiceStateDeleting  ContainerServiceState = "DELETING"
+	ContainerServiceStateDisabled  ContainerServiceState = "DISABLED"
+	ContainerServiceStateDeploying ContainerServiceState = "DEPLOYING"
 )
 
 // Values returns all known values for ContainerServiceState. Note that this can be
@@ -348,6 +349,40 @@ func (ContainerServiceState) Values() []ContainerServiceState {
 		"UPDATING",
 		"DELETING",
 		"DISABLED",
+		"DEPLOYING",
+	}
+}
+
+type ContainerServiceStateDetailCode string
+
+// Enum values for ContainerServiceStateDetailCode
+const (
+	ContainerServiceStateDetailCodeCreatingSystemResources       ContainerServiceStateDetailCode = "CREATING_SYSTEM_RESOURCES"
+	ContainerServiceStateDetailCodeCreatingNetworkInfrastructure ContainerServiceStateDetailCode = "CREATING_NETWORK_INFRASTRUCTURE"
+	ContainerServiceStateDetailCodeProvisioningCertificate       ContainerServiceStateDetailCode = "PROVISIONING_CERTIFICATE"
+	ContainerServiceStateDetailCodeProvisioningService           ContainerServiceStateDetailCode = "PROVISIONING_SERVICE"
+	ContainerServiceStateDetailCodeCreatingDeployment            ContainerServiceStateDetailCode = "CREATING_DEPLOYMENT"
+	ContainerServiceStateDetailCodeEvaluatingHealthCheck         ContainerServiceStateDetailCode = "EVALUATING_HEALTH_CHECK"
+	ContainerServiceStateDetailCodeActivatingDeployment          ContainerServiceStateDetailCode = "ACTIVATING_DEPLOYMENT"
+	ContainerServiceStateDetailCodeCertificateLimitExceeded      ContainerServiceStateDetailCode = "CERTIFICATE_LIMIT_EXCEEDED"
+	ContainerServiceStateDetailCodeUnknownError                  ContainerServiceStateDetailCode = "UNKNOWN_ERROR"
+)
+
+// Values returns all known values for ContainerServiceStateDetailCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ContainerServiceStateDetailCode) Values() []ContainerServiceStateDetailCode {
+	return []ContainerServiceStateDetailCode{
+		"CREATING_SYSTEM_RESOURCES",
+		"CREATING_NETWORK_INFRASTRUCTURE",
+		"PROVISIONING_CERTIFICATE",
+		"PROVISIONING_SERVICE",
+		"CREATING_DEPLOYMENT",
+		"EVALUATING_HEALTH_CHECK",
+		"ACTIVATING_DEPLOYMENT",
+		"CERTIFICATE_LIMIT_EXCEEDED",
+		"UNKNOWN_ERROR",
 	}
 }
 

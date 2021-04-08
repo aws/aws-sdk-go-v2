@@ -19,7 +19,7 @@ import (
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastore.html).
 //
 // *
-// The GlobalReplicationGroupIdSuffix is the name of the Global Datastore.
+// The GlobalReplicationGroupIdSuffix is the name of the Global datastore.
 //
 // * The
 // PrimaryReplicationGroupId represents the name of the primary cluster that
@@ -41,14 +41,14 @@ func (c *Client) CreateGlobalReplicationGroup(ctx context.Context, params *Creat
 
 type CreateGlobalReplicationGroupInput struct {
 
-	// The suffix name of a Global Datastore. Amazon ElastiCache automatically applies
-	// a prefix to the Global Datastore ID when it is created. Each AWS Region has its
-	// own prefix. For instance, a Global Datastore ID created in the US-West-1 region
+	// The suffix name of a Global datastore. Amazon ElastiCache automatically applies
+	// a prefix to the Global datastore ID when it is created. Each AWS Region has its
+	// own prefix. For instance, a Global datastore ID created in the US-West-1 region
 	// will begin with "dsdfu" along with the suffix name you provide. The suffix,
 	// combined with the auto-generated prefix, guarantees uniqueness of the Global
-	// Datastore name across multiple regions. For a full list of AWS Regions and their
-	// respective Global Datastore iD prefixes, see Using the AWS CLI with Global
-	// Datastores
+	// datastore name across multiple regions. For a full list of AWS Regions and their
+	// respective Global datastore iD prefixes, see Using the AWS CLI with Global
+	// datastores
 	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html).
 	//
 	// This member is required.
@@ -60,7 +60,7 @@ type CreateGlobalReplicationGroupInput struct {
 	// This member is required.
 	PrimaryReplicationGroupId *string
 
-	// Provides details of the Global Datastore
+	// Provides details of the Global datastore
 	GlobalReplicationGroupDescription *string
 }
 
@@ -72,7 +72,7 @@ type CreateGlobalReplicationGroupOutput struct {
 	// secondary cluster.
 	//
 	// * The GlobalReplicationGroupIdSuffix represents the name of
-	// the Global Datastore, which is what you use to associate a secondary cluster.
+	// the Global datastore, which is what you use to associate a secondary cluster.
 	GlobalReplicationGroup *types.GlobalReplicationGroup
 
 	// Metadata pertaining to the operation's result.

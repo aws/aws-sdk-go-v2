@@ -2397,9 +2397,19 @@ func awsRestjson1_serializeDocumentAc3Settings(v *types.Ac3Settings, value smith
 		ok.Integer(v.Dialnorm)
 	}
 
+	if len(v.DynamicRangeCompressionLine) > 0 {
+		ok := object.Key("dynamicRangeCompressionLine")
+		ok.String(string(v.DynamicRangeCompressionLine))
+	}
+
 	if len(v.DynamicRangeCompressionProfile) > 0 {
 		ok := object.Key("dynamicRangeCompressionProfile")
 		ok.String(string(v.DynamicRangeCompressionProfile))
+	}
+
+	if len(v.DynamicRangeCompressionRf) > 0 {
+		ok := object.Key("dynamicRangeCompressionRf")
+		ok.String(string(v.DynamicRangeCompressionRf))
 	}
 
 	if len(v.LfeFilter) > 0 {
@@ -3172,6 +3182,13 @@ func awsRestjson1_serializeDocumentCaptionDestinationSettings(v *types.CaptionDe
 		}
 	}
 
+	if v.WebvttDestinationSettings != nil {
+		ok := object.Key("webvttDestinationSettings")
+		if err := awsRestjson1_serializeDocumentWebvttDestinationSettings(v.WebvttDestinationSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3419,6 +3436,11 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 		ok.String(string(v.MpdProfile))
 	}
 
+	if len(v.PtsOffsetHandlingForBFrames) > 0 {
+		ok := object.Key("ptsOffsetHandlingForBFrames")
+		ok.String(string(v.PtsOffsetHandlingForBFrames))
+	}
+
 	if len(v.SegmentControl) > 0 {
 		ok := object.Key("segmentControl")
 		ok.String(string(v.SegmentControl))
@@ -3459,6 +3481,26 @@ func awsRestjson1_serializeDocumentCmfcSettings(v *types.CmfcSettings, value smi
 	if len(v.AudioDuration) > 0 {
 		ok := object.Key("audioDuration")
 		ok.String(string(v.AudioDuration))
+	}
+
+	if v.AudioGroupId != nil {
+		ok := object.Key("audioGroupId")
+		ok.String(*v.AudioGroupId)
+	}
+
+	if v.AudioRenditionSets != nil {
+		ok := object.Key("audioRenditionSets")
+		ok.String(*v.AudioRenditionSets)
+	}
+
+	if len(v.AudioTrackType) > 0 {
+		ok := object.Key("audioTrackType")
+		ok.String(string(v.AudioTrackType))
+	}
+
+	if len(v.DescriptiveVideoServiceFlag) > 0 {
+		ok := object.Key("descriptiveVideoServiceFlag")
+		ok.String(string(v.DescriptiveVideoServiceFlag))
 	}
 
 	if len(v.IFrameOnlyManifest) > 0 {
@@ -3635,6 +3677,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 		}
 	}
 
+	if len(v.AudioChannelConfigSchemeIdUri) > 0 {
+		ok := object.Key("audioChannelConfigSchemeIdUri")
+		ok.String(string(v.AudioChannelConfigSchemeIdUri))
+	}
+
 	if v.BaseUrl != nil {
 		ok := object.Key("baseUrl")
 		ok.String(*v.BaseUrl)
@@ -3682,6 +3729,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 	if len(v.MpdProfile) > 0 {
 		ok := object.Key("mpdProfile")
 		ok.String(string(v.MpdProfile))
+	}
+
+	if len(v.PtsOffsetHandlingForBFrames) > 0 {
+		ok := object.Key("ptsOffsetHandlingForBFrames")
+		ok.String(string(v.PtsOffsetHandlingForBFrames))
 	}
 
 	if len(v.SegmentControl) > 0 {
@@ -5114,6 +5166,11 @@ func awsRestjson1_serializeDocumentHlsSettings(v *types.HlsSettings, value smith
 	if len(v.AudioTrackType) > 0 {
 		ok := object.Key("audioTrackType")
 		ok.String(string(v.AudioTrackType))
+	}
+
+	if len(v.DescriptiveVideoServiceFlag) > 0 {
+		ok := object.Key("descriptiveVideoServiceFlag")
+		ok.String(string(v.DescriptiveVideoServiceFlag))
 	}
 
 	if len(v.IFrameOnlyManifest) > 0 {
@@ -7862,6 +7919,18 @@ func awsRestjson1_serializeDocumentWavSettings(v *types.WavSettings, value smith
 	if v.SampleRate != 0 {
 		ok := object.Key("sampleRate")
 		ok.Integer(v.SampleRate)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWebvttDestinationSettings(v *types.WebvttDestinationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.StylePassthrough) > 0 {
+		ok := object.Key("stylePassthrough")
+		ok.String(string(v.StylePassthrough))
 	}
 
 	return nil

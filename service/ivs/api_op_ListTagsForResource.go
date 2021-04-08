@@ -34,7 +34,7 @@ type ListTagsForResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Maximum number of tags to return.
+	// Maximum number of tags to return. Default: 50.
 	MaxResults int32
 
 	// The first tag to retrieve. This is used for pagination; see the nextToken
@@ -129,7 +129,7 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResourcePaginatorOptions is the paginator options for
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
-	// Maximum number of tags to return.
+	// Maximum number of tags to return. Default: 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -166,6 +166,38 @@ func (PlaylistType) Values() []PlaylistType {
 	}
 }
 
+type PresetSpeke20Audio string
+
+// Enum values for PresetSpeke20Audio
+const (
+	PresetSpeke20AudioPresetAudio1 PresetSpeke20Audio = "PRESET-AUDIO-1"
+)
+
+// Values returns all known values for PresetSpeke20Audio. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PresetSpeke20Audio) Values() []PresetSpeke20Audio {
+	return []PresetSpeke20Audio{
+		"PRESET-AUDIO-1",
+	}
+}
+
+type PresetSpeke20Video string
+
+// Enum values for PresetSpeke20Video
+const (
+	PresetSpeke20VideoPresetVideo1 PresetSpeke20Video = "PRESET-VIDEO-1"
+)
+
+// Values returns all known values for PresetSpeke20Video. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PresetSpeke20Video) Values() []PresetSpeke20Video {
+	return []PresetSpeke20Video{
+		"PRESET-VIDEO-1",
+	}
+}
+
 type Profile string
 
 // Enum values for Profile

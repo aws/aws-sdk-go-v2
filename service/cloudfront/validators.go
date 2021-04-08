@@ -4151,15 +4151,15 @@ func validateOpUpdateCachePolicyInput(v *UpdateCachePolicyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCachePolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.CachePolicyConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CachePolicyConfig"))
 	} else if v.CachePolicyConfig != nil {
 		if err := validateCachePolicyConfig(v.CachePolicyConfig); err != nil {
 			invalidParams.AddNested("CachePolicyConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4173,15 +4173,15 @@ func validateOpUpdateCloudFrontOriginAccessIdentityInput(v *UpdateCloudFrontOrig
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCloudFrontOriginAccessIdentityInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.CloudFrontOriginAccessIdentityConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudFrontOriginAccessIdentityConfig"))
 	} else if v.CloudFrontOriginAccessIdentityConfig != nil {
 		if err := validateCloudFrontOriginAccessIdentityConfig(v.CloudFrontOriginAccessIdentityConfig); err != nil {
 			invalidParams.AddNested("CloudFrontOriginAccessIdentityConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4195,15 +4195,15 @@ func validateOpUpdateDistributionInput(v *UpdateDistributionInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDistributionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.DistributionConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DistributionConfig"))
 	} else if v.DistributionConfig != nil {
 		if err := validateDistributionConfig(v.DistributionConfig); err != nil {
 			invalidParams.AddNested("DistributionConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4217,15 +4217,15 @@ func validateOpUpdateFieldLevelEncryptionConfigInput(v *UpdateFieldLevelEncrypti
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFieldLevelEncryptionConfigInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.FieldLevelEncryptionConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldLevelEncryptionConfig"))
 	} else if v.FieldLevelEncryptionConfig != nil {
 		if err := validateFieldLevelEncryptionConfig(v.FieldLevelEncryptionConfig); err != nil {
 			invalidParams.AddNested("FieldLevelEncryptionConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4239,15 +4239,15 @@ func validateOpUpdateFieldLevelEncryptionProfileInput(v *UpdateFieldLevelEncrypt
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFieldLevelEncryptionProfileInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.FieldLevelEncryptionProfileConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FieldLevelEncryptionProfileConfig"))
 	} else if v.FieldLevelEncryptionProfileConfig != nil {
 		if err := validateFieldLevelEncryptionProfileConfig(v.FieldLevelEncryptionProfileConfig); err != nil {
 			invalidParams.AddNested("FieldLevelEncryptionProfileConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4261,15 +4261,15 @@ func validateOpUpdateKeyGroupInput(v *UpdateKeyGroupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateKeyGroupInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.KeyGroupConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyGroupConfig"))
 	} else if v.KeyGroupConfig != nil {
 		if err := validateKeyGroupConfig(v.KeyGroupConfig); err != nil {
 			invalidParams.AddNested("KeyGroupConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4283,15 +4283,15 @@ func validateOpUpdateOriginRequestPolicyInput(v *UpdateOriginRequestPolicyInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateOriginRequestPolicyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.OriginRequestPolicyConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OriginRequestPolicyConfig"))
 	} else if v.OriginRequestPolicyConfig != nil {
 		if err := validateOriginRequestPolicyConfig(v.OriginRequestPolicyConfig); err != nil {
 			invalidParams.AddNested("OriginRequestPolicyConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4305,15 +4305,15 @@ func validateOpUpdatePublicKeyInput(v *UpdatePublicKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdatePublicKeyInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.PublicKeyConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyConfig"))
 	} else if v.PublicKeyConfig != nil {
 		if err := validatePublicKeyConfig(v.PublicKeyConfig); err != nil {
 			invalidParams.AddNested("PublicKeyConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4344,15 +4344,15 @@ func validateOpUpdateStreamingDistributionInput(v *UpdateStreamingDistributionIn
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStreamingDistributionInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
 	if v.StreamingDistributionConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StreamingDistributionConfig"))
 	} else if v.StreamingDistributionConfig != nil {
 		if err := validateStreamingDistributionConfig(v.StreamingDistributionConfig); err != nil {
 			invalidParams.AddNested("StreamingDistributionConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.Id == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

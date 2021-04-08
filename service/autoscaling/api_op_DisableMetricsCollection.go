@@ -65,8 +65,25 @@ type DisableMetricsCollectionInput struct {
 	//
 	// * GroupTotalCapacity
 	//
-	// If you
-	// omit this parameter, all metrics are disabled.
+	// *
+	// WarmPoolDesiredCapacity
+	//
+	// * WarmPoolWarmedCapacity
+	//
+	// * WarmPoolPendingCapacity
+	//
+	// *
+	// WarmPoolTerminatingCapacity
+	//
+	// * WarmPoolTotalCapacity
+	//
+	// *
+	// GroupAndWarmPoolDesiredCapacity
+	//
+	// * GroupAndWarmPoolTotalCapacity
+	//
+	// If you omit
+	// this parameter, all metrics are disabled.
 	Metrics []string
 }
 

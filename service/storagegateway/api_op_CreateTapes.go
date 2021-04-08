@@ -53,7 +53,7 @@ type CreateTapesInput struct {
 	NumTapesToCreate *int32
 
 	// A prefix that you append to the barcode of the virtual tape you are creating.
-	// This prefix makes the barcode unique. The prefix must be 1 to 4 characters in
+	// This prefix makes the barcode unique. The prefix must be 1-4 characters in
 	// length and must be one of the uppercase letters from A to Z.
 	//
 	// This member is required.
