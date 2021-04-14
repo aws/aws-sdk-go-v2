@@ -2970,6 +2970,7 @@ type ScalingConfiguration struct {
 	MinCapacity *int32
 
 	// The time, in seconds, before an Aurora DB cluster in serverless mode is paused.
+	// Specify a value between 300 and 86,400 seconds.
 	SecondsUntilAutoPause *int32
 
 	// The action to take when the timeout is reached, either ForceApplyCapacityChange

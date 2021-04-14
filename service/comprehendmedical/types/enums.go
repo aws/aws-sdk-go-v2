@@ -141,6 +141,8 @@ const (
 	ICD10CMAttributeTypeSystemOrganSite ICD10CMAttributeType = "SYSTEM_ORGAN_SITE"
 	ICD10CMAttributeTypeQuality         ICD10CMAttributeType = "QUALITY"
 	ICD10CMAttributeTypeQuantity        ICD10CMAttributeType = "QUANTITY"
+	ICD10CMAttributeTypeTimeToDxName    ICD10CMAttributeType = "TIME_TO_DX_NAME"
+	ICD10CMAttributeTypeTimeExpression  ICD10CMAttributeType = "TIME_EXPRESSION"
 )
 
 // Values returns all known values for ICD10CMAttributeType. Note that this can be
@@ -153,6 +155,8 @@ func (ICD10CMAttributeType) Values() []ICD10CMAttributeType {
 		"SYSTEM_ORGAN_SITE",
 		"QUALITY",
 		"QUANTITY",
+		"TIME_TO_DX_NAME",
+		"TIME_EXPRESSION",
 	}
 }
 
@@ -176,7 +180,8 @@ type ICD10CMEntityType string
 
 // Enum values for ICD10CMEntityType
 const (
-	ICD10CMEntityTypeDxName ICD10CMEntityType = "DX_NAME"
+	ICD10CMEntityTypeDxName         ICD10CMEntityType = "DX_NAME"
+	ICD10CMEntityTypeTimeExpression ICD10CMEntityType = "TIME_EXPRESSION"
 )
 
 // Values returns all known values for ICD10CMEntityType. Note that this can be
@@ -185,6 +190,25 @@ const (
 func (ICD10CMEntityType) Values() []ICD10CMEntityType {
 	return []ICD10CMEntityType{
 		"DX_NAME",
+		"TIME_EXPRESSION",
+	}
+}
+
+type ICD10CMRelationshipType string
+
+// Enum values for ICD10CMRelationshipType
+const (
+	ICD10CMRelationshipTypeOverlap         ICD10CMRelationshipType = "OVERLAP"
+	ICD10CMRelationshipTypeSystemOrganSite ICD10CMRelationshipType = "SYSTEM_ORGAN_SITE"
+)
+
+// Values returns all known values for ICD10CMRelationshipType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ICD10CMRelationshipType) Values() []ICD10CMRelationshipType {
+	return []ICD10CMRelationshipType{
+		"OVERLAP",
+		"SYSTEM_ORGAN_SITE",
 	}
 }
 

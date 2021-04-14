@@ -970,6 +970,26 @@ func (m *validateOpGetReservedNodeExchangeOfferings) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyAquaConfiguration struct {
+}
+
+func (*validateOpModifyAquaConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyAquaConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyAquaConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyAquaConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyClusterDbRevision struct {
 }
 
@@ -1660,6 +1680,10 @@ func addOpGetClusterCredentialsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetReservedNodeExchangeOfferingsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetReservedNodeExchangeOfferings{}, middleware.After)
+}
+
+func addOpModifyAquaConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyAquaConfiguration{}, middleware.After)
 }
 
 func addOpModifyClusterDbRevisionValidationMiddleware(stack *middleware.Stack) error {
@@ -2744,6 +2768,21 @@ func validateOpGetReservedNodeExchangeOfferingsInput(v *GetReservedNodeExchangeO
 	invalidParams := smithy.InvalidParamsError{Context: "GetReservedNodeExchangeOfferingsInput"}
 	if v.ReservedNodeId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReservedNodeId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyAquaConfigurationInput(v *ModifyAquaConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyAquaConfigurationInput"}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

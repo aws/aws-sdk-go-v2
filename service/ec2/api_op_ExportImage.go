@@ -13,7 +13,7 @@ import (
 )
 
 // Exports an Amazon Machine Image (AMI) to a VM file. For more information, see
-// Exporting a VM Directory from an Amazon Machine Image (AMI)
+// Exporting a VM directly from an Amazon Machine Image (AMI)
 // (https://docs.aws.amazon.com/vm-import/latest/userguide/vmexport_image.html) in
 // the VM Import/Export User Guide.
 func (c *Client) ExportImage(ctx context.Context, params *ExportImageInput, optFns ...func(*Options)) (*ExportImageOutput, error) {

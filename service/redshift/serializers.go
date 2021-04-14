@@ -4099,6 +4099,62 @@ func (m *awsAwsquery_serializeOpGetReservedNodeExchangeOfferings) HandleSerializ
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyAquaConfiguration struct {
+}
+
+func (*awsAwsquery_serializeOpModifyAquaConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyAquaConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyAquaConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyAquaConfiguration")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentModifyAquaConfigurationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyCluster struct {
 }
 
@@ -6237,6 +6293,11 @@ func awsAwsquery_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, va
 		objectKey.Boolean(*v.AllowVersionUpgrade)
 	}
 
+	if len(v.AquaConfigurationStatus) > 0 {
+		objectKey := object.Key("AquaConfigurationStatus")
+		objectKey.String(string(v.AquaConfigurationStatus))
+	}
+
 	if v.AutomatedSnapshotRetentionPeriod != nil {
 		objectKey := object.Key("AutomatedSnapshotRetentionPeriod")
 		objectKey.Integer(*v.AutomatedSnapshotRetentionPeriod)
@@ -8128,6 +8189,23 @@ func awsAwsquery_serializeOpDocumentGetReservedNodeExchangeOfferingsInput(v *Get
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentModifyAquaConfigurationInput(v *ModifyAquaConfigurationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.AquaConfigurationStatus) > 0 {
+		objectKey := object.Key("AquaConfigurationStatus")
+		objectKey.String(string(v.AquaConfigurationStatus))
+	}
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentModifyClusterDbRevisionInput(v *ModifyClusterDbRevisionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -8719,6 +8797,11 @@ func awsAwsquery_serializeOpDocumentRestoreFromClusterSnapshotInput(v *RestoreFr
 		objectKey.Boolean(*v.AllowVersionUpgrade)
 	}
 
+	if len(v.AquaConfigurationStatus) > 0 {
+		objectKey := object.Key("AquaConfigurationStatus")
+		objectKey.String(string(v.AquaConfigurationStatus))
+	}
+
 	if v.AutomatedSnapshotRetentionPeriod != nil {
 		objectKey := object.Key("AutomatedSnapshotRetentionPeriod")
 		objectKey.Integer(*v.AutomatedSnapshotRetentionPeriod)
@@ -8860,6 +8943,11 @@ func awsAwsquery_serializeOpDocumentRestoreTableFromClusterSnapshotInput(v *Rest
 	if v.ClusterIdentifier != nil {
 		objectKey := object.Key("ClusterIdentifier")
 		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.EnableCaseSensitiveIdentifier != nil {
+		objectKey := object.Key("EnableCaseSensitiveIdentifier")
+		objectKey.Boolean(*v.EnableCaseSensitiveIdentifier)
 	}
 
 	if v.NewTableName != nil {

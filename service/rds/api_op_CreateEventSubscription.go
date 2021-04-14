@@ -76,11 +76,11 @@ type CreateEventSubscriptionInput struct {
 	// begin with a letter and must contain only ASCII letters, digits, and hyphens. It
 	// can't end with a hyphen or contain two consecutive hyphens. Constraints:
 	//
-	// * If a
-	// SourceIds value is supplied, SourceType must also be provided.
+	// * If
+	// SourceIds are supplied, SourceType must also be provided.
 	//
-	// * If the source
-	// type is a DB instance, a DBInstanceIdentifier value must be supplied.
+	// * If the source type
+	// is a DB instance, a DBInstanceIdentifier value must be supplied.
 	//
 	// * If the
 	// source type is a DB cluster, a DBClusterIdentifier value must be supplied.

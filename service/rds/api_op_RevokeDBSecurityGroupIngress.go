@@ -12,7 +12,7 @@ import (
 )
 
 // Revokes ingress from a DBSecurityGroup for previously authorized IP ranges or
-// EC2 or VPC Security Groups. Required parameters for this API are one of CIDRIP,
+// EC2 or VPC security groups. Required parameters for this API are one of CIDRIP,
 // EC2SecurityGroupId for VPC, or (EC2SecurityGroupOwnerId and either
 // EC2SecurityGroupName or EC2SecurityGroupId).
 func (c *Client) RevokeDBSecurityGroupIngress(ctx context.Context, params *RevokeDBSecurityGroupIngressInput, optFns ...func(*Options)) (*RevokeDBSecurityGroupIngressOutput, error) {

@@ -1285,6 +1285,9 @@ func awsAwsjson11_deserializeOpErrorDeleteRemediationConfiguration(response *smi
 	case strings.EqualFold("InsufficientPermissionsException", errorCode):
 		return awsAwsjson11_deserializeErrorInsufficientPermissionsException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValueException(response, errorBody)
+
 	case strings.EqualFold("NoSuchRemediationConfigurationException", errorCode):
 		return awsAwsjson11_deserializeErrorNoSuchRemediationConfigurationException(response, errorBody)
 
@@ -4609,6 +4612,9 @@ func awsAwsjson11_deserializeOpErrorDescribeRemediationExecutionStatus(response 
 	switch {
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterValueException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterValueException(response, errorBody)
 
 	case strings.EqualFold("NoSuchRemediationConfigurationException", errorCode):
 		return awsAwsjson11_deserializeErrorNoSuchRemediationConfigurationException(response, errorBody)

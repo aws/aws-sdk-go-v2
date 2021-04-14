@@ -127,15 +127,14 @@ type DescribeInstanceTypesInput struct {
 	//
 	// *
 	// network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic
-	// Fabric Adapters (EFAs) per instance. (true | false).
+	// Fabric Adapters (EFAs) per instance.
 	//
-	// *
-	// network-info.efa-supported - Indicates whether the instance type supports
-	// Elastic Fabric Adapter (EFA) (true | false).
+	// * network-info.efa-supported - Indicates
+	// whether the instance type supports Elastic Fabric Adapter (EFA) (true |
+	// false).
 	//
-	// * network-info.ena-support -
-	// Indicates whether Elastic Network Adapter (ENA) is supported or required
-	// (required | supported | unsupported).
+	// * network-info.ena-support - Indicates whether Elastic Network Adapter
+	// (ENA) is supported or required (required | supported | unsupported).
 	//
 	// *
 	// network-info.ipv4-addresses-per-interface - The maximum number of private IPv4

@@ -627,6 +627,9 @@ func awsAwsjson11_deserializeOpErrorCreateProtection(response *smithyhttp.Respon
 	case strings.EqualFold("InvalidOperationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidOperationException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
 	case strings.EqualFold("InvalidResourceException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidResourceException(response, errorBody)
 

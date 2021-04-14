@@ -18,8 +18,8 @@ import (
 // an Amazon Redshift HSM configuration that provides a cluster the information
 // needed to store and use encryption keys in the HSM. For more information, go to
 // Hardware Security Modules
-// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html) in the
-// Amazon Redshift Cluster Management Guide.
+// (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM)
+// in the Amazon Redshift Cluster Management Guide.
 func (c *Client) CreateHsmClientCertificate(ctx context.Context, params *CreateHsmClientCertificateInput, optFns ...func(*Options)) (*CreateHsmClientCertificateOutput, error) {
 	if params == nil {
 		params = &CreateHsmClientCertificateInput{}

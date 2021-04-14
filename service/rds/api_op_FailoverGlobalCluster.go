@@ -19,7 +19,7 @@ import (
 // The selected secondary DB cluster assumes full read/write capabilities for the
 // Aurora global database. For more information about failing over an Amazon Aurora
 // global database, see Managed planned failover for Amazon Aurora global databases
-// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.managed-failover)
+// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-disaster-recovery.managed-failover)
 // in the Amazon Aurora User Guide. This action applies to GlobalCluster (Aurora
 // global databases) only. Use this action only on healthy Aurora global databases
 // with running Aurora DB clusters and no Region-wide outages, to test disaster

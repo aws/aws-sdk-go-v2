@@ -53,6 +53,8 @@ type CreateHostInput struct {
 	// This member is required.
 	ProviderType types.ProviderType
 
+	Tags []types.Tag
+
 	// The VPC configuration to be provisioned for the host. A VPC must be configured
 	// and the infrastructure to be represented by the host must already be connected
 	// to the VPC.
@@ -63,6 +65,8 @@ type CreateHostOutput struct {
 
 	// The Amazon Resource Name (ARN) of the host to be created.
 	HostArn *string
+
+	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

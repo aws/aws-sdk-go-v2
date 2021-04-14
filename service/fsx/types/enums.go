@@ -100,6 +100,7 @@ const (
 	BackupLifecycleDeleted      BackupLifecycle = "DELETED"
 	BackupLifecycleFailed       BackupLifecycle = "FAILED"
 	BackupLifecyclePending      BackupLifecycle = "PENDING"
+	BackupLifecycleCopying      BackupLifecycle = "COPYING"
 )
 
 // Values returns all known values for BackupLifecycle. Note that this can be
@@ -113,6 +114,7 @@ func (BackupLifecycle) Values() []BackupLifecycle {
 		"DELETED",
 		"FAILED",
 		"PENDING",
+		"COPYING",
 	}
 }
 
@@ -377,10 +379,12 @@ type ServiceLimit string
 
 // Enum values for ServiceLimit
 const (
-	ServiceLimitFileSystemCount           ServiceLimit = "FILE_SYSTEM_COUNT"
-	ServiceLimitTotalThroughputCapacity   ServiceLimit = "TOTAL_THROUGHPUT_CAPACITY"
-	ServiceLimitTotalStorage              ServiceLimit = "TOTAL_STORAGE"
-	ServiceLimitTotalUserInitiatedBackups ServiceLimit = "TOTAL_USER_INITIATED_BACKUPS"
+	ServiceLimitFileSystemCount            ServiceLimit = "FILE_SYSTEM_COUNT"
+	ServiceLimitTotalThroughputCapacity    ServiceLimit = "TOTAL_THROUGHPUT_CAPACITY"
+	ServiceLimitTotalStorage               ServiceLimit = "TOTAL_STORAGE"
+	ServiceLimitTotalUserInitiatedBackups  ServiceLimit = "TOTAL_USER_INITIATED_BACKUPS"
+	ServiceLimitTotalUserTags              ServiceLimit = "TOTAL_USER_TAGS"
+	ServiceLimitTotalInProgressCopyBackups ServiceLimit = "TOTAL_IN_PROGRESS_COPY_BACKUPS"
 )
 
 // Values returns all known values for ServiceLimit. Note that this can be expanded
@@ -392,6 +396,8 @@ func (ServiceLimit) Values() []ServiceLimit {
 		"TOTAL_THROUGHPUT_CAPACITY",
 		"TOTAL_STORAGE",
 		"TOTAL_USER_INITIATED_BACKUPS",
+		"TOTAL_USER_TAGS",
+		"TOTAL_IN_PROGRESS_COPY_BACKUPS",
 	}
 }
 

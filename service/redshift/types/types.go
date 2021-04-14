@@ -27,6 +27,33 @@ type AccountWithRestoreAccess struct {
 	AccountId *string
 }
 
+// The AQUA (Advanced Query Accelerator) configuration of the cluster.
+type AquaConfiguration struct {
+
+	// The value represents how the cluster is configured to use AQUA. Possible values
+	// include the following.
+	//
+	// * enabled - Use AQUA if it is available for the current
+	// AWS Region and Amazon Redshift node type.
+	//
+	// * disabled - Don't use AQUA.
+	//
+	// * auto
+	// - Amazon Redshift determines whether to use AQUA.
+	AquaConfigurationStatus AquaConfigurationStatus
+
+	// The value indicates the status of AQUA on the cluster. Possible values include
+	// the following.
+	//
+	// * enabled - AQUA is enabled.
+	//
+	// * disabled - AQUA is not
+	// enabled.
+	//
+	// * applying - AQUA status is being applied.
+	AquaStatus AquaStatus
+}
+
 // Describes an attribute value.
 type AttributeValueTarget struct {
 
@@ -50,6 +77,9 @@ type Cluster struct {
 	// A boolean value that, if true, indicates that major version upgrades will be
 	// applied automatically to the cluster during the maintenance window.
 	AllowVersionUpgrade bool
+
+	// The AQUA (Advanced Query Accelerator) configuration of the cluster.
+	AquaConfiguration *AquaConfiguration
 
 	// The number of days that automatic cluster snapshots are retained.
 	AutomatedSnapshotRetentionPeriod int32

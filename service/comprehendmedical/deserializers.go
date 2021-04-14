@@ -3392,6 +3392,15 @@ func awsAwsjson11_deserializeDocumentICD10CMAttribute(v **types.ICD10CMAttribute
 				sv.BeginOffset = ptr.Int32(int32(i64))
 			}
 
+		case "Category":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ICD10CMEntityType to be of type string, got %T instead", value)
+				}
+				sv.Category = types.ICD10CMEntityType(jtv)
+			}
+
 		case "EndOffset":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3429,6 +3438,15 @@ func awsAwsjson11_deserializeDocumentICD10CMAttribute(v **types.ICD10CMAttribute
 					return err
 				}
 				sv.RelationshipScore = ptr.Float32(float32(f64))
+			}
+
+		case "RelationshipType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ICD10CMRelationshipType to be of type string, got %T instead", value)
+				}
+				sv.RelationshipType = types.ICD10CMRelationshipType(jtv)
 			}
 
 		case "Score":

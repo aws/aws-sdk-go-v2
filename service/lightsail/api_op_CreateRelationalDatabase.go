@@ -32,32 +32,81 @@ func (c *Client) CreateRelationalDatabase(ctx context.Context, params *CreateRel
 
 type CreateRelationalDatabaseInput struct {
 
-	// The name of the master database created when the Lightsail database resource is
-	// created. Constraints:
+	// The meaning of this parameter differs according to the database engine you use.
+	// MySQL The name of the database to create when the Lightsail database resource is
+	// created. If this parameter isn't specified, no database is created in the
+	// database resource. Constraints:
 	//
-	// * Must contain from 1 to 64 alphanumeric characters.
+	// * Must contain 1 to 64 letters or numbers.
 	//
 	// *
-	// Cannot be a word reserved by the specified database engine
+	// Must begin with a letter. Subsequent characters can be letters, underscores, or
+	// digits (0- 9).
+	//
+	// * Can't be a word reserved by the specified database engine. For
+	// more information about reserved words in MySQL, see the Keywords and Reserved
+	// Words articles for MySQL 5.6
+	// (https://dev.mysql.com/doc/refman/5.6/en/keywords.html), MySQL 5.7
+	// (https://dev.mysql.com/doc/refman/5.7/en/keywords.html), and MySQL 8.0
+	// (https://dev.mysql.com/doc/refman/8.0/en/keywords.html).
+	//
+	// PostgreSQL The name of
+	// the database to create when the Lightsail database resource is created. If this
+	// parameter isn't specified, a database named postgres is created in the database
+	// resource. Constraints:
+	//
+	// * Must contain 1 to 63 letters or numbers.
+	//
+	// * Must begin
+	// with a letter. Subsequent characters can be letters, underscores, or digits (0-
+	// 9).
+	//
+	// * Can't be a word reserved by the specified database engine. For more
+	// information about reserved words in PostgreSQL, see the SQL Key Words articles
+	// for PostgreSQL 9.6
+	// (https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html), PostgreSQL 10
+	// (https://www.postgresql.org/docs/10/sql-keywords-appendix.html), PostgreSQL 11
+	// (https://www.postgresql.org/docs/11/sql-keywords-appendix.html), and PostgreSQL
+	// 12 (https://www.postgresql.org/docs/12/sql-keywords-appendix.html).
 	//
 	// This member is required.
 	MasterDatabaseName *string
 
-	// The master user name for your new database. Constraints:
+	// The name for the master user. MySQL Constraints:
 	//
-	// * Master user name is
-	// required.
+	// * Required for MySQL.
 	//
-	// * Must contain from 1 to 16 alphanumeric characters.
+	// * Must
+	// be 1 to 16 letters or numbers. Can contain underscores.
 	//
-	// * The first
-	// character must be a letter.
+	// * First character must
+	// be a letter.
 	//
-	// * Cannot be a reserved word for the database engine
-	// you choose. For more information about reserved words in MySQL 5.6 or 5.7, see
-	// the Keywords and Reserved Words articles for MySQL 5.6
-	// (https://dev.mysql.com/doc/refman/5.6/en/keywords.html) or MySQL 5.7
-	// (https://dev.mysql.com/doc/refman/5.7/en/keywords.html) respectively.
+	// * Can't be a reserved word for the chosen database engine. For
+	// more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and
+	// Reserved Words articles for MySQL 5.6
+	// (https://dev.mysql.com/doc/refman/5.6/en/keywords.html), MySQL 5.7
+	// (https://dev.mysql.com/doc/refman/5.7/en/keywords.html), or MySQL 8.0
+	// (https://dev.mysql.com/doc/refman/8.0/en/keywords.html).
+	//
+	// PostgreSQL
+	// Constraints:
+	//
+	// * Required for PostgreSQL.
+	//
+	// * Must be 1 to 63 letters or numbers.
+	// Can contain underscores.
+	//
+	// * First character must be a letter.
+	//
+	// * Can't be a
+	// reserved word for the chosen database engine. For more information about
+	// reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles
+	// for PostgreSQL 9.6
+	// (https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html), PostgreSQL 10
+	// (https://www.postgresql.org/docs/10/sql-keywords-appendix.html), PostgreSQL 11
+	// (https://www.postgresql.org/docs/11/sql-keywords-appendix.html), and PostgreSQL
+	// 12 (https://www.postgresql.org/docs/12/sql-keywords-appendix.html).
 	//
 	// This member is required.
 	MasterUsername *string
@@ -93,9 +142,10 @@ type CreateRelationalDatabaseInput struct {
 	// Zones parameter to your request.
 	AvailabilityZone *string
 
-	// The password for the master user of your new database. The password can include
-	// any printable ASCII character except "/", """, or "@". Constraints: Must contain
-	// 8 to 41 characters.
+	// The password for the master user. The password can include any printable ASCII
+	// character except "/", """, or "@". It cannot contain spaces. MySQL Constraints:
+	// Must contain from 8 to 41 characters. PostgreSQL Constraints: Must contain from
+	// 8 to 128 characters.
 	MasterUserPassword *string
 
 	// The daily time range during which automated backups are created for your new

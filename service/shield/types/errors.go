@@ -144,9 +144,7 @@ func (e *InvalidResourceException) ErrorMessage() string {
 func (e *InvalidResourceException) ErrorCode() string             { return "InvalidResourceException" }
 func (e *InvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception that indicates that the operation would exceed a limit. Type is the
-// type of limit that would be exceeded. Limit is the threshold that would be
-// exceeded.
+// Exception that indicates that the operation would exceed a limit.
 type LimitsExceededException struct {
 	Message *string
 

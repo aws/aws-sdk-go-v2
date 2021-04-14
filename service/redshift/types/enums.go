@@ -22,6 +22,46 @@ func (ActionType) Values() []ActionType {
 	}
 }
 
+type AquaConfigurationStatus string
+
+// Enum values for AquaConfigurationStatus
+const (
+	AquaConfigurationStatusEnabled  AquaConfigurationStatus = "enabled"
+	AquaConfigurationStatusDisabled AquaConfigurationStatus = "disabled"
+	AquaConfigurationStatusAuto     AquaConfigurationStatus = "auto"
+)
+
+// Values returns all known values for AquaConfigurationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AquaConfigurationStatus) Values() []AquaConfigurationStatus {
+	return []AquaConfigurationStatus{
+		"enabled",
+		"disabled",
+		"auto",
+	}
+}
+
+type AquaStatus string
+
+// Enum values for AquaStatus
+const (
+	AquaStatusEnabled  AquaStatus = "enabled"
+	AquaStatusDisabled AquaStatus = "disabled"
+	AquaStatusApplying AquaStatus = "applying"
+)
+
+// Values returns all known values for AquaStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (AquaStatus) Values() []AquaStatus {
+	return []AquaStatus{
+		"enabled",
+		"disabled",
+		"applying",
+	}
+}
+
 type AuthorizationStatus string
 
 // Enum values for AuthorizationStatus

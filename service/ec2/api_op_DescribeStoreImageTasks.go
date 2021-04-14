@@ -4,6 +4,7 @@ package ec2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -141,6 +142,93 @@ func addOperationDescribeStoreImageTasksMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// DescribeStoreImageTasksAPIClient is a client that implements the
+// DescribeStoreImageTasks operation.
+type DescribeStoreImageTasksAPIClient interface {
+	DescribeStoreImageTasks(context.Context, *DescribeStoreImageTasksInput, ...func(*Options)) (*DescribeStoreImageTasksOutput, error)
+}
+
+var _ DescribeStoreImageTasksAPIClient = (*Client)(nil)
+
+// DescribeStoreImageTasksPaginatorOptions is the paginator options for
+// DescribeStoreImageTasks
+type DescribeStoreImageTasksPaginatorOptions struct {
+	// The maximum number of results to return in a single call. To retrieve the
+	// remaining results, make another call with the returned NextToken value. This
+	// value can be between 1 and 200. You cannot specify this parameter and the
+	// ImageIDs parameter in the same call.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeStoreImageTasksPaginator is a paginator for DescribeStoreImageTasks
+type DescribeStoreImageTasksPaginator struct {
+	options   DescribeStoreImageTasksPaginatorOptions
+	client    DescribeStoreImageTasksAPIClient
+	params    *DescribeStoreImageTasksInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeStoreImageTasksPaginator returns a new
+// DescribeStoreImageTasksPaginator
+func NewDescribeStoreImageTasksPaginator(client DescribeStoreImageTasksAPIClient, params *DescribeStoreImageTasksInput, optFns ...func(*DescribeStoreImageTasksPaginatorOptions)) *DescribeStoreImageTasksPaginator {
+	if params == nil {
+		params = &DescribeStoreImageTasksInput{}
+	}
+
+	options := DescribeStoreImageTasksPaginatorOptions{}
+	if params.MaxResults != 0 {
+		options.Limit = params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeStoreImageTasksPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeStoreImageTasksPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeStoreImageTasks page.
+func (p *DescribeStoreImageTasksPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeStoreImageTasksOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.MaxResults = p.options.Limit
+
+	result, err := p.client.DescribeStoreImageTasks(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeStoreImageTasks(region string) *awsmiddleware.RegisterServiceMetadata {

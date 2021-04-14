@@ -35,7 +35,7 @@ func (c *Client) UpdateRelationalDatabase(ctx context.Context, params *UpdateRel
 
 type UpdateRelationalDatabaseInput struct {
 
-	// The name of your database to update.
+	// The name of your Lightsail database resource to update.
 	//
 	// This member is required.
 	RelationalDatabaseName *string
@@ -58,9 +58,9 @@ type UpdateRelationalDatabaseInput struct {
 	// applied during the next maintenance window because this can result in an outage.
 	EnableBackupRetention *bool
 
-	// The password for the master user of your database. The password can include any
-	// printable ASCII character except "/", """, or "@". Constraints: Must contain 8
-	// to 41 characters.
+	// The password for the master user. The password can include any printable ASCII
+	// character except "/", """, or "@". MySQL Constraints: Must contain from 8 to 41
+	// characters. PostgreSQL Constraints: Must contain from 8 to 128 characters.
 	MasterUserPassword *string
 
 	// The daily time range during which automated backups are created for your

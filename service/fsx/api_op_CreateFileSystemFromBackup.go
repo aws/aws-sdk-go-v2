@@ -57,8 +57,7 @@ func (c *Client) CreateFileSystemFromBackup(ctx context.Context, params *CreateF
 // The request object for the CreateFileSystemFromBackup operation.
 type CreateFileSystemFromBackupInput struct {
 
-	// The ID of the backup. Specifies the backup to use if you're creating a file
-	// system from an existing backup.
+	// The ID of the source backup. Specifies the backup you are copying.
 	//
 	// This member is required.
 	BackupId *string
@@ -78,6 +77,16 @@ type CreateFileSystemFromBackupInput struct {
 	// creation. This string is automatically filled on your behalf when you use the
 	// AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string
+
+	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file
+	// system's data for Amazon FSx for Windows File Server file systems and Amazon FSx
+	// for Lustre PERSISTENT_1 file systems at rest. In either case, if not specified,
+	// the Amazon FSx managed key is used. The Amazon FSx for Lustre SCRATCH_1 and
+	// SCRATCH_2 file systems are always encrypted at rest using Amazon FSx managed
+	// keys. For more information, see Encrypt
+	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
+	// AWS Key Management Service API Reference.
+	KmsKeyId *string
 
 	// The Lustre configuration for the file system being created.
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration

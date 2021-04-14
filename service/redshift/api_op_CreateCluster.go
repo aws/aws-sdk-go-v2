@@ -115,6 +115,19 @@ type CreateClusterInput struct {
 	// Redshift engine that is running on your cluster. Default: true
 	AllowVersionUpgrade *bool
 
+	// The value represents how the cluster is configured to use AQUA (Advanced Query
+	// Accelerator) when it is created. Possible values include the following.
+	//
+	// *
+	// enabled - Use AQUA if it is available for the current AWS Region and Amazon
+	// Redshift node type.
+	//
+	// * disabled - Don't use AQUA.
+	//
+	// * auto - Amazon Redshift
+	// determines whether to use AQUA.
+	AquaConfigurationStatus types.AquaConfigurationStatus
+
 	// The number of days that automated snapshots are retained. If the value is 0,
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
 	// can still create manual snapshots when you want with CreateClusterSnapshot. You

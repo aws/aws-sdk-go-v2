@@ -27,6 +27,25 @@ func (e *ActiveDirectoryError) ErrorMessage() string {
 func (e *ActiveDirectoryError) ErrorCode() string             { return "ActiveDirectoryError" }
 func (e *ActiveDirectoryError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You can't delete a backup while it's being copied.
+type BackupBeingCopied struct {
+	Message *string
+
+	BackupId *string
+}
+
+func (e *BackupBeingCopied) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *BackupBeingCopied) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *BackupBeingCopied) ErrorCode() string             { return "BackupBeingCopied" }
+func (e *BackupBeingCopied) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Another backup is already under way. Wait for completion before initiating
 // additional backups of this file system.
 type BackupInProgress struct {
@@ -189,6 +208,24 @@ func (e *IncompatibleParameterError) ErrorMessage() string {
 func (e *IncompatibleParameterError) ErrorCode() string             { return "IncompatibleParameterError" }
 func (e *IncompatibleParameterError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Amazon FSx doesn't support Multi-AZ Windows File Server copy backup in the
+// destination Region, so the copied backup can't be restored.
+type IncompatibleRegionForMultiAZ struct {
+	Message *string
+}
+
+func (e *IncompatibleRegionForMultiAZ) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IncompatibleRegionForMultiAZ) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IncompatibleRegionForMultiAZ) ErrorCode() string             { return "IncompatibleRegionForMultiAZ" }
+func (e *IncompatibleRegionForMultiAZ) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A generic error indicating a server-side failure.
 type InternalServerError struct {
 	Message *string
@@ -205,6 +242,24 @@ func (e *InternalServerError) ErrorMessage() string {
 }
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The AWS Key Management Service (AWS KMS) key of the destination backup is
+// invalid.
+type InvalidDestinationKmsKey struct {
+	Message *string
+}
+
+func (e *InvalidDestinationKmsKey) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDestinationKmsKey) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDestinationKmsKey) ErrorCode() string             { return "InvalidDestinationKmsKey" }
+func (e *InvalidDestinationKmsKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The path provided for data repository export isn't valid.
 type InvalidExportPath struct {
@@ -283,6 +338,41 @@ func (e *InvalidPerUnitStorageThroughput) ErrorCode() string {
 	return "InvalidPerUnitStorageThroughput"
 }
 func (e *InvalidPerUnitStorageThroughput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Region provided for Source Region is invalid or is in a different AWS
+// partition.
+type InvalidRegion struct {
+	Message *string
+}
+
+func (e *InvalidRegion) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidRegion) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidRegion) ErrorCode() string             { return "InvalidRegion" }
+func (e *InvalidRegion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The AWS Key Management Service (AWS KMS) key of the source backup is invalid.
+type InvalidSourceKmsKey struct {
+	Message *string
+}
+
+func (e *InvalidSourceKmsKey) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidSourceKmsKey) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidSourceKmsKey) ErrorCode() string             { return "InvalidSourceKmsKey" }
+func (e *InvalidSourceKmsKey) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A file system configuration is required for this operation.
 type MissingFileSystemConfiguration struct {
@@ -378,6 +468,26 @@ func (e *ServiceLimitExceeded) ErrorMessage() string {
 }
 func (e *ServiceLimitExceeded) ErrorCode() string             { return "ServiceLimitExceeded" }
 func (e *ServiceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The request was rejected because the lifecycle status of the source backup is
+// not AVAILABLE.
+type SourceBackupUnavailable struct {
+	Message *string
+
+	BackupId *string
+}
+
+func (e *SourceBackupUnavailable) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SourceBackupUnavailable) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SourceBackupUnavailable) ErrorCode() string             { return "SourceBackupUnavailable" }
+func (e *SourceBackupUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested operation is not supported for this resource or API.
 type UnsupportedOperation struct {
