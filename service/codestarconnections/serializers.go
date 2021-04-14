@@ -719,6 +719,13 @@ func awsAwsjson10_serializeOpDocumentCreateHostInput(v *CreateHostInput, value s
 		ok.String(string(v.ProviderType))
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VpcConfiguration != nil {
 		ok := object.Key("VpcConfiguration")
 		if err := awsAwsjson10_serializeDocumentVpcConfiguration(v.VpcConfiguration, ok); err != nil {

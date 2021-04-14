@@ -736,6 +736,9 @@
                     "target": "com.amazonaws.shield#InvalidOperationException"
                 },
                 {
+                    "target": "com.amazonaws.shield#InvalidParameterException"
+                },
+                {
                     "target": "com.amazonaws.shield#InvalidResourceException"
                 },
                 {
@@ -1734,14 +1737,20 @@
                     "target": "com.amazonaws.shield#errorMessage"
                 },
                 "Type": {
-                    "target": "com.amazonaws.shield#LimitType"
+                    "target": "com.amazonaws.shield#LimitType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of limit that would be exceeded.</p>"
+                    }
                 },
                 "Limit": {
-                    "target": "com.amazonaws.shield#LimitNumber"
+                    "target": "com.amazonaws.shield#LimitNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threshold that would be exceeded.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Exception that indicates that the operation would exceed a limit.</p>\n         <p>\n            <code>Type</code> is the type of limit that would be exceeded.</p>\n         <p>\n            <code>Limit</code> is the threshold that would be exceeded.</p>",
+                "smithy.api#documentation": "<p>Exception that indicates that the operation would exceed a limit.</p>",
                 "smithy.api#error": "client"
             }
         },

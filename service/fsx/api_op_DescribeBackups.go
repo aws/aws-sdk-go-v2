@@ -72,7 +72,7 @@ type DescribeBackupsInput struct {
 // Response object for DescribeBackups operation.
 type DescribeBackupsOutput struct {
 
-	// Any array of backups.
+	// An array of backups.
 	Backups []types.Backup
 
 	// This is present if there are more backups than returned in the response

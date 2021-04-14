@@ -43,13 +43,13 @@ type AggregateComplianceByConfigRule struct {
 
 // Provides aggregate compliance of the conformance pack. Indicates whether a
 // conformance pack is compliant based on the name of the conformance pack, account
-// ID, and region. A conformance pack is compliant if all of the rules in that
+// ID, and region. A conformance pack is compliant if all of the rules in a
 // conformance packs are compliant. It is noncompliant if any of the rules are not
-// compliant. If a conformance pack has rules that return INSUFFICIENT_DATA, the
-// conformance pack returns INSUFFICIENT_DATA only if all the rules within that
-// conformance pack return INSUFFICIENT_DATA. If some of the rules in a conformance
-// pack are compliant and others return INSUFFICIENT_DATA, the conformance pack
-// shows compliant.
+// compliant. The compliance status of a conformance pack is INSUFFICIENT_DATA only
+// if all rules within a conformance pack cannot be evaluated due to insufficient
+// data. If some of the rules in a conformance pack are compliant but the
+// compliance status of other rules in that same conformance pack is
+// INSUFFICIENT_DATA, the conformance pack shows compliant.
 type AggregateComplianceByConformancePack struct {
 
 	// The 12-digit AWS account ID of the source account.
@@ -77,9 +77,15 @@ type AggregateComplianceCount struct {
 }
 
 // Provides the number of compliant and noncompliant rules within a conformance
-// pack. Also provides the total count of compliant rules, noncompliant rules, and
-// the rules that do not have any applicable resources to evaluate upon resulting
-// in insufficient data.
+// pack. Also provides the compliance status of the conformance pack and the total
+// rule count which includes compliant rules, noncompliant rules, and rules that
+// cannot be evaluated due to insufficient data. A conformance pack is compliant if
+// all of the rules in a conformance packs are compliant. It is noncompliant if any
+// of the rules are not compliant. The compliance status of a conformance pack is
+// INSUFFICIENT_DATA only if all rules within a conformance pack cannot be
+// evaluated due to insufficient data. If some of the rules in a conformance pack
+// are compliant but the compliance status of other rules in that same conformance
+// pack is INSUFFICIENT_DATA, the conformance pack shows compliant.
 type AggregateConformancePackCompliance struct {
 
 	// The compliance status of the conformance pack.

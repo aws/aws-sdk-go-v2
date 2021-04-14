@@ -2851,11 +2851,11 @@ type FleetLaunchTemplateOverrides struct {
 	// priority to determine which launch template override to use first in fulfilling
 	// On-Demand capacity. If the Spot AllocationStrategy is set to
 	// capacity-optimized-prioritized, EC2 Fleet uses priority on a best-effort basis
-	// to determine which launch template override to use first in fulfilling Spot
-	// capacity, but optimizes for capacity first. Valid values are whole numbers
-	// starting at 0. The lower the number, the higher the priority. If no number is
-	// set, the override has the lowest priority. You can set the same priority for
-	// different launch template overrides.
+	// to determine which launch template override to use in fulfilling Spot capacity,
+	// but optimizes for capacity first. Valid values are whole numbers starting at 0.
+	// The lower the number, the higher the priority. If no number is set, the override
+	// has the lowest priority. You can set the same priority for different launch
+	// template overrides.
 	Priority float64
 
 	// The ID of the subnet in which to launch the instances.
@@ -2885,11 +2885,11 @@ type FleetLaunchTemplateOverridesRequest struct {
 	// priority to determine which launch template override to use first in fulfilling
 	// On-Demand capacity. If the Spot AllocationStrategy is set to
 	// capacity-optimized-prioritized, EC2 Fleet uses priority on a best-effort basis
-	// to determine which launch template override to use first in fulfilling Spot
-	// capacity, but optimizes for capacity first. Valid values are whole numbers
-	// starting at 0. The lower the number, the higher the priority. If no number is
-	// set, the launch template override has the lowest priority. You can set the same
-	// priority for different launch template overrides.
+	// to determine which launch template override to use in fulfilling Spot capacity,
+	// but optimizes for capacity first. Valid values are whole numbers starting at 0.
+	// The lower the number, the higher the priority. If no number is set, the launch
+	// template override has the lowest priority. You can set the same priority for
+	// different launch template overrides.
 	Priority float64
 
 	// The IDs of the subnets in which to launch the instances. Separate multiple
@@ -4275,7 +4275,7 @@ type InstanceNetworkInterface struct {
 	// One or more private IPv4 addresses associated with the network interface.
 	PrivateIpAddresses []InstancePrivateIpAddress
 
-	// Indicates whether to validate network traffic to or from this network interface.
+	// Indicates whether source/destination checking is enabled.
 	SourceDestCheck bool
 
 	// The status of the network interface.
@@ -5489,11 +5489,11 @@ type LaunchTemplateOverrides struct {
 	// priority to determine which launch template override to use first in fulfilling
 	// On-Demand capacity. If the Spot AllocationStrategy is set to
 	// capacityOptimizedPrioritized, Spot Fleet uses priority on a best-effort basis to
-	// determine which launch template override to use first in fulfilling Spot
-	// capacity, but optimizes for capacity first. Valid values are whole numbers
-	// starting at 0. The lower the number, the higher the priority. If no number is
-	// set, the launch template override has the lowest priority. You can set the same
-	// priority for different launch template overrides.
+	// determine which launch template override to use in fulfilling Spot capacity, but
+	// optimizes for capacity first. Valid values are whole numbers starting at 0. The
+	// lower the number, the higher the priority. If no number is set, the launch
+	// template override has the lowest priority. You can set the same priority for
+	// different launch template overrides.
 	Priority float64
 
 	// The maximum price per unit hour that you are willing to pay for a Spot Instance.
@@ -6498,7 +6498,7 @@ type NetworkInterface struct {
 	// Indicates whether the network interface is being managed by AWS.
 	RequesterManaged bool
 
-	// Indicates whether traffic to or from the instance is validated.
+	// Indicates whether source/destination checking is enabled.
 	SourceDestCheck bool
 
 	// The status of the network interface.
@@ -7610,9 +7610,7 @@ type RequestSpotLaunchSpecification struct {
 	// EC2-Classic, you can specify the names or the IDs of the security groups.
 	SecurityGroups []string
 
-	// The IDs of the subnets in which to launch the instance. To specify multiple
-	// subnets, separate them using commas; for example, "subnet-1234abcdeexample1,
-	// subnet-0987cdef6example2".
+	// The ID of the subnet in which to launch the instance.
 	SubnetId *string
 
 	// The Base64-encoded user data for the instance. User data is limited to 16 KB.

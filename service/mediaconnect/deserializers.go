@@ -6097,6 +6097,15 @@ func awsRestjson1_deserializeDocumentOutput(v **types.Output, value interface{})
 				sv.EntitlementArn = ptr.String(jtv)
 			}
 
+		case "listenerAddress":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ListenerAddress = ptr.String(jtv)
+			}
+
 		case "mediaLiveInputArn":
 			if value != nil {
 				jtv, ok := value.(string)

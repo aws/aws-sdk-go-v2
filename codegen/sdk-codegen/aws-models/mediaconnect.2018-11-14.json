@@ -661,6 +661,158 @@
                     "method": "GET",
                     "uri": "/v1/flows/{FlowArn}",
                     "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "FlowActive": {
+                        "documentation": "Wait until a flow is active",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "STARTING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "UPDATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerErrorException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "ServiceUnavailableException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "ERROR",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 3
+                    },
+                    "FlowDeleted": {
+                        "documentation": "Wait until a flow is deleted",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "NotFoundException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerErrorException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "ServiceUnavailableException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "ERROR",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 3
+                    },
+                    "FlowStandby": {
+                        "documentation": "Wait until a flow is in standby mode",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "STANDBY",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "STOPPING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerErrorException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "ServiceUnavailableException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Flow.Status",
+                                        "expected": "ERROR",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 3
+                    }
                 }
             }
         },
@@ -1986,6 +2138,13 @@
                     "traits": {
                         "smithy.api#documentation": "The ARN of the entitlement on the originator''s flow. This value is relevant only on entitled flows.",
                         "smithy.api#jsonName": "entitlementArn"
+                    }
+                },
+                "ListenerAddress": {
+                    "target": "com.amazonaws.mediaconnect#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The IP address that the receiver requires in order to establish a connection with the flow. For public networking, the ListenerAddress is represented by the elastic IP address of the flow. For private networking, the ListenerAddress is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the Zixi pull or SRT listener protocol.",
+                        "smithy.api#jsonName": "listenerAddress"
                     }
                 },
                 "MediaLiveInputArn": {

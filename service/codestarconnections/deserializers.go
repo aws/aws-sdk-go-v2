@@ -2279,6 +2279,11 @@ func awsAwsjson10_deserializeOpDocumentCreateHostOutput(v **CreateHostOutput, va
 				sv.HostArn = ptr.String(jtv)
 			}
 
+		case "Tags":
+			if err := awsAwsjson10_deserializeDocumentTagList(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

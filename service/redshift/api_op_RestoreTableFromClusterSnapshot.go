@@ -67,6 +67,11 @@ type RestoreTableFromClusterSnapshotInput struct {
 	// This member is required.
 	SourceTableName *string
 
+	// Indicates whether name identifiers for database, schema, and table are case
+	// sensitive. If true, the names are case sensitive. If false (default), the names
+	// are not case sensitive.
+	EnableCaseSensitiveIdentifier *bool
+
 	// The name of the source schema that contains the table to restore from. If you do
 	// not specify a SourceSchemaName value, the default is public.
 	SourceSchemaName *string

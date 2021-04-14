@@ -4184,7 +4184,7 @@
                 "relationalDatabaseName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name to use for your new database.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first and last character must be a letter or number.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name to use for your new Lightsail database resource.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 2 to 255 alphanumeric characters, or hyphens.</p>\n            </li>\n            <li>\n               <p>The first and last character must be a letter or number.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4282,21 +4282,21 @@
                 "masterDatabaseName": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the master database created when the Lightsail database resource is\n      created.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 64 alphanumeric characters.</p>\n            </li>\n            <li>\n               <p>Cannot be a word reserved by the specified database engine</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>The name of the database to create when the Lightsail database resource is created. If\n      this parameter isn't specified, no database is created in the database resource.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits\n          (0- 9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine.</p>\n               <p>For more information about reserved words in MySQL, see the Keywords and Reserved\n          Words articles for <a href=\"https://dev.mysql.com/doc/refman/5.6/en/keywords.html\">MySQL 5.6</a>, <a href=\"https://dev.mysql.com/doc/refman/5.7/en/keywords.html\">MySQL 5.7</a>, and <a href=\"https://dev.mysql.com/doc/refman/8.0/en/keywords.html\">MySQL 8.0</a>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>The name of the database to create when the Lightsail database resource is created. If\n      this parameter isn't specified, a database named <code>postgres</code> is created in the\n      database resource.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 63 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits\n          (0- 9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine.</p>\n               <p>For more information about reserved words in PostgreSQL, see the SQL Key Words\n          articles for <a href=\"https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html\">PostgreSQL 9.6</a>, <a href=\"https://www.postgresql.org/docs/10/sql-keywords-appendix.html\">PostgreSQL\n            10</a>, <a href=\"https://www.postgresql.org/docs/11/sql-keywords-appendix.html\">PostgreSQL 11</a>, and <a href=\"https://www.postgresql.org/docs/12/sql-keywords-appendix.html\">PostgreSQL\n            12</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "masterUsername": {
                     "target": "com.amazonaws.lightsail#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The master user name for your new database.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Master user name is required.</p>\n            </li>\n            <li>\n               <p>Must contain from 1 to 16 alphanumeric characters.</p>\n            </li>\n            <li>\n               <p>The first character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot be a reserved word for the database engine you choose.</p>\n               <p>For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and\n          Reserved Words articles for <a href=\"https://dev.mysql.com/doc/refman/5.6/en/keywords.html\">MySQL 5.6</a> or <a href=\"https://dev.mysql.com/doc/refman/5.7/en/keywords.html\">MySQL 5.7</a>\n          respectively.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name for the master user.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Required for MySQL.</p>\n            </li>\n            <li>\n               <p>Must be 1 to 16 letters or numbers. Can contain underscores.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't be a reserved word for the chosen database engine.</p>\n               <p>For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and\n          Reserved Words articles for <a href=\"https://dev.mysql.com/doc/refman/5.6/en/keywords.html\">MySQL 5.6</a>, <a href=\"https://dev.mysql.com/doc/refman/5.7/en/keywords.html\">MySQL 5.7</a>, or <a href=\"https://dev.mysql.com/doc/refman/8.0/en/keywords.html\">MySQL 8.0</a>.</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Required for PostgreSQL.</p>\n            </li>\n            <li>\n               <p>Must be 1 to 63 letters or numbers. Can contain underscores.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't be a reserved word for the chosen database engine.</p>\n               <p>For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and\n          Reserved Words articles for <a href=\"https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html\">PostgreSQL\n            9.6</a>, <a href=\"https://www.postgresql.org/docs/10/sql-keywords-appendix.html\">PostgreSQL 10</a>, <a href=\"https://www.postgresql.org/docs/11/sql-keywords-appendix.html\">PostgreSQL\n            11</a>, and <a href=\"https://www.postgresql.org/docs/12/sql-keywords-appendix.html\">PostgreSQL\n            12</a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "masterUserPassword": {
                     "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the master user of your new database. The password can include any\n      printable ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints: Must contain 8 to 41 characters.</p>"
+                        "smithy.api#documentation": "<p>The password for the master user. The password can include any printable ASCII character\n      except \"/\", \"\"\", or \"@\". It cannot contain spaces.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>"
                     }
                 },
                 "preferredBackupWindow": {
@@ -17641,14 +17641,14 @@
                 "relationalDatabaseName": {
                     "target": "com.amazonaws.lightsail#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of your database to update.</p>",
+                        "smithy.api#documentation": "<p>The name of your Lightsail database resource to update.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "masterUserPassword": {
                     "target": "com.amazonaws.lightsail#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The password for the master user of your database. The password can include any printable\n      ASCII character except \"/\", \"\"\", or \"@\".</p>\n         <p>Constraints: Must contain 8 to 41 characters.</p>"
+                        "smithy.api#documentation": "<p>The password for the master user. The password can include any printable ASCII character\n      except \"/\", \"\"\", or \"@\".</p>\n         <p>My<b>SQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 41 characters.</p>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>Constraints: Must contain from 8 to 128 characters.</p>"
                     }
                 },
                 "rotateMasterUserPassword": {

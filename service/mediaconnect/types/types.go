@@ -377,6 +377,13 @@ type Output struct {
 	// only on entitled flows.
 	EntitlementArn *string
 
+	// The IP address that the receiver requires in order to establish a connection
+	// with the flow. For public networking, the ListenerAddress is represented by the
+	// elastic IP address of the flow. For private networking, the ListenerAddress is
+	// represented by the elastic network interface IP address of the VPC. This field
+	// applies only to outputs that use the Zixi pull or SRT listener protocol.
+	ListenerAddress *string
+
 	// The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant
 	// only for outputs that were added by creating a MediaLive input.
 	MediaLiveInputArn *string

@@ -171,6 +171,9 @@ type ICD10CMAttribute struct {
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
 
+	// The category of attribute. Can be either of DX_NAME or TIME_EXPRESSION.
+	Category ICD10CMEntityType
+
 	// The 0-based character offset in the input text that shows where the attribute
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
@@ -182,6 +185,10 @@ type ICD10CMAttribute struct {
 	// The level of confidence that Amazon Comprehend Medical has that this attribute
 	// is correctly related to this entity.
 	RelationshipScore *float32
+
+	// The type of relationship between the entity and attribute. Type for the
+	// relationship can be either of OVERLAP or SYSTEM_ORGAN_SITE.
+	RelationshipType ICD10CMRelationshipType
 
 	// The level of confidence that Amazon Comprehend Medical has that the segment of
 	// text is correctly recognized as an attribute.
@@ -258,7 +265,7 @@ type ICD10CMEntity struct {
 	Traits []ICD10CMTrait
 
 	// Describes the specific type of entity with category of entities. InferICD10CM
-	// detects entities of the type DX_NAME.
+	// detects entities of the type DX_NAME and TIME_EXPRESSION.
 	Type ICD10CMEntityType
 }
 
@@ -275,8 +282,7 @@ type ICD10CMTrait struct {
 }
 
 // The input properties for an entities detection job. This includes the name of
-// the S3 bucket and the path to the files to be analyzed. See batch-manifest for
-// more information.
+// the S3 bucket and the path to the files to be analyzed.
 type InputDataConfig struct {
 
 	// The URI of the S3 bucket that contains the input data. The bucket must be in the

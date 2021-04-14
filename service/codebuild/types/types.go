@@ -79,7 +79,12 @@ type Build struct {
 	// Information about the build environment for this build.
 	Environment *ProjectEnvironment
 
-	// A list of exported environment variables for this build.
+	// A list of exported environment variables for this build. Exported environment
+	// variables are used in conjunction with AWS CodePipeline to export environment
+	// variables from the current build stage to subsequent stages in the pipeline. For
+	// more information, see Working with variables
+	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html)
+	// in the AWS CodePipeline User Guide.
 	ExportedEnvironmentVariables []ExportedEnvironmentVariable
 
 	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
@@ -197,6 +202,29 @@ type BuildArtifacts struct {
 
 	// An identifier for this artifact definition.
 	ArtifactIdentifier *string
+
+	// Specifies the access for objects that are uploaded to an Amazon S3 bucket that
+	// is owned by another account. By default, only the account that uploads the
+	// objects to the bucket has access to these objects. This property allows you to
+	// give the bucket owner access to these objects. NONE The bucket owner does not
+	// have access to the objects. This is the default. READ_ONLY The bucket owner has
+	// read only access to the objects. The uploading account retains ownership of the
+	// objects. FULL The bucket owner has full access to the objects. Object ownership
+	// is determined by the following criteria:
+	//
+	// * If the bucket is configured with the
+	// Bucket owner preferred setting, the bucket owner owns the objects. The uploading
+	// account will have object access as specified by the bucket's policy.
+	//
+	// *
+	// Otherwise, the uploading account retains ownership of the objects.
+	//
+	// For more
+	// information about Amazon S3 object ownership, see Controlling ownership of
+	// uploaded objects using S3 Object Ownership
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+	// in the Amazon Simple Storage Service User Guide.
+	BucketOwnerAccess BucketOwnerAccess
 
 	// Information that tells you if encryption for build artifacts is disabled.
 	EncryptionDisabled *bool
@@ -733,17 +761,21 @@ type EnvironmentVariable struct {
 	Type EnvironmentVariableType
 }
 
-// Information about an exported environment variable.
+// Contains information about an exported environment variable. Exported
+// environment variables are used in conjunction with AWS CodePipeline to export
+// environment variables from the current build stage to subsequent stages in the
+// pipeline. For more information, see Working with variables
+// (https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html)
+// in the AWS CodePipeline User Guide. During a build, the value of a variable is
+// available starting with the install phase. It can be updated between the start
+// of the install phase and the end of the post_build phase. After the post_build
+// phase ends, the value of exported variables cannot change.
 type ExportedEnvironmentVariable struct {
 
-	// The name of this exported environment variable.
+	// The name of the exported environment variable.
 	Name *string
 
-	// The value assigned to this exported environment variable. During a build, the
-	// value of a variable is available starting with the install phase. It can be
-	// updated between the start of the install phase and the end of the post_build
-	// phase. After the post_build phase ends, the value of exported variables cannot
-	// change.
+	// The value assigned to the exported environment variable.
 	Value *string
 }
 
@@ -972,6 +1004,29 @@ type ProjectArtifacts struct {
 
 	// An identifier for this artifact definition.
 	ArtifactIdentifier *string
+
+	// Specifies the access for objects that are uploaded to an Amazon S3 bucket that
+	// is owned by another account. By default, only the account that uploads the
+	// objects to the bucket has access to these objects. This property allows you to
+	// give the bucket owner access to these objects. NONE The bucket owner does not
+	// have access to the objects. This is the default. READ_ONLY The bucket owner has
+	// read only access to the objects. The uploading account retains ownership of the
+	// objects. FULL The bucket owner has full access to the objects. Object ownership
+	// is determined by the following criteria:
+	//
+	// * If the bucket is configured with the
+	// Bucket owner preferred setting, the bucket owner owns the objects. The uploading
+	// account will have object access as specified by the bucket's policy.
+	//
+	// *
+	// Otherwise, the uploading account retains ownership of the objects.
+	//
+	// For more
+	// information about Amazon S3 object ownership, see Controlling ownership of
+	// uploaded objects using S3 Object Ownership
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+	// in the Amazon Simple Storage Service User Guide.
+	BucketOwnerAccess BucketOwnerAccess
 
 	// Set to true if you do not want your output artifacts encrypted. This option is
 	// valid only if your artifacts type is Amazon S3. If this is set with another
@@ -1703,6 +1758,29 @@ type S3LogsConfig struct {
 	//
 	// This member is required.
 	Status LogsConfigStatusType
+
+	// Specifies the access for objects that are uploaded to an Amazon S3 bucket that
+	// is owned by another account. By default, only the account that uploads the
+	// objects to the bucket has access to these objects. This property allows you to
+	// give the bucket owner access to these objects. NONE The bucket owner does not
+	// have access to the objects. This is the default. READ_ONLY The bucket owner has
+	// read only access to the objects. The uploading account retains ownership of the
+	// objects. FULL The bucket owner has full access to the objects. Object ownership
+	// is determined by the following criteria:
+	//
+	// * If the bucket is configured with the
+	// Bucket owner preferred setting, the bucket owner owns the objects. The uploading
+	// account will have object access as specified by the bucket's policy.
+	//
+	// *
+	// Otherwise, the uploading account retains ownership of the objects.
+	//
+	// For more
+	// information about Amazon S3 object ownership, see Controlling ownership of
+	// uploaded objects using S3 Object Ownership
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html)
+	// in the Amazon Simple Storage Service User Guide.
+	BucketOwnerAccess BucketOwnerAccess
 
 	// Set to true if you do not want your S3 build log output encrypted. By default S3
 	// build logs are encrypted.

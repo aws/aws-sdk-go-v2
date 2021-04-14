@@ -91,6 +91,9 @@ type DescribeCapacityReservationsInput struct {
 	// capacity constraints, or instance limit constraints. Failed requests are
 	// retained for 60 minutes.
 	//
+	// * start-date - The date and time at which the Capacity
+	// Reservation was started.
+	//
 	// * end-date - The date and time at which the Capacity
 	// Reservation expires. When a Capacity Reservation expires, the reserved capacity
 	// is released and you can no longer launch instances into it. The Capacity

@@ -86,12 +86,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.2.2
 	github.com/aws/smithy-go v1.3.1
 	github.com/google/go-cmp v0.5.4
-	github.com/aws/aws-sdk-go-v2/credentials v1.1.5
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.0.6
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.0.4
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.0.6
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.2.2
-	github.com/aws/aws-sdk-go-v2/service/sso v1.1.5
 )
 
 go 1.15

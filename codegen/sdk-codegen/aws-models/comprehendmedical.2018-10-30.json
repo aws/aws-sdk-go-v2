@@ -56,7 +56,7 @@
                 "RelationshipType": {
                     "target": "com.amazonaws.comprehendmedical#RelationshipType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of relationship between the entity and attribute. Type for the relationship is <code>OVERLAP</code>, indicating that the entity occurred at the same time as the <code>Date_Expression</code>.\n    </p>"
+                        "smithy.api#documentation": "<p>The type of relationship between the entity and attribute. Type for the relationship is\n        <code>OVERLAP</code>, indicating that the entity occurred at the same time as the\n        <code>Date_Expression</code>. </p>"
                     }
                 },
                 "Id": {
@@ -434,7 +434,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the properties associated with an InferICD10CM job.\n      Use this operation to get the status of an inference job.</p>"
+                "smithy.api#documentation": "<p>Gets the properties associated with an InferICD10CM job. Use this operation to get the\n      status of an inference job.</p>"
             }
         },
         "com.amazonaws.comprehendmedical#DescribeICD10CMInferenceJobRequest": {
@@ -443,7 +443,7 @@
                 "JobId": {
                     "target": "com.amazonaws.comprehendmedical#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier that Amazon Comprehend Medical generated for the job. <code>The StartICD10CMInferenceJob</code> operation returns this identifier in its response.</p>",
+                        "smithy.api#documentation": "<p>The identifier that Amazon Comprehend Medical generated for the job. <code>The\n        StartICD10CMInferenceJob</code> operation returns this identifier in its response.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -532,7 +532,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the properties associated with an InferRxNorm job.\n      Use this operation to get the status of an inference job.</p>"
+                "smithy.api#documentation": "<p>Gets the properties associated with an InferRxNorm job. Use this operation to get the\n      status of an inference job.</p>"
             }
         },
         "com.amazonaws.comprehendmedical#DescribeRxNormInferenceJobRequest": {
@@ -541,7 +541,7 @@
                 "JobId": {
                     "target": "com.amazonaws.comprehendmedical#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier that Amazon Comprehend Medical generated for the job. The StartRxNormInferenceJob operation returns this identifier in its response.</p>",
+                        "smithy.api#documentation": "<p>The identifier that Amazon Comprehend Medical generated for the job. The\n      StartRxNormInferenceJob operation returns this identifier in its response.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1078,6 +1078,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The contextual information for the attribute. The traits recognized by InferICD10CM are\n        <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and\n      <code>NEGATION</code>.</p>"
                     }
+                },
+                "Category": {
+                    "target": "com.amazonaws.comprehendmedical#ICD10CMEntityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of attribute. Can be either of <code>DX_NAME</code> or <code>TIME_EXPRESSION</code>.</p>"
+                    }
+                },
+                "RelationshipType": {
+                    "target": "com.amazonaws.comprehendmedical#ICD10CMRelationshipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of relationship between the entity and attribute. Type for the relationship can\n        be either of <code>OVERLAP</code> or <code>SYSTEM_ORGAN_SITE</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1113,6 +1125,14 @@
                     {
                         "value": "QUANTITY",
                         "name": "QUANTITY"
+                    },
+                    {
+                        "value": "TIME_TO_DX_NAME",
+                        "name": "TIME_TO_DX_NAME"
+                    },
+                    {
+                        "value": "TIME_EXPRESSION",
+                        "name": "TIME_EXPRESSION"
                     }
                 ]
             }
@@ -1173,7 +1193,7 @@
                 "Type": {
                     "target": "com.amazonaws.comprehendmedical#ICD10CMEntityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the specific type of entity with category of entities. InferICD10CM detects\n      entities of the type <code>DX_NAME</code>.</p>"
+                        "smithy.api#documentation": "<p>Describes the specific type of entity with category of entities. InferICD10CM detects\n      entities of the type <code>DX_NAME</code> and <code>TIME_EXPRESSION</code>.</p>"
                     }
                 },
                 "Score": {
@@ -1241,6 +1261,25 @@
                     {
                         "value": "DX_NAME",
                         "name": "DX_NAME"
+                    },
+                    {
+                        "value": "TIME_EXPRESSION",
+                        "name": "TIME_EXPRESSION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.comprehendmedical#ICD10CMRelationshipType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OVERLAP",
+                        "name": "OVERLAP"
+                    },
+                    {
+                        "value": "SYSTEM_ORGAN_SITE",
+                        "name": "SYSTEM_ORGAN_SITE"
                     }
                 ]
             }
@@ -1333,7 +1372,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>InferICD10CM detects medical conditions as entities listed in a patient record and links\n      those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the\n      Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in\n      English language texts.</p>"
+                "smithy.api#documentation": "<p>InferICD10CM detects medical conditions as entities listed in a patient record and links\n      those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the\n      Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in\n      English language texts.  </p>"
             }
         },
         "com.amazonaws.comprehendmedical#InferICD10CMRequest": {
@@ -1401,7 +1440,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>InferRxNorm detects medications as entities listed in a patient record and links to the\n      normalized concept identifiers in the RxNorm database from the National Library of Medicine.\n      Amazon Comprehend Medical only detects medical entities in English language texts.</p>"
+                "smithy.api#documentation": "<p>InferRxNorm detects medications as entities listed in a patient record and links to the\n      normalized concept identifiers in the RxNorm database from the National Library of Medicine.\n      Amazon Comprehend Medical only detects medical entities in English language texts.  </p>"
             }
         },
         "com.amazonaws.comprehendmedical#InferRxNormRequest": {
@@ -1458,7 +1497,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed. See <a>batch-manifest</a> for more information. </p>"
+                "smithy.api#documentation": "<p>The input properties for an entities detection job. This includes the name of the S3\n      bucket and the path to the files to be analyzed. </p>"
             }
         },
         "com.amazonaws.comprehendmedical#Integer": {
@@ -1671,7 +1710,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of InferICD10CM jobs that you have\n      submitted.</p>"
+                "smithy.api#documentation": "<p>Gets a list of InferICD10CM jobs that you have submitted.</p>"
             }
         },
         "com.amazonaws.comprehendmedical#ListICD10CMInferenceJobsRequest": {
@@ -1680,7 +1719,7 @@
                 "Filter": {
                     "target": "com.amazonaws.comprehendmedical#ComprehendMedicalAsyncJobFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.</p>"
+                        "smithy.api#documentation": "<p>Filters the jobs that are returned. You can filter jobs based on their names, status, or\n      the date and time that they were submitted. You can only set one filter at a time.</p>"
                     }
                 },
                 "NextToken": {
@@ -1803,7 +1842,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of InferRxNorm jobs that you have\n      submitted.</p>"
+                "smithy.api#documentation": "<p>Gets a list of InferRxNorm jobs that you have submitted.</p>"
             }
         },
         "com.amazonaws.comprehendmedical#ListRxNormInferenceJobsRequest": {
@@ -1812,7 +1851,7 @@
                 "Filter": {
                     "target": "com.amazonaws.comprehendmedical#ComprehendMedicalAsyncJobFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters the jobs that are returned. You can filter jobs based on their names, status, or the date and time that they were submitted. You can only set one filter at a time.</p>"
+                        "smithy.api#documentation": "<p>Filters the jobs that are returned. You can filter jobs based on their names, status, or\n      the date and time that they were submitted. You can only set one filter at a time.</p>"
                     }
                 },
                 "NextToken": {
@@ -2401,7 +2440,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous job to detect medical conditions and link them to the ICD-10-CM ontology. Use the\n      <code>DescribeICD10CMInferenceJob</code> operation to track the status of a job.</p>"
+                "smithy.api#documentation": "<p>Starts an asynchronous job to detect medical conditions and link them to the ICD-10-CM\n      ontology. Use the <code>DescribeICD10CMInferenceJob</code> operation to track the status of a\n      job.</p>"
             }
         },
         "com.amazonaws.comprehendmedical#StartICD10CMInferenceJobRequest": {
@@ -2579,7 +2618,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous job to detect medication entities and link them to the RxNorm ontology. Use the\n      <code>DescribeRxNormInferenceJob</code> operation to track the status of a job.</p>"
+                "smithy.api#documentation": "<p>Starts an asynchronous job to detect medication entities and link them to the RxNorm\n      ontology. Use the <code>DescribeRxNormInferenceJob</code> operation to track the status of a\n      job.</p>"
             }
         },
         "com.amazonaws.comprehendmedical#StartRxNormInferenceJobRequest": {
@@ -2732,7 +2771,7 @@
                 "JobId": {
                     "target": "com.amazonaws.comprehendmedical#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of job, use this identifier with the <code>DescribeICD10CMInferenceJob</code> operation.</p>"
+                        "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of job, use this identifier with\n      the <code>DescribeICD10CMInferenceJob</code> operation.</p>"
                     }
                 }
             }
@@ -2824,7 +2863,7 @@
                 "JobId": {
                     "target": "com.amazonaws.comprehendmedical#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of job, use this identifier with the <code>DescribeRxNormInferenceJob</code> operation.</p>"
+                        "smithy.api#documentation": "<p>The identifier generated for the job. To get the status of job, use this identifier with\n      the <code>DescribeRxNormInferenceJob</code> operation.</p>"
                     }
                 }
             }

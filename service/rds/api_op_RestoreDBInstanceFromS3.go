@@ -254,7 +254,7 @@ type RestoreDBInstanceFromS3Input struct {
 	Port *int32
 
 	// The time range each day during which automated backups are created if automated
-	// backups are enabled. For more information, see The Backup Window
+	// backups are enabled. For more information, see Backup window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
 	// in the Amazon RDS User Guide. Constraints:
 	//

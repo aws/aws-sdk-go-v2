@@ -50,6 +50,26 @@ func (m *validateOpCancelDataRepositoryTask) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCopyBackup struct {
+}
+
+func (*validateOpCopyBackup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCopyBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CopyBackupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCopyBackupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateBackup struct {
 }
 
@@ -298,6 +318,10 @@ func addOpCancelDataRepositoryTaskValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpCancelDataRepositoryTask{}, middleware.After)
 }
 
+func addOpCopyBackupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCopyBackup{}, middleware.After)
+}
+
 func addOpCreateBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackup{}, middleware.After)
 }
@@ -499,6 +523,26 @@ func validateOpCancelDataRepositoryTaskInput(v *CancelDataRepositoryTaskInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "CancelDataRepositoryTaskInput"}
 	if v.TaskId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TaskId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCopyBackupInput(v *CopyBackupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CopyBackupInput"}
+	if v.SourceBackupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceBackupId"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

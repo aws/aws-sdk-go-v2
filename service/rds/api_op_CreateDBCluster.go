@@ -297,9 +297,8 @@ type CreateDBClusterInput struct {
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
 	// 30-minute window selected at random from an 8-hour block of time for each AWS
-	// Region. To see the time blocks available, see  Adjusting the Preferred DB
-	// Cluster Maintenance Window
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow.Aurora)
+	// Region. To view the time blocks available, see  Backup window
+	// (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Managing.Backups.html#Aurora.Managing.Backups.BackupWindow)
 	// in the Amazon Aurora User Guide. Constraints:
 	//
 	// * Must be in the format

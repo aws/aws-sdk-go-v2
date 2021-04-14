@@ -37,13 +37,13 @@ func (c *Client) CreateRelationalDatabaseFromSnapshot(ctx context.Context, param
 
 type CreateRelationalDatabaseFromSnapshotInput struct {
 
-	// The name to use for your new database. Constraints:
+	// The name to use for your new Lightsail database resource. Constraints:
 	//
-	// * Must contain from 2 to
-	// 255 alphanumeric characters, or hyphens.
+	// * Must
+	// contain from 2 to 255 alphanumeric characters, or hyphens.
 	//
-	// * The first and last character must be
-	// a letter or number.
+	// * The first and last
+	// character must be a letter or number.
 	//
 	// This member is required.
 	RelationalDatabaseName *string

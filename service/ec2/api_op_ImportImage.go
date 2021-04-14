@@ -12,7 +12,7 @@ import (
 )
 
 // Import single or multi-volume disk images or EBS snapshots into an Amazon
-// Machine Image (AMI). For more information, see Importing a VM as an Image Using
+// Machine Image (AMI). For more information, see Importing a VM as an image using
 // VM Import/Export
 // (https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html)
 // in the VM Import/Export User Guide.

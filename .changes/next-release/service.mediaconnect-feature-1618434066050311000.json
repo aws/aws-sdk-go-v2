@@ -1,0 +1,9 @@
+{
+ "ID": "service.mediaconnect-feature-1618434066050311000",
+ "SchemaVersion": 1,
+ "Module": "service/mediaconnect",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

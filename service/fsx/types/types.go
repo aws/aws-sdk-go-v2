@@ -16,6 +16,14 @@ type ActiveDirectoryBackupAttributes struct {
 
 	// The fully qualified domain name of the self-managed AD directory.
 	DomainName *string
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS
+	// resources. We require an ARN when you need to specify a resource unambiguously
+	// across all of AWS. For more information, see Amazon Resource Names (ARNs) and
+	// AWS Service Namespaces
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the AWS General Reference.
+	ResourceARN *string
 }
 
 // Describes a specific Amazon FSx administrative action for the current Windows or
@@ -141,29 +149,21 @@ type Alias struct {
 	// hostname.domain, for example, accounting.example.com.
 	//
 	// * Can contain
-	// alphanumeric characters and the hyphen (-).
+	// alphanumeric characters, the underscore (_), and the hyphen (-).
 	//
-	// * Cannot start or end with a
-	// hyphen.
+	// * Cannot start
+	// or end with a hyphen.
 	//
 	// * Can start with a numeric.
 	//
-	// For DNS names, Amazon FSx stores
-	// alphabetic characters as lowercase letters (a-z), regardless of how you specify
-	// them: as uppercase letters, lowercase letters, or the corresponding letters in
-	// escape codes.
+	// For DNS names, Amazon FSx
+	// stores alphabetic characters as lowercase letters (a-z), regardless of how you
+	// specify them: as uppercase letters, lowercase letters, or the corresponding
+	// letters in escape codes.
 	Name *string
 }
 
-// A backup of an Amazon FSx file system. For more information see:
-//
-// * Working with
-// backups for Windows file systems
-// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html)
-//
-// *
-// Working with backups for Lustre file systems
-// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html)
+// A backup of an Amazon FSx file system.
 type Backup struct {
 
 	// The ID of the backup.
@@ -196,11 +196,13 @@ type Backup struct {
 	// * TRANSFERRING - For user-initiated backups on Lustre file
 	// systems only; Amazon FSx is transferring the backup to S3.
 	//
-	// * DELETED - Amazon
-	// FSx deleted the backup and it is no longer available.
+	// * COPYING - Amazon
+	// FSx is copying the backup.
 	//
-	// * FAILED - Amazon FSx
-	// could not complete the backup.
+	// * DELETED - Amazon FSx deleted the backup and it is
+	// no longer available.
+	//
+	// * FAILED - Amazon FSx could not complete the backup.
 	//
 	// This member is required.
 	Lifecycle BackupLifecycle
@@ -221,11 +223,22 @@ type Backup struct {
 	// backup of the Amazon FSx file system's data at rest.
 	KmsKeyId *string
 
+	// An AWS account ID. This ID is a 12-digit number that you use to construct Amazon
+	// Resource Names (ARNs) for resources.
+	OwnerId *string
+
 	// The current percent of progress of an asynchronous task.
 	ProgressPercent *int32
 
 	// The Amazon Resource Name (ARN) for the backup resource.
 	ResourceARN *string
+
+	// The ID of the source backup. Specifies the backup you are copying.
+	SourceBackupId *string
+
+	// The source Region of the backup. Specifies the Region from where this backup is
+	// copied.
+	SourceBackupRegion *string
 
 	// Tags associated with a particular file system.
 	Tags []Tag
@@ -429,17 +442,17 @@ type CreateFileSystemWindowsConfiguration struct {
 	// Formatted as a fully-qualified domain name (FQDN), hostname.domain, for example,
 	// accounting.example.com.
 	//
-	// * Can contain alphanumeric characters and the hyphen
-	// (-).
+	// * Can contain alphanumeric characters, the underscore
+	// (_), and the hyphen (-).
 	//
 	// * Cannot start or end with a hyphen.
 	//
-	// * Can start with a numeric.
+	// * Can start with
+	// a numeric.
 	//
-	// For DNS
-	// alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z),
-	// regardless of how you specify them: as uppercase letters, lowercase letters, or
-	// the corresponding letters in escape codes.
+	// For DNS alias names, Amazon FSx stores alphabetic characters as
+	// lowercase letters (a-z), regardless of how you specify them: as uppercase
+	// letters, lowercase letters, or the corresponding letters in escape codes.
 	Aliases []string
 
 	// The number of days to retain automatic backups. The default is to retain backups
@@ -490,7 +503,9 @@ type CreateFileSystemWindowsConfiguration struct {
 
 	// The configuration that Amazon FSx uses to join the Windows File Server instance
 	// to your self-managed (including on-premises) Microsoft Active Directory (AD)
-	// directory.
+	// directory. For more information, see  Using Amazon FSx with your self-managed
+	// Microsoft Active Directory
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html).
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
@@ -1001,22 +1016,13 @@ type SelfManagedActiveDirectoryAttributes struct {
 
 // The configuration that Amazon FSx uses to join the Windows File Server instance
 // to your self-managed (including on-premises) Microsoft Active Directory (AD)
-// directory.
+// directory. For more information, see  Using Amazon FSx with your self-managed
+// Microsoft Active Directory
+// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html).
 type SelfManagedActiveDirectoryConfiguration struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the
-	// self-managed AD directory. The IP addresses need to be either in the same VPC
-	// CIDR range as the one in which your Amazon FSx file system is being created, or
-	// in the private IP version 4 (IPv4) address ranges, as specified in RFC 1918
-	// (http://www.faqs.org/rfcs/rfc1918.html):
-	//
-	// * 10.0.0.0 - 10.255.255.255 (10/8
-	// prefix)
-	//
-	// * 172.16.0.0 - 172.31.255.255 (172.16/12 prefix)
-	//
-	// * 192.168.0.0 -
-	// 192.168.255.255 (192.168/16 prefix)
+	// self-managed AD directory.
 	//
 	// This member is required.
 	DnsIps []string
@@ -1182,8 +1188,8 @@ type UpdateFileSystemWindowsConfiguration struct {
 // The configuration for this Microsoft Windows file system.
 type WindowsFileSystemConfiguration struct {
 
-	// The ID for an existing Microsoft Active Directory instance that the file system
-	// should join when it's created.
+	// The ID for an existing AWS Managed Microsoft Active Directory instance that the
+	// file system is joined to.
 	ActiveDirectoryId *string
 
 	// An array of one or more DNS aliases that are currently associated with the
@@ -1251,9 +1257,9 @@ type WindowsFileSystemConfiguration struct {
 	// SubnetIds property. Amazon FSx serves traffic from this subnet except in the
 	// event of a failover to the secondary file server. For SINGLE_AZ_1 and
 	// SINGLE_AZ_2 deployment types, this value is the same as that for SubnetIDs. For
-	// more information, see Availability and Durability: Single-AZ and Multi-AZ File
-	// Systems
-	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources)
+	// more information, see Availability and durability: Single-AZ and Multi-AZ file
+	// systems
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources).
 	PreferredSubnetId *string
 
 	// For MULTI_AZ_1 deployment types, use this endpoint when performing
@@ -1267,7 +1273,7 @@ type WindowsFileSystemConfiguration struct {
 	// to which the Windows File Server instance is joined.
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryAttributes
 
-	// The throughput of an Amazon FSx file system, measured in megabytes per second.
+	// The throughput of the Amazon FSx file system, measured in megabytes per second.
 	ThroughputCapacity *int32
 
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the

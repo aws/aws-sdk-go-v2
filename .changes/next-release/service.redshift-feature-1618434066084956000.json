@@ -1,0 +1,9 @@
+{
+ "ID": "service.redshift-feature-1618434066084956000",
+ "SchemaVersion": 1,
+ "Module": "service/redshift",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

@@ -551,26 +551,23 @@ type CreateDBInstanceInput struct {
 	Port *int32
 
 	// The daily time range during which automated backups are created if automated
-	// backups are enabled, using the BackupRetentionPeriod parameter. For more
-	// information, see The Backup Window
+	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
+	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// Region. For more information, see Backup window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
 	// in the Amazon RDS User Guide. Amazon Aurora Not applicable. The daily time range
-	// for creating automated backups is managed by the DB cluster. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
-	// Region. To see the time blocks available, see  Adjusting the Preferred DB
-	// Instance Maintenance Window
-	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html#AdjustingTheMaintenanceWindow)
-	// in the Amazon RDS User Guide. Constraints:
+	// for creating automated backups is managed by the DB cluster. Constraints:
 	//
-	// * Must be in the format
-	// hh24:mi-hh24:mi.
+	// *
+	// Must be in the format hh24:mi-hh24:mi.
 	//
-	// * Must be in Universal Coordinated Time (UTC).
+	// * Must be in Universal Coordinated Time
+	// (UTC).
 	//
-	// * Must not
-	// conflict with the preferred maintenance window.
+	// * Must not conflict with the preferred maintenance window.
 	//
-	// * Must be at least 30 minutes.
+	// * Must be at
+	// least 30 minutes.
 	PreferredBackupWindow *string
 
 	// The time range each week during which system maintenance can occur, in Universal

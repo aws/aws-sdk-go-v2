@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Imports a disk into an EBS snapshot.
+// Imports a disk into an EBS snapshot. For more information, see Importing a disk
+// as a snapshot using VM Import/Export
+// (https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-import-snapshot.html)
+// in the VM Import/Export User Guide.
 func (c *Client) ImportSnapshot(ctx context.Context, params *ImportSnapshotInput, optFns ...func(*Options)) (*ImportSnapshotOutput, error) {
 	if params == nil {
 		params = &ImportSnapshotInput{}

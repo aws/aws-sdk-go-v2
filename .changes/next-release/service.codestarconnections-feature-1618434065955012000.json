@@ -1,0 +1,9 @@
+{
+ "ID": "service.codestarconnections-feature-1618434065955012000",
+ "SchemaVersion": 1,
+ "Module": "service/codestarconnections",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

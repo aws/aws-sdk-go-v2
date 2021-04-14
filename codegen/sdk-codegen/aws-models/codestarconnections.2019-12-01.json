@@ -325,6 +325,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The VPC configuration to be provisioned for the host. A VPC must be configured and the\n      infrastructure to be represented by the host must already be connected to the VPC.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.codestarconnections#TagList"
                 }
             }
         },
@@ -336,6 +339,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the host to be created.</p>"
                     }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.codestarconnections#TagList"
                 }
             }
         },
@@ -604,7 +610,14 @@
             }
         },
         "com.amazonaws.codestarconnections#HostStatus": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": ".*"
+            }
         },
         "com.amazonaws.codestarconnections#HostStatusMessage": {
             "type": "string"
