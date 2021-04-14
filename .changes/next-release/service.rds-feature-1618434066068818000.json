@@ -1,0 +1,9 @@
+{
+ "ID": "service.rds-feature-1618434066068818000",
+ "SchemaVersion": 1,
+ "Module": "service/rds",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}
