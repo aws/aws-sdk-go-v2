@@ -155,7 +155,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p>\n\t\t       <p>A conformance pack is compliant if all of the rules in that conformance packs are compliant. It is noncompliant if any of the rules are not compliant.</p>\n\t\t       <note>\n            <p>If a conformance pack has rules that return INSUFFICIENT_DATA, the conformance pack returns INSUFFICIENT_DATA only if all the rules within that conformance pack return INSUFFICIENT_DATA.\n\t\t\tIf some of the rules in a conformance pack are compliant and others return INSUFFICIENT_DATA, the conformance pack shows compliant.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides aggregate compliance of the conformance pack. Indicates whether a conformance pack is compliant based on the name of the conformance pack, account ID, and region.</p>\n\t\t       <p>A conformance pack is compliant if all of the rules in a conformance packs are compliant. It is noncompliant if any of the rules are not compliant.\n\t\t\tThe compliance status of a conformance pack is INSUFFICIENT_DATA only if all rules within a conformance pack cannot be evaluated due to insufficient data.\n\t\t\tIf some of the rules in a conformance pack are compliant but the compliance status of other rules in that same conformance pack is INSUFFICIENT_DATA, the conformance pack shows compliant.</p>"
             }
         },
         "com.amazonaws.configservice#AggregateComplianceByConformancePackList": {
@@ -219,7 +219,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the number of compliant and noncompliant rules within a conformance pack. \n\t\t\tAlso provides the total count of compliant rules, noncompliant rules, and the rules that do not have any applicable resources to evaluate upon resulting in insufficient data. \n\t\t\t</p>"
+                "smithy.api#documentation": "<p>Provides the number of compliant and noncompliant rules within a conformance pack.\n\t\t\tAlso provides the compliance status of the conformance pack and the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>\n\t\t\n\t\t       <p>A conformance pack is compliant if all of the rules in a conformance packs are compliant. It is noncompliant if any of the rules are not compliant.\n\t\t\tThe compliance status of a conformance pack is INSUFFICIENT_DATA only if all rules within a conformance pack cannot be evaluated due to insufficient data.\n\t\t\tIf some of the rules in a conformance pack are compliant but the compliance status of other rules in that same conformance pack is INSUFFICIENT_DATA, the conformance pack shows compliant.</p>"
             }
         },
         "com.amazonaws.configservice#AggregateConformancePackComplianceCount": {
@@ -2639,6 +2639,9 @@
                     "target": "com.amazonaws.configservice#InsufficientPermissionsException"
                 },
                 {
+                    "target": "com.amazonaws.configservice#InvalidParameterValueException"
+                },
+                {
                     "target": "com.amazonaws.configservice#NoSuchRemediationConfigurationException"
                 },
                 {
@@ -3098,7 +3101,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.\n\t\t\tAlso returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacksRequest": {
@@ -3120,7 +3123,7 @@
                 "Limit": {
                     "target": "com.amazonaws.configservice#Limit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of conformance packs details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. </p>"
+                        "smithy.api#documentation": "<p>The maximum number of conformance packs compliance details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. </p>"
                     }
                 },
                 "NextToken": {
@@ -4472,6 +4475,9 @@
                     "target": "com.amazonaws.configservice#InvalidNextTokenException"
                 },
                 {
+                    "target": "com.amazonaws.configservice#InvalidParameterValueException"
+                },
+                {
                     "target": "com.amazonaws.configservice#NoSuchRemediationConfigurationException"
                 }
             ],
@@ -5151,7 +5157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions. You can filter based on AWS Account ID or AWS Region.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions in an aggregator. You can filter based on AWS Account ID or AWS Region.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p>\n         </note>"
             }
         },
         "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummaryRequest": {

@@ -199,6 +199,64 @@
                 ]
             }
         },
+        "com.amazonaws.redshift#AquaConfiguration": {
+            "type": "structure",
+            "members": {
+                "AquaStatus": {
+                    "target": "com.amazonaws.redshift#AquaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value indicates the status of AQUA on the cluster. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - AQUA is enabled.</p>\n            </li>\n            <li>\n               <p>disabled - AQUA is not enabled. </p>\n            </li>\n            <li>\n               <p>applying - AQUA status is being applied. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "AquaConfigurationStatus": {
+                    "target": "com.amazonaws.redshift#AquaConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
+            }
+        },
+        "com.amazonaws.redshift#AquaConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "enabled",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "disabled",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "auto",
+                        "name": "AUTO"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshift#AquaStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "enabled",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "disabled",
+                        "name": "DISABLED"
+                    },
+                    {
+                        "value": "applying",
+                        "name": "APPLYING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.redshift#AssociatedClusterList": {
             "type": "list",
             "member": {
@@ -1029,6 +1087,12 @@
                     "target": "com.amazonaws.redshift#LongOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>The total storage capacity of the cluster in megabytes. </p>"
+                    }
+                },
+                "AquaConfiguration": {
+                    "target": "com.amazonaws.redshift#AquaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
                     }
                 }
             },
@@ -2231,6 +2295,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.</p>"
                     }
+                },
+                "AquaConfigurationStatus": {
+                    "target": "com.amazonaws.redshift#AquaConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -2751,7 +2821,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to\n            the client's HSM in order to store and retrieve the keys used to encrypt the cluster\n            databases.</p>\n        <p>The command returns a public key, which you must store in the HSM. In addition to\n            creating the HSM certificate, you must create an Amazon Redshift HSM configuration that\n            provides a cluster the information needed to store and use encryption keys in the HSM.\n            For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html\">Hardware Security Modules</a>\n            in the Amazon Redshift Cluster Management Guide.</p>"
+                "smithy.api#documentation": "<p>Creates an HSM client certificate that an Amazon Redshift cluster will use to connect to\n            the client's HSM in order to store and retrieve the keys used to encrypt the cluster\n            databases.</p>\n        <p>The command returns a public key, which you must store in the HSM. In addition to\n            creating the HSM certificate, you must create an Amazon Redshift HSM configuration that\n            provides a cluster the information needed to store and use encryption keys in the HSM.\n            For more information, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM\">Hardware Security Modules</a>\n            in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#CreateHsmClientCertificateMessage": {
@@ -7611,6 +7681,55 @@
                 ]
             }
         },
+        "com.amazonaws.redshift#ModifyAquaConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#ModifyAquaInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#ModifyAquaOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnsupportedOperationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies whether a cluster can use AQUA (Advanced Query Accelerator). </p>"
+            }
+        },
+        "com.amazonaws.redshift#ModifyAquaInputMessage": {
+            "type": "structure",
+            "members": {
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the cluster to be modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AquaConfigurationStatus": {
+                    "target": "com.amazonaws.redshift#AquaConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new value of AQUA configuration status. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#ModifyAquaOutputMessage": {
+            "type": "structure",
+            "members": {
+                "AquaConfiguration": {
+                    "target": "com.amazonaws.redshift#AquaConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated AQUA configuration of the cluster. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#ModifyCluster": {
             "type": "operation",
             "input": {
@@ -9469,6 +9588,9 @@
                     "target": "com.amazonaws.redshift#GetReservedNodeExchangeOfferings"
                 },
                 {
+                    "target": "com.amazonaws.redshift#ModifyAquaConfiguration"
+                },
+                {
                     "target": "com.amazonaws.redshift#ModifyCluster"
                 },
                 {
@@ -10401,6 +10523,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.</p>"
                     }
+                },
+                "AquaConfigurationStatus": {
+                    "target": "com.amazonaws.redshift#AquaConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -10548,6 +10676,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the table to create as a result of the current request.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "EnableCaseSensitiveIdentifier": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether name identifiers for database, schema, and table are case sensitive. \n            If <code>true</code>, the names are case sensitive. \n            If <code>false</code> (default), the names are not case sensitive.</p>"
                     }
                 }
             },

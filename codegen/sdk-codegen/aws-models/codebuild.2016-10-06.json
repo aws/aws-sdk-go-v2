@@ -408,6 +408,26 @@
         "com.amazonaws.codebuild#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.codebuild#BucketOwnerAccess": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the access for objects that are uploaded to an Amazon S3 bucket that is owned by\n            another account.</p>\n        <p>By default, only the account that uploads the objects to the bucket has access to\n            these objects. This property allows you to give the bucket owner access to these\n            objects.</p>\n         <dl>\n            <dt>NONE</dt>\n            <dd>\n                <p>The bucket owner does not have access to the objects. This is the\n                        default.</p>\n            </dd>\n            <dt>READ_ONLY</dt>\n            <dd>\n              <p>The bucket owner has read only access to the objects. The uploading account\n                        retains ownership of the objects.</p>\n            </dd>\n            <dt>FULL</dt>\n            <dd>\n              <p>The bucket owner has full access to the objects. Object ownership is determined\n                        by the following criteria:</p>\n                    <ul>\n                  <li>\n                            <p>If the bucket is configured with the <b>Bucket\n                                    owner preferred</b> setting, the bucket owner owns the\n                                objects. The uploading account will have object access as specified\n                                by the bucket's policy.</p>\n                        </li>\n                  <li>\n                            <p>Otherwise, the uploading account retains ownership of the\n                                objects.</p>\n                        </li>\n               </ul>\n                    <p>For more information about Amazon S3 object ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\">Controlling ownership of uploaded objects using S3\n                            Object Ownership</a> in the <i>Amazon Simple Storage Service User\n                        Guide</i>.</p>\n            </dd>\n         </dl>",
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "READ_ONLY",
+                        "name": "READ_ONLY"
+                    },
+                    {
+                        "value": "FULL",
+                        "name": "FULL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.codebuild#Build": {
             "type": "structure",
             "members": {
@@ -576,7 +596,7 @@
                 "exportedEnvironmentVariables": {
                     "target": "com.amazonaws.codebuild#ExportedEnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p> A list of exported environment variables for this build. </p>"
+                        "smithy.api#documentation": "<p>A list of exported environment variables for this build.</p>\n        <p>Exported environment variables are used in conjunction with AWS CodePipeline to export\n  environment variables from the current build stage to subsequent stages in the pipeline.\n  For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p>"
                     }
                 },
                 "reportArns": {
@@ -646,6 +666,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p> An identifier for this artifact definition. </p>"
                     }
+                },
+                "bucketOwnerAccess": {
+                    "target": "com.amazonaws.codebuild#BucketOwnerAccess"
                 }
             },
             "traits": {
@@ -826,7 +849,7 @@
                 "debugSessionEnabled": {
                     "target": "com.amazonaws.codebuild#WrapperBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>\n         <p>Specifies if session debugging is enabled for this batch build. For more information, see\n  <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>"
+                        "smithy.api#documentation": "<p>Specifies if session debugging is enabled for this batch build. For more information, see\n  <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>"
                     }
                 }
             },
@@ -2518,18 +2541,18 @@
                 "name": {
                     "target": "com.amazonaws.codebuild#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p> The name of this exported environment variable. </p>"
+                        "smithy.api#documentation": "<p>The name of the exported environment variable.</p>"
                     }
                 },
                 "value": {
                     "target": "com.amazonaws.codebuild#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The value assigned to this exported environment variable. </p>\n        <note>\n            <p> During a build, the value of a variable is available starting with the\n                    <code>install</code> phase. It can be updated between the start of the\n                    <code>install</code> phase and the end of the <code>post_build</code> phase.\n                After the <code>post_build</code> phase ends, the value of exported variables cannot\n                change.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The value assigned to the exported environment variable.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Information about an exported environment variable. </p>"
+                "smithy.api#documentation": "<p>Contains information about an exported environment variable. </p>\n        <p>Exported environment variables are used in conjunction with AWS CodePipeline to export\n  environment variables from the current build stage to subsequent stages in the pipeline.\n  For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p>\n        <note>\n            <p> During a build, the value of a variable is available starting with the\n                  <code>install</code> phase. It can be updated between the start of the\n                  <code>install</code> phase and the end of the <code>post_build</code> phase.\n              After the <code>post_build</code> phase ends, the value of exported variables cannot\n              change.</p>\n         </note>"
             }
         },
         "com.amazonaws.codebuild#ExportedEnvironmentVariables": {
@@ -4075,6 +4098,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p> An identifier for this artifact definition. </p>"
                     }
+                },
+                "bucketOwnerAccess": {
+                    "target": "com.amazonaws.codebuild#BucketOwnerAccess"
                 }
             },
             "traits": {
@@ -5167,6 +5193,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p> Set to true if you do not want your S3 build log output encrypted. By default S3\n            build logs are encrypted. </p>"
                     }
+                },
+                "bucketOwnerAccess": {
+                    "target": "com.amazonaws.codebuild#BucketOwnerAccess"
                 }
             },
             "traits": {

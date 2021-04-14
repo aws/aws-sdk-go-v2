@@ -51,6 +51,9 @@
                     "target": "com.amazonaws.fsx#CancelDataRepositoryTask"
                 },
                 {
+                    "target": "com.amazonaws.fsx#CopyBackup"
+                },
+                {
                     "target": "com.amazonaws.fsx#CreateBackup"
                 },
                 {
@@ -126,6 +129,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.</p>"
                     }
+                },
+                "ResourceARN": {
+                    "target": "com.amazonaws.fsx#ResourceARN"
                 }
             },
             "traits": {
@@ -285,7 +291,7 @@
                 "Name": {
                     "target": "com.amazonaws.fsx#AlternateDNSName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DNS alias. The alias name has to meet the following requirements:</p>\n        <ul>\n            <li>\n               <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p>\n            </li>\n            <li>\n               <p>Can contain alphanumeric characters and the hyphen (-).</p>\n            </li>\n            <li>\n               <p>Cannot start or end with a hyphen.</p>\n            </li>\n            <li>\n               <p>Can start with a numeric.</p>\n            </li>\n         </ul>\n        <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: \n            as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
+                        "smithy.api#documentation": "<p>The name of the DNS alias. The alias name has to meet the following requirements:</p>\n        <ul>\n            <li>\n               <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p>\n            </li>\n            <li>\n               <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p>\n            </li>\n            <li>\n               <p>Cannot start or end with a hyphen.</p>\n            </li>\n            <li>\n               <p>Can start with a numeric.</p>\n            </li>\n         </ul>\n        <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: \n            as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
                     }
                 },
                 "Lifecycle": {
@@ -296,7 +302,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A DNS alias that is associated with the file system. You can use a DNS alias to access a file system using \n            user-defined DNS names, in addition to the default DNS name\n            that Amazon FSx assigns to the file system. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">DNS aliases</a> in the <i>FSx for Windows File Server User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A DNS alias that is associated with the file system. You can use a DNS alias to access a file system using \n            user-defined DNS names, in addition to the default DNS name\n            that Amazon FSx assigns to the file system. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">DNS aliases</a> \n            in the <i>FSx for Windows File Server User Guide</i>.</p>"
             }
         },
         "com.amazonaws.fsx#AliasLifecycle": {
@@ -479,7 +485,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.fsx#BackupLifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The backup is fully available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon FSx is creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx could not complete the backup.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The backup is fully available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon FSx is creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COPYING</code> - Amazon FSx is copying the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx could not complete the backup.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -536,10 +542,37 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.</p>"
                     }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.fsx#AWSAccountId"
+                },
+                "SourceBackupId": {
+                    "target": "com.amazonaws.fsx#BackupId"
+                },
+                "SourceBackupRegion": {
+                    "target": "com.amazonaws.fsx#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source Region of the backup. Specifies the Region from where this backup\n            is copied.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A backup of an Amazon FSx file system. For more information see:</p> \n            <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html\">Working with backups for Windows file systems</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html\">Working with backups for Lustre file systems</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A backup of an Amazon FSx file system.</p>"
+            }
+        },
+        "com.amazonaws.fsx#BackupBeingCopied": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                },
+                "BackupId": {
+                    "target": "com.amazonaws.fsx#BackupId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You can't delete a backup while it's being copied.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.fsx#BackupFailureDetails": {
@@ -559,7 +592,7 @@
         "com.amazonaws.fsx#BackupId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The ID of the backup. Specifies the backup to use if you're creating a file system from an existing backup.</p>",
+                "smithy.api#documentation": "<p>The ID of the source backup. Specifies the backup you are copying.</p>",
                 "smithy.api#length": {
                     "min": 12,
                     "max": 128
@@ -595,7 +628,7 @@
         "com.amazonaws.fsx#BackupLifecycle": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The backup is fully available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon FSx is creating the new user-intiated backup</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is backing up the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx could not complete the backup.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>The lifecycle status of the backup.</p>\n        <ul>\n            <li>\n               <p>\n                  <code>AVAILABLE</code> - The backup is fully available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATING</code> - Amazon FSx is creating the new user-intiated backup</p>\n            </li>\n            <li>\n               <p>\n                  <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is backing up the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COPYING</code> - Amazon FSx is copying the backup.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - Amazon FSx could not complete the backup.</p>\n            </li>\n         </ul>",
                 "smithy.api#enum": [
                     {
                         "value": "AVAILABLE",
@@ -620,6 +653,10 @@
                     {
                         "value": "PENDING",
                         "name": "PENDING"
+                    },
+                    {
+                        "value": "COPYING",
+                        "name": "COPYING"
                     }
                 ]
             }
@@ -803,6 +840,98 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides a report detailing the data repository task results of the files processed that match the criteria specified in the report <code>Scope</code> parameter. \n            FSx delivers the report to the file system's linked data repository in Amazon S3, \n            using the path specified in the report <code>Path</code> parameter. \n            You can specify whether or not a report gets generated for a task using the <code>Enabled</code> parameter.</p>"
+            }
+        },
+        "com.amazonaws.fsx#CopyBackup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.fsx#CopyBackupRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.fsx#CopyBackupResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.fsx#BackupNotFound"
+                },
+                {
+                    "target": "com.amazonaws.fsx#BadRequest"
+                },
+                {
+                    "target": "com.amazonaws.fsx#IncompatibleParameterError"
+                },
+                {
+                    "target": "com.amazonaws.fsx#IncompatibleRegionForMultiAZ"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InvalidDestinationKmsKey"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InvalidRegion"
+                },
+                {
+                    "target": "com.amazonaws.fsx#InvalidSourceKmsKey"
+                },
+                {
+                    "target": "com.amazonaws.fsx#ServiceLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.fsx#SourceBackupUnavailable"
+                },
+                {
+                    "target": "com.amazonaws.fsx#UnsupportedOperation"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Copies an existing backup within the same AWS account to another Region\n         (cross-Region copy) or within the same Region (in-Region copy). You can have up to five\n         backup copy requests in progress to a single destination Region per account.</p>\n         <p>You can use cross-Region backup copies for cross-region disaster recovery.\n         You periodically take backups and copy them to another Region so that in the\n         event of a disaster in the primary Region, you can restore from backup and recover\n         availability quickly in the other Region. You can make cross-Region copies\n         only within your AWS partition.</p>\n         <p> You can also use backup copies to clone your file data set to another Region\n         or within the same Region.</p>\n         <p>You can use the <code>SourceRegion</code> parameter to specify the AWS Region\n         from which the backup will be copied. For example, if you make the call from the\n         <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code>\n         Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter\n         to make a cross-Region copy. If you don't specify a Region, the backup copy is\n         created in the same Region where the request is sent from (in-Region copy).</p>\n         <p>For more information on creating backup copies, see \n         <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/copy-backups.html\">\n            Copying backups</a> in the <i>Amazon FSx for Windows User Guide</i> and \n         <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/copy-backups.html\">Copying backups</a> \n         in the <i>Amazon FSx for Lustre User Guide</i>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.fsx#CopyBackupRequest": {
+            "type": "structure",
+            "members": {
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.fsx#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "SourceBackupId": {
+                    "target": "com.amazonaws.fsx#SourceBackupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source backup. Specifies the ID of the backup that is\n         being copied.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceRegion": {
+                    "target": "com.amazonaws.fsx#Region",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source AWS Region of the backup. Specifies the AWS Region from which\n         the backup is being copied. The source and destination Regions must be in\n         the same AWS partition. If you don't specify a Region, it defaults to\n         the Region where the request is sent from (in-Region copy).</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.fsx#KmsKeyId"
+                },
+                "CopyTags": {
+                    "target": "com.amazonaws.fsx#Flag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean flag indicating whether tags from the source backup\n         should be copied to the backup copy. This value defaults to false.</p>\n         <p>If you set <code>CopyTags</code> to true and the source backup has\n         existing tags, you can use the <code>Tags</code> parameter to create new\n         tags, provided that the sum of the source backup tags and the new tags\n         doesn't exceed 50. Both sets of tags are merged. If there are tag\n         conflicts (for example, two tags with the same key but different values),\n         the tags created with the <code>Tags</code> parameter take precedence.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.fsx#Tags"
+                }
+            }
+        },
+        "com.amazonaws.fsx#CopyBackupResponse": {
+            "type": "structure",
+            "members": {
+                "Backup": {
+                    "target": "com.amazonaws.fsx#Backup"
+                }
             }
         },
         "com.amazonaws.fsx#CreateBackup": {
@@ -1104,6 +1233,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the storage type for the Windows file system you're creating from a backup. \n            Valid values are <code>SSD</code> and <code>HDD</code>.</p>\n        <ul>\n            <li>\n               <p>Set to <code>SSD</code> to use solid state drive storage. \n                Supported on all Windows deployment types.</p>\n            </li>\n            <li>\n               <p>Set to <code>HDD</code> to use hard disk drive storage. \n                Supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. \n                </p>\n            </li>\n         </ul>\n        <p>\n            Default value is <code>SSD</code>. \n        </p>\n        <note>\n            <p>HDD and SSD storage types have different minimum storage capacity requirements. \n            A restored file system's storage capacity is tied to the file system that was backed up. \n            You can create a file system that uses HDD storage from a backup of a file system that \n            used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB. \n        </p>\n         </note>"
                     }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.fsx#KmsKeyId"
                 }
             },
             "traits": {
@@ -1225,7 +1357,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.fsx#SubnetIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> \n            file system deployment types, provide exactly two subnet IDs, one for the preferred file server \n            and one for the standby file server. You specify one of these subnets as the preferred subnet \n            using the <code>WindowsConfiguration > PreferredSubnetID</code> property.</p>\n        <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID.\n           The file server is launched in that subnet's Availability Zone.</p>",
+                        "smithy.api#documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> \n            file system deployment types, provide exactly two subnet IDs, one for the preferred file server \n            and one for the standby file server. You specify one of these subnets as the preferred subnet \n            using the <code>WindowsConfiguration > PreferredSubnetID</code> property. For more information, \n            see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\">\n                Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p>\n        <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID.\n           The file server is launched in that subnet's Availability Zone.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1330,7 +1462,7 @@
                 "Aliases": {
                     "target": "com.amazonaws.fsx#AlternateDNSNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. \n            Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. \n            You can associate up to 50 aliases with a file system at any time. \n            You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. \n            You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation.\n            You only need to specify the alias name in the request payload.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">Working with DNS Aliases</a> and \n        <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html\">Walkthrough 5: Using DNS aliases to access your file system</a>, including\n        additional steps you must take to be able to access your file system using a DNS alias.</p>\n         <p>An alias name has to meet the following requirements:</p>\n            <ul>\n            <li>\n               <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p>\n            </li>\n            <li>\n               <p>Can contain alphanumeric characters and the hyphen (-).</p>\n            </li>\n            <li>\n               <p>Cannot start or end with a hyphen.</p>\n            </li>\n            <li>\n               <p>Can start with a numeric.</p>\n            </li>\n         </ul>\n        <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: \n            as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
+                        "smithy.api#documentation": "<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. \n            Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. \n            You can associate up to 50 aliases with a file system at any time. \n            You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. \n            You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation.\n            You only need to specify the alias name in the request payload.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">Working with DNS Aliases</a> and \n        <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html\">Walkthrough 5: Using DNS aliases to access your file system</a>, including\n        additional steps you must take to be able to access your file system using a DNS alias.</p>\n         <p>An alias name has to meet the following requirements:</p>\n            <ul>\n            <li>\n               <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p>\n            </li>\n            <li>\n               <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p>\n            </li>\n            <li>\n               <p>Cannot start or end with a hyphen.</p>\n            </li>\n            <li>\n               <p>Can start with a numeric.</p>\n            </li>\n         </ul>\n        <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: \n            as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
                     }
                 }
             },
@@ -1759,6 +1891,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.fsx#BackupBeingCopied"
+                },
+                {
                     "target": "com.amazonaws.fsx#BackupInProgress"
                 },
                 {
@@ -2057,7 +2192,7 @@
                 "Backups": {
                     "target": "com.amazonaws.fsx#Backups",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any array of backups.</p>"
+                        "smithy.api#documentation": "<p>An array of backups.</p>"
                     }
                 },
                 "NextToken": {
@@ -2798,6 +2933,18 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.fsx#IncompatibleRegionForMultiAZ": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Amazon FSx doesn't support Multi-AZ Windows File Server\n         copy backup in the destination Region, so the copied backup\n         can't be restored.</p>",
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.fsx#InternalServerError": {
             "type": "structure",
             "members": {
@@ -2808,6 +2955,18 @@
             "traits": {
                 "smithy.api#documentation": "<p>A generic error indicating a server-side failure.</p>",
                 "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.fsx#InvalidDestinationKmsKey": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key of the destination\n         backup is invalid.</p>",
+                "smithy.api#error": "client"
             }
         },
         "com.amazonaws.fsx#InvalidExportPath": {
@@ -2861,6 +3020,30 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An invalid value for <code>PerUnitStorageThroughput</code> was provided. Please create your file system again, using a valid value.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.fsx#InvalidRegion": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Region provided for <code>Source Region</code> is invalid or\n         is in a different AWS partition.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.fsx#InvalidSourceKmsKey": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key of the source backup\n         is invalid.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3184,6 +3367,16 @@
                 }
             }
         },
+        "com.amazonaws.fsx#Region": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^[a-z0-9-]{1,20}$"
+            }
+        },
         "com.amazonaws.fsx#ReportFormat": {
             "type": "string",
             "traits": {
@@ -3359,13 +3552,13 @@
                 "DnsIps": {
                     "target": "com.amazonaws.fsx#DnsIps",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range\n            as the one in which your Amazon FSx file system is being created, or in the private IP version 4\n            (IPv4) address ranges, as specified in <a href=\"http://www.faqs.org/rfcs/rfc1918.html\">RFC 1918</a>:</p>\n        <ul>\n            <li>\n                <p>10.0.0.0 - 10.255.255.255 (10/8 prefix)</p>\n            </li>\n            <li>\n                <p>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</p>\n            </li>\n            <li>\n                <p>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the\n            self-managed AD directory. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to\n            your self-managed (including on-premises) Microsoft Active Directory (AD)\n            directory.</p>"
+                "smithy.api#documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to\n            your self-managed (including on-premises) Microsoft Active Directory (AD)\n            directory. For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html\">\n                Using Amazon FSx with your self-managed Microsoft Active Directory</a>.</p>"
             }
         },
         "com.amazonaws.fsx#SelfManagedActiveDirectoryConfigurationUpdates": {
@@ -3414,6 +3607,14 @@
                     {
                         "value": "TOTAL_USER_INITIATED_BACKUPS",
                         "name": "TOTAL_USER_INITIATED_BACKUPS"
+                    },
+                    {
+                        "value": "TOTAL_USER_TAGS",
+                        "name": "TOTAL_USER_TAGS"
+                    },
+                    {
+                        "value": "TOTAL_IN_PROGRESS_COPY_BACKUPS",
+                        "name": "TOTAL_IN_PROGRESS_COPY_BACKUPS"
                     }
                 ]
             }
@@ -3434,6 +3635,31 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An error indicating that a particular service limit was exceeded. You can increase\n            some service limits by contacting AWS Support.\n            </p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.fsx#SourceBackupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(backup-[0-9a-f]{8,})$"
+            }
+        },
+        "com.amazonaws.fsx#SourceBackupUnavailable": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.fsx#ErrorMessage"
+                },
+                "BackupId": {
+                    "target": "com.amazonaws.fsx#BackupId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was rejected because the lifecycle status of the \n         source backup is not <code>AVAILABLE</code>.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3949,7 +4175,7 @@
                 "ActiveDirectoryId": {
                     "target": "com.amazonaws.fsx#DirectoryId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for an existing Microsoft Active Directory instance that the file system should join when\n            it's created.</p>"
+                        "smithy.api#documentation": "<p>The ID for an existing AWS Managed Microsoft Active Directory instance that the file system is joined to.</p>"
                     }
                 },
                 "SelfManagedActiveDirectoryConfiguration": {
@@ -3970,7 +4196,7 @@
                 "PreferredSubnetId": {
                     "target": "com.amazonaws.fsx#SubnetId",
                     "traits": {
-                        "smithy.api#documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. \n            Must be one of the two subnet IDs specified in <code>SubnetIds</code> property.\n            Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p>\n        <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>.\n            For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources\">Availability and Durability: Single-AZ and Multi-AZ File Systems</a>\n         </p>"
+                        "smithy.api#documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. \n            Must be one of the two subnet IDs specified in <code>SubnetIds</code> property.\n            Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p>\n        <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>.\n            For more information, see \n            <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources\">Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p>"
                     }
                 },
                 "PreferredFileServerIp": {
@@ -3982,7 +4208,7 @@
                 "ThroughputCapacity": {
                     "target": "com.amazonaws.fsx#MegabytesPerSecond",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per\n            second.</p>"
+                        "smithy.api#documentation": "<p>The throughput of the Amazon FSx file system, measured in megabytes per\n            second.</p>"
                     }
                 },
                 "MaintenanceOperationsInProgress": {
