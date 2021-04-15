@@ -1,9 +1,0 @@
-{
- "ID": "service.fsx-feature-1618434066018929000",
- "SchemaVersion": 1,
- "Module": "service/fsx",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

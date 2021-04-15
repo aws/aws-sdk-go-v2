@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.3.2
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.0.6
 	github.com/aws/aws-sdk-go-v2/service/sso v1.1.5
-	github.com/aws/aws-sdk-go-v2/service/sts v1.2.2
+	github.com/aws/aws-sdk-go-v2/service/sts v1.3.0
 	github.com/aws/smithy-go v1.3.1
 	github.com/google/go-cmp v0.5.4
 	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.0.6

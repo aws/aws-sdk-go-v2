@@ -1,9 +1,0 @@
-{
- "ID": "service.comprehendmedical-feature-1618434065970280000",
- "SchemaVersion": 1,
- "Module": "service/comprehendmedical",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

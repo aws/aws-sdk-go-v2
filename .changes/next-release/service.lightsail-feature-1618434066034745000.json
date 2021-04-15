@@ -1,9 +1,0 @@
-{
- "ID": "service.lightsail-feature-1618434066034745000",
- "SchemaVersion": 1,
- "Module": "service/lightsail",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

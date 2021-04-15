@@ -1,9 +1,0 @@
-{
- "ID": "service.codebuild-feature-1618434065941089000",
- "SchemaVersion": 1,
- "Module": "service/codebuild",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

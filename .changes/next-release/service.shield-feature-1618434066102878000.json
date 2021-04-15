@@ -1,9 +1,0 @@
-{
- "ID": "service.shield-feature-1618434066102878000",
- "SchemaVersion": 1,
- "Module": "service/shield",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

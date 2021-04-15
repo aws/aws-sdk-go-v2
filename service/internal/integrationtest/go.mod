@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/service/internal/integrationtest
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.3.2
-	github.com/aws/aws-sdk-go-v2/config v1.1.5
+	github.com/aws/aws-sdk-go-v2/config v1.1.6
 	github.com/aws/aws-sdk-go-v2/service/acm v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/apigateway v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.2.2
@@ -17,13 +17,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.3.1
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.2.2
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.3.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.1.5
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.3.0
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/codestar v1.1.5
 	github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider v1.2.2
-	github.com/aws/aws-sdk-go-v2/service/configservice v1.3.1
+	github.com/aws/aws-sdk-go-v2/service/configservice v1.4.0
 	github.com/aws/aws-sdk-go-v2/service/costandusagereportservice v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/databasemigrationservice v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/devicefarm v1.1.5
@@ -31,7 +31,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.1.5
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.2.2
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.4.0
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.5.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/efs v1.2.2
@@ -54,14 +54,14 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/kms v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.2.2
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.3.0
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.4.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.1.5
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/pinpointemail v1.1.5
 	github.com/aws/aws-sdk-go-v2/service/polly v1.1.5
-	github.com/aws/aws-sdk-go-v2/service/rds v1.2.2
-	github.com/aws/aws-sdk-go-v2/service/redshift v1.3.1
+	github.com/aws/aws-sdk-go-v2/service/rds v1.3.0
+	github.com/aws/aws-sdk-go-v2/service/redshift v1.4.0
 	github.com/aws/aws-sdk-go-v2/service/rekognition v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.4.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.1.5
@@ -72,13 +72,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/ses v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/sfn v1.2.2
-	github.com/aws/aws-sdk-go-v2/service/shield v1.2.2
+	github.com/aws/aws-sdk-go-v2/service/shield v1.3.0
 	github.com/aws/aws-sdk-go-v2/service/sms v1.1.5
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/sns v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/ssm v1.4.0
-	github.com/aws/aws-sdk-go-v2/service/sts v1.2.2
+	github.com/aws/aws-sdk-go-v2/service/sts v1.3.0
 	github.com/aws/aws-sdk-go-v2/service/support v1.1.5
 	github.com/aws/aws-sdk-go-v2/service/waf v1.1.5
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.2.2
@@ -86,6 +86,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.2.2
 	github.com/aws/smithy-go v1.3.1
 	github.com/google/go-cmp v0.5.4
+	github.com/aws/aws-sdk-go-v2/credentials v1.1.6
 )
 
 go 1.15

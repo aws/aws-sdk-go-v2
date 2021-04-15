@@ -1,9 +1,0 @@
-{
- "ID": "service.configservice-feature-1618434065986453000",
- "SchemaVersion": 1,
- "Module": "service/configservice",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,3 +1,32 @@
+# Release 2021-04-14
+## Service Client Highlights
+* `service/codebuild` - v1.3.0
+  * Feature: API client updated
+* `service/codestarconnections` - v1.2.0
+  * Feature: API client updated
+* `service/comprehendmedical` - v1.2.0
+  * Feature: API client updated
+* `service/configservice` - v1.4.0
+  * Feature: API client updated
+* `service/ec2` - v1.5.0
+  * Feature: API client updated
+* `service/fsx` - v1.3.0
+  * Feature: API client updated
+* `service/lightsail` - v1.4.0
+  * Feature: API client updated
+* `service/mediaconnect` - v1.3.0
+  * Feature: API client updated
+* `service/rds` - v1.3.0
+  * Feature: API client updated
+* `service/redshift` - v1.4.0
+  * Feature: API client updated
+* `service/shield` - v1.3.0
+  * Feature: API client updated
+* `service/sts` - v1.3.0
+  * Feature: API client updated
+## Core SDK Highlights
+* Dependency Update: Updated SDK dependencies to their latest versions.
+
 # Release 2021-04-08
 ## Service Client Highlights
 * Feature: API model sync
