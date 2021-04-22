@@ -10,44 +10,39 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the specified member accounts from the associated administrator
-// account. Can be used to disassociate both accounts that are managed using
-// Organizations and accounts that were invited manually.
-func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
+// Disassociates the current Security Hub member account from the associated
+// administrator account. This operation is only used by accounts that are not part
+// of an organization. For organization accounts, only the administrator account
+// can disassociate a member account.
+func (c *Client) DisassociateFromAdministratorAccount(ctx context.Context, params *DisassociateFromAdministratorAccountInput, optFns ...func(*Options)) (*DisassociateFromAdministratorAccountOutput, error) {
 	if params == nil {
-		params = &DisassociateMembersInput{}
+		params = &DisassociateFromAdministratorAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "DisassociateMembers", params, optFns, addOperationDisassociateMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "DisassociateFromAdministratorAccount", params, optFns, addOperationDisassociateFromAdministratorAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*DisassociateMembersOutput)
+	out := result.(*DisassociateFromAdministratorAccountOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type DisassociateMembersInput struct {
-
-	// The account IDs of the member accounts to disassociate from the administrator
-	// account.
-	//
-	// This member is required.
-	AccountIds []string
+type DisassociateFromAdministratorAccountInput struct {
 }
 
-type DisassociateMembersOutput struct {
+type DisassociateFromAdministratorAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationDisassociateMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateMembers{}, middleware.After)
+func addOperationDisassociateFromAdministratorAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateFromAdministratorAccount{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateMembers{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateFromAdministratorAccount{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -87,10 +82,7 @@ func addOperationDisassociateMembersMiddlewares(stack *middleware.Stack, options
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpDisassociateMembersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateMembers(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateFromAdministratorAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -105,11 +97,11 @@ func addOperationDisassociateMembersMiddlewares(stack *middleware.Stack, options
 	return nil
 }
 
-func newServiceMetadataMiddleware_opDisassociateMembers(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opDisassociateFromAdministratorAccount(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securityhub",
-		OperationName: "DisassociateMembers",
+		OperationName: "DisassociateFromAdministratorAccount",
 	}
 }

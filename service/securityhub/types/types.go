@@ -5105,8 +5105,8 @@ type InsightResultValue struct {
 // Details about an invitation.
 type Invitation struct {
 
-	// The account ID of the Security Hub master account that the invitation was sent
-	// from.
+	// The account ID of the Security Hub administrator account that the invitation was
+	// sent from.
 	AccountId *string
 
 	// The ID of the invitation sent to the member account.
@@ -5115,7 +5115,8 @@ type Invitation struct {
 	// The timestamp of when the invitation was sent.
 	InvitedAt *time.Time
 
-	// The current status of the association between the member and master accounts.
+	// The current status of the association between the member and administrator
+	// accounts.
 	MemberStatus *string
 }
 
@@ -5225,6 +5226,10 @@ type Member struct {
 	// The AWS account ID of the member account.
 	AccountId *string
 
+	// The AWS account ID of the Security Hub administrator account associated with
+	// this member account.
+	AdministratorId *string
+
 	// The email address of the member account.
 	Email *string
 
@@ -5232,33 +5237,35 @@ type Member struct {
 	// account.
 	InvitedAt *time.Time
 
-	// The AWS account ID of the Security Hub master account associated with this
-	// member account.
+	// This is replaced by AdministratorID. The AWS account ID of the Security Hub
+	// administrator account associated with this member account.
+	//
+	// Deprecated: This field is deprecated, use AdministratorId instead.
 	MasterId *string
 
-	// The status of the relationship between the member account and its master
+	// The status of the relationship between the member account and its administrator
 	// account. The status can have one of the following values:
 	//
 	// * CREATED - Indicates
-	// that the master account added the member account, but has not yet invited the
-	// member account.
+	// that the administrator account added the member account, but has not yet invited
+	// the member account.
 	//
-	// * INVITED - Indicates that the master account invited the
-	// member account. The member account has not yet responded to the invitation.
-	//
-	// *
-	// ENABLED - Indicates that the member account is currently active. For manually
-	// invited member accounts, indicates that the member account accepted the
+	// * INVITED - Indicates that the administrator account
+	// invited the member account. The member account has not yet responded to the
 	// invitation.
 	//
-	// * REMOVED - Indicates that the master account disassociated the
-	// member account.
+	// * ENABLED - Indicates that the member account is currently active.
+	// For manually invited member accounts, indicates that the member account accepted
+	// the invitation.
 	//
-	// * RESIGNED - Indicates that the member account disassociated
-	// themselves from the master account.
+	// * REMOVED - Indicates that the administrator account
+	// disassociated the member account.
 	//
-	// * DELETED - Indicates that the master
-	// account deleted the member account.
+	// * RESIGNED - Indicates that the member
+	// account disassociated themselves from the administrator account.
+	//
+	// * DELETED -
+	// Indicates that the administrator account deleted the member account.
 	MemberStatus *string
 
 	// The timestamp for the date and time when the member account was updated.
@@ -5586,7 +5593,8 @@ type Product struct {
 	// This member is required.
 	ProductArn *string
 
-	// The URL used to activate the product.
+	// The URL to the service or product documentation about the integration with
+	// Security Hub, including how to activate the integration.
 	ActivationUrl *string
 
 	// The categories assigned to the product.
@@ -5601,14 +5609,20 @@ type Product struct {
 	// The types of integration that the product supports. Available values are the
 	// following.
 	//
-	// * SEND_FINDINGS_TO_SECURITY_HUB - Indicates that the integration
-	// sends findings to Security Hub.
+	// * SEND_FINDINGS_TO_SECURITY_HUB - The integration sends findings to
+	// Security Hub.
 	//
-	// * RECEIVE_FINDINGS_FROM_SECURITY_HUB -
-	// Indicates that the integration receives findings from Security Hub.
+	// * RECEIVE_FINDINGS_FROM_SECURITY_HUB - The integration receives
+	// findings from Security Hub.
+	//
+	// * UPDATE_FINDINGS_IN_SECURITY_HUB - The integration
+	// does not send new findings to Security Hub, but does make updates to the
+	// findings that it receives from Security Hub.
 	IntegrationTypes []IntegrationType
 
-	// The URL for the page that contains more information about the product.
+	// For integrations with AWS services, the AWS Console URL from which to activate
+	// the service. For integrations with third-party products, the AWS Marketplace URL
+	// from which to subscribe to or purchase the product.
 	MarketplaceUrl *string
 
 	// The name of the product.

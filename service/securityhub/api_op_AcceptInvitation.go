@@ -10,11 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts the invitation to be a member account and be monitored by the Security
-// Hub master account that the invitation was sent from. This operation is only
+// This method is deprecated. Instead, use AcceptAdministratorInvitation. Accepts
+// the invitation to be a member account and be monitored by the Security Hub
+// administrator account that the invitation was sent from. This operation is only
 // used by member accounts that are not added through Organizations. When the
-// member account accepts the invitation, permission is granted to the master
-// account to view findings generated in the member account.
+// member account accepts the invitation, permission is granted to the
+// administrator account to view findings generated in the member account.
+//
+// Deprecated: This API has been deprecated, use AcceptAdministratorInvitation API
+// instead.
 func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationInput, optFns ...func(*Options)) (*AcceptInvitationOutput, error) {
 	if params == nil {
 		params = &AcceptInvitationInput{}
@@ -32,12 +36,14 @@ func (c *Client) AcceptInvitation(ctx context.Context, params *AcceptInvitationI
 
 type AcceptInvitationInput struct {
 
-	// The ID of the invitation sent from the Security Hub master account.
+	// The identifier of the invitation sent from the Security Hub administrator
+	// account.
 	//
 	// This member is required.
 	InvitationId *string
 
-	// The account ID of the Security Hub master account that sent the invitation.
+	// The account ID of the Security Hub administrator account that sent the
+	// invitation.
 	//
 	// This member is required.
 	MasterId *string

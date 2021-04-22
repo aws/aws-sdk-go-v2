@@ -6,59 +6,56 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Invites other AWS accounts to become member accounts for the Security Hub
-// administrator account that the invitation is sent from. This operation is only
-// used to invite accounts that do not belong to an organization. Organization
-// accounts do not receive invitations. Before you can use this action to invite a
-// member, you must first use the CreateMembers action to create the member account
-// in Security Hub. When the account owner enables Security Hub and accepts the
-// invitation to become a member account, the administrator account can view the
-// findings generated from the member account.
-func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
+// Accepts the invitation to be a member account and be monitored by the Security
+// Hub administrator account that the invitation was sent from. This operation is
+// only used by member accounts that are not added through Organizations. When the
+// member account accepts the invitation, permission is granted to the
+// administrator account to view findings generated in the member account.
+func (c *Client) AcceptAdministratorInvitation(ctx context.Context, params *AcceptAdministratorInvitationInput, optFns ...func(*Options)) (*AcceptAdministratorInvitationOutput, error) {
 	if params == nil {
-		params = &InviteMembersInput{}
+		params = &AcceptAdministratorInvitationInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InviteMembers", params, optFns, addOperationInviteMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "AcceptAdministratorInvitation", params, optFns, addOperationAcceptAdministratorInvitationMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*InviteMembersOutput)
+	out := result.(*AcceptAdministratorInvitationOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type InviteMembersInput struct {
+type AcceptAdministratorInvitationInput struct {
 
-	// The list of account IDs of the AWS accounts to invite to Security Hub as
-	// members.
+	// The account ID of the Security Hub administrator account that sent the
+	// invitation.
 	//
 	// This member is required.
-	AccountIds []string
+	AdministratorId *string
+
+	// The identifier of the invitation sent from the Security Hub administrator
+	// account.
+	//
+	// This member is required.
+	InvitationId *string
 }
 
-type InviteMembersOutput struct {
-
-	// The list of AWS accounts that could not be processed. For each account, the list
-	// includes the account ID and the email address.
-	UnprocessedAccounts []types.Result
-
+type AcceptAdministratorInvitationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInviteMembers{}, middleware.After)
+func addOperationAcceptAdministratorInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptAdministratorInvitation{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInviteMembers{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptAdministratorInvitation{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -98,10 +95,10 @@ func addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpInviteMembersValidationMiddleware(stack); err != nil {
+	if err = addOpAcceptAdministratorInvitationValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInviteMembers(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptAdministratorInvitation(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -116,11 +113,11 @@ func addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Optio
 	return nil
 }
 
-func newServiceMetadataMiddleware_opInviteMembers(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opAcceptAdministratorInvitation(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securityhub",
-		OperationName: "InviteMembers",
+		OperationName: "AcceptAdministratorInvitation",
 	}
 }

@@ -11,54 +11,42 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Invites other AWS accounts to become member accounts for the Security Hub
-// administrator account that the invitation is sent from. This operation is only
-// used to invite accounts that do not belong to an organization. Organization
-// accounts do not receive invitations. Before you can use this action to invite a
-// member, you must first use the CreateMembers action to create the member account
-// in Security Hub. When the account owner enables Security Hub and accepts the
-// invitation to become a member account, the administrator account can view the
-// findings generated from the member account.
-func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
+// Provides the details for the Security Hub administrator account for the current
+// member account. Can be used by both member accounts that are managed using
+// Organizations and accounts that were invited manually.
+func (c *Client) GetAdministratorAccount(ctx context.Context, params *GetAdministratorAccountInput, optFns ...func(*Options)) (*GetAdministratorAccountOutput, error) {
 	if params == nil {
-		params = &InviteMembersInput{}
+		params = &GetAdministratorAccountInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "InviteMembers", params, optFns, addOperationInviteMembersMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GetAdministratorAccount", params, optFns, addOperationGetAdministratorAccountMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*InviteMembersOutput)
+	out := result.(*GetAdministratorAccountOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type InviteMembersInput struct {
-
-	// The list of account IDs of the AWS accounts to invite to Security Hub as
-	// members.
-	//
-	// This member is required.
-	AccountIds []string
+type GetAdministratorAccountInput struct {
 }
 
-type InviteMembersOutput struct {
+type GetAdministratorAccountOutput struct {
 
-	// The list of AWS accounts that could not be processed. For each account, the list
-	// includes the account ID and the email address.
-	UnprocessedAccounts []types.Result
+	// Details about an invitation.
+	Administrator *types.Invitation
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInviteMembers{}, middleware.After)
+func addOperationGetAdministratorAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAdministratorAccount{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInviteMembers{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAdministratorAccount{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -98,10 +86,7 @@ func addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Optio
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addOpInviteMembersValidationMiddleware(stack); err != nil {
-		return err
-	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInviteMembers(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAdministratorAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -116,11 +101,11 @@ func addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Optio
 	return nil
 }
 
-func newServiceMetadataMiddleware_opInviteMembers(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGetAdministratorAccount(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
 		SigningName:   "securityhub",
-		OperationName: "InviteMembers",
+		OperationName: "GetAdministratorAccount",
 	}
 }

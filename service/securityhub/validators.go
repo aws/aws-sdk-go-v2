@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptAdministratorInvitation struct {
+}
+
+func (*validateOpAcceptAdministratorInvitation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptAdministratorInvitation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptAdministratorInvitationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptAdministratorInvitationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAcceptInvitation struct {
 }
 
@@ -610,6 +630,10 @@ func (m *validateOpUpdateStandardsControl) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcceptAdministratorInvitationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptAdministratorInvitation{}, middleware.After)
+}
+
 func addOpAcceptInvitationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptInvitation{}, middleware.After)
 }
@@ -1193,6 +1217,24 @@ func validateVulnerabilityVendor(v *types.VulnerabilityVendor) error {
 	invalidParams := smithy.InvalidParamsError{Context: "VulnerabilityVendor"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptAdministratorInvitationInput(v *AcceptAdministratorInvitationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptAdministratorInvitationInput"}
+	if v.AdministratorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AdministratorId"))
+	}
+	if v.InvitationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InvitationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

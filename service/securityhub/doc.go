@@ -18,24 +18,24 @@
 // change in other Regions, execute the same command for each Region to apply the
 // change to. For example, if your Region is set to us-west-2, when you use
 // CreateMembers to add a member account to Security Hub, the association of the
-// member account with the master account is created only in the us-west-2 Region.
-// Security Hub must be enabled for the member account in the same Region that the
-// invitation was sent from. The following throttling limits apply to using
-// Security Hub API operations.
+// member account with the administrator account is created only in the us-west-2
+// Region. Security Hub must be enabled for the member account in the same Region
+// that the invitation was sent from. The following throttling limits apply to
+// using Security Hub API operations.
 //
-// * BatchEnableStandards - RateLimit of 1 request
-// per second, BurstLimit of 1 request per second.
+// * BatchEnableStandards - RateLimit of 1
+// request per second, BurstLimit of 1 request per second.
 //
-// * GetFindings - RateLimit of 3
-// requests per second. BurstLimit of 6 requests per second.
-//
-// * UpdateFindings -
-// RateLimit of 1 request per second. BurstLimit of 5 requests per second.
+// * GetFindings -
+// RateLimit of 3 requests per second. BurstLimit of 6 requests per second.
 //
 // *
-// UpdateStandardsControl - RateLimit of 1 request per second, BurstLimit of 5
-// requests per second.
+// UpdateFindings - RateLimit of 1 request per second. BurstLimit of 5 requests per
+// second.
 //
-// * All other operations - RateLimit of 10 requests per
-// second. BurstLimit of 30 requests per second.
+// * UpdateStandardsControl - RateLimit of 1 request per second,
+// BurstLimit of 5 requests per second.
+//
+// * All other operations - RateLimit of 10
+// requests per second. BurstLimit of 30 requests per second.
 package securityhub
