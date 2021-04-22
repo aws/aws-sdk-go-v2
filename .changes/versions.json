@@ -4,8 +4,8 @@
   "/": {
    "Module": "/",
    "ImportPath": "github.com/aws/aws-sdk-go-v2",
-   "Version": "v1.3.2",
-   "ModuleHash": "h1:j8jZPO0THl6TRFGJx5xbk4weWPVNXjQLeNPnzK2mO4g="
+   "Version": "v1.3.3",
+   "ModuleHash": "h1:BKKakJ9v28yopLRF6bg6FAMbVKmcXuZe+r688XMsxtk="
   },
   "config": {
    "Module": "config",

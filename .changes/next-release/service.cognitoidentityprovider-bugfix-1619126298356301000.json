@@ -1,0 +1,9 @@
+{
+ "ID": "service.cognitoidentityprovider-bugfix-1619126298356301000",
+ "SchemaVersion": 1,
+ "Module": "service/cognitoidentityprovider",
+ "Type": "documentation",
+ "Description": "Service Documentation Updates",
+ "MinVersion": "",
+ "AffectedModules": null
+}

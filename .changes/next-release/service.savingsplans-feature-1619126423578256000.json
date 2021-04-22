@@ -1,0 +1,9 @@
+{
+ "ID": "service.savingsplans-feature-1619126423578256000",
+ "SchemaVersion": 1,
+ "Module": "service/savingsplans",
+ "Type": "feature",
+ "Description": "Service API Updates",
+ "MinVersion": "",
+ "AffectedModules": null
+}
