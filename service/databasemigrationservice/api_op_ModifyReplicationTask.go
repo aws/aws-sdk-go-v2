@@ -85,9 +85,9 @@ type ModifyReplicationTaskInput struct {
 	ReplicationTaskSettings *string
 
 	// When using the AWS CLI or boto3, provide the path of the JSON file that contains
-	// the table mappings. Precede the path with file://. When working with the DMS
-	// API, provide the JSON as the parameter value, for example: --table-mappings
-	// file://mappingfile.json
+	// the table mappings. Precede the path with file://. For example, --table-mappings
+	// file://mappingfile.json. When working with the DMS API, provide the JSON as the
+	// parameter value.
 	TableMappings *string
 
 	// Supplemental information that the task requires to migrate the data for certain

@@ -1002,6 +1002,53 @@ func (m *awsAwsjson11_serializeOpDescribeEndpoints) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeEndpointSettings struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeEndpointSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeEndpointSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeEndpointSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonDMSv20160101.DescribeEndpointSettings")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeEndpointSettingsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeEndpointTypes struct {
 }
 
@@ -2852,6 +2899,41 @@ func awsAwsjson11_serializeDocumentKafkaSettings(v *types.KafkaSettings, value s
 		ok.Boolean(*v.PartitionIncludeSchemaTable)
 	}
 
+	if v.SaslPassword != nil {
+		ok := object.Key("SaslPassword")
+		ok.String(*v.SaslPassword)
+	}
+
+	if v.SaslUsername != nil {
+		ok := object.Key("SaslUsername")
+		ok.String(*v.SaslUsername)
+	}
+
+	if len(v.SecurityProtocol) > 0 {
+		ok := object.Key("SecurityProtocol")
+		ok.String(string(v.SecurityProtocol))
+	}
+
+	if v.SslCaCertificateArn != nil {
+		ok := object.Key("SslCaCertificateArn")
+		ok.String(*v.SslCaCertificateArn)
+	}
+
+	if v.SslClientCertificateArn != nil {
+		ok := object.Key("SslClientCertificateArn")
+		ok.String(*v.SslClientCertificateArn)
+	}
+
+	if v.SslClientKeyArn != nil {
+		ok := object.Key("SslClientKeyArn")
+		ok.String(*v.SslClientKeyArn)
+	}
+
+	if v.SslClientKeyPassword != nil {
+		ok := object.Key("SslClientKeyPassword")
+		ok.String(*v.SslClientKeyPassword)
+	}
+
 	if v.Topic != nil {
 		ok := object.Key("Topic")
 		ok.String(*v.Topic)
@@ -2952,6 +3034,11 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 		ok.Integer(*v.Port)
 	}
 
+	if v.QuerySingleAlwaysOnNode != nil {
+		ok := object.Key("QuerySingleAlwaysOnNode")
+		ok.Boolean(*v.QuerySingleAlwaysOnNode)
+	}
+
 	if v.ReadBackupOnly != nil {
 		ok := object.Key("ReadBackupOnly")
 		ok.Boolean(*v.ReadBackupOnly)
@@ -2985,6 +3072,11 @@ func awsAwsjson11_serializeDocumentMicrosoftSQLServerSettings(v *types.Microsoft
 	if v.Username != nil {
 		ok := object.Key("Username")
 		ok.String(*v.Username)
+	}
+
+	if v.UseThirdPartyBackupDevice != nil {
+		ok := object.Key("UseThirdPartyBackupDevice")
+		ok.Boolean(*v.UseThirdPartyBackupDevice)
 	}
 
 	return nil
@@ -3074,6 +3166,11 @@ func awsAwsjson11_serializeDocumentMySQLSettings(v *types.MySQLSettings, value s
 	if v.AfterConnectScript != nil {
 		ok := object.Key("AfterConnectScript")
 		ok.String(*v.AfterConnectScript)
+	}
+
+	if v.CleanSourceMetadataOnMismatch != nil {
+		ok := object.Key("CleanSourceMetadataOnMismatch")
+		ok.Boolean(*v.CleanSourceMetadataOnMismatch)
 	}
 
 	if v.DatabaseName != nil {
@@ -3338,6 +3435,11 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 	if v.ServerName != nil {
 		ok := object.Key("ServerName")
 		ok.String(*v.ServerName)
+	}
+
+	if v.SpatialDataOptionToGeoJsonFunctionName != nil {
+		ok := object.Key("SpatialDataOptionToGeoJsonFunctionName")
+		ok.String(*v.SpatialDataOptionToGeoJsonFunctionName)
 	}
 
 	if v.UseAlternateFolderForOnline != nil {
@@ -4550,6 +4652,28 @@ func awsAwsjson11_serializeOpDocumentDescribeConnectionsInput(v *DescribeConnect
 		if err := awsAwsjson11_serializeDocumentFilterList(v.Filters, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Marker != nil {
+		ok := object.Key("Marker")
+		ok.String(*v.Marker)
+	}
+
+	if v.MaxRecords != nil {
+		ok := object.Key("MaxRecords")
+		ok.Integer(*v.MaxRecords)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeEndpointSettingsInput(v *DescribeEndpointSettingsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EngineName != nil {
+		ok := object.Key("EngineName")
+		ok.String(*v.EngineName)
 	}
 
 	if v.Marker != nil {
