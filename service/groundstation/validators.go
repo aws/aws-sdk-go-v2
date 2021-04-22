@@ -594,6 +594,11 @@ func validateConfigTypeData(v types.ConfigTypeData) error {
 			invalidParams.AddNested("[dataflowEndpointConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConfigTypeDataMemberS3RecordingConfig:
+		if err := validateS3RecordingConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3RecordingConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ConfigTypeDataMemberTrackingConfig:
 		if err := validateTrackingConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[trackingConfig]", err.(smithy.InvalidParamsError))
@@ -759,6 +764,24 @@ func validateFrequencyBandwidth(v *types.FrequencyBandwidth) error {
 	}
 	if len(v.Units) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Units"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3RecordingConfig(v *types.S3RecordingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3RecordingConfig"}
+	if v.BucketArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

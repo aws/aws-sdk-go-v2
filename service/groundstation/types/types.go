@@ -65,6 +65,7 @@ type AntennaUplinkConfig struct {
 // The following types satisfy this interface:
 //  ConfigDetailsMemberEndpointDetails
 //  ConfigDetailsMemberAntennaDemodDecodeDetails
+//  ConfigDetailsMemberS3RecordingDetails
 type ConfigDetails interface {
 	isConfigDetails()
 }
@@ -82,6 +83,13 @@ type ConfigDetailsMemberAntennaDemodDecodeDetails struct {
 }
 
 func (*ConfigDetailsMemberAntennaDemodDecodeDetails) isConfigDetails() {}
+
+// Details for an S3 recording Config in a contact.
+type ConfigDetailsMemberS3RecordingDetails struct {
+	Value S3RecordingDetails
+}
+
+func (*ConfigDetailsMemberS3RecordingDetails) isConfigDetails() {}
 
 // An item in a list of Config objects.
 type ConfigListItem struct {
@@ -109,6 +117,7 @@ type ConfigListItem struct {
 //  ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig
 //  ConfigTypeDataMemberAntennaUplinkConfig
 //  ConfigTypeDataMemberUplinkEchoConfig
+//  ConfigTypeDataMemberS3RecordingConfig
 type ConfigTypeData interface {
 	isConfigTypeData()
 }
@@ -160,6 +169,13 @@ type ConfigTypeDataMemberUplinkEchoConfig struct {
 }
 
 func (*ConfigTypeDataMemberUplinkEchoConfig) isConfigTypeData() {}
+
+// Information about an S3 recording Config.
+type ConfigTypeDataMemberS3RecordingConfig struct {
+	Value S3RecordingConfig
+}
+
+func (*ConfigTypeDataMemberS3RecordingConfig) isConfigTypeData() {}
 
 // Data describing a contact.
 type ContactData struct {
@@ -396,6 +412,33 @@ type MissionProfileListItem struct {
 
 	// Region of a mission profile.
 	Region *string
+}
+
+// Information about an S3 recording Config.
+type S3RecordingConfig struct {
+
+	// ARN of the bucket to record to.
+	//
+	// This member is required.
+	BucketArn *string
+
+	// ARN of the role Ground Station assumes to write data to the bucket.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// S3 Key prefix to prefice data files.
+	Prefix *string
+}
+
+// Details about an S3 recording Config used in a contact.
+type S3RecordingDetails struct {
+
+	// ARN of the bucket used.
+	BucketArn *string
+
+	// Template of the S3 key used.
+	KeyTemplate *string
 }
 
 // Item in a list of satellites.
