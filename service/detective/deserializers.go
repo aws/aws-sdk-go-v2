@@ -2478,6 +2478,32 @@ func awsRestjson1_deserializeDocumentMemberDetail(v **types.MemberDetail, value 
 				sv.UpdatedTime = ptr.Time(t)
 			}
 
+		case "VolumeUsageInBytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ByteValue to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.VolumeUsageInBytes = ptr.Int64(i64)
+			}
+
+		case "VolumeUsageUpdatedTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.VolumeUsageUpdatedTime = ptr.Time(t)
+			}
+
 		default:
 			_, _ = key, value
 

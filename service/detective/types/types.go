@@ -65,10 +65,9 @@ type MemberDetail struct {
 	// value is in milliseconds since the epoch.
 	InvitedTime *time.Time
 
-	// Deprecated. Instead of MasterId, use AdministratorId. The AWS account identifier
-	// of the administrator account for the behavior graph.
+	// The AWS account identifier of the administrator account for the behavior graph.
 	//
-	// Deprecated: This property is deprecated, use AdministratorId instead.
+	// Deprecated: This property is deprecated. Use AdministratorId instead.
 	MasterId *string
 
 	// The member account data volume as a percentage of the maximum allowed data
@@ -78,9 +77,13 @@ type MemberDetail struct {
 	// GB per day. If the data volume for the member account is 40 GB per day, then
 	// PercentOfGraphUtilization is 25. It represents 25% of the maximum allowed data
 	// volume.
+	//
+	// Deprecated: This property is deprecated. Use VolumeUsageInBytes instead.
 	PercentOfGraphUtilization *float64
 
 	// The date and time when the graph utilization percentage was last updated.
+	//
+	// Deprecated: This property is deprecated. Use VolumeUsageUpdatedTime instead.
 	PercentOfGraphUtilizationUpdatedTime *time.Time
 
 	// The current membership status of the member account. The status can have one of
@@ -115,6 +118,12 @@ type MemberDetail struct {
 	// The date and time that the member account was last updated. The value is in
 	// milliseconds since the epoch.
 	UpdatedTime *time.Time
+
+	// The data volume in bytes per day for the member account.
+	VolumeUsageInBytes *int64
+
+	// The data and time when the member account data volume was last updated.
+	VolumeUsageUpdatedTime *time.Time
 }
 
 // A member account that was included in a request but for which the request could

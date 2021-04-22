@@ -194,6 +194,12 @@
         "com.amazonaws.detective#Boolean": {
             "type": "boolean"
         },
+        "com.amazonaws.detective#ByteValue": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.detective#ConflictException": {
             "type": "structure",
             "members": {
@@ -890,9 +896,9 @@
                     "target": "com.amazonaws.detective#AccountId",
                     "traits": {
                         "smithy.api#deprecated": {
-                            "message": "This property is deprecated, use AdministratorId instead."
+                            "message": "This property is deprecated. Use AdministratorId instead."
                         },
-                        "smithy.api#documentation": "<p>Deprecated. Instead of <code>MasterId</code>, use <code>AdministratorId</code>.</p>\n         <p>The AWS account identifier of the administrator account for the behavior graph.</p>"
+                        "smithy.api#documentation": "<p>The AWS account identifier of the administrator account for the behavior graph.</p>"
                     }
                 },
                 "AdministratorId": {
@@ -925,15 +931,33 @@
                         "smithy.api#documentation": "<p>The date and time that the member account was last updated. The value is in milliseconds\n         since the epoch.</p>"
                     }
                 },
+                "VolumeUsageInBytes": {
+                    "target": "com.amazonaws.detective#ByteValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data volume in bytes per day for the member account.</p>"
+                    }
+                },
+                "VolumeUsageUpdatedTime": {
+                    "target": "com.amazonaws.detective#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data and time when the member account data volume was last updated.</p>"
+                    }
+                },
                 "PercentOfGraphUtilization": {
                     "target": "com.amazonaws.detective#Percentage",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property is deprecated. Use VolumeUsageInBytes instead."
+                        },
                         "smithy.api#documentation": "<p>The member account data volume as a percentage of the maximum allowed data volume. 0\n         indicates 0 percent, and 100 indicates 100 percent.</p>\n         <p>Note that this is not the percentage of the behavior graph data volume.</p>\n         <p>For example, the data volume for the behavior graph is 80 GB per day. The maximum data\n         volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then\n            <code>PercentOfGraphUtilization</code> is 25. It represents 25% of the maximum allowed\n         data volume. </p>"
                     }
                 },
                 "PercentOfGraphUtilizationUpdatedTime": {
                     "target": "com.amazonaws.detective#Timestamp",
                     "traits": {
+                        "smithy.api#deprecated": {
+                            "message": "This property is deprecated. Use VolumeUsageUpdatedTime instead."
+                        },
                         "smithy.api#documentation": "<p>The date and time when the graph utilization percentage was last updated.</p>"
                     }
                 }
