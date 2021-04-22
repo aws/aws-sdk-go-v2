@@ -824,7 +824,7 @@
       <description>
         
         
-        &lt;h2 id=&#34;putobjectv1go&#34;&gt;PutObjectv1.go&lt;/h2&gt;
+        &lt;h2 id=&#34;putobjectv2go&#34;&gt;PutObjectv2.go&lt;/h2&gt;
 &lt;p&gt;This example creates an Amazon S3 bucket object from a local file.&lt;/p&gt;
 &lt;p&gt;&lt;code&gt;go run PutObjectv2.go -b BUCKET -f FILE&lt;/code&gt;&lt;/p&gt;
 &lt;ul&gt;

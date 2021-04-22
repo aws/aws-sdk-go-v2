@@ -1364,7 +1364,7 @@ development environment.&lt;/p&gt;
 &lt;a href=&#34;https://docs.aws.amazon.com/cloud9/latest/user-guide/build-run-debug.html#build-run-debug-run&#34;&gt;Run Your Code&lt;/a&gt; in the
 AWS Cloud9 User Guide.&lt;/p&gt;
 &lt;h2 id=&#34;InstallUpgradeGo&#34;&gt;Installing/Upgrading AWS Cloud9 Go Version&lt;/h2&gt;
-&lt;p&gt;If the IDE can&amp;rsquo;t find Go or version of Go does&amp;rsquo;t meet the minimum require version, run the following commands, one at a
+&lt;p&gt;If the IDE can&amp;rsquo;t find Go or version of Go doesn&amp;rsquo;t meet the minimum require version, run the following commands, one at a
 time in this order, to install it. (These commands assume you chose the option to &lt;strong&gt;Create a new instance for
 environment (EC2)&lt;/strong&gt;, earlier in this topic. Also, these commands assume the latest stable version of Go at the time this
 topic was written; for more information, see &lt;a href=&#34;https://golang.org/dl/&#34;&gt;Downloads&lt;/a&gt; on The Go Programming Language
@@ -1381,6 +1381,54 @@ referenced. To do this, run the following command. (This command assumes you cho
 for environment (EC2)&lt;/strong&gt;, earlier in this topic.)&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;. ~/.bashrc
 &lt;/code&gt;&lt;/pre&gt;
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: Amazon RDS Utilities</title>
+      <link>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/rds/</link>
+      <pubDate>Fri, 16 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/rds/</guid>
+      <description>
+        
+        
+        &lt;h2 id=&#34;iam-authentication&#34;&gt;IAM Authentication&lt;/h2&gt;
+&lt;p&gt;The &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/rds/auth&#34;&gt;auth&lt;/a&gt; package provides utilities for generating authentication tokens for
+connecting to Amazon RDS MySQL and PostgreSQL database instances. Using the &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/feature/rds/auth#BuildAuthToken&#34;&gt;BuildAuthToken&lt;/a&gt; method, you generate a database authorization token by providing the
+database endpoint, AWS Region, username, and a &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#CredentialsProvider&#34;&gt;aws.CredentialProvider&lt;/a&gt;
+implantation that returns IAM credentials with permission connect to the database using IAM
+database authentication. To learn more about configuring Amazon RDS with IAM
+authentication see the following Amazon RDS Developer Guide resources:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.Enabling.html&#34;&gt;Enabling and disabling IAM database authentication&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.IAMPolicy.html&#34;&gt;Creating and using an IAM policy for IAM database access&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.DBAccounts.html&#34;&gt;Creating a database account using IAM authentication&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The following examples shows how to generate an authentication token to connect to an Amazon RDS
+database:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-go&#34; data-lang=&#34;go&#34;&gt;&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;context&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;github.com/aws/aws-sdk-go-v2/config&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;github.com/aws/aws-sdk-go-v2/feature/rds/auth&amp;#34;&lt;/span&gt;
+
+&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// ...
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;
+&lt;span style=&#34;color:#000&#34;&gt;cfg&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;config&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;LoadDefaultConfig&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;())&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#204a87&#34;&gt;panic&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;configuration error: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Error&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;())&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#000&#34;&gt;authenticationToken&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;:=&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;auth&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;BuildAuthToken&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;
+	&lt;span style=&#34;color:#000&#34;&gt;context&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;TODO&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(),&lt;/span&gt;
+	&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;mydb.123456789012.us-east-1.rds.amazonaws.com:3306&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// Database Endpoint (With Port)
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;us-east-1&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// AWS Region
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;jane_doe&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;// Database Account
+&lt;/span&gt;&lt;span style=&#34;color:#8f5902;font-style:italic&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#000&#34;&gt;cfg&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Credentials&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#204a87;font-weight:bold&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;{&lt;/span&gt;
+	&lt;span style=&#34;color:#204a87&#34;&gt;panic&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#4e9a06&#34;&gt;&amp;#34;failed to create authentication token: &amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#ce5c00;font-weight:bold&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#000&#34;&gt;err&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#000&#34;&gt;Error&lt;/span&gt;&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;())&lt;/span&gt;
+&lt;span style=&#34;color:#000;font-weight:bold&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       </description>
     </item>
     
@@ -1835,7 +1883,7 @@ protection in this AWS product or service. As described in this model, AWS is re
 infrastructure that runs all of the AWS Cloud. You are responsible for maintaining control over your content that is
 hosted on this infrastructure. This content includes the security configuration and management tasks for the AWS
 services that you use. For more information about data privacy, see
-the &lt;a href=&#34;http://aws.amazon.com/compliance/data-privacy-faq%3E&#34;&gt;Data Privacy FAQ&lt;/a&gt;. For information about data protection in
+the &lt;a href=&#34;http://aws.amazon.com/compliance/data-privacy-faq&#34;&gt;Data Privacy FAQ&lt;/a&gt;. For information about data protection in
 Europe, see the
 &lt;a href=&#34;http://aws.amazon.com/blogs/security/the-aws-shared-responsibility-model-and-gdpr&#34;&gt;AWS Shared Responsibility Model and GDPR&lt;/a&gt;
 blog post on the AWS Security Blog.&lt;/p&gt;
@@ -2389,7 +2437,7 @@ ability to tune the request back off policy.&lt;/p&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;When a retryable error occurs while invoking your request, the standard retyer will use it&amp;rsquo;s provided configuration
+&lt;p&gt;When a retryable error occurs while invoking your request, the standard retryer will use it&amp;rsquo;s provided configuration
 to delay and subsequently retry the request. Retries add to the overall latency of your request, and you must configure
 retryer if the default configuration does not meet your application requirements.&lt;/p&gt;
 &lt;p&gt;See the &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/retry&#34;&gt;retry&lt;/a&gt; package documentation for details on what errors are considered as
