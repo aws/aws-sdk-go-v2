@@ -1187,6 +1187,41 @@ func validateDocumentMetadataConfigurationList(v []types.DocumentMetadataConfigu
 	}
 }
 
+func validateDocumentRelevanceConfiguration(v *types.DocumentRelevanceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentRelevanceConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Relevance == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Relevance"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDocumentRelevanceOverrideConfigurationList(v []types.DocumentRelevanceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentRelevanceOverrideConfigurationList"}
+	for i := range v {
+		if err := validateDocumentRelevanceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGoogleDriveConfiguration(v *types.GoogleDriveConfiguration) error {
 	if v == nil {
 		return nil
@@ -2187,6 +2222,11 @@ func validateOpQueryInput(v *QueryInput) error {
 	if v.AttributeFilter != nil {
 		if err := validateAttributeFilter(v.AttributeFilter); err != nil {
 			invalidParams.AddNested("AttributeFilter", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DocumentRelevanceOverrideConfigurations != nil {
+		if err := validateDocumentRelevanceOverrideConfigurationList(v.DocumentRelevanceOverrideConfigurations); err != nil {
+			invalidParams.AddNested("DocumentRelevanceOverrideConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.SortingConfiguration != nil {

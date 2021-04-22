@@ -3233,6 +3233,39 @@
                 }
             }
         },
+        "com.amazonaws.kendra#DocumentRelevanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.kendra#DocumentMetadataConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tuning configuration to override document relevance \n         at the index level.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Relevance": {
+                    "target": "com.amazonaws.kendra#Relevance",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Overrides the document relevance properties of a custom index field.</p>"
+            }
+        },
+        "com.amazonaws.kendra#DocumentRelevanceOverrideConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kendra#DocumentRelevanceConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.kendra#DocumentsMetadataConfiguration": {
             "type": "structure",
             "members": {
@@ -4727,6 +4760,12 @@
                     "target": "com.amazonaws.kendra#QueryResultType",
                     "traits": {
                         "smithy.api#documentation": "<p>Sets the type of query. Only results for the specified query type\n         are returned.</p>"
+                    }
+                },
+                "DocumentRelevanceOverrideConfigurations": {
+                    "target": "com.amazonaws.kendra#DocumentRelevanceOverrideConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Overrides relevance tuning configurations of fields or attributes set at the index level.</p>\n         <p>If you use this API to override the relevance tuning configured at the index \n         level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning.</p>\n         <p>If there is relevance tuning configured at the index level, but you do not use this API \n         to override any relevance tuning in the index, then Amazon Kendra uses the relevance tuning that is configured at the index level.</p>\n         <p>If there is relevance tuning configured for fields at the index level, \n         but you use this API to override only some of these fields, then for the fields you did not override,\n         the importance is set to 1.</p>"
                     }
                 },
                 "PageNumber": {

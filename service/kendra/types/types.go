@@ -744,6 +744,23 @@ type DocumentMetadataConfiguration struct {
 	Search *Search
 }
 
+// Overrides the document relevance properties of a custom index field.
+type DocumentRelevanceConfiguration struct {
+
+	// The name of the tuning configuration to override document relevance at the index
+	// level.
+	//
+	// This member is required.
+	Name *string
+
+	// Provides information for manually tuning the relevance of a field in a search.
+	// When a query includes terms that match the field, the results are given a boost
+	// in the response based on these tuning parameters.
+	//
+	// This member is required.
+	Relevance *Relevance
+}
+
 // Document metadata files that contain information such as the document access
 // control information, source URI, document author, and custom attributes. Each
 // metadata file contains metadata about a single document.

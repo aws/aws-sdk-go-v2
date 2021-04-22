@@ -2318,6 +2318,38 @@ func awsAwsjson11_serializeDocumentDocumentMetadataConfigurationList(v []types.D
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDocumentRelevanceConfiguration(v *types.DocumentRelevanceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Relevance != nil {
+		ok := object.Key("Relevance")
+		if err := awsAwsjson11_serializeDocumentRelevance(v.Relevance, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDocumentRelevanceOverrideConfigurationList(v []types.DocumentRelevanceConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentDocumentRelevanceConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDocumentsMetadataConfiguration(v *types.DocumentsMetadataConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3966,6 +3998,13 @@ func awsAwsjson11_serializeOpDocumentQueryInput(v *QueryInput, value smithyjson.
 	if v.AttributeFilter != nil {
 		ok := object.Key("AttributeFilter")
 		if err := awsAwsjson11_serializeDocumentAttributeFilter(v.AttributeFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DocumentRelevanceOverrideConfigurations != nil {
+		ok := object.Key("DocumentRelevanceOverrideConfigurations")
+		if err := awsAwsjson11_serializeDocumentDocumentRelevanceOverrideConfigurationList(v.DocumentRelevanceOverrideConfigurations, ok); err != nil {
 			return err
 		}
 	}
