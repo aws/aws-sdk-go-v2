@@ -82,9 +82,10 @@ type SavingsPlanProductType string
 
 // Enum values for SavingsPlanProductType
 const (
-	SavingsPlanProductTypeEc2     SavingsPlanProductType = "EC2"
-	SavingsPlanProductTypeFargate SavingsPlanProductType = "Fargate"
-	SavingsPlanProductTypeLambda  SavingsPlanProductType = "Lambda"
+	SavingsPlanProductTypeEc2       SavingsPlanProductType = "EC2"
+	SavingsPlanProductTypeFargate   SavingsPlanProductType = "Fargate"
+	SavingsPlanProductTypeLambda    SavingsPlanProductType = "Lambda"
+	SavingsPlanProductTypeSagemaker SavingsPlanProductType = "SageMaker"
 )
 
 // Values returns all known values for SavingsPlanProductType. Note that this can
@@ -95,6 +96,7 @@ func (SavingsPlanProductType) Values() []SavingsPlanProductType {
 		"EC2",
 		"Fargate",
 		"Lambda",
+		"SageMaker",
 	}
 }
 
@@ -183,9 +185,11 @@ type SavingsPlanRateServiceCode string
 
 // Enum values for SavingsPlanRateServiceCode
 const (
-	SavingsPlanRateServiceCodeEc2     SavingsPlanRateServiceCode = "AmazonEC2"
-	SavingsPlanRateServiceCodeFargate SavingsPlanRateServiceCode = "AmazonECS"
-	SavingsPlanRateServiceCodeLambda  SavingsPlanRateServiceCode = "AWSLambda"
+	SavingsPlanRateServiceCodeEc2        SavingsPlanRateServiceCode = "AmazonEC2"
+	SavingsPlanRateServiceCodeFargate    SavingsPlanRateServiceCode = "AmazonECS"
+	SavingsPlanRateServiceCodeFargateEks SavingsPlanRateServiceCode = "AmazonEKS"
+	SavingsPlanRateServiceCodeLambda     SavingsPlanRateServiceCode = "AWSLambda"
+	SavingsPlanRateServiceCodeSagemaker  SavingsPlanRateServiceCode = "AmazonSageMaker"
 )
 
 // Values returns all known values for SavingsPlanRateServiceCode. Note that this
@@ -195,7 +199,9 @@ func (SavingsPlanRateServiceCode) Values() []SavingsPlanRateServiceCode {
 	return []SavingsPlanRateServiceCode{
 		"AmazonEC2",
 		"AmazonECS",
+		"AmazonEKS",
 		"AWSLambda",
+		"AmazonSageMaker",
 	}
 }
 
@@ -283,6 +289,7 @@ type SavingsPlanType string
 const (
 	SavingsPlanTypeCompute     SavingsPlanType = "Compute"
 	SavingsPlanTypeEc2Instance SavingsPlanType = "EC2Instance"
+	SavingsPlanTypeSagemaker   SavingsPlanType = "SageMaker"
 )
 
 // Values returns all known values for SavingsPlanType. Note that this can be
@@ -292,5 +299,6 @@ func (SavingsPlanType) Values() []SavingsPlanType {
 	return []SavingsPlanType{
 		"Compute",
 		"EC2Instance",
+		"SageMaker",
 	}
 }
