@@ -77,7 +77,7 @@ To run code in your {{% alias service=AC9 %}} development environment, see
 
 ## Installing/Upgrading {{% alias service=AC9 %}} Go Version {#InstallUpgradeGo}
 
-If the IDE can't find Go or version of Go does't meet the minimum require version, run the following commands, one at a
+If the IDE can't find Go or version of Go doesn't meet the minimum require version, run the following commands, one at a
 time in this order, to install it. (These commands assume you chose the option to **Create a new instance for
 environment (EC2)**, earlier in this topic. Also, these commands assume the latest stable version of Go at the time this
 topic was written; for more information, see [Downloads](https://golang.org/dl/) on The Go Programming Language

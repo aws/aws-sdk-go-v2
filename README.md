@@ -47,8 +47,8 @@ hugo server
 ```
 
 ### Submitting PRs
-Pull requests should be submitted to the [SDK Repository](sdkrepo), to help speed up the process and reduce the time
-to merge time please ensure that `Allow edits and access to secrets by maintainers` is checked before submitting your PR.
+Pull requests should be submitted to the [SDK Repository][sdkrepo], to help speed up the process and reduce the time
+to merge please ensure that `Allow edits and access to secrets by maintainers` is checked before submitting your PR.
 This will allow the project maintainers to make minor adjustments or improvements to the submitted PR, allow us to reduce the
 roundtrip time for merging your request.
 

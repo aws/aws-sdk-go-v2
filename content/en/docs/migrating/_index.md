@@ -176,7 +176,7 @@ The {{% alias sdk-go %}} release updates the AWS Credential Providers to provide
 AWS Credentials. Each provider implements the [aws.CredentialsProvider]({{< apiref "aws#CredentialsProvider" >}})
 interface, which defines a `Retrieve` method that returns a `(aws.Credentials, error)`.
 [aws.Credentials]({{< apiref "aws#Credentials" >}}) that is analogous to the AWS SDK for Go
-[credentials.Value]({{< apiref "aws/credentials#Value" >}}) type.
+[credentials.Value]({{< apiref v1="aws/credentials#Value" >}}) type.
 
 You must wrap `aws.CredentialsProvider` objects with [aws.CredentialsCache]({{< apiref "aws#CredentialsCache" >}}) to
 allow credential caching to occur. You use [NewCredentialsCache]({{< apiref "aws#NewCredentialsCache" >}}) to
@@ -304,7 +304,7 @@ credentials provider and override specific configuration settings.
 `NewProviderCommand` takes an implementation of the
 [NewCommandBuilder]({{< apiref "credentials/processcreds#NewCommandBuilder" >}}) interface that defines
 more complex process commands that might take one or more command-line arguments, or have certain execution environment
-requirements. [DefaultNewCommandBuilder]({{< apiref "processcreds#DefaultNewCommandBuilder" >}}) implements
+requirements. [DefaultNewCommandBuilder]({{< apiref "credentials/processcreds#DefaultNewCommandBuilder" >}}) implements
 this interface, and defines a command builder for a process that requires multiple command-line arguments.
 
 #### Example
@@ -649,7 +649,7 @@ from the service API reference documentation, you can now use one of the concret
 `types` package. For example, you can provide the {{% alias service=S3 %}} PutObjectInput operation
 with an ACL to be applied on an object. In the AWS SDK for Go V1, this parameter was a `*string` type. In the
 {{& alias sdk-go %}} this parameter is now a
-[types.ObjectCannedACL]({{< apiref "service/s3/types.ObjectCannedACL" >}}). The `types` package
+[types.ObjectCannedACL]({{< apiref "service/s3/types#ObjectCannedACL" >}}). The `types` package
 provides generated constants for the valid enumeration values that can be assigned to this field. For example
 [types.ObjectCannedACLPrivate]({{< apiref "service/s3/types#ObjectCannedACLPrivate" >}}) is the constant for the
 "private" canned ACL value. This value can be used in place of managing string constants within your application.
