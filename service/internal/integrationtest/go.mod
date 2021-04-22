@@ -86,7 +86,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.2.2
 	github.com/aws/smithy-go v1.3.1
 	github.com/google/go-cmp v0.5.4
-	github.com/aws/aws-sdk-go-v2/credentials v1.1.6
 )
 
 go 1.15

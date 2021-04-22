@@ -7,7 +7,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.2.2
 	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.1.5
 	github.com/google/go-cmp v0.5.4
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.0.4
 )
 
 replace github.com/aws/aws-sdk-go-v2/service/dynamodb => ../../../service/dynamodb/

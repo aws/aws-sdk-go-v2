@@ -6,8 +6,6 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.3.2
 	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.0.6
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.2.2
-	github.com/aws/aws-sdk-go-v2/service/dynamodbstreams v1.1.5
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.0.4
 )
 
 replace (
