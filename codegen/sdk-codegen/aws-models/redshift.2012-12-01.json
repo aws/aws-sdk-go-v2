@@ -199,6 +199,29 @@
                 ]
             }
         },
+        "com.amazonaws.redshift#AddPartner": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#PartnerIntegrationInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#PartnerIntegrationOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#PartnerNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a partner integration to a cluster.\n            This operation authorizes a partner to push status updates for the specified database. \n            To complete the integration, you also set up the integration on the partner website.</p>"
+            }
+        },
         "com.amazonaws.redshift#AquaConfiguration": {
             "type": "structure",
             "members": {
@@ -3798,6 +3821,29 @@
                 "smithy.api#documentation": "<p></p>"
             }
         },
+        "com.amazonaws.redshift#DeletePartner": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#PartnerIntegrationInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#PartnerIntegrationOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#PartnerNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.</p>"
+            }
+        },
         "com.amazonaws.redshift#DeleteScheduledAction": {
             "type": "operation",
             "input": {
@@ -4711,7 +4757,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a Redshift-managed VPC endpoint.</p>"
+                "smithy.api#documentation": "<p>Describes a Redshift-managed VPC endpoint.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "EndpointAccessList",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.redshift#DescribeEndpointAccessMessage": {
@@ -4744,13 +4796,13 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist\n            than the specified <code>MaxRecords</code> value, a pagination token called a <code>Marker</code> is\n            included in the response so that the remaining results can be retrieved.</p>"
                     }
                 },
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n            <code>DescribeEndpointAccess</code> request. If this parameter is specified, the\n            response includes only records beyond the marker, up to the value specified by the\n            <code>MaxRecords</code> parameter.</p>"
                     }
                 }
             }
@@ -4772,7 +4824,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an endpoint authorization.</p>"
+                "smithy.api#documentation": "<p>Describes an endpoint authorization.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "items": "EndpointAuthorizationList",
+                    "pageSize": "MaxRecords"
+                }
             }
         },
         "com.amazonaws.redshift#DescribeEndpointAuthorizationMessage": {
@@ -4799,13 +4857,13 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist\n            than the specified <code>MaxRecords</code> value, a pagination token called a <code>Marker</code> is\n            included in the response so that the remaining results can be retrieved.</p>"
                     }
                 },
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n            <code>DescribeEndpointAuthorization</code> request. If this parameter is specified, the\n            response includes only records beyond the marker, up to the value specified by the\n            <code>MaxRecords</code> parameter.</p>"
                     }
                 }
             }
@@ -5257,6 +5315,68 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.redshift#DescribePartners": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DescribePartnersInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DescribePartnersOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the partner integrations defined for a cluster.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DescribePartnersInputMessage": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID that owns the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier of the cluster whose partner integration is being described.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database whose partner integration is being described. If database name is not specified, then all databases in the cluster are described.</p>"
+                    }
+                },
+                "PartnerName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationPartnerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribePartnersOutputMessage": {
+            "type": "structure",
+            "members": {
+                "PartnerIntegrationInfoList": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationInfoList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of partner integrations.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.redshift#DescribeReservedNodeOfferings": {
@@ -6248,7 +6368,7 @@
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n            <code>DescribeEndpointAccess</code> request. If this parameter is specified, the\n            response includes only records beyond the marker, up to the value specified by the\n            <code>MaxRecords</code> parameter.</p>"
                     }
                 }
             }
@@ -6359,7 +6479,7 @@
                 "Marker": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Reserved for Amazon Redshift internal use.</p>"
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n            <code>DescribeEndpointAuthorization</code> request. If this parameter is specified, the\n            response includes only records beyond the marker, up to the value specified by the\n            <code>MaxRecords</code> parameter.</p>"
                     }
                 }
             }
@@ -9114,6 +9234,195 @@
                 }
             }
         },
+        "com.amazonaws.redshift#PartnerIntegrationAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationClusterIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationDatabaseName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 127
+                },
+                "smithy.api#pattern": "^[\\p{L}_][\\p{L}\\p{N}@$#_]+$"
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationInfo": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database that receives data from a partner.</p>"
+                    }
+                },
+                "PartnerName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationPartnerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the partner.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The partner integration status.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message provided by the partner.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date (UTC) that the partner integration was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date (UTC) that the partner integration status was last updated by the partner.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a partner integration.</p>"
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationInfoList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#PartnerIntegrationInfo",
+                "traits": {
+                    "smithy.api#xmlName": "PartnerIntegrationInfo"
+                }
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationInputMessage": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID that owns the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier of the cluster that receives data from the partner.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database that receives data from the partner.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartnerName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationPartnerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the partner that is authorized to send data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationOutputMessage": {
+            "type": "structure",
+            "members": {
+                "DatabaseName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database that receives data from the partner.</p>"
+                    }
+                },
+                "PartnerName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationPartnerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the partner that is authorized to send data.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationPartnerName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\-_]+$"
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Active",
+                        "name": "Active"
+                    },
+                    {
+                        "value": "Inactive",
+                        "name": "Inactive"
+                    },
+                    {
+                        "value": "RuntimeFailure",
+                        "name": "RuntimeFailure"
+                    },
+                    {
+                        "value": "ConnectionFailure",
+                        "name": "ConnectionFailure"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshift#PartnerIntegrationStatusMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 262144
+                },
+                "smithy.api#pattern": "^[\\x20-\\x7E]+$"
+            }
+        },
+        "com.amazonaws.redshift#PartnerNotFoundFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the partner was not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
         "com.amazonaws.redshift#PauseCluster": {
             "type": "operation",
             "input": {
@@ -9372,6 +9681,9 @@
                     "target": "com.amazonaws.redshift#AcceptReservedNodeExchange"
                 },
                 {
+                    "target": "com.amazonaws.redshift#AddPartner"
+                },
+                {
                     "target": "com.amazonaws.redshift#AuthorizeClusterSecurityGroupIngress"
                 },
                 {
@@ -9462,6 +9774,9 @@
                     "target": "com.amazonaws.redshift#DeleteHsmConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DeletePartner"
+                },
+                {
                     "target": "com.amazonaws.redshift#DeleteScheduledAction"
                 },
                 {
@@ -9538,6 +9853,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#DescribeOrderableClusterOptions"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DescribePartners"
                 },
                 {
                     "target": "com.amazonaws.redshift#DescribeReservedNodeOfferings"
@@ -9667,6 +9985,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#RotateEncryptionKey"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UpdatePartnerStatus"
                 }
             ],
             "traits": {
@@ -12508,6 +12829,19 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The partner integration is not authorized.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
         "com.amazonaws.redshift#UnknownSnapshotCopyRegionFault": {
             "type": "structure",
             "members": {
@@ -12545,6 +12879,75 @@
                 "smithy.api#documentation": "<p>A request option was specified that is not supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#UpdatePartnerStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#UpdatePartnerStatusInputMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#PartnerIntegrationOutputMessage"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#ClusterNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#PartnerNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#UnauthorizedPartnerIntegrationFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the status of a partner integration.</p>"
+            }
+        },
+        "com.amazonaws.redshift#UpdatePartnerStatusInputMessage": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID that owns the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterIdentifier": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationClusterIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster identifier of the cluster whose partner integration status is being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationDatabaseName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the database whose partner integration status is being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PartnerName": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationPartnerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the partner whose integration status is being updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the updated status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.redshift#PartnerIntegrationStatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status message provided by the partner.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.redshift#UpdateTarget": {

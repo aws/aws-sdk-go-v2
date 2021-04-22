@@ -1506,6 +1506,23 @@ func (e *NumberOfNodesQuotaExceededFault) ErrorCode() string {
 }
 func (e *NumberOfNodesQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The name of the partner was not found.
+type PartnerNotFoundFault struct {
+	Message *string
+}
+
+func (e *PartnerNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PartnerNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PartnerNotFoundFault) ErrorCode() string             { return "PartnerNotFoundFault" }
+func (e *PartnerNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // User already has a reservation with the given identifier.
 type ReservedNodeAlreadyExistsFault struct {
 	Message *string
@@ -2178,6 +2195,27 @@ func (e *UnauthorizedOperation) ErrorMessage() string {
 }
 func (e *UnauthorizedOperation) ErrorCode() string             { return "UnauthorizedOperation" }
 func (e *UnauthorizedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The partner integration is not authorized.
+type UnauthorizedPartnerIntegrationFault struct {
+	Message *string
+}
+
+func (e *UnauthorizedPartnerIntegrationFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnauthorizedPartnerIntegrationFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnauthorizedPartnerIntegrationFault) ErrorCode() string {
+	return "UnauthorizedPartnerIntegrationFault"
+}
+func (e *UnauthorizedPartnerIntegrationFault) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
 
 // The specified region is incorrect or does not exist.
 type UnknownSnapshotCopyRegionFault struct {
