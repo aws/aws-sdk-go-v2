@@ -152,13 +152,16 @@ type CacheCluster struct {
 	// The version of the cache engine that is used in this cluster.
 	EngineVersion *string
 
+	// Returns the destination, format and type of the logs.
+	LogDeliveryConfigurations []LogDeliveryConfiguration
+
 	// Describes a notification topic and its status. Notification topics are used for
 	// publishing ElastiCache events to subscribers using Amazon Simple Notification
 	// Service (SNS).
 	NotificationConfiguration *NotificationConfiguration
 
 	// The number of cache nodes in the cluster. For clusters running Redis, this value
-	// must be 1. For clusters running Memcached, this value must be between 1 and 20.
+	// must be 1. For clusters running Memcached, this value must be between 1 and 40.
 	NumCacheNodes *int32
 
 	// A group of settings that are applied to the cluster in the future, or that are
@@ -198,6 +201,10 @@ type CacheCluster struct {
 	// The replication group to which this cluster belongs. If this field is empty, the
 	// cluster is not associated with any replication group.
 	ReplicationGroupId *string
+
+	// A boolean value indicating whether log delivery is enabled for the replication
+	// group.
+	ReplicationGroupLogDeliveryEnabled bool
 
 	// A list of VPC Security Groups associated with the cluster.
 	SecurityGroups []SecurityGroupMembership
@@ -513,6 +520,13 @@ type CacheSubnetGroup struct {
 	VpcId *string
 }
 
+// The configuration details of the CloudWatch Logs destination.
+type CloudWatchLogsDestinationDetails struct {
+
+	// The name of the CloudWatch Logs log group.
+	LogGroup *string
+}
+
 // Node group (shard) configuration options when adding or removing replicas. Each
 // node group (shard) configuration has the following members: NodeGroupId,
 // NewReplicaCount, and PreferredAvailabilityZones.
@@ -564,6 +578,17 @@ type CustomerNodeEndpoint struct {
 
 	// The port of the node endpoint
 	Port *int32
+}
+
+// Configuration details of either a CloudWatch Logs destination or Kinesis Data
+// Firehose destination.
+type DestinationDetails struct {
+
+	// The configuration details of the CloudWatch Logs destination.
+	CloudWatchLogsDetails *CloudWatchLogsDestinationDetails
+
+	// The configuration details of the Kinesis Data Firehose destination.
+	KinesisFirehoseDetails *KinesisFirehoseDestinationDetails
 }
 
 // Provides ownership and status information for an Amazon EC2 security group.
@@ -742,6 +767,57 @@ type GlobalReplicationGroupMember struct {
 
 	// The status of the membership of the replication group.
 	Status *string
+}
+
+// The configuration details of the Kinesis Data Firehose destination.
+type KinesisFirehoseDestinationDetails struct {
+
+	// The name of the Kinesis Data Firehose delivery stream.
+	DeliveryStream *string
+}
+
+// Returns the destination, format and type of the logs.
+type LogDeliveryConfiguration struct {
+
+	// Configuration details of either a CloudWatch Logs destination or Kinesis Data
+	// Firehose destination.
+	DestinationDetails *DestinationDetails
+
+	// Returns the destination type, either cloudwatch-logs or kinesis-firehose.
+	DestinationType DestinationType
+
+	// Returns the log format, either JSON or TEXT.
+	LogFormat LogFormat
+
+	// Refers to slow-log (https://redis.io/commands/slowlog).
+	LogType LogType
+
+	// Returns an error message for the log delivery configuration.
+	Message *string
+
+	// Returns the log delivery configuration status. Values are one of enabling |
+	// disabling | modifying | active | error
+	Status LogDeliveryConfigurationStatus
+}
+
+// Specifies the destination, format and type of the logs.
+type LogDeliveryConfigurationRequest struct {
+
+	// Configuration details of either a CloudWatch Logs destination or Kinesis Data
+	// Firehose destination.
+	DestinationDetails *DestinationDetails
+
+	// Specify either cloudwatch-logs or kinesis-firehose as the destination type.
+	DestinationType DestinationType
+
+	// Specify if log delivery is enabled. Default true.
+	Enabled *bool
+
+	// Specifies either JSON or TEXT
+	LogFormat LogFormat
+
+	// Refers to slow-log (https://redis.io/commands/slowlog).
+	LogType LogType
 }
 
 // Represents a collection of cache nodes in a replication group. One node in the
@@ -960,6 +1036,23 @@ type ParameterNameValue struct {
 	ParameterValue *string
 }
 
+// The log delivery configurations being modified
+type PendingLogDeliveryConfiguration struct {
+
+	// Configuration details of either a CloudWatch Logs destination or Kinesis Data
+	// Firehose destination.
+	DestinationDetails *DestinationDetails
+
+	// Returns the destination type, either CloudWatch Logs or Kinesis Data Firehose.
+	DestinationType DestinationType
+
+	// Returns the log format, either JSON or TEXT
+	LogFormat LogFormat
+
+	// Refers to slow-log (https://redis.io/commands/slowlog).
+	LogType LogType
+}
+
 // A group of settings that are applied to the cluster in the future, or that are
 // currently being applied.
 type PendingModifiedValues struct {
@@ -977,9 +1070,12 @@ type PendingModifiedValues struct {
 	// The new cache engine version that the cluster runs.
 	EngineVersion *string
 
+	// The log delivery configurations being modified
+	LogDeliveryConfigurations []PendingLogDeliveryConfiguration
+
 	// The new number of cache nodes for the cluster. For clusters running Redis, this
 	// value must be 1. For clusters running Memcached, this value must be between 1
-	// and 20.
+	// and 40.
 	NumCacheNodes *int32
 }
 
@@ -1076,6 +1172,9 @@ type ReplicationGroup struct {
 	// The ID of the KMS key used to encrypt the disk in the cluster.
 	KmsKeyId *string
 
+	// Returns the destination, format and type of the logs.
+	LogDeliveryConfigurations []LogDeliveryConfiguration
+
 	// The names of all the cache clusters that are part of this replication group.
 	MemberClusters []string
 
@@ -1140,6 +1239,9 @@ type ReplicationGroupPendingModifiedValues struct {
 
 	// Indicates the status of automatic failover for this Redis replication group.
 	AutomaticFailoverStatus PendingAutomaticFailoverStatus
+
+	// The log delivery configurations being modified
+	LogDeliveryConfigurations []PendingLogDeliveryConfiguration
 
 	// The primary cluster ID that is applied immediately (if --apply-immediately was
 	// specified), or during the next maintenance window.
@@ -1538,7 +1640,7 @@ type Snapshot struct {
 
 	// The number of cache nodes in the source cluster. For clusters running Redis,
 	// this value must be 1. For clusters running Memcached, this value must be between
-	// 1 and 20.
+	// 1 and 40.
 	NumCacheNodes *int32
 
 	// The number of node groups (shards) in this snapshot. When restoring from a

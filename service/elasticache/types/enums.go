@@ -116,6 +116,83 @@ func (ChangeType) Values() []ChangeType {
 	}
 }
 
+type DestinationType string
+
+// Enum values for DestinationType
+const (
+	DestinationTypeCloudWatchLogs  DestinationType = "cloudwatch-logs"
+	DestinationTypeKinesisFirehose DestinationType = "kinesis-firehose"
+)
+
+// Values returns all known values for DestinationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DestinationType) Values() []DestinationType {
+	return []DestinationType{
+		"cloudwatch-logs",
+		"kinesis-firehose",
+	}
+}
+
+type LogDeliveryConfigurationStatus string
+
+// Enum values for LogDeliveryConfigurationStatus
+const (
+	LogDeliveryConfigurationStatusActive    LogDeliveryConfigurationStatus = "active"
+	LogDeliveryConfigurationStatusEnabling  LogDeliveryConfigurationStatus = "enabling"
+	LogDeliveryConfigurationStatusModifying LogDeliveryConfigurationStatus = "modifying"
+	LogDeliveryConfigurationStatusDisabling LogDeliveryConfigurationStatus = "disabling"
+	LogDeliveryConfigurationStatusError     LogDeliveryConfigurationStatus = "error"
+)
+
+// Values returns all known values for LogDeliveryConfigurationStatus. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (LogDeliveryConfigurationStatus) Values() []LogDeliveryConfigurationStatus {
+	return []LogDeliveryConfigurationStatus{
+		"active",
+		"enabling",
+		"modifying",
+		"disabling",
+		"error",
+	}
+}
+
+type LogFormat string
+
+// Enum values for LogFormat
+const (
+	LogFormatText LogFormat = "text"
+	LogFormatJson LogFormat = "json"
+)
+
+// Values returns all known values for LogFormat. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogFormat) Values() []LogFormat {
+	return []LogFormat{
+		"text",
+		"json",
+	}
+}
+
+type LogType string
+
+// Enum values for LogType
+const (
+	LogTypeSlowLog LogType = "slow-log"
+)
+
+// Values returns all known values for LogType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (LogType) Values() []LogType {
+	return []LogType{
+		"slow-log",
+	}
+}
+
 type MultiAZStatus string
 
 // Enum values for MultiAZStatus

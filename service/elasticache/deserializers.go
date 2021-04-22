@@ -11315,6 +11315,12 @@ func awsAwsquery_deserializeDocumentCacheCluster(v **types.CacheCluster, decoder
 				sv.EngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("LogDeliveryConfigurations", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentLogDeliveryConfigurationList(&sv.LogDeliveryConfigurations, nodeDecoder); err != nil {
+				return err
+			}
+
 		case strings.EqualFold("NotificationConfiguration", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentNotificationConfiguration(&sv.NotificationConfiguration, nodeDecoder); err != nil {
@@ -11394,6 +11400,22 @@ func awsAwsquery_deserializeDocumentCacheCluster(v **types.CacheCluster, decoder
 			{
 				xtv := string(val)
 				sv.ReplicationGroupId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("ReplicationGroupLogDeliveryEnabled", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
+				}
+				sv.ReplicationGroupLogDeliveryEnabled = xtv
 			}
 
 		case strings.EqualFold("SecurityGroups", t.Name.Local):
@@ -13890,6 +13912,55 @@ func awsAwsquery_deserializeDocumentCacheSubnetQuotaExceededFault(v **types.Cach
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentCloudWatchLogsDestinationDetails(v **types.CloudWatchLogsDestinationDetails, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.CloudWatchLogsDestinationDetails
+	if *v == nil {
+		sv = &types.CloudWatchLogsDestinationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("LogGroup", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogGroup = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsquery_deserializeDocumentClusterIdList(v *[]string, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14101,6 +14172,54 @@ func awsAwsquery_deserializeDocumentDefaultUserRequired(v **types.DefaultUserReq
 			{
 				xtv := string(val)
 				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentDestinationDetails(v **types.DestinationDetails, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.DestinationDetails
+	if *v == nil {
+		sv = &types.DestinationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("CloudWatchLogsDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentCloudWatchLogsDestinationDetails(&sv.CloudWatchLogsDetails, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("KinesisFirehoseDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentKinesisFirehoseDestinationDetails(&sv.KinesisFirehoseDetails, nodeDecoder); err != nil {
+				return err
 			}
 
 		default:
@@ -16074,6 +16193,230 @@ func awsAwsquery_deserializeDocumentInvalidVPCNetworkStateFault(v **types.Invali
 	return nil
 }
 
+func awsAwsquery_deserializeDocumentKinesisFirehoseDestinationDetails(v **types.KinesisFirehoseDestinationDetails, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.KinesisFirehoseDestinationDetails
+	if *v == nil {
+		sv = &types.KinesisFirehoseDestinationDetails{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DeliveryStream", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DeliveryStream = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentLogDeliveryConfiguration(v **types.LogDeliveryConfiguration, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.LogDeliveryConfiguration
+	if *v == nil {
+		sv = &types.LogDeliveryConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DestinationDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDestinationDetails(&sv.DestinationDetails, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("DestinationType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DestinationType = types.DestinationType(xtv)
+			}
+
+		case strings.EqualFold("LogFormat", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogFormat = types.LogFormat(xtv)
+			}
+
+		case strings.EqualFold("LogType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogType = types.LogType(xtv)
+			}
+
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = types.LogDeliveryConfigurationStatus(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentLogDeliveryConfigurationList(v *[]types.LogDeliveryConfiguration, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.LogDeliveryConfiguration
+	if *v == nil {
+		sv = make([]types.LogDeliveryConfiguration, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("LogDeliveryConfiguration", t.Name.Local):
+			var col types.LogDeliveryConfiguration
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentLogDeliveryConfiguration(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentLogDeliveryConfigurationListUnwrapped(v *[]types.LogDeliveryConfiguration, decoder smithyxml.NodeDecoder) error {
+	var sv []types.LogDeliveryConfiguration
+	if *v == nil {
+		sv = make([]types.LogDeliveryConfiguration, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.LogDeliveryConfiguration
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentLogDeliveryConfiguration(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentNodeGroup(v **types.NodeGroup, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17778,6 +18121,155 @@ func awsAwsquery_deserializeDocumentParametersListUnwrapped(v *[]types.Parameter
 	*v = sv
 	return nil
 }
+func awsAwsquery_deserializeDocumentPendingLogDeliveryConfiguration(v **types.PendingLogDeliveryConfiguration, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.PendingLogDeliveryConfiguration
+	if *v == nil {
+		sv = &types.PendingLogDeliveryConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("DestinationDetails", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentDestinationDetails(&sv.DestinationDetails, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("DestinationType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.DestinationType = types.DestinationType(xtv)
+			}
+
+		case strings.EqualFold("LogFormat", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogFormat = types.LogFormat(xtv)
+			}
+
+		case strings.EqualFold("LogType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.LogType = types.LogType(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentPendingLogDeliveryConfigurationList(v *[]types.PendingLogDeliveryConfiguration, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.PendingLogDeliveryConfiguration
+	if *v == nil {
+		sv = make([]types.PendingLogDeliveryConfiguration, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col types.PendingLogDeliveryConfiguration
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsAwsquery_deserializeDocumentPendingLogDeliveryConfiguration(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsquery_deserializeDocumentPendingLogDeliveryConfigurationListUnwrapped(v *[]types.PendingLogDeliveryConfiguration, decoder smithyxml.NodeDecoder) error {
+	var sv []types.PendingLogDeliveryConfiguration
+	if *v == nil {
+		sv = make([]types.PendingLogDeliveryConfiguration, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.PendingLogDeliveryConfiguration
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsAwsquery_deserializeDocumentPendingLogDeliveryConfiguration(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModifiedValues, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17843,6 +18335,12 @@ func awsAwsquery_deserializeDocumentPendingModifiedValues(v **types.PendingModif
 			{
 				xtv := string(val)
 				sv.EngineVersion = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("LogDeliveryConfigurations", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentPendingLogDeliveryConfigurationList(&sv.LogDeliveryConfigurations, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("NumCacheNodes", t.Name.Local):
@@ -18328,6 +18826,12 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 			{
 				xtv := string(val)
 				sv.KmsKeyId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("LogDeliveryConfigurations", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentLogDeliveryConfigurationList(&sv.LogDeliveryConfigurations, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("MemberClusters", t.Name.Local):
@@ -18862,6 +19366,12 @@ func awsAwsquery_deserializeDocumentReplicationGroupPendingModifiedValues(v **ty
 			{
 				xtv := string(val)
 				sv.AutomaticFailoverStatus = types.PendingAutomaticFailoverStatus(xtv)
+			}
+
+		case strings.EqualFold("LogDeliveryConfigurations", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsAwsquery_deserializeDocumentPendingLogDeliveryConfigurationList(&sv.LogDeliveryConfigurations, nodeDecoder); err != nil {
+				return err
 			}
 
 		case strings.EqualFold("PrimaryClusterId", t.Name.Local):

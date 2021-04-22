@@ -114,6 +114,9 @@ type ModifyReplicationGroupInput struct {
 	// create it anew with the earlier engine version.
 	EngineVersion *string
 
+	// Specifies the destination, format and type of the logs.
+	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
+
 	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
 	// key must be accompanied by a tag value, although null is accepted.
 	MultiAZEnabled *bool
