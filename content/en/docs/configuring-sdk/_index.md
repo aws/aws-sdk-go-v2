@@ -163,11 +163,11 @@ import (
 // ...
 
 cfg , err := config.LoadDefaultConfig(context.TODO(), 
-	WithSharedCredentialsFiles(
-	    []string{"test/credentials", "data/credentials"}
-	), 
-    WithSharedConfigFiles(
-        []string("test/config", "data/config")
+    config.WithSharedCredentialsFiles(
+	[]string{"test/credentials", "data/credentials"},
+    ), 
+    config.WithSharedConfigFiles(
+        []string{"test/config", "data/config"},
     )	
 ) 
 
