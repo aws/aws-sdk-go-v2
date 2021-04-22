@@ -438,9 +438,7 @@ type EmailConfigurationType struct {
 	// VerificationMessageTemplate.EmailSubjectByLink
 	//
 	// DEVELOPER EmailSendingAccount is
-	// required.
-	//
-	// DEVELOPER When Amazon Cognito emails your users, it uses your Amazon
+	// required. DEVELOPER When Amazon Cognito emails your users, it uses your Amazon
 	// SES configuration. Amazon Cognito calls Amazon SES on your behalf to send email
 	// from your verified email address. When you use this option, the email delivery
 	// limits are the same limits that apply to your Amazon SES verified email address
@@ -1015,7 +1013,10 @@ type SmsConfigurationType struct {
 	// attempting to assume your IAM role, so that you can set your roles trust policy
 	// to require the ExternalID. If you use the Cognito Management Console to create a
 	// role for SMS MFA, Cognito will create a role with the required permissions and a
-	// trust policy that demonstrates use of the ExternalId.
+	// trust policy that demonstrates use of the ExternalId. For more information about
+	// the ExternalId of a role, see How to use an external ID when granting access to
+	// your AWS resources to a third party
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)
 	ExternalId *string
 }
 

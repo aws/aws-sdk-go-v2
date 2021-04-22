@@ -34,15 +34,18 @@ type SetUserPoolMfaConfigInput struct {
 	// This member is required.
 	UserPoolId *string
 
-	// The MFA configuration. Valid values include:
+	// The MFA configuration. Users who don't have an MFA factor set up won't be able
+	// to sign-in if you set the MfaConfiguration value to ‘ON’. See Adding
+	// Multi-Factor Authentication (MFA) to a User Pool to learn more. Valid values
+	// include:
 	//
-	// * OFF MFA will not be used for any
-	// users.
+	// * OFF MFA will not be used for any users.
 	//
-	// * ON MFA is required for all users to sign in.
+	// * ON MFA is required for
+	// all users to sign in.
 	//
-	// * OPTIONAL MFA will be
-	// required only for individual users who have an MFA factor enabled.
+	// * OPTIONAL MFA will be required only for individual users
+	// who have an MFA factor enabled.
 	MfaConfiguration types.UserPoolMfaType
 
 	// The SMS text message MFA configuration.

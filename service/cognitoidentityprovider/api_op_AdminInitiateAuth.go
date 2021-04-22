@@ -215,9 +215,19 @@ type AdminInitiateAuthOutput struct {
 	// and PASSWORD directly. An app client must be enabled to use this flow.
 	//
 	// *
-	// NEW_PASSWORD_REQUIRED: For users which are required to change their passwords
+	// NEW_PASSWORD_REQUIRED: For users who are required to change their passwords
 	// after successful first login. This challenge should be passed with NEW_PASSWORD
 	// and any other required attributes.
+	//
+	// * MFA_SETUP: For users who are required to
+	// setup an MFA factor before they can sign-in. The MFA types enabled for the user
+	// pool will be listed in the challenge parameters MFA_CAN_SETUP value. To setup
+	// software token MFA, use the session returned here from InitiateAuth as an input
+	// to AssociateSoftwareToken, and use the session returned by VerifySoftwareToken
+	// as an input to RespondToAuthChallenge with challenge name MFA_SETUP to complete
+	// sign-in. To setup SMS MFA, users will need help from an administrator to add a
+	// phone number to their account and then call InitiateAuth again to restart
+	// sign-in.
 	ChallengeName types.ChallengeNameType
 
 	// The challenge parameters. These are returned to you in the AdminInitiateAuth

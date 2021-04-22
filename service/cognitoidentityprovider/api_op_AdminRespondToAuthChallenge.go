@@ -69,11 +69,14 @@ type AdminRespondToAuthChallengeInput struct {
 	// attributes, USERNAME, SECRET_HASH (if app client is configured with client
 	// secret).
 	//
-	// The value of the USERNAME attribute must be the user's actual
-	// username, not an alias (such as email address or phone number). To make this
-	// easier, the AdminInitiateAuth response includes the actual username value in the
-	// USERNAMEUSER_ID_FOR_SRP attribute, even if you specified an alias in your call
-	// to AdminInitiateAuth.
+	// * MFA_SETUP requires USERNAME, plus you need to use the session value
+	// returned by VerifySoftwareToken in the Session parameter.
+	//
+	// The value of the
+	// USERNAME attribute must be the user's actual username, not an alias (such as
+	// email address or phone number). To make this easier, the AdminInitiateAuth
+	// response includes the actual username value in the USERNAMEUSER_ID_FOR_SRP
+	// attribute, even if you specified an alias in your call to AdminInitiateAuth.
 	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom

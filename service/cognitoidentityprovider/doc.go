@@ -7,5 +7,6 @@
 // directories and users. You can authenticate a user to obtain tokens related to
 // user identity and access policies. This API reference provides information about
 // user pools in Amazon Cognito User Pools. For more information, see the Amazon
-// Cognito Documentation.
+// Cognito Documentation
+// (https://docs.aws.amazon.com/cognito/latest/developerguide/what-is-amazon-cognito.html).
 package cognitoidentityprovider
