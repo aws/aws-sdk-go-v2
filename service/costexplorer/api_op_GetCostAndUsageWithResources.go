@@ -55,6 +55,13 @@ type GetCostAndUsageWithResourcesInput struct {
 	// This member is required.
 	Filter *types.Expression
 
+	// Sets the AWS cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't
+	// set, the response object doesn't include the Granularity, MONTHLY, DAILY, or
+	// HOURLY.
+	//
+	// This member is required.
+	Granularity types.Granularity
+
 	// Sets the start and end dates for retrieving Amazon Web Services costs. The range
 	// must be within the last 14 days (the start date cannot be earlier than 14 days
 	// ago). The start date is inclusive, but the end date is exclusive. For example,
@@ -64,11 +71,6 @@ type GetCostAndUsageWithResourcesInput struct {
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
-
-	// Sets the AWS cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't
-	// set, the response object doesn't include the Granularity, MONTHLY, DAILY, or
-	// HOURLY.
-	Granularity types.Granularity
 
 	// You can group Amazon Web Services costs using up to two different groups:
 	// DIMENSION, TAG, COST_CATEGORY.
