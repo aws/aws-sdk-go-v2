@@ -5251,7 +5251,8 @@
                 "parameters": {
                     "target": "com.amazonaws.apigateway#MapOfStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key-value map of query string parameters that specify properties of the export, depending on the requested <code>exportType</code>. For <code>exportType</code> <code>oas30</code> and <code>swagger</code>, any combination of the following parameters are supported: <code>extensions='integrations'</code> or <code>extensions='apigateway'</code> will export the API with x-amazon-apigateway-integration extensions. <code>extensions='authorizers'</code> will export the API with  x-amazon-apigateway-authorizer extensions. <code>postman</code> will export the API with Postman extensions, allowing for import to the Postman tool</p>"
+                        "smithy.api#documentation": "<p>A key-value map of query string parameters that specify properties of the export, depending on the requested <code>exportType</code>. For <code>exportType</code> <code>oas30</code> and <code>swagger</code>, any combination of the following parameters are supported: <code>extensions='integrations'</code> or <code>extensions='apigateway'</code> will export the API with x-amazon-apigateway-integration extensions. <code>extensions='authorizers'</code> will export the API with  x-amazon-apigateway-authorizer extensions. <code>postman</code> will export the API with Postman extensions, allowing for import to the Postman tool</p>",
+                        "smithy.api#httpQueryParams": {}
                     }
                 },
                 "accepts": {
@@ -6226,7 +6227,8 @@
                 "parameters": {
                     "target": "com.amazonaws.apigateway#MapOfStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string-to-string key-value map of query parameters <code>sdkType</code>-dependent properties of the SDK. For <code>sdkType</code> of <code>objectivec</code> or <code>swift</code>,  a parameter named <code>classPrefix</code> is required. For <code>sdkType</code> of <code>android</code>, parameters named <code>groupId</code>, <code>artifactId</code>, <code>artifactVersion</code>, and <code>invokerPackage</code> are required. For <code>sdkType</code> of <code>java</code>, parameters named <code>serviceName</code> and <code>javaPackageName</code> are required. </p>"
+                        "smithy.api#documentation": "<p>A string-to-string key-value map of query parameters <code>sdkType</code>-dependent properties of the SDK. For <code>sdkType</code> of <code>objectivec</code> or <code>swift</code>,  a parameter named <code>classPrefix</code> is required. For <code>sdkType</code> of <code>android</code>, parameters named <code>groupId</code>, <code>artifactId</code>, <code>artifactVersion</code>, and <code>invokerPackage</code> are required. For <code>sdkType</code> of <code>java</code>, parameters named <code>serviceName</code> and <code>javaPackageName</code> are required. </p>",
+                        "smithy.api#httpQueryParams": {}
                     }
                 }
             },
@@ -6965,6 +6967,14 @@
         "com.amazonaws.apigateway#ImportApiKeysRequest": {
             "type": "structure",
             "members": {
+                "body": {
+                    "target": "com.amazonaws.apigateway#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payload of the POST request to import API keys. For the payload format, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html\">API Key File Format</a>.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                },
                 "format": {
                     "target": "com.amazonaws.apigateway#ApiKeysFormat",
                     "traits": {
@@ -7042,6 +7052,14 @@
                         "smithy.api#documentation": "<p>A query parameter to specify whether to rollback the documentation importation (<code>true</code>) or not (<code>false</code>) when a warning is encountered. The default value is <code>false</code>.</p>",
                         "smithy.api#httpQuery": "failonwarnings"
                     }
+                },
+                "body": {
+                    "target": "com.amazonaws.apigateway#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Required] Raw byte array representing the to-be-imported documentation parts. To import from an OpenAPI file, this is a JSON object.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
@@ -7095,7 +7113,16 @@
                 "parameters": {
                     "target": "com.amazonaws.apigateway#MapOfStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.</p>\n        <p> To exclude <a>DocumentationParts</a> from the import, set <code>parameters</code> as <code>ignore=documentation</code>.</p>\n      <p> To configure the endpoint type, set <code>parameters</code> as <code>endpointConfigurationTypes=EDGE</code>, <code>endpointConfigurationTypes=REGIONAL</code>, or <code>endpointConfigurationTypes=PRIVATE</code>. The default endpoint type is <code>EDGE</code>.</p>\n        <p> To handle imported <code>basepath</code>, set <code>parameters</code> as <code>basepath=ignore</code>, <code>basepath=prepend</code> or <code>basepath=split</code>.</p>\n        <p>For example, the AWS CLI command to exclude documentation from the imported API is:</p> \n        <pre><code>aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'</code></pre>\n        <p>The AWS CLI command to set the regional endpoint on the imported API is:</p>\n        <pre><code>aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json'</code></pre>"
+                        "smithy.api#documentation": "<p>A key-value map of context-specific query string parameters specifying the behavior of different API importing operations. The following shows operation-specific parameters and their supported values.</p>\n        <p> To exclude <a>DocumentationParts</a> from the import, set <code>parameters</code> as <code>ignore=documentation</code>.</p>\n      <p> To configure the endpoint type, set <code>parameters</code> as <code>endpointConfigurationTypes=EDGE</code>, <code>endpointConfigurationTypes=REGIONAL</code>, or <code>endpointConfigurationTypes=PRIVATE</code>. The default endpoint type is <code>EDGE</code>.</p>\n        <p> To handle imported <code>basepath</code>, set <code>parameters</code> as <code>basepath=ignore</code>, <code>basepath=prepend</code> or <code>basepath=split</code>.</p>\n        <p>For example, the AWS CLI command to exclude documentation from the imported API is:</p> \n        <pre><code>aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'</code></pre>\n        <p>The AWS CLI command to set the regional endpoint on the imported API is:</p>\n        <pre><code>aws apigateway import-rest-api --parameters endpointConfigurationTypes=REGIONAL --body 'file:///path/to/imported-api-body.json'</code></pre>",
+                        "smithy.api#httpQueryParams": {}
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.apigateway#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Required] The POST request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -8569,7 +8596,16 @@
                 "parameters": {
                     "target": "com.amazonaws.apigateway#MapOfStringToString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Custom header parameters as part of the request. For example, to exclude <a>DocumentationParts</a> from an imported API, set <code>ignore=documentation</code> as a <code>parameters</code> value, as in the AWS CLI command of <code>aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'</code>.</p>"
+                        "smithy.api#documentation": "<p>Custom header parameters as part of the request. For example, to exclude <a>DocumentationParts</a> from an imported API, set <code>ignore=documentation</code> as a <code>parameters</code> value, as in the AWS CLI command of <code>aws apigateway import-rest-api --parameters ignore=documentation --body 'file:///path/to/imported-api-body.json'</code>.</p>",
+                        "smithy.api#httpQueryParams": {}
+                    }
+                },
+                "body": {
+                    "target": "com.amazonaws.apigateway#Blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Required] The PUT request body containing external API definitions. Currently, only OpenAPI definition JSON/YAML files are supported. The maximum size of the API definition file is 6MB.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -9862,7 +9898,7 @@
                 "basePath": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Required] The base path of the <a>BasePathMapping</a> resource to change.</p>\n        <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>",
+                        "smithy.api#documentation": "<p>[Required] The base path of the <a>BasePathMappipDocumentGetSdkInputng</a> resource to change.</p>\n        <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
