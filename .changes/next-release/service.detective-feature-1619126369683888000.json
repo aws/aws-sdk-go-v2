@@ -1,9 +1,0 @@
-{
- "ID": "service.detective-feature-1619126369683888000",
- "SchemaVersion": 1,
- "Module": "service/detective",
- "Type": "feature",
- "Description": "Service API Updates",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,9 +1,0 @@
-{
- "ID": "service.cloudformation-bugfix-1619126289525602000",
- "SchemaVersion": 1,
- "Module": "service/cloudformation",
- "Type": "documentation",
- "Description": "Service Documentation Updates",
- "MinVersion": "",
- "AffectedModules": null
-}

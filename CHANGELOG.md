@@ -1,3 +1,34 @@
+# Release 2021-04-23
+## Service Client Highlights
+* `service/cloudformation` - v1.3.2
+  * Documentation: Service Documentation Updates
+* `service/cognitoidentityprovider` - v1.2.3
+  * Documentation: Service Documentation Updates
+* `service/costexplorer` - v1.4.0
+  * Feature: Service API Updates
+* `service/databasemigrationservice` - v1.3.0
+  * Feature: Service API Updates
+* `service/detective` - v1.4.0
+  * Feature: Service API Updates
+* `service/elasticache` - v1.4.0
+  * Feature: Service API Updates
+* `service/forecast` - v1.3.0
+  * Feature: Service API Updates
+* `service/groundstation` - v1.3.0
+  * Feature: Service API Updates
+* `service/kendra` - v1.3.0
+  * Feature: Service API Updates
+* `service/redshift` - v1.5.0
+  * Feature: Service API Updates
+* `service/savingsplans` - v1.2.0
+  * Feature: Service API Updates
+* `service/securityhub` - v1.3.0
+  * Feature: Service API Updates
+## Core SDK Highlights
+* Dependency Update: Updated SDK dependencies to their latest versions.
+* `feature/rds/auth` - v1.0.0
+  * Feature: Add Support for Amazon RDS IAM Authentication
+
 # Release 2021-04-14
 ## Service Client Highlights
 * `service/codebuild` - v1.3.0

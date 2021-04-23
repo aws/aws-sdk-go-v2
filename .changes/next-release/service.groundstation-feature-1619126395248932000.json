@@ -1,9 +1,0 @@
-{
- "ID": "service.groundstation-feature-1619126395248932000",
- "SchemaVersion": 1,
- "Module": "service/groundstation",
- "Type": "feature",
- "Description": "Service API Updates",
- "MinVersion": "",
- "AffectedModules": null
-}

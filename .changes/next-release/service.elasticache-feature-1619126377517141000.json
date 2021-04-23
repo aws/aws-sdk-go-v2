@@ -1,9 +1,0 @@
-{
- "ID": "service.elasticache-feature-1619126377517141000",
- "SchemaVersion": 1,
- "Module": "service/elasticache",
- "Type": "feature",
- "Description": "Service API Updates",
- "MinVersion": "",
- "AffectedModules": null
-}

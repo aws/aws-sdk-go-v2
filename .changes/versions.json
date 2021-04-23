@@ -5,31 +5,31 @@
    "Module": "/",
    "ImportPath": "github.com/aws/aws-sdk-go-v2",
    "Version": "v1.3.3",
-   "ModuleHash": "h1:BKKakJ9v28yopLRF6bg6FAMbVKmcXuZe+r688XMsxtk="
+   "ModuleHash": "h1:6WWSoDhc0pvBNiDTR4iRB0ZgyNYl09qQdYAaNBa4DCM="
   },
   "config": {
    "Module": "config",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/config",
    "Version": "v1.1.6",
-   "ModuleHash": "h1:tg8KyxrxDt1CrYmZXWs9lc6IFE1yxtk9kn6eS/v2fdA="
+   "ModuleHash": "h1:eTDpBWcoDwOkmH7Ox7yurHXOImerb+VL4O1zUqJKTnM="
   },
   "credentials": {
    "Module": "credentials",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/credentials",
    "Version": "v1.1.6",
-   "ModuleHash": "h1:efaeh6FsO/jzyJ+U4ZxduKC6rRJDrUpu+Z0k5+guqHo="
+   "ModuleHash": "h1:f4FVEa3wdKspC56pFBfKYCAlx4Eh9S/E4F7+neq8L4w="
   },
   "example/service/s3/listObjects": {
    "Module": "example/service/s3/listObjects",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/example/service/s3/listObjects",
    "Version": "v0.2.8",
-   "ModuleHash": "h1:89AtsWSkuhEdEqESKH6AgPQ9n2JtOF/wSkFED/dOfJE="
+   "ModuleHash": "h1:d7PI9bNNBDGwOigkUrc99EL9g8fNKS65xRsvCZ+KZG0="
   },
   "example/service/s3/usingPrivateLink": {
    "Module": "example/service/s3/usingPrivateLink",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/example/service/s3/usingPrivateLink",
    "Version": "v0.1.5",
-   "ModuleHash": "h1:znvoCf28fcG5qynLaCMshAOrgqWqq2KSZBoDbjXDMS0="
+   "ModuleHash": "h1:0FRFI48G5SoU+MVCgvzl4mSHrxtkE0aJJc1klJHRSBo="
   },
   "feature/cloudfront/sign": {
    "Module": "feature/cloudfront/sign",
@@ -41,19 +41,19 @@
    "Module": "feature/dynamodb/attributevalue",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue",
    "Version": "v1.0.6",
-   "ModuleHash": "h1:g5wLY5sYDVsiSfhdCNTz1PCrwg3IPFI0B6RCq7jPS0U="
+   "ModuleHash": "h1:ia8ph+wcGcTNRmAtYWcdl6QoA9hd8lycDflvEMMHkdU="
   },
   "feature/dynamodb/expression": {
    "Module": "feature/dynamodb/expression",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression",
    "Version": "v1.0.6",
-   "ModuleHash": "h1:UScRUs89QPTf31HMBlfeozWFlQGch8OCd2oCed/7oPE="
+   "ModuleHash": "h1:kO6e5wgW4L4ComMaZcixwWy+wTspC8ddK1Aq4lAcbDE="
   },
   "feature/dynamodbstreams/attributevalue": {
    "Module": "feature/dynamodbstreams/attributevalue",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue",
    "Version": "v1.0.6",
-   "ModuleHash": "h1:Kl+l73LWyU8ROv4Dr7ET9xtqkO4RfRAmX6PezJXMEkE="
+   "ModuleHash": "h1:SDdOVJmaOMza17QA77SEbwobsxzUFqZWBTF6hVCFy7A="
   },
   "feature/ec2/imds": {
    "Module": "feature/ec2/imds",
@@ -61,11 +61,17 @@
    "Version": "v1.0.6",
    "ModuleHash": "h1:zoOz5V56jO/rGixsCDnrQtAzYRYM2hGA/43U6jVMFbo="
   },
+  "feature/rds/auth": {
+   "Module": "feature/rds/auth",
+   "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/rds/auth",
+   "Version": "v1.0.0",
+   "ModuleHash": "h1:CdO0z1uRu0Md4tXe/9hfTHBVUll16RBD0y4FksNmjtM="
+  },
   "feature/s3/manager": {
    "Module": "feature/s3/manager",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/feature/s3/manager",
    "Version": "v1.1.3",
-   "ModuleHash": "h1:uJ7ZQbDAzCb0lQ/gmk6lzMkZVHPaZdoLii6awFBHxFI="
+   "ModuleHash": "h1:cX0VzFQimEkZzycyzgaXUi7GwOiS1O/hHnfEZ6G24fE="
   },
   "internal/protocoltest/awsrestjson": {
    "Module": "internal/protocoltest/awsrestjson",
@@ -119,7 +125,7 @@
    "Module": "internal/repotools/changes",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/internal/repotools/changes",
    "Version": "v0.2.7",
-   "ModuleHash": "h1:eij97LzX092GN6VmAlPGgSHF47qSNyOeom2EHMpDD3U="
+   "ModuleHash": "h1:r29a4UNKDT529Hf4LaqWiI3s0iDrKQPbWCEcrCelaeA="
   },
   "service/accessanalyzer": {
    "Module": "service/accessanalyzer",
@@ -304,8 +310,8 @@
   "service/cloudformation": {
    "Module": "service/cloudformation",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cloudformation",
-   "Version": "v1.3.1",
-   "ModuleHash": "h1:Hw2Ten8sgwpwYnagyiuL35VAd5pLIrGofJQWOZRrZd8="
+   "Version": "v1.3.2",
+   "ModuleHash": "h1:8C7mEzv69kiycFb4yONaHAIW7PhZCjtFs3Kj//3vZPk="
   },
   "service/cloudfront": {
    "Module": "service/cloudfront",
@@ -430,8 +436,8 @@
   "service/cognitoidentityprovider": {
    "Module": "service/cognitoidentityprovider",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider",
-   "Version": "v1.2.2",
-   "ModuleHash": "h1:PiGLyQLF+uxGvb7x9KCEjO6dxOATvVwdIkvbvJaNLb4="
+   "Version": "v1.2.3",
+   "ModuleHash": "h1:Xn4coLAhlpwlgDrdqfrmYXV+ii/CEAJm1T4nPkGCQkc="
   },
   "service/cognitosync": {
    "Module": "service/cognitosync",
@@ -490,8 +496,8 @@
   "service/costexplorer": {
    "Module": "service/costexplorer",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/costexplorer",
-   "Version": "v1.3.1",
-   "ModuleHash": "h1:fBx01OUBHqQn+oUX5RckhWI5sTlmmADePkypDwTVtW4="
+   "Version": "v1.4.0",
+   "ModuleHash": "h1:osxGSnT6V7sAQreDgHhHmMYnDFhWLWegjiw97+NYaTA="
   },
   "service/customerprofiles": {
    "Module": "service/customerprofiles",
@@ -502,8 +508,8 @@
   "service/databasemigrationservice": {
    "Module": "service/databasemigrationservice",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/databasemigrationservice",
-   "Version": "v1.2.2",
-   "ModuleHash": "h1:zENwxpED+8XWsB1J5Oeq/8bgoIf4Z/LX00cY2ZXukDU="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:Bzz505N7pBQ218TxcQB8WvoCm3+AZdRCaqquWCkoXl4="
   },
   "service/databrew": {
    "Module": "service/databrew",
@@ -538,8 +544,8 @@
   "service/detective": {
    "Module": "service/detective",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/detective",
-   "Version": "v1.3.1",
-   "ModuleHash": "h1:aIkO4GMvuxTzjxlrYl8fNOYrP80QNWO4d2w0tADCWZ4="
+   "Version": "v1.4.0",
+   "ModuleHash": "h1:SV4MTiy2rH8kRVvlJYmCtBdgXqkqv3OAHT9DkGxdUME="
   },
   "service/devicefarm": {
    "Module": "service/devicefarm",
@@ -640,8 +646,8 @@
   "service/elasticache": {
    "Module": "service/elasticache",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/elasticache",
-   "Version": "v1.3.0",
-   "ModuleHash": "h1:ftZ/5F/CPqW7A18xVD02hGX1b1r8QsdLRk/w/BEg3E8="
+   "Version": "v1.4.0",
+   "ModuleHash": "h1:nn/e8DOpUKr5C1baMiW75kwsfd41Kgxf+jCMsQjoX90="
   },
   "service/elasticbeanstalk": {
    "Module": "service/elasticbeanstalk",
@@ -718,8 +724,8 @@
   "service/forecast": {
    "Module": "service/forecast",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/forecast",
-   "Version": "v1.2.2",
-   "ModuleHash": "h1:We81CTSlR/ndjQmklALdVMVpYCaolrWr5KkZ8e0MB90="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:3OnB9rbft400IlAgmXR4pSKDCpbB8GzwtZEOr4nr5gU="
   },
   "service/forecastquery": {
    "Module": "service/forecastquery",
@@ -778,8 +784,8 @@
   "service/groundstation": {
    "Module": "service/groundstation",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/groundstation",
-   "Version": "v1.2.2",
-   "ModuleHash": "h1:qCzYnFZ+5m6G5Xr8kyg7YFvrbdF0VBtjQdptsFhAFW4="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:cZnzfG4bPF+rO/qUKqVpK+MbEM1HuV1gpkUozhE4Llw="
   },
   "service/guardduty": {
    "Module": "service/guardduty",
@@ -844,8 +850,8 @@
   "service/internal/integrationtest": {
    "Module": "service/internal/integrationtest",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/internal/integrationtest",
-   "Version": "v0.5.3",
-   "ModuleHash": "h1:Xl8+OMIRgPNFkbe3mvnXhKOXEroNh+sNKVFZZw4D2LQ="
+   "Version": "v0.5.4",
+   "ModuleHash": "h1:3wTc78gIInUy+9doBsVFP90rKLiNytuBwdxhuVClcwY="
   },
   "service/internal/presigned-url": {
    "Module": "service/internal/presigned-url",
@@ -958,8 +964,8 @@
   "service/kendra": {
    "Module": "service/kendra",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/kendra",
-   "Version": "v1.2.0",
-   "ModuleHash": "h1:ylHTIgxC9yXSXZViqdAxd4A/Z9kXid/1H8zcBsHYYT8="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:WeYUZpyYZ0tC5yQiEpgY3VdBzWQf6JLwvQo+SY2WhY0="
   },
   "service/kinesis": {
    "Module": "service/kinesis",
@@ -1354,8 +1360,8 @@
   "service/redshift": {
    "Module": "service/redshift",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/redshift",
-   "Version": "v1.4.0",
-   "ModuleHash": "h1:imJ4aQHWqC2VnWihvPQDExVKK5HukaTo6fEjzDuJuII="
+   "Version": "v1.5.0",
+   "ModuleHash": "h1:P4PBqd32nJSpI/acCRModJOpn12aUs3qIns6RUxbKLs="
   },
   "service/redshiftdata": {
    "Module": "service/redshiftdata",
@@ -1415,7 +1421,7 @@
    "Module": "service/s3/internal/configtesting",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/s3/internal/configtesting",
    "Version": "v1.1.3",
-   "ModuleHash": "h1:JiJ87fecsNQhdJyp2AIKC6t0LiOt9ax75fd3nxZkYMc="
+   "ModuleHash": "h1:52waZoeAwvYp2mUhtvLjSFl8bFdBazJNrQxvqFBuVCg="
   },
   "service/s3control": {
    "Module": "service/s3control",
@@ -1462,8 +1468,8 @@
   "service/savingsplans": {
    "Module": "service/savingsplans",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/savingsplans",
-   "Version": "v1.1.5",
-   "ModuleHash": "h1:B3mytVU7IRRNOR87dtg/2pIjlQ5oqkqmZjLXUl5gGxg="
+   "Version": "v1.2.0",
+   "ModuleHash": "h1:j4Ed3b9BvWLUBSq5Oh2Ujn6zf7UlWB0pGygwa3tE1yQ="
   },
   "service/schemas": {
    "Module": "service/schemas",
@@ -1480,8 +1486,8 @@
   "service/securityhub": {
    "Module": "service/securityhub",
    "ImportPath": "github.com/aws/aws-sdk-go-v2/service/securityhub",
-   "Version": "v1.2.2",
-   "ModuleHash": "h1:98HxONwbO0i40LLgQStDxB7eQ8GFuw0Iwps9tb8tKgU="
+   "Version": "v1.3.0",
+   "ModuleHash": "h1:iaUMMwtSVGEAoEJma/GPXbihfW1Y4ox901NkOmNwUWw="
   },
   "service/serverlessapplicationrepository": {
    "Module": "service/serverlessapplicationrepository",
@@ -1749,6 +1755,7 @@
   "github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression": "feature/dynamodb/expression",
   "github.com/aws/aws-sdk-go-v2/feature/dynamodbstreams/attributevalue": "feature/dynamodbstreams/attributevalue",
   "github.com/aws/aws-sdk-go-v2/feature/ec2/imds": "feature/ec2/imds",
+  "github.com/aws/aws-sdk-go-v2/feature/rds/auth": "feature/rds/auth",
   "github.com/aws/aws-sdk-go-v2/feature/s3/manager": "feature/s3/manager",
   "github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/integration": "feature/s3/manager",
   "github.com/aws/aws-sdk-go-v2/feature/s3/manager/internal/integration/downloader": "feature/s3/manager",

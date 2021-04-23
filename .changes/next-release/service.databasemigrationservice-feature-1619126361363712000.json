@@ -1,9 +1,0 @@
-{
- "ID": "service.databasemigrationservice-feature-1619126361363712000",
- "SchemaVersion": 1,
- "Module": "service/databasemigrationservice",
- "Type": "feature",
- "Description": "Service API Updates",
- "MinVersion": "",
- "AffectedModules": null
-}
