@@ -33,6 +33,13 @@ func (c *Client) ImportRestApi(ctx context.Context, params *ImportRestApiInput, 
 // definition file.
 type ImportRestApiInput struct {
 
+	// [Required] The POST request body containing external API definitions. Currently,
+	// only OpenAPI definition JSON/YAML files are supported. The maximum size of the
+	// API definition file is 6MB.
+	//
+	// This member is required.
+	Body []byte
+
 	// A query parameter to indicate whether to rollback the API creation (true) or not
 	// (false) when a warning is encountered. The default value is false.
 	FailOnWarnings bool
@@ -164,6 +171,9 @@ func addOperationImportRestApiMiddlewares(stack *middleware.Stack, options Optio
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpImportRestApiValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportRestApi(options.Region), middleware.Before); err != nil {

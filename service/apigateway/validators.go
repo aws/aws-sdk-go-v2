@@ -1550,6 +1550,26 @@ func (m *validateOpImportDocumentationParts) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportRestApi struct {
+}
+
+func (*validateOpImportRestApi) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportRestApi) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportRestApiInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportRestApiInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutGatewayResponse struct {
 }
 
@@ -2476,6 +2496,10 @@ func addOpImportApiKeysValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpImportDocumentationPartsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportDocumentationParts{}, middleware.After)
+}
+
+func addOpImportRestApiValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportRestApi{}, middleware.After)
 }
 
 func addOpPutGatewayResponseValidationMiddleware(stack *middleware.Stack) error {
@@ -3949,6 +3973,9 @@ func validateOpImportApiKeysInput(v *ImportApiKeysInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ImportApiKeysInput"}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
 	if len(v.Format) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Format"))
 	}
@@ -3966,6 +3993,24 @@ func validateOpImportDocumentationPartsInput(v *ImportDocumentationPartsInput) e
 	invalidParams := smithy.InvalidParamsError{Context: "ImportDocumentationPartsInput"}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportRestApiInput(v *ImportRestApiInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportRestApiInput"}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4095,6 +4140,9 @@ func validateOpPutRestApiInput(v *PutRestApiInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PutRestApiInput"}
 	if v.RestApiId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RestApiId"))
+	}
+	if v.Body == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Body"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -34,6 +34,13 @@ func (c *Client) PutRestApi(ctx context.Context, params *PutRestApiInput, optFns
 // as the request body.
 type PutRestApiInput struct {
 
+	// [Required] The PUT request body containing external API definitions. Currently,
+	// only OpenAPI definition JSON/YAML files are supported. The maximum size of the
+	// API definition file is 6MB.
+	//
+	// This member is required.
+	Body []byte
+
 	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.

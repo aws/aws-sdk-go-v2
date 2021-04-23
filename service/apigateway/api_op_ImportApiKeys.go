@@ -31,6 +31,13 @@ func (c *Client) ImportApiKeys(ctx context.Context, params *ImportApiKeysInput, 
 // CSV-formatted file.
 type ImportApiKeysInput struct {
 
+	// The payload of the POST request to import API keys. For the payload format, see
+	// API Key File Format
+	// (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-key-file-format.html).
+	//
+	// This member is required.
+	Body []byte
+
 	// A query parameter to specify the input format to imported API keys. Currently,
 	// only the csv format is supported.
 	//
