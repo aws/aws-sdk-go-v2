@@ -30,6 +30,26 @@ func (m *validateOpAcceptReservedNodeExchange) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAddPartner struct {
+}
+
+func (*validateOpAddPartner) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddPartner) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddPartnerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddPartnerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAuthorizeClusterSecurityGroupIngress struct {
 }
 
@@ -610,6 +630,26 @@ func (m *validateOpDeleteHsmConfiguration) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeletePartner struct {
+}
+
+func (*validateOpDeletePartner) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeletePartner) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeletePartnerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeletePartnerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteScheduledAction struct {
 }
 
@@ -805,6 +845,26 @@ func (m *validateOpDescribeNodeConfigurationOptions) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeNodeConfigurationOptionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribePartners struct {
+}
+
+func (*validateOpDescribePartners) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribePartners) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribePartnersInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribePartnersInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1490,8 +1550,32 @@ func (m *validateOpRotateEncryptionKey) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdatePartnerStatus struct {
+}
+
+func (*validateOpUpdatePartnerStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdatePartnerStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdatePartnerStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdatePartnerStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAcceptReservedNodeExchangeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAcceptReservedNodeExchange{}, middleware.After)
+}
+
+func addOpAddPartnerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddPartner{}, middleware.After)
 }
 
 func addOpAuthorizeClusterSecurityGroupIngressValidationMiddleware(stack *middleware.Stack) error {
@@ -1610,6 +1694,10 @@ func addOpDeleteHsmConfigurationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDeleteHsmConfiguration{}, middleware.After)
 }
 
+func addOpDeletePartnerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeletePartner{}, middleware.After)
+}
+
 func addOpDeleteScheduledActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteScheduledAction{}, middleware.After)
 }
@@ -1648,6 +1736,10 @@ func addOpDescribeLoggingStatusValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDescribeNodeConfigurationOptionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNodeConfigurationOptions{}, middleware.After)
+}
+
+func addOpDescribePartnersValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribePartners{}, middleware.After)
 }
 
 func addOpDescribeResizeValidationMiddleware(stack *middleware.Stack) error {
@@ -1784,6 +1876,10 @@ func addOpRevokeSnapshotAccessValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpRotateEncryptionKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRotateEncryptionKey{}, middleware.After)
+}
+
+func addOpUpdatePartnerStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdatePartnerStatus{}, middleware.After)
 }
 
 func validateDeleteClusterSnapshotMessage(v *types.DeleteClusterSnapshotMessage) error {
@@ -1967,6 +2063,30 @@ func validateOpAcceptReservedNodeExchangeInput(v *AcceptReservedNodeExchangeInpu
 	}
 	if v.TargetReservedNodeOfferingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetReservedNodeOfferingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddPartnerInput(v *AddPartnerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddPartnerInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.PartnerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartnerName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2490,6 +2610,30 @@ func validateOpDeleteHsmConfigurationInput(v *DeleteHsmConfigurationInput) error
 	}
 }
 
+func validateOpDeletePartnerInput(v *DeletePartnerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeletePartnerInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.PartnerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartnerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteScheduledActionInput(v *DeleteScheduledActionInput) error {
 	if v == nil {
 		return nil
@@ -2637,6 +2781,24 @@ func validateOpDescribeNodeConfigurationOptionsInput(v *DescribeNodeConfiguratio
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeNodeConfigurationOptionsInput"}
 	if len(v.ActionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribePartnersInput(v *DescribePartnersInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribePartnersInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3193,6 +3355,33 @@ func validateOpRotateEncryptionKeyInput(v *RotateEncryptionKeyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RotateEncryptionKeyInput"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdatePartnerStatusInput(v *UpdatePartnerStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdatePartnerStatusInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.PartnerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PartnerName"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

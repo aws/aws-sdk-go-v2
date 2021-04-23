@@ -953,6 +953,9 @@ func validateOpGetCostAndUsageInput(v *GetCostAndUsageInput) error {
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
 		}
 	}
+	if len(v.Granularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
+	}
 	if v.Metrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Metrics"))
 	}
@@ -974,6 +977,9 @@ func validateOpGetCostAndUsageWithResourcesInput(v *GetCostAndUsageWithResources
 		if err := validateDateInterval(v.TimePeriod); err != nil {
 			invalidParams.AddNested("TimePeriod", err.(smithy.InvalidParamsError))
 		}
+	}
+	if len(v.Granularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
 	}
 	if v.Filter == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filter"))

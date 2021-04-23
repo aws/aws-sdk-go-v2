@@ -1,0 +1,9 @@
+{
+ "ID": "feature.rds.auth-feature-1619126693329855000",
+ "SchemaVersion": 1,
+ "Module": "feature/rds/auth",
+ "Type": "feature",
+ "Description": "Add Support for Amazon RDS IAM Authentication",
+ "MinVersion": "v1.0.0",
+ "AffectedModules": null
+}

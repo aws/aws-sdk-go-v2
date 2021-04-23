@@ -11,9 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides the details for the Security Hub master account for the current member
-// account. Can be used by both member accounts that are in an organization and
-// accounts that were invited manually.
+// This method is deprecated. Instead, use GetAdministratorAccount. Provides the
+// details for the Security Hub administrator account for the current member
+// account. Can be used by both member accounts that are managed using
+// Organizations and accounts that were invited manually.
+//
+// Deprecated: This API has been deprecated, use GetAdministratorAccount API
+// instead.
 func (c *Client) GetMasterAccount(ctx context.Context, params *GetMasterAccountInput, optFns ...func(*Options)) (*GetMasterAccountOutput, error) {
 	if params == nil {
 		params = &GetMasterAccountInput{}
@@ -34,8 +38,8 @@ type GetMasterAccountInput struct {
 
 type GetMasterAccountOutput struct {
 
-	// A list of details about the Security Hub master account for the current member
-	// account.
+	// A list of details about the Security Hub administrator account for the current
+	// member account.
 	Master *types.Invitation
 
 	// Metadata pertaining to the operation's result.

@@ -224,6 +224,9 @@ type CreateReplicationGroupInput struct {
 	// The ID of the KMS key used to encrypt the disk in the cluster.
 	KmsKeyId *string
 
+	// Specifies the destination, format and type of the logs.
+	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
+
 	// A flag indicating if you have Multi-AZ enabled to enhance fault tolerance. For
 	// more information, see Minimizing Downtime: Multi-AZ
 	// (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html).

@@ -202,6 +202,50 @@ func (EncryptionModeValue) Values() []EncryptionModeValue {
 	}
 }
 
+type EndpointSettingTypeValue string
+
+// Enum values for EndpointSettingTypeValue
+const (
+	EndpointSettingTypeValueString  EndpointSettingTypeValue = "string"
+	EndpointSettingTypeValueBoolean EndpointSettingTypeValue = "boolean"
+	EndpointSettingTypeValueInteger EndpointSettingTypeValue = "integer"
+	EndpointSettingTypeValueEnum    EndpointSettingTypeValue = "enum"
+)
+
+// Values returns all known values for EndpointSettingTypeValue. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointSettingTypeValue) Values() []EndpointSettingTypeValue {
+	return []EndpointSettingTypeValue{
+		"string",
+		"boolean",
+		"integer",
+		"enum",
+	}
+}
+
+type KafkaSecurityProtocol string
+
+// Enum values for KafkaSecurityProtocol
+const (
+	KafkaSecurityProtocolPlaintext         KafkaSecurityProtocol = "plaintext"
+	KafkaSecurityProtocolSslAuthentication KafkaSecurityProtocol = "ssl-authentication"
+	KafkaSecurityProtocolSslEncryption     KafkaSecurityProtocol = "ssl-encryption"
+	KafkaSecurityProtocolSaslSsl           KafkaSecurityProtocol = "sasl-ssl"
+)
+
+// Values returns all known values for KafkaSecurityProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KafkaSecurityProtocol) Values() []KafkaSecurityProtocol {
+	return []KafkaSecurityProtocol{
+		"plaintext",
+		"ssl-authentication",
+		"ssl-encryption",
+		"sasl-ssl",
+	}
+}
+
 type MessageFormatValue string
 
 // Enum values for MessageFormatValue

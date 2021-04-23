@@ -76,6 +76,9 @@ type DescribeDatasetImportJobOutput struct {
 	// The name of the dataset import job.
 	DatasetImportJobName *string
 
+	// The estimated time in minutes for the dataset import job to complete.
+	EstimatedTimeRemainingInMinutes *int64
+
 	// Statistical information about each field in the input data.
 	FieldStatistics map[string]types.Statistics
 

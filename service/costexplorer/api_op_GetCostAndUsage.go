@@ -39,6 +39,13 @@ func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInp
 
 type GetCostAndUsageInput struct {
 
+	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
+	// isn't set, the response object doesn't include the Granularity, either MONTHLY
+	// or DAILY, or HOURLY.
+	//
+	// This member is required.
+	Granularity types.Granularity
+
 	// Which metrics are returned in the query. For more information about blended and
 	// unblended rates, see Why does the "blended" annotation appear on some line items
 	// in my bill?
@@ -69,11 +76,6 @@ type GetCostAndUsageInput struct {
 	// of dimension filters. For more information, see Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	Filter *types.Expression
-
-	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
-	// isn't set, the response object doesn't include the Granularity, either MONTHLY
-	// or DAILY, or HOURLY.
-	Granularity types.Granularity
 
 	// You can group AWS costs using up to two different groups, either dimensions, tag
 	// keys, cost categories, or any two group by types. When you group by tag key, you

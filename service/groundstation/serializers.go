@@ -1885,6 +1885,12 @@ func awsRestjson1_serializeDocumentConfigTypeData(v types.ConfigTypeData, value 
 			return err
 		}
 
+	case *types.ConfigTypeDataMemberS3RecordingConfig:
+		av := object.Key("s3RecordingConfig")
+		if err := awsRestjson1_serializeDocumentS3RecordingConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConfigTypeDataMemberTrackingConfig:
 		av := object.Key("trackingConfig")
 		if err := awsRestjson1_serializeDocumentTrackingConfig(&uv.Value, av); err != nil {
@@ -2081,6 +2087,28 @@ func awsRestjson1_serializeDocumentFrequencyBandwidth(v *types.FrequencyBandwidt
 	if v.Value != nil {
 		ok := object.Key("value")
 		ok.Double(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentS3RecordingConfig(v *types.S3RecordingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketArn != nil {
+		ok := object.Key("bucketArn")
+		ok.String(*v.BucketArn)
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("prefix")
+		ok.String(*v.Prefix)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
 	}
 
 	return nil

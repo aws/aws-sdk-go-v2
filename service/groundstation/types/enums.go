@@ -50,6 +50,7 @@ const (
 	ConfigCapabilityTypeDataflowEndpoint           ConfigCapabilityType = "dataflow-endpoint"
 	ConfigCapabilityTypeTracking                   ConfigCapabilityType = "tracking"
 	ConfigCapabilityTypeUplinkEcho                 ConfigCapabilityType = "uplink-echo"
+	ConfigCapabilityTypeS3Recording                ConfigCapabilityType = "s3-recording"
 )
 
 // Values returns all known values for ConfigCapabilityType. Note that this can be
@@ -63,6 +64,7 @@ func (ConfigCapabilityType) Values() []ConfigCapabilityType {
 		"dataflow-endpoint",
 		"tracking",
 		"uplink-echo",
+		"s3-recording",
 	}
 }
 

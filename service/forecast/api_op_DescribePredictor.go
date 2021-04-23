@@ -73,6 +73,9 @@ type DescribePredictorOutput struct {
 	// Management (IAM) role that Amazon Forecast can assume to access the key.
 	EncryptionConfig *types.EncryptionConfig
 
+	// The estimated time in minutes for the predictor training job to complete.
+	EstimatedTimeRemainingInMinutes *int64
+
 	// Used to override the default evaluation parameters of the specified algorithm.
 	// Amazon Forecast evaluates a predictor by splitting a dataset into training data
 	// and testing data. The evaluation parameters define how to perform the split and

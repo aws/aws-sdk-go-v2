@@ -370,6 +370,26 @@ func (m *validateOpDescribeConnections) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeEndpointSettings struct {
+}
+
+func (*validateOpDescribeEndpointSettings) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeEndpointSettings) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeEndpointSettingsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeEndpointSettingsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeEndpoints struct {
 }
 
@@ -1082,6 +1102,10 @@ func addOpDescribeConnectionsValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeConnections{}, middleware.After)
 }
 
+func addOpDescribeEndpointSettingsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeEndpointSettings{}, middleware.After)
+}
+
 func addOpDescribeEndpointsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEndpoints{}, middleware.After)
 }
@@ -1657,6 +1681,21 @@ func validateOpDescribeConnectionsInput(v *DescribeConnectionsInput) error {
 		if err := validateFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeEndpointSettingsInput(v *DescribeEndpointSettingsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeEndpointSettingsInput"}
+	if v.EngineName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EngineName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

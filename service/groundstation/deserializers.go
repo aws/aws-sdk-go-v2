@@ -4588,6 +4588,16 @@ loop:
 			uv = &types.ConfigDetailsMemberEndpointDetails{Value: mv}
 			break loop
 
+		case "s3RecordingDetails":
+			var mv types.S3RecordingDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3RecordingDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigDetailsMemberS3RecordingDetails{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -4757,6 +4767,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ConfigTypeDataMemberDataflowEndpointConfig{Value: mv}
+			break loop
+
+		case "s3RecordingConfig":
+			var mv types.S3RecordingConfig
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentS3RecordingConfig(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigTypeDataMemberS3RecordingConfig{Value: mv}
 			break loop
 
 		case "trackingConfig":
@@ -6165,6 +6185,113 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3RecordingConfig(v **types.S3RecordingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3RecordingConfig
+	if *v == nil {
+		sv = &types.S3RecordingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketArn to be of type string, got %T instead", value)
+				}
+				sv.BucketArn = ptr.String(jtv)
+			}
+
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3KeyPrefix to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3RecordingDetails(v **types.S3RecordingDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3RecordingDetails
+	if *v == nil {
+		sv = &types.S3RecordingDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketArn to be of type string, got %T instead", value)
+				}
+				sv.BucketArn = ptr.String(jtv)
+			}
+
+		case "keyTemplate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.KeyTemplate = ptr.String(jtv)
 			}
 
 		default:

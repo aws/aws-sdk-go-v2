@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -35,10 +36,14 @@ type DescribeEndpointAccessInput struct {
 	// The name of the endpoint to be described.
 	EndpointName *string
 
-	// Reserved for Amazon Redshift internal use.
+	// An optional pagination token provided by a previous DescribeEndpointAccess
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by the MaxRecords parameter.
 	Marker *string
 
-	// Reserved for Amazon Redshift internal use.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a Marker is
+	// included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
 
 	// The AWS account ID of the owner of the cluster.
@@ -53,7 +58,9 @@ type DescribeEndpointAccessOutput struct {
 	// The list of endpoints with access to the cluster.
 	EndpointAccessList []types.EndpointAccess
 
-	// Reserved for Amazon Redshift internal use.
+	// An optional pagination token provided by a previous DescribeEndpointAccess
+	// request. If this parameter is specified, the response includes only records
+	// beyond the marker, up to the value specified by the MaxRecords parameter.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -118,6 +125,95 @@ func addOperationDescribeEndpointAccessMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	return nil
+}
+
+// DescribeEndpointAccessAPIClient is a client that implements the
+// DescribeEndpointAccess operation.
+type DescribeEndpointAccessAPIClient interface {
+	DescribeEndpointAccess(context.Context, *DescribeEndpointAccessInput, ...func(*Options)) (*DescribeEndpointAccessOutput, error)
+}
+
+var _ DescribeEndpointAccessAPIClient = (*Client)(nil)
+
+// DescribeEndpointAccessPaginatorOptions is the paginator options for
+// DescribeEndpointAccess
+type DescribeEndpointAccessPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a Marker is
+	// included in the response so that the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEndpointAccessPaginator is a paginator for DescribeEndpointAccess
+type DescribeEndpointAccessPaginator struct {
+	options   DescribeEndpointAccessPaginatorOptions
+	client    DescribeEndpointAccessAPIClient
+	params    *DescribeEndpointAccessInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEndpointAccessPaginator returns a new DescribeEndpointAccessPaginator
+func NewDescribeEndpointAccessPaginator(client DescribeEndpointAccessAPIClient, params *DescribeEndpointAccessInput, optFns ...func(*DescribeEndpointAccessPaginatorOptions)) *DescribeEndpointAccessPaginator {
+	if params == nil {
+		params = &DescribeEndpointAccessInput{}
+	}
+
+	options := DescribeEndpointAccessPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeEndpointAccessPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEndpointAccessPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeEndpointAccess page.
+func (p *DescribeEndpointAccessPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEndpointAccessOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeEndpointAccess(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEndpointAccess(region string) *awsmiddleware.RegisterServiceMetadata {

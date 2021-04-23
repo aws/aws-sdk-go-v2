@@ -1,0 +1,9 @@
+{
+ "ID": "service.forecast-feature-1619126384754726000",
+ "SchemaVersion": 1,
+ "Module": "service/forecast",
+ "Type": "feature",
+ "Description": "Service API Updates",
+ "MinVersion": "",
+ "AffectedModules": null
+}

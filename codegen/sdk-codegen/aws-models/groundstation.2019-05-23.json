@@ -121,6 +121,14 @@
                 ]
             }
         },
+        "com.amazonaws.groundstation#BucketArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::S3::Bucket"
+                }
+            }
+        },
         "com.amazonaws.groundstation#CancelContact": {
             "type": "operation",
             "input": {
@@ -237,6 +245,10 @@
                     {
                         "value": "uplink-echo",
                         "name": "UPLINK_ECHO"
+                    },
+                    {
+                        "value": "s3-recording",
+                        "name": "S3_RECORDING"
                     }
                 ]
             }
@@ -251,6 +263,12 @@
                     "target": "com.amazonaws.groundstation#AntennaDemodDecodeDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details for antenna demod decode <code>Config</code> in a contact.</p>"
+                    }
+                },
+                "s3RecordingDetails": {
+                    "target": "com.amazonaws.groundstation#S3RecordingDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for an S3 recording <code>Config</code> in a contact.</p>"
                     }
                 }
             },
@@ -359,6 +377,12 @@
                     "target": "com.amazonaws.groundstation#UplinkEchoConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about an uplink echo <code>Config</code>.</p>\n         <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
+                    }
+                },
+                "s3RecordingConfig": {
+                    "target": "com.amazonaws.groundstation#S3RecordingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about an S3 recording <code>Config</code>.</p>"
                     }
                 }
             },
@@ -2008,7 +2032,8 @@
                     "sdkId": "GroundStation",
                     "arnNamespace": "groundstation",
                     "cloudFormationName": "AWSGroundStation",
-                    "cloudTrailEventSource": "groundstation.amazonaws.com"
+                    "cloudTrailEventSource": "REPLACE_WITH_EVENT_SOURCE",
+                    "endpointPrefix": "groundstation"
                 },
                 "aws.auth#sigv4": {
                     "name": "groundstation"
@@ -2892,6 +2917,64 @@
         },
         "com.amazonaws.groundstation#RoleArn": {
             "type": "string"
+        },
+        "com.amazonaws.groundstation#S3KeyPrefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 900
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9_\\-=/]|\\{satellite_id\\}|\\{config\\-name}|\\{s3\\-config-id}|\\{year\\}|\\{month\\}|\\{day\\}){1,900}$"
+            }
+        },
+        "com.amazonaws.groundstation#S3RecordingConfig": {
+            "type": "structure",
+            "members": {
+                "bucketArn": {
+                    "target": "com.amazonaws.groundstation#BucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the bucket to record to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.groundstation#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the role Ground Station assumes to write data to the bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.groundstation#S3KeyPrefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>S3 Key prefix to prefice data files.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an S3 recording <code>Config</code>.</p>"
+            }
+        },
+        "com.amazonaws.groundstation#S3RecordingDetails": {
+            "type": "structure",
+            "members": {
+                "bucketArn": {
+                    "target": "com.amazonaws.groundstation#BucketArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the bucket used.</p>"
+                    }
+                },
+                "keyTemplate": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Template of the S3 key used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an S3 recording <code>Config</code> used in a contact.</p>"
+            }
         },
         "com.amazonaws.groundstation#SafeName": {
             "type": "string",

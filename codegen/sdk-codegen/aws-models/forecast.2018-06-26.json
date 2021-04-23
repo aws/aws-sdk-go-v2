@@ -1484,6 +1484,12 @@
                         "smithy.api#documentation": "<p>The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast\n      can assume to access the data.</p>\n         <p>If encryption is used, <code>DataSource</code> includes an AWS Key Management Service (KMS) key.</p>"
                     }
                 },
+                "EstimatedTimeRemainingInMinutes": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time in minutes for the dataset import job to complete.</p>"
+                    }
+                },
                 "FieldStatistics": {
                     "target": "com.amazonaws.forecast#FieldStatistics",
                     "traits": {
@@ -1751,6 +1757,12 @@
                         "smithy.api#documentation": "<p>The ARN of the dataset group that provided the data used to train the predictor.</p>"
                     }
                 },
+                "EstimatedTimeRemainingInMinutes": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time in minutes for the forecast job to complete.</p>"
+                    }
+                },
                 "Status": {
                     "target": "com.amazonaws.forecast#String",
                     "traits": {
@@ -1978,6 +1990,12 @@
                     "target": "com.amazonaws.forecast#PredictorExecutionDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details on the the status and results of the backtests performed to evaluate the accuracy\n      of the predictor. You specify the number of backtests to perform when you call the  operation.</p>"
+                    }
+                },
+                "EstimatedTimeRemainingInMinutes": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated time in minutes for the predictor training job to complete.</p>"
                     }
                 },
                 "DatasetImportJobArns": {
@@ -3189,6 +3207,12 @@
                         "smithy.api#documentation": "<p>The tags for the resource.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.forecast#Long": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.forecast#MaxResults": {

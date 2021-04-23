@@ -132,20 +132,21 @@ type CreateStackSetInput struct {
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
 	//
 	// *
-	// CAPABILITY_AUTO_EXPAND Some templates contain macros. If your stack template
-	// contains one or more macros, and you choose to create a stack directly from the
-	// processed template, without first reviewing the resulting changes in a change
-	// set, you must acknowledge this capability. For more information, see Using AWS
-	// CloudFormation Macros to Perform Custom Processing on Templates
+	// CAPABILITY_AUTO_EXPAND Some templates reference macros. If your stack set
+	// template references one or more macros, you must create the stack set directly
+	// from the processed template, without first reviewing the resulting changes in a
+	// change set. To create the stack set directly, you must acknowledge this
+	// capability. For more information, see Using AWS CloudFormation Macros to Perform
+	// Custom Processing on Templates
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-macros.html).
-	// Stack sets do not currently support macros in stack templates. (This includes
-	// the AWS::Include
+	// Stack sets with service-managed permissions do not currently support the use of
+	// macros in templates. (This includes the AWS::Include
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/create-reusable-transform-function-snippets-and-add-to-your-template-with-aws-include-transform.html)
 	// and AWS::Serverless
 	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-aws-serverless.html)
 	// transforms, which are macros hosted by AWS CloudFormation.) Even if you specify
-	// this capability, if you include a macro in your template the stack set operation
-	// will fail.
+	// this capability for a stack set with service-managed permissions, if you
+	// reference a macro in your template the stack set operation will fail.
 	Capabilities []types.Capability
 
 	// A unique identifier for this CreateStackSet request. Specify this token if you

@@ -363,6 +363,35 @@ type Endpoint struct {
 	Username *string
 }
 
+// Endpoint settings.
+type EndpointSetting struct {
+
+	// The relevance or validity of an endpoint setting for an engine name and its
+	// endpoint type.
+	Applicability *string
+
+	// Enumerated values to use for this endpoint.
+	EnumValues []string
+
+	// The maximum value of an endpoint setting that is of type int.
+	IntValueMax *int32
+
+	// The minimum value of an endpoint setting that is of type int.
+	IntValueMin *int32
+
+	// The name that you want to give the endpoint settings.
+	Name *string
+
+	// A value that marks this endpoint setting as sensitive.
+	Sensitive *bool
+
+	// The type of endpoint. Valid values are source and target.
+	Type EndpointSettingTypeValue
+
+	// The unit of measure for this endpoint setting.
+	Units *string
+}
+
 // Describes an identifiable significant activity that affects a replication
 // instance or task. This object can provide the message, the available event
 // categories, the date and source of the event, and the AWS DMS resource type.
@@ -508,9 +537,14 @@ type IBMDb2Settings struct {
 // transaction and control table data information.
 type KafkaSettings struct {
 
-	// The broker location and port of the Kafka broker that hosts your Kafka instance.
-	// Specify the broker in the form  broker-hostname-or-ip:port . For example,
-	// "ec2-12-345-678-901.compute-1.amazonaws.com:2345".
+	// A comma-separated list of one or more broker locations in your Kafka cluster
+	// that host your Kafka instance. Specify each broker location in the form
+	// broker-hostname-or-ip:port . For example,
+	// "ec2-12-345-678-901.compute-1.amazonaws.com:2345". For more information and
+	// examples of specifying a list of broker locations, see Using Apache Kafka as a
+	// target for AWS Database Migration Service
+	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html) in the
+	// AWS Data Migration Service User Guide.
 	Broker *string
 
 	// Shows detailed control information for table definition, column definition, and
@@ -551,6 +585,37 @@ type KafkaSettings struct {
 	// key is sent from thousands of tables to the same partition, which causes
 	// throttling. The default is false.
 	PartitionIncludeSchemaTable *bool
+
+	// The secure password you created when you first set up your MSK cluster to
+	// validate a client identity and make an encrypted connection between server and
+	// client using SASL-SSL authentication.
+	SaslPassword *string
+
+	// The secure username you created when you first set up your MSK cluster to
+	// validate a client identity and make an encrypted connection between server and
+	// client using SASL-SSL authentication.
+	SaslUsername *string
+
+	// Set secure connection to a Kafka target endpoint using Transport Layer Security
+	// (TLS). Options include ssl-encryption, ssl-authentication, and sasl-ssl.
+	// sasl-ssl requires SaslUsername and SaslPassword.
+	SecurityProtocol KafkaSecurityProtocol
+
+	// The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert
+	// that AWS DMS uses to securely connect to your Kafka target endpoint.
+	SslCaCertificateArn *string
+
+	// The Amazon Resource Name (ARN) of the client certificate used to securely
+	// connect to a Kafka target endpoint.
+	SslClientCertificateArn *string
+
+	// The Amazon Resource Name (ARN) for the client private key used to securely
+	// connect to a Kafka target endpoint.
+	SslClientKeyArn *string
+
+	// The password for the client private key used to securely connect to a Kafka
+	// target endpoint.
+	SslClientKeyPassword *string
 
 	// The topic to which you migrate the data. If you don't specify a topic, AWS DMS
 	// specifies "kafka-default-topic" as the migration topic.
@@ -625,6 +690,12 @@ type MicrosoftSQLServerSettings struct {
 	// Endpoint TCP port.
 	Port *int32
 
+	// Cleans and recreates table metadata information on the replication instance when
+	// a mismatch occurs. An example is a situation where running an alter DDL
+	// statement on a table might result in different information about the table
+	// cached in the replication instance.
+	QuerySingleAlwaysOnNode *bool
+
 	// When this attribute is set to Y, AWS DMS only reads changes from transaction log
 	// backups and doesn't read from the active transaction log file during ongoing
 	// replication. Setting this parameter to Y enables you to control active
@@ -673,6 +744,10 @@ type MicrosoftSQLServerSettings struct {
 	// the target table contains an identity column that does not exist in the source
 	// table, you must disable the use BCP for loading table option.
 	UseBcpFullLoad *bool
+
+	// When this attribute is set to Y, DMS processes third-party transaction log
+	// backups if they are created in native format.
+	UseThirdPartyBackupDevice *bool
 
 	// Endpoint connection user name.
 	Username *string
@@ -756,6 +831,12 @@ type MySQLSettings struct {
 	// The migration task continues running regardless if the SQL statement succeeds or
 	// fails.
 	AfterConnectScript *string
+
+	// Adjusts the behavior of DMS when migrating from an SQL Server source database
+	// that is hosted as part of an Always On availability group cluster. If you need
+	// DMS to poll all the nodes in the Always On cluster for transaction backups, set
+	// this attribute to false.
+	CleanSourceMetadataOnMismatch *bool
 
 	// Database name for the endpoint.
 	DatabaseName *string
@@ -1058,6 +1139,12 @@ type OracleSettings struct {
 
 	// Fully qualified domain name of the endpoint.
 	ServerName *string
+
+	// Use this attribute to convert SDO_GEOMETRY to GEOJSON format. By default, DMS
+	// calls the SDO2GEOJSON custom function if present and accessible. Or you can
+	// create your own custom function that mimics the operation of SDOGEOJSON and set
+	// SpatialDataOptionToGeoJsonFunctionName to call it instead.
+	SpatialDataOptionToGeoJsonFunctionName *string
 
 	// Set this attribute to true in order to use the Binary Reader to capture change
 	// data for an Amazon RDS for Oracle as the source. This tells the DMS instance to
@@ -2258,7 +2345,7 @@ type S3Settings struct {
 	ServerSideEncryptionKmsKeyId *string
 
 	// The Amazon Resource Name (ARN) used by the service access IAM role. It is a
-	// required parameter that enables DMS to write and read objects from an 3S bucket.
+	// required parameter that enables DMS to write and read objects from an S3 bucket.
 	ServiceAccessRoleArn *string
 
 	// A value that when nonblank causes AWS DMS to add a column with timestamp

@@ -77,11 +77,13 @@ type UpdateUserPoolInput struct {
 	// cannot be specified during user registration.
 	//
 	// * ON - MFA tokens are required
-	// for all user registrations. You can only specify required when you are initially
-	// creating a user pool.
+	// for all user registrations. You can only specify ON when you are initially
+	// creating a user pool. You can use the SetUserPoolMfaConfig
+	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserPoolMfaConfig.html)
+	// API operation to turn MFA "ON" for existing user pools.
 	//
-	// * OPTIONAL - Users have the option when registering to
-	// create an MFA token.
+	// * OPTIONAL - Users have
+	// the option when registering to create an MFA token.
 	MfaConfiguration types.UserPoolMfaType
 
 	// A container with the policies you wish to update in a user pool.

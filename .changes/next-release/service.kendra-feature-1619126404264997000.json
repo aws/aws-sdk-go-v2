@@ -1,0 +1,9 @@
+{
+ "ID": "service.kendra-feature-1619126404264997000",
+ "SchemaVersion": 1,
+ "Module": "service/kendra",
+ "Type": "feature",
+ "Description": "Service API Updates",
+ "MinVersion": "",
+ "AffectedModules": null
+}

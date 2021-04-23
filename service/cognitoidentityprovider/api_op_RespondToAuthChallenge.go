@@ -67,6 +67,9 @@ type RespondToAuthChallengeInput struct {
 	// *
 	// DEVICE_PASSWORD_VERIFIER requires everything that PASSWORD_VERIFIER requires
 	// plus DEVICE_KEY.
+	//
+	// * MFA_SETUP requires USERNAME, plus you need to use the
+	// session value returned by VerifySoftwareToken in the Session parameter.
 	ChallengeResponses map[string]string
 
 	// A map of custom key-value pairs that you can provide as input for any custom

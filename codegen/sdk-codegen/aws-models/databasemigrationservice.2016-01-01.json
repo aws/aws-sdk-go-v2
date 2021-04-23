@@ -193,6 +193,9 @@
                     "target": "com.amazonaws.databasemigrationservice#DescribeEndpoints"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#DescribeEndpointSettings"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#DescribeEndpointTypes"
                 },
                 {
@@ -2138,6 +2141,64 @@
                 "smithy.api#documentation": "<p></p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#DescribeEndpointSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeEndpointSettingsMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.databasemigrationservice#DescribeEndpointSettingsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about the possible endpoint settings available \n         when you create an endpoint for a specific database engine.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "outputToken": "Marker",
+                    "pageSize": "MaxRecords"
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeEndpointSettingsMessage": {
+            "type": "structure",
+            "members": {
+                "EngineName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The databse engine used for your source or target endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response. If more records exist than \n         the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response \n         so that the remaining results can be retrieved.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#DescribeEndpointSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, \n         the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+                    }
+                },
+                "EndpointSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#EndpointSettingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Descriptions of the endpoint settings available for your source or target database engine.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.databasemigrationservice#DescribeEndpointTypes": {
             "type": "operation",
             "input": {
@@ -3523,16 +3584,6 @@
                                 "matcher": {
                                     "output": {
                                         "path": "ReplicationTasks[].Status",
-                                        "expected": "running",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "ReplicationTasks[].Status",
                                         "expected": "failed",
                                         "comparator": "anyStringEquals"
                                     }
@@ -4194,6 +4245,97 @@
                 }
             }
         },
+        "com.amazonaws.databasemigrationservice#EndpointSetting": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that you want to give the endpoint settings.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.databasemigrationservice#EndpointSettingTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of endpoint.  Valid values are <code>source</code> and <code>target</code>.</p>"
+                    }
+                },
+                "EnumValues": {
+                    "target": "com.amazonaws.databasemigrationservice#EndpointSettingEnumValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enumerated values to use for this endpoint.</p>"
+                    }
+                },
+                "Sensitive": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that marks this endpoint setting as sensitive.</p>"
+                    }
+                },
+                "Units": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measure for this endpoint setting.</p>"
+                    }
+                },
+                "Applicability": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The relevance or validity of an endpoint setting for an engine name and its endpoint type.</p>"
+                    }
+                },
+                "IntValueMin": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum value of an endpoint setting that is of type <code>int</code>.</p>"
+                    }
+                },
+                "IntValueMax": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum value of an endpoint setting that is of type <code>int</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Endpoint settings.</p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#EndpointSettingEnumValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#String"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#EndpointSettingTypeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "string",
+                        "name": "STRING"
+                    },
+                    {
+                        "value": "boolean",
+                        "name": "BOOLEAN"
+                    },
+                    {
+                        "value": "integer",
+                        "name": "INTEGER"
+                    },
+                    {
+                        "value": "enum",
+                        "name": "ENUM"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.databasemigrationservice#EndpointSettingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#EndpointSetting"
+            }
+        },
         "com.amazonaws.databasemigrationservice#Event": {
             "type": "structure",
             "members": {
@@ -4501,7 +4643,7 @@
                     }
                 },
                 "CertificatePem": {
-                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "target": "com.amazonaws.databasemigrationservice#SecretString",
                     "traits": {
                         "smithy.api#documentation": "<p>The contents of a <code>.pem</code> file, which contains an X.509 certificate.</p>"
                     }
@@ -4696,13 +4838,36 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.databasemigrationservice#KafkaSecurityProtocol": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "plaintext",
+                        "name": "PLAINTEXT"
+                    },
+                    {
+                        "value": "ssl-authentication",
+                        "name": "SSL_AUTHENTICATION"
+                    },
+                    {
+                        "value": "ssl-encryption",
+                        "name": "SSL_ENCRYPTION"
+                    },
+                    {
+                        "value": "sasl-ssl",
+                        "name": "SASL_SSL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.databasemigrationservice#KafkaSettings": {
             "type": "structure",
             "members": {
                 "Broker": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The broker location and port of the Kafka broker that hosts your Kafka instance. Specify the broker \n         in the form <code>\n               <i>broker-hostname-or-ip</i>:<i>port</i>\n            </code>. For example, <code>\"ec2-12-345-678-901.compute-1.amazonaws.com:2345\"</code>.</p>"
+                        "smithy.api#documentation": "<p>A comma-separated list of one or more broker locations in your Kafka cluster that host your Kafka instance. Specify each broker location\n         in the form <code>\n               <i>broker-hostname-or-ip</i>:<i>port</i>\n            </code>. For example, <code>\"ec2-12-345-678-901.compute-1.amazonaws.com:2345\"</code>.\n         For more information and examples of specifying a list of broker locations,\n         see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html\">Using Apache Kafka as a target for AWS Database Migration Service</a>\n         in the <i>AWS Data Migration Service User Guide</i>.\n      </p>"
                     }
                 },
                 "Topic": {
@@ -4757,6 +4922,48 @@
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Include NULL and empty columns for records migrated to the endpoint. The default is <code>false</code>.</p>"
+                    }
+                },
+                "SecurityProtocol": {
+                    "target": "com.amazonaws.databasemigrationservice#KafkaSecurityProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include \n         <code>ssl-encryption</code>, <code>ssl-authentication</code>, and <code>sasl-ssl</code>. \n         <code>sasl-ssl</code> requires <code>SaslUsername</code> and <code>SaslPassword</code>.</p>"
+                    }
+                },
+                "SslClientCertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the client certificate used to securely connect to a Kafka target endpoint.</p>"
+                    }
+                },
+                "SslClientKeyArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the client private key used to securely connect to a Kafka target endpoint.</p>"
+                    }
+                },
+                "SslClientKeyPassword": {
+                    "target": "com.amazonaws.databasemigrationservice#SecretString",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The password for the client private key used to securely connect to a Kafka target endpoint.</p>"
+                    }
+                },
+                "SslCaCertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert that AWS DMS uses \n         to securely connect to your Kafka target endpoint.</p>"
+                    }
+                },
+                "SaslUsername": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The secure username you created when you first set up your MSK cluster to validate a client identity and \n         make an encrypted connection between server and client using SASL-SSL authentication.</p>"
+                    }
+                },
+                "SaslPassword": {
+                    "target": "com.amazonaws.databasemigrationservice#SecretString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secure password you created when you first set up your MSK cluster to validate a client identity and \n         make an encrypted connection between server and client using SASL-SSL authentication.</p>"
                     }
                 }
             },
@@ -4929,6 +5136,12 @@
                         "smithy.api#documentation": "<p>Endpoint connection password.</p>"
                     }
                 },
+                "QuerySingleAlwaysOnNode": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Cleans and recreates table metadata information on the replication instance when \n         a mismatch occurs. An example is a situation where running an alter DDL statement on \n         a table might result in different information about the table cached in the replication \n         instance.</p>"
+                    }
+                },
                 "ReadBackupOnly": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
@@ -4957,6 +5170,12 @@
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Use this to attribute to transfer data for full-load operations\n         using BCP. When the target table contains an identity\n         column that does not exist in the source table, you must\n         disable the use BCP for loading table option.</p>"
+                    }
+                },
+                "UseThirdPartyBackupDevice": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this attribute is set to <code>Y</code>, DMS processes third-party \n         transaction log backups if they are created in native format.</p>"
                     }
                 },
                 "SecretsManagerAccessRoleArn": {
@@ -5567,7 +5786,7 @@
                 "TableMappings": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the\n         table mappings. Precede the path with <code>file://</code>. When working with the DMS API,\n         provide the JSON as the parameter value, for example: <code>--table-mappings\n            file://mappingfile.json</code>\n         </p>"
+                        "smithy.api#documentation": "<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the\n         table mappings. Precede the path with <code>file://</code>.  For example, \n         <code>--table-mappings file://mappingfile.json</code>. When working with the DMS API, \n         provide the JSON as the parameter value. \n    </p>"
                     }
                 },
                 "ReplicationTaskSettings": {
@@ -5727,6 +5946,9 @@
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
                 },
                 {
+                    "target": "com.amazonaws.databasemigrationservice#KMSKeyNotAccessibleFault"
+                },
+                {
                     "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
                 }
             ],
@@ -5777,6 +5999,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies a script to run immediately after AWS DMS\n         connects to the endpoint. The migration task continues\n         running regardless if the SQL statement succeeds or fails.</p>"
+                    }
+                },
+                "CleanSourceMetadataOnMismatch": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adjusts the behavior of DMS when migrating from an SQL Server source database \n         that is hosted as part of an Always On availability group cluster.  If you need DMS to poll \n         all the nodes in the Always On cluster for transaction backups, set this attribute to \n         <code>false</code>.</p>"
                     }
                 },
                 "DatabaseName": {
@@ -6098,6 +6326,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+                    }
+                },
+                "SpatialDataOptionToGeoJsonFunctionName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this attribute to convert <code>SDO_GEOMETRY</code> to \n         <code>GEOJSON</code> format. By default, DMS calls the \n         <code>SDO2GEOJSON</code> custom function if present and accessible. \n         Or you can create your own custom function that mimics the operation of \n         <code>SDOGEOJSON</code> and set \n         <code>SpatialDataOptionToGeoJsonFunctionName</code> to call it instead. </p>"
                     }
                 },
                 "Username": {
@@ -7684,7 +7918,7 @@
                 "ServiceAccessRoleArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) used by the service access IAM role. It is a required\n         parameter that enables DMS to write and read objects from an 3S bucket.</p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) used by the service access IAM role. It is a required\n         parameter that enables DMS to write and read objects from an S3 bucket.</p>"
                     }
                 },
                 "ExternalTableDefinition": {
@@ -8645,6 +8879,9 @@
                 "target": "com.amazonaws.databasemigrationservice#TestConnectionResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.databasemigrationservice#AccessDeniedFault"
+                },
                 {
                     "target": "com.amazonaws.databasemigrationservice#InvalidResourceStateFault"
                 },

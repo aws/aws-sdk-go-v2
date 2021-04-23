@@ -4,6 +4,7 @@ package redshift
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
@@ -41,10 +42,15 @@ type DescribeEndpointAuthorizationInput struct {
 	// granted. If false (default), checks authorization from a grantor point of view.
 	Grantee *bool
 
-	// Reserved for Amazon Redshift internal use.
+	// An optional pagination token provided by a previous
+	// DescribeEndpointAuthorization request. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// the MaxRecords parameter.
 	Marker *string
 
-	// Reserved for Amazon Redshift internal use.
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a Marker is
+	// included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
 }
 
@@ -53,7 +59,10 @@ type DescribeEndpointAuthorizationOutput struct {
 	// The authorizations to an endpoint.
 	EndpointAuthorizationList []types.EndpointAuthorization
 
-	// Reserved for Amazon Redshift internal use.
+	// An optional pagination token provided by a previous
+	// DescribeEndpointAuthorization request. If this parameter is specified, the
+	// response includes only records beyond the marker, up to the value specified by
+	// the MaxRecords parameter.
 	Marker *string
 
 	// Metadata pertaining to the operation's result.
@@ -118,6 +127,97 @@ func addOperationDescribeEndpointAuthorizationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+// DescribeEndpointAuthorizationAPIClient is a client that implements the
+// DescribeEndpointAuthorization operation.
+type DescribeEndpointAuthorizationAPIClient interface {
+	DescribeEndpointAuthorization(context.Context, *DescribeEndpointAuthorizationInput, ...func(*Options)) (*DescribeEndpointAuthorizationOutput, error)
+}
+
+var _ DescribeEndpointAuthorizationAPIClient = (*Client)(nil)
+
+// DescribeEndpointAuthorizationPaginatorOptions is the paginator options for
+// DescribeEndpointAuthorization
+type DescribeEndpointAuthorizationPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a Marker is
+	// included in the response so that the remaining results can be retrieved.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeEndpointAuthorizationPaginator is a paginator for
+// DescribeEndpointAuthorization
+type DescribeEndpointAuthorizationPaginator struct {
+	options   DescribeEndpointAuthorizationPaginatorOptions
+	client    DescribeEndpointAuthorizationAPIClient
+	params    *DescribeEndpointAuthorizationInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeEndpointAuthorizationPaginator returns a new
+// DescribeEndpointAuthorizationPaginator
+func NewDescribeEndpointAuthorizationPaginator(client DescribeEndpointAuthorizationAPIClient, params *DescribeEndpointAuthorizationInput, optFns ...func(*DescribeEndpointAuthorizationPaginatorOptions)) *DescribeEndpointAuthorizationPaginator {
+	if params == nil {
+		params = &DescribeEndpointAuthorizationInput{}
+	}
+
+	options := DescribeEndpointAuthorizationPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeEndpointAuthorizationPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeEndpointAuthorizationPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeEndpointAuthorization page.
+func (p *DescribeEndpointAuthorizationPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeEndpointAuthorizationOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeEndpointAuthorization(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeEndpointAuthorization(region string) *awsmiddleware.RegisterServiceMetadata {

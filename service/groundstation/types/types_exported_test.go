@@ -17,6 +17,9 @@ func ExampleConfigDetails_outputUsage() {
 	case *types.ConfigDetailsMemberEndpointDetails:
 		_ = v.Value // Value is types.EndpointDetails
 
+	case *types.ConfigDetailsMemberS3RecordingDetails:
+		_ = v.Value // Value is types.S3RecordingDetails
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -26,6 +29,7 @@ func ExampleConfigDetails_outputUsage() {
 	}
 }
 
+var _ *types.S3RecordingDetails
 var _ *types.AntennaDemodDecodeDetails
 var _ *types.EndpointDetails
 
@@ -45,6 +49,9 @@ func ExampleConfigTypeData_outputUsage() {
 	case *types.ConfigTypeDataMemberDataflowEndpointConfig:
 		_ = v.Value // Value is types.DataflowEndpointConfig
 
+	case *types.ConfigTypeDataMemberS3RecordingConfig:
+		_ = v.Value // Value is types.S3RecordingConfig
+
 	case *types.ConfigTypeDataMemberTrackingConfig:
 		_ = v.Value // Value is types.TrackingConfig
 
@@ -63,6 +70,7 @@ func ExampleConfigTypeData_outputUsage() {
 var _ *types.TrackingConfig
 var _ *types.UplinkEchoConfig
 var _ *types.AntennaDownlinkDemodDecodeConfig
+var _ *types.S3RecordingConfig
 var _ *types.AntennaUplinkConfig
 var _ *types.AntennaDownlinkConfig
 var _ *types.DataflowEndpointConfig

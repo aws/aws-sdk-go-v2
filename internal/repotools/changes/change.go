@@ -26,6 +26,8 @@ const (
 	DependencyChangeType ChangeType = "dependency"
 	// AnnouncementChangeType is a constant change type for an SDK announcement.
 	AnnouncementChangeType ChangeType = "announcement"
+	// DocumentationChangeType is a constant change type for an SDK announcement.
+	DocumentationChangeType ChangeType = "documentation"
 )
 
 const dependencyUpdateMessage = "Updated SDK dependencies to their latest versions."
@@ -43,6 +45,8 @@ func ParseChangeType(v string) (ChangeType, error) {
 		return DependencyChangeType, nil
 	case string(AnnouncementChangeType):
 		return AnnouncementChangeType, nil
+	case string(DocumentationChangeType):
+		return DocumentationChangeType, nil
 	default:
 		return "", fmt.Errorf("unknown change type: %s", v)
 	}
@@ -61,6 +65,8 @@ func (c ChangeType) ChangelogPrefix() string {
 		return "Dependency Update: "
 	case AnnouncementChangeType:
 		return "" // Announcements do not have a Changelog prefix.
+	case DocumentationChangeType:
+		return "Documentation: "
 	default:
 		panic("unknown change type: " + string(c))
 	}
@@ -79,6 +85,8 @@ func (c ChangeType) VersionIncrement() VersionIncrement {
 		return PatchBump
 	case AnnouncementChangeType:
 		return NoBump
+	case DocumentationChangeType:
+		return PatchBump
 	default:
 		panic("unknown change type: " + string(c))
 	}

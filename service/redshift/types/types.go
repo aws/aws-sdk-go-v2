@@ -1030,6 +1030,29 @@ type Parameter struct {
 	Source *string
 }
 
+// Describes a partner integration.
+type PartnerIntegrationInfo struct {
+
+	// The date (UTC) that the partner integration was created.
+	CreatedAt *time.Time
+
+	// The name of the database that receives data from a partner.
+	DatabaseName *string
+
+	// The name of the partner.
+	PartnerName *string
+
+	// The partner integration status.
+	Status PartnerIntegrationStatus
+
+	// The status message provided by the partner.
+	StatusMessage *string
+
+	// The date (UTC) that the partner integration status was last updated by the
+	// partner.
+	UpdatedAt *time.Time
+}
+
 // Describes a pause cluster operation. For example, a scheduled action to run the
 // PauseCluster API operation.
 type PauseClusterMessage struct {

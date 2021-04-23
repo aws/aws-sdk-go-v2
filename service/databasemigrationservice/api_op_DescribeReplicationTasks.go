@@ -1449,30 +1449,6 @@ func replicationTaskStoppedStateRetryable(ctx context.Context, input *DescribeRe
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
-		expectedValue := "running"
-		listOfValues, ok := pathValue.([]interface{})
-		if !ok {
-			return false, fmt.Errorf("waiter comparator expected list got %T", pathValue)
-		}
-
-		for _, v := range listOfValues {
-			value, ok := v.(*string)
-			if !ok {
-				return false, fmt.Errorf("waiter comparator expected *string value, got %T", pathValue)
-			}
-
-			if string(*value) == expectedValue {
-				return false, fmt.Errorf("waiter state transitioned to Failure")
-			}
-		}
-	}
-
-	if err == nil {
-		pathValue, err := jmespath.Search("ReplicationTasks[].Status", output)
-		if err != nil {
-			return false, fmt.Errorf("error evaluating waiter state: %w", err)
-		}
-
 		expectedValue := "failed"
 		listOfValues, ok := pathValue.([]interface{})
 		if !ok {

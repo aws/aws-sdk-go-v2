@@ -167,6 +167,28 @@ func (ParameterApplyType) Values() []ParameterApplyType {
 	}
 }
 
+type PartnerIntegrationStatus string
+
+// Enum values for PartnerIntegrationStatus
+const (
+	PartnerIntegrationStatusActive            PartnerIntegrationStatus = "Active"
+	PartnerIntegrationStatusInactive          PartnerIntegrationStatus = "Inactive"
+	PartnerIntegrationStatusRuntimeFailure    PartnerIntegrationStatus = "RuntimeFailure"
+	PartnerIntegrationStatusConnectionFailure PartnerIntegrationStatus = "ConnectionFailure"
+)
+
+// Values returns all known values for PartnerIntegrationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PartnerIntegrationStatus) Values() []PartnerIntegrationStatus {
+	return []PartnerIntegrationStatus{
+		"Active",
+		"Inactive",
+		"RuntimeFailure",
+		"ConnectionFailure",
+	}
+}
+
 type ReservedNodeOfferingType string
 
 // Enum values for ReservedNodeOfferingType

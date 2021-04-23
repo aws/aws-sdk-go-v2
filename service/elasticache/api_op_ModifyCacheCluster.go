@@ -120,12 +120,15 @@ type ModifyCacheClusterInput struct {
 	// with the earlier engine version.
 	EngineVersion *string
 
-	// The list of Availability Zones where the new Memcached cache nodes are created.
-	// This parameter is only valid when NumCacheNodes in the request is greater than
-	// the sum of the number of active cache nodes and the number of cache nodes
-	// pending creation (which may be zero). The number of Availability Zones supplied
-	// in this list must match the cache nodes being added in this request. This option
-	// is only supported on Memcached clusters. Scenarios:
+	// Specifies the destination, format and type of the logs.
+	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
+
+	// This option is only supported on Memcached clusters. The list of Availability
+	// Zones where the new Memcached cache nodes are created. This parameter is only
+	// valid when NumCacheNodes in the request is greater than the sum of the number of
+	// active cache nodes and the number of cache nodes pending creation (which may be
+	// zero). The number of Availability Zones supplied in this list must match the
+	// cache nodes being added in this request. Scenarios:
 	//
 	// * Scenario 1: You have 3
 	// active nodes and wish to add 2 nodes. Specify NumCacheNodes=5 (3 + 2) and
@@ -210,7 +213,7 @@ type ModifyCacheClusterInput struct {
 	// add or remove requests are canceled. If you are removing cache nodes, you must
 	// use the CacheNodeIdsToRemove parameter to provide the IDs of the specific cache
 	// nodes to remove. For clusters running Redis, this value must be 1. For clusters
-	// running Memcached, this value must be between 1 and 20. Adding or removing
+	// running Memcached, this value must be between 1 and 40. Adding or removing
 	// Memcached cache nodes can be applied immediately or as a pending operation (see
 	// ApplyImmediately). A pending operation to modify the number of cache nodes in a
 	// cluster during its maintenance window, whether by adding or removing nodes in

@@ -2227,7 +2227,8 @@
                 "Granularity": {
                     "target": "com.amazonaws.costexplorer#Granularity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the AWS cost granularity to <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn't set, \n\t    the response object doesn't include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. </p>"
+                        "smithy.api#documentation": "<p>Sets the AWS cost granularity to <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. If <code>Granularity</code> isn't set, \n\t    the response object doesn't include the <code>Granularity</code>, either <code>MONTHLY</code> or <code>DAILY</code>, or <code>HOURLY</code>. </p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Filter": {
@@ -2328,7 +2329,8 @@
                 "Granularity": {
                     "target": "com.amazonaws.costexplorer#Granularity",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the AWS cost granularity to <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. If\n\t    <code>Granularity</code> isn't set, the response object doesn't include the\n\t    <code>Granularity</code>, <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. </p>"
+                        "smithy.api#documentation": "<p>Sets the AWS cost granularity to <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. If\n\t    <code>Granularity</code> isn't set, the response object doesn't include the\n\t    <code>Granularity</code>, <code>MONTHLY</code>, <code>DAILY</code>, or <code>HOURLY</code>. </p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Filter": {
@@ -5828,6 +5830,10 @@
                     {
                         "value": "EC2_INSTANCE_SP",
                         "name": "EC2_INSTANCE_SP"
+                    },
+                    {
+                        "value": "SAGEMAKER_SP",
+                        "name": "SAGEMAKER_SP"
                     }
                 ]
             }

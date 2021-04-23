@@ -3706,6 +3706,18 @@ func awsAwsquery_serializeDocumentCacheSecurityGroupNameList(v []string, value q
 	return nil
 }
 
+func awsAwsquery_serializeDocumentCloudWatchLogsDestinationDetails(v *types.CloudWatchLogsDestinationDetails, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.LogGroup != nil {
+		objectKey := object.Key("LogGroup")
+		objectKey.String(*v.LogGroup)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentConfigureShard(v *types.ConfigureShard, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -3766,6 +3778,27 @@ func awsAwsquery_serializeDocumentCustomerNodeEndpointList(v []types.CustomerNod
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentDestinationDetails(v *types.DestinationDetails, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.CloudWatchLogsDetails != nil {
+		objectKey := object.Key("CloudWatchLogsDetails")
+		if err := awsAwsquery_serializeDocumentCloudWatchLogsDestinationDetails(v.CloudWatchLogsDetails, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.KinesisFirehoseDetails != nil {
+		objectKey := object.Key("KinesisFirehoseDetails")
+		if err := awsAwsquery_serializeDocumentKinesisFirehoseDestinationDetails(v.KinesisFirehoseDetails, objectKey); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3838,6 +3871,67 @@ func awsAwsquery_serializeDocumentKeyList(v []string, value query.Value) error {
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentKinesisFirehoseDestinationDetails(v *types.KinesisFirehoseDestinationDetails, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DeliveryStream != nil {
+		objectKey := object.Key("DeliveryStream")
+		objectKey.String(*v.DeliveryStream)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentLogDeliveryConfigurationRequest(v *types.LogDeliveryConfigurationRequest, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DestinationDetails != nil {
+		objectKey := object.Key("DestinationDetails")
+		if err := awsAwsquery_serializeDocumentDestinationDetails(v.DestinationDetails, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DestinationType) > 0 {
+		objectKey := object.Key("DestinationType")
+		objectKey.String(string(v.DestinationType))
+	}
+
+	if v.Enabled != nil {
+		objectKey := object.Key("Enabled")
+		objectKey.Boolean(*v.Enabled)
+	}
+
+	if len(v.LogFormat) > 0 {
+		objectKey := object.Key("LogFormat")
+		objectKey.String(string(v.LogFormat))
+	}
+
+	if len(v.LogType) > 0 {
+		objectKey := object.Key("LogType")
+		objectKey.String(string(v.LogType))
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentLogDeliveryConfigurationRequestList(v []types.LogDeliveryConfigurationRequest, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("LogDeliveryConfigurationRequest")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentLogDeliveryConfigurationRequest(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -4480,6 +4574,13 @@ func awsAwsquery_serializeOpDocumentCreateCacheClusterInput(v *CreateCacheCluste
 		objectKey.String(*v.EngineVersion)
 	}
 
+	if v.LogDeliveryConfigurations != nil {
+		objectKey := object.Key("LogDeliveryConfigurations")
+		if err := awsAwsquery_serializeDocumentLogDeliveryConfigurationRequestList(v.LogDeliveryConfigurations, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.NotificationTopicArn != nil {
 		objectKey := object.Key("NotificationTopicArn")
 		objectKey.String(*v.NotificationTopicArn)
@@ -4743,6 +4844,13 @@ func awsAwsquery_serializeOpDocumentCreateReplicationGroupInput(v *CreateReplica
 	if v.KmsKeyId != nil {
 		objectKey := object.Key("KmsKeyId")
 		objectKey.String(*v.KmsKeyId)
+	}
+
+	if v.LogDeliveryConfigurations != nil {
+		objectKey := object.Key("LogDeliveryConfigurations")
+		if err := awsAwsquery_serializeDocumentLogDeliveryConfigurationRequestList(v.LogDeliveryConfigurations, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.MultiAZEnabled != nil {
@@ -5923,6 +6031,13 @@ func awsAwsquery_serializeOpDocumentModifyCacheClusterInput(v *ModifyCacheCluste
 		objectKey.String(*v.EngineVersion)
 	}
 
+	if v.LogDeliveryConfigurations != nil {
+		objectKey := object.Key("LogDeliveryConfigurations")
+		if err := awsAwsquery_serializeDocumentLogDeliveryConfigurationRequestList(v.LogDeliveryConfigurations, objectKey); err != nil {
+			return err
+		}
+	}
+
 	if v.NewAvailabilityZones != nil {
 		objectKey := object.Key("NewAvailabilityZones")
 		if err := awsAwsquery_serializeDocumentPreferredAvailabilityZoneList(v.NewAvailabilityZones, objectKey); err != nil {
@@ -6104,6 +6219,13 @@ func awsAwsquery_serializeOpDocumentModifyReplicationGroupInput(v *ModifyReplica
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)
+	}
+
+	if v.LogDeliveryConfigurations != nil {
+		objectKey := object.Key("LogDeliveryConfigurations")
+		if err := awsAwsquery_serializeDocumentLogDeliveryConfigurationRequestList(v.LogDeliveryConfigurations, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.MultiAZEnabled != nil {

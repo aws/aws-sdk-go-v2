@@ -100,6 +100,7 @@ type IntegrationType string
 const (
 	IntegrationTypeSendFindingsToSecurityHub      IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"
 	IntegrationTypeReceiveFindingsFromSecurityHub IntegrationType = "RECEIVE_FINDINGS_FROM_SECURITY_HUB"
+	IntegrationTypeUpdateFindingsInSecurityHub    IntegrationType = "UPDATE_FINDINGS_IN_SECURITY_HUB"
 )
 
 // Values returns all known values for IntegrationType. Note that this can be
@@ -109,6 +110,7 @@ func (IntegrationType) Values() []IntegrationType {
 	return []IntegrationType{
 		"SEND_FINDINGS_TO_SECURITY_HUB",
 		"RECEIVE_FINDINGS_FROM_SECURITY_HUB",
+		"UPDATE_FINDINGS_IN_SECURITY_HUB",
 	}
 }
 

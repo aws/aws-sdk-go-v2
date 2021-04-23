@@ -7822,6 +7822,19 @@ func awsAwsjson11_deserializeOpDocumentDescribeDatasetImportJobOutput(v **Descri
 				return err
 			}
 
+		case "EstimatedTimeRemainingInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EstimatedTimeRemainingInMinutes = ptr.Int64(i64)
+			}
+
 		case "FieldStatistics":
 			if err := awsAwsjson11_deserializeDocumentFieldStatistics(&sv.FieldStatistics, value); err != nil {
 				return err
@@ -8175,6 +8188,19 @@ func awsAwsjson11_deserializeOpDocumentDescribeForecastOutput(v **DescribeForeca
 				sv.DatasetGroupArn = ptr.String(jtv)
 			}
 
+		case "EstimatedTimeRemainingInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EstimatedTimeRemainingInMinutes = ptr.Int64(i64)
+			}
+
 		case "ForecastArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8411,6 +8437,19 @@ func awsAwsjson11_deserializeOpDocumentDescribePredictorOutput(v **DescribePredi
 		case "EncryptionConfig":
 			if err := awsAwsjson11_deserializeDocumentEncryptionConfig(&sv.EncryptionConfig, value); err != nil {
 				return err
+			}
+
+		case "EstimatedTimeRemainingInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EstimatedTimeRemainingInMinutes = ptr.Int64(i64)
 			}
 
 		case "EvaluationParameters":

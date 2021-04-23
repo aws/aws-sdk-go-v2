@@ -71,6 +71,62 @@ func (m *awsAwsquery_serializeOpAcceptReservedNodeExchange) HandleSerialize(ctx 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpAddPartner struct {
+}
+
+func (*awsAwsquery_serializeOpAddPartner) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpAddPartner) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddPartnerInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("AddPartner")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentAddPartnerInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpAuthorizeClusterSecurityGroupIngress struct {
 }
 
@@ -1751,6 +1807,62 @@ func (m *awsAwsquery_serializeOpDeleteHsmConfiguration) HandleSerialize(ctx cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpDeletePartner struct {
+}
+
+func (*awsAwsquery_serializeOpDeletePartner) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDeletePartner) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeletePartnerInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DeletePartner")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDeletePartnerInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpDeleteScheduledAction struct {
 }
 
@@ -3187,6 +3299,62 @@ func (m *awsAwsquery_serializeOpDescribeOrderableClusterOptions) HandleSerialize
 	body.Key("Version").String("2012-12-01")
 
 	if err := awsAwsquery_serializeOpDocumentDescribeOrderableClusterOptionsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsquery_serializeOpDescribePartners struct {
+}
+
+func (*awsAwsquery_serializeOpDescribePartners) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpDescribePartners) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribePartnersInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("DescribePartners")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentDescribePartnersInput(input, bodyEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -5610,6 +5778,62 @@ func (m *awsAwsquery_serializeOpRotateEncryptionKey) HandleSerialize(ctx context
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsquery_serializeOpUpdatePartnerStatus struct {
+}
+
+func (*awsAwsquery_serializeOpUpdatePartnerStatus) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpUpdatePartnerStatus) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdatePartnerStatusInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("UpdatePartnerStatus")
+	body.Key("Version").String("2012-12-01")
+
+	if err := awsAwsquery_serializeOpDocumentUpdatePartnerStatusInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsquery_serializeDocumentAttributeNameList(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -6124,6 +6348,33 @@ func awsAwsquery_serializeOpDocumentAcceptReservedNodeExchangeInput(v *AcceptRes
 	if v.TargetReservedNodeOfferingId != nil {
 		objectKey := object.Key("TargetReservedNodeOfferingId")
 		objectKey.String(*v.TargetReservedNodeOfferingId)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentAddPartnerInput(v *AddPartnerInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AccountId != nil {
+		objectKey := object.Key("AccountId")
+		objectKey.String(*v.AccountId)
+	}
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.DatabaseName != nil {
+		objectKey := object.Key("DatabaseName")
+		objectKey.String(*v.DatabaseName)
+	}
+
+	if v.PartnerName != nil {
+		objectKey := object.Key("PartnerName")
+		objectKey.String(*v.PartnerName)
 	}
 
 	return nil
@@ -7022,6 +7273,33 @@ func awsAwsquery_serializeOpDocumentDeleteHsmConfigurationInput(v *DeleteHsmConf
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentDeletePartnerInput(v *DeletePartnerInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AccountId != nil {
+		objectKey := object.Key("AccountId")
+		objectKey.String(*v.AccountId)
+	}
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.DatabaseName != nil {
+		objectKey := object.Key("DatabaseName")
+		objectKey.String(*v.DatabaseName)
+	}
+
+	if v.PartnerName != nil {
+		objectKey := object.Key("PartnerName")
+		objectKey.String(*v.PartnerName)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentDeleteScheduledActionInput(v *DeleteScheduledActionInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -7749,6 +8027,33 @@ func awsAwsquery_serializeOpDocumentDescribeOrderableClusterOptionsInput(v *Desc
 	if v.NodeType != nil {
 		objectKey := object.Key("NodeType")
 		objectKey.String(*v.NodeType)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentDescribePartnersInput(v *DescribePartnersInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AccountId != nil {
+		objectKey := object.Key("AccountId")
+		objectKey.String(*v.AccountId)
+	}
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.DatabaseName != nil {
+		objectKey := object.Key("DatabaseName")
+		objectKey.String(*v.DatabaseName)
+	}
+
+	if v.PartnerName != nil {
+		objectKey := object.Key("PartnerName")
+		objectKey.String(*v.PartnerName)
 	}
 
 	return nil
@@ -9085,6 +9390,43 @@ func awsAwsquery_serializeOpDocumentRotateEncryptionKeyInput(v *RotateEncryption
 	if v.ClusterIdentifier != nil {
 		objectKey := object.Key("ClusterIdentifier")
 		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentUpdatePartnerStatusInput(v *UpdatePartnerStatusInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AccountId != nil {
+		objectKey := object.Key("AccountId")
+		objectKey.String(*v.AccountId)
+	}
+
+	if v.ClusterIdentifier != nil {
+		objectKey := object.Key("ClusterIdentifier")
+		objectKey.String(*v.ClusterIdentifier)
+	}
+
+	if v.DatabaseName != nil {
+		objectKey := object.Key("DatabaseName")
+		objectKey.String(*v.DatabaseName)
+	}
+
+	if v.PartnerName != nil {
+		objectKey := object.Key("PartnerName")
+		objectKey.String(*v.PartnerName)
+	}
+
+	if len(v.Status) > 0 {
+		objectKey := object.Key("Status")
+		objectKey.String(string(v.Status))
+	}
+
+	if v.StatusMessage != nil {
+		objectKey := object.Key("StatusMessage")
+		objectKey.String(*v.StatusMessage)
 	}
 
 	return nil

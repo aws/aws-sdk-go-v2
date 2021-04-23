@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the specified member accounts from the associated master account.
-// Can be used to disassociate both accounts that are in an organization and
-// accounts that were invited manually.
+// Disassociates the specified member accounts from the associated administrator
+// account. Can be used to disassociate both accounts that are managed using
+// Organizations and accounts that were invited manually.
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
 	if params == nil {
 		params = &DisassociateMembersInput{}
@@ -30,7 +30,8 @@ func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMe
 
 type DisassociateMembersInput struct {
 
-	// The account IDs of the member accounts to disassociate from the master account.
+	// The account IDs of the member accounts to disassociate from the administrator
+	// account.
 	//
 	// This member is required.
 	AccountIds []string

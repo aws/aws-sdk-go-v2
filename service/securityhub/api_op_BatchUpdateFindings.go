@@ -12,36 +12,37 @@ import (
 )
 
 // Used by Security Hub customers to update information about their investigation
-// into a finding. Requested by master accounts or member accounts. Master accounts
-// can update findings for their account and their member accounts. Member accounts
-// can update findings for their account. Updates from BatchUpdateFindings do not
-// affect the value of UpdatedAt for a finding. Master and member accounts can use
-// BatchUpdateFindings to update the following finding fields and objects.
+// into a finding. Requested by administrator accounts or member accounts.
+// Administrator accounts can update findings for their account and their member
+// accounts. Member accounts can update findings for their account. Updates from
+// BatchUpdateFindings do not affect the value of UpdatedAt for a finding.
+// Administrator and member accounts can use BatchUpdateFindings to update the
+// following finding fields and objects.
 //
-// *
-// Confidence
+// * Confidence
 //
 // * Criticality
 //
 // * Note
 //
-// * RelatedFindings
+// *
+// RelatedFindings
 //
 // * Severity
 //
 // * Types
 //
-// *
-// UserDefinedFields
+// * UserDefinedFields
 //
-// * VerificationState
+// *
+// VerificationState
 //
 // * Workflow
 //
-// You can configure IAM
-// policies to restrict access to fields and field values. For example, you might
-// not want member accounts to be able to suppress findings or change the finding
-// severity. See Configuring access to BatchUpdateFindings
+// You can configure IAM policies to restrict access
+// to fields and field values. For example, you might not want member accounts to
+// be able to suppress findings or change the finding severity. See Configuring
+// access to BatchUpdateFindings
 // (https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access)
 // in the AWS Security Hub User Guide.
 func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFindingsInput, optFns ...func(*Options)) (*BatchUpdateFindingsOutput, error) {

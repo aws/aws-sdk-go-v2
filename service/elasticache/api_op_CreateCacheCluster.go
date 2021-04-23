@@ -172,6 +172,9 @@ type CreateCacheClusterInput struct {
 	// group and create it anew with the earlier engine version.
 	EngineVersion *string
 
+	// Specifies the destination, format and type of the logs.
+	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
+
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
 	// topic to which notifications are sent. The Amazon SNS topic owner must be the
 	// same as the cluster owner.
@@ -179,7 +182,7 @@ type CreateCacheClusterInput struct {
 
 	// The initial number of cache nodes that the cluster has. For clusters running
 	// Redis, this value must be 1. For clusters running Memcached, this value must be
-	// between 1 and 20. If you need more than 20 nodes for your Memcached cluster,
+	// between 1 and 40. If you need more than 20 nodes for your Memcached cluster,
 	// please fill out the ElastiCache Limit Increase Request form at
 	// http://aws.amazon.com/contact-us/elasticache-node-limit-request/
 	// (http://aws.amazon.com/contact-us/elasticache-node-limit-request/).

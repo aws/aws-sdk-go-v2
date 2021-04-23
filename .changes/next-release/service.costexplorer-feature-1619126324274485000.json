@@ -1,0 +1,9 @@
+{
+ "ID": "service.costexplorer-feature-1619126324274485000",
+ "SchemaVersion": 1,
+ "Module": "service/costexplorer",
+ "Type": "feature",
+ "Description": "Service API Updates",
+ "MinVersion": "",
+ "AffectedModules": null
+}

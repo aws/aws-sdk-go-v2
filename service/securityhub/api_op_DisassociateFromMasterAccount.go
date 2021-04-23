@@ -10,10 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates the current Security Hub member account from the associated master
-// account. This operation is only used by accounts that are not part of an
-// organization. For organization accounts, only the master account (the designated
-// Security Hub administrator) can disassociate a member account.
+// This method is deprecated. Instead, use DisassociateFromAdministratorAccount.
+// Disassociates the current Security Hub member account from the associated
+// administrator account. This operation is only used by accounts that are not part
+// of an organization. For organization accounts, only the administrator account
+// can disassociate a member account.
+//
+// Deprecated: This API has been deprecated, use
+// DisassociateFromAdministratorAccount API instead.
 func (c *Client) DisassociateFromMasterAccount(ctx context.Context, params *DisassociateFromMasterAccountInput, optFns ...func(*Options)) (*DisassociateFromMasterAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateFromMasterAccountInput{}
