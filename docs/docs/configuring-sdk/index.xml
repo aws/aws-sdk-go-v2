@@ -325,7 +325,7 @@ ability to tune the request back off policy.&lt;/p&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;When a retryable error occurs while invoking your request, the standard retyer will use it&amp;rsquo;s provided configuration
+&lt;p&gt;When a retryable error occurs while invoking your request, the standard retryer will use it&amp;rsquo;s provided configuration
 to delay and subsequently retry the request. Retries add to the overall latency of your request, and you must configure
 retryer if the default configuration does not meet your application requirements.&lt;/p&gt;
 &lt;p&gt;See the &lt;a href=&#34;https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws/retry&#34;&gt;retry&lt;/a&gt; package documentation for details on what errors are considered as
