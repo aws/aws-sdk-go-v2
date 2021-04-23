@@ -130,7 +130,7 @@ public class S3UpdateEndpoint implements GoIntegration {
             final OperationShape operation = model.expectShape(operationId, OperationShape.class);
 
             // Create a symbol provider because one is not available in this call.
-            SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings.getModuleName());
+            SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings);
             String helperFuncName = addMiddlewareFuncName(
                     symbolProvider.toSymbol(operation).getName(),
                     UPDATE_ENDPOINT_INTERNAL_ADDER
