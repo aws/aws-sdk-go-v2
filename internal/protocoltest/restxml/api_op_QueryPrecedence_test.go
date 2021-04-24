@@ -19,9 +19,9 @@ import (
 	"testing"
 )
 
-func TestClient_OmitsNullSerializesEmptyString_awsRestxmlSerialize(t *testing.T) {
+func TestClient_QueryPrecedence_awsRestxmlSerialize(t *testing.T) {
 	cases := map[string]struct {
-		Params        *OmitsNullSerializesEmptyStringInput
+		Params        *QueryPrecedenceInput
 		ExpectMethod  string
 		ExpectURIPath string
 		ExpectQuery   []smithytesting.QueryItem
@@ -33,27 +33,20 @@ func TestClient_OmitsNullSerializesEmptyString_awsRestxmlSerialize(t *testing.T)
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Omits null query values
-		"RestXmlOmitsNullQuery": {
-			Params: &OmitsNullSerializesEmptyStringInput{
-				NullValue: nil,
+		// Prefer named query parameters when serializing
+		"RestXmlQueryPrecedence": {
+			Params: &QueryPrecedenceInput{
+				Foo: ptr.String("named"),
+				Baz: map[string]string{
+					"bar": "fromMap",
+					"qux": "alsoFromMap",
+				},
 			},
-			ExpectMethod:  "GET",
-			ExpectURIPath: "/OmitsNullSerializesEmptyString",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareReaderEmpty(actual)
-			},
-		},
-		// Serializes empty query strings
-		"RestXmlSerializesEmptyString": {
-			Params: &OmitsNullSerializesEmptyStringInput{
-				EmptyString: ptr.String(""),
-			},
-			ExpectMethod:  "GET",
-			ExpectURIPath: "/OmitsNullSerializesEmptyString",
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/Precedence",
 			ExpectQuery: []smithytesting.QueryItem{
-				{Key: "Empty", Value: ""},
+				{Key: "bar", Value: "named"},
+				{Key: "qux", Value: "alsoFromMap"},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
@@ -97,7 +90,7 @@ func TestClient_OmitsNullSerializesEmptyString_awsRestxmlSerialize(t *testing.T)
 				IdempotencyTokenProvider: smithyrand.NewUUIDIdempotencyToken(&smithytesting.ByteLoop{}),
 				Region:                   "us-west-2",
 			})
-			result, err := client.OmitsNullSerializesEmptyString(context.Background(), c.Params)
+			result, err := client.QueryPrecedence(context.Background(), c.Params)
 			if err != nil {
 				t.Fatalf("expect nil err, got %v", err)
 			}

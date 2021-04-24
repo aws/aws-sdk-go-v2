@@ -52,6 +52,8 @@ type AllQueryStringTypesInput struct {
 
 	QueryLong *int64
 
+	QueryParamsMapOfStrings map[string]string
+
 	QueryShort *int16
 
 	QueryString *string

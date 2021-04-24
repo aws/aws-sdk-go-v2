@@ -33,10 +33,21 @@ func TestClient_OmitsNullSerializesEmptyString_awsRestjson1Serialize(t *testing.
 		BodyMediaType string
 		BodyAssert    func(io.Reader) error
 	}{
-		// Serializes empty query strings but omits null
-		"RestJsonOmitsNullSerializesEmptyString": {
+		// Omits null query values
+		"RestJsonOmitsNullQuery": {
 			Params: &OmitsNullSerializesEmptyStringInput{
-				NullValue:   nil,
+				NullValue: nil,
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/OmitsNullSerializesEmptyString",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Serializes empty query strings
+		"RestJsonSerializesEmptyQueryValue": {
+			Params: &OmitsNullSerializesEmptyStringInput{
 				EmptyString: ptr.String(""),
 			},
 			ExpectMethod:  "GET",

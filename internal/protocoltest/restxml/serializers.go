@@ -121,6 +121,15 @@ func awsRestxml_serializeOpHttpBindingsAllQueryStringTypesInput(v *AllQueryStrin
 		encoder.SetQuery("Long").Long(*v.QueryLong)
 	}
 
+	if v.QueryParamsMapOfStrings != nil {
+		for qkey, qvalue := range v.QueryParamsMapOfStrings {
+			if encoder.HasQuery(qkey) {
+				continue
+			}
+			encoder.SetQuery(qkey).String(qvalue)
+		}
+	}
+
 	if v.QueryShort != nil {
 		encoder.SetQuery("Short").Short(*v.QueryShort)
 	}
@@ -2078,6 +2087,132 @@ func awsRestxml_serializeOpHttpBindingsQueryIdempotencyTokenAutoFillInput(v *Que
 
 	if v.Token != nil {
 		encoder.SetQuery("token").String(*v.Token)
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpQueryParamsAsStringListMap struct {
+}
+
+func (*awsRestxml_serializeOpQueryParamsAsStringListMap) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpQueryParamsAsStringListMap) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*QueryParamsAsStringListMapInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/StringListMap")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsQueryParamsAsStringListMapInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsQueryParamsAsStringListMapInput(v *QueryParamsAsStringListMapInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Foo != nil {
+		for qkey, qvalue := range v.Foo {
+			if encoder.HasQuery(qkey) {
+				continue
+			}
+			for i := range qvalue {
+				encoder.AddQuery(qkey).String(qvalue[i])
+			}
+		}
+	}
+
+	if v.Qux != nil {
+		encoder.SetQuery("corge").String(*v.Qux)
+	}
+
+	return nil
+}
+
+type awsRestxml_serializeOpQueryPrecedence struct {
+}
+
+func (*awsRestxml_serializeOpQueryPrecedence) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestxml_serializeOpQueryPrecedence) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*QueryPrecedenceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/Precedence")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestxml_serializeOpHttpBindingsQueryPrecedenceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestxml_serializeOpHttpBindingsQueryPrecedenceInput(v *QueryPrecedenceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Baz != nil {
+		for qkey, qvalue := range v.Baz {
+			if encoder.HasQuery(qkey) {
+				continue
+			}
+			encoder.SetQuery(qkey).String(qvalue)
+		}
+	}
+
+	if v.Foo != nil {
+		encoder.SetQuery("bar").String(*v.Foo)
 	}
 
 	return nil

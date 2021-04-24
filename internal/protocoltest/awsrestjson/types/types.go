@@ -22,6 +22,7 @@ type ComplexNestedErrorData struct {
 //  MyUnionMemberListValue
 //  MyUnionMemberMapValue
 //  MyUnionMemberStructureValue
+//  MyUnionMemberRenamedStructureValue
 type MyUnion interface {
 	isMyUnion()
 }
@@ -80,6 +81,12 @@ type MyUnionMemberStructureValue struct {
 
 func (*MyUnionMemberStructureValue) isMyUnion() {}
 
+type MyUnionMemberRenamedStructureValue struct {
+	Value RenamedGreeting
+}
+
+func (*MyUnionMemberRenamedStructureValue) isMyUnion() {}
+
 type NestedPayload struct {
 	Greeting *string
 
@@ -102,6 +109,10 @@ type StructureListMember struct {
 	A *string
 
 	B *string
+}
+
+type RenamedGreeting struct {
+	Salutation *string
 }
 
 type GreetingStruct struct {

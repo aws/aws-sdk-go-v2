@@ -82,8 +82,9 @@ func TestClient_SimpleScalarProperties_awsRestjson1Serialize(t *testing.T) {
 			ExpectHeader: http.Header{
 				"Content-Type": []string{"application/json"},
 			},
+			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareReaderBytes(actual, []byte(`{}`))
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
 			},
 		},
 	}
@@ -199,6 +200,7 @@ func TestClient_SimpleScalarProperties_awsRestjson1Deserialize(t *testing.T) {
 			Header: http.Header{
 				"Content-Type": []string{"application/json"},
 			},
+			BodyMediaType: "application/json",
 			Body: []byte(`{
 			    "stringValue": null
 			}`),

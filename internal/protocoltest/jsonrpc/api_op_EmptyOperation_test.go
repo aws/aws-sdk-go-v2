@@ -68,22 +68,6 @@ func TestClient_EmptyOperation_awsAwsjson11Serialize(t *testing.T) {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
 			},
 		},
-		// Service implementations must support no payload or an empty object payload for
-		// operations that define no input. However, despite the lack of a payload, a
-		// Content-Type header is still required in order for the service to properly
-		// detect the protocol.
-		"json_1_1_service_supports_empty_payload_for_no_input_shape": {
-			Params:        &EmptyOperationInput{},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-			},
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareReaderEmpty(actual)
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

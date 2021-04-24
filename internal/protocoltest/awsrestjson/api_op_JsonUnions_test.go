@@ -230,6 +230,30 @@ func TestClient_JsonUnions_awsRestjson1Serialize(t *testing.T) {
 			}`))
 			},
 		},
+		// Serializes a renamed structure union value
+		"RestJsonSerializeRenamedStructureUnionValue": {
+			Params: &JsonUnionsInput{
+				Contents: &types.MyUnionMemberRenamedStructureValue{Value: types.RenamedGreeting{
+					Salutation: ptr.String("hello!"),
+				}},
+			},
+			ExpectMethod:  "PUT",
+			ExpectURIPath: "/JsonUnions",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/json"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "contents": {
+			        "renamedStructureValue": {
+			            "salutation": "hello!"
+			        }
+			    }
+			}`))
+			},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

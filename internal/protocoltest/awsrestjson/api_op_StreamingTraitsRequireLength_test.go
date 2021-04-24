@@ -52,6 +52,7 @@ func TestClient_StreamingTraitsRequireLength_awsRestjson1Serialize(t *testing.T)
 			RequireHeader: []string{
 				"Content-Length",
 			},
+			BodyMediaType: "application/octet-stream",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderBytes(actual, []byte(`blobby blob blob`))
 			},
@@ -67,6 +68,7 @@ func TestClient_StreamingTraitsRequireLength_awsRestjson1Serialize(t *testing.T)
 			ExpectHeader: http.Header{
 				"X-Foo": []string{"Foo"},
 			},
+			BodyMediaType: "application/octet-stream",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
@@ -153,7 +155,8 @@ func TestClient_StreamingTraitsRequireLength_awsRestjson1Deserialize(t *testing.
 				"Content-Type": []string{"application/octet-stream"},
 				"X-Foo":        []string{"Foo"},
 			},
-			Body: []byte(`blobby blob blob`),
+			BodyMediaType: "application/octet-stream",
+			Body:          []byte(`blobby blob blob`),
 			ExpectResult: &StreamingTraitsRequireLengthOutput{
 				Foo:  ptr.String("Foo"),
 				Blob: smithyio.ReadSeekNopCloser{ReadSeeker: bytes.NewReader([]byte("blobby blob blob"))},
@@ -165,7 +168,8 @@ func TestClient_StreamingTraitsRequireLength_awsRestjson1Deserialize(t *testing.
 			Header: http.Header{
 				"X-Foo": []string{"Foo"},
 			},
-			Body: []byte(``),
+			BodyMediaType: "application/octet-stream",
+			Body:          []byte(``),
 			ExpectResult: &StreamingTraitsRequireLengthOutput{
 				Foo: ptr.String("Foo"),
 			},
