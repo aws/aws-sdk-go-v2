@@ -311,7 +311,7 @@ public class XmlShapeDeserVisitor extends DocumentShapeDeserVisitor {
     }
 
     private String getUnwrappedMapDelegateFunctionName(GenerationContext context, Shape shape) {
-        return ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getProtocolName()) + "Unwrapped";
+        return ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), context.getProtocolName()) + "Unwrapped";
     }
 
     @Override

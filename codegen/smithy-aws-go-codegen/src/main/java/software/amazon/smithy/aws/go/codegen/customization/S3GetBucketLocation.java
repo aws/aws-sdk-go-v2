@@ -187,7 +187,7 @@ public class S3GetBucketLocation implements GoIntegration {
             // xml tag with operation specific xml tag.
             writer.write("decoder := smithyxml.WrapNodeDecoder(rootDecoder, xml.StartElement{})");
 
-            String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(outputShape, protocolName);
+            String deserFuncName = ProtocolGenerator.getOperationDocumentDeserFuncName(outputShape, protocolName);
             writer.addUseImports(SmithyGoDependency.IO);
 
             // delegate to already generated inner body deserializer function.

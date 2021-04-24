@@ -10,6 +10,7 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
@@ -53,7 +54,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter();
         StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
+        String functionName = ProtocolGenerator.getOperationDocumentSerFuncName(input, getProtocolName());
         writer.addUseImports(AwsGoDependency.AWS_QUERY_PROTOCOL);
 
         writer.addUseImports(SmithyGoDependency.BYTES);
@@ -91,7 +92,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter();
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
+        String functionName = ProtocolGenerator.getOperationDocumentDeserFuncName(output, getProtocolName());
         initializeXmlDecoder(writer, "response.Body", "out, metadata, ","nil");
         unwrapOutputDocument(context, operation);
         writer.write("err = $L(&output, decoder)", functionName);
@@ -106,12 +107,16 @@ class AwsQuery extends HttpRpcProtocolGenerator {
         writer.write("output := &$T{}", symbol);
         writer.insertTrailingNewline();
         if (isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
-            String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
-                    shape, getProtocolName());
+            String functionName = shape.hasTrait(SyntheticClone.class) ?
+                    ProtocolGenerator.getOperationDocumentDeserFuncName(
+                            shape, context.getProtocolName()) :
+                    ProtocolGenerator.getDocumentDeserializerFunctionName(
+                            shape, context.getService(), context.getProtocolName());
+
             writer.addUseImports(SmithyGoDependency.IO);
             initializeXmlDecoder(writer, "errorBody", "output");
             unwrapErrorElement(context);
-            writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
+            writer.write("err = $L(&output, decoder)", functionName);
             XmlProtocolUtils.handleDecodeError(writer, "");
             writer.insertTrailingNewline();
         }

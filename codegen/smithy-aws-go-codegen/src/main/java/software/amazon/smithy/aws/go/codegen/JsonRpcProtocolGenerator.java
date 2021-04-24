@@ -74,7 +74,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         }
 
         StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
+        String functionName = ProtocolGenerator.getOperationDocumentSerFuncName(input, getProtocolName());
 
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("jsonEncoder := smithyjson.NewEncoder()");
@@ -99,7 +99,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter();
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
+        String functionName = ProtocolGenerator.getOperationDocumentDeserFuncName(output, getProtocolName());
         initializeJsonDecoder(writer, "response.Body");
         AwsProtocolUtils.decodeJsonIntoInterface(writer, "out, metadata, ");
         writer.write("err = $L(&output, shape)", functionName);
@@ -118,7 +118,7 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
     protected void deserializeError(GenerationContext context, StructureShape shape) {
         GoWriter writer = context.getWriter();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
-        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), getProtocolName());
 
         initializeJsonDecoder(writer, "errorBody");
         AwsProtocolUtils.decodeJsonIntoInterface(writer, "");

@@ -361,7 +361,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     }
 
     private void writeDelegateFunction(Shape shape) {
-        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), context.getProtocolName());
         GoWriter writer = context.getWriter();
 
         ProtocolUtils.writeDeserDelegateFunction(context, writer, member, dataDest, (destVar) -> {

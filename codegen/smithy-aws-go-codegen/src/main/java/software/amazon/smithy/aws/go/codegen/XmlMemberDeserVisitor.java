@@ -365,7 +365,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     }
 
     private void writeDelegateFunction(Shape shape) {
-        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), context.getProtocolName());
         GoWriter writer = context.getWriter();
         writer.write("nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)");
 
@@ -377,7 +377,7 @@ public class XmlMemberDeserVisitor implements ShapeVisitor<Void> {
     }
 
     private String getUnwrappedDelegateFunctionName(Shape shape) {
-        return ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getProtocolName()) + "Unwrapped";
+        return ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), context.getProtocolName()) + "Unwrapped";
     }
 
     private void writeUnwrappedDelegateFunction(Shape shape) {
