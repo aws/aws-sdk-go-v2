@@ -30,8 +30,8 @@ func (c *Client) UpdateBasePathMapping(ctx context.Context, params *UpdateBasePa
 // A request to change information about the BasePathMapping resource.
 type UpdateBasePathMappingInput struct {
 
-	// [Required] The base path of the BasePathMapping resource to change. To specify
-	// an empty base path, set this parameter to '(none)'.
+	// [Required] The base path of the BasePathMappipDocumentGetSdkInputng resource to
+	// change. To specify an empty base path, set this parameter to '(none)'.
 	//
 	// This member is required.
 	BasePath *string
