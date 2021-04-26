@@ -186,6 +186,12 @@ func addSetLoggerMiddleware(stack *middleware.Stack, o Options) error {
 
 // NewFromConfig returns a new client from the provided config.
 func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
+	opts := OptionsFromConfig(cfg)
+	return New(opts, optFns...)
+}
+
+// OptionsFromConfig returns new S3 Options from the provided config
+func OptionsFromConfig(cfg aws.Config) Options {
 	opts := Options{
 		Region:        cfg.Region,
 		HTTPClient:    cfg.HTTPClient,
@@ -197,7 +203,7 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSEndpointResolver(cfg, &opts)
 	resolveClientConfig(cfg, &opts)
-	return New(opts, optFns...)
+	return opts
 }
 
 func resolveHTTPClient(o *Options) {
