@@ -53,7 +53,7 @@ smithy-build: gen-repo-mod-replace
 
 smithy-build-%: gen-repo-mod-replace
 	@# smithy-build- command that uses the pattern to define build filter that
-	@# the smithy API model service id starts with. Strips off the 
+	@# the smithy API model service id starts with. Strips off the
 	@# "smithy-build-".
 	@#
 	@# e.g. smithy-build-com.amazonaws.rds
@@ -103,17 +103,18 @@ add-module-license-files:
     	go run . -skip-root \
             "cp $(LICENSE_FILE) ."
 
-sync-models: sync-endpoint-models sync-api-models
-sync-endpoint-models: clone-v1-models sync-endpoints.json gen-endpoint-prefix.json
+sync-models: sync-endpoints-model sync-api-models
+
+sync-endpoints-model: sync-endpoints.json gen-endpoint-prefix.json
+
+sync-endpoints.json:
+	[[ ! -z "${ENDPOINTS_MODEL}" ]] && cp ${ENDPOINTS_MODEL} ${ENDPOINTS_JSON} || echo "ENDPOINTS_MODEL not set, must not be empty"
 
 clone-v1-models:
 	rm -rf /tmp/aws-sdk-go-model-sync
 	git clone https://github.com/aws/aws-sdk-go.git --depth 1 /tmp/aws-sdk-go-model-sync
 
-sync-endpoints.json:
-	cp /tmp/aws-sdk-go-model-sync/models/endpoints/endpoints.json ${ENDPOINTS_JSON}
-
-gen-endpoint-prefix.json:
+gen-endpoint-prefix.json: clone-v1-models
 	cd internal/repotools/cmd/endpointPrefix && \
 		go run . \
 			-m '/tmp/aws-sdk-go-model-sync/models/apis/*/*/api-2.json' \
