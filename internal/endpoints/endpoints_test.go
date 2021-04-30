@@ -117,6 +117,12 @@ var testPartitions = Partitions{
 					Region: "cn-east-1",
 				},
 			},
+			"fips-partition": {
+				Hostname: "some-global-thing-fips.amazonaws.com.cn",
+				CredentialScope: CredentialScope{
+					Region: "cn-east-1",
+				},
+			},
 		},
 	},
 	{
@@ -177,6 +183,26 @@ func TestResolveEndpoint(t *testing.T) {
 			Expected: aws.Endpoint{
 				PartitionID:   "part-id-2",
 				URL:           "https://some-global-thing.amazonaws.com.cn",
+				SigningRegion: "cn-east-1",
+				SigningName:   "foo",
+				SigningMethod: "v4",
+			},
+		},
+		"specified partition endpoint": {
+			Region: "partition",
+			Expected: aws.Endpoint{
+				PartitionID:   "part-id-2",
+				URL:           "https://some-global-thing.amazonaws.com.cn",
+				SigningRegion: "cn-east-1",
+				SigningName:   "foo",
+				SigningMethod: "v4",
+			},
+		},
+		"fips partition endpoint": {
+			Region: "fips-partition",
+			Expected: aws.Endpoint{
+				PartitionID:   "part-id-2",
+				URL:           "https://some-global-thing-fips.amazonaws.com.cn",
 				SigningRegion: "cn-east-1",
 				SigningName:   "foo",
 				SigningMethod: "v4",
