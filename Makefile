@@ -38,12 +38,24 @@ ENDPOINT_PREFIX_JSON=${CODEGEN_RESOURCES_PATH}/endpoint-prefix.json
 
 LICENSE_FILE=$(shell pwd)/LICENSE.txt
 
+RELEASE_MANIFEST_FILE ?=
+RELEASE_CHGLOG_DESC_FILE ?=
+
+.PHONY: all
 all: generate unit
 
 ###################
 # Code Generation #
 ###################
-generate: smithy-generate gen-config-asserts copy-attributevalue-feature gen-repo-mod-replace gen-mod-dropreplace-smithy min-go-version-. tidy-modules-. add-module-license-files gen-aws-ptrs
+.PHONY: generate smithy-generate smithy-build smithy-build-% smithy-clean smithy-go-publish-local format \
+gen-config-asserts gen-repo-mod-replace gen-mod-replace-smithy gen-mod-dropreplace-smithy gen-aws-ptrs tidy-modules-% \
+add-module-license-files sync-models sync-endpoints-model sync-endpoints.json clone-v1-models gen-endpoint-prefix.json \
+sync-api-models copy-attributevalue-feature min-go-version-% update-requires smithy-annotate-stable \
+update-module-metadata
+
+generate: smithy-generate update-requires update-module-metadata smithy-annotate-stable gen-config-asserts \
+copy-attributevalue-feature gen-repo-mod-replace gen-mod-dropreplace-smithy min-go-version-. tidy-modules-. \
+add-module-license-files gen-aws-ptrs format
 
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
@@ -61,6 +73,10 @@ smithy-build-%: gen-repo-mod-replace
 	cd codegen && \
 	SMITHY_GO_BUILD_API="$(subst smithy-build-,,$@)" ./gradlew clean build -Plog-tests
 
+smithy-annotate-stable:
+	cd ./internal/repotools && \
+		go run ./cmd/annotatestablegen
+
 smithy-clean:
 	cd codegen && ./gradlew clean
 
@@ -68,6 +84,9 @@ smithy-go-publish-local:
 	rm -rf /tmp/smithy-go-local
 	git clone https://github.com/aws/smithy-go /tmp/smithy-go-local
 	make -C /tmp/smithy-go-local smithy-clean smithy-publish-local
+
+format:
+	gofmt -w -s .
 
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"
@@ -152,10 +171,19 @@ min-go-version-%:
 		&& go run . -p $(subst _,/,$(subst min-go-version-,,$@)) ${EACHMODULE_FLAGS} \
 		"go mod edit -go=${SDK_MIN_GO_VERSION}"
 
+update-requires:
+	cd ./internal/repotools && \
+		go run ./cmd/updaterequires
+
+update-module-metadata:
+	cd ./internal/repotools && \
+		go run ./cmd/updatemodulemeta
 
 ################
 # Unit Testing #
 ################
+.PHONY: unit unit-race unit-test unit-race-test unit-race-modules-% unit-modules-% build build-modules-% \
+go-build-modules-% test test-race-modules-% test-modules-% cachedep cachedep-modules-% api-diff-modules-%
 
 unit: lint unit-modules-.
 unit-race: lint unit-race-modules-.
@@ -264,6 +292,8 @@ api-diff-modules-%:
 ##############
 # CI Testing #
 ##############
+.PHONY: ci-test ci-test-no-generate ci-test-generate-validate
+
 ci-test: generate unit-race ci-test-generate-validate
 ci-test-no-generate: unit-race
 
@@ -279,6 +309,8 @@ ci-test-generate-validate:
 #######################
 # Integration Testing #
 #######################
+.PHONY: integration integ-modules-% cleanup-integ-buckets
+
 integration: integ-modules-service
 
 integ-modules-%:
@@ -298,6 +330,8 @@ cleanup-integ-buckets:
 ##############
 # Benchmarks #
 ##############
+.PHONY: bench bench-modules-%
+
 bench: bench-modules-.
 
 bench-modules-%:
@@ -310,9 +344,47 @@ bench-modules-%:
 		&& go run . -p $(subst _,/,$(subst bench-modules-,,$@)) ${EACHMODULE_FLAGS} \
 		"go test -timeout=10m -bench . --benchmem ${BUILD_TAGS} ${RUN_NONE} ./..."
 
+
+#####################
+#  Release Process  #
+#####################
+.PHONY: preview-release pre-release-validation release
+
+preview-release:
+	@cd ./internal/repotools && \
+		go run ./cmd/calculaterelease
+
+pre-release-validation:
+	@if [[ -z "${RELEASE_MANIFEST_FILE}" ]]; then \
+      		echo "RELEASE_MANIFEST_FILE is required to specify the file to write the release manifest" && false; \
+      	fi
+	@if [[ -z "${RELEASE_CHGLOG_DESC_FILE}" ]]; then \
+		echo "RELEASE_CHGLOG_DESC_FILE is required to specify the file to write the release notes" && false; \
+	fi
+
+release: pre-release-validation
+	cd ./internal/repotools && \
+		go run ./cmd/calculaterelease -o ${RELEASE_MANIFEST_FILE} && \
+		go run ./cmd/updaterequires -release ${RELEASE_MANIFEST_FILE} && \
+		go run ./cmd/updatemodulemeta -release ${RELEASE_MANIFEST_FILE} && \
+		go run ./cmd/generatechangelog -release ${RELEASE_MANIFEST_FILE} -o ${RELEASE_CHGLOG_DESC_FILE} && \
+		go run ./cmd/changelog rm -all && \
+		go run ./cmd/tagrelease -release ${RELEASE_MANIFEST_FILE}
+
+##############
+# Repo Tools #
+##############
+.PHONY: install-repotools
+
+install-repotools:
+	cd ./internal/repotools && \
+		go install ./cmd/changelog
+
 ##################
 # Linting/Verify #
 ##################
+.PHONY: verify lint vet vet-modules-% sdkv1check
+
 verify: lint vet sdkv1check
 
 lint:
@@ -339,6 +411,9 @@ sdkv1check:
 ###################
 # Sandbox Testing #
 ###################
+.PHONY: sandbox-tests sandbox-build-go1.15 sandbox-go1.15 sandbox-test-go1.15 sandbox-build-go1.16 \
+sandbox-go1.16 sandbox-test-go1.16 sandbox-build-gotip sandbox-gotip sandbox-test-gotip update-aws-golang-tip
+
 sandbox-tests: sandbox-test-go1.15 sandbox-test-go1.16 sandbox-test-gotip
 
 sandbox-build-go1.15:

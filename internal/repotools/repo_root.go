@@ -6,6 +6,21 @@ import (
 	"path/filepath"
 )
 
+// GetRepoRoot uses the current working directory to find the repository root.
+func GetRepoRoot() (string, error) {
+	dir, err := os.Getwd()
+	if err != nil {
+		return "", fmt.Errorf("failed to get current directory: %w", err)
+	}
+
+	repoRootPath, err := FindRepoRoot(dir)
+	if err != nil {
+		return "", fmt.Errorf("failed to find git repository: %w", err)
+	}
+
+	return repoRootPath, nil
+}
+
 // FindRepoRoot returns the absolute path to the root directory of the
 // repository, or error. If the dir passed in is a relative path it will be
 // used relative to the current working directory of the executable.

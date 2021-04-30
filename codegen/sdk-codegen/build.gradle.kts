@@ -17,7 +17,14 @@ import software.amazon.smithy.model.Model
 import software.amazon.smithy.model.node.Node
 import software.amazon.smithy.model.shapes.ServiceShape
 import software.amazon.smithy.gradle.tasks.SmithyBuild
+import software.amazon.smithy.aws.traits.ServiceTrait
 import kotlin.streams.toList
+
+buildscript {
+    dependencies {
+        "classpath"("software.amazon.smithy:smithy-aws-traits:[1.5.1,2.0.0[")
+    }
+}
 
 plugins {
     id("software.amazon.smithy") version "0.5.1"
@@ -70,18 +77,21 @@ tasks.register("generate-smithy-build") {
                 }
             }
 
-            var (sdkId, version, remaining) = file.name.split(".")
-            sdkId = sdkId.replace("-", "").toLowerCase();
+            val serviceTrait = service.getTrait(ServiceTrait::class.javaObjectType).get();
+
+            val sdkId = serviceTrait.sdkId
+                    .replace("-", "")
+                    .replace(" ", "")
+                    .toLowerCase();
             val projectionContents = Node.objectNodeBuilder()
-                    .withMember("imports", Node.fromStrings("${models.getAbsolutePath()}${File.separator}${file.name}"))
+                    .withMember("imports", Node.fromStrings("${models.absolutePath}${File.separator}${file.name}"))
                     .withMember("plugins", Node.objectNode()
                             .withMember("go-codegen", Node.objectNodeBuilder()
                                     .withMember("service", service.id.toString())
-                                    .withMember("module", "github.com/aws/aws-sdk-go-v2/service/" + sdkId.toLowerCase())
-                                    .withMember("moduleVersion", "1.0")
+                                    .withMember("module", "github.com/aws/aws-sdk-go-v2/service/$sdkId")
                                     .build()))
                     .build()
-            projectionsBuilder.withMember(sdkId + "." + version.toLowerCase(), projectionContents)
+            projectionsBuilder.withMember(sdkId + "." + service.version.toLowerCase(), projectionContents)
         }
 
         file("smithy-build.json").writeText(Node.prettyPrintJson(Node.objectNodeBuilder()
@@ -99,6 +109,6 @@ tasks["build"]
 // ensure built artifacts are put into the SDK's folders
 tasks.create<Exec>("copyGoCodegen") {
     dependsOn ("buildSdk")
-    commandLine ("$rootDir/copy_go_codegen.sh", "$rootDir/../", "$buildDir", "github.com/aws/aws-sdk-go-v2/")
+    commandLine ("$rootDir/copy_go_codegen.sh", "$rootDir/..", (tasks["buildSdk"] as SmithyBuild).outputDirectory.absolutePath)
 }
 tasks["buildSdk"].finalizedBy(tasks["copyGoCodegen"])
