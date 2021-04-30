@@ -28,7 +28,7 @@ public class S3HeadObjectCustomizations implements GoIntegration {
         }
 
         for (ShapeId operationId :service.getAllOperations()) {
-            if (operationId.getName().equalsIgnoreCase("HeadObject")) {
+            if (operationId.getName(service).equalsIgnoreCase("HeadObject")) {
                 Model.Builder modelBuilder = model.toBuilder();
                 OperationShape operationShape = model.expectShape(operationId, OperationShape.class);
                 OperationShape.Builder builder  = operationShape.toBuilder();

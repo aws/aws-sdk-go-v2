@@ -344,7 +344,7 @@ public class S3UpdateEndpoint implements GoIntegration {
             StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
 
             List<MemberShape> targetBucketShape = input.getAllMembers().values().stream()
-                    .filter(m -> m.getTarget().getName().equals("BucketName"))
+                    .filter(m -> m.getTarget().getName(service).equals("BucketName"))
                     .collect(Collectors.toList());
             // if model has multiple top level shapes targeting `BucketName`, we throw a codegen exception
             if (targetBucketShape.size() > 1) {
@@ -637,18 +637,18 @@ public class S3UpdateEndpoint implements GoIntegration {
                 GoWriter writer, Model model, SymbolProvider symbolProvider, OperationShape operation
         ) {
             // list of outpost id input require special behavior
-            if (LIST_OUTPOST_ID_INPUT.contains(operation.getId().getName())) {
+            if (LIST_OUTPOST_ID_INPUT.contains(operation.getId().getName(service))) {
                 return;
             }
 
             // arn target shape
             String arnType = LIST_ACCESSPOINT_ARN_INPUT.contains(
-                    operation.getId().getName()
+                    operation.getId().getName(service)
             ) ? "AccessPointName" : "BucketName";
 
             StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
             List<MemberShape> listOfARNMembers = input.getAllMembers().values().stream()
-                    .filter(m -> m.getTarget().getName().equals(arnType))
+                    .filter(m -> m.getTarget().getName(service).equals(arnType))
                     .collect(Collectors.toList());
             // if model has multiple top level shapes targeting arnable field, we throw a codegen exception
             if (listOfARNMembers.size() > 1) {

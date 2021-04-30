@@ -3,8 +3,6 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
-import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.aws.traits.auth.SigV4Trait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
@@ -44,7 +42,7 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
         ServiceIndex serviceIndex = ServiceIndex.of(model);
 
         for (ShapeId operationId: service.getAllOperations()) {
-            String middlewareName = getServiceMetadataMiddlewareName(operationId);
+            String middlewareName = getServiceMetadataMiddlewareName(service, operationId);
             OperationShape operation = model.expectShape(operationId, OperationShape.class);
             goDelegator.useShapeWriter(operation, writer -> {
                 writer.openBlock("func $L(region string) $P {", "}",
@@ -59,7 +57,7 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
                         SigV4Trait trait = (SigV4Trait) authSchemes.get(SigV4Trait.ID);
                         builder.append(String.format("SigningName: \"%s\",\n", trait.getName()));
                     }
-                    builder.append(String.format("OperationName: \"%s\",\n", operation.getId().getName()));
+                    builder.append(String.format("OperationName: \"%s\",\n", operation.getId().getName(service)));
                     builder.append("}");
 
                     writer.write(builder.toString(), serviceMetadataProvider);
@@ -71,17 +69,11 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
         @Override
     public void processFinalizedModel(GoSettings settings, Model model) {
         ServiceShape service = settings.getService(model);
-
         for (ShapeId operationId : service.getAllOperations()) {
-            String middlewareName = getServiceMetadataMiddlewareName(operationId);
+            String middlewareName = getServiceMetadataMiddlewareName(service, operationId);
             OperationShape operation = model.expectShape(operationId, OperationShape.class);
             RuntimeClientPlugin runtimeClientPlugin = RuntimeClientPlugin.builder()
-                    .operationPredicate((predicateModel, predicateService, predicateOperation) -> {
-                        if (operation.equals(predicateOperation)) {
-                            return true;
-                        }
-                        return false;
-                    })
+                    .operationPredicate((m, s, o) -> operation.equals(o))
                     .registerMiddleware(MiddlewareRegistrar.builder()
                             .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                     middlewareName).build())
@@ -100,7 +92,7 @@ public final class RegisterServiceMetadataMiddleware implements GoIntegration {
         return runtimeClientPlugins;
     }
 
-    private String getServiceMetadataMiddlewareName(ShapeId operationID) {
-        return "newServiceMetadataMiddleware_op"+ operationID.getName();
+    private String getServiceMetadataMiddlewareName(ServiceShape service, ShapeId operationID) {
+        return "newServiceMetadataMiddleware_op"+ operationID.getName(service);
     }
 }

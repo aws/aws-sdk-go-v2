@@ -49,7 +49,7 @@ public class S3ErrorWith200Status implements GoIntegration {
             return false;
         }
 
-       return customizedOperations.contains(operation.getId().getName());
+       return customizedOperations.contains(operation.getId().getName(service));
     }
 
     // returns true if service is s3

@@ -73,6 +73,7 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     @Override
     public Void blobShape(BlobShape shape) {
         GoWriter writer = context.getWriter();
+        ServiceShape service = context.getService();
         writer.addUseImports(SmithyGoDependency.FMT);
         writer.addUseImports(SmithyGoDependency.BASE64);
         final String typeError = "return fmt.Errorf(\"expected $L to be []byte, got %T instead\", value)";
@@ -80,12 +81,13 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
         writer.openBlock("if value != nil {", "}", () -> {
             writer.write("jtv, ok := value.(string)");
             writer.openBlock("if !ok {", "}", () -> {
-                writer.write(typeError, shape.getId().getName());
+                writer.write(typeError, shape.getId().getName(service));
             });
 
             writer.write("dv, err := base64.StdEncoding.DecodeString(jtv)");
             writer.openBlock("if err != nil {", "}", () -> {
-                writer.write("return fmt.Errorf(\"failed to base64 decode $L, %w\", err)", shape.getId().getName());
+                writer.write("return fmt.Errorf(\"failed to base64 decode $L, %w\", err)",
+                        shape.getId().getName(service));
             });
 
             writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
@@ -97,15 +99,16 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
     @Override
     public Void booleanShape(BooleanShape shape) {
         GoWriter writer = context.getWriter();
+        ServiceShape service = context.getService();
         writer.addUseImports(SmithyGoDependency.FMT);
         writer.openBlock("if value != nil {", "}", () -> {
             writer.write("jtv, ok := value.(bool)");
             writer.openBlock("if !ok {", "}", () -> {
                 writer.write("return fmt.Errorf(\"expected $L to be of type *bool, got %T instead\", value)",
-                        shape.getId().getName());
+                        shape.getId().getName(service));
             });
             writer.write("$L = $L", dataDest, CodegenUtils.getAsPointerIfPointable(context.getModel(),
-                    context.getWriter(), pointableIndex, member, "jtv"));
+                    writer, pointableIndex, member, "jtv"));
         });
         return null;
     }
@@ -169,13 +172,14 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
      */
     private void handleNumber(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
-        writer.addUseImports(SmithyGoDependency.FMT);
+        ServiceShape service = context.getService();
 
+        writer.addUseImports(SmithyGoDependency.FMT);
         writer.openBlock("if value != nil {", "}", () -> {
             writer.write("jtv, ok := value.(json.Number)");
             writer.openBlock("if !ok {", "}", () -> {
                 writer.write("return fmt.Errorf(\"expected $L to be json.Number, got %T instead\", value)",
-                        shape.getId().getName());
+                        shape.getId().getName(service));
             });
             r.run();
         });
@@ -237,13 +241,14 @@ public class JsonMemberDeserVisitor implements ShapeVisitor<Void> {
      */
     private void handleString(Shape shape, Runnable r) {
         GoWriter writer = context.getWriter();
+        ServiceShape service = context.getService();
         writer.addUseImports(SmithyGoDependency.FMT);
 
         writer.openBlock("if value != nil {", "}", () -> {
             writer.write("jtv, ok := value.(string)");
             writer.openBlock("if !ok {", "}", () -> {
                 writer.write("return fmt.Errorf(\"expected $L to be of type string, got %T instead\", value)",
-                        shape.getId().getName());
+                        shape.getId().getName(service));
             });
             r.run();
         });

@@ -41,7 +41,7 @@ public class KinesisCustomizations implements GoIntegration {
     }
 
     private static boolean isGetRecords(Model model, ServiceShape service, OperationShape operation) {
-        return isKinesis(model, service) && operation.getId().getName().equals("GetRecords");
+        return isKinesis(model, service) && operation.getId().getName(service).equals("GetRecords");
     }
 
     private static boolean isKinesis(Model model, ServiceShape service) {
