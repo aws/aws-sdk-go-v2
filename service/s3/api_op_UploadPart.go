@@ -165,7 +165,7 @@ type UploadPartInput struct {
 	// Object data.
 	//
 	// For using values that are not seekable (io.Seeker) see,
-	// https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilisties/s3/#unseekable-streaming-input
+	// https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/#unseekable-streaming-input
 	Body io.Reader
 
 	// Size of the body in bytes. This parameter is useful when the size of the body
