@@ -71,7 +71,9 @@ smithy-go-publish-local:
 
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"
-	cd config && go generate
+	cd config \
+	    && go mod tidy \
+	    && go generate
 
 gen-repo-mod-replace:
 	@echo "Generating go.mod replace for repo modules"
@@ -140,6 +142,7 @@ copy-attributevalue-feature:
 	sed -i.bk 's:ddbtypes\.:ddb.:g' "convert.go" &&\
 	sed -i.bk 's:Streams::g' "convert.go" && \
 	rm -rf ./*.bk && \
+	go mod tidy && \
 	gofmt -w -s . && \
 	go test .
 
