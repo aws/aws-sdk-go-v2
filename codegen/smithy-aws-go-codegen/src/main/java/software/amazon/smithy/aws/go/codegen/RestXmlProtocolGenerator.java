@@ -378,7 +378,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
         });
     }
 
-    // Write middleware that delegates to deserializers for shapes that have implicit payload
+    // Writes middleware that delegates to deserializers for shapes that have implicit payload.
     private void writeMiddlewareDocumentBindingDeserializerDelegator(
             GenerationContext context,
             GoWriter writer,
