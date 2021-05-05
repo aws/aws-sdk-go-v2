@@ -4,6 +4,6 @@
  "Module": "service/ec2",
  "Type": "bugfix",
  "Description": "Fix incorrectly modeled Amazon EC2 number and boolean members in structures. The Amazon EC2 API client has been updated with a breaking change to fix all structure number and boolean members to be pointer types instead of value types. Fixes [#1107](https://github.com/aws/aws-sdk-go-v2/issues/1107), [#1178](https://github.com/aws/aws-sdk-go-v2/issues/1178), and [#1190](https://github.com/aws/aws-sdk-go-v2/issues/1190). This breaking change is made within the major version of the client' module, because the client operations failed and were unusable with value type number and boolean members with the EC2 API.",
- "MinVersion": "v1.3.0",
+ "MinVersion": "v1.6.0",
  "AffectedModules": null
 }
