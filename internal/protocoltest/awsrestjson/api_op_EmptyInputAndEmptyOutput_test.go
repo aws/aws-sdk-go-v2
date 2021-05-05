@@ -46,21 +46,6 @@ func TestClient_EmptyInputAndEmptyOutput_awsRestjson1Serialize(t *testing.T) {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
 		},
-		// Similar to RestJsonEmptyInputAndEmptyOutput, but ensures that services
-		// gracefully handles receiving a JSON object.
-		"RestJsonEmptyInputAndEmptyOutputWithJson": {
-			Params:        &EmptyInputAndEmptyOutputInput{},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/EmptyInputAndEmptyOutput",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/json"},
-			},
-			BodyMediaType: "application/json",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

@@ -101,8 +101,8 @@ public class Route53Customizations implements GoIntegration {
                     OperationShape operation = model.expectShape(operationId, OperationShape.class);
                     StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
                     List<MemberShape> hostedZoneIDMembers = input.getAllMembers().values().stream()
-                            .filter(m -> m.getTarget().getName().equalsIgnoreCase("ResourceId")
-                                    || m.getTarget().getName().equalsIgnoreCase("DelegationSetId"))
+                            .filter(m -> m.getTarget().getName(service).equalsIgnoreCase("ResourceId")
+                                    || m.getTarget().getName(service).equalsIgnoreCase("DelegationSetId"))
                             .collect(Collectors.toList());
 
                     if (!hostedZoneIDMembers.isEmpty()){
@@ -131,7 +131,7 @@ public class Route53Customizations implements GoIntegration {
             return false;
         }
 
-        return operation.getId().getName().equalsIgnoreCase("ChangeResourceRecordSets");
+        return operation.getId().getName(service).equalsIgnoreCase("ChangeResourceRecordSets");
     }
 
     // return true if the operation takes input that supports Hosted zone ID.
@@ -144,13 +144,13 @@ public class Route53Customizations implements GoIntegration {
 
         StructureShape input = model.expectShape(operation.getInput().get(), StructureShape.class);
         List<MemberShape> targetMembers = input.getAllMembers().values().stream().filter(
-                memberShape -> memberShape.getTarget().getName().equalsIgnoreCase("ResourceId") ||
-                        memberShape.getTarget().getName().equalsIgnoreCase("DelegationSetId")
+                memberShape -> memberShape.getTarget().getName(service).equalsIgnoreCase("ResourceId") ||
+                        memberShape.getTarget().getName(service).equalsIgnoreCase("DelegationSetId")
         ).collect(Collectors.toList());
 
         if (targetMembers.size() >1 ){
             throw new CodegenException(String.format("Route53 service has ResourceId, DelegationSetId members " +
-                            "modeled on %s shape", input.getId().getName()));
+                            "modeled on %s shape", input.getId().getName(service)));
         }
 
         return targetMembers.size() != 0;

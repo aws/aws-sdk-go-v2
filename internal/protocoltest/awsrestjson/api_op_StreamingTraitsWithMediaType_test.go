@@ -49,6 +49,7 @@ func TestClient_StreamingTraitsWithMediaType_awsRestjson1Serialize(t *testing.T)
 				"Content-Type": []string{"text/plain"},
 				"X-Foo":        []string{"Foo"},
 			},
+			BodyMediaType: "application/octet-stream",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderBytes(actual, []byte(`blobby blob blob`))
 			},
@@ -135,7 +136,8 @@ func TestClient_StreamingTraitsWithMediaType_awsRestjson1Deserialize(t *testing.
 				"Content-Type": []string{"text/plain"},
 				"X-Foo":        []string{"Foo"},
 			},
-			Body: []byte(`blobby blob blob`),
+			BodyMediaType: "application/octet-stream",
+			Body:          []byte(`blobby blob blob`),
 			ExpectResult: &StreamingTraitsWithMediaTypeOutput{
 				Foo:  ptr.String("Foo"),
 				Blob: smithyio.ReadSeekNopCloser{ReadSeeker: bytes.NewReader([]byte("blobby blob blob"))},

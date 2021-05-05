@@ -4313,17 +4313,6 @@ func (m *awsRestjson1_serializeOpGetExport) HandleSerialize(ctx context.Context,
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetExportInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -4350,6 +4339,15 @@ func awsRestjson1_serializeOpHttpBindingsGetExportInput(v *GetExportInput, encod
 		}
 	}
 
+	if v.Parameters != nil {
+		for qkey, qvalue := range v.Parameters {
+			if encoder.HasQuery(qkey) {
+				continue
+			}
+			encoder.SetQuery(qkey).String(qvalue)
+		}
+	}
+
 	if v.RestApiId == nil || len(*v.RestApiId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member restApiId must not be empty")}
 	}
@@ -4364,20 +4362,6 @@ func awsRestjson1_serializeOpHttpBindingsGetExportInput(v *GetExportInput, encod
 	}
 	if v.StageName != nil {
 		if err := encoder.SetURI("stageName").String(*v.StageName); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetExportInput(v *GetExportInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Parameters != nil {
-		ok := object.Key("parameters")
-		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Parameters, ok); err != nil {
 			return err
 		}
 	}
@@ -5471,17 +5455,6 @@ func (m *awsRestjson1_serializeOpGetSdk) HandleSerialize(ctx context.Context, in
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGetSdkInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -5492,6 +5465,15 @@ func (m *awsRestjson1_serializeOpGetSdk) HandleSerialize(ctx context.Context, in
 func awsRestjson1_serializeOpHttpBindingsGetSdkInput(v *GetSdkInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Parameters != nil {
+		for qkey, qvalue := range v.Parameters {
+			if encoder.HasQuery(qkey) {
+				continue
+			}
+			encoder.SetQuery(qkey).String(qvalue)
+		}
 	}
 
 	if v.RestApiId == nil || len(*v.RestApiId) == 0 {
@@ -5517,20 +5499,6 @@ func awsRestjson1_serializeOpHttpBindingsGetSdkInput(v *GetSdkInput, encoder *ht
 	}
 	if v.StageName != nil {
 		if err := encoder.SetURI("stageName").String(*v.StageName); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGetSdkInput(v *GetSdkInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Parameters != nil {
-		ok := object.Key("parameters")
-		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Parameters, ok); err != nil {
 			return err
 		}
 	}
@@ -6331,6 +6299,17 @@ func (m *awsRestjson1_serializeOpImportApiKeys) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	if input.Body != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+		}
+
+		payload := bytes.NewReader(input.Body)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -6386,6 +6365,17 @@ func (m *awsRestjson1_serializeOpImportDocumentationParts) HandleSerialize(ctx c
 
 	if err := awsRestjson1_serializeOpHttpBindingsImportDocumentationPartsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.Body != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+		}
+
+		payload := bytes.NewReader(input.Body)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6454,15 +6444,15 @@ func (m *awsRestjson1_serializeOpImportRestApi) HandleSerialize(ctx context.Cont
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
+	if input.Body != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+		}
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentImportRestApiInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
+		payload := bytes.NewReader(input.Body)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -6481,17 +6471,12 @@ func awsRestjson1_serializeOpHttpBindingsImportRestApiInput(v *ImportRestApiInpu
 		encoder.SetQuery("failonwarnings").Boolean(v.FailOnWarnings)
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentImportRestApiInput(v *ImportRestApiInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
 	if v.Parameters != nil {
-		ok := object.Key("parameters")
-		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Parameters, ok); err != nil {
-			return err
+		for qkey, qvalue := range v.Parameters {
+			if encoder.HasQuery(qkey) {
+				continue
+			}
+			encoder.SetQuery(qkey).String(qvalue)
 		}
 	}
 
@@ -7192,15 +7177,15 @@ func (m *awsRestjson1_serializeOpPutRestApi) HandleSerialize(ctx context.Context
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	restEncoder.SetHeader("Content-Type").String("application/json")
+	if input.Body != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/octet-stream")
+		}
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentPutRestApiInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
+		payload := bytes.NewReader(input.Body)
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
 	}
 
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
@@ -7223,25 +7208,20 @@ func awsRestjson1_serializeOpHttpBindingsPutRestApiInput(v *PutRestApiInput, enc
 		encoder.SetQuery("mode").String(string(v.Mode))
 	}
 
+	if v.Parameters != nil {
+		for qkey, qvalue := range v.Parameters {
+			if encoder.HasQuery(qkey) {
+				continue
+			}
+			encoder.SetQuery(qkey).String(qvalue)
+		}
+	}
+
 	if v.RestApiId == nil || len(*v.RestApiId) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member restApiId must not be empty")}
 	}
 	if v.RestApiId != nil {
 		if err := encoder.SetURI("restApiId").String(*v.RestApiId); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentPutRestApiInput(v *PutRestApiInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Parameters != nil {
-		ok := object.Key("parameters")
-		if err := awsRestjson1_serializeDocumentMapOfStringToString(v.Parameters, ok); err != nil {
 			return err
 		}
 	}

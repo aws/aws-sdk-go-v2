@@ -279,7 +279,7 @@ public class PresignURLAutoFill implements GoIntegration {
             final OperationShape operation = model.expectShape(operationId, OperationShape.class);
 
             // Create a symbol provider because one is not available in this call.
-            SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings.getModuleName());
+            SymbolProvider symbolProvider = GoCodegenPlugin.createSymbolProvider(model, settings);
             String helperFuncName = addPresignMiddlewareFuncName(symbolProvider.toSymbol(operation).getName());
 
             runtimeClientPlugins.add(RuntimeClientPlugin.builder()

@@ -30,6 +30,9 @@ func ExampleMyUnion_outputUsage() {
 	case *types.MyUnionMemberNumberValue:
 		_ = v.Value // Value is int32
 
+	case *types.MyUnionMemberRenamedStructureValue:
+		_ = v.Value // Value is types.RenamedGreeting
+
 	case *types.MyUnionMemberStringValue:
 		_ = v.Value // Value is string
 
@@ -53,6 +56,7 @@ var _ []string
 var _ *string
 var _ *int32
 var _ *bool
+var _ *types.RenamedGreeting
 var _ types.FooEnum
 var _ *types.GreetingStruct
 var _ *time.Time

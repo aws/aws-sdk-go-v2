@@ -10,11 +10,13 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
+import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.HttpRpcProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolUtils;
 import software.amazon.smithy.model.knowledge.HttpBinding;
 import software.amazon.smithy.model.shapes.OperationShape;
+import software.amazon.smithy.model.shapes.ServiceShape;
 import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeId;
 import software.amazon.smithy.model.shapes.StructureShape;
@@ -52,16 +54,18 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     @Override
     protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter();
+        ServiceShape service = context.getService();
         StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(input, getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
+                input, context.getService(), getProtocolName());
         writer.addUseImports(AwsGoDependency.AWS_QUERY_PROTOCOL);
 
         writer.addUseImports(SmithyGoDependency.BYTES);
         writer.write("bodyWriter := bytes.NewBuffer(nil)");
         writer.write("bodyEncoder := query.NewEncoder(bodyWriter)");
         writer.write("body := bodyEncoder.Object()");
-        writer.write("body.Key(\"Action\").String($S)", operation.getId().getName());
-        writer.write("body.Key(\"Version\").String($S)", context.getService().getVersion());
+        writer.write("body.Key(\"Action\").String($S)", operation.getId().getName(service));
+        writer.write("body.Key(\"Version\").String($S)", service.getVersion());
         writer.write("");
 
         if (!input.members().isEmpty()) {
@@ -91,7 +95,8 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
         GoWriter writer = context.getWriter();
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
-        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(output, getProtocolName());
+        String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
+                output, context.getService(), getProtocolName());
         initializeXmlDecoder(writer, "response.Body", "out, metadata, ","nil");
         unwrapOutputDocument(context, operation);
         writer.write("err = $L(&output, decoder)", functionName);
@@ -106,12 +111,13 @@ class AwsQuery extends HttpRpcProtocolGenerator {
         writer.write("output := &$T{}", symbol);
         writer.insertTrailingNewline();
         if (isShapeWithResponseBindings(context.getModel(), shape, HttpBinding.Location.DOCUMENT)) {
-            String documentDeserFunctionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
-                    shape, getProtocolName());
+            String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
+                    shape, context.getService(), context.getProtocolName());
+
             writer.addUseImports(SmithyGoDependency.IO);
             initializeXmlDecoder(writer, "errorBody", "output");
             unwrapErrorElement(context);
-            writer.write("err = $L(&output, decoder)", documentDeserFunctionName);
+            writer.write("err = $L(&output, decoder)", functionName);
             XmlProtocolUtils.handleDecodeError(writer, "");
             writer.insertTrailingNewline();
         }
@@ -120,7 +126,8 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
     protected void unwrapOutputDocument(GenerationContext context, OperationShape shape) {
         GoWriter writer = context.getWriter();
-        writer.write("t, err = decoder.GetElement(\"$LResult\")", shape.getId().getName());
+        ServiceShape service = context.getService();
+        writer.write("t, err = decoder.GetElement(\"$LResult\")", shape.getId().getName(service));
         handleDecodeError(writer, "out, metadata, ");
         Symbol wrapNodeDecoder = SymbolUtils.createValueSymbolBuilder("WrapNodeDecoder",
                 SmithyGoDependency.SMITHY_XML).build();

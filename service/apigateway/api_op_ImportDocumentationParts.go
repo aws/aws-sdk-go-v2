@@ -29,6 +29,12 @@ func (c *Client) ImportDocumentationParts(ctx context.Context, params *ImportDoc
 // Import documentation parts from an external (e.g., OpenAPI) definition file.
 type ImportDocumentationPartsInput struct {
 
+	// [Required] Raw byte array representing the to-be-imported documentation parts.
+	// To import from an OpenAPI file, this is a JSON object.
+	//
+	// This member is required.
+	Body []byte
+
 	// [Required] The string identifier of the associated RestApi.
 	//
 	// This member is required.

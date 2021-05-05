@@ -49,10 +49,11 @@ public class S3GetBucketLocation implements GoIntegration {
     /**
      * returns name of the deserializer middleware written wrt this customization.
      *
+     * @param service the service closure for the operation.
      * @param operation the operation for which custom deserializer is generated.
      */
-    private String getDeserializeMiddlewareName(OperationShape operation) {
-        return ProtocolGenerator.getDeserializeMiddlewareName(operation.getId(), protocolName) + "_custom";
+    private String getDeserializeMiddlewareName(ServiceShape service, OperationShape operation) {
+        return ProtocolGenerator.getDeserializeMiddlewareName(operation.getId(), service, protocolName) + "_custom";
     }
 
     @Override
@@ -85,14 +86,14 @@ public class S3GetBucketLocation implements GoIntegration {
         }
 
         for (ShapeId operationId : service.getAllOperations()) {
-            if (!(operationId.getName().equals(getBucketLocationOpID))) {
+            if (!(operationId.getName(service).equals(getBucketLocationOpID))) {
                 continue;
             }
 
             OperationShape operation = model.expectShape(operationId, OperationShape.class);
             goDelegator.useShapeWriter(operation, writer -> {
-                writeCustomDeserializer(writer, model, symbolProvider, operation);
-                writeDeserializerSwapFunction(writer, operation);
+                writeCustomDeserializer(writer, model, symbolProvider, service, operation);
+                writeDeserializerSwapFunction(writer, service, operation);
             });
         }
 
@@ -107,6 +108,7 @@ public class S3GetBucketLocation implements GoIntegration {
      */
     private void writeDeserializerSwapFunction(
             GoWriter writer,
+            ServiceShape service,
             OperationShape operation
     ) {
         writer.writeDocs("Helper to swap in a custom deserializer");
@@ -114,7 +116,7 @@ public class S3GetBucketLocation implements GoIntegration {
                 swapDeserializerFuncName, () -> {
                     writer.write("_, err := stack.Deserialize.Swap($S, &$L{})",
                             ProtocolUtils.OPERATION_DESERIALIZER_MIDDLEWARE_ID.getString(),
-                            getDeserializeMiddlewareName(operation)
+                            getDeserializeMiddlewareName(service, operation)
                     );
                     writer.write("if err != nil { return err }");
                     writer.write("return nil");
@@ -133,14 +135,14 @@ public class S3GetBucketLocation implements GoIntegration {
             GoWriter goWriter,
             Model model,
             SymbolProvider symbolProvider,
+            ServiceShape service,
             OperationShape operation
     ) {
-
         GoStackStepMiddlewareGenerator middleware = GoStackStepMiddlewareGenerator.createDeserializeStepMiddleware(
-                getDeserializeMiddlewareName(operation), ProtocolUtils.OPERATION_DESERIALIZER_MIDDLEWARE_ID);
+                getDeserializeMiddlewareName(service, operation), ProtocolUtils.OPERATION_DESERIALIZER_MIDDLEWARE_ID);
 
         String errorFunctionName = ProtocolGenerator.getOperationErrorDeserFunctionName(
-                operation, protocolName);
+                operation, service, protocolName);
 
         middleware.writeMiddleware(goWriter, (generator, writer) -> {
             writer.addUseImports(SmithyGoDependency.FMT);
@@ -187,7 +189,7 @@ public class S3GetBucketLocation implements GoIntegration {
             // xml tag with operation specific xml tag.
             writer.write("decoder := smithyxml.WrapNodeDecoder(rootDecoder, xml.StartElement{})");
 
-            String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(outputShape, protocolName);
+            String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(outputShape, service, protocolName);
             writer.addUseImports(SmithyGoDependency.IO);
 
             // delegate to already generated inner body deserializer function.

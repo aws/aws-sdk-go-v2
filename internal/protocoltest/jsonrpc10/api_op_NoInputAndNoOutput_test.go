@@ -51,23 +51,6 @@ func TestClient_NoInputAndNoOutput_awsAwsjson10Serialize(t *testing.T) {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
 			},
 		},
-		// Service implementations must support no payload or an empty object payload for
-		// operations that define no input. However, despite the lack of a payload, a
-		// Content-Type header is still required in order for the service to properly
-		// detect the protocol.
-		"AwsJson10ServiceSupportsNoPayloadForNoInput": {
-			Params:        &NoInputAndNoOutputInput{},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.0"},
-				"X-Amz-Target": []string{"JsonRpc10.NoInputAndNoOutput"},
-			},
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareReaderEmpty(actual)
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {

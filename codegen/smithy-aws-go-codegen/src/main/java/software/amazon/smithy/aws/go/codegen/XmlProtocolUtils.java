@@ -251,13 +251,14 @@ public final class XmlProtocolUtils {
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol shapeSymbol = symbolProvider.toSymbol(shape);
         String shapeName = shapeSymbol.getName();
+        ServiceShape service = context.getService();
 
         // check if synthetic cloned shape
         Optional<SyntheticClone> clone = shape.getTrait(SyntheticClone.class);
         if (clone.isPresent()) {
             SyntheticClone cl = clone.get();
             if (cl.getArchetype().isPresent()) {
-                shapeName = cl.getArchetype().get().getName();
+                shapeName = cl.getArchetype().get().getName(service);
             }
         }
 

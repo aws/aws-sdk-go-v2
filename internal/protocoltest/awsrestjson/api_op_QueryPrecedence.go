@@ -5,79 +5,42 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"time"
 )
 
-// This example uses all query string types.
-func (c *Client) AllQueryStringTypes(ctx context.Context, params *AllQueryStringTypesInput, optFns ...func(*Options)) (*AllQueryStringTypesOutput, error) {
+func (c *Client) QueryPrecedence(ctx context.Context, params *QueryPrecedenceInput, optFns ...func(*Options)) (*QueryPrecedenceOutput, error) {
 	if params == nil {
-		params = &AllQueryStringTypesInput{}
+		params = &QueryPrecedenceInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "AllQueryStringTypes", params, optFns, addOperationAllQueryStringTypesMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "QueryPrecedence", params, optFns, addOperationQueryPrecedenceMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*AllQueryStringTypesOutput)
+	out := result.(*QueryPrecedenceOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type AllQueryStringTypesInput struct {
-	QueryBoolean *bool
+type QueryPrecedenceInput struct {
+	Baz map[string]string
 
-	QueryBooleanList []bool
-
-	QueryByte *int8
-
-	QueryDouble *float64
-
-	QueryDoubleList []float64
-
-	QueryEnum types.FooEnum
-
-	QueryEnumList []types.FooEnum
-
-	QueryFloat *float32
-
-	QueryInteger *int32
-
-	QueryIntegerList []int32
-
-	QueryIntegerSet []int32
-
-	QueryLong *int64
-
-	QueryParamsMapOfStrings map[string]string
-
-	QueryShort *int16
-
-	QueryString *string
-
-	QueryStringList []string
-
-	QueryStringSet []string
-
-	QueryTimestamp *time.Time
-
-	QueryTimestampList []time.Time
+	Foo *string
 }
 
-type AllQueryStringTypesOutput struct {
+type QueryPrecedenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }
 
-func addOperationAllQueryStringTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAllQueryStringTypes{}, middleware.After)
+func addOperationQueryPrecedenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpQueryPrecedence{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAllQueryStringTypes{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpQueryPrecedence{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -111,7 +74,7 @@ func addOperationAllQueryStringTypesMiddlewares(stack *middleware.Stack, options
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAllQueryStringTypes(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryPrecedence(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -126,10 +89,10 @@ func addOperationAllQueryStringTypesMiddlewares(stack *middleware.Stack, options
 	return nil
 }
 
-func newServiceMetadataMiddleware_opAllQueryStringTypes(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opQueryPrecedence(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "AllQueryStringTypes",
+		OperationName: "QueryPrecedence",
 	}
 }

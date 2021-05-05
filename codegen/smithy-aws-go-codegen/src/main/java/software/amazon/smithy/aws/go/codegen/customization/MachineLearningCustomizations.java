@@ -58,7 +58,7 @@ public class MachineLearningCustomizations implements GoIntegration {
         }
 
         service.getAllOperations().stream()
-                .filter(shapeId -> shapeId.getName().equalsIgnoreCase("Predict"))
+                .filter(shapeId -> shapeId.getName(service).equalsIgnoreCase("Predict"))
                 .findAny()
                 .map(model::expectShape)
                 .flatMap(Shape::asOperationShape)
@@ -88,7 +88,7 @@ public class MachineLearningCustomizations implements GoIntegration {
     }
 
     private static boolean isPredict(Model model, ServiceShape service, OperationShape operation) {
-        return isMachineLearning(model, service) && operation.getId().getName().equalsIgnoreCase("Predict");
+        return isMachineLearning(model, service) && operation.getId().getName(service).equalsIgnoreCase("Predict");
     }
 
     private static boolean isMachineLearning(Model model, ServiceShape service) {

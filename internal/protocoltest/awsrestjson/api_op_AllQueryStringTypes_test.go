@@ -89,6 +89,10 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 					types.FooEnum("Baz"),
 					types.FooEnum("Bar"),
 				},
+				QueryParamsMapOfStrings: map[string]string{
+					"QueryParamsStringKeyA": "Foo",
+					"QueryParamsStringKeyB": "Bar",
+				},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/AllQueryStringTypesInput",
@@ -127,6 +131,8 @@ func TestClient_AllQueryStringTypes_awsRestjson1Serialize(t *testing.T) {
 				{Key: "EnumList", Value: "Foo"},
 				{Key: "EnumList", Value: "Baz"},
 				{Key: "EnumList", Value: "Bar"},
+				{Key: "QueryParamsStringKeyA", Value: "Foo"},
+				{Key: "QueryParamsStringKeyB", Value: "Bar"},
 			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)

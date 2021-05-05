@@ -240,7 +240,7 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     }
 
     private void writeDelegateFunction(Shape shape) {
-        String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(shape, context.getProtocolName());
+        String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(shape, context.getService(), context.getProtocolName());
         GoWriter writer = context.getWriter();
 
         ProtocolUtils.writeSerDelegateFunction(context, writer, member, dataSource, (srcVar) -> {
