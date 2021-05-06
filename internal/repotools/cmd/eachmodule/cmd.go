@@ -23,8 +23,9 @@ type WorkLog struct {
 	Output    io.Reader
 }
 
-// CommandWorker provides a consumer of work jobs and posts results to the worklog
-func CommandWorker(ctx context.Context, jobs <-chan Work, results chan<- WorkLog, outWriter io.ReadWriter) {
+// CommandWorker provides a consumer of work jobs and posts results to the
+// worklog.
+func CommandWorker(ctx context.Context, jobs <-chan Work, results chan<- WorkLog, streamOut io.Writer) {
 	for {
 		var result WorkLog
 
@@ -35,9 +36,12 @@ func CommandWorker(ctx context.Context, jobs <-chan Work, results chan<- WorkLog
 			if !ok {
 				return
 			}
-			if outWriter == nil {
-				outWriter = bytes.NewBuffer(nil)
-				result.Output = outWriter
+
+			outBuffer := bytes.NewBuffer(nil)
+			outWriter := io.Writer(outBuffer)
+
+			if streamOut != nil {
+				outWriter = io.MultiWriter(outWriter, streamOut)
 			}
 
 			result.Path = w.Path
@@ -51,6 +55,11 @@ func CommandWorker(ctx context.Context, jobs <-chan Work, results chan<- WorkLog
 
 			if err := cmd.Run(); err != nil {
 				result.Err = fmt.Errorf("failed to run command, %v", err)
+			}
+
+			if streamOut == nil {
+				outReader := bytes.NewReader(outBuffer.Bytes())
+				result.Output = outReader
 			}
 		}
 

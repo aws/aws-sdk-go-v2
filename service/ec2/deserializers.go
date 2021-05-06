@@ -40681,7 +40681,7 @@ func awsEc2query_deserializeDocumentAnalysisAclRule(v **types.AnalysisAclRule, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Egress = xtv
+				sv.Egress = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("portRange", t.Name.Local):
@@ -40730,7 +40730,7 @@ func awsEc2query_deserializeDocumentAnalysisAclRule(v **types.AnalysisAclRule, d
 				if err != nil {
 					return err
 				}
-				sv.RuleNumber = int32(i64)
+				sv.RuleNumber = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -40913,7 +40913,7 @@ func awsEc2query_deserializeDocumentAnalysisLoadBalancerListener(v **types.Analy
 				if err != nil {
 					return err
 				}
-				sv.InstancePort = int32(i64)
+				sv.InstancePort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("loadBalancerPort", t.Name.Local):
@@ -40930,7 +40930,7 @@ func awsEc2query_deserializeDocumentAnalysisLoadBalancerListener(v **types.Analy
 				if err != nil {
 					return err
 				}
-				sv.LoadBalancerPort = int32(i64)
+				sv.LoadBalancerPort = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -41015,7 +41015,7 @@ func awsEc2query_deserializeDocumentAnalysisLoadBalancerTarget(v **types.Analysi
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -42038,7 +42038,7 @@ func awsEc2query_deserializeDocumentAttributeBooleanValue(v **types.AttributeBoo
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Value = xtv
+				sv.Value = ptr.Bool(xtv)
 			}
 
 		default:
@@ -42139,7 +42139,7 @@ func awsEc2query_deserializeDocumentAuthorizationRule(v **types.AuthorizationRul
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AccessAll = xtv
+				sv.AccessAll = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("clientVpnEndpointId", t.Name.Local):
@@ -42681,7 +42681,7 @@ func awsEc2query_deserializeDocumentAvailableCapacity(v **types.AvailableCapacit
 				if err != nil {
 					return err
 				}
-				sv.AvailableVCpus = int32(i64)
+				sv.AvailableVCpus = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -43935,7 +43935,7 @@ func awsEc2query_deserializeDocumentCapacityReservation(v **types.CapacityReserv
 				if err != nil {
 					return err
 				}
-				sv.AvailableInstanceCount = int32(i64)
+				sv.AvailableInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("capacityReservationArn", t.Name.Local):
@@ -43994,7 +43994,7 @@ func awsEc2query_deserializeDocumentCapacityReservation(v **types.CapacityReserv
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EbsOptimized = xtv
+				sv.EbsOptimized = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("endDate", t.Name.Local):
@@ -44040,7 +44040,7 @@ func awsEc2query_deserializeDocumentCapacityReservation(v **types.CapacityReserv
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EphemeralStorage = xtv
+				sv.EphemeralStorage = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("instanceMatchCriteria", t.Name.Local):
@@ -44158,7 +44158,7 @@ func awsEc2query_deserializeDocumentCapacityReservation(v **types.CapacityReserv
 				if err != nil {
 					return err
 				}
-				sv.TotalInstanceCount = int32(i64)
+				sv.TotalInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -44902,7 +44902,7 @@ func awsEc2query_deserializeDocumentClassicLinkDnsSupport(v **types.ClassicLinkD
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ClassicLinkDnsSupported = xtv
+				sv.ClassicLinkDnsSupported = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("vpcId", t.Name.Local):
@@ -45398,7 +45398,7 @@ func awsEc2query_deserializeDocumentClientConnectResponseOptions(v **types.Clien
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("lambdaFunctionArn", t.Name.Local):
@@ -46140,7 +46140,7 @@ func awsEc2query_deserializeDocumentClientVpnEndpoint(v **types.ClientVpnEndpoin
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SplitTunnel = xtv
+				sv.SplitTunnel = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -46195,7 +46195,7 @@ func awsEc2query_deserializeDocumentClientVpnEndpoint(v **types.ClientVpnEndpoin
 				if err != nil {
 					return err
 				}
-				sv.VpnPort = int32(i64)
+				sv.VpnPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("vpnProtocol", t.Name.Local):
@@ -47051,7 +47051,7 @@ func awsEc2query_deserializeDocumentConnectionLogResponseOptions(v **types.Conne
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -47486,7 +47486,7 @@ func awsEc2query_deserializeDocumentCpuOptions(v **types.CpuOptions, decoder smi
 				if err != nil {
 					return err
 				}
-				sv.CoreCount = int32(i64)
+				sv.CoreCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("threadsPerCore", t.Name.Local):
@@ -47503,7 +47503,7 @@ func awsEc2query_deserializeDocumentCpuOptions(v **types.CpuOptions, decoder smi
 				if err != nil {
 					return err
 				}
-				sv.ThreadsPerCore = int32(i64)
+				sv.ThreadsPerCore = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -48600,7 +48600,7 @@ func awsEc2query_deserializeDocumentDeleteLaunchTemplateVersionsResponseErrorIte
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:
@@ -48747,7 +48747,7 @@ func awsEc2query_deserializeDocumentDeleteLaunchTemplateVersionsResponseSuccessI
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:
@@ -50565,7 +50565,7 @@ func awsEc2query_deserializeDocumentDiskImageDescription(v **types.DiskImageDesc
 				if err != nil {
 					return err
 				}
-				sv.Size = i64
+				sv.Size = ptr.Int64(i64)
 			}
 
 		default:
@@ -50631,7 +50631,7 @@ func awsEc2query_deserializeDocumentDiskImageVolumeDescription(v **types.DiskIma
 				if err != nil {
 					return err
 				}
-				sv.Size = i64
+				sv.Size = ptr.Int64(i64)
 			}
 
 		default:
@@ -50964,7 +50964,7 @@ func awsEc2query_deserializeDocumentEbsBlockDevice(v **types.EbsBlockDevice, dec
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("encrypted", t.Name.Local):
@@ -50980,7 +50980,7 @@ func awsEc2query_deserializeDocumentEbsBlockDevice(v **types.EbsBlockDevice, dec
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("iops", t.Name.Local):
@@ -50997,7 +50997,7 @@ func awsEc2query_deserializeDocumentEbsBlockDevice(v **types.EbsBlockDevice, dec
 				if err != nil {
 					return err
 				}
-				sv.Iops = int32(i64)
+				sv.Iops = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("KmsKeyId", t.Name.Local):
@@ -51053,7 +51053,7 @@ func awsEc2query_deserializeDocumentEbsBlockDevice(v **types.EbsBlockDevice, dec
 				if err != nil {
 					return err
 				}
-				sv.Throughput = int32(i64)
+				sv.Throughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("volumeSize", t.Name.Local):
@@ -51070,7 +51070,7 @@ func awsEc2query_deserializeDocumentEbsBlockDevice(v **types.EbsBlockDevice, dec
 				if err != nil {
 					return err
 				}
-				sv.VolumeSize = int32(i64)
+				sv.VolumeSize = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("volumeType", t.Name.Local):
@@ -51233,7 +51233,7 @@ func awsEc2query_deserializeDocumentEbsInstanceBlockDevice(v **types.EbsInstance
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -52869,7 +52869,7 @@ func awsEc2query_deserializeDocumentEnclaveOptions(v **types.EnclaveOptions, dec
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -53269,7 +53269,7 @@ func awsEc2query_deserializeDocumentExplanation(v **types.Explanation, decoder s
 				if err != nil {
 					return err
 				}
-				sv.LoadBalancerListenerPort = int32(i64)
+				sv.LoadBalancerListenerPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("loadBalancerTarget", t.Name.Local):
@@ -53304,7 +53304,7 @@ func awsEc2query_deserializeDocumentExplanation(v **types.Explanation, decoder s
 				if err != nil {
 					return err
 				}
-				sv.LoadBalancerTargetPort = int32(i64)
+				sv.LoadBalancerTargetPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("missingComponent", t.Name.Local):
@@ -53359,7 +53359,7 @@ func awsEc2query_deserializeDocumentExplanation(v **types.Explanation, decoder s
 				if err != nil {
 					return err
 				}
-				sv.Port = int32(i64)
+				sv.Port = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("portRangeSet", t.Name.Local):
@@ -54380,7 +54380,7 @@ func awsEc2query_deserializeDocumentFleetData(v **types.FleetData, decoder smith
 				if err != nil {
 					return err
 				}
-				sv.FulfilledCapacity = f64
+				sv.FulfilledCapacity = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("fulfilledOnDemandCapacity", t.Name.Local):
@@ -54397,7 +54397,7 @@ func awsEc2query_deserializeDocumentFleetData(v **types.FleetData, decoder smith
 				if err != nil {
 					return err
 				}
-				sv.FulfilledOnDemandCapacity = f64
+				sv.FulfilledOnDemandCapacity = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("fleetInstanceSet", t.Name.Local):
@@ -54431,7 +54431,7 @@ func awsEc2query_deserializeDocumentFleetData(v **types.FleetData, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReplaceUnhealthyInstances = xtv
+				sv.ReplaceUnhealthyInstances = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("spotOptions", t.Name.Local):
@@ -54465,7 +54465,7 @@ func awsEc2query_deserializeDocumentFleetData(v **types.FleetData, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.TerminateInstancesWithExpiration = xtv
+				sv.TerminateInstancesWithExpiration = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("type", t.Name.Local):
@@ -54726,7 +54726,7 @@ func awsEc2query_deserializeDocumentFleetLaunchTemplateOverrides(v **types.Fleet
 				if err != nil {
 					return err
 				}
-				sv.Priority = f64
+				sv.Priority = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("subnetId", t.Name.Local):
@@ -54756,7 +54756,7 @@ func awsEc2query_deserializeDocumentFleetLaunchTemplateOverrides(v **types.Fleet
 				if err != nil {
 					return err
 				}
-				sv.WeightedCapacity = f64
+				sv.WeightedCapacity = ptr.Float64(f64)
 			}
 
 		default:
@@ -55245,7 +55245,7 @@ func awsEc2query_deserializeDocumentFlowLog(v **types.FlowLog, decoder smithyxml
 				if err != nil {
 					return err
 				}
-				sv.MaxAggregationInterval = int32(i64)
+				sv.MaxAggregationInterval = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("resourceId", t.Name.Local):
@@ -55620,7 +55620,7 @@ func awsEc2query_deserializeDocumentFpgaImage(v **types.FpgaImage, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DataRetentionSupport = xtv
+				sv.DataRetentionSupport = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("description", t.Name.Local):
@@ -55726,7 +55726,7 @@ func awsEc2query_deserializeDocumentFpgaImage(v **types.FpgaImage, decoder smith
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Public = xtv
+				sv.Public = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("shellVersion", t.Name.Local):
@@ -56639,7 +56639,7 @@ func awsEc2query_deserializeDocumentHibernationOptions(v **types.HibernationOpti
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Configured = xtv
+				sv.Configured = ptr.Bool(xtv)
 			}
 
 		default:
@@ -57110,7 +57110,7 @@ func awsEc2query_deserializeDocumentHost(v **types.Host, decoder smithyxml.NodeD
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.MemberOfServiceLinkedResourceGroup = xtv
+				sv.MemberOfServiceLinkedResourceGroup = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ownerId", t.Name.Local):
@@ -57436,7 +57436,7 @@ func awsEc2query_deserializeDocumentHostOffering(v **types.HostOffering, decoder
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("hourlyPrice", t.Name.Local):
@@ -57622,7 +57622,7 @@ func awsEc2query_deserializeDocumentHostProperties(v **types.HostProperties, dec
 				if err != nil {
 					return err
 				}
-				sv.Cores = int32(i64)
+				sv.Cores = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("instanceFamily", t.Name.Local):
@@ -57665,7 +57665,7 @@ func awsEc2query_deserializeDocumentHostProperties(v **types.HostProperties, dec
 				if err != nil {
 					return err
 				}
-				sv.Sockets = int32(i64)
+				sv.Sockets = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("totalVCpus", t.Name.Local):
@@ -57682,7 +57682,7 @@ func awsEc2query_deserializeDocumentHostProperties(v **types.HostProperties, dec
 				if err != nil {
 					return err
 				}
-				sv.TotalVCpus = int32(i64)
+				sv.TotalVCpus = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -57735,7 +57735,7 @@ func awsEc2query_deserializeDocumentHostReservation(v **types.HostReservation, d
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("currencyCode", t.Name.Local):
@@ -57765,7 +57765,7 @@ func awsEc2query_deserializeDocumentHostReservation(v **types.HostReservation, d
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("end", t.Name.Local):
@@ -58313,7 +58313,7 @@ func awsEc2query_deserializeDocumentIcmpTypeCode(v **types.IcmpTypeCode, decoder
 				if err != nil {
 					return err
 				}
-				sv.Code = int32(i64)
+				sv.Code = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("type", t.Name.Local):
@@ -58330,7 +58330,7 @@ func awsEc2query_deserializeDocumentIcmpTypeCode(v **types.IcmpTypeCode, decoder
 				if err != nil {
 					return err
 				}
-				sv.Type = int32(i64)
+				sv.Type = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -58412,7 +58412,7 @@ func awsEc2query_deserializeDocumentIdFormat(v **types.IdFormat, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.UseLongIds = xtv
+				sv.UseLongIds = ptr.Bool(xtv)
 			}
 
 		default:
@@ -58707,7 +58707,7 @@ func awsEc2query_deserializeDocumentImage(v **types.Image, decoder smithyxml.Nod
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EnaSupport = xtv
+				sv.EnaSupport = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("hypervisor", t.Name.Local):
@@ -58859,7 +58859,7 @@ func awsEc2query_deserializeDocumentImage(v **types.Image, decoder smithyxml.Nod
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Public = xtv
+				sv.Public = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ramdiskId", t.Name.Local):
@@ -59225,7 +59225,7 @@ func awsEc2query_deserializeDocumentImportImageTask(v **types.ImportImageTask, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("hypervisor", t.Name.Local):
@@ -59575,7 +59575,7 @@ func awsEc2query_deserializeDocumentImportInstanceVolumeDetailItem(v **types.Imp
 				if err != nil {
 					return err
 				}
-				sv.BytesConverted = i64
+				sv.BytesConverted = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("description", t.Name.Local):
@@ -59902,7 +59902,7 @@ func awsEc2query_deserializeDocumentImportVolumeTaskDetails(v **types.ImportVolu
 				if err != nil {
 					return err
 				}
-				sv.BytesConverted = i64
+				sv.BytesConverted = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("description", t.Name.Local):
@@ -60249,7 +60249,7 @@ func awsEc2query_deserializeDocumentInstance(v **types.Instance, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.AmiLaunchIndex = int32(i64)
+				sv.AmiLaunchIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("architecture", t.Name.Local):
@@ -60335,7 +60335,7 @@ func awsEc2query_deserializeDocumentInstance(v **types.Instance, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EbsOptimized = xtv
+				sv.EbsOptimized = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("elasticGpuAssociationSet", t.Name.Local):
@@ -60363,7 +60363,7 @@ func awsEc2query_deserializeDocumentInstance(v **types.Instance, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EnaSupport = xtv
+				sv.EnaSupport = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("enclaveOptions", t.Name.Local):
@@ -60664,7 +60664,7 @@ func awsEc2query_deserializeDocumentInstance(v **types.Instance, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SourceDestCheck = xtv
+				sv.SourceDestCheck = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("spotInstanceRequestId", t.Name.Local):
@@ -60936,7 +60936,7 @@ func awsEc2query_deserializeDocumentInstanceCapacity(v **types.InstanceCapacity,
 				if err != nil {
 					return err
 				}
-				sv.AvailableCapacity = int32(i64)
+				sv.AvailableCapacity = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("instanceType", t.Name.Local):
@@ -60966,7 +60966,7 @@ func awsEc2query_deserializeDocumentInstanceCapacity(v **types.InstanceCapacity,
 				if err != nil {
 					return err
 				}
-				sv.TotalCapacity = int32(i64)
+				sv.TotalCapacity = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -61019,7 +61019,7 @@ func awsEc2query_deserializeDocumentInstanceCount(v **types.InstanceCount, decod
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("state", t.Name.Local):
@@ -61765,7 +61765,7 @@ func awsEc2query_deserializeDocumentInstanceMetadataOptionsResponse(v **types.In
 				if err != nil {
 					return err
 				}
-				sv.HttpPutResponseHopLimit = int32(i64)
+				sv.HttpPutResponseHopLimit = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("httpTokens", t.Name.Local):
@@ -62087,7 +62087,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterface(v **types.InstanceN
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SourceDestCheck = xtv
+				sv.SourceDestCheck = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -62296,7 +62296,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceAttachment(v **types
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("deviceIndex", t.Name.Local):
@@ -62313,7 +62313,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceAttachment(v **types
 				if err != nil {
 					return err
 				}
-				sv.DeviceIndex = int32(i64)
+				sv.DeviceIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("networkCardIndex", t.Name.Local):
@@ -62330,7 +62330,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceAttachment(v **types
 				if err != nil {
 					return err
 				}
-				sv.NetworkCardIndex = int32(i64)
+				sv.NetworkCardIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -62463,7 +62463,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AssociateCarrierIpAddress = xtv
+				sv.AssociateCarrierIpAddress = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("associatePublicIpAddress", t.Name.Local):
@@ -62479,7 +62479,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AssociatePublicIpAddress = xtv
+				sv.AssociatePublicIpAddress = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("deleteOnTermination", t.Name.Local):
@@ -62495,7 +62495,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("description", t.Name.Local):
@@ -62525,7 +62525,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 				if err != nil {
 					return err
 				}
-				sv.DeviceIndex = int32(i64)
+				sv.DeviceIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("SecurityGroupId", t.Name.Local):
@@ -62561,7 +62561,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 				if err != nil {
 					return err
 				}
-				sv.Ipv6AddressCount = int32(i64)
+				sv.Ipv6AddressCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ipv6AddressesSet", t.Name.Local):
@@ -62584,7 +62584,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 				if err != nil {
 					return err
 				}
-				sv.NetworkCardIndex = int32(i64)
+				sv.NetworkCardIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("networkInterfaceId", t.Name.Local):
@@ -62633,7 +62633,7 @@ func awsEc2query_deserializeDocumentInstanceNetworkInterfaceSpecification(v **ty
 				if err != nil {
 					return err
 				}
-				sv.SecondaryPrivateIpAddressCount = int32(i64)
+				sv.SecondaryPrivateIpAddressCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("subnetId", t.Name.Local):
@@ -62772,7 +62772,7 @@ func awsEc2query_deserializeDocumentInstancePrivateIpAddress(v **types.InstanceP
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Primary = xtv
+				sv.Primary = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("privateDnsName", t.Name.Local):
@@ -62919,7 +62919,7 @@ func awsEc2query_deserializeDocumentInstanceState(v **types.InstanceState, decod
 				if err != nil {
 					return err
 				}
-				sv.Code = int32(i64)
+				sv.Code = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("name", t.Name.Local):
@@ -63828,7 +63828,7 @@ func awsEc2query_deserializeDocumentInstanceTagNotificationAttribute(v **types.I
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IncludeAllTagsOfInstance = xtv
+				sv.IncludeAllTagsOfInstance = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("instanceTagKeySet", t.Name.Local):
@@ -64385,7 +64385,7 @@ func awsEc2query_deserializeDocumentInstanceUsage(v **types.InstanceUsage, decod
 				if err != nil {
 					return err
 				}
-				sv.UsedInstanceCount = int32(i64)
+				sv.UsedInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -64858,7 +64858,7 @@ func awsEc2query_deserializeDocumentIpPermission(v **types.IpPermission, decoder
 				if err != nil {
 					return err
 				}
-				sv.FromPort = int32(i64)
+				sv.FromPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ipProtocol", t.Name.Local):
@@ -64906,7 +64906,7 @@ func awsEc2query_deserializeDocumentIpPermission(v **types.IpPermission, decoder
 				if err != nil {
 					return err
 				}
-				sv.ToPort = int32(i64)
+				sv.ToPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("groups", t.Name.Local):
@@ -66201,7 +66201,7 @@ func awsEc2query_deserializeDocumentLaunchSpecification(v **types.LaunchSpecific
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EbsOptimized = xtv
+				sv.EbsOptimized = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("iamInstanceProfile", t.Name.Local):
@@ -66473,7 +66473,7 @@ func awsEc2query_deserializeDocumentLaunchTemplate(v **types.LaunchTemplate, dec
 				if err != nil {
 					return err
 				}
-				sv.DefaultVersionNumber = i64
+				sv.DefaultVersionNumber = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("latestVersionNumber", t.Name.Local):
@@ -66490,7 +66490,7 @@ func awsEc2query_deserializeDocumentLaunchTemplate(v **types.LaunchTemplate, dec
 				if err != nil {
 					return err
 				}
-				sv.LatestVersionNumber = i64
+				sv.LatestVersionNumber = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("launchTemplateId", t.Name.Local):
@@ -66943,7 +66943,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateCpuOptions(v **types.LaunchTem
 				if err != nil {
 					return err
 				}
-				sv.CoreCount = int32(i64)
+				sv.CoreCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("threadsPerCore", t.Name.Local):
@@ -66960,7 +66960,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateCpuOptions(v **types.LaunchTem
 				if err != nil {
 					return err
 				}
-				sv.ThreadsPerCore = int32(i64)
+				sv.ThreadsPerCore = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -67012,7 +67012,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateEbsBlockDevice(v **types.Launc
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("encrypted", t.Name.Local):
@@ -67028,7 +67028,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateEbsBlockDevice(v **types.Launc
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("iops", t.Name.Local):
@@ -67045,7 +67045,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateEbsBlockDevice(v **types.Launc
 				if err != nil {
 					return err
 				}
-				sv.Iops = int32(i64)
+				sv.Iops = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("kmsKeyId", t.Name.Local):
@@ -67088,7 +67088,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateEbsBlockDevice(v **types.Launc
 				if err != nil {
 					return err
 				}
-				sv.Throughput = int32(i64)
+				sv.Throughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("volumeSize", t.Name.Local):
@@ -67105,7 +67105,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateEbsBlockDevice(v **types.Launc
 				if err != nil {
 					return err
 				}
-				sv.VolumeSize = int32(i64)
+				sv.VolumeSize = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("volumeType", t.Name.Local):
@@ -67171,7 +67171,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateElasticInferenceAcceleratorRes
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("type", t.Name.Local):
@@ -67304,7 +67304,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateEnclaveOptions(v **types.Launc
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -67356,7 +67356,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateHibernationOptions(v **types.L
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Configured = xtv
+				sv.Configured = ptr.Bool(xtv)
 			}
 
 		default:
@@ -67539,7 +67539,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceMetadataOptions(v **ty
 				if err != nil {
 					return err
 				}
-				sv.HttpPutResponseHopLimit = int32(i64)
+				sv.HttpPutResponseHopLimit = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("httpTokens", t.Name.Local):
@@ -67617,7 +67617,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AssociateCarrierIpAddress = xtv
+				sv.AssociateCarrierIpAddress = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("associatePublicIpAddress", t.Name.Local):
@@ -67633,7 +67633,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AssociatePublicIpAddress = xtv
+				sv.AssociatePublicIpAddress = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("deleteOnTermination", t.Name.Local):
@@ -67649,7 +67649,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("description", t.Name.Local):
@@ -67679,7 +67679,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				if err != nil {
 					return err
 				}
-				sv.DeviceIndex = int32(i64)
+				sv.DeviceIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("groupSet", t.Name.Local):
@@ -67715,7 +67715,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				if err != nil {
 					return err
 				}
-				sv.Ipv6AddressCount = int32(i64)
+				sv.Ipv6AddressCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ipv6AddressesSet", t.Name.Local):
@@ -67738,7 +67738,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				if err != nil {
 					return err
 				}
-				sv.NetworkCardIndex = int32(i64)
+				sv.NetworkCardIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("networkInterfaceId", t.Name.Local):
@@ -67787,7 +67787,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceNetworkInterfaceSpecif
 				if err != nil {
 					return err
 				}
-				sv.SecondaryPrivateIpAddressCount = int32(i64)
+				sv.SecondaryPrivateIpAddressCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("subnetId", t.Name.Local):
@@ -68064,7 +68064,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateOverrides(v **types.LaunchTemp
 				if err != nil {
 					return err
 				}
-				sv.Priority = f64
+				sv.Priority = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("spotPrice", t.Name.Local):
@@ -68107,7 +68107,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateOverrides(v **types.LaunchTemp
 				if err != nil {
 					return err
 				}
-				sv.WeightedCapacity = f64
+				sv.WeightedCapacity = ptr.Float64(f64)
 			}
 
 		default:
@@ -68293,7 +68293,7 @@ func awsEc2query_deserializeDocumentLaunchTemplatePlacement(v **types.LaunchTemp
 				if err != nil {
 					return err
 				}
-				sv.PartitionNumber = int32(i64)
+				sv.PartitionNumber = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("spreadDomain", t.Name.Local):
@@ -68439,7 +68439,7 @@ func awsEc2query_deserializeDocumentLaunchTemplatesMonitoring(v **types.LaunchTe
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -68492,7 +68492,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateSpotMarketOptions(v **types.La
 				if err != nil {
 					return err
 				}
-				sv.BlockDurationMinutes = int32(i64)
+				sv.BlockDurationMinutes = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("instanceInterruptionBehavior", t.Name.Local):
@@ -68753,7 +68753,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateVersion(v **types.LaunchTempla
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DefaultVersion = xtv
+				sv.DefaultVersion = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("launchTemplateData", t.Name.Local):
@@ -68815,7 +68815,7 @@ func awsEc2query_deserializeDocumentLaunchTemplateVersion(v **types.LaunchTempla
 				if err != nil {
 					return err
 				}
-				sv.VersionNumber = i64
+				sv.VersionNumber = ptr.Int64(i64)
 			}
 
 		default:
@@ -70191,7 +70191,7 @@ func awsEc2query_deserializeDocumentLocalGatewayVirtualInterface(v **types.Local
 				if err != nil {
 					return err
 				}
-				sv.LocalBgpAsn = int32(i64)
+				sv.LocalBgpAsn = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("localGatewayId", t.Name.Local):
@@ -70260,7 +70260,7 @@ func awsEc2query_deserializeDocumentLocalGatewayVirtualInterface(v **types.Local
 				if err != nil {
 					return err
 				}
-				sv.PeerBgpAsn = int32(i64)
+				sv.PeerBgpAsn = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("tagSet", t.Name.Local):
@@ -70283,7 +70283,7 @@ func awsEc2query_deserializeDocumentLocalGatewayVirtualInterface(v **types.Local
 				if err != nil {
 					return err
 				}
-				sv.Vlan = int32(i64)
+				sv.Vlan = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -70652,7 +70652,7 @@ func awsEc2query_deserializeDocumentManagedPrefixList(v **types.ManagedPrefixLis
 				if err != nil {
 					return err
 				}
-				sv.MaxEntries = int32(i64)
+				sv.MaxEntries = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ownerId", t.Name.Local):
@@ -70753,7 +70753,7 @@ func awsEc2query_deserializeDocumentManagedPrefixList(v **types.ManagedPrefixLis
 				if err != nil {
 					return err
 				}
-				sv.Version = i64
+				sv.Version = ptr.Int64(i64)
 			}
 
 		default:
@@ -71507,7 +71507,7 @@ func awsEc2query_deserializeDocumentNetworkAcl(v **types.NetworkAcl, decoder smi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsDefault = xtv
+				sv.IsDefault = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("networkAclId", t.Name.Local):
@@ -71760,7 +71760,7 @@ func awsEc2query_deserializeDocumentNetworkAclEntry(v **types.NetworkAclEntry, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Egress = xtv
+				sv.Egress = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("icmpTypeCode", t.Name.Local):
@@ -71828,7 +71828,7 @@ func awsEc2query_deserializeDocumentNetworkAclEntry(v **types.NetworkAclEntry, d
 				if err != nil {
 					return err
 				}
-				sv.RuleNumber = int32(i64)
+				sv.RuleNumber = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -72421,7 +72421,7 @@ func awsEc2query_deserializeDocumentNetworkInsightsAnalysis(v **types.NetworkIns
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.NetworkPathFound = xtv
+				sv.NetworkPathFound = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("returnPathComponentSet", t.Name.Local):
@@ -72640,7 +72640,7 @@ func awsEc2query_deserializeDocumentNetworkInsightsPath(v **types.NetworkInsight
 				if err != nil {
 					return err
 				}
-				sv.DestinationPort = int32(i64)
+				sv.DestinationPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("networkInsightsPathArn", t.Name.Local):
@@ -72991,7 +72991,7 @@ func awsEc2query_deserializeDocumentNetworkInterface(v **types.NetworkInterface,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.RequesterManaged = xtv
+				sv.RequesterManaged = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("sourceDestCheck", t.Name.Local):
@@ -73007,7 +73007,7 @@ func awsEc2query_deserializeDocumentNetworkInterface(v **types.NetworkInterface,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SourceDestCheck = xtv
+				sv.SourceDestCheck = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -73261,7 +73261,7 @@ func awsEc2query_deserializeDocumentNetworkInterfaceAttachment(v **types.Network
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("deviceIndex", t.Name.Local):
@@ -73278,7 +73278,7 @@ func awsEc2query_deserializeDocumentNetworkInterfaceAttachment(v **types.Network
 				if err != nil {
 					return err
 				}
-				sv.DeviceIndex = int32(i64)
+				sv.DeviceIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("instanceId", t.Name.Local):
@@ -73321,7 +73321,7 @@ func awsEc2query_deserializeDocumentNetworkInterfaceAttachment(v **types.Network
 				if err != nil {
 					return err
 				}
-				sv.NetworkCardIndex = int32(i64)
+				sv.NetworkCardIndex = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("status", t.Name.Local):
@@ -73814,7 +73814,7 @@ func awsEc2query_deserializeDocumentNetworkInterfacePrivateIpAddress(v **types.N
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Primary = xtv
+				sv.Primary = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("privateDnsName", t.Name.Local):
@@ -74081,7 +74081,7 @@ func awsEc2query_deserializeDocumentOnDemandOptions(v **types.OnDemandOptions, d
 				if err != nil {
 					return err
 				}
-				sv.MinTargetCapacity = int32(i64)
+				sv.MinTargetCapacity = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("singleAvailabilityZone", t.Name.Local):
@@ -74097,7 +74097,7 @@ func awsEc2query_deserializeDocumentOnDemandOptions(v **types.OnDemandOptions, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SingleAvailabilityZone = xtv
+				sv.SingleAvailabilityZone = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("singleInstanceType", t.Name.Local):
@@ -74113,7 +74113,7 @@ func awsEc2query_deserializeDocumentOnDemandOptions(v **types.OnDemandOptions, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SingleInstanceType = xtv
+				sv.SingleInstanceType = ptr.Bool(xtv)
 			}
 
 		default:
@@ -74208,7 +74208,7 @@ func awsEc2query_deserializeDocumentPathComponent(v **types.PathComponent, decod
 				if err != nil {
 					return err
 				}
-				sv.SequenceNumber = int32(i64)
+				sv.SequenceNumber = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("sourceVpc", t.Name.Local):
@@ -74496,7 +74496,7 @@ func awsEc2query_deserializeDocumentPeeringConnectionOptions(v **types.PeeringCo
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowDnsResolutionFromRemoteVpc = xtv
+				sv.AllowDnsResolutionFromRemoteVpc = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("allowEgressFromLocalClassicLinkToRemoteVpc", t.Name.Local):
@@ -74512,7 +74512,7 @@ func awsEc2query_deserializeDocumentPeeringConnectionOptions(v **types.PeeringCo
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowEgressFromLocalClassicLinkToRemoteVpc = xtv
+				sv.AllowEgressFromLocalClassicLinkToRemoteVpc = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("allowEgressFromLocalVpcToRemoteClassicLink", t.Name.Local):
@@ -74528,7 +74528,7 @@ func awsEc2query_deserializeDocumentPeeringConnectionOptions(v **types.PeeringCo
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowEgressFromLocalVpcToRemoteClassicLink = xtv
+				sv.AllowEgressFromLocalVpcToRemoteClassicLink = ptr.Bool(xtv)
 			}
 
 		default:
@@ -74724,7 +74724,7 @@ func awsEc2query_deserializeDocumentPhase1DHGroupNumbersListValue(v **types.Phas
 				if err != nil {
 					return err
 				}
-				sv.Value = int32(i64)
+				sv.Value = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -75079,7 +75079,7 @@ func awsEc2query_deserializeDocumentPhase2DHGroupNumbersListValue(v **types.Phas
 				if err != nil {
 					return err
 				}
-				sv.Value = int32(i64)
+				sv.Value = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -75431,7 +75431,7 @@ func awsEc2query_deserializeDocumentPlacement(v **types.Placement, decoder smith
 				if err != nil {
 					return err
 				}
-				sv.PartitionNumber = int32(i64)
+				sv.PartitionNumber = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("spreadDomain", t.Name.Local):
@@ -75536,7 +75536,7 @@ func awsEc2query_deserializeDocumentPlacementGroup(v **types.PlacementGroup, dec
 				if err != nil {
 					return err
 				}
-				sv.PartitionCount = int32(i64)
+				sv.PartitionCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("state", t.Name.Local):
@@ -75977,7 +75977,7 @@ func awsEc2query_deserializeDocumentPortRange(v **types.PortRange, decoder smith
 				if err != nil {
 					return err
 				}
-				sv.From = int32(i64)
+				sv.From = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("to", t.Name.Local):
@@ -75994,7 +75994,7 @@ func awsEc2query_deserializeDocumentPortRange(v **types.PortRange, decoder smith
 				if err != nil {
 					return err
 				}
-				sv.To = int32(i64)
+				sv.To = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -76720,7 +76720,7 @@ func awsEc2query_deserializeDocumentPriceSchedule(v **types.PriceSchedule, decod
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Active = xtv
+				sv.Active = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("currencyCode", t.Name.Local):
@@ -76750,7 +76750,7 @@ func awsEc2query_deserializeDocumentPriceSchedule(v **types.PriceSchedule, decod
 				if err != nil {
 					return err
 				}
-				sv.Price = f64
+				sv.Price = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("term", t.Name.Local):
@@ -76767,7 +76767,7 @@ func awsEc2query_deserializeDocumentPriceSchedule(v **types.PriceSchedule, decod
 				if err != nil {
 					return err
 				}
-				sv.Term = i64
+				sv.Term = ptr.Int64(i64)
 			}
 
 		default:
@@ -76888,7 +76888,7 @@ func awsEc2query_deserializeDocumentPricingDetail(v **types.PricingDetail, decod
 				if err != nil {
 					return err
 				}
-				sv.Count = int32(i64)
+				sv.Count = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("price", t.Name.Local):
@@ -76905,7 +76905,7 @@ func awsEc2query_deserializeDocumentPricingDetail(v **types.PricingDetail, decod
 				if err != nil {
 					return err
 				}
-				sv.Price = f64
+				sv.Price = ptr.Float64(f64)
 			}
 
 		default:
@@ -77353,7 +77353,7 @@ func awsEc2query_deserializeDocumentPrivateIpAddressSpecification(v **types.Priv
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Primary = xtv
+				sv.Primary = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("privateIpAddress", t.Name.Local):
@@ -78028,7 +78028,7 @@ func awsEc2query_deserializeDocumentPublicIpv4Pool(v **types.PublicIpv4Pool, dec
 				if err != nil {
 					return err
 				}
-				sv.TotalAddressCount = int32(i64)
+				sv.TotalAddressCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("totalAvailableAddressCount", t.Name.Local):
@@ -78045,7 +78045,7 @@ func awsEc2query_deserializeDocumentPublicIpv4Pool(v **types.PublicIpv4Pool, dec
 				if err != nil {
 					return err
 				}
-				sv.TotalAvailableAddressCount = int32(i64)
+				sv.TotalAvailableAddressCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -78098,7 +78098,7 @@ func awsEc2query_deserializeDocumentPublicIpv4PoolRange(v **types.PublicIpv4Pool
 				if err != nil {
 					return err
 				}
-				sv.AddressCount = int32(i64)
+				sv.AddressCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("availableAddressCount", t.Name.Local):
@@ -78115,7 +78115,7 @@ func awsEc2query_deserializeDocumentPublicIpv4PoolRange(v **types.PublicIpv4Pool
 				if err != nil {
 					return err
 				}
-				sv.AvailableAddressCount = int32(i64)
+				sv.AvailableAddressCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("firstAddress", t.Name.Local):
@@ -78343,7 +78343,7 @@ func awsEc2query_deserializeDocumentPurchase(v **types.Purchase, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.Duration = int32(i64)
+				sv.Duration = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("hostIdSet", t.Name.Local):
@@ -78603,7 +78603,7 @@ func awsEc2query_deserializeDocumentRecurringCharge(v **types.RecurringCharge, d
 				if err != nil {
 					return err
 				}
-				sv.Amount = f64
+				sv.Amount = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("frequency", t.Name.Local):
@@ -79434,7 +79434,7 @@ func awsEc2query_deserializeDocumentReservedInstances(v **types.ReservedInstance
 				if err != nil {
 					return err
 				}
-				sv.Duration = i64
+				sv.Duration = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("end", t.Name.Local):
@@ -79468,7 +79468,7 @@ func awsEc2query_deserializeDocumentReservedInstances(v **types.ReservedInstance
 				if err != nil {
 					return err
 				}
-				sv.FixedPrice = float32(f64)
+				sv.FixedPrice = ptr.Float32(float32(f64))
 			}
 
 		case strings.EqualFold("instanceCount", t.Name.Local):
@@ -79485,7 +79485,7 @@ func awsEc2query_deserializeDocumentReservedInstances(v **types.ReservedInstance
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("instanceTenancy", t.Name.Local):
@@ -79635,7 +79635,7 @@ func awsEc2query_deserializeDocumentReservedInstances(v **types.ReservedInstance
 				if err != nil {
 					return err
 				}
-				sv.UsagePrice = float32(f64)
+				sv.UsagePrice = ptr.Float32(float32(f64))
 			}
 
 		default:
@@ -79701,7 +79701,7 @@ func awsEc2query_deserializeDocumentReservedInstancesConfiguration(v **types.Res
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("instanceType", t.Name.Local):
@@ -80499,7 +80499,7 @@ func awsEc2query_deserializeDocumentReservedInstancesOffering(v **types.Reserved
 				if err != nil {
 					return err
 				}
-				sv.Duration = i64
+				sv.Duration = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("fixedPrice", t.Name.Local):
@@ -80516,7 +80516,7 @@ func awsEc2query_deserializeDocumentReservedInstancesOffering(v **types.Reserved
 				if err != nil {
 					return err
 				}
-				sv.FixedPrice = float32(f64)
+				sv.FixedPrice = ptr.Float32(float32(f64))
 			}
 
 		case strings.EqualFold("instanceTenancy", t.Name.Local):
@@ -80558,7 +80558,7 @@ func awsEc2query_deserializeDocumentReservedInstancesOffering(v **types.Reserved
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Marketplace = xtv
+				sv.Marketplace = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("offeringClass", t.Name.Local):
@@ -80652,7 +80652,7 @@ func awsEc2query_deserializeDocumentReservedInstancesOffering(v **types.Reserved
 				if err != nil {
 					return err
 				}
-				sv.UsagePrice = float32(f64)
+				sv.UsagePrice = ptr.Float32(float32(f64))
 			}
 
 		default:
@@ -81086,7 +81086,7 @@ func awsEc2query_deserializeDocumentResponseLaunchTemplateData(v **types.Respons
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DisableApiTermination = xtv
+				sv.DisableApiTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ebsOptimized", t.Name.Local):
@@ -81102,7 +81102,7 @@ func awsEc2query_deserializeDocumentResponseLaunchTemplateData(v **types.Respons
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EbsOptimized = xtv
+				sv.EbsOptimized = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("elasticGpuSpecificationSet", t.Name.Local):
@@ -81826,7 +81826,7 @@ func awsEc2query_deserializeDocumentRouteTableAssociation(v **types.RouteTableAs
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Main = xtv
+				sv.Main = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("routeTableAssociationId", t.Name.Local):
@@ -82115,7 +82115,7 @@ func awsEc2query_deserializeDocumentRunInstancesMonitoringEnabled(v **types.RunI
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -82317,7 +82317,7 @@ func awsEc2query_deserializeDocumentScheduledInstance(v **types.ScheduledInstanc
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("instanceType", t.Name.Local):
@@ -82426,7 +82426,7 @@ func awsEc2query_deserializeDocumentScheduledInstance(v **types.ScheduledInstanc
 				if err != nil {
 					return err
 				}
-				sv.SlotDurationInHours = int32(i64)
+				sv.SlotDurationInHours = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("termEndDate", t.Name.Local):
@@ -82477,7 +82477,7 @@ func awsEc2query_deserializeDocumentScheduledInstance(v **types.ScheduledInstanc
 				if err != nil {
 					return err
 				}
-				sv.TotalScheduledInstanceHours = int32(i64)
+				sv.TotalScheduledInstanceHours = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -82543,7 +82543,7 @@ func awsEc2query_deserializeDocumentScheduledInstanceAvailability(v **types.Sche
 				if err != nil {
 					return err
 				}
-				sv.AvailableInstanceCount = int32(i64)
+				sv.AvailableInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("firstSlotStartTime", t.Name.Local):
@@ -82603,7 +82603,7 @@ func awsEc2query_deserializeDocumentScheduledInstanceAvailability(v **types.Sche
 				if err != nil {
 					return err
 				}
-				sv.MaxTermDurationInDays = int32(i64)
+				sv.MaxTermDurationInDays = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("minTermDurationInDays", t.Name.Local):
@@ -82620,7 +82620,7 @@ func awsEc2query_deserializeDocumentScheduledInstanceAvailability(v **types.Sche
 				if err != nil {
 					return err
 				}
-				sv.MinTermDurationInDays = int32(i64)
+				sv.MinTermDurationInDays = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("networkPlatform", t.Name.Local):
@@ -82682,7 +82682,7 @@ func awsEc2query_deserializeDocumentScheduledInstanceAvailability(v **types.Sche
 				if err != nil {
 					return err
 				}
-				sv.SlotDurationInHours = int32(i64)
+				sv.SlotDurationInHours = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("totalScheduledInstanceHours", t.Name.Local):
@@ -82699,7 +82699,7 @@ func awsEc2query_deserializeDocumentScheduledInstanceAvailability(v **types.Sche
 				if err != nil {
 					return err
 				}
-				sv.TotalScheduledInstanceHours = int32(i64)
+				sv.TotalScheduledInstanceHours = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -82833,7 +82833,7 @@ func awsEc2query_deserializeDocumentScheduledInstanceRecurrence(v **types.Schedu
 				if err != nil {
 					return err
 				}
-				sv.Interval = int32(i64)
+				sv.Interval = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("occurrenceDaySet", t.Name.Local):
@@ -82855,7 +82855,7 @@ func awsEc2query_deserializeDocumentScheduledInstanceRecurrence(v **types.Schedu
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.OccurrenceRelativeToEnd = xtv
+				sv.OccurrenceRelativeToEnd = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("occurrenceUnit", t.Name.Local):
@@ -83460,7 +83460,7 @@ func awsEc2query_deserializeDocumentServiceConfiguration(v **types.ServiceConfig
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AcceptanceRequired = xtv
+				sv.AcceptanceRequired = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("availabilityZoneSet", t.Name.Local):
@@ -83494,7 +83494,7 @@ func awsEc2query_deserializeDocumentServiceConfiguration(v **types.ServiceConfig
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ManagesVpcEndpoints = xtv
+				sv.ManagesVpcEndpoints = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("networkLoadBalancerArnSet", t.Name.Local):
@@ -83690,7 +83690,7 @@ func awsEc2query_deserializeDocumentServiceDetail(v **types.ServiceDetail, decod
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AcceptanceRequired = xtv
+				sv.AcceptanceRequired = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("availabilityZoneSet", t.Name.Local):
@@ -83718,7 +83718,7 @@ func awsEc2query_deserializeDocumentServiceDetail(v **types.ServiceDetail, decod
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ManagesVpcEndpoints = xtv
+				sv.ManagesVpcEndpoints = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("owner", t.Name.Local):
@@ -83817,7 +83817,7 @@ func awsEc2query_deserializeDocumentServiceDetail(v **types.ServiceDetail, decod
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.VpcEndpointPolicySupported = xtv
+				sv.VpcEndpointPolicySupported = ptr.Bool(xtv)
 			}
 
 		default:
@@ -84080,7 +84080,7 @@ func awsEc2query_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("kmsKeyId", t.Name.Local):
@@ -84237,7 +84237,7 @@ func awsEc2query_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 				if err != nil {
 					return err
 				}
-				sv.VolumeSize = int32(i64)
+				sv.VolumeSize = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -84316,7 +84316,7 @@ func awsEc2query_deserializeDocumentSnapshotDetail(v **types.SnapshotDetail, dec
 				if err != nil {
 					return err
 				}
-				sv.DiskImageSize = f64
+				sv.DiskImageSize = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("format", t.Name.Local):
@@ -84533,7 +84533,7 @@ func awsEc2query_deserializeDocumentSnapshotInfo(v **types.SnapshotInfo, decoder
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("outpostArn", t.Name.Local):
@@ -84651,7 +84651,7 @@ func awsEc2query_deserializeDocumentSnapshotInfo(v **types.SnapshotInfo, decoder
 				if err != nil {
 					return err
 				}
-				sv.VolumeSize = int32(i64)
+				sv.VolumeSize = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -84853,7 +84853,7 @@ func awsEc2query_deserializeDocumentSnapshotTaskDetail(v **types.SnapshotTaskDet
 				if err != nil {
 					return err
 				}
-				sv.DiskImageSize = f64
+				sv.DiskImageSize = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("encrypted", t.Name.Local):
@@ -84869,7 +84869,7 @@ func awsEc2query_deserializeDocumentSnapshotTaskDetail(v **types.SnapshotTaskDet
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("format", t.Name.Local):
@@ -85180,7 +85180,7 @@ func awsEc2query_deserializeDocumentSpotFleetLaunchSpecification(v **types.SpotF
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EbsOptimized = xtv
+				sv.EbsOptimized = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("iamInstanceProfile", t.Name.Local):
@@ -85337,7 +85337,7 @@ func awsEc2query_deserializeDocumentSpotFleetLaunchSpecification(v **types.SpotF
 				if err != nil {
 					return err
 				}
-				sv.WeightedCapacity = f64
+				sv.WeightedCapacity = ptr.Float64(f64)
 			}
 
 		default:
@@ -85389,7 +85389,7 @@ func awsEc2query_deserializeDocumentSpotFleetMonitoring(v **types.SpotFleetMonit
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Enabled = xtv
+				sv.Enabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -85585,7 +85585,7 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 				if err != nil {
 					return err
 				}
-				sv.FulfilledCapacity = f64
+				sv.FulfilledCapacity = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("iamFleetRole", t.Name.Local):
@@ -85628,7 +85628,7 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 				if err != nil {
 					return err
 				}
-				sv.InstancePoolsToUseCount = int32(i64)
+				sv.InstancePoolsToUseCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("launchSpecifications", t.Name.Local):
@@ -85676,7 +85676,7 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 				if err != nil {
 					return err
 				}
-				sv.OnDemandFulfilledCapacity = f64
+				sv.OnDemandFulfilledCapacity = ptr.Float64(f64)
 			}
 
 		case strings.EqualFold("onDemandMaxTotalPrice", t.Name.Local):
@@ -85706,7 +85706,7 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 				if err != nil {
 					return err
 				}
-				sv.OnDemandTargetCapacity = int32(i64)
+				sv.OnDemandTargetCapacity = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("replaceUnhealthyInstances", t.Name.Local):
@@ -85722,7 +85722,7 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReplaceUnhealthyInstances = xtv
+				sv.ReplaceUnhealthyInstances = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("spotMaintenanceStrategies", t.Name.Local):
@@ -85777,7 +85777,7 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 				if err != nil {
 					return err
 				}
-				sv.TargetCapacity = int32(i64)
+				sv.TargetCapacity = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("terminateInstancesWithExpiration", t.Name.Local):
@@ -85793,7 +85793,7 @@ func awsEc2query_deserializeDocumentSpotFleetRequestConfigData(v **types.SpotFle
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.TerminateInstancesWithExpiration = xtv
+				sv.TerminateInstancesWithExpiration = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("type", t.Name.Local):
@@ -86110,7 +86110,7 @@ func awsEc2query_deserializeDocumentSpotInstanceRequest(v **types.SpotInstanceRe
 				if err != nil {
 					return err
 				}
-				sv.BlockDurationMinutes = int32(i64)
+				sv.BlockDurationMinutes = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("createTime", t.Name.Local):
@@ -86632,7 +86632,7 @@ func awsEc2query_deserializeDocumentSpotOptions(v **types.SpotOptions, decoder s
 				if err != nil {
 					return err
 				}
-				sv.InstancePoolsToUseCount = int32(i64)
+				sv.InstancePoolsToUseCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("maintenanceStrategies", t.Name.Local):
@@ -86668,7 +86668,7 @@ func awsEc2query_deserializeDocumentSpotOptions(v **types.SpotOptions, decoder s
 				if err != nil {
 					return err
 				}
-				sv.MinTargetCapacity = int32(i64)
+				sv.MinTargetCapacity = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("singleAvailabilityZone", t.Name.Local):
@@ -86684,7 +86684,7 @@ func awsEc2query_deserializeDocumentSpotOptions(v **types.SpotOptions, decoder s
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SingleAvailabilityZone = xtv
+				sv.SingleAvailabilityZone = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("singleInstanceType", t.Name.Local):
@@ -86700,7 +86700,7 @@ func awsEc2query_deserializeDocumentSpotOptions(v **types.SpotOptions, decoder s
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SingleInstanceType = xtv
+				sv.SingleInstanceType = ptr.Bool(xtv)
 			}
 
 		default:
@@ -87001,7 +87001,7 @@ func awsEc2query_deserializeDocumentStaleIpPermission(v **types.StaleIpPermissio
 				if err != nil {
 					return err
 				}
-				sv.FromPort = int32(i64)
+				sv.FromPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ipProtocol", t.Name.Local):
@@ -87043,7 +87043,7 @@ func awsEc2query_deserializeDocumentStaleIpPermission(v **types.StaleIpPermissio
 				if err != nil {
 					return err
 				}
-				sv.ToPort = int32(i64)
+				sv.ToPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("groups", t.Name.Local):
@@ -87468,7 +87468,7 @@ func awsEc2query_deserializeDocumentStoreImageTaskResult(v **types.StoreImageTas
 				if err != nil {
 					return err
 				}
-				sv.ProgressPercentage = int32(i64)
+				sv.ProgressPercentage = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("s3objectKey", t.Name.Local):
@@ -87724,7 +87724,7 @@ func awsEc2query_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.N
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AssignIpv6AddressOnCreation = xtv
+				sv.AssignIpv6AddressOnCreation = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("availabilityZone", t.Name.Local):
@@ -87767,7 +87767,7 @@ func awsEc2query_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.N
 				if err != nil {
 					return err
 				}
-				sv.AvailableIpAddressCount = int32(i64)
+				sv.AvailableIpAddressCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("cidrBlock", t.Name.Local):
@@ -87809,7 +87809,7 @@ func awsEc2query_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.N
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DefaultForAz = xtv
+				sv.DefaultForAz = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ipv6CidrBlockAssociationSet", t.Name.Local):
@@ -87831,7 +87831,7 @@ func awsEc2query_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.N
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.MapCustomerOwnedIpOnLaunch = xtv
+				sv.MapCustomerOwnedIpOnLaunch = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("mapPublicIpOnLaunch", t.Name.Local):
@@ -87847,7 +87847,7 @@ func awsEc2query_deserializeDocumentSubnet(v **types.Subnet, decoder smithyxml.N
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.MapPublicIpOnLaunch = xtv
+				sv.MapPublicIpOnLaunch = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("outpostArn", t.Name.Local):
@@ -89036,7 +89036,7 @@ func awsEc2query_deserializeDocumentTargetCapacitySpecification(v **types.Target
 				if err != nil {
 					return err
 				}
-				sv.OnDemandTargetCapacity = int32(i64)
+				sv.OnDemandTargetCapacity = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("spotTargetCapacity", t.Name.Local):
@@ -89053,7 +89053,7 @@ func awsEc2query_deserializeDocumentTargetCapacitySpecification(v **types.Target
 				if err != nil {
 					return err
 				}
-				sv.SpotTargetCapacity = int32(i64)
+				sv.SpotTargetCapacity = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("totalTargetCapacity", t.Name.Local):
@@ -89070,7 +89070,7 @@ func awsEc2query_deserializeDocumentTargetCapacitySpecification(v **types.Target
 				if err != nil {
 					return err
 				}
-				sv.TotalTargetCapacity = int32(i64)
+				sv.TotalTargetCapacity = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -89123,7 +89123,7 @@ func awsEc2query_deserializeDocumentTargetConfiguration(v **types.TargetConfigur
 				if err != nil {
 					return err
 				}
-				sv.InstanceCount = int32(i64)
+				sv.InstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("offeringId", t.Name.Local):
@@ -89967,7 +89967,7 @@ func awsEc2query_deserializeDocumentTrafficMirrorFilterRule(v **types.TrafficMir
 				if err != nil {
 					return err
 				}
-				sv.Protocol = int32(i64)
+				sv.Protocol = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ruleAction", t.Name.Local):
@@ -89997,7 +89997,7 @@ func awsEc2query_deserializeDocumentTrafficMirrorFilterRule(v **types.TrafficMir
 				if err != nil {
 					return err
 				}
-				sv.RuleNumber = int32(i64)
+				sv.RuleNumber = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("sourceCidrBlock", t.Name.Local):
@@ -90324,7 +90324,7 @@ func awsEc2query_deserializeDocumentTrafficMirrorPortRange(v **types.TrafficMirr
 				if err != nil {
 					return err
 				}
-				sv.FromPort = int32(i64)
+				sv.FromPort = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("toPort", t.Name.Local):
@@ -90341,7 +90341,7 @@ func awsEc2query_deserializeDocumentTrafficMirrorPortRange(v **types.TrafficMirr
 				if err != nil {
 					return err
 				}
-				sv.ToPort = int32(i64)
+				sv.ToPort = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -90433,7 +90433,7 @@ func awsEc2query_deserializeDocumentTrafficMirrorSession(v **types.TrafficMirror
 				if err != nil {
 					return err
 				}
-				sv.PacketLength = int32(i64)
+				sv.PacketLength = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("sessionNumber", t.Name.Local):
@@ -90450,7 +90450,7 @@ func awsEc2query_deserializeDocumentTrafficMirrorSession(v **types.TrafficMirror
 				if err != nil {
 					return err
 				}
-				sv.SessionNumber = int32(i64)
+				sv.SessionNumber = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("tagSet", t.Name.Local):
@@ -90512,7 +90512,7 @@ func awsEc2query_deserializeDocumentTrafficMirrorSession(v **types.TrafficMirror
 				if err != nil {
 					return err
 				}
-				sv.VirtualNetworkId = int32(i64)
+				sv.VirtualNetworkId = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -91296,7 +91296,7 @@ func awsEc2query_deserializeDocumentTransitGatewayAttachmentBgpConfiguration(v *
 				if err != nil {
 					return err
 				}
-				sv.PeerAsn = i64
+				sv.PeerAsn = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("transitGatewayAddress", t.Name.Local):
@@ -91326,7 +91326,7 @@ func awsEc2query_deserializeDocumentTransitGatewayAttachmentBgpConfiguration(v *
 				if err != nil {
 					return err
 				}
-				sv.TransitGatewayAsn = i64
+				sv.TransitGatewayAsn = ptr.Int64(i64)
 			}
 
 		default:
@@ -92896,7 +92896,7 @@ func awsEc2query_deserializeDocumentTransitGatewayMulticastGroup(v **types.Trans
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.GroupMember = xtv
+				sv.GroupMember = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("groupSource", t.Name.Local):
@@ -92912,7 +92912,7 @@ func awsEc2query_deserializeDocumentTransitGatewayMulticastGroup(v **types.Trans
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.GroupSource = xtv
+				sv.GroupSource = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("memberType", t.Name.Local):
@@ -93273,7 +93273,7 @@ func awsEc2query_deserializeDocumentTransitGatewayOptions(v **types.TransitGatew
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("associationDefaultRouteTableId", t.Name.Local):
@@ -93681,7 +93681,7 @@ func awsEc2query_deserializeDocumentTransitGatewayPrefixListReference(v **types.
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Blackhole = xtv
+				sv.Blackhole = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("prefixListId", t.Name.Local):
@@ -94282,7 +94282,7 @@ func awsEc2query_deserializeDocumentTransitGatewayRouteTable(v **types.TransitGa
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DefaultAssociationRouteTable = xtv
+				sv.DefaultAssociationRouteTable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("defaultPropagationRouteTable", t.Name.Local):
@@ -94298,7 +94298,7 @@ func awsEc2query_deserializeDocumentTransitGatewayRouteTable(v **types.TransitGa
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DefaultPropagationRouteTable = xtv
+				sv.DefaultPropagationRouteTable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("state", t.Name.Local):
@@ -95068,7 +95068,7 @@ func awsEc2query_deserializeDocumentTunnelOption(v **types.TunnelOption, decoder
 				if err != nil {
 					return err
 				}
-				sv.DpdTimeoutSeconds = int32(i64)
+				sv.DpdTimeoutSeconds = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("ikeVersionSet", t.Name.Local):
@@ -95122,7 +95122,7 @@ func awsEc2query_deserializeDocumentTunnelOption(v **types.TunnelOption, decoder
 				if err != nil {
 					return err
 				}
-				sv.Phase1LifetimeSeconds = int32(i64)
+				sv.Phase1LifetimeSeconds = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("phase2DHGroupNumberSet", t.Name.Local):
@@ -95157,7 +95157,7 @@ func awsEc2query_deserializeDocumentTunnelOption(v **types.TunnelOption, decoder
 				if err != nil {
 					return err
 				}
-				sv.Phase2LifetimeSeconds = int32(i64)
+				sv.Phase2LifetimeSeconds = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("preSharedKey", t.Name.Local):
@@ -95187,7 +95187,7 @@ func awsEc2query_deserializeDocumentTunnelOption(v **types.TunnelOption, decoder
 				if err != nil {
 					return err
 				}
-				sv.RekeyFuzzPercentage = int32(i64)
+				sv.RekeyFuzzPercentage = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("rekeyMarginTimeSeconds", t.Name.Local):
@@ -95204,7 +95204,7 @@ func awsEc2query_deserializeDocumentTunnelOption(v **types.TunnelOption, decoder
 				if err != nil {
 					return err
 				}
-				sv.RekeyMarginTimeSeconds = int32(i64)
+				sv.RekeyMarginTimeSeconds = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("replayWindowSize", t.Name.Local):
@@ -95221,7 +95221,7 @@ func awsEc2query_deserializeDocumentTunnelOption(v **types.TunnelOption, decoder
 				if err != nil {
 					return err
 				}
-				sv.ReplayWindowSize = int32(i64)
+				sv.ReplayWindowSize = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("startupAction", t.Name.Local):
@@ -96507,7 +96507,7 @@ func awsEc2query_deserializeDocumentVgwTelemetry(v **types.VgwTelemetry, decoder
 				if err != nil {
 					return err
 				}
-				sv.AcceptedRouteCount = int32(i64)
+				sv.AcceptedRouteCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("certificateArn", t.Name.Local):
@@ -96812,7 +96812,7 @@ func awsEc2query_deserializeDocumentVolume(v **types.Volume, decoder smithyxml.N
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("fastRestored", t.Name.Local):
@@ -96828,7 +96828,7 @@ func awsEc2query_deserializeDocumentVolume(v **types.Volume, decoder smithyxml.N
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.FastRestored = xtv
+				sv.FastRestored = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("iops", t.Name.Local):
@@ -96845,7 +96845,7 @@ func awsEc2query_deserializeDocumentVolume(v **types.Volume, decoder smithyxml.N
 				if err != nil {
 					return err
 				}
-				sv.Iops = int32(i64)
+				sv.Iops = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("kmsKeyId", t.Name.Local):
@@ -96874,7 +96874,7 @@ func awsEc2query_deserializeDocumentVolume(v **types.Volume, decoder smithyxml.N
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.MultiAttachEnabled = xtv
+				sv.MultiAttachEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("outpostArn", t.Name.Local):
@@ -96904,7 +96904,7 @@ func awsEc2query_deserializeDocumentVolume(v **types.Volume, decoder smithyxml.N
 				if err != nil {
 					return err
 				}
-				sv.Size = int32(i64)
+				sv.Size = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("snapshotId", t.Name.Local):
@@ -96953,7 +96953,7 @@ func awsEc2query_deserializeDocumentVolume(v **types.Volume, decoder smithyxml.N
 				if err != nil {
 					return err
 				}
-				sv.Throughput = int32(i64)
+				sv.Throughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("volumeId", t.Name.Local):
@@ -97048,7 +97048,7 @@ func awsEc2query_deserializeDocumentVolumeAttachment(v **types.VolumeAttachment,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("device", t.Name.Local):
@@ -97319,7 +97319,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return err
 				}
-				sv.OriginalIops = int32(i64)
+				sv.OriginalIops = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("originalMultiAttachEnabled", t.Name.Local):
@@ -97335,7 +97335,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.OriginalMultiAttachEnabled = xtv
+				sv.OriginalMultiAttachEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("originalSize", t.Name.Local):
@@ -97352,7 +97352,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return err
 				}
-				sv.OriginalSize = int32(i64)
+				sv.OriginalSize = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("originalThroughput", t.Name.Local):
@@ -97369,7 +97369,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return err
 				}
-				sv.OriginalThroughput = int32(i64)
+				sv.OriginalThroughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("originalVolumeType", t.Name.Local):
@@ -97399,7 +97399,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return err
 				}
-				sv.Progress = i64
+				sv.Progress = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("startTime", t.Name.Local):
@@ -97446,7 +97446,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return err
 				}
-				sv.TargetIops = int32(i64)
+				sv.TargetIops = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("targetMultiAttachEnabled", t.Name.Local):
@@ -97462,7 +97462,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.TargetMultiAttachEnabled = xtv
+				sv.TargetMultiAttachEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("targetSize", t.Name.Local):
@@ -97479,7 +97479,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return err
 				}
-				sv.TargetSize = int32(i64)
+				sv.TargetSize = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("targetThroughput", t.Name.Local):
@@ -97496,7 +97496,7 @@ func awsEc2query_deserializeDocumentVolumeModification(v **types.VolumeModificat
 				if err != nil {
 					return err
 				}
-				sv.TargetThroughput = int32(i64)
+				sv.TargetThroughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("targetVolumeType", t.Name.Local):
@@ -98521,7 +98521,7 @@ func awsEc2query_deserializeDocumentVpc(v **types.Vpc, decoder smithyxml.NodeDec
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsDefault = xtv
+				sv.IsDefault = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("ownerId", t.Name.Local):
@@ -98946,7 +98946,7 @@ func awsEc2query_deserializeDocumentVpcClassicLink(v **types.VpcClassicLink, dec
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ClassicLinkEnabled = xtv
+				sv.ClassicLinkEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("tagSet", t.Name.Local):
@@ -99152,7 +99152,7 @@ func awsEc2query_deserializeDocumentVpcEndpoint(v **types.VpcEndpoint, decoder s
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.PrivateDnsEnabled = xtv
+				sv.PrivateDnsEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("requesterManaged", t.Name.Local):
@@ -99168,7 +99168,7 @@ func awsEc2query_deserializeDocumentVpcEndpoint(v **types.VpcEndpoint, decoder s
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.RequesterManaged = xtv
+				sv.RequesterManaged = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("routeTableIdSet", t.Name.Local):
@@ -99950,7 +99950,7 @@ func awsEc2query_deserializeDocumentVpcPeeringConnectionOptionsDescription(v **t
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowDnsResolutionFromRemoteVpc = xtv
+				sv.AllowDnsResolutionFromRemoteVpc = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("allowEgressFromLocalClassicLinkToRemoteVpc", t.Name.Local):
@@ -99966,7 +99966,7 @@ func awsEc2query_deserializeDocumentVpcPeeringConnectionOptionsDescription(v **t
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowEgressFromLocalClassicLinkToRemoteVpc = xtv
+				sv.AllowEgressFromLocalClassicLinkToRemoteVpc = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("allowEgressFromLocalVpcToRemoteClassicLink", t.Name.Local):
@@ -99982,7 +99982,7 @@ func awsEc2query_deserializeDocumentVpcPeeringConnectionOptionsDescription(v **t
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AllowEgressFromLocalVpcToRemoteClassicLink = xtv
+				sv.AllowEgressFromLocalVpcToRemoteClassicLink = ptr.Bool(xtv)
 			}
 
 		default:
@@ -100434,7 +100434,7 @@ func awsEc2query_deserializeDocumentVpnConnectionOptions(v **types.VpnConnection
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EnableAcceleration = xtv
+				sv.EnableAcceleration = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("localIpv4NetworkCidr", t.Name.Local):
@@ -100502,7 +100502,7 @@ func awsEc2query_deserializeDocumentVpnConnectionOptions(v **types.VpnConnection
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.StaticRoutesOnly = xtv
+				sv.StaticRoutesOnly = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("tunnelInsideIpVersion", t.Name.Local):
@@ -100574,7 +100574,7 @@ func awsEc2query_deserializeDocumentVpnGateway(v **types.VpnGateway, decoder smi
 				if err != nil {
 					return err
 				}
-				sv.AmazonSideAsn = i64
+				sv.AmazonSideAsn = ptr.Int64(i64)
 			}
 
 		case strings.EqualFold("availabilityZone", t.Name.Local):
@@ -102012,7 +102012,7 @@ func awsEc2query_deserializeOpDocumentAttachClassicLinkVpcOutput(v **AttachClass
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -102078,7 +102078,7 @@ func awsEc2query_deserializeOpDocumentAttachNetworkInterfaceOutput(v **AttachNet
 				if err != nil {
 					return err
 				}
-				sv.NetworkCardIndex = int32(i64)
+				sv.NetworkCardIndex = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -102147,7 +102147,7 @@ func awsEc2query_deserializeOpDocumentAttachVolumeOutput(v **AttachVolumeOutput,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("device", t.Name.Local):
@@ -102419,7 +102419,7 @@ func awsEc2query_deserializeOpDocumentCancelCapacityReservationOutput(v **Cancel
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -102691,7 +102691,7 @@ func awsEc2query_deserializeOpDocumentConfirmProductInstanceOutput(v **ConfirmPr
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -104344,7 +104344,7 @@ func awsEc2query_deserializeOpDocumentCreateRouteOutput(v **CreateRouteOutput, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -104519,7 +104519,7 @@ func awsEc2query_deserializeOpDocumentCreateSnapshotOutput(v **CreateSnapshotOut
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("kmsKeyId", t.Name.Local):
@@ -104676,7 +104676,7 @@ func awsEc2query_deserializeOpDocumentCreateSnapshotOutput(v **CreateSnapshotOut
 				if err != nil {
 					return err
 				}
-				sv.VolumeSize = int32(i64)
+				sv.VolumeSize = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -105537,7 +105537,7 @@ func awsEc2query_deserializeOpDocumentCreateVolumeOutput(v **CreateVolumeOutput,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("fastRestored", t.Name.Local):
@@ -105553,7 +105553,7 @@ func awsEc2query_deserializeOpDocumentCreateVolumeOutput(v **CreateVolumeOutput,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.FastRestored = xtv
+				sv.FastRestored = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("iops", t.Name.Local):
@@ -105570,7 +105570,7 @@ func awsEc2query_deserializeOpDocumentCreateVolumeOutput(v **CreateVolumeOutput,
 				if err != nil {
 					return err
 				}
-				sv.Iops = int32(i64)
+				sv.Iops = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("kmsKeyId", t.Name.Local):
@@ -105599,7 +105599,7 @@ func awsEc2query_deserializeOpDocumentCreateVolumeOutput(v **CreateVolumeOutput,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.MultiAttachEnabled = xtv
+				sv.MultiAttachEnabled = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("outpostArn", t.Name.Local):
@@ -105629,7 +105629,7 @@ func awsEc2query_deserializeOpDocumentCreateVolumeOutput(v **CreateVolumeOutput,
 				if err != nil {
 					return err
 				}
-				sv.Size = int32(i64)
+				sv.Size = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("snapshotId", t.Name.Local):
@@ -105678,7 +105678,7 @@ func awsEc2query_deserializeOpDocumentCreateVolumeOutput(v **CreateVolumeOutput,
 				if err != nil {
 					return err
 				}
-				sv.Throughput = int32(i64)
+				sv.Throughput = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("volumeId", t.Name.Local):
@@ -106215,7 +106215,7 @@ func awsEc2query_deserializeOpDocumentDeleteEgressOnlyInternetGatewayOutput(v **
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReturnCode = xtv
+				sv.ReturnCode = ptr.Bool(xtv)
 			}
 
 		default:
@@ -106357,7 +106357,7 @@ func awsEc2query_deserializeOpDocumentDeleteFpgaImageOutput(v **DeleteFpgaImageO
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -106772,7 +106772,7 @@ func awsEc2query_deserializeOpDocumentDeleteNetworkInterfacePermissionOutput(v *
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -107572,7 +107572,7 @@ func awsEc2query_deserializeOpDocumentDeleteVpcPeeringConnectionOutput(v **Delet
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -107937,7 +107937,7 @@ func awsEc2query_deserializeOpDocumentDescribeAggregateIdFormatOutput(v **Descri
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.UseLongIdsAggregated = xtv
+				sv.UseLongIdsAggregated = ptr.Bool(xtv)
 			}
 
 		default:
@@ -108824,7 +108824,7 @@ func awsEc2query_deserializeOpDocumentDescribeElasticGpusOutput(v **DescribeElas
 				if err != nil {
 					return err
 				}
-				sv.MaxResults = int32(i64)
+				sv.MaxResults = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("nextToken", t.Name.Local):
@@ -114524,7 +114524,7 @@ func awsEc2query_deserializeOpDocumentDetachClassicLinkVpcOutput(v **DetachClass
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -114593,7 +114593,7 @@ func awsEc2query_deserializeOpDocumentDetachVolumeOutput(v **DetachVolumeOutput,
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.DeleteOnTermination = xtv
+				sv.DeleteOnTermination = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("device", t.Name.Local):
@@ -114697,7 +114697,7 @@ func awsEc2query_deserializeOpDocumentDisableEbsEncryptionByDefaultOutput(v **Di
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EbsEncryptionByDefault = xtv
+				sv.EbsEncryptionByDefault = ptr.Bool(xtv)
 			}
 
 		default:
@@ -114797,7 +114797,7 @@ func awsEc2query_deserializeOpDocumentDisableSerialConsoleAccessOutput(v **Disab
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SerialConsoleAccessEnabled = xtv
+				sv.SerialConsoleAccessEnabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -114891,7 +114891,7 @@ func awsEc2query_deserializeOpDocumentDisableVpcClassicLinkDnsSupportOutput(v **
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -114943,7 +114943,7 @@ func awsEc2query_deserializeOpDocumentDisableVpcClassicLinkOutput(v **DisableVpc
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -115050,7 +115050,7 @@ func awsEc2query_deserializeOpDocumentDisassociateEnclaveCertificateIamRoleOutpu
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -115344,7 +115344,7 @@ func awsEc2query_deserializeOpDocumentEnableEbsEncryptionByDefaultOutput(v **Ena
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EbsEncryptionByDefault = xtv
+				sv.EbsEncryptionByDefault = ptr.Bool(xtv)
 			}
 
 		default:
@@ -115444,7 +115444,7 @@ func awsEc2query_deserializeOpDocumentEnableSerialConsoleAccessOutput(v **Enable
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SerialConsoleAccessEnabled = xtv
+				sv.SerialConsoleAccessEnabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -115538,7 +115538,7 @@ func awsEc2query_deserializeOpDocumentEnableVpcClassicLinkDnsSupportOutput(v **E
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -115590,7 +115590,7 @@ func awsEc2query_deserializeOpDocumentEnableVpcClassicLinkOutput(v **EnableVpcCl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -116045,7 +116045,7 @@ func awsEc2query_deserializeOpDocumentGetCapacityReservationUsageOutput(v **GetC
 				if err != nil {
 					return err
 				}
-				sv.AvailableInstanceCount = int32(i64)
+				sv.AvailableInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		case strings.EqualFold("capacityReservationId", t.Name.Local):
@@ -116120,7 +116120,7 @@ func awsEc2query_deserializeOpDocumentGetCapacityReservationUsageOutput(v **GetC
 				if err != nil {
 					return err
 				}
-				sv.TotalInstanceCount = int32(i64)
+				sv.TotalInstanceCount = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -116472,7 +116472,7 @@ func awsEc2query_deserializeOpDocumentGetEbsEncryptionByDefaultOutput(v **GetEbs
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.EbsEncryptionByDefault = xtv
+				sv.EbsEncryptionByDefault = ptr.Bool(xtv)
 			}
 
 		default:
@@ -116953,7 +116953,7 @@ func awsEc2query_deserializeOpDocumentGetReservedInstancesExchangeQuoteOutput(v 
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.IsValidExchange = xtv
+				sv.IsValidExchange = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("outputReservedInstancesWillExpireAt", t.Name.Local):
@@ -117072,7 +117072,7 @@ func awsEc2query_deserializeOpDocumentGetSerialConsoleAccessStatusOutput(v **Get
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.SerialConsoleAccessEnabled = xtv
+				sv.SerialConsoleAccessEnabled = ptr.Bool(xtv)
 			}
 
 		default:
@@ -117399,7 +117399,7 @@ func awsEc2query_deserializeOpDocumentImportClientVpnClientCertificateRevocation
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -117477,7 +117477,7 @@ func awsEc2query_deserializeOpDocumentImportImageOutput(v **ImportImageOutput, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Encrypted = xtv
+				sv.Encrypted = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("hypervisor", t.Name.Local):
@@ -117945,7 +117945,7 @@ func awsEc2query_deserializeOpDocumentModifyAvailabilityZoneGroupOutput(v **Modi
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -117997,7 +117997,7 @@ func awsEc2query_deserializeOpDocumentModifyCapacityReservationOutput(v **Modify
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -118049,7 +118049,7 @@ func awsEc2query_deserializeOpDocumentModifyClientVpnEndpointOutput(v **ModifyCl
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -118192,7 +118192,7 @@ func awsEc2query_deserializeOpDocumentModifyFleetOutput(v **ModifyFleetOutput, d
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -118334,7 +118334,7 @@ func awsEc2query_deserializeOpDocumentModifyInstanceCapacityReservationAttribute
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -118531,7 +118531,7 @@ func awsEc2query_deserializeOpDocumentModifyInstancePlacementOutput(v **ModifyIn
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -118716,7 +118716,7 @@ func awsEc2query_deserializeOpDocumentModifySpotFleetRequestOutput(v **ModifySpo
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -119062,7 +119062,7 @@ func awsEc2query_deserializeOpDocumentModifyVpcEndpointConnectionNotificationOut
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReturnValue = xtv
+				sv.ReturnValue = ptr.Bool(xtv)
 			}
 
 		default:
@@ -119114,7 +119114,7 @@ func awsEc2query_deserializeOpDocumentModifyVpcEndpointOutput(v **ModifyVpcEndpo
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -119166,7 +119166,7 @@ func awsEc2query_deserializeOpDocumentModifyVpcEndpointServiceConfigurationOutpu
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -119218,7 +119218,7 @@ func awsEc2query_deserializeOpDocumentModifyVpcEndpointServicePermissionsOutput(
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReturnValue = xtv
+				sv.ReturnValue = ptr.Bool(xtv)
 			}
 
 		default:
@@ -119318,7 +119318,7 @@ func awsEc2query_deserializeOpDocumentModifyVpcTenancyOutput(v **ModifyVpcTenanc
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReturnValue = xtv
+				sv.ReturnValue = ptr.Bool(xtv)
 			}
 
 		default:
@@ -120212,7 +120212,7 @@ func awsEc2query_deserializeOpDocumentRejectVpcPeeringConnectionOutput(v **Rejec
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -120682,7 +120682,7 @@ func awsEc2query_deserializeOpDocumentResetFpgaImageAttributeOutput(v **ResetFpg
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -120880,7 +120880,7 @@ func awsEc2query_deserializeOpDocumentRevokeSecurityGroupEgressOutput(v **Revoke
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("unknownIpPermissionSet", t.Name.Local):
@@ -120938,7 +120938,7 @@ func awsEc2query_deserializeOpDocumentRevokeSecurityGroupIngressOutput(v **Revok
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("unknownIpPermissionSet", t.Name.Local):
@@ -121235,7 +121235,7 @@ func awsEc2query_deserializeOpDocumentSearchTransitGatewayRoutesOutput(v **Searc
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.AdditionalRoutesAvailable = xtv
+				sv.AdditionalRoutesAvailable = ptr.Bool(xtv)
 			}
 
 		case strings.EqualFold("routeSet", t.Name.Local):
@@ -121377,7 +121377,7 @@ func awsEc2query_deserializeOpDocumentStartVpcEndpointServicePrivateDnsVerificat
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.ReturnValue = xtv
+				sv.ReturnValue = ptr.Bool(xtv)
 			}
 
 		default:
@@ -121678,7 +121678,7 @@ func awsEc2query_deserializeOpDocumentUpdateSecurityGroupRuleDescriptionsEgressO
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:
@@ -121730,7 +121730,7 @@ func awsEc2query_deserializeOpDocumentUpdateSecurityGroupRuleDescriptionsIngress
 				if err != nil {
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", val)
 				}
-				sv.Return = xtv
+				sv.Return = ptr.Bool(xtv)
 			}
 
 		default:

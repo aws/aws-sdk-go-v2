@@ -45,7 +45,7 @@ type CreateNetworkInterfaceInput struct {
 	// actually making the request, and provides an error response. If you have the
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
-	DryRun bool
+	DryRun *bool
 
 	// The IDs of one or more security groups.
 	Groups []string
@@ -61,7 +61,7 @@ type CreateNetworkInterfaceInput struct {
 	// this option if specifying specific IPv6 addresses. If your subnet has the
 	// AssignIpv6AddressOnCreation attribute set to true, you can specify 0 to override
 	// this setting.
-	Ipv6AddressCount int32
+	Ipv6AddressCount *int32
 
 	// One or more specific IPv6 addresses from the IPv6 CIDR block range of your
 	// subnet. You can't use this option if you're specifying a number of IPv6
@@ -86,7 +86,7 @@ type CreateNetworkInterfaceInput struct {
 	// type. For more information, see IP Addresses Per ENI Per Instance Type
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI)
 	// in the Amazon Virtual Private Cloud User Guide.
-	SecondaryPrivateIpAddressCount int32
+	SecondaryPrivateIpAddressCount *int32
 
 	// The tags to apply to the new network interface.
 	TagSpecifications []types.TagSpecification
