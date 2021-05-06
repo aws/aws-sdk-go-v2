@@ -48,7 +48,7 @@ type DescribeChannelBanInput struct {
 
 type DescribeChannelBanOutput struct {
 
-	// The the details of the ban.
+	// The details of the ban.
 	ChannelBan *types.ChannelBan
 
 	// Metadata pertaining to the operation's result.

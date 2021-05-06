@@ -39,12 +39,6 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The current application version ID. You can retrieve the application version ID
-	// using DescribeApplication.
-	//
-	// This member is required.
-	CurrentApplicationVersionId *int64
-
 	// Describes application configuration updates.
 	ApplicationConfigurationUpdate *types.ApplicationConfigurationUpdate
 
@@ -52,6 +46,16 @@ type UpdateApplicationInput struct {
 	// update existing CloudWatch logging options with this action. To add a new
 	// CloudWatch logging option, use AddApplicationCloudWatchLoggingOption.
 	CloudWatchLoggingOptionUpdates []types.CloudWatchLoggingOptionUpdate
+
+	// A value you use to implement strong concurrency for application updates. You
+	// must provide the ApplicationVersionID or the ConditionalToken. You get the
+	// application's current ConditionalToken using DescribeApplication.
+	ConditionalToken *string
+
+	// The current application version ID. You must provide the ApplicationVersionID or
+	// the ConditionalToken.You can retrieve the application version ID using
+	// DescribeApplication.
+	CurrentApplicationVersionId *int64
 
 	// Describes updates to the application's starting parameters.
 	RunConfigurationUpdate *types.RunConfigurationUpdate

@@ -58,10 +58,7 @@ type UpdateTaskSetInput struct {
 
 type UpdateTaskSetOutput struct {
 
-	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
-	// EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
-	// number of tasks, how many tasks are running, and whether the task set serves
-	// production traffic.
+	// Details about the task set.
 	TaskSet *types.TaskSet
 
 	// Metadata pertaining to the operation's result.

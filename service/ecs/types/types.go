@@ -98,15 +98,7 @@ type AutoScalingGroupProvider struct {
 // The details of the Auto Scaling group capacity provider to update.
 type AutoScalingGroupProviderUpdate struct {
 
-	// The managed scaling settings for the Auto Scaling group capacity provider. When
-	// managed scaling is enabled, Amazon ECS manages the scale-in and scale-out
-	// actions of the Auto Scaling group. Amazon ECS manages a target tracking scaling
-	// policy using an Amazon ECS-managed CloudWatch metric with the specified
-	// targetCapacity value as the target value for the metric. For more information,
-	// see Using Managed Scaling
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/asg-capacity-providers.html#asg-capacity-providers-managed-scaling)
-	// in the Amazon Elastic Container Service Developer Guide. If managed scaling is
-	// disabled, the user must manage the scaling of the Auto Scaling group.
+	// The managed scaling settings for the Auto Scaling group capacity provider.
 	ManagedScaling *ManagedScaling
 
 	// The managed termination protection setting to use for the Auto Scaling group
@@ -541,8 +533,7 @@ type ContainerDefinition struct {
 	// parameter maps to NetworkDisabled in the Create a container
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/). This
-	// parameter is not supported for Windows containers or tasks that use the awsvpc
-	// network mode.
+	// parameter is not supported for Windows containers.
 	DisableNetworking *bool
 
 	// A list of DNS search domains that are presented to the container. This parameter
@@ -551,8 +542,7 @@ type ContainerDefinition struct {
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
 	// --dns-search option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers or tasks that use the awsvpc
-	// network mode.
+	// parameter is not supported for Windows containers.
 	DnsSearchDomains []string
 
 	// A list of DNS servers that are presented to the container. This parameter maps
@@ -561,8 +551,7 @@ type ContainerDefinition struct {
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --dns
 	// option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers or tasks that use the awsvpc
-	// network mode.
+	// parameter is not supported for Windows containers.
 	DnsServers []string
 
 	// A key/value map of labels to add to the container. This parameter maps to Labels
@@ -745,11 +734,10 @@ type ContainerDefinition struct {
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --link
 	// option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers or tasks that use the awsvpc
-	// network mode. Containers that are collocated on a single container instance may
-	// be able to communicate with each other without requiring links or host port
-	// mappings. Network isolation is achieved on the container instance using security
-	// groups and VPC settings.
+	// parameter is not supported for Windows containers. Containers that are
+	// collocated on a single container instance may be able to communicate with each
+	// other without requiring links or host port mappings. Network isolation is
+	// achieved on the container instance using security groups and VPC settings.
 	Links []string
 
 	// Linux-specific modifications that are applied to the container, such as Linux
@@ -900,8 +888,7 @@ type ContainerDefinition struct {
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
 	// --read-only option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration). This
-	// parameter is not supported for Windows containers or tasks that use the awsvpc
-	// network mode.
+	// parameter is not supported for Windows containers.
 	ReadonlyRootFilesystem *bool
 
 	// The private repository authentication credentials to use.
@@ -986,12 +973,16 @@ type ContainerDefinition struct {
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the
 	// --ulimit option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration). Valid
-	// naming values are displayed in the Ulimit data type. This parameter requires
-	// version 1.18 of the Docker Remote API or greater on your container instance. To
-	// check the Docker Remote API version on your container instance, log in to your
-	// container instance and run the following command: sudo docker version --format
-	// '{{.Server.APIVersion}}' This parameter is not supported for Windows containers
-	// or tasks that use the awsvpc network mode.
+	// naming values are displayed in the Ulimit data type. Amazon ECS tasks hosted on
+	// Fargate use the default resource limit values set by the operating system with
+	// the exception of the nofile resource limit parameter which Fargate overrides.
+	// The nofile resource limit sets a restriction on the number of open files that a
+	// container can use. The default nofile soft limit is 1024 and hard limit is 4096.
+	// This parameter requires version 1.18 of the Docker Remote API or greater on your
+	// container instance. To check the Docker Remote API version on your container
+	// instance, log in to your container instance and run the following command: sudo
+	// docker version --format '{{.Server.APIVersion}}' This parameter is not supported
+	// for Windows containers.
 	Ulimits []Ulimit
 
 	// The user to use inside the container. This parameter maps to User in the Create
@@ -1019,7 +1010,7 @@ type ContainerDefinition struct {
 	// * uid:group
 	//
 	// This parameter is not supported for Windows
-	// containers or tasks that use the awsvpc network mode.
+	// containers.
 	User *string
 
 	// Data volumes to mount from another container. This parameter maps to VolumesFrom
@@ -1613,6 +1604,22 @@ type EnvironmentFile struct {
 	//
 	// This member is required.
 	Value *string
+}
+
+// The amount of ephemeral storage to allocate for the task. This parameter is used
+// to expand the total amount of ephemeral storage available, beyond the default
+// amount, for tasks hosted on AWS Fargate. For more information, see Fargate task
+// storage
+// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
+// in the Amazon ECS User Guide for AWS Fargate. This parameter is only supported
+// for tasks hosted on AWS Fargate using platform version 1.4.0 or later.
+type EphemeralStorage struct {
+
+	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
+	// supported value is 21 GiB and the maximum supported value is 200 GiB.
+	//
+	// This member is required.
+	SizeInGiB int32
 }
 
 // The details of the execute command configuration.
@@ -2342,9 +2349,10 @@ type PlatformDevice struct {
 // definition. If you are using containers in a task with the awsvpc or host
 // network mode, exposed ports should be specified using containerPort. The
 // hostPort can be left blank or it must be the same value as the containerPort.
-// After a task reaches the RUNNING status, manual and automatic host and container
-// port assignments are visible in the networkBindings section of DescribeTasks API
-// responses.
+// You cannot expose the same container port for multiple protocols. An error will
+// be returned if this is attempted After a task reaches the RUNNING status, manual
+// and automatic host and container port assignments are visible in the
+// networkBindings section of DescribeTasks API responses.
 type PortMapping struct {
 
 	// The port number on the container that is bound to the user-specified or
@@ -2936,6 +2944,9 @@ type Task struct {
 	// this enables execute command functionality on all containers in the task.
 	EnableExecuteCommand bool
 
+	// The ephemeral storage settings for the task.
+	EphemeralStorage *EphemeralStorage
+
 	// The Unix timestamp for when the task execution stopped.
 	ExecutionStoppedAt *time.Time
 
@@ -3123,6 +3134,9 @@ type TaskDefinition struct {
 
 	// The Unix timestamp for when the task definition was deregistered.
 	DeregisteredAt *time.Time
+
+	// The ephemeral storage settings to use for tasks run with the task definition.
+	EphemeralStorage *EphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
 	// ECS container agent permission to make AWS API calls on your behalf. The task
@@ -3344,6 +3358,10 @@ type TaskOverride struct {
 	// The cpu override for the task.
 	Cpu *string
 
+	// The ephemeral storage setting override for the task. This parameter is only
+	// supported for tasks hosted on AWS Fargate using platform version 1.4.0 or later.
+	EphemeralStorage *EphemeralStorage
+
 	// The Amazon Resource Name (ARN) of the task execution IAM role override for the
 	// task.
 	ExecutionRoleArn *string
@@ -3529,7 +3547,11 @@ type Tmpfs struct {
 	MountOptions []string
 }
 
-// The ulimit settings to pass to the container.
+// The ulimit settings to pass to the container. Amazon ECS tasks hosted on Fargate
+// use the default resource limit values set by the operating system with the
+// exception of the nofile resource limit parameter which Fargate overrides. The
+// nofile resource limit sets a restriction on the number of open files that a
+// container can use. The default nofile soft limit is 1024 and hard limit is 4096.
 type Ulimit struct {
 
 	// The hard limit for the ulimit type.

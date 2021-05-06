@@ -274,6 +274,12 @@
                         "smithy.api#documentation": "<p>A complex type that contains zero or more Lambda function associations for a cache \n\t\t\tbehavior.</p>"
                     }
                 },
+                "FunctionAssociations": {
+                    "target": "com.amazonaws.cloudfront#FunctionAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must\n\t\t\tbe published to the <code>LIVE</code> stage to associate them with a cache\n\t\t\tbehavior.</p>"
+                    }
+                },
                 "FieldLevelEncryptionId": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -289,7 +295,7 @@
                 "CachePolicyId": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the cache policy that is attached to this cache behavior. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the cache policy that is attached to this cache behavior. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the\n            <i>Amazon CloudFront Developer Guide</i>.</p>\n        <p>A <code>CacheBehavior</code> must include either a\n            <code>CachePolicyId</code> or <code>ForwardedValues</code>. We recommend that you\n            use a <code>CachePolicyId</code>.</p>"
                     }
                 },
                 "OriginRequestPolicyId": {
@@ -302,7 +308,7 @@
                     "target": "com.amazonaws.cloudfront#ForwardedValues",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>This field is deprecated. We recommend that you use a cache policy or an origin\n\t\t\trequest policy instead of this field. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html\">Working with policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to include values in the cache key, use a cache policy. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to send values to the origin but not include them in the cache key, use an\n\t\t\torigin request policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy\">Creating origin request policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html\">Using the managed origin request policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>"
+                        "smithy.api#documentation": "<p>This field is deprecated. We recommend that you use a cache policy or an origin\n\t\t\trequest policy instead of this field. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html\">Working with policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to include values in the cache key, use a cache policy. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to send values to the origin but not include them in the cache key, use an\n\t\t\torigin request policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy\">Creating origin request policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html\">Using the managed origin request policies</a> in the\n            <i>Amazon CloudFront Developer Guide</i>.</p>\n        <p>A <code>CacheBehavior</code> must include either a\n            <code>CachePolicyId</code> or <code>ForwardedValues</code>. We recommend that you\n            use a <code>CachePolicyId</code>.</p>\n\t\t       <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>"
                     }
                 },
                 "MinTTL": {
@@ -409,7 +415,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comment to describe the cache policy.</p>"
+                        "smithy.api#documentation": "<p>A comment to describe the cache policy. The comment cannot be longer than 128\n\t\t\tcharacters.</p>"
                     }
                 },
                 "Name": {
@@ -768,7 +774,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any comments you want to include about the origin access identity. </p>",
+                        "smithy.api#documentation": "<p>An optional comment to describe the origin access identity. The comment cannot be longer\n\t\t\tthan 128 characters.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -899,6 +905,9 @@
                     "target": "com.amazonaws.cloudfront#CreateFieldLevelEncryptionProfile"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#CreateFunction"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#CreateInvalidation"
                 },
                 {
@@ -938,6 +947,9 @@
                     "target": "com.amazonaws.cloudfront#DeleteFieldLevelEncryptionProfile"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#DeleteFunction"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#DeleteKeyGroup"
                 },
                 {
@@ -954,6 +966,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#DeleteStreamingDistribution"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#DescribeFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetCachePolicy"
@@ -984,6 +999,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetFieldLevelEncryptionProfileConfig"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#GetFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#GetInvalidation"
@@ -1049,6 +1067,9 @@
                     "target": "com.amazonaws.cloudfront#ListFieldLevelEncryptionProfiles"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#ListFunctions"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#ListInvalidations"
                 },
                 {
@@ -1070,7 +1091,13 @@
                     "target": "com.amazonaws.cloudfront#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#PublishFunction"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TestFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UntagResource"
@@ -1089,6 +1116,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateFieldLevelEncryptionProfile"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UpdateFunction"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#UpdateKeyGroup"
@@ -1461,6 +1491,9 @@
                     "target": "com.amazonaws.cloudfront#InvalidForwardCookies"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#InvalidFunctionAssociation"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#InvalidGeoRestrictionParameter"
                 },
                 {
@@ -1527,6 +1560,12 @@
                     "target": "com.amazonaws.cloudfront#NoSuchOriginRequestPolicy"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#NoSuchRealtimeLogConfig"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#RealtimeLogConfigOwnerMismatch"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#TooManyCacheBehaviors"
                 },
                 {
@@ -1554,10 +1593,16 @@
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsAssociatedToOriginRequestPolicy"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#TooManyDistributionsWithFunctionAssociations"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsWithLambdaAssociations"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsWithSingleFunctionARN"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TooManyFunctionAssociations"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyHeadersInForwardedValues"
@@ -1682,6 +1727,9 @@
                     "target": "com.amazonaws.cloudfront#InvalidForwardCookies"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#InvalidFunctionAssociation"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#InvalidGeoRestrictionParameter"
                 },
                 {
@@ -1751,6 +1799,12 @@
                     "target": "com.amazonaws.cloudfront#NoSuchOriginRequestPolicy"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#NoSuchRealtimeLogConfig"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#RealtimeLogConfigOwnerMismatch"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#TooManyCacheBehaviors"
                 },
                 {
@@ -1778,10 +1832,16 @@
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsAssociatedToOriginRequestPolicy"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#TooManyDistributionsWithFunctionAssociations"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsWithLambdaAssociations"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsWithSingleFunctionARN"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TooManyFunctionAssociations"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyHeadersInForwardedValues"
@@ -2035,6 +2095,89 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#CreateFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#CreateFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#CreateFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#FunctionAlreadyExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#FunctionSizeLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TooManyFunctions"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a CloudFront function.</p>\n\t\t       <p>To create a function, you provide the function code and some configuration information\n\t\t\tabout the function. The response contains an Amazon Resource Name (ARN) that uniquely\n\t\t\tidentifies the function.</p>\n\t\t       <p>When you create a function, it’s in the <code>DEVELOPMENT</code> stage. In this stage, you\n\t\t\tcan test the function with <code>TestFunction</code>, and update it with\n\t\t\t<code>UpdateFunction</code>.</p>\n\t\t       <p>When you’re ready to use your function with a CloudFront distribution, use\n\t\t\t<code>PublishFunction</code> to copy the function from the <code>DEVELOPMENT</code>\n\t\t\tstage to <code>LIVE</code>. When it’s live, you can attach the function to a\n\t\t\tdistribution’s cache behavior, using the function’s ARN.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/function",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#FunctionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name to identify the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionConfig": {
+                    "target": "com.amazonaws.cloudfront#FunctionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information about the function, including an optional comment and the\n\t\t\tfunction’s runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionCode": {
+                    "target": "com.amazonaws.cloudfront#FunctionBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function code. For more information about writing a CloudFront function, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html\">Writing function\n\t\t\tcode for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#CreateFunctionResult": {
+            "type": "structure",
+            "members": {
+                "FunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#FunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration information and metadata about a CloudFront function.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "Location": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the CloudFront function. Use the URL to manage the function with the CloudFront\n\t\t\tAPI.</p>",
+                        "smithy.api#httpHeader": "Location"
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the CloudFront function.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#CreateInvalidation": {
             "type": "operation",
             "input": {
@@ -2207,6 +2350,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#NoSuchDistribution"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
                 }
             ],
             "traits": {
@@ -2864,6 +3010,12 @@
                         "smithy.api#documentation": "<p>A complex type that contains zero or more Lambda function associations for a cache \n\t\t\tbehavior.</p>"
                     }
                 },
+                "FunctionAssociations": {
+                    "target": "com.amazonaws.cloudfront#FunctionAssociations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must\n\t\t\tbe published to the <code>LIVE</code> stage to associate them with a cache\n\t\t\tbehavior.</p>"
+                    }
+                },
                 "FieldLevelEncryptionId": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
@@ -2879,7 +3031,7 @@
                 "CachePolicyId": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the cache policy that is attached to the default cache behavior.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the cache policy that is attached to the default cache behavior.\n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the\n            <i>Amazon CloudFront Developer Guide</i>.</p>\n        <p>A <code>DefaultCacheBehavior</code> must include either a\n            <code>CachePolicyId</code> or <code>ForwardedValues</code>. We recommend that you\n            use a <code>CachePolicyId</code>.</p>"
                     }
                 },
                 "OriginRequestPolicyId": {
@@ -2892,7 +3044,7 @@
                     "target": "com.amazonaws.cloudfront#ForwardedValues",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>This field is deprecated. We recommend that you use a cache policy or an origin request\n\t\t\tpolicy instead of this field. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html\">Working with policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to include values in the cache key, use a cache policy. For more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to send values to the origin but not include them in the cache key, use an\n\t\t\torigin request policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy\">Creating origin request policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html\">Using the managed origin request policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>"
+                        "smithy.api#documentation": "<p>This field is deprecated. We recommend that you use a cache policy or an origin request\n\t\t\tpolicy instead of this field. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/working-with-policies.html\">Working with policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to include values in the cache key, use a cache policy. For more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html\">Using the managed cache policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to send values to the origin but not include them in the cache key, use an\n\t\t\torigin request policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy\">Creating origin request policies</a> or <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html\">Using the managed origin request policies</a> in the\n            <i>Amazon CloudFront Developer Guide</i>.</p>\n        <p>A <code>DefaultCacheBehavior</code> must include either a\n            <code>CachePolicyId</code> or <code>ForwardedValues</code>. We recommend that you\n            use a <code>CachePolicyId</code>.</p>\n\t\t       <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>"
                     }
                 },
                 "MinTTL": {
@@ -3185,6 +3337,55 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#DeleteFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DeleteFunctionRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#FunctionInUse"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchFunctionExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a CloudFront function.</p>\n\t\t       <p>You cannot delete a function if it’s associated with a cache behavior. First, update your\n\t\t\tdistributions to remove the function association from all cache behaviors, then delete\n\t\t\tthe function.</p>\n\t\t       <p>To delete a function, you must provide the function’s name and version\n\t\t\t(<code>ETag</code> value). To get these values, you can use <code>ListFunctions</code>\n\t\t\tand <code>DescribeFunction</code>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2020-05-31/function/{Name}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DeleteFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function that you are deleting.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the function that you are deleting, which\n\t\t\tyou can get using <code>DescribeFunction</code>.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#DeleteKeyGroup": {
             "type": "operation",
             "input": {
@@ -3247,6 +3448,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#NoSuchDistribution"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
                 }
             ],
             "traits": {
@@ -3479,6 +3683,67 @@
                 "smithy.api#documentation": "<p>The request to delete a streaming distribution.</p>"
             }
         },
+        "com.amazonaws.cloudfront#DescribeFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#DescribeFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#DescribeFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchFunctionExists"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets configuration information and metadata about a CloudFront function, but not the function’s\n\t\t\tcode. To get a function’s code, use <code>GetFunction</code>.</p>\n\t\t       <p>To get configuration information and metadata about a function, you must provide the\n\t\t\tfunction’s name and stage. To get these values, you can use\n\t\t\t<code>ListFunctions</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/function/{Name}/describe",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DescribeFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function that you are getting information about.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function’s stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.</p>",
+                        "smithy.api#httpQuery": "Stage"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#DescribeFunctionResult": {
+            "type": "structure",
+            "members": {
+                "FunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#FunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration information and metadata about a CloudFront function.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the CloudFront function.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#Distribution": {
             "type": "structure",
             "members": {
@@ -3624,7 +3889,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#CommentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any comments you want to include about the distribution.</p> \n\t\t       <p>If you don't want to specify a comment, include an empty <code>Comment</code> \n\t\t\telement.</p> \n\t\t       <p>To delete an existing comment, update the distribution configuration and include an \n\t\t\tempty <code>Comment</code> element.</p> \n\t\t       <p>To add or change a comment, update the distribution configuration and specify the new \n\t\t\tcomment.</p>",
+                        "smithy.api#documentation": "<p>An optional comment to describe the distribution. The comment cannot be longer than 128\n\t\t\tcharacters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4128,7 +4393,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional comment about the configuration.</p>"
+                        "smithy.api#documentation": "<p>An optional comment about the configuration. The comment cannot be longer than 128\n\t\t\tcharacters.</p>"
                     }
                 },
                 "QueryArgProfileConfig": {
@@ -4270,7 +4535,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional comment for the field-level encryption profile.</p>"
+                        "smithy.api#documentation": "<p>An optional comment for the field-level encryption profile. The comment cannot be longer\n\t\t\tthan 128 characters.</p>"
                     }
                 },
                 "EncryptionEntities": {
@@ -4379,7 +4644,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional comment for the field-level encryption profile summary.</p>"
+                        "smithy.api#documentation": "<p>An optional comment for the field-level encryption profile summary. The comment cannot be\n\t\t\tlonger than 128 characters.</p>"
                     }
                 }
             },
@@ -4416,7 +4681,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional comment about the field-level encryption item.</p>"
+                        "smithy.api#documentation": "<p>An optional comment about the field-level encryption item. The comment cannot be longer than\n\t\t\t128 characters.</p>"
                     }
                 },
                 "QueryArgProfileConfig": {
@@ -4527,6 +4792,303 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>This field is deprecated. We recommend that you use a cache policy or an origin\n\t\t\trequest policy instead of this field.</p>\n\t\t       <p>If you want to include values in the cache key, use a cache policy. For more information,\n\t\t\tsee <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy\">Creating cache policies</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>If you want to send values to the origin but not include them in the cache key, use an\n\t\t\torigin request policy. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy\">Creating origin request policies</a> in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p> \n\t\t       <p>A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 108
+                },
+                "smithy.api#pattern": "arn:aws:cloudfront::[0-9]{12}:function\\/[a-zA-Z0-9-_]{1,64}$"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionAlreadyExists": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A function with the same name already exists in this AWS account. To create a\n\t\t\tfunction, you must provide a unique name. To update an existing function, use\n\t\t\t<code>UpdateFunction</code>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionAssociation": {
+            "type": "structure",
+            "members": {
+                "FunctionARN": {
+                    "target": "com.amazonaws.cloudfront#FunctionARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EventType": {
+                    "target": "com.amazonaws.cloudfront#EventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event type of the function, either <code>viewer-request</code> or\n\t\t\t<code>viewer-response</code>. You cannot use origin-facing event types\n\t\t\t(<code>origin-request</code> and <code>origin-response</code>) with a CloudFront\n\t\t\tfunction.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CloudFront function that is associated with a cache behavior in a CloudFront\n\t\t\tdistribution.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#FunctionAssociation",
+                "traits": {
+                    "smithy.api#xmlName": "FunctionAssociation"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionAssociations": {
+            "type": "structure",
+            "members": {
+                "Quantity": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CloudFront functions in the list.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.cloudfront#FunctionAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudFront functions that are associated with a cache behavior in a CloudFront distribution.  CloudFront\n\t\t\tfunctions must be published to the <code>LIVE</code> stage to associate them with a\n\t\t\tcache behavior.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of CloudFront functions that are associated with a cache behavior in a CloudFront distribution.\n\t\t\tCloudFront functions must be published to the <code>LIVE</code> stage to associate them with a\n\t\t\tcache behavior.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionBlob": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 40960
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionConfig": {
+            "type": "structure",
+            "members": {
+                "Comment": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A comment to describe the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Runtime": {
+                    "target": "com.amazonaws.cloudfront#FunctionRuntime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function’s runtime environment. The only valid value is\n\t\t\t<code>cloudfront-js-1.0</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration information about a CloudFront function.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionEventObject": {
+            "type": "blob",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 40960
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionExecutionLogList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#string"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionInUse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cannot delete the function because it’s attached to one or more cache\n\t\t\tbehaviors.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionList": {
+            "type": "structure",
+            "members": {
+                "NextMarker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are more items in the list than are in this response, this element is\n\t\t\tpresent. It contains the value that you should use in the <code>Marker</code> field of a\n\t\t\tsubsequent request to continue listing functions where you left off.</p>"
+                    }
+                },
+                "MaxItems": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of functions requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Quantity": {
+                    "target": "com.amazonaws.cloudfront#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of functions returned in the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.cloudfront#FunctionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the functions in the list.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of CloudFront functions.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionMetadata": {
+            "type": "structure",
+            "members": {
+                "FunctionARN": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the\n\t\t\tfunction.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stage that the function is in, either <code>DEVELOPMENT</code> or\n\t\t\t<code>LIVE</code>.</p>\n\t\t       <p>When a function is in the <code>DEVELOPMENT</code> stage, you can test the function with\n\t\t\t\t<code>TestFunction</code>, and update it with <code>UpdateFunction</code>.</p>\n\t\t       <p>When a function is in the <code>LIVE</code> stage, you can attach the function to a\n\t\t\tdistribution’s cache behavior, using the function’s ARN.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the function was created.</p>"
+                    }
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.cloudfront#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the function was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a CloudFront function.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]{1,64}$"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionRuntime": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "cloudfront-js-1.0",
+                        "name": "cloudfront_js_1_0"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionSizeLimitExceeded": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The function is too large. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> (formerly known as limits) in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 413
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionStage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DEVELOPMENT",
+                        "name": "DEVELOPMENT"
+                    },
+                    {
+                        "value": "LIVE",
+                        "name": "LIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionSummary": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#FunctionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudFront function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the CloudFront function.</p>"
+                    }
+                },
+                "FunctionConfig": {
+                    "target": "com.amazonaws.cloudfront#FunctionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration information about a CloudFront function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionMetadata": {
+                    "target": "com.amazonaws.cloudfront#FunctionMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains metadata about a CloudFront function.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains configuration information and metadata about a CloudFront function.</p>"
+            }
+        },
+        "com.amazonaws.cloudfront#FunctionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cloudfront#FunctionSummary",
+                "traits": {
+                    "smithy.api#xmlName": "FunctionSummary"
+                }
             }
         },
         "com.amazonaws.cloudfront#GeoRestriction": {
@@ -5188,6 +5750,74 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#GetFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#GetFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#GetFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchFunctionExists"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the code of a CloudFront function. To get configuration information and metadata about\n\t\t\ta function, use <code>DescribeFunction</code>.</p>\n\t\t       <p>To get a function’s code, you must provide the function’s name and stage. To get these\n\t\t\tvalues, you can use <code>ListFunctions</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/function/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function whose code you are getting.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function’s stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.</p>",
+                        "smithy.api#httpQuery": "Stage"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#GetFunctionResult": {
+            "type": "structure",
+            "members": {
+                "FunctionCode": {
+                    "target": "com.amazonaws.cloudfront#FunctionBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function code of a CloudFront function.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the CloudFront function.</p>",
+                        "smithy.api#httpHeader": "ETag"
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content type (media type) of the response.</p>",
+                        "smithy.api#httpHeader": "Content-Type"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#GetInvalidation": {
             "type": "operation",
             "input": {
@@ -5395,6 +6025,9 @@
                 },
                 {
                     "target": "com.amazonaws.cloudfront#NoSuchDistribution"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#UnsupportedOperation"
                 }
             ],
             "traits": {
@@ -6027,6 +6660,19 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudfront#InvalidFunctionAssociation": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A CloudFront function association is invalid.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudfront#InvalidGeoRestrictionParameter": {
             "type": "structure",
             "members": {
@@ -6525,7 +7171,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comment to describe the key group.</p>"
+                        "smithy.api#documentation": "<p>A comment to describe the key group. The comment cannot be longer than 128\n\t\t\tcharacters.</p>"
                     }
                 }
             },
@@ -7335,6 +7981,66 @@
                 }
             }
         },
+        "com.amazonaws.cloudfront#ListFunctions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#ListFunctionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#ListFunctionsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a list of all CloudFront functions in your AWS account.</p>\n\t\t       <p>You can optionally apply a filter to return only the functions that are in the\n\t\t\tspecified stage, either <code>DEVELOPMENT</code> or <code>LIVE</code>.</p>\n\t\t       <p>You can optionally specify the maximum number of items to receive in the response. If\n\t\t\tthe total number of items in the list exceeds the maximum that you specify, or the\n\t\t\tdefault maximum, the response is paginated. To get the next page of items, send a\n\t\t\tsubsequent request that specifies the <code>NextMarker</code> value from the current\n\t\t\tresponse as the <code>Marker</code> value in the subsequent request.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2020-05-31/function",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListFunctionsRequest": {
+            "type": "structure",
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use this field when paginating results to indicate where to begin in your list of\n\t\t\tfunctions. The response includes functions in the list that occur after the marker. To\n\t\t\tget the next page of the list, set this field’s value to the value of\n\t\t\t<code>NextMarker</code> from the current page’s response.</p>",
+                        "smithy.api#httpQuery": "Marker"
+                    }
+                },
+                "MaxItems": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of functions that you want in the response.</p>",
+                        "smithy.api#httpQuery": "MaxItems"
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter to return only the functions that are in the specified stage,\n\t\t\teither <code>DEVELOPMENT</code> or <code>LIVE</code>.</p>",
+                        "smithy.api#httpQuery": "Stage"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#ListFunctionsResult": {
+            "type": "structure",
+            "members": {
+                "FunctionList": {
+                    "target": "com.amazonaws.cloudfront#FunctionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of CloudFront functions.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.cloudfront#ListInvalidations": {
             "type": "operation",
             "input": {
@@ -7985,6 +8691,19 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.cloudfront#NoSuchFunctionExists": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The function does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
         "com.amazonaws.cloudfront#NoSuchInvalidation": {
             "type": "structure",
             "members": {
@@ -8382,7 +9101,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comment to describe the origin request policy.</p>"
+                        "smithy.api#documentation": "<p>A comment to describe the origin request policy. The comment cannot be longer than 128\n\t\t\tcharacters.</p>"
                     }
                 },
                 "Name": {
@@ -8784,7 +9503,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The precondition given in one or more of the request header fields evaluated to\n\t\t\t<code>false</code>.</p>",
+                "smithy.api#documentation": "<p>The precondition in one or more of the request fields evaluated to\n\t\t\t<code>false</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 412
             }
@@ -8877,7 +9596,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comment to describe the public key.</p>"
+                        "smithy.api#documentation": "<p>A comment to describe the public key. The comment cannot be longer than 128\n\t\t\tcharacters.</p>"
                     }
                 }
             },
@@ -8975,7 +9694,7 @@
                 "Comment": {
                     "target": "com.amazonaws.cloudfront#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A comment to describe the public key.</p>"
+                        "smithy.api#documentation": "<p>A comment to describe the public key. The comment cannot be longer than 128\n\t\t\tcharacters.</p>"
                     }
                 }
             },
@@ -8989,6 +9708,70 @@
                 "target": "com.amazonaws.cloudfront#PublicKeySummary",
                 "traits": {
                     "smithy.api#xmlName": "PublicKeySummary"
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#PublishFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#PublishFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#PublishFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchFunctionExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Publishes a CloudFront function by copying the function code from the <code>DEVELOPMENT</code>\n\t\t\tstage to <code>LIVE</code>. This automatically updates all cache behaviors that are\n\t\t\tusing this function to use the newly published copy in the <code>LIVE</code>\n\t\t\tstage.</p>\n\t\t       <p>When a function is published to the <code>LIVE</code> stage, you can attach the function to\n\t\t\ta distribution’s cache behavior, using the function’s Amazon Resource Name (ARN).</p>\n\t\t       <p>To publish a function, you must provide the function’s name and version (<code>ETag</code>\n\t\t\tvalue). To get these values, you can use <code>ListFunctions</code> and\n\t\t\t<code>DescribeFunction</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/function/{Name}/publish",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#PublishFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function that you are publishing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the function that you are publishing, which\n\t\t\tyou can get using <code>DescribeFunction</code>.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#PublishFunctionResult": {
+            "type": "structure",
+            "members": {
+                "FunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#FunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration information and metadata about a CloudFront function.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
                 }
             }
         },
@@ -9211,6 +9994,19 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudfront#RealtimeLogConfig"
+            }
+        },
+        "com.amazonaws.cloudfront#RealtimeLogConfigOwnerMismatch": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified real-time log configuration belongs to a different AWS account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
             }
         },
         "com.amazonaws.cloudfront#RealtimeLogConfigs": {
@@ -9949,6 +10745,134 @@
                 "smithy.api#documentation": "<p> A complex type that contains zero or more <code>Tag</code> elements.</p>"
             }
         },
+        "com.amazonaws.cloudfront#TestFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#TestFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#TestFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchFunctionExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TestFunctionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tests a CloudFront function.</p>\n\t\t       <p>To test a function, you provide an <i>event object</i> that represents an HTTP\n\t\t\trequest or response that your CloudFront distribution could receive in production. CloudFront runs\n\t\t\tthe function, passing it the event object that you provided, and returns the function’s\n\t\t\tresult (the modified event object) in the response. The response also contains function\n\t\t\tlogs and error messages, if any exist. For more information about testing functions, see\n\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function\">Testing functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>\n\t\t       <p>To test a function, you provide the function’s name and version (<code>ETag</code> value)\n\t\t\talong with the event object. To get the function’s name and version, you can use\n\t\t\t<code>ListFunctions</code> and <code>DescribeFunction</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/2020-05-31/function/{Name}/test",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#TestFunctionFailed": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CloudFront function failed.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.cloudfront#TestFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function that you are testing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the function that you are testing, which\n\t\t\tyou can get using <code>DescribeFunction</code>.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Stage": {
+                    "target": "com.amazonaws.cloudfront#FunctionStage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The stage of the function that you are testing, either <code>DEVELOPMENT</code> or\n\t\t\t<code>LIVE</code>.</p>"
+                    }
+                },
+                "EventObject": {
+                    "target": "com.amazonaws.cloudfront#FunctionEventObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event object to test the function with. For more information about the structure of the\n\t\t\tevent object, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/managing-functions.html#test-function\">Testing functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#TestFunctionResult": {
+            "type": "structure",
+            "members": {
+                "TestResult": {
+                    "target": "com.amazonaws.cloudfront#TestResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that represents the result of running the function with the provided event\n\t\t\tobject.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#TestResult": {
+            "type": "structure",
+            "members": {
+                "FunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#FunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration information and metadata about the CloudFront function that was\n\t\t\ttested.</p>"
+                    }
+                },
+                "ComputeUtilization": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of time that the function took to run as a percentage of the maximum\n\t\t\tallowed time. For example, a compute utilization of 35 means that the function completed\n\t\t\tin 35% of the maximum allowed time.</p>"
+                    }
+                },
+                "FunctionExecutionLogs": {
+                    "target": "com.amazonaws.cloudfront#FunctionExecutionLogList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the log lines that the function wrote (if any) when running the test.</p>"
+                    }
+                },
+                "FunctionErrorMessage": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of testing the function was an error, this field contains the error\n\t\t\tmessage.</p>"
+                    }
+                },
+                "FunctionOutput": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event object returned by the function. For more information about the structure of the\n\t\t\tevent object, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/functions-event-structure.html\">Event object\n\t\t\tstructure</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the result of testing a CloudFront function with <code>TestFunction</code>.</p>"
+            }
+        },
         "com.amazonaws.cloudfront#TooManyCacheBehaviors": {
             "type": "structure",
             "members": {
@@ -10118,6 +11042,19 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.cloudfront#TooManyDistributionsWithFunctionAssociations": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have reached the maximum number of distributions that are associated with a CloudFront\n\t\t\tfunction. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> (formerly known as limits) in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudfront#TooManyDistributionsWithLambdaAssociations": {
             "type": "structure",
             "members": {
@@ -10218,6 +11155,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The maximum number of query arg profiles for field-level encryption have been created.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudfront#TooManyFunctionAssociations": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have reached the maximum number of CloudFront function associations for this\n\t\t\tdistribution. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> (formerly known as limits) in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.cloudfront#TooManyFunctions": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You have reached the maximum number of CloudFront functions for this AWS account. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html\">Quotas</a> (formerly known as limits) in the\n\t\t\t<i>Amazon CloudFront Developer Guide</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -10573,6 +11536,19 @@
                 "smithy.api#documentation": "<p>A list of AWS accounts whose public keys CloudFront can use to verify the signatures of signed\n\t\t\tURLs and signed cookies.</p>"
             }
         },
+        "com.amazonaws.cloudfront#UnsupportedOperation": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.cloudfront#string"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This operation is not supported in this region.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.cloudfront#UntagResource": {
             "type": "operation",
             "input": {
@@ -10860,6 +11836,9 @@
                     "target": "com.amazonaws.cloudfront#InvalidForwardCookies"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#InvalidFunctionAssociation"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#InvalidGeoRestrictionParameter"
                 },
                 {
@@ -10926,7 +11905,13 @@
                     "target": "com.amazonaws.cloudfront#NoSuchOriginRequestPolicy"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#NoSuchRealtimeLogConfig"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#RealtimeLogConfigOwnerMismatch"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyCacheBehaviors"
@@ -10953,10 +11938,16 @@
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsAssociatedToOriginRequestPolicy"
                 },
                 {
+                    "target": "com.amazonaws.cloudfront#TooManyDistributionsWithFunctionAssociations"
+                },
+                {
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsWithLambdaAssociations"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyDistributionsWithSingleFunctionARN"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#TooManyFunctionAssociations"
                 },
                 {
                     "target": "com.amazonaws.cloudfront#TooManyHeadersInForwardedValues"
@@ -11251,6 +12242,94 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The result of the field-level encryption profile request. </p>",
                         "smithy.api#httpHeader": "ETag"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateFunction": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cloudfront#UpdateFunctionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.cloudfront#UpdateFunctionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cloudfront#FunctionSizeLimitExceeded"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidArgument"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#InvalidIfMatchVersion"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#NoSuchFunctionExists"
+                },
+                {
+                    "target": "com.amazonaws.cloudfront#PreconditionFailed"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a CloudFront function.</p>\n\t\t       <p>You can update a function’s code or the comment that describes the function. You\n\t\t\tcannot update a function’s name.</p>\n\t\t       <p>To update a function, you provide the function’s name and version (<code>ETag</code> value)\n\t\t\talong with the updated function code. To get the name and version, you can use\n\t\t\t<code>ListFunctions</code> and <code>DescribeFunction</code>.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2020-05-31/function/{Name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateFunctionRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the function that you are updating.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IfMatch": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current version (<code>ETag</code> value) of the function that you are updating, which\n\t\t\tyou can get using <code>DescribeFunction</code>.</p>",
+                        "smithy.api#httpHeader": "If-Match",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionConfig": {
+                    "target": "com.amazonaws.cloudfront#FunctionConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information about the function.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FunctionCode": {
+                    "target": "com.amazonaws.cloudfront#FunctionBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The function code. For more information about writing a CloudFront function, see <a href=\"https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html\">Writing function\n\t\t\tcode for CloudFront Functions</a> in the <i>Amazon CloudFront Developer Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cloudfront#UpdateFunctionResult": {
+            "type": "structure",
+            "members": {
+                "FunctionSummary": {
+                    "target": "com.amazonaws.cloudfront#FunctionSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains configuration information and metadata about a CloudFront function.</p>",
+                        "smithy.api#httpPayload": {}
+                    }
+                },
+                "ETag": {
+                    "target": "com.amazonaws.cloudfront#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version identifier for the current version of the CloudFront function.</p>",
+                        "smithy.api#httpHeader": "ETtag"
                     }
                 }
             }

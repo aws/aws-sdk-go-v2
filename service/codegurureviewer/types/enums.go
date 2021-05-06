@@ -2,6 +2,24 @@
 
 package types
 
+type EncryptionOption string
+
+// Enum values for EncryptionOption
+const (
+	EncryptionOptionAoCmk EncryptionOption = "AWS_OWNED_CMK"
+	EncryptionOptionCmCmk EncryptionOption = "CUSTOMER_MANAGED_CMK"
+)
+
+// Values returns all known values for EncryptionOption. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionOption) Values() []EncryptionOption {
+	return []EncryptionOption{
+		"AWS_OWNED_CMK",
+		"CUSTOMER_MANAGED_CMK",
+	}
+}
+
 type JobState string
 
 // Enum values for JobState

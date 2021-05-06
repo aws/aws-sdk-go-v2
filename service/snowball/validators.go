@@ -110,6 +110,26 @@ func (m *validateOpCreateJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLongTermPricing struct {
+}
+
+func (*validateOpCreateLongTermPricing) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLongTermPricing) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLongTermPricingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLongTermPricingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateReturnShippingLabel struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpDescribeJob) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeReturnShippingLabel struct {
+}
+
+func (*validateOpDescribeReturnShippingLabel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReturnShippingLabel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReturnShippingLabelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReturnShippingLabelInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +370,26 @@ func (m *validateOpUpdateJobShipmentState) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLongTermPricing struct {
+}
+
+func (*validateOpUpdateLongTermPricing) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLongTermPricing) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLongTermPricingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLongTermPricingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCancelClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelCluster{}, middleware.After)
 }
@@ -350,6 +410,10 @@ func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
 }
 
+func addOpCreateLongTermPricingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLongTermPricing{}, middleware.After)
+}
+
 func addOpCreateReturnShippingLabelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateReturnShippingLabel{}, middleware.After)
 }
@@ -364,6 +428,10 @@ func addOpDescribeClusterValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJob{}, middleware.After)
+}
+
+func addOpDescribeReturnShippingLabelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReturnShippingLabel{}, middleware.After)
 }
 
 func addOpGetJobManifestValidationMiddleware(stack *middleware.Stack) error {
@@ -392,6 +460,10 @@ func addOpUpdateJobValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateJobShipmentStateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateJobShipmentState{}, middleware.After)
+}
+
+func addOpUpdateLongTermPricingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLongTermPricing{}, middleware.After)
 }
 
 func validateEc2AmiResource(v *types.Ec2AmiResource) error {
@@ -509,6 +581,9 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 	if v.RoleARN == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleARN"))
 	}
+	if len(v.SnowballType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SnowballType"))
+	}
 	if len(v.ShippingOption) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ShippingOption"))
 	}
@@ -528,6 +603,21 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 		if err := validateJobResource(v.Resources); err != nil {
 			invalidParams.AddNested("Resources", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateLongTermPricingInput(v *CreateLongTermPricingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLongTermPricingInput"}
+	if len(v.LongTermPricingType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LongTermPricingType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -586,6 +676,21 @@ func validateOpDescribeJobInput(v *DescribeJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeReturnShippingLabelInput(v *DescribeReturnShippingLabelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReturnShippingLabelInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
@@ -706,6 +811,21 @@ func validateOpUpdateJobShipmentStateInput(v *UpdateJobShipmentStateInput) error
 	}
 	if len(v.ShipmentState) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ShipmentState"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLongTermPricingInput(v *UpdateLongTermPricingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLongTermPricingInput"}
+	if v.LongTermPricingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LongTermPricingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

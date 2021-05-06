@@ -22,6 +22,9 @@ type Change struct {
 	//
 	// This member is required.
 	Entity *Entity
+
+	// Optional name for the change.
+	ChangeName *string
 }
 
 // A summary of a change set returned in a list of change sets when the
@@ -65,6 +68,9 @@ type ChangeSetSummaryListItem struct {
 // summary doesn't contain the whole change structure.
 type ChangeSummary struct {
 
+	// Optional name for the change.
+	ChangeName *string
+
 	// The type of the change.
 	ChangeType *string
 
@@ -79,8 +85,8 @@ type ChangeSummary struct {
 	ErrorDetailList []ErrorDetail
 }
 
-// A product entity contains data that describes your product, its supported
-// features, and how it can be used or launched by your customer.
+// An entity contains data that describes your product, its supported features, and
+// how it can be used or launched by your customer.
 type Entity struct {
 
 	// The type of entity.

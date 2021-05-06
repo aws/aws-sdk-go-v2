@@ -4,6 +4,7 @@ package personalize
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
@@ -110,6 +111,91 @@ func addOperationListFiltersMiddlewares(stack *middleware.Stack, options Options
 		return err
 	}
 	return nil
+}
+
+// ListFiltersAPIClient is a client that implements the ListFilters operation.
+type ListFiltersAPIClient interface {
+	ListFilters(context.Context, *ListFiltersInput, ...func(*Options)) (*ListFiltersOutput, error)
+}
+
+var _ ListFiltersAPIClient = (*Client)(nil)
+
+// ListFiltersPaginatorOptions is the paginator options for ListFilters
+type ListFiltersPaginatorOptions struct {
+	// The maximum number of filters to return.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListFiltersPaginator is a paginator for ListFilters
+type ListFiltersPaginator struct {
+	options   ListFiltersPaginatorOptions
+	client    ListFiltersAPIClient
+	params    *ListFiltersInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListFiltersPaginator returns a new ListFiltersPaginator
+func NewListFiltersPaginator(client ListFiltersAPIClient, params *ListFiltersInput, optFns ...func(*ListFiltersPaginatorOptions)) *ListFiltersPaginator {
+	if params == nil {
+		params = &ListFiltersInput{}
+	}
+
+	options := ListFiltersPaginatorOptions{}
+	if params.MaxResults != nil {
+		options.Limit = *params.MaxResults
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListFiltersPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListFiltersPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListFilters page.
+func (p *ListFiltersPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListFiltersOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxResults = limit
+
+	result, err := p.client.ListFilters(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListFilters(region string) *awsmiddleware.RegisterServiceMetadata {

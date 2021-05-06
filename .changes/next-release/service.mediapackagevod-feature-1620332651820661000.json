@@ -1,0 +1,9 @@
+{
+ "ID": "service.mediapackagevod-feature-1620332651820661000",
+ "SchemaVersion": 1,
+ "Module": "service/mediapackagevod",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

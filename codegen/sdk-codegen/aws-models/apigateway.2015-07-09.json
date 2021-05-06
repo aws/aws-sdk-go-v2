@@ -9898,7 +9898,7 @@
                 "basePath": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Required] The base path of the <a>BasePathMappipDocumentGetSdkInputng</a> resource to change.</p>\n        <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>",
+                        "smithy.api#documentation": "<p>[Required] The base path of the <a>BasePathMapping</a> resource to change.</p>\n        <p>To specify an empty base path, set this parameter to <code>'(none)'</code>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

@@ -421,7 +421,10 @@
             "type": "structure",
             "members": {
                 "managedScaling": {
-                    "target": "com.amazonaws.ecs#ManagedScaling"
+                    "target": "com.amazonaws.ecs#ManagedScaling",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The managed scaling settings for the Auto Scaling group capacity provider.</p>"
+                    }
                 },
                 "managedTerminationProtection": {
                     "target": "com.amazonaws.ecs#ManagedTerminationProtection",
@@ -1117,7 +1120,7 @@
                 "links": {
                     "target": "com.amazonaws.ecs#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>links</code> parameter allows containers to communicate with each other\n\t\t\twithout the need for port mappings. This parameter is only supported if the network mode\n\t\t\tof a task definition is <code>bridge</code>. The <code>name:internalName</code>\n\t\t\tconstruct is analogous to <code>name:alias</code> in Docker links.\n\t\t\tUp to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to\n\t\t\t\t<a href=\"https://docs.docker.com/network/links/\">Legacy container links</a>\n\t\t\tin the Docker documentation. This parameter maps to <code>Links</code> in the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the\n\t\t\t\t<code>--link</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker\n\t\t\trun</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p>\n                     </note> \n         <important>\n\t\t\t         <p>Containers that are collocated on a single container instance may be able to\n\t\t\t\tcommunicate with each other without requiring links or host port mappings. Network\n\t\t\t\tisolation is achieved on the container instance using security groups and VPC\n\t\t\t\tsettings.</p>\n\t\t       </important>"
+                        "smithy.api#documentation": "<p>The <code>links</code> parameter allows containers to communicate with each other\n\t\t\twithout the need for port mappings. This parameter is only supported if the network mode\n\t\t\tof a task definition is <code>bridge</code>. The <code>name:internalName</code>\n\t\t\tconstruct is analogous to <code>name:alias</code> in Docker links.\n\t\t\tUp to 255 letters (uppercase and lowercase), numbers, and hyphens are allowed. For more information about linking Docker containers, go to\n\t\t\t\t<a href=\"https://docs.docker.com/network/links/\">Legacy container links</a>\n\t\t\tin the Docker documentation. This parameter maps to <code>Links</code> in the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the\n\t\t\t\t<code>--link</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker\n\t\t\trun</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note> \n         <important>\n\t\t\t         <p>Containers that are collocated on a single container instance may be able to\n\t\t\t\tcommunicate with each other without requiring links or host port mappings. Network\n\t\t\t\tisolation is achieved on the container instance using security groups and VPC\n\t\t\t\tsettings.</p>\n\t\t       </important>"
                     }
                 },
                 "portMappings": {
@@ -1207,7 +1210,7 @@
                 "user": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user to use inside the container. This parameter maps to <code>User</code> in the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the\n\t\t\t\t<code>--user</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker\n\t\t\trun</a>.</p>\n\t\t       <important>\n\t\t\t         <p>When running tasks using the <code>host</code> network mode, you should not run\n\t\t\t\tcontainers using the root user (UID 0). It is considered best practice to use a\n\t\t\t\tnon-root user.</p>\n\t\t       </important>\n\t\t       <p>You can specify the <code>user</code> using the following formats. If specifying a UID\n\t\t\tor GID, you must specify it as a positive integer.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>user</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>user:group</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>uid</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>uid:gid</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>user:gid</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>uid:group</code>\n               </p>\n\t\t\t         </li>\n         </ul> \n         <note>\n                        <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p>\n                     </note>"
+                        "smithy.api#documentation": "<p>The user to use inside the container. This parameter maps to <code>User</code> in the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the\n\t\t\t\t<code>--user</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker\n\t\t\trun</a>.</p>\n\t\t       <important>\n\t\t\t         <p>When running tasks using the <code>host</code> network mode, you should not run\n\t\t\t\tcontainers using the root user (UID 0). It is considered best practice to use a\n\t\t\t\tnon-root user.</p>\n\t\t       </important>\n\t\t       <p>You can specify the <code>user</code> using the following formats. If specifying a UID\n\t\t\tor GID, you must specify it as a positive integer.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n                  <code>user</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>user:group</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>uid</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>uid:gid</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>user:gid</code>\n               </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>\n                  <code>uid:group</code>\n               </p>\n\t\t\t         </li>\n         </ul> \n         <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note>"
                     }
                 },
                 "workingDirectory": {
@@ -1219,7 +1222,7 @@
                 "disableNetworking": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>When this parameter is true, networking is disabled within the container. This\n\t\t\tparameter maps to <code>NetworkDisabled</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a>\n\t\t\tsection of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p>\n                     </note>"
+                        "smithy.api#documentation": "<p>When this parameter is true, networking is disabled within the container. This\n\t\t\tparameter maps to <code>NetworkDisabled</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a>\n\t\t\tsection of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note>"
                     }
                 },
                 "privileged": {
@@ -1231,19 +1234,19 @@
                 "readonlyRootFilesystem": {
                     "target": "com.amazonaws.ecs#BoxedBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>When this parameter is true, the container is given read-only access to its root file\n\t\t\tsystem. This parameter maps to <code>ReadonlyRootfs</code> in the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the\n\t\t\t\t<code>--read-only</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker\n\t\t\t\trun</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p>\n                     </note>"
+                        "smithy.api#documentation": "<p>When this parameter is true, the container is given read-only access to its root file\n\t\t\tsystem. This parameter maps to <code>ReadonlyRootfs</code> in the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the <a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the\n\t\t\t\t<code>--read-only</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker\n\t\t\t\trun</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note>"
                     }
                 },
                 "dnsServers": {
                     "target": "com.amazonaws.ecs#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DNS servers that are presented to the container. This parameter maps to\n\t\t\t\t<code>Dns</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--dns</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p>\n                     </note>"
+                        "smithy.api#documentation": "<p>A list of DNS servers that are presented to the container. This parameter maps to\n\t\t\t\t<code>Dns</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--dns</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note>"
                     }
                 },
                 "dnsSearchDomains": {
                     "target": "com.amazonaws.ecs#StringList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of DNS search domains that are presented to the container. This parameter maps\n\t\t\tto <code>DnsSearch</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--dns-search</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p>\n                     </note>"
+                        "smithy.api#documentation": "<p>A list of DNS search domains that are presented to the container. This parameter maps\n\t\t\tto <code>DnsSearch</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--dns-search</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>.</p> \n         <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note>"
                     }
                 },
                 "extraHosts": {
@@ -1279,7 +1282,7 @@
                 "ulimits": {
                     "target": "com.amazonaws.ecs#UlimitList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>ulimits</code> to set in the container. If a ulimit value is specified\n\t\t\tin a task definition, it will override the default values set by Docker. This parameter\n\t\t\tmaps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>. Valid naming values are displayed\n\t\t\tin the <a>Ulimit</a> data type. This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code> \n         </p> \n         <note>\n                        <p>This parameter is not supported for Windows containers or tasks that use the awsvpc network mode.</p>\n                     </note>"
+                        "smithy.api#documentation": "<p>A list of <code>ulimits</code> to set in the container. If a ulimit value is specified\n\t\t\tin a task definition, it will override the default values set by Docker. This parameter\n\t\t\tmaps to <code>Ulimits</code> in the <a href=\"https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate\">Create a container</a> section of the\n\t\t\t<a href=\"https://docs.docker.com/engine/api/v1.35/\">Docker Remote API</a> and the <code>--ulimit</code> option to <a href=\"https://docs.docker.com/engine/reference/run/#security-configuration\">docker run</a>. Valid naming values are displayed\n\t\t\tin the <a>Ulimit</a> data type.</p>\n\t\t       <p>Amazon ECS tasks hosted on Fargate use the default\n\t\t\t\t\t\t\tresource limit values set by the operating system with the exception of\n\t\t\t\t\t\t\tthe <code>nofile</code> resource limit parameter which Fargate\n\t\t\t\t\t\t\toverrides. The <code>nofile</code> resource limit sets a restriction on\n\t\t\t\t\t\t\tthe number of open files that a container can use. The default\n\t\t\t\t\t\t\t\t<code>nofile</code> soft limit is <code>1024</code> and hard limit\n\t\t\t\t\t\t\tis <code>4096</code>.</p>\n\t\t       <p>This parameter requires version 1.18 of the Docker Remote API or greater on your container instance. To check the Docker Remote API version on your container instance, log in to your container instance and run the following command: <code>sudo docker version --format '{{.Server.APIVersion}}'</code>\n         </p> \n         <note>\n                        <p>This parameter is not supported for Windows containers.</p>\n                     </note>"
                     }
                 },
                 "logConfiguration": {
@@ -1844,7 +1847,7 @@
                 "serviceRegistries": {
                     "target": "com.amazonaws.ecs#ServiceRegistries",
                     "traits": {
-                        "smithy.api#documentation": "<p>The details of the service discovery registries to assign to this service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service\n\t\t\t\tdiscovery</a>.</p>\n\t\t       <note>\n\t\t\t         <p>Service discovery is supported for Fargate tasks if you are using\n\t\t\t\tplatform version v1.1.0 or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html\">AWS Fargate platform\n\t\t\t\t\tversions</a>.</p>\n\t\t       </note>"
+                        "smithy.api#documentation": "<p>The details of the service discovery registry to associate with this service. For more\n\t\t\tinformation, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html\">Service\n\t\t\t\tdiscovery</a>.</p>\n\t\t       <note>\n\t\t\t         <p>Each service may be associated with one service registry. Multiple service\n\t\t\t\tregistries per service isn't supported.</p>\n\t\t       </note>"
                     }
                 },
                 "desiredCount": {
@@ -1922,7 +1925,7 @@
                 "deploymentController": {
                     "target": "com.amazonaws.ecs#DeploymentController",
                     "traits": {
-                        "smithy.api#documentation": "<p>The deployment controller to use for the service.</p>"
+                        "smithy.api#documentation": "<p>The deployment controller to use for the service. If no deployment controller is\n\t\t\tspecified, the default value of <code>ECS</code> is used.</p>"
                     }
                 },
                 "tags": {
@@ -2037,7 +2040,10 @@
                     }
                 },
                 "networkConfiguration": {
-                    "target": "com.amazonaws.ecs#NetworkConfiguration"
+                    "target": "com.amazonaws.ecs#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the network configuration for a task set.</p>"
+                    }
                 },
                 "loadBalancers": {
                     "target": "com.amazonaws.ecs#LoadBalancers",
@@ -2070,7 +2076,10 @@
                     }
                 },
                 "scale": {
-                    "target": "com.amazonaws.ecs#Scale"
+                    "target": "com.amazonaws.ecs#Scale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A floating-point percentage of the desired number of tasks to place and keep running\n\t\t\tin the task set.</p>"
+                    }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.ecs#String",
@@ -2090,7 +2099,10 @@
             "type": "structure",
             "members": {
                 "taskSet": {
-                    "target": "com.amazonaws.ecs#TaskSet"
+                    "target": "com.amazonaws.ecs#TaskSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an\n\t\t\t\t<code>EXTERNAL</code> deployment. A task set includes details such as the desired\n\t\t\tnumber of tasks, how many tasks are running, and whether the task set serves production\n\t\t\ttraffic.</p>"
+                    }
                 }
             }
         },
@@ -2237,7 +2249,10 @@
             "type": "structure",
             "members": {
                 "capacityProvider": {
-                    "target": "com.amazonaws.ecs#CapacityProvider"
+                    "target": "com.amazonaws.ecs#CapacityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the capacity provider.</p>"
+                    }
                 }
             }
         },
@@ -2443,7 +2458,10 @@
             "type": "structure",
             "members": {
                 "taskSet": {
-                    "target": "com.amazonaws.ecs#TaskSet"
+                    "target": "com.amazonaws.ecs#TaskSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the task set.</p>"
+                    }
                 }
             }
         },
@@ -3630,6 +3648,21 @@
                 "target": "com.amazonaws.ecs#KeyValuePair"
             }
         },
+        "com.amazonaws.ecs#EphemeralStorage": {
+            "type": "structure",
+            "members": {
+                "sizeInGiB": {
+                    "target": "com.amazonaws.ecs#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total amount, in GiB, of ephemeral storage to set for the task. The minimum\n\t\t\tsupported value is <code>21</code> GiB and the maximum supported value is\n\t\t\t\t<code>200</code> GiB.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on AWS Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for AWS Fargate</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on AWS Fargate using platform\n\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t       </note>"
+            }
+        },
         "com.amazonaws.ecs#ExecuteCommand": {
             "type": "operation",
             "input": {
@@ -4310,7 +4343,7 @@
                 "principalArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the principal, which can be an IAM user, IAM role, or the root user. If\n\t\t\tthis field is omitted, the account settings are listed only for the authenticated\n\t\t\tuser.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the principal, which can be an IAM user, IAM role, or the root user. If\n\t\t\tthis field is omitted, the account settings are listed only for the authenticated\n\t\t\tuser.</p>\n\t\t       <note>\n\t\t\t         <p>Federated users assume the account setting of the root user and can't have\n\t\t\t\texplicit account settings set for them.</p>\n\t\t       </note>"
                     }
                 },
                 "effectiveSettings": {
@@ -5636,7 +5669,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Port mappings allow containers to access ports on the host container instance to send\n\t\t\tor receive traffic. Port mappings are specified as part of the container\n\t\t\tdefinition.</p>\n\t\t       <p>If you are using containers in a task with the <code>awsvpc</code> or\n\t\t\t\t<code>host</code> network mode, exposed ports should be specified using\n\t\t\t\t<code>containerPort</code>. The <code>hostPort</code> can be left blank or it must\n\t\t\tbe the same value as the <code>containerPort</code>.</p>\n\t\t       <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and\n\t\t\tcontainer port assignments are visible in the <code>networkBindings</code> section of\n\t\t\t\t<a>DescribeTasks</a> API responses.</p>"
+                "smithy.api#documentation": "<p>Port mappings allow containers to access ports on the host container instance to send\n\t\t\tor receive traffic. Port mappings are specified as part of the container\n\t\t\tdefinition.</p>\n\t\t       <p>If you are using containers in a task with the <code>awsvpc</code> or\n\t\t\t\t<code>host</code> network mode, exposed ports should be specified using\n\t\t\t\t<code>containerPort</code>. The <code>hostPort</code> can be left blank or it must\n\t\t\tbe the same value as the <code>containerPort</code>.</p>\n\t\t       <note>\n\t\t\t         <p>You cannot expose the same container port for multiple protocols. An error will be\n\t\t\t\treturned if this is attempted</p>\n\t\t       </note>\n\t\t       <p>After a task reaches the <code>RUNNING</code> status, manual and automatic host and\n\t\t\tcontainer port assignments are visible in the <code>networkBindings</code> section of\n\t\t\t\t<a>DescribeTasks</a> API responses.</p>"
             }
         },
         "com.amazonaws.ecs#PortMappingList": {
@@ -5773,7 +5806,10 @@
             "type": "structure",
             "members": {
                 "setting": {
-                    "target": "com.amazonaws.ecs#Setting"
+                    "target": "com.amazonaws.ecs#Setting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current setting for a resource.</p>"
+                    }
                 }
             }
         },
@@ -5797,7 +5833,7 @@
                 "principalArn": {
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you\n\t\t\tspecify the root user, it modifies the account setting for all IAM users, IAM roles, and\n\t\t\tthe root user of the account unless an IAM user or role explicitly overrides these\n\t\t\tsettings. If this field is omitted, the setting is changed only for the authenticated\n\t\t\tuser.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the principal, which can be an IAM user, IAM role, or the root user. If you\n\t\t\tspecify the root user, it modifies the account setting for all IAM users, IAM roles, and\n\t\t\tthe root user of the account unless an IAM user or role explicitly overrides these\n\t\t\tsettings. If this field is omitted, the setting is changed only for the authenticated\n\t\t\tuser.</p>\n\t\t       <note>\n\t\t\t         <p>Federated users assume the account setting of the root user and can't have\n\t\t\t\texplicit account settings set for them.</p>\n\t\t       </note>"
                     }
                 }
             }
@@ -5930,7 +5966,10 @@
             "type": "structure",
             "members": {
                 "cluster": {
-                    "target": "com.amazonaws.ecs#Cluster"
+                    "target": "com.amazonaws.ecs#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the cluster.</p>"
+                    }
                 }
             }
         },
@@ -6134,12 +6173,21 @@
                     }
                 },
                 "proxyConfiguration": {
-                    "target": "com.amazonaws.ecs#ProxyConfiguration"
+                    "target": "com.amazonaws.ecs#ProxyConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details for the App Mesh proxy.</p>\n\t\t       <p>For tasks hosted on Amazon EC2 instances, the container instances require at least version\n\t\t\t\t<code>1.26.0</code> of the container agent and at least version\n\t\t\t\t<code>1.26.0-1</code> of the <code>ecs-init</code> package to enable a proxy\n\t\t\tconfiguration. If your container instances are launched from the Amazon ECS-optimized\n\t\t\tAMI version <code>20190301</code> or later, then they contain the required versions of\n\t\t\tthe container agent and <code>ecs-init</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-versions.html\">Amazon ECS-optimized AMI versions</a> in the\n\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                    }
                 },
                 "inferenceAccelerators": {
                     "target": "com.amazonaws.ecs#InferenceAccelerators",
                     "traits": {
                         "smithy.api#documentation": "<p>The Elastic Inference accelerators to use for the containers in the task.</p>"
+                    }
+                },
+                "ephemeralStorage": {
+                    "target": "com.amazonaws.ecs#EphemeralStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of ephemeral storage to allocate for the task. This parameter is used to\n\t\t\texpand the total amount of ephemeral storage available, beyond the default amount, for\n\t\t\ttasks hosted on AWS Fargate. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html\">Fargate task\n\t\t\t\tstorage</a> in the <i>Amazon ECS User Guide for AWS Fargate</i>.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on AWS Fargate using platform\n\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t       </note>"
                     }
                 }
             }
@@ -7820,6 +7868,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The version counter for the task. Every time a task experiences a change that triggers\n\t\t\ta CloudWatch event, the version counter is incremented. If you are replicating your Amazon ECS task\n\t\t\tstate with CloudWatch Events, you can compare the version of a task reported by the Amazon ECS API\n\t\t\tactions with the version reported in CloudWatch Events for the task (inside the\n\t\t\t\t<code>detail</code> object) to verify that the version in your event stream is\n\t\t\tcurrent.</p>"
                     }
+                },
+                "ephemeralStorage": {
+                    "target": "com.amazonaws.ecs#EphemeralStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ephemeral storage settings for the task.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7959,6 +8013,12 @@
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The principal that registered the task definition.</p>"
+                    }
+                },
+                "ephemeralStorage": {
+                    "target": "com.amazonaws.ecs#EphemeralStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ephemeral storage settings to use for tasks run with the task definition.</p>"
                     }
                 }
             },
@@ -8108,6 +8168,12 @@
                     "target": "com.amazonaws.ecs#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that containers in this task can assume. All containers\n\t\t\tin this task are granted the permissions that are specified in this role.</p>"
+                    }
+                },
+                "ephemeralStorage": {
+                    "target": "com.amazonaws.ecs#EphemeralStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ephemeral storage setting override for the task.</p>\n\t\t       <note>\n\t\t\t         <p>This parameter is only supported for tasks hosted on AWS Fargate using platform\n\t\t\t\tversion <code>1.4.0</code> or later.</p>\n\t\t       </note>"
                     }
                 }
             },
@@ -8399,7 +8465,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>ulimit</code> settings to pass to the container.</p>"
+                "smithy.api#documentation": "<p>The <code>ulimit</code> settings to pass to the container.</p>\n\t\t       <p>Amazon ECS tasks hosted on Fargate use the default\n\t\t\t\t\t\t\tresource limit values set by the operating system with the exception of\n\t\t\t\t\t\t\tthe <code>nofile</code> resource limit parameter which Fargate\n\t\t\t\t\t\t\toverrides. The <code>nofile</code> resource limit sets a restriction on\n\t\t\t\t\t\t\tthe number of open files that a container can use. The default\n\t\t\t\t\t\t\t\t<code>nofile</code> soft limit is <code>1024</code> and hard limit\n\t\t\t\t\t\t\tis <code>4096</code>.</p>"
             }
         },
         "com.amazonaws.ecs#UlimitList": {
@@ -8585,7 +8651,10 @@
             "type": "structure",
             "members": {
                 "capacityProvider": {
-                    "target": "com.amazonaws.ecs#CapacityProvider"
+                    "target": "com.amazonaws.ecs#CapacityProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the capacity provider.</p>"
+                    }
                 }
             }
         },
@@ -8643,7 +8712,10 @@
             "type": "structure",
             "members": {
                 "cluster": {
-                    "target": "com.amazonaws.ecs#Cluster"
+                    "target": "com.amazonaws.ecs#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the cluster.</p>"
+                    }
                 }
             }
         },
@@ -8696,7 +8768,10 @@
             "type": "structure",
             "members": {
                 "cluster": {
-                    "target": "com.amazonaws.ecs#Cluster"
+                    "target": "com.amazonaws.ecs#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the cluster</p>"
+                    }
                 }
             }
         },
@@ -8732,7 +8807,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the Amazon ECS container agent on a specified container instance. Updating the\n\t\t\tAmazon ECS container agent does not interrupt running tasks or services on the container\n\t\t\tinstance. The process for updating the agent differs depending on whether your container\n\t\t\tinstance was launched with the Amazon ECS-optimized AMI or another operating system.</p>\n\t\t       <p>\n\t\t\t         <code>UpdateContainerAgent</code> requires the Amazon ECS-optimized AMI or Amazon Linux with\n\t\t\tthe <code>ecs-init</code> service installed and running. For help updating the Amazon ECS\n\t\t\tcontainer agent on other operating systems, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent\">Manually Updating the Amazon ECS Container Agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Updates the Amazon ECS container agent on a specified container instance. Updating the\n\t\t\tAmazon ECS container agent does not interrupt running tasks or services on the container\n\t\t\tinstance. The process for updating the agent differs depending on whether your container\n\t\t\tinstance was launched with the Amazon ECS-optimized AMI or another operating system.</p>\n\t\t       <note>\n\t\t\t         <p>The <code>UpdateContainerAgent</code> API isn't supported for container instances\n\t\t\t\tusing the Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent,\n\t\t\t\tyou can update the <code>ecs-init</code> package which will update the agent. For\n\t\t\t\tmore information, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html\">Updating the\n\t\t\t\t\tAmazon ECS container agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>\n\t\t       </note>\n\t\t       <p>The <code>UpdateContainerAgent</code> API requires an Amazon ECS-optimized AMI or Amazon\n\t\t\tLinux AMI with the <code>ecs-init</code> service installed and running. For help\n\t\t\tupdating the Amazon ECS container agent on other operating systems, see <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent\">Manually updating the Amazon ECS container agent</a> in the\n\t\t\t\t<i>Amazon Elastic Container Service Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.ecs#UpdateContainerAgentRequest": {
@@ -8956,7 +9031,10 @@
             "type": "structure",
             "members": {
                 "taskSet": {
-                    "target": "com.amazonaws.ecs#TaskSet"
+                    "target": "com.amazonaws.ecs#TaskSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the task set.</p>"
+                    }
                 }
             }
         },
@@ -9001,7 +9079,10 @@
                     }
                 },
                 "networkConfiguration": {
-                    "target": "com.amazonaws.ecs#NetworkConfiguration"
+                    "target": "com.amazonaws.ecs#NetworkConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object representing the network configuration for the service.</p>"
+                    }
                 },
                 "placementConstraints": {
                     "target": "com.amazonaws.ecs#PlacementConstraints",
@@ -9120,6 +9201,7 @@
                 "scale": {
                     "target": "com.amazonaws.ecs#Scale",
                     "traits": {
+                        "smithy.api#documentation": "<p>A floating-point percentage of the desired number of tasks to place and keep running\n\t\t\tin the task set.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9129,7 +9211,10 @@
             "type": "structure",
             "members": {
                 "taskSet": {
-                    "target": "com.amazonaws.ecs#TaskSet"
+                    "target": "com.amazonaws.ecs#TaskSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the task set.</p>"
+                    }
                 }
             }
         },

@@ -40,7 +40,7 @@ type CreateUserProfileInput struct {
 	// This member is required.
 	DomainId *string
 
-	// A name for the UserProfile.
+	// A name for the UserProfile. This value is not case sensitive.
 	//
 	// This member is required.
 	UserProfileName *string
@@ -58,7 +58,8 @@ type CreateUserProfileInput struct {
 	SingleSignOnUserValue *string
 
 	// Each tag consists of a key and an optional value. Tag keys must be unique per
-	// resource.
+	// resource. Tags that you specify for the User Profile are also added to all Apps
+	// that the User Profile launches.
 	Tags []types.Tag
 
 	// A collection of settings.

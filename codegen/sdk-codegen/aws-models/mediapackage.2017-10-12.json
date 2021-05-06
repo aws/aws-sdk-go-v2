@@ -165,6 +165,13 @@
         "com.amazonaws.mediapackage#CmafEncryption": {
             "type": "structure",
             "members": {
+                "ConstantInitializationVector": {
+                    "target": "com.amazonaws.mediapackage#__string",
+                    "traits": {
+                        "smithy.api#documentation": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
+                        "smithy.api#jsonName": "constantInitializationVector"
+                    }
+                },
                 "KeyRotationIntervalSeconds": {
                     "target": "com.amazonaws.mediapackage#__integer",
                     "traits": {

@@ -297,6 +297,61 @@ func (e *FieldLevelEncryptionProfileSizeExceeded) ErrorFault() smithy.ErrorFault
 	return smithy.FaultClient
 }
 
+// A function with the same name already exists in this AWS account. To create a
+// function, you must provide a unique name. To update an existing function, use
+// UpdateFunction.
+type FunctionAlreadyExists struct {
+	Message *string
+}
+
+func (e *FunctionAlreadyExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FunctionAlreadyExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FunctionAlreadyExists) ErrorCode() string             { return "FunctionAlreadyExists" }
+func (e *FunctionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Cannot delete the function because it’s attached to one or more cache behaviors.
+type FunctionInUse struct {
+	Message *string
+}
+
+func (e *FunctionInUse) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FunctionInUse) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FunctionInUse) ErrorCode() string             { return "FunctionInUse" }
+func (e *FunctionInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The function is too large. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type FunctionSizeLimitExceeded struct {
+	Message *string
+}
+
+func (e *FunctionSizeLimitExceeded) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *FunctionSizeLimitExceeded) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *FunctionSizeLimitExceeded) ErrorCode() string             { return "FunctionSizeLimitExceeded" }
+func (e *FunctionSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You cannot delete a managed policy.
 type IllegalDelete struct {
 	Message *string
@@ -440,6 +495,23 @@ func (e *InvalidForwardCookies) ErrorMessage() string {
 }
 func (e *InvalidForwardCookies) ErrorCode() string             { return "InvalidForwardCookies" }
 func (e *InvalidForwardCookies) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A CloudFront function association is invalid.
+type InvalidFunctionAssociation struct {
+	Message *string
+}
+
+func (e *InvalidFunctionAssociation) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidFunctionAssociation) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidFunctionAssociation) ErrorCode() string             { return "InvalidFunctionAssociation" }
+func (e *InvalidFunctionAssociation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified geo restriction parameter is not valid.
 type InvalidGeoRestrictionParameter struct {
@@ -904,6 +976,23 @@ func (e *NoSuchFieldLevelEncryptionProfile) ErrorCode() string {
 }
 func (e *NoSuchFieldLevelEncryptionProfile) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The function does not exist.
+type NoSuchFunctionExists struct {
+	Message *string
+}
+
+func (e *NoSuchFunctionExists) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *NoSuchFunctionExists) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *NoSuchFunctionExists) ErrorCode() string             { return "NoSuchFunctionExists" }
+func (e *NoSuchFunctionExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified invalidation does not exist.
 type NoSuchInvalidation struct {
 	Message *string
@@ -1062,8 +1151,7 @@ func (e *OriginRequestPolicyInUse) ErrorMessage() string {
 func (e *OriginRequestPolicyInUse) ErrorCode() string             { return "OriginRequestPolicyInUse" }
 func (e *OriginRequestPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The precondition given in one or more of the request header fields evaluated to
-// false.
+// The precondition in one or more of the request fields evaluated to false.
 type PreconditionFailed struct {
 	Message *string
 }
@@ -1168,6 +1256,23 @@ func (e *RealtimeLogConfigInUse) ErrorMessage() string {
 func (e *RealtimeLogConfigInUse) ErrorCode() string             { return "RealtimeLogConfigInUse" }
 func (e *RealtimeLogConfigInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The specified real-time log configuration belongs to a different AWS account.
+type RealtimeLogConfigOwnerMismatch struct {
+	Message *string
+}
+
+func (e *RealtimeLogConfigOwnerMismatch) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RealtimeLogConfigOwnerMismatch) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RealtimeLogConfigOwnerMismatch) ErrorCode() string             { return "RealtimeLogConfigOwnerMismatch" }
+func (e *RealtimeLogConfigOwnerMismatch) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Cannot delete this resource because it is in use.
 type ResourceInUse struct {
 	Message *string
@@ -1226,6 +1331,23 @@ func (e *StreamingDistributionNotDisabled) ErrorCode() string {
 	return "StreamingDistributionNotDisabled"
 }
 func (e *StreamingDistributionNotDisabled) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The CloudFront function failed.
+type TestFunctionFailed struct {
+	Message *string
+}
+
+func (e *TestFunctionFailed) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TestFunctionFailed) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TestFunctionFailed) ErrorCode() string             { return "TestFunctionFailed" }
+func (e *TestFunctionFailed) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // You cannot create more cache behaviors for the distribution.
 type TooManyCacheBehaviors struct {
@@ -1494,6 +1616,30 @@ func (e *TooManyDistributionsAssociatedToOriginRequestPolicy) ErrorFault() smith
 	return smithy.FaultClient
 }
 
+// You have reached the maximum number of distributions that are associated with a
+// CloudFront function. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyDistributionsWithFunctionAssociations struct {
+	Message *string
+}
+
+func (e *TooManyDistributionsWithFunctionAssociations) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyDistributionsWithFunctionAssociations) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyDistributionsWithFunctionAssociations) ErrorCode() string {
+	return "TooManyDistributionsWithFunctionAssociations"
+}
+func (e *TooManyDistributionsWithFunctionAssociations) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // Processing your request would cause the maximum number of distributions with
 // Lambda function associations per owner to be exceeded.
 type TooManyDistributionsWithLambdaAssociations struct {
@@ -1668,6 +1814,46 @@ func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorCode() string {
 func (e *TooManyFieldLevelEncryptionQueryArgProfiles) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// You have reached the maximum number of CloudFront function associations for this
+// distribution. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyFunctionAssociations struct {
+	Message *string
+}
+
+func (e *TooManyFunctionAssociations) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyFunctionAssociations) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyFunctionAssociations) ErrorCode() string             { return "TooManyFunctionAssociations" }
+func (e *TooManyFunctionAssociations) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// You have reached the maximum number of CloudFront functions for this AWS
+// account. For more information, see Quotas
+// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/cloudfront-limits.html)
+// (formerly known as limits) in the Amazon CloudFront Developer Guide.
+type TooManyFunctions struct {
+	Message *string
+}
+
+func (e *TooManyFunctions) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TooManyFunctions) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TooManyFunctions) ErrorCode() string             { return "TooManyFunctions" }
+func (e *TooManyFunctions) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The number of headers in the cache policy exceeds the maximum. For more
 // information, see Quotas
@@ -2100,3 +2286,20 @@ func (e *TrustedSignerDoesNotExist) ErrorMessage() string {
 }
 func (e *TrustedSignerDoesNotExist) ErrorCode() string             { return "TrustedSignerDoesNotExist" }
 func (e *TrustedSignerDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// This operation is not supported in this region.
+type UnsupportedOperation struct {
+	Message *string
+}
+
+func (e *UnsupportedOperation) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnsupportedOperation) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnsupportedOperation) ErrorCode() string             { return "UnsupportedOperation" }
+func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

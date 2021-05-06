@@ -43,7 +43,7 @@ type UpdateCapacityProviderInput struct {
 
 type UpdateCapacityProviderOutput struct {
 
-	// The details of a capacity provider.
+	// Details about the capacity provider.
 	CapacityProvider *types.CapacityProvider
 
 	// Metadata pertaining to the operation's result.

@@ -155,6 +155,53 @@ func (m *awsAwsjson11_serializeOpCreateDataset) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateDatasetExportJob struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateDatasetExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateDatasetExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateDatasetExportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.CreateDatasetExportJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateDatasetExportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateDatasetGroup struct {
 }
 
@@ -1001,6 +1048,53 @@ func (m *awsAwsjson11_serializeOpDescribeDataset) HandleSerialize(ctx context.Co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDescribeDatasetExportJob struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeDatasetExportJob) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeDatasetExportJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeDatasetExportJobInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.DescribeDatasetExportJob")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeDatasetExportJobInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDescribeDatasetGroup struct {
 }
 
@@ -1550,6 +1644,53 @@ func (m *awsAwsjson11_serializeOpListCampaigns) HandleSerialize(ctx context.Cont
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListCampaignsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListDatasetExportJobs struct {
+}
+
+func (*awsAwsjson11_serializeOpListDatasetExportJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListDatasetExportJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListDatasetExportJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AmazonPersonalize.ListDatasetExportJobs")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListDatasetExportJobsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2198,6 +2339,20 @@ func awsAwsjson11_serializeDocumentContinuousHyperParameterRanges(v []types.Cont
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDatasetExportJobOutput(v *types.DatasetExportJobOutput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3DataDestination != nil {
+		ok := object.Key("s3DataDestination")
+		if err := awsAwsjson11_serializeDocumentS3DataConfig(v.S3DataDestination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDataSource(v *types.DataSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2496,6 +2651,40 @@ func awsAwsjson11_serializeOpDocumentCreateCampaignInput(v *CreateCampaignInput,
 	if v.SolutionVersionArn != nil {
 		ok := object.Key("solutionVersionArn")
 		ok.String(*v.SolutionVersionArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateDatasetExportJobInput(v *CreateDatasetExportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatasetArn != nil {
+		ok := object.Key("datasetArn")
+		ok.String(*v.DatasetArn)
+	}
+
+	if len(v.IngestionMode) > 0 {
+		ok := object.Key("ingestionMode")
+		ok.String(string(v.IngestionMode))
+	}
+
+	if v.JobName != nil {
+		ok := object.Key("jobName")
+		ok.String(*v.JobName)
+	}
+
+	if v.JobOutput != nil {
+		ok := object.Key("jobOutput")
+		if err := awsAwsjson11_serializeDocumentDatasetExportJobOutput(v.JobOutput, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
 	}
 
 	return nil
@@ -2816,6 +3005,18 @@ func awsAwsjson11_serializeOpDocumentDescribeCampaignInput(v *DescribeCampaignIn
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeDatasetExportJobInput(v *DescribeDatasetExportJobInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatasetExportJobArn != nil {
+		ok := object.Key("datasetExportJobArn")
+		ok.String(*v.DatasetExportJobArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDescribeDatasetGroupInput(v *DescribeDatasetGroupInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2987,6 +3188,28 @@ func awsAwsjson11_serializeOpDocumentListCampaignsInput(v *ListCampaignsInput, v
 	if v.SolutionArn != nil {
 		ok := object.Key("solutionArn")
 		ok.String(*v.SolutionArn)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListDatasetExportJobsInput(v *ListDatasetExportJobsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatasetArn != nil {
+		ok := object.Key("datasetArn")
+		ok.String(*v.DatasetArn)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("maxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
 	}
 
 	return nil

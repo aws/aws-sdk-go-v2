@@ -1325,6 +1325,11 @@ func awsRestjson1_serializeDocumentCmafPackage(v *types.CmafPackage, value smith
 		}
 	}
 
+	if v.IncludeEncoderConfigurationInSegments {
+		ok := object.Key("includeEncoderConfigurationInSegments")
+		ok.Boolean(v.IncludeEncoderConfigurationInSegments)
+	}
+
 	if v.SegmentDurationSeconds != 0 {
 		ok := object.Key("segmentDurationSeconds")
 		ok.Integer(v.SegmentDurationSeconds)
@@ -1397,6 +1402,11 @@ func awsRestjson1_serializeDocumentDashPackage(v *types.DashPackage, value smith
 		if err := awsRestjson1_serializeDocumentDashEncryption(v.Encryption, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.IncludeEncoderConfigurationInSegments {
+		ok := object.Key("includeEncoderConfigurationInSegments")
+		ok.Boolean(v.IncludeEncoderConfigurationInSegments)
 	}
 
 	if v.PeriodTriggers != nil {

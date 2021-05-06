@@ -2472,6 +2472,18 @@ func awsRestjson1_serializeDocumentFirehose(v *types.Firehose, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIam(v *types.Iam, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJmxExporterInfo(v *types.JmxExporterInfo, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2570,6 +2582,13 @@ func awsRestjson1_serializeDocumentS3(v *types.S3, value smithyjson.Value) error
 func awsRestjson1_serializeDocumentSasl(v *types.Sasl, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Iam != nil {
+		ok := object.Key("iam")
+		if err := awsRestjson1_serializeDocumentIam(v.Iam, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.Scram != nil {
 		ok := object.Key("scram")

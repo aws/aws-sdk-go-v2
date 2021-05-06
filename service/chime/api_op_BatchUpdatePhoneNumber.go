@@ -12,13 +12,13 @@ import (
 )
 
 // Updates phone number product types or calling names. You can update one
-// attribute at a time for each UpdatePhoneNumberRequestItem . For example, you can
-// update either the product type or the calling name. For product types, choose
-// from Amazon Chime Business Calling and Amazon Chime Voice Connector. For
-// toll-free numbers, you must use the Amazon Chime Voice Connector product type.
-// Updates to outbound calling names can take up to 72 hours to complete. Pending
-// updates to outbound calling names must be complete before you can request
-// another update.
+// attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can
+// update the product type or the calling name. For toll-free numbers, you cannot
+// use the Amazon Chime Business Calling product type. For numbers outside the US,
+// you must use the Amazon Chime SIP Media Application Dial-In product type.
+// Updates to outbound calling names can take 72 hours to complete. Pending updates
+// to outbound calling names must be complete before you can request another
+// update.
 func (c *Client) BatchUpdatePhoneNumber(ctx context.Context, params *BatchUpdatePhoneNumberInput, optFns ...func(*Options)) (*BatchUpdatePhoneNumberOutput, error) {
 	if params == nil {
 		params = &BatchUpdatePhoneNumberInput{}

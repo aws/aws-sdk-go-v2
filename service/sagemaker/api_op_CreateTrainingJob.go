@@ -53,14 +53,17 @@ import (
 //
 // * StoppingCondition - To help cap training costs, use
 // MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds
-// to specify how long you are willing to wait for a managed spot training job to
-// complete.
+// to specify how long a managed spot training job has to complete.
 //
-// * Environment - The environment variables to set in the Docker
-// container.
+// * Environment
+// - The environment variables to set in the Docker container.
 //
-// For more information about Amazon SageMaker, see How It Works
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
+// * RetryStrategy -
+// The number of times to retry the job when the job fails due to an
+// InternalServerError.
+//
+// For more information about Amazon SageMaker, see How It
+// Works (https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html).
 func (c *Client) CreateTrainingJob(ctx context.Context, params *CreateTrainingJobInput, optFns ...func(*Options)) (*CreateTrainingJobOutput, error) {
 	if params == nil {
 		params = &CreateTrainingJobInput{}
@@ -119,12 +122,13 @@ type CreateTrainingJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Specifies a limit to how long a model training job can run. When the job reaches
-	// the time limit, Amazon SageMaker ends the training job. Use this API to cap
-	// model training costs. To stop a job, Amazon SageMaker sends the algorithm the
-	// SIGTERM signal, which delays job termination for 120 seconds. Algorithms can use
-	// this 120-second window to save the model artifacts, so the results of training
-	// are not lost.
+	// Specifies a limit to how long a model training job can run. It also specifies
+	// how long a managed Spot training job has to complete. When the job reaches the
+	// time limit, Amazon SageMaker ends the training job. Use this API to cap model
+	// training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
+	// signal, which delays job termination for 120 seconds. Algorithms can use this
+	// 120-second window to save the model artifacts, so the results of training are
+	// not lost.
 	//
 	// This member is required.
 	StoppingCondition *types.StoppingCondition
@@ -220,6 +224,10 @@ type CreateTrainingJobInput struct {
 	// Configuration information for Debugger rules for profiling system and framework
 	// metrics.
 	ProfilerRuleConfigurations []types.ProfilerRuleConfiguration
+
+	// The number of times to retry the job when the job fails due to an
+	// InternalServerError.
+	RetryStrategy *types.RetryStrategy
 
 	// An array of key-value pairs. You can use tags to categorize your AWS resources
 	// in different ways, for example, by purpose, owner, or environment. For more

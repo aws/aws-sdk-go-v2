@@ -62,6 +62,9 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-west-2": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-cn",

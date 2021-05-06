@@ -31,7 +31,7 @@ func (c *Client) OptInPhoneNumber(ctx context.Context, params *OptInPhoneNumberI
 // Input for the OptInPhoneNumber action.
 type OptInPhoneNumberInput struct {
 
-	// The phone number to opt in.
+	// The phone number to opt in. Use E.164 format.
 	//
 	// This member is required.
 	PhoneNumber *string

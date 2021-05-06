@@ -1,0 +1,9 @@
+{
+ "ID": "service.route53-feature-1620332651959116000",
+ "SchemaVersion": 1,
+ "Module": "service/route53",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

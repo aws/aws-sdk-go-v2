@@ -1730,6 +1730,11 @@ func awsAwsjson11_serializeOpDocumentCreateCertificateAuthorityInput(v *CreateCe
 		ok.String(*v.IdempotencyToken)
 	}
 
+	if len(v.KeyStorageSecurityStandard) > 0 {
+		ok := object.Key("KeyStorageSecurityStandard")
+		ok.String(string(v.KeyStorageSecurityStandard))
+	}
+
 	if v.RevocationConfiguration != nil {
 		ok := object.Key("RevocationConfiguration")
 		if err := awsAwsjson11_serializeDocumentRevocationConfiguration(v.RevocationConfiguration, ok); err != nil {

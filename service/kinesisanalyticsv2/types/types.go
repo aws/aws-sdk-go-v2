@@ -156,7 +156,8 @@ type ApplicationDetail struct {
 	// This member is required.
 	ApplicationVersionId *int64
 
-	// The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+	// The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or
+	// FLINK-1_11).
 	//
 	// This member is required.
 	RuntimeEnvironment RuntimeEnvironment
@@ -168,8 +169,22 @@ type ApplicationDetail struct {
 	// The description of the application.
 	ApplicationDescription *string
 
+	// Describes the time window for automatic application maintenance.
+	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription
+
+	// If you reverted the application using RollbackApplication, the application
+	// version when RollbackApplication was called.
+	ApplicationVersionRolledBackFrom *int64
+
+	// The previous application version before the latest application update.
+	// RollbackApplication reverts the application to this version.
+	ApplicationVersionUpdatedFrom *int64
+
 	// Describes the application Amazon CloudWatch logging options.
 	CloudWatchLoggingOptionDescriptions []CloudWatchLoggingOptionDescription
+
+	// A value you use to implement strong concurrency for application updates.
+	ConditionalToken *string
 
 	// The current timestamp when the application was created.
 	CreateTimestamp *time.Time
@@ -179,6 +194,29 @@ type ApplicationDetail struct {
 
 	// Specifies the IAM role that the application uses to access external resources.
 	ServiceExecutionRole *string
+}
+
+// Describes the time window for automatic application maintenance.
+type ApplicationMaintenanceConfigurationDescription struct {
+
+	// The end time for the automatic maintenance window.
+	//
+	// This member is required.
+	ApplicationMaintenanceWindowEndTime *string
+
+	// The start time for the automatic maintenance window.
+	//
+	// This member is required.
+	ApplicationMaintenanceWindowStartTime *string
+}
+
+// Describes the updated time window for automatic application maintenance.
+type ApplicationMaintenanceConfigurationUpdate struct {
+
+	// The updated start time for the automatic maintenance window.
+	//
+	// This member is required.
+	ApplicationMaintenanceWindowStartTimeUpdate *string
 }
 
 // Specifies the method and snapshot to use when restarting an application using
@@ -253,7 +291,8 @@ type ApplicationSummary struct {
 	// This member is required.
 	ApplicationVersionId *int64
 
-	// The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+	// The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or
+	// FLINK-1_11).
 	//
 	// This member is required.
 	RuntimeEnvironment RuntimeEnvironment
@@ -286,7 +325,7 @@ type CheckpointConfiguration struct {
 
 	// Describes the interval in milliseconds between checkpoint operations. If
 	// CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a
-	// CheckpointInterval vaue of 60000, even if this value is set to another value
+	// CheckpointInterval value of 60000, even if this value is set to another value
 	// using this API or in application code.
 	CheckpointInterval *int64
 
@@ -315,7 +354,7 @@ type CheckpointConfigurationDescription struct {
 
 	// Describes the interval in milliseconds between checkpoint operations. If
 	// CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a
-	// CheckpointInterval vaue of 60000, even if this value is set to another value
+	// CheckpointInterval value of 60000, even if this value is set to another value
 	// using this API or in application code.
 	CheckpointInterval *int64
 
@@ -352,7 +391,7 @@ type CheckpointConfigurationUpdate struct {
 
 	// Describes updates to the interval in milliseconds between checkpoint operations.
 	// If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will
-	// use a CheckpointInterval vaue of 60000, even if this value is set to another
+	// use a CheckpointInterval value of 60000, even if this value is set to another
 	// value using this API or in application code.
 	CheckpointIntervalUpdate *int64
 
@@ -1228,8 +1267,8 @@ type OutputUpdate struct {
 }
 
 // Describes parameters for how a Flink-based Kinesis Data Analytics application
-// application executes multiple tasks simultaneously. For more information about
-// parallelism, see Parallel Execution
+// executes multiple tasks simultaneously. For more information about parallelism,
+// see Parallel Execution
 // (https://ci.apache.org/projects/flink/flink-docs-release-1.8/dev/parallel.html)
 // in the Apache Flink Documentation
 // (https://ci.apache.org/projects/flink/flink-docs-release-1.8/).

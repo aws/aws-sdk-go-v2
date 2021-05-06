@@ -2407,6 +2407,103 @@ func awsRestjson1_serializeOpHttpBindingsGetAssetPropertyValueHistoryInput(v *Ge
 	return nil
 }
 
+type awsRestjson1_serializeOpGetInterpolatedAssetPropertyValues struct {
+}
+
+func (*awsRestjson1_serializeOpGetInterpolatedAssetPropertyValues) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetInterpolatedAssetPropertyValues) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetInterpolatedAssetPropertyValuesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/properties/interpolated")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetInterpolatedAssetPropertyValuesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetInterpolatedAssetPropertyValuesInput(v *GetInterpolatedAssetPropertyValuesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssetId != nil {
+		encoder.SetQuery("assetId").String(*v.AssetId)
+	}
+
+	if v.EndTimeInSeconds != nil {
+		encoder.SetQuery("endTimeInSeconds").Long(*v.EndTimeInSeconds)
+	}
+
+	if v.EndTimeOffsetInNanos != nil {
+		encoder.SetQuery("endTimeOffsetInNanos").Integer(*v.EndTimeOffsetInNanos)
+	}
+
+	if v.IntervalInSeconds != nil {
+		encoder.SetQuery("intervalInSeconds").Long(*v.IntervalInSeconds)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.PropertyAlias != nil {
+		encoder.SetQuery("propertyAlias").String(*v.PropertyAlias)
+	}
+
+	if v.PropertyId != nil {
+		encoder.SetQuery("propertyId").String(*v.PropertyId)
+	}
+
+	if len(v.Quality) > 0 {
+		encoder.SetQuery("quality").String(string(v.Quality))
+	}
+
+	if v.StartTimeInSeconds != nil {
+		encoder.SetQuery("startTimeInSeconds").Long(*v.StartTimeInSeconds)
+	}
+
+	if v.StartTimeOffsetInNanos != nil {
+		encoder.SetQuery("startTimeOffsetInNanos").Integer(*v.StartTimeOffsetInNanos)
+	}
+
+	if v.Type != nil {
+		encoder.SetQuery("type").String(*v.Type)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListAccessPolicies struct {
 }
 

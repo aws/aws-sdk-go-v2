@@ -2001,6 +2001,15 @@ func awsRestjson1_deserializeOpDocumentGetBootstrapBrokersOutput(v **GetBootstra
 				sv.BootstrapBrokerString = ptr.String(jtv)
 			}
 
+		case "bootstrapBrokerStringSaslIam":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BootstrapBrokerStringSaslIam = ptr.String(jtv)
+			}
+
 		case "bootstrapBrokerStringSaslScram":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7250,6 +7259,46 @@ func awsRestjson1_deserializeDocumentForbiddenException(v **types.ForbiddenExcep
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentIam(v **types.Iam, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Iam
+	if *v == nil {
+		sv = &types.Iam{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.InternalServerErrorException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7838,6 +7887,11 @@ func awsRestjson1_deserializeDocumentSasl(v **types.Sasl, value interface{}) err
 
 	for key, value := range shape {
 		switch key {
+		case "iam":
+			if err := awsRestjson1_deserializeDocumentIam(&sv.Iam, value); err != nil {
+				return err
+			}
+
 		case "scram":
 			if err := awsRestjson1_deserializeDocumentScram(&sv.Scram, value); err != nil {
 				return err

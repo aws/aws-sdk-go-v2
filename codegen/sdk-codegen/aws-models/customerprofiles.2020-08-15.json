@@ -195,6 +195,15 @@
                 "smithy.api#documentation": "<p>A generic address associated with the customer that is not mailing, shipping, or\n         billing.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#AttributeSourceIdMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.customerprofiles#string1To255"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#uuid"
+            }
+        },
         "com.amazonaws.customerprofiles#Attributes": {
             "type": "map",
             "key": {
@@ -349,6 +358,12 @@
                         "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications. You must set up a policy on the\n         DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send\n         messages to the DeadLetterQueue.</p>"
                     }
                 },
+                "Matching": {
+                    "target": "com.amazonaws.customerprofiles#MatchingRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
@@ -384,6 +399,12 @@
                     "target": "com.amazonaws.customerprofiles#sqsQueueUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications.</p>"
+                    }
+                },
+                "Matching": {
+                    "target": "com.amazonaws.customerprofiles#MatchingResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -462,7 +483,7 @@
                 "AdditionalInformation": {
                     "target": "com.amazonaws.customerprofiles#string1To1000",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+                        "smithy.api#documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
                     }
                 },
                 "PartyType": {
@@ -498,19 +519,19 @@
                 "BirthDate": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer’s birth date.</p>"
+                        "smithy.api#documentation": "<p>The customer’s birth date. </p>"
                     }
                 },
                 "Gender": {
                     "target": "com.amazonaws.customerprofiles#Gender",
                     "traits": {
-                        "smithy.api#documentation": "<p>The gender with which the customer identifies.</p>"
+                        "smithy.api#documentation": "<p>The gender with which the customer identifies. </p>"
                     }
                 },
                 "PhoneNumber": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business\n         number.</p>"
+                        "smithy.api#documentation": "<p>The customer’s phone number, which has not been specified as a mobile, home, or business\n         number. </p>"
                     }
                 },
                 "MobilePhoneNumber": {
@@ -534,7 +555,7 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer's email address, which has not been specified as a personal or business\n         address.</p>"
+                        "smithy.api#documentation": "<p>The customer’s email address, which has not been specified as a personal or business\n         address. </p>"
                     }
                 },
                 "PersonalEmailAddress": {
@@ -631,6 +652,9 @@
                     "target": "com.amazonaws.customerprofiles#GetIntegration"
                 },
                 {
+                    "target": "com.amazonaws.customerprofiles#GetMatches"
+                },
+                {
                     "target": "com.amazonaws.customerprofiles#GetProfileObjectType"
                 },
                 {
@@ -656,6 +680,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#MergeProfiles"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#PutIntegration"
@@ -1231,6 +1258,140 @@
                 "target": "com.amazonaws.customerprofiles#name"
             }
         },
+        "com.amazonaws.customerprofiles#FieldSourceProfileIds": {
+            "type": "structure",
+            "members": {
+                "AccountNumber": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the account number field to be merged. </p>"
+                    }
+                },
+                "AdditionalInformation": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the additional information field to be merged.</p>"
+                    }
+                },
+                "PartyType": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+                    }
+                },
+                "BusinessName": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the business name field to be merged.</p>"
+                    }
+                },
+                "FirstName": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the first name field to be merged.</p>"
+                    }
+                },
+                "MiddleName": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the middle name field to be merged.</p>"
+                    }
+                },
+                "LastName": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the last name field to be merged.</p>"
+                    }
+                },
+                "BirthDate": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the birthdate field to be merged.</p>"
+                    }
+                },
+                "Gender": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the gender field to be merged.</p>"
+                    }
+                },
+                "PhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the phone number field to be merged.</p>"
+                    }
+                },
+                "MobilePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the mobile phone number field to be merged.</p>"
+                    }
+                },
+                "HomePhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the home phone number field to be merged.</p>"
+                    }
+                },
+                "BusinessPhoneNumber": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the business phone number field to be merged.</p>"
+                    }
+                },
+                "EmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the email address field to be merged.</p>"
+                    }
+                },
+                "PersonalEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the personal email address field to be merged.</p>"
+                    }
+                },
+                "BusinessEmailAddress": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+                    }
+                },
+                "Address": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the party type field to be merged.</p>"
+                    }
+                },
+                "ShippingAddress": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the shipping address field to be merged.</p>"
+                    }
+                },
+                "MailingAddress": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the mailing address field to be merged.</p>"
+                    }
+                },
+                "BillingAddress": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the billing type field to be merged.</p>"
+                    }
+                },
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#AttributeSourceIdMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the attributes field to be merged.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A duplicate customer profile that is to be merged into a main profile. </p>"
+            }
+        },
         "com.amazonaws.customerprofiles#FlowDefinition": {
             "type": "structure",
             "members": {
@@ -1277,7 +1438,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configurations that control how Customer Profiles retrieves data from the source,\n         Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf\n         of customers.</p>"
+                "smithy.api#documentation": "<p>The configurations that control how Customer Profiles retrieves data from the source,\n         Amazon AppFlow. Customer Profiles uses this information to create an AppFlow flow on behalf of\n         customers.</p>"
             }
         },
         "com.amazonaws.customerprofiles#FlowDescription": {
@@ -1359,7 +1520,7 @@
                 "DomainName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique name for the domain.</p>",
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1398,6 +1559,12 @@
                     "target": "com.amazonaws.customerprofiles#DomainStats",
                     "traits": {
                         "smithy.api#documentation": "<p>Usage-specific statistics about the domain.</p>"
+                    }
+                },
+                "Matching": {
+                    "target": "com.amazonaws.customerprofiles#MatchingResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -1518,6 +1685,96 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetMatches": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetMatchesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetMatchesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p>\n         <p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles.\n            The results are returned up to seven days after the Saturday run.</p>\n         </important>\n\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n            <li>\n               <p>BusinessName</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/matches",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetMatchesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#GetMatchesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "MatchGenerationDate": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp this version of Match Result generated.</p>"
+                    }
+                },
+                "PotentialMatches": {
+                    "target": "com.amazonaws.customerprofiles#matchesNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of potential matches found.</p>"
+                    }
+                },
+                "Matches": {
+                    "target": "com.amazonaws.customerprofiles#MatchesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of matched profiles for this instance.</p>"
                     }
                 }
             }
@@ -2569,6 +2826,136 @@
                 "smithy.api#documentation": "<p>The properties that are applied when Marketo is being used as a source.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#MatchItem": {
+            "type": "structure",
+            "members": {
+                "MatchId": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifiers for this group of profiles that match.</p>"
+                    }
+                },
+                "ProfileIds": {
+                    "target": "com.amazonaws.customerprofiles#ProfileIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of identifiers for profiles that match.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Match group object.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#MatchesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#MatchItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#MatchingRequest": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.customerprofiles#optionalBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#MatchingResponse": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.customerprofiles#optionalBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The flag that enables the matching process of duplicate profiles.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#MergeProfiles": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#MergeProfilesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#MergeProfilesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p>\n         <p>Runs an AWS Lambda job that does the following:</p>\n         <ol>\n            <li>\n               <p>All the profileKeys in the <code>ProfileToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>All the objects in the <code>ProfileToBeMerged</code> will be moved to the main\n               profile.</p>\n            </li>\n            <li>\n               <p>All the <code>ProfileToBeMerged</code> will be deleted at the end.</p>\n            </li>\n            <li>\n               <p>All the profileKeys in the <code>ProfileIdsToBeMerged</code> will be moved to the\n               main profile.</p>\n            </li>\n            <li>\n               <p>Standard fields are merged as follows:</p>\n               <ol>\n                  <li>\n                     <p>Fields are always \"union\"-ed if there are no conflicts in standard fields or\n                     attributeKeys.</p>\n                  </li>\n                  <li>\n                     <p>When there are conflicting fields:</p>\n\n                     <ol>\n                        <li>\n                           <p>If no <code>SourceProfileIds</code> entry is specified, the main\n                           Profile value is always taken. </p>\n                        </li>\n                        <li>\n                           <p>If a <code>SourceProfileIds</code> entry is specified, the specified\n                           profileId is always taken, even if it is a NULL value.</p>\n                        </li>\n                     </ol>\n                  </li>\n               </ol>\n            </li>\n         </ol>\n         <p>You can use MergeProfiles together with <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>, which\n         returns potentially matching profiles, or use it with the results of another matching\n         system. After profiles have been merged, they cannot be separated (unmerged).</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/profiles/objects/merge",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#MergeProfilesRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MainProfileId": {
+                    "target": "com.amazonaws.customerprofiles#uuid",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the profile to be taken.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileIdsToBeMerged": {
+                    "target": "com.amazonaws.customerprofiles#ProfileIdToBeMergedList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the profile to be merged into MainProfileId.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FieldSourceProfileIds": {
+                    "target": "com.amazonaws.customerprofiles#FieldSourceProfileIds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of the fields in the profile that has the information you want to apply to the\n         merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the \n         identifier of the EmailAddress field in Profile1. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#MergeProfilesResponse": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#message",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that indicates the merge request is complete.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#Object": {
             "type": "string",
             "traits": {
@@ -2731,7 +3118,7 @@
                 "AdditionalInformation": {
                     "target": "com.amazonaws.customerprofiles#string1To1000",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+                        "smithy.api#documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
                     }
                 },
                 "PartyType": {
@@ -2767,13 +3154,13 @@
                 "BirthDate": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer’s birth date.</p>"
+                        "smithy.api#documentation": "<p>The customer’s birth date. </p>"
                     }
                 },
                 "Gender": {
                     "target": "com.amazonaws.customerprofiles#Gender",
                     "traits": {
-                        "smithy.api#documentation": "<p>The gender with which the customer identifies.</p>"
+                        "smithy.api#documentation": "<p>The gender with which the customer identifies. </p>"
                     }
                 },
                 "PhoneNumber": {
@@ -2803,7 +3190,7 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer's email address, which has not been specified as a personal or business\n         address.</p>"
+                        "smithy.api#documentation": "<p>The customer’s email address, which has not been specified as a personal or business\n         address. </p>"
                     }
                 },
                 "PersonalEmailAddress": {
@@ -2851,6 +3238,24 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The standard profile of a customer.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#uuid"
+            }
+        },
+        "com.amazonaws.customerprofiles#ProfileIdToBeMergedList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#uuid"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
             }
         },
         "com.amazonaws.customerprofiles#ProfileList": {
@@ -3626,7 +4031,7 @@
                 "KeyName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use to search\n         include: _account, _profileId, _fullName, _phone, _email, _ctrContactId, _marketoLeadId,\n         _salesforceAccountId, _salesforceContactId, _zendeskUserId, _zendeskExternalId,\n         _serviceNowSystemId.</p>",
+                        "smithy.api#documentation": "<p>A searchable identifier of a customer profile. The predefined keys you can use to search include: _account, _profileId,\n         _fullName, _phone, _email, _ctrContactId, _marketoLeadId, _salesforceAccountId,\n         _salesforceContactId, _zendeskUserId, _zendeskExternalId, _serviceNowSystemId.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4331,7 +4736,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue\n         or an encryption key.</p>\n         <p>Once a domain is created, the name can’t be changed.</p>",
+                "smithy.api#documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue\n         or an encryption key.</p>\n         <p>After a domain is created, the name can’t be changed.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}",
@@ -4345,7 +4750,7 @@
                 "DomainName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name for the domain.</p>",
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4368,6 +4773,12 @@
                         "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications. If specified as an empty string, it will\n         clear any existing value. You must set up a policy on the DeadLetterQueue for the\n         SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the\n         DeadLetterQueue.</p>"
                     }
                 },
+                "Matching": {
+                    "target": "com.amazonaws.customerprofiles#MatchingRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
@@ -4382,7 +4793,7 @@
                 "DomainName": {
                     "target": "com.amazonaws.customerprofiles#name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name for the domain.</p>",
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4402,6 +4813,12 @@
                     "target": "com.amazonaws.customerprofiles#sqsQueueUrl",
                     "traits": {
                         "smithy.api#documentation": "<p>The URL of the SQS dead letter queue, which is used for reporting errors associated with\n         ingesting data from third party applications.</p>"
+                    }
+                },
+                "Matching": {
+                    "target": "com.amazonaws.customerprofiles#MatchingResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
                     }
                 },
                 "CreatedAt": {
@@ -4481,7 +4898,7 @@
                 "AdditionalInformation": {
                     "target": "com.amazonaws.customerprofiles#string0To1000",
                     "traits": {
-                        "smithy.api#documentation": "<p>Any additional information relevant to the customer's profile.</p>"
+                        "smithy.api#documentation": "<p>Any additional information relevant to the customer’s profile.</p>"
                     }
                 },
                 "AccountNumber": {
@@ -4523,19 +4940,19 @@
                 "BirthDate": {
                     "target": "com.amazonaws.customerprofiles#string0To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer’s birth date.</p>"
+                        "smithy.api#documentation": "<p>The customer’s birth date. </p>"
                     }
                 },
                 "Gender": {
                     "target": "com.amazonaws.customerprofiles#Gender",
                     "traits": {
-                        "smithy.api#documentation": "<p>The gender with which the customer identifies.</p>"
+                        "smithy.api#documentation": "<p>The gender with which the customer identifies. </p>"
                     }
                 },
                 "PhoneNumber": {
                     "target": "com.amazonaws.customerprofiles#string0To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer's phone number, which has not been specified as a mobile, home, or business\n         number.</p>"
+                        "smithy.api#documentation": "<p>The customer’s phone number, which has not been specified as a mobile, home, or business\n         number. </p>"
                     }
                 },
                 "MobilePhoneNumber": {
@@ -4559,7 +4976,7 @@
                 "EmailAddress": {
                     "target": "com.amazonaws.customerprofiles#string0To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer's email address, which has not been specified as a personal or business\n         address.</p>"
+                        "smithy.api#documentation": "<p>The customer’s email address, which has not been specified as a personal or business\n         address. </p>"
                     }
                 },
                 "PersonalEmailAddress": {
@@ -4721,6 +5138,15 @@
         "com.amazonaws.customerprofiles#long": {
             "type": "long"
         },
+        "com.amazonaws.customerprofiles#matchesNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#maxSize100": {
             "type": "integer",
             "traits": {
@@ -4742,6 +5168,12 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.customerprofiles#optionalBoolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
             }
         },
         "com.amazonaws.customerprofiles#requestValueList": {

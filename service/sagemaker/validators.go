@@ -5800,6 +5800,11 @@ func validateHyperParameterTrainingJobDefinition(v *types.HyperParameterTraining
 			invalidParams.AddNested("CheckpointConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RetryStrategy != nil {
+		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
+			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -7553,6 +7558,18 @@ func validateResourceLimits(v *types.ResourceLimits) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ResourceLimits"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRetryStrategy(v *types.RetryStrategy) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RetryStrategy"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -9596,6 +9613,11 @@ func validateOpCreateTrainingJobInput(v *CreateTrainingJobInput) error {
 	if v.ProfilerRuleConfigurations != nil {
 		if err := validateProfilerRuleConfigurations(v.ProfilerRuleConfigurations); err != nil {
 			invalidParams.AddNested("ProfilerRuleConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RetryStrategy != nil {
+		if err := validateRetryStrategy(v.RetryStrategy); err != nil {
+			invalidParams.AddNested("RetryStrategy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

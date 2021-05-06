@@ -386,6 +386,13 @@ type Firehose struct {
 	DeliveryStream *string
 }
 
+// Details for IAM access control.
+type Iam struct {
+
+	// Indicates whether IAM access control is enabled.
+	Enabled bool
+}
+
 // Indicates whether you want to enable or disable the JMX Exporter.
 type JmxExporter struct {
 
@@ -534,6 +541,9 @@ type S3 struct {
 
 // Details for client authentication using SASL.
 type Sasl struct {
+
+	// Indicates whether IAM access control is enabled.
+	Iam *Iam
 
 	// Details for SASL/SCRAM client authentication.
 	Scram *Scram

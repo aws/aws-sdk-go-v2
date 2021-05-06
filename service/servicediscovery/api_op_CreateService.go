@@ -58,30 +58,31 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 type CreateServiceInput struct {
 
 	// The name that you want to assign to the service. If you want AWS Cloud Map to
-	// create an SRV record when you register an instance, and if you're using a system
+	// create an SRV record when you register an instance and you're using a system
 	// that requires a specific SRV format, such as HAProxy (http://www.haproxy.org/),
 	// specify the following for Name:
 	//
 	// * Start the name with an underscore (_), such
-	// as _exampleservice
+	// as _exampleservice.
 	//
-	// * End the name with ._protocol, such as ._tcp
+	// * End the name with ._protocol, such as ._tcp.
 	//
 	// When you
 	// register an instance, AWS Cloud Map creates an SRV record and assigns a name to
 	// the record by concatenating the service name and the namespace name, for
-	// example: _exampleservice._tcp.example.com For a single DNS namespace, you cannot
-	// create two services with names that differ only by case (such as EXAMPLE and
-	// example). Otherwise, these services will have the same DNS name. However, you
-	// can create multiple HTTP services with names that differ only by case because
-	// HTTP services are case sensitive.
+	// example: _exampleservice._tcp.example.com For services that are accessible by
+	// DNS queries, you can't create multiple services with names that differ only by
+	// case (such as EXAMPLE and example). Otherwise, these services have the same DNS
+	// name and can't be distinguished. However, if you use a namespace that's only
+	// accessible by API calls, then you can create services that with names that
+	// differ only by case.
 	//
 	// This member is required.
 	Name *string
 
 	// A unique string that identifies the request and that allows failed CreateService
-	// requests to be retried without the risk of executing the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/time stamp.
+	// requests to be retried without the risk of running the operation twice.
+	// CreatorRequestId can be any unique string, for example, a date/timestamp.
 	CreatorRequestId *string
 
 	// A description for the service.
@@ -107,12 +108,14 @@ type CreateServiceInput struct {
 	// service.
 	HealthCheckCustomConfig *types.HealthCheckCustomConfig
 
-	// The ID of the namespace that you want to use to create the service.
+	// The ID of the namespace that you want to use to create the service. The
+	// namespace ID must be specified, but it can be specified either here or in the
+	// DnsConfig object.
 	NamespaceId *string
 
-	// The tags to add to the service. Each tag consists of a key and an optional
-	// value, both of which you define. Tag keys can have a maximum character length of
-	// 128 characters, and tag values can have a maximum length of 256 characters.
+	// The tags to add to the service. Each tag consists of a key and an optional value
+	// that you define. Tags keys can be up to 128 characters in length, and tag values
+	// can be up to 256 characters in length.
 	Tags []types.Tag
 
 	// If present, specifies that the service instances are only discoverable using the

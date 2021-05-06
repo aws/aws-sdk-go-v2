@@ -5946,6 +5946,10 @@
                     {
                         "value": "Dashing",
                         "name": "Dashing"
+                    },
+                    {
+                        "value": "Foxy",
+                        "name": "Foxy"
                     }
                 ]
             }
@@ -6847,7 +6851,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "7|9|Kinetic|Melodic|Dashing"
+                "smithy.api#pattern": "7|9|11|Kinetic|Melodic|Dashing|Foxy"
             }
         },
         "com.amazonaws.robomaker#SimulationTimeMillis": {

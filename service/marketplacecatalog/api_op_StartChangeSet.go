@@ -20,8 +20,10 @@ import (
 // ResourceInUseException. For example, you cannot start the ChangeSet described in
 // the example
 // (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples)
-// below because it contains two changes to execute the same change type
-// (AddRevisions) against the same entity (entity-id@1).
+// later in this topic, because it contains two changes to execute the same change
+// type (AddRevisions) against the same entity (entity-id@1). For more information
+// about working with change sets, see  Working with change sets
+// (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets).
 func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput, optFns ...func(*Options)) (*StartChangeSetOutput, error) {
 	if params == nil {
 		params = &StartChangeSetInput{}

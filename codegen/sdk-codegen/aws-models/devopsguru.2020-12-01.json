@@ -223,6 +223,9 @@
                     "target": "com.amazonaws.devopsguru#DescribeServiceIntegration"
                 },
                 {
+                    "target": "com.amazonaws.devopsguru#GetCostEstimation"
+                },
+                {
                     "target": "com.amazonaws.devopsguru#GetResourceCollection"
                 },
                 {
@@ -248,6 +251,9 @@
                 },
                 {
                     "target": "com.amazonaws.devopsguru#SearchInsights"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#StartCostEstimation"
                 },
                 {
                     "target": "com.amazonaws.devopsguru#UpdateResourceCollection"
@@ -278,6 +284,16 @@
                 "target": "com.amazonaws.devopsguru#NotificationChannel"
             }
         },
+        "com.amazonaws.devopsguru#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*$"
+            }
+        },
         "com.amazonaws.devopsguru#CloudFormationCollection": {
             "type": "structure",
             "members": {
@@ -289,7 +305,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#CloudFormationCollectionFilter": {
@@ -303,7 +319,21 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
+                "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#CloudFormationCostEstimationResourceCollectionFilter": {
+            "type": "structure",
+            "members": {
+                "StackNames": {
+                    "target": "com.amazonaws.devopsguru#CostEstimationStackNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of CloudFormation stack names. Its size is fixed at 1 item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an AWS CloudFormation stack used to create a monthly cost estimate for DevOps Guru to analyze \n\t\tAWS resources. The maximum number of stacks you can specify for a cost estimate is one. The estimate created is for the cost \n\t\tto analyze the AWS resources defined by the stack. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.</p>"
             }
         },
         "com.amazonaws.devopsguru#CloudFormationHealth": {
@@ -493,6 +523,88 @@
                 "smithy.api#documentation": "<p>\n\t\t\tAn exception that is thrown when a conflict occurs.\n\t\t</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.devopsguru#Cost": {
+            "type": "double"
+        },
+        "com.amazonaws.devopsguru#CostEstimationResourceCollectionFilter": {
+            "type": "structure",
+            "members": {
+                "CloudFormation": {
+                    "target": "com.amazonaws.devopsguru#CloudFormationCostEstimationResourceCollectionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that specifies the CloudFormation stack that defines the AWS resources \n\t\t\tused to create a monthly estimate for DevOps Guru.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a filter used to specify which AWS resources are analyzed to create \n\t\t\ta monthly DevOps Guru cost estimate. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html\">Estimate your \n\t\t\tAmazon DevOps Guru costs</a> and \n\t\t\t<a href=\"http://aws.amazon.com/devops-guru/pricing/\">Amazon DevOps Guru pricing</a>.\n\t\t</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#CostEstimationServiceResourceCount": {
+            "type": "integer"
+        },
+        "com.amazonaws.devopsguru#CostEstimationServiceResourceState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#CostEstimationStackNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#StackName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#CostEstimationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ONGOING",
+                        "name": "ONGOING"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#CostEstimationTimeRange": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start time of the cost estimation.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.devopsguru#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end time of the cost estimation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The time range of a cost estimation.</p>"
             }
         },
         "com.amazonaws.devopsguru#DescribeAccountHealth": {
@@ -691,13 +803,13 @@
                 "ProactiveAnomaly": {
                     "target": "com.amazonaws.devopsguru#ProactiveAnomaly",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>ReactiveAnomaly</code> object that represents the requested anomaly.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>ReactiveAnomaly</code> object that represents the requested anomaly.\n\t\t</p>"
                     }
                 },
                 "ReactiveAnomaly": {
                     "target": "com.amazonaws.devopsguru#ReactiveAnomaly",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>ProactiveAnomaly</code> object that represents the requested anomaly.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>ProactiveAnomaly</code> object that represents the requested anomaly.\n\t\t</p>"
                     }
                 }
             }
@@ -808,13 +920,13 @@
                 "ProactiveInsight": {
                     "target": "com.amazonaws.devopsguru#ProactiveInsight",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>ProactiveInsight</code> object that represents the requested insight.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>ProactiveInsight</code> object that represents the requested insight.\n\t\t</p>"
                     }
                 },
                 "ReactiveInsight": {
                     "target": "com.amazonaws.devopsguru#ReactiveInsight",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tAn <code>ReactiveInsight</code> object that represents the requested insight.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>ReactiveInsight</code> object that represents the requested insight.\n\t\t</p>"
                     }
                 }
             }
@@ -842,7 +954,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   \t\tReturns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in \n   \t\tresource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.\n   \t</p>",
+                "smithy.api#documentation": "<p>\n   \t\tReturns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in \n   \t\tresource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/health/resource-collection/{ResourceCollectionType}",
@@ -860,7 +972,7 @@
                 "ResourceCollectionType": {
                     "target": "com.amazonaws.devopsguru#ResourceCollectionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   \t\tAn AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.       \n   \t</p>",
+                        "smithy.api#documentation": "<p>\n   \t\tAn AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.       \n   \t</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -882,6 +994,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n   \t\tThe returned <code>CloudFormationHealthOverview</code> object that contains an <code>InsightHealthOverview</code> object with \n   \t\tthe requested system health information.\n   \t</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.devopsguru#ServiceHealths",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>ServiceHealth</code> objects that describes the health of the AWS services \n\t\tassociated with the resources in the collection.</p>"
                     }
                 },
                 "NextToken": {
@@ -1174,6 +1292,97 @@
                 "target": "com.amazonaws.devopsguru#Event"
             }
         },
+        "com.amazonaws.devopsguru#GetCostEstimation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#GetCostEstimationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#GetCostEstimationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS resources. \n\t\t\tFor more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html\">Estimate your \n\t\t\tAmazon DevOps Guru costs</a> and \n\t\t\t<a href=\"http://aws.amazon.com/devops-guru/pricing/\">Amazon DevOps Guru pricing</a>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/cost-estimation",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken"
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#GetCostEstimationRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#GetCostEstimationResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#CostEstimationResourceCollectionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of the AWS resources used to create your monthly DevOps Guru cost estimate.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.devopsguru#CostEstimationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of creating this cost estimate. If it's still in progress, the status \n\t\t\t<code>ONGOING</code> is returned. If it is finished, the status <code>COMPLETED</code> is returned.</p>"
+                    }
+                },
+                "Costs": {
+                    "target": "com.amazonaws.devopsguru#ServiceResourceCosts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of <code>ResourceCost</code> objects that each contains details \n\t\t\tabout the monthly cost estimate to analyze one of your AWS resources.</p>"
+                    }
+                },
+                "TimeRange": {
+                    "target": "com.amazonaws.devopsguru#CostEstimationTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start and end time of the cost estimation.</p>"
+                    }
+                },
+                "TotalCost": {
+                    "target": "com.amazonaws.devopsguru#Cost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The estimated monthly cost to analyze the AWS resources. \n\t\t\tThis value is the sum of the estimated costs to analyze each resource in the <code>Costs</code> \n\t\t\tobject in this response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.devopsguru#UuidNextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.devopsguru#GetResourceCollection": {
             "type": "operation",
             "input": {
@@ -1200,7 +1409,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n   \t\tReturns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.\n   \t</p>",
+                "smithy.api#documentation": "<p>\n   \t\tReturns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.\n   \t</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resource-collections/{ResourceCollectionType}",
@@ -1238,7 +1447,7 @@
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollectionFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n   \t\tThe requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.\n   \t</p>"
+                        "smithy.api#documentation": "<p>\n   \t\tThe requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.\n   \t</p>"
                     }
                 },
                 "NextToken": {
@@ -1991,6 +2200,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
                     }
+                },
+                "Locale": {
+                    "target": "com.amazonaws.devopsguru#Locale",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A locale that specifies the language to use for recommendations.</p>"
+                    }
                 }
             }
         },
@@ -2009,6 +2224,57 @@
                         "smithy.api#documentation": "<p>The pagination token to use to retrieve \n   the next page of results for this operation. If there are no more pages, this value is null.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.devopsguru#Locale": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DE_DE",
+                        "name": "DE_DE"
+                    },
+                    {
+                        "value": "EN_US",
+                        "name": "EN_US"
+                    },
+                    {
+                        "value": "EN_GB",
+                        "name": "EN_GB"
+                    },
+                    {
+                        "value": "ES_ES",
+                        "name": "ES_ES"
+                    },
+                    {
+                        "value": "FR_FR",
+                        "name": "FR_FR"
+                    },
+                    {
+                        "value": "IT_IT",
+                        "name": "IT_IT"
+                    },
+                    {
+                        "value": "JA_JP",
+                        "name": "JA_JP"
+                    },
+                    {
+                        "value": "KO_KR",
+                        "name": "KO_KR"
+                    },
+                    {
+                        "value": "PT_BR",
+                        "name": "PT_BR"
+                    },
+                    {
+                        "value": "ZH_CN",
+                        "name": "ZH_CN"
+                    },
+                    {
+                        "value": "ZH_TW",
+                        "name": "ZH_TW"
+                    }
+                ]
             }
         },
         "com.amazonaws.devopsguru#MeanTimeToRecoverInMilliseconds": {
@@ -2348,6 +2614,12 @@
                 },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "ServiceCollection": {
+                    "target": "com.amazonaws.devopsguru#ServiceCollection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of the names of AWS services.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2582,6 +2854,12 @@
                 },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "ServiceCollection": {
+                    "target": "com.amazonaws.devopsguru#ServiceCollection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of the names of AWS services.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2766,7 +3044,7 @@
                 "Resources": {
                     "target": "com.amazonaws.devopsguru#RecommendationRelatedEventResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tA <code>ResourceCollection</code> object that contains arrays of the names of AWS \n\t\t\tCloudFormation stacks.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tA <code>ResourceCollection</code> object that contains arrays of the names of AWS \n\t\t\tCloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks.\n\t\t</p>"
                     }
                 }
             },
@@ -2893,12 +3171,12 @@
                 "CloudFormation": {
                     "target": "com.amazonaws.devopsguru#CloudFormationCollection",
                     "traits": {
-                        "smithy.api#documentation": "<p> An array of the names of AWS CloudFormation stacks. The stacks define AWS resources\n   \t\tthat DevOps Guru analyzes. \n   \t</p>"
+                        "smithy.api#documentation": "<p> An array of the names of AWS CloudFormation stacks. The stacks define AWS resources\n   \t\tthat DevOps Guru analyzes. You can specify up to 500 AWS CloudFormation stacks.\n   \t</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n\t\t\tA collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks.\n\t\t</p>"
+                "smithy.api#documentation": "<p>\n\t\t\tA collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks.\n\t\t</p>"
             }
         },
         "com.amazonaws.devopsguru#ResourceCollectionFilter": {
@@ -2907,7 +3185,7 @@
                 "CloudFormation": {
                     "target": "com.amazonaws.devopsguru#CloudFormationCollectionFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tInformation about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. \n\t\t\tFor more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> \n\t\t\tin the <i>AWS CloudFormation User Guide</i>.\n\t\t</p>"
                     }
                 }
             },
@@ -2922,6 +3200,10 @@
                     {
                         "value": "AWS_CLOUD_FORMATION",
                         "name": "AWS_CLOUD_FORMATION"
+                    },
+                    {
+                        "value": "AWS_SERVICE",
+                        "name": "AWS_SERVICE"
                     }
                 ]
             }
@@ -2966,6 +3248,16 @@
                 "smithy.api#documentation": "<p>A requested resource could not be found</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.devopsguru#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z]+[a-zA-Z0-9-_:]*$"
             }
         },
         "com.amazonaws.devopsguru#RetryAfterSeconds": {
@@ -3024,6 +3316,12 @@
                 },
                 "ResourceCollection": {
                     "target": "com.amazonaws.devopsguru#ResourceCollection"
+                },
+                "ServiceCollection": {
+                    "target": "com.amazonaws.devopsguru#ServiceCollection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of the names of AWS services.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3100,6 +3398,66 @@
                 }
             }
         },
+        "com.amazonaws.devopsguru#ServiceCollection": {
+            "type": "structure",
+            "members": {
+                "ServiceNames": {
+                    "target": "com.amazonaws.devopsguru#ServiceNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of strings that each specifies the name of an AWS service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of the names of AWS services.</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ServiceHealth": {
+            "type": "structure",
+            "members": {
+                "ServiceName": {
+                    "target": "com.amazonaws.devopsguru#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS service.</p>"
+                    }
+                },
+                "Insight": {
+                    "target": "com.amazonaws.devopsguru#ServiceInsightHealth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the health of an AWS service. This is a <code>ServiceInsightHealth</code> that \n\t\tcontains the number of open proactive and reactive insights for this service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the health of an AWS service.</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ServiceHealths": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ServiceHealth"
+            }
+        },
+        "com.amazonaws.devopsguru#ServiceInsightHealth": {
+            "type": "structure",
+            "members": {
+                "OpenProactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#NumOpenProactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of open proactive insights in the AWS service</p>"
+                    }
+                },
+                "OpenReactiveInsights": {
+                    "target": "com.amazonaws.devopsguru#NumOpenReactiveInsights",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of open reactive insights in the AWS service</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the number of open proactive and reactive insights in an analyzed AWS service.</p>"
+            }
+        },
         "com.amazonaws.devopsguru#ServiceIntegrationConfig": {
             "type": "structure",
             "members": {
@@ -3114,6 +3472,119 @@
                 "smithy.api#documentation": "<p>\n\t\t\tInformation about the integration of DevOps Guru with another AWS service, such as AWS Systems Manager.\n\t\t</p>"
             }
         },
+        "com.amazonaws.devopsguru#ServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "API_GATEWAY",
+                        "name": "API_GATEWAY"
+                    },
+                    {
+                        "value": "APPLICATION_ELB",
+                        "name": "APPLICATION_ELB"
+                    },
+                    {
+                        "value": "AUTO_SCALING_GROUP",
+                        "name": "AUTO_SCALING_GROUP"
+                    },
+                    {
+                        "value": "CLOUD_FRONT",
+                        "name": "CLOUD_FRONT"
+                    },
+                    {
+                        "value": "DYNAMO_DB",
+                        "name": "DYNAMO_DB"
+                    },
+                    {
+                        "value": "EC2",
+                        "name": "EC2"
+                    },
+                    {
+                        "value": "ECS",
+                        "name": "ECS"
+                    },
+                    {
+                        "value": "EKS",
+                        "name": "EKS"
+                    },
+                    {
+                        "value": "ELASTIC_BEANSTALK",
+                        "name": "ELASTIC_BEANSTALK"
+                    },
+                    {
+                        "value": "ELASTI_CACHE",
+                        "name": "ELASTI_CACHE"
+                    },
+                    {
+                        "value": "ELB",
+                        "name": "ELB"
+                    },
+                    {
+                        "value": "ES",
+                        "name": "ES"
+                    },
+                    {
+                        "value": "KINESIS",
+                        "name": "KINESIS"
+                    },
+                    {
+                        "value": "LAMBDA",
+                        "name": "LAMBDA"
+                    },
+                    {
+                        "value": "NAT_GATEWAY",
+                        "name": "NAT_GATEWAY"
+                    },
+                    {
+                        "value": "NETWORK_ELB",
+                        "name": "NETWORK_ELB"
+                    },
+                    {
+                        "value": "RDS",
+                        "name": "RDS"
+                    },
+                    {
+                        "value": "REDSHIFT",
+                        "name": "REDSHIFT"
+                    },
+                    {
+                        "value": "ROUTE_53",
+                        "name": "ROUTE_53"
+                    },
+                    {
+                        "value": "S3",
+                        "name": "S3"
+                    },
+                    {
+                        "value": "SAGE_MAKER",
+                        "name": "SAGE_MAKER"
+                    },
+                    {
+                        "value": "SNS",
+                        "name": "SNS"
+                    },
+                    {
+                        "value": "SQS",
+                        "name": "SQS"
+                    },
+                    {
+                        "value": "STEP_FUNCTIONS",
+                        "name": "STEP_FUNCTIONS"
+                    },
+                    {
+                        "value": "SWF",
+                        "name": "SWF"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.devopsguru#ServiceNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ServiceName"
+            }
+        },
         "com.amazonaws.devopsguru#ServiceQuotaExceededException": {
             "type": "structure",
             "members": {
@@ -3125,6 +3596,50 @@
                 "smithy.api#documentation": "<p>The request contains a value that exceeds a maximum quota.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.devopsguru#ServiceResourceCost": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.devopsguru#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the AWS resource.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.devopsguru#CostEstimationServiceResourceState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the resource. The resource is <code>ACTIVE</code> if it produces metrics, \n\t\t\tevents, or logs within an hour, otherwise it is <code>INACTIVE</code>. You pay for \n\t\t\tthe number of active AWS resource hours analyzed for each resource. Inactive resources are \n\t\t\tnot charged.\n\t\t</p>"
+                    }
+                },
+                "Count": {
+                    "target": "com.amazonaws.devopsguru#CostEstimationServiceResourceCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of active resources analyzed for this service to create a monthly cost\n\t\t\testimate.</p>"
+                    }
+                },
+                "UnitCost": {
+                    "target": "com.amazonaws.devopsguru#Cost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The price per hour to analyze the resources in the service. \n\t\t\tFor more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html\">Estimate your \n\t\t\tAmazon DevOps Guru costs</a> and \n\t\t\t<a href=\"http://aws.amazon.com/devops-guru/pricing/\">Amazon DevOps Guru pricing</a>.</p>"
+                    }
+                },
+                "Cost": {
+                    "target": "com.amazonaws.devopsguru#Cost",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total estimated monthly cost to analyze the active resources for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about the estimated monthly cost to \n\t\t\tanalyze an AWS resource. For more information, \n\t\t\tsee <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html\">Estimate your \n\t\t\tAmazon DevOps Guru costs</a> and \n\t\t\t<a href=\"http://aws.amazon.com/devops-guru/pricing/\">Amazon DevOps Guru pricing</a>.</p>"
+            }
+        },
+        "com.amazonaws.devopsguru#ServiceResourceCosts": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.devopsguru#ServiceResourceCost"
             }
         },
         "com.amazonaws.devopsguru#SnsChannelConfig": {
@@ -3166,6 +3681,66 @@
             "member": {
                 "target": "com.amazonaws.devopsguru#StackName"
             }
+        },
+        "com.amazonaws.devopsguru#StartCostEstimation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.devopsguru#StartCostEstimationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.devopsguru#StartCostEstimationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.devopsguru#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.devopsguru#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts the creation of an estimate of the monthly cost to analyze your AWS resources.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/cost-estimation",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#StartCostEstimationRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceCollection": {
+                    "target": "com.amazonaws.devopsguru#CostEstimationResourceCollectionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The collection of AWS resources used to create a monthly DevOps Guru cost estimate.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.devopsguru#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotency token used to identify each cost estimate request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.devopsguru#StartCostEstimationResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.devopsguru#StartTimeRange": {
             "type": "structure",
@@ -3241,12 +3816,12 @@
                 "StackNames": {
                     "target": "com.amazonaws.devopsguru#UpdateStackNames",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tAn array of the name of stacks to update.\n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tAn array of the names of the AWS CloudFormation stacks to update. You can specify up to 500 AWS CloudFormation stacks.\n\t\t</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Contains the names of AWS CloudFormation stacks used to update a collection of stacks. </p>"
+                "smithy.api#documentation": "<p> Contains the names of AWS CloudFormation stacks used to update a collection of stacks. You can specify up to 500 AWS CloudFormation stacks.</p>"
             }
         },
         "com.amazonaws.devopsguru#UpdateResourceCollection": {
@@ -3275,7 +3850,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates the collection of resources that DevOps Guru analyzes.\n\t\t\tThe one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks. This method also creates the IAM role required for you\n\t\t\tto use DevOps Guru. </p>",
+                "smithy.api#documentation": "<p> Updates the collection of resources that DevOps Guru analyzes.\n\t\t\tThe one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze \n      \tonly the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. This method also creates the IAM role required for you\n\t\t\tto use DevOps Guru. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/resource-collections",
@@ -3304,7 +3879,7 @@
                 "CloudFormation": {
                     "target": "com.amazonaws.devopsguru#UpdateCloudFormationCollectionFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tAn collection of AWS CloudFormation stacks. \n\t\t</p>"
+                        "smithy.api#documentation": "<p>\n\t\t\tAn collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks.\n\t\t</p>"
                     }
                 }
             },

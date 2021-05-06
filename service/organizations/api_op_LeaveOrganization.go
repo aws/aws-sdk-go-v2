@@ -61,6 +61,10 @@ import (
 // the organization, all tags that were attached to the account object in the
 // organization are deleted. AWS accounts outside of an organization do not support
 // tags.
+//
+// * A newly created account has a waiting period before it can be removed
+// from its organization. If you get an error that indicates that a wait period is
+// required, then try again in a few days.
 func (c *Client) LeaveOrganization(ctx context.Context, params *LeaveOrganizationInput, optFns ...func(*Options)) (*LeaveOrganizationOutput, error) {
 	if params == nil {
 		params = &LeaveOrganizationInput{}

@@ -49,7 +49,7 @@ type DeleteCapacityProviderInput struct {
 
 type DeleteCapacityProviderOutput struct {
 
-	// The details of a capacity provider.
+	// The details of the capacity provider.
 	CapacityProvider *types.CapacityProvider
 
 	// Metadata pertaining to the operation's result.

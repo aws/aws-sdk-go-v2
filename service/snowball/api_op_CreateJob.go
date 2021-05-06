@@ -15,7 +15,72 @@ import (
 // data center. Your AWS account must have the right trust policies and permissions
 // in place to create a job for a Snow device. If you're creating a job for a node
 // in a cluster, you only need to provide the clusterId value; the other job
-// attributes are inherited from the cluster.
+// attributes are inherited from the cluster. Only the Snowball; Edge device type
+// is supported when ordering clustered jobs. The device capacity is optional.
+// Availability of device types differ by AWS Region. For more information about
+// region availability, see AWS Regional Services
+// (https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&loc=4).
+// AWS Snow Family device types and their capacities.
+//
+// * Snow Family device type:
+// SNC1_SSD
+//
+// * Capacity: T14
+//
+// * Description: Snowcone
+//
+// * Snow Family device type:
+// SNC1_HDD
+//
+// * Capacity: T8
+//
+// * Description: Snowcone
+//
+// * Device type: EDGE_S
+//
+// *
+// Capacity: T98
+//
+// * Description: Snowball Edge Storage Optimized for data transfer
+// only
+//
+// * Device type: EDGE_CG
+//
+// * Capacity: T42
+//
+// * Description: Snowball Edge
+// Compute Optimized with GPU
+//
+// * Device type: EDGE_C
+//
+// * Capacity: T42
+//
+// *
+// Description: Snowball Edge Compute Optimized without GPU
+//
+// * Device type: EDGE
+//
+// *
+// Capacity: T100
+//
+// * Description: Snowball Edge Storage Optimized with EC2
+// Compute
+//
+// * Device type: STANDARD
+//
+// * Capacity: T50
+//
+// * Description: Original
+// Snowball device This device is only available in the Ningxia, Beijing, and
+// Singapore AWS Regions.
+//
+// * Device type: STANDARD
+//
+// * Capacity: T80
+//
+// * Description:
+// Original Snowball device This device is only available in the Ningxia, Beijing,
+// and Singapore AWS Regions.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -45,7 +110,12 @@ type CreateJobInput struct {
 	// Photos 2016-08-11.
 	Description *string
 
-	// Defines the device configuration for an AWS Snowcone job.
+	// Defines the device configuration for an AWS Snowcone job. For more information,
+	// see
+	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
+	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	DeviceConfiguration *types.DeviceConfiguration
 
 	// The forwarding address ID for a job. This field is not supported in most
@@ -60,6 +130,9 @@ type CreateJobInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html) AWS Key
 	// Management Service (KMS) API action.
 	KmsKeyARN *string
+
+	// The ID of the long term pricing type for the device.
+	LongTermPricingId *string
 
 	// Defines the Amazon Simple Notification Service (Amazon SNS) notification
 	// settings for this job.
@@ -102,7 +175,11 @@ type CreateJobInput struct {
 
 	// If your job is being created in one of the US regions, you have the option of
 	// specifying what size Snow device you'd like for this job. In all other regions,
-	// Snowballs come with 80 TB in storage capacity.
+	// Snowballs come with 80 TB in storage capacity. For more information, see
+	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
+	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballCapacityPreference types.SnowballCapacity
 
 	// The type of AWS Snow Family device to use for this job. For cluster jobs, AWS
@@ -110,7 +187,11 @@ type CreateJobInput struct {
 	// device to use for this job. Currently, the only supported device type for
 	// cluster jobs is EDGE. For more information, see Snowball Edge Device Options
 	// (https://docs.aws.amazon.com/snowball/latest/developer-guide/device-differences.html)
-	// in the Snowball Edge Developer Guide.
+	// in the Snowball Edge Developer Guide. For more information, see
+	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
+	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballType types.SnowballType
 
 	// The tax documents required in your AWS Region.

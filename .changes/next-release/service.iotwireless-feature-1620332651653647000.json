@@ -1,0 +1,9 @@
+{
+ "ID": "service.iotwireless-feature-1620332651653647000",
+ "SchemaVersion": 1,
+ "Module": "service/iotwireless",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

@@ -184,7 +184,7 @@ type UpdateServiceInput struct {
 	// them before they have time to come up.
 	HealthCheckGracePeriodSeconds *int32
 
-	// An object representing the network configuration for a task or service.
+	// An object representing the network configuration for the service.
 	NetworkConfiguration *types.NetworkConfiguration
 
 	// An array of task placement constraint objects to update the service to use. If

@@ -590,6 +590,26 @@ func (m *validateOpGetAssetPropertyAggregates) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetInterpolatedAssetPropertyValues struct {
+}
+
+func (*validateOpGetInterpolatedAssetPropertyValues) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInterpolatedAssetPropertyValues) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInterpolatedAssetPropertyValuesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInterpolatedAssetPropertyValuesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAssetRelationships struct {
 }
 
@@ -1084,6 +1104,10 @@ func addOpDisassociateAssetsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetAssetPropertyAggregatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAssetPropertyAggregates{}, middleware.After)
+}
+
+func addOpGetInterpolatedAssetPropertyValuesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInterpolatedAssetPropertyValues{}, middleware.After)
 }
 
 func addOpListAssetRelationshipsValidationMiddleware(stack *middleware.Stack) error {
@@ -2399,6 +2423,33 @@ func validateOpGetAssetPropertyAggregatesInput(v *GetAssetPropertyAggregatesInpu
 	}
 	if v.EndDate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EndDate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInterpolatedAssetPropertyValuesInput(v *GetInterpolatedAssetPropertyValuesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInterpolatedAssetPropertyValuesInput"}
+	if v.StartTimeInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTimeInSeconds"))
+	}
+	if v.EndTimeInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTimeInSeconds"))
+	}
+	if len(v.Quality) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Quality"))
+	}
+	if v.IntervalInSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntervalInSeconds"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

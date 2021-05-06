@@ -3594,6 +3594,15 @@ func awsRestjson1_deserializeDocumentCmafPackage(v **types.CmafPackage, value in
 				return err
 			}
 
+		case "includeEncoderConfigurationInSegments":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeEncoderConfigurationInSegments = jtv
+			}
+
 		case "segmentDurationSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -3758,6 +3767,15 @@ func awsRestjson1_deserializeDocumentDashPackage(v **types.DashPackage, value in
 		case "encryption":
 			if err := awsRestjson1_deserializeDocumentDashEncryption(&sv.Encryption, value); err != nil {
 				return err
+			}
+
+		case "includeEncoderConfigurationInSegments":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeEncoderConfigurationInSegments = jtv
 			}
 
 		case "periodTriggers":

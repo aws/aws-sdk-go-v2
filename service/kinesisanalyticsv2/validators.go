@@ -430,6 +430,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRollbackApplication struct {
+}
+
+func (*validateOpRollbackApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRollbackApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RollbackApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRollbackApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartApplication struct {
 }
 
@@ -530,6 +550,26 @@ func (m *validateOpUpdateApplication) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateApplicationMaintenanceConfiguration struct {
+}
+
+func (*validateOpUpdateApplicationMaintenanceConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateApplicationMaintenanceConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateApplicationMaintenanceConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateApplicationMaintenanceConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAddApplicationCloudWatchLoggingOptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddApplicationCloudWatchLoggingOption{}, middleware.After)
 }
@@ -614,6 +654,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpRollbackApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRollbackApplication{}, middleware.After)
+}
+
 func addOpStartApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartApplication{}, middleware.After)
 }
@@ -632,6 +676,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateApplication{}, middleware.After)
+}
+
+func addOpUpdateApplicationMaintenanceConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateApplicationMaintenanceConfiguration{}, middleware.After)
 }
 
 func validateApplicationCodeConfiguration(v *types.ApplicationCodeConfiguration) error {
@@ -722,6 +770,21 @@ func validateApplicationConfigurationUpdate(v *types.ApplicationConfigurationUpd
 		if err := validateVpcConfigurationUpdates(v.VpcConfigurationUpdates); err != nil {
 			invalidParams.AddNested("VpcConfigurationUpdates", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateApplicationMaintenanceConfigurationUpdate(v *types.ApplicationMaintenanceConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ApplicationMaintenanceConfigurationUpdate"}
+	if v.ApplicationMaintenanceWindowStartTimeUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationMaintenanceWindowStartTimeUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1971,9 +2034,6 @@ func validateOpAddApplicationCloudWatchLoggingOptionInput(v *AddApplicationCloud
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
 	if v.CloudWatchLoggingOption == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLoggingOption"))
 	} else if v.CloudWatchLoggingOption != nil {
@@ -2099,9 +2159,6 @@ func validateOpAddApplicationVpcConfigurationInput(v *AddApplicationVpcConfigura
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
 	if v.VpcConfiguration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcConfiguration"))
 	} else if v.VpcConfiguration != nil {
@@ -2195,9 +2252,6 @@ func validateOpDeleteApplicationCloudWatchLoggingOptionInput(v *DeleteApplicatio
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteApplicationCloudWatchLoggingOptionInput"}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
-	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
 	}
 	if v.CloudWatchLoggingOptionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CloudWatchLoggingOptionId"))
@@ -2319,9 +2373,6 @@ func validateOpDeleteApplicationVpcConfigurationInput(v *DeleteApplicationVpcCon
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
 	if v.VpcConfigurationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VpcConfigurationId"))
 	}
@@ -2420,6 +2471,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpRollbackApplicationInput(v *RollbackApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollbackApplicationInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.CurrentApplicationVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartApplicationInput(v *StartApplicationInput) error {
 	if v == nil {
 		return nil
@@ -2505,9 +2574,6 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
-	if v.CurrentApplicationVersionId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CurrentApplicationVersionId"))
-	}
 	if v.ApplicationConfigurationUpdate != nil {
 		if err := validateApplicationConfigurationUpdate(v.ApplicationConfigurationUpdate); err != nil {
 			invalidParams.AddNested("ApplicationConfigurationUpdate", err.(smithy.InvalidParamsError))
@@ -2521,6 +2587,28 @@ func validateOpUpdateApplicationInput(v *UpdateApplicationInput) error {
 	if v.CloudWatchLoggingOptionUpdates != nil {
 		if err := validateCloudWatchLoggingOptionUpdates(v.CloudWatchLoggingOptionUpdates); err != nil {
 			invalidParams.AddNested("CloudWatchLoggingOptionUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateApplicationMaintenanceConfigurationInput(v *UpdateApplicationMaintenanceConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateApplicationMaintenanceConfigurationInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.ApplicationMaintenanceConfigurationUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationMaintenanceConfigurationUpdate"))
+	} else if v.ApplicationMaintenanceConfigurationUpdate != nil {
+		if err := validateApplicationMaintenanceConfigurationUpdate(v.ApplicationMaintenanceConfigurationUpdate); err != nil {
+			invalidParams.AddNested("ApplicationMaintenanceConfigurationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

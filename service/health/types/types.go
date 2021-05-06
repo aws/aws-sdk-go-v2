@@ -23,9 +23,9 @@ type AffectedEntity struct {
 	// The ID of the affected entity.
 	EntityValue *string
 
-	// The unique identifier for the event. Format:
-	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
-	// Example: Example:
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
 
@@ -68,9 +68,9 @@ type EntityAggregate struct {
 	// The number of entities that match the criteria for the specified events.
 	Count int32
 
-	// The unique identifier for the event. Format:
-	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
-	// Example: Example:
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
 }
@@ -123,9 +123,9 @@ type EntityFilter struct {
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html#AWSHealth-Type-Event-eventScopeCode).
 type Event struct {
 
-	// The unique identifier for the event. Format:
-	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
-	// Example: Example:
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	Arn *string
 
@@ -163,7 +163,7 @@ type Event struct {
 	// The most recent date and time that the event was updated.
 	LastUpdatedTime *time.Time
 
-	// The AWS region name of the event.
+	// The AWS Region name of the event.
 	Region *string
 
 	// The AWS service that is affected by the event. For example, EC2, RDS.
@@ -184,9 +184,9 @@ type Event struct {
 // operations.
 type EventAccountFilter struct {
 
-	// The unique identifier for the event. Format:
-	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
-	// Example: Example:
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	//
 	// This member is required.
@@ -240,7 +240,7 @@ type EventDetails struct {
 
 // Error information returned when a DescribeEventDetails
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)
-// operation cannot find a specified event.
+// operation can't find a specified event.
 type EventDetailsErrorItem struct {
 
 	// A message that describes the error.
@@ -249,9 +249,9 @@ type EventDetailsErrorItem struct {
 	// The name of the error.
 	ErrorName *string
 
-	// The unique identifier for the event. Format:
-	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
-	// Example: Example:
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
 }
@@ -263,7 +263,7 @@ type EventDetailsErrorItem struct {
 // operations.
 type EventFilter struct {
 
-	// A list of AWS availability zones.
+	// A list of AWS Availability Zones.
 	AvailabilityZones []string
 
 	// A list of dates and times that the event ended.
@@ -295,7 +295,7 @@ type EventFilter struct {
 	// A list of dates and times that the event was last updated.
 	LastUpdatedTimes []DateTimeRange
 
-	// A list of AWS regions.
+	// A list of AWS Regions.
 	Regions []string
 
 	// The AWS services associated with the event. For example, EC2, RDS.
@@ -354,7 +354,7 @@ type EventTypeFilter struct {
 
 // Error information returned when a DescribeAffectedEntitiesForOrganization
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
-// operation cannot find or process a specific entity.
+// operation can't find or process a specific entity.
 type OrganizationAffectedEntitiesErrorItem struct {
 
 	// The 12-digit AWS account numbers that contains the affected entities.
@@ -367,9 +367,9 @@ type OrganizationAffectedEntitiesErrorItem struct {
 	// The name of the error.
 	ErrorName *string
 
-	// The unique identifier for the event. Format:
-	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
-	// Example: Example:
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
 }
@@ -380,9 +380,9 @@ type OrganizationAffectedEntitiesErrorItem struct {
 // operation.
 type OrganizationEvent struct {
 
-	// The unique identifier for the event. Format:
-	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
-	// Example: Example:
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	Arn *string
 
@@ -419,7 +419,7 @@ type OrganizationEvent struct {
 	// The AWS Region name of the event.
 	Region *string
 
-	// The AWS service that is affected by the event. For example, EC2, RDS.
+	// The AWS service that is affected by the event, such as EC2 and RDS.
 	Service *string
 
 	// The date and time that the event began.
@@ -474,23 +474,37 @@ type OrganizationEventDetails struct {
 
 // Error information returned when a DescribeEventDetailsForOrganization
 // (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
-// operation cannot find a specified event.
+// operation can't find a specified event.
 type OrganizationEventDetailsErrorItem struct {
 
 	// Error information returned when a DescribeEventDetailsForOrganization
 	// (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
-	// operation cannot find a specified event.
+	// operation can't find a specified event.
 	AwsAccountId *string
 
-	// A message that describes the error.
+	// A message that describes the error. If you call the
+	// DescribeEventDetailsForOrganization operation and receive one of the following
+	// errors, follow the recommendations in the message:
+	//
+	// * We couldn't find a public
+	// event that matches your request. To find an event that is account specific, you
+	// must enter an AWS account ID in the request.
+	//
+	// * We couldn't find an account
+	// specific event for the specified AWS account. To find an event that is public,
+	// you must enter a null value for the AWS account ID in the request.
+	//
+	// * Your AWS
+	// account doesn't include the AWS Support plan required to use the AWS Health API.
+	// You must have either a Business or Enterprise Support plan.
 	ErrorMessage *string
 
 	// The name of the error.
 	ErrorName *string
 
-	// The unique identifier for the event. Format:
-	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID .
-	// Example: Example:
+	// The unique identifier for the event. The event ARN has the
+	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
+	// format. For example, an event ARN might look like the following:
 	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	EventArn *string
 }

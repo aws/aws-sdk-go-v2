@@ -168,6 +168,7 @@ type DeploymentTargets struct {
 	// updates.
 	Accounts []string
 
+	// Returns the value of the AccountsUrl property.
 	AccountsUrl *string
 
 	// The organization root ID or organizational unit (OU) IDs to which StackSets
@@ -1638,6 +1639,8 @@ type StackSetOperationPreferences struct {
 	// MaxConcurrentPercentage, but not both.
 	MaxConcurrentPercentage *int32
 
+	// The concurrency type of deploying StackSets operations in regions, could be in
+	// parallel or one region at a time.
 	RegionConcurrencyType RegionConcurrencyType
 
 	// The order of the Regions in where you want to perform the stack operation.

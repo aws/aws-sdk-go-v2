@@ -392,7 +392,7 @@ func awsRestjson1_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChang
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.FailureDescription = ptr.String(jtv)
 			}
@@ -612,7 +612,7 @@ func awsRestjson1_deserializeOpDocumentDescribeEntityOutput(v **DescribeEntityOu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected DateTimeISO8601 to be of type string, got %T instead", value)
 				}
 				sv.LastModifiedDate = ptr.String(jtv)
 			}
@@ -1451,7 +1451,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -1654,6 +1654,15 @@ func awsRestjson1_deserializeDocumentChangeSummary(v **types.ChangeSummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "ChangeName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChangeName to be of type string, got %T instead", value)
+				}
+				sv.ChangeName = ptr.String(jtv)
+			}
+
 		case "ChangeType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1793,7 +1802,7 @@ func awsRestjson1_deserializeDocumentEntitySummary(v **types.EntitySummary, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected DateTimeISO8601 to be of type string, got %T instead", value)
 				}
 				sv.LastModifiedDate = ptr.String(jtv)
 			}
@@ -1802,7 +1811,7 @@ func awsRestjson1_deserializeDocumentEntitySummary(v **types.EntitySummary, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected EntityNameString to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
 			}
@@ -1811,7 +1820,7 @@ func awsRestjson1_deserializeDocumentEntitySummary(v **types.EntitySummary, valu
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected VisibilityValue to be of type string, got %T instead", value)
 				}
 				sv.Visibility = ptr.String(jtv)
 			}
@@ -1885,7 +1894,7 @@ func awsRestjson1_deserializeDocumentErrorDetail(v **types.ErrorDetail, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ErrorCodeString to be of type string, got %T instead", value)
 				}
 				sv.ErrorCode = ptr.String(jtv)
 			}
@@ -1894,7 +1903,7 @@ func awsRestjson1_deserializeDocumentErrorDetail(v **types.ErrorDetail, value in
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.ErrorMessage = ptr.String(jtv)
 			}
@@ -1968,7 +1977,7 @@ func awsRestjson1_deserializeDocumentInternalServiceException(v **types.Internal
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -2044,7 +2053,7 @@ func awsRestjson1_deserializeDocumentResourceInUseException(v **types.ResourceIn
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -2084,7 +2093,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -2124,7 +2133,7 @@ func awsRestjson1_deserializeDocumentResourceNotSupportedException(v **types.Res
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -2164,7 +2173,7 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -2204,7 +2213,7 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}
@@ -2244,7 +2253,7 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StringValue to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
 			}

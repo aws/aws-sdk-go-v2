@@ -17,6 +17,7 @@ import (
 // your account. You specify the type of AWS resources collection. The one type of
 // AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can
 // be configured to analyze only the AWS resources that are defined in the stacks.
+// You can specify up to 500 AWS CloudFormation stacks.
 func (c *Client) DescribeResourceCollectionHealth(ctx context.Context, params *DescribeResourceCollectionHealthInput, optFns ...func(*Options)) (*DescribeResourceCollectionHealthOutput, error) {
 	if params == nil {
 		params = &DescribeResourceCollectionHealthInput{}
@@ -37,7 +38,8 @@ type DescribeResourceCollectionHealthInput struct {
 	// An AWS resource collection type. This type specifies how analyzed AWS resources
 	// are defined. The one type of AWS resource collection supported is AWS
 	// CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS
-	// resources that are defined in the stacks.
+	// resources that are defined in the stacks. You can specify up to 500 AWS
+	// CloudFormation stacks.
 	//
 	// This member is required.
 	ResourceCollectionType types.ResourceCollectionType
@@ -58,6 +60,10 @@ type DescribeResourceCollectionHealthOutput struct {
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
+
+	// An array of ServiceHealth objects that describes the health of the AWS services
+	// associated with the resources in the collection.
+	Service []types.ServiceHealth
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

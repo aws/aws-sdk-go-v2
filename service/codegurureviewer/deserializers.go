@@ -2829,6 +2829,55 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKMSKeyDetails(v **types.KMSKeyDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KMSKeyDetails
+	if *v == nil {
+		sv = &types.KMSKeyDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EncryptionOption":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionOption to be of type string, got %T instead", value)
+				}
+				sv.EncryptionOption = types.EncryptionOption(jtv)
+			}
+
+		case "KMSKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KMSKeyId to be of type string, got %T instead", value)
+				}
+				sv.KMSKeyId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMetrics(v **types.Metrics, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3374,6 +3423,11 @@ func awsRestjson1_deserializeDocumentRepositoryAssociation(v **types.RepositoryA
 					return err
 				}
 				sv.CreatedTimeStamp = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "KMSKeyDetails":
+			if err := awsRestjson1_deserializeDocumentKMSKeyDetails(&sv.KMSKeyDetails, value); err != nil {
+				return err
 			}
 
 		case "LastUpdatedTimeStamp":

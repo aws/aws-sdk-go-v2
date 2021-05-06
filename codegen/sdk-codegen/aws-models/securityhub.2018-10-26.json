@@ -115,7 +115,7 @@
                 "smithy.api#deprecated": {
                     "message": "This API has been deprecated, use AcceptAdministratorInvitation API instead."
                 },
-                "smithy.api#documentation": "<p>This method is deprecated. Instead, use <code>AcceptAdministratorInvitation</code>.</p>\n         <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator\n         account that the invitation was sent from.</p>\n         <p>This operation is only used by member accounts that are not added through\n         Organizations.</p>\n         <p>When the member account accepts the invitation, permission is granted to the administrator\n         account to view findings generated in the member account.</p>",
+                "smithy.api#documentation": "<p>This method is deprecated. Instead, use <code>AcceptAdministratorInvitation</code>.</p>\n         <p>The Security Hub console continues to use <code>AcceptInvitation</code>. It will eventually change to use <code>AcceptAdministratorInvitation</code>. Any IAM policies that specifically control access to this function must continue to use <code>AcceptInvitation</code>. You should also add <code>AcceptAdministratorInvitation</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>AcceptAdministratorInvitation</code>.</p>\n         <p>Accepts the invitation to be a member account and be monitored by the Security Hub administrator\n         account that the invitation was sent from.</p>\n         <p>This operation is only used by member accounts that are not added through\n         Organizations.</p>\n         <p>When the member account accepts the invitation, permission is granted to the administrator\n         account to view findings generated in the member account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/master",
@@ -726,7 +726,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>contains information about a REST API in version 1 of Amazon API Gateway.</p>"
+                "smithy.api#documentation": "<p>Contains information about a REST API in version 1 of Amazon API Gateway.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsApiGatewayStageDetails": {
@@ -2623,6 +2623,144 @@
                 "smithy.api#documentation": "<p>The details of an Amazon EC2 instance.</p>"
             }
         },
+        "com.amazonaws.securityhub#AwsEc2NetworkAclAssociation": {
+            "type": "structure",
+            "members": {
+                "NetworkAclAssociationId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the association between the network ACL and the subnet.</p>"
+                    }
+                },
+                "NetworkAclId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the network ACL.</p>"
+                    }
+                },
+                "SubnetId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the subnet that is associated with the network ACL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An association between the network ACL and a subnet.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2NetworkAclAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEc2NetworkAclAssociation"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2NetworkAclDetails": {
+            "type": "structure",
+            "members": {
+                "IsDefault": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether this is the default network ACL for the VPC.</p>"
+                    }
+                },
+                "NetworkAclId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the network ACL.</p>"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AWS account that owns the network ACL.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC for the network ACL.</p>"
+                    }
+                },
+                "Associations": {
+                    "target": "com.amazonaws.securityhub#AwsEc2NetworkAclAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Associations between the network ACL and subnets.</p>"
+                    }
+                },
+                "Entries": {
+                    "target": "com.amazonaws.securityhub#AwsEc2NetworkAclEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The set of rules in the network ACL.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an EC2 network access control list (ACL).</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2NetworkAclEntry": {
+            "type": "structure",
+            "members": {
+                "CidrBlock": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPV4 network range for which to deny or allow access.</p>"
+                    }
+                },
+                "Egress": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the rule is an egress rule. An egress rule is a rule that applies to traffic that leaves the subnet.</p>"
+                    }
+                },
+                "IcmpTypeCode": {
+                    "target": "com.amazonaws.securityhub#IcmpTypeCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Internet Control Message Protocol (ICMP) type and code for which to deny or allow access.</p>"
+                    }
+                },
+                "Ipv6CidrBlock": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPV6 network range for which to deny or allow access.</p>"
+                    }
+                },
+                "PortRange": {
+                    "target": "com.amazonaws.securityhub#PortRangeFromTo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For TCP or UDP protocols, the range of ports that the rule applies to.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol that the rule applies to. To deny or allow access to all protocols, use the value -1.</p>"
+                    }
+                },
+                "RuleAction": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the rule is used to allow access or deny access.</p>"
+                    }
+                },
+                "RuleNumber": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule number. The rules are processed in order by their number.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule for the network ACL. Each rule allows or denies access based on the IP address, traffic direction, port, and protocol.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2NetworkAclEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEc2NetworkAclEntry"
+            }
+        },
         "com.amazonaws.securityhub#AwsEc2NetworkInterfaceAttachment": {
             "type": "structure",
             "members": {
@@ -3011,6 +3149,92 @@
                 "target": "com.amazonaws.securityhub#AwsEc2SecurityGroupUserIdGroupPair"
             }
         },
+        "com.amazonaws.securityhub#AwsEc2SubnetDetails": {
+            "type": "structure",
+            "members": {
+                "AssignIpv6AddressOnCreation": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to assign an IPV6 address to a network interface that is created in this subnet.</p>"
+                    }
+                },
+                "AvailabilityZone": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone for the subnet.</p>"
+                    }
+                },
+                "AvailabilityZoneId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Availability Zone for the subnet.</p>"
+                    }
+                },
+                "AvailableIpAddressCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of available IPV4 addresses in the subnet. Does not include addresses for stopped instances.</p>"
+                    }
+                },
+                "CidrBlock": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPV4 CIDR block that is assigned to the subnet.</p>"
+                    }
+                },
+                "DefaultForAz": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether this subnet is the default subnet for the Availability Zone.</p>"
+                    }
+                },
+                "MapPublicIpOnLaunch": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether instances in this subnet receive a public IP address.</p>"
+                    }
+                },
+                "OwnerId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the AWS account that owns the subnet.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the subnet.</p>"
+                    }
+                },
+                "SubnetArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the subnet.</p>"
+                    }
+                },
+                "SubnetId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the subnet.</p>"
+                    }
+                },
+                "VpcId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC that contains the subnet.</p>"
+                    }
+                },
+                "Ipv6CidrBlockAssociationSet": {
+                    "target": "com.amazonaws.securityhub#Ipv6CidrBlockAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPV6 CIDR blocks that are associated with the subnet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a subnet in EC2.</p>"
+            }
+        },
         "com.amazonaws.securityhub#AwsEc2VolumeAttachment": {
             "type": "structure",
             "members": {
@@ -3129,6 +3353,200 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about an EC2 VPC.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentDetails": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application that is associated with the environment.</p>"
+                    }
+                },
+                "Cname": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to the CNAME for this environment.</p>"
+                    }
+                },
+                "DateCreated": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date for this environment.</p>"
+                    }
+                },
+                "DateUpdated": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date when this environment was last modified.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the environment.</p>"
+                    }
+                },
+                "EndpointUrl": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For load-balanced, autoscaling environments, the URL to the load balancer. For single-instance environments, the IP address of the instance.</p>"
+                    }
+                },
+                "EnvironmentArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the environment.</p>"
+                    }
+                },
+                "EnvironmentId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the environment.</p>"
+                    }
+                },
+                "EnvironmentLinks": {
+                    "target": "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentEnvironmentLinks",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Links to other environments in the same group.</p>"
+                    }
+                },
+                "EnvironmentName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment.</p>"
+                    }
+                },
+                "OptionSettings": {
+                    "target": "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentOptionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration setting for the environment.</p>"
+                    }
+                },
+                "PlatformArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the platform version for the environment.</p>"
+                    }
+                },
+                "SolutionStackName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the solution stack that is deployed with the environment.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current operational status of the environment.</p>"
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the environment.</p>"
+                    }
+                },
+                "VersionLabel": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The application version of the environment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about an Elastic Beanstalk environment.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentEnvironmentLink": {
+            "type": "structure",
+            "members": {
+                "EnvironmentName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the linked environment.</p>"
+                    }
+                },
+                "LinkName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment link.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a link to another environment that is in the same group.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentEnvironmentLinks": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentEnvironmentLink"
+            }
+        },
+        "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentOptionSetting": {
+            "type": "structure",
+            "members": {
+                "Namespace": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that the configuration option is associated with.</p>"
+                    }
+                },
+                "OptionName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the option.</p>"
+                    }
+                },
+                "ResourceName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the configuration setting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A configuration option setting for the environment.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentOptionSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentOptionSetting"
+            }
+        },
+        "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentTier": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment tier.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of environment tier.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the environment tier.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the tier of the environment.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsElasticsearchDomainDetails": {
@@ -10212,7 +10630,7 @@
                 "smithy.api#deprecated": {
                     "message": "This API has been deprecated, use DisassociateFromAdministratorAccount API instead."
                 },
-                "smithy.api#documentation": "<p>This method is deprecated. Instead, use <code>DisassociateFromAdministratorAccount</code>.</p>\n         <p>Disassociates the current Security Hub member account from the associated administrator\n         account.</p>\n         <p>This operation is only used by accounts that are not part of an organization. For\n         organization accounts, only the administrator account can\n         disassociate a member account.</p>",
+                "smithy.api#documentation": "<p>This method is deprecated. Instead, use <code>DisassociateFromAdministratorAccount</code>.</p>\n         <p>The Security Hub console continues to use <code>DisassociateFromMasterAccount</code>. It will eventually change to use <code>DisassociateFromAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>DisassociateFromMasterAccount</code>. You should also add <code>DisassociateFromAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>DisassociateFromAdministratorAccount</code>.</p>\n         <p>Disassociates the current Security Hub member account from the associated administrator\n         account.</p>\n         <p>This operation is only used by accounts that are not part of an organization. For\n         organization accounts, only the administrator account can\n         disassociate a member account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/master/disassociate",
@@ -10972,7 +11390,7 @@
                 "smithy.api#deprecated": {
                     "message": "This API has been deprecated, use GetAdministratorAccount API instead."
                 },
-                "smithy.api#documentation": "<p>This method is deprecated. Instead, use <code>GetAdministratorAccount</code>.</p>\n         <p>Provides the details for the Security Hub administrator account for the current member account.</p>\n         <p>Can be used by both member accounts that are managed using Organizations and accounts that were\n         invited manually.</p>",
+                "smithy.api#documentation": "<p>This method is deprecated. Instead, use <code>GetAdministratorAccount</code>.</p>\n         <p>The Security Hub console continues to use <code>GetMasterAccount</code>. It will eventually change to use <code>GetAdministratorAccount</code>. Any IAM policies that specifically control access to this function must continue to use <code>GetMasterAccount</code>. You should also add <code>GetAdministratorAccount</code> to your policies to ensure that the correct permissions are in place after the console begins to use <code>GetAdministratorAccount</code>.</p>\n         <p>Provides the details for the Security Hub administrator account for the current member account.</p>\n         <p>Can be used by both member accounts that are managed using Organizations and accounts that were\n         invited manually.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/master",
@@ -11056,6 +11474,26 @@
                         "smithy.api#documentation": "<p>The list of AWS accounts that could not be processed. For each account, the list\n         includes the account ID and the email address.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.securityhub#IcmpTypeCode": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ICMP code for which to deny or allow access. To deny or allow all codes, use the value -1.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ICMP type for which to deny or allow access. To deny or allow all types, use the value -1.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An Internet Control Message Protocol (ICMP) type and code.</p>"
             }
         },
         "com.amazonaws.securityhub#ImportFindingsError": {
@@ -12647,6 +13085,26 @@
                 "smithy.api#documentation": "<p>A range of ports.</p>"
             }
         },
+        "com.amazonaws.securityhub#PortRangeFromTo": {
+            "type": "structure",
+            "members": {
+                "From": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The first port in the port range.</p>"
+                    }
+                },
+                "To": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last port in the port range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A range of ports.</p>"
+            }
+        },
         "com.amazonaws.securityhub#PortRangeList": {
             "type": "list",
             "member": {
@@ -13059,10 +13517,28 @@
                         "smithy.api#documentation": "<p>Details about an Elastic IP address.</p>"
                     }
                 },
+                "AwsEc2Subnet": {
+                    "target": "com.amazonaws.securityhub#AwsEc2SubnetDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about a subnet in EC2.</p>"
+                    }
+                },
+                "AwsEc2NetworkAcl": {
+                    "target": "com.amazonaws.securityhub#AwsEc2NetworkAclDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an EC2 network access control list (ACL).</p>"
+                    }
+                },
                 "AwsElbv2LoadBalancer": {
                     "target": "com.amazonaws.securityhub#AwsElbv2LoadBalancerDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about a load balancer.</p>"
+                    }
+                },
+                "AwsElasticBeanstalkEnvironment": {
+                    "target": "com.amazonaws.securityhub#AwsElasticBeanstalkEnvironmentDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an Elastic Beanstalk environment.</p>"
                     }
                 },
                 "AwsElasticsearchDomain": {

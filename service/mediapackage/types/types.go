@@ -53,6 +53,11 @@ type CmafEncryption struct {
 	// This member is required.
 	SpekeKeyProvider *SpekeKeyProvider
 
+	// An optional 128-bit, 16-byte hex value represented by a 32-character string,
+	// used in conjunction with the key for encrypting blocks. If you don't specify a
+	// value, then MediaPackage creates the constant initialization vector (IV).
+	ConstantInitializationVector *string
+
 	// Time (in seconds) between each encryption key rotation.
 	KeyRotationIntervalSeconds int32
 }

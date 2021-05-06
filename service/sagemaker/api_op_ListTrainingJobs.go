@@ -18,10 +18,10 @@ import (
 // StatusEquals parameter and then they are filtered by the StatusEquals parameter,
 // which is returned as a response. For example, if ListTrainingJobs is invoked
 // with the following parameters: { ... MaxResults: 100, StatusEquals: InProgress
-// ... } Then, 100 trainings jobs with any status including those other than
-// InProgress are selected first (sorted according the creation time, from the
-// latest to the oldest) and those with status InProgress are returned. You can
-// quickly test the API using the following AWS CLI code. aws sagemaker
+// ... } First, 100 trainings jobs with any status, including those other than
+// InProgress, are selected (sorted according to the creation time, from the most
+// current to the oldest). Next, those with a status of InProgress are returned.
+// You can quickly test the API using the following AWS CLI code. aws sagemaker
 // list-training-jobs --max-results 100 --status-equals InProgress
 func (c *Client) ListTrainingJobs(ctx context.Context, params *ListTrainingJobsInput, optFns ...func(*Options)) (*ListTrainingJobsOutput, error) {
 	if params == nil {

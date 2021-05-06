@@ -250,6 +250,26 @@ func (m *validateOpSearchInsights) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCostEstimation struct {
+}
+
+func (*validateOpStartCostEstimation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCostEstimation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCostEstimationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCostEstimationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateResourceCollection struct {
 }
 
@@ -336,6 +356,10 @@ func addOpRemoveNotificationChannelValidationMiddleware(stack *middleware.Stack)
 
 func addOpSearchInsightsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchInsights{}, middleware.After)
+}
+
+func addOpStartCostEstimationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCostEstimation{}, middleware.After)
 }
 
 func addOpUpdateResourceCollectionValidationMiddleware(stack *middleware.Stack) error {
@@ -661,6 +685,21 @@ func validateOpSearchInsightsInput(v *SearchInsightsInput) error {
 	}
 	if len(v.Type) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCostEstimationInput(v *StartCostEstimationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCostEstimationInput"}
+	if v.ResourceCollection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceCollection"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

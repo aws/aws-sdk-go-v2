@@ -41,7 +41,8 @@ type AddApplicationInputInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The current version of your application. You can use the DescribeApplication
+	// The current version of your application. You must provide the
+	// ApplicationVersionID or the ConditionalToken.You can use the DescribeApplication
 	// operation to find the current application version.
 	//
 	// This member is required.

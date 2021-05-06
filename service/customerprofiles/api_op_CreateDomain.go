@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -54,6 +55,10 @@ type CreateDomainInput struct {
 	// before it is placed in permanent or semi-permanent storage.
 	DefaultEncryptionKey *string
 
+	// The process of matching duplicate profiles. This process runs every Saturday at
+	// 12AM.
+	Matching *types.MatchingRequest
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 }
@@ -88,6 +93,10 @@ type CreateDomainOutput struct {
 	// specific type of encryption key is specified. It is used to encrypt all data
 	// before it is placed in permanent or semi-permanent storage.
 	DefaultEncryptionKey *string
+
+	// The process of matching duplicate profiles. This process runs every Saturday at
+	// 12AM.
+	Matching *types.MatchingResponse
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

@@ -57,7 +57,7 @@ type ListCandidatesForAutoMLJobInput struct {
 
 type ListCandidatesForAutoMLJobOutput struct {
 
-	// Summaries about the Candidates.
+	// Summaries about the AutoMLCandidates.
 	//
 	// This member is required.
 	Candidates []types.AutoMLCandidate

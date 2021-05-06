@@ -1,0 +1,9 @@
+{
+ "ID": "service.mediaconvert-feature-1620332651774707000",
+ "SchemaVersion": 1,
+ "Module": "service/mediaconvert",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

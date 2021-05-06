@@ -34510,6 +34510,11 @@ func awsAwsjson11_deserializeDocumentHyperParameterTrainingJobDefinition(v **typ
 				return err
 			}
 
+		case "RetryStrategy":
+			if err := awsAwsjson11_deserializeDocumentRetryStrategy(&sv.RetryStrategy, value); err != nil {
+				return err
+			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -37627,6 +37632,95 @@ func awsAwsjson11_deserializeDocumentModelDataQuality(v **types.ModelDataQuality
 		case "Statistics":
 			if err := awsAwsjson11_deserializeDocumentMetricsSource(&sv.Statistics, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentModelDeployConfig(v **types.ModelDeployConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelDeployConfig
+	if *v == nil {
+		sv = &types.ModelDeployConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutoGenerateEndpointName":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected AutoGenerateEndpointName to be of type *bool, got %T instead", value)
+				}
+				sv.AutoGenerateEndpointName = jtv
+			}
+
+		case "EndpointName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointName to be of type string, got %T instead", value)
+				}
+				sv.EndpointName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentModelDeployResult(v **types.ModelDeployResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ModelDeployResult
+	if *v == nil {
+		sv = &types.ModelDeployResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndpointName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EndpointName to be of type string, got %T instead", value)
+				}
+				sv.EndpointName = ptr.String(jtv)
 			}
 
 		default:
@@ -45393,6 +45487,50 @@ func awsAwsjson11_deserializeDocumentResponseMIMETypes(v *[]string, value interf
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentRetryStrategy(v **types.RetryStrategy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryStrategy
+	if *v == nil {
+		sv = &types.RetryStrategy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "MaximumRetryAttempts":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MaximumRetryAttempts to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaximumRetryAttempts = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentRuleParameters(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -46991,6 +47129,11 @@ func awsAwsjson11_deserializeDocumentTrainingJob(v **types.TrainingJob, value in
 
 		case "ResourceConfig":
 			if err := awsAwsjson11_deserializeDocumentResourceConfig(&sv.ResourceConfig, value); err != nil {
+				return err
+			}
+
+		case "RetryStrategy":
+			if err := awsAwsjson11_deserializeDocumentRetryStrategy(&sv.RetryStrategy, value); err != nil {
 				return err
 			}
 
@@ -53510,6 +53653,16 @@ func awsAwsjson11_deserializeOpDocumentDescribeAutoMLJobOutput(v **DescribeAutoM
 				sv.LastModifiedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "ModelDeployConfig":
+			if err := awsAwsjson11_deserializeDocumentModelDeployConfig(&sv.ModelDeployConfig, value); err != nil {
+				return err
+			}
+
+		case "ModelDeployResult":
+			if err := awsAwsjson11_deserializeDocumentModelDeployResult(&sv.ModelDeployResult, value); err != nil {
+				return err
+			}
+
 		case "OutputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentAutoMLOutputDataConfig(&sv.OutputDataConfig, value); err != nil {
 				return err
@@ -57735,6 +57888,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTrainingJobOutput(v **DescribeTra
 
 		case "ResourceConfig":
 			if err := awsAwsjson11_deserializeDocumentResourceConfig(&sv.ResourceConfig, value); err != nil {
+				return err
+			}
+
+		case "RetryStrategy":
+			if err := awsAwsjson11_deserializeDocumentRetryStrategy(&sv.RetryStrategy, value); err != nil {
 				return err
 			}
 

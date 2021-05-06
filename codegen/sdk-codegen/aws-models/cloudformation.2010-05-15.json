@@ -1609,7 +1609,10 @@
                     }
                 },
                 "AccountsUrl": {
-                    "target": "com.amazonaws.cloudformation#AccountsUrl"
+                    "target": "com.amazonaws.cloudformation#AccountsUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the value of the AccountsUrl property.</p>"
+                    }
                 },
                 "OrganizationalUnitIds": {
                     "target": "com.amazonaws.cloudformation#OrganizationalUnitIdList",
@@ -3251,6 +3254,12 @@
                     "target": "com.amazonaws.cloudformation#StackSetNameOrId",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or unique ID of the stack set from which the stack was created.</p>\n         <p>Conditional: You must specify only one of the following parameters:\n            <code>StackName</code>, <code>StackSetName</code>, <code>TemplateBody</code>, or\n            <code>TemplateURL</code>.</p>"
+                    }
+                },
+                "CallAs": {
+                    "target": "com.amazonaws.cloudformation#CallAs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>[Service-managed permissions] Specifies whether you are acting as an account administrator in the organization's management account or as a delegated administrator in a member account.</p> \n         <p>By default, <code>SELF</code> is specified. Use <code>SELF</code> for stack sets with self-managed permissions.</p>\n         <ul>\n            <li>\n               <p>If you are signed in to the management account, specify <code>SELF</code>.</p>\n            </li>\n            <li>\n               <p>If you are signed in to a delegated administrator account, specify <code>DELEGATED_ADMIN</code>.</p>\n               <p>Your AWS account must be registered as a delegated administrator in the management account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html\">Register a delegated administrator</a> in the <i>AWS CloudFormation User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7191,7 +7200,10 @@
             "type": "structure",
             "members": {
                 "RegionConcurrencyType": {
-                    "target": "com.amazonaws.cloudformation#RegionConcurrencyType"
+                    "target": "com.amazonaws.cloudformation#RegionConcurrencyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The concurrency type of deploying StackSets operations in regions, could be in parallel or one region at a time.</p>"
+                    }
                 },
                 "RegionOrder": {
                     "target": "com.amazonaws.cloudformation#RegionList",

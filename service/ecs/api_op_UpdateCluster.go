@@ -43,10 +43,7 @@ type UpdateClusterInput struct {
 
 type UpdateClusterOutput struct {
 
-	// A regional grouping of one or more container instances on which you can run task
-	// requests. Each account receives a default cluster the first time you use the
-	// Amazon ECS service, but you may also create other clusters. Clusters may contain
-	// more than one instance type simultaneously.
+	// Details about the cluster.
 	Cluster *types.Cluster
 
 	// Metadata pertaining to the operation's result.

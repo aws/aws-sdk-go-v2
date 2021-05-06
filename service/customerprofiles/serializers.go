@@ -196,6 +196,13 @@ func awsRestjson1_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		ok.Integer(*v.DefaultExpirationDays)
 	}
 
+	if v.Matching != nil {
+		ok := object.Key("Matching")
+		if err := awsRestjson1_serializeDocumentMatchingRequest(v.Matching, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -1007,6 +1014,72 @@ func awsRestjson1_serializeOpDocumentGetIntegrationInput(v *GetIntegrationInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpGetMatches struct {
+}
+
+func (*awsRestjson1_serializeOpGetMatches) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetMatches) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMatchesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{DomainName}/matches")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetMatchesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetMatchesInput(v *GetMatchesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetProfileObjectType struct {
 }
 
@@ -1603,6 +1676,101 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	}
 	if v.ResourceArn != nil {
 		if err := encoder.SetURI("resourceArn").String(*v.ResourceArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpMergeProfiles struct {
+}
+
+func (*awsRestjson1_serializeOpMergeProfiles) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpMergeProfiles) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*MergeProfilesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{DomainName}/profiles/objects/merge")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsMergeProfilesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentMergeProfilesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsMergeProfilesInput(v *MergeProfilesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentMergeProfilesInput(v *MergeProfilesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FieldSourceProfileIds != nil {
+		ok := object.Key("FieldSourceProfileIds")
+		if err := awsRestjson1_serializeDocumentFieldSourceProfileIds(v.FieldSourceProfileIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MainProfileId != nil {
+		ok := object.Key("MainProfileId")
+		ok.String(*v.MainProfileId)
+	}
+
+	if v.ProfileIdsToBeMerged != nil {
+		ok := object.Key("ProfileIdsToBeMerged")
+		if err := awsRestjson1_serializeDocumentProfileIdToBeMergedList(v.ProfileIdsToBeMerged, ok); err != nil {
 			return err
 		}
 	}
@@ -2258,6 +2426,13 @@ func awsRestjson1_serializeOpDocumentUpdateDomainInput(v *UpdateDomainInput, val
 		ok.Integer(*v.DefaultExpirationDays)
 	}
 
+	if v.Matching != nil {
+		ok := object.Key("Matching")
+		if err := awsRestjson1_serializeDocumentMatchingRequest(v.Matching, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -2532,6 +2707,17 @@ func awsRestjson1_serializeDocumentAttributes(v map[string]string, value smithyj
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAttributeSourceIdMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConnectorOperator(v *types.ConnectorOperator, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2586,6 +2772,120 @@ func awsRestjson1_serializeDocumentFieldNameList(v []string, value smithyjson.Va
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFieldSourceProfileIds(v *types.FieldSourceProfileIds, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccountNumber != nil {
+		ok := object.Key("AccountNumber")
+		ok.String(*v.AccountNumber)
+	}
+
+	if v.AdditionalInformation != nil {
+		ok := object.Key("AdditionalInformation")
+		ok.String(*v.AdditionalInformation)
+	}
+
+	if v.Address != nil {
+		ok := object.Key("Address")
+		ok.String(*v.Address)
+	}
+
+	if v.Attributes != nil {
+		ok := object.Key("Attributes")
+		if err := awsRestjson1_serializeDocumentAttributeSourceIdMap(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.BillingAddress != nil {
+		ok := object.Key("BillingAddress")
+		ok.String(*v.BillingAddress)
+	}
+
+	if v.BirthDate != nil {
+		ok := object.Key("BirthDate")
+		ok.String(*v.BirthDate)
+	}
+
+	if v.BusinessEmailAddress != nil {
+		ok := object.Key("BusinessEmailAddress")
+		ok.String(*v.BusinessEmailAddress)
+	}
+
+	if v.BusinessName != nil {
+		ok := object.Key("BusinessName")
+		ok.String(*v.BusinessName)
+	}
+
+	if v.BusinessPhoneNumber != nil {
+		ok := object.Key("BusinessPhoneNumber")
+		ok.String(*v.BusinessPhoneNumber)
+	}
+
+	if v.EmailAddress != nil {
+		ok := object.Key("EmailAddress")
+		ok.String(*v.EmailAddress)
+	}
+
+	if v.FirstName != nil {
+		ok := object.Key("FirstName")
+		ok.String(*v.FirstName)
+	}
+
+	if v.Gender != nil {
+		ok := object.Key("Gender")
+		ok.String(*v.Gender)
+	}
+
+	if v.HomePhoneNumber != nil {
+		ok := object.Key("HomePhoneNumber")
+		ok.String(*v.HomePhoneNumber)
+	}
+
+	if v.LastName != nil {
+		ok := object.Key("LastName")
+		ok.String(*v.LastName)
+	}
+
+	if v.MailingAddress != nil {
+		ok := object.Key("MailingAddress")
+		ok.String(*v.MailingAddress)
+	}
+
+	if v.MiddleName != nil {
+		ok := object.Key("MiddleName")
+		ok.String(*v.MiddleName)
+	}
+
+	if v.MobilePhoneNumber != nil {
+		ok := object.Key("MobilePhoneNumber")
+		ok.String(*v.MobilePhoneNumber)
+	}
+
+	if v.PartyType != nil {
+		ok := object.Key("PartyType")
+		ok.String(*v.PartyType)
+	}
+
+	if v.PersonalEmailAddress != nil {
+		ok := object.Key("PersonalEmailAddress")
+		ok.String(*v.PersonalEmailAddress)
+	}
+
+	if v.PhoneNumber != nil {
+		ok := object.Key("PhoneNumber")
+		ok.String(*v.PhoneNumber)
+	}
+
+	if v.ShippingAddress != nil {
+		ok := object.Key("ShippingAddress")
+		ok.String(*v.ShippingAddress)
+	}
+
 	return nil
 }
 
@@ -2672,6 +2972,18 @@ func awsRestjson1_serializeDocumentMarketoSourceProperties(v *types.MarketoSourc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMatchingRequest(v *types.MatchingRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentObjectTypeField(v *types.ObjectTypeField, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2724,6 +3036,17 @@ func awsRestjson1_serializeDocumentObjectTypeKeyList(v []types.ObjectTypeKey, va
 		if err := awsRestjson1_serializeDocumentObjectTypeKey(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentProfileIdToBeMergedList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

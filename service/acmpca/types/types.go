@@ -40,6 +40,7 @@ type AccessMethod struct {
 // APIPassthrough or APICSRPassthrough template variant must be selected, or else
 // this parameter is ignored. If conflicting or duplicate certificate information
 // is supplied from other sources, ACM Private CA applies order of operation rules
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations)
 // to determine what information is used.
 type ApiPassthrough struct {
 
@@ -145,6 +146,15 @@ type CertificateAuthority struct {
 	// Reason the request to create your private CA failed.
 	FailureReason FailureReason
 
+	// Defines a cryptographic key management compliance standard used for handling CA
+	// keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: AWS Region ap-northeast-3
+	// supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must explicitly specify this
+	// parameter and value when creating a CA in that Region. Specifying a different
+	// value (or no value) results in an InvalidArgsException with the message "A
+	// certificate authority cannot be created in this region with the specified
+	// security standard."
+	KeyStorageSecurityStandard KeyStorageSecurityStandard
+
 	// Date and time at which your private CA was last updated.
 	LastStateChangeAt *time.Time
 
@@ -221,7 +231,7 @@ type CertificateAuthorityConfiguration struct {
 // by specifying a value for the CustomCname parameter. Your private CA copies the
 // CNAME or the S3 bucket name to the CRL Distribution Points extension of each
 // certificate it issues. Your S3 bucket policy must give write permission to ACM
-// Private CA. ACM Private CAA assets that are stored in Amazon S3 can be protected
+// Private CA. ACM Private CA assets that are stored in Amazon S3 can be protected
 // with encryption. For more information, see Encrypting Your CRLs
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption).
 // Your private CA uses the value in the ExpirationInDays parameter to calculate

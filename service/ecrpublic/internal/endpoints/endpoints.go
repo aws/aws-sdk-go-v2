@@ -62,6 +62,14 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-east-1": endpoints.Endpoint{
+				Hostname: "api.ecr-public.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-cn",

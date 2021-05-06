@@ -63,7 +63,11 @@ type UpdateJobInput struct {
 	ShippingOption types.ShippingOption
 
 	// The updated SnowballCapacityPreference of this job's JobMetadata object. The 50
-	// TB Snowballs are only available in the US regions.
+	// TB Snowballs are only available in the US regions. For more information, see
+	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
+	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballCapacityPreference types.SnowballCapacity
 }
 

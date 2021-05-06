@@ -153,7 +153,8 @@ type CreateServiceInput struct {
 	// deployment and the ordering of stopping and starting tasks.
 	DeploymentConfiguration *types.DeploymentConfiguration
 
-	// The deployment controller to use for the service.
+	// The deployment controller to use for the service. If no deployment controller is
+	// specified, the default value of ECS is used.
 	DeploymentController *types.DeploymentController
 
 	// The number of instantiations of the specified task definition to place and keep
@@ -316,12 +317,11 @@ type CreateServiceInput struct {
 	// controller types don't support the DAEMON scheduling strategy.
 	SchedulingStrategy types.SchedulingStrategy
 
-	// The details of the service discovery registries to assign to this service. For
-	// more information, see Service discovery
+	// The details of the service discovery registry to associate with this service.
+	// For more information, see Service discovery
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html).
-	// Service discovery is supported for Fargate tasks if you are using platform
-	// version v1.1.0 or later. For more information, see AWS Fargate platform versions
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html).
+	// Each service may be associated with one service registry. Multiple service
+	// registries per service isn't supported.
 	ServiceRegistries []types.ServiceRegistry
 
 	// The metadata that you apply to the service to help you categorize and organize

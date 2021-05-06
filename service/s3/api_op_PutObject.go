@@ -123,9 +123,6 @@ type PutObjectInput struct {
 	ACL types.ObjectCannedACL
 
 	// Object data.
-	//
-	// For using values that are not seekable (io.Seeker) see,
-	// https://aws.github.io/aws-sdk-go-v2/docs/sdk-utilities/s3/#unseekable-streaming-input
 	Body io.Reader
 
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption

@@ -36,6 +36,9 @@ type ListRecommendationsInput struct {
 	// This member is required.
 	InsightId *string
 
+	// A locale that specifies the language to use for recommendations.
+	Locale types.Locale
+
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string

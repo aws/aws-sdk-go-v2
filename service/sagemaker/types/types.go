@@ -1338,10 +1338,10 @@ type AthenaDatasetDefinition struct {
 }
 
 // An Autopilot job returns recommendations, or candidates. Each candidate has
-// futher details about the steps involed, and the status.
+// futher details about the steps involved and the status.
 type AutoMLCandidate struct {
 
-	// The candidate name.
+	// The name of the candidate.
 	//
 	// This member is required.
 	CandidateName *string
@@ -1351,7 +1351,7 @@ type AutoMLCandidate struct {
 	// This member is required.
 	CandidateStatus CandidateStatus
 
-	// The candidate's steps.
+	// Information about the candidate's steps.
 	//
 	// This member is required.
 	CandidateSteps []AutoMLCandidateStep
@@ -1366,7 +1366,7 @@ type AutoMLCandidate struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// The objective status.
+	// The objective's status.
 	//
 	// This member is required.
 	ObjectiveStatus ObjectiveStatus
@@ -1383,24 +1383,24 @@ type AutoMLCandidate struct {
 	// The best candidate result from an AutoML training job.
 	FinalAutoMLJobObjectiveMetric *FinalAutoMLJobObjectiveMetric
 
-	// The inference containers.
+	// Information about the inference container definitions.
 	InferenceContainers []AutoMLContainerDefinition
 }
 
-// Information about the steps for a Candidate, and what step it is working on.
+// Information about the steps for a candidate and what step it is working on.
 type AutoMLCandidateStep struct {
 
-	// The ARN for the Candidate's step.
+	// The ARN for the candidate's step.
 	//
 	// This member is required.
 	CandidateStepArn *string
 
-	// The name for the Candidate's step.
+	// The name for the candidate's step.
 	//
 	// This member is required.
 	CandidateStepName *string
 
-	// Whether the Candidate is at the transform, training, or processing step.
+	// Whether the candidate is at the transform, training, or processing step.
 	//
 	// This member is required.
 	CandidateStepType CandidateStepType
@@ -1439,7 +1439,7 @@ type AutoMLContainerDefinition struct {
 	// This member is required.
 	ModelDataUrl *string
 
-	// Environment variables to set in the container. For more information, see .
+	// The environment variables to set in the container. For more information, see .
 	Environment map[string]string
 }
 
@@ -1453,13 +1453,13 @@ type AutoMLDataSource struct {
 	S3DataSource *AutoMLS3DataSource
 }
 
-// Artifacts that are generation during a job.
+// The artifacts that are generated during an AutoML job.
 type AutoMLJobArtifacts struct {
 
-	// The URL to the notebook location.
+	// The URL of the notebook location.
 	CandidateDefinitionNotebookLocation *string
 
-	// The URL to the notebook location.
+	// The URL of the notebook location.
 	DataExplorationNotebookLocation *string
 }
 
@@ -1485,7 +1485,7 @@ type AutoMLJobConfig struct {
 	// allowed to generate.
 	CompletionCriteria *AutoMLJobCompletionCriteria
 
-	// Security configuration for traffic encryption or Amazon VPC settings.
+	// The security configuration for traffic encryption or Amazon VPC settings.
 	SecurityConfig *AutoMLSecurityConfig
 }
 
@@ -1499,66 +1499,67 @@ type AutoMLJobObjective struct {
 	// *
 	// MSE: The mean squared error (MSE) is the average of the squared differences
 	// between the predicted and actual values. It is used for regression. MSE values
-	// are always positive, the better a model is at predicting the actual values the
+	// are always positive: the better a model is at predicting the actual values, the
 	// smaller the MSE value. When the data contains outliers, they tend to dominate
-	// the MSE which might cause subpar prediction performance.
+	// the MSE, which might cause subpar prediction performance.
 	//
 	// * Accuracy: The ratio
-	// of the number correctly classified items to the total number (correctly and
-	// incorrectly) classified. It is used for binary and multiclass classification.
-	// Measures how close the predicted class values are to the actual values. Accuracy
-	// values vary between zero and one, one being perfect accuracy and zero perfect
-	// inaccuracy.
+	// of the number of correctly classified items to the total number of (correctly
+	// and incorrectly) classified items. It is used for binary and multiclass
+	// classification. It measures how close the predicted class values are to the
+	// actual values. Accuracy values vary between zero and one: one indicates perfect
+	// accuracy and zero indicates perfect inaccuracy.
 	//
-	// * F1: The F1 score is the harmonic mean of the precision and
-	// recall. It is used for binary classification into classes traditionally referred
-	// to as positive and negative. Predictions are said to be true when they match
-	// their actual (correct) class; false when they do not. Precision is the ratio of
-	// the true positive predictions to all positive predictions (including the false
-	// positives) in a data set and measures the quality of the prediction when it
-	// predicts the positive class. Recall (or sensitivity) is the ratio of the true
-	// positive predictions to all actual positive instances and measures how
-	// completely a model predicts the actual class members in a data set. The standard
-	// F1 score weighs precision and recall equally. But which metric is paramount
-	// typically depends on specific aspects of a problem. F1 scores vary between zero
-	// and one, one being the best possible performance and zero the worst.
+	// * F1: The F1 score is the
+	// harmonic mean of the precision and recall. It is used for binary classification
+	// into classes traditionally referred to as positive and negative. Predictions are
+	// said to be true when they match their actual (correct) class and false when they
+	// do not. Precision is the ratio of the true positive predictions to all positive
+	// predictions (including the false positives) in a data set and measures the
+	// quality of the prediction when it predicts the positive class. Recall (or
+	// sensitivity) is the ratio of the true positive predictions to all actual
+	// positive instances and measures how completely a model predicts the actual class
+	// members in a data set. The standard F1 score weighs precision and recall
+	// equally. But which metric is paramount typically depends on specific aspects of
+	// a problem. F1 scores vary between zero and one: one indicates the best possible
+	// performance and zero the worst.
 	//
-	// * AUC: The
-	// area under the curve (AUC) metric is used to compare and evaluate binary
-	// classification by algorithms such as logistic regression that return
-	// probabilities. A threshold is needed to map the probabilities into
-	// classifications. The relevant curve is the receiver operating characteristic
-	// curve that plots the true positive rate (TPR) of predictions (or recall) against
-	// the false positive rate (FPR) as a function of the threshold value, above which
-	// a prediction is considered positive. Increasing the threshold results in fewer
-	// false positives but more false negatives. AUC is the area under this receiver
-	// operating characteristic curve and so provides an aggregated measure of the
-	// model performance across all possible classification thresholds. The AUC score
-	// can also be interpreted as the probability that a randomly selected positive
-	// data point is more likely to be predicted positive than a randomly selected
-	// negative example. AUC scores vary between zero and one, one being perfect
-	// accuracy and one half not better than a random classifier. Values less that one
-	// half predict worse than a random predictor and such consistently bad predictors
-	// can be inverted to obtain better than random predictors.
+	// * AUC: The area under the curve (AUC) metric is
+	// used to compare and evaluate binary classification by algorithms such as
+	// logistic regression that return probabilities. A threshold is needed to map the
+	// probabilities into classifications. The relevant curve is the receiver operating
+	// characteristic curve that plots the true positive rate (TPR) of predictions (or
+	// recall) against the false positive rate (FPR) as a function of the threshold
+	// value, above which a prediction is considered positive. Increasing the threshold
+	// results in fewer false positives but more false negatives. AUC is the area under
+	// this receiver operating characteristic curve and so provides an aggregated
+	// measure of the model performance across all possible classification thresholds.
+	// The AUC score can also be interpreted as the probability that a randomly
+	// selected positive data point is more likely to be predicted positive than a
+	// randomly selected negative example. AUC scores vary between zero and one: a
+	// score of one indicates perfect accuracy and a score of one half indicates that
+	// the prediction is not better than a random classifier. Values under one half
+	// predict less accurately than a random predictor. But such consistently bad
+	// predictors can simply be inverted to obtain better than random predictors.
 	//
-	// * F1macro: The F1macro
-	// score applies F1 scoring to multiclass classification. In this context, you have
-	// multiple classes to predict. You just calculate the precision and recall for
-	// each class as you did for the positive class in binary classification. Then used
-	// these values to calculate the F1 score for each class and average them to obtain
-	// the F1macro score. F1macro scores vary between zero and one, one being the best
-	// possible performance and zero the worst.
+	// *
+	// F1macro: The F1macro score applies F1 scoring to multiclass classification. In
+	// this context, you have multiple classes to predict. You just calculate the
+	// precision and recall for each class as you did for the positive class in binary
+	// classification. Then, use these values to calculate the F1 score for each class
+	// and average them to obtain the F1macro score. F1macro scores vary between zero
+	// and one: one indicates the best possible performance and zero the worst.
 	//
-	// If you do not specify a metric
-	// explicitly, the default behavior is to automatically use:
+	// If you
+	// do not specify a metric explicitly, the default behavior is to automatically
+	// use:
 	//
-	// * MSE: for
-	// regression.
+	// * MSE: for regression.
 	//
 	// * F1: for binary classification
 	//
-	// * Accuracy: for multiclass
-	// classification.
+	// * Accuracy: for
+	// multiclass classification.
 	//
 	// This member is required.
 	MetricName AutoMLMetricEnum
@@ -1649,7 +1650,7 @@ type AutoMLSecurityConfig struct {
 	// The key used to encrypt stored data.
 	VolumeKmsKeyId *string
 
-	// VPC configuration.
+	// The VPC configuration.
 	VpcConfig *VpcConfig
 }
 
@@ -1689,10 +1690,10 @@ type CacheHitResult struct {
 	SourcePipelineExecutionArn *string
 }
 
-// Location of artifacts for an AutoML candidate job.
+// The location of artifacts for an AutoML candidate job.
 type CandidateArtifactLocations struct {
 
-	// The S3 prefix to the explainability artifacts generated for the AutoML
+	// The Amazon S3 prefix to the explainability artifacts generated for the AutoML
 	// candidate.
 	//
 	// This member is required.
@@ -1702,7 +1703,7 @@ type CandidateArtifactLocations struct {
 // The properties of an AutoML candidate job.
 type CandidateProperties struct {
 
-	// The S3 prefix to the artifacts generated for an AutoML candidate.
+	// The Amazon S3 prefix to the artifacts generated for an AutoML candidate.
 	CandidateArtifactLocations *CandidateArtifactLocations
 }
 
@@ -2280,15 +2281,19 @@ type DataProcessing struct {
 	// values are None and Input. The default value is None, which specifies not to
 	// join the input with the transformed data. If you want the batch transform job to
 	// join the original input data with the transformed data, set JoinSource to Input.
-	// For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the
-	// transformed data to the input JSON object in an attribute called
-	// SageMakerOutput. The joined result for JSON must be a key-value pair object. If
-	// the input is not a key-value pair object, Amazon SageMaker creates a new JSON
-	// file. In the new JSON file, and the input data is stored under the
-	// SageMakerInput key and the results are stored in SageMakerOutput. For CSV files,
-	// Amazon SageMaker combines the transformed data with the input data at the end of
-	// the input data and stores it in the output file. The joined data has the joined
-	// input data followed by the transformed data and the output is a CSV file.
+	// You can specify OutputFilter as an additional filter to select a portion of the
+	// joined dataset and store it in the output file. For JSON or JSONLines objects,
+	// such as a JSON array, Amazon SageMaker adds the transformed data to the input
+	// JSON object in an attribute called SageMakerOutput. The joined result for JSON
+	// must be a key-value pair object. If the input is not a key-value pair object,
+	// Amazon SageMaker creates a new JSON file. In the new JSON file, and the input
+	// data is stored under the SageMakerInput key and the results are stored in
+	// SageMakerOutput. For CSV data, Amazon SageMaker takes each row as a JSON array
+	// and joins the transformed data with the input by appending each transformed row
+	// to the end of the input. The joined data has the original input data followed by
+	// the transformed data and the output is a CSV file. For information on how
+	// joining in applied, see Workflow for Associating Inferences with Input Records
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow).
 	JoinSource JoinSource
 
 	// A JSONPath
@@ -2853,7 +2858,7 @@ type EndpointInput struct {
 	ProbabilityThresholdAttribute *float64
 
 	// Whether input data distributed in Amazon S3 is fully replicated or sharded by an
-	// S3 key. Defauts to FullyReplicated
+	// S3 key. Defaults to FullyReplicated
 	S3DataDistributionType ProcessingS3DataDistributionType
 
 	// Whether the Pipe or File is used as the input mode for transfering data for the
@@ -4814,9 +4819,9 @@ type HyperParameterTrainingJobDefinition struct {
 	RoleArn *string
 
 	// Specifies a limit to how long a model hyperparameter training job can run. It
-	// also specifies how long you are willing to wait for a managed spot training job
-	// to complete. When the job reaches the a limit, Amazon SageMaker ends the
-	// training job. Use this API to cap model training costs.
+	// also specifies how long a managed spot training job has to complete. When the
+	// job reaches the time limit, Amazon SageMaker ends the training job. Use this API
+	// to cap model training costs.
 	//
 	// This member is required.
 	StoppingCondition *StoppingCondition
@@ -4860,6 +4865,10 @@ type HyperParameterTrainingJobDefinition struct {
 	// An array of Channel objects that specify the input for the training jobs that
 	// the tuning job launches.
 	InputDataConfig []Channel
+
+	// The number of times to retry the job when the job fails due to an
+	// InternalServerError.
+	RetryStrategy *RetryStrategy
 
 	// Specifies the values of hyperparameters that do not change for the tuning job.
 	StaticHyperParameters map[string]string
@@ -5676,7 +5685,7 @@ type LabelingJobForWorkteamSummary struct {
 	// This member is required.
 	JobReferenceCode *string
 
-	//
+	// The AWS account ID of the account used to start the labeling job.
 	//
 	// This member is required.
 	WorkRequesterAccountId *string
@@ -5737,11 +5746,13 @@ type LabelingJobOutputConfig struct {
 	// Amazon Simple Storage Service Developer Guide.
 	KmsKeyId *string
 
-	// An Amazon Simple Notification Service (Amazon SNS) output topic ARN. If you
-	// provide an SnsTopicArn in OutputConfig, when workers complete labeling tasks,
-	// Ground Truth will send labeling task output data to the SNS output topic you
-	// specify here. To learn more, see Receive Output Data from a Streaming Labeling
-	// Job
+	// An Amazon Simple Notification Service (Amazon SNS) output topic ARN. Provide a
+	// SnsTopicArn if you want to do real time chaining to another streaming job and
+	// receive an Amazon SNS notifications each time a data object is submitted by a
+	// worker. If you provide an SnsTopicArn in OutputConfig, when workers complete
+	// labeling tasks, Ground Truth will send labeling task output data to the SNS
+	// output topic you specify here. To learn more, see Receive Output Data from a
+	// Streaming Labeling Job
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data).
 	SnsTopicArn *string
 }
@@ -5963,8 +5974,8 @@ type MetricsSource struct {
 
 // Provides information about the location that is configured for storing model
 // artifacts. Model artifacts are the output that results from training a model,
-// and typically consist of trained parameters, a model defintion that desribes how
-// to compute inferences, and other metadata.
+// and typically consist of trained parameters, a model defintion that describes
+// how to compute inferences, and other metadata.
 type ModelArtifacts struct {
 
 	// The path of the S3 object that contains the model artifacts. For example,
@@ -6036,6 +6047,31 @@ type ModelDataQuality struct {
 
 	// Data quality statistics for a model.
 	Statistics *MetricsSource
+}
+
+// Specifies how to generate the endpoint name for an automatic one-click Autopilot
+// model deployment.
+type ModelDeployConfig struct {
+
+	// Set to True to automatically generate an endpoint name for a one-click Autopilot
+	// model deployment; set to False otherwise. The default value is True. If you set
+	// AutoGenerateEndpointName to True, do not specify the EndpointName; otherwise a
+	// 400 error is thrown.
+	AutoGenerateEndpointName bool
+
+	// Specifies the endpoint name to use for a one-click Autopilot model deployment if
+	// the endpoint name is not generated automatically. Specify the EndpointName if
+	// and only if you set AutoGenerateEndpointName to False; otherwise a 400 error is
+	// thrown.
+	EndpointName *string
+}
+
+// Provides information about the endpoint of the model deployment.
+type ModelDeployResult struct {
+
+	// The name of the endpoint to which the model has been deployed. If model
+	// deployment fails, this field is omitted from the response.
+	EndpointName *string
 }
 
 // Provides information to verify the integrity of stored model artifacts.
@@ -6899,7 +6935,10 @@ type MonitoringStatisticsResource struct {
 // A time limit for how long the monitoring job is allowed to run before stopping.
 type MonitoringStoppingCondition struct {
 
-	// The maximum runtime allowed in seconds.
+	// The maximum runtime allowed in seconds. The MaxRuntimeInSeconds cannot exceed
+	// the frequency of the job. For data quality and model explainability, this can be
+	// up to 3600 seconds for an hourly schedule. For model bias and model quality
+	// hourly schedules, this can be up to 1800 seconds.
 	//
 	// This member is required.
 	MaxRuntimeInSeconds int32
@@ -7460,9 +7499,9 @@ type OutputDataConfig struct {
 	// that only allows objects with server-side encryption, set the condition key of
 	// s3:x-amz-server-side-encryption to "aws:kms". For more information, see
 	// KMS-Managed Encryption Keys
-	// (https://docs.aws.amazon.com/mazonS3/latest/dev/UsingKMSEncryption.html) in the
-	// Amazon Simple Storage Service Developer Guide. The KMS key policy must grant
-	// permission to the IAM role that you specify in your CreateTrainingJob,
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html)
+	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
+	// grant permission to the IAM role that you specify in your CreateTrainingJob,
 	// CreateTransformJob, or CreateHyperParameterTuningJob requests. For more
 	// information, see Using Key Policies in AWS KMS
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
@@ -8759,6 +8798,19 @@ type RetentionPolicy struct {
 	HomeEfsFileSystem RetentionType
 }
 
+// The retry strategy to use when a training job fails due to an
+// InternalServerError. RetryStrategy is specified as part of the CreateTrainingJob
+// and CreateHyperParameterTuningJob requests. You can add the StoppingCondition
+// parameter to the request to limit the training time for the complete job.
+type RetryStrategy struct {
+
+	// The number of times to retry the job. When the job is retried, it's
+	// SecondaryStatus is changed to STARTING.
+	//
+	// This member is required.
+	MaximumRetryAttempts int32
+}
+
 // Describes the S3 data source.
 type S3DataSource struct {
 
@@ -9215,33 +9267,38 @@ type SourceIpConfig struct {
 	Cidrs []string
 }
 
-// Specifies a limit to how long a model training or compilation job can run. It
-// also specifies how long you are willing to wait for a managed spot training job
-// to complete. When the job reaches the time limit, Amazon SageMaker ends the
-// training or compilation job. Use this API to cap model training costs. To stop a
-// job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job
-// termination for 120 seconds. Algorithms can use this 120-second window to save
-// the model artifacts, so the results of training are not lost. The training
-// algorithms provided by Amazon SageMaker automatically save the intermediate
-// results of a model training job when possible. This attempt to save artifacts is
-// only a best effort case as model might not be in a state from which it can be
-// saved. For example, if training has just started, the model might not be ready
-// to save. When saved, this intermediate data is a valid model artifact. You can
-// use it to create a model with CreateModel. The Neural Topic Model (NTM)
-// currently does not support saving intermediate model artifacts. When training
-// NTMs, make sure that the maximum runtime is sufficient for the training job to
-// complete.
+// Specifies a limit to how long a model training job, model compilation job, or
+// hyperparameter tuning job can run. It also specifies how long a managed Spot
+// training job has to complete. When the job reaches the time limit, Amazon
+// SageMaker ends the training or compilation job. Use this API to cap model
+// training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
+// signal, which delays job termination for 120 seconds. Algorithms can use this
+// 120-second window to save the model artifacts, so the results of training are
+// not lost. The training algorithms provided by Amazon SageMaker automatically
+// save the intermediate results of a model training job when possible. This
+// attempt to save artifacts is only a best effort case as model might not be in a
+// state from which it can be saved. For example, if training has just started, the
+// model might not be ready to save. When saved, this intermediate data is a valid
+// model artifact. You can use it to create a model with CreateModel. The Neural
+// Topic Model (NTM) currently does not support saving intermediate model
+// artifacts. When training NTMs, make sure that the maximum runtime is sufficient
+// for the training job to complete.
 type StoppingCondition struct {
 
-	// The maximum length of time, in seconds, that the training or compilation job can
-	// run. If job does not complete during this time, Amazon SageMaker ends the job.
-	// If value is not specified, default value is 1 day. The maximum value is 28 days.
+	// The maximum length of time, in seconds, that a training or compilation job can
+	// run. If the job does not complete during this time, Amazon SageMaker ends the
+	// job. When RetryStrategy is specified in the job request, MaxRuntimeInSeconds
+	// specifies the maximum time for all of the attempts in total, not each individual
+	// attempt. The default value is 1 day. The maximum value is 28 days.
 	MaxRuntimeInSeconds int32
 
-	// The maximum length of time, in seconds, how long you are willing to wait for a
-	// managed spot training job to complete. It is the amount of time spent waiting
-	// for Spot capacity plus the amount of time the training job runs. It must be
-	// equal to or greater than MaxRuntimeInSeconds.
+	// The maximum length of time, in seconds, that a managed Spot training job has to
+	// complete. It is the amount of time spent waiting for Spot capacity plus the
+	// amount of time the job can run. It must be equal to or greater than
+	// MaxRuntimeInSeconds. If the job does not complete during this time, Amazon
+	// SageMaker ends the job. When RetryStrategy is specified in the job request,
+	// MaxWaitTimeInSeconds specifies the maximum time for all of the attempts in
+	// total, not each individual attempt.
 	MaxWaitTimeInSeconds *int32
 }
 
@@ -9471,6 +9528,10 @@ type TrainingJob struct {
 	// configured for model training.
 	ResourceConfig *ResourceConfig
 
+	// The number of times to retry the job when the job fails due to an
+	// InternalServerError.
+	RetryStrategy *RetryStrategy
+
 	// The AWS Identity and Access Management (IAM) role configured for the training
 	// job.
 	RoleArn *string
@@ -9531,12 +9592,13 @@ type TrainingJob struct {
 	// transitioned through.
 	SecondaryStatusTransitions []SecondaryStatusTransition
 
-	// Specifies a limit to how long a model training job can run. When the job reaches
-	// the time limit, Amazon SageMaker ends the training job. Use this API to cap
-	// model training costs. To stop a job, Amazon SageMaker sends the algorithm the
-	// SIGTERM signal, which delays job termination for 120 seconds. Algorithms can use
-	// this 120-second window to save the model artifacts, so the results of training
-	// are not lost.
+	// Specifies a limit to how long a model training job can run. It also specifies
+	// how long a managed Spot training job has to complete. When the job reaches the
+	// time limit, Amazon SageMaker ends the training job. Use this API to cap model
+	// training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
+	// signal, which delays job termination for 120 seconds. Algorithms can use this
+	// 120-second window to save the model artifacts, so the results of training are
+	// not lost.
 	StoppingCondition *StoppingCondition
 
 	// An array of key-value pairs. You can use tags to categorize your AWS resources
@@ -9621,11 +9683,12 @@ type TrainingJobDefinition struct {
 	// This member is required.
 	ResourceConfig *ResourceConfig
 
-	// Specifies a limit to how long a model training job can run. When the job reaches
-	// the time limit, Amazon SageMaker ends the training job. Use this API to cap
-	// model training costs. To stop a job, Amazon SageMaker sends the algorithm the
-	// SIGTERM signal, which delays job termination for 120 seconds. Algorithms can use
-	// this 120-second window to save the model artifacts.
+	// Specifies a limit to how long a model training job can run. It also specifies
+	// how long a managed Spot training job has to complete. When the job reaches the
+	// time limit, Amazon SageMaker ends the training job. Use this API to cap model
+	// training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
+	// signal, which delays job termination for 120 seconds. Algorithms can use this
+	// 120-second window to save the model artifacts.
 	//
 	// This member is required.
 	StoppingCondition *StoppingCondition
@@ -9805,9 +9868,8 @@ type TransformInput struct {
 	// BatchStrategy is set to MultiRecord. For more information about RecordIO, see
 	// Create a Dataset Using RecordIO (https://mxnet.apache.org/api/faq/recordio) in
 	// the MXNet documentation. For more information about TFRecord, see Consuming
-	// TFRecord data
-	// (https://www.tensorflow.org/guide/datasets#consuming_tfrecord_data) in the
-	// TensorFlow documentation.
+	// TFRecord data (https://www.tensorflow.org/guide/data#consuming_tfrecord_data) in
+	// the TensorFlow documentation.
 	SplitType SplitType
 }
 
@@ -10553,7 +10615,7 @@ type UiTemplateInfo struct {
 	Url *string
 }
 
-// Represents an amount of money in United States dollars/
+// Represents an amount of money in United States dollars.
 type USD struct {
 
 	// The fractional portion, in cents, of the amount.

@@ -79,6 +79,13 @@ func awsRestjson1_serializeOpDocumentAssociateRepositoryInput(v *AssociateReposi
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.KMSKeyDetails != nil {
+		ok := object.Key("KMSKeyDetails")
+		if err := awsRestjson1_serializeDocumentKMSKeyDetails(v.KMSKeyDetails, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Repository != nil {
 		ok := object.Key("Repository")
 		if err := awsRestjson1_serializeDocumentRepository(v.Repository, ok); err != nil {
@@ -1031,6 +1038,23 @@ func awsRestjson1_serializeDocumentCodeReviewType(v *types.CodeReviewType, value
 		if err := awsRestjson1_serializeDocumentRepositoryAnalysis(v.RepositoryAnalysis, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKMSKeyDetails(v *types.KMSKeyDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EncryptionOption) > 0 {
+		ok := object.Key("EncryptionOption")
+		ok.String(string(v.EncryptionOption))
+	}
+
+	if v.KMSKeyId != nil {
+		ok := object.Key("KMSKeyId")
+		ok.String(*v.KMSKeyId)
 	}
 
 	return nil

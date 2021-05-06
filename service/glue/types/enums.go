@@ -148,31 +148,36 @@ type ConnectionPropertyKey string
 
 // Enum values for ConnectionPropertyKey
 const (
-	ConnectionPropertyKeyHost                          ConnectionPropertyKey = "HOST"
-	ConnectionPropertyKeyPort                          ConnectionPropertyKey = "PORT"
-	ConnectionPropertyKeyUserName                      ConnectionPropertyKey = "USERNAME"
-	ConnectionPropertyKeyPassword                      ConnectionPropertyKey = "PASSWORD"
-	ConnectionPropertyKeyEncryptedPassword             ConnectionPropertyKey = "ENCRYPTED_PASSWORD"
-	ConnectionPropertyKeyJdbcDriverJarUri              ConnectionPropertyKey = "JDBC_DRIVER_JAR_URI"
-	ConnectionPropertyKeyJdbcDriverClassName           ConnectionPropertyKey = "JDBC_DRIVER_CLASS_NAME"
-	ConnectionPropertyKeyJdbcEngine                    ConnectionPropertyKey = "JDBC_ENGINE"
-	ConnectionPropertyKeyJdbcEngineVersion             ConnectionPropertyKey = "JDBC_ENGINE_VERSION"
-	ConnectionPropertyKeyConfigFiles                   ConnectionPropertyKey = "CONFIG_FILES"
-	ConnectionPropertyKeyInstanceId                    ConnectionPropertyKey = "INSTANCE_ID"
-	ConnectionPropertyKeyJdbcConnectionUrl             ConnectionPropertyKey = "JDBC_CONNECTION_URL"
-	ConnectionPropertyKeyJdbcEnforceSsl                ConnectionPropertyKey = "JDBC_ENFORCE_SSL"
-	ConnectionPropertyKeyCustomJdbcCert                ConnectionPropertyKey = "CUSTOM_JDBC_CERT"
-	ConnectionPropertyKeySkipCustomJdbcCertValidation  ConnectionPropertyKey = "SKIP_CUSTOM_JDBC_CERT_VALIDATION"
-	ConnectionPropertyKeyCustomJdbcCertString          ConnectionPropertyKey = "CUSTOM_JDBC_CERT_STRING"
-	ConnectionPropertyKeyConnectionUrl                 ConnectionPropertyKey = "CONNECTION_URL"
-	ConnectionPropertyKeyKafkaBootstrapServers         ConnectionPropertyKey = "KAFKA_BOOTSTRAP_SERVERS"
-	ConnectionPropertyKeyKafkaSslEnabled               ConnectionPropertyKey = "KAFKA_SSL_ENABLED"
-	ConnectionPropertyKeyKafkaCustomCert               ConnectionPropertyKey = "KAFKA_CUSTOM_CERT"
-	ConnectionPropertyKeyKafkaSkipCustomCertValidation ConnectionPropertyKey = "KAFKA_SKIP_CUSTOM_CERT_VALIDATION"
-	ConnectionPropertyKeySecretId                      ConnectionPropertyKey = "SECRET_ID"
-	ConnectionPropertyKeyConnectorUrl                  ConnectionPropertyKey = "CONNECTOR_URL"
-	ConnectionPropertyKeyConnectorType                 ConnectionPropertyKey = "CONNECTOR_TYPE"
-	ConnectionPropertyKeyConnectorClassName            ConnectionPropertyKey = "CONNECTOR_CLASS_NAME"
+	ConnectionPropertyKeyHost                                 ConnectionPropertyKey = "HOST"
+	ConnectionPropertyKeyPort                                 ConnectionPropertyKey = "PORT"
+	ConnectionPropertyKeyUserName                             ConnectionPropertyKey = "USERNAME"
+	ConnectionPropertyKeyPassword                             ConnectionPropertyKey = "PASSWORD"
+	ConnectionPropertyKeyEncryptedPassword                    ConnectionPropertyKey = "ENCRYPTED_PASSWORD"
+	ConnectionPropertyKeyJdbcDriverJarUri                     ConnectionPropertyKey = "JDBC_DRIVER_JAR_URI"
+	ConnectionPropertyKeyJdbcDriverClassName                  ConnectionPropertyKey = "JDBC_DRIVER_CLASS_NAME"
+	ConnectionPropertyKeyJdbcEngine                           ConnectionPropertyKey = "JDBC_ENGINE"
+	ConnectionPropertyKeyJdbcEngineVersion                    ConnectionPropertyKey = "JDBC_ENGINE_VERSION"
+	ConnectionPropertyKeyConfigFiles                          ConnectionPropertyKey = "CONFIG_FILES"
+	ConnectionPropertyKeyInstanceId                           ConnectionPropertyKey = "INSTANCE_ID"
+	ConnectionPropertyKeyJdbcConnectionUrl                    ConnectionPropertyKey = "JDBC_CONNECTION_URL"
+	ConnectionPropertyKeyJdbcEnforceSsl                       ConnectionPropertyKey = "JDBC_ENFORCE_SSL"
+	ConnectionPropertyKeyCustomJdbcCert                       ConnectionPropertyKey = "CUSTOM_JDBC_CERT"
+	ConnectionPropertyKeySkipCustomJdbcCertValidation         ConnectionPropertyKey = "SKIP_CUSTOM_JDBC_CERT_VALIDATION"
+	ConnectionPropertyKeyCustomJdbcCertString                 ConnectionPropertyKey = "CUSTOM_JDBC_CERT_STRING"
+	ConnectionPropertyKeyConnectionUrl                        ConnectionPropertyKey = "CONNECTION_URL"
+	ConnectionPropertyKeyKafkaBootstrapServers                ConnectionPropertyKey = "KAFKA_BOOTSTRAP_SERVERS"
+	ConnectionPropertyKeyKafkaSslEnabled                      ConnectionPropertyKey = "KAFKA_SSL_ENABLED"
+	ConnectionPropertyKeyKafkaCustomCert                      ConnectionPropertyKey = "KAFKA_CUSTOM_CERT"
+	ConnectionPropertyKeyKafkaSkipCustomCertValidation        ConnectionPropertyKey = "KAFKA_SKIP_CUSTOM_CERT_VALIDATION"
+	ConnectionPropertyKeyKafkaClientKeystore                  ConnectionPropertyKey = "KAFKA_CLIENT_KEYSTORE"
+	ConnectionPropertyKeyKafkaClientKeystorePassword          ConnectionPropertyKey = "KAFKA_CLIENT_KEYSTORE_PASSWORD"
+	ConnectionPropertyKeyKafkaClientKeyPassword               ConnectionPropertyKey = "KAFKA_CLIENT_KEY_PASSWORD"
+	ConnectionPropertyKeyEncryptedKafkaClientKeystorePassword ConnectionPropertyKey = "ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD"
+	ConnectionPropertyKeyEncryptedKafkaClientKeyPassword      ConnectionPropertyKey = "ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD"
+	ConnectionPropertyKeySecretId                             ConnectionPropertyKey = "SECRET_ID"
+	ConnectionPropertyKeyConnectorUrl                         ConnectionPropertyKey = "CONNECTOR_URL"
+	ConnectionPropertyKeyConnectorType                        ConnectionPropertyKey = "CONNECTOR_TYPE"
+	ConnectionPropertyKeyConnectorClassName                   ConnectionPropertyKey = "CONNECTOR_CLASS_NAME"
 )
 
 // Values returns all known values for ConnectionPropertyKey. Note that this can be
@@ -201,6 +206,11 @@ func (ConnectionPropertyKey) Values() []ConnectionPropertyKey {
 		"KAFKA_SSL_ENABLED",
 		"KAFKA_CUSTOM_CERT",
 		"KAFKA_SKIP_CUSTOM_CERT_VALIDATION",
+		"KAFKA_CLIENT_KEYSTORE",
+		"KAFKA_CLIENT_KEYSTORE_PASSWORD",
+		"KAFKA_CLIENT_KEY_PASSWORD",
+		"ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD",
+		"ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD",
 		"SECRET_ID",
 		"CONNECTOR_URL",
 		"CONNECTOR_TYPE",

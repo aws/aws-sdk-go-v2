@@ -240,7 +240,7 @@
                 "target": "com.amazonaws.sagemaker#AddTagsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add\n            tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform\n            jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints.</p>\n        <p>Each tag consists of a key and an optional value. Tag keys must be unique per\n            resource. For more information about tags, see For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS\n                Tagging Strategies</a>.</p>\n        <note>\n            <p>Tags that you add to a hyperparameter tuning job by calling this API are also\n                added to any training jobs that the hyperparameter tuning job launches after you\n                call this API, but not to training jobs that the hyperparameter tuning job launched\n                before you called this API. To make sure that the tags associated with a\n                hyperparameter tuning job are also added to all training jobs that the\n                hyperparameter tuning job launches, add the tags when you first create the tuning\n                job by specifying them in the <code>Tags</code> parameter of <a>CreateHyperParameterTuningJob</a>\n            </p>\n        </note>"
+                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified Amazon SageMaker resource. You can add\n            tags to notebook instances, training jobs, hyperparameter tuning jobs, batch transform\n            jobs, models, labeling jobs, work teams, endpoint configurations, and\n            endpoints.</p>\n        <p>Each tag consists of a key and an optional value. Tag keys must be unique per\n            resource. For more information about tags, see For more information, see <a href=\"https://aws.amazon.com/answers/account-management/aws-tagging-strategies/\">AWS\n                Tagging Strategies</a>.</p>\n        <note>\n            <p>Tags that you add to a hyperparameter tuning job by calling this API are also\n                added to any training jobs that the hyperparameter tuning job launches after you\n                call this API, but not to training jobs that the hyperparameter tuning job launched\n                before you called this API. To make sure that the tags associated with a\n                hyperparameter tuning job are also added to all training jobs that the\n                hyperparameter tuning job launches, add the tags when you first create the tuning\n                job by specifying them in the <code>Tags</code> parameter of <a>CreateHyperParameterTuningJob</a>\n            </p>\n        </note>\n        <note>\n            <p>Tags that you add to a SageMaker Studio Domain or User Profile by calling this API are also\n                added to any Apps that the Domain or User Profile launches after you\n                call this API, but not to Apps that the Domain or User Profile launched\n                before you called this API. To make sure that the tags associated with a\n                Domain or User Profile are also added to all Apps that the\n                Domain or User Profile launches, add the tags when you first create the Domain or User Profile by specifying them in the <code>Tags</code> parameter of <a>CreateDomain</a> or <a>CreateUserProfile</a>.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#AddTagsInput": {
@@ -1526,13 +1526,16 @@
                 ]
             }
         },
+        "com.amazonaws.sagemaker#AutoGenerateEndpointName": {
+            "type": "boolean"
+        },
         "com.amazonaws.sagemaker#AutoMLCandidate": {
             "type": "structure",
             "members": {
                 "CandidateName": {
                     "target": "com.amazonaws.sagemaker#CandidateName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The candidate name.</p>",
+                        "smithy.api#documentation": "<p>The name of the candidate.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1542,14 +1545,14 @@
                 "ObjectiveStatus": {
                     "target": "com.amazonaws.sagemaker#ObjectiveStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The objective status.</p>",
+                        "smithy.api#documentation": "<p>The objective's status.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CandidateSteps": {
                     "target": "com.amazonaws.sagemaker#CandidateSteps",
                     "traits": {
-                        "smithy.api#documentation": "<p>The candidate's steps.</p>",
+                        "smithy.api#documentation": "<p>Information about the candidate's steps.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1563,7 +1566,7 @@
                 "InferenceContainers": {
                     "target": "com.amazonaws.sagemaker#AutoMLContainerDefinitions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The inference containers.</p>"
+                        "smithy.api#documentation": "<p>Information about the inference container definitions.</p>"
                     }
                 },
                 "CreationTime": {
@@ -1600,7 +1603,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An Autopilot job returns recommendations, or candidates. Each candidate has futher details\n         about the steps involed, and the status.</p>"
+                "smithy.api#documentation": "<p>An Autopilot job returns recommendations, or candidates. Each candidate has futher details\n         about the steps involved and the status.</p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLCandidateStep": {
@@ -1609,27 +1612,27 @@
                 "CandidateStepType": {
                     "target": "com.amazonaws.sagemaker#CandidateStepType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the Candidate is at the transform, training, or processing step.</p>",
+                        "smithy.api#documentation": "<p>Whether the candidate is at the transform, training, or processing step.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CandidateStepArn": {
                     "target": "com.amazonaws.sagemaker#CandidateStepArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN for the Candidate's step.</p>",
+                        "smithy.api#documentation": "<p>The ARN for the candidate's step.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "CandidateStepName": {
                     "target": "com.amazonaws.sagemaker#CandidateStepName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the Candidate's step.</p>",
+                        "smithy.api#documentation": "<p>The name for the candidate's step.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the steps for a Candidate, and what step it is working on.</p>"
+                "smithy.api#documentation": "<p>Information about the steps for a candidate and what step it is working on.</p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLCandidates": {
@@ -1686,7 +1689,7 @@
                 "Environment": {
                     "target": "com.amazonaws.sagemaker#EnvironmentMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Environment variables to set in the container. For more information, see .</p>"
+                        "smithy.api#documentation": "<p>The environment variables to set in the container. For more information, see .</p>"
                     }
                 }
             },
@@ -1758,18 +1761,18 @@
                 "CandidateDefinitionNotebookLocation": {
                     "target": "com.amazonaws.sagemaker#CandidateDefinitionNotebookLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL to the notebook location.</p>"
+                        "smithy.api#documentation": "<p>The URL of the notebook location.</p>"
                     }
                 },
                 "DataExplorationNotebookLocation": {
                     "target": "com.amazonaws.sagemaker#DataExplorationNotebookLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The URL to the notebook location.</p>"
+                        "smithy.api#documentation": "<p>The URL of the notebook location.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Artifacts that are generation during a job.</p>"
+                "smithy.api#documentation": "<p>The artifacts that are generated during an AutoML job.</p>"
             }
         },
         "com.amazonaws.sagemaker#AutoMLJobCompletionCriteria": {
@@ -1810,7 +1813,7 @@
                 "SecurityConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLSecurityConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Security configuration for traffic encryption or Amazon VPC settings.</p>"
+                        "smithy.api#documentation": "<p>The security configuration for traffic encryption or Amazon VPC settings.</p>"
                     }
                 }
             },
@@ -1834,7 +1837,7 @@
                 "MetricName": {
                     "target": "com.amazonaws.sagemaker#AutoMLMetricEnum",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. This metric is optimized during training to provide the best estimate for\n         model parameter values from data.</p>\n         <p>Here are the options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MSE</code>: The mean squared error (MSE) is the average of the squared\n               differences between the predicted and actual values. It is used for regression. MSE\n               values are always positive, the better a model is at predicting the actual values the\n               smaller the MSE value. When the data contains outliers, they tend to dominate the MSE\n               which might cause subpar prediction performance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Accuracy</code>: The ratio of the number correctly classified items to the\n               total number (correctly and incorrectly) classified. It is used for binary and\n               multiclass classification. Measures how close the predicted class values are to the\n               actual values. Accuracy values vary between zero and one, one being perfect accuracy\n               and zero perfect inaccuracy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>F1</code>: The F1 score is the harmonic mean of the precision and recall. It\n               is used for binary classification into classes traditionally referred to as positive\n               and negative. Predictions are said to be true when they match their actual (correct)\n               class; false when they do not. Precision is the ratio of the true positive\n               predictions to all positive predictions (including the false positives) in a data set\n               and measures the quality of the prediction when it predicts the positive class.\n               Recall (or sensitivity) is the ratio of the true positive predictions to all actual\n               positive instances and measures how completely a model predicts the actual class\n               members in a data set. The standard F1 score weighs precision and recall equally. But\n               which metric is paramount typically depends on specific aspects of a problem. F1\n               scores vary between zero and one, one being the best possible performance and zero\n               the worst.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUC</code>: The area under the curve (AUC) metric is used to compare and\n               evaluate binary classification by algorithms such as logistic regression that return\n               probabilities. A threshold is needed to map the probabilities into classifications.\n               The relevant curve is the receiver operating characteristic curve that plots the true\n               positive rate (TPR) of predictions (or recall) against the false positive rate (FPR)\n               as a function of the threshold value, above which a prediction is considered\n               positive. Increasing the threshold results in fewer false positives but more false\n               negatives. AUC is the area under this receiver operating characteristic curve and so\n               provides an aggregated measure of the model performance across all possible\n               classification thresholds. The AUC score can also be interpreted as the probability\n               that a randomly selected positive data point is more likely to be predicted positive\n               than a randomly selected negative example. AUC scores vary between zero and one, one\n               being perfect accuracy and one half not better than a random classifier. Values less\n               that one half predict worse than a random predictor and such consistently bad\n               predictors can be inverted to obtain better than random predictors.</p>\n            </li>\n            <li>\n               <p>\n                  <code>F1macro</code>: The F1macro score applies F1 scoring to multiclass\n               classification. In this context, you have multiple classes to predict. You just\n               calculate the precision and recall for each class as you did for the positive class\n               in binary classification. Then used these values to calculate the F1 score for each\n               class and average them to obtain the F1macro score. F1macro scores vary between zero\n               and one, one being the best possible performance and zero the worst.</p>\n            </li>\n         </ul>\n         <p>If you do not specify a metric explicitly, the default behavior is to automatically\n         use:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MSE</code>: for regression.</p>\n            </li>\n            <li>\n               <p>\n                  <code>F1</code>: for binary classification</p>\n            </li>\n            <li>\n               <p>\n                  <code>Accuracy</code>: for multiclass classification.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the objective metric used to measure the predictive quality of a machine\n         learning system. This metric is optimized during training to provide the best estimate for\n         model parameter values from data.</p>\n         <p>Here are the options:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MSE</code>: The mean squared error (MSE) is the average of the squared\n               differences between the predicted and actual values. It is used for regression. MSE\n               values are always positive: the better a model is at predicting the actual values,\n               the smaller the MSE value. When the data contains outliers, they tend to dominate the\n               MSE, which might cause subpar prediction performance.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Accuracy</code>: The ratio of the number of correctly classified items to\n               the total number of (correctly and incorrectly) classified items. It is used for\n               binary and multiclass classification. It measures how close the predicted class\n               values are to the actual values. Accuracy values vary between zero and one: one\n               indicates perfect accuracy and zero indicates perfect inaccuracy.</p>\n            </li>\n            <li>\n               <p>\n                  <code>F1</code>: The F1 score is the harmonic mean of the precision and recall. It\n               is used for binary classification into classes traditionally referred to as positive\n               and negative. Predictions are said to be true when they match their actual (correct)\n               class and false when they do not. Precision is the ratio of the true positive\n               predictions to all positive predictions (including the false positives) in a data set\n               and measures the quality of the prediction when it predicts the positive class.\n               Recall (or sensitivity) is the ratio of the true positive predictions to all actual\n               positive instances and measures how completely a model predicts the actual class\n               members in a data set. The standard F1 score weighs precision and recall equally. But\n               which metric is paramount typically depends on specific aspects of a problem. F1\n               scores vary between zero and one: one indicates the best possible performance and\n               zero the worst.</p>\n            </li>\n            <li>\n               <p>\n                  <code>AUC</code>: The area under the curve (AUC) metric is used to compare and\n               evaluate binary classification by algorithms such as logistic regression that return\n               probabilities. A threshold is needed to map the probabilities into classifications.\n               The relevant curve is the receiver operating characteristic curve that plots the true\n               positive rate (TPR) of predictions (or recall) against the false positive rate (FPR)\n               as a function of the threshold value, above which a prediction is considered\n               positive. Increasing the threshold results in fewer false positives but more false\n               negatives. AUC is the area under this receiver operating characteristic curve and so\n               provides an aggregated measure of the model performance across all possible\n               classification thresholds. The AUC score can also be interpreted as the probability\n               that a randomly selected positive data point is more likely to be predicted positive\n               than a randomly selected negative example. AUC scores vary between zero and one: a\n               score of one indicates perfect accuracy and a score of one half indicates that the\n               prediction is not better than a random classifier. Values under one half predict less\n               accurately than a random predictor. But such consistently bad predictors can simply\n               be inverted to obtain better than random predictors.</p>\n            </li>\n            <li>\n               <p>\n                  <code>F1macro</code>: The F1macro score applies F1 scoring to multiclass\n               classification. In this context, you have multiple classes to predict. You just\n               calculate the precision and recall for each class as you did for the positive class\n               in binary classification. Then, use these values to calculate the F1 score for each\n               class and average them to obtain the F1macro score. F1macro scores vary between zero\n               and one: one indicates the best possible performance and zero the worst.</p>\n            </li>\n         </ul>\n         <p>If you do not specify a metric explicitly, the default behavior is to automatically\n         use:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>MSE</code>: for regression.</p>\n            </li>\n            <li>\n               <p>\n                  <code>F1</code>: for binary classification</p>\n            </li>\n            <li>\n               <p>\n                  <code>Accuracy</code>: for multiclass classification.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1913,6 +1916,14 @@
                     {
                         "value": "ExplainabilityError",
                         "name": "EXPLAINABILITY_ERROR"
+                    },
+                    {
+                        "value": "DeployingModel",
+                        "name": "DEPLOYING_MODEL"
+                    },
+                    {
+                        "value": "ModelDeploymentError",
+                        "name": "MODEL_DEPLOYMENT_ERROR"
                     }
                 ]
             }
@@ -2166,7 +2177,7 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.sagemaker#VpcConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>VPC configuration.</p>"
+                        "smithy.api#documentation": "<p>The VPC configuration.</p>"
                     }
                 }
             },
@@ -2359,13 +2370,13 @@
                 "Explainability": {
                     "target": "com.amazonaws.sagemaker#ExplainabilityLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 prefix to the explainability artifacts generated for the AutoML candidate.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 prefix to the explainability artifacts generated for the AutoML\n         candidate.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Location of artifacts for an AutoML candidate job.</p>"
+                "smithy.api#documentation": "<p>The location of artifacts for an AutoML candidate job.</p>"
             }
         },
         "com.amazonaws.sagemaker#CandidateDefinitionNotebookLocation": {
@@ -2391,7 +2402,7 @@
                 "CandidateArtifactLocations": {
                     "target": "com.amazonaws.sagemaker#CandidateArtifactLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 prefix to the artifacts generated for an AutoML candidate.</p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 prefix to the artifacts generated for an AutoML candidate.</p>"
                     }
                 }
             },
@@ -2846,9 +2857,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 128
+                    "max": 1024
                 },
-                "smithy.api#pattern": "[\\w+-]+"
+                "smithy.api#pattern": "[ -~]+"
             }
         },
         "com.amazonaws.sagemaker#ClientSecret": {
@@ -2856,9 +2867,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 64
+                    "max": 1024
                 },
-                "smithy.api#pattern": "[\\w+=/-]+",
+                "smithy.api#pattern": "[ -~]+",
                 "smithy.api#sensitive": {}
             }
         },
@@ -3335,7 +3346,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>There was a conflict when you attempted to modify an experiment, trial, or trial\n      component.</p>",
+                "smithy.api#documentation": "<p>There was a conflict when you attempted to modify a SageMaker entity such as an\n      <code>Experiment</code> or <code>Artifact</code>.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3709,7 +3720,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an <i>action</i>. An action is a lineage tracking entity that\n        represents an action or activity. For example, a model deployment or an HPO job.\n        Generally, an action involves at least one input or output artifact. For more information, see\n        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker\n          ML Lineage Tracking</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an <i>action</i>. An action is a lineage tracking entity that\n        represents an action or activity. For example, a model deployment or an HPO job.\n        Generally, an action involves at least one input or output artifact. For more information, see\n        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker\n          ML Lineage Tracking</a>.</p>\n         <note>\n            <p>\n               <code>CreateAction</code> can only be invoked from within an SageMaker managed\n          environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker\n          notebooks. A call to <code>CreateAction</code> from outside one of these\n          environments results in an error.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateActionRequest": {
@@ -3991,7 +4002,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an <i>artifact</i>. An artifact is a lineage tracking entity that\n        represents a URI addressable object or data. Some examples are the S3 URI of a dataset and\n        the ECR registry path of an image. For more information, see\n        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker\n          ML Lineage Tracking</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an <i>artifact</i>. An artifact is a lineage tracking entity that\n        represents a URI addressable object or data. Some examples are the S3 URI of a dataset and\n        the ECR registry path of an image. For more information, see\n        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker\n          ML Lineage Tracking</a>.</p>\n         <note>\n            <p>\n               <code>CreateArtifact</code> can only be invoked from within an SageMaker managed\n          environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker\n          notebooks. A call to <code>CreateArtifact</code> from outside one of these\n          environments results in an error.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateArtifactRequest": {
@@ -4085,32 +4096,32 @@
                 "OutputDataConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLOutputDataConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store\n         artifacts from an AutoML job. Format(s) supported: CSV.</p>",
+                        "smithy.api#documentation": "<p>Provides information about encryption and the Amazon S3 output path needed to store\n         artifacts from an AutoML job. Format(s) supported: CSV.</p>\n      \n         <p><para>Specifies whether to automatically deploy the best &ATP; model to an\n         endpoint and the name of that endpoint if deployed automatically.</para></p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ProblemType": {
                     "target": "com.amazonaws.sagemaker#ProblemType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the type of supervised learning available for the candidates. Options include:\n         BinaryClassification, MulticlassClassification, and Regression. For more information, see\n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\">\n            Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
+                        "smithy.api#documentation": "<p>Defines the type of supervised learning available for the candidates. Options include:\n            <code>BinaryClassification</code>, <code>MulticlassClassification</code>, and\n            <code>Regression</code>. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-problem-types.html\">\n            Amazon SageMaker Autopilot problem types and algorithm support</a>.</p>"
                     }
                 },
                 "AutoMLJobObjective": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobObjective",
                     "traits": {
-                        "smithy.api#documentation": "<p>Defines the objective metric used to measure the predictive quality of an AutoML job.\n         You provide a <a>AutoMLJobObjective$MetricName</a> and Autopilot infers whether to\n         minimize or maximize it.</p>"
+                        "smithy.api#documentation": "<p>Defines the objective metric used to measure the predictive quality of an AutoML job.\n         You provide an <a>AutoMLJobObjective$MetricName</a> and Autopilot infers whether to\n         minimize or maximize it.</p>"
                     }
                 },
                 "AutoMLJobConfig": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains CompletionCriteria and SecurityConfig settings for the AutoML job.</p>"
+                        "smithy.api#documentation": "<p>Contains <code>CompletionCriteria</code> and <code>SecurityConfig</code> settings for\n         the AutoML job.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.sagemaker#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the role that is used to access the data.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the role that is used to access the data.</p>\n      \n         <p><para>Specifies whether to automatically deploy the best &ATP; model to an\n         endpoint and the name of that endpoint if deployed automatically.</para></p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4124,6 +4135,12 @@
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>Each tag consists of a key and an optional value. Tag keys must be unique per\n         resource.</p>"
+                    }
+                },
+                "ModelDeployConfig": {
+                    "target": "com.amazonaws.sagemaker#ModelDeployConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model\n         deployment.</p>"
                     }
                 }
             }
@@ -4281,7 +4298,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <i>context</i>. A context is a lineage tracking entity that\n        represents a logical grouping of other tracking or experiment entities. Some examples are\n        an endpoint and a model package. For more information, see\n        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker\n          ML Lineage Tracking</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a <i>context</i>. A context is a lineage tracking entity that\n        represents a logical grouping of other tracking or experiment entities. Some examples are\n        an endpoint and a model package. For more information, see\n        <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker\n          ML Lineage Tracking</a>.</p>\n         <note>\n            <p>\n               <code>CreateContext</code> can only be invoked from within an SageMaker managed\n          environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker\n          notebooks. A call to <code>CreateContext</code> from outside one of these\n          environments results in an error.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateContextRequest": {
@@ -4552,7 +4569,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to associated with the Domain. Each tag consists of a key and an optional value.\n         Tag keys must be unique per resource. Tags are searchable using the\n         <code>Search</code> API.</p>"
+                        "smithy.api#documentation": "<p>Tags to associated with the Domain. Each tag consists of a key and an optional value.\n         Tag keys must be unique per resource. Tags are searchable using the\n         <code>Search</code> API.</p>\n         <p>Tags that you specify for the Domain are also added to all Apps that the\n          Domain launches.</p>"
                     }
                 },
                 "AppNetworkAccessType": {
@@ -4799,7 +4816,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an SageMaker <i>experiment</i>. An experiment is a collection of\n        <i>trials</i> that are observed, compared and evaluated as a group. A trial is\n      a set of steps, called <i>trial components</i>, that produce a machine learning\n      model.</p>\n         <p>The goal of an experiment is to determine the components that produce the best model.\n      Multiple trials are performed, each one isolating and measuring the impact of a change to one\n      or more inputs, while keeping the remaining inputs constant.</p>\n         <p>When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial\n      components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you\n      must use the logging APIs provided by the SDK.</p>\n         <p>You can add tags to experiments, trials, trial components and then use the <a>Search</a> API to search for the tags.</p>\n         <p>To add a description to an experiment, specify the optional <code>Description</code>\n      parameter. To add a description later, or to change the description, call the <a>UpdateExperiment</a> API.</p>\n         <p>To get a list of all your experiments, call the <a>ListExperiments</a> API. To\n      view an experiment's properties, call the <a>DescribeExperiment</a> API. To get a\n      list of all the trials associated with an experiment, call the <a>ListTrials</a>\n      API. To create a trial call the <a>CreateTrial</a> API.</p>"
+                "smithy.api#documentation": "<p>Creates an SageMaker <i>experiment</i>. An experiment is a collection of\n        <i>trials</i> that are observed, compared and evaluated as a group. A trial is\n      a set of steps, called <i>trial components</i>, that produce a machine learning\n      model.</p>\n         <p>The goal of an experiment is to determine the components that produce the best model.\n      Multiple trials are performed, each one isolating and measuring the impact of a change to one\n      or more inputs, while keeping the remaining inputs constant.</p>\n         <p>When you use SageMaker Studio or the SageMaker Python SDK, all experiments, trials, and trial\n      components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you\n      must use the logging APIs provided by the SDK.</p>\n         <p>You can add tags to experiments, trials, trial components and then use the <a>Search</a> API to search for the tags.</p>\n         <p>To add a description to an experiment, specify the optional <code>Description</code>\n      parameter. To add a description later, or to change the description, call the <a>UpdateExperiment</a> API.</p>\n         <p>To get a list of all your experiments, call the <a>ListExperiments</a> API. To\n      view an experiment's properties, call the <a>DescribeExperiment</a> API. To get a\n      list of all the trials associated with an experiment, call the <a>ListTrials</a>\n      API. To create a trial call the <a>CreateTrial</a> API.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateExperimentRequest": {
@@ -6053,7 +6070,7 @@
                 "DirectInternetAccess": {
                     "target": "com.amazonaws.sagemaker#DirectInternetAccess",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this\n            to <code>Disabled</code> this notebook instance will be able to access resources only in\n            your VPC, and will not be able to connect to Amazon SageMaker training and endpoint services unless\n            your configure a NAT Gateway in your VPC.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access\">Notebook Instances Are Internet-Enabled by Default</a>. You can set the value\n            of this parameter to <code>Disabled</code> only if you set a value for the\n                <code>SubnetId</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Sets whether Amazon SageMaker provides internet access to the notebook instance. If you set this\n            to <code>Disabled</code> this notebook instance is able to access resources only in your\n            VPC, and is not be able to connect to Amazon SageMaker training and endpoint services unless you\n            configure a NAT Gateway in your VPC.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/appendix-additional-considerations.html#appendix-notebook-and-internet-access\">Notebook Instances Are Internet-Enabled by Default</a>. You can set the value\n            of this parameter to <code>Disabled</code> only if you set a value for the\n                <code>SubnetId</code> parameter.</p>"
                     }
                 },
                 "VolumeSizeInGB": {
@@ -6528,7 +6545,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a model training job. After training completes, Amazon SageMaker saves the resulting\n            model artifacts to an Amazon S3 location that you specify. </p>\n        <p>If you choose to host your model using Amazon SageMaker hosting services, you can use the\n            resulting model artifacts as part of the model. You can also use the artifacts in a\n            machine learning service other than Amazon SageMaker, provided that you know how to use them for\n            inference.\n            \n        </p>\n        <p>In the request body, you provide the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>AlgorithmSpecification</code> - Identifies the training algorithm to\n                    use.\n                    </p>\n            </li>\n            <li>\n                <p>\n                    <code>HyperParameters</code> - Specify these algorithm-specific parameters to\n                    enable the estimation of model parameters during training. Hyperparameters can\n                    be tuned to optimize this learning process. For a list of hyperparameters for\n                    each training algorithm provided by Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3,\n                    EFS, or FSx location where it is stored.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want\n                    Amazon SageMaker to save the results of model training. </p>\n                <p></p>\n            </li>\n            <li>\n                <p>\n                  <code>ResourceConfig</code> - Identifies the resources, ML compute\n                    instances, and ML storage volumes to deploy for model training. In distributed\n                    training, you specify more than one instance. </p>\n                \n            </li>\n            <li>\n                <p>\n                  <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine\n                    learning models by up to 80% by using Amazon EC2 Spot instances. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot\n                        Training</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RoleArn</code> - The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks on\n                    your behalf during model training.\n                    \n                    You must grant this role the necessary permissions so that Amazon SageMaker can successfully\n                    complete model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>StoppingCondition</code> - To help cap training costs, use\n                        <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use\n                        <code>MaxWaitTimeInSeconds</code> to specify how long you are willing to\n                    wait for a managed spot training job to complete. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Environment</code> - The environment variables to set in the Docker container.</p>\n            </li>\n         </ul>\n        <p> For more information about Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
+                "smithy.api#documentation": "<p>Starts a model training job. After training completes, Amazon SageMaker saves the resulting\n            model artifacts to an Amazon S3 location that you specify. </p>\n        <p>If you choose to host your model using Amazon SageMaker hosting services, you can use the\n            resulting model artifacts as part of the model. You can also use the artifacts in a\n            machine learning service other than Amazon SageMaker, provided that you know how to use them for\n            inference.\n            \n        </p>\n        <p>In the request body, you provide the following: </p>\n        <ul>\n            <li>\n                <p>\n                  <code>AlgorithmSpecification</code> - Identifies the training algorithm to\n                    use.\n                    </p>\n            </li>\n            <li>\n                <p>\n                    <code>HyperParameters</code> - Specify these algorithm-specific parameters to\n                    enable the estimation of model parameters during training. Hyperparameters can\n                    be tuned to optimize this learning process. For a list of hyperparameters for\n                    each training algorithm provided by Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html\">Algorithms</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>InputDataConfig</code> - Describes the training dataset and the Amazon S3,\n                    EFS, or FSx location where it is stored.</p>\n            </li>\n            <li>\n                <p>\n                  <code>OutputDataConfig</code> - Identifies the Amazon S3 bucket where you want\n                    Amazon SageMaker to save the results of model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>ResourceConfig</code> - Identifies the resources, ML compute\n                    instances, and ML storage volumes to deploy for model training. In distributed\n                    training, you specify more than one instance. </p>\n                \n            </li>\n            <li>\n                <p>\n                  <code>EnableManagedSpotTraining</code> - Optimize the cost of training machine\n                    learning models by up to 80% by using Amazon EC2 Spot instances. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-managed-spot-training.html\">Managed Spot\n                        Training</a>. </p>\n            </li>\n            <li>\n                <p>\n                  <code>RoleArn</code> - The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks on\n                    your behalf during model training.\n                    \n                    You must grant this role the necessary permissions so that Amazon SageMaker can successfully\n                    complete model training. </p>\n            </li>\n            <li>\n                <p>\n                  <code>StoppingCondition</code> - To help cap training costs, use\n                        <code>MaxRuntimeInSeconds</code> to set a time limit for training. Use\n                        <code>MaxWaitTimeInSeconds</code> to specify how long\n                        a managed spot training job has to complete. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Environment</code> - The environment variables to set in the Docker container.</p>\n            </li>\n            <li>\n                <p>\n                  <code>RetryStrategy</code> - The number of times to retry the job when the\n                    job fails due to an <code>InternalServerError</code>.</p>\n            </li>\n         </ul>\n        <p> For more information about Amazon SageMaker, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works.html\">How It Works</a>. </p>"
             }
         },
         "com.amazonaws.sagemaker#CreateTrainingJobRequest": {
@@ -6590,7 +6607,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. When the job reaches the\n            time limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>",
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run.\n            It also specifies how long a managed Spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6652,6 +6669,12 @@
                     "target": "com.amazonaws.sagemaker#TrainingEnvironmentMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The environment variables to set in the Docker container.</p>"
+                    }
+                },
+                "RetryStrategy": {
+                    "target": "com.amazonaws.sagemaker#RetryStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n            <code>InternalServerError</code>.</p>"
                     }
                 }
             }
@@ -6805,7 +6828,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon SageMaker <i>trial</i>. A trial is a set of steps called\n        <i>trial components</i> that produce a machine learning model. A trial is part\n      of a single Amazon SageMaker <i>experiment</i>.</p>\n         <p>When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial\n      components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you\n      must use the logging APIs provided by the SDK.</p>\n         <p>You can add tags to a trial and then use the <a>Search</a> API to search for\n      the tags.</p>\n         <p>To get a list of all your trials, call the <a>ListTrials</a> API. To view a\n      trial's properties, call the <a>DescribeTrial</a> API. To create a trial component,\n      call the <a>CreateTrialComponent</a> API.</p>"
+                "smithy.api#documentation": "<p>Creates an SageMaker <i>trial</i>. A trial is a set of steps called\n        <i>trial components</i> that produce a machine learning model. A trial is part\n      of a single SageMaker <i>experiment</i>.</p>\n         <p>When you use SageMaker Studio or the SageMaker Python SDK, all experiments, trials, and trial\n      components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you\n      must use the logging APIs provided by the SDK.</p>\n         <p>You can add tags to a trial and then use the <a>Search</a> API to search for\n      the tags.</p>\n         <p>To get a list of all your trials, call the <a>ListTrials</a> API. To view a\n      trial's properties, call the <a>DescribeTrial</a> API. To create a trial component,\n      call the <a>CreateTrialComponent</a> API.</p>"
             }
         },
         "com.amazonaws.sagemaker#CreateTrialComponent": {
@@ -6822,7 +6845,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a <i>trial component</i>, which is a stage of a machine learning\n        <i>trial</i>. A trial is composed of one or more trial components. A trial\n      component can be used in multiple trials.</p>\n         <p>Trial components include pre-processing jobs, training jobs, and batch transform\n      jobs.</p>\n         <p>When you use Amazon SageMaker Studio or the Amazon SageMaker Python SDK, all experiments, trials, and trial\n      components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you\n      must use the logging APIs provided by the SDK.</p>\n         <p>You can add tags to a trial component and then use the <a>Search</a> API to\n      search for the tags.</p>\n         <note>\n            <p>\n               <code>CreateTrialComponent</code> can only be invoked from within an Amazon SageMaker managed\n        environment. This includes Amazon SageMaker training jobs, processing jobs, transform jobs, and Amazon SageMaker\n        notebooks. A call to <code>CreateTrialComponent</code> from outside one of these\n        environments results in an error.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a <i>trial component</i>, which is a stage of a machine learning\n        <i>trial</i>. A trial is composed of one or more trial components. A trial\n      component can be used in multiple trials.</p>\n         <p>Trial components include pre-processing jobs, training jobs, and batch transform\n      jobs.</p>\n         <p>When you use SageMaker Studio or the SageMaker Python SDK, all experiments, trials, and trial\n      components are automatically tracked, logged, and indexed. When you use the AWS SDK for Python (Boto), you\n      must use the logging APIs provided by the SDK.</p>\n         <p>You can add tags to a trial component and then use the <a>Search</a> API to\n      search for the tags.</p>\n         <note>\n            <p>\n               <code>CreateTrialComponent</code> can only be invoked from within an SageMaker managed\n        environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker\n        notebooks. A call to <code>CreateTrialComponent</code> from outside one of these\n        environments results in an error.</p>\n         </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateTrialComponentRequest": {
@@ -6977,7 +7000,7 @@
                 "UserProfileName": {
                     "target": "com.amazonaws.sagemaker#UserProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the UserProfile.</p>",
+                        "smithy.api#documentation": "<p>A name for the UserProfile. This value is not case sensitive.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6996,7 +7019,7 @@
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each tag consists of a key and an optional value.\n         Tag keys must be unique per resource.</p>"
+                        "smithy.api#documentation": "<p>Each tag consists of a key and an optional value.\n         Tag keys must be unique per resource.</p>\n         <p>Tags that you specify for the User Profile are also added to all Apps that the\n          User Profile launches.</p>"
                     }
                 },
                 "UserSettings": {
@@ -7386,7 +7409,7 @@
                 "JoinSource": {
                     "target": "com.amazonaws.sagemaker#JoinSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the source of the data to join with the transformed data. The valid values\n            are <code>None</code> and <code>Input</code>. The default value is <code>None</code>,\n            which specifies not to join the input with the transformed data. If you want the batch\n            transform job to join the original input data with the transformed data, set\n                <code>JoinSource</code> to <code>Input</code>. </p>\n        \n        <p>For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to\n            the input JSON object in an attribute called <code>SageMakerOutput</code>. The joined\n            result for JSON must be a key-value pair object. If the input is not a key-value pair\n            object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored\n            under the <code>SageMakerInput</code> key and the results are stored in\n                <code>SageMakerOutput</code>.</p>\n        <p>For CSV files, Amazon SageMaker combines the transformed data with the input data at the end of\n            the input data and stores it in the output file. The joined data has the joined input\n            data followed by the transformed data and the output is a CSV file. </p>"
+                        "smithy.api#documentation": "<p>Specifies the source of the data to join with the transformed data. The valid values\n            are <code>None</code> and <code>Input</code>. The default value is <code>None</code>,\n            which specifies not to join the input with the transformed data. If you want the batch\n            transform job to join the original input data with the transformed data, set\n            <code>JoinSource</code> to <code>Input</code>. You can specify <code>OutputFilter</code> \n            as an additional filter to select a portion of the joined dataset and store it in the output file.</p>\n        <p>For JSON or JSONLines objects, such as a JSON array, Amazon SageMaker adds the transformed data to\n            the input JSON object in an attribute called <code>SageMakerOutput</code>. The joined\n            result for JSON must be a key-value pair object. If the input is not a key-value pair\n            object, Amazon SageMaker creates a new JSON file. In the new JSON file, and the input data is stored\n            under the <code>SageMakerInput</code> key and the results are stored in\n                <code>SageMakerOutput</code>.</p>\n        <p>For CSV data, Amazon SageMaker takes each row as a JSON array and joins the transformed \n            data with the input by appending each transformed row to the end of the input. \n            The joined data has the original input data followed by the transformed data and \n            the output is a CSV file.</p>\n        <p>For information on how joining in applied, see \n            <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/batch-transform-data-processing.html#batch-transform-data-processing-workflow\">Workflow for Associating Inferences with Input Records</a>.</p>"
                     }
                 }
             },
@@ -8139,7 +8162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Amazon SageMaker experiment. All trials associated with the experiment must be deleted\n      first. Use the <a>ListTrials</a> API to get a list of the trials associated with\n      the experiment.</p>"
+                "smithy.api#documentation": "<p>Deletes an SageMaker experiment. All trials associated with the experiment must be deleted\n      first. Use the <a>ListTrials</a> API to get a list of the trials associated with\n      the experiment.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeleteExperimentRequest": {
@@ -8588,7 +8611,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a pipeline if there are no in-progress executions.</p>"
+                "smithy.api#documentation": "<p>Deletes a pipeline if there are no running instances of the pipeline. To delete a\n        pipeline, you must stop all running instances of the pipeline using the\n        <code>StopPipelineExecution</code> API. When you delete a pipeline, all instances of the\n        pipeline are deleted.</p>"
             }
         },
         "com.amazonaws.sagemaker#DeletePipelineRequest": {
@@ -8652,7 +8675,7 @@
                 "target": "com.amazonaws.sagemaker#DeleteTagsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified tags from an Amazon SageMaker resource.</p>\n        <p>To list a resource's tags, use the <code>ListTags</code> API. </p>\n        <note>\n            <p>When you call this API to delete tags from a hyperparameter tuning job, the\n                deleted tags are not removed from training jobs that the hyperparameter tuning job\n                launched before you called this API.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Deletes the specified tags from an Amazon SageMaker resource.</p>\n        <p>To list a resource's tags, use the <code>ListTags</code> API. </p>\n        <note>\n            <p>When you call this API to delete tags from a hyperparameter tuning job, the\n                deleted tags are not removed from training jobs that the hyperparameter tuning job\n                launched before you called this API.</p>\n        </note>\n        <note>\n            <p>When you call this API to delete tags from a SageMaker Studio Domain or User Profile, the\n                deleted tags are not removed from Apps that the SageMaker Studio Domain or User Profile\n                launched before you called this API.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#DeleteTagsInput": {
@@ -9520,25 +9543,25 @@
                 "FailureReason": {
                     "target": "com.amazonaws.sagemaker#AutoMLFailureReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the job's FailureReason.</p>"
+                        "smithy.api#documentation": "<p>Returns the failure reason for an AutoML job, when applicable.</p>"
                     }
                 },
                 "PartialFailureReasons": {
                     "target": "com.amazonaws.sagemaker#AutoMLPartialFailureReasons",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns a list of reasons for partial failures within an AutoML job. </p>"
+                        "smithy.api#documentation": "<p>Returns a list of reasons for partial failures within an AutoML job.</p>"
                     }
                 },
                 "BestCandidate": {
                     "target": "com.amazonaws.sagemaker#AutoMLCandidate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the job's BestCandidate.</p>"
+                        "smithy.api#documentation": "<p>Returns the job's best <code>AutoMLCandidate</code>.</p>"
                     }
                 },
                 "AutoMLJobStatus": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the status of the AutoML job's AutoMLJobStatus.</p>",
+                        "smithy.api#documentation": "<p>Returns the status of the AutoML job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9552,19 +9575,31 @@
                 "GenerateCandidateDefinitionsOnly": {
                     "target": "com.amazonaws.sagemaker#GenerateCandidateDefinitionsOnly",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns the job's output from GenerateCandidateDefinitionsOnly.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the output for an AutoML job generates candidate definitions\n         only.</p>"
                     }
                 },
                 "AutoMLJobArtifacts": {
                     "target": "com.amazonaws.sagemaker#AutoMLJobArtifacts",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns information on the job's artifacts found in AutoMLJobArtifacts.</p>"
+                        "smithy.api#documentation": "<p>Returns information on the job's artifacts found in\n         <code>AutoMLJobArtifacts</code>.</p>"
                     }
                 },
                 "ResolvedAttributes": {
                     "target": "com.amazonaws.sagemaker#ResolvedAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>This contains ProblemType, AutoMLJobObjective and CompletionCriteria. If you do not\n         provide these values, they are auto-inferred. If you do provide them, they are the values\n         you provide.</p>"
+                        "smithy.api#documentation": "<p>This contains <code>ProblemType</code>, <code>AutoMLJobObjective</code> and\n            <code>CompletionCriteria</code>. If you do not provide these values, they are\n         auto-inferred. If you do provide them, the values used are the ones you provide.</p>"
+                    }
+                },
+                "ModelDeployConfig": {
+                    "target": "com.amazonaws.sagemaker#ModelDeployConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the model was deployed automatically to an endpoint and the name of\n         that endpoint if deployed automatically.</p>"
+                    }
+                },
+                "ModelDeployResult": {
+                    "target": "com.amazonaws.sagemaker#ModelDeployResult",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about endpoint for the model deployment.</p>"
                     }
                 }
             }
@@ -12987,7 +13022,7 @@
                 "SecondaryStatus": {
                     "target": "com.amazonaws.sagemaker#SecondaryStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p> Provides detailed information about the state of the training job. For detailed\n            information on the secondary status of the training job, see <code>StatusMessage</code>\n            under <a>SecondaryStatusTransition</a>.</p>\n        <p>Amazon SageMaker provides primary statuses and secondary statuses that apply to each of\n            them:</p>\n        <dl>\n            <dt>InProgress</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>Starting</code>\n                                - Starting the training job.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Downloading</code> - An optional stage for algorithms that\n                                support <code>File</code> training input mode. It indicates that\n                                data is being downloaded to the ML storage volumes.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Training</code> - Training is in progress.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Interrupted</code> - The job stopped because the managed\n                                spot training instances were interrupted. </p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Uploading</code> - Training is complete and the model\n                                artifacts are being uploaded to the S3 location.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Completed</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>Completed</code> - The training job has completed.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Failed</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>Failed</code> - The training job has failed. The reason for\n                                the failure is returned in the <code>FailureReason</code> field of\n                                    <code>DescribeTrainingJobResponse</code>.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Stopped</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>MaxRuntimeExceeded</code> - The job stopped because it\n                                exceeded the maximum allowed runtime.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>MaxWaitTimeExceeded</code> - The job stopped because it\n                                exceeded the maximum allowed wait time.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Stopped</code> - The training job has stopped.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Stopping</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>Stopping</code> - Stopping the training job.</p>\n                        </li>\n               </ul>\n                </dd>\n         </dl>\n        \n        <important>\n            <p>Valid values for <code>SecondaryStatus</code> are subject to change. </p>\n        </important>\n        <p>We no longer support the following secondary statuses:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>LaunchingMLInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>PreparingTrainingStack</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DownloadingTrainingImage</code>\n                </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p> Provides detailed information about the state of the training job. For detailed\n            information on the secondary status of the training job, see <code>StatusMessage</code>\n            under <a>SecondaryStatusTransition</a>.</p>\n        <p>Amazon SageMaker provides primary statuses and secondary statuses that apply to each of\n            them:</p>\n        <dl>\n            <dt>InProgress</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>Starting</code>\n                                - Starting the training job.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Downloading</code> - An optional stage for algorithms that\n                                support <code>File</code> training input mode. It indicates that\n                                data is being downloaded to the ML storage volumes.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Training</code> - Training is in progress.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Interrupted</code> - The job stopped because the managed\n                                spot training instances were interrupted. </p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Uploading</code> - Training is complete and the model\n                                artifacts are being uploaded to the S3 location.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Completed</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>Completed</code> - The training job has completed.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Failed</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>Failed</code> - The training job has failed. The reason for\n                                the failure is returned in the <code>FailureReason</code> field of\n                                    <code>DescribeTrainingJobResponse</code>.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Stopped</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>MaxRuntimeExceeded</code> - The job stopped because it\n                                exceeded the maximum allowed runtime.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>MaxWaitTimeExceeded</code> - The job stopped because it\n                                exceeded the maximum allowed wait time.</p>\n                        </li>\n                  <li>\n                            <p>\n                        <code>Stopped</code> - The training job has stopped.</p>\n                        </li>\n               </ul>\n                </dd>\n            <dt>Stopping</dt>\n            <dd>\n                    <ul>\n                  <li>\n                            <p>\n                        <code>Stopping</code> - Stopping the training job.</p>\n                        </li>\n               </ul>\n                </dd>\n         </dl>\n        \n        <important>\n            <p>Valid values for <code>SecondaryStatus</code> are subject to change. </p>\n        </important>\n        <p>We no longer support the following secondary statuses:</p>\n        <ul>\n            <li>\n                <p>\n                    <code>LaunchingMLInstances</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>PreparingTraining</code>\n                </p>\n            </li>\n            <li>\n                <p>\n                    <code>DownloadingTrainingImage</code>\n                </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13044,7 +13079,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. It also specifies the\n            maximum time to wait for a spot instance. When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>",
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run.\n            It also specifies how long a managed Spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13158,6 +13193,12 @@
                     "target": "com.amazonaws.sagemaker#ProfilingStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Profiling status of a training job.</p>"
+                    }
+                },
+                "RetryStrategy": {
+                    "target": "com.amazonaws.sagemaker#RetryStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n            <code>InternalServerError</code>.</p>"
                     }
                 },
                 "Environment": {
@@ -13571,7 +13612,7 @@
                 "UserProfileName": {
                     "target": "com.amazonaws.sagemaker#UserProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user profile name.</p>",
+                        "smithy.api#documentation": "<p>The user profile name. This value is not case sensitive.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -14769,7 +14810,7 @@
                 "S3DataDistributionType": {
                     "target": "com.amazonaws.sagemaker#ProcessingS3DataDistributionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key.\n         Defauts to <code>FullyReplicated</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Whether input data distributed in Amazon S3 is fully replicated or sharded by an S3 key.\n         Defaults to <code>FullyReplicated</code>\n         </p>"
                     }
                 },
                 "FeaturesAttribute": {
@@ -16760,7 +16801,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model hyperparameter training job can run. It also\n            specifies how long you are willing to wait for a managed spot training job to complete.\n            When the job reaches the a limit, Amazon SageMaker ends the training job. Use this API to cap model\n            training costs.</p>",
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model hyperparameter training job can run. It also\n            specifies how long a managed spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends the training job. Use this API to cap model\n            training costs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16784,6 +16825,12 @@
                 },
                 "CheckpointConfig": {
                     "target": "com.amazonaws.sagemaker#CheckpointConfig"
+                },
+                "RetryStrategy": {
+                    "target": "com.amazonaws.sagemaker#RetryStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n            <code>InternalServerError</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17320,7 +17367,7 @@
                 "RepositoryAuthConfig": {
                     "target": "com.amazonaws.sagemaker#RepositoryAuthConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) Specifies an authentication configuration for the private docker registry\n            where your model image is hosted. Specify a value for this property only if you specified <code>Vpc</code> as the value for the\n            <code>RepositoryAccessMode</code> field, and the private Docker registry where the model\n        image is hosted requires authentication.</p>"
+                        "smithy.api#documentation": "<p>(Optional) Specifies an authentication configuration for the private docker registry\n            where your model image is hosted. Specify a value for this property only if you\n            specified <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field,\n            and the private Docker registry where the model image is hosted requires\n            authentication.</p>"
                     }
                 }
             },
@@ -17642,7 +17689,7 @@
                 "Mode": {
                     "target": "com.amazonaws.sagemaker#InferenceExecutionMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>How containers in a multi-container are run. The following values are valid.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SERIAL</code> - Containers run as a serial pipeline.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DIRECT</code> - Only the individual container that you specify is run.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>How containers in a multi-container are run. The following values are valid.</p>\n        <ul>\n            <li>\n                <p>\n                  <code>SERIAL</code> - Containers run as a serial pipeline.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DIRECT</code> - Only the individual container that you specify is\n                    run.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -18400,7 +18447,7 @@
                 "WorkRequesterAccountId": {
                     "target": "com.amazonaws.sagemaker#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>The AWS account ID of the account used to start the labeling job.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18505,7 +18552,7 @@
                 "SnsTopicArn": {
                     "target": "com.amazonaws.sagemaker#SnsTopicArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Simple Notification Service (Amazon SNS) output topic ARN.</p>\n         <p>If you provide an <code>SnsTopicArn</code> in <code>OutputConfig</code>, when workers\n            complete labeling tasks, Ground Truth will send labeling task output data to the SNS output\n            topic you specify here. </p>\n        <p>To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data\">Receive Output Data from a Streaming Labeling\n                Job</a>. </p>"
+                        "smithy.api#documentation": "<p>An Amazon Simple Notification Service (Amazon SNS) output topic ARN. Provide a <code>SnsTopicArn</code> if you want to\n            do real time chaining to another streaming job and receive an Amazon SNS notifications each\n            time a data object is submitted by a worker.</p>\n         <p>If you provide an <code>SnsTopicArn</code> in <code>OutputConfig</code>, when workers\n            complete labeling tasks, Ground Truth will send labeling task output data to the SNS output\n            topic you specify here. </p>\n        <p>To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/sms-streaming-labeling-job.html#sms-streaming-how-it-works-output-data\">Receive Output Data from a Streaming Labeling\n                Job</a>. </p>"
                     }
                 }
             },
@@ -19333,13 +19380,13 @@
                 "SortOrder": {
                     "target": "com.amazonaws.sagemaker#AutoMLSortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sort order for the results. The default is Descending.</p>"
+                        "smithy.api#documentation": "<p>The sort order for the results. The default is <code>Descending</code>.</p>"
                     }
                 },
                 "SortBy": {
                     "target": "com.amazonaws.sagemaker#AutoMLSortBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter by which to sort the results. The default is AutoMLJobName.</p>"
+                        "smithy.api#documentation": "<p>The parameter by which to sort the results. The default is <code>Name</code>.</p>"
                     }
                 },
                 "MaxResults": {
@@ -19452,7 +19499,7 @@
                 "Candidates": {
                     "target": "com.amazonaws.sagemaker#AutoMLCandidates",
                     "traits": {
-                        "smithy.api#documentation": "<p>Summaries about the Candidates.</p>",
+                        "smithy.api#documentation": "<p>Summaries about the <code>AutoMLCandidates</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -20351,7 +20398,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sagemaker#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of endpoints to return in the response.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of endpoints to return in the response. This value defaults to 10.</p>"
                     }
                 },
                 "NameContains": {
@@ -22831,7 +22878,7 @@
                 "target": "com.amazonaws.sagemaker#ListTrainingJobsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists training jobs.</p>\n        <note>\n            <p>When <code>StatusEquals</code> and <code>MaxResults</code> are set at the same\n                time, the <code>MaxResults</code> number of training jobs are first retrieved\n                ignoring the <code>StatusEquals</code> parameter and then they are filtered by the\n                    <code>StatusEquals</code> parameter, which is returned as a response. For\n                example, if <code>ListTrainingJobs</code> is invoked with the following\n                parameters:</p>\n            <p>\n               <code>{ ... MaxResults: 100, StatusEquals: InProgress ... }</code>\n            </p>\n            <p>Then, 100 trainings jobs with any status including those other than\n                    <code>InProgress</code> are selected first (sorted according the creation time,\n                from the latest to the oldest) and those with status <code>InProgress</code> are\n                returned.</p>\n            <p>You can quickly test the API using the following AWS CLI code.</p>\n            <p>\n               <code>aws sagemaker list-training-jobs --max-results 100 --status-equals\n                    InProgress</code>\n            </p>\n        </note>",
+                "smithy.api#documentation": "<p>Lists training jobs.</p>\n        <note>\n            <p>When <code>StatusEquals</code> and <code>MaxResults</code> are set at the same\n                time, the <code>MaxResults</code> number of training jobs are first retrieved\n                ignoring the <code>StatusEquals</code> parameter and then they are filtered by the\n                <code>StatusEquals</code> parameter, which is returned as a response.</p>\n            <p>For example, if <code>ListTrainingJobs</code> is invoked with the following parameters:</p>\n            <p>\n               <code>{ ... MaxResults: 100, StatusEquals: InProgress ... }</code>\n            </p>\n            <p>First, 100 trainings jobs with any status, including those other than\n                <code>InProgress</code>, are selected (sorted according to the creation time,\n                from the most current to the oldest). Next, those with a status of\n                <code>InProgress</code> are returned.</p>\n            <p>You can quickly test the API using the following AWS CLI code.</p>\n            <p>\n               <code>aws sagemaker list-training-jobs --max-results 100 --status-equals\n                    InProgress</code>\n            </p>\n        </note>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -23679,6 +23726,15 @@
                 }
             }
         },
+        "com.amazonaws.sagemaker#MaximumRetryAttempts": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 30
+                }
+            }
+        },
         "com.amazonaws.sagemaker#MediaType": {
             "type": "string",
             "traits": {
@@ -23915,7 +23971,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the location that is configured for storing model\n            artifacts. </p>\n        <p>Model artifacts are the output that results from training a model, and typically\n            consist of trained parameters, a model defintion that desribes how to compute\n            inferences, and other metadata.</p>"
+                "smithy.api#documentation": "<p>Provides information about the location that is configured for storing model\n            artifacts. </p>\n        <p>Model artifacts are the output that results from training a model, and typically\n            consist of trained parameters, a model defintion that describes how to compute\n            inferences, and other metadata.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelBiasAppSpecification": {
@@ -24037,6 +24093,40 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Data quality constraints and statistics for a model.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelDeployConfig": {
+            "type": "structure",
+            "members": {
+                "AutoGenerateEndpointName": {
+                    "target": "com.amazonaws.sagemaker#AutoGenerateEndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>True</code> to automatically generate an endpoint name for a one-click\n         Autopilot model deployment; set to <code>False</code> otherwise. The default value is\n            <code>True</code>.</p>\n         <note>\n            <p>If you set <code>AutoGenerateEndpointName</code> to <code>True</code>, do not specify\n            the <code>EndpointName</code>; otherwise a 400 error is thrown.</p>\n         </note>"
+                    }
+                },
+                "EndpointName": {
+                    "target": "com.amazonaws.sagemaker#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the endpoint name to use for a one-click Autopilot model deployment if the\n         endpoint name is not generated automatically.</p>\n         <note>\n            <p>Specify the <code>EndpointName</code> if and only if you set\n               <code>AutoGenerateEndpointName</code> to <code>False</code>; otherwise a 400 error\n            is thrown.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies how to generate the endpoint name for an automatic one-click Autopilot model\n         deployment.</p>"
+            }
+        },
+        "com.amazonaws.sagemaker#ModelDeployResult": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sagemaker#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint to which the model has been deployed.</p>\n         <note>\n            <p>If model deployment fails, this field is omitted from the response.</p>\n         </note>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the endpoint of the model deployment.</p>"
             }
         },
         "com.amazonaws.sagemaker#ModelDigests": {
@@ -25711,7 +25801,7 @@
                 "MaxRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MonitoringMaxRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum runtime allowed in seconds.</p>",
+                        "smithy.api#documentation": "<p>The maximum runtime allowed in seconds.</p>\n         <note>\n            <p>The <code>MaxRuntimeInSeconds</code> cannot exceed the frequency of the job. For data quality and\n            model explainability, this can be up to 3600 seconds for an hourly schedule. For model\n            bias and model quality hourly schedules, this can be up to 1800 seconds.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -26685,7 +26775,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/mazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer\n                Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or\n                <code>CreateHyperParameterTuningJob</code> requests. For more information, see\n                <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer\n                Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer\n                Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateTrainingJob</code>, <code>CreateTransformJob</code>, or\n                <code>CreateHyperParameterTuningJob</code> requests. For more information, see\n                <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using\n                Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer\n                Guide</i>.</p>"
                     }
                 },
                 "S3OutputPath": {
@@ -28366,7 +28456,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.sagemaker#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the core dump data at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n            <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer\n                    Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n            <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more information, see\n            <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS KMS</a> in the <i>AWS Key Management Service Developer\n                    Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the core dump data at rest using\n            Amazon S3 server-side encryption. The <code>KmsKeyId</code> can be any of the following\n            formats: </p>\n        <ul>\n            <li>\n                <p>// KMS Key ID</p>\n                <p>\n                    <code>\"1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// KMS Key Alias</p>\n                <p>\n                    <code>\"alias/ExampleAlias\"</code>\n                </p>\n            </li>\n            <li>\n                <p>// Amazon Resource Name (ARN) of a KMS Key Alias</p>\n                <p>\n                    <code>\"arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias\"</code>\n                </p>\n            </li>\n         </ul>\n        \n        <p>If you use a KMS key ID or an alias of your master key, the Amazon SageMaker execution role must\n            include permissions to call <code>kms:Encrypt</code>. If you don't provide a KMS key ID,\n            Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. Amazon SageMaker uses server-side\n            encryption with KMS-managed keys for <code>OutputDataConfig</code>. If you use a bucket\n            policy with an <code>s3:PutObject</code> permission that only allows objects with\n            server-side encryption, set the condition key of\n                <code>s3:x-amz-server-side-encryption</code> to <code>\"aws:kms\"</code>. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">KMS-Managed Encryption\n                Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i>\n         </p>\n        <p>The KMS key policy must grant permission to the IAM role that you specify in your\n                <code>CreateEndpoint</code> and <code>UpdateEndpoint</code> requests. For more\n            information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\">Using Key Policies in AWS\n                KMS</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
                     }
                 }
             },
@@ -29580,13 +29670,13 @@
                 "RepositoryCredentialsProviderArn": {
                     "target": "com.amazonaws.sagemaker#RepositoryCredentialsProviderArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to\n            authenticate to the private Docker registry where your model image is hosted. For\n            information about how to create an AWS Lambda function, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html\">Create a Lambda function with the console</a> in the\n            <i>AWS Lambda Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an AWS Lambda function that provides credentials to\n            authenticate to the private Docker registry where your model image is hosted. For\n            information about how to create an AWS Lambda function, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html\">Create a Lambda function\n                with the console</a> in the <i>AWS Lambda Developer\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies an authentication configuration for the private docker registry\n            where your model image is hosted. Specify a value for this property only if you specified <code>Vpc</code> as the value for the\n            <code>RepositoryAccessMode</code> field of the <code>ImageConfig</code> object that you\n            passed to a call to <a>CreateModel</a> and the private Docker registry where the model\n            image is hosted requires authentication.</p>"
+                "smithy.api#documentation": "<p>Specifies an authentication configuration for the private docker registry where your\n            model image is hosted. Specify a value for this property only if you specified\n                <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the\n                <code>ImageConfig</code> object that you passed to a call to <a>CreateModel</a> and the private Docker registry where the model image is\n            hosted requires authentication.</p>"
             }
         },
         "com.amazonaws.sagemaker#RepositoryCredentialsProviderArn": {
@@ -29857,6 +29947,21 @@
                         "name": "Delete"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.sagemaker#RetryStrategy": {
+            "type": "structure",
+            "members": {
+                "MaximumRetryAttempts": {
+                    "target": "com.amazonaws.sagemaker#MaximumRetryAttempts",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times to retry the job. When the job is retried, it's\n            <code>SecondaryStatus</code> is changed to <code>STARTING</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The retry strategy to use when a training job fails due to an\n            <code>InternalServerError</code>. <code>RetryStrategy</code> is specified as\n            part of the <code>CreateTrainingJob</code> and <code>CreateHyperParameterTuningJob</code>\n            requests. You can add the <code>StoppingCondition</code> parameter to the request to\n            limit the training time for the complete job.</p>"
             }
         },
         "com.amazonaws.sagemaker#RoleArn": {
@@ -31095,6 +31200,10 @@
                     {
                         "value": "Updating",
                         "name": "UPDATING"
+                    },
+                    {
+                        "value": "Restarting",
+                        "name": "RESTARTING"
                     }
                 ]
             }
@@ -32066,18 +32175,18 @@
                 "MaxRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that the training or compilation job can run.\n            If job does not complete during this time, Amazon SageMaker ends the job. If value is not specified,\n            default value is 1 day. The maximum value is 28 days.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run.\n            If the job does not complete during this time, Amazon SageMaker ends the job.</p>\n        <p>When <code>RetryStrategy</code> is specified in the job request, <code>MaxRuntimeInSeconds</code>\n            specifies the maximum time for all of the attempts in total, not each individual attempt.</p>\n        <p>The default value is 1 day. The maximum value is 28 days.</p>"
                     }
                 },
                 "MaxWaitTimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxWaitTimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, how long you are willing to wait for a managed\n            spot training job to complete. It is the amount of time spent waiting for Spot capacity\n            plus the amount of time the training job runs. It must be equal to or greater than\n                <code>MaxRuntimeInSeconds</code>. </p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a managed Spot training job has to complete.\n            It is the amount of time spent waiting for Spot capacity plus the amount of time the job\n            can run. It must be equal to or greater than <code>MaxRuntimeInSeconds</code>.  If the job\n            does not complete during this time, Amazon SageMaker ends the job.</p>\n        <p>When <code>RetryStrategy</code> is specified in the job request, <code>MaxWaitTimeInSeconds</code>\n            specifies the maximum time for all of the attempts in total, not each individual attempt.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a limit to how long a model training or compilation job can run. It also\n            specifies how long you are willing to wait for a managed spot training job to complete.\n            When the job reaches the time limit, Amazon SageMaker ends the training or compilation job. Use this\n            API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>\n        <p>The training algorithms provided by Amazon SageMaker automatically save the intermediate results\n            of a model training job when possible. This attempt to save artifacts is only a best\n            effort case as model might not be in a state from which it can be saved. For example, if\n            training has just started, the model might not be ready to save. When saved, this\n            intermediate data is a valid model artifact. You can use it to create a model with\n                <code>CreateModel</code>.</p>\n        <note>\n            <p>The Neural Topic Model (NTM) currently does not support saving intermediate model\n                artifacts. When training NTMs, make sure that the maximum runtime is sufficient for\n                the training job to complete.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Specifies a limit to how long a model training job, model compilation job, or\n            hyperparameter tuning job can run. It also specifies how long a managed Spot training\n            job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends the training or compilation job. Use this\n            API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>\n        <p>The training algorithms provided by Amazon SageMaker automatically save the intermediate results\n            of a model training job when possible. This attempt to save artifacts is only a best\n            effort case as model might not be in a state from which it can be saved. For example, if\n            training has just started, the model might not be ready to save. When saved, this\n            intermediate data is a valid model artifact. You can use it to create a model with\n                <code>CreateModel</code>.</p>\n        <note>\n            <p>The Neural Topic Model (NTM) currently does not support saving intermediate model\n                artifacts. When training NTMs, make sure that the maximum runtime is sufficient for\n                the training job to complete.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#String": {
@@ -33081,7 +33190,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. When the job reaches the\n            time limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>"
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run.\n            It also specifies how long a managed Spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>"
                     }
                 },
                 "CreationTime": {
@@ -33180,6 +33289,12 @@
                         "smithy.api#documentation": "<p>The environment variables to set in the Docker container.</p>"
                     }
                 },
+                "RetryStrategy": {
+                    "target": "com.amazonaws.sagemaker#RetryStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of times to retry the job when the job fails due to an\n            <code>InternalServerError</code>.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.sagemaker#TagList",
                     "traits": {
@@ -33241,7 +33356,7 @@
                 "StoppingCondition": {
                     "target": "com.amazonaws.sagemaker#StoppingCondition",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run. When the job reaches the\n            time limit, Amazon SageMaker ends the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job\n            termination for 120 seconds. Algorithms can use this 120-second window to save the model\n            artifacts.</p>",
+                        "smithy.api#documentation": "<p>Specifies a limit to how long a model training job can run.\n            It also specifies how long a managed Spot training job has to complete.\n            When the job reaches the time limit, Amazon SageMaker ends\n            the training job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the SIGTERM signal, which delays job\n            termination for 120 seconds. Algorithms can use this 120-second window to save the model\n            artifacts.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -33582,7 +33697,7 @@
                 "SplitType": {
                     "target": "com.amazonaws.sagemaker#SplitType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The method to use to split the transform job's data files into smaller batches.\n            Splitting is necessary when the total size of each object is too large to fit in a\n            single request. You can also use data splitting to improve performance by processing\n            multiple concurrent mini-batches. The default value for <code>SplitType</code> is\n                <code>None</code>, which indicates that input data files are not split, and request\n            payloads contain the entire contents of an input object. Set the value of this parameter\n            to <code>Line</code> to split records on a newline character boundary.\n                <code>SplitType</code> also supports a number of record-oriented binary data\n            formats. Currently, the supported record formats are:</p>\n        <ul>\n            <li>\n                <p>RecordIO</p>\n            </li>\n            <li>\n                <p>TFRecord</p>\n            </li>\n         </ul>\n        <p>When splitting is enabled, the size of a mini-batch depends on the values of the\n                <code>BatchStrategy</code> and <code>MaxPayloadInMB</code> parameters. When the\n            value of <code>BatchStrategy</code> is <code>MultiRecord</code>, Amazon SageMaker sends the maximum\n            number of records in each request, up to the <code>MaxPayloadInMB</code> limit. If the\n            value of <code>BatchStrategy</code> is <code>SingleRecord</code>, Amazon SageMaker sends individual\n            records in each request.</p>\n        <note>\n            <p>Some data formats represent a record as a binary payload wrapped with extra\n                padding bytes. When splitting is applied to a binary data format, padding is removed\n                if the value of <code>BatchStrategy</code> is set to <code>SingleRecord</code>.\n                Padding is not removed if the value of <code>BatchStrategy</code> is set to\n                    <code>MultiRecord</code>.</p>\n            <p>For more information about <code>RecordIO</code>, see <a href=\"https://mxnet.apache.org/api/faq/recordio\">Create a Dataset Using\n                    RecordIO</a> in the MXNet documentation. For more information about\n                    <code>TFRecord</code>, see <a href=\"https://www.tensorflow.org/guide/datasets#consuming_tfrecord_data\">Consuming TFRecord data</a> in the TensorFlow documentation.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The method to use to split the transform job's data files into smaller batches.\n            Splitting is necessary when the total size of each object is too large to fit in a\n            single request. You can also use data splitting to improve performance by processing\n            multiple concurrent mini-batches. The default value for <code>SplitType</code> is\n                <code>None</code>, which indicates that input data files are not split, and request\n            payloads contain the entire contents of an input object. Set the value of this parameter\n            to <code>Line</code> to split records on a newline character boundary.\n                <code>SplitType</code> also supports a number of record-oriented binary data\n            formats. Currently, the supported record formats are:</p>\n        <ul>\n            <li>\n                <p>RecordIO</p>\n            </li>\n            <li>\n                <p>TFRecord</p>\n            </li>\n         </ul>\n        <p>When splitting is enabled, the size of a mini-batch depends on the values of the\n                <code>BatchStrategy</code> and <code>MaxPayloadInMB</code> parameters. When the\n            value of <code>BatchStrategy</code> is <code>MultiRecord</code>, Amazon SageMaker sends the maximum\n            number of records in each request, up to the <code>MaxPayloadInMB</code> limit. If the\n            value of <code>BatchStrategy</code> is <code>SingleRecord</code>, Amazon SageMaker sends individual\n            records in each request.</p>\n        <note>\n            <p>Some data formats represent a record as a binary payload wrapped with extra\n                padding bytes. When splitting is applied to a binary data format, padding is removed\n                if the value of <code>BatchStrategy</code> is set to <code>SingleRecord</code>.\n                Padding is not removed if the value of <code>BatchStrategy</code> is set to\n                    <code>MultiRecord</code>.</p>\n            <p>For more information about <code>RecordIO</code>, see <a href=\"https://mxnet.apache.org/api/faq/recordio\">Create a Dataset Using\n                    RecordIO</a> in the MXNet documentation. For more information about\n                    <code>TFRecord</code>, see <a href=\"https://www.tensorflow.org/guide/data#consuming_tfrecord_data\">Consuming TFRecord data</a> in the TensorFlow documentation.</p>\n        </note>"
                     }
                 }
             },
@@ -34812,7 +34927,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents an amount of money in United States dollars/</p>"
+                "smithy.api#documentation": "<p>Represents an amount of money in United States dollars.</p>"
             }
         },
         "com.amazonaws.sagemaker#UiConfig": {

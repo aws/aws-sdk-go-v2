@@ -145,20 +145,20 @@ type CodeReviewSummary struct {
 // The type of a code review. There are two code review types:
 //
 // * PullRequest - A
-// code review that is automatically triggered by a pull request on an assocaited
+// code review that is automatically triggered by a pull request on an associated
 // repository. Because this type of code review is automatically generated, you
 // cannot specify this code review type using CreateCodeReview
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
 //
 // *
 // RepositoryAnalysis - A code review that analyzes all code under a specified
-// branch in an associated respository. The assocated repository is specified using
+// branch in an associated repository. The associated repository is specified using
 // its ARN in CreateCodeReview
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
 type CodeReviewType struct {
 
 	// A code review that analyzes all code under a specified branch in an associated
-	// respository. The assocated repository is specified using its ARN in
+	// repository. The associated repository is specified using its ARN in
 	// CreateCodeReview
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
 	//
@@ -176,6 +176,25 @@ type CommitDiffSourceCodeType struct {
 
 	// The SHA of the source commit used to generate a commit diff.
 	SourceCommit *string
+}
+
+// An object that contains:
+//
+// * The encryption option for a repository association.
+// It is either owned by AWS Key Management Service (KMS) (AWS_OWNED_CMK) or
+// customer managed (CUSTOMER_MANAGED_CMK).
+//
+// * The ID of the AWS KMS key that is
+// associated with a respository association.
+type KMSKeyDetails struct {
+
+	// The encryption option for a repository association. It is either owned by AWS
+	// Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed
+	// (CUSTOMER_MANAGED_CMK).
+	EncryptionOption EncryptionOption
+
+	// The ID of the AWS KMS key that is associated with a respository association.
+	KMSKeyId *string
 }
 
 // Information about the statistics from the code review.
@@ -307,7 +326,7 @@ type Repository struct {
 }
 
 // A code review type that analyzes all code under a specified branch in an
-// associated respository. The assocated repository is specified using its ARN when
+// associated repository. The associated repository is specified using its ARN when
 // you call CreateCodeReview
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview).
 type RepositoryAnalysis struct {
@@ -342,6 +361,16 @@ type RepositoryAssociation struct {
 	// The time, in milliseconds since the epoch, when the repository association was
 	// created.
 	CreatedTimeStamp *time.Time
+
+	// A KMSKeyDetails object that contains:
+	//
+	// * The encryption option for this
+	// repository association. It is either owned by AWS Key Management Service (KMS)
+	// (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
+	//
+	// * The ID of the AWS
+	// KMS key that is associated with this respository association.
+	KMSKeyDetails *KMSKeyDetails
 
 	// The time, in milliseconds since the epoch, when the repository association was
 	// last updated.

@@ -87,8 +87,9 @@ type IssueCertificateInput struct {
 	// these templates, see Understanding Certificate Templates
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html). If
 	// conflicting or duplicate certificate information is supplied during certificate
-	// issuance, ACM Private CA applies order of operation rules to determine what
-	// information is used.
+	// issuance, ACM Private CA applies order of operation rules
+	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations)
+	// to determine what information is used.
 	ApiPassthrough *types.ApiPassthrough
 
 	// Alphanumeric string that can be used to distinguish between calls to the

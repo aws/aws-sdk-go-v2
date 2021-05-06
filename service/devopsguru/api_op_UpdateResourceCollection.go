@@ -14,7 +14,8 @@ import (
 // Updates the collection of resources that DevOps Guru analyzes. The one type of
 // AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can
 // be configured to analyze only the AWS resources that are defined in the stacks.
-// This method also creates the IAM role required for you to use DevOps Guru.
+// You can specify up to 500 AWS CloudFormation stacks. This method also creates
+// the IAM role required for you to use DevOps Guru.
 func (c *Client) UpdateResourceCollection(ctx context.Context, params *UpdateResourceCollectionInput, optFns ...func(*Options)) (*UpdateResourceCollectionOutput, error) {
 	if params == nil {
 		params = &UpdateResourceCollectionInput{}

@@ -405,6 +405,8 @@ const (
 	AutoMLJobSecondaryStatusGeneratingExplainabilityReport AutoMLJobSecondaryStatus = "GeneratingExplainabilityReport"
 	AutoMLJobSecondaryStatusCompleted                      AutoMLJobSecondaryStatus = "Completed"
 	AutoMLJobSecondaryStatusExplainabilityError            AutoMLJobSecondaryStatus = "ExplainabilityError"
+	AutoMLJobSecondaryStatusDeployingModel                 AutoMLJobSecondaryStatus = "DeployingModel"
+	AutoMLJobSecondaryStatusModelDeploymentError           AutoMLJobSecondaryStatus = "ModelDeploymentError"
 )
 
 // Values returns all known values for AutoMLJobSecondaryStatus. Note that this can
@@ -425,6 +427,8 @@ func (AutoMLJobSecondaryStatus) Values() []AutoMLJobSecondaryStatus {
 		"GeneratingExplainabilityReport",
 		"Completed",
 		"ExplainabilityError",
+		"DeployingModel",
+		"ModelDeploymentError",
 	}
 }
 
@@ -3143,6 +3147,7 @@ const (
 	SecondaryStatusInterrupted              SecondaryStatus = "Interrupted"
 	SecondaryStatusMaxWaitTimeExceeded      SecondaryStatus = "MaxWaitTimeExceeded"
 	SecondaryStatusUpdating                 SecondaryStatus = "Updating"
+	SecondaryStatusRestarting               SecondaryStatus = "Restarting"
 )
 
 // Values returns all known values for SecondaryStatus. Note that this can be
@@ -3165,6 +3170,7 @@ func (SecondaryStatus) Values() []SecondaryStatus {
 		"Interrupted",
 		"MaxWaitTimeExceeded",
 		"Updating",
+		"Restarting",
 	}
 }
 

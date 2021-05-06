@@ -36,7 +36,8 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+	// The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or
+	// FLINK-1_11).
 	//
 	// This member is required.
 	RuntimeEnvironment types.RuntimeEnvironment

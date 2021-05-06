@@ -290,6 +290,26 @@ func (m *validateOpDeletePredictor) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourceTree struct {
+}
+
+func (*validateOpDeleteResourceTree) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourceTree) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourceTreeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourceTreeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDatasetGroup struct {
 }
 
@@ -704,6 +724,10 @@ func addOpDeletePredictorBacktestExportJobValidationMiddleware(stack *middleware
 
 func addOpDeletePredictorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePredictor{}, middleware.After)
+}
+
+func addOpDeleteResourceTreeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourceTree{}, middleware.After)
 }
 
 func addOpDescribeDatasetGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1538,6 +1562,21 @@ func validateOpDeletePredictorInput(v *DeletePredictorInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePredictorInput"}
 	if v.PredictorArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PredictorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteResourceTreeInput(v *DeleteResourceTreeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourceTreeInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

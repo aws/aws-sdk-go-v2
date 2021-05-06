@@ -57,7 +57,7 @@ type DescribeForecastOutput struct {
 	// The ARN of the dataset group that provided the data used to train the predictor.
 	DatasetGroupArn *string
 
-	// The estimated time in minutes for the forecast job to complete.
+	// The estimated time remaining in minutes for the forecast job to complete.
 	EstimatedTimeRemainingInMinutes *int64
 
 	// The forecast ARN as specified in the request.

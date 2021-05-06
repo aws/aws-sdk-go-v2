@@ -447,6 +447,99 @@ func awsRestjson1_serializeOpDocumentBatchCreateAttendeeInput(v *BatchCreateAtte
 	return nil
 }
 
+type awsRestjson1_serializeOpBatchCreateChannelMembership struct {
+}
+
+func (*awsRestjson1_serializeOpBatchCreateChannelMembership) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchCreateChannelMembership) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchCreateChannelMembershipInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/channels/{ChannelArn}/memberships?operation=batch-create")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchCreateChannelMembershipInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchCreateChannelMembershipInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchCreateChannelMembershipInput(v *BatchCreateChannelMembershipInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ChannelArn == nil || len(*v.ChannelArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ChannelArn must not be empty")}
+	}
+	if v.ChannelArn != nil {
+		if err := encoder.SetURI("ChannelArn").String(*v.ChannelArn); err != nil {
+			return err
+		}
+	}
+
+	if v.ChimeBearer != nil && len(*v.ChimeBearer) > 0 {
+		locationName := "X-Amz-Chime-Bearer"
+		encoder.SetHeader(locationName).String(*v.ChimeBearer)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchCreateChannelMembershipInput(v *BatchCreateChannelMembershipInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MemberArns != nil {
+		ok := object.Key("MemberArns")
+		if err := awsRestjson1_serializeDocumentMemberArns(v.MemberArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpBatchCreateRoomMembership struct {
 }
 
@@ -9047,6 +9140,59 @@ func awsRestjson1_serializeOpHttpBindingsListSipRulesInput(v *ListSipRulesInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpListSupportedPhoneNumberCountries struct {
+}
+
+func (*awsRestjson1_serializeOpListSupportedPhoneNumberCountries) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListSupportedPhoneNumberCountries) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListSupportedPhoneNumberCountriesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/phone-number-countries")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListSupportedPhoneNumberCountriesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListSupportedPhoneNumberCountriesInput(v *ListSupportedPhoneNumberCountriesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if len(v.ProductType) > 0 {
+		encoder.SetQuery("product-type").String(string(v.ProductType))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpListTagsForResource struct {
 }
 
@@ -10916,6 +11062,10 @@ func awsRestjson1_serializeOpHttpBindingsSearchAvailablePhoneNumbersInput(v *Sea
 
 	if v.NextToken != nil {
 		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	if len(v.PhoneNumberType) > 0 {
+		encoder.SetQuery("phone-number-type").String(string(v.PhoneNumberType))
 	}
 
 	if v.State != nil {
@@ -13658,6 +13808,17 @@ func awsRestjson1_serializeDocumentMeetingTagList(v []types.Tag, value smithyjso
 		if err := awsRestjson1_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMemberArns(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }

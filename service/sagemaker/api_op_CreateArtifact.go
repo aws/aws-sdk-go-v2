@@ -16,6 +16,10 @@ import (
 // the ECR registry path of an image. For more information, see Amazon SageMaker ML
 // Lineage Tracking
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html).
+// CreateArtifact can only be invoked from within an SageMaker managed environment.
+// This includes SageMaker training jobs, processing jobs, transform jobs, and
+// SageMaker notebooks. A call to CreateArtifact from outside one of these
+// environments results in an error.
 func (c *Client) CreateArtifact(ctx context.Context, params *CreateArtifactInput, optFns ...func(*Options)) (*CreateArtifactOutput, error) {
 	if params == nil {
 		params = &CreateArtifactInput{}

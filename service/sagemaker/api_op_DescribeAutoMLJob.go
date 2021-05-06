@@ -53,7 +53,7 @@ type DescribeAutoMLJobOutput struct {
 	// This member is required.
 	AutoMLJobSecondaryStatus types.AutoMLJobSecondaryStatus
 
-	// Returns the status of the AutoML job's AutoMLJobStatus.
+	// Returns the status of the AutoML job.
 	//
 	// This member is required.
 	AutoMLJobStatus types.AutoMLJobStatus
@@ -94,17 +94,25 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's objective.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
-	// Returns the job's BestCandidate.
+	// Returns the job's best AutoMLCandidate.
 	BestCandidate *types.AutoMLCandidate
 
 	// Returns the end time of the AutoML job.
 	EndTime *time.Time
 
-	// Returns the job's FailureReason.
+	// Returns the failure reason for an AutoML job, when applicable.
 	FailureReason *string
 
-	// Returns the job's output from GenerateCandidateDefinitionsOnly.
+	// Indicates whether the output for an AutoML job generates candidate definitions
+	// only.
 	GenerateCandidateDefinitionsOnly bool
+
+	// Indicates whether the model was deployed automatically to an endpoint and the
+	// name of that endpoint if deployed automatically.
+	ModelDeployConfig *types.ModelDeployConfig
+
+	// Provides information about endpoint for the model deployment.
+	ModelDeployResult *types.ModelDeployResult
 
 	// Returns a list of reasons for partial failures within an AutoML job.
 	PartialFailureReasons []types.AutoMLPartialFailureReason
@@ -113,8 +121,8 @@ type DescribeAutoMLJobOutput struct {
 	ProblemType types.ProblemType
 
 	// This contains ProblemType, AutoMLJobObjective and CompletionCriteria. If you do
-	// not provide these values, they are auto-inferred. If you do provide them, they
-	// are the values you provide.
+	// not provide these values, they are auto-inferred. If you do provide them, the
+	// values used are the ones you provide.
 	ResolvedAttributes *types.ResolvedAttributes
 
 	// Metadata pertaining to the operation's result.

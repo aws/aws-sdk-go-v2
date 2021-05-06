@@ -118,7 +118,7 @@ type DescribeTrainingJobOutput struct {
 	// * LaunchingMLInstances
 	//
 	// *
-	// PreparingTrainingStack
+	// PreparingTraining
 	//
 	// * DownloadingTrainingImage
 	//
@@ -126,8 +126,8 @@ type DescribeTrainingJobOutput struct {
 	SecondaryStatus types.SecondaryStatus
 
 	// Specifies a limit to how long a model training job can run. It also specifies
-	// the maximum time to wait for a spot instance. When the job reaches the time
-	// limit, Amazon SageMaker ends the training job. Use this API to cap model
+	// how long a managed Spot training job has to complete. When the job reaches the
+	// time limit, Amazon SageMaker ends the training job. Use this API to cap model
 	// training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
 	// signal, which delays job termination for 120 seconds. Algorithms can use this
 	// 120-second window to save the model artifacts, so the results of training are
@@ -269,6 +269,10 @@ type DescribeTrainingJobOutput struct {
 
 	// Profiling status of a training job.
 	ProfilingStatus types.ProfilingStatus
+
+	// The number of times to retry the job when the job fails due to an
+	// InternalServerError.
+	RetryStrategy *types.RetryStrategy
 
 	// The AWS Identity and Access Management (IAM) role configured for the training
 	// job.

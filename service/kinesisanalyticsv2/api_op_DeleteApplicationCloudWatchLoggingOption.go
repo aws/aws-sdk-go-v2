@@ -42,10 +42,14 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	// This member is required.
 	CloudWatchLoggingOptionId *string
 
-	// The version ID of the application. You can retrieve the application version ID
-	// using DescribeApplication.
-	//
-	// This member is required.
+	// A value you use to implement strong concurrency for application updates. You
+	// must provide the ApplicationVersionID or the ConditionalToken. You get the
+	// application's current ConditionalToken using DescribeApplication.
+	ConditionalToken *string
+
+	// The version ID of the application. You must provide the ApplicationVersionID or
+	// the ConditionalToken. You can retrieve the application version ID using
+	// DescribeApplication.
 	CurrentApplicationVersionId *int64
 }
 

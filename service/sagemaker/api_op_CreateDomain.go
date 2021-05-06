@@ -113,7 +113,8 @@ type CreateDomainInput struct {
 
 	// Tags to associated with the Domain. Each tag consists of a key and an optional
 	// value. Tag keys must be unique per resource. Tags are searchable using the
-	// Search API.
+	// Search API. Tags that you specify for the Domain are also added to all Apps that
+	// the Domain launches.
 	Tags []types.Tag
 }
 

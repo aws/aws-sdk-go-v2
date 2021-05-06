@@ -190,14 +190,8 @@ type AudioChannelTaggingSettings struct {
 	ChannelTag AudioChannelTag
 }
 
-// Audio codec settings (CodecSettings) under (AudioDescriptions) contains the
-// group of settings related to audio encoding. The settings in this group vary
-// depending on the value that you choose for Audio codec (Codec). For each codec
-// enum that you choose, define the corresponding settings object. The following
-// lists the codec enum, settings object pairs. * AAC, AacSettings * MP2,
-// Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3,
-// Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings * VORBIS,
-// VorbisSettings * OPUS, OpusSettings
+// Settings related to audio encoding. The settings in this group vary depending on
+// the value that you choose for your audio codec.
 type AudioCodecSettings struct {
 
 	// Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -217,7 +211,17 @@ type AudioCodecSettings struct {
 	// value AIFF.
 	AiffSettings *AiffSettings
 
-	// Type of Audio codec.
+	// Choose the audio codec for this output. Note that the option Dolby Digital
+	// passthrough (PASSTHROUGH) applies only to Dolby Digital and Dolby Digital Plus
+	// audio inputs. Make sure that you choose a codec that's supported with your
+	// output container:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio
+	// For audio-only outputs, make sure that both your input audio codec and your
+	// output audio codec are supported for audio-only workflows. For more information,
+	// see:
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only
+	// and
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output
 	Codec AudioCodec
 
 	// Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the
@@ -249,7 +253,11 @@ type AudioCodecSettings struct {
 	WavSettings *WavSettings
 }
 
-// Description of audio output
+// Settings related to one audio tab on the MediaConvert console. In your job JSON,
+// an instance of AudioDescription is equivalent to one audio tab in the console.
+// Usually, one audio tab corresponds to one output audio track. Depending on how
+// you set up your input audio selectors and whether you use audio selector groups,
+// one audio tab can correspond to a group of output audio tracks.
 type AudioDescription struct {
 
 	// When you mimic a multi-channel audio layout with multiple mono-channel tracks,
@@ -291,14 +299,8 @@ type AudioDescription struct {
 	// BROADCASTER_MIXED_AD.
 	AudioTypeControl AudioTypeControl
 
-	// Audio codec settings (CodecSettings) under (AudioDescriptions) contains the
-	// group of settings related to audio encoding. The settings in this group vary
-	// depending on the value that you choose for Audio codec (Codec). For each codec
-	// enum that you choose, define the corresponding settings object. The following
-	// lists the codec enum, settings object pairs. * AAC, AacSettings * MP2,
-	// Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3,
-	// Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings * VORBIS,
-	// VorbisSettings * OPUS, OpusSettings
+	// Settings related to audio encoding. The settings in this group vary depending on
+	// the value that you choose for your audio codec.
 	CodecSettings *AudioCodecSettings
 
 	// Specify the language for this audio output track. The service puts this language
@@ -376,7 +378,9 @@ type AudioNormalizationSettings struct {
 	TargetLkfs float64
 }
 
-// Selector for Audio
+// Use Audio selectors (AudioSelectors) to specify a track or set of tracks from
+// the input that you will use in your outputs. You can use multiple Audio
+// selectors per input.
 type AudioSelector struct {
 
 	// Selects a specific language code from within an audio source, using the ISO
@@ -428,7 +432,10 @@ type AudioSelector struct {
 	Tracks []int32
 }
 
-// Group of Audio Selectors
+// Use audio selector groups to combine multiple sidecar audio inputs so that you
+// can assign them to a single output audio tab (AudioDescription). Note that, if
+// you're working with embedded audio, it's simpler to assign multiple input tracks
+// into a single audio selector rather than use an audio selector group.
 type AudioSelectorGroup struct {
 
 	// Name of an Audio Selector within the same input to include in the group. Audio
@@ -560,7 +567,9 @@ type Av1Settings struct {
 	// 5000000. Required when Rate control mode is QVBR.
 	MaxBitrate int32
 
-	// Specify the number of B-frames. With AV1, MediaConvert supports only 7 or 15.
+	// Specify from the number of B-frames, in the range of 0-15. For AV1 encoding, we
+	// recommend using 7 or 15. Choose a larger number for a lower bitrate and smaller
+	// file size; choose a smaller number for better video quality.
 	NumberBFramesBetweenReferenceFrames int32
 
 	// Settings for quality-defined variable bitrate encoding with the AV1 codec.
@@ -596,7 +605,11 @@ type Av1Settings struct {
 	SpatialAdaptiveQuantization Av1SpatialAdaptiveQuantization
 }
 
-// Settings for Avail Blanking
+// Use ad avail blanking settings to specify your output content during SCTE-35
+// triggered ad avails. You can blank your video or overlay it with an image.
+// MediaConvert also removes any audio and embedded captions during the ad avail.
+// For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/ad-avail-blanking.html.
 type AvailBlanking struct {
 
 	// Blanking image to be used. Leave empty for solid black. Only bmp and png images
@@ -604,11 +617,11 @@ type AvailBlanking struct {
 	AvailBlankingImage *string
 }
 
-// Required when you set your output video codec to AVC-Intra. For more information
-// about the AVC-I settings, see the relevant specification. For detailed
-// information about SD and HD in AVC-I, see
+// Required when you choose AVC-Intra for your output video codec. For more
+// information about the AVC-Intra settings, see the relevant specification. For
+// detailed information about SD and HD in AVC-Intra, see
 // https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in
-// AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
+// AVC-Intra, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
 type AvcIntraSettings struct {
 
 	// Specify the AVC-Intra class of your output. The AVC-Intra class selection
@@ -724,7 +737,11 @@ type AvcIntraUhdSettings struct {
 	QualityTuningLevel AvcIntraUhdQualityTuningLevel
 }
 
-// Burn-In Destination Settings.
+// Settings related to burn-in captions. Set up burn-in captions in the same output
+// as your video. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html.
+// When you work directly in your JSON job specification, include this object and
+// any required children when you set destinationType to BURN_IN.
 type BurninDestinationSettings struct {
 
 	// If no explicit x_position or y_position is provided, setting alignment to
@@ -827,7 +844,8 @@ type BurninDestinationSettings struct {
 	YPosition int32
 }
 
-// Description of Caption output
+// This object holds groups of settings related to captions for one output. For
+// each output that has captions, include one instance of CaptionDescriptions.
 type CaptionDescription struct {
 
 	// Specifies which "Caption Selector":#inputs-caption_selector to use from each
@@ -847,9 +865,12 @@ type CaptionDescription struct {
 	// Streaming.
 	CustomLanguageCode *string
 
-	// Specific settings required by destination type. Note that
-	// burnin_destination_settings are not available if the source of the caption data
-	// is Embedded or Teletext.
+	// Settings related to one captions tab on the MediaConvert console. In your job
+	// JSON, an instance of captions DestinationSettings is equivalent to one captions
+	// tab in the console. Usually, one captions tab corresponds to one output captions
+	// track. Depending on your output captions format, one tab might correspond to a
+	// set of output captions tracks. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html.
 	DestinationSettings *CaptionDestinationSettings
 
 	// Specify the language of this captions output track. For most captions output
@@ -881,9 +902,12 @@ type CaptionDescriptionPreset struct {
 	// Streaming.
 	CustomLanguageCode *string
 
-	// Specific settings required by destination type. Note that
-	// burnin_destination_settings are not available if the source of the caption data
-	// is Embedded or Teletext.
+	// Settings related to one captions tab on the MediaConvert console. In your job
+	// JSON, an instance of captions DestinationSettings is equivalent to one captions
+	// tab in the console. Usually, one captions tab corresponds to one output captions
+	// track. Depending on your output captions format, one tab might correspond to a
+	// set of output captions tracks. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html.
 	DestinationSettings *CaptionDestinationSettings
 
 	// Specify the language of this captions output track. For most captions output
@@ -901,48 +925,87 @@ type CaptionDescriptionPreset struct {
 	LanguageDescription *string
 }
 
-// Specific settings required by destination type. Note that
-// burnin_destination_settings are not available if the source of the caption data
-// is Embedded or Teletext.
+// Settings related to one captions tab on the MediaConvert console. In your job
+// JSON, an instance of captions DestinationSettings is equivalent to one captions
+// tab in the console. Usually, one captions tab corresponds to one output captions
+// track. Depending on your output captions format, one tab might correspond to a
+// set of output captions tracks. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html.
 type CaptionDestinationSettings struct {
 
-	// Burn-In Destination Settings.
+	// Settings related to burn-in captions. Set up burn-in captions in the same output
+	// as your video. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html.
+	// When you work directly in your JSON job specification, include this object and
+	// any required children when you set destinationType to BURN_IN.
 	BurninDestinationSettings *BurninDestinationSettings
 
 	// Specify the format for this set of captions on this output. The default format
-	// is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in,
-	// DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20,
-	// choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that
-	// complies with the SCTE-43 spec. To create a non-compliant output where the
-	// embedded captions come first, choose Embedded plus SCTE-20
-	// (EMBEDDED_PLUS_SCTE20).
+	// is embedded without SCTE-20. Note that your choice of video output container
+	// constrains your choice of output captions format. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/captions-support-tables.html.
+	// If you are using SCTE-20 and you want to create an output that complies with the
+	// SCTE-43 spec, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED). To create a
+	// non-compliant output where the embedded captions come first, choose Embedded
+	// plus SCTE-20 (EMBEDDED_PLUS_SCTE20).
 	DestinationType CaptionDestinationType
 
-	// DVB-Sub Destination Settings
+	// Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same output
+	// as your video. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/dvb-sub-output-captions.html.
+	// When you work directly in your JSON job specification, include this object and
+	// any required children when you set destinationType to DVB_SUB.
 	DvbSubDestinationSettings *DvbSubDestinationSettings
 
-	// Settings specific to embedded/ancillary caption outputs, including 608/708
-	// Channel destination number.
+	// Settings related to CEA/EIA-608 and CEA/EIA-708 (also called embedded or
+	// ancillary) captions. Set up embedded captions in the same output as your video.
+	// For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/embedded-output-captions.html.
+	// When you work directly in your JSON job specification, include this object and
+	// any required children when you set destinationType to EMBEDDED,
+	// EMBEDDED_PLUS_SCTE20, or SCTE20_PLUS_EMBEDDED.
 	EmbeddedDestinationSettings *EmbeddedDestinationSettings
 
-	// Settings specific to IMSC caption outputs.
+	// Settings related to IMSC captions. IMSC is a sidecar format that holds captions
+	// in a file that is separate from the video container. Set up sidecar captions in
+	// the same output group, but different output from your video. For more
+	// information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
+	// When you work directly in your JSON job specification, include this object and
+	// any required children when you set destinationType to IMSC.
 	ImscDestinationSettings *ImscDestinationSettings
 
-	// Settings for SCC caption output.
+	// Settings related to SCC captions. SCC is a sidecar format that holds captions in
+	// a file that is separate from the video container. Set up sidecar captions in the
+	// same output group, but different output from your video. For more information,
+	// see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html.
+	// When you work directly in your JSON job specification, include this object and
+	// any required children when you set destinationType to SCC.
 	SccDestinationSettings *SccDestinationSettings
 
-	// Settings for Teletext caption output
+	// Settings related to teletext captions. Set up teletext captions in the same
+	// output as your video. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/teletext-output-captions.html.
+	// When you work directly in your JSON job specification, include this object and
+	// any required children when you set destinationType to TELETEXT.
 	TeletextDestinationSettings *TeletextDestinationSettings
 
-	// Settings specific to TTML caption outputs, including Pass style information
-	// (TtmlStylePassthrough).
+	// Settings related to TTML captions. TTML is a sidecar format that holds captions
+	// in a file that is separate from the video container. Set up sidecar captions in
+	// the same output group, but different output from your video. For more
+	// information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
+	// When you work directly in your JSON job specification, include this object and
+	// any required children when you set destinationType to TTML.
 	TtmlDestinationSettings *TtmlDestinationSettings
 
 	// WEBVTT Destination Settings
 	WebvttDestinationSettings *WebvttDestinationSettings
 }
 
-// Set up captions in your outputs by first selecting them from your input here.
+// Use captions selectors to specify the captions data from your input that you use
+// in your outputs. You can use up to 20 captions selectors per input.
 type CaptionSelector struct {
 
 	// The specific language to extract from source, using the ISO 639-2 or ISO 639-3
@@ -1091,9 +1154,11 @@ type CmafEncryptionSettings struct {
 	Type CmafKeyProviderType
 }
 
-// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
-// CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a
-// single video, audio, or caption output.
+// Settings related to your CMAF output package. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When
+// you work directly in your JSON job specification, include this object and any
+// required children when you set Type, under OutputGroupSettings, to
+// CMAF_GROUP_SETTINGS.
 type CmafGroupSettings struct {
 
 	// By default, the service creates one top-level .m3u8 HLS manifest and one top
@@ -1219,7 +1284,8 @@ type CmafGroupSettings struct {
 	WriteSegmentTimelineInRepresentation CmafWriteSegmentTimelineInRepresentation
 }
 
-// Settings for MP4 segments in CMAF
+// These settings relate to the fragmented MP4 container for the segments in your
+// CMAF outputs.
 type CmfcSettings struct {
 
 	// Specify this setting only when your output will be consumed by a downstream
@@ -1355,7 +1421,8 @@ type ColorCorrector struct {
 // Container specific settings.
 type ContainerSettings struct {
 
-	// Settings for MP4 segments in CMAF
+	// These settings relate to the fragmented MP4 container for the segments in your
+	// CMAF outputs.
 	CmfcSettings *CmfcSettings
 
 	// Container for this output. Some containers require a container settings object.
@@ -1377,20 +1444,23 @@ type ContainerSettings struct {
 	// asset.
 	M2tsSettings *M2tsSettings
 
-	// Settings for TS segments in HLS
+	// These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for
+	// the MPEG2-TS segments in your HLS outputs.
 	M3u8Settings *M3u8Settings
 
-	// Settings for MOV Container.
+	// These settings relate to your QuickTime MOV output container.
 	MovSettings *MovSettings
 
-	// Settings for MP4 container. You can create audio-only AAC outputs with this
-	// container.
+	// These settings relate to your MP4 output container. You can create audio only
+	// outputs with this container. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/supported-codecs-containers-audio-only.html#output-codecs-and-containers-supported-for-audio-only.
 	Mp4Settings *Mp4Settings
 
-	// Settings for MP4 segments in DASH
+	// These settings relate to the fragmented MP4 container for the segments in your
+	// DASH outputs.
 	MpdSettings *MpdSettings
 
-	// MXF settings
+	// These settings relate to your MXF output container.
 	MxfSettings *MxfSettings
 }
 
@@ -1428,7 +1498,10 @@ type DashIsoEncryptionSettings struct {
 	SpekeKeyProvider *SpekeKeyProvider
 }
 
-// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
+// Settings related to your DASH output package. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When
+// you work directly in your JSON job specification, include this object and any
+// required children when you set Type, under OutputGroupSettings, to
 // DASH_ISO_GROUP_SETTINGS.
 type DashIsoGroupSettings struct {
 
@@ -1572,7 +1645,9 @@ type DestinationSettings struct {
 	S3Settings *S3DestinationSettings
 }
 
-// Settings for Dolby Vision
+// With AWS Elemental MediaConvert, you can create profile 5 Dolby Vision outputs
+// from MXF and IMF sources that contain mastering information as frame-interleaved
+// Dolby Vision metadata.
 type DolbyVision struct {
 
 	// Use these settings when you set DolbyVisionLevel6Mode to SPECIFY to override the
@@ -1602,8 +1677,10 @@ type DolbyVisionLevel6Metadata struct {
 	MaxFall int32
 }
 
-// Inserts DVB Network Information Table (NIT) at the specified table repetition
-// interval.
+// Use these settings to insert a DVB Network Information Table (NIT) in the
+// transport stream of this output. When you work directly in your JSON job
+// specification, include this object only when your job has a transport stream
+// output and the container settings contain the object M2tsSettings.
 type DvbNitSettings struct {
 
 	// The numeric value placed in the Network Information Table (NIT).
@@ -1618,8 +1695,10 @@ type DvbNitSettings struct {
 	NitInterval int32
 }
 
-// Inserts DVB Service Description Table (NIT) at the specified table repetition
-// interval.
+// Use these settings to insert a DVB Service Description Table (SDT) in the
+// transport stream of this output. When you work directly in your JSON job
+// specification, include this object only when your job has a transport stream
+// output and the container settings contain the object M2tsSettings.
 type DvbSdtSettings struct {
 
 	// Selects method of inserting SDT information into output stream. "Follow input
@@ -1643,7 +1722,11 @@ type DvbSdtSettings struct {
 	ServiceProviderName *string
 }
 
-// DVB-Sub Destination Settings
+// Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same output
+// as your video. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/dvb-sub-output-captions.html.
+// When you work directly in your JSON job specification, include this object and
+// any required children when you set destinationType to DVB_SUB.
 type DvbSubDestinationSettings struct {
 
 	// If no explicit x_position or y_position is provided, setting alignment to
@@ -1760,8 +1843,10 @@ type DvbSubSourceSettings struct {
 	Pid int32
 }
 
-// Inserts DVB Time and Date Table (TDT) at the specified table repetition
-// interval.
+// Use these settings to insert a DVB Time and Date Table (TDT) in the transport
+// stream of this output. When you work directly in your JSON job specification,
+// include this object only when your job has a transport stream output and the
+// container settings contain the object M2tsSettings.
 type DvbTdtSettings struct {
 
 	// The number of milliseconds between instances of this table in the output
@@ -1968,8 +2053,13 @@ type Eac3Settings struct {
 	SurroundMode Eac3SurroundMode
 }
 
-// Settings specific to embedded/ancillary caption outputs, including 608/708
-// Channel destination number.
+// Settings related to CEA/EIA-608 and CEA/EIA-708 (also called embedded or
+// ancillary) captions. Set up embedded captions in the same output as your video.
+// For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/embedded-output-captions.html.
+// When you work directly in your JSON job specification, include this object and
+// any required children when you set destinationType to EMBEDDED,
+// EMBEDDED_PLUS_SCTE20, or SCTE20_PLUS_EMBEDDED.
 type EmbeddedDestinationSettings struct {
 
 	// Ignore this setting unless your input captions are SCC format and your output
@@ -2076,7 +2166,10 @@ type F4vSettings struct {
 	MoovPlacement F4vMoovPlacement
 }
 
-// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
+// Settings related to your File output group. MediaConvert uses this group of
+// settings to generate a single standalone file, rather than a streaming package.
+// When you work directly in your JSON job specification, include this object and
+// any required children when you set Type, under OutputGroupSettings, to
 // FILE_GROUP_SETTINGS.
 type FileGroupSettings struct {
 
@@ -2957,7 +3050,10 @@ type HlsEncryptionSettings struct {
 	Type HlsKeyProviderType
 }
 
-// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
+// Settings related to your HLS output package. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When
+// you work directly in your JSON job specification, include this object and any
+// required children when you set Type, under OutputGroupSettings, to
 // HLS_GROUP_SETTINGS.
 type HlsGroupSettings struct {
 
@@ -3177,8 +3273,10 @@ type Id3Insertion struct {
 	Timecode *string
 }
 
-// Enable the image inserter feature to include a graphic overlay on your video.
-// Enable or disable this feature for each input or output individually. This
+// Use the image inserter feature to include a graphic overlay on your video.
+// Enable or disable this feature for each input or output individually. For more
+// information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/graphic-overlay.html. This
 // setting is disabled by default.
 type ImageInserter struct {
 
@@ -3187,7 +3285,13 @@ type ImageInserter struct {
 	InsertableImages []InsertableImage
 }
 
-// Settings specific to IMSC caption outputs.
+// Settings related to IMSC captions. IMSC is a sidecar format that holds captions
+// in a file that is separate from the video container. Set up sidecar captions in
+// the same output group, but different output from your video. For more
+// information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
+// When you work directly in your JSON job specification, include this object and
+// any required children when you set destinationType to IMSC.
 type ImscDestinationSettings struct {
 
 	// Keep this setting enabled to have MediaConvert use the font style and position
@@ -3197,12 +3301,18 @@ type ImscDestinationSettings struct {
 	StylePassthrough ImscStylePassthrough
 }
 
-// Specifies media input
+// Use inputs to define the source files used in your transcoding job. For more
+// information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/specify-input-settings.html.
+// You can use multiple video inputs to do input stitching. For more information,
+// see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/assembling-multiple-inputs-and-input-clips.html
 type Input struct {
 
-	// Specifies set of audio selectors within an input to combine. An input may have
-	// multiple audio selector groups. See "Audio Selector
-	// Group":#inputs-audio_selector_group for more information.
+	// Use audio selector groups to combine multiple sidecar audio inputs so that you
+	// can assign them to a single output audio tab (AudioDescription). Note that, if
+	// you're working with embedded audio, it's simpler to assign multiple input tracks
+	// into a single audio selector rather than use an audio selector group.
 	AudioSelectorGroups map[string]AudioSelectorGroup
 
 	// Use Audio selectors (AudioSelectors) to specify a track or set of tracks from
@@ -3327,13 +3437,15 @@ type Input struct {
 	// https://docs.aws.amazon.com/console/mediaconvert/timecode.
 	TimecodeStart *string
 
-	// Selector for video.
+	// Input video selectors contain the video settings for the input. Each of your
+	// inputs can have up to one video selector.
 	VideoSelector *VideoSelector
 }
 
-// To transcode only portions of your input (clips), include one Input clipping
-// (one instance of InputClipping in the JSON job file) for each input clip. All
-// input clips you specify will be included in every output of the job.
+// To transcode only portions of your input, include one input clip for each part
+// of your input that you want in your output. All input clips that you specify
+// will be included in every output of the job. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/assembling-multiple-inputs-and-input-clips.html.
 type InputClipping struct {
 
 	// Set End timecode (EndTimecode) to the end of the portion of the input you are
@@ -3390,9 +3502,10 @@ type InputDecryptionSettings struct {
 // Specified video input in a template.
 type InputTemplate struct {
 
-	// Specifies set of audio selectors within an input to combine. An input may have
-	// multiple audio selector groups. See "Audio Selector
-	// Group":#inputs-audio_selector_group for more information.
+	// Use audio selector groups to combine multiple sidecar audio inputs so that you
+	// can assign them to a single output audio tab (AudioDescription). Note that, if
+	// you're working with embedded audio, it's simpler to assign multiple input tracks
+	// into a single audio selector rather than use an audio selector group.
 	AudioSelectorGroups map[string]AudioSelectorGroup
 
 	// Use Audio selectors (AudioSelectors) to specify a track or set of tracks from
@@ -3494,11 +3607,13 @@ type InputTemplate struct {
 	// https://docs.aws.amazon.com/console/mediaconvert/timecode.
 	TimecodeStart *string
 
-	// Selector for video.
+	// Input video selectors contain the video settings for the input. Each of your
+	// inputs can have up to one video selector.
 	VideoSelector *VideoSelector
 }
 
-// Settings that specify how your still graphic overlay appears.
+// These settings apply to a specific graphic overlay. You can include multiple
+// overlays in your job.
 type InsertableImage struct {
 
 	// Specify the time, in milliseconds, for the image to remain on the output video.
@@ -3700,7 +3815,8 @@ type JobSettings struct {
 	// and audio muted during SCTE-35 triggered ad avails.
 	AvailBlanking *AvailBlanking
 
-	// Settings for Event Signaling And Messaging (ESAM).
+	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion,
+	// you can ignore these settings.
 	Esam *EsamSettings
 
 	// Use Inputs (inputs) to define source file used in the transcode job. There can
@@ -3709,7 +3825,9 @@ type JobSettings struct {
 	Inputs []Input
 
 	// Overlay motion graphics on top of your video. The motion graphics that you
-	// specify here appear on all outputs in all output groups.
+	// specify here appear on all outputs in all output groups. For more information,
+	// see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
 	MotionImageInserter *MotionImageInserter
 
 	// Settings for your Nielsen configuration. If you don't do Nielsen measurement and
@@ -3742,7 +3860,8 @@ type JobSettings struct {
 	// CmafGroupSettings
 	OutputGroups []OutputGroup
 
-	// Contains settings used to acquire and adjust timecode information from inputs.
+	// These settings control how the service handles timecodes throughout the job.
+	// These settings don't affect input clipping.
 	TimecodeConfig *TimecodeConfig
 
 	// Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in
@@ -3820,7 +3939,8 @@ type JobTemplateSettings struct {
 	// and audio muted during SCTE-35 triggered ad avails.
 	AvailBlanking *AvailBlanking
 
-	// Settings for Event Signaling And Messaging (ESAM).
+	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion,
+	// you can ignore these settings.
 	Esam *EsamSettings
 
 	// Use Inputs (inputs) to define the source file used in the transcode job. There
@@ -3829,7 +3949,9 @@ type JobTemplateSettings struct {
 	Inputs []InputTemplate
 
 	// Overlay motion graphics on top of your video. The motion graphics that you
-	// specify here appear on all outputs in all output groups.
+	// specify here appear on all outputs in all output groups. For more information,
+	// see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
 	MotionImageInserter *MotionImageInserter
 
 	// Settings for your Nielsen configuration. If you don't do Nielsen measurement and
@@ -3862,7 +3984,8 @@ type JobTemplateSettings struct {
 	// CmafGroupSettings
 	OutputGroups []OutputGroup
 
-	// Contains settings used to acquire and adjust timecode information from inputs.
+	// These settings control how the service handles timecodes throughout the job.
+	// These settings don't affect input clipping.
 	TimecodeConfig *TimecodeConfig
 
 	// Enable Timed metadata insertion (TimedMetadataInsertion) to include ID3 tags in
@@ -3932,20 +4055,26 @@ type M2tsSettings struct {
 	// interruptions.
 	BufferModel M2tsBufferModel
 
-	// Inserts DVB Network Information Table (NIT) at the specified table repetition
-	// interval.
+	// Use these settings to insert a DVB Network Information Table (NIT) in the
+	// transport stream of this output. When you work directly in your JSON job
+	// specification, include this object only when your job has a transport stream
+	// output and the container settings contain the object M2tsSettings.
 	DvbNitSettings *DvbNitSettings
 
-	// Inserts DVB Service Description Table (NIT) at the specified table repetition
-	// interval.
+	// Use these settings to insert a DVB Service Description Table (SDT) in the
+	// transport stream of this output. When you work directly in your JSON job
+	// specification, include this object only when your job has a transport stream
+	// output and the container settings contain the object M2tsSettings.
 	DvbSdtSettings *DvbSdtSettings
 
 	// Specify the packet identifiers (PIDs) for DVB subtitle data included in this
 	// output. Specify multiple PIDs as a JSON array. Default is the range 460-479.
 	DvbSubPids []int32
 
-	// Inserts DVB Time and Date Table (TDT) at the specified table repetition
-	// interval.
+	// Use these settings to insert a DVB Time and Date Table (TDT) in the transport
+	// stream of this output. When you work directly in your JSON job specification,
+	// include this object only when your job has a transport stream output and the
+	// container settings contain the object M2tsSettings.
 	DvbTdtSettings *DvbTdtSettings
 
 	// Specify the packet identifier (PID) for DVB teletext data you include in this
@@ -4092,7 +4221,8 @@ type M2tsSettings struct {
 	VideoPid int32
 }
 
-// Settings for TS segments in HLS
+// These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for
+// the MPEG2-TS segments in your HLS outputs.
 type M3u8Settings struct {
 
 	// Specify this setting only when your output will be consumed by a downstream
@@ -4176,7 +4306,10 @@ type M3u8Settings struct {
 	VideoPid int32
 }
 
-// Overlay motion graphics on top of your video at the time that you specify.
+// Overlay motion graphics on top of your video. The motion graphics that you
+// specify here appear on all outputs in all output groups. For more information,
+// see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html.
 type MotionImageInserter struct {
 
 	// If your motion graphic asset is a .mov file, keep this setting unspecified. If
@@ -4257,7 +4390,7 @@ type MotionImageInsertionOffset struct {
 	ImageY int32
 }
 
-// Settings for MOV Container.
+// These settings relate to your QuickTime MOV output container.
 type MovSettings struct {
 
 	// When enabled, include 'clap' atom if appropriate for the video output settings.
@@ -4326,8 +4459,9 @@ type Mp3Settings struct {
 	VbrQuality int32
 }
 
-// Settings for MP4 container. You can create audio-only AAC outputs with this
-// container.
+// These settings relate to your MP4 output container. You can create audio only
+// outputs with this container. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/supported-codecs-containers-audio-only.html#output-codecs-and-containers-supported-for-audio-only.
 type Mp4Settings struct {
 
 	// Specify this setting only when your output will be consumed by a downstream
@@ -4372,7 +4506,8 @@ type Mp4Settings struct {
 	Mp4MajorBrand *string
 }
 
-// Settings for MP4 segments in DASH
+// These settings relate to the fragmented MP4 container for the segments in your
+// DASH outputs.
 type MpdSettings struct {
 
 	// Optional. Choose Include (INCLUDE) to have MediaConvert mark up your DASH
@@ -4690,7 +4825,11 @@ type MsSmoothEncryptionSettings struct {
 	SpekeKeyProvider *SpekeKeyProvider
 }
 
-// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
+// Settings related to your Microsoft Smooth Streaming output package. For more
+// information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When
+// you work directly in your JSON job specification, include this object and any
+// required children when you set Type, under OutputGroupSettings, to
 // MS_SMOOTH_GROUP_SETTINGS.
 type MsSmoothGroupSettings struct {
 
@@ -4729,7 +4868,7 @@ type MsSmoothGroupSettings struct {
 	ManifestEncoding MsSmoothManifestEncoding
 }
 
-// MXF settings
+// These settings relate to your MXF output container.
 type MxfSettings struct {
 
 	// Optional. When you have AFD signaling set up in your output video stream, use
@@ -4979,8 +5118,9 @@ type OpusSettings struct {
 	SampleRate int32
 }
 
-// An output object describes the settings for a single output file or stream in an
-// output group.
+// Each output in your job is a collection of settings that describes how you want
+// MediaConvert to encode a single output file or stream. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/create-outputs.html.
 type Output struct {
 
 	// (AudioDescriptions) contains groups of audio encoding settings organized by
@@ -5020,10 +5160,9 @@ type Output struct {
 	// Container settings (ContainerSettings), but not both.
 	Preset *string
 
-	// (VideoDescription) contains a group of video encoding settings. The specific
-	// video settings depend on the video codec that you choose when you specify a
-	// value for Video codec (codec). Include one instance of (VideoDescription) per
-	// output.
+	// VideoDescription contains a group of video encoding settings. The specific video
+	// settings depend on the video codec that you choose for the property codec.
+	// Include one instance of VideoDescription per output.
 	VideoDescription *VideoDescription
 }
 
@@ -5083,24 +5222,39 @@ type OutputGroupDetail struct {
 // Output Group settings, including type
 type OutputGroupSettings struct {
 
-	// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
-	// CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a
-	// single video, audio, or caption output.
+	// Settings related to your CMAF output package. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When
+	// you work directly in your JSON job specification, include this object and any
+	// required children when you set Type, under OutputGroupSettings, to
+	// CMAF_GROUP_SETTINGS.
 	CmafGroupSettings *CmafGroupSettings
 
-	// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
+	// Settings related to your DASH output package. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When
+	// you work directly in your JSON job specification, include this object and any
+	// required children when you set Type, under OutputGroupSettings, to
 	// DASH_ISO_GROUP_SETTINGS.
 	DashIsoGroupSettings *DashIsoGroupSettings
 
-	// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
+	// Settings related to your File output group. MediaConvert uses this group of
+	// settings to generate a single standalone file, rather than a streaming package.
+	// When you work directly in your JSON job specification, include this object and
+	// any required children when you set Type, under OutputGroupSettings, to
 	// FILE_GROUP_SETTINGS.
 	FileGroupSettings *FileGroupSettings
 
-	// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
+	// Settings related to your HLS output package. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When
+	// you work directly in your JSON job specification, include this object and any
+	// required children when you set Type, under OutputGroupSettings, to
 	// HLS_GROUP_SETTINGS.
 	HlsGroupSettings *HlsGroupSettings
 
-	// Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to
+	// Settings related to your Microsoft Smooth Streaming output package. For more
+	// information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When
+	// you work directly in your JSON job specification, include this object and any
+	// required children when you set Type, under OutputGroupSettings, to
 	// MS_SMOOTH_GROUP_SETTINGS.
 	MsSmoothGroupSettings *MsSmoothGroupSettings
 
@@ -5169,17 +5323,16 @@ type PresetSettings struct {
 	// (AudioDescriptions) can contain multiple groups of encoding settings.
 	AudioDescriptions []AudioDescription
 
-	// Caption settings for this preset. There can be multiple caption settings in a
-	// single output.
+	// This object holds groups of settings related to captions for one output. For
+	// each output that has captions, include one instance of CaptionDescriptions.
 	CaptionDescriptions []CaptionDescriptionPreset
 
 	// Container specific settings.
 	ContainerSettings *ContainerSettings
 
-	// (VideoDescription) contains a group of video encoding settings. The specific
-	// video settings depend on the video codec that you choose when you specify a
-	// value for Video codec (codec). Include one instance of (VideoDescription) per
-	// output.
+	// VideoDescription contains a group of video encoding settings. The specific video
+	// settings depend on the video codec that you choose for the property codec.
+	// Include one instance of VideoDescription per output.
 	VideoDescription *VideoDescription
 }
 
@@ -5543,7 +5696,13 @@ type S3EncryptionSettings struct {
 	KmsKeyArn *string
 }
 
-// Settings for SCC caption output.
+// Settings related to SCC captions. SCC is a sidecar format that holds captions in
+// a file that is separate from the video container. Set up sidecar captions in the
+// same output group, but different output from your video. For more information,
+// see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html.
+// When you work directly in your JSON job specification, include this object and
+// any required children when you set destinationType to SCC.
 type SccDestinationSettings struct {
 
 	// Set Framerate (SccDestinationFramerate) to make sure that the captions and the
@@ -5631,7 +5790,11 @@ type StaticKeyProvider struct {
 	Url *string
 }
 
-// Settings for Teletext caption output
+// Settings related to teletext captions. Set up teletext captions in the same
+// output as your video. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/teletext-output-captions.html.
+// When you work directly in your JSON job specification, include this object and
+// any required children when you set destinationType to TELETEXT.
 type TeletextDestinationSettings struct {
 
 	// Set pageNumber to the Teletext page number for the destination captions for this
@@ -5657,8 +5820,7 @@ type TeletextSourceSettings struct {
 	PageNumber *string
 }
 
-// Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified
-// prefix into the output.
+// Settings for burning the output timecode and specified prefix into the output.
 type TimecodeBurnin struct {
 
 	// Use Font Size (FontSize) to set the font size of any burned-in timecode. Valid
@@ -5761,8 +5923,13 @@ type TrackSourceSettings struct {
 	TrackNumber int32
 }
 
-// Settings specific to TTML caption outputs, including Pass style information
-// (TtmlStylePassthrough).
+// Settings related to TTML captions. TTML is a sidecar format that holds captions
+// in a file that is separate from the video container. Set up sidecar captions in
+// the same output group, but different output from your video. For more
+// information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html.
+// When you work directly in your JSON job specification, include this object and
+// any required children when you set destinationType to TTML.
 type TtmlDestinationSettings struct {
 
 	// Pass through style and position information from a TTML-like input source (TTML,
@@ -5874,11 +6041,11 @@ type VideoCodecSettings struct {
 	// AV1.
 	Av1Settings *Av1Settings
 
-	// Required when you set your output video codec to AVC-Intra. For more information
-	// about the AVC-I settings, see the relevant specification. For detailed
-	// information about SD and HD in AVC-I, see
+	// Required when you choose AVC-Intra for your output video codec. For more
+	// information about the AVC-Intra settings, see the relevant specification. For
+	// detailed information about SD and HD in AVC-Intra, see
 	// https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in
-	// AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
+	// AVC-Intra, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf.
 	AvcIntraSettings *AvcIntraSettings
 
 	// Specifies the video codec. This must be equal to one of the enum values defined
@@ -5917,7 +6084,10 @@ type VideoCodecSettings struct {
 	Vp9Settings *Vp9Settings
 }
 
-// Settings for video outputs
+// Settings related to video encoding of your output. The specific video settings
+// depend on the video codec that you choose. When you work directly in your JSON
+// job specification, include one instance of Video description (VideoDescription)
+// per output.
 type VideoDescription struct {
 
 	// This setting only applies to H.264, H.265, and MPEG2 outputs. Use Insert AFD
@@ -6036,13 +6206,14 @@ type VideoDetail struct {
 // default.
 type VideoPreprocessor struct {
 
-	// Enable the Color corrector (ColorCorrector) feature if necessary. Enable or
-	// disable this feature for each output individually. This setting is disabled by
-	// default.
+	// Use these settings to convert the color space or to modify properties such as
+	// hue and contrast for this output. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/converting-the-color-space.html.
 	ColorCorrector *ColorCorrector
 
-	// Use Deinterlacer (Deinterlacer) to produce smoother motion and a clearer
-	// picture.
+	// Use the deinterlacer to produce smoother motion and a clearer picture. For more
+	// information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-scan-type.html.
 	Deinterlacer *Deinterlacer
 
 	// Enable Dolby Vision feature to produce Dolby Vision compatible video output.
@@ -6063,12 +6234,12 @@ type VideoPreprocessor struct {
 	// your output.
 	PartnerWatermarking *PartnerWatermarking
 
-	// Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified
-	// prefix into the output.
+	// Settings for burning the output timecode and specified prefix into the output.
 	TimecodeBurnin *TimecodeBurnin
 }
 
-// Selector for video.
+// Input video selectors contain the video settings for the input. Each of your
+// inputs can have up to one video selector.
 type VideoSelector struct {
 
 	// Ignore this setting unless this input is a QuickTime animation with an alpha
@@ -6372,8 +6543,8 @@ type WavSettings struct {
 // WEBVTT Destination Settings
 type WebvttDestinationSettings struct {
 
-	// If your input captions format is teletext or teletext inside of STL, enable this
-	// setting to pass through style, color, and position information to your WebVTT
-	// output captions.
+	// Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and
+	// position information from the captions source in the input. Keep the default
+	// value, Disabled (DISABLED), for simplified output captions.
 	StylePassthrough WebvttStylePassthrough
 }

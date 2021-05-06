@@ -1,0 +1,9 @@
+{
+ "ID": "service.organizations-feature-1620332651893114000",
+ "SchemaVersion": 1,
+ "Module": "service/organizations",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

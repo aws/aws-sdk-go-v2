@@ -138,7 +138,8 @@ type BatchInferenceJobConfig struct {
 	// A string to string map specifying the exploration configuration hyperparameters,
 	// including explorationWeight and explorationItemAgeCutOff, you want to use to
 	// configure the amount of item exploration Amazon Personalize uses when
-	// recommending items. See native-recipe-new-item-USER_PERSONALIZATION.
+	// recommending items. See User-Personalization
+	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html).
 	ItemExplorationConfig map[string]string
 }
 
@@ -379,6 +380,92 @@ type Dataset struct {
 	Status *string
 }
 
+// Describes a job that exports a dataset to an Amazon S3 bucket. For more
+// information, see CreateDatasetExportJob. A dataset export job can be in one of
+// the following states:
+//
+// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
+// CREATE FAILED
+type DatasetExportJob struct {
+
+	// The creation date and time (in Unix time) of the dataset export job.
+	CreationDateTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the dataset to export.
+	DatasetArn *string
+
+	// The Amazon Resource Name (ARN) of the dataset export job.
+	DatasetExportJobArn *string
+
+	// If a dataset export job fails, provides the reason why.
+	FailureReason *string
+
+	// The data to export, based on how you imported the data. You can choose to export
+	// BULK data that you imported using a dataset import job, PUT data that you
+	// imported incrementally (using the console, PutEvents, PutUsers and PutItems
+	// operations), or ALL for both types. The default value is PUT.
+	IngestionMode IngestionMode
+
+	// The name of the export job.
+	JobName *string
+
+	// The path to the Amazon S3 bucket where the job's output is stored. For example:
+	// s3://bucket-name/folder-name/
+	JobOutput *DatasetExportJobOutput
+
+	// The date and time (in Unix time) the status of the dataset export job was last
+	// updated.
+	LastUpdatedDateTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management service
+	// role that has permissions to add data to your output Amazon S3 bucket.
+	RoleArn *string
+
+	// The status of the dataset export job. A dataset export job can be in one of the
+	// following states:
+	//
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// FAILED
+	Status *string
+}
+
+// The output configuration parameters of a dataset export job.
+type DatasetExportJobOutput struct {
+
+	// The configuration details of an Amazon S3 input or output bucket.
+	//
+	// This member is required.
+	S3DataDestination *S3DataConfig
+}
+
+// Provides a summary of the properties of a dataset export job. For a complete
+// listing, call the DescribeDatasetExportJob API.
+type DatasetExportJobSummary struct {
+
+	// The date and time (in Unix time) that the dataset export job was created.
+	CreationDateTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the dataset export job.
+	DatasetExportJobArn *string
+
+	// If a dataset export job fails, the reason behind the failure.
+	FailureReason *string
+
+	// The name of the dataset export job.
+	JobName *string
+
+	// The date and time (in Unix time) that the dataset export job status was last
+	// updated.
+	LastUpdatedDateTime *time.Time
+
+	// The status of the dataset export job. A dataset export job can be in one of the
+	// following states:
+	//
+	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
+	// FAILED
+	Status *string
+}
+
 // A dataset group is a collection of related datasets (Interactions, User, and
 // Item). You create a dataset group by calling CreateDatasetGroup. You then create
 // a dataset and add it to a dataset group by calling CreateDataset. The dataset
@@ -504,7 +591,8 @@ type DatasetImportJobSummary struct {
 	// The name of the dataset import job.
 	JobName *string
 
-	// The date and time (in Unix time) that the dataset was last updated.
+	// The date and time (in Unix time) that the dataset import job status was last
+	// updated.
 	LastUpdatedDateTime *time.Time
 
 	// The status of the dataset import job. A dataset import job can be in one of the
@@ -594,7 +682,7 @@ type DatasetSummary struct {
 type DataSource struct {
 
 	// The path to the Amazon S3 bucket where the data that you want to upload to your
-	// dataset is stored. For example: s3://bucket-name/training-data.csv
+	// dataset is stored. For example: s3://bucket-name/folder-name/
 	DataLocation *string
 }
 

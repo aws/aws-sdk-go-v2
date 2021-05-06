@@ -2,6 +2,26 @@
 
 package types
 
+type IngestionMode string
+
+// Enum values for IngestionMode
+const (
+	IngestionModeBulk IngestionMode = "BULK"
+	IngestionModePut  IngestionMode = "PUT"
+	IngestionModeAll  IngestionMode = "ALL"
+)
+
+// Values returns all known values for IngestionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (IngestionMode) Values() []IngestionMode {
+	return []IngestionMode{
+		"BULK",
+		"PUT",
+		"ALL",
+	}
+}
+
 type RecipeProvider string
 
 // Enum values for RecipeProvider

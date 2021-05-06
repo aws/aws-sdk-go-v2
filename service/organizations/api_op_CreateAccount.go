@@ -24,9 +24,9 @@ import (
 // operation.
 //
 // * Check the AWS CloudTrail log for the CreateAccountResult event.
-// For information on using AWS CloudTrail with AWS Organizations, see Monitoring
-// the Activity in Your Organization
-// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_monitoring.html)
+// For information on using AWS CloudTrail with AWS Organizations, see Logging and
+// monitoring in AWS Organizations
+// (http://docs.aws.amazon.com/organizations/latest/userguide/orgs_security_incident-response.html#orgs_cloudtrail-integration)
 // in the AWS Organizations User Guide.
 //
 // The user who calls the API to create an

@@ -88,7 +88,7 @@
                     "name": "codeguru-reviewer"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service\n         that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends\n         fixes in your Java code.</p>\n         \n         <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer\n            improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the \n            <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n      \n         <p>\n         To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by \n         creating an <i>interface VPC endpoint</i>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface \n            VPC endpoints (AWS PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.\n      </p>",
+                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service\n         that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommendations to \n         address them in your Java and Python code.</p>\n         \n         <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer\n            improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the \n            <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n      \n         <p>\n         To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by \n         creating an <i>interface VPC endpoint</i>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface \n            VPC endpoints (AWS PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.\n      </p>",
                 "smithy.api#title": "Amazon CodeGuru Reviewer"
             }
         },
@@ -141,7 +141,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Use to associate an AWS CodeCommit repository or a repostory managed by \n         AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a \n        repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides \n        automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html\">Recommendations in \n            Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> \n        </p>\n      \n         <p>If you associate a CodeCommit repository, it must be in the same \n         AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.</p>\n      \n         <p>Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar\n         Connections to connect to CodeGuru Reviewer. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/reviewer-ug/step-one.html#select-repository-source-provider\">Connect to a repository source provider</a> in\n         the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n      \n         <note>\n            <p>\n            You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate \n            a GitHub repository, use the console. For more information, see \n            <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html\">Getting \n            started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>\n            </p>\n         </note>",
+                "smithy.api#documentation": "<p>\n         Use to associate an AWS CodeCommit repository or a repostory managed by \n         AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a \n        repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides \n        automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html\">Recommendations in \n            Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> \n        </p>\n      \n         <p>If you associate a CodeCommit repository, it must be in the same \n         AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.</p>\n      \n         <p>Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar\n         Connections to connect to CodeGuru Reviewer. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html\">Associate a repository</a> in\n         the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n      \n         <note>\n            <p>\n            You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate \n            a GitHub repository, use the console. For more information, see \n            <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html\">Getting \n            started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>\n            </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/associations",
@@ -170,6 +170,12 @@
                     "target": "com.amazonaws.codegurureviewer#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tAn array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts: \n\t\t</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>A <i>tag key</i> (for example, <code>CostCenter</code>,\n\t\t\t\t\t<code>Environment</code>, <code>Project</code>, or <code>Secret</code>). Tag\n\t\t\t\t\tkeys are case sensitive.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>An optional field known as a <i>tag value</i> (for example,\n\t\t\t\t\t<code>111122223333</code>, <code>Production</code>, or a team name).\n\t\t\t\t\tOmitting the tag value is the same as using an empty string. Like tag keys, tag\n\t\t\t\t\tvalues are case sensitive.</p>\n\t\t\t         </li>\n         </ul>"
+                    }
+                },
+                "KMSKeyDetails": {
+                    "target": "com.amazonaws.codegurureviewer#KMSKeyDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>KMSKeyDetails</code> object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for this repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the AWS KMS key that \n            is associated with this respository association.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -432,13 +438,13 @@
                 "RepositoryAnalysis": {
                     "target": "com.amazonaws.codegurureviewer#RepositoryAnalysis",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A code review that analyzes all code under a specified branch in an associated respository. \n         The assocated repository is specified using its ARN in <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n               <code>CreateCodeReview</code>\n            </a>.\n      </p>",
+                        "smithy.api#documentation": "<p> A code review that analyzes all code under a specified branch in an associated\n\t\t\trepository. The associated repository is specified using its ARN in <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n               <code>CreateCodeReview</code>\n            </a>. </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         The type of a code review. There are two code review types:         \n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PullRequest</code> - A code review that is automatically triggered by a pull request on an assocaited repository. Because this \n               type of code review is automatically generated, you cannot specify this code review type using <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n                     <code>CreateCodeReview</code>\n                  </a>.\n            </p>\n            </li>\n            <li>\n               <p>\n                  <code>RepositoryAnalysis</code> - A code review that analyzes all code under a specified branch in an associated respository. \n               The assocated repository is specified using its ARN in <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n                     <code>CreateCodeReview</code>\n                  </a>.\n            </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>\n         The type of a code review. There are two code review types:         \n      </p>\n         <ul>\n            <li>\n               <p>\n                  <code>PullRequest</code> - A code review that is automatically triggered by a pull request on an associated repository. Because this \n               type of code review is automatically generated, you cannot specify this code review type using <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n                     <code>CreateCodeReview</code>\n                  </a>.\n            </p>\n            </li>\n            <li>\n               <p>\n\t\t\t\t\t             <code>RepositoryAnalysis</code> - A code review that analyzes all code under a specified\n\t\t\t\t\tbranch in an associated repository. The associated repository is specified using its ARN\n\t\t\t\t\tin <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n                     <code>CreateCodeReview</code>\n                  </a>. </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.codegurureviewer#CommitDiffSourceCodeType": {
@@ -833,6 +839,21 @@
                 }
             }
         },
+        "com.amazonaws.codegurureviewer#EncryptionOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AWS_OWNED_CMK",
+                        "name": "AoCmk"
+                    },
+                    {
+                        "value": "CUSTOMER_MANAGED_CMK",
+                        "name": "CmCmk"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.codegurureviewer#ErrorMessage": {
             "type": "string"
         },
@@ -897,6 +918,36 @@
                     "min": 1,
                     "max": 3
                 }
+            }
+        },
+        "com.amazonaws.codegurureviewer#KMSKeyDetails": {
+            "type": "structure",
+            "members": {
+                "KMSKeyId": {
+                    "target": "com.amazonaws.codegurureviewer#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS KMS key that is associated with a respository association.</p>"
+                    }
+                },
+                "EncryptionOption": {
+                    "target": "com.amazonaws.codegurureviewer#EncryptionOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption option for a repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for a repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the AWS KMS key that \n            is associated with a respository association.</p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.codegurureviewer#KMSKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9-]+"
             }
         },
         "com.amazonaws.codegurureviewer#LineNumber": {
@@ -1781,7 +1832,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         A code review type that analyzes all code under a specified branch in an associated respository. \n         The assocated repository is specified using its ARN when you call <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n               <code>CreateCodeReview</code>\n            </a>.\n      </p>"
+                "smithy.api#documentation": "<p> A code review type that analyzes all code under a specified branch in an associated\n\t\t\trepository. The associated repository is specified using its ARN when you call <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CreateCodeReview\">\n               <code>CreateCodeReview</code>\n            </a>. </p>"
             }
         },
         "com.amazonaws.codegurureviewer#RepositoryAssociation": {
@@ -1845,6 +1896,12 @@
                     "target": "com.amazonaws.codegurureviewer#TimeStamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the repository association was created.</p>"
+                    }
+                },
+                "KMSKeyDetails": {
+                    "target": "com.amazonaws.codegurureviewer#KMSKeyDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>KMSKeyDetails</code> object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for this repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the AWS KMS key that \n            is associated with this respository association.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

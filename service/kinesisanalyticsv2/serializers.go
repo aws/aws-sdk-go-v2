@@ -1049,6 +1049,53 @@ func (m *awsAwsjson11_serializeOpListTagsForResource) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpRollbackApplication struct {
+}
+
+func (*awsAwsjson11_serializeOpRollbackApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRollbackApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RollbackApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("KinesisAnalytics_20180523.RollbackApplication")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRollbackApplicationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartApplication struct {
 }
 
@@ -1283,6 +1330,53 @@ func (m *awsAwsjson11_serializeOpUpdateApplication) HandleSerialize(ctx context.
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson11_serializeOpUpdateApplicationMaintenanceConfiguration struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateApplicationMaintenanceConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateApplicationMaintenanceConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateApplicationMaintenanceConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("KinesisAnalytics_20180523.UpdateApplicationMaintenanceConfiguration")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateApplicationMaintenanceConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson11_serializeDocumentApplicationCodeConfiguration(v *types.ApplicationCodeConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1414,6 +1508,18 @@ func awsAwsjson11_serializeDocumentApplicationConfigurationUpdate(v *types.Appli
 		if err := awsAwsjson11_serializeDocumentVpcConfigurationUpdates(v.VpcConfigurationUpdates, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentApplicationMaintenanceConfigurationUpdate(v *types.ApplicationMaintenanceConfigurationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationMaintenanceWindowStartTimeUpdate != nil {
+		ok := object.Key("ApplicationMaintenanceWindowStartTimeUpdate")
+		ok.String(*v.ApplicationMaintenanceWindowStartTimeUpdate)
 	}
 
 	return nil
@@ -2933,6 +3039,11 @@ func awsAwsjson11_serializeOpDocumentAddApplicationCloudWatchLoggingOptionInput(
 		}
 	}
 
+	if v.ConditionalToken != nil {
+		ok := object.Key("ConditionalToken")
+		ok.String(*v.ConditionalToken)
+	}
+
 	if v.CurrentApplicationVersionId != nil {
 		ok := object.Key("CurrentApplicationVersionId")
 		ok.Long(*v.CurrentApplicationVersionId)
@@ -3051,6 +3162,11 @@ func awsAwsjson11_serializeOpDocumentAddApplicationVpcConfigurationInput(v *AddA
 		ok.String(*v.ApplicationName)
 	}
 
+	if v.ConditionalToken != nil {
+		ok := object.Key("ConditionalToken")
+		ok.String(*v.ConditionalToken)
+	}
+
 	if v.CurrentApplicationVersionId != nil {
 		ok := object.Key("CurrentApplicationVersionId")
 		ok.Long(*v.CurrentApplicationVersionId)
@@ -3165,6 +3281,11 @@ func awsAwsjson11_serializeOpDocumentDeleteApplicationCloudWatchLoggingOptionInp
 	if v.CloudWatchLoggingOptionId != nil {
 		ok := object.Key("CloudWatchLoggingOptionId")
 		ok.String(*v.CloudWatchLoggingOptionId)
+	}
+
+	if v.ConditionalToken != nil {
+		ok := object.Key("ConditionalToken")
+		ok.String(*v.ConditionalToken)
 	}
 
 	if v.CurrentApplicationVersionId != nil {
@@ -3287,6 +3408,11 @@ func awsAwsjson11_serializeOpDocumentDeleteApplicationVpcConfigurationInput(v *D
 	if v.ApplicationName != nil {
 		ok := object.Key("ApplicationName")
 		ok.String(*v.ApplicationName)
+	}
+
+	if v.ConditionalToken != nil {
+		ok := object.Key("ConditionalToken")
+		ok.String(*v.ConditionalToken)
 	}
 
 	if v.CurrentApplicationVersionId != nil {
@@ -3425,6 +3551,23 @@ func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentRollbackApplicationInput(v *RollbackApplicationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationName != nil {
+		ok := object.Key("ApplicationName")
+		ok.String(*v.ApplicationName)
+	}
+
+	if v.CurrentApplicationVersionId != nil {
+		ok := object.Key("CurrentApplicationVersionId")
+		ok.Long(*v.CurrentApplicationVersionId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentStartApplicationInput(v *StartApplicationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3522,6 +3665,11 @@ func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 		}
 	}
 
+	if v.ConditionalToken != nil {
+		ok := object.Key("ConditionalToken")
+		ok.String(*v.ConditionalToken)
+	}
+
 	if v.CurrentApplicationVersionId != nil {
 		ok := object.Key("CurrentApplicationVersionId")
 		ok.Long(*v.CurrentApplicationVersionId)
@@ -3537,6 +3685,25 @@ func awsAwsjson11_serializeOpDocumentUpdateApplicationInput(v *UpdateApplication
 	if v.ServiceExecutionRoleUpdate != nil {
 		ok := object.Key("ServiceExecutionRoleUpdate")
 		ok.String(*v.ServiceExecutionRoleUpdate)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateApplicationMaintenanceConfigurationInput(v *UpdateApplicationMaintenanceConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationMaintenanceConfigurationUpdate != nil {
+		ok := object.Key("ApplicationMaintenanceConfigurationUpdate")
+		if err := awsAwsjson11_serializeDocumentApplicationMaintenanceConfigurationUpdate(v.ApplicationMaintenanceConfigurationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ApplicationName != nil {
+		ok := object.Key("ApplicationName")
+		ok.String(*v.ApplicationName)
 	}
 
 	return nil

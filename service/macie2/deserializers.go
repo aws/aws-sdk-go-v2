@@ -3587,6 +3587,11 @@ func awsRestjson1_deserializeOpDocumentGetBucketStatisticsOutput(v **GetBucketSt
 				return err
 			}
 
+		case "bucketCountByObjectEncryptionRequirement":
+			if err := awsRestjson1_deserializeDocumentBucketCountPolicyAllowsUnencryptedObjectUploads(&sv.BucketCountByObjectEncryptionRequirement, value); err != nil {
+				return err
+			}
+
 		case "bucketCountBySharedAccessType":
 			if err := awsRestjson1_deserializeDocumentBucketCountBySharedAccessType(&sv.BucketCountBySharedAccessType, value); err != nil {
 				return err
@@ -10138,6 +10143,19 @@ func awsRestjson1_deserializeDocumentBucketCountByEncryptionType(v **types.Bucke
 				sv.Unencrypted = i64
 			}
 
+		case "unknown":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Unknown = i64
+			}
+
 		default:
 			_, _ = key, value
 
@@ -10206,6 +10224,76 @@ func awsRestjson1_deserializeDocumentBucketCountBySharedAccessType(v **types.Buc
 					return err
 				}
 				sv.NotShared = i64
+			}
+
+		case "unknown":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Unknown = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBucketCountPolicyAllowsUnencryptedObjectUploads(v **types.BucketCountPolicyAllowsUnencryptedObjectUploads, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BucketCountPolicyAllowsUnencryptedObjectUploads
+	if *v == nil {
+		sv = &types.BucketCountPolicyAllowsUnencryptedObjectUploads{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "allowsUnencryptedObjectUploads":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AllowsUnencryptedObjectUploads = i64
+			}
+
+		case "deniesUnencryptedObjectUploads":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DeniesUnencryptedObjectUploads = i64
 			}
 
 		case "unknown":
@@ -10305,6 +10393,15 @@ func awsRestjson1_deserializeDocumentBucketMetadata(v **types.BucketMetadata, va
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.AccountId = ptr.String(jtv)
+			}
+
+		case "allowsUnencryptedObjectUploads":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AllowsUnencryptedObjectUploads to be of type string, got %T instead", value)
+				}
+				sv.AllowsUnencryptedObjectUploads = types.AllowsUnencryptedObjectUploads(jtv)
 			}
 
 		case "bucketArn":
@@ -13186,6 +13283,19 @@ func awsRestjson1_deserializeDocumentObjectCountByEncryptionType(v **types.Objec
 				sv.Unencrypted = i64
 			}
 
+		case "unknown":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Unknown = i64
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13798,6 +13908,15 @@ func awsRestjson1_deserializeDocumentS3Bucket(v **types.S3Bucket, value interfac
 
 	for key, value := range shape {
 		switch key {
+		case "allowsUnencryptedObjectUploads":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AllowsUnencryptedObjectUploads to be of type string, got %T instead", value)
+				}
+				sv.AllowsUnencryptedObjectUploads = types.AllowsUnencryptedObjectUploads(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)

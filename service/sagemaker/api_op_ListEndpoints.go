@@ -47,7 +47,8 @@ type ListEndpointsInput struct {
 	// timestamp.
 	LastModifiedTimeBefore *time.Time
 
-	// The maximum number of endpoints to return in the response.
+	// The maximum number of endpoints to return in the response. This value defaults
+	// to 10.
 	MaxResults *int32
 
 	// A string in endpoint names. This filter returns only endpoints whose name
@@ -153,7 +154,8 @@ var _ ListEndpointsAPIClient = (*Client)(nil)
 
 // ListEndpointsPaginatorOptions is the paginator options for ListEndpoints
 type ListEndpointsPaginatorOptions struct {
-	// The maximum number of endpoints to return in the response.
+	// The maximum number of endpoints to return in the response. This value defaults
+	// to 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

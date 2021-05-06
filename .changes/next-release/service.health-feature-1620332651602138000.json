@@ -1,0 +1,9 @@
+{
+ "ID": "service.health-feature-1620332651602138000",
+ "SchemaVersion": 1,
+ "Module": "service/health",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

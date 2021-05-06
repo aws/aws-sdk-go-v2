@@ -89,7 +89,7 @@ type RegisterInstanceInput struct {
 	//
 	// * If the service that is specified by
 	// ServiceId includes HealthCheckConfig settings, AWS Cloud Map will create the
-	// Route 53 health check, but it won't associate the health check with the alias
+	// Route 53 health check, but it doesn't associate the health check with the alias
 	// record.
 	//
 	// * Auto naming currently doesn't support creating alias records that

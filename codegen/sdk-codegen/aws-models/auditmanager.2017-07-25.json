@@ -765,7 +765,7 @@
                     "min": 1,
                     "max": 300
                 },
-                "smithy.api#pattern": "^[\\w\\W\\s\\S]*$"
+                "smithy.api#pattern": "^[^\\\\]*$"
             }
         },
         "com.amazonaws.auditmanager#AssessmentReport": {
@@ -2033,7 +2033,7 @@
                     "min": 1,
                     "max": 300
                 },
-                "smithy.api#pattern": "^[\\w\\W\\s\\S]*$"
+                "smithy.api#pattern": "^[^\\\\]*$"
             }
         },
         "com.amazonaws.auditmanager#ControlResponse": {
@@ -2278,7 +2278,8 @@
                 "name": {
                     "target": "com.amazonaws.auditmanager#ControlSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the specified control set.\n</p>"
+                        "smithy.api#documentation": "<p>\nThe name of the specified control set.\n</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "controls": {
@@ -3346,7 +3347,7 @@
                 "assessmentReportSelection": {
                     "target": "com.amazonaws.auditmanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies whether the evidence is inclded in the assessment report.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Specifies whether the evidence is included in the assessment report.\n      </p>"
                     }
                 }
             },
@@ -3564,7 +3565,7 @@
                     "min": 1,
                     "max": 300
                 },
-                "smithy.api#pattern": "^[\\w\\W\\s\\S]*$"
+                "smithy.api#pattern": "^[^\\\\]*$"
             }
         },
         "com.amazonaws.auditmanager#FrameworkType": {
@@ -6231,7 +6232,7 @@
             "type": "structure",
             "members": {
                 "id": {
-                    "target": "com.amazonaws.auditmanager#UUID",
+                    "target": "com.amazonaws.auditmanager#ControlSetName",
                     "traits": {
                         "smithy.api#documentation": "<p>\nThe unique identifier for the control set.\n</p>"
                     }
@@ -6239,7 +6240,8 @@
                 "name": {
                     "target": "com.amazonaws.auditmanager#ControlSetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe name of the control set.\n</p>"
+                        "smithy.api#documentation": "<p>\nThe name of the control set.\n</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "controls": {

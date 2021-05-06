@@ -245,7 +245,8 @@ type CacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy)
 	// or Using the managed cache policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html)
-	// in the Amazon CloudFront Developer Guide.
+	// in the Amazon CloudFront Developer Guide. A CacheBehavior must include either a
+	// CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId.
 	CachePolicyId *string
 
 	// Whether you want CloudFront to automatically compress certain files for this
@@ -294,11 +295,18 @@ type CacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy)
 	// or Using the managed origin request policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html)
-	// in the Amazon CloudFront Developer Guide. A complex type that specifies how
-	// CloudFront handles query strings, cookies, and HTTP headers.
+	// in the Amazon CloudFront Developer Guide. A CacheBehavior must include either a
+	// CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId. A
+	// complex type that specifies how CloudFront handles query strings, cookies, and
+	// HTTP headers.
 	//
 	// Deprecated: This member has been deprecated.
 	ForwardedValues *ForwardedValues
+
+	// A list of CloudFront functions that are associated with this cache behavior.
+	// CloudFront functions must be published to the LIVE stage to associate them with
+	// a cache behavior.
+	FunctionAssociations *FunctionAssociations
 
 	// A complex type that contains zero or more Lambda function associations for a
 	// cache behavior.
@@ -494,7 +502,8 @@ type CachePolicyConfig struct {
 	// This member is required.
 	Name *string
 
-	// A comment to describe the cache policy.
+	// A comment to describe the cache policy. The comment cannot be longer than 128
+	// characters.
 	Comment *string
 
 	// The default amount of time, in seconds, that you want objects to stay in the
@@ -700,7 +709,8 @@ type CloudFrontOriginAccessIdentityConfig struct {
 	// This member is required.
 	CallerReference *string
 
-	// Any comments you want to include about the origin access identity.
+	// An optional comment to describe the origin access identity. The comment cannot
+	// be longer than 128 characters.
 	//
 	// This member is required.
 	Comment *string
@@ -1123,7 +1133,9 @@ type DefaultCacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html#cache-key-create-cache-policy)
 	// or Using the managed cache policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-cache-policies.html)
-	// in the Amazon CloudFront Developer Guide.
+	// in the Amazon CloudFront Developer Guide. A DefaultCacheBehavior must include
+	// either a CachePolicyId or ForwardedValues. We recommend that you use a
+	// CachePolicyId.
 	CachePolicyId *string
 
 	// Whether you want CloudFront to automatically compress certain files for this
@@ -1172,11 +1184,18 @@ type DefaultCacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html#origin-request-create-origin-request-policy)
 	// or Using the managed origin request policies
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/using-managed-origin-request-policies.html)
-	// in the Amazon CloudFront Developer Guide. A complex type that specifies how
-	// CloudFront handles query strings, cookies, and HTTP headers.
+	// in the Amazon CloudFront Developer Guide. A DefaultCacheBehavior must include
+	// either a CachePolicyId or ForwardedValues. We recommend that you use a
+	// CachePolicyId. A complex type that specifies how CloudFront handles query
+	// strings, cookies, and HTTP headers.
 	//
 	// Deprecated: This member has been deprecated.
 	ForwardedValues *ForwardedValues
+
+	// A list of CloudFront functions that are associated with this cache behavior.
+	// CloudFront functions must be published to the LIVE stage to associate them with
+	// a cache behavior.
+	FunctionAssociations *FunctionAssociations
 
 	// A complex type that contains zero or more Lambda function associations for a
 	// cache behavior.
@@ -1346,11 +1365,8 @@ type DistributionConfig struct {
 	// This member is required.
 	CallerReference *string
 
-	// Any comments you want to include about the distribution. If you don't want to
-	// specify a comment, include an empty Comment element. To delete an existing
-	// comment, update the distribution configuration and include an empty Comment
-	// element. To add or change a comment, update the distribution configuration and
-	// specify the new comment.
+	// An optional comment to describe the distribution. The comment cannot be longer
+	// than 128 characters.
 	//
 	// This member is required.
 	Comment *string
@@ -1794,7 +1810,8 @@ type FieldLevelEncryptionConfig struct {
 	// This member is required.
 	CallerReference *string
 
-	// An optional comment about the configuration.
+	// An optional comment about the configuration. The comment cannot be longer than
+	// 128 characters.
 	Comment *string
 
 	// A complex data type that specifies when to forward content if a content type
@@ -1871,7 +1888,8 @@ type FieldLevelEncryptionProfileConfig struct {
 	// This member is required.
 	Name *string
 
-	// An optional comment for the field-level encryption profile.
+	// An optional comment for the field-level encryption profile. The comment cannot
+	// be longer than 128 characters.
 	Comment *string
 }
 
@@ -1923,7 +1941,8 @@ type FieldLevelEncryptionProfileSummary struct {
 	// This member is required.
 	Name *string
 
-	// An optional comment for the field-level encryption profile summary.
+	// An optional comment for the field-level encryption profile summary. The comment
+	// cannot be longer than 128 characters.
 	Comment *string
 }
 
@@ -1940,7 +1959,8 @@ type FieldLevelEncryptionSummary struct {
 	// This member is required.
 	LastModifiedTime *time.Time
 
-	// An optional comment about the field-level encryption item.
+	// An optional comment about the field-level encryption item. The comment cannot be
+	// longer than 128 characters.
 	Comment *string
 
 	// A summary of a content type-profile mapping.
@@ -2055,6 +2075,122 @@ type ForwardedValues struct {
 	// information about the query string parameters that you want CloudFront to use
 	// for caching for this cache behavior.
 	QueryStringCacheKeys *QueryStringCacheKeys
+}
+
+// A CloudFront function that is associated with a cache behavior in a CloudFront
+// distribution.
+type FunctionAssociation struct {
+
+	// The event type of the function, either viewer-request or viewer-response. You
+	// cannot use origin-facing event types (origin-request and origin-response) with a
+	// CloudFront function.
+	//
+	// This member is required.
+	EventType EventType
+
+	// The Amazon Resource Name (ARN) of the function.
+	//
+	// This member is required.
+	FunctionARN *string
+}
+
+// A list of CloudFront functions that are associated with a cache behavior in a
+// CloudFront distribution. CloudFront functions must be published to the LIVE
+// stage to associate them with a cache behavior.
+type FunctionAssociations struct {
+
+	// The number of CloudFront functions in the list.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// The CloudFront functions that are associated with a cache behavior in a
+	// CloudFront distribution. CloudFront functions must be published to the LIVE
+	// stage to associate them with a cache behavior.
+	Items []FunctionAssociation
+}
+
+// Contains configuration information about a CloudFront function.
+type FunctionConfig struct {
+
+	// A comment to describe the function.
+	//
+	// This member is required.
+	Comment *string
+
+	// The function’s runtime environment. The only valid value is cloudfront-js-1.0.
+	//
+	// This member is required.
+	Runtime FunctionRuntime
+}
+
+// A list of CloudFront functions.
+type FunctionList struct {
+
+	// The maximum number of functions requested.
+	//
+	// This member is required.
+	MaxItems *int32
+
+	// The number of functions returned in the response.
+	//
+	// This member is required.
+	Quantity *int32
+
+	// Contains the functions in the list.
+	Items []FunctionSummary
+
+	// If there are more items in the list than are in this response, this element is
+	// present. It contains the value that you should use in the Marker field of a
+	// subsequent request to continue listing functions where you left off.
+	NextMarker *string
+}
+
+// Contains metadata about a CloudFront function.
+type FunctionMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the
+	// function.
+	//
+	// This member is required.
+	FunctionARN *string
+
+	// The date and time when the function was most recently updated.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The date and time when the function was created.
+	CreatedTime *time.Time
+
+	// The stage that the function is in, either DEVELOPMENT or LIVE. When a function
+	// is in the DEVELOPMENT stage, you can test the function with TestFunction, and
+	// update it with UpdateFunction. When a function is in the LIVE stage, you can
+	// attach the function to a distribution’s cache behavior, using the function’s
+	// ARN.
+	Stage FunctionStage
+}
+
+// Contains configuration information and metadata about a CloudFront function.
+type FunctionSummary struct {
+
+	// Contains configuration information about a CloudFront function.
+	//
+	// This member is required.
+	FunctionConfig *FunctionConfig
+
+	// Contains metadata about a CloudFront function.
+	//
+	// This member is required.
+	FunctionMetadata *FunctionMetadata
+
+	// The name of the CloudFront function.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the CloudFront function.
+	Status *string
 }
 
 // A complex type that controls the countries in which your content is distributed.
@@ -2257,7 +2393,8 @@ type KeyGroupConfig struct {
 	// This member is required.
 	Name *string
 
-	// A comment to describe the key group.
+	// A comment to describe the key group. The comment cannot be longer than 128
+	// characters.
 	Comment *string
 }
 
@@ -2714,7 +2851,8 @@ type OriginRequestPolicyConfig struct {
 	// This member is required.
 	QueryStringsConfig *OriginRequestPolicyQueryStringsConfig
 
-	// A comment to describe the origin request policy.
+	// A comment to describe the origin request policy. The comment cannot be longer
+	// than 128 characters.
 	Comment *string
 }
 
@@ -3057,7 +3195,8 @@ type PublicKeyConfig struct {
 	// This member is required.
 	Name *string
 
-	// A comment to describe the public key.
+	// A comment to describe the public key. The comment cannot be longer than 128
+	// characters.
 	Comment *string
 }
 
@@ -3109,7 +3248,8 @@ type PublicKeySummary struct {
 	// This member is required.
 	Name *string
 
-	// A comment to describe the public key.
+	// A comment to describe the public key. The comment cannot be longer than 128
+	// characters.
 	Comment *string
 }
 
@@ -3649,6 +3789,32 @@ type Tags struct {
 
 	// A complex type that contains Tag elements.
 	Items []Tag
+}
+
+// Contains the result of testing a CloudFront function with TestFunction.
+type TestResult struct {
+
+	// The amount of time that the function took to run as a percentage of the maximum
+	// allowed time. For example, a compute utilization of 35 means that the function
+	// completed in 35% of the maximum allowed time.
+	ComputeUtilization *string
+
+	// If the result of testing the function was an error, this field contains the
+	// error message.
+	FunctionErrorMessage *string
+
+	// Contains the log lines that the function wrote (if any) when running the test.
+	FunctionExecutionLogs []string
+
+	// The event object returned by the function. For more information about the
+	// structure of the event object, see Event object structure
+	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/functions-event-structure.html)
+	// in the Amazon CloudFront Developer Guide.
+	FunctionOutput *string
+
+	// Contains configuration information and metadata about the CloudFront function
+	// that was tested.
+	FunctionSummary *FunctionSummary
 }
 
 // A list of key groups whose public keys CloudFront can use to verify the

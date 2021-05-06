@@ -1,0 +1,9 @@
+{
+ "ID": "service.nimble-feature-1620332651871292000",
+ "SchemaVersion": 1,
+ "Module": "service/nimble",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "v1.0.0",
+ "AffectedModules": null
+}

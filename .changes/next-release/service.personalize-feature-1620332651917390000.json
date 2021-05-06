@@ -1,0 +1,9 @@
+{
+ "ID": "service.personalize-feature-1620332651917390000",
+ "SchemaVersion": 1,
+ "Module": "service/personalize",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

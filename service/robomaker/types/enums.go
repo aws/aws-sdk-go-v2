@@ -215,6 +215,7 @@ const (
 	RobotSoftwareSuiteVersionTypeKinetic RobotSoftwareSuiteVersionType = "Kinetic"
 	RobotSoftwareSuiteVersionTypeMelodic RobotSoftwareSuiteVersionType = "Melodic"
 	RobotSoftwareSuiteVersionTypeDashing RobotSoftwareSuiteVersionType = "Dashing"
+	RobotSoftwareSuiteVersionTypeFoxy    RobotSoftwareSuiteVersionType = "Foxy"
 )
 
 // Values returns all known values for RobotSoftwareSuiteVersionType. Note that
@@ -226,6 +227,7 @@ func (RobotSoftwareSuiteVersionType) Values() []RobotSoftwareSuiteVersionType {
 		"Kinetic",
 		"Melodic",
 		"Dashing",
+		"Foxy",
 	}
 }
 

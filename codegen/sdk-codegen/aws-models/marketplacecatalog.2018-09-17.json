@@ -82,7 +82,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue"
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent"
                 }
             },
             "traits": {
@@ -199,10 +199,26 @@
                         "smithy.api#documentation": "<p>This object contains details specific to the change type of the requested\n            change.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ChangeName": {
+                    "target": "com.amazonaws.marketplacecatalog#ChangeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional name for the change.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object that contains the <code>ChangeType</code>, <code>Details</code>, and\n                <code>Entity</code>.</p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ChangeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 72
+                },
+                "smithy.api#pattern": "^[a-zA-Z]$"
             }
         },
         "com.amazonaws.marketplacecatalog#ChangeSetDescription": {
@@ -335,6 +351,12 @@
                     "target": "com.amazonaws.marketplacecatalog#ErrorDetailList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of <code>ErrorDetail</code> objects associated with the change.</p>"
+                    }
+                },
+                "ChangeName": {
+                    "target": "com.amazonaws.marketplacecatalog#ChangeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional name for the change.</p>"
                     }
                 }
             },
@@ -473,7 +495,7 @@
                     }
                 },
                 "FailureDescription": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue",
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent",
                     "traits": {
                         "smithy.api#documentation": "<p>Returned if there is a failure on the change set, but that failure is not related to\n            any of the changes in the request.</p>"
                     }
@@ -566,7 +588,7 @@
                     }
                 },
                 "LastModifiedDate": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue",
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
                     "traits": {
                         "smithy.api#documentation": "<p>The last modified date of the entity, in ISO 8601 format\n            (2018-02-27T13:45:22Z).</p>"
                     }
@@ -597,14 +619,24 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A product entity contains data that describes your product, its supported features,\n            and how it can be used or launched by your customer. </p>"
+                "smithy.api#documentation": "<p>An entity contains data that describes your product, its supported features,\n            and how it can be used or launched by your customer. </p>"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#EntityNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^\\\\S+[\\\\S\\\\s]*"
             }
         },
         "com.amazonaws.marketplacecatalog#EntitySummary": {
             "type": "structure",
             "members": {
                 "Name": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue",
+                    "target": "com.amazonaws.marketplacecatalog#EntityNameString",
                     "traits": {
                         "smithy.api#documentation": "<p>The name for the entity. This value is not unique. It is defined by the\n            seller.</p>"
                     }
@@ -628,13 +660,13 @@
                     }
                 },
                 "LastModifiedDate": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue",
+                    "target": "com.amazonaws.marketplacecatalog#DateTimeISO8601",
                     "traits": {
                         "smithy.api#documentation": "<p>The last time the entity was published, using ISO 8601 format\n            (2018-02-27T13:45:22Z).</p>"
                     }
                 },
                 "Visibility": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue",
+                    "target": "com.amazonaws.marketplacecatalog#VisibilityValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The visibility status of the entity to\n            buyers.\n            This value can be <code>Public</code> (everyone can view the entity),\n                <code>Limited</code> (the entity is visible to limited accounts only), or\n                <code>Restricted</code> (the entity was published and then unpublished and only\n            existing\n            buyers\n            can view it). </p>"
                     }
@@ -660,17 +692,27 @@
                 "smithy.api#pattern": "^[a-zA-Z]+$"
             }
         },
+        "com.amazonaws.marketplacecatalog#ErrorCodeString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 72
+                },
+                "smithy.api#pattern": "^[a-zA-Z_]+$"
+            }
+        },
         "com.amazonaws.marketplacecatalog#ErrorDetail": {
             "type": "structure",
             "members": {
                 "ErrorCode": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue",
+                    "target": "com.amazonaws.marketplacecatalog#ErrorCodeString",
                     "traits": {
                         "smithy.api#documentation": "<p>The error code that identifies the type of error.</p>"
                     }
                 },
                 "ErrorMessage": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue",
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent",
                     "traits": {
                         "smithy.api#documentation": "<p>The message for the error.</p>"
                     }
@@ -684,6 +726,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.marketplacecatalog#ErrorDetail"
+            }
+        },
+        "com.amazonaws.marketplacecatalog#ExceptionMessageContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^(.)+$"
             }
         },
         "com.amazonaws.marketplacecatalog#FailureCode": {
@@ -743,6 +795,16 @@
                 "smithy.api#pattern": "^[a-zA-Z]+$"
             }
         },
+        "com.amazonaws.marketplacecatalog#FilterValueContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.)+$"
+            }
+        },
         "com.amazonaws.marketplacecatalog#Identifier": {
             "type": "string",
             "traits": {
@@ -757,7 +819,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue"
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent"
                 }
             },
             "traits": {
@@ -1016,7 +1078,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue"
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent"
                 }
             },
             "traits": {
@@ -1029,7 +1091,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue"
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent"
                 }
             },
             "traits": {
@@ -1042,7 +1104,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue"
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent"
                 }
             },
             "traits": {
@@ -1055,7 +1117,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue"
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent"
                 }
             },
             "traits": {
@@ -1141,7 +1203,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This operation allows you to request changes for your entities. Within a single\n            ChangeSet, you cannot start the same change type against the same entity multiple times.\n            Additionally, when a ChangeSet is running, all the entities targeted by the different\n            changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If \n            you try to start a ChangeSet containing a change against an entity that is already\n            locked, you will receive a <code>ResourceInUseException</code>.</p>\n\n\n        <p>For example, you cannot start the ChangeSet described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> below because it contains two changes to execute the same change\n            type (<code>AddRevisions</code>) against the same entity\n            (<code>entity-id@1)</code>.</p>",
+                "smithy.api#documentation": "<p>This operation allows you to request changes for your entities. Within a single\n            ChangeSet, you cannot start the same change type against the same entity multiple times.\n            Additionally, when a ChangeSet is running, all the entities targeted by the different\n            changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If \n            you try to start a ChangeSet containing a change against an entity that is already\n            locked, you will receive a <code>ResourceInUseException</code>.</p>\n\n        <p>For example, you cannot start the ChangeSet described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic, because it contains two changes to execute the same change\n            type (<code>AddRevisions</code>) against the same entity\n            (<code>entity-id@1)</code>.</p>\n        \n        <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\">\n            Working with change sets</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/StartChangeSet",
@@ -1197,14 +1259,11 @@
                 }
             }
         },
-        "com.amazonaws.marketplacecatalog#StringValue": {
-            "type": "string"
-        },
         "com.amazonaws.marketplacecatalog#ThrottlingException": {
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue"
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent"
                 }
             },
             "traits": {
@@ -1217,7 +1276,7 @@
             "type": "structure",
             "members": {
                 "Message": {
-                    "target": "com.amazonaws.marketplacecatalog#StringValue"
+                    "target": "com.amazonaws.marketplacecatalog#ExceptionMessageContent"
                 }
             },
             "traits": {
@@ -1229,13 +1288,23 @@
         "com.amazonaws.marketplacecatalog#ValueList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.marketplacecatalog#StringValue"
+                "target": "com.amazonaws.marketplacecatalog#FilterValueContent"
             },
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 10
                 }
+            }
+        },
+        "com.amazonaws.marketplacecatalog#VisibilityValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z]+$"
             }
         }
     }

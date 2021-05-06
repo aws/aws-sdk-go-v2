@@ -1,0 +1,9 @@
+{
+ "ID": "service.cloudfront-feature-1620332651340654000",
+ "SchemaVersion": 1,
+ "Module": "service/cloudfront",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}
