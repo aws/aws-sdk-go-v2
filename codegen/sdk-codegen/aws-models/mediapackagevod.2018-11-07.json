@@ -167,6 +167,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "IncludeEncoderConfigurationInSegments": {
+                    "target": "com.amazonaws.mediapackagevod#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
+                        "smithy.api#jsonName": "includeEncoderConfigurationInSegments"
+                    }
+                },
                 "SegmentDurationSeconds": {
                     "target": "com.amazonaws.mediapackagevod#__integer",
                     "traits": {
@@ -773,6 +780,13 @@
                     "target": "com.amazonaws.mediapackagevod#DashEncryption",
                     "traits": {
                         "smithy.api#jsonName": "encryption"
+                    }
+                },
+                "IncludeEncoderConfigurationInSegments": {
+                    "target": "com.amazonaws.mediapackagevod#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
+                        "smithy.api#jsonName": "includeEncoderConfigurationInSegments"
                     }
                 },
                 "PeriodTriggers": {

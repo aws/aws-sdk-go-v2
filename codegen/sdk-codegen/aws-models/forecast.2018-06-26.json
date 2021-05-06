@@ -76,6 +76,9 @@
                     "target": "com.amazonaws.forecast#DeletePredictorBacktestExportJob"
                 },
                 {
+                    "target": "com.amazonaws.forecast#DeleteResourceTree"
+                },
+                {
                     "target": "com.amazonaws.forecast#DescribeDataset"
                 },
                 {
@@ -1299,6 +1302,39 @@
                 }
             }
         },
+        "com.amazonaws.forecast#DeleteResourceTree": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.forecast#DeleteResourceTreeRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecast#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecast#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an entire resource tree. This operation will delete the parent resource and\n            its child resources.</p>\n        <p>Child resources are resources that were created from another resource. For example,\n            when a forecast is generated from a predictor, the forecast is the child resource and\n            the predictor is the parent resource.</p>\n        <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p>\n\n        <ul>\n            <li>\n                <p>\n                  <b>Dataset Group</b>: predictors, predictor backtest\n                    export jobs, forecasts, forecast export jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Dataset</b>: dataset import jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Predictor</b>: predictor backtest export jobs,\n                    forecasts, forecast export jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Forecast</b>: forecast export jobs</p>\n            </li>\n         </ul>\n        <note>\n            <p>\n               <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not\n                delete datasets or exported files stored in Amazon S3. </p>\n        </note>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.forecast#DeleteResourceTreeRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.forecast#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the parent resource to delete. All child resources\n            of the parent resource will also be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.forecast#DescribeDataset": {
             "type": "operation",
             "input": {
@@ -1487,7 +1523,7 @@
                 "EstimatedTimeRemainingInMinutes": {
                     "target": "com.amazonaws.forecast#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated time in minutes for the dataset import job to complete.</p>"
+                        "smithy.api#documentation": "<p>The estimated time remaining in minutes for the dataset import job to complete.</p>"
                     }
                 },
                 "FieldStatistics": {
@@ -1760,7 +1796,7 @@
                 "EstimatedTimeRemainingInMinutes": {
                     "target": "com.amazonaws.forecast#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated time in minutes for the forecast job to complete.</p>"
+                        "smithy.api#documentation": "<p>The estimated time remaining in minutes for the forecast job to complete.</p>"
                     }
                 },
                 "Status": {
@@ -1995,7 +2031,7 @@
                 "EstimatedTimeRemainingInMinutes": {
                     "target": "com.amazonaws.forecast#Long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The estimated time in minutes for the predictor training job to complete.</p>"
+                        "smithy.api#documentation": "<p>The estimated time remaining in minutes for the predictor training job to complete.</p>"
                     }
                 },
                 "DatasetImportJobArns": {

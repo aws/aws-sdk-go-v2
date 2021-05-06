@@ -10392,7 +10392,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 200
+                    "max": 50
                 }
             }
         },
@@ -10407,7 +10407,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 200
+                    "max": 50
                 }
             }
         },
@@ -11025,8 +11025,7 @@
                     "target": "com.amazonaws.connect#QueueMaxContacts",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The maximum number of contacts that can be in the queue before it is considered full.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The maximum number of contacts that can be in the queue before it is considered full.</p>"
                     }
                 }
             }

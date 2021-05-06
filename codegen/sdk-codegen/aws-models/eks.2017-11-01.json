@@ -44,6 +44,10 @@
                     {
                         "value": "AL2_ARM_64",
                         "name": "AL2_ARM_64"
+                    },
+                    {
+                        "value": "CUSTOM",
+                        "name": "CUSTOM"
                     }
                 ]
             }
@@ -3685,7 +3689,7 @@
             "type": "structure",
             "members": {
                 "minSize": {
-                    "target": "com.amazonaws.eks#Capacity",
+                    "target": "com.amazonaws.eks#ZeroCapacity",
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum number of nodes that the managed node group can scale in to. This number\n            must be greater than zero.</p>"
                     }
@@ -3697,7 +3701,7 @@
                     }
                 },
                 "desiredSize": {
-                    "target": "com.amazonaws.eks#Capacity",
+                    "target": "com.amazonaws.eks#ZeroCapacity",
                     "traits": {
                         "smithy.api#documentation": "<p>The current number of nodes that the managed node group should maintain.</p>"
                     }
@@ -4840,6 +4844,14 @@
                         "name": "PUBLIC_ACCESS_CIDRS"
                     },
                     {
+                        "value": "LaunchTemplateName",
+                        "name": "LAUNCH_TEMPLATE_NAME"
+                    },
+                    {
+                        "value": "LaunchTemplateVersion",
+                        "name": "LAUNCH_TEMPLATE_VERSION"
+                    },
+                    {
                         "value": "IdentityProviderConfig",
                         "name": "IDENTITY_PROVIDER_CONFIG"
                     },
@@ -5016,6 +5028,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An object representing an Amazon EKS cluster VPC configuration response.</p>"
+            }
+        },
+        "com.amazonaws.eks#ZeroCapacity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0
+                }
             }
         },
         "com.amazonaws.eks#configStatus": {

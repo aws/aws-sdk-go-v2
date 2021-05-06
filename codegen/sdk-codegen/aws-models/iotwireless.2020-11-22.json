@@ -4353,6 +4353,30 @@
         "com.amazonaws.iotwireless#MessageId": {
             "type": "string"
         },
+        "com.amazonaws.iotwireless#MessageType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Sidewalk device message type.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CUSTOM_COMMAND_ID_NOTIFY",
+                        "name": "CUSTOM_COMMAND_ID_NOTIFY"
+                    },
+                    {
+                        "value": "CUSTOM_COMMAND_ID_GET",
+                        "name": "CUSTOM_COMMAND_ID_GET"
+                    },
+                    {
+                        "value": "CUSTOM_COMMAND_ID_SET",
+                        "name": "CUSTOM_COMMAND_ID_SET"
+                    },
+                    {
+                        "value": "CUSTOM_COMMAND_ID_RESP",
+                        "name": "CUSTOM_COMMAND_ID_RESP"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotwireless#MinGwDiversity": {
             "type": "integer",
             "traits": {
@@ -5007,6 +5031,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The sequence number.</p>"
                     }
+                },
+                "MessageType": {
+                    "target": "com.amazonaws.iotwireless#MessageType"
                 }
             },
             "traits": {

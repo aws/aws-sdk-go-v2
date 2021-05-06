@@ -715,7 +715,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 100
+                    "max": 360
                 }
             }
         },
@@ -963,6 +963,12 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
+                    }
+                },
+                "CalendarNames": {
+                    "target": "com.amazonaws.ssm#CalendarNameOrARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type \n  documents your associations are gated under. The associations only run when that Change \n  Calendar is open. For more information, see \n  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>"
                     }
                 },
                 "TargetLocations": {
@@ -1646,6 +1652,12 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
+                    }
+                },
+                "CalendarNames": {
+                    "target": "com.amazonaws.ssm#CalendarNameOrARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type \n  documents your associations are gated under. The associations for this version only run when \n  that Change Calendar is open.  For more information, see \n  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>"
                     }
                 },
                 "TargetLocations": {
@@ -4239,6 +4251,12 @@
                         "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
                     }
                 },
+                "CalendarNames": {
+                    "target": "com.amazonaws.ssm#CalendarNameOrARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type \n  documents your associations are gated under. The associations only run when that Change \n  Calendar is open.  For more information, see \n  <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>"
+                    }
+                },
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
@@ -4352,7 +4370,13 @@
                 "ApplyOnlyAtCronInterval": {
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
-                        "smithy.api#documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
+                        "smithy.api#documentation": "<p>By default, when you create a new association, the system runs it immediately after it is\n   created and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you create it. This parameter is not supported for rate\n   expressions.</p>"
+                    }
+                },
+                "CalendarNames": {
+                    "target": "com.amazonaws.ssm#CalendarNameOrARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type\n   documents you want to gate your associations under. The associations only run when that Change\n   Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change\n    Calendar</a>.</p>"
                     }
                 },
                 "TargetLocations": {
@@ -9262,7 +9286,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\w+=,.@-]+"
+                "smithy.api#pattern": "[\\w+=,.@/-]+"
             }
         },
         "com.amazonaws.ssm#ExpirationDate": {
@@ -23569,6 +23593,12 @@
                     "target": "com.amazonaws.ssm#ApplyOnlyAtCronInterval",
                     "traits": {
                         "smithy.api#documentation": "<p>By default, when you update an association, the system runs it immediately after it is\n   updated and then according to the schedule you specified. Specify this option if you don't want\n   an association to run immediately after you update it. This parameter is not supported for rate\n   expressions.</p>\n         <p>Also, if you specified this option when you created the association, you can reset it. To do\n   so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the\n   association from the command line. This parameter forces the association to run immediately after\n   updating it and according to the interval specified.</p>"
+                    }
+                },
+                "CalendarNames": {
+                    "target": "com.amazonaws.ssm#CalendarNameOrARNList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type\n   documents you want to gate your associations under. The associations only run when that Change\n   Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change\n    Calendar</a>.</p>"
                     }
                 },
                 "TargetLocations": {

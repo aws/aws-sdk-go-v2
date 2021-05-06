@@ -846,6 +846,35 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.chime#BatchChannelMemberships": {
+            "type": "structure",
+            "members": {
+                "InvitedBy": {
+                    "target": "com.amazonaws.chime#Identity"
+                },
+                "Type": {
+                    "target": "com.amazonaws.chime#ChannelMembershipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The membership types set for the channel users.</p>"
+                    }
+                },
+                "Members": {
+                    "target": "com.amazonaws.chime#Members",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The users successfully added to the request.</p>"
+                    }
+                },
+                "ChannelArn": {
+                    "target": "com.amazonaws.chime#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel to which you're adding users.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The membership information, including member ARNs, the channel ARN, and membership types.</p>"
+            }
+        },
         "com.amazonaws.chime#BatchCreateAttendee": {
             "type": "operation",
             "input": {
@@ -928,6 +957,128 @@
                     "target": "com.amazonaws.chime#BatchCreateAttendeeErrorList",
                     "traits": {
                         "smithy.api#documentation": "<p>If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#BatchCreateChannelMembership": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chime#BatchCreateChannelMembershipRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chime#BatchCreateChannelMembershipResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chime#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a specified number of users to a channel. </p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "messaging-"
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/channels/{ChannelArn}/memberships?operation=batch-create",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chime#BatchCreateChannelMembershipError": {
+            "type": "structure",
+            "members": {
+                "MemberArn": {
+                    "target": "com.amazonaws.chime#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the member that the service couldn't add.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "com.amazonaws.chime#ErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.chime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of failed member ARNs, error codes, and error messages.</p>"
+            }
+        },
+        "com.amazonaws.chime#BatchCreateChannelMembershipErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#BatchCreateChannelMembershipError"
+            }
+        },
+        "com.amazonaws.chime#BatchCreateChannelMembershipRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelArn": {
+                    "target": "com.amazonaws.chime#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the channel to which you're adding users.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.chime#ChannelMembershipType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of \n            <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals \n            <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.</p>"
+                    }
+                },
+                "MemberArns": {
+                    "target": "com.amazonaws.chime#MemberArns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARNs of the members you want to add to the channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChimeBearer": {
+                    "target": "com.amazonaws.chime#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p>\n        <p></p>",
+                        "smithy.api#httpHeader": "x-amz-chime-bearer"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#BatchCreateChannelMembershipResponse": {
+            "type": "structure",
+            "members": {
+                "BatchChannelMemberships": {
+                    "target": "com.amazonaws.chime#BatchChannelMemberships",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of channel memberships in the response.</p>"
+                    }
+                },
+                "Errors": {
+                    "target": "com.amazonaws.chime#BatchCreateChannelMembershipErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.</p>"
                     }
                 }
             }
@@ -1248,7 +1399,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nUpdates phone number product types or calling names. You can update one attribute at a time for each \n<code>UpdatePhoneNumberRequestItem</code>\n. For example, you can update either the product type or the calling name.\n</p>\n         <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector.\n            For toll-free numbers, you must use the Amazon Chime Voice Connector product\n            type.</p>\n         <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>",
+                "smithy.api#documentation": "<p>Updates phone number product types or calling names. You can update one attribute at a time for each \n        <code>UpdatePhoneNumberRequestItem</code>. For example, you can update the product type or the calling name.</p>\n        \n         <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For\n            numbers outside the\n            US,\n            you must use the Amazon Chime SIP Media Application Dial-In product type.</p>\n        \n         <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you \n            can request another update.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-numbers?operation=batch-update",
@@ -3200,7 +3351,7 @@
                 "JoinToken": {
                     "target": "com.amazonaws.chime#JoinTokenString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Token used by the Amazon Chime SDK attendee. Call the \n    <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.htmlCreateAttendee\">CreateAttendee</a> action to \n    get a join token.</p>",
+                        "smithy.api#documentation": "<p>Token used by the Amazon Chime SDK attendee. Call the \n    <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html\">CreateAttendee</a> action to \n    get a join token.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3424,7 +3575,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling\n            and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the\n            Amazon Chime Voice Connector product type.</p>",
+                "smithy.api#documentation": "<p>Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot\n            use the Amazon Chime Business Calling product type. For numbers outside the\n            US,\n            you must use the Amazon Chime SIP Media Application Dial-In product type.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-number-orders",
@@ -3834,14 +3985,14 @@
                 "FromPhoneNumber": {
                     "target": "com.amazonaws.chime#E164PhoneNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The phone number that a user calls from.</p>",
+                        "smithy.api#documentation": "<p>The phone number that a user calls from. This is a phone number in your Amazon Chime phone number inventory.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ToPhoneNumber": {
                     "target": "com.amazonaws.chime#E164PhoneNumber",
                     "traits": {
-                        "smithy.api#documentation": "<p>The phone number that the user dials in order to connect to a meeting.</p>",
+                        "smithy.api#documentation": "<p>The phone number that the service should call.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4336,7 +4487,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting\n                <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action\n            to dodo.</p>\n\n         <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the\n            claimed domains for your Amazon Chime account before deletion. As soon as you release\n            the domain, all users under that account are suspended.</p>\n\n         <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore\n            deleted account from your <code>Disabled</code> accounts list, you must contact AWS\n            Support.</p>\n\n         <p>\nAfter 90 days, deleted accounts are permanently removed from your \n<code>Disabled</code>\naccounts list.\n</p>",
+                "smithy.api#documentation": "<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting\n                <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action\n            to dodo.</p>\n\n         <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the\n            claimed domains for your Amazon Chime account before deletion. As soon as you release\n            the domain, all users under that account are suspended.</p>\n\n         <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore\n            deleted account from your <code>Disabled</code> accounts list, you must contact AWS\n            Support.</p>\n\n         <p>After 90 days, deleted accounts are permanently removed from your \n<code>Disabled</code> accounts list.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/accounts/{AccountId}",
@@ -4601,7 +4752,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDeletes an attendee from the specified Amazon Chime SDK meeting and deletes their \n<code>JoinToken</code>\n. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see \n<a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a>\nin the \n<i>Amazon Chime Developer Guide</i>\n.\n</p>",
+                "smithy.api#documentation": "<p>Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their \n<code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see \n<a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a>\nin the <i>Amazon Chime Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/meetings/{MeetingId}/attendees/{AttendeeId}",
@@ -4740,6 +4891,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.chime#ForbiddenException"
@@ -5031,7 +5185,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are\n            also deleted, clients connected to the meeting are disconnected, and clients can no\n            longer join the meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime\n                SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from \n    joining the meeting. For more information about the Amazon Chime SDK, see \n    <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the \n    <i>Amazon Chime Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/meetings/{MeetingId}",
@@ -5081,7 +5235,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Moves the specified phone number into the <b>Deletionqueue</b>. A\n            phone number must be disassociated from any users or Amazon Chime Voice Connectors\n            before it can be deleted.</p>\n\n         <p>\nDeleted phone numbers remain in the \n<b>Deletion queue</b>\nfor 7 days before they are deleted permanently.\n</p>",
+                "smithy.api#documentation": "<p>Moves the specified phone number into the <b>Deletion\n                queue</b>. A phone number must be disassociated from any\n            users or Amazon Chime Voice Connectors before it can be deleted.</p>\n\n         <p>Deleted phone numbers remain in the \n<b>Deletion queue</b>\nfor 7 days before they are deleted permanently.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/phone-numbers/{PhoneNumberId}",
@@ -5512,7 +5666,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nDeletes the specified Amazon Chime Voice Connector group. Any \n<code>VoiceConnectorItems</code>\nand phone numbers associated with the group must be removed before it can be deleted.\n</p>",
+                "smithy.api#documentation": "<p>Deletes the specified Amazon Chime Voice Connector group. Any \n<code>VoiceConnectorItems</code>\nand phone numbers associated with the group must be removed before it can be deleted.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/voice-connector-groups/{VoiceConnectorGroupId}",
@@ -6120,7 +6274,7 @@
                 "ChannelBan": {
                     "target": "com.amazonaws.chime#ChannelBan",
                     "traits": {
-                        "smithy.api#documentation": "<p>The the details of the ban.</p>"
+                        "smithy.api#documentation": "<p>The details of\n            the ban.</p>"
                     }
                 }
             }
@@ -9258,7 +9412,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts\n            by account name prefix. To find out which Amazon Chime account a user belongs to, toucan\n            filter by the user's email address, which returns one account result.</p>",
+                "smithy.api#documentation": "<p>Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts\n            by account name prefix. To find out which Amazon Chime account a user belongs to, you can\n            filter by the user's email address, which returns one account result.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts",
@@ -10018,7 +10172,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an\n                <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their\n            own. </p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an\n                <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their\n            own. </p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10177,7 +10331,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>.\n            By default, sorted by creation timestamp in descending order .</p>\n\n         <note>\n            <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted.\n                Deleted messages do not appear in the results. This action always returns the latest\n                version of an edited message.</p>\n            <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the \n        value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>.\n            By default, sorted by creation timestamp in descending\n            order.</p>\n\n         <note>\n            <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted.\n                Deleted messages do not appear in the results. This action always returns the latest\n                version of an edited message.</p>\n            <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the \n        value in the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10402,7 +10556,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p>\n\n         <p class=\"title\">\n            <b>Functionality & restrictions</b>\n         </p>\n         <ul>\n            <li>\n\n               <p>\nUse privacy = \n<code>PUBLIC</code>\nto retrieve all public channels in the account\n</p>\n            </li>\n            <li>\n\n               <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the\n                    private channels in an account.</p>\n            </li>\n         </ul>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p>\n\n         <p class=\"title\">\n            <b>Functionality & restrictions</b>\n         </p>\n         <ul>\n            <li>\n               <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p>\n            </li>\n            <li>\n               <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the\n                    private channels in an account.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10527,7 +10681,7 @@
                 "Privacy": {
                     "target": "com.amazonaws.chime#ChannelPrivacy",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe privacy setting. \n<code>PUBLIC</code>\nretrieves all the public channels. \n<code>PRIVATE</code>\nretrieves private channels. Only an <code>AppInstanceAdmin</code> can retrieve private channels.\n</p>",
+                        "smithy.api#documentation": "<p>The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an \n    <code>AppInstanceAdmin</code> can retrieve private channels.\n</p>",
                         "smithy.api#httpQuery": "privacy"
                     }
                 },
@@ -11352,6 +11506,70 @@
                 }
             }
         },
+        "com.amazonaws.chime#ListSupportedPhoneNumberCountries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chime#ListSupportedPhoneNumberCountriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chime#ListSupportedPhoneNumberCountriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chime#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.chime#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chime#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chime#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists supported phone number countries.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/phone-number-countries",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chime#ListSupportedPhoneNumberCountriesRequest": {
+            "type": "structure",
+            "members": {
+                "ProductType": {
+                    "target": "com.amazonaws.chime#PhoneNumberProductType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number product type.</p>",
+                        "smithy.api#httpQuery": "product-type",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chime#ListSupportedPhoneNumberCountriesResponse": {
+            "type": "structure",
+            "members": {
+                "PhoneNumberCountries": {
+                    "target": "com.amazonaws.chime#PhoneNumberCountriesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported phone number countries.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.chime#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -11899,7 +12117,7 @@
                 "MediaRegion": {
                     "target": "com.amazonaws.chime#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Region in which you create the meeting. Available values: <code>af-south-1</code> ,\n                <code>ap-northeast-1</code> , <code>ap-northeast-2</code> , <code>ap-south-1</code>\n            , <code>ap-southeast-1</code> , <code>ap-southeast-2</code> , <code>ca-central-1</code>\n            , <code>eu-central-1</code> , <code>eu-north-1</code> , <code>eu-south-1</code> ,\n                <code>eu-west-1</code> , <code>eu-west-2</code> , <code>eu-west-3</code> ,\n                <code>sa-east-1</code> , <code>us-east-1</code> , <code>us-east-2</code> ,\n                <code>us-west-1</code> , <code>us-west-2</code> . </p>"
+                        "smithy.api#documentation": "<p>The Region in which you create the meeting. Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, \n    <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, \n    <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>,\n                <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>,\n                <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>,\n                <code>us-west-1</code>, <code>us-west-2</code>.</p>"
                     }
                 }
             },
@@ -11995,6 +12213,18 @@
                 "smithy.api#documentation": "<p>The member details, such as email address, name, member ID, and member type.</p>"
             }
         },
+        "com.amazonaws.chime#MemberArns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#ChimeArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.chime#MemberError": {
             "type": "structure",
             "members": {
@@ -12044,6 +12274,12 @@
                         "name": "Webhook"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.chime#Members": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#Identity"
             }
         },
         "com.amazonaws.chime#MembershipItem": {
@@ -12437,6 +12673,12 @@
                         "smithy.api#documentation": "<p>The phone number, in E.164 format.</p>"
                     }
                 },
+                "Country": {
+                    "target": "com.amazonaws.chime#Alpha2CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number country. Format: ISO 3166-1 alpha-2.</p>"
+                    }
+                },
                 "Type": {
                     "target": "com.amazonaws.chime#PhoneNumberType",
                     "traits": {
@@ -12605,6 +12847,32 @@
                 "smithy.api#documentation": "<p>The phone number capabilities for Amazon Chime Business Calling phone numbers, such as enabled\n            inbound and outbound calling and text messaging.</p>"
             }
         },
+        "com.amazonaws.chime#PhoneNumberCountriesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#PhoneNumberCountry"
+            }
+        },
+        "com.amazonaws.chime#PhoneNumberCountry": {
+            "type": "structure",
+            "members": {
+                "CountryCode": {
+                    "target": "com.amazonaws.chime#Alpha2CountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number country code. Format: ISO 3166-1 alpha-2.</p>"
+                    }
+                },
+                "SupportedPhoneNumberTypes": {
+                    "target": "com.amazonaws.chime#PhoneNumberTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The supported phone number types. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The phone number country.</p>"
+            }
+        },
         "com.amazonaws.chime#PhoneNumberError": {
             "type": "structure",
             "members": {
@@ -12737,6 +13005,10 @@
                     {
                         "value": "VoiceConnector",
                         "name": "VoiceConnector"
+                    },
+                    {
+                        "value": "SipMediaApplicationDialIn",
+                        "name": "SipMediaApplicationDialIn"
                     }
                 ]
             }
@@ -12793,6 +13065,12 @@
                         "name": "TollFree"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.chime#PhoneNumberTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chime#PhoneNumberType"
             }
         },
         "com.amazonaws.chime#Port": {
@@ -14540,11 +14818,16 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches phone numbers that can be ordered.</p>",
+                "smithy.api#documentation": "<p>Searches for phone numbers that can be ordered. For\n            US\n            numbers, provide at least one of the following search filters: <code>AreaCode</code>,\n                <code>City</code>, <code>State</code>, or <code>TollFreePrefix</code>. If you\n            provide <code>City</code>, you must also provide <code>State</code>. Numbers outside the\n            US\n            only support the <code>PhoneNumberType</code> filter, which you must use.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/search?type=phone-numbers",
                     "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             }
         },
@@ -14554,36 +14837,43 @@
                 "AreaCode": {
                     "target": "com.amazonaws.chime#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The area code used to filter results.</p>",
+                        "smithy.api#documentation": "<p>The area code used to filter results. Only applies to the\n            US.</p>",
                         "smithy.api#httpQuery": "area-code"
                     }
                 },
                 "City": {
                     "target": "com.amazonaws.chime#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The city used to filter results.</p>",
+                        "smithy.api#documentation": "<p>The city used to filter results. Only applies to the\n            US.</p>",
                         "smithy.api#httpQuery": "city"
                     }
                 },
                 "Country": {
-                    "target": "com.amazonaws.chime#String",
+                    "target": "com.amazonaws.chime#Alpha2CountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The country used to filter results.</p>",
+                        "smithy.api#documentation": "<p>The country used to filter results. Defaults to the\n            US\n            Format: ISO 3166-1 alpha-2.</p>",
                         "smithy.api#httpQuery": "country"
                     }
                 },
                 "State": {
                     "target": "com.amazonaws.chime#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state used to filter results.</p>",
+                        "smithy.api#documentation": "<p>The state used to filter results. Required only if you provide <code>City</code>. Only\n            applies to the\n            US.</p>",
                         "smithy.api#httpQuery": "state"
                     }
                 },
                 "TollFreePrefix": {
                     "target": "com.amazonaws.chime#TollFreePrefix",
                     "traits": {
-                        "smithy.api#documentation": "<p>The toll-free prefix that you use to filter results.</p>",
+                        "smithy.api#documentation": "<p>The toll-free prefix that you use to filter results. Only applies to the\n            US.</p>",
                         "smithy.api#httpQuery": "toll-free-prefix"
+                    }
+                },
+                "PhoneNumberType": {
+                    "target": "com.amazonaws.chime#PhoneNumberType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phone number type used to filter results. Required for\n            non-US\n            numbers.</p>",
+                        "smithy.api#httpQuery": "phone-number-type"
                     }
                 },
                 "MaxResults": {
@@ -14596,7 +14886,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.chime#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results.</p>",
+                        "smithy.api#documentation": "<p>The token used to retrieve the next page of results.</p>",
                         "smithy.api#httpQuery": "next-token"
                     }
                 }
@@ -14609,6 +14899,12 @@
                     "target": "com.amazonaws.chime#E164PhoneNumberList",
                     "traits": {
                         "smithy.api#documentation": "<p>List of phone numbers, in E.164 format.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chime#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to retrieve the next page of search results.</p>"
                     }
                 }
             }
@@ -15508,6 +15804,9 @@
                     "target": "com.amazonaws.chime#BatchCreateAttendee"
                 },
                 {
+                    "target": "com.amazonaws.chime#BatchCreateChannelMembership"
+                },
+                {
                     "target": "com.amazonaws.chime#BatchCreateRoomMembership"
                 },
                 {
@@ -15878,6 +16177,9 @@
                 },
                 {
                     "target": "com.amazonaws.chime#ListSipRules"
+                },
+                {
+                    "target": "com.amazonaws.chime#ListSupportedPhoneNumberCountries"
                 },
                 {
                     "target": "com.amazonaws.chime#ListTagsForResource"
@@ -16987,7 +17289,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p>\n         <p>For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p>\n         <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>",
+                "smithy.api#documentation": "<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number \n        detail at a time. For example, you can update either the product type or the calling name in one action.</p>\n        \n         <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the \n        Amazon Chime SIP Media Application Dial-In product type.</p>\n        \n         <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you \n         can request another update.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/phone-numbers/{PhoneNumberId}",
@@ -17044,7 +17346,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nThe phone number ID, product type, or calling name fields to update, used with the \n<a>BatchUpdatePhoneNumber</a>\nand \n<a>UpdatePhoneNumber</a>\nactions.\n</p>"
+                "smithy.api#documentation": "<p>The phone number ID, product type, or calling name fields to update, used with the \n<a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.</p>"
             }
         },
         "com.amazonaws.chime#UpdatePhoneNumberRequestItemList": {
@@ -17636,7 +17938,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nThe user ID and user fields to update, used with the \n<a>BatchUpdateUser</a>\naction.\n</p>"
+                "smithy.api#documentation": "<p>The user ID and user fields to update, used with the \n<a>BatchUpdateUser</a> action.</p>"
             }
         },
         "com.amazonaws.chime#UpdateUserRequestItemList": {
@@ -17831,7 +18133,7 @@
                 "VoiceConnectorItems": {
                     "target": "com.amazonaws.chime#VoiceConnectorItemList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\nThe \n<code>VoiceConnectorItems</code>\nto associate with the group.\n</p>",
+                        "smithy.api#documentation": "<p>The <code>VoiceConnectorItems</code> to associate with the group.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -18040,9 +18342,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 50
+                    "max": 64
                 },
-                "smithy.api#pattern": "[A-Za-z0-9][A-Za-z0-9\\:\\-\\_\\.\\@]{3,50}[A-Za-z0-9]",
+                "smithy.api#pattern": "[A-Za-z0-9]([A-Za-z0-9\\:\\-\\_\\.\\@]{0,62}[A-Za-z0-9])?",
                 "smithy.api#sensitive": {}
             }
         },
@@ -18242,7 +18544,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\nFor Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 \n<code>VoiceConnectorItems</code>\nper Amazon Chime Voice Connector group.\n</p>"
+                "smithy.api#documentation": "<p>For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 \n<code>VoiceConnectorItems</code>\nper Amazon Chime Voice Connector group.</p>"
             }
         },
         "com.amazonaws.chime#VoiceConnectorItemList": {

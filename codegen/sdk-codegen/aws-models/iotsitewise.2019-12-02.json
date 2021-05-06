@@ -143,6 +143,9 @@
                     "target": "com.amazonaws.iotsitewise#GetAssetPropertyValueHistory"
                 },
                 {
+                    "target": "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValues"
+                },
+                {
                     "target": "com.amazonaws.iotsitewise#ListAccessPolicies"
                 },
                 {
@@ -4883,6 +4886,160 @@
                 }
             }
         },
+        "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValues": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValuesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValuesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotsitewise#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotsitewise#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Get interpolated values for an asset property for a specified time interval, during a\n      period of time. For example, you can use the this operation to return the interpolated temperature values for a wind turbine every 24 hours \n      over a duration of 7 days.</p>\n      \n         <p>To identify an asset property, you must specify one of the following:</p>\n         <ul>\n            <li>\n               <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p>\n            </li>\n            <li>\n               <p>A <code>propertyAlias</code>, which is a data stream alias (for example,\n          <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "data."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/properties/interpolated",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValuesRequest": {
+            "type": "structure",
+            "members": {
+                "assetId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset.</p>",
+                        "smithy.api#httpQuery": "assetId"
+                    }
+                },
+                "propertyId": {
+                    "target": "com.amazonaws.iotsitewise#ID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the asset property.</p>",
+                        "smithy.api#httpQuery": "propertyId"
+                    }
+                },
+                "propertyAlias": {
+                    "target": "com.amazonaws.iotsitewise#AssetPropertyAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property alias that identifies the property, such as an OPC-UA server data stream path\n        (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see\n        <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the\n        <i>AWS IoT SiteWise User Guide</i>.</p>",
+                        "smithy.api#httpQuery": "propertyAlias"
+                    }
+                },
+                "startTimeInSeconds": {
+                    "target": "com.amazonaws.iotsitewise#TimeInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exclusive start of the range from which to interpolate data, expressed in seconds in\n      Unix epoch time.</p>",
+                        "smithy.api#httpQuery": "startTimeInSeconds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "startTimeOffsetInNanos": {
+                    "target": "com.amazonaws.iotsitewise#OffsetInNanos",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nanosecond offset converted from <code>startTimeInSeconds</code>.</p>",
+                        "smithy.api#httpQuery": "startTimeOffsetInNanos"
+                    }
+                },
+                "endTimeInSeconds": {
+                    "target": "com.amazonaws.iotsitewise#TimeInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The inclusive end of the range from which to interpolate data, expressed in seconds in\n      Unix epoch time.</p>",
+                        "smithy.api#httpQuery": "endTimeInSeconds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "endTimeOffsetInNanos": {
+                    "target": "com.amazonaws.iotsitewise#OffsetInNanos",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nanosecond offset converted from <code>endTimeInSeconds</code>.</p>",
+                        "smithy.api#httpQuery": "endTimeOffsetInNanos"
+                    }
+                },
+                "quality": {
+                    "target": "com.amazonaws.iotsitewise#Quality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quality of the asset property value. You can use this parameter as a filter to choose\n      only the asset property values that have a specific quality.</p>",
+                        "smithy.api#httpQuery": "quality",
+                        "smithy.api#required": {}
+                    }
+                },
+                "intervalInSeconds": {
+                    "target": "com.amazonaws.iotsitewise#IntervalInSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time interval in seconds over which to interpolate data. Each interval starts when the\n      previous one ends.</p>",
+                        "smithy.api#httpQuery": "intervalInSeconds",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotsitewise#MaxInterpolatedResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request. \n      If not specified, the default value is 10.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.iotsitewise#InterpolationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The interpolation type.</p>\n         <p>Valid values: <code>LINEAR_INTERPOLATION</code>\n         </p>",
+                        "smithy.api#httpQuery": "type",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotsitewise#GetInterpolatedAssetPropertyValuesResponse": {
+            "type": "structure",
+            "members": {
+                "interpolatedAssetPropertyValues": {
+                    "target": "com.amazonaws.iotsitewise#InterpolatedAssetPropertyValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The requested interpolated values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotsitewise#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotsitewise#Greengrass": {
             "type": "structure",
             "members": {
@@ -4919,7 +5076,7 @@
                 "arn": {
                     "target": "com.amazonaws.iotsitewise#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns\">IAM ARNs</a> in the\n      <i>IAM User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the\n      <i>IAM User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4934,7 +5091,7 @@
                 "arn": {
                     "target": "com.amazonaws.iotsitewise#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM user. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the\n        <i>IAM User Guide</i>.</p>\n         <note>\n            <p>If you delete the IAM user, access policies that contain this identity include an\n        empty <code>arn</code>. You can delete the access policy for the IAM user that no longer\n        exists.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM user. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the\n      <i>IAM User Guide</i>.</p>\n         <note>\n            <p>If you delete the IAM user, access policies that contain this identity include an\n        empty <code>arn</code>. You can delete the access policy for the IAM user that no longer\n        exists.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5123,6 +5280,41 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.iotsitewise#InterpolatedAssetPropertyValue": {
+            "type": "structure",
+            "members": {
+                "timestamp": {
+                    "target": "com.amazonaws.iotsitewise#TimeInNanos",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.iotsitewise#Variant",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an interpolated asset property value.</p>"
+            }
+        },
+        "com.amazonaws.iotsitewise#InterpolatedAssetPropertyValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotsitewise#InterpolatedAssetPropertyValue"
+            }
+        },
+        "com.amazonaws.iotsitewise#InterpolationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.iotsitewise#Interval": {
             "type": "string",
             "traits": {
@@ -5131,6 +5323,16 @@
                     "max": 3
                 },
                 "smithy.api#pattern": "1w|1d|1h|15m|5m|1m"
+            }
+        },
+        "com.amazonaws.iotsitewise#IntervalInSeconds": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 320000000
+                }
             }
         },
         "com.amazonaws.iotsitewise#InvalidRequestException": {
@@ -6146,6 +6348,15 @@
                 "smithy.api#pattern": "[^\\u0000-\\u001F\\u007F]+"
             }
         },
+        "com.amazonaws.iotsitewise#MaxInterpolatedResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.iotsitewise#MaxResults": {
             "type": "integer",
             "traits": {
@@ -6263,7 +6474,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2048
+                    "max": 4096
                 },
                 "smithy.api#pattern": "[A-Za-z0-9+/=]+"
             }

@@ -1893,6 +1893,13 @@
                         "smithy.api#documentation": "<p>A string containing one or more DNS names (or IP) and Sasl Scram port pairs.</p>",
                         "smithy.api#jsonName": "bootstrapBrokerStringSaslScram"
                     }
+                },
+                "BootstrapBrokerStringSaslIam": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerStringSaslIam"
+                    }
                 }
             }
         },
@@ -1958,6 +1965,21 @@
                         "smithy.api#jsonName": "compatibleKafkaVersions"
                     }
                 }
+            }
+        },
+        "com.amazonaws.kafka#Iam": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether IAM access control is enabled.</p>",
+                        "smithy.api#jsonName": "enabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for IAM access control.</p>"
             }
         },
         "com.amazonaws.kafka#InternalServerErrorException": {
@@ -3185,6 +3207,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details for SASL/SCRAM client authentication.</p>",
                         "smithy.api#jsonName": "scram"
+                    }
+                },
+                "Iam": {
+                    "target": "com.amazonaws.kafka#Iam",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether IAM access control is enabled.</p>",
+                        "smithy.api#jsonName": "iam"
                     }
                 }
             },
