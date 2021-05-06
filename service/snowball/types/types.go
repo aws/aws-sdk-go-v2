@@ -334,6 +334,9 @@ type JobMetadata struct {
 	// action in AWS KMS.
 	KmsKeyARN *string
 
+	// The ID of the long term pricing type for the device.
+	LongTermPricingId *string
+
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings
 	// associated with a specific job. The Notification object is returned as a part of
 	// the response syntax of the DescribeJob action in the JobMetadata data type.
@@ -354,7 +357,11 @@ type JobMetadata struct {
 
 	// The Snow device capacity preference for this job, specified at job creation. In
 	// US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions
-	// use 80 TB capacity Snowballs.
+	// use 80 TB capacity Snowballs. For more information, see
+	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
+	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballCapacityPreference SnowballCapacity
 
 	// The type of device used with this job.
@@ -404,6 +411,42 @@ type LambdaResource struct {
 	// An Amazon Resource Name (ARN) that represents an AWS Lambda function to be
 	// triggered by PUT object actions on the associated local Amazon S3 resource.
 	LambdaArn *string
+}
+
+// Each LongTermPricingListEntry object contains information about a long term
+// pricing type.
+type LongTermPricingListEntry struct {
+
+	// The current active jobs on the device the long term pricing type.
+	CurrentActiveJob *string
+
+	// If set to true, specifies that the current long term pricing type for the device
+	// should be automatically renewed before the long term pricing contract expires.
+	IsLongTermPricingAutoRenew *bool
+
+	// The IDs of the jobs that are associated with a long term pricing type.
+	JobIds []string
+
+	// The end date the long term pricing contract.
+	LongTermPricingEndDate *time.Time
+
+	// The ID of the long term pricing type for the device.
+	LongTermPricingId *string
+
+	// The start date of the long term pricing contract.
+	LongTermPricingStartDate *time.Time
+
+	// The status of the long term pricing type.
+	LongTermPricingStatus *string
+
+	// The type of long term pricing that was selected for the device.
+	LongTermPricingType LongTermPricingType
+
+	// A new device that replaces a device that is ordered with long term pricing.
+	ReplacementJob *string
+
+	// The type of AWS Snow Family device associated with this long term pricing job.
+	SnowballType SnowballType
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) notification settings

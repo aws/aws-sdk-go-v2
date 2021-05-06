@@ -20,6 +20,27 @@ func (AdminStatus) Values() []AdminStatus {
 	}
 }
 
+type AllowsUnencryptedObjectUploads string
+
+// Enum values for AllowsUnencryptedObjectUploads
+const (
+	AllowsUnencryptedObjectUploadsTrue    AllowsUnencryptedObjectUploads = "TRUE"
+	AllowsUnencryptedObjectUploadsFalse   AllowsUnencryptedObjectUploads = "FALSE"
+	AllowsUnencryptedObjectUploadsUnknown AllowsUnencryptedObjectUploads = "UNKNOWN"
+)
+
+// Values returns all known values for AllowsUnencryptedObjectUploads. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (AllowsUnencryptedObjectUploads) Values() []AllowsUnencryptedObjectUploads {
+	return []AllowsUnencryptedObjectUploads{
+		"TRUE",
+		"FALSE",
+		"UNKNOWN",
+	}
+}
+
 type Currency string
 
 // Enum values for Currency

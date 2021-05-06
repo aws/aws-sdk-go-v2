@@ -80,10 +80,6 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			"cn-north-1":     endpoints.Endpoint{},
-			"cn-northwest-1": endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-iso",
@@ -94,9 +90,6 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			"us-iso-east-1": endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-iso-b",
@@ -107,9 +100,6 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			"us-isob-east-1": endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-us-gov",

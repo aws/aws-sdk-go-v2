@@ -230,6 +230,26 @@ func (m *validateOpGetIntegration) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMatches struct {
+}
+
+func (*validateOpGetMatches) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMatches) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMatchesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMatchesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetProfileObjectType struct {
 }
 
@@ -365,6 +385,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpMergeProfiles struct {
+}
+
+func (*validateOpMergeProfiles) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpMergeProfiles) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*MergeProfilesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpMergeProfilesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -574,6 +614,10 @@ func addOpGetIntegrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIntegration{}, middleware.After)
 }
 
+func addOpGetMatchesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMatches{}, middleware.After)
+}
+
 func addOpGetProfileObjectTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProfileObjectType{}, middleware.After)
 }
@@ -600,6 +644,10 @@ func addOpListProfileObjectTypesValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpMergeProfilesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpMergeProfiles{}, middleware.After)
 }
 
 func addOpPutIntegrationValidationMiddleware(stack *middleware.Stack) error {
@@ -680,6 +728,21 @@ func validateMarketoSourceProperties(v *types.MarketoSourceProperties) error {
 	invalidParams := smithy.InvalidParamsError{Context: "MarketoSourceProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMatchingRequest(v *types.MatchingRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MatchingRequest"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -929,6 +992,11 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	if v.DefaultExpirationDays == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DefaultExpirationDays"))
 	}
+	if v.Matching != nil {
+		if err := validateMatchingRequest(v.Matching); err != nil {
+			invalidParams.AddNested("Matching", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1101,6 +1169,21 @@ func validateOpGetIntegrationInput(v *GetIntegrationInput) error {
 	}
 }
 
+func validateOpGetMatchesInput(v *GetMatchesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMatchesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetProfileObjectTypeInput(v *GetProfileObjectTypeInput) error {
 	if v == nil {
 		return nil
@@ -1207,6 +1290,27 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpMergeProfilesInput(v *MergeProfilesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MergeProfilesInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.MainProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MainProfileId"))
+	}
+	if v.ProfileIdsToBeMerged == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProfileIdsToBeMerged"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1344,6 +1448,11 @@ func validateOpUpdateDomainInput(v *UpdateDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.Matching != nil {
+		if err := validateMatchingRequest(v.Matching); err != nil {
+			invalidParams.AddNested("Matching", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

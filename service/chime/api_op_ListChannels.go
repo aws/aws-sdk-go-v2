@@ -16,7 +16,7 @@ import (
 // specify filters to narrow results. Functionality & restrictions
 //
 // * Use privacy =
-// PUBLIC to retrieve all public channels in the account
+// PUBLIC to retrieve all public channels in the account.
 //
 // * Only an
 // AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an

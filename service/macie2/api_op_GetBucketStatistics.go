@@ -44,12 +44,16 @@ type GetBucketStatisticsOutput struct {
 	// of permissions settings for each bucket.
 	BucketCountByEffectivePermission *types.BucketCountByEffectivePermission
 
-	// The total number of buckets, grouped by default server-side encryption type.
-	// This object also reports the total number of buckets that don't encrypt new
-	// objects by default.
+	// The total number of buckets that use certain types of server-side encryption to
+	// encrypt new objects by default. This object also reports the total number of
+	// buckets that don't encrypt new objects by default.
 	BucketCountByEncryptionType *types.BucketCountByEncryptionType
 
-	// The total number of buckets that are shared with another AWS account.
+	// The total number of buckets whose bucket policies do and don't require
+	// server-side encryption of objects when objects are uploaded to the buckets.
+	BucketCountByObjectEncryptionRequirement *types.BucketCountPolicyAllowsUnencryptedObjectUploads
+
+	// The total number of buckets that are and aren't shared with another AWS account.
 	BucketCountBySharedAccessType *types.BucketCountBySharedAccessType
 
 	// The total number of objects that Amazon Macie can analyze in the buckets. These

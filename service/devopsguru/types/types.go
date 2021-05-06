@@ -28,8 +28,9 @@ type AnomalyTimeRange struct {
 	EndTime *time.Time
 }
 
-// Information about AWS CloudFormation stacks. You can use stacks to specify which
-// AWS resources in your account to analyze. For more information, see Stacks
+// Information about AWS CloudFormation stacks. You can use up to 500 stacks to
+// specify which AWS resources in your account to analyze. For more information,
+// see Stacks
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
 // the AWS CloudFormation User Guide.
 type CloudFormationCollection struct {
@@ -38,13 +39,27 @@ type CloudFormationCollection struct {
 	StackNames []string
 }
 
-// Information about AWS CloudFormation stacks. You can use stacks to specify which
-// AWS resources in your account to analyze. For more information, see Stacks
+// Information about AWS CloudFormation stacks. You can use up to 500 stacks to
+// specify which AWS resources in your account to analyze. For more information,
+// see Stacks
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
 // the AWS CloudFormation User Guide.
 type CloudFormationCollectionFilter struct {
 
 	// An array of CloudFormation stack names.
+	StackNames []string
+}
+
+// Information about an AWS CloudFormation stack used to create a monthly cost
+// estimate for DevOps Guru to analyze AWS resources. The maximum number of stacks
+// you can specify for a cost estimate is one. The estimate created is for the cost
+// to analyze the AWS resources defined by the stack. For more information, see
+// Stacks
+// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
+// the AWS CloudFormation User Guide.
+type CloudFormationCostEstimationResourceCollectionFilter struct {
+
+	// An array of CloudFormation stack names. Its size is fixed at 1 item.
 	StackNames []string
 }
 
@@ -105,6 +120,28 @@ type CloudWatchMetricsDimension struct {
 	Value *string
 }
 
+// Information about a filter used to specify which AWS resources are analyzed to
+// create a monthly DevOps Guru cost estimate. For more information, see Estimate
+// your Amazon DevOps Guru costs
+// (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
+// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
+type CostEstimationResourceCollectionFilter struct {
+
+	// An object that specifies the CloudFormation stack that defines the AWS resources
+	// used to create a monthly estimate for DevOps Guru.
+	CloudFormation *CloudFormationCostEstimationResourceCollectionFilter
+}
+
+// The time range of a cost estimation.
+type CostEstimationTimeRange struct {
+
+	// The end time of the cost estimation.
+	EndTime *time.Time
+
+	// The start time of the cost estimation.
+	StartTime *time.Time
+}
+
 // A range of time that specifies when anomalous behavior in an anomaly or insight
 // ended.
 type EndTimeRange struct {
@@ -140,7 +177,8 @@ type Event struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// An EventResource object that contains information about the resource that
@@ -241,7 +279,8 @@ type ListEventsFilters struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 }
 
@@ -397,7 +436,8 @@ type ProactiveAnomaly struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of a proactive anomaly.
@@ -438,7 +478,8 @@ type ProactiveAnomalySummary struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of the anomaly.
@@ -474,7 +515,8 @@ type ProactiveInsight struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of the proactive insight.
@@ -508,8 +550,12 @@ type ProactiveInsightSummary struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
+
+	// A collection of the names of AWS services.
+	ServiceCollection *ServiceCollection
 
 	// The severity of the proactive insight.
 	Severity InsightSeverity
@@ -534,7 +580,8 @@ type ReactiveAnomaly struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of the anomaly.
@@ -564,7 +611,8 @@ type ReactiveAnomalySummary struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of the reactive anomaly.
@@ -593,7 +641,8 @@ type ReactiveInsight struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
 
 	// The severity of a reactive insight.
@@ -624,8 +673,12 @@ type ReactiveInsightSummary struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
+
+	// A collection of the names of AWS services.
+	ServiceCollection *ServiceCollection
 
 	// The severity of a reactive insight.
 	Severity InsightSeverity
@@ -709,7 +762,7 @@ type RecommendationRelatedEvent struct {
 	Name *string
 
 	// A ResourceCollection object that contains arrays of the names of AWS
-	// CloudFormation stacks.
+	// CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks.
 	Resources []RecommendationRelatedEventResource
 }
 
@@ -728,11 +781,13 @@ type RecommendationRelatedEventResource struct {
 
 // A collection of AWS resources supported by DevOps Guru. The one type of AWS
 // resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-// configured to analyze only the AWS resources that are defined in the stacks.
+// configured to analyze only the AWS resources that are defined in the stacks. You
+// can specify up to 500 AWS CloudFormation stacks.
 type ResourceCollection struct {
 
 	// An array of the names of AWS CloudFormation stacks. The stacks define AWS
-	// resources that DevOps Guru analyzes.
+	// resources that DevOps Guru analyzes. You can specify up to 500 AWS
+	// CloudFormation stacks.
 	CloudFormation *CloudFormationCollection
 }
 
@@ -740,8 +795,9 @@ type ResourceCollection struct {
 // anomalous behavior by DevOps Guru.
 type ResourceCollectionFilter struct {
 
-	// Information about AWS CloudFormation stacks. You can use stacks to specify which
-	// AWS resources in your account to analyze. For more information, see Stacks
+	// Information about AWS CloudFormation stacks. You can use up to 500 stacks to
+	// specify which AWS resources in your account to analyze. For more information,
+	// see Stacks
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html) in
 	// the AWS CloudFormation User Guide.
 	CloudFormation *CloudFormationCollectionFilter
@@ -753,14 +809,47 @@ type SearchInsightsFilters struct {
 
 	// A collection of AWS resources supported by DevOps Guru. The one type of AWS
 	// resource collection supported is AWS CloudFormation stacks. DevOps Guru can be
-	// configured to analyze only the AWS resources that are defined in the stacks.
+	// configured to analyze only the AWS resources that are defined in the stacks. You
+	// can specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *ResourceCollection
+
+	// A collection of the names of AWS services.
+	ServiceCollection *ServiceCollection
 
 	// An array of severity values used to search for insights.
 	Severities []InsightSeverity
 
 	// An array of status values used to search for insights.
 	Statuses []InsightStatus
+}
+
+// A collection of the names of AWS services.
+type ServiceCollection struct {
+
+	// An array of strings that each specifies the name of an AWS service.
+	ServiceNames []ServiceName
+}
+
+// Represents the health of an AWS service.
+type ServiceHealth struct {
+
+	// Represents the health of an AWS service. This is a ServiceInsightHealth that
+	// contains the number of open proactive and reactive insights for this service.
+	Insight *ServiceInsightHealth
+
+	// The name of the AWS service.
+	ServiceName ServiceName
+}
+
+// Contains the number of open proactive and reactive insights in an analyzed AWS
+// service.
+type ServiceInsightHealth struct {
+
+	// The number of open proactive insights in the AWS service
+	OpenProactiveInsights int32
+
+	// The number of open reactive insights in the AWS service
+	OpenReactiveInsights int32
 }
 
 // Information about the integration of DevOps Guru with another AWS service, such
@@ -770,6 +859,37 @@ type ServiceIntegrationConfig struct {
 	// Information about whether DevOps Guru is configured to create an OpsItem in AWS
 	// Systems Manager OpsCenter for each created insight.
 	OpsCenter *OpsCenterIntegration
+}
+
+// An object that contains information about the estimated monthly cost to analyze
+// an AWS resource. For more information, see Estimate your Amazon DevOps Guru
+// costs
+// (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
+// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
+type ServiceResourceCost struct {
+
+	// The total estimated monthly cost to analyze the active resources for this
+	// resource.
+	Cost float64
+
+	// The number of active resources analyzed for this service to create a monthly
+	// cost estimate.
+	Count int32
+
+	// The state of the resource. The resource is ACTIVE if it produces metrics,
+	// events, or logs within an hour, otherwise it is INACTIVE. You pay for the number
+	// of active AWS resource hours analyzed for each resource. Inactive resources are
+	// not charged.
+	State CostEstimationServiceResourceState
+
+	// The type of the AWS resource.
+	Type *string
+
+	// The price per hour to analyze the resources in the service. For more
+	// information, see Estimate your Amazon DevOps Guru costs
+	// (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
+	// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/).
+	UnitCost float64
 }
 
 // Contains the Amazon Resource Name (ARN) of an Amazon Simple Notification Service
@@ -800,17 +920,19 @@ type StartTimeRange struct {
 }
 
 // Contains the names of AWS CloudFormation stacks used to update a collection of
-// stacks.
+// stacks. You can specify up to 500 AWS CloudFormation stacks.
 type UpdateCloudFormationCollectionFilter struct {
 
-	// An array of the name of stacks to update.
+	// An array of the names of the AWS CloudFormation stacks to update. You can
+	// specify up to 500 AWS CloudFormation stacks.
 	StackNames []string
 }
 
 // Contains information used to update a collection of AWS resources.
 type UpdateResourceCollectionFilter struct {
 
-	// An collection of AWS CloudFormation stacks.
+	// An collection of AWS CloudFormation stacks. You can specify up to 500 AWS
+	// CloudFormation stacks.
 	CloudFormation *UpdateCloudFormationCollectionFilter
 }
 

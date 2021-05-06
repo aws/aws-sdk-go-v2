@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a public namespace based on DNS, which will be visible on the internet.
-// The namespace defines your service naming scheme. For example, if you name your
+// Creates a public namespace based on DNS, which is visible on the internet. The
+// namespace defines your service naming scheme. For example, if you name your
 // namespace example.com and name your service backend, the resulting DNS name for
-// the service will be backend.example.com. For the current quota on the number of
+// the service is backend.example.com. For the current quota on the number of
 // namespaces that you can create using the same AWS account, see AWS Cloud Map
 // Limits (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
 // in the AWS Cloud Map Developer Guide.
@@ -42,17 +42,17 @@ type CreatePublicDnsNamespaceInput struct {
 	Name *string
 
 	// A unique string that identifies the request and that allows failed
-	// CreatePublicDnsNamespace requests to be retried without the risk of executing
-	// the operation twice. CreatorRequestId can be any unique string, for example, a
-	// date/time stamp.
+	// CreatePublicDnsNamespace requests to be retried without the risk of running the
+	// operation twice. CreatorRequestId can be any unique string, for example, a
+	// date/timestamp.
 	CreatorRequestId *string
 
 	// A description for the namespace.
 	Description *string
 
 	// The tags to add to the namespace. Each tag consists of a key and an optional
-	// value, both of which you define. Tag keys can have a maximum character length of
-	// 128 characters, and tag values can have a maximum length of 256 characters.
+	// value that you define. Tags keys can be up to 128 characters in length, and tag
+	// values can be up to 256 characters in length.
 	Tags []types.Tag
 }
 

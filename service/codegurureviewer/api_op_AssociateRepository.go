@@ -23,8 +23,8 @@ import (
 // repository, it must be in the same AWS Region and AWS account where its CodeGuru
 // Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server
 // repositories are managed by AWS CodeStar Connections to connect to CodeGuru
-// Reviewer. For more information, see Connect to a repository source provider
-// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/reviewer-ug/step-one.html#select-repository-source-provider)
+// Reviewer. For more information, see Associate a repository
+// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html)
 // in the Amazon CodeGuru Reviewer User Guide. You cannot use the CodeGuru Reviewer
 // SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru
 // Reviewer. To associate a GitHub repository, use the console. For more
@@ -56,6 +56,16 @@ type AssociateRepositoryInput struct {
 	// Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of
 	// duplicate repository associations if there are failures and retries.
 	ClientRequestToken *string
+
+	// A KMSKeyDetails object that contains:
+	//
+	// * The encryption option for this
+	// repository association. It is either owned by AWS Key Management Service (KMS)
+	// (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
+	//
+	// * The ID of the AWS
+	// KMS key that is associated with this respository association.
+	KMSKeyDetails *types.KMSKeyDetails
 
 	// An array of key-value pairs used to tag an associated repository. A tag is a
 	// custom attribute label with two parts:

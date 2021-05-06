@@ -21,8 +21,8 @@ import (
 // of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias
 // for the S3 bucket that is included in certificates issued by the CA. If
 // successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM
-// Private CAA assets that are stored in Amazon S3 can be protected with
-// encryption. For more information, see Encrypting Your CRLs
+// Private CA assets that are stored in Amazon S3 can be protected with encryption.
+// For more information, see Encrypting Your CRLs
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption).
 // Both PCA and the IAM principal must have permission to write to the S3 bucket
 // that you specify. If the IAM principal making the call does not have permission
@@ -65,6 +65,15 @@ type CreateCertificateAuthorityInput struct {
 	// authority and will issue only one. If you change the idempotency token for each
 	// call, PCA recognizes that you are requesting multiple certificate authorities.
 	IdempotencyToken *string
+
+	// Specifies a cryptographic key management compliance standard used for handling
+	// CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: AWS Region ap-northeast-3
+	// supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must explicitly specify this
+	// parameter and value when creating a CA in that Region. Specifying a different
+	// value (or no value) results in an InvalidArgsException with the message "A
+	// certificate authority cannot be created in this region with the specified
+	// security standard."
+	KeyStorageSecurityStandard types.KeyStorageSecurityStandard
 
 	// Contains a Boolean value that you can use to enable a certification revocation
 	// list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will

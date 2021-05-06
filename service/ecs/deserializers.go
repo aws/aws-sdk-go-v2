@@ -10230,6 +10230,50 @@ func awsAwsjson11_deserializeDocumentEnvironmentVariables(v *[]types.KeyValuePai
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentEphemeralStorage(v **types.EphemeralStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EphemeralStorage
+	if *v == nil {
+		sv = &types.EphemeralStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "sizeInGiB":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInGiB = int32(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentExecuteCommandConfiguration(v **types.ExecuteCommandConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14313,6 +14357,11 @@ func awsAwsjson11_deserializeDocumentTask(v **types.Task, value interface{}) err
 				sv.EnableExecuteCommand = jtv
 			}
 
+		case "ephemeralStorage":
+			if err := awsAwsjson11_deserializeDocumentEphemeralStorage(&sv.EphemeralStorage, value); err != nil {
+				return err
+			}
+
 		case "executionStoppedAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14579,6 +14628,11 @@ func awsAwsjson11_deserializeDocumentTaskDefinition(v **types.TaskDefinition, va
 					return err
 				}
 				sv.DeregisteredAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "ephemeralStorage":
+			if err := awsAwsjson11_deserializeDocumentEphemeralStorage(&sv.EphemeralStorage, value); err != nil {
+				return err
 			}
 
 		case "executionRoleArn":
@@ -14853,6 +14907,11 @@ func awsAwsjson11_deserializeDocumentTaskOverride(v **types.TaskOverride, value 
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Cpu = ptr.String(jtv)
+			}
+
+		case "ephemeralStorage":
+			if err := awsAwsjson11_deserializeDocumentEphemeralStorage(&sv.EphemeralStorage, value); err != nil {
+				return err
 			}
 
 		case "executionRoleArn":

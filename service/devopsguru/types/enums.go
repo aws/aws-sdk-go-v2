@@ -70,6 +70,43 @@ func (CloudWatchMetricsStat) Values() []CloudWatchMetricsStat {
 	}
 }
 
+type CostEstimationServiceResourceState string
+
+// Enum values for CostEstimationServiceResourceState
+const (
+	CostEstimationServiceResourceStateActive   CostEstimationServiceResourceState = "ACTIVE"
+	CostEstimationServiceResourceStateInactive CostEstimationServiceResourceState = "INACTIVE"
+)
+
+// Values returns all known values for CostEstimationServiceResourceState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CostEstimationServiceResourceState) Values() []CostEstimationServiceResourceState {
+	return []CostEstimationServiceResourceState{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
+type CostEstimationStatus string
+
+// Enum values for CostEstimationStatus
+const (
+	CostEstimationStatusOngoing   CostEstimationStatus = "ONGOING"
+	CostEstimationStatusCompleted CostEstimationStatus = "COMPLETED"
+)
+
+// Values returns all known values for CostEstimationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CostEstimationStatus) Values() []CostEstimationStatus {
+	return []CostEstimationStatus{
+		"ONGOING",
+		"COMPLETED",
+	}
+}
+
 type EventClass string
 
 // Enum values for EventClass
@@ -192,6 +229,42 @@ func (InsightType) Values() []InsightType {
 	}
 }
 
+type Locale string
+
+// Enum values for Locale
+const (
+	LocaleDeDe Locale = "DE_DE"
+	LocaleEnUs Locale = "EN_US"
+	LocaleEnGb Locale = "EN_GB"
+	LocaleEsEs Locale = "ES_ES"
+	LocaleFrFr Locale = "FR_FR"
+	LocaleItIt Locale = "IT_IT"
+	LocaleJaJp Locale = "JA_JP"
+	LocaleKoKr Locale = "KO_KR"
+	LocalePtBr Locale = "PT_BR"
+	LocaleZhCn Locale = "ZH_CN"
+	LocaleZhTw Locale = "ZH_TW"
+)
+
+// Values returns all known values for Locale. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Locale) Values() []Locale {
+	return []Locale{
+		"DE_DE",
+		"EN_US",
+		"EN_GB",
+		"ES_ES",
+		"FR_FR",
+		"IT_IT",
+		"JA_JP",
+		"KO_KR",
+		"PT_BR",
+		"ZH_CN",
+		"ZH_TW",
+	}
+}
+
 type OptInStatus string
 
 // Enum values for OptInStatus
@@ -215,6 +288,7 @@ type ResourceCollectionType string
 // Enum values for ResourceCollectionType
 const (
 	ResourceCollectionTypeAwsCloudFormation ResourceCollectionType = "AWS_CLOUD_FORMATION"
+	ResourceCollectionTypeAwsService        ResourceCollectionType = "AWS_SERVICE"
 )
 
 // Values returns all known values for ResourceCollectionType. Note that this can
@@ -223,6 +297,71 @@ const (
 func (ResourceCollectionType) Values() []ResourceCollectionType {
 	return []ResourceCollectionType{
 		"AWS_CLOUD_FORMATION",
+		"AWS_SERVICE",
+	}
+}
+
+type ServiceName string
+
+// Enum values for ServiceName
+const (
+	ServiceNameApiGateway       ServiceName = "API_GATEWAY"
+	ServiceNameApplicationElb   ServiceName = "APPLICATION_ELB"
+	ServiceNameAutoScalingGroup ServiceName = "AUTO_SCALING_GROUP"
+	ServiceNameCloudFront       ServiceName = "CLOUD_FRONT"
+	ServiceNameDynamoDb         ServiceName = "DYNAMO_DB"
+	ServiceNameEc2              ServiceName = "EC2"
+	ServiceNameEcs              ServiceName = "ECS"
+	ServiceNameEks              ServiceName = "EKS"
+	ServiceNameElasticBeanstalk ServiceName = "ELASTIC_BEANSTALK"
+	ServiceNameElastiCache      ServiceName = "ELASTI_CACHE"
+	ServiceNameElb              ServiceName = "ELB"
+	ServiceNameEs               ServiceName = "ES"
+	ServiceNameKinesis          ServiceName = "KINESIS"
+	ServiceNameLambda           ServiceName = "LAMBDA"
+	ServiceNameNatGateway       ServiceName = "NAT_GATEWAY"
+	ServiceNameNetworkElb       ServiceName = "NETWORK_ELB"
+	ServiceNameRds              ServiceName = "RDS"
+	ServiceNameRedshift         ServiceName = "REDSHIFT"
+	ServiceNameRoute53          ServiceName = "ROUTE_53"
+	ServiceNameS3               ServiceName = "S3"
+	ServiceNameSageMaker        ServiceName = "SAGE_MAKER"
+	ServiceNameSns              ServiceName = "SNS"
+	ServiceNameSqs              ServiceName = "SQS"
+	ServiceNameStepFunctions    ServiceName = "STEP_FUNCTIONS"
+	ServiceNameSwf              ServiceName = "SWF"
+)
+
+// Values returns all known values for ServiceName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ServiceName) Values() []ServiceName {
+	return []ServiceName{
+		"API_GATEWAY",
+		"APPLICATION_ELB",
+		"AUTO_SCALING_GROUP",
+		"CLOUD_FRONT",
+		"DYNAMO_DB",
+		"EC2",
+		"ECS",
+		"EKS",
+		"ELASTIC_BEANSTALK",
+		"ELASTI_CACHE",
+		"ELB",
+		"ES",
+		"KINESIS",
+		"LAMBDA",
+		"NAT_GATEWAY",
+		"NETWORK_ELB",
+		"RDS",
+		"REDSHIFT",
+		"ROUTE_53",
+		"S3",
+		"SAGE_MAKER",
+		"SNS",
+		"SQS",
+		"STEP_FUNCTIONS",
+		"SWF",
 	}
 }
 

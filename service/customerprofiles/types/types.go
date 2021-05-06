@@ -79,6 +79,73 @@ type DomainStats struct {
 	TotalSize int64
 }
 
+// A duplicate customer profile that is to be merged into a main profile.
+type FieldSourceProfileIds struct {
+
+	// A unique identifier for the account number field to be merged.
+	AccountNumber *string
+
+	// A unique identifier for the additional information field to be merged.
+	AdditionalInformation *string
+
+	// A unique identifier for the party type field to be merged.
+	Address *string
+
+	// A unique identifier for the attributes field to be merged.
+	Attributes map[string]string
+
+	// A unique identifier for the billing type field to be merged.
+	BillingAddress *string
+
+	// A unique identifier for the birthdate field to be merged.
+	BirthDate *string
+
+	// A unique identifier for the party type field to be merged.
+	BusinessEmailAddress *string
+
+	// A unique identifier for the business name field to be merged.
+	BusinessName *string
+
+	// A unique identifier for the business phone number field to be merged.
+	BusinessPhoneNumber *string
+
+	// A unique identifier for the email address field to be merged.
+	EmailAddress *string
+
+	// A unique identifier for the first name field to be merged.
+	FirstName *string
+
+	// A unique identifier for the gender field to be merged.
+	Gender *string
+
+	// A unique identifier for the home phone number field to be merged.
+	HomePhoneNumber *string
+
+	// A unique identifier for the last name field to be merged.
+	LastName *string
+
+	// A unique identifier for the mailing address field to be merged.
+	MailingAddress *string
+
+	// A unique identifier for the middle name field to be merged.
+	MiddleName *string
+
+	// A unique identifier for the mobile phone number field to be merged.
+	MobilePhoneNumber *string
+
+	// A unique identifier for the party type field to be merged.
+	PartyType *string
+
+	// A unique identifier for the personal email address field to be merged.
+	PersonalEmailAddress *string
+
+	// A unique identifier for the phone number field to be merged.
+	PhoneNumber *string
+
+	// A unique identifier for the shipping address field to be merged.
+	ShippingAddress *string
+}
+
 // The configurations that control how Customer Profiles retrieves data from the
 // source, Amazon AppFlow. Customer Profiles uses this information to create an
 // AppFlow flow on behalf of customers.
@@ -239,6 +306,32 @@ type MarketoSourceProperties struct {
 	Object *string
 }
 
+// The flag that enables the matching process of duplicate profiles.
+type MatchingRequest struct {
+
+	// The flag that enables the matching process of duplicate profiles.
+	//
+	// This member is required.
+	Enabled *bool
+}
+
+// The flag that enables the matching process of duplicate profiles.
+type MatchingResponse struct {
+
+	// The flag that enables the matching process of duplicate profiles.
+	Enabled *bool
+}
+
+// The Match group object.
+type MatchItem struct {
+
+	// The unique identifiers for this group of profiles that match.
+	MatchId *string
+
+	// A list of identifiers for profiles that match.
+	ProfileIds []string
+}
+
 // Represents a field in a ProfileObjectType.
 type ObjectTypeField struct {
 
@@ -280,7 +373,7 @@ type Profile struct {
 	// A unique account number that you have given to the customer.
 	AccountNumber *string
 
-	// Any additional information relevant to the customer's profile.
+	// Any additional information relevant to the customer’s profile.
 	AdditionalInformation *string
 
 	// A generic address associated with the customer that is not mailing, shipping, or
@@ -305,7 +398,7 @@ type Profile struct {
 	// The customer’s home phone number.
 	BusinessPhoneNumber *string
 
-	// The customer's email address, which has not been specified as a personal or
+	// The customer’s email address, which has not been specified as a personal or
 	// business address.
 	EmailAddress *string
 

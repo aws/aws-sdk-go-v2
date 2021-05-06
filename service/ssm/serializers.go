@@ -6793,6 +6793,13 @@ func awsAwsjson11_serializeDocumentCreateAssociationBatchRequestEntry(v *types.C
 		ok.String(*v.AutomationTargetParameterName)
 	}
 
+	if v.CalendarNames != nil {
+		ok := object.Key("CalendarNames")
+		if err := awsAwsjson11_serializeDocumentCalendarNameOrARNList(v.CalendarNames, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ComplianceSeverity) > 0 {
 		ok := object.Key("ComplianceSeverity")
 		ok.String(string(v.ComplianceSeverity))
@@ -9153,6 +9160,13 @@ func awsAwsjson11_serializeOpDocumentCreateAssociationInput(v *CreateAssociation
 	if v.AutomationTargetParameterName != nil {
 		ok := object.Key("AutomationTargetParameterName")
 		ok.String(*v.AutomationTargetParameterName)
+	}
+
+	if v.CalendarNames != nil {
+		ok := object.Key("CalendarNames")
+		if err := awsAwsjson11_serializeDocumentCalendarNameOrARNList(v.CalendarNames, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ComplianceSeverity) > 0 {
@@ -12373,6 +12387,13 @@ func awsAwsjson11_serializeOpDocumentUpdateAssociationInput(v *UpdateAssociation
 	if v.AutomationTargetParameterName != nil {
 		ok := object.Key("AutomationTargetParameterName")
 		ok.String(*v.AutomationTargetParameterName)
+	}
+
+	if v.CalendarNames != nil {
+		ok := object.Key("CalendarNames")
+		if err := awsAwsjson11_serializeDocumentCalendarNameOrARNList(v.CalendarNames, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ComplianceSeverity) > 0 {

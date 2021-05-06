@@ -50,6 +50,26 @@ func (m *validateOpCreateCampaign) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateDatasetExportJob struct {
+}
+
+func (*validateOpCreateDatasetExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDatasetExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDatasetExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDatasetExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateDatasetGroup struct {
 }
 
@@ -410,6 +430,26 @@ func (m *validateOpDescribeCampaign) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeDatasetExportJob struct {
+}
+
+func (*validateOpDescribeDatasetExportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeDatasetExportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeDatasetExportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeDatasetExportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDatasetGroup struct {
 }
 
@@ -658,6 +698,10 @@ func addOpCreateCampaignValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCampaign{}, middleware.After)
 }
 
+func addOpCreateDatasetExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDatasetExportJob{}, middleware.After)
+}
+
 func addOpCreateDatasetGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDatasetGroup{}, middleware.After)
 }
@@ -728,6 +772,10 @@ func addOpDescribeBatchInferenceJobValidationMiddleware(stack *middleware.Stack)
 
 func addOpDescribeCampaignValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCampaign{}, middleware.After)
+}
+
+func addOpDescribeDatasetExportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeDatasetExportJob{}, middleware.After)
 }
 
 func addOpDescribeDatasetGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -816,6 +864,25 @@ func validateBatchInferenceJobOutput(v *types.BatchInferenceJobOutput) error {
 	}
 }
 
+func validateDatasetExportJobOutput(v *types.DatasetExportJobOutput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatasetExportJobOutput"}
+	if v.S3DataDestination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DataDestination"))
+	} else if v.S3DataDestination != nil {
+		if err := validateS3DataConfig(v.S3DataDestination); err != nil {
+			invalidParams.AddNested("S3DataDestination", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3DataConfig(v *types.S3DataConfig) error {
 	if v == nil {
 		return nil
@@ -879,6 +946,34 @@ func validateOpCreateCampaignInput(v *CreateCampaignInput) error {
 	}
 	if v.MinProvisionedTPS == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MinProvisionedTPS"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDatasetExportJobInput(v *CreateDatasetExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetExportJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.DatasetArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetArn"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.JobOutput == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobOutput"))
+	} else if v.JobOutput != nil {
+		if err := validateDatasetExportJobOutput(v.JobOutput); err != nil {
+			invalidParams.AddNested("JobOutput", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1182,6 +1277,21 @@ func validateOpDescribeCampaignInput(v *DescribeCampaignInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeCampaignInput"}
 	if v.CampaignArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CampaignArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeDatasetExportJobInput(v *DescribeDatasetExportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeDatasetExportJobInput"}
+	if v.DatasetExportJobArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetExportJobArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

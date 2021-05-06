@@ -46,12 +46,16 @@ type CreateAutoMLJobInput struct {
 	InputDataConfig []types.AutoMLChannel
 
 	// Provides information about encryption and the Amazon S3 output path needed to
-	// store artifacts from an AutoML job. Format(s) supported: CSV.
+	// store artifacts from an AutoML job. Format(s) supported: CSV. Specifies whether
+	// to automatically deploy the best &ATP; model to an endpoint and the name of that
+	// endpoint if deployed automatically.
 	//
 	// This member is required.
 	OutputDataConfig *types.AutoMLOutputDataConfig
 
-	// The ARN of the role that is used to access the data.
+	// The ARN of the role that is used to access the data. Specifies whether to
+	// automatically deploy the best &ATP; model to an endpoint and the name of that
+	// endpoint if deployed automatically.
 	//
 	// This member is required.
 	RoleArn *string
@@ -60,13 +64,17 @@ type CreateAutoMLJobInput struct {
 	AutoMLJobConfig *types.AutoMLJobConfig
 
 	// Defines the objective metric used to measure the predictive quality of an AutoML
-	// job. You provide a AutoMLJobObjective$MetricName and Autopilot infers whether to
-	// minimize or maximize it.
+	// job. You provide an AutoMLJobObjective$MetricName and Autopilot infers whether
+	// to minimize or maximize it.
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// Generates possible candidates without training the models. A candidate is a
 	// combination of data preprocessors, algorithms, and algorithm parameter settings.
 	GenerateCandidateDefinitionsOnly bool
+
+	// Specifies how to generate the endpoint name for an automatic one-click Autopilot
+	// model deployment.
+	ModelDeployConfig *types.ModelDeployConfig
 
 	// Defines the type of supervised learning available for the candidates. Options
 	// include: BinaryClassification, MulticlassClassification, and Regression. For

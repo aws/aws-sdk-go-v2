@@ -110,6 +110,26 @@ func (m *validateOpBatchCreateAttendee) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchCreateChannelMembership struct {
+}
+
+func (*validateOpBatchCreateChannelMembership) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchCreateChannelMembership) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchCreateChannelMembershipInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchCreateChannelMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchCreateRoomMembership struct {
 }
 
@@ -2350,6 +2370,26 @@ func (m *validateOpListRooms) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSupportedPhoneNumberCountries struct {
+}
+
+func (*validateOpListSupportedPhoneNumberCountries) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSupportedPhoneNumberCountries) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSupportedPhoneNumberCountriesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSupportedPhoneNumberCountriesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -3350,6 +3390,10 @@ func addOpBatchCreateAttendeeValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpBatchCreateAttendee{}, middleware.After)
 }
 
+func addOpBatchCreateChannelMembershipValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchCreateChannelMembership{}, middleware.After)
+}
+
 func addOpBatchCreateRoomMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchCreateRoomMembership{}, middleware.After)
 }
@@ -3796,6 +3840,10 @@ func addOpListRoomMembershipsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListRoomsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRooms{}, middleware.After)
+}
+
+func addOpListSupportedPhoneNumberCountriesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSupportedPhoneNumberCountries{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -4502,6 +4550,24 @@ func validateOpBatchCreateAttendeeInput(v *BatchCreateAttendeeInput) error {
 		if err := validateCreateAttendeeRequestItemList(v.Attendees); err != nil {
 			invalidParams.AddNested("Attendees", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchCreateChannelMembershipInput(v *BatchCreateChannelMembershipInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchCreateChannelMembershipInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.MemberArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MemberArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6439,6 +6505,21 @@ func validateOpListRoomsInput(v *ListRoomsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListRoomsInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSupportedPhoneNumberCountriesInput(v *ListSupportedPhoneNumberCountriesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSupportedPhoneNumberCountriesInput"}
+	if len(v.ProductType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProductType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -37,7 +37,11 @@ type CreateClusterInput struct {
 	AddressId *string
 
 	// The type of job for this cluster. Currently, the only job type supported for
-	// clusters is LOCAL_USE.
+	// clusters is LOCAL_USE. For more information, see
+	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
+	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	//
 	// This member is required.
 	JobType types.JobType
@@ -93,6 +97,17 @@ type CreateClusterInput struct {
 	// This member is required.
 	ShippingOption types.ShippingOption
 
+	// The type of AWS Snow Family device to use for this cluster. For cluster jobs,
+	// AWS Snow Family currently supports only the EDGE device type. For more
+	// information, see
+	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
+	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
+	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
+	//
+	// This member is required.
+	SnowballType types.SnowballType
+
 	// An optional description of this specific cluster, for example Environmental Data
 	// Cluster-01.
 	Description *string
@@ -110,10 +125,6 @@ type CreateClusterInput struct {
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
 	// this cluster.
 	Notification *types.Notification
-
-	// The type of AWS Snow Family device to use for this cluster. For cluster jobs,
-	// AWS Snow Family currently supports only the EDGE device type.
-	SnowballType types.SnowballType
 
 	// The tax documents required in your AWS Region.
 	TaxDocuments *types.TaxDocuments

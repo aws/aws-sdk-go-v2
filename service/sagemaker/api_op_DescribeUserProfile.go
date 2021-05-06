@@ -35,7 +35,7 @@ type DescribeUserProfileInput struct {
 	// This member is required.
 	DomainId *string
 
-	// The user profile name.
+	// The user profile name. This value is not case sensitive.
 	//
 	// This member is required.
 	UserProfileName *string

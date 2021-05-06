@@ -33,6 +33,8 @@ type DescribeReturnShippingLabelInput struct {
 
 	// The automatically generated ID for a job, for example
 	// JID123e4567-e89b-12d3-a456-426655440000.
+	//
+	// This member is required.
 	JobId *string
 }
 
@@ -92,6 +94,9 @@ func addOperationDescribeReturnShippingLabelMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addOpDescribeReturnShippingLabelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReturnShippingLabel(options.Region), middleware.Before); err != nil {

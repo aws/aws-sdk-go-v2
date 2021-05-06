@@ -15,10 +15,17 @@ import (
 // Updating the Amazon ECS container agent does not interrupt running tasks or
 // services on the container instance. The process for updating the agent differs
 // depending on whether your container instance was launched with the Amazon
-// ECS-optimized AMI or another operating system. UpdateContainerAgent requires the
-// Amazon ECS-optimized AMI or Amazon Linux with the ecs-init service installed and
-// running. For help updating the Amazon ECS container agent on other operating
-// systems, see Manually Updating the Amazon ECS Container Agent
+// ECS-optimized AMI or another operating system. The UpdateContainerAgent API
+// isn't supported for container instances using the Amazon ECS-optimized Amazon
+// Linux 2 (arm64) AMI. To update the container agent, you can update the ecs-init
+// package which will update the agent. For more information, see Updating the
+// Amazon ECS container agent
+// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html)
+// in the Amazon Elastic Container Service Developer Guide. The
+// UpdateContainerAgent API requires an Amazon ECS-optimized AMI or Amazon Linux
+// AMI with the ecs-init service installed and running. For help updating the
+// Amazon ECS container agent on other operating systems, see Manually updating the
+// Amazon ECS container agent
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent)
 // in the Amazon Elastic Container Service Developer Guide.
 func (c *Client) UpdateContainerAgent(ctx context.Context, params *UpdateContainerAgentInput, optFns ...func(*Options)) (*UpdateContainerAgentOutput, error) {

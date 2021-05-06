@@ -28,7 +28,7 @@ import (
 // from the service.
 //
 // * If you omit an existing HealthCheckCustomConfig
-// configuration from an UpdateService request, the configuration is not deleted
+// configuration from an UpdateService request, the configuration isn't deleted
 // from the service.
 //
 // When you update settings for a service, AWS Cloud Map also

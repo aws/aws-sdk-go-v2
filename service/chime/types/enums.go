@@ -459,8 +459,9 @@ type PhoneNumberProductType string
 
 // Enum values for PhoneNumberProductType
 const (
-	PhoneNumberProductTypeBusinessCalling PhoneNumberProductType = "BusinessCalling"
-	PhoneNumberProductTypeVoiceConnector  PhoneNumberProductType = "VoiceConnector"
+	PhoneNumberProductTypeBusinessCalling           PhoneNumberProductType = "BusinessCalling"
+	PhoneNumberProductTypeVoiceConnector            PhoneNumberProductType = "VoiceConnector"
+	PhoneNumberProductTypeSipMediaApplicationDialIn PhoneNumberProductType = "SipMediaApplicationDialIn"
 )
 
 // Values returns all known values for PhoneNumberProductType. Note that this can
@@ -470,6 +471,7 @@ func (PhoneNumberProductType) Values() []PhoneNumberProductType {
 	return []PhoneNumberProductType{
 		"BusinessCalling",
 		"VoiceConnector",
+		"SipMediaApplicationDialIn",
 	}
 }
 

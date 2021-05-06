@@ -533,6 +533,26 @@ type Connection struct {
 	//
 	// * CONNECTOR_CLASS_NAME -
 	// The connector class name for a MARKETPLACE or CUSTOM connection.
+	//
+	// *
+	// KAFKA_CLIENT_KEYSTORE - The Amazon S3 location of the client keystore file for
+	// Kafka client side authentication (Optional).
+	//
+	// * KAFKA_CLIENT_KEYSTORE_PASSWORD -
+	// The password to access the provided keystore (Optional).
+	//
+	// *
+	// KAFKA_CLIENT_KEY_PASSWORD - A keystore can consist of multiple keys, so this is
+	// the password to access the client key to be used with the Kafka server side key
+	// (Optional).
+	//
+	// * ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD - The encrypted version
+	// of the Kafka client keystore password (if the user has the AWS Glue encrypt
+	// passwords setting selected).
+	//
+	// * ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The
+	// encrypted version of the Kafka client key password (if the user has the AWS Glue
+	// encrypt passwords setting selected).
 	ConnectionProperties map[string]string
 
 	// The type of the connection. Currently, SFTP is not supported.

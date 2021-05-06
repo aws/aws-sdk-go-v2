@@ -33,7 +33,8 @@ func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstance
 
 type DiscoverInstancesInput struct {
 
-	// The name of the namespace that you specified when you registered the instance.
+	// The HttpName name of the namespace, found in the HttpProperties member of the
+	// Properties member of the namespace.
 	//
 	// This member is required.
 	NamespaceName *string
@@ -60,7 +61,7 @@ type DiscoverInstancesInput struct {
 
 	// Filters to scope the results based on custom attributes for the instance. For
 	// example, {version=v1, az=1a}. Only instances that match all the specified
-	// key-value pairs will be returned.
+	// key-value pairs are returned.
 	QueryParameters map[string]string
 }
 

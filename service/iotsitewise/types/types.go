@@ -788,8 +788,8 @@ type GroupIdentity struct {
 type IAMRoleIdentity struct {
 
 	// The ARN of the IAM role. For more information, see IAM ARNs
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns)
-	// in the IAM User Guide.
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html) in
+	// the IAM User Guide.
 	//
 	// This member is required.
 	Arn *string
@@ -871,6 +871,20 @@ type ImageLocation struct {
 	//
 	// This member is required.
 	Url *string
+}
+
+// Contains information about an interpolated asset property value.
+type InterpolatedAssetPropertyValue struct {
+
+	// Contains a timestamp with optional nanosecond granularity.
+	//
+	// This member is required.
+	Timestamp *TimeInNanos
+
+	// Contains an asset property value (of a single type only).
+	//
+	// This member is required.
+	Value *Variant
 }
 
 // Contains logging options.

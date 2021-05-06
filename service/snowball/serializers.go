@@ -249,6 +249,53 @@ func (m *awsAwsjson11_serializeOpCreateJob) HandleSerialize(ctx context.Context,
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateLongTermPricing struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLongTermPricing) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLongTermPricingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.CreateLongTermPricing")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLongTermPricingInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateReturnShippingLabel struct {
 }
 
@@ -907,6 +954,53 @@ func (m *awsAwsjson11_serializeOpListJobs) HandleSerialize(ctx context.Context, 
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListLongTermPricing struct {
+}
+
+func (*awsAwsjson11_serializeOpListLongTermPricing) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLongTermPricingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListLongTermPricing")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListLongTermPricingInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateCluster struct {
 }
 
@@ -1033,6 +1127,53 @@ func (m *awsAwsjson11_serializeOpUpdateJobShipmentState) HandleSerialize(ctx con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentUpdateJobShipmentStateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateLongTermPricing struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateLongTermPricing) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLongTermPricingInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.UpdateLongTermPricing")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateLongTermPricingInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1536,6 +1677,11 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		ok.String(*v.KmsKeyARN)
 	}
 
+	if v.LongTermPricingId != nil {
+		ok := object.Key("LongTermPricingId")
+		ok.String(*v.LongTermPricingId)
+	}
+
 	if v.Notification != nil {
 		ok := object.Key("Notification")
 		if err := awsAwsjson11_serializeDocumentNotification(v.Notification, ok); err != nil {
@@ -1575,6 +1721,28 @@ func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		if err := awsAwsjson11_serializeDocumentTaxDocuments(v.TaxDocuments, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateLongTermPricingInput(v *CreateLongTermPricingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsLongTermPricingAutoRenew != nil {
+		ok := object.Key("IsLongTermPricingAutoRenew")
+		ok.Boolean(*v.IsLongTermPricingAutoRenew)
+	}
+
+	if len(v.LongTermPricingType) > 0 {
+		ok := object.Key("LongTermPricingType")
+		ok.String(string(v.LongTermPricingType))
+	}
+
+	if len(v.SnowballType) > 0 {
+		ok := object.Key("SnowballType")
+		ok.String(string(v.SnowballType))
 	}
 
 	return nil
@@ -1778,6 +1946,23 @@ func awsAwsjson11_serializeOpDocumentListJobsInput(v *ListJobsInput, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentListLongTermPricingInput(v *ListLongTermPricingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1897,6 +2082,28 @@ func awsAwsjson11_serializeOpDocumentUpdateJobShipmentStateInput(v *UpdateJobShi
 	if len(v.ShipmentState) > 0 {
 		ok := object.Key("ShipmentState")
 		ok.String(string(v.ShipmentState))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateLongTermPricingInput(v *UpdateLongTermPricingInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IsLongTermPricingAutoRenew != nil {
+		ok := object.Key("IsLongTermPricingAutoRenew")
+		ok.Boolean(*v.IsLongTermPricingAutoRenew)
+	}
+
+	if v.LongTermPricingId != nil {
+		ok := object.Key("LongTermPricingId")
+		ok.String(*v.LongTermPricingId)
+	}
+
+	if v.ReplacementJob != nil {
+		ok := object.Key("ReplacementJob")
+		ok.String(*v.ReplacementJob)
 	}
 
 	return nil

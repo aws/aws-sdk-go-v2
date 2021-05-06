@@ -53,7 +53,7 @@ type ListAutoMLJobsInput struct {
 	// next request to receive the next set of results.
 	NextToken *string
 
-	// The parameter by which to sort the results. The default is AutoMLJobName.
+	// The parameter by which to sort the results. The default is Name.
 	SortBy types.AutoMLSortBy
 
 	// The sort order for the results. The default is Descending.

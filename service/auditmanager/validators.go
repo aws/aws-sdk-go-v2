@@ -5,6 +5,7 @@ package auditmanager
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -969,6 +970,70 @@ func addOpValidateAssessmentReportIntegrityValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpValidateAssessmentReportIntegrity{}, middleware.After)
 }
 
+func validateCreateAssessmentFrameworkControlSet(v *types.CreateAssessmentFrameworkControlSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssessmentFrameworkControlSet"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateAssessmentFrameworkControlSets(v []types.CreateAssessmentFrameworkControlSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAssessmentFrameworkControlSets"}
+	for i := range v {
+		if err := validateCreateAssessmentFrameworkControlSet(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateAssessmentFrameworkControlSet(v *types.UpdateAssessmentFrameworkControlSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssessmentFrameworkControlSet"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateAssessmentFrameworkControlSets(v []types.UpdateAssessmentFrameworkControlSet) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAssessmentFrameworkControlSets"}
+	for i := range v {
+		if err := validateUpdateAssessmentFrameworkControlSet(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateAssessmentReportEvidenceFolderInput(v *AssociateAssessmentReportEvidenceFolderInput) error {
 	if v == nil {
 		return nil
@@ -1099,6 +1164,10 @@ func validateOpCreateAssessmentFrameworkInput(v *CreateAssessmentFrameworkInput)
 	}
 	if v.ControlSets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ControlSets"))
+	} else if v.ControlSets != nil {
+		if err := validateCreateAssessmentFrameworkControlSets(v.ControlSets); err != nil {
+			invalidParams.AddNested("ControlSets", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1615,6 +1684,10 @@ func validateOpUpdateAssessmentFrameworkInput(v *UpdateAssessmentFrameworkInput)
 	}
 	if v.ControlSets == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ControlSets"))
+	} else if v.ControlSets != nil {
+		if err := validateUpdateAssessmentFrameworkControlSets(v.ControlSets); err != nil {
+			invalidParams.AddNested("ControlSets", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -11,7 +11,7 @@ import (
 )
 
 // Returns the UnlockCode code value for the specified job. A particular UnlockCode
-// value can be accessed for up to 90 days after the associated job has been
+// value can be accessed for up to 360 days after the associated job has been
 // created. The UnlockCode value is a 29-character code with 25 alphanumeric
 // characters and 4 hyphens. This code is used to decrypt the manifest file when it
 // is passed along with the manifest to the Snow device through the Snowball client
@@ -46,7 +46,7 @@ type GetJobUnlockCodeInput struct {
 type GetJobUnlockCodeOutput struct {
 
 	// The UnlockCode value for the specified job. The UnlockCode value can be accessed
-	// for up to 90 days after the job has been created.
+	// for up to 360 days after the job has been created.
 	UnlockCode *string
 
 	// Metadata pertaining to the operation's result.

@@ -6408,7 +6408,7 @@ func awsRestjson1_deserializeDocumentAv1Settings(v **types.Av1Settings, value in
 			if value != nil {
 				jtv, ok := value.(json.Number)
 				if !ok {
-					return fmt.Errorf("expected __integerMin7Max15 to be json.Number, got %T instead", value)
+					return fmt.Errorf("expected __integerMin0Max15 to be json.Number, got %T instead", value)
 				}
 				i64, err := jtv.Int64()
 				if err != nil {

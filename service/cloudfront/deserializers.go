@@ -488,6 +488,9 @@ func awsRestxml_deserializeOpErrorCreateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("InvalidForwardCookies", errorCode):
 		return awsRestxml_deserializeErrorInvalidForwardCookies(response, errorBody)
 
+	case strings.EqualFold("InvalidFunctionAssociation", errorCode):
+		return awsRestxml_deserializeErrorInvalidFunctionAssociation(response, errorBody)
+
 	case strings.EqualFold("InvalidGeoRestrictionParameter", errorCode):
 		return awsRestxml_deserializeErrorInvalidGeoRestrictionParameter(response, errorBody)
 
@@ -554,6 +557,12 @@ func awsRestxml_deserializeOpErrorCreateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("NoSuchOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorNoSuchOriginRequestPolicy(response, errorBody)
 
+	case strings.EqualFold("NoSuchRealtimeLogConfig", errorCode):
+		return awsRestxml_deserializeErrorNoSuchRealtimeLogConfig(response, errorBody)
+
+	case strings.EqualFold("RealtimeLogConfigOwnerMismatch", errorCode):
+		return awsRestxml_deserializeErrorRealtimeLogConfigOwnerMismatch(response, errorBody)
+
 	case strings.EqualFold("TooManyCacheBehaviors", errorCode):
 		return awsRestxml_deserializeErrorTooManyCacheBehaviors(response, errorBody)
 
@@ -581,11 +590,17 @@ func awsRestxml_deserializeOpErrorCreateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("TooManyDistributionsAssociatedToOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPolicy(response, errorBody)
 
+	case strings.EqualFold("TooManyDistributionsWithFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsWithFunctionAssociations(response, errorBody)
+
 	case strings.EqualFold("TooManyDistributionsWithLambdaAssociations", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsWithLambdaAssociations(response, errorBody)
 
 	case strings.EqualFold("TooManyDistributionsWithSingleFunctionARN", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsWithSingleFunctionARN(response, errorBody)
+
+	case strings.EqualFold("TooManyFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyFunctionAssociations(response, errorBody)
 
 	case strings.EqualFold("TooManyHeadersInForwardedValues", errorCode):
 		return awsRestxml_deserializeErrorTooManyHeadersInForwardedValues(response, errorBody)
@@ -800,6 +815,9 @@ func awsRestxml_deserializeOpErrorCreateDistributionWithTags(response *smithyhtt
 	case strings.EqualFold("InvalidForwardCookies", errorCode):
 		return awsRestxml_deserializeErrorInvalidForwardCookies(response, errorBody)
 
+	case strings.EqualFold("InvalidFunctionAssociation", errorCode):
+		return awsRestxml_deserializeErrorInvalidFunctionAssociation(response, errorBody)
+
 	case strings.EqualFold("InvalidGeoRestrictionParameter", errorCode):
 		return awsRestxml_deserializeErrorInvalidGeoRestrictionParameter(response, errorBody)
 
@@ -869,6 +887,12 @@ func awsRestxml_deserializeOpErrorCreateDistributionWithTags(response *smithyhtt
 	case strings.EqualFold("NoSuchOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorNoSuchOriginRequestPolicy(response, errorBody)
 
+	case strings.EqualFold("NoSuchRealtimeLogConfig", errorCode):
+		return awsRestxml_deserializeErrorNoSuchRealtimeLogConfig(response, errorBody)
+
+	case strings.EqualFold("RealtimeLogConfigOwnerMismatch", errorCode):
+		return awsRestxml_deserializeErrorRealtimeLogConfigOwnerMismatch(response, errorBody)
+
 	case strings.EqualFold("TooManyCacheBehaviors", errorCode):
 		return awsRestxml_deserializeErrorTooManyCacheBehaviors(response, errorBody)
 
@@ -896,11 +920,17 @@ func awsRestxml_deserializeOpErrorCreateDistributionWithTags(response *smithyhtt
 	case strings.EqualFold("TooManyDistributionsAssociatedToOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPolicy(response, errorBody)
 
+	case strings.EqualFold("TooManyDistributionsWithFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsWithFunctionAssociations(response, errorBody)
+
 	case strings.EqualFold("TooManyDistributionsWithLambdaAssociations", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsWithLambdaAssociations(response, errorBody)
 
 	case strings.EqualFold("TooManyDistributionsWithSingleFunctionARN", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsWithSingleFunctionARN(response, errorBody)
+
+	case strings.EqualFold("TooManyFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyFunctionAssociations(response, errorBody)
 
 	case strings.EqualFold("TooManyHeadersInForwardedValues", errorCode):
 		return awsRestxml_deserializeErrorTooManyHeadersInForwardedValues(response, errorBody)
@@ -1361,6 +1391,174 @@ func awsRestxml_deserializeOpDocumentCreateFieldLevelEncryptionProfileOutput(v *
 	return nil
 }
 
+type awsRestxml_deserializeOpCreateFunction struct {
+}
+
+func (*awsRestxml_deserializeOpCreateFunction) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpCreateFunction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorCreateFunction(response, &metadata)
+	}
+	output := &CreateFunctionOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeOpHttpBindingsCreateFunctionOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeDocumentFunctionSummary(&output.FunctionSummary, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorCreateFunction(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("FunctionAlreadyExists", errorCode):
+		return awsRestxml_deserializeErrorFunctionAlreadyExists(response, errorBody)
+
+	case strings.EqualFold("FunctionSizeLimitExceeded", errorCode):
+		return awsRestxml_deserializeErrorFunctionSizeLimitExceeded(response, errorBody)
+
+	case strings.EqualFold("InvalidArgument", errorCode):
+		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
+
+	case strings.EqualFold("TooManyFunctions", errorCode):
+		return awsRestxml_deserializeErrorTooManyFunctions(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpHttpBindingsCreateFunctionOutput(v *CreateFunctionOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("ETag"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ETag = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Location"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.Location = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestxml_deserializeOpDocumentCreateFunctionOutput(v **CreateFunctionOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *CreateFunctionOutput
+	if *v == nil {
+		sv = &CreateFunctionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FunctionSummary", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionSummary(&sv.FunctionSummary, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestxml_deserializeOpCreateInvalidation struct {
 }
 
@@ -1788,6 +1986,9 @@ func awsRestxml_deserializeOpErrorCreateMonitoringSubscription(response *smithyh
 
 	case strings.EqualFold("NoSuchDistribution", errorCode):
 		return awsRestxml_deserializeErrorNoSuchDistribution(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsRestxml_deserializeErrorUnsupportedOperation(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3147,6 +3348,88 @@ func awsRestxml_deserializeOpErrorDeleteFieldLevelEncryptionProfile(response *sm
 	}
 }
 
+type awsRestxml_deserializeOpDeleteFunction struct {
+}
+
+func (*awsRestxml_deserializeOpDeleteFunction) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpDeleteFunction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorDeleteFunction(response, &metadata)
+	}
+	output := &DeleteFunctionOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorDeleteFunction(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("FunctionInUse", errorCode):
+		return awsRestxml_deserializeErrorFunctionInUse(response, errorBody)
+
+	case strings.EqualFold("InvalidIfMatchVersion", errorCode):
+		return awsRestxml_deserializeErrorInvalidIfMatchVersion(response, errorBody)
+
+	case strings.EqualFold("NoSuchFunctionExists", errorCode):
+		return awsRestxml_deserializeErrorNoSuchFunctionExists(response, errorBody)
+
+	case strings.EqualFold("PreconditionFailed", errorCode):
+		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestxml_deserializeOpDeleteKeyGroup struct {
 }
 
@@ -3288,6 +3571,9 @@ func awsRestxml_deserializeOpErrorDeleteMonitoringSubscription(response *smithyh
 
 	case strings.EqualFold("NoSuchDistribution", errorCode):
 		return awsRestxml_deserializeErrorNoSuchDistribution(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsRestxml_deserializeErrorUnsupportedOperation(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3637,6 +3923,160 @@ func awsRestxml_deserializeOpErrorDeleteStreamingDistribution(response *smithyht
 		return genericError
 
 	}
+}
+
+type awsRestxml_deserializeOpDescribeFunction struct {
+}
+
+func (*awsRestxml_deserializeOpDescribeFunction) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpDescribeFunction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorDescribeFunction(response, &metadata)
+	}
+	output := &DescribeFunctionOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeOpHttpBindingsDescribeFunctionOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeDocumentFunctionSummary(&output.FunctionSummary, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorDescribeFunction(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("NoSuchFunctionExists", errorCode):
+		return awsRestxml_deserializeErrorNoSuchFunctionExists(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpHttpBindingsDescribeFunctionOutput(v *DescribeFunctionOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("ETag"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ETag = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestxml_deserializeOpDocumentDescribeFunctionOutput(v **DescribeFunctionOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *DescribeFunctionOutput
+	if *v == nil {
+		sv = &DescribeFunctionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FunctionSummary", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionSummary(&sv.FunctionSummary, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
 }
 
 type awsRestxml_deserializeOpGetCachePolicy struct {
@@ -5209,6 +5649,114 @@ func awsRestxml_deserializeOpDocumentGetFieldLevelEncryptionProfileConfigOutput(
 	return nil
 }
 
+type awsRestxml_deserializeOpGetFunction struct {
+}
+
+func (*awsRestxml_deserializeOpGetFunction) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpGetFunction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorGetFunction(response, &metadata)
+	}
+	output := &GetFunctionOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeOpHttpBindingsGetFunctionOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	err = awsRestxml_deserializeOpDocumentGetFunctionOutput(output, response.Body)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to deserialize response payload, %w", err)}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorGetFunction(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("NoSuchFunctionExists", errorCode):
+		return awsRestxml_deserializeErrorNoSuchFunctionExists(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpHttpBindingsGetFunctionOutput(v *GetFunctionOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Content-Type"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("ETag"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ETag = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestxml_deserializeOpDocumentGetFunctionOutput(v *GetFunctionOutput, body io.ReadCloser) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization of nil %T", v)
+	}
+	bs, err := ioutil.ReadAll(body)
+	if err != nil {
+		return err
+	}
+	if len(bs) > 0 {
+		v.FunctionCode = bs
+	}
+	return nil
+}
+
 type awsRestxml_deserializeOpGetInvalidation struct {
 }
 
@@ -5747,6 +6295,9 @@ func awsRestxml_deserializeOpErrorGetMonitoringSubscription(response *smithyhttp
 
 	case strings.EqualFold("NoSuchDistribution", errorCode):
 		return awsRestxml_deserializeErrorNoSuchDistribution(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsRestxml_deserializeErrorUnsupportedOperation(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -8279,6 +8830,143 @@ func awsRestxml_deserializeOpDocumentListFieldLevelEncryptionProfilesOutput(v **
 	return nil
 }
 
+type awsRestxml_deserializeOpListFunctions struct {
+}
+
+func (*awsRestxml_deserializeOpListFunctions) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpListFunctions) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorListFunctions(response, &metadata)
+	}
+	output := &ListFunctionsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeDocumentFunctionList(&output.FunctionList, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorListFunctions(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("InvalidArgument", errorCode):
+		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpDocumentListFunctionsOutput(v **ListFunctionsOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *ListFunctionsOutput
+	if *v == nil {
+		sv = &ListFunctionsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FunctionList", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionList(&sv.FunctionList, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestxml_deserializeOpListInvalidations struct {
 }
 
@@ -9265,6 +9953,152 @@ func awsRestxml_deserializeOpDocumentListTagsForResourceOutput(v **ListTagsForRe
 	return nil
 }
 
+type awsRestxml_deserializeOpPublishFunction struct {
+}
+
+func (*awsRestxml_deserializeOpPublishFunction) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpPublishFunction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorPublishFunction(response, &metadata)
+	}
+	output := &PublishFunctionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeDocumentFunctionSummary(&output.FunctionSummary, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorPublishFunction(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("InvalidArgument", errorCode):
+		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
+
+	case strings.EqualFold("InvalidIfMatchVersion", errorCode):
+		return awsRestxml_deserializeErrorInvalidIfMatchVersion(response, errorBody)
+
+	case strings.EqualFold("NoSuchFunctionExists", errorCode):
+		return awsRestxml_deserializeErrorNoSuchFunctionExists(response, errorBody)
+
+	case strings.EqualFold("PreconditionFailed", errorCode):
+		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpDocumentPublishFunctionOutput(v **PublishFunctionOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *PublishFunctionOutput
+	if *v == nil {
+		sv = &PublishFunctionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FunctionSummary", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionSummary(&sv.FunctionSummary, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestxml_deserializeOpTagResource struct {
 }
 
@@ -9345,6 +10179,152 @@ func awsRestxml_deserializeOpErrorTagResource(response *smithyhttp.Response, met
 		return genericError
 
 	}
+}
+
+type awsRestxml_deserializeOpTestFunction struct {
+}
+
+func (*awsRestxml_deserializeOpTestFunction) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpTestFunction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorTestFunction(response, &metadata)
+	}
+	output := &TestFunctionOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeDocumentTestResult(&output.TestResult, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorTestFunction(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("InvalidArgument", errorCode):
+		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
+
+	case strings.EqualFold("InvalidIfMatchVersion", errorCode):
+		return awsRestxml_deserializeErrorInvalidIfMatchVersion(response, errorBody)
+
+	case strings.EqualFold("NoSuchFunctionExists", errorCode):
+		return awsRestxml_deserializeErrorNoSuchFunctionExists(response, errorBody)
+
+	case strings.EqualFold("TestFunctionFailed", errorCode):
+		return awsRestxml_deserializeErrorTestFunctionFailed(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpDocumentTestFunctionOutput(v **TestFunctionOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *TestFunctionOutput
+	if *v == nil {
+		sv = &TestFunctionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("TestResult", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentTestResult(&sv.TestResult, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
 }
 
 type awsRestxml_deserializeOpUntagResource struct {
@@ -9902,6 +10882,9 @@ func awsRestxml_deserializeOpErrorUpdateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("InvalidForwardCookies", errorCode):
 		return awsRestxml_deserializeErrorInvalidForwardCookies(response, errorBody)
 
+	case strings.EqualFold("InvalidFunctionAssociation", errorCode):
+		return awsRestxml_deserializeErrorInvalidFunctionAssociation(response, errorBody)
+
 	case strings.EqualFold("InvalidGeoRestrictionParameter", errorCode):
 		return awsRestxml_deserializeErrorInvalidGeoRestrictionParameter(response, errorBody)
 
@@ -9968,8 +10951,14 @@ func awsRestxml_deserializeOpErrorUpdateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("NoSuchOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorNoSuchOriginRequestPolicy(response, errorBody)
 
+	case strings.EqualFold("NoSuchRealtimeLogConfig", errorCode):
+		return awsRestxml_deserializeErrorNoSuchRealtimeLogConfig(response, errorBody)
+
 	case strings.EqualFold("PreconditionFailed", errorCode):
 		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
+
+	case strings.EqualFold("RealtimeLogConfigOwnerMismatch", errorCode):
+		return awsRestxml_deserializeErrorRealtimeLogConfigOwnerMismatch(response, errorBody)
 
 	case strings.EqualFold("TooManyCacheBehaviors", errorCode):
 		return awsRestxml_deserializeErrorTooManyCacheBehaviors(response, errorBody)
@@ -9995,11 +10984,17 @@ func awsRestxml_deserializeOpErrorUpdateDistribution(response *smithyhttp.Respon
 	case strings.EqualFold("TooManyDistributionsAssociatedToOriginRequestPolicy", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPolicy(response, errorBody)
 
+	case strings.EqualFold("TooManyDistributionsWithFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyDistributionsWithFunctionAssociations(response, errorBody)
+
 	case strings.EqualFold("TooManyDistributionsWithLambdaAssociations", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsWithLambdaAssociations(response, errorBody)
 
 	case strings.EqualFold("TooManyDistributionsWithSingleFunctionARN", errorCode):
 		return awsRestxml_deserializeErrorTooManyDistributionsWithSingleFunctionARN(response, errorBody)
+
+	case strings.EqualFold("TooManyFunctionAssociations", errorCode):
+		return awsRestxml_deserializeErrorTooManyFunctionAssociations(response, errorBody)
 
 	case strings.EqualFold("TooManyHeadersInForwardedValues", errorCode):
 		return awsRestxml_deserializeErrorTooManyHeadersInForwardedValues(response, errorBody)
@@ -10449,6 +11444,172 @@ func awsRestxml_deserializeOpDocumentUpdateFieldLevelEncryptionProfileOutput(v *
 		case strings.EqualFold("FieldLevelEncryptionProfile", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentFieldLevelEncryptionProfile(&sv.FieldLevelEncryptionProfile, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestxml_deserializeOpUpdateFunction struct {
+}
+
+func (*awsRestxml_deserializeOpUpdateFunction) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestxml_deserializeOpUpdateFunction) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestxml_deserializeOpErrorUpdateFunction(response, &metadata)
+	}
+	output := &UpdateFunctionOutput{}
+	out.Result = output
+
+	err = awsRestxml_deserializeOpHttpBindingsUpdateFunctionOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(response.Body, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return out, metadata, nil
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	err = awsRestxml_deserializeDocumentFunctionSummary(&output.FunctionSummary, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestxml_deserializeOpErrorUpdateFunction(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	errorComponents, err := awsxml.GetErrorResponseComponents(errorBody, false)
+	if err != nil {
+		return err
+	}
+	if reqID := errorComponents.RequestID; len(reqID) != 0 {
+		awsmiddleware.SetRequestIDMetadata(metadata, reqID)
+	}
+	if len(errorComponents.Code) != 0 {
+		errorCode = errorComponents.Code
+	}
+	if len(errorComponents.Message) != 0 {
+		errorMessage = errorComponents.Message
+	}
+	errorBody.Seek(0, io.SeekStart)
+	switch {
+	case strings.EqualFold("FunctionSizeLimitExceeded", errorCode):
+		return awsRestxml_deserializeErrorFunctionSizeLimitExceeded(response, errorBody)
+
+	case strings.EqualFold("InvalidArgument", errorCode):
+		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
+
+	case strings.EqualFold("InvalidIfMatchVersion", errorCode):
+		return awsRestxml_deserializeErrorInvalidIfMatchVersion(response, errorBody)
+
+	case strings.EqualFold("NoSuchFunctionExists", errorCode):
+		return awsRestxml_deserializeErrorNoSuchFunctionExists(response, errorBody)
+
+	case strings.EqualFold("PreconditionFailed", errorCode):
+		return awsRestxml_deserializeErrorPreconditionFailed(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestxml_deserializeOpHttpBindingsUpdateFunctionOutput(v *UpdateFunctionOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("ETtag"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ETag = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestxml_deserializeOpDocumentUpdateFunctionOutput(v **UpdateFunctionOutput, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *UpdateFunctionOutput
+	if *v == nil {
+		sv = &UpdateFunctionOutput{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FunctionSummary", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionSummary(&sv.FunctionSummary, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -11984,6 +13145,138 @@ func awsRestxml_deserializeErrorFieldLevelEncryptionProfileSizeExceeded(response
 	return output
 }
 
+func awsRestxml_deserializeErrorFunctionAlreadyExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.FunctionAlreadyExists{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentFunctionAlreadyExists(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorFunctionInUse(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.FunctionInUse{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentFunctionInUse(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorFunctionSizeLimitExceeded(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.FunctionSizeLimitExceeded{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentFunctionSizeLimitExceeded(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsRestxml_deserializeErrorIllegalDelete(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.IllegalDelete{}
 	var buff [1024]byte
@@ -12324,6 +13617,50 @@ func awsRestxml_deserializeErrorInvalidForwardCookies(response *smithyhttp.Respo
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentInvalidForwardCookies(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorInvalidFunctionAssociation(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.InvalidFunctionAssociation{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentInvalidFunctionAssociation(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -13480,6 +14817,50 @@ func awsRestxml_deserializeErrorNoSuchFieldLevelEncryptionProfile(response *smit
 	return output
 }
 
+func awsRestxml_deserializeErrorNoSuchFunctionExists(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.NoSuchFunctionExists{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentNoSuchFunctionExists(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsRestxml_deserializeErrorNoSuchInvalidation(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.NoSuchInvalidation{}
 	var buff [1024]byte
@@ -14140,6 +15521,50 @@ func awsRestxml_deserializeErrorRealtimeLogConfigInUse(response *smithyhttp.Resp
 	return output
 }
 
+func awsRestxml_deserializeErrorRealtimeLogConfigOwnerMismatch(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.RealtimeLogConfigOwnerMismatch{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentRealtimeLogConfigOwnerMismatch(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsRestxml_deserializeErrorResourceInUse(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ResourceInUse{}
 	var buff [1024]byte
@@ -14260,6 +15685,50 @@ func awsRestxml_deserializeErrorStreamingDistributionNotDisabled(response *smith
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentStreamingDistributionNotDisabled(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorTestFunctionFailed(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.TestFunctionFailed{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentTestFunctionFailed(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -14844,6 +16313,50 @@ func awsRestxml_deserializeErrorTooManyDistributionsAssociatedToOriginRequestPol
 	return output
 }
 
+func awsRestxml_deserializeErrorTooManyDistributionsWithFunctionAssociations(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.TooManyDistributionsWithFunctionAssociations{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentTooManyDistributionsWithFunctionAssociations(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsRestxml_deserializeErrorTooManyDistributionsWithLambdaAssociations(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.TooManyDistributionsWithLambdaAssociations{}
 	var buff [1024]byte
@@ -15184,6 +16697,94 @@ func awsRestxml_deserializeErrorTooManyFieldLevelEncryptionQueryArgProfiles(resp
 
 	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 	err = awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionQueryArgProfiles(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorTooManyFunctionAssociations(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.TooManyFunctionAssociations{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentTooManyFunctionAssociations(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
+func awsRestxml_deserializeErrorTooManyFunctions(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.TooManyFunctions{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentTooManyFunctions(&output, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -16164,6 +17765,50 @@ func awsRestxml_deserializeErrorTrustedSignerDoesNotExist(response *smithyhttp.R
 	return output
 }
 
+func awsRestxml_deserializeErrorUnsupportedOperation(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.UnsupportedOperation{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+	body := io.TeeReader(errorBody, ringBuffer)
+	rootDecoder := xml.NewDecoder(body)
+	t, err := smithyxml.FetchRootElement(rootDecoder)
+	if err == io.EOF {
+		return output
+	}
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
+	t, err = decoder.GetElement("Error")
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	decoder = smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+	err = awsRestxml_deserializeDocumentUnsupportedOperation(&output, decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return output
+}
+
 func awsRestxml_deserializeDocumentAccessDenied(v **types.AccessDenied, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -16916,6 +18561,12 @@ func awsRestxml_deserializeDocumentCacheBehavior(v **types.CacheBehavior, decode
 		case strings.EqualFold("ForwardedValues", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentForwardedValues(&sv.ForwardedValues, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("FunctionAssociations", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionAssociations(&sv.FunctionAssociations, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -19454,6 +21105,12 @@ func awsRestxml_deserializeDocumentDefaultCacheBehavior(v **types.DefaultCacheBe
 		case strings.EqualFold("ForwardedValues", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsRestxml_deserializeDocumentForwardedValues(&sv.ForwardedValues, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("FunctionAssociations", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionAssociations(&sv.FunctionAssociations, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -22316,6 +23973,811 @@ func awsRestxml_deserializeDocumentForwardedValues(v **types.ForwardedValues, de
 	return nil
 }
 
+func awsRestxml_deserializeDocumentFunctionAlreadyExists(v **types.FunctionAlreadyExists, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionAlreadyExists
+	if *v == nil {
+		sv = &types.FunctionAlreadyExists{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionAssociation(v **types.FunctionAssociation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionAssociation
+	if *v == nil {
+		sv = &types.FunctionAssociation{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("EventType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EventType = types.EventType(xtv)
+			}
+
+		case strings.EqualFold("FunctionARN", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FunctionARN = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionAssociationList(v *[]types.FunctionAssociation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.FunctionAssociation
+	if *v == nil {
+		sv = make([]types.FunctionAssociation, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("FunctionAssociation", t.Name.Local):
+			var col types.FunctionAssociation
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsRestxml_deserializeDocumentFunctionAssociation(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionAssociationListUnwrapped(v *[]types.FunctionAssociation, decoder smithyxml.NodeDecoder) error {
+	var sv []types.FunctionAssociation
+	if *v == nil {
+		sv = make([]types.FunctionAssociation, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.FunctionAssociation
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentFunctionAssociation(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsRestxml_deserializeDocumentFunctionAssociations(v **types.FunctionAssociations, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionAssociations
+	if *v == nil {
+		sv = &types.FunctionAssociations{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Items", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionAssociationList(&sv.Items, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Quantity", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Quantity = ptr.Int32(int32(i64))
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionConfig(v **types.FunctionConfig, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionConfig
+	if *v == nil {
+		sv = &types.FunctionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Comment", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Comment = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Runtime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Runtime = types.FunctionRuntime(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionExecutionLogList(v *[]string, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		memberDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		decoder = memberDecoder
+		switch {
+		case strings.EqualFold("member", t.Name.Local):
+			var col string
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				col = xtv
+			}
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionExecutionLogListUnwrapped(v *[]string, decoder smithyxml.NodeDecoder) error {
+	var sv []string
+	if *v == nil {
+		sv = make([]string, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv string
+		t := decoder.StartEl
+		_ = t
+		val, err := decoder.Value()
+		if err != nil {
+			return err
+		}
+		if val == nil {
+			break
+		}
+		{
+			xtv := string(val)
+			mv = xtv
+		}
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
+func awsRestxml_deserializeDocumentFunctionInUse(v **types.FunctionInUse, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionInUse
+	if *v == nil {
+		sv = &types.FunctionInUse{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionList(v **types.FunctionList, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionList
+	if *v == nil {
+		sv = &types.FunctionList{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Items", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionSummaryList(&sv.Items, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("MaxItems", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.MaxItems = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("NextMarker", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NextMarker = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Quantity", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Quantity = ptr.Int32(int32(i64))
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionMetadata(v **types.FunctionMetadata, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionMetadata
+	if *v == nil {
+		sv = &types.FunctionMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("CreatedTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.CreatedTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("FunctionARN", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FunctionARN = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("LastModifiedTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.LastModifiedTime = ptr.Time(t)
+			}
+
+		case strings.EqualFold("Stage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Stage = types.FunctionStage(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionSizeLimitExceeded(v **types.FunctionSizeLimitExceeded, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionSizeLimitExceeded
+	if *v == nil {
+		sv = &types.FunctionSizeLimitExceeded{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionSummary(v **types.FunctionSummary, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.FunctionSummary
+	if *v == nil {
+		sv = &types.FunctionSummary{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("FunctionConfig", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionConfig(&sv.FunctionConfig, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("FunctionMetadata", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionMetadata(&sv.FunctionMetadata, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("Name", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Name = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("Status", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Status = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionSummaryList(v *[]types.FunctionSummary, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv []types.FunctionSummary
+	if *v == nil {
+		sv = make([]types.FunctionSummary, 0)
+	} else {
+		sv = *v
+	}
+
+	originalDecoder := decoder
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		switch {
+		case strings.EqualFold("FunctionSummary", t.Name.Local):
+			var col types.FunctionSummary
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			destAddr := &col
+			if err := awsRestxml_deserializeDocumentFunctionSummary(&destAddr, nodeDecoder); err != nil {
+				return err
+			}
+			col = *destAddr
+			sv = append(sv, col)
+
+		default:
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentFunctionSummaryListUnwrapped(v *[]types.FunctionSummary, decoder smithyxml.NodeDecoder) error {
+	var sv []types.FunctionSummary
+	if *v == nil {
+		sv = make([]types.FunctionSummary, 0)
+	} else {
+		sv = *v
+	}
+
+	switch {
+	default:
+		var mv types.FunctionSummary
+		t := decoder.StartEl
+		_ = t
+		nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+		destAddr := &mv
+		if err := awsRestxml_deserializeDocumentFunctionSummary(&destAddr, nodeDecoder); err != nil {
+			return err
+		}
+		mv = *destAddr
+		sv = append(sv, mv)
+	}
+	*v = sv
+	return nil
+}
 func awsRestxml_deserializeDocumentGeoRestriction(v **types.GeoRestriction, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23282,6 +25744,55 @@ func awsRestxml_deserializeDocumentInvalidForwardCookies(v **types.InvalidForwar
 	var sv *types.InvalidForwardCookies
 	if *v == nil {
 		sv = &types.InvalidForwardCookies{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentInvalidFunctionAssociation(v **types.InvalidFunctionAssociation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.InvalidFunctionAssociation
+	if *v == nil {
+		sv = &types.InvalidFunctionAssociation{}
 	} else {
 		sv = *v
 	}
@@ -25720,6 +28231,55 @@ func awsRestxml_deserializeDocumentNoSuchFieldLevelEncryptionProfile(v **types.N
 	var sv *types.NoSuchFieldLevelEncryptionProfile
 	if *v == nil {
 		sv = &types.NoSuchFieldLevelEncryptionProfile{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentNoSuchFunctionExists(v **types.NoSuchFunctionExists, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.NoSuchFunctionExists
+	if *v == nil {
+		sv = &types.NoSuchFunctionExists{}
 	} else {
 		sv = *v
 	}
@@ -29357,6 +31917,55 @@ func awsRestxml_deserializeDocumentRealtimeLogConfigListUnwrapped(v *[]types.Rea
 	*v = sv
 	return nil
 }
+func awsRestxml_deserializeDocumentRealtimeLogConfigOwnerMismatch(v **types.RealtimeLogConfigOwnerMismatch, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.RealtimeLogConfigOwnerMismatch
+	if *v == nil {
+		sv = &types.RealtimeLogConfigOwnerMismatch{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentRealtimeLogConfigs(v **types.RealtimeLogConfigs, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -30990,6 +33599,142 @@ func awsRestxml_deserializeDocumentTags(v **types.Tags, decoder smithyxml.NodeDe
 	return nil
 }
 
+func awsRestxml_deserializeDocumentTestFunctionFailed(v **types.TestFunctionFailed, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.TestFunctionFailed
+	if *v == nil {
+		sv = &types.TestFunctionFailed{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentTestResult(v **types.TestResult, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.TestResult
+	if *v == nil {
+		sv = &types.TestResult{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("ComputeUtilization", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.ComputeUtilization = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("FunctionErrorMessage", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FunctionErrorMessage = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("FunctionExecutionLogs", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionExecutionLogList(&sv.FunctionExecutionLogs, nodeDecoder); err != nil {
+				return err
+			}
+
+		case strings.EqualFold("FunctionOutput", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.FunctionOutput = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("FunctionSummary", t.Name.Local):
+			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
+			if err := awsRestxml_deserializeDocumentFunctionSummary(&sv.FunctionSummary, nodeDecoder); err != nil {
+				return err
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentTooManyCacheBehaviors(v **types.TooManyCacheBehaviors, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31627,6 +34372,55 @@ func awsRestxml_deserializeDocumentTooManyDistributionsAssociatedToOriginRequest
 	return nil
 }
 
+func awsRestxml_deserializeDocumentTooManyDistributionsWithFunctionAssociations(v **types.TooManyDistributionsWithFunctionAssociations, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.TooManyDistributionsWithFunctionAssociations
+	if *v == nil {
+		sv = &types.TooManyDistributionsWithFunctionAssociations{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestxml_deserializeDocumentTooManyDistributionsWithLambdaAssociations(v **types.TooManyDistributionsWithLambdaAssociations, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31977,6 +34771,104 @@ func awsRestxml_deserializeDocumentTooManyFieldLevelEncryptionQueryArgProfiles(v
 	var sv *types.TooManyFieldLevelEncryptionQueryArgProfiles
 	if *v == nil {
 		sv = &types.TooManyFieldLevelEncryptionQueryArgProfiles{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentTooManyFunctionAssociations(v **types.TooManyFunctionAssociations, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.TooManyFunctionAssociations
+	if *v == nil {
+		sv = &types.TooManyFunctionAssociations{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentTooManyFunctions(v **types.TooManyFunctions, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.TooManyFunctions
+	if *v == nil {
+		sv = &types.TooManyFunctions{}
 	} else {
 		sv = *v
 	}
@@ -33311,6 +36203,55 @@ func awsRestxml_deserializeDocumentTrustedSigners(v **types.TrustedSigners, deco
 					return err
 				}
 				sv.Quantity = ptr.Int32(int32(i64))
+			}
+
+		default:
+			// Do nothing and ignore the unexpected tag element
+			err = decoder.Decoder.Skip()
+			if err != nil {
+				return err
+			}
+
+		}
+		decoder = originalDecoder
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestxml_deserializeDocumentUnsupportedOperation(v **types.UnsupportedOperation, decoder smithyxml.NodeDecoder) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	var sv *types.UnsupportedOperation
+	if *v == nil {
+		sv = &types.UnsupportedOperation{}
+	} else {
+		sv = *v
+	}
+
+	for {
+		t, done, err := decoder.Token()
+		if err != nil {
+			return err
+		}
+		if done {
+			break
+		}
+		originalDecoder := decoder
+		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
+		switch {
+		case strings.EqualFold("Message", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Message = ptr.String(xtv)
 			}
 
 		default:

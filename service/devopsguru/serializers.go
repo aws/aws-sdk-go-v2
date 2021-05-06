@@ -494,6 +494,59 @@ func awsRestjson1_serializeOpHttpBindingsDescribeServiceIntegrationInput(v *Desc
 	return nil
 }
 
+type awsRestjson1_serializeOpGetCostEstimation struct {
+}
+
+func (*awsRestjson1_serializeOpGetCostEstimation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetCostEstimation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCostEstimationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/cost-estimation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetCostEstimationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetCostEstimationInput(v *GetCostEstimationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetResourceCollection struct {
 }
 
@@ -942,6 +995,11 @@ func awsRestjson1_serializeOpDocumentListRecommendationsInput(v *ListRecommendat
 		ok.String(*v.InsightId)
 	}
 
+	if len(v.Locale) > 0 {
+		ok := object.Key("Locale")
+		ok.String(string(v.Locale))
+	}
+
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
@@ -1170,6 +1228,81 @@ func awsRestjson1_serializeOpDocumentSearchInsightsInput(v *SearchInsightsInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpStartCostEstimation struct {
+}
+
+func (*awsRestjson1_serializeOpStartCostEstimation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStartCostEstimation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StartCostEstimationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/cost-estimation")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartCostEstimationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStartCostEstimationInput(v *StartCostEstimationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartCostEstimationInput(v *StartCostEstimationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ResourceCollection != nil {
+		ok := object.Key("ResourceCollection")
+		if err := awsRestjson1_serializeDocumentCostEstimationResourceCollectionFilter(v.ResourceCollection, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateResourceCollection struct {
 }
 
@@ -1326,6 +1459,45 @@ func awsRestjson1_serializeDocumentCloudFormationCollection(v *types.CloudFormat
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCloudFormationCostEstimationResourceCollectionFilter(v *types.CloudFormationCostEstimationResourceCollectionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StackNames != nil {
+		ok := object.Key("StackNames")
+		if err := awsRestjson1_serializeDocumentCostEstimationStackNames(v.StackNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCostEstimationResourceCollectionFilter(v *types.CostEstimationResourceCollectionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CloudFormation != nil {
+		ok := object.Key("CloudFormation")
+		if err := awsRestjson1_serializeDocumentCloudFormationCostEstimationResourceCollectionFilter(v.CloudFormation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCostEstimationStackNames(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -1572,6 +1744,13 @@ func awsRestjson1_serializeDocumentSearchInsightsFilters(v *types.SearchInsights
 		}
 	}
 
+	if v.ServiceCollection != nil {
+		ok := object.Key("ServiceCollection")
+		if err := awsRestjson1_serializeDocumentServiceCollection(v.ServiceCollection, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Severities != nil {
 		ok := object.Key("Severities")
 		if err := awsRestjson1_serializeDocumentInsightSeverities(v.Severities, ok); err != nil {
@@ -1586,6 +1765,31 @@ func awsRestjson1_serializeDocumentSearchInsightsFilters(v *types.SearchInsights
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceCollection(v *types.ServiceCollection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ServiceNames != nil {
+		ok := object.Key("ServiceNames")
+		if err := awsRestjson1_serializeDocumentServiceNames(v.ServiceNames, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentServiceNames(v []types.ServiceName, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

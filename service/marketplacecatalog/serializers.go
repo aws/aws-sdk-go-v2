@@ -463,6 +463,11 @@ func awsRestjson1_serializeDocumentChange(v *types.Change, value smithyjson.Valu
 	object := value.Object()
 	defer object.Close()
 
+	if v.ChangeName != nil {
+		ok := object.Key("ChangeName")
+		ok.String(*v.ChangeName)
+	}
+
 	if v.ChangeType != nil {
 		ok := object.Key("ChangeType")
 		ok.String(*v.ChangeType)

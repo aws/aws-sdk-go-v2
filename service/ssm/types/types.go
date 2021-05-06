@@ -114,6 +114,13 @@ type AssociationDescription struct {
 	// that use an Automation document and target resources by using rate controls.
 	AutomationTargetParameterName *string
 
+	// The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar
+	// type documents your associations are gated under. The associations only run when
+	// that Change Calendar is open. For more information, see AWS Systems Manager
+	// Change Calendar
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar).
+	CalendarNames []string
+
 	// The severity level that is assigned to the association.
 	ComplianceSeverity AssociationComplianceSeverity
 
@@ -357,6 +364,13 @@ type AssociationVersionInfo struct {
 
 	// The association version.
 	AssociationVersion *string
+
+	// The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar
+	// type documents your associations are gated under. The associations for this
+	// version only run when that Change Calendar is open. For more information, see
+	// AWS Systems Manager Change Calendar
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar).
+	CalendarNames []string
 
 	// The severity level that is assigned to the association.
 	ComplianceSeverity AssociationComplianceSeverity
@@ -1342,6 +1356,13 @@ type CreateAssociationBatchRequestEntry struct {
 	// Specify the target for the association. This target is required for associations
 	// that use an Automation document and target resources by using rate controls.
 	AutomationTargetParameterName *string
+
+	// The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar
+	// type documents your associations are gated under. The associations only run when
+	// that Change Calendar is open. For more information, see AWS Systems Manager
+	// Change Calendar
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar).
+	CalendarNames []string
 
 	// The severity level to assign to the association.
 	ComplianceSeverity AssociationComplianceSeverity

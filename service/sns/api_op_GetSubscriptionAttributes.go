@@ -96,8 +96,8 @@ type GetSubscriptionAttributesOutput struct {
 	// valid ARN for this attribute is required for Kinesis Data Firehose delivery
 	// stream subscriptions. For more information, see Fanout to Kinesis Data Firehose
 	// delivery streams
-	// (https://docs.aws.amazon.com/sns/latest/dg/sns-kinesis-subscriber.html) in the
-	// Amazon SNS Developer Guide.
+	// (https://docs.aws.amazon.com/sns/latest/dg/sns-firehose-as-subscriber.html) in
+	// the Amazon SNS Developer Guide.
 	Attributes map[string]string
 
 	// Metadata pertaining to the operation's result.

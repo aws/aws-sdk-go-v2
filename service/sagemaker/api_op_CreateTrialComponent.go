@@ -15,15 +15,15 @@ import (
 // Creates a trial component, which is a stage of a machine learning trial. A trial
 // is composed of one or more trial components. A trial component can be used in
 // multiple trials. Trial components include pre-processing jobs, training jobs,
-// and batch transform jobs. When you use Amazon SageMaker Studio or the Amazon
-// SageMaker Python SDK, all experiments, trials, and trial components are
-// automatically tracked, logged, and indexed. When you use the AWS SDK for Python
-// (Boto), you must use the logging APIs provided by the SDK. You can add tags to a
-// trial component and then use the Search API to search for the tags.
-// CreateTrialComponent can only be invoked from within an Amazon SageMaker managed
-// environment. This includes Amazon SageMaker training jobs, processing jobs,
-// transform jobs, and Amazon SageMaker notebooks. A call to CreateTrialComponent
-// from outside one of these environments results in an error.
+// and batch transform jobs. When you use SageMaker Studio or the SageMaker Python
+// SDK, all experiments, trials, and trial components are automatically tracked,
+// logged, and indexed. When you use the AWS SDK for Python (Boto), you must use
+// the logging APIs provided by the SDK. You can add tags to a trial component and
+// then use the Search API to search for the tags. CreateTrialComponent can only be
+// invoked from within an SageMaker managed environment. This includes SageMaker
+// training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call
+// to CreateTrialComponent from outside one of these environments results in an
+// error.
 func (c *Client) CreateTrialComponent(ctx context.Context, params *CreateTrialComponentInput, optFns ...func(*Options)) (*CreateTrialComponentOutput, error) {
 	if params == nil {
 		params = &CreateTrialComponentInput{}

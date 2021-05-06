@@ -93,6 +93,15 @@ type RegisterTaskDefinitionInput struct {
 	// values: Between 8192 (8 GB) and 30720 (30 GB) in increments of 1024 (1 GB)
 	Cpu *string
 
+	// The amount of ephemeral storage to allocate for the task. This parameter is used
+	// to expand the total amount of ephemeral storage available, beyond the default
+	// amount, for tasks hosted on AWS Fargate. For more information, see Fargate task
+	// storage
+	// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
+	// in the Amazon ECS User Guide for AWS Fargate. This parameter is only supported
+	// for tasks hosted on AWS Fargate using platform version 1.4.0 or later.
+	EphemeralStorage *types.EphemeralStorage
+
 	// The Amazon Resource Name (ARN) of the task execution role that grants the Amazon
 	// ECS container agent permission to make AWS API calls on your behalf. The task
 	// execution IAM role is required depending on the requirements of your task. For
@@ -212,14 +221,15 @@ type RegisterTaskDefinitionInput struct {
 	// definition and those specified at runtime).
 	PlacementConstraints []types.TaskDefinitionPlacementConstraint
 
-	// The configuration details for the App Mesh proxy. For tasks using the EC2 launch
-	// type, the container instances require at least version 1.26.0 of the container
-	// agent and at least version 1.26.0-1 of the ecs-init package to enable a proxy
-	// configuration. If your container instances are launched from the Amazon
+	// The configuration details for the App Mesh proxy. For tasks hosted on Amazon EC2
+	// instances, the container instances require at least version 1.26.0 of the
+	// container agent and at least version 1.26.0-1 of the ecs-init package to enable
+	// a proxy configuration. If your container instances are launched from the Amazon
 	// ECS-optimized AMI version 20190301 or later, then they contain the required
 	// versions of the container agent and ecs-init. For more information, see Amazon
-	// ECS-optimized Linux AMI
-	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html)
+	// ECS-optimized AMI versions
+	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-ami-versions.html)
+	// in the Amazon Elastic Container Service Developer Guide.
 	ProxyConfiguration *types.ProxyConfiguration
 
 	// The task launch type that Amazon ECS should validate the task definition

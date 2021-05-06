@@ -15,7 +15,7 @@ import (
 // Returns lists AWS resources that are of the specified resource collection type.
 // The one type of AWS resource collection supported is AWS CloudFormation stacks.
 // DevOps Guru can be configured to analyze only the AWS resources that are defined
-// in the stacks.
+// in the stacks. You can specify up to 500 AWS CloudFormation stacks.
 func (c *Client) GetResourceCollection(ctx context.Context, params *GetResourceCollectionInput, optFns ...func(*Options)) (*GetResourceCollectionOutput, error) {
 	if params == nil {
 		params = &GetResourceCollectionInput{}
@@ -52,7 +52,8 @@ type GetResourceCollectionOutput struct {
 
 	// The requested list of AWS resource collections. The one type of AWS resource
 	// collection supported is AWS CloudFormation stacks. DevOps Guru can be configured
-	// to analyze only the AWS resources that are defined in the stacks.
+	// to analyze only the AWS resources that are defined in the stacks. You can
+	// specify up to 500 AWS CloudFormation stacks.
 	ResourceCollection *types.ResourceCollectionFilter
 
 	// Metadata pertaining to the operation's result.

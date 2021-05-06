@@ -389,6 +389,129 @@ func awsAwsjson11_deserializeOpErrorCreateDataset(response *smithyhttp.Response,
 	}
 }
 
+type awsAwsjson11_deserializeOpCreateDatasetExportJob struct {
+}
+
+func (*awsAwsjson11_deserializeOpCreateDatasetExportJob) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpCreateDatasetExportJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateDatasetExportJob(response, &metadata)
+	}
+	output := &CreateDatasetExportJobOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateDatasetExportJobOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorCreateDatasetExportJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourceAlreadyExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceAlreadyExistsException(response, errorBody)
+
+	case strings.EqualFold("ResourceInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpCreateDatasetGroup struct {
 }
 
@@ -2353,6 +2476,120 @@ func awsAwsjson11_deserializeOpErrorDescribeDataset(response *smithyhttp.Respons
 	}
 }
 
+type awsAwsjson11_deserializeOpDescribeDatasetExportJob struct {
+}
+
+func (*awsAwsjson11_deserializeOpDescribeDatasetExportJob) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDescribeDatasetExportJob) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeDatasetExportJob(response, &metadata)
+	}
+	output := &DescribeDatasetExportJobOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDescribeDatasetExportJobOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDescribeDatasetExportJob(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpDescribeDatasetGroup struct {
 }
 
@@ -3668,6 +3905,120 @@ func (m *awsAwsjson11_deserializeOpListCampaigns) HandleDeserialize(ctx context.
 }
 
 func awsAwsjson11_deserializeOpErrorListCampaigns(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InvalidInputException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
+
+	case strings.EqualFold("InvalidNextTokenException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpListDatasetExportJobs struct {
+}
+
+func (*awsAwsjson11_deserializeOpListDatasetExportJobs) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListDatasetExportJobs) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListDatasetExportJobs(response, &metadata)
+	}
+	output := &ListDatasetExportJobsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListDatasetExportJobsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListDatasetExportJobs(response *smithyhttp.Response, metadata *middleware.Metadata) error {
 	var errorBuffer bytes.Buffer
 	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
 		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
@@ -6442,6 +6793,294 @@ func awsAwsjson11_deserializeDocumentDataset(v **types.Dataset, value interface{
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.SchemaArn = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDatasetExportJob(v **types.DatasetExportJob, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatasetExportJob
+	if *v == nil {
+		sv = &types.DatasetExportJob{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "creationDateTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.CreationDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "datasetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.DatasetArn = ptr.String(jtv)
+			}
+
+		case "datasetExportJobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.DatasetExportJobArn = ptr.String(jtv)
+			}
+
+		case "failureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "ingestionMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IngestionMode to be of type string, got %T instead", value)
+				}
+				sv.IngestionMode = types.IngestionMode(jtv)
+			}
+
+		case "jobName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.JobName = ptr.String(jtv)
+			}
+
+		case "jobOutput":
+			if err := awsAwsjson11_deserializeDocumentDatasetExportJobOutput(&sv.JobOutput, value); err != nil {
+				return err
+			}
+
+		case "lastUpdatedDateTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.LastUpdatedDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Status to be of type string, got %T instead", value)
+				}
+				sv.Status = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDatasetExportJobOutput(v **types.DatasetExportJobOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatasetExportJobOutput
+	if *v == nil {
+		sv = &types.DatasetExportJobOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "s3DataDestination":
+			if err := awsAwsjson11_deserializeDocumentS3DataConfig(&sv.S3DataDestination, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDatasetExportJobs(v *[]types.DatasetExportJobSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DatasetExportJobSummary
+	if *v == nil {
+		cv = []types.DatasetExportJobSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DatasetExportJobSummary
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentDatasetExportJobSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDatasetExportJobSummary(v **types.DatasetExportJobSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatasetExportJobSummary
+	if *v == nil {
+		sv = &types.DatasetExportJobSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "creationDateTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.CreationDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "datasetExportJobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.DatasetExportJobArn = ptr.String(jtv)
+			}
+
+		case "failureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = ptr.String(jtv)
+			}
+
+		case "jobName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.JobName = ptr.String(jtv)
+			}
+
+		case "lastUpdatedDateTime":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Date to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.LastUpdatedDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
 		case "status":
@@ -9956,6 +10595,46 @@ func awsAwsjson11_deserializeOpDocumentCreateCampaignOutput(v **CreateCampaignOu
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentCreateDatasetExportJobOutput(v **CreateDatasetExportJobOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateDatasetExportJobOutput
+	if *v == nil {
+		sv = &CreateDatasetExportJobOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "datasetExportJobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.DatasetExportJobArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentCreateDatasetGroupOutput(v **CreateDatasetGroupOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10381,6 +11060,42 @@ func awsAwsjson11_deserializeOpDocumentDescribeCampaignOutput(v **DescribeCampai
 		switch key {
 		case "campaign":
 			if err := awsAwsjson11_deserializeDocumentCampaign(&sv.Campaign, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDescribeDatasetExportJobOutput(v **DescribeDatasetExportJobOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeDatasetExportJobOutput
+	if *v == nil {
+		sv = &DescribeDatasetExportJobOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "datasetExportJob":
+			if err := awsAwsjson11_deserializeDocumentDatasetExportJob(&sv.DatasetExportJob, value); err != nil {
 				return err
 			}
 
@@ -10867,6 +11582,51 @@ func awsAwsjson11_deserializeOpDocumentListCampaignsOutput(v **ListCampaignsOutp
 		switch key {
 		case "campaigns":
 			if err := awsAwsjson11_deserializeDocumentCampaigns(&sv.Campaigns, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentListDatasetExportJobsOutput(v **ListDatasetExportJobsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListDatasetExportJobsOutput
+	if *v == nil {
+		sv = &ListDatasetExportJobsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "datasetExportJobs":
+			if err := awsAwsjson11_deserializeDocumentDatasetExportJobs(&sv.DatasetExportJobs, value); err != nil {
 				return err
 			}
 

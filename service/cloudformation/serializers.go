@@ -4491,6 +4491,11 @@ func awsAwsquery_serializeOpDocumentGetTemplateSummaryInput(v *GetTemplateSummar
 	object := value.Object()
 	_ = object
 
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
 	if v.StackName != nil {
 		objectKey := object.Key("StackName")
 		objectKey.String(*v.StackName)

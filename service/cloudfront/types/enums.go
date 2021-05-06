@@ -141,6 +141,40 @@ func (Format) Values() []Format {
 	}
 }
 
+type FunctionRuntime string
+
+// Enum values for FunctionRuntime
+const (
+	FunctionRuntimeCloudfrontJs10 FunctionRuntime = "cloudfront-js-1.0"
+)
+
+// Values returns all known values for FunctionRuntime. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionRuntime) Values() []FunctionRuntime {
+	return []FunctionRuntime{
+		"cloudfront-js-1.0",
+	}
+}
+
+type FunctionStage string
+
+// Enum values for FunctionStage
+const (
+	FunctionStageDevelopment FunctionStage = "DEVELOPMENT"
+	FunctionStageLive        FunctionStage = "LIVE"
+)
+
+// Values returns all known values for FunctionStage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FunctionStage) Values() []FunctionStage {
+	return []FunctionStage{
+		"DEVELOPMENT",
+		"LIVE",
+	}
+}
+
 type GeoRestrictionType string
 
 // Enum values for GeoRestrictionType

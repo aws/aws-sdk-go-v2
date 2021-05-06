@@ -551,6 +551,49 @@ type EventCategoriesMap struct {
 	SourceType *string
 }
 
+// Detailed information about an event to which you have subscribed.
+type EventSubscription struct {
+
+	// The Amazon DocumentDB event notification subscription ID.
+	CustSubscriptionId *string
+
+	// The AWS customer account that is associated with the Amazon DocumentDB event
+	// notification subscription.
+	CustomerAwsId *string
+
+	// A Boolean value indicating whether the subscription is enabled. A value of true
+	// indicates that the subscription is enabled.
+	Enabled bool
+
+	// A list of event categories for the Amazon DocumentDB event notification
+	// subscription.
+	EventCategoriesList []string
+
+	// The Amazon Resource Name (ARN) for the event subscription.
+	EventSubscriptionArn *string
+
+	// The topic ARN of the Amazon DocumentDB event notification subscription.
+	SnsTopicArn *string
+
+	// A list of source IDs for the Amazon DocumentDB event notification subscription.
+	SourceIdsList []string
+
+	// The source type for the Amazon DocumentDB event notification subscription.
+	SourceType *string
+
+	// The status of the Amazon DocumentDB event notification subscription.
+	// Constraints: Can be one of the following: creating, modifying, deleting, active,
+	// no-permission, topic-not-exist The no-permission status indicates that Amazon
+	// DocumentDB no longer has permission to post to the SNS topic. The
+	// topic-not-exist status indicates that the topic was deleted after the
+	// subscription was created.
+	Status *string
+
+	// The time at which the Amazon DocumentDB event notification subscription was
+	// created.
+	SubscriptionCreationTime *string
+}
+
 // A named set of filter values, used to return a more specific list of results.
 // You can use a filter to match a set of resources by specific criteria, such as
 // IDs. Wildcards are not supported in filters.

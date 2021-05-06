@@ -3928,6 +3928,11 @@ func awsRestjson1_serializeDocumentSidewalkSendDataToDevice(v *types.SidewalkSen
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.MessageType) > 0 {
+		ok := object.Key("MessageType")
+		ok.String(string(v.MessageType))
+	}
+
 	if v.Seq != nil {
 		ok := object.Key("Seq")
 		ok.Integer(*v.Seq)

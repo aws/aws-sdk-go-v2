@@ -13109,6 +13109,13 @@ func awsAwsjson11_serializeDocumentHyperParameterTrainingJobDefinition(v *types.
 		}
 	}
 
+	if v.RetryStrategy != nil {
+		ok := object.Key("RetryStrategy")
+		if err := awsAwsjson11_serializeDocumentRetryStrategy(v.RetryStrategy, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)
@@ -13939,6 +13946,23 @@ func awsAwsjson11_serializeDocumentModelDataQuality(v *types.ModelDataQuality, v
 		if err := awsAwsjson11_serializeDocumentMetricsSource(v.Statistics, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentModelDeployConfig(v *types.ModelDeployConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoGenerateEndpointName {
+		ok := object.Key("AutoGenerateEndpointName")
+		ok.Boolean(v.AutoGenerateEndpointName)
+	}
+
+	if v.EndpointName != nil {
+		ok := object.Key("EndpointName")
+		ok.String(*v.EndpointName)
 	}
 
 	return nil
@@ -15708,6 +15732,18 @@ func awsAwsjson11_serializeDocumentRetentionPolicy(v *types.RetentionPolicy, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRetryStrategy(v *types.RetryStrategy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("MaximumRetryAttempts")
+		ok.Integer(v.MaximumRetryAttempts)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRuleParameters(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16995,6 +17031,13 @@ func awsAwsjson11_serializeOpDocumentCreateAutoMLJobInput(v *CreateAutoMLJobInpu
 	if v.InputDataConfig != nil {
 		ok := object.Key("InputDataConfig")
 		if err := awsAwsjson11_serializeDocumentAutoMLInputDataConfig(v.InputDataConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelDeployConfig != nil {
+		ok := object.Key("ModelDeployConfig")
+		if err := awsAwsjson11_serializeDocumentModelDeployConfig(v.ModelDeployConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -18573,6 +18616,13 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingJobInput(v *CreateTrainingJob
 	if v.ResourceConfig != nil {
 		ok := object.Key("ResourceConfig")
 		if err := awsAwsjson11_serializeDocumentResourceConfig(v.ResourceConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RetryStrategy != nil {
+		ok := object.Key("RetryStrategy")
+		if err := awsAwsjson11_serializeDocumentRetryStrategy(v.RetryStrategy, ok); err != nil {
 			return err
 		}
 	}

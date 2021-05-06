@@ -64,6 +64,13 @@ type UpdateAssociationInput struct {
 	// that use an Automation document and target resources by using rate controls.
 	AutomationTargetParameterName *string
 
+	// The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar
+	// type documents you want to gate your associations under. The associations only
+	// run when that Change Calendar is open. For more information, see AWS Systems
+	// Manager Change Calendar
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar).
+	CalendarNames []string
+
 	// The severity level to assign to the association.
 	ComplianceSeverity types.AssociationComplianceSeverity
 

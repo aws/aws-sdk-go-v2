@@ -200,6 +200,24 @@ func (KeyAlgorithm) Values() []KeyAlgorithm {
 	}
 }
 
+type KeyStorageSecurityStandard string
+
+// Enum values for KeyStorageSecurityStandard
+const (
+	KeyStorageSecurityStandardFips1402Level2OrHigher KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_2_OR_HIGHER"
+	KeyStorageSecurityStandardFips1402Level3OrHigher KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_3_OR_HIGHER"
+)
+
+// Values returns all known values for KeyStorageSecurityStandard. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (KeyStorageSecurityStandard) Values() []KeyStorageSecurityStandard {
+	return []KeyStorageSecurityStandard{
+		"FIPS_140_2_LEVEL_2_OR_HIGHER",
+		"FIPS_140_2_LEVEL_3_OR_HIGHER",
+	}
+}
+
 type PolicyQualifierId string
 
 // Enum values for PolicyQualifierId

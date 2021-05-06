@@ -588,12 +588,14 @@ type CreateAssessmentFrameworkControl struct {
 // Manager. This does not contain the control set ID.
 type CreateAssessmentFrameworkControlSet struct {
 
+	// The name of the specified control set.
+	//
+	// This member is required.
+	Name *string
+
 	// The list of controls within the control set. This does not contain the control
 	// set ID.
 	Controls []CreateAssessmentFrameworkControl
-
-	// The name of the specified control set.
-	Name *string
 }
 
 // Control mapping fields that represent the source for evidence collection, along
@@ -713,7 +715,7 @@ type DelegationMetadata struct {
 // activity triggered by a user, or a system configuration snapshot.
 type Evidence struct {
 
-	// Specifies whether the evidence is inclded in the assessment report.
+	// Specifies whether the evidence is included in the assessment report.
 	AssessmentReportSelection *string
 
 	// The names and values used by the evidence event, including an attribute name
@@ -951,14 +953,16 @@ type SourceKeyword struct {
 // Manager. This does not contain the control set ID.
 type UpdateAssessmentFrameworkControlSet struct {
 
+	// The name of the control set.
+	//
+	// This member is required.
+	Name *string
+
 	// The list of controls contained within the control set.
 	Controls []CreateAssessmentFrameworkControl
 
 	// The unique identifier for the control set.
 	Id *string
-
-	// The name of the control set.
-	Name *string
 }
 
 // A uniform resource locator, used as a unique identifier to locate a resource on

@@ -78,8 +78,8 @@ type CreateAccountStatus struct {
 	// If the request failed, a description of the reason for the failure.
 	//
 	// *
-	// ACCOUNT_LIMIT_EXCEEDED: The account could not be created because you have
-	// reached the limit on the number of accounts in your organization.
+	// ACCOUNT_LIMIT_EXCEEDED: The account couldn't be created because you reached the
+	// limit on the number of accounts in your organization.
 	//
 	// *
 	// CONCURRENT_ACCOUNT_MODIFICATION: You already submitted a request with the same
@@ -109,22 +109,23 @@ type CreateAccountStatus struct {
 	//
 	// *
 	// INTERNAL_FAILURE: The account could not be created because of an internal
-	// failure. Try again later. If the problem persists, contact Customer Support.
+	// failure. Try again later. If the problem persists, contact AWS Customer
+	// Support.
+	//
+	// * MISSING_BUSINESS_VALIDATION: The AWS account that owns your
+	// organization has not received Business Validation.
 	//
 	// *
-	// MISSING_BUSINESS_VALIDATION: The AWS account that owns your organization has not
-	// received Business Validation.
+	// MISSING_PAYMENT_INSTRUMENT: You must configure the management account with a
+	// valid payment method, such as a credit card.
 	//
-	// * MISSING_PAYMENT_INSTRUMENT: You must configure
-	// the management account with a valid payment method, such as a credit card.
+	// * PENDING_BUSINESS_VALIDATION: The
+	// AWS account that owns your organization is still in the process of completing
+	// business license validation.
 	//
-	// *
-	// PENDING_BUSINESS_VALIDATION: The AWS account that owns your organization is
-	// still in the process of completing business license validation.
-	//
-	// *
-	// UNKNOWN_BUSINESS_VALIDATION: The AWS account that owns your organization has an
-	// unknown issue with business license validation.
+	// * UNKNOWN_BUSINESS_VALIDATION: The AWS account
+	// that owns your organization has an unknown issue with business license
+	// validation.
 	FailureReason CreateAccountFailureReason
 
 	// If the account was created successfully, the unique identifier (ID) of the new
@@ -140,7 +141,7 @@ type CreateAccountStatus struct {
 	// The date and time that the request was made for the account creation.
 	RequestedTimestamp *time.Time
 
-	// The status of the request.
+	// The status of the asynchronous request to create an AWS account.
 	State CreateAccountState
 }
 
@@ -182,8 +183,9 @@ type DelegatedService struct {
 	// The date that the account became a delegated administrator for this service.
 	DelegationEnabledDate *time.Time
 
-	// The name of a service that can request an operation for the specified service.
-	// This is typically in the form of a URL, such as:  servicename.amazonaws.com.
+	// The name of an AWS service that can request an operation for the specified
+	// service. This is typically in the form of a URL, such as:
+	// servicename.amazonaws.com.
 	ServicePrincipal *string
 }
 

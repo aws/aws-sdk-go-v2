@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The health check for the instance that is specified by ServiceId and InstanceId
-// is not a custom health check.
+// The health check for the instance that's specified by ServiceId and InstanceId
+// isn't a custom health check.
 type CustomHealthNotFound struct {
 	Message *string
 }

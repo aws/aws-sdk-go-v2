@@ -52,7 +52,7 @@ type PutAccountSettingDefaultInput struct {
 
 type PutAccountSettingDefaultOutput struct {
 
-	// The current account setting for a resource.
+	// The current setting for a resource.
 	Setting *types.Setting
 
 	// Metadata pertaining to the operation's result.

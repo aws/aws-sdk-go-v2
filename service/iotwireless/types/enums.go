@@ -104,6 +104,28 @@ func (ExpressionType) Values() []ExpressionType {
 	}
 }
 
+type MessageType string
+
+// Enum values for MessageType
+const (
+	MessageTypeCustomCommandIdNotify MessageType = "CUSTOM_COMMAND_ID_NOTIFY"
+	MessageTypeCustomCommandIdGet    MessageType = "CUSTOM_COMMAND_ID_GET"
+	MessageTypeCustomCommandIdSet    MessageType = "CUSTOM_COMMAND_ID_SET"
+	MessageTypeCustomCommandIdResp   MessageType = "CUSTOM_COMMAND_ID_RESP"
+)
+
+// Values returns all known values for MessageType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (MessageType) Values() []MessageType {
+	return []MessageType{
+		"CUSTOM_COMMAND_ID_NOTIFY",
+		"CUSTOM_COMMAND_ID_GET",
+		"CUSTOM_COMMAND_ID_SET",
+		"CUSTOM_COMMAND_ID_RESP",
+	}
+}
+
 type PartnerType string
 
 // Enum values for PartnerType

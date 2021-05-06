@@ -48,7 +48,7 @@ type CreateBatchInferenceJobInput struct {
 	JobOutput *types.BatchInferenceJobOutput
 
 	// The ARN of the Amazon Identity and Access Management role that has permissions
-	// to read and write to your input and out Amazon S3 buckets respectively.
+	// to read and write to your input and output Amazon S3 buckets respectively.
 	//
 	// This member is required.
 	RoleArn *string
@@ -63,7 +63,8 @@ type CreateBatchInferenceJobInput struct {
 	BatchInferenceJobConfig *types.BatchInferenceJobConfig
 
 	// The ARN of the filter to apply to the batch inference job. For more information
-	// on using filters, see Using Filters with Amazon Personalize.
+	// on using filters, see Filtering Batch Recommendations
+	// (https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html)..
 	FilterArn *string
 
 	// The number of recommendations to retreive.

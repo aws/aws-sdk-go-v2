@@ -1407,6 +1407,18 @@ func validateEnvironmentFiles(v []types.EnvironmentFile) error {
 	}
 }
 
+func validateEphemeralStorage(v *types.EphemeralStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EphemeralStorage"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateFirelensConfiguration(v *types.FirelensConfiguration) error {
 	if v == nil {
 		return nil
@@ -1790,6 +1802,11 @@ func validateTaskOverride(v *types.TaskOverride) error {
 	if v.ContainerOverrides != nil {
 		if err := validateContainerOverrides(v.ContainerOverrides); err != nil {
 			invalidParams.AddNested("ContainerOverrides", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EphemeralStorage != nil {
+		if err := validateEphemeralStorage(v.EphemeralStorage); err != nil {
+			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2393,6 +2410,11 @@ func validateOpRegisterTaskDefinitionInput(v *RegisterTaskDefinitionInput) error
 	if v.InferenceAccelerators != nil {
 		if err := validateInferenceAccelerators(v.InferenceAccelerators); err != nil {
 			invalidParams.AddNested("InferenceAccelerators", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EphemeralStorage != nil {
+		if err := validateEphemeralStorage(v.EphemeralStorage); err != nil {
+			invalidParams.AddNested("EphemeralStorage", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

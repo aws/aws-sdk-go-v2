@@ -38,7 +38,7 @@ type CreateProfileInput struct {
 	// A unique account number that you have given to the customer.
 	AccountNumber *string
 
-	// Any additional information relevant to the customer's profile.
+	// Any additional information relevant to the customer’s profile.
 	AdditionalInformation *string
 
 	// A generic address associated with the customer that is not mailing, shipping, or
@@ -63,7 +63,7 @@ type CreateProfileInput struct {
 	// The customer’s business phone number.
 	BusinessPhoneNumber *string
 
-	// The customer's email address, which has not been specified as a personal or
+	// The customer’s email address, which has not been specified as a personal or
 	// business address.
 	EmailAddress *string
 
@@ -94,7 +94,7 @@ type CreateProfileInput struct {
 	// The customer’s personal email address.
 	PersonalEmailAddress *string
 
-	// The customer's phone number, which has not been specified as a mobile, home, or
+	// The customer’s phone number, which has not been specified as a mobile, home, or
 	// business number.
 	PhoneNumber *string
 

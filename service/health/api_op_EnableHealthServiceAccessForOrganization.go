@@ -17,10 +17,10 @@ import (
 // operation, you must meet the following requirements:
 //
 // * You must have a Business
-// or Enterprise support plan from AWS Support
+// or Enterprise Support plan from AWS Support
 // (http://aws.amazon.com/premiumsupport/) to use the AWS Health API. If you call
 // the AWS Health API from an AWS account that doesn't have a Business or
-// Enterprise support plan, you receive a SubscriptionRequiredException error.
+// Enterprise Support plan, you receive a SubscriptionRequiredException error.
 //
 // *
 // You must have permission to call this operation from the organization's

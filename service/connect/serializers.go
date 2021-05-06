@@ -6494,7 +6494,7 @@ func awsRestjson1_serializeOpDocumentUpdateQueueMaxContactsInput(v *UpdateQueueM
 	object := value.Object()
 	defer object.Close()
 
-	{
+	if v.MaxContacts != 0 {
 		ok := object.Key("MaxContacts")
 		ok.Integer(v.MaxContacts)
 	}

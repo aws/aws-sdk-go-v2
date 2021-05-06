@@ -20542,6 +20542,11 @@ func awsAwsjson11_deserializeDocumentAssociationDescription(v **types.Associatio
 				sv.AutomationTargetParameterName = ptr.String(jtv)
 			}
 
+		case "CalendarNames":
+			if err := awsAwsjson11_deserializeDocumentCalendarNameOrARNList(&sv.CalendarNames, value); err != nil {
+				return err
+			}
+
 		case "ComplianceSeverity":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -21396,6 +21401,11 @@ func awsAwsjson11_deserializeDocumentAssociationVersionInfo(v **types.Associatio
 					return fmt.Errorf("expected AssociationVersion to be of type string, got %T instead", value)
 				}
 				sv.AssociationVersion = ptr.String(jtv)
+			}
+
+		case "CalendarNames":
+			if err := awsAwsjson11_deserializeDocumentCalendarNameOrARNList(&sv.CalendarNames, value); err != nil {
+				return err
 			}
 
 		case "ComplianceSeverity":
@@ -22670,6 +22680,42 @@ func awsAwsjson11_deserializeDocumentAutomationStepNotFoundException(v **types.A
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCalendarNameOrARNList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CalendarNameOrARN to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentCloudWatchOutputConfig(v **types.CloudWatchOutputConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23850,6 +23896,11 @@ func awsAwsjson11_deserializeDocumentCreateAssociationBatchRequestEntry(v **type
 					return fmt.Errorf("expected AutomationTargetParameterName to be of type string, got %T instead", value)
 				}
 				sv.AutomationTargetParameterName = ptr.String(jtv)
+			}
+
+		case "CalendarNames":
+			if err := awsAwsjson11_deserializeDocumentCalendarNameOrARNList(&sv.CalendarNames, value); err != nil {
+				return err
 			}
 
 		case "ComplianceSeverity":

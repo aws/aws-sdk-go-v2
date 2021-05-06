@@ -63,6 +63,7 @@ const (
 	AMITypesAl2X8664    AMITypes = "AL2_x86_64"
 	AMITypesAl2X8664Gpu AMITypes = "AL2_x86_64_GPU"
 	AMITypesAl2Arm64    AMITypes = "AL2_ARM_64"
+	AMITypesCustom      AMITypes = "CUSTOM"
 )
 
 // Values returns all known values for AMITypes. Note that this can be expanded in
@@ -73,6 +74,7 @@ func (AMITypes) Values() []AMITypes {
 		"AL2_x86_64",
 		"AL2_x86_64_GPU",
 		"AL2_ARM_64",
+		"CUSTOM",
 	}
 }
 
@@ -342,6 +344,8 @@ const (
 	UpdateParamTypeMinSize                UpdateParamType = "MinSize"
 	UpdateParamTypeReleaseVersion         UpdateParamType = "ReleaseVersion"
 	UpdateParamTypePublicAccessCidrs      UpdateParamType = "PublicAccessCidrs"
+	UpdateParamTypeLaunchTemplateName     UpdateParamType = "LaunchTemplateName"
+	UpdateParamTypeLaunchTemplateVersion  UpdateParamType = "LaunchTemplateVersion"
 	UpdateParamTypeIdentityProviderConfig UpdateParamType = "IdentityProviderConfig"
 	UpdateParamTypeEncryptionConfig       UpdateParamType = "EncryptionConfig"
 	UpdateParamTypeAddonVersion           UpdateParamType = "AddonVersion"
@@ -366,6 +370,8 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"MinSize",
 		"ReleaseVersion",
 		"PublicAccessCidrs",
+		"LaunchTemplateName",
+		"LaunchTemplateVersion",
 		"IdentityProviderConfig",
 		"EncryptionConfig",
 		"AddonVersion",

@@ -208,6 +208,36 @@ type Attendee struct {
 	JoinToken *string
 }
 
+// The membership information, including member ARNs, the channel ARN, and
+// membership types.
+type BatchChannelMemberships struct {
+
+	// The ARN of the channel to which you're adding users.
+	ChannelArn *string
+
+	// The details of a user.
+	InvitedBy *Identity
+
+	// The users successfully added to the request.
+	Members []Identity
+
+	// The membership types set for the channel users.
+	Type ChannelMembershipType
+}
+
+// A list of failed member ARNs, error codes, and error messages.
+type BatchCreateChannelMembershipError struct {
+
+	// The error code.
+	ErrorCode ErrorCode
+
+	// The error message.
+	ErrorMessage *string
+
+	// The ARN of the member that the service couldn't add.
+	MemberArn *string
+}
+
 // A resource that allows Enterprise account administrators to configure an
 // interface to receive events from Amazon Chime.
 type Bot struct {
@@ -648,10 +678,10 @@ type Meeting struct {
 	// The media placement for the meeting.
 	MediaPlacement *MediaPlacement
 
-	// The Region in which you create the meeting. Available values: af-south-1 ,
-	// ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 ,
-	// ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 ,
-	// eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 .
+	// The Region in which you create the meeting. Available values: af-south-1,
+	// ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+	// ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2,
+	// eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
 	MediaRegion *string
 
 	// The Amazon Chime SDK meeting ID.
@@ -793,6 +823,9 @@ type PhoneNumber struct {
 	// The phone number capabilities.
 	Capabilities *PhoneNumberCapabilities
 
+	// The phone number country. Format: ISO 3166-1 alpha-2.
+	Country *string
+
 	// The phone number creation timestamp, in ISO 8601 format.
 	CreatedTimestamp *time.Time
 
@@ -855,6 +888,16 @@ type PhoneNumberCapabilities struct {
 
 	// Allows or denies outbound SMS messaging for the specified phone number.
 	OutboundSMS *bool
+}
+
+// The phone number country.
+type PhoneNumberCountry struct {
+
+	// The phone number country code. Format: ISO 3166-1 alpha-2.
+	CountryCode *string
+
+	// The supported phone number types.
+	SupportedPhoneNumberTypes []PhoneNumberType
 }
 
 // If the phone number action fails for one or more of the phone numbers in the

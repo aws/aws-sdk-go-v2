@@ -22,7 +22,7 @@ import (
 // same location as the manifest file for that job. Saving these separately helps
 // prevent unauthorized parties from gaining access to the Snow device associated
 // with that job. The credentials of a given job, including its manifest file and
-// unlock code, expire 90 days after the job is created.
+// unlock code, expire 360 days after the job is created.
 func (c *Client) GetJobManifest(ctx context.Context, params *GetJobManifestInput, optFns ...func(*Options)) (*GetJobManifestOutput, error) {
 	if params == nil {
 		params = &GetJobManifestInput{}

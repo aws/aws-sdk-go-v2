@@ -91,7 +91,7 @@ type CreateTaskSetInput struct {
 	// Network Load Balancer.
 	LoadBalancers []types.LoadBalancer
 
-	// An object representing the network configuration for a task or service.
+	// An object representing the network configuration for a task set.
 	NetworkConfiguration *types.NetworkConfiguration
 
 	// The platform version that the tasks in the task set should use. A platform
@@ -143,9 +143,9 @@ type CreateTaskSetInput struct {
 type CreateTaskSetOutput struct {
 
 	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
-	// EXTERNAL deployment. An Amazon ECS task set includes details such as the desired
-	// number of tasks, how many tasks are running, and whether the task set serves
-	// production traffic.
+	// EXTERNAL deployment. A task set includes details such as the desired number of
+	// tasks, how many tasks are running, and whether the task set serves production
+	// traffic.
 	TaskSet *types.TaskSet
 
 	// Metadata pertaining to the operation's result.

@@ -3378,6 +3378,18 @@ func awsAwsjson11_serializeDocumentEnvironmentVariables(v []types.KeyValuePair, 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentEphemeralStorage(v *types.EphemeralStorage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("sizeInGiB")
+		ok.Integer(v.SizeInGiB)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentExecuteCommandConfiguration(v *types.ExecuteCommandConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4478,6 +4490,13 @@ func awsAwsjson11_serializeDocumentTaskOverride(v *types.TaskOverride, value smi
 	if v.Cpu != nil {
 		ok := object.Key("cpu")
 		ok.String(*v.Cpu)
+	}
+
+	if v.EphemeralStorage != nil {
+		ok := object.Key("ephemeralStorage")
+		if err := awsAwsjson11_serializeDocumentEphemeralStorage(v.EphemeralStorage, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ExecutionRoleArn != nil {
@@ -5795,6 +5814,13 @@ func awsAwsjson11_serializeOpDocumentRegisterTaskDefinitionInput(v *RegisterTask
 	if v.Cpu != nil {
 		ok := object.Key("cpu")
 		ok.String(*v.Cpu)
+	}
+
+	if v.EphemeralStorage != nil {
+		ok := object.Key("ephemeralStorage")
+		if err := awsAwsjson11_serializeDocumentEphemeralStorage(v.EphemeralStorage, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ExecutionRoleArn != nil {

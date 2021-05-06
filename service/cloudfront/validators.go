@@ -130,6 +130,26 @@ func (m *validateOpCreateFieldLevelEncryptionProfile) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFunction struct {
+}
+
+func (*validateOpCreateFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateInvalidation struct {
 }
 
@@ -390,6 +410,26 @@ func (m *validateOpDeleteFieldLevelEncryptionProfile) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFunction struct {
+}
+
+func (*validateOpDeleteFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteKeyGroup struct {
 }
 
@@ -485,6 +525,26 @@ func (m *validateOpDeleteStreamingDistribution) HandleInitialize(ctx context.Con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteStreamingDistributionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeFunction struct {
+}
+
+func (*validateOpDescribeFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFunctionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -685,6 +745,26 @@ func (m *validateOpGetFieldLevelEncryptionProfile) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetFieldLevelEncryptionProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetFunction struct {
+}
+
+func (*validateOpGetFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetFunctionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1010,6 +1090,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPublishFunction struct {
+}
+
+func (*validateOpPublishFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishFunctionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1025,6 +1125,26 @@ func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTestFunction struct {
+}
+
+func (*validateOpTestFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTestFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TestFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTestFunctionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1145,6 +1265,26 @@ func (m *validateOpUpdateFieldLevelEncryptionProfile) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateFieldLevelEncryptionProfileInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateFunction struct {
+}
+
+func (*validateOpUpdateFunction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFunction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFunctionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFunctionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1274,6 +1414,10 @@ func addOpCreateFieldLevelEncryptionProfileValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpCreateFieldLevelEncryptionProfile{}, middleware.After)
 }
 
+func addOpCreateFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFunction{}, middleware.After)
+}
+
 func addOpCreateInvalidationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateInvalidation{}, middleware.After)
 }
@@ -1326,6 +1470,10 @@ func addOpDeleteFieldLevelEncryptionProfileValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpDeleteFieldLevelEncryptionProfile{}, middleware.After)
 }
 
+func addOpDeleteFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFunction{}, middleware.After)
+}
+
 func addOpDeleteKeyGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKeyGroup{}, middleware.After)
 }
@@ -1344,6 +1492,10 @@ func addOpDeletePublicKeyValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteStreamingDistributionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStreamingDistribution{}, middleware.After)
+}
+
+func addOpDescribeFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFunction{}, middleware.After)
 }
 
 func addOpGetCachePolicyConfigValidationMiddleware(stack *middleware.Stack) error {
@@ -1384,6 +1536,10 @@ func addOpGetFieldLevelEncryptionProfileConfigValidationMiddleware(stack *middle
 
 func addOpGetFieldLevelEncryptionProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetFieldLevelEncryptionProfile{}, middleware.After)
+}
+
+func addOpGetFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetFunction{}, middleware.After)
 }
 
 func addOpGetInvalidationValidationMiddleware(stack *middleware.Stack) error {
@@ -1450,8 +1606,16 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPublishFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishFunction{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpTestFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTestFunction{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1476,6 +1640,10 @@ func addOpUpdateFieldLevelEncryptionConfigValidationMiddleware(stack *middleware
 
 func addOpUpdateFieldLevelEncryptionProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFieldLevelEncryptionProfile{}, middleware.After)
+}
+
+func addOpUpdateFunctionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFunction{}, middleware.After)
 }
 
 func addOpUpdateKeyGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1568,6 +1736,11 @@ func validateCacheBehavior(v *types.CacheBehavior) error {
 	if v.LambdaFunctionAssociations != nil {
 		if err := validateLambdaFunctionAssociations(v.LambdaFunctionAssociations); err != nil {
 			invalidParams.AddNested("LambdaFunctionAssociations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FunctionAssociations != nil {
+		if err := validateFunctionAssociations(v.FunctionAssociations); err != nil {
+			invalidParams.AddNested("FunctionAssociations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ForwardedValues != nil {
@@ -1977,6 +2150,11 @@ func validateDefaultCacheBehavior(v *types.DefaultCacheBehavior) error {
 			invalidParams.AddNested("LambdaFunctionAssociations", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.FunctionAssociations != nil {
+		if err := validateFunctionAssociations(v.FunctionAssociations); err != nil {
+			invalidParams.AddNested("FunctionAssociations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ForwardedValues != nil {
 		if err := validateForwardedValues(v.ForwardedValues); err != nil {
 			invalidParams.AddNested("ForwardedValues", err.(smithy.InvalidParamsError))
@@ -2268,6 +2446,79 @@ func validateForwardedValues(v *types.ForwardedValues) error {
 		if err := validateQueryStringCacheKeys(v.QueryStringCacheKeys); err != nil {
 			invalidParams.AddNested("QueryStringCacheKeys", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionAssociation(v *types.FunctionAssociation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionAssociation"}
+	if v.FunctionARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionARN"))
+	}
+	if len(v.EventType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EventType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionAssociationList(v []types.FunctionAssociation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionAssociationList"}
+	for i := range v {
+		if err := validateFunctionAssociation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionAssociations(v *types.FunctionAssociations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionAssociations"}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if v.Items != nil {
+		if err := validateFunctionAssociationList(v.Items); err != nil {
+			invalidParams.AddNested("Items", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionConfig(v *types.FunctionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionConfig"}
+	if v.Comment == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Comment"))
+	}
+	if len(v.Runtime) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Runtime"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3396,6 +3647,31 @@ func validateOpCreateFieldLevelEncryptionProfileInput(v *CreateFieldLevelEncrypt
 	}
 }
 
+func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.FunctionConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionConfig"))
+	} else if v.FunctionConfig != nil {
+		if err := validateFunctionConfig(v.FunctionConfig); err != nil {
+			invalidParams.AddNested("FunctionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FunctionCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateInvalidationInput(v *CreateInvalidationInput) error {
 	if v == nil {
 		return nil
@@ -3638,6 +3914,24 @@ func validateOpDeleteFieldLevelEncryptionProfileInput(v *DeleteFieldLevelEncrypt
 	}
 }
 
+func validateOpDeleteFunctionInput(v *DeleteFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteKeyGroupInput(v *DeleteKeyGroupInput) error {
 	if v == nil {
 		return nil
@@ -3705,6 +3999,21 @@ func validateOpDeleteStreamingDistributionInput(v *DeleteStreamingDistributionIn
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStreamingDistributionInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeFunctionInput(v *DescribeFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3855,6 +4164,21 @@ func validateOpGetFieldLevelEncryptionProfileInput(v *GetFieldLevelEncryptionPro
 	invalidParams := smithy.InvalidParamsError{Context: "GetFieldLevelEncryptionProfileInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetFunctionInput(v *GetFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4106,6 +4430,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPublishFunctionInput(v *PublishFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -4120,6 +4462,27 @@ func validateOpTagResourceInput(v *TagResourceInput) error {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTestFunctionInput(v *TestFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
+	}
+	if v.EventObject == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventObject"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4248,6 +4611,34 @@ func validateOpUpdateFieldLevelEncryptionProfileInput(v *UpdateFieldLevelEncrypt
 		if err := validateFieldLevelEncryptionProfileConfig(v.FieldLevelEncryptionProfileConfig); err != nil {
 			invalidParams.AddNested("FieldLevelEncryptionProfileConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFunctionInput(v *UpdateFunctionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFunctionInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IfMatch == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
+	}
+	if v.FunctionConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionConfig"))
+	} else if v.FunctionConfig != nil {
+		if err := validateFunctionConfig(v.FunctionConfig); err != nil {
+			invalidParams.AddNested("FunctionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FunctionCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

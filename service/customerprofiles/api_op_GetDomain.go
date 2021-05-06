@@ -30,7 +30,7 @@ func (c *Client) GetDomain(ctx context.Context, params *GetDomainInput, optFns .
 
 type GetDomainInput struct {
 
-	// A unique name for the domain.
+	// The unique name of the domain.
 	//
 	// This member is required.
 	DomainName *string
@@ -64,6 +64,10 @@ type GetDomainOutput struct {
 
 	// The default number of days until the data within the domain expires.
 	DefaultExpirationDays *int32
+
+	// The process of matching duplicate profiles. This process runs every Saturday at
+	// 12AM.
+	Matching *types.MatchingResponse
 
 	// Usage-specific statistics about the domain.
 	Stats *types.DomainStats

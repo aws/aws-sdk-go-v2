@@ -190,26 +190,36 @@ type BucketCountByEffectivePermission struct {
 }
 
 // Provides information about the number of S3 buckets that use certain types of
-// server-side encryption by default or don't encrypt new objects by default.
+// server-side encryption by default or don't encrypt new objects by default. For
+// detailed information about these settings, see Setting default server-side
+// encryption behavior for Amazon S3 buckets
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html)
+// in the Amazon Simple Storage Service User Guide.
 type BucketCountByEncryptionType struct {
 
 	// The total number of buckets that use an AWS Key Management Service (AWS KMS)
 	// customer master key (CMK) to encrypt new objects by default. These buckets use
 	// AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption
-	// (SSE-KMS).
+	// (SSE-KMS) by default.
 	KmsManaged int64
 
 	// The total number of buckets that use an Amazon S3 managed key to encrypt new
-	// objects by default. These buckets use Amazon S3 managed encryption (SSE-S3).
+	// objects by default. These buckets use Amazon S3 managed encryption (SSE-S3) by
+	// default.
 	S3Managed int64
 
 	// The total number of buckets that don't encrypt new objects by default. Default
 	// encryption is disabled for these buckets.
 	Unencrypted int64
+
+	// The total number of buckets that Amazon Macie doesn't have current encryption
+	// metadata for. Macie can't provide current data about the default encryption
+	// settings for these buckets.
+	Unknown int64
 }
 
-// Provides information about the number of S3 buckets that are shared with other
-// AWS accounts.
+// Provides information about the number of S3 buckets that are and aren't shared
+// with other AWS accounts.
 type BucketCountBySharedAccessType struct {
 
 	// The total number of buckets that are shared with an AWS account that isn't part
@@ -226,6 +236,30 @@ type BucketCountBySharedAccessType struct {
 	// The total number of buckets that Amazon Macie wasn't able to evaluate shared
 	// access settings for. Macie can't determine whether these buckets are shared with
 	// other AWS accounts.
+	Unknown int64
+}
+
+// Provides information about the number of S3 buckets whose bucket policies do and
+// don't require server-side encryption of objects when objects are uploaded to the
+// buckets.
+type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
+
+	// The total number of buckets that don't have a bucket policy or have a bucket
+	// policy that doesn't require server-side encryption of new objects. If a bucket
+	// policy exists, the policy doesn't require PutObject requests to include the
+	// x-amz-server-side-encryption header and it doesn't require the value for that
+	// header to be AES256 or aws:kms.
+	AllowsUnencryptedObjectUploads int64
+
+	// The total number of buckets whose bucket policies require server-side encryption
+	// of new objects. PutObject requests for these buckets must include the
+	// x-amz-server-side-encryption header and the value for that header must be AES256
+	// or aws:kms.
+	DeniesUnencryptedObjectUploads int64
+
+	// The total number of buckets that Amazon Macie wasn't able to evaluate
+	// server-side encryption requirements for. Macie can't determine whether the
+	// bucket policies for these buckets require server-side encryption of new objects.
 	Unknown int64
 }
 
@@ -278,6 +312,25 @@ type BucketMetadata struct {
 
 	// The unique identifier for the AWS account that owns the bucket.
 	AccountId *string
+
+	// Specifies whether the bucket policy for the bucket requires server-side
+	// encryption of objects when objects are uploaded to the bucket. Possible values
+	// are:
+	//
+	// * FALSE - The bucket policy requires server-side encryption of new
+	// objects. PutObject requests must include the x-amz-server-side-encryption header
+	// and the value for that header must be AES256 or aws:kms.
+	//
+	// * TRUE - The bucket
+	// doesn't have a bucket policy or it has a bucket policy that doesn't require
+	// server-side encryption of new objects. If a bucket policy exists, it doesn't
+	// require PutObject requests to include the x-amz-server-side-encryption header
+	// and it doesn't require the value for that header to be AES256 or aws:kms.
+	//
+	// *
+	// UNKNOWN - Amazon Macie can't determine whether the bucket policy requires
+	// server-side encryption of new objects.
+	AllowsUnencryptedObjectUploads AllowsUnencryptedObjectUploads
 
 	// The Amazon Resource Name (ARN) of the bucket.
 	BucketArn *string
@@ -393,8 +446,8 @@ type BucketPermissionConfiguration struct {
 	BucketLevelPermissions *BucketLevelPermissions
 }
 
-// Provides information about the permissions settings of a bucket policy for an S3
-// bucket.
+// Provides information about the permissions settings of the bucket policy for an
+// S3 bucket.
 type BucketPolicy struct {
 
 	// Specifies whether the bucket policy allows the general public to have read
@@ -423,7 +476,7 @@ type BucketPublicAccess struct {
 	// bucket is publicly accessible.
 	EffectivePermission EffectivePermission
 
-	// The account-level and bucket-level permissions for the bucket.
+	// The account-level and bucket-level permissions settings for the bucket.
 	PermissionConfiguration *BucketPermissionConfiguration
 }
 
@@ -1292,6 +1345,11 @@ type ObjectCountByEncryptionType struct {
 
 	// The total number of objects that aren't encrypted or use client-side encryption.
 	Unencrypted int64
+
+	// The total number of objects that Amazon Macie doesn't have current encryption
+	// metadata for. Macie can't provide current data about the encryption settings for
+	// these objects.
+	Unknown int64
 }
 
 // Provides information about the total storage size (in bytes) or number of
@@ -1470,6 +1528,25 @@ type ResourcesAffected struct {
 // Provides information about an S3 bucket that a finding applies to.
 type S3Bucket struct {
 
+	// Specifies whether the bucket policy for the bucket requires server-side
+	// encryption of objects when objects are uploaded to the bucket. Possible values
+	// are:
+	//
+	// * FALSE - The bucket policy requires server-side encryption of new
+	// objects. PutObject requests must include the x-amz-server-side-encryption header
+	// and the value for that header must be AES256 or aws:kms.
+	//
+	// * TRUE - The bucket
+	// doesn't have a bucket policy or it has a bucket policy that doesn't require
+	// server-side encryption of new objects. If a bucket policy exists, it doesn't
+	// require PutObject requests to include the x-amz-server-side-encryption header
+	// and it doesn't require the value for that header to be AES256 or aws:kms.
+	//
+	// *
+	// UNKNOWN - Amazon Macie can't determine whether the bucket policy requires
+	// server-side encryption of objects.
+	AllowsUnencryptedObjectUploads AllowsUnencryptedObjectUploads
+
 	// The Amazon Resource Name (ARN) of the bucket.
 	Arn *string
 
@@ -1484,7 +1561,7 @@ type S3Bucket struct {
 	// The name of the bucket.
 	Name *string
 
-	// The display name and account identifier for the user who owns the bucket.
+	// The display name and AWS account ID for the user who owns the bucket.
 	Owner *S3BucketOwner
 
 	// The permissions settings that determine whether the bucket is publicly

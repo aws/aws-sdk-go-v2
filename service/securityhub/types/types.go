@@ -288,7 +288,7 @@ type AwsApiGatewayMethodSettings struct {
 	UnauthorizedCacheControlHeaderStrategy *string
 }
 
-// contains information about a REST API in version 1 of Amazon API Gateway.
+// Contains information about a REST API in version 1 of Amazon API Gateway.
 type AwsApiGatewayRestApiDetails struct {
 
 	// The source of the API key for metering requests according to a usage plan.
@@ -1514,6 +1514,73 @@ type AwsEc2InstanceDetails struct {
 	VpcId *string
 }
 
+// An association between the network ACL and a subnet.
+type AwsEc2NetworkAclAssociation struct {
+
+	// The identifier of the association between the network ACL and the subnet.
+	NetworkAclAssociationId *string
+
+	// The identifier of the network ACL.
+	NetworkAclId *string
+
+	// The identifier of the subnet that is associated with the network ACL.
+	SubnetId *string
+}
+
+// Contains details about an EC2 network access control list (ACL).
+type AwsEc2NetworkAclDetails struct {
+
+	// Associations between the network ACL and subnets.
+	Associations []AwsEc2NetworkAclAssociation
+
+	// The set of rules in the network ACL.
+	Entries []AwsEc2NetworkAclEntry
+
+	// Whether this is the default network ACL for the VPC.
+	IsDefault bool
+
+	// The identifier of the network ACL.
+	NetworkAclId *string
+
+	// The identifier of the AWS account that owns the network ACL.
+	OwnerId *string
+
+	// The identifier of the VPC for the network ACL.
+	VpcId *string
+}
+
+// A rule for the network ACL. Each rule allows or denies access based on the IP
+// address, traffic direction, port, and protocol.
+type AwsEc2NetworkAclEntry struct {
+
+	// The IPV4 network range for which to deny or allow access.
+	CidrBlock *string
+
+	// Whether the rule is an egress rule. An egress rule is a rule that applies to
+	// traffic that leaves the subnet.
+	Egress bool
+
+	// The Internet Control Message Protocol (ICMP) type and code for which to deny or
+	// allow access.
+	IcmpTypeCode *IcmpTypeCode
+
+	// The IPV6 network range for which to deny or allow access.
+	Ipv6CidrBlock *string
+
+	// For TCP or UDP protocols, the range of ports that the rule applies to.
+	PortRange *PortRangeFromTo
+
+	// The protocol that the rule applies to. To deny or allow access to all protocols,
+	// use the value -1.
+	Protocol *string
+
+	// Whether the rule is used to allow access or deny access.
+	RuleAction *string
+
+	// The rule number. The rules are processed in order by their number.
+	RuleNumber int32
+}
+
 // Information about the network interface attachment.
 type AwsEc2NetworkInterfaceAttachment struct {
 
@@ -1709,6 +1776,51 @@ type AwsEc2SecurityGroupUserIdGroupPair struct {
 	VpcPeeringConnectionId *string
 }
 
+// Contains information about a subnet in EC2.
+type AwsEc2SubnetDetails struct {
+
+	// Whether to assign an IPV6 address to a network interface that is created in this
+	// subnet.
+	AssignIpv6AddressOnCreation bool
+
+	// The Availability Zone for the subnet.
+	AvailabilityZone *string
+
+	// The identifier of the Availability Zone for the subnet.
+	AvailabilityZoneId *string
+
+	// The number of available IPV4 addresses in the subnet. Does not include addresses
+	// for stopped instances.
+	AvailableIpAddressCount int32
+
+	// The IPV4 CIDR block that is assigned to the subnet.
+	CidrBlock *string
+
+	// Whether this subnet is the default subnet for the Availability Zone.
+	DefaultForAz bool
+
+	// The IPV6 CIDR blocks that are associated with the subnet.
+	Ipv6CidrBlockAssociationSet []Ipv6CidrBlockAssociation
+
+	// Whether instances in this subnet receive a public IP address.
+	MapPublicIpOnLaunch bool
+
+	// The identifier of the AWS account that owns the subnet.
+	OwnerId *string
+
+	// The current state of the subnet.
+	State *string
+
+	// The ARN of the subnet.
+	SubnetArn *string
+
+	// The identifier of the subnet.
+	SubnetId *string
+
+	// The identifier of the VPC that contains the subnet.
+	VpcId *string
+}
+
 // An attachment to an AWS EC2 volume.
 type AwsEc2VolumeAttachment struct {
 
@@ -1770,6 +1882,99 @@ type AwsEc2VpcDetails struct {
 
 	// The current state of the VPC.
 	State *string
+}
+
+// Contains details about an Elastic Beanstalk environment.
+type AwsElasticBeanstalkEnvironmentDetails struct {
+
+	// The name of the application that is associated with the environment.
+	ApplicationName *string
+
+	// The URL to the CNAME for this environment.
+	Cname *string
+
+	// The creation date for this environment.
+	DateCreated *string
+
+	// The date when this environment was last modified.
+	DateUpdated *string
+
+	// A description of the environment.
+	Description *string
+
+	// For load-balanced, autoscaling environments, the URL to the load balancer. For
+	// single-instance environments, the IP address of the instance.
+	EndpointUrl *string
+
+	// The ARN of the environment.
+	EnvironmentArn *string
+
+	// The identifier of the environment.
+	EnvironmentId *string
+
+	// Links to other environments in the same group.
+	EnvironmentLinks []AwsElasticBeanstalkEnvironmentEnvironmentLink
+
+	// The name of the environment.
+	EnvironmentName *string
+
+	// The configuration setting for the environment.
+	OptionSettings []AwsElasticBeanstalkEnvironmentOptionSetting
+
+	// The ARN of the platform version for the environment.
+	PlatformArn *string
+
+	// The name of the solution stack that is deployed with the environment.
+	SolutionStackName *string
+
+	// The current operational status of the environment.
+	Status *string
+
+	// The tier of the environment.
+	Tier *AwsElasticBeanstalkEnvironmentTier
+
+	// The application version of the environment.
+	VersionLabel *string
+}
+
+// Contains information about a link to another environment that is in the same
+// group.
+type AwsElasticBeanstalkEnvironmentEnvironmentLink struct {
+
+	// The name of the linked environment.
+	EnvironmentName *string
+
+	// The name of the environment link.
+	LinkName *string
+}
+
+// A configuration option setting for the environment.
+type AwsElasticBeanstalkEnvironmentOptionSetting struct {
+
+	// The type of resource that the configuration option is associated with.
+	Namespace *string
+
+	// The name of the option.
+	OptionName *string
+
+	// The name of the resource.
+	ResourceName *string
+
+	// The value of the configuration setting.
+	Value *string
+}
+
+// Contains information about the tier of the environment.
+type AwsElasticBeanstalkEnvironmentTier struct {
+
+	// The name of the environment tier.
+	Name *string
+
+	// The type of environment tier.
+	Type *string
+
+	// The version of the environment tier.
+	Version *string
 }
 
 // Information about an Elasticsearch domain.
@@ -5018,6 +5223,18 @@ type GeoLocation struct {
 	Lon float64
 }
 
+// An Internet Control Message Protocol (ICMP) type and code.
+type IcmpTypeCode struct {
+
+	// The ICMP code for which to deny or allow access. To deny or allow all codes, use
+	// the value -1.
+	Code int32
+
+	// The ICMP type for which to deny or allow access. To deny or allow all types, use
+	// the value -1.
+	Type int32
+}
+
 // The list of the findings that cannot be imported. For each finding, the list
 // provides the error.
 type ImportFindingsError struct {
@@ -5557,6 +5774,16 @@ type PortRange struct {
 	End int32
 }
 
+// A range of ports.
+type PortRangeFromTo struct {
+
+	// The first port in the port range.
+	From int32
+
+	// The last port in the port range.
+	To int32
+}
+
 // The details of process-related information about a finding.
 type ProcessDetails struct {
 
@@ -5777,17 +6004,26 @@ type ResourceDetails struct {
 	// Details about an Amazon EC2 instance related to a finding.
 	AwsEc2Instance *AwsEc2InstanceDetails
 
+	// Details about an EC2 network access control list (ACL).
+	AwsEc2NetworkAcl *AwsEc2NetworkAclDetails
+
 	// Details for an Amazon EC2 network interface.
 	AwsEc2NetworkInterface *AwsEc2NetworkInterfaceDetails
 
 	// Details for an EC2 security group.
 	AwsEc2SecurityGroup *AwsEc2SecurityGroupDetails
 
+	// Details about a subnet in EC2.
+	AwsEc2Subnet *AwsEc2SubnetDetails
+
 	// Details for an EC2 volume.
 	AwsEc2Volume *AwsEc2VolumeDetails
 
 	// Details for an EC2 VPC.
 	AwsEc2Vpc *AwsEc2VpcDetails
+
+	// Details about an Elastic Beanstalk environment.
+	AwsElasticBeanstalkEnvironment *AwsElasticBeanstalkEnvironmentDetails
 
 	// Details for an Elasticsearch domain.
 	AwsElasticsearchDomain *AwsElasticsearchDomainDetails

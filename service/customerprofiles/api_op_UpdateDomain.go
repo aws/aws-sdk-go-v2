@@ -6,13 +6,14 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Updates the properties of a domain, including creating or selecting a dead
-// letter queue or an encryption key. Once a domain is created, the name can’t be
+// letter queue or an encryption key. After a domain is created, the name can’t be
 // changed.
 func (c *Client) UpdateDomain(ctx context.Context, params *UpdateDomainInput, optFns ...func(*Options)) (*UpdateDomainOutput, error) {
 	if params == nil {
@@ -31,7 +32,7 @@ func (c *Client) UpdateDomain(ctx context.Context, params *UpdateDomainInput, op
 
 type UpdateDomainInput struct {
 
-	// The unique name for the domain.
+	// The unique name of the domain.
 	//
 	// This member is required.
 	DomainName *string
@@ -52,6 +53,10 @@ type UpdateDomainInput struct {
 	// The default number of days until the data within the domain expires.
 	DefaultExpirationDays *int32
 
+	// The process of matching duplicate profiles. This process runs every Saturday at
+	// 12AM.
+	Matching *types.MatchingRequest
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 }
@@ -63,7 +68,7 @@ type UpdateDomainOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The unique name for the domain.
+	// The unique name of the domain.
 	//
 	// This member is required.
 	DomainName *string
@@ -84,6 +89,10 @@ type UpdateDomainOutput struct {
 
 	// The default number of days until the data within the domain expires.
 	DefaultExpirationDays *int32
+
+	// The process of matching duplicate profiles. This process runs every Saturday at
+	// 12AM.
+	Matching *types.MatchingResponse
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string

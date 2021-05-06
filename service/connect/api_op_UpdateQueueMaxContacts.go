@@ -35,16 +35,14 @@ type UpdateQueueMaxContactsInput struct {
 	// This member is required.
 	InstanceId *string
 
-	// The maximum number of contacts that can be in the queue before it is considered
-	// full.
-	//
-	// This member is required.
-	MaxContacts int32
-
 	// The identifier for the queue.
 	//
 	// This member is required.
 	QueueId *string
+
+	// The maximum number of contacts that can be in the queue before it is considered
+	// full.
+	MaxContacts int32
 }
 
 type UpdateQueueMaxContactsOutput struct {

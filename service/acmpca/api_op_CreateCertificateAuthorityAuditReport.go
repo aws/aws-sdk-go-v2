@@ -22,8 +22,8 @@ import (
 // does not have permission to write to the bucket, then an exception is thrown.
 // For more information, see Configure Access to ACM Private CA
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html). ACM
-// Private CAA assets that are stored in Amazon S3 can be protected with
-// encryption. For more information, see Encrypting Your Audit Reports
+// Private CA assets that are stored in Amazon S3 can be protected with encryption.
+// For more information, see Encrypting Your Audit Reports
 // (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html#audit-report-encryption).
 func (c *Client) CreateCertificateAuthorityAuditReport(ctx context.Context, params *CreateCertificateAuthorityAuditReportInput, optFns ...func(*Options)) (*CreateCertificateAuthorityAuditReportOutput, error) {
 	if params == nil {

@@ -33,16 +33,20 @@ type DeleteApplicationVpcConfigurationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The current application version ID. You can retrieve the application version ID
-	// using DescribeApplication.
-	//
-	// This member is required.
-	CurrentApplicationVersionId *int64
-
 	// The ID of the VPC configuration to delete.
 	//
 	// This member is required.
 	VpcConfigurationId *string
+
+	// A value you use to implement strong concurrency for application updates. You
+	// must provide the ApplicationVersionID or the ConditionalToken. You get the
+	// application's current ConditionalToken using DescribeApplication.
+	ConditionalToken *string
+
+	// The current application version ID. You must provide the ApplicationVersionID or
+	// the ConditionalToken.You can retrieve the application version ID using
+	// DescribeApplication.
+	CurrentApplicationVersionId *int64
 }
 
 type DeleteApplicationVpcConfigurationOutput struct {

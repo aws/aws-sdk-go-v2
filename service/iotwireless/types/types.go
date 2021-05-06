@@ -474,6 +474,9 @@ type SidewalkListDevice struct {
 // Information about a Sidewalk router.
 type SidewalkSendDataToDevice struct {
 
+	// Sidewalk device message type.
+	MessageType MessageType
+
 	// The sequence number.
 	Seq *int32
 }

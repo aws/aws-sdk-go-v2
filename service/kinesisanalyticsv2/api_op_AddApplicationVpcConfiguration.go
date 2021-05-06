@@ -44,18 +44,22 @@ type AddApplicationVpcConfigurationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The version of the application to which you want to add the VPC configuration.
-	// You can use the DescribeApplication operation to get the current application
-	// version. If the version specified is not the current version, the
-	// ConcurrentModificationException is returned.
-	//
-	// This member is required.
-	CurrentApplicationVersionId *int64
-
 	// Description of the VPC to add to the application.
 	//
 	// This member is required.
 	VpcConfiguration *types.VpcConfiguration
+
+	// A value you use to implement strong concurrency for application updates. You
+	// must provide the ApplicationVersionID or the ConditionalToken. You get the
+	// application's current ConditionalToken using DescribeApplication.
+	ConditionalToken *string
+
+	// The version of the application to which you want to add the VPC configuration.
+	// You must provide the ApplicationVersionID or the ConditionalToken. You can use
+	// the DescribeApplication operation to get the current application version. If the
+	// version specified is not the current version, the
+	// ConcurrentModificationException is returned.
+	CurrentApplicationVersionId *int64
 }
 
 type AddApplicationVpcConfigurationOutput struct {

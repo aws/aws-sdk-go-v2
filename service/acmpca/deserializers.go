@@ -3666,6 +3666,15 @@ func awsAwsjson11_deserializeDocumentCertificateAuthority(v **types.CertificateA
 				sv.FailureReason = types.FailureReason(jtv)
 			}
 
+		case "KeyStorageSecurityStandard":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeyStorageSecurityStandard to be of type string, got %T instead", value)
+				}
+				sv.KeyStorageSecurityStandard = types.KeyStorageSecurityStandard(jtv)
+			}
+
 		case "LastStateChangeAt":
 			if value != nil {
 				jtv, ok := value.(json.Number)
