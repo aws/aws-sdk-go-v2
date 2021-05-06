@@ -1,0 +1,9 @@
+{
+ "ID": "service.marketplacecatalog-feature-1620332651749524000",
+ "SchemaVersion": 1,
+ "Module": "service/marketplacecatalog",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

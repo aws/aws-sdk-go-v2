@@ -1,0 +1,9 @@
+{
+ "ID": "service.sns-feature-1620332652103517000",
+ "SchemaVersion": 1,
+ "Module": "service/sns",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

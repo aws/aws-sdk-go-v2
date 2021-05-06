@@ -1,0 +1,9 @@
+{
+ "ID": "service.glue-feature-1620332651579654000",
+ "SchemaVersion": 1,
+ "Module": "service/glue",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

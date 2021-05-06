@@ -1,0 +1,9 @@
+{
+ "ID": "service.chime-feature-1620332651302519000",
+ "SchemaVersion": 1,
+ "Module": "service/chime",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

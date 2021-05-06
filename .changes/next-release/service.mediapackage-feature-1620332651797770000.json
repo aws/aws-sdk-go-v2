@@ -1,0 +1,9 @@
+{
+ "ID": "service.mediapackage-feature-1620332651797770000",
+ "SchemaVersion": 1,
+ "Module": "service/mediapackage",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

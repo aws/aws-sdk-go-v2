@@ -1,0 +1,9 @@
+{
+ "ID": "service.cloudformation-feature-1620332651318756000",
+ "SchemaVersion": 1,
+ "Module": "service/cloudformation",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}

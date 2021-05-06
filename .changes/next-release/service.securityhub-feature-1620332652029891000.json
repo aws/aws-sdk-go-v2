@@ -1,0 +1,9 @@
+{
+ "ID": "service.securityhub-feature-1620332652029891000",
+ "SchemaVersion": 1,
+ "Module": "service/securityhub",
+ "Type": "feature",
+ "Description": "API client updated",
+ "MinVersion": "",
+ "AffectedModules": null
+}
