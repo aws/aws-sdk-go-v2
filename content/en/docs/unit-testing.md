@@ -62,13 +62,13 @@ func (m mockGetObjectAPI) GetObject(ctx context.Context, params *s3.GetObjectInp
 
 func TestGetObjectFromS3(t *testing.T) {
 	cases := []struct {
-		client func(t *testing.T) s3GetObjectAPI
+		client func(t *testing.T) S3GetObjectAPI
 		bucket string
 		key	string
 		expect []byte
 	}{
 		{
-			client: func(t *testing.T) s3GetObjectAPI {
+			client: func(t *testing.T) S3GetObjectAPI {
 				return mockGetObjectAPI(func(ctx context.Context, params *s3.GetObjectInput, optFns ...func(*s3.Options)) (*s3.GetObjectOutput, error) {
 					t.Helper()
 					if params.Bucket == nil {
