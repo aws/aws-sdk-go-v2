@@ -170,11 +170,11 @@ func run() (err error) {
 	for i := 0; i < atOnce; i++ {
 		go func() {
 			defer jobWG.Done()
-			var output io.ReadWriter
+			var streamOut io.Writer
 			if atOnce == 1 {
-				output = os.Stdout
+				streamOut = os.Stdout
 			}
-			CommandWorker(ctx, jobs, results, output)
+			CommandWorker(ctx, jobs, results, streamOut)
 		}()
 	}
 
