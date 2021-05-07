@@ -1,0 +1,9 @@
+{
+ "ID": "sdk-feature-1620346341446632000",
+ "SchemaVersion": 1,
+ "Module": "/",
+ "Type": "feature",
+ "Description": "Add support for FIPS global partition endpoints ([#1242](https://github.com/aws/aws-sdk-go-v2/pull/1242))",
+ "MinVersion": "",
+ "AffectedModules": null
+}
