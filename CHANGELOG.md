@@ -1,3 +1,92 @@
+# Release 2021-05-06
+## Service Client Highlights
+* `service/acmpca` - v1.3.0
+  * Feature: API client updated
+* `service/apigateway` - v1.3.0
+  * Feature: API client updated
+* `service/auditmanager` - v1.4.0
+  * Feature: API client updated
+* `service/chime` - v1.3.0
+  * Feature: API client updated
+* `service/cloudformation` - v1.4.0
+  * Feature: API client updated
+* `service/cloudfront` - v1.4.0
+  * Feature: API client updated
+* `service/codegurureviewer` - v1.3.0
+  * Feature: API client updated
+* `service/connect` - v1.3.0
+  * Feature: API client updated
+* `service/customerprofiles` - v1.5.0
+  * Feature: API client updated
+* `service/devopsguru` - v1.3.0
+  * Feature: API client updated
+* `service/docdb` - v1.4.0
+  * Feature: API client updated
+* `service/ec2` - v1.6.0
+  * This release contains a breaking change to the Amazon EC2 API client. API number(int/int64/etc) and boolean members were changed from value, to pointer type. Your applications using the EC2 API client will fail to compile after upgrading for all members that were updated. To migrate to this module you'll need to update your application to use pointers for all number and boolean members in the API client module. The SDK provides helper utilities to convert between value and pointer types. For example the [aws.Bool](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Bool) function to get the address from a bool literal. Similar utilities are available for all other primative types in the [aws](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws) package.
+  * Bug Fix: Fix incorrectly modeled Amazon EC2 number and boolean members in structures. The Amazon EC2 API client has been updated with a breaking change to fix all structure number and boolean members to be pointer types instead of value types. Fixes [#1107](https://github.com/aws/aws-sdk-go-v2/issues/1107), [#1178](https://github.com/aws/aws-sdk-go-v2/issues/1178), and [#1190](https://github.com/aws/aws-sdk-go-v2/issues/1190). This breaking change is made within the major version of the client' module, because the client operations failed and were unusable with value type number and boolean members with the EC2 API.
+  * Feature: API client updated
+* `service/ecs` - v1.3.0
+  * Feature: API client updated
+* `service/eks` - v1.3.0
+  * Feature: API client updated
+* `service/forecast` - v1.4.0
+  * Feature: API client updated
+* `service/glue` - v1.4.0
+  * Feature: API client updated
+* `service/health` - v1.3.0
+  * Feature: API client updated
+* `service/iotsitewise` - v1.3.0
+  * Feature: API client updated
+* `service/iotwireless` - v1.4.0
+  * Feature: API client updated
+* `service/kafka` - v1.3.0
+  * Feature: API client updated
+* `service/kinesisanalyticsv2` - v1.2.0
+  * Feature: API client updated
+* `service/macie2` - v1.4.0
+  * Feature: API client updated
+* `service/marketplacecatalog` - v1.2.0
+  * Feature: API client updated
+* `service/mediaconvert` - v1.4.0
+  * Feature: API client updated
+* `service/mediapackage` - v1.4.0
+  * Feature: API client updated
+* `service/mediapackagevod` - v1.3.0
+  * Feature: API client updated
+* `service/mturk` - v1.2.0
+  * Feature: API client updated
+* `service/nimble` - v1.0.0
+  * Feature: API client updated
+* `service/organizations` - v1.3.0
+  * Feature: API client updated
+* `service/personalize` - v1.3.0
+  * Feature: API client updated
+* `service/robomaker` - v1.4.0
+  * Feature: API client updated
+* `service/route53` - v1.5.0
+  * Feature: API client updated
+* `service/s3` - v1.6.0
+  * Bug Fix: Fix PutObject and UploadPart unseekable stream documentation link to point to the correct location.
+  * Feature: API client updated
+* `service/sagemaker` - v1.4.0
+  * Feature: API client updated
+* `service/securityhub` - v1.4.0
+  * Feature: API client updated
+* `service/servicediscovery` - v1.3.0
+  * Feature: API client updated
+* `service/snowball` - v1.3.0
+  * Feature: API client updated
+* `service/sns` - v1.3.0
+  * Feature: API client updated
+* `service/ssm` - v1.5.0
+  * Feature: API client updated
+## Core SDK Highlights
+* Dependency Update: Update smithy-go dependency to v1.4.0
+* Dependency Update: Updated SDK dependencies to their latest versions.
+* `/` - v1.4.0
+  * Feature: Add support for FIPS global partition endpoints ([#1242](https://github.com/aws/aws-sdk-go-v2/pull/1242))
+
 # Release 2021-04-23
 ## Service Client Highlights
 * `service/cloudformation` - v1.3.2

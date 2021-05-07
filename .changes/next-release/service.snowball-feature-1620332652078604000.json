@@ -1,9 +1,0 @@
-{
- "ID": "service.snowball-feature-1620332652078604000",
- "SchemaVersion": 1,
- "Module": "service/snowball",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

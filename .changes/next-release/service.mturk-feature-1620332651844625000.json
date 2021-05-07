@@ -1,9 +1,0 @@
-{
- "ID": "service.mturk-feature-1620332651844625000",
- "SchemaVersion": 1,
- "Module": "service/mturk",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

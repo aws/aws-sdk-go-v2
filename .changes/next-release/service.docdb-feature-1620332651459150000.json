@@ -1,9 +1,0 @@
-{
- "ID": "service.docdb-feature-1620332651459150000",
- "SchemaVersion": 1,
- "Module": "service/docdb",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

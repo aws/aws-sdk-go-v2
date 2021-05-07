@@ -1,9 +1,0 @@
-{
- "ID": "service.s3-feature-1620332651985138000",
- "SchemaVersion": 1,
- "Module": "service/s3",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

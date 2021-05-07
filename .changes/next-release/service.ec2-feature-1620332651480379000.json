@@ -1,9 +1,0 @@
-{
- "ID": "service.ec2-feature-1620332651480379000",
- "SchemaVersion": 1,
- "Module": "service/ec2",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

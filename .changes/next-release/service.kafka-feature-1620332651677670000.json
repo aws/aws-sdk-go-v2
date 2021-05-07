@@ -1,9 +1,0 @@
-{
- "ID": "service.kafka-feature-1620332651677670000",
- "SchemaVersion": 1,
- "Module": "service/kafka",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

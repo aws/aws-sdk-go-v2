@@ -1,9 +1,0 @@
-{
- "ID": "service.iotsitewise-feature-1620332651624303000",
- "SchemaVersion": 1,
- "Module": "service/iotsitewise",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

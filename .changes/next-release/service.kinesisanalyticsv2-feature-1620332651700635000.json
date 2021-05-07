@@ -1,9 +1,0 @@
-{
- "ID": "service.kinesisanalyticsv2-feature-1620332651700635000",
- "SchemaVersion": 1,
- "Module": "service/kinesisanalyticsv2",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

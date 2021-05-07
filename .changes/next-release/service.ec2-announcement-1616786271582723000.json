@@ -1,9 +1,0 @@
-{
- "ID": "service.ec2-announcement-1616786271582723000",
- "SchemaVersion": 1,
- "Module": "service/ec2",
- "Type": "announcement",
- "Description": "This release contains a breaking change to the Amazon EC2 API client. API number(int/int64/etc) and boolean members were changed from value, to pointer type. Your applications using the EC2 API client will fail to compile after upgrading for all members that were updated. To migrate to this module you'll need to update your application to use pointers for all number and boolean members in the API client module. The SDK provides helper utilities to convert between value and pointer types. For example the [aws.Bool](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Bool) function to get the address from a bool literal. Similar utilities are available for all other primative types in the [aws](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws) package.",
- "MinVersion": "",
- "AffectedModules": null
-}

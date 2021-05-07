@@ -1,9 +1,0 @@
-{
- "ID": "service.ssm-feature-1620332652128892000",
- "SchemaVersion": 1,
- "Module": "service/ssm",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

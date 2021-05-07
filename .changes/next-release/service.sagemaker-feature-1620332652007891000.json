@@ -1,9 +1,0 @@
-{
- "ID": "service.sagemaker-feature-1620332652007891000",
- "SchemaVersion": 1,
- "Module": "service/sagemaker",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

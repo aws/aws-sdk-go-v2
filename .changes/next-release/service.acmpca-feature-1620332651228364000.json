@@ -1,9 +1,0 @@
-{
- "ID": "service.acmpca-feature-1620332651228364000",
- "SchemaVersion": 1,
- "Module": "service/acmpca",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

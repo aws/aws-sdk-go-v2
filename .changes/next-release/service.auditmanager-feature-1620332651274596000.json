@@ -1,9 +1,0 @@
-{
- "ID": "service.auditmanager-feature-1620332651274596000",
- "SchemaVersion": 1,
- "Module": "service/auditmanager",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

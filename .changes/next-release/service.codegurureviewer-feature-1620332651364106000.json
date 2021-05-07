@@ -1,9 +1,0 @@
-{
- "ID": "service.codegurureviewer-feature-1620332651364106000",
- "SchemaVersion": 1,
- "Module": "service/codegurureviewer",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

@@ -1,9 +1,0 @@
-{
- "ID": "service.servicediscovery-feature-1620332652054641000",
- "SchemaVersion": 1,
- "Module": "service/servicediscovery",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

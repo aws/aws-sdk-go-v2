@@ -1,9 +1,0 @@
-{
- "ID": "service.macie2-feature-1620332651723170000",
- "SchemaVersion": 1,
- "Module": "service/macie2",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

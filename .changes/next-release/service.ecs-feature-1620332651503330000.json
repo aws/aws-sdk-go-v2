@@ -1,9 +1,0 @@
-{
- "ID": "service.ecs-feature-1620332651503330000",
- "SchemaVersion": 1,
- "Module": "service/ecs",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

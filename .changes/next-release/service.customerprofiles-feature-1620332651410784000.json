@@ -1,9 +1,0 @@
-{
- "ID": "service.customerprofiles-feature-1620332651410784000",
- "SchemaVersion": 1,
- "Module": "service/customerprofiles",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}

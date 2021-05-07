@@ -1,9 +1,0 @@
-{
- "ID": "service.apigateway-feature-1620332651247716000",
- "SchemaVersion": 1,
- "Module": "service/apigateway",
- "Type": "feature",
- "Description": "API client updated",
- "MinVersion": "",
- "AffectedModules": null
-}
