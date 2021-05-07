@@ -1,4 +1,9 @@
 # Release 2021-05-06
+
+## Breaking change
+* `service/ec2` - v1.6.0
+  * This release contains a breaking change to the Amazon EC2 API client. API number(int/int64/etc) and boolean members were changed from value, to pointer type. Your applications using the EC2 API client will fail to compile after upgrading for all members that were updated. To migrate to this module you'll need to update your application to use pointers for all number and boolean members in the API client module. The SDK provides helper utilities to convert between value and pointer types. For example the [aws.Bool](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Bool) function to get the address from a bool literal. Similar utilities are available for all other primitive types in the [aws](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws) package.
+
 ## Service Client Highlights
 * `service/acmpca` - v1.3.0
   * Feature: API client updated
@@ -23,7 +28,6 @@
 * `service/docdb` - v1.4.0
   * Feature: API client updated
 * `service/ec2` - v1.6.0
-  * This release contains a breaking change to the Amazon EC2 API client. API number(int/int64/etc) and boolean members were changed from value, to pointer type. Your applications using the EC2 API client will fail to compile after upgrading for all members that were updated. To migrate to this module you'll need to update your application to use pointers for all number and boolean members in the API client module. The SDK provides helper utilities to convert between value and pointer types. For example the [aws.Bool](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws#Bool) function to get the address from a bool literal. Similar utilities are available for all other primative types in the [aws](https://pkg.go.dev/github.com/aws/aws-sdk-go-v2/aws) package.
   * Bug Fix: Fix incorrectly modeled Amazon EC2 number and boolean members in structures. The Amazon EC2 API client has been updated with a breaking change to fix all structure number and boolean members to be pointer types instead of value types. Fixes [#1107](https://github.com/aws/aws-sdk-go-v2/issues/1107), [#1178](https://github.com/aws/aws-sdk-go-v2/issues/1178), and [#1190](https://github.com/aws/aws-sdk-go-v2/issues/1190). This breaking change is made within the major version of the client' module, because the client operations failed and were unusable with value type number and boolean members with the EC2 API.
   * Feature: API client updated
 * `service/ecs` - v1.3.0
@@ -84,7 +88,7 @@
 ## Core SDK Highlights
 * Dependency Update: Update smithy-go dependency to v1.4.0
 * Dependency Update: Updated SDK dependencies to their latest versions.
-* `/` - v1.4.0
+* `aws` - v1.4.0
   * Feature: Add support for FIPS global partition endpoints ([#1242](https://github.com/aws/aws-sdk-go-v2/pull/1242))
 
 # Release 2021-04-23
