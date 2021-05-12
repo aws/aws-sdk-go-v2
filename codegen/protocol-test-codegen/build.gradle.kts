@@ -40,7 +40,7 @@ tasks["build"].finalizedBy(tasks["buildSdk"])
 
 // ensure built artifacts are put into the SDK's folders
 tasks.create<Exec>("copyGoCodegen") {
-    dependsOn ("buildSdk")
-    commandLine ("$rootDir/copy_go_codegen.sh", "$rootDir/../", "$buildDir", "github.com/aws/aws-sdk-go-v2/")
+    dependsOn("buildSdk")
+    commandLine("$rootDir/copy_go_codegen.sh", "$rootDir/..", (tasks["buildSdk"] as SmithyBuild).outputDirectory.absolutePath)
 }
 tasks["buildSdk"].finalizedBy(tasks["copyGoCodegen"])

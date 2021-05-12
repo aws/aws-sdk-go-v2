@@ -4,53 +4,43 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 
 	"github.com/aws/aws-sdk-go-v2/internal/repotools"
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/gomod"
 	"golang.org/x/mod/modfile"
 )
 
 func main() {
-	currDir, err := os.Getwd()
+	repoRoot, err := repotools.GetRepoRoot()
 	if err != nil {
-		log.Fatalf("failed to get current directory: %v", err)
-	}
-
-	gitRoot, err := repotools.FindRepoRoot(currDir)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	_, ok := isGoModPresent(gitRoot)
-	if !ok {
-		log.Fatalf("go.mod not present at %v", gitRoot)
+		log.Fatalf("failed to get repository root: %v", err)
 	}
 
 	registry := NewRegistry()
 
-	rootModulePath := registry.MustLoad(gitRoot).Module.Mod.Path
-
-	subPaths, err := findSubModules(gitRoot)
-	if err != nil {
-		log.Fatalf("failed to find submodules: %v", err)
+	discoverer := gomod.NewDiscoverer(repoRoot)
+	if err = discoverer.Discover(); err != nil {
+		log.Fatalf("failed to discover modules: %v", err)
 	}
 
 	// Load Discovered Modules into Registry
 	var modules []string
-	for _, sub := range subPaths {
-		m := registry.MustLoad(sub)
+
+	for moduleDir := range discoverer.Modules() {
+		m := registry.MustLoad(moduleDir)
 		modules = append(modules, m.Module.Mod.Path)
 	}
 
-	var module string
+	var modulePath string
 	for len(modules) > 0 {
-		module, modules = modules[0], modules[1:]
+		modulePath, modules = modules[0], modules[1:]
 
-		err = addRelativeReplaces(rootModulePath, module, registry)
+		err = addRelativeReplaces(repoRoot, modulePath, registry)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -65,15 +55,15 @@ func main() {
 
 // Registry is a map of module path to a module
 type Registry struct {
-	dirToModule map[string]*Module
-	pathToDir   map[string]string
+	dirToModule     map[string]*Module
+	modulePathToDir map[string]string
 }
 
 // NewRegistry returns a new module registry.
 func NewRegistry() *Registry {
 	return &Registry{
-		dirToModule: map[string]*Module{},
-		pathToDir:   map[string]string{},
+		dirToModule:     map[string]*Module{},
+		modulePathToDir: map[string]string{},
 	}
 }
 
@@ -86,27 +76,33 @@ func (r *Registry) Modules() (m []*Module) {
 }
 
 // MustGet retrieves the module identified by the given module path. Panics on failure.
-func (r *Registry) MustGet(path string) *Module {
-	module, err := r.Get(path)
+func (r *Registry) MustGet(path string) (string, *Module) {
+	modulePath, module, err := r.Get(path)
 	if err != nil {
 		panic(err)
 	}
-	return module
+	return modulePath, module
 }
 
 // Get retrieves the module identified by the give module path.
-func (r *Registry) Get(path string) (*Module, error) {
-	dir, ok := r.pathToDir[path]
+func (r *Registry) Get(path string) (string, *Module, error) {
+	dir, ok := r.modulePathToDir[path]
 	if !ok {
-		return nil, fmt.Errorf("module not found")
+		return "", nil, fmt.Errorf("module not found")
 	}
 
 	module, ok := r.dirToModule[dir]
 	if !ok {
-		return nil, fmt.Errorf("module missing or not loaded")
+		return "", nil, fmt.Errorf("module missing or not loaded")
 	}
 
-	return module, nil
+	return dir, module, nil
+}
+
+// Has returns whether the given module path is in the registry.
+func (r *Registry) Has(path string) bool {
+	_, ok := r.modulePathToDir[path]
+	return ok
 }
 
 // MustLoad loads or retrieves the Module from the registry for the given path. Panics on failure.
@@ -122,13 +118,13 @@ func (r *Registry) MustLoad(dir string) *Module {
 func (r *Registry) Load(dir string) (module *Module, err error) {
 	module, ok := r.dirToModule[dir]
 	if !ok {
-		m, err := loadGoMod(dir)
+		m, err := gomod.LoadModuleFile(dir, nil, false)
 		if err != nil {
 			return nil, err
 		}
 		module = &Module{File: m}
 		r.dirToModule[dir] = module
-		r.pathToDir[module.Module.Mod.Path] = dir
+		r.modulePathToDir[module.Module.Mod.Path] = dir
 	}
 
 	return module, nil
@@ -145,6 +141,8 @@ func (m *Module) Write() error {
 	if !m.modified {
 		return nil
 	}
+
+	m.Cleanup()
 
 	mb, err := m.Format()
 	if err != nil {
@@ -171,14 +169,37 @@ func (m *Module) AddReplace(oldPath, oldVers, newPath, newVers string) error {
 	return m.File.AddReplace(oldPath, oldVers, newPath, newVers)
 }
 
+type toReplace struct {
+	ModulePath   string
+	RelativePath string
+}
+
 // addRelativeReplaces takes the given root and submodule paths and adds go.mod replace directives for any sub modules
 // that refer to the given root as a dependency.
-func addRelativeReplaces(repoModule, module string, registry *Registry) error {
-	mod := registry.MustGet(module)
+func addRelativeReplaces(repoRoot, modulePath string, registry *Registry) error {
+	modDir, mod := registry.MustGet(modulePath)
 
-	modRelativeToRoot := convertToDotted(makeRelativeTo(mod.Module.Mod.Path, repoModule))
+	modDirToRoot, err := filepath.Rel(modDir, repoRoot)
+	if err != nil {
+		return err
+	}
+
+	var toDrop []string
+	for _, replace := range mod.Replace {
+		if !registry.Has(replace.Old.Path) {
+			continue
+		}
+		toDrop = append(toDrop, replace.Old.Path)
+	}
+
+	for _, drop := range toDrop {
+		if err := mod.DropReplace(drop, ""); err != nil {
+			return err
+		}
+	}
 
 	seen := make(map[string]struct{})
+	var replaces []toReplace
 	var toProcess []*modfile.Require
 	var req *modfile.Require
 	toProcess = append(toProcess, mod.Require...)
@@ -192,104 +213,40 @@ func addRelativeReplaces(repoModule, module string, registry *Registry) error {
 			seen[req.Mod.Path] = struct{}{}
 		}
 
-		if !strings.HasPrefix(req.Mod.Path, repoModule) {
+		if !registry.Has(req.Mod.Path) {
 			continue
 		}
 
-		reqMod := registry.MustGet(req.Mod.Path)
+		reqDir, reqMod := registry.MustGet(req.Mod.Path)
 
-		reqFromRoot := makeRelativeTo(req.Mod.Path, repoModule)
-		if reqFromRoot == "." {
-			reqFromRoot = ""
-		} else {
-			reqFromRoot += "/"
-		}
-
-		err := mod.AddReplace(req.Mod.Path, "", fmt.Sprintf("%s/%s", modRelativeToRoot, reqFromRoot), "")
+		reqFromRoot, err := filepath.Rel(repoRoot, reqDir)
 		if err != nil {
 			return err
 		}
+
+		relPathToReq := filepath.Join(modDirToRoot, reqFromRoot)
+		if !strings.HasSuffix(relPathToReq, string(filepath.Separator)) {
+			relPathToReq += string(filepath.Separator)
+		}
+
+		replaces = append(replaces, toReplace{
+			ModulePath:   req.Mod.Path,
+			RelativePath: relPathToReq,
+		})
 
 		toProcess = append(toProcess, reqMod.Require...)
 	}
 
-	return nil
-}
+	sort.Slice(replaces, func(i, j int) bool {
+		return replaces[i].ModulePath < replaces[j].ModulePath
+	})
 
-// makeRelativeTo makes the module path relative to rootModule.
-func makeRelativeTo(module string, rootModule string) string {
-	relative := strings.TrimLeft(strings.TrimPrefix(module, rootModule), "/")
-	if relative == "" {
-		return "."
-	}
-	return relative
-}
-
-// convertToDotted converts a relative path to a form such as ../ or ../../ etc.
-func convertToDotted(path string) string {
-	if path == "." {
-		return path
-	}
-
-	count := strings.Count(path, "/")
-
-	var builder strings.Builder
-	first := true
-	for i := 0; i <= count; i++ {
-		if !first {
-			builder.WriteRune('/')
-		} else {
-			first = false
-		}
-		builder.WriteString("..")
-	}
-
-	return builder.String()
-}
-
-// loadGoMod loads the go.mod file found at the given directory path
-func loadGoMod(dir string) (*modfile.File, error) {
-	path := filepath.Join(dir, "go.mod")
-	mb, err := ioutil.ReadFile(path)
-	if err != nil {
-		return nil, err
-	}
-	parse, err := modfile.Parse(path, mb, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return parse, nil
-}
-
-func findSubModules(dir string) (modules []string, err error) {
-	err = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+	for _, replace := range replaces {
+		err = mod.AddReplace(replace.ModulePath, "", replace.RelativePath, "")
 		if err != nil {
 			return err
 		}
-
-		if dir == path {
-			return nil
-		}
-
-		if info.IsDir() {
-			_, ok := isGoModPresent(path)
-			if !ok {
-				return nil
-			}
-			modules = append(modules, path)
-		}
-
-		return nil
-	})
-	return modules, err
-}
-
-func isGoModPresent(dir string) (string, bool) {
-	path := filepath.Join(dir, "go.mod")
-	_, err := os.Stat(path)
-	if err != nil {
-		return "", false
 	}
-	return path, true
+
+	return nil
 }
