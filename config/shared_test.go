@@ -47,6 +47,28 @@ const assumeRoleRespMsg = `
 </AssumeRoleResponse>
 `
 
+var assumeRoleWithWebIdentityResponse = `<AssumeRoleWithWebIdentityResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">
+  <AssumeRoleWithWebIdentityResult>
+    <SubjectFromWebIdentityToken>amzn1.account.AF6RHO7KZU5XRVQJGXK6HB56KR2A</SubjectFromWebIdentityToken>
+    <Audience>client.5498841531868486423.1548@apps.example.com</Audience>
+    <AssumedRoleUser>
+      <Arn>arn:aws:sts::123456789012:assumed-role/FederatedWebIdentityRole/app1</Arn>
+      <AssumedRoleId>AROACLKWSDQRAOEXAMPLE:app1</AssumedRoleId>
+    </AssumedRoleUser>
+    <Credentials>
+      <AccessKeyId>WEB_IDENTITY_AKID</AccessKeyId>
+      <SecretAccessKey>WEB_IDENTITY_SECRET</SecretAccessKey>
+      <SessionToken>WEB_IDENTITY_SESSION_TOKEN</SessionToken>
+      <Expiration>%s</Expiration>
+    </Credentials>
+    <Provider>www.amazon.com</Provider>
+  </AssumeRoleWithWebIdentityResult>
+  <ResponseMetadata>
+    <RequestId>request-id</RequestId>
+  </ResponseMetadata>
+</AssumeRoleWithWebIdentityResponse>
+`
+
 const getRoleCredentialsResponse = `{
   "roleCredentials": {
     "accessKeyId": "SSO_AKID",

@@ -61,11 +61,31 @@ func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolver, func()) {
 
 	stsServer := httptest.NewServer(http.HandlerFunc(
 		func(w http.ResponseWriter, r *http.Request) {
-			w.Write([]byte(fmt.Sprintf(
-				assumeRoleRespMsg,
-				time.Now().
-					Add(15*time.Minute).
-					Format("2006-01-02T15:04:05Z"))))
+			if err := r.ParseForm(); err != nil {
+				w.WriteHeader(500)
+				return
+			}
+
+			form := r.Form
+
+			switch form.Get("Action") {
+			case "AssumeRole":
+				w.Write([]byte(fmt.Sprintf(
+					assumeRoleRespMsg,
+					time.Now().
+						Add(15*time.Minute).
+						Format("2006-01-02T15:04:05Z"))))
+				return
+			case "AssumeRoleWithWebIdentity":
+				w.Write([]byte(fmt.Sprintf(assumeRoleWithWebIdentityResponse,
+					time.Now().
+						Add(15*time.Minute).
+						Format("2006-01-02T15:04:05Z"))))
+				return
+			default:
+				w.WriteHeader(404)
+				return
+			}
 		}))
 
 	ssoServer := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -309,6 +329,27 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 				os.Setenv("AWS_SECRET_KEY", "secret_key")
 				return func() {}, nil
 			},
+		},
+		"sso mixed with credential process provider": {
+			envProfile:           "sso_mixed_credproc",
+			expectedAccessKey:    "SSO_AKID",
+			expectedSecretKey:    "SSO_SECRET_KEY",
+			expectedSessionToken: "SSO_SESSION_TOKEN",
+			init: func() (func(), error) {
+				return ssoTestSetup()
+			},
+		},
+		"sso mixed with web identity token provider": {
+			envProfile:           "sso_mixed_webident",
+			expectedAccessKey:    "WEB_IDENTITY_AKID",
+			expectedSecretKey:    "WEB_IDENTITY_SECRET",
+			expectedSessionToken: "WEB_IDENTITY_SESSION_TOKEN",
+		},
+		"web identity": {
+			envProfile:           "webident",
+			expectedAccessKey:    "WEB_IDENTITY_AKID",
+			expectedSecretKey:    "WEB_IDENTITY_SECRET",
+			expectedSessionToken: "WEB_IDENTITY_SESSION_TOKEN",
 		},
 	}
 

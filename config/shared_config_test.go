@@ -266,7 +266,38 @@ func TestNewSharedConfig(t *testing.T) {
 		"Assume Role with AWS SSO Configuration and Source Profile": {
 			Filenames: []string{testConfigFilename},
 			Profile:   "source_sso_and_assume",
-			Err:       fmt.Errorf("only one credential type may be specified per profile"),
+			Expected: SharedConfig{
+				Profile:           "source_sso_and_assume",
+				RoleARN:           "source_sso_and_assume_arn",
+				SourceProfileName: "sso_and_assume",
+				Source: &SharedConfig{
+					Profile:           "sso_and_assume",
+					RoleARN:           "sso_with_assume_role_arn",
+					SourceProfileName: "multiple_assume_role_with_credential_source",
+					Source: &SharedConfig{
+						Profile:           "multiple_assume_role_with_credential_source",
+						RoleARN:           "multiple_assume_role_with_credential_source_role_arn",
+						SourceProfileName: "assume_role_with_credential_source",
+						Source: &SharedConfig{
+							Profile:          "assume_role_with_credential_source",
+							RoleARN:          "assume_role_with_credential_source_role_arn",
+							CredentialSource: credSourceEc2Metadata,
+						},
+					},
+				},
+			},
+		},
+		"SSO Mixed with Additional Credential Providrer": {
+			Filenames: []string{testConfigFilename},
+			Profile:   "sso_mixed_credproc",
+			Expected: SharedConfig{
+				Profile:           "sso_mixed_credproc",
+				SSOAccountID:      "012345678901",
+				SSORegion:         "us-west-2",
+				SSORoleName:       "TestRole",
+				SSOStartURL:       "https://127.0.0.1/start",
+				CredentialProcess: "/path/to/process",
+			},
 		},
 	}
 
@@ -1009,5 +1040,18 @@ func TestSharedConfigLoading(t *testing.T) {
 			}
 
 		})
+	}
+}
+
+// TestGitHubIssue1204 https://github.com/aws/aws-sdk-go-v2/issues/1204
+func TestGitHubIssue1204(t *testing.T) {
+	_, err := LoadDefaultConfig(
+		context.TODO(),
+		WithSharedConfigProfile("default"),
+		WithSharedConfigFiles([]string{filepath.Join("testdata", "gh1204_config")}),
+		WithSharedCredentialsFiles([]string{filepath.Join("testdata", "gh1204_credentials")}),
+	)
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
 	}
 }

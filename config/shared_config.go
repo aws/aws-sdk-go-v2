@@ -320,9 +320,6 @@ func LoadSharedConfigProfile(ctx context.Context, profile string, optFns ...func
 		return SharedConfig{}, err
 	}
 
-	// profile should be lower-cased to standardize
-	profile = strings.ToLower(profile)
-
 	cfg := SharedConfig{}
 	profiles := map[string]struct{}{}
 	if err = cfg.setFromIniSections(profiles, profile, configSections, option.Logger); err != nil {
@@ -915,7 +912,6 @@ func (c *SharedConfig) validateCredentialType() error {
 		len(c.CredentialSource) != 0,
 		len(c.CredentialProcess) != 0,
 		len(c.WebIdentityTokenFile) != 0,
-		c.hasSSOConfiguration(),
 	) {
 		return fmt.Errorf("only one credential type may be specified per profile: source profile, credential source, credential process, web identity token, or sso")
 	}
@@ -993,6 +989,10 @@ func (c *SharedConfig) clearCredentialOptions() {
 	c.CredentialProcess = ""
 	c.WebIdentityTokenFile = ""
 	c.Credentials = aws.Credentials{}
+	c.SSOAccountID = ""
+	c.SSORegion = ""
+	c.SSORoleName = ""
+	c.SSOStartURL = ""
 }
 
 // SharedConfigLoadError is an error for the shared config file failed to load.

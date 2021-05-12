@@ -1,0 +1,8 @@
+{
+    "id": "f2c89180-6ed6-4485-bdbe-e78723db3a88",
+    "type": "bugfix",
+    "description": "Fixed a bug that caused configuration profile names to be incorrectly normalized, which could cause incorrect profile loading in certain cases. ([#1204](https://github.com/aws/aws-sdk-go-v2/issues/1204))",
+    "modules": [
+        "config"
+    ]
+}

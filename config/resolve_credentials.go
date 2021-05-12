@@ -123,13 +123,6 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 			Value: sharedConfig.Credentials,
 		}
 
-	case sharedConfig.hasSSOConfiguration():
-		err = resolveSSOCredentials(ctx, cfg, sharedConfig, configs)
-
-	case len(sharedConfig.CredentialProcess) != 0:
-		// Get credentials from CredentialProcess
-		err = processCredentials(ctx, cfg, sharedConfig, configs)
-
 	case len(sharedConfig.CredentialSource) != 0:
 		err = resolveCredsFromSource(ctx, cfg, envConfig, sharedConfig, configs)
 
@@ -137,7 +130,14 @@ func resolveCredsFromProfile(ctx context.Context, cfg *aws.Config, envConfig *En
 		// Credentials from Assume Web Identity token require an IAM Role, and
 		// that roll will be assumed. May be wrapped with another assume role
 		// via SourceProfile.
-		err = assumeWebIdentity(ctx, cfg, sharedConfig.WebIdentityTokenFile, sharedConfig.RoleARN, sharedConfig.RoleSessionName, configs)
+		return assumeWebIdentity(ctx, cfg, sharedConfig.WebIdentityTokenFile, sharedConfig.RoleARN, sharedConfig.RoleSessionName, configs)
+
+	case sharedConfig.hasSSOConfiguration():
+		err = resolveSSOCredentials(ctx, cfg, sharedConfig, configs)
+
+	case len(sharedConfig.CredentialProcess) != 0:
+		// Get credentials from CredentialProcess
+		err = processCredentials(ctx, cfg, sharedConfig, configs)
 
 	case len(envConfig.ContainerCredentialsEndpoint) != 0:
 		err = resolveLocalHTTPCredProvider(ctx, cfg, envConfig.ContainerCredentialsEndpoint, envConfig.ContainerAuthorizationToken, configs)

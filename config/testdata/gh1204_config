@@ -1,0 +1,14 @@
+[default]
+region=us-west-2
+external_id=FooBar
+role_session_name=FooSessionName
+role_arn=foofoofoofoofoofoofoofoofoofoofoofoofoofoo
+duration_seconds = 43200
+source_profile=A
+
+[profile A]
+external_id=AExternalID
+role_session_name=ASessionName
+role_arn=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+duration_seconds = 43210
+source_profile=B
