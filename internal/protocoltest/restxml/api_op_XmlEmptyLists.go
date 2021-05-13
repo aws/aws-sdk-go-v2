@@ -39,6 +39,8 @@ type XmlEmptyListsInput struct {
 
 	FlattenedListWithNamespace []string
 
+	FlattenedStructureList []types.StructureListMember
+
 	IntegerList []int32
 
 	// A list of lists of strings.
@@ -67,6 +69,8 @@ type XmlEmptyListsOutput struct {
 	FlattenedListWithMemberNamespace []string
 
 	FlattenedListWithNamespace []string
+
+	FlattenedStructureList []types.StructureListMember
 
 	IntegerList []int32
 

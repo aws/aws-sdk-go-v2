@@ -15,8 +15,9 @@ import (
 	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
-var expectedAgent = aws.SDKName + "/" + aws.SDKVersion
-var expectedSDKAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go/" + languageVersion + " md/GOOS/" + runtime.GOOS + " md/GOARCH/" + runtime.GOARCH
+var expectedAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go/" + languageVersion + " md/GOOS/" + runtime.GOOS + " md/GOARCH/" + runtime.GOARCH
+
+//var expectedSDKAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go/" + languageVersion + " md/GOOS/" + runtime.GOOS + " md/GOARCH/" + runtime.GOARCH
 
 func TestRequestUserAgent_HandleBuild(t *testing.T) {
 	cases := map[string]struct {
@@ -32,8 +33,8 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 			}},
 			Expect: middleware.BuildInput{Request: &smithyhttp.Request{
 				Request: &http.Request{Header: map[string][]string{
-					"User-Agent":       {expectedAgent},
-					"X-Amz-User-Agent": {expectedSDKAgent},
+					"User-Agent": {expectedAgent},
+					//"X-Amz-User-Agent": {expectedSDKAgent},
 				}},
 			}},
 			Next: func(t *testing.T, expect middleware.BuildInput) middleware.BuildHandler {
@@ -48,14 +49,14 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 		"appends to existing": {
 			In: middleware.BuildInput{Request: &smithyhttp.Request{
 				Request: &http.Request{Header: map[string][]string{
-					"User-Agent":       {"previously set"},
-					"X-Amz-User-Agent": {"previously set"},
+					"User-Agent": {"previously set"},
+					//"X-Amz-User-Agent": {"previously set"},
 				}},
 			}},
 			Expect: middleware.BuildInput{Request: &smithyhttp.Request{
 				Request: &http.Request{Header: map[string][]string{
-					"User-Agent":       {expectedAgent + " previously set"},
-					"X-Amz-User-Agent": {expectedSDKAgent + " previously set"},
+					"User-Agent": {expectedAgent + " previously set"},
+					//"X-Amz-User-Agent": {expectedSDKAgent + " previously set"},
 				}},
 			}},
 			Next: func(t *testing.T, expect middleware.BuildInput) middleware.BuildHandler {
@@ -76,8 +77,8 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 			}},
 			Expect: middleware.BuildInput{Request: &smithyhttp.Request{
 				Request: &http.Request{Header: map[string][]string{
-					"User-Agent":       {expectedAgent},
-					"X-Amz-User-Agent": {expectedSDKAgent + " exec-env/TestCase"},
+					"User-Agent": {expectedAgent + " exec-env/TestCase"},
+					//"X-Amz-User-Agent": {expectedSDKAgent + " exec-env/TestCase"},
 				}},
 			}},
 			Next: func(t *testing.T, expect middleware.BuildInput) middleware.BuildHandler {

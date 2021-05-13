@@ -1,0 +1,8 @@
+{
+    "id": "679a53c1-4cfe-4943-867d-8e23cc85abb9",
+    "type": "feature",
+    "description": "`AddSDKAgentKey` and `AddSDKAgentKeyValue` in `aws/middleware` package have been updated to direct metadata to `User-Agent` HTTP header.",
+    "modules": [
+        "."
+    ]
+}

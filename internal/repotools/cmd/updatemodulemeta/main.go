@@ -77,7 +77,15 @@ func main() {
 	}
 
 	for modDir := range modules {
+		cfg := config.Modules[modDir]
 		dirPath := filepath.Join(repoRoot, modDir)
+		if len(cfg.MetadataPackage) > 0 {
+			pkgRel := filepath.Join(modDir, cfg.MetadataPackage)
+			if gomod.IsSubmodulePath(pkgRel, modules[modDir]) {
+				log.Fatalf("%s metadata_package location must not be located in a sub-module", modDir)
+			}
+			dirPath = filepath.Join(repoRoot, pkgRel)
+		}
 		goPackage, err := getModuleGoPackage(dirPath)
 		if err != nil {
 			log.Fatalf("failed to determine module go package: %v", err)
@@ -175,7 +183,7 @@ func writeModuleMetadata(dir string, goPackage string, version string) (err erro
 
 	return metadataTemplate.Execute(f, metadata{
 		Package: goPackage,
-		Version: version,
+		Version: strings.TrimPrefix(version, "v"),
 	})
 }
 

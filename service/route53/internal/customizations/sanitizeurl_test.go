@@ -40,7 +40,7 @@ func TestSanitizeURLMiddleware(t *testing.T) {
 				Retryer: func() aws.Retryer {
 					return aws.NopRetryer{}
 				},
-				Region:      "mock-region",
+				Region: "mock-region",
 			}
 
 			fm := requestRetrieverMiddleware{}

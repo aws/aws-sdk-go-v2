@@ -48,6 +48,11 @@ matrix:
       env:
         - JAVA_TOOL_OPTIONS="-Xmx1g"
       before_script:
+          - sudo apt-get -y install golang
+          - go get golang.org/dl/go1.16.4
+          - $(go env GOPATH)/bin/go1.16.4 download
+          - export PATH=$HOME/sdk/go1.16.4/bin:$PATH
+          - export GOROOT=$HOME/sdk/go1.16.4
           - rm -rf /tmp/smithy-go
           - git clone https://github.com/aws/smithy-go /tmp/smithy-go
           - pushd /tmp/smithy-go/codegen
@@ -61,6 +66,11 @@ matrix:
       env:
         - JAVA_TOOL_OPTIONS="-Xmx1g"
       before_script:
+          - sudo apt-get -y install golang
+          - go get golang.org/dl/go1.16.4
+          - $(go env GOPATH)/bin/go1.16.4 download
+          - export PATH=$HOME/sdk/go1.16.4/bin:$PATH
+          - export GOROOT=$HOME/sdk/go1.16.4
           - rm -rf /tmp/smithy-go
           - git clone https://github.com/aws/smithy-go /tmp/smithy-go
           - pushd /tmp/smithy-go/codegen

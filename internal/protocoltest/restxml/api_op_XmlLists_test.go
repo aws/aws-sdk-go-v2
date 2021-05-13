@@ -97,6 +97,16 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 						B: ptr.String("4"),
 					},
 				},
+				FlattenedStructureList: []types.StructureListMember{
+					{
+						A: ptr.String("5"),
+						B: ptr.String("6"),
+					},
+					{
+						A: ptr.String("7"),
+						B: ptr.String("8"),
+					},
+				},
 			},
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/XmlLists",
@@ -159,6 +169,14 @@ func TestClient_XmlLists_awsRestxmlSerialize(t *testing.T) {
 			            <other>4</other>
 			        </item>
 			    </myStructureList>
+			    <flattenedStructureList>
+			        <value>5</value>
+			        <other>6</other>
+			    </flattenedStructureList>
+			    <flattenedStructureList>
+			        <value>7</value>
+			        <other>8</other>
+			    </flattenedStructureList>
 			</XmlListsInputOutput>
 			`))
 			},
@@ -302,6 +320,14 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 			            <other>4</other>
 			        </item>
 			    </myStructureList>
+			    <flattenedStructureList>
+			        <value>5</value>
+			        <other>6</other>
+			    </flattenedStructureList>
+			    <flattenedStructureList>
+			        <value>7</value>
+			        <other>8</other>
+			    </flattenedStructureList>
 			</XmlListsInputOutput>
 			`),
 			ExpectResult: &XmlListsOutput{
@@ -367,6 +393,16 @@ func TestClient_XmlLists_awsRestxmlDeserialize(t *testing.T) {
 					{
 						A: ptr.String("3"),
 						B: ptr.String("4"),
+					},
+				},
+				FlattenedStructureList: []types.StructureListMember{
+					{
+						A: ptr.String("5"),
+						B: ptr.String("6"),
+					},
+					{
+						A: ptr.String("7"),
+						B: ptr.String("8"),
 					},
 				},
 			},

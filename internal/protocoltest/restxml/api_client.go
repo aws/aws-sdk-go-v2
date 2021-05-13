@@ -199,7 +199,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddRequestUserAgentMiddleware(stack)
+	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "restxmlprotocol", goModuleVersion)(stack)
 }
 
 func resolveIdempotencyTokenProvider(o *Options) {

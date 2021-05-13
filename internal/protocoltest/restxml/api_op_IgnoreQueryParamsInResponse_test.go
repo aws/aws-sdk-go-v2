@@ -32,7 +32,7 @@ func TestClient_IgnoreQueryParamsInResponse_awsRestxmlDeserialize(t *testing.T) 
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body:          []byte(`<IgnoreQueryParamsInResponseInputOutput><baz>bam</baz></IgnoreQueryParamsInResponseInputOutput>`),
+			Body:          []byte(`<IgnoreQueryParamsInResponseOutput><baz>bam</baz></IgnoreQueryParamsInResponseOutput>`),
 			ExpectResult: &IgnoreQueryParamsInResponseOutput{
 				Baz: ptr.String("bam"),
 			},

@@ -1,0 +1,34 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_CancelStatement.go",
+        "api_op_DescribeStatement.go",
+        "api_op_DescribeTable.go",
+        "api_op_ExecuteStatement.go",
+        "api_op_GetStatementResult.go",
+        "api_op_ListDatabases.go",
+        "api_op_ListSchemas.go",
+        "api_op_ListStatements.go",
+        "api_op_ListTables.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "types/types_exported_test.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/redshiftdata",
+    "unstable": false
+}

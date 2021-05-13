@@ -191,7 +191,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddRequestUserAgentMiddleware(stack)
+	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "restxmlprotocolnamespace", goModuleVersion)(stack)
 }
 
 func addRetryMiddlewares(stack *middleware.Stack, o Options) error {

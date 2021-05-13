@@ -1,0 +1,43 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_CreateDetectorModel.go",
+        "api_op_CreateInput.go",
+        "api_op_DeleteDetectorModel.go",
+        "api_op_DeleteInput.go",
+        "api_op_DescribeDetectorModel.go",
+        "api_op_DescribeDetectorModelAnalysis.go",
+        "api_op_DescribeInput.go",
+        "api_op_DescribeLoggingOptions.go",
+        "api_op_GetDetectorModelAnalysisResults.go",
+        "api_op_ListDetectorModelVersions.go",
+        "api_op_ListDetectorModels.go",
+        "api_op_ListInputs.go",
+        "api_op_ListTagsForResource.go",
+        "api_op_PutLoggingOptions.go",
+        "api_op_StartDetectorModelAnalysis.go",
+        "api_op_TagResource.go",
+        "api_op_UntagResource.go",
+        "api_op_UpdateDetectorModel.go",
+        "api_op_UpdateInput.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/iotevents",
+    "unstable": false
+}
