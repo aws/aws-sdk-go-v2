@@ -17,6 +17,10 @@ type ModuleConfig struct {
 
 	// The semver pre-release string for the module
 	PreRelease string `toml:"pre_release"`
+
+	// The package alternative location relative to the module where the go_module_metadata.go should be written.
+	// By default this file is written in the location of the module root where the `go.mod` is located.
+	MetadataPackage string `toml:"metadata_package"`
 }
 
 // Config is a configuration file for describing how modules and dependencies are managed.
