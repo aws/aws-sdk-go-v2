@@ -97,12 +97,12 @@ type GetAccessPointOutput struct {
 	// information about when Amazon S3 considers a bucket or object public, see The
 	// Meaning of "Public"
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon Simple Storage Service Developer Guide. This is not supported for
-	// Amazon S3 on Outposts.
+	// in the Amazon S3 User Guide. This is not supported for Amazon S3 on Outposts.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
 	// Contains the virtual private cloud (VPC) configuration for the specified access
-	// point.
+	// point. This element is empty if this access point is an Amazon S3 on Outposts
+	// access point that is used by other AWS services.
 	VpcConfiguration *types.VpcConfiguration
 
 	// Metadata pertaining to the operation's result.

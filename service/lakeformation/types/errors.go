@@ -7,6 +7,23 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
+// Access to a resource was denied.
+type AccessDeniedException struct {
+	Message *string
+}
+
+func (e *AccessDeniedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *AccessDeniedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
+func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // A resource to be created or added already exists.
 type AlreadyExistsException struct {
 	Message *string
@@ -60,6 +77,23 @@ func (e *EntityNotFoundException) ErrorMessage() string {
 func (e *EntityNotFoundException) ErrorCode() string             { return "EntityNotFoundException" }
 func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// An encryption operation failed.
+type GlueEncryptionException struct {
+	Message *string
+}
+
+func (e *GlueEncryptionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GlueEncryptionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GlueEncryptionException) ErrorCode() string             { return "GlueEncryptionException" }
+func (e *GlueEncryptionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An internal service error occurred.
 type InternalServiceException struct {
 	Message *string
@@ -110,3 +144,24 @@ func (e *OperationTimeoutException) ErrorMessage() string {
 }
 func (e *OperationTimeoutException) ErrorCode() string             { return "OperationTimeoutException" }
 func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A resource numerical limit was exceeded.
+type ResourceNumberLimitExceededException struct {
+	Message *string
+}
+
+func (e *ResourceNumberLimitExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNumberLimitExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNumberLimitExceededException) ErrorCode() string {
+	return "ResourceNumberLimitExceededException"
+}
+func (e *ResourceNumberLimitExceededException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}

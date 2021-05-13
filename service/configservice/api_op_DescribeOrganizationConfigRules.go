@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -117,6 +118,92 @@ func addOperationDescribeOrganizationConfigRulesMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeOrganizationConfigRulesAPIClient is a client that implements the
+// DescribeOrganizationConfigRules operation.
+type DescribeOrganizationConfigRulesAPIClient interface {
+	DescribeOrganizationConfigRules(context.Context, *DescribeOrganizationConfigRulesInput, ...func(*Options)) (*DescribeOrganizationConfigRulesOutput, error)
+}
+
+var _ DescribeOrganizationConfigRulesAPIClient = (*Client)(nil)
+
+// DescribeOrganizationConfigRulesPaginatorOptions is the paginator options for
+// DescribeOrganizationConfigRules
+type DescribeOrganizationConfigRulesPaginatorOptions struct {
+	// The maximum number of organization config rules returned on each page. If you do
+	// no specify a number, AWS Config uses the default. The default is 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeOrganizationConfigRulesPaginator is a paginator for
+// DescribeOrganizationConfigRules
+type DescribeOrganizationConfigRulesPaginator struct {
+	options   DescribeOrganizationConfigRulesPaginatorOptions
+	client    DescribeOrganizationConfigRulesAPIClient
+	params    *DescribeOrganizationConfigRulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeOrganizationConfigRulesPaginator returns a new
+// DescribeOrganizationConfigRulesPaginator
+func NewDescribeOrganizationConfigRulesPaginator(client DescribeOrganizationConfigRulesAPIClient, params *DescribeOrganizationConfigRulesInput, optFns ...func(*DescribeOrganizationConfigRulesPaginatorOptions)) *DescribeOrganizationConfigRulesPaginator {
+	if params == nil {
+		params = &DescribeOrganizationConfigRulesInput{}
+	}
+
+	options := DescribeOrganizationConfigRulesPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeOrganizationConfigRulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeOrganizationConfigRulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeOrganizationConfigRules page.
+func (p *DescribeOrganizationConfigRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeOrganizationConfigRulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribeOrganizationConfigRules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeOrganizationConfigRules(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a token for federation.
+// Retrieves a token for federation. This API doesn't support root users. If you
+// try to invoke GetFederationToken with root credentials, an error message similar
+// to the following one appears: Provided identity: Principal: .... User: ....
+// cannot be used for federation with Amazon Connect
 func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTokenInput, optFns ...func(*Options)) (*GetFederationTokenOutput, error) {
 	if params == nil {
 		params = &GetFederationTokenInput{}

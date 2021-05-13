@@ -34,7 +34,7 @@ type UpdateDocumentInput struct {
 	// This member is required.
 	Content *string
 
-	// The name of the document that you want to update.
+	// The name of the Systems Manager document that you want to update.
 	//
 	// This member is required.
 	Name *string
@@ -42,6 +42,12 @@ type UpdateDocumentInput struct {
 	// A list of key and value pairs that describe attachments to a version of a
 	// document.
 	Attachments []types.AttachmentsSource
+
+	// The friendly name of the Systems Manager document that you want to update. This
+	// value can differ for each version of the document. If you do not specify a value
+	// for this parameter in your request, the existing value is applied to the new
+	// document version.
+	DisplayName *string
 
 	// Specify the document format for the new document version. Systems Manager
 	// supports JSON and YAML documents. JSON is the default format.

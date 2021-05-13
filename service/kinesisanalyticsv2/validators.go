@@ -370,6 +370,26 @@ func (m *validateOpDescribeApplicationSnapshot) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeApplicationVersion struct {
+}
+
+func (*validateOpDescribeApplicationVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeApplicationVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeApplicationVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeApplicationVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDiscoverInputSchema struct {
 }
 
@@ -405,6 +425,26 @@ func (m *validateOpListApplicationSnapshots) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListApplicationSnapshotsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListApplicationVersions struct {
+}
+
+func (*validateOpListApplicationVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListApplicationVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListApplicationVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListApplicationVersionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -642,12 +682,20 @@ func addOpDescribeApplicationSnapshotValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDescribeApplicationSnapshot{}, middleware.After)
 }
 
+func addOpDescribeApplicationVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeApplicationVersion{}, middleware.After)
+}
+
 func addOpDiscoverInputSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDiscoverInputSchema{}, middleware.After)
 }
 
 func addOpListApplicationSnapshotsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListApplicationSnapshots{}, middleware.After)
+}
+
+func addOpListApplicationVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListApplicationVersions{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -2416,6 +2464,24 @@ func validateOpDescribeApplicationSnapshotInput(v *DescribeApplicationSnapshotIn
 	}
 }
 
+func validateOpDescribeApplicationVersionInput(v *DescribeApplicationVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeApplicationVersionInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if v.ApplicationVersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationVersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDiscoverInputSchemaInput(v *DiscoverInputSchemaInput) error {
 	if v == nil {
 		return nil
@@ -2446,6 +2512,21 @@ func validateOpListApplicationSnapshotsInput(v *ListApplicationSnapshotsInput) e
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationSnapshotsInput"}
+	if v.ApplicationName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListApplicationVersionsInput(v *ListApplicationVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListApplicationVersionsInput"}
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}

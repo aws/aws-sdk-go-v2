@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -131,6 +132,92 @@ func addOperationDescribeConfigurationAggregatorSourcesStatusMiddlewares(stack *
 		return err
 	}
 	return nil
+}
+
+// DescribeConfigurationAggregatorSourcesStatusAPIClient is a client that
+// implements the DescribeConfigurationAggregatorSourcesStatus operation.
+type DescribeConfigurationAggregatorSourcesStatusAPIClient interface {
+	DescribeConfigurationAggregatorSourcesStatus(context.Context, *DescribeConfigurationAggregatorSourcesStatusInput, ...func(*Options)) (*DescribeConfigurationAggregatorSourcesStatusOutput, error)
+}
+
+var _ DescribeConfigurationAggregatorSourcesStatusAPIClient = (*Client)(nil)
+
+// DescribeConfigurationAggregatorSourcesStatusPaginatorOptions is the paginator
+// options for DescribeConfigurationAggregatorSourcesStatus
+type DescribeConfigurationAggregatorSourcesStatusPaginatorOptions struct {
+	// The maximum number of AggregatorSourceStatus returned on each page. The default
+	// is maximum. If you specify 0, AWS Config uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeConfigurationAggregatorSourcesStatusPaginator is a paginator for
+// DescribeConfigurationAggregatorSourcesStatus
+type DescribeConfigurationAggregatorSourcesStatusPaginator struct {
+	options   DescribeConfigurationAggregatorSourcesStatusPaginatorOptions
+	client    DescribeConfigurationAggregatorSourcesStatusAPIClient
+	params    *DescribeConfigurationAggregatorSourcesStatusInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeConfigurationAggregatorSourcesStatusPaginator returns a new
+// DescribeConfigurationAggregatorSourcesStatusPaginator
+func NewDescribeConfigurationAggregatorSourcesStatusPaginator(client DescribeConfigurationAggregatorSourcesStatusAPIClient, params *DescribeConfigurationAggregatorSourcesStatusInput, optFns ...func(*DescribeConfigurationAggregatorSourcesStatusPaginatorOptions)) *DescribeConfigurationAggregatorSourcesStatusPaginator {
+	if params == nil {
+		params = &DescribeConfigurationAggregatorSourcesStatusInput{}
+	}
+
+	options := DescribeConfigurationAggregatorSourcesStatusPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeConfigurationAggregatorSourcesStatusPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeConfigurationAggregatorSourcesStatusPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeConfigurationAggregatorSourcesStatus page.
+func (p *DescribeConfigurationAggregatorSourcesStatusPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeConfigurationAggregatorSourcesStatusOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribeConfigurationAggregatorSourcesStatus(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeConfigurationAggregatorSourcesStatus(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -19,9 +19,9 @@ import (
 // authenticated sender of the request. For more information, see Using Amazon S3
 // on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-// Amazon Simple Storage Service User Guide. For an example of the request syntax
-// for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix
-// and x-amz-outpost-id in your request, see the Examples
+// Amazon S3 User Guide. For an example of the request syntax for Amazon S3 on
+// Outposts that uses the S3 on Outposts endpoint hostname prefix and
+// x-amz-outpost-id in your request, see the Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListRegionalBuckets.html#API_control_ListRegionalBuckets_Examples)
 // section.
 func (c *Client) ListRegionalBuckets(ctx context.Context, params *ListRegionalBucketsInput, optFns ...func(*Options)) (*ListRegionalBucketsOutput, error) {

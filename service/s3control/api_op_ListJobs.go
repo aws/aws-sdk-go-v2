@@ -19,7 +19,7 @@ import (
 // 30 days for the AWS account making the request. For more information, see S3
 // Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
-// Amazon Simple Storage Service User Guide. Related actions include:
+// Amazon S3 User Guide. Related actions include:
 //
 // * CreateJob
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)

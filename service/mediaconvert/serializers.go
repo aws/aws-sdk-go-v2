@@ -3899,6 +3899,21 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 		ok.Integer(v.BackgroundOpacity)
 	}
 
+	if len(v.DdsHandling) > 0 {
+		ok := object.Key("ddsHandling")
+		ok.String(string(v.DdsHandling))
+	}
+
+	if v.DdsXCoordinate != 0 {
+		ok := object.Key("ddsXCoordinate")
+		ok.Integer(v.DdsXCoordinate)
+	}
+
+	if v.DdsYCoordinate != 0 {
+		ok := object.Key("ddsYCoordinate")
+		ok.Integer(v.DdsYCoordinate)
+	}
+
 	if len(v.FontColor) > 0 {
 		ok := object.Key("fontColor")
 		ok.String(string(v.FontColor))
@@ -3922,6 +3937,11 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 	if v.FontSize != 0 {
 		ok := object.Key("fontSize")
 		ok.Integer(v.FontSize)
+	}
+
+	if v.Height != 0 {
+		ok := object.Key("height")
+		ok.Integer(v.Height)
 	}
 
 	if len(v.OutlineColor) > 0 {
@@ -3962,6 +3982,11 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 	if len(v.TeletextSpacing) > 0 {
 		ok := object.Key("teletextSpacing")
 		ok.String(string(v.TeletextSpacing))
+	}
+
+	if v.Width != 0 {
+		ok := object.Key("width")
+		ok.Integer(v.Width)
 	}
 
 	if v.XPosition != 0 {
@@ -5622,6 +5647,13 @@ func awsRestjson1_serializeDocumentJobSettings(v *types.JobSettings, value smith
 		}
 	}
 
+	if v.KantarWatermark != nil {
+		ok := object.Key("kantarWatermark")
+		if err := awsRestjson1_serializeDocumentKantarWatermarkSettings(v.KantarWatermark, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MotionImageInserter != nil {
 		ok := object.Key("motionImageInserter")
 		if err := awsRestjson1_serializeDocumentMotionImageInserter(v.MotionImageInserter, ok); err != nil {
@@ -5697,6 +5729,13 @@ func awsRestjson1_serializeDocumentJobTemplateSettings(v *types.JobTemplateSetti
 		}
 	}
 
+	if v.KantarWatermark != nil {
+		ok := object.Key("kantarWatermark")
+		if err := awsRestjson1_serializeDocumentKantarWatermarkSettings(v.KantarWatermark, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MotionImageInserter != nil {
 		ok := object.Key("motionImageInserter")
 		if err := awsRestjson1_serializeDocumentMotionImageInserter(v.MotionImageInserter, ok); err != nil {
@@ -5737,6 +5776,78 @@ func awsRestjson1_serializeDocumentJobTemplateSettings(v *types.JobTemplateSetti
 		if err := awsRestjson1_serializeDocumentTimedMetadataInsertion(v.TimedMetadataInsertion, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKantarWatermarkSettings(v *types.KantarWatermarkSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelName != nil {
+		ok := object.Key("channelName")
+		ok.String(*v.ChannelName)
+	}
+
+	if v.ContentReference != nil {
+		ok := object.Key("contentReference")
+		ok.String(*v.ContentReference)
+	}
+
+	if v.CredentialsSecretName != nil {
+		ok := object.Key("credentialsSecretName")
+		ok.String(*v.CredentialsSecretName)
+	}
+
+	if v.FileOffset != 0 {
+		ok := object.Key("fileOffset")
+		ok.Double(v.FileOffset)
+	}
+
+	if v.KantarLicenseId != 0 {
+		ok := object.Key("kantarLicenseId")
+		ok.Integer(v.KantarLicenseId)
+	}
+
+	if v.KantarServerUrl != nil {
+		ok := object.Key("kantarServerUrl")
+		ok.String(*v.KantarServerUrl)
+	}
+
+	if v.LogDestination != nil {
+		ok := object.Key("logDestination")
+		ok.String(*v.LogDestination)
+	}
+
+	if v.Metadata3 != nil {
+		ok := object.Key("metadata3")
+		ok.String(*v.Metadata3)
+	}
+
+	if v.Metadata4 != nil {
+		ok := object.Key("metadata4")
+		ok.String(*v.Metadata4)
+	}
+
+	if v.Metadata5 != nil {
+		ok := object.Key("metadata5")
+		ok.String(*v.Metadata5)
+	}
+
+	if v.Metadata6 != nil {
+		ok := object.Key("metadata6")
+		ok.String(*v.Metadata6)
+	}
+
+	if v.Metadata7 != nil {
+		ok := object.Key("metadata7")
+		ok.String(*v.Metadata7)
+	}
+
+	if v.Metadata8 != nil {
+		ok := object.Key("metadata8")
+		ok.String(*v.Metadata8)
 	}
 
 	return nil
@@ -5977,6 +6088,11 @@ func awsRestjson1_serializeDocumentM3u8Settings(v *types.M3u8Settings, value smi
 		if err := awsRestjson1_serializeDocument__listOf__integerMin32Max8182(v.AudioPids, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.MaxPcrInterval != 0 {
+		ok := object.Key("maxPcrInterval")
+		ok.Integer(v.MaxPcrInterval)
 	}
 
 	if len(v.NielsenId3) > 0 {
@@ -7726,6 +7842,11 @@ func awsRestjson1_serializeDocumentVideoSelector(v *types.VideoSelector, value s
 	if len(v.Rotate) > 0 {
 		ok := object.Key("rotate")
 		ok.String(string(v.Rotate))
+	}
+
+	if len(v.SampleRange) > 0 {
+		ok := object.Key("sampleRange")
+		ok.String(string(v.SampleRange))
 	}
 
 	return nil

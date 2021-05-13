@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -111,6 +112,92 @@ func addOperationDescribeAggregationAuthorizationsMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// DescribeAggregationAuthorizationsAPIClient is a client that implements the
+// DescribeAggregationAuthorizations operation.
+type DescribeAggregationAuthorizationsAPIClient interface {
+	DescribeAggregationAuthorizations(context.Context, *DescribeAggregationAuthorizationsInput, ...func(*Options)) (*DescribeAggregationAuthorizationsOutput, error)
+}
+
+var _ DescribeAggregationAuthorizationsAPIClient = (*Client)(nil)
+
+// DescribeAggregationAuthorizationsPaginatorOptions is the paginator options for
+// DescribeAggregationAuthorizations
+type DescribeAggregationAuthorizationsPaginatorOptions struct {
+	// The maximum number of AggregationAuthorizations returned on each page. The
+	// default is maximum. If you specify 0, AWS Config uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAggregationAuthorizationsPaginator is a paginator for
+// DescribeAggregationAuthorizations
+type DescribeAggregationAuthorizationsPaginator struct {
+	options   DescribeAggregationAuthorizationsPaginatorOptions
+	client    DescribeAggregationAuthorizationsAPIClient
+	params    *DescribeAggregationAuthorizationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAggregationAuthorizationsPaginator returns a new
+// DescribeAggregationAuthorizationsPaginator
+func NewDescribeAggregationAuthorizationsPaginator(client DescribeAggregationAuthorizationsAPIClient, params *DescribeAggregationAuthorizationsInput, optFns ...func(*DescribeAggregationAuthorizationsPaginatorOptions)) *DescribeAggregationAuthorizationsPaginator {
+	if params == nil {
+		params = &DescribeAggregationAuthorizationsInput{}
+	}
+
+	options := DescribeAggregationAuthorizationsPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeAggregationAuthorizationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAggregationAuthorizationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAggregationAuthorizations page.
+func (p *DescribeAggregationAuthorizationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAggregationAuthorizationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribeAggregationAuthorizations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAggregationAuthorizations(region string) *awsmiddleware.RegisterServiceMetadata {

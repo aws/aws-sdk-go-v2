@@ -8293,6 +8293,74 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentJoinEuiFilters(v *[][]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv [][]string
+	if *v == nil {
+		cv = [][]string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col []string
+		if err := awsRestjson1_deserializeDocumentJoinEuiRange(&col, value); err != nil {
+			return err
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJoinEuiRange(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected JoinEui to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLoRaWANDevice(v **types.LoRaWANDevice, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8737,6 +8805,16 @@ func awsRestjson1_deserializeDocumentLoRaWANGateway(v **types.LoRaWANGateway, va
 				sv.GatewayEui = ptr.String(jtv)
 			}
 
+		case "JoinEuiFilters":
+			if err := awsRestjson1_deserializeDocumentJoinEuiFilters(&sv.JoinEuiFilters, value); err != nil {
+				return err
+			}
+
+		case "NetIdFilters":
+			if err := awsRestjson1_deserializeDocumentNetIdFilters(&sv.NetIdFilters, value); err != nil {
+				return err
+			}
+
 		case "RfRegion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8744,6 +8822,11 @@ func awsRestjson1_deserializeDocumentLoRaWANGateway(v **types.LoRaWANGateway, va
 					return fmt.Errorf("expected RfRegion to be of type string, got %T instead", value)
 				}
 				sv.RfRegion = ptr.String(jtv)
+			}
+
+		case "SubBands":
+			if err := awsRestjson1_deserializeDocumentSubBands(&sv.SubBands, value); err != nil {
+				return err
 			}
 
 		default:
@@ -9328,6 +9411,42 @@ func awsRestjson1_deserializeDocumentLoRaWANUpdateGatewayTaskEntry(v **types.LoR
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentNetIdFilters(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected NetId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -10030,6 +10149,46 @@ func awsRestjson1_deserializeDocumentSidewalkListDevice(v **types.SidewalkListDe
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSubBands(v *[]int32, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []int32
+	if *v == nil {
+		cv = []int32{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col int32
+		if value != nil {
+			jtv, ok := value.(json.Number)
+			if !ok {
+				return fmt.Errorf("expected SubBand to be json.Number, got %T instead", value)
+			}
+			i64, err := jtv.Int64()
+			if err != nil {
+				return err
+			}
+			col = int32(i64)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

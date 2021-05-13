@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -123,6 +124,96 @@ func addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+// DescribeConfigRuleEvaluationStatusAPIClient is a client that implements the
+// DescribeConfigRuleEvaluationStatus operation.
+type DescribeConfigRuleEvaluationStatusAPIClient interface {
+	DescribeConfigRuleEvaluationStatus(context.Context, *DescribeConfigRuleEvaluationStatusInput, ...func(*Options)) (*DescribeConfigRuleEvaluationStatusOutput, error)
+}
+
+var _ DescribeConfigRuleEvaluationStatusAPIClient = (*Client)(nil)
+
+// DescribeConfigRuleEvaluationStatusPaginatorOptions is the paginator options for
+// DescribeConfigRuleEvaluationStatus
+type DescribeConfigRuleEvaluationStatusPaginatorOptions struct {
+	// The number of rule evaluation results that you want returned. This parameter is
+	// required if the rule limit for your account is more than the default of 150
+	// rules. For information about requesting a rule limit increase, see AWS Config
+	// Limits
+	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
+	// in the AWS General Reference Guide.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeConfigRuleEvaluationStatusPaginator is a paginator for
+// DescribeConfigRuleEvaluationStatus
+type DescribeConfigRuleEvaluationStatusPaginator struct {
+	options   DescribeConfigRuleEvaluationStatusPaginatorOptions
+	client    DescribeConfigRuleEvaluationStatusAPIClient
+	params    *DescribeConfigRuleEvaluationStatusInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeConfigRuleEvaluationStatusPaginator returns a new
+// DescribeConfigRuleEvaluationStatusPaginator
+func NewDescribeConfigRuleEvaluationStatusPaginator(client DescribeConfigRuleEvaluationStatusAPIClient, params *DescribeConfigRuleEvaluationStatusInput, optFns ...func(*DescribeConfigRuleEvaluationStatusPaginatorOptions)) *DescribeConfigRuleEvaluationStatusPaginator {
+	if params == nil {
+		params = &DescribeConfigRuleEvaluationStatusInput{}
+	}
+
+	options := DescribeConfigRuleEvaluationStatusPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeConfigRuleEvaluationStatusPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeConfigRuleEvaluationStatusPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeConfigRuleEvaluationStatus page.
+func (p *DescribeConfigRuleEvaluationStatusPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeConfigRuleEvaluationStatusOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribeConfigRuleEvaluationStatus(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeConfigRuleEvaluationStatus(region string) *awsmiddleware.RegisterServiceMetadata {

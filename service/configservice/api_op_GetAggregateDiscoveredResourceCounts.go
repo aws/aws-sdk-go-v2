@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -140,6 +141,93 @@ func addOperationGetAggregateDiscoveredResourceCountsMiddlewares(stack *middlewa
 		return err
 	}
 	return nil
+}
+
+// GetAggregateDiscoveredResourceCountsAPIClient is a client that implements the
+// GetAggregateDiscoveredResourceCounts operation.
+type GetAggregateDiscoveredResourceCountsAPIClient interface {
+	GetAggregateDiscoveredResourceCounts(context.Context, *GetAggregateDiscoveredResourceCountsInput, ...func(*Options)) (*GetAggregateDiscoveredResourceCountsOutput, error)
+}
+
+var _ GetAggregateDiscoveredResourceCountsAPIClient = (*Client)(nil)
+
+// GetAggregateDiscoveredResourceCountsPaginatorOptions is the paginator options
+// for GetAggregateDiscoveredResourceCounts
+type GetAggregateDiscoveredResourceCountsPaginatorOptions struct {
+	// The maximum number of GroupedResourceCount objects returned on each page. The
+	// default is 1000. You cannot specify a number greater than 1000. If you specify
+	// 0, AWS Config uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// GetAggregateDiscoveredResourceCountsPaginator is a paginator for
+// GetAggregateDiscoveredResourceCounts
+type GetAggregateDiscoveredResourceCountsPaginator struct {
+	options   GetAggregateDiscoveredResourceCountsPaginatorOptions
+	client    GetAggregateDiscoveredResourceCountsAPIClient
+	params    *GetAggregateDiscoveredResourceCountsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewGetAggregateDiscoveredResourceCountsPaginator returns a new
+// GetAggregateDiscoveredResourceCountsPaginator
+func NewGetAggregateDiscoveredResourceCountsPaginator(client GetAggregateDiscoveredResourceCountsAPIClient, params *GetAggregateDiscoveredResourceCountsInput, optFns ...func(*GetAggregateDiscoveredResourceCountsPaginatorOptions)) *GetAggregateDiscoveredResourceCountsPaginator {
+	if params == nil {
+		params = &GetAggregateDiscoveredResourceCountsInput{}
+	}
+
+	options := GetAggregateDiscoveredResourceCountsPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &GetAggregateDiscoveredResourceCountsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *GetAggregateDiscoveredResourceCountsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next GetAggregateDiscoveredResourceCounts page.
+func (p *GetAggregateDiscoveredResourceCountsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*GetAggregateDiscoveredResourceCountsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.GetAggregateDiscoveredResourceCounts(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opGetAggregateDiscoveredResourceCounts(region string) *awsmiddleware.RegisterServiceMetadata {

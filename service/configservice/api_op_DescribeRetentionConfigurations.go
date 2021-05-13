@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -114,6 +115,83 @@ func addOperationDescribeRetentionConfigurationsMiddlewares(stack *middleware.St
 		return err
 	}
 	return nil
+}
+
+// DescribeRetentionConfigurationsAPIClient is a client that implements the
+// DescribeRetentionConfigurations operation.
+type DescribeRetentionConfigurationsAPIClient interface {
+	DescribeRetentionConfigurations(context.Context, *DescribeRetentionConfigurationsInput, ...func(*Options)) (*DescribeRetentionConfigurationsOutput, error)
+}
+
+var _ DescribeRetentionConfigurationsAPIClient = (*Client)(nil)
+
+// DescribeRetentionConfigurationsPaginatorOptions is the paginator options for
+// DescribeRetentionConfigurations
+type DescribeRetentionConfigurationsPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeRetentionConfigurationsPaginator is a paginator for
+// DescribeRetentionConfigurations
+type DescribeRetentionConfigurationsPaginator struct {
+	options   DescribeRetentionConfigurationsPaginatorOptions
+	client    DescribeRetentionConfigurationsAPIClient
+	params    *DescribeRetentionConfigurationsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeRetentionConfigurationsPaginator returns a new
+// DescribeRetentionConfigurationsPaginator
+func NewDescribeRetentionConfigurationsPaginator(client DescribeRetentionConfigurationsAPIClient, params *DescribeRetentionConfigurationsInput, optFns ...func(*DescribeRetentionConfigurationsPaginatorOptions)) *DescribeRetentionConfigurationsPaginator {
+	if params == nil {
+		params = &DescribeRetentionConfigurationsInput{}
+	}
+
+	options := DescribeRetentionConfigurationsPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeRetentionConfigurationsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeRetentionConfigurationsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeRetentionConfigurations page.
+func (p *DescribeRetentionConfigurationsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeRetentionConfigurationsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.DescribeRetentionConfigurations(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeRetentionConfigurations(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -52,7 +52,7 @@ type GetAccessPointPolicyStatusForObjectLambdaOutput struct {
 	// how Amazon S3 evaluates policies to determine whether they are public, see The
 	// Meaning of "Public"
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon Simple Storage Service User Guide.
+	// in the Amazon S3 User Guide.
 	PolicyStatus *types.PolicyStatus
 
 	// Metadata pertaining to the operation's result.

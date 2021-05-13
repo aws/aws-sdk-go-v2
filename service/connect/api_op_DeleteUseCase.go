@@ -10,7 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Deletes a use case from an AppIntegration association.
 func (c *Client) DeleteUseCase(ctx context.Context, params *DeleteUseCaseInput, optFns ...func(*Options)) (*DeleteUseCaseOutput, error) {
 	if params == nil {

@@ -7,6 +7,7 @@
     "files": [
         "api_client.go",
         "api_op_AddTagsToResource.go",
+        "api_op_AssociateOpsItemRelatedItem.go",
         "api_op_CancelCommand.go",
         "api_op_CancelMaintenanceWindowExecution.go",
         "api_op_CreateActivation.go",
@@ -64,6 +65,7 @@
         "api_op_DescribePatchGroups.go",
         "api_op_DescribePatchProperties.go",
         "api_op_DescribeSessions.go",
+        "api_op_DisassociateOpsItemRelatedItem.go",
         "api_op_GetAutomationExecution.go",
         "api_op_GetCalendarState.go",
         "api_op_GetCommandInvocation.go",
@@ -100,6 +102,7 @@
         "api_op_ListDocuments.go",
         "api_op_ListInventoryEntries.go",
         "api_op_ListOpsItemEvents.go",
+        "api_op_ListOpsItemRelatedItems.go",
         "api_op_ListOpsMetadata.go",
         "api_op_ListResourceComplianceSummaries.go",
         "api_op_ListResourceDataSync.go",

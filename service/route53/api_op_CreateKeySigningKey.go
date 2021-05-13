@@ -59,10 +59,10 @@ type CreateKeySigningKeyInput struct {
 	// service in the principal for your account. Specify the following:
 	//
 	// * "Service":
-	// "dnssec.route53.aws.amazonaws.com"
+	// "api-service.dnssec.route53.aws.internal"
 	//
-	// For more information about working with a
-	// customer managed CMK in AWS KMS, see AWS Key Management Service concepts
+	// For more information about working
+	// with a customer managed CMK in AWS KMS, see AWS Key Management Service concepts
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html).
 	//
 	// This member is required.

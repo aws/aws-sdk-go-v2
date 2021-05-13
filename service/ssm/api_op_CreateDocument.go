@@ -70,6 +70,11 @@ type CreateDocumentInput struct {
 	// document.
 	Attachments []types.AttachmentsSource
 
+	// An optional field where you can specify a friendly name for the Systems Manager
+	// document. This value can differ for each version of the document. You can update
+	// this value at a later time using the UpdateDocument action.
+	DisplayName *string
+
 	// Specify the document format for the request. The document format can be JSON,
 	// YAML, or TEXT. JSON is the default format.
 	DocumentFormat types.DocumentFormat

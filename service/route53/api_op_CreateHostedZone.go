@@ -46,8 +46,7 @@ import (
 // request, the initial status of the hosted zone is PENDING. For public hosted
 // zones, this means that the NS and SOA records are not yet available on all Route
 // 53 DNS servers. When the NS and SOA records are available, the status of the
-// zone changes to INSYNC. The CreateHostedZone request requires the caller to have
-// an ec2:DescribeVpcs permission.
+// zone changes to INSYNC.
 func (c *Client) CreateHostedZone(ctx context.Context, params *CreateHostedZoneInput, optFns ...func(*Options)) (*CreateHostedZoneOutput, error) {
 	if params == nil {
 		params = &CreateHostedZoneInput{}

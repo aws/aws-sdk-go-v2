@@ -20,7 +20,7 @@ import (
 // (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax)
 // parameter to Disposed. To view information about a disposed package version, use
 // DescribePackageVersion
-// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html)..
+// (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html).
 func (c *Client) DisposePackageVersions(ctx context.Context, params *DisposePackageVersionsInput, optFns ...func(*Options)) (*DisposePackageVersionsOutput, error) {
 	if params == nil {
 		params = &DisposePackageVersionsInput{}

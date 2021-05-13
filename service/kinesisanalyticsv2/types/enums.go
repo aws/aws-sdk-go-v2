@@ -36,6 +36,7 @@ const (
 	ApplicationStatusForceStopping ApplicationStatus = "FORCE_STOPPING"
 	ApplicationStatusMaintenance   ApplicationStatus = "MAINTENANCE"
 	ApplicationStatusRollingBack   ApplicationStatus = "ROLLING_BACK"
+	ApplicationStatusRolledBack    ApplicationStatus = "ROLLED_BACK"
 )
 
 // Values returns all known values for ApplicationStatus. Note that this can be
@@ -53,6 +54,7 @@ func (ApplicationStatus) Values() []ApplicationStatus {
 		"FORCE_STOPPING",
 		"MAINTENANCE",
 		"ROLLING_BACK",
+		"ROLLED_BACK",
 	}
 }
 

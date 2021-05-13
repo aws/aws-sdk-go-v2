@@ -41,6 +41,17 @@ type BatchPermissionsRequestEntry struct {
 type CatalogResource struct {
 }
 
+// A structure containing the name of a column resource and the tags attached to
+// it.
+type ColumnLFTag struct {
+
+	// The tags attached to a column resource.
+	LFTags []LFTagPair
+
+	// The name of a column resource.
+	Name *string
+}
+
 // A wildcard object, consisting of an optional list of excluded column names or
 // indexes.
 type ColumnWildcard struct {
@@ -111,10 +122,10 @@ type DataLocationResource struct {
 // A structure containing the additional details to be returned in the
 // AdditionalDetails attribute of PrincipalResourcePermissions. If a catalog
 // resource is shared through AWS Resource Access Manager (AWS RAM), then there
-// will exist a corresponding RAM share resource ARN.
+// will exist a corresponding RAM resource share ARN.
 type DetailsMap struct {
 
-	// A share resource ARN for a catalog resource shared through AWS Resource Access
+	// A resource share ARN for a catalog resource shared through AWS Resource Access
 	// Manager (AWS RAM).
 	ResourceShare []string
 }
@@ -143,6 +154,94 @@ type FilterCondition struct {
 	StringValueList []string
 }
 
+// A structure that allows an admin to grant user permissions on certain
+// conditions. For example, granting a role access to all columns not tagged 'PII'
+// of tables tagged 'Prod'.
+type LFTag struct {
+
+	// The key-name for the tag.
+	//
+	// This member is required.
+	TagKey *string
+
+	// A list of possible values an attribute can take.
+	//
+	// This member is required.
+	TagValues []string
+}
+
+// A structure containing an error related to a TagResource or UnTagResource
+// operation.
+type LFTagError struct {
+
+	// An error that occurred with the attachment or detachment of the tag.
+	Error *ErrorDetail
+
+	// The key-name of the tag.
+	LFTag *LFTagPair
+}
+
+// A structure containing a tag key and values for a resource.
+type LFTagKeyResource struct {
+
+	// The key-name for the tag.
+	//
+	// This member is required.
+	TagKey *string
+
+	// A list of possible values an attribute can take.
+	//
+	// This member is required.
+	TagValues []string
+
+	// The identifier for the Data Catalog. By default, the account ID. The Data
+	// Catalog is the persistent metadata store. It contains database definitions,
+	// table definitions, and other control information to manage your AWS Lake
+	// Formation environment.
+	CatalogId *string
+}
+
+// A structure containing a tag key-value pair.
+type LFTagPair struct {
+
+	// The key-name for the tag.
+	//
+	// This member is required.
+	TagKey *string
+
+	// A list of possible values an attribute can take.
+	//
+	// This member is required.
+	TagValues []string
+
+	// The identifier for the Data Catalog. By default, the account ID. The Data
+	// Catalog is the persistent metadata store. It contains database definitions,
+	// table definitions, and other control information to manage your AWS Lake
+	// Formation environment.
+	CatalogId *string
+}
+
+// A structure containing a list of tag conditions that apply to a resource's tag
+// policy.
+type LFTagPolicyResource struct {
+
+	// A list of tag conditions that apply to the resource's tag policy.
+	//
+	// This member is required.
+	Expression []LFTag
+
+	// The resource type for which the tag policy applies.
+	//
+	// This member is required.
+	ResourceType ResourceType
+
+	// The identifier for the Data Catalog. By default, the account ID. The Data
+	// Catalog is the persistent metadata store. It contains database definitions,
+	// table definitions, and other control information to manage your AWS Lake
+	// Formation environment.
+	CatalogId *string
+}
+
 // Permissions granted to a principal.
 type PrincipalPermissions struct {
 
@@ -157,7 +256,7 @@ type PrincipalPermissions struct {
 type PrincipalResourcePermissions struct {
 
 	// This attribute can be used to return any additional details of
-	// PrincipalResourcePermissions. Currently returns only as a RAM share resource
+	// PrincipalResourcePermissions. Currently returns only as a RAM resource share
 	// ARN.
 	AdditionalDetails *DetailsMap
 
@@ -191,6 +290,12 @@ type Resource struct {
 	// of associated table definitions organized into a logical group. You can Grant
 	// and Revoke database permissions to a principal.
 	Database *DatabaseResource
+
+	// The tag key and values attached to a resource.
+	LFTag *LFTagKeyResource
+
+	// A list of tag conditions that define a resource's tag policy.
+	LFTagPolicy *LFTagPolicyResource
 
 	// The table for the resource. A table is a metadata definition that represents
 	// your data. You can Grant and Revoke table privileges to a principal.
@@ -271,4 +376,30 @@ type TableWithColumnsResource struct {
 	// A wildcard specified by a ColumnWildcard object. At least one of ColumnNames or
 	// ColumnWildcard is required.
 	ColumnWildcard *ColumnWildcard
+}
+
+// A structure describing a database resource with tags.
+type TaggedDatabase struct {
+
+	// A database that has tags attached to it.
+	Database *DatabaseResource
+
+	// A list of tags attached to the database.
+	LFTags []LFTagPair
+}
+
+// A structure describing a table resource with tags.
+type TaggedTable struct {
+
+	// A list of tags attached to the database where the table resides.
+	LFTagOnDatabase []LFTagPair
+
+	// A list of tags attached to columns in the table.
+	LFTagsOnColumns []ColumnLFTag
+
+	// A list of tags attached to the table.
+	LFTagsOnTable []LFTagPair
+
+	// A table that has tags attached to it.
+	Table *TableResource
 }

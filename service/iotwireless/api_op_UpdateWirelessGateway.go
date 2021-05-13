@@ -36,8 +36,15 @@ type UpdateWirelessGatewayInput struct {
 	// A new description of the resource.
 	Description *string
 
+	// A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
+	JoinEuiFilters [][]string
+
 	// The new name of the resource.
 	Name *string
+
+	// A list of NetId values that are used by LoRa gateways to filter the uplink
+	// frames.
+	NetIdFilters []string
 }
 
 type UpdateWirelessGatewayOutput struct {

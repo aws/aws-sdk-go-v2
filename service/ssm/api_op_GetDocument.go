@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Gets the contents of the specified Systems Manager document.
@@ -55,6 +56,14 @@ type GetDocumentOutput struct {
 
 	// The contents of the Systems Manager document.
 	Content *string
+
+	// The date the Systems Manager document was created.
+	CreatedDate *time.Time
+
+	// The friendly name of the Systems Manager document. This value can differ for
+	// each version of the document. If you want to update this value, see
+	// UpdateDocument.
+	DisplayName *string
 
 	// The document format, either JSON or YAML.
 	DocumentFormat types.DocumentFormat

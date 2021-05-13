@@ -3502,9 +3502,23 @@ func awsRestjson1_serializeOpDocumentUpdateWirelessGatewayInput(v *UpdateWireles
 		ok.String(*v.Description)
 	}
 
+	if v.JoinEuiFilters != nil {
+		ok := object.Key("JoinEuiFilters")
+		if err := awsRestjson1_serializeDocumentJoinEuiFilters(v.JoinEuiFilters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.NetIdFilters != nil {
+		ok := object.Key("NetIdFilters")
+		if err := awsRestjson1_serializeDocumentNetIdFilters(v.NetIdFilters, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3555,6 +3569,33 @@ func awsRestjson1_serializeDocumentFactoryPresetFreqsList(v []int32, value smith
 	for i := range v {
 		av := array.Value()
 		av.Integer(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJoinEuiFilters(v [][]string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentJoinEuiRange(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJoinEuiRange(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -3722,9 +3763,30 @@ func awsRestjson1_serializeDocumentLoRaWANGateway(v *types.LoRaWANGateway, value
 		ok.String(*v.GatewayEui)
 	}
 
+	if v.JoinEuiFilters != nil {
+		ok := object.Key("JoinEuiFilters")
+		if err := awsRestjson1_serializeDocumentJoinEuiFilters(v.JoinEuiFilters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NetIdFilters != nil {
+		ok := object.Key("NetIdFilters")
+		if err := awsRestjson1_serializeDocumentNetIdFilters(v.NetIdFilters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RfRegion != nil {
 		ok := object.Key("RfRegion")
 		ok.String(*v.RfRegion)
+	}
+
+	if v.SubBands != nil {
+		ok := object.Key("SubBands")
+		if err := awsRestjson1_serializeDocumentSubBands(v.SubBands, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3821,6 +3883,17 @@ func awsRestjson1_serializeDocumentLoRaWANUpdateGatewayTaskCreate(v *types.LoRaW
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentNetIdFilters(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -3950,6 +4023,17 @@ func awsRestjson1_serializeDocumentSidewalkUpdateAccount(v *types.SidewalkUpdate
 		ok.String(*v.AppServerPrivateKey)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSubBands(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
+	}
 	return nil
 }
 

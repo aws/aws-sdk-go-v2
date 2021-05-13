@@ -148,8 +148,7 @@ var _ SelectAggregateResourceConfigAPIClient = (*Client)(nil)
 // SelectAggregateResourceConfigPaginatorOptions is the paginator options for
 // SelectAggregateResourceConfig
 type SelectAggregateResourceConfigPaginatorOptions struct {
-	// The maximum number of query results returned on each page. AWS Config also
-	// allows the Limit request parameter.
+	// The maximum number of query results returned on each page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -175,8 +174,8 @@ func NewSelectAggregateResourceConfigPaginator(client SelectAggregateResourceCon
 	}
 
 	options := SelectAggregateResourceConfigPaginatorOptions{}
-	if params.MaxResults != 0 {
-		options.Limit = params.MaxResults
+	if params.Limit != 0 {
+		options.Limit = params.Limit
 	}
 
 	for _, fn := range optFns {
@@ -205,7 +204,7 @@ func (p *SelectAggregateResourceConfigPaginator) NextPage(ctx context.Context, o
 	params := *p.params
 	params.NextToken = p.nextToken
 
-	params.MaxResults = p.options.Limit
+	params.Limit = p.options.Limit
 
 	result, err := p.client.SelectAggregateResourceConfig(ctx, &params, optFns...)
 	if err != nil {

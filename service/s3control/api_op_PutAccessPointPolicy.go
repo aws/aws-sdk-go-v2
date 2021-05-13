@@ -71,9 +71,9 @@ type PutAccessPointPolicyInput struct {
 
 	// The policy that you want to apply to the specified access point. For more
 	// information about access point policies, see Managing data access with Amazon S3
-	// Access Points
+	// access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html) in
-	// the Amazon Simple Storage Service User Guide.
+	// the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Policy *string

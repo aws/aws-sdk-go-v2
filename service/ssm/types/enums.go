@@ -753,6 +753,8 @@ const (
 	DocumentTypeDeploymentStrategy             DocumentType = "DeploymentStrategy"
 	DocumentTypeChangeCalendar                 DocumentType = "ChangeCalendar"
 	DocumentTypeChangeTemplate                 DocumentType = "Automation.ChangeTemplate"
+	DocumentTypeProblemAnalysis                DocumentType = "ProblemAnalysis"
+	DocumentTypeProblemAnalysisTemplate        DocumentType = "ProblemAnalysisTemplate"
 )
 
 // Values returns all known values for DocumentType. Note that this can be expanded
@@ -770,6 +772,8 @@ func (DocumentType) Values() []DocumentType {
 		"DeploymentStrategy",
 		"ChangeCalendar",
 		"Automation.ChangeTemplate",
+		"ProblemAnalysis",
+		"ProblemAnalysisTemplate",
 	}
 }
 
@@ -1275,6 +1279,43 @@ func (OpsItemFilterOperator) Values() []OpsItemFilterOperator {
 		"Contains",
 		"GreaterThan",
 		"LessThan",
+	}
+}
+
+type OpsItemRelatedItemsFilterKey string
+
+// Enum values for OpsItemRelatedItemsFilterKey
+const (
+	OpsItemRelatedItemsFilterKeyResourceType  OpsItemRelatedItemsFilterKey = "ResourceType"
+	OpsItemRelatedItemsFilterKeyAssociationId OpsItemRelatedItemsFilterKey = "AssociationId"
+	OpsItemRelatedItemsFilterKeyResourceUri   OpsItemRelatedItemsFilterKey = "ResourceUri"
+)
+
+// Values returns all known values for OpsItemRelatedItemsFilterKey. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OpsItemRelatedItemsFilterKey) Values() []OpsItemRelatedItemsFilterKey {
+	return []OpsItemRelatedItemsFilterKey{
+		"ResourceType",
+		"AssociationId",
+		"ResourceUri",
+	}
+}
+
+type OpsItemRelatedItemsFilterOperator string
+
+// Enum values for OpsItemRelatedItemsFilterOperator
+const (
+	OpsItemRelatedItemsFilterOperatorEqual OpsItemRelatedItemsFilterOperator = "Equal"
+)
+
+// Values returns all known values for OpsItemRelatedItemsFilterOperator. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (OpsItemRelatedItemsFilterOperator) Values() []OpsItemRelatedItemsFilterOperator {
+	return []OpsItemRelatedItemsFilterOperator{
+		"Equal",
 	}
 }
 

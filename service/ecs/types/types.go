@@ -726,8 +726,8 @@ type ContainerDefinition struct {
 	// need for port mappings. This parameter is only supported if the network mode of
 	// a task definition is bridge. The name:internalName construct is analogous to
 	// name:alias in Docker links. Up to 255 letters (uppercase and lowercase),
-	// numbers, and hyphens are allowed. For more information about linking Docker
-	// containers, go to Legacy container links
+	// numbers, underscores, and hyphens are allowed. For more information about
+	// linking Docker containers, go to Legacy container links
 	// (https://docs.docker.com/network/links/) in the Docker documentation. This
 	// parameter maps to Links in the Create a container
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
@@ -834,8 +834,8 @@ type ContainerDefinition struct {
 	// The name of a container. If you are linking multiple containers together in a
 	// task definition, the name of one container can be entered in the links of
 	// another container to connect the containers. Up to 255 letters (uppercase and
-	// lowercase), numbers, and hyphens are allowed. This parameter maps to name in the
-	// Create a container
+	// lowercase), numbers, underscores, and hyphens are allowed. This parameter maps
+	// to name in the Create a container
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/) and the --name
 	// option to docker run
@@ -2678,9 +2678,9 @@ type Service struct {
 	ServiceArn *string
 
 	// The name of your service. Up to 255 letters (uppercase and lowercase), numbers,
-	// and hyphens are allowed. Service names must be unique within a cluster, but you
-	// can have similarly named services in multiple clusters within a Region or across
-	// multiple Regions.
+	// underscores, and hyphens are allowed. Service names must be unique within a
+	// cluster, but you can have similarly named services in multiple clusters within a
+	// Region or across multiple Regions.
 	ServiceName *string
 
 	// The details of the service discovery registries to assign to this service. For
@@ -3623,8 +3623,8 @@ type Volume struct {
 	Host *HostVolumeProperties
 
 	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,
-	// and hyphens are allowed. This name is referenced in the sourceVolume parameter
-	// of container definition mountPoints.
+	// underscores, and hyphens are allowed. This name is referenced in the
+	// sourceVolume parameter of container definition mountPoints.
 	Name *string
 }
 
