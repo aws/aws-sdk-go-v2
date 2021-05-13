@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -124,6 +125,89 @@ func addOperationSelectResourceConfigMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	return nil
+}
+
+// SelectResourceConfigAPIClient is a client that implements the
+// SelectResourceConfig operation.
+type SelectResourceConfigAPIClient interface {
+	SelectResourceConfig(context.Context, *SelectResourceConfigInput, ...func(*Options)) (*SelectResourceConfigOutput, error)
+}
+
+var _ SelectResourceConfigAPIClient = (*Client)(nil)
+
+// SelectResourceConfigPaginatorOptions is the paginator options for
+// SelectResourceConfig
+type SelectResourceConfigPaginatorOptions struct {
+	// The maximum number of query results returned on each page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// SelectResourceConfigPaginator is a paginator for SelectResourceConfig
+type SelectResourceConfigPaginator struct {
+	options   SelectResourceConfigPaginatorOptions
+	client    SelectResourceConfigAPIClient
+	params    *SelectResourceConfigInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewSelectResourceConfigPaginator returns a new SelectResourceConfigPaginator
+func NewSelectResourceConfigPaginator(client SelectResourceConfigAPIClient, params *SelectResourceConfigInput, optFns ...func(*SelectResourceConfigPaginatorOptions)) *SelectResourceConfigPaginator {
+	if params == nil {
+		params = &SelectResourceConfigInput{}
+	}
+
+	options := SelectResourceConfigPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &SelectResourceConfigPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *SelectResourceConfigPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next SelectResourceConfig page.
+func (p *SelectResourceConfigPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*SelectResourceConfigOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.SelectResourceConfig(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opSelectResourceConfig(region string) *awsmiddleware.RegisterServiceMetadata {

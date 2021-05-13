@@ -1579,6 +1579,52 @@ func (e *OpsItemNotFoundException) ErrorMessage() string {
 func (e *OpsItemNotFoundException) ErrorCode() string             { return "OpsItemNotFoundException" }
 func (e *OpsItemNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The Amazon Resource Name (ARN) is already associated with the OpsItem.
+type OpsItemRelatedItemAlreadyExistsException struct {
+	Message *string
+
+	ResourceUri *string
+	OpsItemId   *string
+}
+
+func (e *OpsItemRelatedItemAlreadyExistsException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsItemRelatedItemAlreadyExistsException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsItemRelatedItemAlreadyExistsException) ErrorCode() string {
+	return "OpsItemRelatedItemAlreadyExistsException"
+}
+func (e *OpsItemRelatedItemAlreadyExistsException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The association was not found using the parameters you specified in the call.
+// Verify the information and try again.
+type OpsItemRelatedItemAssociationNotFoundException struct {
+	Message *string
+}
+
+func (e *OpsItemRelatedItemAssociationNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OpsItemRelatedItemAssociationNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OpsItemRelatedItemAssociationNotFoundException) ErrorCode() string {
+	return "OpsItemRelatedItemAssociationNotFoundException"
+}
+func (e *OpsItemRelatedItemAssociationNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // An OpsMetadata object already exists for the selected resource.
 type OpsMetadataAlreadyExistsException struct {
 	Message *string

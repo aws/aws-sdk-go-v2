@@ -907,6 +907,13 @@ func awsRestjson1_serializeOpDocumentCreateIntegrationAssociationInput(v *Create
 		ok.String(string(v.SourceType))
 	}
 
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1320,6 +1327,13 @@ func awsRestjson1_serializeOpHttpBindingsCreateUseCaseInput(v *CreateUseCaseInpu
 func awsRestjson1_serializeOpDocumentCreateUseCaseInput(v *CreateUseCaseInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
 
 	if len(v.UseCaseType) > 0 {
 		ok := object.Key("UseCaseType")

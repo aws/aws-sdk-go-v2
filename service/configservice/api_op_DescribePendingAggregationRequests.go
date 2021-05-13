@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -109,6 +110,92 @@ func addOperationDescribePendingAggregationRequestsMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+// DescribePendingAggregationRequestsAPIClient is a client that implements the
+// DescribePendingAggregationRequests operation.
+type DescribePendingAggregationRequestsAPIClient interface {
+	DescribePendingAggregationRequests(context.Context, *DescribePendingAggregationRequestsInput, ...func(*Options)) (*DescribePendingAggregationRequestsOutput, error)
+}
+
+var _ DescribePendingAggregationRequestsAPIClient = (*Client)(nil)
+
+// DescribePendingAggregationRequestsPaginatorOptions is the paginator options for
+// DescribePendingAggregationRequests
+type DescribePendingAggregationRequestsPaginatorOptions struct {
+	// The maximum number of evaluation results returned on each page. The default is
+	// maximum. If you specify 0, AWS Config uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribePendingAggregationRequestsPaginator is a paginator for
+// DescribePendingAggregationRequests
+type DescribePendingAggregationRequestsPaginator struct {
+	options   DescribePendingAggregationRequestsPaginatorOptions
+	client    DescribePendingAggregationRequestsAPIClient
+	params    *DescribePendingAggregationRequestsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribePendingAggregationRequestsPaginator returns a new
+// DescribePendingAggregationRequestsPaginator
+func NewDescribePendingAggregationRequestsPaginator(client DescribePendingAggregationRequestsAPIClient, params *DescribePendingAggregationRequestsInput, optFns ...func(*DescribePendingAggregationRequestsPaginatorOptions)) *DescribePendingAggregationRequestsPaginator {
+	if params == nil {
+		params = &DescribePendingAggregationRequestsInput{}
+	}
+
+	options := DescribePendingAggregationRequestsPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribePendingAggregationRequestsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribePendingAggregationRequestsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribePendingAggregationRequests page.
+func (p *DescribePendingAggregationRequestsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribePendingAggregationRequestsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribePendingAggregationRequests(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribePendingAggregationRequests(region string) *awsmiddleware.RegisterServiceMetadata {

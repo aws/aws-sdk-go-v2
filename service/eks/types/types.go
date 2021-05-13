@@ -37,9 +37,9 @@ type Addon struct {
 	// The status of the add-on.
 	Status AddonStatus
 
-	// The metadata that you apply to the cluster to assist with categorization and
+	// The metadata that you apply to the add-on to assist with categorization and
 	// organization. Each tag consists of a key and an optional value, both of which
-	// you define. Cluster tags do not propagate to any other resources associated with
+	// you define. Add-on tags do not propagate to any other resources associated with
 	// the cluster.
 	Tags map[string]string
 }
@@ -190,8 +190,8 @@ type Compatibility struct {
 // The encryption configuration for the cluster.
 type EncryptionConfig struct {
 
-	// AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN
-	// or the alias can be used.
+	// AWS Key Management Service (AWS KMS) key. Either the ARN or the alias can be
+	// used.
 	Provider *Provider
 
 	// Specifies the resources to be encrypted. The only supported value is "secrets".
@@ -569,6 +569,12 @@ type Nodegroup struct {
 	// with the node group, such as the Amazon EC2 instances or subnets.
 	Tags map[string]string
 
+	// The Kubernetes taints to be applied to the nodes in the node group when they are
+	// created. Effect is one of NoSchedule, PreferNoSchedule, or NoExecute. Kubernetes
+	// taints can be used together with tolerations to control how workloads are
+	// scheduled to your nodes.
+	Taints []Taint
+
 	// The Kubernetes version of the managed node group.
 	Version *string
 }
@@ -593,8 +599,9 @@ type NodegroupResources struct {
 }
 
 // An object representing the scaling configuration details for the Auto Scaling
-// group that is associated with your node group. If you specify a value for any
-// property, then you must specify values for all of the properties.
+// group that is associated with your node group. When creating a node group, you
+// must specify all or none of the properties. When updating a node group, you can
+// specify any or none of the properties.
 type NodegroupScalingConfig struct {
 
 	// The current number of nodes that the managed node group should maintain.
@@ -729,14 +736,14 @@ type OidcIdentityProviderConfigRequest struct {
 	UsernamePrefix *string
 }
 
-// Identifies the AWS Key Management Service (AWS KMS) customer master key (CMK)
-// used to encrypt the secrets.
+// Identifies the AWS Key Management Service (AWS KMS) key used to encrypt the
+// secrets.
 type Provider struct {
 
-	// Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK
-	// must be symmetric, created in the same region as the cluster, and if the CMK was
-	// created in a different account, the user must have access to the CMK. For more
-	// information, see Allowing Users in Other Accounts to Use a CMK
+	// Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be
+	// symmetric, created in the same region as the cluster, and if the KMS key was
+	// created in a different account, the user must have access to the KMS key. For
+	// more information, see Allowing Users in Other Accounts to Use a KMS key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html)
 	// in the AWS Key Management Service Developer Guide.
 	KeyArn *string
@@ -759,6 +766,19 @@ type RemoteAccessConfig struct {
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html) in
 	// the Amazon Virtual Private Cloud User Guide.
 	SourceSecurityGroups []string
+}
+
+// A property that allows a node to repel a set of pods.
+type Taint struct {
+
+	// The effect of the taint.
+	Effect TaintEffect
+
+	// The key of the taint.
+	Key *string
+
+	// The value of the taint.
+	Value *string
 }
 
 // An object representing an asynchronous update.
@@ -801,6 +821,16 @@ type UpdateParam struct {
 
 	// The value of the keys submitted as part of an update request.
 	Value *string
+}
+
+// An object representing the details of an update to a taints payload.
+type UpdateTaintsPayload struct {
+
+	// Kubernetes taints to be added or updated.
+	AddOrUpdateTaints []Taint
+
+	// Kubernetes taints to be removed.
+	RemoveTaints []Taint
 }
 
 // An object representing the VPC configuration to use for an Amazon EKS cluster.

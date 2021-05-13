@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -122,6 +123,92 @@ func addOperationDescribeAggregateComplianceByConfigRulesMiddlewares(stack *midd
 		return err
 	}
 	return nil
+}
+
+// DescribeAggregateComplianceByConfigRulesAPIClient is a client that implements
+// the DescribeAggregateComplianceByConfigRules operation.
+type DescribeAggregateComplianceByConfigRulesAPIClient interface {
+	DescribeAggregateComplianceByConfigRules(context.Context, *DescribeAggregateComplianceByConfigRulesInput, ...func(*Options)) (*DescribeAggregateComplianceByConfigRulesOutput, error)
+}
+
+var _ DescribeAggregateComplianceByConfigRulesAPIClient = (*Client)(nil)
+
+// DescribeAggregateComplianceByConfigRulesPaginatorOptions is the paginator
+// options for DescribeAggregateComplianceByConfigRules
+type DescribeAggregateComplianceByConfigRulesPaginatorOptions struct {
+	// The maximum number of evaluation results returned on each page. The default is
+	// maximum. If you specify 0, AWS Config uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeAggregateComplianceByConfigRulesPaginator is a paginator for
+// DescribeAggregateComplianceByConfigRules
+type DescribeAggregateComplianceByConfigRulesPaginator struct {
+	options   DescribeAggregateComplianceByConfigRulesPaginatorOptions
+	client    DescribeAggregateComplianceByConfigRulesAPIClient
+	params    *DescribeAggregateComplianceByConfigRulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeAggregateComplianceByConfigRulesPaginator returns a new
+// DescribeAggregateComplianceByConfigRulesPaginator
+func NewDescribeAggregateComplianceByConfigRulesPaginator(client DescribeAggregateComplianceByConfigRulesAPIClient, params *DescribeAggregateComplianceByConfigRulesInput, optFns ...func(*DescribeAggregateComplianceByConfigRulesPaginatorOptions)) *DescribeAggregateComplianceByConfigRulesPaginator {
+	if params == nil {
+		params = &DescribeAggregateComplianceByConfigRulesInput{}
+	}
+
+	options := DescribeAggregateComplianceByConfigRulesPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeAggregateComplianceByConfigRulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeAggregateComplianceByConfigRulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeAggregateComplianceByConfigRules page.
+func (p *DescribeAggregateComplianceByConfigRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeAggregateComplianceByConfigRulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribeAggregateComplianceByConfigRules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeAggregateComplianceByConfigRules(region string) *awsmiddleware.RegisterServiceMetadata {

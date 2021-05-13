@@ -42,10 +42,14 @@ type DataLakeResourceType string
 
 // Enum values for DataLakeResourceType
 const (
-	DataLakeResourceTypeCatalog      DataLakeResourceType = "CATALOG"
-	DataLakeResourceTypeDatabase     DataLakeResourceType = "DATABASE"
-	DataLakeResourceTypeTable        DataLakeResourceType = "TABLE"
-	DataLakeResourceTypeDataLocation DataLakeResourceType = "DATA_LOCATION"
+	DataLakeResourceTypeCatalog             DataLakeResourceType = "CATALOG"
+	DataLakeResourceTypeDatabase            DataLakeResourceType = "DATABASE"
+	DataLakeResourceTypeTable               DataLakeResourceType = "TABLE"
+	DataLakeResourceTypeDataLocation        DataLakeResourceType = "DATA_LOCATION"
+	DataLakeResourceTypeLfTag               DataLakeResourceType = "LF_TAG"
+	DataLakeResourceTypeLfTagPolicy         DataLakeResourceType = "LF_TAG_POLICY"
+	DataLakeResourceTypeLfTagPolicyDatabase DataLakeResourceType = "LF_TAG_POLICY_DATABASE"
+	DataLakeResourceTypeLfTagPolicyTable    DataLakeResourceType = "LF_TAG_POLICY_TABLE"
 )
 
 // Values returns all known values for DataLakeResourceType. Note that this can be
@@ -57,6 +61,10 @@ func (DataLakeResourceType) Values() []DataLakeResourceType {
 		"DATABASE",
 		"TABLE",
 		"DATA_LOCATION",
+		"LF_TAG",
+		"LF_TAG_POLICY",
+		"LF_TAG_POLICY_DATABASE",
+		"LF_TAG_POLICY_TABLE",
 	}
 }
 
@@ -94,6 +102,11 @@ const (
 	PermissionCreateDatabase     Permission = "CREATE_DATABASE"
 	PermissionCreateTable        Permission = "CREATE_TABLE"
 	PermissionDataLocationAccess Permission = "DATA_LOCATION_ACCESS"
+	PermissionCreateTag          Permission = "CREATE_TAG"
+	PermissionAlterTag           Permission = "ALTER_TAG"
+	PermissionDeleteTag          Permission = "DELETE_TAG"
+	PermissionDescribeTag        Permission = "DESCRIBE_TAG"
+	PermissionAssociateTag       Permission = "ASSOCIATE_TAG"
 )
 
 // Values returns all known values for Permission. Note that this can be expanded
@@ -111,5 +124,46 @@ func (Permission) Values() []Permission {
 		"CREATE_DATABASE",
 		"CREATE_TABLE",
 		"DATA_LOCATION_ACCESS",
+		"CREATE_TAG",
+		"ALTER_TAG",
+		"DELETE_TAG",
+		"DESCRIBE_TAG",
+		"ASSOCIATE_TAG",
+	}
+}
+
+type ResourceShareType string
+
+// Enum values for ResourceShareType
+const (
+	ResourceShareTypeForeign ResourceShareType = "FOREIGN"
+	ResourceShareTypeAll     ResourceShareType = "ALL"
+)
+
+// Values returns all known values for ResourceShareType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceShareType) Values() []ResourceShareType {
+	return []ResourceShareType{
+		"FOREIGN",
+		"ALL",
+	}
+}
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeDatabase ResourceType = "DATABASE"
+	ResourceTypeTable    ResourceType = "TABLE"
+)
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"DATABASE",
+		"TABLE",
 	}
 }

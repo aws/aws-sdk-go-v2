@@ -1,6 +1,7 @@
 package software.amazon.smithy.aws.go.codegen;
 
 import java.util.List;
+import software.amazon.smithy.aws.go.codegen.customization.AdjustAwsRestJsonContentType;
 import software.amazon.smithy.aws.traits.auth.UnsignedPayloadTrait;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
@@ -130,6 +131,16 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .resolvedFunction(SymbolUtils.createPointableSymbolBuilder(
                                         AwsClientUserAgent.MIDDLEWARE_RESOLVER).build())
                                 .build())
+                        .build(),
+
+                // Add REST-JSON Content-Type Adjuster
+                RuntimeClientPlugin.builder()
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        AdjustAwsRestJsonContentType.RESOLVER_NAME).build())
+                                .build())
+                        .servicePredicate((model, serviceShape) ->
+                                AdjustAwsRestJsonContentType.isServiceOnShameList(serviceShape))
                         .build()
         );
     }

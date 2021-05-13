@@ -16,13 +16,12 @@ import (
 // This action creates an Amazon S3 on Outposts bucket. To create an S3 bucket, see
 // Create Bucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateBucket.html) in the
-// Amazon Simple Storage Service API. Creates a new Outposts bucket. By creating
-// the bucket, you become the bucket owner. To create an Outposts bucket, you must
-// have S3 on Outposts. For more information, see Using Amazon S3 on Outposts
+// Amazon S3 API Reference. Creates a new Outposts bucket. By creating the bucket,
+// you become the bucket owner. To create an Outposts bucket, you must have S3 on
+// Outposts. For more information, see Using Amazon S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in
-// Amazon Simple Storage Service User Guide. Not every string is an acceptable
-// bucket name. For information on bucket naming restrictions, see Working with
-// Amazon S3 Buckets
+// Amazon S3 User Guide. Not every string is an acceptable bucket name. For
+// information on bucket naming restrictions, see Working with Amazon S3 Buckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/BucketRestrictions.html#bucketnamingrules).
 // S3 on Outposts buckets support:
 //

@@ -14,6 +14,53 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsAwsjson11_serializeOpAddLFTagsToResource struct {
+}
+
+func (*awsAwsjson11_serializeOpAddLFTagsToResource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpAddLFTagsToResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddLFTagsToResourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.AddLFTagsToResource")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentAddLFTagsToResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpBatchGrantPermissions struct {
 }
 
@@ -93,6 +140,100 @@ func (m *awsAwsjson11_serializeOpBatchRevokePermissions) HandleSerialize(ctx con
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentBatchRevokePermissionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateLFTag struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLFTag) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLFTag) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLFTagInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.CreateLFTag")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLFTagInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteLFTag struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteLFTag) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteLFTag) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLFTagInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.DeleteLFTag")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteLFTagInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -296,6 +437,100 @@ func (m *awsAwsjson11_serializeOpGetEffectivePermissionsForPath) HandleSerialize
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetLFTag struct {
+}
+
+func (*awsAwsjson11_serializeOpGetLFTag) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetLFTag) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLFTagInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.GetLFTag")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetLFTagInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpGetResourceLFTags struct {
+}
+
+func (*awsAwsjson11_serializeOpGetResourceLFTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetResourceLFTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetResourceLFTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.GetResourceLFTags")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetResourceLFTagsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGrantPermissions struct {
 }
 
@@ -328,6 +563,53 @@ func (m *awsAwsjson11_serializeOpGrantPermissions) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentGrantPermissionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListLFTags struct {
+}
+
+func (*awsAwsjson11_serializeOpListLFTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListLFTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLFTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.ListLFTags")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListLFTagsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -531,6 +813,53 @@ func (m *awsAwsjson11_serializeOpRegisterResource) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpRemoveLFTagsFromResource struct {
+}
+
+func (*awsAwsjson11_serializeOpRemoveLFTagsFromResource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRemoveLFTagsFromResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveLFTagsFromResourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.RemoveLFTagsFromResource")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRemoveLFTagsFromResourceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpRevokePermissions struct {
 }
 
@@ -563,6 +892,147 @@ func (m *awsAwsjson11_serializeOpRevokePermissions) HandleSerialize(ctx context.
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentRevokePermissionsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpSearchDatabasesByLFTags struct {
+}
+
+func (*awsAwsjson11_serializeOpSearchDatabasesByLFTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSearchDatabasesByLFTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchDatabasesByLFTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.SearchDatabasesByLFTags")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSearchDatabasesByLFTagsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpSearchTablesByLFTags struct {
+}
+
+func (*awsAwsjson11_serializeOpSearchTablesByLFTags) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSearchTablesByLFTags) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchTablesByLFTagsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.SearchTablesByLFTags")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSearchTablesByLFTagsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateLFTag struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateLFTag) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateLFTag) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLFTagInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLakeFormation.UpdateLFTag")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateLFTagInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -803,6 +1273,19 @@ func awsAwsjson11_serializeDocumentDataLocationResource(v *types.DataLocationRes
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentExpression(v []types.LFTag, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentLFTag(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFilterCondition(v *types.FilterCondition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -834,6 +1317,110 @@ func awsAwsjson11_serializeDocumentFilterConditionList(v []types.FilterCondition
 	for i := range v {
 		av := array.Value()
 		if err := awsAwsjson11_serializeDocumentFilterCondition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLFTag(v *types.LFTag, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TagKey != nil {
+		ok := object.Key("TagKey")
+		ok.String(*v.TagKey)
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("TagValues")
+		if err := awsAwsjson11_serializeDocumentTagValueList(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLFTagKeyResource(v *types.LFTagKeyResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.TagKey != nil {
+		ok := object.Key("TagKey")
+		ok.String(*v.TagKey)
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("TagValues")
+		if err := awsAwsjson11_serializeDocumentTagValueList(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLFTagPair(v *types.LFTagPair, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.TagKey != nil {
+		ok := object.Key("TagKey")
+		ok.String(*v.TagKey)
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("TagValues")
+		if err := awsAwsjson11_serializeDocumentTagValueList(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLFTagPolicyResource(v *types.LFTagPolicyResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		if err := awsAwsjson11_serializeDocumentExpression(v.Expression, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ResourceType) > 0 {
+		ok := object.Key("ResourceType")
+		ok.String(string(v.ResourceType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentLFTagsList(v []types.LFTagPair, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentLFTagPair(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -906,6 +1493,20 @@ func awsAwsjson11_serializeDocumentResource(v *types.Resource, value smithyjson.
 	if v.DataLocation != nil {
 		ok := object.Key("DataLocation")
 		if err := awsAwsjson11_serializeDocumentDataLocationResource(v.DataLocation, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LFTag != nil {
+		ok := object.Key("LFTag")
+		if err := awsAwsjson11_serializeDocumentLFTagKeyResource(v.LFTag, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.LFTagPolicy != nil {
+		ok := object.Key("LFTagPolicy")
+		if err := awsAwsjson11_serializeDocumentLFTagPolicyResource(v.LFTagPolicy, ok); err != nil {
 			return err
 		}
 	}
@@ -1010,6 +1611,17 @@ func awsAwsjson11_serializeDocumentTableWithColumnsResource(v *types.TableWithCo
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTagValueList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTrustedResourceOwners(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1018,6 +1630,32 @@ func awsAwsjson11_serializeDocumentTrustedResourceOwners(v []string, value smith
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentAddLFTagsToResourceInput(v *AddLFTagsToResourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.LFTags != nil {
+		ok := object.Key("LFTags")
+		if err := awsAwsjson11_serializeDocumentLFTagsList(v.LFTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Resource != nil {
+		ok := object.Key("Resource")
+		if err := awsAwsjson11_serializeDocumentResource(v.Resource, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1054,6 +1692,47 @@ func awsAwsjson11_serializeOpDocumentBatchRevokePermissionsInput(v *BatchRevokeP
 		if err := awsAwsjson11_serializeDocumentBatchPermissionsRequestEntryList(v.Entries, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateLFTagInput(v *CreateLFTagInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.TagKey != nil {
+		ok := object.Key("TagKey")
+		ok.String(*v.TagKey)
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("TagValues")
+		if err := awsAwsjson11_serializeDocumentTagValueList(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteLFTagInput(v *DeleteLFTagInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.TagKey != nil {
+		ok := object.Key("TagKey")
+		ok.String(*v.TagKey)
 	}
 
 	return nil
@@ -1122,6 +1801,47 @@ func awsAwsjson11_serializeOpDocumentGetEffectivePermissionsForPathInput(v *GetE
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetLFTagInput(v *GetLFTagInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.TagKey != nil {
+		ok := object.Key("TagKey")
+		ok.String(*v.TagKey)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetResourceLFTagsInput(v *GetResourceLFTagsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.Resource != nil {
+		ok := object.Key("Resource")
+		if err := awsAwsjson11_serializeDocumentResource(v.Resource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ShowAssignedLFTags != nil {
+		ok := object.Key("ShowAssignedLFTags")
+		ok.Boolean(*v.ShowAssignedLFTags)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGrantPermissionsInput(v *GrantPermissionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1157,6 +1877,33 @@ func awsAwsjson11_serializeOpDocumentGrantPermissionsInput(v *GrantPermissionsIn
 		if err := awsAwsjson11_serializeDocumentResource(v.Resource, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListLFTagsInput(v *ListLFTagsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.ResourceShareType) > 0 {
+		ok := object.Key("ResourceShareType")
+		ok.String(string(v.ResourceShareType))
 	}
 
 	return nil
@@ -1268,6 +2015,32 @@ func awsAwsjson11_serializeOpDocumentRegisterResourceInput(v *RegisterResourceIn
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentRemoveLFTagsFromResourceInput(v *RemoveLFTagsFromResourceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.LFTags != nil {
+		ok := object.Key("LFTags")
+		if err := awsAwsjson11_serializeDocumentLFTagsList(v.LFTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Resource != nil {
+		ok := object.Key("Resource")
+		if err := awsAwsjson11_serializeDocumentResource(v.Resource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentRevokePermissionsInput(v *RevokePermissionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1301,6 +2074,95 @@ func awsAwsjson11_serializeOpDocumentRevokePermissionsInput(v *RevokePermissions
 	if v.Resource != nil {
 		ok := object.Key("Resource")
 		if err := awsAwsjson11_serializeDocumentResource(v.Resource, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentSearchDatabasesByLFTagsInput(v *SearchDatabasesByLFTagsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		if err := awsAwsjson11_serializeDocumentExpression(v.Expression, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentSearchTablesByLFTagsInput(v *SearchTablesByLFTagsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.Expression != nil {
+		ok := object.Key("Expression")
+		if err := awsAwsjson11_serializeDocumentExpression(v.Expression, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateLFTagInput(v *UpdateLFTagInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogId != nil {
+		ok := object.Key("CatalogId")
+		ok.String(*v.CatalogId)
+	}
+
+	if v.TagKey != nil {
+		ok := object.Key("TagKey")
+		ok.String(*v.TagKey)
+	}
+
+	if v.TagValuesToAdd != nil {
+		ok := object.Key("TagValuesToAdd")
+		if err := awsAwsjson11_serializeDocumentTagValueList(v.TagValuesToAdd, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TagValuesToDelete != nil {
+		ok := object.Key("TagValuesToDelete")
+		if err := awsAwsjson11_serializeDocumentTagValueList(v.TagValuesToDelete, ok); err != nil {
 			return err
 		}
 	}

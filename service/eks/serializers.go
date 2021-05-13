@@ -692,6 +692,13 @@ func awsRestjson1_serializeOpDocumentCreateNodegroupInput(v *CreateNodegroupInpu
 		}
 	}
 
+	if v.Taints != nil {
+		ok := object.Key("taints")
+		if err := awsRestjson1_serializeDocumentTaintsList(v.Taints, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Version != nil {
 		ok := object.Key("version")
 		ok.String(*v.Version)
@@ -2516,6 +2523,13 @@ func awsRestjson1_serializeOpDocumentUpdateNodegroupConfigInput(v *UpdateNodegro
 		}
 	}
 
+	if v.Taints != nil {
+		ok := object.Key("taints")
+		if err := awsRestjson1_serializeDocumentUpdateTaintsPayload(v.Taints, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2973,6 +2987,41 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentTaint(v *types.Taint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Effect) > 0 {
+		ok := object.Key("effect")
+		ok.String(string(v.Effect))
+	}
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTaintsList(v []types.Taint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTaint(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentUpdateLabelsPayload(v *types.UpdateLabelsPayload, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2987,6 +3036,27 @@ func awsRestjson1_serializeDocumentUpdateLabelsPayload(v *types.UpdateLabelsPayl
 	if v.RemoveLabels != nil {
 		ok := object.Key("removeLabels")
 		if err := awsRestjson1_serializeDocumentLabelsKeyList(v.RemoveLabels, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateTaintsPayload(v *types.UpdateTaintsPayload, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AddOrUpdateTaints != nil {
+		ok := object.Key("addOrUpdateTaints")
+		if err := awsRestjson1_serializeDocumentTaintsList(v.AddOrUpdateTaints, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RemoveTaints != nil {
+		ok := object.Key("removeTaints")
+		if err := awsRestjson1_serializeDocumentTaintsList(v.RemoveTaints, ok); err != nil {
 			return err
 		}
 	}

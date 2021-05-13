@@ -17,21 +17,20 @@ import (
 // This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a
 // policy for an S3 bucket, see GetBucketPolicy
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html) in
-// the Amazon Simple Storage Service API. Returns the policy of a specified
-// Outposts bucket. For more information, see Using Amazon S3 on Outposts
+// the Amazon S3 API Reference. Returns the policy of a specified Outposts bucket.
+// For more information, see Using Amazon S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-// Amazon Simple Storage Service User Guide. If you are using an identity other
-// than the root user of the AWS account that owns the bucket, the calling identity
-// must have the GetBucketPolicy permissions on the specified bucket and belong to
-// the bucket owner's account in order to use this action. Only users from Outposts
-// bucket owner account with the right permissions can perform actions on an
-// Outposts bucket. If you don't have s3-outposts:GetBucketPolicy permissions or
-// you're not using an identity that belongs to the bucket owner's account, Amazon
-// S3 returns a 403 Access Denied error. As a security precaution, the root user of
-// the AWS account that owns a bucket can always use this action, even if the
-// policy explicitly denies the root user the ability to perform this action. For
-// more information about bucket policies, see Using Bucket Policies and User
-// Policies
+// Amazon S3 User Guide. If you are using an identity other than the root user of
+// the AWS account that owns the bucket, the calling identity must have the
+// GetBucketPolicy permissions on the specified bucket and belong to the bucket
+// owner's account in order to use this action. Only users from Outposts bucket
+// owner account with the right permissions can perform actions on an Outposts
+// bucket. If you don't have s3-outposts:GetBucketPolicy permissions or you're not
+// using an identity that belongs to the bucket owner's account, Amazon S3 returns
+// a 403 Access Denied error. As a security precaution, the root user of the AWS
+// account that owns a bucket can always use this action, even if the policy
+// explicitly denies the root user the ability to perform this action. For more
+// information about bucket policies, see Using Bucket Policies and User Policies
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). All
 // Amazon S3 on Outposts REST API requests for this action require an additional
 // parameter of x-amz-outpost-id to be passed with the request and an S3 on

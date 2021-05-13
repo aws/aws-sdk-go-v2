@@ -46,7 +46,8 @@ type GetMetricDataInput struct {
 	// The queues, up to 100, or channels, to use to filter the metrics returned.
 	// Metric data is retrieved only for the resources associated with the queues or
 	// channels included in the filter. You can include both queue IDs and queue ARNs
-	// in the same request. VOICE, CHAT, and TASK channels are supported.
+	// in the same request. VOICE, CHAT, and TASK channels are supported. To filter by
+	// Queues, enter the queue ID/ARN, not the name of the queue.
 	//
 	// This member is required.
 	Filters *types.Filters
@@ -72,9 +73,10 @@ type GetMetricDataInput struct {
 	// INTERACTION_AND_HOLD_TIME Unit: SECONDS Statistic: AVG INTERACTION_TIME Unit:
 	// SECONDS Statistic: AVG OCCUPANCY Unit: PERCENT Statistic: AVG QUEUE_ANSWER_TIME
 	// Unit: SECONDS Statistic: AVG QUEUED_TIME Unit: SECONDS Statistic: MAX
-	// SERVICE_LEVEL Unit: PERCENT Statistic: AVG Threshold: Only "Less than"
-	// comparisons are supported, with the following service level thresholds: 15, 20,
-	// 25, 30, 45, 60, 90, 120, 180, 240, 300, 600
+	// SERVICE_LEVEL You can include up to 20 SERVICE_LEVEL metrics in a request. Unit:
+	// PERCENT Statistic: AVG Threshold: For ThresholdValue, enter any whole number
+	// from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for
+	// "Less than").
 	//
 	// This member is required.
 	HistoricalMetrics []types.HistoricalMetric
@@ -95,9 +97,8 @@ type GetMetricDataInput struct {
 
 	// The grouping applied to the metrics returned. For example, when results are
 	// grouped by queue, the metrics returned are grouped by queue. The values returned
-	// apply to the metrics for each queue rather than aggregated for all queues. The
-	// only supported grouping is QUEUE. If no grouping is specified, a summary of
-	// metrics for all queues is returned.
+	// apply to the metrics for each queue rather than aggregated for all queues. If no
+	// grouping is specified, a summary of metrics for all queues is returned.
 	Groupings []types.Grouping
 
 	// The maximum number of results to return per page.

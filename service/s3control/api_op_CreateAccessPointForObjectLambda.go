@@ -18,8 +18,8 @@ import (
 // Creates an Object Lambda Access Point. For more information, see Transforming
 // objects with Object Lambda Access Points
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html)
-// in the Amazon Simple Storage Service User Guide. The following actions are
-// related to CreateAccessPointForObjectLambda:
+// in the Amazon S3 User Guide. The following actions are related to
+// CreateAccessPointForObjectLambda:
 //
 // * DeleteAccessPointForObjectLambda
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)

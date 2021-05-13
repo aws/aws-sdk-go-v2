@@ -1133,7 +1133,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Returns a \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html\">\n               <code>DomainDescription</code>\n            </a> \n      object that contains information about the requested domain.\n     </p>",
+                "smithy.api#documentation": "<p>\n         Returns a \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html\">DomainDescription</a> \n      object that contains information about the requested domain.\n     </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/domain",
@@ -1198,7 +1198,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n       Returns a \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">\n               <code>PackageVersionDescription</code>\n            </a> \n       object that contains information about the requested package version.\n     </p>",
+                "smithy.api#documentation": "<p>\n       Returns a \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html\">PackageVersionDescription</a> \n       object that contains information about the requested package version.\n     </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/v1/package/version",
@@ -1476,7 +1476,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Deletes the assets in package versions and sets the package versions' status to <code>Disposed</code>.\n      A disposed package version cannot be restored in your repository because its assets are deleted.\n    </p>\n    \n         <p>\n      To view all disposed package versions in a repository, use <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html\">\n               <code>ListPackageVersions</code>\n            </a> and set the \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax\">\n               <code>status</code>\n            </a> parameter \n      to <code>Disposed</code>.\n    </p>\n    \n         <p>\n      To view information about a disposed package version, use <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html\">\n               <code>DescribePackageVersion</code>\n            </a>..\n    </p>",
+                "smithy.api#documentation": "<p>\n      Deletes the assets in package versions and sets the package versions' status to <code>Disposed</code>.\n      A disposed package version cannot be restored in your repository because its assets are deleted.\n    </p>\n    \n         <p>\n      To view all disposed package versions in a repository, use <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html\">ListPackageVersions</a> and set the \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html#API_ListPackageVersions_RequestSyntax\">status</a> parameter \n      to <code>Disposed</code>.\n    </p>\n    \n         <p>\n      To view information about a disposed package version, use <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DescribePackageVersion.html\">DescribePackageVersion</a>.\n    </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/package/versions/dispose",
@@ -1699,7 +1699,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Information about a domain, including its name, Amazon Resource Name (ARN), and status.\n      The <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListDomains.html\">\n               <code>ListDomains</code>\n            </a> operation returns a list of <code>DomainSummary</code>\n      objects. </p>"
+                "smithy.api#documentation": "<p> Information about a domain, including its name, Amazon Resource Name (ARN), and status.\n      The <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListDomains.html\">ListDomains</a> operation returns a list of <code>DomainSummary</code>\n      objects. </p>"
             }
         },
         "com.amazonaws.codeartifact#DomainSummaryList": {
@@ -2487,7 +2487,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n       Returns a list of \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html\">\n               <code>AssetSummary</code>\n            </a> \n       objects for assets in a package version.\n     </p>",
+                "smithy.api#documentation": "<p>\n       Returns a list of \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html\">AssetSummary</a> \n       objects for assets in a package version.\n     </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/package/version/assets",
@@ -2625,7 +2625,7 @@
                 "assets": {
                     "target": "com.amazonaws.codeartifact#AssetSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html\">\n               <code>AssetSummary</code>\n            </a> objects.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html\">AssetSummary</a> objects.\n    </p>"
                     }
                 }
             }
@@ -2656,7 +2656,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Returns the direct dependencies for a package version. The dependencies are returned as \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html\">\n               <code>PackageDependency</code>\n            </a> \n          objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package \n          format (for example, the <code>package.json</code> file for npm packages and the <code>pom.xml</code> file \n        for Maven). Any package version dependencies that are not listed in the configuration file are not returned.\n      </p>",
+                "smithy.api#documentation": "<p>\n         Returns the direct dependencies for a package version. The dependencies are returned as \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html\">PackageDependency</a> \n          objects. CodeArtifact extracts the dependencies for a package version from the metadata file for the package \n          format (for example, the <code>package.json</code> file for npm packages and the <code>pom.xml</code> file \n        for Maven). Any package version dependencies that are not listed in the configuration file are not returned.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/package/version/dependencies",
@@ -2772,7 +2772,7 @@
                 "dependencies": {
                     "target": "com.amazonaws.codeartifact#PackageDependencyList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html\">\n               <code>PackageDependency</code>\n            </a> objects.\n    </p>"
+                        "smithy.api#documentation": "<p>\n      The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html\">PackageDependency</a> objects.\n    </p>"
                     }
                 }
             }
@@ -2803,7 +2803,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n        Returns a list of \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html\">\n               <code>PackageVersionSummary</code>\n            </a> \n        objects for package versions in a repository that match the request parameters.\n      </p>",
+                "smithy.api#documentation": "<p>\n        Returns a list of \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html\">PackageVersionSummary</a> \n        objects for package versions in a repository that match the request parameters.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/package/versions",
@@ -2935,7 +2935,7 @@
                 "versions": {
                     "target": "com.amazonaws.codeartifact#PackageVersionSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The returned list of \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html\">\n               <code>PackageVersionSummary</code>\n            </a> \n        objects.\n       </p>"
+                        "smithy.api#documentation": "<p>\n        The returned list of \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionSummary.html\">PackageVersionSummary</a> \n        objects.\n       </p>"
                     }
                 },
                 "nextToken": {
@@ -2972,7 +2972,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n        Returns a list of \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html\">\n               <code>PackageSummary</code>\n            </a> \n        objects for packages in a repository that match the request parameters.\n      </p>",
+                "smithy.api#documentation": "<p>\n        Returns a list of \n        <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html\">PackageSummary</a> \n        objects for packages in a repository that match the request parameters.\n      </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/packages",
@@ -3064,7 +3064,7 @@
                 "packages": {
                     "target": "com.amazonaws.codeartifact#PackageSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The list of returned <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html\">\n               <code>PackageSummary</code>\n            </a> \n        objects.\n       </p>"
+                        "smithy.api#documentation": "<p>\n        The list of returned <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html\">PackageSummary</a> \n        objects.\n       </p>"
                     }
                 },
                 "nextToken": {
@@ -3098,7 +3098,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n       Returns a list of \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html\">\n               <code>RepositorySummary</code>\n            </a> \n       objects. Each <code>RepositorySummary</code> contains information about a repository in the specified AWS account and that matches the input \n       parameters.\n     </p>",
+                "smithy.api#documentation": "<p>\n       Returns a list of \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html\">RepositorySummary</a> \n       objects. Each <code>RepositorySummary</code> contains information about a repository in the specified AWS account and that matches the input \n       parameters.\n     </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/repositories",
@@ -3137,7 +3137,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n       Returns a list of \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html\">\n               <code>RepositorySummary</code>\n            </a> \n       objects. Each <code>RepositorySummary</code> contains information about a repository in the specified domain and that matches the input \n       parameters.\n     </p>",
+                "smithy.api#documentation": "<p>\n       Returns a list of \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html\">RepositorySummary</a> \n       objects. Each <code>RepositorySummary</code> contains information about a repository in the specified domain and that matches the input \n       parameters.\n     </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/v1/domain/repositories",
@@ -3267,7 +3267,7 @@
                 "repositories": {
                     "target": "com.amazonaws.codeartifact#RepositorySummaryList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html\">\n               <code>RepositorySummary</code>\n            </a> \n        objects.\n       </p>"
+                        "smithy.api#documentation": "<p>\n        The returned list of <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html\">RepositorySummary</a> \n        objects.\n       </p>"
                     }
                 },
                 "nextToken": {
@@ -3446,7 +3446,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Details about a package, including its format, namespace, and name. The \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html\">\n               <code>ListPackages</code>\n            </a> \n      operation returns a list of <code>PackageSummary</code> objects.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Details about a package, including its format, namespace, and name. The \n      <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackages.html\">ListPackages</a> \n      operation returns a list of <code>PackageSummary</code> objects.\n    </p>"
             }
         },
         "com.amazonaws.codeartifact#PackageSummaryList": {
@@ -3703,7 +3703,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n       Details about a package version, including its status, version, and revision. The \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html\">\n               <code>ListPackageVersions</code>\n            </a> \n       operation returns a list of <code>PackageVersionSummary</code> objects.\n     </p>"
+                "smithy.api#documentation": "<p>\n       Details about a package version, including its status, version, and revision. The \n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListPackageVersions.html\">ListPackageVersions</a> \n       operation returns a list of <code>PackageVersionSummary</code> objects.\n     </p>"
             }
         },
         "com.amazonaws.codeartifact#PackageVersionSummaryList": {
@@ -4054,7 +4054,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Details about a repository, including its Amazon Resource Name (ARN), description, and\n      domain information. The <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListRepositories.html\">\n               <code>ListRepositories</code>\n            </a> operation returns a list of\n        <code>RepositorySummary</code> objects. </p>"
+                "smithy.api#documentation": "<p> Details about a repository, including its Amazon Resource Name (ARN), description, and\n      domain information. The <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_ListRepositories.html\">ListRepositories</a> operation returns a list of\n        <code>RepositorySummary</code> objects. </p>"
             }
         },
         "com.amazonaws.codeartifact#RepositorySummaryList": {
@@ -4656,7 +4656,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n       Information about an upstream repository. A list of <code>UpstreamRepository</code> objects is an input parameter to\n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_CreateRepository.html\">\n               <code>CreateRepository</code>\n            </a>\n       and <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdateRepository.html\">\n               <code>UpdateRepository</code>\n            </a>.\n     </p>"
+                "smithy.api#documentation": "<p>\n       Information about an upstream repository. A list of <code>UpstreamRepository</code> objects is an input parameter to\n       <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_CreateRepository.html\">CreateRepository</a>\n       and <a href=\"https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdateRepository.html\">UpdateRepository</a>.\n     </p>"
             }
         },
         "com.amazonaws.codeartifact#UpstreamRepositoryInfo": {

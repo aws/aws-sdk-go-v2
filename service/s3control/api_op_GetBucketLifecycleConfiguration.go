@@ -18,17 +18,17 @@ import (
 // This action gets an Amazon S3 on Outposts bucket's lifecycle configuration. To
 // get an S3 bucket's lifecycle configuration, see GetBucketLifecycleConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketLifecycleConfiguration.html)
-// in the Amazon Simple Storage Service API. Returns the lifecycle configuration
-// information set on the Outposts bucket. For more information, see Using Amazon
-// S3 on Outposts
+// in the Amazon S3 API Reference. Returns the lifecycle configuration information
+// set on the Outposts bucket. For more information, see Using Amazon S3 on
+// Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) and
 // for information about lifecycle configuration, see  Object Lifecycle Management
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lifecycle-mgmt.html) in
-// Amazon Simple Storage Service User Guide. To use this action, you must have
-// permission to perform the s3-outposts:GetLifecycleConfiguration action. The
-// Outposts bucket owner has this permission, by default. The bucket owner can
-// grant this permission to others. For more information about permissions, see
-// Permissions Related to Bucket Subresource Operations
+// Amazon S3 User Guide. To use this action, you must have permission to perform
+// the s3-outposts:GetLifecycleConfiguration action. The Outposts bucket owner has
+// this permission, by default. The bucket owner can grant this permission to
+// others. For more information about permissions, see Permissions Related to
+// Bucket Subresource Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).

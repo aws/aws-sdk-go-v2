@@ -48,8 +48,8 @@ type DescribeAutomationStepExecutionsInput struct {
 	// previous call.)
 	NextToken *string
 
-	// A boolean that indicates whether to list step executions in reverse order by
-	// start time. The default value is 'false'.
+	// Indicates whether to list step executions in reverse order by start time. The
+	// default value is 'false'.
 	ReverseOrder bool
 }
 

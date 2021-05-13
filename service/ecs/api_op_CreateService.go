@@ -128,9 +128,9 @@ func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, 
 type CreateServiceInput struct {
 
 	// The name of your service. Up to 255 letters (uppercase and lowercase), numbers,
-	// and hyphens are allowed. Service names must be unique within a cluster, but you
-	// can have similarly named services in multiple clusters within a Region or across
-	// multiple Regions.
+	// underscores, and hyphens are allowed. Service names must be unique within a
+	// cluster, but you can have similarly named services in multiple clusters within a
+	// Region or across multiple Regions.
 	//
 	// This member is required.
 	ServiceName *string

@@ -11,7 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Creates a use case for an AppIntegration association.
 func (c *Client) CreateUseCase(ctx context.Context, params *CreateUseCaseInput, optFns ...func(*Options)) (*CreateUseCaseOutput, error) {
 	if params == nil {
@@ -45,6 +44,9 @@ type CreateUseCaseInput struct {
 	//
 	// This member is required.
 	UseCaseType types.UseCaseType
+
+	// One or more tags.
+	Tags map[string]string
 }
 
 type CreateUseCaseOutput struct {

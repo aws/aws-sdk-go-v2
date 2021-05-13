@@ -74,20 +74,19 @@ type DescribeReservedInstancesOfferingsInput struct {
 	// description will only be displayed to EC2-Classic account holders and are for
 	// use with Amazon VPC. (Linux/UNIX | Linux/UNIX (Amazon VPC) | SUSE Linux | SUSE
 	// Linux (Amazon VPC) | Red Hat Enterprise Linux | Red Hat Enterprise Linux (Amazon
-	// VPC) | Red Hat Enterprise Linux with HA (Amazon VPC) | Windows | Windows (Amazon
-	// VPC) | Windows with SQL Server Standard | Windows with SQL Server Standard
-	// (Amazon VPC) | Windows with SQL Server Web |  Windows with SQL Server Web
-	// (Amazon VPC) | Windows with SQL Server Enterprise | Windows with SQL Server
-	// Enterprise (Amazon VPC))
+	// VPC) | Windows | Windows (Amazon VPC) | Windows with SQL Server Standard |
+	// Windows with SQL Server Standard (Amazon VPC) | Windows with SQL Server Web |
+	// Windows with SQL Server Web (Amazon VPC) | Windows with SQL Server Enterprise |
+	// Windows with SQL Server Enterprise (Amazon VPC))
 	//
-	// * reserved-instances-offering-id - The Reserved
-	// Instances offering ID.
+	// *
+	// reserved-instances-offering-id - The Reserved Instances offering ID.
 	//
-	// * scope - The scope of the Reserved Instance
-	// (Availability Zone or Region).
+	// * scope -
+	// The scope of the Reserved Instance (Availability Zone or Region).
 	//
-	// * usage-price - The usage price of the Reserved
-	// Instance, per hour (for example, 0.84).
+	// * usage-price
+	// - The usage price of the Reserved Instance, per hour (for example, 0.84).
 	Filters []types.Filter
 
 	// Include Reserved Instance Marketplace offerings in the response.

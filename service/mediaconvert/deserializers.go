@@ -8675,6 +8675,41 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 				sv.BackgroundOpacity = int32(i64)
 			}
 
+		case "ddsHandling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DvbddsHandling to be of type string, got %T instead", value)
+				}
+				sv.DdsHandling = types.DvbddsHandling(jtv)
+			}
+
+		case "ddsXCoordinate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DdsXCoordinate = int32(i64)
+			}
+
+		case "ddsYCoordinate":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DdsYCoordinate = int32(i64)
+			}
+
 		case "fontColor":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8730,6 +8765,19 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 					return err
 				}
 				sv.FontSize = int32(i64)
+			}
+
+		case "height":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Height = int32(i64)
 			}
 
 		case "outlineColor":
@@ -8818,6 +8866,19 @@ func awsRestjson1_deserializeDocumentDvbSubDestinationSettings(v **types.DvbSubD
 					return fmt.Errorf("expected DvbSubtitleTeletextSpacing to be of type string, got %T instead", value)
 				}
 				sv.TeletextSpacing = types.DvbSubtitleTeletextSpacing(jtv)
+			}
+
+		case "width":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin1Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Width = int32(i64)
 			}
 
 		case "xPosition":
@@ -12939,6 +13000,11 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				return err
 			}
 
+		case "kantarWatermark":
+			if err := awsRestjson1_deserializeDocumentKantarWatermarkSettings(&sv.KantarWatermark, value); err != nil {
+				return err
+			}
+
 		case "motionImageInserter":
 			if err := awsRestjson1_deserializeDocumentMotionImageInserter(&sv.MotionImageInserter, value); err != nil {
 				return err
@@ -13176,6 +13242,11 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 				return err
 			}
 
+		case "kantarWatermark":
+			if err := awsRestjson1_deserializeDocumentKantarWatermarkSettings(&sv.KantarWatermark, value); err != nil {
+				return err
+			}
+
 		case "motionImageInserter":
 			if err := awsRestjson1_deserializeDocumentMotionImageInserter(&sv.MotionImageInserter, value); err != nil {
 				return err
@@ -13204,6 +13275,162 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 		case "timedMetadataInsertion":
 			if err := awsRestjson1_deserializeDocumentTimedMetadataInsertion(&sv.TimedMetadataInsertion, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKantarWatermarkSettings(v **types.KantarWatermarkSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KantarWatermarkSettings
+	if *v == nil {
+		sv = &types.KantarWatermarkSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "channelName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max20 to be of type string, got %T instead", value)
+				}
+				sv.ChannelName = ptr.String(jtv)
+			}
+
+		case "contentReference":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max50PatternAZAZ09 to be of type string, got %T instead", value)
+				}
+				sv.ContentReference = ptr.String(jtv)
+			}
+
+		case "credentialsSecretName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max512PatternAZAZ09 to be of type string, got %T instead", value)
+				}
+				sv.CredentialsSecretName = ptr.String(jtv)
+			}
+
+		case "fileOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __doubleMin0 to be json.Number, got %T instead", value)
+				}
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				sv.FileOffset = f64
+			}
+
+		case "kantarLicenseId":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max2147483647 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.KantarLicenseId = int32(i64)
+			}
+
+		case "kantarServerUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternHttpsKantarmediaCom to be of type string, got %T instead", value)
+				}
+				sv.KantarServerUrl = ptr.String(jtv)
+			}
+
+		case "logDestination":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternS3 to be of type string, got %T instead", value)
+				}
+				sv.LogDestination = ptr.String(jtv)
+			}
+
+		case "metadata3":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max50 to be of type string, got %T instead", value)
+				}
+				sv.Metadata3 = ptr.String(jtv)
+			}
+
+		case "metadata4":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max50 to be of type string, got %T instead", value)
+				}
+				sv.Metadata4 = ptr.String(jtv)
+			}
+
+		case "metadata5":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max50 to be of type string, got %T instead", value)
+				}
+				sv.Metadata5 = ptr.String(jtv)
+			}
+
+		case "metadata6":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max50 to be of type string, got %T instead", value)
+				}
+				sv.Metadata6 = ptr.String(jtv)
+			}
+
+		case "metadata7":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max50 to be of type string, got %T instead", value)
+				}
+				sv.Metadata7 = ptr.String(jtv)
+			}
+
+		case "metadata8":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringMin1Max50 to be of type string, got %T instead", value)
+				}
+				sv.Metadata8 = ptr.String(jtv)
 			}
 
 		default:
@@ -13718,6 +13945,19 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 		case "audioPids":
 			if err := awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(&sv.AudioPids, value); err != nil {
 				return err
+			}
+
+		case "maxPcrInterval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected __integerMin0Max500 to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxPcrInterval = int32(i64)
 			}
 
 		case "nielsenId3":
@@ -18304,6 +18544,15 @@ func awsRestjson1_deserializeDocumentVideoSelector(v **types.VideoSelector, valu
 					return fmt.Errorf("expected InputRotate to be of type string, got %T instead", value)
 				}
 				sv.Rotate = types.InputRotate(jtv)
+			}
+
+		case "sampleRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputSampleRange to be of type string, got %T instead", value)
+				}
+				sv.SampleRange = types.InputSampleRange(jtv)
 			}
 
 		default:

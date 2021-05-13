@@ -169,12 +169,15 @@ type ApplicationDetail struct {
 	// The description of the application.
 	ApplicationDescription *string
 
-	// Describes the time window for automatic application maintenance.
+	// The details of the maintenance configuration for the application.
 	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription
 
 	// If you reverted the application using RollbackApplication, the application
 	// version when RollbackApplication was called.
 	ApplicationVersionRolledBackFrom *int64
+
+	// The version to which you want to roll back the application.
+	ApplicationVersionRolledBackTo *int64
 
 	// The previous application version before the latest application update.
 	// RollbackApplication reverts the application to this version.
@@ -196,24 +199,24 @@ type ApplicationDetail struct {
 	ServiceExecutionRole *string
 }
 
-// Describes the time window for automatic application maintenance.
+// The details of the maintenance configuration for the application.
 type ApplicationMaintenanceConfigurationDescription struct {
 
-	// The end time for the automatic maintenance window.
+	// The end time for the maintenance window.
 	//
 	// This member is required.
 	ApplicationMaintenanceWindowEndTime *string
 
-	// The start time for the automatic maintenance window.
+	// The start time for the maintenance window.
 	//
 	// This member is required.
 	ApplicationMaintenanceWindowStartTime *string
 }
 
-// Describes the updated time window for automatic application maintenance.
+// Describes the updated maintenance configuration for the application.
 type ApplicationMaintenanceConfigurationUpdate struct {
 
-	// The updated start time for the automatic maintenance window.
+	// The updated start time for the maintenance window.
 	//
 	// This member is required.
 	ApplicationMaintenanceWindowStartTimeUpdate *string
@@ -296,6 +299,21 @@ type ApplicationSummary struct {
 	//
 	// This member is required.
 	RuntimeEnvironment RuntimeEnvironment
+}
+
+// The summary of the application version.
+type ApplicationVersionSummary struct {
+
+	// The status of the application.
+	//
+	// This member is required.
+	ApplicationStatus ApplicationStatus
+
+	// The ID of the application version. Kinesis Data Analytics updates the
+	// ApplicationVersionId each time you update the application.
+	//
+	// This member is required.
+	ApplicationVersionId *int64
 }
 
 // Describes an application's checkpointing configuration. Checkpointing is the

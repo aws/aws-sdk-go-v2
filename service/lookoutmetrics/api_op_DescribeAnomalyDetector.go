@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Describes a detector.
+// Describes a detector. Amazon Lookout for Metrics API actions are eventually
+// consistent. If you do a read operation on a resource immediately after creating
+// or modifying it, use retries to allow time for the write operation to complete.
 func (c *Client) DescribeAnomalyDetector(ctx context.Context, params *DescribeAnomalyDetectorInput, optFns ...func(*Options)) (*DescribeAnomalyDetectorOutput, error) {
 	if params == nil {
 		params = &DescribeAnomalyDetectorInput{}

@@ -1943,6 +1943,26 @@ func (DropFrameTimecode) Values() []DropFrameTimecode {
 	}
 }
 
+type DvbddsHandling string
+
+// Enum values for DvbddsHandling
+const (
+	DvbddsHandlingNone            DvbddsHandling = "NONE"
+	DvbddsHandlingSpecified       DvbddsHandling = "SPECIFIED"
+	DvbddsHandlingNoDisplayWindow DvbddsHandling = "NO_DISPLAY_WINDOW"
+)
+
+// Values returns all known values for DvbddsHandling. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DvbddsHandling) Values() []DvbddsHandling {
+	return []DvbddsHandling{
+		"NONE",
+		"SPECIFIED",
+		"NO_DISPLAY_WINDOW",
+	}
+}
+
 type DvbSubtitleAlignment string
 
 // Enum values for DvbSubtitleAlignment
@@ -4157,6 +4177,26 @@ func (InputRotate) Values() []InputRotate {
 		"DEGREES_180",
 		"DEGREES_270",
 		"AUTO",
+	}
+}
+
+type InputSampleRange string
+
+// Enum values for InputSampleRange
+const (
+	InputSampleRangeFollow       InputSampleRange = "FOLLOW"
+	InputSampleRangeFullRange    InputSampleRange = "FULL_RANGE"
+	InputSampleRangeLimitedRange InputSampleRange = "LIMITED_RANGE"
+)
+
+// Values returns all known values for InputSampleRange. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InputSampleRange) Values() []InputSampleRange {
+	return []InputSampleRange{
+		"FOLLOW",
+		"FULL_RANGE",
+		"LIMITED_RANGE",
 	}
 }
 

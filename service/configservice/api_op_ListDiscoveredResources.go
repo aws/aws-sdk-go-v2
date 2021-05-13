@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -145,6 +146,92 @@ func addOperationListDiscoveredResourcesMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+// ListDiscoveredResourcesAPIClient is a client that implements the
+// ListDiscoveredResources operation.
+type ListDiscoveredResourcesAPIClient interface {
+	ListDiscoveredResources(context.Context, *ListDiscoveredResourcesInput, ...func(*Options)) (*ListDiscoveredResourcesOutput, error)
+}
+
+var _ ListDiscoveredResourcesAPIClient = (*Client)(nil)
+
+// ListDiscoveredResourcesPaginatorOptions is the paginator options for
+// ListDiscoveredResources
+type ListDiscoveredResourcesPaginatorOptions struct {
+	// The maximum number of resource identifiers returned on each page. The default is
+	// 100. You cannot specify a number greater than 100. If you specify 0, AWS Config
+	// uses the default.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListDiscoveredResourcesPaginator is a paginator for ListDiscoveredResources
+type ListDiscoveredResourcesPaginator struct {
+	options   ListDiscoveredResourcesPaginatorOptions
+	client    ListDiscoveredResourcesAPIClient
+	params    *ListDiscoveredResourcesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListDiscoveredResourcesPaginator returns a new
+// ListDiscoveredResourcesPaginator
+func NewListDiscoveredResourcesPaginator(client ListDiscoveredResourcesAPIClient, params *ListDiscoveredResourcesInput, optFns ...func(*ListDiscoveredResourcesPaginatorOptions)) *ListDiscoveredResourcesPaginator {
+	if params == nil {
+		params = &ListDiscoveredResourcesInput{}
+	}
+
+	options := ListDiscoveredResourcesPaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListDiscoveredResourcesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListDiscoveredResourcesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListDiscoveredResources page.
+func (p *ListDiscoveredResourcesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListDiscoveredResourcesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.ListDiscoveredResources(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListDiscoveredResources(region string) *awsmiddleware.RegisterServiceMetadata {

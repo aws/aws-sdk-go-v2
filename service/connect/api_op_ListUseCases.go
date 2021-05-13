@@ -12,7 +12,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Lists the use cases.
 func (c *Client) ListUseCases(ctx context.Context, params *ListUseCasesInput, optFns ...func(*Options)) (*ListUseCasesOutput, error) {
 	if params == nil {

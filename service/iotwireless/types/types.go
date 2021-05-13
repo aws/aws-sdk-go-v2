@@ -186,8 +186,18 @@ type LoRaWANGateway struct {
 	// The gateway's EUI value.
 	GatewayEui *string
 
+	// A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.
+	JoinEuiFilters [][]string
+
+	// A list of NetId values that are used by LoRa gateways to filter the uplink
+	// frames.
+	NetIdFilters []string
+
 	// The frequency band (RFRegion) value.
 	RfRegion *string
+
+	// A list of integer indicating which sub bands are supported by LoRa gateway.
+	SubBands []int32
 }
 
 // LoRaWANGatewayCurrentVersion object.

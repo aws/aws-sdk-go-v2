@@ -12,7 +12,9 @@ import (
 	"time"
 )
 
-// Describes a dataset.
+// Describes a dataset. Amazon Lookout for Metrics API actions are eventually
+// consistent. If you do a read operation on a resource immediately after creating
+// or modifying it, use retries to allow time for the write operation to complete.
 func (c *Client) DescribeMetricSet(ctx context.Context, params *DescribeMetricSetInput, optFns ...func(*Options)) (*DescribeMetricSetOutput, error) {
 	if params == nil {
 		params = &DescribeMetricSetInput{}

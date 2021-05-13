@@ -328,6 +328,26 @@ func (ResolveConflicts) Values() []ResolveConflicts {
 	}
 }
 
+type TaintEffect string
+
+// Enum values for TaintEffect
+const (
+	TaintEffectNoSchedule       TaintEffect = "NO_SCHEDULE"
+	TaintEffectNoExecute        TaintEffect = "NO_EXECUTE"
+	TaintEffectPreferNoSchedule TaintEffect = "PREFER_NO_SCHEDULE"
+)
+
+// Values returns all known values for TaintEffect. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TaintEffect) Values() []TaintEffect {
+	return []TaintEffect{
+		"NO_SCHEDULE",
+		"NO_EXECUTE",
+		"PREFER_NO_SCHEDULE",
+	}
+}
+
 type UpdateParamType string
 
 // Enum values for UpdateParamType
@@ -340,6 +360,8 @@ const (
 	UpdateParamTypeDesiredSize            UpdateParamType = "DesiredSize"
 	UpdateParamTypeLabelsToAdd            UpdateParamType = "LabelsToAdd"
 	UpdateParamTypeLabelsToRemove         UpdateParamType = "LabelsToRemove"
+	UpdateParamTypeTaintsToAdd            UpdateParamType = "TaintsToAdd"
+	UpdateParamTypeTaintsToRemove         UpdateParamType = "TaintsToRemove"
 	UpdateParamTypeMaxSize                UpdateParamType = "MaxSize"
 	UpdateParamTypeMinSize                UpdateParamType = "MinSize"
 	UpdateParamTypeReleaseVersion         UpdateParamType = "ReleaseVersion"
@@ -366,6 +388,8 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"DesiredSize",
 		"LabelsToAdd",
 		"LabelsToRemove",
+		"TaintsToAdd",
+		"TaintsToRemove",
 		"MaxSize",
 		"MinSize",
 		"ReleaseVersion",

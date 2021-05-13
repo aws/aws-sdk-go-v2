@@ -40,7 +40,8 @@ type AccessPoint struct {
 	AccessPointArn *string
 
 	// The virtual private cloud (VPC) configuration for this access point, if one
-	// exists.
+	// exists. This element is empty if this access point is an Amazon S3 on Outposts
+	// access point that is used by other AWS services.
 	VpcConfiguration *VpcConfiguration
 }
 
@@ -281,7 +282,7 @@ type JobManifestSpec struct {
 // The operation that you want this job to perform on every object listed in the
 // manifest. For more information about the available operations, see Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html) in
-// the Amazon Simple Storage Service User Guide.
+// the Amazon S3 User Guide.
 type JobOperation struct {
 
 	// Directs the specified job to invoke an AWS Lambda function on every object in
@@ -309,7 +310,7 @@ type JobOperation struct {
 	// API. For more information, see Using S3 Object Lock legal hold with S3 Batch
 	// Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html) in
-	// the Amazon Simple Storage Service User Guide.
+	// the Amazon S3 User Guide.
 	S3PutObjectLegalHold *S3SetObjectLegalHoldOperation
 
 	// Contains the configuration parameters for the Object Lock retention action for
@@ -317,7 +318,7 @@ type JobOperation struct {
 	// underlying PutObjectRetention API. For more information, see Using S3 Object
 	// Lock retention with S3 Batch Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-	// in the Amazon Simple Storage Service User Guide.
+	// in the Amazon S3 User Guide.
 	S3PutObjectRetention *S3SetObjectRetentionOperation
 
 	// Directs the specified job to run a PUT Object tagging call on every object in
@@ -411,7 +412,7 @@ type LifecycleRule struct {
 	// information, see  Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
 	// Policy
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload
 
 	// Specifies the expiration for the lifecycle of the object in the form of date,
@@ -502,7 +503,7 @@ type NoncurrentVersionExpiration struct {
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	NoncurrentDays int32
 }
 
@@ -514,7 +515,7 @@ type NoncurrentVersionTransition struct {
 	// calculations, see  How Amazon S3 Calculates How Long an Object Has Been
 	// Noncurrent
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	NoncurrentDays int32
 
 	// The class of storage used to store the object.
@@ -590,7 +591,7 @@ type ObjectLambdaTransformationConfiguration struct {
 // how Amazon S3 evaluates policies to determine whether they are public, see The
 // Meaning of "Public"
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-// in the Amazon Simple Storage Service User Guide.
+// in the Amazon S3 User Guide.
 type PolicyStatus struct {
 
 	//
@@ -621,8 +622,7 @@ type PrefixLevelStorageMetrics struct {
 // information about when Amazon S3 considers a bucket or object public, see The
 // Meaning of "Public"
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-// in the Amazon Simple Storage Service Developer Guide. This is not supported for
-// Amazon S3 on Outposts.
+// in the Amazon S3 User Guide. This is not supported for Amazon S3 on Outposts.
 type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should block public access control lists (ACLs) for
@@ -925,7 +925,7 @@ type S3ObjectOwner struct {
 // types in your operation, you will remove the retention from your objects. For
 // more information, see Using S3 Object Lock retention with S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-// in the Amazon Simple Storage Service User Guide.
+// in the Amazon S3 User Guide.
 type S3Retention struct {
 
 	// The Object Lock retention mode to be applied to all objects in the Batch
@@ -952,7 +952,7 @@ type S3SetObjectAclOperation struct {
 // API. For more information, see Using S3 Object Lock legal hold with S3 Batch
 // Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html) in
-// the Amazon Simple Storage Service User Guide.
+// the Amazon S3 User Guide.
 type S3SetObjectLegalHoldOperation struct {
 
 	// Contains the Object Lock legal hold status to be applied to all objects in the
@@ -967,14 +967,14 @@ type S3SetObjectLegalHoldOperation struct {
 // underlying PutObjectRetention API. For more information, see Using S3 Object
 // Lock retention with S3 Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-// in the Amazon Simple Storage Service User Guide.
+// in the Amazon S3 User Guide.
 type S3SetObjectRetentionOperation struct {
 
 	// Contains the Object Lock retention mode to be applied to all objects in the
 	// Batch Operations job. For more information, see Using S3 Object Lock retention
 	// with S3 Batch Operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-	// in the Amazon Simple Storage Service User Guide.
+	// in the Amazon S3 User Guide.
 	//
 	// This member is required.
 	Retention *S3Retention
@@ -1138,7 +1138,7 @@ type Tagging struct {
 // information about Amazon S3 Lifecycle configuration rules, see  Transitioning
 // objects using Amazon S3 Lifecycle
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html)
-// in the Amazon Simple Storage Service User Guide.
+// in the Amazon S3 User Guide.
 type Transition struct {
 
 	// Indicates when objects are transitioned to the specified storage class. The date

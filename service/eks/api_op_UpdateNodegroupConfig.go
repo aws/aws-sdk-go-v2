@@ -54,6 +54,10 @@ type UpdateNodegroupConfigInput struct {
 
 	// The scaling configuration details for the Auto Scaling group after the update.
 	ScalingConfig *types.NodegroupScalingConfig
+
+	// The Kubernetes taints to be applied to the nodes in the node group after the
+	// update.
+	Taints *types.UpdateTaintsPayload
 }
 
 type UpdateNodegroupConfigOutput struct {

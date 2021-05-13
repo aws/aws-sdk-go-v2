@@ -10,7 +10,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Deletes an AppIntegration association from an Amazon Connect instance. The
 // association must not have any use cases associated with it.
 func (c *Client) DeleteIntegrationAssociation(ctx context.Context, params *DeleteIntegrationAssociationInput, optFns ...func(*Options)) (*DeleteIntegrationAssociationOutput, error) {

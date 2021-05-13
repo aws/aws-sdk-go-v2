@@ -813,7 +813,7 @@
                 "ApplicationMaintenanceConfigurationDescription": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceConfigurationDescription",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the time window for automatic application maintenance.</p>"
+                        "smithy.api#documentation": "<p>The details of the maintenance configuration for the application.</p>"
                     }
                 },
                 "ApplicationVersionUpdatedFrom": {
@@ -833,6 +833,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A value you use to implement strong concurrency for application updates.</p>"
                     }
+                },
+                "ApplicationVersionRolledBackTo": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version to which you want to roll back the application.</p>"
+                    }
                 }
             },
             "traits": {
@@ -845,20 +851,20 @@
                 "ApplicationMaintenanceWindowStartTime": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceWindowStartTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time for the automatic maintenance window.</p>",
+                        "smithy.api#documentation": "<p>The start time for the maintenance window.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ApplicationMaintenanceWindowEndTime": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceWindowEndTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time for the automatic maintenance window.</p>",
+                        "smithy.api#documentation": "<p>The end time for the maintenance window.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the time window for automatic application maintenance.</p>"
+                "smithy.api#documentation": "<p>The details of the maintenance configuration for the application.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceConfigurationUpdate": {
@@ -867,13 +873,13 @@
                 "ApplicationMaintenanceWindowStartTimeUpdate": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceWindowStartTime",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated start time for the automatic maintenance window.</p>",
+                        "smithy.api#documentation": "<p>The updated start time for the maintenance window.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the updated time window for automatic application maintenance.</p>"
+                "smithy.api#documentation": "<p>Describes the updated maintenance configuration for the application.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#ApplicationMaintenanceWindowEndTime": {
@@ -1034,6 +1040,10 @@
                     {
                         "value": "ROLLING_BACK",
                         "name": "ROLLING_BACK"
+                    },
+                    {
+                        "value": "ROLLED_BACK",
+                        "name": "ROLLED_BACK"
                     }
                 ]
             }
@@ -1095,6 +1105,34 @@
                     "min": 1,
                     "max": 999999999
                 }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationVersionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kinesisanalyticsv2#ApplicationVersionSummary"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ApplicationVersionSummary": {
+            "type": "structure",
+            "members": {
+                "ApplicationVersionId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application version. Kinesis Data Analytics updates the <code>ApplicationVersionId</code> each time you update the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationStatus": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the application.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of the application version.</p>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#AuthorizedUrl": {
@@ -2313,6 +2351,56 @@
                 }
             }
         },
+        "com.amazonaws.kinesisanalyticsv2#DescribeApplicationVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplicationVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplicationVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a detailed description of a specified version of the application. To see a list of all the versions of an application, invoke the <a>ListApplicationVersions</a> operation.</p>\n         <note>\n            <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#DescribeApplicationVersionRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application for which you want to get the version description.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ApplicationVersionId": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationVersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the application version for which you want to get the description.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#DescribeApplicationVersionResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationVersionDetail": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationDetail"
+                }
+            }
+        },
         "com.amazonaws.kinesisanalyticsv2#DestinationSchema": {
             "type": "structure",
             "members": {
@@ -3104,6 +3192,9 @@
                     "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplicationSnapshot"
                 },
                 {
+                    "target": "com.amazonaws.kinesisanalyticsv2#DescribeApplicationVersion"
+                },
+                {
                     "target": "com.amazonaws.kinesisanalyticsv2#DiscoverInputSchema"
                 },
                 {
@@ -3111,6 +3202,9 @@
                 },
                 {
                     "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationSnapshots"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationVersions"
                 },
                 {
                     "target": "com.amazonaws.kinesisanalyticsv2#ListTagsForResource"
@@ -3480,6 +3574,80 @@
                     "target": "com.amazonaws.kinesisanalyticsv2#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> if there are no additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ListApplicationVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#InvalidArgumentException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kinesisanalyticsv2#UnsupportedOperationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration \n      associated with each version.</p>\n    \n         <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p>\n         <note>\n            <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ListApplicationVersionsInputLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ListApplicationVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "ApplicationName": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the application for which you want to list all versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Limit": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ListApplicationVersionsInputLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of versions to list in this invocation of the operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the AWS Command Line Interface's Pagination Options</a>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.kinesisanalyticsv2#ListApplicationVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "ApplicationVersionSummaries": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#ApplicationVersionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the application versions and the associated configuration summaries. The list includes application versions that were rolled back.</p>\n         <p>To get the complete description of a specific application version, invoke the <a>DescribeApplicationVersion</a> operation.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.kinesisanalyticsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token for the next set of results, or <code>null</code> if there are no additional results. \n      To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see \n      <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/pagination.html\">Using the AWS Command Line Interface's Pagination Options</a>.</p>"
                     }
                 }
             }
@@ -5442,7 +5610,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration for the automatic maintenance that Kinesis Data Analytics performs on the application. For information about automatic application maintenance, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html\">Kinesis Data Analytics for Apache Flink Maintenance</a>.</p>"
+                "smithy.api#documentation": "<p>Updates the maintenance configuration of the Kinesis Data Analytics application. </p>\n         <p>You can invoke this operation on an application that is in one of the two following\n      states: <code>READY</code> or <code>RUNNING</code>. If you invoke it when the application is\n      in a state other than these two states, it throws a <code>ResourceInUseException</code>. The\n      service makes use of the updated configuration the next time it schedules maintenance for the\n      application. If you invoke this operation after the service schedules maintenance, the service\n      will apply the configuration update the next time it schedules maintenance for the\n      application. This means that you might not see the maintenance configuration update applied to\n      the maintenance process that follows a successful invocation of this operation, but to the\n      following maintenance process instead.</p>\n         <p>To see the current maintenance configuration of your application, invoke the\n      <a>DescribeApplication</a> operation.</p>\n         <p>For information about application maintenance, see <a href=\"https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html\">Kinesis Data Analytics for Apache Flink Maintenance</a>.</p>\n         <note>\n            <p>This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.</p>\n         </note>"
             }
         },
         "com.amazonaws.kinesisanalyticsv2#UpdateApplicationMaintenanceConfigurationRequest": {
@@ -5451,7 +5619,7 @@
                 "ApplicationName": {
                     "target": "com.amazonaws.kinesisanalyticsv2#ApplicationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the application for which you want to update the maintenance time window.</p>",
+                        "smithy.api#documentation": "<p>The name of the application for which you want to update the maintenance configuration.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -71,9 +71,7 @@ type CreateNodegroupInput struct {
 	NodegroupName *string
 
 	// The subnets to use for the Auto Scaling group that is created for your node
-	// group. These subnets must have the tag key kubernetes.io/cluster/CLUSTER_NAME
-	// with a value of shared, where CLUSTER_NAME is replaced with the name of your
-	// cluster. If you specify launchTemplate, then don't specify SubnetId
+	// group. If you specify launchTemplate, then don't specify SubnetId
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html)
 	// in your launch template, or the node group deployment will fail. For more
 	// information about using launch templates with Amazon EKS, see Launch template
@@ -165,6 +163,9 @@ type CreateNodegroupInput struct {
 	// you define. Node group tags do not propagate to any other resources associated
 	// with the node group, such as the Amazon EC2 instances or subnets.
 	Tags map[string]string
+
+	// The Kubernetes taints to be applied to the nodes in the node group.
+	Taints []types.Taint
 
 	// The Kubernetes version to use for your managed nodes. By default, the Kubernetes
 	// version of the cluster is used, and this is the only accepted specified value.

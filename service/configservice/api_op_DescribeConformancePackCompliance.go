@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -128,6 +129,92 @@ func addOperationDescribeConformancePackComplianceMiddlewares(stack *middleware.
 		return err
 	}
 	return nil
+}
+
+// DescribeConformancePackComplianceAPIClient is a client that implements the
+// DescribeConformancePackCompliance operation.
+type DescribeConformancePackComplianceAPIClient interface {
+	DescribeConformancePackCompliance(context.Context, *DescribeConformancePackComplianceInput, ...func(*Options)) (*DescribeConformancePackComplianceOutput, error)
+}
+
+var _ DescribeConformancePackComplianceAPIClient = (*Client)(nil)
+
+// DescribeConformancePackCompliancePaginatorOptions is the paginator options for
+// DescribeConformancePackCompliance
+type DescribeConformancePackCompliancePaginatorOptions struct {
+	// The maximum number of AWS Config rules within a conformance pack are returned on
+	// each page.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeConformancePackCompliancePaginator is a paginator for
+// DescribeConformancePackCompliance
+type DescribeConformancePackCompliancePaginator struct {
+	options   DescribeConformancePackCompliancePaginatorOptions
+	client    DescribeConformancePackComplianceAPIClient
+	params    *DescribeConformancePackComplianceInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeConformancePackCompliancePaginator returns a new
+// DescribeConformancePackCompliancePaginator
+func NewDescribeConformancePackCompliancePaginator(client DescribeConformancePackComplianceAPIClient, params *DescribeConformancePackComplianceInput, optFns ...func(*DescribeConformancePackCompliancePaginatorOptions)) *DescribeConformancePackCompliancePaginator {
+	if params == nil {
+		params = &DescribeConformancePackComplianceInput{}
+	}
+
+	options := DescribeConformancePackCompliancePaginatorOptions{}
+	if params.Limit != 0 {
+		options.Limit = params.Limit
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeConformancePackCompliancePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeConformancePackCompliancePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeConformancePackCompliance page.
+func (p *DescribeConformancePackCompliancePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeConformancePackComplianceOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	params.Limit = p.options.Limit
+
+	result, err := p.client.DescribeConformancePackCompliance(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeConformancePackCompliance(region string) *awsmiddleware.RegisterServiceMetadata {

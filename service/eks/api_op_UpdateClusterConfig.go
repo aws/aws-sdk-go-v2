@@ -28,11 +28,11 @@ import (
 // enabled, and private access is disabled. For more information, see Amazon EKS
 // Cluster Endpoint Access Control
 // (https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html) in the
-// Amazon EKS User Guide . At this time, you can not update the subnets or security
-// group IDs for an existing cluster. Cluster updates are asynchronous, and they
-// should finish within a few minutes. During an update, the cluster status moves
-// to UPDATING (this status transition is eventually consistent). When the update
-// is complete (either Failed or Successful), the cluster status moves to Active.
+// Amazon EKS User Guide . You can't update the subnets or security group IDs for
+// an existing cluster. Cluster updates are asynchronous, and they should finish
+// within a few minutes. During an update, the cluster status moves to UPDATING
+// (this status transition is eventually consistent). When the update is complete
+// (either Failed or Successful), the cluster status moves to Active.
 func (c *Client) UpdateClusterConfig(ctx context.Context, params *UpdateClusterConfigInput, optFns ...func(*Options)) (*UpdateClusterConfigOutput, error) {
 	if params == nil {
 		params = &UpdateClusterConfigInput{}

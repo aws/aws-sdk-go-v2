@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddLFTagsToResource struct {
+}
+
+func (*validateOpAddLFTagsToResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddLFTagsToResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddLFTagsToResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddLFTagsToResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGrantPermissions struct {
 }
 
@@ -45,6 +65,46 @@ func (m *validateOpBatchRevokePermissions) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpBatchRevokePermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateLFTag struct {
+}
+
+func (*validateOpCreateLFTag) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLFTag) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLFTagInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLFTagInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLFTag struct {
+}
+
+func (*validateOpDeleteLFTag) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLFTag) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLFTagInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLFTagInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -105,6 +165,46 @@ func (m *validateOpGetEffectivePermissionsForPath) HandleInitialize(ctx context.
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetEffectivePermissionsForPathInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLFTag struct {
+}
+
+func (*validateOpGetLFTag) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLFTag) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLFTagInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLFTagInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetResourceLFTags struct {
+}
+
+func (*validateOpGetResourceLFTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceLFTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceLFTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceLFTagsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +290,26 @@ func (m *validateOpRegisterResource) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveLFTagsFromResource struct {
+}
+
+func (*validateOpRemoveLFTagsFromResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveLFTagsFromResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveLFTagsFromResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveLFTagsFromResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRevokePermissions struct {
 }
 
@@ -205,6 +325,66 @@ func (m *validateOpRevokePermissions) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRevokePermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchDatabasesByLFTags struct {
+}
+
+func (*validateOpSearchDatabasesByLFTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchDatabasesByLFTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchDatabasesByLFTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchDatabasesByLFTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchTablesByLFTags struct {
+}
+
+func (*validateOpSearchTablesByLFTags) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchTablesByLFTags) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchTablesByLFTagsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchTablesByLFTagsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLFTag struct {
+}
+
+func (*validateOpUpdateLFTag) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLFTag) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLFTagInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLFTagInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,12 +410,24 @@ func (m *validateOpUpdateResource) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddLFTagsToResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddLFTagsToResource{}, middleware.After)
+}
+
 func addOpBatchGrantPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGrantPermissions{}, middleware.After)
 }
 
 func addOpBatchRevokePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchRevokePermissions{}, middleware.After)
+}
+
+func addOpCreateLFTagValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLFTag{}, middleware.After)
+}
+
+func addOpDeleteLFTagValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLFTag{}, middleware.After)
 }
 
 func addOpDeregisterResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -248,6 +440,14 @@ func addOpDescribeResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetEffectivePermissionsForPathValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEffectivePermissionsForPath{}, middleware.After)
+}
+
+func addOpGetLFTagValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLFTag{}, middleware.After)
+}
+
+func addOpGetResourceLFTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceLFTags{}, middleware.After)
 }
 
 func addOpGrantPermissionsValidationMiddleware(stack *middleware.Stack) error {
@@ -266,8 +466,24 @@ func addOpRegisterResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterResource{}, middleware.After)
 }
 
+func addOpRemoveLFTagsFromResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveLFTagsFromResource{}, middleware.After)
+}
+
 func addOpRevokePermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokePermissions{}, middleware.After)
+}
+
+func addOpSearchDatabasesByLFTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchDatabasesByLFTags{}, middleware.After)
+}
+
+func addOpSearchTablesByLFTagsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchTablesByLFTags{}, middleware.After)
+}
+
+func addOpUpdateLFTagValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLFTag{}, middleware.After)
 }
 
 func addOpUpdateResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -341,6 +557,116 @@ func validateDataLocationResource(v *types.DataLocationResource) error {
 	}
 }
 
+func validateExpression(v []types.LFTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Expression"}
+	for i := range v {
+		if err := validateLFTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLFTag(v *types.LFTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LFTag"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if v.TagValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLFTagKeyResource(v *types.LFTagKeyResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LFTagKeyResource"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if v.TagValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLFTagPair(v *types.LFTagPair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LFTagPair"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if v.TagValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLFTagPolicyResource(v *types.LFTagPolicyResource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LFTagPolicyResource"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	} else if v.Expression != nil {
+		if err := validateExpression(v.Expression); err != nil {
+			invalidParams.AddNested("Expression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLFTagsList(v []types.LFTagPair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LFTagsList"}
+	for i := range v {
+		if err := validateLFTagPair(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateResource(v *types.Resource) error {
 	if v == nil {
 		return nil
@@ -364,6 +690,16 @@ func validateResource(v *types.Resource) error {
 	if v.DataLocation != nil {
 		if err := validateDataLocationResource(v.DataLocation); err != nil {
 			invalidParams.AddNested("DataLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LFTag != nil {
+		if err := validateLFTagKeyResource(v.LFTag); err != nil {
+			invalidParams.AddNested("LFTag", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LFTagPolicy != nil {
+		if err := validateLFTagPolicyResource(v.LFTagPolicy); err != nil {
+			invalidParams.AddNested("LFTagPolicy", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -398,6 +734,32 @@ func validateTableWithColumnsResource(v *types.TableWithColumnsResource) error {
 	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddLFTagsToResourceInput(v *AddLFTagsToResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddLFTagsToResourceInput"}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	} else if v.Resource != nil {
+		if err := validateResource(v.Resource); err != nil {
+			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LFTags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LFTags"))
+	} else if v.LFTags != nil {
+		if err := validateLFTagsList(v.LFTags); err != nil {
+			invalidParams.AddNested("LFTags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -444,6 +806,39 @@ func validateOpBatchRevokePermissionsInput(v *BatchRevokePermissionsInput) error
 	}
 }
 
+func validateOpCreateLFTagInput(v *CreateLFTagInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLFTagInput"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if v.TagValues == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagValues"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLFTagInput(v *DeleteLFTagInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLFTagInput"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeregisterResourceInput(v *DeregisterResourceInput) error {
 	if v == nil {
 		return nil
@@ -481,6 +876,40 @@ func validateOpGetEffectivePermissionsForPathInput(v *GetEffectivePermissionsFor
 	invalidParams := smithy.InvalidParamsError{Context: "GetEffectivePermissionsForPathInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLFTagInput(v *GetLFTagInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLFTagInput"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetResourceLFTagsInput(v *GetResourceLFTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceLFTagsInput"}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	} else if v.Resource != nil {
+		if err := validateResource(v.Resource); err != nil {
+			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -561,6 +990,32 @@ func validateOpRegisterResourceInput(v *RegisterResourceInput) error {
 	}
 }
 
+func validateOpRemoveLFTagsFromResourceInput(v *RemoveLFTagsFromResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveLFTagsFromResourceInput"}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
+	} else if v.Resource != nil {
+		if err := validateResource(v.Resource); err != nil {
+			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LFTags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LFTags"))
+	} else if v.LFTags != nil {
+		if err := validateLFTagsList(v.LFTags); err != nil {
+			invalidParams.AddNested("LFTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRevokePermissionsInput(v *RevokePermissionsInput) error {
 	if v == nil {
 		return nil
@@ -578,6 +1033,59 @@ func validateOpRevokePermissionsInput(v *RevokePermissionsInput) error {
 	}
 	if v.Permissions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Permissions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchDatabasesByLFTagsInput(v *SearchDatabasesByLFTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchDatabasesByLFTagsInput"}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	} else if v.Expression != nil {
+		if err := validateExpression(v.Expression); err != nil {
+			invalidParams.AddNested("Expression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchTablesByLFTagsInput(v *SearchTablesByLFTagsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchTablesByLFTagsInput"}
+	if v.Expression == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
+	} else if v.Expression != nil {
+		if err := validateExpression(v.Expression); err != nil {
+			invalidParams.AddNested("Expression", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLFTagInput(v *UpdateLFTagInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLFTagInput"}
+	if v.TagKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -58,8 +58,8 @@ type RegisterTaskDefinitionInput struct {
 
 	// You must specify a family for a task definition, which allows you to track
 	// multiple versions of the same task definition. The family is used as a name for
-	// your task definition. Up to 255 letters (uppercase and lowercase), numbers, and
-	// hyphens are allowed.
+	// your task definition. Up to 255 letters (uppercase and lowercase), numbers,
+	// underscores, and hyphens are allowed.
 	//
 	// This member is required.
 	Family *string

@@ -211,7 +211,7 @@ type AnomalyGroupTimeSeriesFeedback struct {
 // Details about an Amazon AppFlow flow datasource.
 type AppFlowConfig struct {
 
-	// The name of the flow.
+	// name of the flow.
 	//
 	// This member is required.
 	FlowName *string
@@ -566,7 +566,7 @@ type SampleDataS3SourceConfig struct {
 // and the IAM role that has access to that topic.
 type SNSConfiguration struct {
 
-	// THe ARN of the IAM role that has access to the target SNS topic.
+	// The ARN of the IAM role that has access to the target SNS topic.
 	//
 	// This member is required.
 	RoleArn *string

@@ -222,6 +222,8 @@
   "SNS": "sns",
   "SQS": "sqs",
   "SSM": "ssm",
+  "SSM Contacts": "ssm-contacts",
+  "SSM Incidents": "ssm-incidents",
   "SSO": "portal.sso",
   "SSO Admin": "sso",
   "SSO OIDC": "oidc",

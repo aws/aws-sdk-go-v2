@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -135,6 +136,83 @@ func addOperationDescribeComplianceByConfigRuleMiddlewares(stack *middleware.Sta
 		return err
 	}
 	return nil
+}
+
+// DescribeComplianceByConfigRuleAPIClient is a client that implements the
+// DescribeComplianceByConfigRule operation.
+type DescribeComplianceByConfigRuleAPIClient interface {
+	DescribeComplianceByConfigRule(context.Context, *DescribeComplianceByConfigRuleInput, ...func(*Options)) (*DescribeComplianceByConfigRuleOutput, error)
+}
+
+var _ DescribeComplianceByConfigRuleAPIClient = (*Client)(nil)
+
+// DescribeComplianceByConfigRulePaginatorOptions is the paginator options for
+// DescribeComplianceByConfigRule
+type DescribeComplianceByConfigRulePaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeComplianceByConfigRulePaginator is a paginator for
+// DescribeComplianceByConfigRule
+type DescribeComplianceByConfigRulePaginator struct {
+	options   DescribeComplianceByConfigRulePaginatorOptions
+	client    DescribeComplianceByConfigRuleAPIClient
+	params    *DescribeComplianceByConfigRuleInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeComplianceByConfigRulePaginator returns a new
+// DescribeComplianceByConfigRulePaginator
+func NewDescribeComplianceByConfigRulePaginator(client DescribeComplianceByConfigRuleAPIClient, params *DescribeComplianceByConfigRuleInput, optFns ...func(*DescribeComplianceByConfigRulePaginatorOptions)) *DescribeComplianceByConfigRulePaginator {
+	if params == nil {
+		params = &DescribeComplianceByConfigRuleInput{}
+	}
+
+	options := DescribeComplianceByConfigRulePaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeComplianceByConfigRulePaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeComplianceByConfigRulePaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeComplianceByConfigRule page.
+func (p *DescribeComplianceByConfigRulePaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeComplianceByConfigRuleOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.DescribeComplianceByConfigRule(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeComplianceByConfigRule(region string) *awsmiddleware.RegisterServiceMetadata {

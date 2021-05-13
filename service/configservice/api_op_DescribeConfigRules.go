@@ -4,6 +4,7 @@ package configservice
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
@@ -111,6 +112,81 @@ func addOperationDescribeConfigRulesMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	return nil
+}
+
+// DescribeConfigRulesAPIClient is a client that implements the DescribeConfigRules
+// operation.
+type DescribeConfigRulesAPIClient interface {
+	DescribeConfigRules(context.Context, *DescribeConfigRulesInput, ...func(*Options)) (*DescribeConfigRulesOutput, error)
+}
+
+var _ DescribeConfigRulesAPIClient = (*Client)(nil)
+
+// DescribeConfigRulesPaginatorOptions is the paginator options for
+// DescribeConfigRules
+type DescribeConfigRulesPaginatorOptions struct {
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeConfigRulesPaginator is a paginator for DescribeConfigRules
+type DescribeConfigRulesPaginator struct {
+	options   DescribeConfigRulesPaginatorOptions
+	client    DescribeConfigRulesAPIClient
+	params    *DescribeConfigRulesInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeConfigRulesPaginator returns a new DescribeConfigRulesPaginator
+func NewDescribeConfigRulesPaginator(client DescribeConfigRulesAPIClient, params *DescribeConfigRulesInput, optFns ...func(*DescribeConfigRulesPaginatorOptions)) *DescribeConfigRulesPaginator {
+	if params == nil {
+		params = &DescribeConfigRulesInput{}
+	}
+
+	options := DescribeConfigRulesPaginatorOptions{}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeConfigRulesPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeConfigRulesPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeConfigRules page.
+func (p *DescribeConfigRulesPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeConfigRulesOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.NextToken = p.nextToken
+
+	result, err := p.client.DescribeConfigRules(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.NextToken
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeConfigRules(region string) *awsmiddleware.RegisterServiceMetadata {

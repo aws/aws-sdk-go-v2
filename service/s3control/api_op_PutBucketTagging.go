@@ -18,17 +18,16 @@ import (
 // This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3
 // bucket, see PutBucketTagging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html) in
-// the Amazon Simple Storage Service API. Sets the tags for an S3 on Outposts
-// bucket. For more information, see Using Amazon S3 on Outposts
+// the Amazon S3 API Reference. Sets the tags for an S3 on Outposts bucket. For
+// more information, see Using Amazon S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-// Amazon Simple Storage Service User Guide. Use tags to organize your AWS bill to
-// reflect your own cost structure. To do this, sign up to get your AWS account
-// bill with tag key values included. Then, to see the cost of combined resources,
-// organize your billing information according to resources with the same tag key
-// values. For example, you can tag several resources with a specific application
-// name, and then organize your billing information to see the total cost of that
-// application across several services. For more information, see Cost allocation
-// and tagging
+// Amazon S3 User Guide. Use tags to organize your AWS bill to reflect your own
+// cost structure. To do this, sign up to get your AWS account bill with tag key
+// values included. Then, to see the cost of combined resources, organize your
+// billing information according to resources with the same tag key values. For
+// example, you can tag several resources with a specific application name, and
+// then organize your billing information to see the total cost of that application
+// across several services. For more information, see Cost allocation and tagging
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html).
 // Within a bucket, if you add a tag that has the same key as an existing tag, the
 // new value overwrites the old value. For more information, see  Using cost

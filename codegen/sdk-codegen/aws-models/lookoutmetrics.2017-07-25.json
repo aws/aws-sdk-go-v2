@@ -676,7 +676,7 @@
                 "FlowName": {
                     "target": "com.amazonaws.lookoutmetrics#FlowName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the flow.</p>",
+                        "smithy.api#documentation": "<p> name of the flow.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1306,7 +1306,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any\n      configured datasets and alerts. </p>",
+                "smithy.api#documentation": "<p>Deletes a detector. Deleting an anomaly detector will delete all of its corresponding resources including any\n      configured datasets and alerts.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DeleteAnomalyDetector",
@@ -1366,7 +1366,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes an alert.</p>",
+                "smithy.api#documentation": "<p>Describes an alert.</p>\n         <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource\n      immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeAlert",
@@ -1510,7 +1510,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a detector.</p>",
+                "smithy.api#documentation": "<p>Describes a detector.</p>\n         <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource\n      immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeAnomalyDetector",
@@ -1615,7 +1615,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a dataset.</p>",
+                "smithy.api#documentation": "<p>Describes a dataset.</p>\n         <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource\n      immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/DescribeMetricSet",
@@ -2248,7 +2248,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*"
+                "smithy.api#pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
             }
         },
         "com.amazonaws.lookoutmetrics#LambdaConfiguration": {
@@ -2299,7 +2299,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the alerts attached to a detector.</p>",
+                "smithy.api#documentation": "<p>Lists the alerts attached to a detector.</p>\n         <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource\n      immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListAlerts",
@@ -2379,7 +2379,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the detectors in the current AWS Region.</p>",
+                "smithy.api#documentation": "<p>Lists the detectors in the current AWS Region.</p>\n         <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource\n      immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListAnomalyDetectors",
@@ -2660,7 +2660,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the datasets in the current AWS Region.</p>",
+                "smithy.api#documentation": "<p>Lists the datasets in the current AWS Region.</p>\n         <p>Amazon Lookout for Metrics API actions are eventually consistent. If you do a read operation on a resource\n      immediately after creating or modifying it, use retries to allow time for the write operation to complete.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListMetricSets",
@@ -3432,7 +3432,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.lookoutmetrics#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>THe ARN of the IAM role that has access to the target SNS topic.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that has access to the target SNS topic.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3861,7 +3861,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+                "smithy.api#pattern": "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
             }
         },
         "com.amazonaws.lookoutmetrics#UntagResource": {

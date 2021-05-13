@@ -1,0 +1,3114 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.ssmcontacts#AcceptCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#AcceptPage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#AcceptPageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#AcceptPageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Used to acknowledge an engagement to a contact channel during an incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#AcceptPageRequest": {
+            "type": "structure",
+            "members": {
+                "PageId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the engagement to a contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactChannelId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact channel.</p>"
+                    }
+                },
+                "AcceptType": {
+                    "target": "com.amazonaws.ssmcontacts#AcceptType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type indicates if the page was <code>DELIVERED</code> or <code>READ</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Note": {
+                    "target": "com.amazonaws.ssmcontacts#ReceiptInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information provided by the user when the user acknowledges the page.</p>"
+                    }
+                },
+                "AcceptCode": {
+                    "target": "com.amazonaws.ssmcontacts#AcceptCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accept code is a 6-digit code used to acknowledge the page.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#AcceptPageResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#AcceptType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DELIVERED",
+                        "name": "DELIVERED"
+                    },
+                    {
+                        "value": "READ",
+                        "name": "READ"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmcontacts#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ssmcontacts#ActivateContactChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ActivateContactChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ActivateContactChannelResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Activates a contact's contact channel. Incident Manager can't engage a contact until\n         the\n         contact channel has been activated.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ActivateContactChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ContactChannelId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActivationCode": {
+                    "target": "com.amazonaws.ssmcontacts#ActivationCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The code sent to the contact channel when it was created in the contact. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ActivateContactChannelResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#ActivationCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 6,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^[0-9]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ActivationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVATED",
+                        "name": "ACTIVATED"
+                    },
+                    {
+                        "value": "NOT_ACTIVATED",
+                        "name": "NOT_ACTIVATED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmcontacts#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ChannelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\s\\.]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ChannelTargetInfo": {
+            "type": "structure",
+            "members": {
+                "ContactChannelId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RetryIntervalInMinutes": {
+                    "target": "com.amazonaws.ssmcontacts#RetryIntervalInMinutes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of minutes to wait to retry sending engagement in the case the engagement\n         initially fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the contact channel that Incident Manager uses to engage the\n         contact.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ChannelType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SMS",
+                        "name": "SMS"
+                    },
+                    {
+                        "value": "VOICE",
+                        "name": "VOICE"
+                    },
+                    {
+                        "value": "EMAIL",
+                        "name": "EMAIL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmcontacts#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier of the resource in use",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "ype of the resource in use",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting a resource causes an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.ssmcontacts#Contact": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.ssmcontacts#ContactAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique and identifiable alias of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssmcontacts#ContactName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full name of the contact or escalation plan.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Refers to the type of contact. A single contact is type <code>PERSONAL</code> and an\n         escalation plan is type <code>ESCALATION</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A personal contact or escalation plan that Incident Manager engages during an\n         incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ContactAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-z0-9_\\-]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ContactChannel": {
+            "type": "structure",
+            "members": {
+                "ContactChannelArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact that contains the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.ssmcontacts#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the contact channel. Incident Manager supports three contact methods:</p>\n         <ul>\n            <li>\n               <p>SMS</p>\n            </li>\n            <li>\n               <p>VOICE</p>\n            </li>\n            <li>\n               <p>EMAIL</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DeliveryAddress": {
+                    "target": "com.amazonaws.ssmcontacts#ContactChannelAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActivationStatus": {
+                    "target": "com.amazonaws.ssmcontacts#ActivationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value describing if the contact channel has been activated or not. If the\n         contact channel isn't activated, Incident Manager can't engage the contact through it. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The method that Incident Manager uses to engage a contact.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ContactChannelAddress": {
+            "type": "structure",
+            "members": {
+                "SimpleAddress": {
+                    "target": "com.amazonaws.ssmcontacts#SimpleAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format is dependent on the type of the contact channel. The following are the\n         expected formats:</p>\n         <ul>\n            <li>\n               <p>SMS - '+' followed by the country code and phone number</p>\n            </li>\n            <li>\n               <p>VOICE - '+' followed by the country code and phone number</p>\n            </li>\n            <li>\n               <p>EMAIL - any standard email format</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel. </p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ContactChannelList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#ContactChannel"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ContactName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-\\s\\.]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ContactTargetInfo": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact.</p>"
+                    }
+                },
+                "IsEssential": {
+                    "target": "com.amazonaws.ssmcontacts#IsEssential",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value determining if the contact's acknowledgement stops the progress of\n         stages in the plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contact that Incident Manager is engaging during an incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ContactType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PERSONAL",
+                        "name": "PERSONAL"
+                    },
+                    {
+                        "value": "ESCALATION",
+                        "name": "ESCALATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmcontacts#ContactsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Contact"
+            }
+        },
+        "com.amazonaws.ssmcontacts#Content": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^[.\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#CreateContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#CreateContactResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Contacts are either the contacts that Incident Manager engages during an incident or the\n         escalation plans that Incident Manager uses to engage contacts in phases during an\n         incident. </p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateContactChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#CreateContactChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#CreateContactChannelResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A contact channel is the method that Incident Manager uses to engage your contact.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateContactChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.ssmcontacts#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Incident Manager supports three types of contact channels:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>SMS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>VOICE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>EMAIL</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeliveryAddress": {
+                    "target": "com.amazonaws.ssmcontacts#ContactChannelAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel. The format\n         is dependent on the type of the contact channel. The following are the expected\n         formats:</p>\n         <ul>\n            <li>\n               <p>SMS - '+' followed by the country code and phone number</p>\n            </li>\n            <li>\n               <p>VOICE - '+' followed by the country code and phone number</p>\n            </li>\n            <li>\n               <p>EMAIL - any standard email format</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeferActivation": {
+                    "target": "com.amazonaws.ssmcontacts#DeferActivation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you want to activate the channel at a later time, you can choose to defer activation.\n         Incident Manager can't engage your contact channel until it has been activated.</p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.ssmcontacts#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateContactChannelResult": {
+            "type": "structure",
+            "members": {
+                "ContactChannelArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateContactRequest": {
+            "type": "structure",
+            "members": {
+                "Alias": {
+                    "target": "com.amazonaws.ssmcontacts#ContactAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short name to quickly identify a contact or escalation plan. The contact alias must\n         be unique and identifiable. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssmcontacts#ContactName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full name of the contact or escalation plan.  </p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To create an escalation plan use <code>ESCALATION</code>. To create a contact use\n            <code>PERSONAL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Plan": {
+                    "target": "com.amazonaws.ssmcontacts#Plan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of stages. A contact has an engagement plan with stages that contact specified\n         contact channels. An escalation plan uses stages that contact specified contacts. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmcontacts#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adds a tag to the target. You can only tag resources created in the first Region of your\n         replication set. </p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.ssmcontacts#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#CreateContactResult": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the created contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DataEncryptionException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action failed to due an encryption key error.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssmcontacts#DateTime": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.ssmcontacts#DeactivateContactChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#DeactivateContactChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#DeactivateContactChannelResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>To no longer receive Incident Manager engagements to a contact channel, you can deactivate\n         the channel.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeactivateContactChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ContactChannelId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel you're deactivating.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeactivateContactChannelResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#DeferActivation": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#DeleteContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#DeleteContactResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>To remove a contact from Incident Manager, you can delete the contact. Deleting a contact\n         removes them from all escalation plans and related response plans. Deleting an escalation\n         plan removes it from all related response plans. You will have to recreate the contact and\n         its contact channels before you can use it again.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteContactChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#DeleteContactChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#DeleteContactChannelResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>To no longer receive engagements on a contact channel, you can delete the channel from a\n         contact. Deleting the contact channel removes it from the contact's engagement plan. If you\n         delete the only contact channel for a contact, you won't be able to engage that contact\n         during an incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteContactChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ContactChannelId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteContactChannelResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#DeleteContactRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact that you're deleting.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DeleteContactResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#DescribeEngagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#DescribeEngagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#DescribeEngagementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Incident Manager uses engagements to engage contacts and escalation plans during an incident.\n         Use this command to describe the engagement that occurred during an incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#DescribeEngagementRequest": {
+            "type": "structure",
+            "members": {
+                "EngagementId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the engagement you want the details of.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DescribeEngagementResult": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the escalation plan or contacts involved in the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EngagementArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sender": {
+                    "target": "com.amazonaws.ssmcontacts#Sender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user that started the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subject": {
+                    "target": "com.amazonaws.ssmcontacts#Subject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secure subject of the message that was sent to the contact. Use this field for\n         engagements to <code>VOICE</code> and <code>EMAIL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.ssmcontacts#Content",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secure content of the message that was sent to the contact. Use this field for\n         engagements to <code>VOICE</code> and <code>EMAIL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicSubject": {
+                    "target": "com.amazonaws.ssmcontacts#PublicSubject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insecure subject of the message that was sent to the contact. Use this field for\n         engagements to <code>SMS</code>.</p>"
+                    }
+                },
+                "PublicContent": {
+                    "target": "com.amazonaws.ssmcontacts#PublicContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insecure content of the message that was sent to the contact. Use this field for\n         engagements to <code>SMS</code>.</p>"
+                    }
+                },
+                "IncidentId": {
+                    "target": "com.amazonaws.ssmcontacts#IncidentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the incident in which the engagement occurred.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the engagement started.</p>"
+                    }
+                },
+                "StopTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the engagement ended.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DescribePage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#DescribePageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#DescribePageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists details of the engagement to a contact channel.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#DescribePageRequest": {
+            "type": "structure",
+            "members": {
+                "PageId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the engagement to a contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#DescribePageResult": {
+            "type": "structure",
+            "members": {
+                "PageArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the engagement to a contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EngagementArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the engagement that engaged the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact that was engaged.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sender": {
+                    "target": "com.amazonaws.ssmcontacts#Sender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user that started the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subject": {
+                    "target": "com.amazonaws.ssmcontacts#Subject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secure subject of the message that was sent to the contact. Use this field for\n         engagements to <code>VOICE</code> and <code>EMAIL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.ssmcontacts#Content",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secure content of the message that was sent to the contact. Use this field for\n         engagements to <code>VOICE</code> and <code>EMAIL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicSubject": {
+                    "target": "com.amazonaws.ssmcontacts#PublicSubject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insecure subject of the message that was sent to the contact. Use this field for\n         engagements to <code>SMS</code>.</p>"
+                    }
+                },
+                "PublicContent": {
+                    "target": "com.amazonaws.ssmcontacts#PublicContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insecure content of the message that was sent to the contact. Use this field for\n         engagements to <code>SMS</code>.</p>"
+                    }
+                },
+                "IncidentId": {
+                    "target": "com.amazonaws.ssmcontacts#IncidentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the incident that engaged the contact channel.</p>"
+                    }
+                },
+                "SentTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the engagement was sent to the contact channel.</p>"
+                    }
+                },
+                "ReadTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the contact channel acknowledged the engagement.</p>"
+                    }
+                },
+                "DeliveryTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the contact channel received the engagement.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#Engagement": {
+            "type": "structure",
+            "members": {
+                "EngagementArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the escalation plan or contact that Incident Manager is engaging.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sender": {
+                    "target": "com.amazonaws.ssmcontacts#Sender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user that started the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncidentId": {
+                    "target": "com.amazonaws.ssmcontacts#IncidentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the incident that's engaging the contact.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the engagement began.</p>"
+                    }
+                },
+                "StopTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the engagement ended.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Incident Manager reaching out to a contact or escalation plan to engage contact during an\n         incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#EngagementsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Engagement"
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#GetContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#GetContactResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about the specified contact or escalation plan.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContactChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#GetContactChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#GetContactChannelResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List details about a specific contact channel.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContactChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ContactChannelId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel you want information about.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContactChannelResult": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact that the channel belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactChannelArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.ssmcontacts#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the contact channel</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ChannelType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of contact channel. The type is <code>SMS</code>, <code>VOICE</code>, or\n            <code>EMAIL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeliveryAddress": {
+                    "target": "com.amazonaws.ssmcontacts#ContactChannelAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ActivationStatus": {
+                    "target": "com.amazonaws.ssmcontacts#ActivationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Boolean value indicating if the contact channel has been activated or not.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContactPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#GetContactPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#GetContactPolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the resource policies attached to the specified contact or escalation\n         plan.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContactPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContactPolicyResult": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact or escalation plan.</p>"
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.ssmcontacts#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the resource policy attached to the contact or escalation plan.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContactRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#GetContactResult": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.ssmcontacts#ContactAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias of the contact or escalation plan. The alias is unique and\n         identifiable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssmcontacts#ContactName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full name of the contact or escalation plan.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of contact, either <code>PERSONAL</code> or <code>ESCALATION</code>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Plan": {
+                    "target": "com.amazonaws.ssmcontacts#Plan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the specific timing or stages and targets of the escalation plan or\n         engagement plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#IdempotencyToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\\\\\/a-zA-Z0-9_+=\\-]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#IncidentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\\\a-zA-Z0-9_@#%*+=:?.\\/!\\s-]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.ssmcontacts#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "Advice to clients on when the call can be safely retried",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Unexpected error occurred while\n         processing the request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ssmcontacts#IsEssential": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListContactChannels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListContactChannelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListContactChannelsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all contact channels for the specified contact.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ContactChannels",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListContactChannelsRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of contact channels per page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListContactChannelsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "ContactChannels": {
+                    "target": "com.amazonaws.ssmcontacts#ContactChannelList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of contact channels related to the specified contact.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListContacts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListContactsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListContactsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all contacts and escalation plans in Incident Manager.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Contacts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListContactsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of contacts and escalation plans per page of results.</p>"
+                    }
+                },
+                "AliasPrefix": {
+                    "target": "com.amazonaws.ssmcontacts#ContactAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to list only contacts who's aliases start with the specified prefix.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.ssmcontacts#ContactType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of contact. A contact is type <code>PERSONAL</code> and an escalation plan is\n         type <code>ESCALATION</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListContactsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "Contacts": {
+                    "target": "com.amazonaws.ssmcontacts#ContactsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the contacts and escalation plans in your Incident Manager account.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListEngagements": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListEngagementsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListEngagementsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all engagements that have happened in an incident.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Engagements",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListEngagementsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of engagements per page of results.</p>"
+                    }
+                },
+                "IncidentId": {
+                    "target": "com.amazonaws.ssmcontacts#IncidentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident you're listing engagements for.</p>"
+                    }
+                },
+                "TimeRangeValue": {
+                    "target": "com.amazonaws.ssmcontacts#TimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time range to lists engagements for an incident.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListEngagementsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "Engagements": {
+                    "target": "com.amazonaws.ssmcontacts#EngagementsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of each engagement that occurred during the specified time range of an\n         incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPageReceipts": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListPageReceiptsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListPageReceiptsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the engagements to contact channels that have been acknowledged. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Receipts",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPageReceiptsRequest": {
+            "type": "structure",
+            "members": {
+                "PageId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the engagement to a specific contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of acknowledgements per page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPageReceiptsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "Receipts": {
+                    "target": "com.amazonaws.ssmcontacts#ReceiptsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of each acknowledgement.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPagesByContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListPagesByContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListPagesByContactResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the engagements to a contact's contact channels.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Pages",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPagesByContactRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact you are retrieving engagements for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of engagements to contact channels to list per page of results. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPagesByContactResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "Pages": {
+                    "target": "com.amazonaws.ssmcontacts#PagesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of engagements to a contact's contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPagesByEngagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListPagesByEngagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListPagesByEngagementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the engagements to contact channels that occurred by engaging a contact.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Pages",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPagesByEngagementRequest": {
+            "type": "structure",
+            "members": {
+                "EngagementId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssmcontacts#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of engagements to contact channels to list per page of\n         results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListPagesByEngagementResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssmcontacts#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                },
+                "Pages": {
+                    "target": "com.amazonaws.ssmcontacts#PagesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of engagements to contact channels.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#ListTagsForResourceResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags of an escalation plan or contact.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.ssmcontacts#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#ListTagsForResourceResult": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.ssmcontacts#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags related to the contact or escalation plan.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#Page": {
+            "type": "structure",
+            "members": {
+                "PageArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the page to the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EngagementArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the engagement that this page is part of.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the contact that Incident Manager is engaging.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sender": {
+                    "target": "com.amazonaws.ssmcontacts#Sender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user that started the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncidentId": {
+                    "target": "com.amazonaws.ssmcontacts#IncidentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the incident that's engaging the contact channel.</p>"
+                    }
+                },
+                "SentTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that Incident Manager engaged the contact channel.</p>"
+                    }
+                },
+                "DeliveryTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the message was delivered to the contact channel.</p>"
+                    }
+                },
+                "ReadTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the contact channel acknowledged engagement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Incident Manager engaging a contact's contact channel.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#PagesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Page"
+            }
+        },
+        "com.amazonaws.ssmcontacts#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[\\\\\\/a-zA-Z0-9_+=\\-]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#Plan": {
+            "type": "structure",
+            "members": {
+                "Stages": {
+                    "target": "com.amazonaws.ssmcontacts#StagesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of stages that the escalation plan or engagement plan uses to engage contacts and\n         contact methods.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The stages that an escalation plan or engagement plan engages contacts and contact\n         methods in.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#Policy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 395000
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.ssmcontacts#PublicContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^[.\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#PublicSubject": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[.\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#PutContactPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#PutContactPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#PutContactPolicyResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a resource to the specified contact or escalation plan.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#PutContactPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "ContactArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.ssmcontacts#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the resource policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#PutContactPolicyResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#Receipt": {
+            "type": "structure",
+            "members": {
+                "ContactChannelArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel Incident Manager engaged.</p>"
+                    }
+                },
+                "ReceiptType": {
+                    "target": "com.amazonaws.ssmcontacts#ReceiptType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type follows the engagement cycle, <code>SENT</code>, <code>DELIVERED</code>, and\n            <code>READ</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReceiptInfo": {
+                    "target": "com.amazonaws.ssmcontacts#ReceiptInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information provided during the page acknowledgement.</p>"
+                    }
+                },
+                "ReceiptTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time receipt was <code>SENT</code>, <code>DELIVERED</code>, or\n         <code>READ</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Records events during an engagement.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ReceiptInfo": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[.\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ReceiptType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DELIVERED",
+                        "name": "DELIVERED"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "READ",
+                        "name": "READ"
+                    },
+                    {
+                        "value": "SENT",
+                        "name": "SENT"
+                    },
+                    {
+                        "value": "STOP",
+                        "name": "STOP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmcontacts#ReceiptsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Receipt"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Hypothetical resource identifier that was not found",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Hypothetical resource type that was not found",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request references a resource that\n         doesn't\n         exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ssmcontacts#RetryAfterSeconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.ssmcontacts#RetryIntervalInMinutes": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 60
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#SSMContacts": {
+            "type": "service",
+            "version": "2021-05-03",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AcceptPage"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ActivateContactChannel"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#CreateContact"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#CreateContactChannel"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DeactivateContactChannel"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DeleteContact"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DeleteContactChannel"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DescribeEngagement"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DescribePage"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#GetContact"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#GetContactChannel"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#GetContactPolicy"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListContactChannels"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListContacts"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListEngagements"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListPageReceipts"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListPagesByContact"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListPagesByEngagement"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#PutContactPolicy"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#SendActivationCode"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#StartEngagement"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#StopEngagement"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#UpdateContact"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#UpdateContactChannel"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSM Contacts",
+                    "arnNamespace": "ssm-contacts",
+                    "cloudFormationName": "SSMContacts",
+                    "cloudTrailEventSource": "ssmcontacts.amazonaws.com",
+                    "endpointPrefix": "ssm-contacts"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm-contacts"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p></p>",
+                "smithy.api#title": "AWS Systems Manager Incident Manager Contacts"
+            }
+        },
+        "com.amazonaws.ssmcontacts#SendActivationCode": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#SendActivationCodeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#SendActivationCodeResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends an activation code to a contact channel. The contact can use this code to activate\n         the contact channel in the console or with the <code>ActivateChannel</code> action.\n         Incident Manager can't engage a contact channel until it has been activated.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#SendActivationCodeRequest": {
+            "type": "structure",
+            "members": {
+                "ContactChannelId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#SendActivationCodeResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#Sender": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\\\a-zA-Z0-9_@#%*+=:?.\\/!\\s-]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceId": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Identifier of the resource affected"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Type of the resource affected"
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating service",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating quota",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request would cause a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.ssmcontacts#SimpleAddress": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 320
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#SsmContactsArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "arn:(aws|aws-cn|aws-us-gov):ssm-contacts:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*"
+            }
+        },
+        "com.amazonaws.ssmcontacts#Stage": {
+            "type": "structure",
+            "members": {
+                "DurationInMinutes": {
+                    "target": "com.amazonaws.ssmcontacts#StageDurationInMins",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time to wait until beginning the next stage.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Targets": {
+                    "target": "com.amazonaws.ssmcontacts#TargetsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contacts or contact methods that the escalation plan or engagement plan is\n         engaging.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A set amount of time that an escalation plan or engagement plan engages the specified\n         contacts or contact methods.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#StageDurationInMins": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 30
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#StagesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Stage"
+            }
+        },
+        "com.amazonaws.ssmcontacts#StartEngagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#StartEngagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#StartEngagementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an engagement to a contact or escalation plan. The engagement engages each\n         contact specified in the incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#StartEngagementRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact being engaged.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Sender": {
+                    "target": "com.amazonaws.ssmcontacts#Sender",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user that started the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Subject": {
+                    "target": "com.amazonaws.ssmcontacts#Subject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secure subject of the message that was sent to the contact. Use this field for\n         engagements to <code>VOICE</code> or <code>EMAIL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.ssmcontacts#Content",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The secure content of the message that was sent to the contact. Use this field for\n         engagements to <code>VOICE</code> or <code>EMAIL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicSubject": {
+                    "target": "com.amazonaws.ssmcontacts#PublicSubject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insecure subject of the message that was sent to the contact. Use this field for\n         engagements to <code>SMS</code>.</p>"
+                    }
+                },
+                "PublicContent": {
+                    "target": "com.amazonaws.ssmcontacts#PublicContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The insecure content of the message that was sent to the contact. Use this field for\n         engagements to <code>SMS</code>.</p>"
+                    }
+                },
+                "IncidentId": {
+                    "target": "com.amazonaws.ssmcontacts#IncidentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the incident that the engagement is part of.</p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.ssmcontacts#IdempotencyToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#StartEngagementResult": {
+            "type": "structure",
+            "members": {
+                "EngagementArn": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#StopEngagement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#StopEngagementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#StopEngagementResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops an engagement before it finishes the final stage of the escalation plan or\n         engagement plan. Further contacts aren't engaged.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#StopEngagementRequest": {
+            "type": "structure",
+            "members": {
+                "EngagementId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the engagement.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.ssmcontacts#StopReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that you're stopping the engagement. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#StopEngagementResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#StopReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[.\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#String": {
+            "type": "string"
+        },
+        "com.amazonaws.ssmcontacts#Subject": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[.\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ssmcontacts#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the\n         object\n         key.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.ssmcontacts#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Value of the tag.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container of a key-value name pair.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\\\\\/a-zA-Z0-9_+=\\-]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#TagResourceResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Tags a contact or escalation plan. You can tag only contacts and escalation plans in the\n         first region of your replication set. </p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.ssmcontacts#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.ssmcontacts#TagsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags that you are adding to the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#TagResourceResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*$"
+            }
+        },
+        "com.amazonaws.ssmcontacts#TagsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#Target": {
+            "type": "structure",
+            "members": {
+                "ChannelTargetInfo": {
+                    "target": "com.amazonaws.ssmcontacts#ChannelTargetInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the contact channel Incident Manager is engaging.</p>"
+                    }
+                },
+                "ContactTargetInfo": {
+                    "target": "com.amazonaws.ssmcontacts#ContactTargetInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the contact that Incident Manager is engaging.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The contact or contact channel that is being engaged.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#TargetsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#Target"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "QuotaCode": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating service"
+                    }
+                },
+                "ServiceCode": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "Service Quotas requirement to identify originating quota"
+                    }
+                },
+                "RetryAfterSeconds": {
+                    "target": "com.amazonaws.ssmcontacts#RetryAfterSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "Advice to clients on when the call can be safely retried",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.ssmcontacts#TimeRange": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start of the time range.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.ssmcontacts#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of the time range.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A range of between two set times</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#UntagResourceResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes tags from the specified resource. </p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.ssmcontacts#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.ssmcontacts#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag that you want to remove.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#UntagResourceResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#UpdateContact": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#UpdateContactRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#UpdateContactResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the contact or escalation plan specified. </p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#UpdateContactChannel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmcontacts#UpdateContactChannelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmcontacts#UpdateContactChannelResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmcontacts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#DataEncryptionException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmcontacts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a contact's contact channel.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#UpdateContactChannelRequest": {
+            "type": "structure",
+            "members": {
+                "ContactChannelId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.ssmcontacts#ChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the contact channel</p>"
+                    }
+                },
+                "DeliveryAddress": {
+                    "target": "com.amazonaws.ssmcontacts#ContactChannelAddress",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details that Incident Manager uses when trying to engage the contact channel. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#UpdateContactChannelResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#UpdateContactRequest": {
+            "type": "structure",
+            "members": {
+                "ContactId": {
+                    "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact or escalation plan you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssmcontacts#ContactName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full name of the contact or escalation plan.</p>"
+                    }
+                },
+                "Plan": {
+                    "target": "com.amazonaws.ssmcontacts#Plan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of stages. A contact has an engagement plan with stages for specified contact\n         channels. An escalation plan uses these stages to contact specified contacts. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmcontacts#UpdateContactResult": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmcontacts#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.ssmcontacts#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "Reason the request failed validation"
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.ssmcontacts#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "The fields that caused the error"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an\n         AWS\n         service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.ssmcontacts#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field that caused the exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.ssmcontacts#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about what caused the field to cause an exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about which field caused the exception.</p>"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmcontacts#ValidationExceptionField"
+            }
+        },
+        "com.amazonaws.ssmcontacts#ValidationExceptionReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "UNKNOWN_OPERATION",
+                        "name": "UNKNOWN_OPERATION"
+                    },
+                    {
+                        "value": "CANNOT_PARSE",
+                        "name": "CANNOT_PARSE"
+                    },
+                    {
+                        "value": "FIELD_VALIDATION_FAILED",
+                        "name": "FIELD_VALIDATION_FAILED"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        }
+    }
+}

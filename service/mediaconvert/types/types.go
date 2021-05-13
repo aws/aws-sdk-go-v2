@@ -1748,6 +1748,43 @@ type DvbSubDestinationSettings struct {
 	// (transparent). All burn-in and DVB-Sub font settings must match.
 	BackgroundOpacity int32
 
+	// Specify how MediaConvert handles the display definition segment (DDS). Keep the
+	// default, None (NONE), to exclude the DDS from this set of captions. Choose No
+	// display window (NO_DISPLAY_WINDOW) to have MediaConvert include the DDS but not
+	// include display window data. In this case, MediaConvert writes that information
+	// to the page composition segment (PCS) instead. Choose Specify (SPECIFIED) to
+	// have MediaConvert set up the display window based on the values that you specify
+	// in related job settings. For video resolutions that are 576 pixels or smaller in
+	// height, MediaConvert doesn't include the DDS, regardless of the value you choose
+	// for DDS handling (ddsHandling). In this case, it doesn't write the display
+	// window data to the PCS either. Related settings: Use the settings DDS
+	// x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate) to specify
+	// the offset between the top left corner of the display window and the top left
+	// corner of the video frame. All burn-in and DVB-Sub font settings must match.
+	DdsHandling DvbddsHandling
+
+	// Use this setting, along with DDS y-coordinate (ddsYCoordinate), to specify the
+	// upper left corner of the display definition segment (DDS) display window. With
+	// this setting, specify the distance, in pixels, between the left side of the
+	// frame and the left side of the DDS display window. Keep the default value, 0, to
+	// have MediaConvert automatically choose this offset. Related setting: When you
+	// use this setting, you must set DDS handling (ddsHandling) to a value other than
+	// None (NONE). MediaConvert uses these values to determine whether to write page
+	// position data to the DDS or to the page composition segment (PCS). All burn-in
+	// and DVB-Sub font settings must match.
+	DdsXCoordinate int32
+
+	// Use this setting, along with DDS x-coordinate (ddsXCoordinate), to specify the
+	// upper left corner of the display definition segment (DDS) display window. With
+	// this setting, specify the distance, in pixels, between the top of the frame and
+	// the top of the DDS display window. Keep the default value, 0, to have
+	// MediaConvert automatically choose this offset. Related setting: When you use
+	// this setting, you must set DDS handling (ddsHandling) to a value other than None
+	// (NONE). MediaConvert uses these values to determine whether to write page
+	// position data to the DDS or to the page composition segment (PCS). All burn-in
+	// and DVB-Sub font settings must match.
+	DdsYCoordinate int32
+
 	// Specifies the color of the burned-in captions. This option is not valid for
 	// source captions that are STL, 608/embedded or teletext. These source settings
 	// are already pre-defined by the caption stream. All burn-in and DVB-Sub font
@@ -1771,6 +1808,12 @@ type DvbSubDestinationSettings struct {
 	// A positive integer indicates the exact font size in points. Set to 0 for
 	// automatic font size selection. All burn-in and DVB-Sub font settings must match.
 	FontSize int32
+
+	// Specify the height, in pixels, of this set of DVB-Sub captions. The default
+	// value is 576 pixels. Related setting: When you use this setting, you must set
+	// DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and
+	// DVB-Sub font settings must match.
+	Height int32
 
 	// Specifies font outline color. This option is not valid for source captions that
 	// are either 608/embedded or teletext. These source settings are already
@@ -1814,6 +1857,12 @@ type DvbSubDestinationSettings struct {
 	// specified in the captions file more accurately. Choose proportional to make the
 	// text easier to read if the captions are closed caption.
 	TeletextSpacing DvbSubtitleTeletextSpacing
+
+	// Specify the width, in pixels, of this set of DVB-Sub captions. The default value
+	// is 720 pixels. Related setting: When you use this setting, you must set DDS
+	// handling (ddsHandling) to a value other than None (NONE). All burn-in and
+	// DVB-Sub font settings must match.
+	Width int32
 
 	// Specifies the horizontal position of the caption relative to the left side of
 	// the output in pixels. A value of 10 would result in the captions starting 10
@@ -3824,6 +3873,14 @@ type JobSettings struct {
 	// create the output.
 	Inputs []Input
 
+	// Use these settings only when you use Kantar watermarking. Specify the values
+	// that MediaConvert uses to generate and place Kantar watermarks in your output
+	// audio. These settings apply to every output in your job. In addition to
+	// specifying these values, you also need to store your Kantar credentials in AWS
+	// Secrets Manager. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+	KantarWatermark *KantarWatermarkSettings
+
 	// Overlay motion graphics on top of your video. The motion graphics that you
 	// specify here appear on all outputs in all output groups. For more information,
 	// see
@@ -3948,6 +4005,14 @@ type JobTemplateSettings struct {
 	// inputs when referencing a job template.
 	Inputs []InputTemplate
 
+	// Use these settings only when you use Kantar watermarking. Specify the values
+	// that MediaConvert uses to generate and place Kantar watermarks in your output
+	// audio. These settings apply to every output in your job. In addition to
+	// specifying these values, you also need to store your Kantar credentials in AWS
+	// Secrets Manager. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+	KantarWatermark *KantarWatermarkSettings
+
 	// Overlay motion graphics on top of your video. The motion graphics that you
 	// specify here appear on all outputs in all output groups. For more information,
 	// see
@@ -3993,6 +4058,76 @@ type JobTemplateSettings struct {
 	// in each output container, and specify tags and timecodes in ID3 insertion
 	// (Id3Insertion) objects.
 	TimedMetadataInsertion *TimedMetadataInsertion
+}
+
+// Use these settings only when you use Kantar watermarking. Specify the values
+// that MediaConvert uses to generate and place Kantar watermarks in your output
+// audio. These settings apply to every output in your job. In addition to
+// specifying these values, you also need to store your Kantar credentials in AWS
+// Secrets Manager. For more information, see
+// https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.
+type KantarWatermarkSettings struct {
+
+	// Provide an audio channel name from your Kantar audio license.
+	ChannelName *string
+
+	// Specify a unique identifier for Kantar to use for this piece of content.
+	ContentReference *string
+
+	// Provide the name of the AWS Secrets Manager secret where your Kantar credentials
+	// are stored. Note that your MediaConvert service role must provide access to this
+	// secret. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/granting-permissions-for-mediaconvert-to-access-secrets-manager-secret.html.
+	// For instructions on creating a secret, see
+	// https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html,
+	// in the AWS Secrets Manager User Guide.
+	CredentialsSecretName *string
+
+	// Optional. Specify an offset, in whole seconds, from the start of your output and
+	// the beginning of the watermarking. When you don't specify an offset, Kantar
+	// defaults to zero.
+	FileOffset float64
+
+	// Provide your Kantar license ID number. You should get this number from Kantar.
+	KantarLicenseId int32
+
+	// Provide the HTTPS endpoint to the Kantar server. You should get this endpoint
+	// from Kantar.
+	KantarServerUrl *string
+
+	// Optional. Specify the Amazon S3 bucket where you want MediaConvert to store your
+	// Kantar watermark XML logs. When you don't specify a bucket, MediaConvert doesn't
+	// save these logs. Note that your MediaConvert service role must provide access to
+	// this location. For more information, see
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html
+	LogDestination *string
+
+	// You can optionally use this field to specify the first timestamp that Kantar
+	// embeds during watermarking. Kantar suggests that you be very cautious when using
+	// this Kantar feature, and that you use it only on channels that are managed
+	// specifically for use with this feature by your Audience Measurement Operator.
+	// For more information about this feature, contact Kantar technical support.
+	Metadata3 *string
+
+	// Additional metadata that MediaConvert sends to Kantar. Maximum length is 50
+	// characters.
+	Metadata4 *string
+
+	// Additional metadata that MediaConvert sends to Kantar. Maximum length is 50
+	// characters.
+	Metadata5 *string
+
+	// Additional metadata that MediaConvert sends to Kantar. Maximum length is 50
+	// characters.
+	Metadata6 *string
+
+	// Additional metadata that MediaConvert sends to Kantar. Maximum length is 50
+	// characters.
+	Metadata7 *string
+
+	// Additional metadata that MediaConvert sends to Kantar. Maximum length is 50
+	// characters.
+	Metadata8 *string
 }
 
 // Settings for SCTE-35 signals from ESAM. Include this in your job settings to put
@@ -4247,6 +4382,10 @@ type M3u8Settings struct {
 	// stream. Multiple values are accepted, and can be entered in ranges and/or by
 	// comma separation.
 	AudioPids []int32
+
+	// Specify the maximum time, in milliseconds, between Program Clock References
+	// (PCRs) inserted into the transport stream.
+	MaxPcrInterval int32
 
 	// If INSERT, Nielsen inaudible tones for media tracking will be detected in the
 	// input audio and an equivalent ID3 tag will be inserted in the output.
@@ -6307,6 +6446,18 @@ type VideoSelector struct {
 	// rotation. By default, the service does no rotation, even if your input video has
 	// rotation metadata. The service doesn't pass through rotation metadata.
 	Rotate InputRotate
+
+	// Use this setting when your input video codec is AVC-Intra. Ignore this setting
+	// for all other inputs. If the sample range metadata in your input video is
+	// accurate, or if you don't know about sample range, keep the default value,
+	// Follow (FOLLOW), for this setting. When you do, the service automatically
+	// detects your input sample range. If your input video has metadata indicating the
+	// wrong sample range, specify the accurate sample range here. When you do,
+	// MediaConvert ignores any sample range information in the input metadata.
+	// Regardless of whether MediaConvert uses the input sample range or the sample
+	// range that you specify, MediaConvert uses the sample range for transcoding and
+	// also writes it to the output metadata.
+	SampleRange InputSampleRange
 }
 
 // Required when you set Codec, under AudioDescriptions>CodecSettings, to the value

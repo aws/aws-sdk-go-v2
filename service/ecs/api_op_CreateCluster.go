@@ -55,7 +55,7 @@ type CreateClusterInput struct {
 
 	// The name of your cluster. If you do not specify a name for your cluster, you
 	// create a cluster named default. Up to 255 letters (uppercase and lowercase),
-	// numbers, and hyphens are allowed.
+	// numbers, underscores, and hyphens are allowed.
 	ClusterName *string
 
 	// The execute command configuration for the cluster.

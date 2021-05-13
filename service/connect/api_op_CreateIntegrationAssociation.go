@@ -11,7 +11,6 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
 // Create an AppIntegration association with an Amazon Connect instance.
 func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *CreateIntegrationAssociationInput, optFns ...func(*Options)) (*CreateIntegrationAssociationOutput, error) {
 	if params == nil {
@@ -59,6 +58,9 @@ type CreateIntegrationAssociationInput struct {
 	//
 	// This member is required.
 	SourceType types.SourceType
+
+	// One or more tags.
+	Tags map[string]string
 }
 
 type CreateIntegrationAssociationOutput struct {
