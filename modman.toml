@@ -3,6 +3,9 @@
 "github.com/google/go-cmp" = "v0.5.4"
 "github.com/jmespath/go-jmespath" = "v0.4.0"
 
+[modules."."]
+metadata_package = "aws"
+
 [modules."example/service/s3/listObjects"]
 no_tag = true
 
