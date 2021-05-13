@@ -131,7 +131,6 @@ func TestClient_MediaTypeHeader_awsRestjson1Deserialize(t *testing.T) {
 			Header: http.Header{
 				"X-Json": []string{"dHJ1ZQ=="},
 			},
-			Body: []byte(``),
 			ExpectResult: &MediaTypeHeaderOutput{
 				Json: ptr.String("true"),
 			},

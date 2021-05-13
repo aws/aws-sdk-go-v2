@@ -150,7 +150,6 @@ func TestClient_TimestampFormatHeaders_awsRestjson1Deserialize(t *testing.T) {
 				"X-targetEpochSeconds": []string{"1576540098"},
 				"X-targetHttpDate":     []string{"Mon, 16 Dec 2019 23:48:18 GMT"},
 			},
-			Body: []byte(``),
 			ExpectResult: &TimestampFormatHeadersOutput{
 				MemberEpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1576540098)),
 				MemberHttpDate:     ptr.Time(smithytime.ParseEpochSeconds(1576540098)),

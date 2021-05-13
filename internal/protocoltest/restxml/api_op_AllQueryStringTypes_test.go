@@ -89,10 +89,6 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 					types.FooEnum("Baz"),
 					types.FooEnum("Bar"),
 				},
-				QueryParamsMapOfStrings: map[string]string{
-					"QueryParamsStringKeyA": "Foo",
-					"QueryParamsStringKeyB": "Bar",
-				},
 			},
 			ExpectMethod:  "GET",
 			ExpectURIPath: "/AllQueryStringTypesInput",
@@ -131,6 +127,22 @@ func TestClient_AllQueryStringTypes_awsRestxmlSerialize(t *testing.T) {
 				{Key: "EnumList", Value: "Foo"},
 				{Key: "EnumList", Value: "Baz"},
 				{Key: "EnumList", Value: "Bar"},
+			},
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareReaderEmpty(actual)
+			},
+		},
+		// Handles query string maps
+		"RestXmlQueryStringMap": {
+			Params: &AllQueryStringTypesInput{
+				QueryParamsMapOfStrings: map[string]string{
+					"QueryParamsStringKeyA": "Foo",
+					"QueryParamsStringKeyB": "Bar",
+				},
+			},
+			ExpectMethod:  "GET",
+			ExpectURIPath: "/AllQueryStringTypesInput",
+			ExpectQuery: []smithytesting.QueryItem{
 				{Key: "QueryParamsStringKeyA", Value: "Foo"},
 				{Key: "QueryParamsStringKeyB", Value: "Bar"},
 			},

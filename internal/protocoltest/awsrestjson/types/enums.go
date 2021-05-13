@@ -2,6 +2,22 @@
 
 package types
 
+type StringEnum string
+
+// Enum values for StringEnum
+const (
+	StringEnumV StringEnum = "enumvalue"
+)
+
+// Values returns all known values for StringEnum. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (StringEnum) Values() []StringEnum {
+	return []StringEnum{
+		"enumvalue",
+	}
+}
+
 type FooEnum string
 
 // Enum values for FooEnum

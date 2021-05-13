@@ -203,7 +203,7 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 }
 
 func addClientUserAgent(stack *middleware.Stack) error {
-	return awsmiddleware.AddRequestUserAgentMiddleware(stack)
+	return awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "ecr", goModuleVersion)(stack)
 }
 
 func addHTTPSignerV4Middleware(stack *middleware.Stack, o Options) error {

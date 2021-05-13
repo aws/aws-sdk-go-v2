@@ -86,12 +86,6 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.2.3
 	github.com/aws/smithy-go v1.4.0
 	github.com/google/go-cmp v0.5.4
-	github.com/aws/aws-sdk-go-v2/credentials v1.1.7
-	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.0.7
-	github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding v1.0.5
-	github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.0.7
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.2.3
-	github.com/aws/aws-sdk-go-v2/service/sso v1.1.6
 )
 
 go 1.15
@@ -99,6 +93,10 @@ go 1.15
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 
 replace github.com/aws/aws-sdk-go-v2/config => ../../../config/
+
+replace github.com/aws/aws-sdk-go-v2/credentials => ../../../credentials/
+
+replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../feature/ec2/imds/
 
 replace github.com/aws/aws-sdk-go-v2/service/acm => ../../../service/acm/
 
@@ -194,6 +192,12 @@ replace github.com/aws/aws-sdk-go-v2/service/iam => ../../../service/iam/
 
 replace github.com/aws/aws-sdk-go-v2/service/inspector => ../../../service/inspector/
 
+replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../service/internal/accept-encoding/
+
+replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../service/internal/presigned-url/
+
+replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../../service/internal/s3shared/
+
 replace github.com/aws/aws-sdk-go-v2/service/iot => ../../../service/iot/
 
 replace github.com/aws/aws-sdk-go-v2/service/kinesis => ../../../service/kinesis/
@@ -250,6 +254,8 @@ replace github.com/aws/aws-sdk-go-v2/service/sqs => ../../../service/sqs/
 
 replace github.com/aws/aws-sdk-go-v2/service/ssm => ../../../service/ssm/
 
+replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../service/sso/
+
 replace github.com/aws/aws-sdk-go-v2/service/sts => ../../../service/sts/
 
 replace github.com/aws/aws-sdk-go-v2/service/support => ../../../service/support/
@@ -261,15 +267,3 @@ replace github.com/aws/aws-sdk-go-v2/service/wafregional => ../../../service/waf
 replace github.com/aws/aws-sdk-go-v2/service/wafv2 => ../../../service/wafv2/
 
 replace github.com/aws/aws-sdk-go-v2/service/workspaces => ../../../service/workspaces/
-
-replace github.com/aws/aws-sdk-go-v2/credentials => ../../../credentials/
-
-replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../feature/ec2/imds/
-
-replace github.com/aws/aws-sdk-go-v2/service/internal/s3shared => ../../../service/internal/s3shared/
-
-replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../service/internal/accept-encoding/
-
-replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../service/internal/presigned-url/
-
-replace github.com/aws/aws-sdk-go-v2/service/sso => ../../../service/sso/

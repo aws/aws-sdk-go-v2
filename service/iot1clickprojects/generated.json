@@ -1,0 +1,39 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_AssociateDeviceWithPlacement.go",
+        "api_op_CreatePlacement.go",
+        "api_op_CreateProject.go",
+        "api_op_DeletePlacement.go",
+        "api_op_DeleteProject.go",
+        "api_op_DescribePlacement.go",
+        "api_op_DescribeProject.go",
+        "api_op_DisassociateDeviceFromPlacement.go",
+        "api_op_GetDevicesInPlacement.go",
+        "api_op_ListPlacements.go",
+        "api_op_ListProjects.go",
+        "api_op_ListTagsForResource.go",
+        "api_op_TagResource.go",
+        "api_op_UntagResource.go",
+        "api_op_UpdatePlacement.go",
+        "api_op_UpdateProject.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/iot1clickprojects",
+    "unstable": false
+}

@@ -1,0 +1,35 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_DescribeRecommendationExportJobs.go",
+        "api_op_ExportAutoScalingGroupRecommendations.go",
+        "api_op_ExportEC2InstanceRecommendations.go",
+        "api_op_GetAutoScalingGroupRecommendations.go",
+        "api_op_GetEBSVolumeRecommendations.go",
+        "api_op_GetEC2InstanceRecommendations.go",
+        "api_op_GetEC2RecommendationProjectedMetrics.go",
+        "api_op_GetEnrollmentStatus.go",
+        "api_op_GetLambdaFunctionRecommendations.go",
+        "api_op_GetRecommendationSummaries.go",
+        "api_op_UpdateEnrollmentStatus.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/computeoptimizer",
+    "unstable": false
+}

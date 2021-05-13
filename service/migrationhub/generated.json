@@ -1,0 +1,41 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_AssociateCreatedArtifact.go",
+        "api_op_AssociateDiscoveredResource.go",
+        "api_op_CreateProgressUpdateStream.go",
+        "api_op_DeleteProgressUpdateStream.go",
+        "api_op_DescribeApplicationState.go",
+        "api_op_DescribeMigrationTask.go",
+        "api_op_DisassociateCreatedArtifact.go",
+        "api_op_DisassociateDiscoveredResource.go",
+        "api_op_ImportMigrationTask.go",
+        "api_op_ListApplicationStates.go",
+        "api_op_ListCreatedArtifacts.go",
+        "api_op_ListDiscoveredResources.go",
+        "api_op_ListMigrationTasks.go",
+        "api_op_ListProgressUpdateStreams.go",
+        "api_op_NotifyApplicationState.go",
+        "api_op_NotifyMigrationTaskState.go",
+        "api_op_PutResourceAttributes.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/migrationhub",
+    "unstable": false
+}
