@@ -356,7 +356,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                     } else { // string
                         writer.addUseImports(SmithyGoDependency.SMITHY_PTR);
                         if (targetShape.hasTrait(EnumTrait.class)) {
-                            writer.write("v.$L = string(bs)", memberName);
+                            writer.write("v.$L = $T(bs)", memberName, symbolProvider.toSymbol(targetShape));
                         } else {
                             writer.write("v.$L = ptr.String(string(bs))", memberName);
                         }

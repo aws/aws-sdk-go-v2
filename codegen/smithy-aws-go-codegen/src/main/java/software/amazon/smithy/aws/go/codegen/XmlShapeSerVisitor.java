@@ -106,7 +106,7 @@ final class XmlShapeSerVisitor extends DocumentShapeSerVisitor {
             writer.insertTrailingNewline();
 
             // Serialize zero values as empty values.
-            GoValueAccessUtils.writeIfZeroValue(context.getModel(), writer, shape.getValue(), "v[i]", () -> {
+            GoValueAccessUtils.writeIfZeroValue(context.getModel(), writer, shape.getValue(), "v[key]", () -> {
                 writer.write("entry.Close()");
                 writer.write("continue");
             });
