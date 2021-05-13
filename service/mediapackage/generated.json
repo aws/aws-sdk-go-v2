@@ -1,0 +1,43 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_ConfigureLogs.go",
+        "api_op_CreateChannel.go",
+        "api_op_CreateHarvestJob.go",
+        "api_op_CreateOriginEndpoint.go",
+        "api_op_DeleteChannel.go",
+        "api_op_DeleteOriginEndpoint.go",
+        "api_op_DescribeChannel.go",
+        "api_op_DescribeHarvestJob.go",
+        "api_op_DescribeOriginEndpoint.go",
+        "api_op_ListChannels.go",
+        "api_op_ListHarvestJobs.go",
+        "api_op_ListOriginEndpoints.go",
+        "api_op_ListTagsForResource.go",
+        "api_op_RotateChannelCredentials.go",
+        "api_op_RotateIngestEndpointCredentials.go",
+        "api_op_TagResource.go",
+        "api_op_UntagResource.go",
+        "api_op_UpdateChannel.go",
+        "api_op_UpdateOriginEndpoint.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/mediapackage",
+    "unstable": false
+}

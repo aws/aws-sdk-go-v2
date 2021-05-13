@@ -19,9 +19,9 @@ type mockClient struct {
 	Output *sso.GetRoleCredentialsOutput
 	Err    error
 
-	ExpectedAccountID    string
-	ExpectedAccessToken  string
-	ExpectedRoleName     string
+	ExpectedAccountID   string
+	ExpectedAccessToken string
+	ExpectedRoleName    string
 
 	Response func(mockClient) (*sso.GetRoleCredentialsOutput, error)
 }
@@ -87,9 +87,9 @@ func TestProvider(t *testing.T) {
 		},
 		"valid required parameter values": {
 			Client: mockClient{
-				ExpectedAccountID:    "012345678901",
-				ExpectedRoleName:     "TestRole",
-				ExpectedAccessToken:  "dGhpcyBpcyBub3QgYSByZWFsIHZhbHVl",
+				ExpectedAccountID:   "012345678901",
+				ExpectedRoleName:    "TestRole",
+				ExpectedAccessToken: "dGhpcyBpcyBub3QgYSByZWFsIHZhbHVl",
 				Response: func(mock mockClient) (*sso.GetRoleCredentialsOutput, error) {
 					return &sso.GetRoleCredentialsOutput{
 						RoleCredentials: &types.RoleCredentials{
@@ -120,9 +120,9 @@ func TestProvider(t *testing.T) {
 		},
 		"api error": {
 			Client: mockClient{
-				ExpectedAccountID:    "012345678901",
-				ExpectedRoleName:     "TestRole",
-				ExpectedAccessToken:  "dGhpcyBpcyBub3QgYSByZWFsIHZhbHVl",
+				ExpectedAccountID:   "012345678901",
+				ExpectedRoleName:    "TestRole",
+				ExpectedAccessToken: "dGhpcyBpcyBub3QgYSByZWFsIHZhbHVl",
 				Response: func(mock mockClient) (*sso.GetRoleCredentialsOutput, error) {
 					return nil, fmt.Errorf("api error")
 				},

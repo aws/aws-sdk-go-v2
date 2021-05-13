@@ -1,0 +1,39 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_AcceptInvitation.go",
+        "api_op_CreateGraph.go",
+        "api_op_CreateMembers.go",
+        "api_op_DeleteGraph.go",
+        "api_op_DeleteMembers.go",
+        "api_op_DisassociateMembership.go",
+        "api_op_GetMembers.go",
+        "api_op_ListGraphs.go",
+        "api_op_ListInvitations.go",
+        "api_op_ListMembers.go",
+        "api_op_ListTagsForResource.go",
+        "api_op_RejectInvitation.go",
+        "api_op_StartMonitoringMember.go",
+        "api_op_TagResource.go",
+        "api_op_UntagResource.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/detective",
+    "unstable": false
+}

@@ -9,5 +9,5 @@ Predict Endpoint
 The predict endpoint customization runs after normal endpoint resolution happens. If
 the user has provided a value for PredictEndpoint then this customization will
 overwrite the request's endpoint with that value.
- */
+*/
 package customizations

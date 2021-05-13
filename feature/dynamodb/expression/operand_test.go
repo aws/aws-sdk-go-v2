@@ -154,7 +154,7 @@ func TestBuildOperand(t *testing.T) {
 			},
 		},
 		{
-			name: "types.AttributeValueMemberNULL as value",
+			name:  "types.AttributeValueMemberNULL as value",
 			input: Value(types.AttributeValueMemberNULL{Value: true}),
 			expected: exprNode{
 				values: []types.AttributeValue{
@@ -164,7 +164,7 @@ func TestBuildOperand(t *testing.T) {
 			},
 		},
 		{
-			name: "types.AttributeValueMemberBOOL as value",
+			name:  "types.AttributeValueMemberBOOL as value",
 			input: Value(types.AttributeValueMemberBOOL{Value: true}),
 			expected: exprNode{
 				values: []types.AttributeValue{

@@ -1,0 +1,37 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_BatchGrantPermissions.go",
+        "api_op_BatchRevokePermissions.go",
+        "api_op_DeregisterResource.go",
+        "api_op_DescribeResource.go",
+        "api_op_GetDataLakeSettings.go",
+        "api_op_GetEffectivePermissionsForPath.go",
+        "api_op_GrantPermissions.go",
+        "api_op_ListPermissions.go",
+        "api_op_ListResources.go",
+        "api_op_PutDataLakeSettings.go",
+        "api_op_RegisterResource.go",
+        "api_op_RevokePermissions.go",
+        "api_op_UpdateResource.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/lakeformation",
+    "unstable": false
+}

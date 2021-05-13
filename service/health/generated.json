@@ -1,0 +1,37 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_DescribeAffectedAccountsForOrganization.go",
+        "api_op_DescribeAffectedEntities.go",
+        "api_op_DescribeAffectedEntitiesForOrganization.go",
+        "api_op_DescribeEntityAggregates.go",
+        "api_op_DescribeEventAggregates.go",
+        "api_op_DescribeEventDetails.go",
+        "api_op_DescribeEventDetailsForOrganization.go",
+        "api_op_DescribeEventTypes.go",
+        "api_op_DescribeEvents.go",
+        "api_op_DescribeEventsForOrganization.go",
+        "api_op_DescribeHealthServiceStatusForOrganization.go",
+        "api_op_DisableHealthServiceAccessForOrganization.go",
+        "api_op_EnableHealthServiceAccessForOrganization.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/health",
+    "unstable": false
+}

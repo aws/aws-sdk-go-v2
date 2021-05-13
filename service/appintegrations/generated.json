@@ -1,0 +1,32 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_CreateEventIntegration.go",
+        "api_op_DeleteEventIntegration.go",
+        "api_op_GetEventIntegration.go",
+        "api_op_ListEventIntegrationAssociations.go",
+        "api_op_ListEventIntegrations.go",
+        "api_op_ListTagsForResource.go",
+        "api_op_TagResource.go",
+        "api_op_UntagResource.go",
+        "api_op_UpdateEventIntegration.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/appintegrations",
+    "unstable": false
+}

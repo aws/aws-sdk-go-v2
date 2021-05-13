@@ -241,7 +241,6 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 				"X-StringList": []string{"a, b, c"},
 				"X-StringSet":  []string{"a, b, c"},
 			},
-			Body: []byte(``),
 			ExpectResult: &InputAndOutputWithHeadersOutput{
 				HeaderString: ptr.String("Hello"),
 				HeaderStringList: []string{
@@ -268,7 +267,6 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 				"X-Long":        []string{"123"},
 				"X-Short":       []string{"123"},
 			},
-			Body: []byte(``),
 			ExpectResult: &InputAndOutputWithHeadersOutput{
 				HeaderByte:    ptr.Int8(1),
 				HeaderShort:   ptr.Int16(123),
@@ -291,7 +289,6 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 				"X-Boolean2":    []string{"false"},
 				"X-BooleanList": []string{"true, false, true"},
 			},
-			Body: []byte(``),
 			ExpectResult: &InputAndOutputWithHeadersOutput{
 				HeaderTrueBool:  ptr.Bool(true),
 				HeaderFalseBool: ptr.Bool(false),
@@ -308,7 +305,6 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 			Header: http.Header{
 				"X-TimestampList": []string{"Mon, 16 Dec 2019 23:48:18 GMT, Mon, 16 Dec 2019 23:48:18 GMT"},
 			},
-			Body: []byte(``),
 			ExpectResult: &InputAndOutputWithHeadersOutput{
 				HeaderTimestampList: []time.Time{
 					smithytime.ParseEpochSeconds(1576540098),
@@ -323,7 +319,6 @@ func TestClient_InputAndOutputWithHeaders_awsRestjson1Deserialize(t *testing.T) 
 				"X-Enum":     []string{"Foo"},
 				"X-EnumList": []string{"Foo, Bar, Baz"},
 			},
-			Body: []byte(``),
 			ExpectResult: &InputAndOutputWithHeadersOutput{
 				HeaderEnum: types.FooEnum("Foo"),
 				HeaderEnumList: []types.FooEnum{

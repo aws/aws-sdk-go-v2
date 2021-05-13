@@ -1,0 +1,42 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_CreateConnectorProfile.go",
+        "api_op_CreateFlow.go",
+        "api_op_DeleteConnectorProfile.go",
+        "api_op_DeleteFlow.go",
+        "api_op_DescribeConnectorEntity.go",
+        "api_op_DescribeConnectorProfiles.go",
+        "api_op_DescribeConnectors.go",
+        "api_op_DescribeFlow.go",
+        "api_op_DescribeFlowExecutionRecords.go",
+        "api_op_ListConnectorEntities.go",
+        "api_op_ListFlows.go",
+        "api_op_ListTagsForResource.go",
+        "api_op_StartFlow.go",
+        "api_op_StopFlow.go",
+        "api_op_TagResource.go",
+        "api_op_UntagResource.go",
+        "api_op_UpdateConnectorProfile.go",
+        "api_op_UpdateFlow.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/appflow",
+    "unstable": false
+}
