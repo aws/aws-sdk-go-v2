@@ -221,7 +221,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you\n   can assign to your documents, managed instances, maintenance windows, Parameter Store parameters,\n   and patch baselines. Tags enable you to categorize your resources in different ways, for example,\n   by purpose, owner, or environment. Each tag consists of a key and an optional value, both of\n   which you define. For example, you could define a set of tags for your account's managed\n   instances that helps you track each instance's owner and stack level. For example: Key=Owner and\n   Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or\n   Test.</p>\n\n         <p>Each resource can have a maximum of 50 tags. </p>\n         <p>We recommend that you devise a set of tag keys that meets your needs for each resource type.\n   Using a consistent set of tag keys makes it easier for you to manage your resources. You can\n   search and filter the resources based on the tags you add. Tags don't have any semantic meaning\n   to and are interpreted strictly as a string of characters. </p>\n         <p>For more information about using tags with EC2 instances, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging your Amazon EC2 resources</a> in the\n    <i>Amazon EC2 User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you\n   can assign to your documents, managed instances, maintenance windows, Parameter Store parameters,\n   and patch baselines. Tags enable you to categorize your resources in different ways, for example,\n   by purpose, owner, or environment. Each tag consists of a key and an optional value, both of\n   which you define. For example, you could define a set of tags for your account's managed\n   instances that helps you track each instance's owner and stack level. For example: Key=Owner and\n   Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or\n   Test.</p>\n         <p>Each resource can have a maximum of 50 tags. </p>\n         <p>We recommend that you devise a set of tag keys that meets your needs for each resource type.\n   Using a consistent set of tag keys makes it easier for you to manage your resources. You can\n   search and filter the resources based on the tags you add. Tags don't have any semantic meaning\n   to and are interpreted strictly as a string of characters. </p>\n         <p>For more information about using tags with EC2 instances, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging your Amazon EC2 resources</a> in the\n    <i>Amazon EC2 User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#AddTagsToResourceRequest": {
@@ -237,7 +237,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.ssm#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource ID you want to tag.</p>\n         <p>Use the ID of the resource. Here are some examples:</p>\n         <p>ManagedInstance: mi-012345abcde</p>\n         <p>MaintenanceWindow: mw-012345abcde</p>\n         <p>PatchBaseline: pb-012345abcde</p>\n         <p>OpsMetadata object: <code>ResourceID</code> for tagging is created from the Amazon Resource\n   Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from the strings that\n   come after the word <code>opsmetadata</code> in the ARN. For example, an OpsMetadata object with\n   an ARN of <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code>\n   has a <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or\n    <code>/aws/ssm/MyGroup/appmanager</code>.</p>\n         <p>For the Document and Parameter values, use the name of the resource.</p>\n\n         <note>\n            <p>The ManagedInstance type for this API action is only for on-premises managed instances. You\n    must specify the name of the managed instance in the following format: mi-ID_number. For\n    example, mi-1a2b3c4d5e6f.</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The resource ID you want to tag.</p>\n         <p>Use the ID of the resource. Here are some examples:</p>\n         <p>ManagedInstance: mi-012345abcde</p>\n         <p>MaintenanceWindow: mw-012345abcde</p>\n         <p>PatchBaseline: pb-012345abcde</p>\n         <p>OpsMetadata object: <code>ResourceID</code> for tagging is created from the Amazon Resource\n   Name (ARN) for the object. Specifically, <code>ResourceID</code> is created from the strings that\n   come after the word <code>opsmetadata</code> in the ARN. For example, an OpsMetadata object with\n   an ARN of <code>arn:aws:ssm:us-east-2:1234567890:opsmetadata/aws/ssm/MyGroup/appmanager</code>\n   has a <code>ResourceID</code> of either <code>aws/ssm/MyGroup/appmanager</code> or\n    <code>/aws/ssm/MyGroup/appmanager</code>.</p>\n         <p>For the Document and Parameter values, use the name of the resource.</p>\n         <note>\n            <p>The ManagedInstance type for this API action is only for on-premises managed instances. You\n    must specify the name of the managed instance in the following format: mi-ID_number. For\n    example, mi-1a2b3c4d5e6f.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -293,6 +293,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.ssm#AddTagsToResource"
+                },
+                {
+                    "target": "com.amazonaws.ssm#AssociateOpsItemRelatedItem"
                 },
                 {
                     "target": "com.amazonaws.ssm#CancelCommand"
@@ -466,6 +469,9 @@
                     "target": "com.amazonaws.ssm#DescribeSessions"
                 },
                 {
+                    "target": "com.amazonaws.ssm#DisassociateOpsItemRelatedItem"
+                },
+                {
                     "target": "com.amazonaws.ssm#GetAutomationExecution"
                 },
                 {
@@ -572,6 +578,9 @@
                 },
                 {
                     "target": "com.amazonaws.ssm#ListOpsItemEvents"
+                },
+                {
+                    "target": "com.amazonaws.ssm#ListOpsItemRelatedItems"
                 },
                 {
                     "target": "com.amazonaws.ssm#ListOpsMetadata"
@@ -700,7 +709,7 @@
                     "name": "ssm"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS Systems Manager</fullname>\n         <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as\n   collecting system inventory, applying operating system (OS) patches, automating the creation of\n   Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale.\n   Systems Manager lets you remotely and securely manage the configuration of your managed instances. A\n    <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any\n   on-premises server or virtual machine (VM) in your hybrid environment that has been configured\n   for Systems Manager.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">AWS Systems Manager User Guide</a>.</p>\n         <p>To get started, verify prerequisites and configure managed instances. For more information,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up\n    AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p>\n         <p>For information about other API actions you can perform on EC2 instances, see the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>. For information\n   about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>",
+                "smithy.api#documentation": "<fullname>AWS Systems Manager</fullname>\n         <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as\n   collecting system inventory, applying operating system (OS) patches, automating the creation of\n   Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale.\n   Systems Manager lets you remotely and securely manage the configuration of your managed instances. A\n    <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any\n   on-premises server or virtual machine (VM) in your hybrid environment that has been configured\n   for Systems Manager.</p>\n         <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">AWS Systems Manager User Guide</a>.</p>\n         <p>To get started, verify prerequisites and configure managed instances. For more information,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up\n    AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p>\n         <p class=\"title\">\n            <b>Related resources</b>\n         </p>\n         <ul>\n            <li>\n               <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>\n            </li>\n            <li>\n               <p>For information about other API actions you can perform on EC2 instances, see the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about AWS AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AWS AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AWS AppConfig API\n     Reference</a>.</p>\n            </li>\n            <li>\n               <p>For information about AWS Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">AWS Incident Manager User Guide</a>\n     and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">AWS Incident Manager API\n      Reference</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Simple Systems Manager (SSM)",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://ssm.amazonaws.com/doc/2014-11-06/"
@@ -716,6 +725,79 @@
                 "smithy.api#range": {
                     "min": 0,
                     "max": 360
+                }
+            }
+        },
+        "com.amazonaws.ssm#AssociateOpsItemRelatedItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#AssociateOpsItemRelatedItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#AssociateOpsItemRelatedItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAlreadyExistsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can\n   associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a\n   capability of AWS Systems Manager.</p>"
+            }
+        },
+        "com.amazonaws.ssm#AssociateOpsItemRelatedItemRequest": {
+            "type": "structure",
+            "members": {
+                "OpsItemId": {
+                    "target": "com.amazonaws.ssm#OpsItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OpsItem to which you want to associate a resource as a related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of association that you want to create between an OpsItem and a resource. OpsCenter\n   supports <code>IsParentOf</code> and <code>RelatesTo</code> association types.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the\n   following types:</p>\n         <p>\n            <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. Incident\n   Manager is a capability of AWS Systems Manager.</p>\n         <p>\n            <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceUri": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationResourceUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS resource that you want to associate with the\n   OpsItem.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#AssociateOpsItemRelatedItemResponse": {
+            "type": "structure",
+            "members": {
+                "AssociationId": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association ID.</p>"
+                    }
                 }
             }
         },
@@ -2674,7 +2756,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -2686,7 +2768,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {
@@ -4021,7 +4103,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n   different ways, such as by purpose, owner, or environment. For example, you might want to tag an\n   activation to identify which servers or virtual machines (VMs) in your on-premises environment\n   you intend to activate. In this case, you could specify the following key name/value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n         </ul>\n         <important>\n            <p>When you install SSM Agent on your on-premises servers and VMs, you specify an activation\n    ID and code. When you specify the activation ID and code, tags assigned to the activation are\n    automatically applied to the on-premises servers or VMs.</p>\n         </important>\n\n         <p>You can't add tags to or delete tags from an existing activation. You can tag your\n   on-premises servers and VMs after they connect to Systems Manager for the first time and are assigned a\n   managed instance ID. This means they are listed in the AWS Systems Manager console with an ID that is\n   prefixed with \"mi-\". For information about how to add tags to your managed instances, see <a>AddTagsToResource</a>. For information about how to remove tags from your managed\n   instances, see <a>RemoveTagsFromResource</a>.</p>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n   different ways, such as by purpose, owner, or environment. For example, you might want to tag an\n   activation to identify which servers or virtual machines (VMs) in your on-premises environment\n   you intend to activate. In this case, you could specify the following key name/value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n         </ul>\n         <important>\n            <p>When you install SSM Agent on your on-premises servers and VMs, you specify an activation\n    ID and code. When you specify the activation ID and code, tags assigned to the activation are\n    automatically applied to the on-premises servers or VMs.</p>\n         </important>\n         <p>You can't add tags to or delete tags from an existing activation. You can tag your\n   on-premises servers and VMs after they connect to Systems Manager for the first time and are assigned a\n   managed instance ID. This means they are listed in the AWS Systems Manager console with an ID that is\n   prefixed with \"mi-\". For information about how to add tags to your managed instances, see <a>AddTagsToResource</a>. For information about how to remove tags from your managed\n   instances, see <a>RemoveTagsFromResource</a>.</p>"
                     }
                 }
             }
@@ -4459,6 +4541,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssm#DocumentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional field where you can specify a friendly name for the Systems Manager document. This value\n   can differ for each version of the document. You can update this value at a later time using the\n    <a>UpdateDocument</a> action.</p>"
+                    }
+                },
                 "VersionName": {
                     "target": "com.amazonaws.ssm#DocumentVersionName",
                     "traits": {
@@ -4486,7 +4574,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n   different ways, such as by purpose, owner, or environment. For example, you might want to tag an\n   SSM document to identify the types of targets or the environment where it will run. In this case,\n   you could specify the following key name/value pairs:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>To add tags to an existing SSM document, use the <a>AddTagsToResource</a>\n    action.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n   different ways, such as by purpose, owner, or environment. For example, you might want to tag an\n   SSM document to identify the types of targets or the environment where it will run. In this case,\n   you could specify the following key name/value pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>To add tags to an existing SSM document, use the <a>AddTagsToResource</a>\n    action.</p>\n         </note>"
                     }
                 }
             }
@@ -4665,7 +4753,7 @@
                 "OperationalData": {
                     "target": "com.amazonaws.ssm#OpsItemOperationalData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,\n    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API action) can view and search on the\n   specified data. Operational data that is not searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>\n\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,\n    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API action) can view and search on the\n   specified data. Operational data that is not searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "Notifications": {
@@ -4703,7 +4791,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can restrict access to OpsItems by\n   using an inline IAM policy that specifies tags. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions\">Getting started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p>\n         <p>Tags use a key-value pair. For example:</p>\n\n         <p>\n            <code>Key=Department,Value=Finance</code>\n         </p>\n\n         <note>\n            <p>To add tags to an existing OpsItem, use the <a>AddTagsToResource</a>\n    action.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can restrict access to OpsItems by\n   using an inline IAM policy that specifies tags. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html#OpsCenter-getting-started-user-permissions\">Getting started with OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p>\n         <p>Tags use a key-value pair. For example:</p>\n         <p>\n            <code>Key=Department,Value=Finance</code>\n         </p>\n         <note>\n            <p>To add tags to an existing OpsItem, use the <a>AddTagsToResource</a>\n    action.</p>\n         </note>"
                     }
                 },
                 "Category": {
@@ -4873,7 +4961,7 @@
                 "ApprovedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly approved patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ApprovedPatchesComplianceLevel": {
@@ -4892,7 +4980,7 @@
                 "RejectedPatches": {
                     "target": "com.amazonaws.ssm#PatchIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p> \n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A list of explicitly rejected patches for the baseline.</p>\n         <p>For information about accepted formats for lists of approved patches and rejected patches,\n                        see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/patch-manager-approved-rejected-package-name-formats.html\">About\n                        package name formats for approved and rejected patch lists</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "RejectedPatchesAction": {
@@ -4962,7 +5050,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A resource data sync helps you view data from multiple sources in a single location. Systems\n   Manager offers two types of resource data sync: <code>SyncToDestination</code> and\n    <code>SyncFromSource</code>.</p>\n         <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to\n   synchronize Inventory data from multiple AWS Regions to a single S3 bucket. For more information,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html\">Configuring Resource Data\n    Sync for Inventory</a> in the <i>AWS Systems Manager User Guide</i>.</p>\n\n         <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize\n   operational work items (OpsItems) and operational data (OpsData) from multiple AWS Regions to a\n   single S3 bucket. This type can synchronize OpsItems and OpsData from multiple AWS accounts and\n   Regions or <code>EntireOrganization</code> by using AWS Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html\">Setting up Systems Manager Explorer to display data from multiple accounts and Regions</a> in the\n    <i>AWS Systems Manager User Guide</i>.</p>\n\n         <p>A resource data sync is an asynchronous operation that returns immediately. After a\n   successful initial sync is completed, the system continuously syncs data. To check the status of\n   a sync, use the <a>ListResourceDataSync</a>.</p>\n\n         <note>\n            <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption\n    in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3\n    bucket by creating a restrictive bucket policy. </p>\n         </note>"
+                "smithy.api#documentation": "<p>A resource data sync helps you view data from multiple sources in a single location. Systems\n   Manager offers two types of resource data sync: <code>SyncToDestination</code> and\n    <code>SyncFromSource</code>.</p>\n         <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to\n   synchronize Inventory data from multiple AWS Regions to a single S3 bucket. For more information,\n   see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html\">Configuring Resource Data\n    Sync for Inventory</a> in the <i>AWS Systems Manager User Guide</i>.</p>\n         <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize\n   operational work items (OpsItems) and operational data (OpsData) from multiple AWS Regions to a\n   single S3 bucket. This type can synchronize OpsItems and OpsData from multiple AWS accounts and\n   Regions or <code>EntireOrganization</code> by using AWS Organizations. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html\">Setting up Systems Manager Explorer to display data from multiple accounts and Regions</a> in the\n    <i>AWS Systems Manager User Guide</i>.</p>\n         <p>A resource data sync is an asynchronous operation that returns immediately. After a\n   successful initial sync is completed, the system continuously syncs data. To check the status of\n   a sync, use the <a>ListResourceDataSync</a>.</p>\n         <note>\n            <p>By default, data is not encrypted in Amazon S3. We strongly recommend that you enable encryption\n    in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3\n    bucket by creating a restrictive bucket policy. </p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#CreateResourceDataSyncRequest": {
@@ -6226,7 +6314,7 @@
                     "target": "com.amazonaws.ssm#Boolean",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>A boolean that indicates whether to list step executions in reverse order by start time. The\n   default value is 'false'.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to list step executions in reverse order by start time. The default value\n   is 'false'.</p>"
                     }
                 }
             }
@@ -8187,6 +8275,55 @@
         "com.amazonaws.ssm#DescriptionInDocument": {
             "type": "string"
         },
+        "com.amazonaws.ssm#DisassociateOpsItemRelatedItem": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#DisassociateOpsItemRelatedItemRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#DisassociateOpsItemRelatedItemResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemInvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the association between an OpsItem and a related resource. For example, this API\n   action can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability\n   of AWS Systems Manager.</p>"
+            }
+        },
+        "com.amazonaws.ssm#DisassociateOpsItemRelatedItemRequest": {
+            "type": "structure",
+            "members": {
+                "OpsItemId": {
+                    "target": "com.amazonaws.ssm#OpsItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a\n   related resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociationId": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the association for which you want to delete an association between the OpsItem\n   and a related resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#DisassociateOpsItemRelatedItemResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.ssm#DocumentARN": {
             "type": "string",
             "traits": {
@@ -8267,6 +8404,12 @@
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Systems Manager document.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssm#DocumentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the\n   document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
                     }
                 },
                 "VersionName": {
@@ -8412,6 +8555,16 @@
                 "smithy.api#documentation": "<p>Describes a Systems Manager document. </p>"
             }
         },
+        "com.amazonaws.ssm#DocumentDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\w\\.\\-\\:\\/ ]*$"
+            }
+        },
         "com.amazonaws.ssm#DocumentFilter": {
             "type": "structure",
             "members": {
@@ -8529,6 +8682,18 @@
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Systems Manager document.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the Systems Manager document was created.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssm#DocumentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional field where you can specify a friendly name for the Systems Manager document. This value\n   can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
                     }
                 },
                 "Owner": {
@@ -9072,6 +9237,14 @@
                     {
                         "value": "Automation.ChangeTemplate",
                         "name": "ChangeTemplate"
+                    },
+                    {
+                        "value": "ProblemAnalysis",
+                        "name": "ProblemAnalysis"
+                    },
+                    {
+                        "value": "ProblemAnalysisTemplate",
+                        "name": "ProblemAnalysisTemplate"
                     }
                 ]
             }
@@ -9089,6 +9262,12 @@
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
                         "smithy.api#documentation": "<p>The document name.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssm#DocumentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the\n   document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
                     }
                 },
                 "DocumentVersion": {
@@ -9707,7 +9886,7 @@
                 "StatusDetails": {
                     "target": "com.amazonaws.ssm#StatusDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code>\n   includes more information than <code>Status</code> because it includes states resulting from\n   error and concurrency control parameters. <code>StatusDetails</code> can show different results\n   than <code>Status</code>. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding\n    command statuses</a> in the <i>AWS Systems Manager User Guide</i>.\n    <code>StatusDetails</code> can be one of the following values:</p>\n\n         <ul>\n            <li>\n               <p>Pending: The command has not been sent to the instance.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the instance but has not reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Delayed: The system attempted to send the command to the target, but the target was not\n     available. The instance might not be available because of network issues, because the instance\n     was stopped, or for similar reasons. The system will try to send the command again.</p>\n            </li>\n            <li>\n               <p>Success: The command or plugin ran successfully. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command was not delivered to the instance before the delivery\n     timeout expired. Delivery timeouts do not count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: The command started to run on the instance, but the execution was not\n     complete before the timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates\n     that the result code was not zero. For a command invocation, this indicates that the result\n     code for one or more plugins was not zero. Invocation failures count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Canceled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the instance. The instance might not\n     exist or might not be responding. Undeliverable invocations don't count against the parent\n     command's <code>MaxErrors</code> limit and don't contribute to whether the parent command\n     status is Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its <code>MaxErrors</code> limit and subsequent\n     command invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code>\n   includes more information than <code>Status</code> because it includes states resulting from\n   error and concurrency control parameters. <code>StatusDetails</code> can show different results\n   than <code>Status</code>. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding\n    command statuses</a> in the <i>AWS Systems Manager User Guide</i>.\n    <code>StatusDetails</code> can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>Pending: The command has not been sent to the instance.</p>\n            </li>\n            <li>\n               <p>In Progress: The command has been sent to the instance but has not reached a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Delayed: The system attempted to send the command to the target, but the target was not\n     available. The instance might not be available because of network issues, because the instance\n     was stopped, or for similar reasons. The system will try to send the command again.</p>\n            </li>\n            <li>\n               <p>Success: The command or plugin ran successfully. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Delivery Timed Out: The command was not delivered to the instance before the delivery\n     timeout expired. Delivery timeouts do not count against the parent command's\n      <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is\n     Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Execution Timed Out: The command started to run on the instance, but the execution was not\n     complete before the timeout expired. Execution timeouts count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates\n     that the result code was not zero. For a command invocation, this indicates that the result\n     code for one or more plugins was not zero. Invocation failures count against the\n      <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Canceled: The command was terminated before it was completed. This is a terminal\n     state.</p>\n            </li>\n            <li>\n               <p>Undeliverable: The command can't be delivered to the instance. The instance might not\n     exist or might not be responding. Undeliverable invocations don't count against the parent\n     command's <code>MaxErrors</code> limit and don't contribute to whether the parent command\n     status is Success or Incomplete. This is a terminal state.</p>\n            </li>\n            <li>\n               <p>Terminated: The parent command exceeded its <code>MaxErrors</code> limit and subsequent\n     command invocations were canceled by the system. This is a terminal state.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "StandardOutputContent": {
@@ -9970,6 +10149,18 @@
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Systems Manager document.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date the Systems Manager document was created.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssm#DocumentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the\n   document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
                     }
                 },
                 "VersionName": {
@@ -11520,7 +11711,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   AWS service charges money to the account based on feature or service usage, then the AWS service\n   team might create a default setting of \"false\". This means the user can't use this feature unless\n   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change\n   the default setting. Or use the <a>ResetServiceSetting</a> to change the value back to\n   the original value defined by the AWS service team.</p>\n\n         <p>Query the current service setting for the account. </p>"
+                "smithy.api#documentation": "<p>\n            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   AWS service charges money to the account based on feature or service usage, then the AWS service\n   team might create a default setting of \"false\". This means the user can't use this feature unless\n   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change\n   the default setting. Or use the <a>ResetServiceSetting</a> to change the value back to\n   the original value defined by the AWS service team.</p>\n         <p>Query the current service setting for the account. </p>"
             }
         },
         "com.amazonaws.ssm#GetServiceSettingRequest": {
@@ -14704,6 +14895,78 @@
                 }
             }
         },
+        "com.amazonaws.ssm#ListOpsItemRelatedItems": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssm#ListOpsItemRelatedItemsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssm#ListOpsItemRelatedItemsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssm#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.ssm#OpsItemInvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all related-item resources associated with an OpsItem.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Summaries",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.ssm#ListOpsItemRelatedItemsRequest": {
+            "type": "structure",
+            "members": {
+                "OpsItemId": {
+                    "target": "com.amazonaws.ssm#OpsItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OpsItem for which you want to list all related-item resources.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemsFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more OpsItem filters. Use a filter to return a more specific list of results. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you\n   can specify in a subsequent call to get the next set of results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. (You received this token from a previous\n   call.)</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssm#ListOpsItemRelatedItemsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.ssm#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of items to return. Use this token to get the next set of\n   results.</p>"
+                    }
+                },
+                "Summaries": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of related-item resources for the specified OpsItem.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.ssm#ListOpsMetadata": {
             "type": "operation",
             "input": {
@@ -15019,7 +15282,7 @@
                 "Parameters": {
                     "target": "com.amazonaws.ssm#AutomationParameterMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameters for the AUTOMATION task.</p>\n\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note> \n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For AUTOMATION task types,\n    Systems Manager ignores any values specified for these parameters.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parameters for the AUTOMATION task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n   \n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For AUTOMATION task types, Systems Manager ignores any values specified for these parameters.</p>\n         </note>"
                     }
                 }
             },
@@ -15554,7 +15817,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a LAMBDA task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note> \n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For Lambda tasks, Systems Manager\n    ignores any values specified for TaskParameters and LoggingInfo.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a LAMBDA task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n   \n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Lambda tasks, Systems Manager ignores any values specified for TaskParameters and\n    LoggingInfo.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowLambdaPayload": {
@@ -15688,7 +15951,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a RUN_COMMAND task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note> \n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For Run Command tasks, Systems Manager\n    uses specified values for <code>TaskParameters</code> and <code>LoggingInfo</code> only if no\n    values are specified for <code>TaskInvocationParameters</code>. </p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a RUN_COMMAND task type.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n   \n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Run Command tasks, Systems Manager uses specified values for <code>TaskParameters</code> and\n     <code>LoggingInfo</code> only if no values are specified for\n     <code>TaskInvocationParameters</code>. </p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowSchedule": {
@@ -15744,7 +16007,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The parameters for a STEP_FUNCTIONS task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note> \n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p> \n            <p>For Step Functions tasks,\n    Systems Manager ignores any values specified for <code>TaskParameters</code> and\n    <code>LoggingInfo</code>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The parameters for a STEP_FUNCTIONS task.</p>\n         <p>For information about specifying and updating task parameters, see <a>RegisterTaskWithMaintenanceWindow</a> and <a>UpdateMaintenanceWindowTask</a>.</p>\n         <note>\n   \n            <p>\n               <code>LoggingInfo</code> has been deprecated. To specify an S3 bucket to contain logs, instead use the\n      <code>OutputS3BucketName</code> and <code>OutputS3KeyPrefix</code> options in the <code>TaskInvocationParameters</code> structure.\n      For information about how Systems Manager handles these options for the supported maintenance\n      window task types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n   \n            <p>\n               <code>TaskParameters</code> has been deprecated. To specify parameters to pass to a task when it runs,\n      instead use the <code>Parameters</code> option in the <code>TaskInvocationParameters</code> structure. For information\n      about how Systems Manager handles these options for the supported maintenance window task\n      types, see <a>MaintenanceWindowTaskInvocationParameters</a>.</p>\n            <p>For Step Functions tasks, Systems Manager ignores any values specified for\n     <code>TaskParameters</code> and <code>LoggingInfo</code>.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#MaintenanceWindowStringDateTime": {
@@ -16833,7 +17096,7 @@
                 "OperationalData": {
                     "target": "com.amazonaws.ssm#OpsItemOperationalData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,\n    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API action) can view and search on the\n   specified data. Operational data that is not searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>\n\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,\n    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API action) can view and search on the\n   specified data. Operational data that is not searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "Category": {
@@ -16958,7 +17221,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 2048
                 },
                 "smithy.api#pattern": "[\\s\\S]*\\S[\\s\\S]*"
             }
@@ -17099,7 +17362,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary information about an OpsItem event.</p>"
+                "smithy.api#documentation": "<p>Summary information about an OpsItem event or that associated an OpsItem with a related\n   item.</p>"
             }
         },
         "com.amazonaws.ssm#OpsItemFilter": {
@@ -17406,6 +17669,194 @@
                 "smithy.api#range": {
                     "min": 1,
                     "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemAlreadyExistsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                },
+                "ResourceUri": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationResourceUri"
+                },
+                "OpsItemId": {
+                    "target": "com.amazonaws.ssm#OpsItemId"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) is already associated with the OpsItem.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemAssociationId": {
+            "type": "string"
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemAssociationNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.ssm#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The association was not found using the parameters you specified in the call. Verify the\n   information and try again.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemAssociationResourceType": {
+            "type": "string"
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemAssociationResourceUri": {
+            "type": "string"
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemAssociationType": {
+            "type": "string"
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#OpsItemRelatedItemSummary"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemSummary": {
+            "type": "structure",
+            "members": {
+                "OpsItemId": {
+                    "target": "com.amazonaws.ssm#OpsItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OpsItem ID.</p>"
+                    }
+                },
+                "AssociationId": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association ID.</p>"
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource type.</p>"
+                    }
+                },
+                "AssociationType": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The association type.</p>"
+                    }
+                },
+                "ResourceUri": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemAssociationResourceUri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the related-item resource.</p>"
+                    }
+                },
+                "CreatedBy": {
+                    "target": "com.amazonaws.ssm#OpsItemIdentity"
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the related-item association was created.</p>"
+                    }
+                },
+                "LastModifiedBy": {
+                    "target": "com.amazonaws.ssm#OpsItemIdentity"
+                },
+                "LastModifiedTime": {
+                    "target": "com.amazonaws.ssm#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the related-item association was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information about related-item resources for an OpsItem.</p>"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemsFilter": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemsFilterKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter key. Supported values include <code>ResourceUri</code>,\n    <code>ResourceType</code>, or <code>AssociationId</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemsFilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values for the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.ssm#OpsItemRelatedItemsFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator used by the filter call. The only supported operator is\n   <code>EQUAL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a filter for a specific list of related-item resources. </p>"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemsFilterKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ResourceType",
+                        "name": "RESOURCE_TYPE"
+                    },
+                    {
+                        "value": "AssociationId",
+                        "name": "ASSOCIATION_ID"
+                    },
+                    {
+                        "value": "ResourceUri",
+                        "name": "RESOURCE_URI"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemsFilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Equal",
+                        "name": "EQUAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemsFilterValue": {
+            "type": "string"
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemsFilterValues": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#OpsItemRelatedItemsFilterValue"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemsFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssm#OpsItemRelatedItemsFilter"
+            }
+        },
+        "com.amazonaws.ssm#OpsItemRelatedItemsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
                 }
             }
         },
@@ -19974,7 +20425,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n   different ways, such as by purpose, owner, or environment. For example, you might want to tag a\n   Systems Manager parameter to identify the type of resource to which it applies, the environment, or the\n   type of configuration data referenced by the parameter. In this case, you could specify the\n   following key name/value pairs:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Resource,Value=S3bucket</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ParameterType,Value=LicenseKey</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>To add tags to an existing Systems Manager parameter, use the <a>AddTagsToResource</a>\n    action.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. Tags enable you to categorize a resource in\n   different ways, such as by purpose, owner, or environment. For example, you might want to tag a\n   Systems Manager parameter to identify the type of resource to which it applies, the environment, or the\n   type of configuration data referenced by the parameter. In this case, you could specify the\n   following key name/value pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Resource,Value=S3bucket</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=OS,Value=Windows</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=ParameterType,Value=LicenseKey</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>To add tags to an existing Systems Manager parameter, use the <a>AddTagsToResource</a>\n    action.</p>\n         </note>"
                     }
                 },
                 "Tier": {
@@ -19986,7 +20437,7 @@
                 "Policies": {
                     "target": "com.amazonaws.ssm#ParameterPolicies",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more policies to apply to a parameter. This action takes a JSON array. Parameter\n   Store supports the following policy types:</p>\n\n         <p>Expiration: This policy deletes the parameter after it expires. When you create the policy,\n   you specify the expiration date. You can update the expiration date and time by updating the\n   policy. Updating the <i>parameter</i> does not affect the expiration date and time.\n   When the expiration time is reached, Parameter Store deletes the parameter.</p>\n         <p>ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that\n   notifies you about the expiration. By using this policy, you can receive notification before or\n   after the expiration time is reached, in units of days or hours.</p>\n         <p>NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been\n   modified for a specified period of time. This policy type is useful when, for example, a secret\n   needs to be changed within a period of time, but it has not been changed.</p>\n\n         <p>All existing policies are preserved until you send new policies or an empty policy. For more\n   information about parameter policies, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html\">Assigning parameter\n    policies</a>. </p>"
+                        "smithy.api#documentation": "<p>One or more policies to apply to a parameter. This action takes a JSON array. Parameter\n   Store supports the following policy types:</p>\n         <p>Expiration: This policy deletes the parameter after it expires. When you create the policy,\n   you specify the expiration date. You can update the expiration date and time by updating the\n   policy. Updating the <i>parameter</i> does not affect the expiration date and time.\n   When the expiration time is reached, Parameter Store deletes the parameter.</p>\n         <p>ExpirationNotification: This policy triggers an event in Amazon CloudWatch Events that\n   notifies you about the expiration. By using this policy, you can receive notification before or\n   after the expiration time is reached, in units of days or hours.</p>\n         <p>NoChangeNotification: This policy triggers a CloudWatch event if a parameter has not been\n   modified for a specified period of time. This policy type is useful when, for example, a secret\n   needs to be changed within a period of time, but it has not been changed.</p>\n         <p>All existing policies are preserved until you send new policies or an empty policy. For more\n   information about parameter policies, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-policies.html\">Assigning parameter\n    policies</a>. </p>"
                     }
                 },
                 "DataType": {
@@ -20495,7 +20946,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   AWS service charges money to the account based on feature or service usage, then the AWS service\n   team might create a default setting of \"false\". This means the user can't use this feature unless\n   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>GetServiceSetting</a> API action to view the\n   current value. Use the <a>UpdateServiceSetting</a> API action to change the default\n   setting. </p>\n\n         <p>Reset the service setting for the account to the default value as provisioned by the AWS\n   service team. </p>"
+                "smithy.api#documentation": "<p>\n            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   AWS service charges money to the account based on feature or service usage, then the AWS service\n   team might create a default setting of \"false\". This means the user can't use this feature unless\n   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>GetServiceSetting</a> API action to view the\n   current value. Use the <a>UpdateServiceSetting</a> API action to change the default\n   setting. </p>\n         <p>Reset the service setting for the account to the default value as provisioned by the AWS\n   service team. </p>"
             }
         },
         "com.amazonaws.ssm#ResetServiceSettingRequest": {
@@ -21057,7 +21508,7 @@
                 "State": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncState",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type name for including resource data sync state. There are four sync\n   states:</p>\n\n         <p>\n            <code>OrganizationNotExists</code>: Your organization doesn't exist.</p>\n         <p>\n            <code>NoPermissions</code>: The system can't locate the service-linked role. This role is\n   automatically created when a user creates a resource data sync in Explorer.</p>\n         <p>\n            <code>InvalidOrganizationalUnit</code>: You specified or selected an invalid unit in the\n   resource data sync configuration.</p>\n         <p>\n            <code>TrustedAccessDisabled</code>: You disabled Systems Manager access in the organization in\n   AWS Organizations.</p>"
+                        "smithy.api#documentation": "<p>The data type name for including resource data sync state. There are four sync\n   states:</p>\n         <p>\n            <code>OrganizationNotExists</code>: Your organization doesn't exist.</p>\n         <p>\n            <code>NoPermissions</code>: The system can't locate the service-linked role. This role is\n   automatically created when a user creates a resource data sync in Explorer.</p>\n         <p>\n            <code>InvalidOrganizationalUnit</code>: You specified or selected an invalid unit in the\n   resource data sync configuration.</p>\n         <p>\n            <code>TrustedAccessDisabled</code>: You disabled Systems Manager access in the organization in\n   AWS Organizations.</p>"
                     }
                 },
                 "EnableAllOpsDataSources": {
@@ -21068,7 +21519,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The data type name for including resource data sync state. There are four sync\n   states:</p>\n\n         <p>\n            <code>OrganizationNotExists</code> (Your organization doesn't exist)</p>\n         <p>\n            <code>NoPermissions</code> (The system can't locate the service-linked role. This role is\n   automatically created when a user creates a resource data sync in Explorer.)</p>\n         <p>\n            <code>InvalidOrganizationalUnit</code> (You specified or selected an invalid unit in the\n   resource data sync configuration.)</p>\n         <p>\n            <code>TrustedAccessDisabled</code> (You disabled Systems Manager access in the organization in\n   AWS Organizations.)</p>"
+                "smithy.api#documentation": "<p>The data type name for including resource data sync state. There are four sync\n   states:</p>\n         <p>\n            <code>OrganizationNotExists</code> (Your organization doesn't exist)</p>\n         <p>\n            <code>NoPermissions</code> (The system can't locate the service-linked role. This role is\n   automatically created when a user creates a resource data sync in Explorer.)</p>\n         <p>\n            <code>InvalidOrganizationalUnit</code> (You specified or selected an invalid unit in the\n   resource data sync configuration.)</p>\n         <p>\n            <code>TrustedAccessDisabled</code> (You disabled Systems Manager access in the organization in\n   AWS Organizations.)</p>"
             }
         },
         "com.amazonaws.ssm#ResourceDataSyncState": {
@@ -21253,7 +21704,7 @@
                 "StreamUrl": {
                     "target": "com.amazonaws.ssm#StreamUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p> \n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>AWS General Reference</i>.</p> \n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>AWS General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
                 }
             }
@@ -21774,7 +22225,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The service setting data structure.</p>\n\n         <p>\n            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   AWS service charges money to the account based on feature or service usage, then the AWS service\n   team might create a default setting of \"false\". This means the user can't use this feature unless\n   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change\n   the default setting. Or, use the <a>ResetServiceSetting</a> to change the value back\n   to the original value defined by the AWS service team.</p>"
+                "smithy.api#documentation": "<p>The service setting data structure.</p>\n         <p>\n            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   AWS service charges money to the account based on feature or service usage, then the AWS service\n   team might create a default setting of \"false\". This means the user can't use this feature unless\n   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>UpdateServiceSetting</a> API action to change\n   the default setting. Or, use the <a>ResetServiceSetting</a> to change the value back\n   to the original value defined by the AWS service team.</p>"
             }
         },
         "com.amazonaws.ssm#ServiceSettingId": {
@@ -22562,7 +23013,7 @@
                 "StreamUrl": {
                     "target": "com.amazonaws.ssm#StreamUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>\n         </p> \n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>AWS General Reference</i>.</p> \n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>\n         </p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAWS Region supported by AWS Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"http://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>AWS General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
                 }
             }
@@ -23863,8 +24314,14 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the document that you want to update.</p>",
+                        "smithy.api#documentation": "<p>The name of the Systems Manager document that you want to update.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.ssm#DocumentDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The friendly name of the Systems Manager document that you want to update. This value can differ for\n   each version of the document. If you do not specify a value for this parameter in your request,\n   the existing value is applied to the new document version.</p>"
                     }
                 },
                 "VersionName": {
@@ -24483,7 +24940,7 @@
                 "OperationalData": {
                     "target": "com.amazonaws.ssm#OpsItemOperationalData",
                     "traits": {
-                        "smithy.api#documentation": "<p>Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem\n   object.</p>\n         <p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,\n    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>\n         </important>\n\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API action) can view and search on the\n   specified data. Operational data that is not searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>\n\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Add new keys or edit existing key-value pairs of the OperationalData map in the OpsItem\n   object.</p>\n         <p>Operational data is custom data that provides useful reference details about the OpsItem.\n   For example, you can specify log files, error strings, license keys, troubleshooting tips, or\n   other relevant data. You enter operational data as key-value pairs. The key has a maximum length\n   of 128 characters. The value has a maximum size of 20 KB.</p>\n         <important>\n            <p>Operational data keys <i>can't</i> begin with the following: amazon, aws,\n    amzn, ssm, /amazon, /aws, /amzn, /ssm.</p>\n         </important>\n         <p>You can choose to make the data searchable by other users in the account or you can restrict\n   search access. Searchable data means that all users with access to the OpsItem Overview page (as\n   provided by the <a>DescribeOpsItems</a> API action) can view and search on the\n   specified data. Operational data that is not searchable is only viewable by users who have access\n   to the OpsItem (as provided by the <a>GetOpsItem</a> API action).</p>\n         <p>Use the <code>/aws/resources</code> key in OperationalData to specify a related resource in\n   the request. Use the <code>/aws/automations</code> key in OperationalData to associate an\n   Automation runbook with the OpsItem. To view AWS CLI example commands that use these keys, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-creating-OpsItems.html#OpsCenter-manually-create-OpsItems\">Creating OpsItems manually</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "OperationalDataToDelete": {
@@ -24901,7 +25358,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   AWS service charges money to the account based on feature or service usage, then the AWS service\n   team might create a default setting of \"false\". This means the user can't use this feature unless\n   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>GetServiceSetting</a> API action to view the\n   current value. Or, use the <a>ResetServiceSetting</a> to change the value back to the\n   original value defined by the AWS service team.</p>\n\n         <p>Update the service setting for the account. </p>"
+                "smithy.api#documentation": "<p>\n            <code>ServiceSetting</code> is an account-level setting for an AWS service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   AWS service charges money to the account based on feature or service usage, then the AWS service\n   team might create a default setting of \"false\". This means the user can't use this feature unless\n   they change the setting to \"true\" and intentionally opt in for a paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. AWS services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>GetServiceSetting</a> API action to view the\n   current value. Or, use the <a>ResetServiceSetting</a> to change the value back to the\n   original value defined by the AWS service team.</p>\n         <p>Update the service setting for the account. </p>"
             }
         },
         "com.amazonaws.ssm#UpdateServiceSettingRequest": {

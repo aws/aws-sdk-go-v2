@@ -1,0 +1,1059 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.finspace#AWSHabaneroManagementService": {
+            "type": "service",
+            "version": "2021-03-12",
+            "operations": [
+                {
+                    "target": "com.amazonaws.finspace#CreateEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.finspace#DeleteEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.finspace#GetEnvironment"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ListEnvironments"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.finspace#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.finspace#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.finspace#UpdateEnvironment"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "finspace",
+                    "arnNamespace": "finspace",
+                    "cloudFormationName": "Finspace",
+                    "cloudTrailEventSource": "finspace.amazonaws.com",
+                    "endpointPrefix": "finspace"
+                },
+                "aws.auth#sigv4": {
+                    "name": "finspace"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The FinSpace management service provides the APIs for managing the FinSpace\n           environments. </p>",
+                "smithy.api#title": "FinSpace User Environment Management service"
+            }
+        },
+        "com.amazonaws.finspace#AccessDeniedException": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.finspace#AttributeMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.finspace#FederationAttributeKey"
+            },
+            "value": {
+                "target": "com.amazonaws.finspace#url"
+            }
+        },
+        "com.amazonaws.finspace#CreateEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#CreateEnvironmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#CreateEnvironmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a new FinSpace environment.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/environment",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#CreateEnvironmentRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.finspace#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the FinSpace environment to be created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the FinSpace environment to be created.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.finspace#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key id to encrypt your data in the FinSpace environment.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.finspace#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Add tags to your FinSpace environment.</p>"
+                    }
+                },
+                "federationMode": {
+                    "target": "com.amazonaws.finspace#FederationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Authentication mode for the environment.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FEDERATED</code> - Users access FinSpace through Single Sign On (SSO) via your Identity provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LOCAL</code> - Users access FinSpace via email and password managed within the FinSpace environment.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "federationParameters": {
+                    "target": "com.amazonaws.finspace#FederationParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information when authentication mode is FEDERATED.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#CreateEnvironmentResponse": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#IdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for FinSpace environment that you created.</p>"
+                    }
+                },
+                "environmentArn": {
+                    "target": "com.amazonaws.finspace#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the FinSpace environment that you created.</p>"
+                    }
+                },
+                "environmentUrl": {
+                    "target": "com.amazonaws.finspace#url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sign-in url for the web application of the FinSpace environment you created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#DeleteEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#DeleteEnvironmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#DeleteEnvironmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an FinSpace environment.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/environment/{environmentId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#DeleteEnvironmentRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#IdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the FinSpace environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#DeleteEnvironmentResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.finspace#Description": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9. ]{1,1000}$"
+            }
+        },
+        "com.amazonaws.finspace#Environment": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.finspace#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the FinSpace environment.</p>"
+                    }
+                },
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#IdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the FinSpace environment.</p>"
+                    }
+                },
+                "awsAccountId": {
+                    "target": "com.amazonaws.finspace#IdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS account in which the FinSpace environment is created.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.finspace#EnvironmentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of creation of the FinSpace environment.</p>"
+                    }
+                },
+                "environmentUrl": {
+                    "target": "com.amazonaws.finspace#url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sign-in url for the web application of your FinSpace environment.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the FinSpace environment.</p>"
+                    }
+                },
+                "environmentArn": {
+                    "target": "com.amazonaws.finspace#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of your FinSpace environment.</p>"
+                    }
+                },
+                "sageMakerStudioDomainUrl": {
+                    "target": "com.amazonaws.finspace#SmsDomainUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The url of the integrated FinSpace notebook environment in your web application.</p>"
+                    }
+                },
+                "kmsKeyId": {
+                    "target": "com.amazonaws.finspace#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key id used to encrypt in the FinSpace environment.</p>"
+                    }
+                },
+                "dedicatedServiceAccountId": {
+                    "target": "com.amazonaws.finspace#IdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID of the dedicated service account associated with your FinSpace\n         environment.</p>"
+                    }
+                },
+                "federationMode": {
+                    "target": "com.amazonaws.finspace#FederationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication mode for the environment.</p>"
+                    }
+                },
+                "federationParameters": {
+                    "target": "com.amazonaws.finspace#FederationParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information when authentication mode is FEDERATED.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an FinSpace environment.</p>"
+            }
+        },
+        "com.amazonaws.finspace#EnvironmentArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 20,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$"
+            }
+        },
+        "com.amazonaws.finspace#EnvironmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#Environment"
+            }
+        },
+        "com.amazonaws.finspace#EnvironmentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]$"
+            }
+        },
+        "com.amazonaws.finspace#EnvironmentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE_REQUESTED",
+                        "name": "CREATE_REQUESTED"
+                    },
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "DELETE_REQUESTED",
+                        "name": "DELETE_REQUESTED"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    },
+                    {
+                        "value": "FAILED_CREATION",
+                        "name": "FAILED_CREATION"
+                    },
+                    {
+                        "value": "RETRY_DELETION",
+                        "name": "RETRY_DELETION"
+                    },
+                    {
+                        "value": "FAILED_DELETION",
+                        "name": "FAILED_DELETION"
+                    },
+                    {
+                        "value": "SUSPENDED",
+                        "name": "SUSPENDED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.finspace#FederationAttributeKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.finspace#FederationMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FEDERATED",
+                        "name": "FEDERATED"
+                    },
+                    {
+                        "value": "LOCAL",
+                        "name": "LOCAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.finspace#FederationParameters": {
+            "type": "structure",
+            "members": {
+                "samlMetadataDocument": {
+                    "target": "com.amazonaws.finspace#SamlMetadataDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>SAML 2.0 Metadata document from identity provider (IdP).</p>"
+                    }
+                },
+                "samlMetadataURL": {
+                    "target": "com.amazonaws.finspace#url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide the metadata URL from your SAML 2.0 compliant identity provider (IdP).</p>"
+                    }
+                },
+                "applicationCallBackURL": {
+                    "target": "com.amazonaws.finspace#url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redirect or sign-in URL that should be entered into the SAML 2.0 compliant identity provider configuration\n       (IdP).</p>"
+                    }
+                },
+                "federationURN": {
+                    "target": "com.amazonaws.finspace#urn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Uniform Resource Name (URN). Also referred as Service Provider URN or Audience URI or Service Provider Entity ID.</p>"
+                    }
+                },
+                "federationProviderName": {
+                    "target": "com.amazonaws.finspace#FederationProviderName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the identity provider (IdP).</p>"
+                    }
+                },
+                "attributeMap": {
+                    "target": "com.amazonaws.finspace#AttributeMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>SAML attribute name and value. The name must always be <code>Email</code> and the value should be set to\n         the attribute definition in which user email is set. For example, name would be <code>Email</code> and\n         value <code>http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress</code>.\n         Please check your SAML 2.0 compliant identity provider (IdP) documentation for details.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information when authentication mode is FEDERATED.</p>"
+            }
+        },
+        "com.amazonaws.finspace#FederationProviderName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                },
+                "smithy.api#pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+"
+            }
+        },
+        "com.amazonaws.finspace#GetEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#GetEnvironmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#GetEnvironmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the FinSpace environment object.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/environment/{environmentId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#GetEnvironmentRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#IdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the FinSpace environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#GetEnvironmentResponse": {
+            "type": "structure",
+            "members": {
+                "environment": {
+                    "target": "com.amazonaws.finspace#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the FinSpace environment.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#IdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 26
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]{1,26}$"
+            }
+        },
+        "com.amazonaws.finspace#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspace#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or\n         failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.finspace#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspace#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request is invalid. Something is wrong with the input to the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.finspace#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z-0-9-:\\/]*$"
+            }
+        },
+        "com.amazonaws.finspace#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspace#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A service limit or quota is exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.finspace#ListEnvironments": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#ListEnvironmentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#ListEnvironmentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A list of all of your FinSpace environments.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/environment",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#ListEnvironmentsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.finspace#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token generated by FinSpace that specifies where to continue pagination if a previous\n         request was truncated. To get the next set of pages, pass in the nextToken value from the\n         response object of the previous page call.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.finspace#ResultLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in this request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#ListEnvironmentsResponse": {
+            "type": "structure",
+            "members": {
+                "environments": {
+                    "target": "com.amazonaws.finspace#EnvironmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all of your FinSpace environments.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.finspace#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that you can use in a subsequent call to retrieve the next set of\n         results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A list of all tags for a resource.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.finspace#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name of the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.finspace#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of all tags for a resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.finspace#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspace#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more resources can't be found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.finspace#ResultLimit": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.finspace#SamlMetadataDocument": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1000,
+                    "max": 10000000
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.finspace#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspace#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> You have exceeded your service quota. To perform the requested action, \n         remove some of the relevant resources, or use Service Quotas to request a service quota increase.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.finspace#SmsDomainUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[a-zA-Z-0-9-:\\/.]*$"
+            }
+        },
+        "com.amazonaws.finspace#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+            }
+        },
+        "com.amazonaws.finspace#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.finspace#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.finspace#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.finspace#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.finspace#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.finspace#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds metadata tags to a FinSpace resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.finspace#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.finspace#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags to be assigned to the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.finspace#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9+-=._:@ ]+$"
+            }
+        },
+        "com.amazonaws.finspace#ThrottlingException": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.finspace#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes metadata tags from a FinSpace resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.finspace#EnvironmentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A FinSpace resource from which you want to remove a tag or tags. The value for this\n         parameter is an Amazon Resource Name (ARN).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.finspace#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys (names) of one or more tags to be removed.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.finspace#UpdateEnvironment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.finspace#UpdateEnvironmentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.finspace#UpdateEnvironmentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.finspace#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.finspace#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update your FinSpace environment.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/environment/{environmentId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.finspace#UpdateEnvironmentRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.finspace#IdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the FinSpace environment.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.finspace#EnvironmentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.finspace#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the environment.</p>"
+                    }
+                },
+                "federationMode": {
+                    "target": "com.amazonaws.finspace#FederationMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Authentication mode for the environment.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>FEDERATED</code> - Users access FinSpace through Single Sign On (SSO) via your Identity provider.</p>\n            </li>\n            <li>\n               <p>\n                  <code>LOCAL</code> - Users access FinSpace via email and password managed within the FinSpace environment.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "federationParameters": {
+                    "target": "com.amazonaws.finspace#FederationParameters"
+                }
+            }
+        },
+        "com.amazonaws.finspace#UpdateEnvironmentResponse": {
+            "type": "structure",
+            "members": {
+                "environment": {
+                    "target": "com.amazonaws.finspace#Environment",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the FinSpace environment object.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.finspace#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.finspace#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.finspace#errorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.finspace#url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+            }
+        },
+        "com.amazonaws.finspace#urn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9._\\-:\\/#\\+]+$"
+            }
+        }
+    }
+}

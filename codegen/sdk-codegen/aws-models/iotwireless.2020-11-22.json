@@ -515,10 +515,16 @@
                     "target": "com.amazonaws.iotwireless#Message"
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.iotwireless#ResourceId"
+                    "target": "com.amazonaws.iotwireless#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Id of the resource in the conflicting operation.</p>"
+                    }
                 },
                 "ResourceType": {
-                    "target": "com.amazonaws.iotwireless#ResourceType"
+                    "target": "com.amazonaws.iotwireless#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the resource in the conflicting operation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3172,6 +3178,32 @@
                 "smithy.api#pattern": "[a-fA-F0-9]{16}"
             }
         },
+        "com.amazonaws.iotwireless#JoinEuiFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#JoinEuiRange"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of JoinEuiRange used by LoRa gateways to filter LoRa frames.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#JoinEuiRange": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#JoinEui"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A pair of join EUI describing a range [BegEui, EndEui], both ends are inclusive.</p>",
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
         "com.amazonaws.iotwireless#ListDestinations": {
             "type": "operation",
             "input": {
@@ -3989,6 +4021,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The frequency band (RFRegion) value.</p>"
                     }
+                },
+                "JoinEuiFilters": {
+                    "target": "com.amazonaws.iotwireless#JoinEuiFilters"
+                },
+                "NetIdFilters": {
+                    "target": "com.amazonaws.iotwireless#NetIdFilters"
+                },
+                "SubBands": {
+                    "target": "com.amazonaws.iotwireless#SubBands"
                 }
             },
             "traits": {
@@ -4396,6 +4437,26 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#NetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>LoRaWAN network ID.</p>",
+                "smithy.api#pattern": "[a-fA-F0-9]{6}"
+            }
+        },
+        "com.amazonaws.iotwireless#NetIdFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#NetId"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of NetId values that are used by LoRa gateways to filter the uplink frames.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.iotwireless#NextToken": {
             "type": "string",
             "traits": {
@@ -4584,10 +4645,16 @@
                     "target": "com.amazonaws.iotwireless#Message"
                 },
                 "ResourceId": {
-                    "target": "com.amazonaws.iotwireless#ResourceId"
+                    "target": "com.amazonaws.iotwireless#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Id of the not found resource.</p>"
+                    }
                 },
                 "ResourceType": {
-                    "target": "com.amazonaws.iotwireless#ResourceType"
+                    "target": "com.amazonaws.iotwireless#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of the font found resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5079,6 +5146,29 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#SubBand": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#documentation": "<p>A subset of supported frequency channels in a certain RFRegion.</p>",
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 8
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#SubBands": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#SubBand"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of integer indicating which sub bands are supported by LoRa gateway.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8
+                }
+            }
+        },
         "com.amazonaws.iotwireless#Supports32BitFCnt": {
             "type": "boolean"
         },
@@ -5309,7 +5399,10 @@
                     "target": "com.amazonaws.iotwireless#Message"
                 },
                 "ResourceName": {
-                    "target": "com.amazonaws.iotwireless#AmazonResourceName"
+                    "target": "com.amazonaws.iotwireless#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the resource that exceeds maximum number of tags allowed.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5703,6 +5796,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A new description of the resource.</p>"
                     }
+                },
+                "JoinEuiFilters": {
+                    "target": "com.amazonaws.iotwireless#JoinEuiFilters"
+                },
+                "NetIdFilters": {
+                    "target": "com.amazonaws.iotwireless#NetIdFilters"
                 }
             }
         },

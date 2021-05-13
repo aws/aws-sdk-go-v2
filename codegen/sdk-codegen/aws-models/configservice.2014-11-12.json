@@ -3028,7 +3028,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of compliant and noncompliant rules with the\n\t\t\tnumber of resources for compliant and noncompliant rules.\n\t\t\t</p>\n\t\t       <note>\n\t\t\t         <p>The results can return an empty result page, but if you\n\t\t\t\thave a <code>nextToken</code>, the results are displayed on the next\n\t\t\t\tpage.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>Returns a list of compliant and noncompliant rules with the\n\t\t\tnumber of resources for compliant and noncompliant rules.\n\t\t\t</p>\n\t\t       <note>\n\t\t\t         <p>The results can return an empty result page, but if you\n\t\t\t\thave a <code>nextToken</code>, the results are displayed on the next\n\t\t\t\tpage.</p>\n\t\t       </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeAggregateComplianceByConfigRulesRequest": {
@@ -3101,7 +3106,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.\n\t\t\tAlso returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack.\n\t\t\tAlso returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a <code>nextToken</code>, the results are displayed on the next page.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AggregateComplianceByConformancePacks",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeAggregateComplianceByConformancePacksRequest": {
@@ -3171,7 +3182,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of authorizations granted to various aggregator\n\t\t\taccounts and regions.</p>"
+                "smithy.api#documentation": "<p>Returns a list of authorizations granted to various aggregator\n\t\t\taccounts and regions.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AggregationAuthorizations",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeAggregationAuthorizationsRequest": {
@@ -3228,7 +3245,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether the specified AWS Config rules are compliant.\n\t\t\tIf a rule is noncompliant, this action returns the number of AWS\n\t\t\tresources that do not comply with the rule.</p>\n\t\t       <p>A rule is compliant if all of the evaluated resources comply\n\t\t\twith it. It is noncompliant if any of these resources do not\n\t\t\tcomply.</p>\n\t\t       <p>If AWS Config has no current evaluation results for the rule,\n\t\t\tit returns <code>INSUFFICIENT_DATA</code>. This result might\n\t\t\tindicate one of the following conditions:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>AWS Config has never invoked an evaluation for the\n\t\t\t\t\trule. To check whether it has, use the\n\t\t\t\t\t\t<code>DescribeConfigRuleEvaluationStatus</code> action\n\t\t\t\t\tto get the <code>LastSuccessfulInvocationTime</code> and\n\t\t\t\t\t\t<code>LastFailedInvocationTime</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The rule's AWS Lambda function is failing to send\n\t\t\t\t\tevaluation results to AWS Config. Verify that the role you\n\t\t\t\t\tassigned to your configuration recorder includes the\n\t\t\t\t\t\t<code>config:PutEvaluations</code> permission. If the\n\t\t\t\t\trule is a custom rule, verify that the AWS Lambda execution\n\t\t\t\t\trole includes the <code>config:PutEvaluations</code>\n\t\t\t\t\tpermission.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The rule's AWS Lambda function has returned\n\t\t\t\t\t\t<code>NOT_APPLICABLE</code> for all evaluation results.\n\t\t\t\t\tThis can occur if the resources were deleted or removed from\n\t\t\t\t\tthe rule's scope.</p>\n\t\t\t         </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Indicates whether the specified AWS Config rules are compliant.\n\t\t\tIf a rule is noncompliant, this action returns the number of AWS\n\t\t\tresources that do not comply with the rule.</p>\n\t\t       <p>A rule is compliant if all of the evaluated resources comply\n\t\t\twith it. It is noncompliant if any of these resources do not\n\t\t\tcomply.</p>\n\t\t       <p>If AWS Config has no current evaluation results for the rule,\n\t\t\tit returns <code>INSUFFICIENT_DATA</code>. This result might\n\t\t\tindicate one of the following conditions:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>AWS Config has never invoked an evaluation for the\n\t\t\t\t\trule. To check whether it has, use the\n\t\t\t\t\t\t<code>DescribeConfigRuleEvaluationStatus</code> action\n\t\t\t\t\tto get the <code>LastSuccessfulInvocationTime</code> and\n\t\t\t\t\t\t<code>LastFailedInvocationTime</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The rule's AWS Lambda function is failing to send\n\t\t\t\t\tevaluation results to AWS Config. Verify that the role you\n\t\t\t\t\tassigned to your configuration recorder includes the\n\t\t\t\t\t\t<code>config:PutEvaluations</code> permission. If the\n\t\t\t\t\trule is a custom rule, verify that the AWS Lambda execution\n\t\t\t\t\trole includes the <code>config:PutEvaluations</code>\n\t\t\t\t\tpermission.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The rule's AWS Lambda function has returned\n\t\t\t\t\t\t<code>NOT_APPLICABLE</code> for all evaluation results.\n\t\t\t\t\tThis can occur if the resources were deleted or removed from\n\t\t\t\t\tthe rule's scope.</p>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ComplianceByConfigRules"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeComplianceByConfigRuleRequest": {
@@ -3294,7 +3316,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Indicates whether the specified AWS resources are compliant. If\n\t\t\ta resource is noncompliant, this action returns the number of AWS\n\t\t\tConfig rules that the resource does not comply with.</p>\n\t\t       <p>A resource is compliant if it complies with all the AWS Config\n\t\t\trules that evaluate it. It is noncompliant if it does not comply\n\t\t\twith one or more of these rules.</p>\n\t\t       <p>If AWS Config has no current evaluation results for the\n\t\t\tresource, it returns <code>INSUFFICIENT_DATA</code>. This result\n\t\t\tmight indicate one of the following conditions about the rules that\n\t\t\tevaluate the resource:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>AWS Config has never invoked an evaluation for the\n\t\t\t\t\trule. To check whether it has, use the\n\t\t\t\t\t\t<code>DescribeConfigRuleEvaluationStatus</code> action\n\t\t\t\t\tto get the <code>LastSuccessfulInvocationTime</code> and\n\t\t\t\t\t\t<code>LastFailedInvocationTime</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The rule's AWS Lambda function is failing to send\n\t\t\t\t\tevaluation results to AWS Config. Verify that the role that\n\t\t\t\t\tyou assigned to your configuration recorder includes the\n\t\t\t\t\t\t<code>config:PutEvaluations</code> permission. If the\n\t\t\t\t\trule is a custom rule, verify that the AWS Lambda execution\n\t\t\t\t\trole includes the <code>config:PutEvaluations</code>\n\t\t\t\t\tpermission.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The rule's AWS Lambda function has returned\n\t\t\t\t\t\t<code>NOT_APPLICABLE</code> for all evaluation results.\n\t\t\t\t\tThis can occur if the resources were deleted or removed from\n\t\t\t\t\tthe rule's scope.</p>\n\t\t\t         </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Indicates whether the specified AWS resources are compliant. If\n\t\t\ta resource is noncompliant, this action returns the number of AWS\n\t\t\tConfig rules that the resource does not comply with.</p>\n\t\t       <p>A resource is compliant if it complies with all the AWS Config\n\t\t\trules that evaluate it. It is noncompliant if it does not comply\n\t\t\twith one or more of these rules.</p>\n\t\t       <p>If AWS Config has no current evaluation results for the\n\t\t\tresource, it returns <code>INSUFFICIENT_DATA</code>. This result\n\t\t\tmight indicate one of the following conditions about the rules that\n\t\t\tevaluate the resource:</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>AWS Config has never invoked an evaluation for the\n\t\t\t\t\trule. To check whether it has, use the\n\t\t\t\t\t\t<code>DescribeConfigRuleEvaluationStatus</code> action\n\t\t\t\t\tto get the <code>LastSuccessfulInvocationTime</code> and\n\t\t\t\t\t\t<code>LastFailedInvocationTime</code>.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The rule's AWS Lambda function is failing to send\n\t\t\t\t\tevaluation results to AWS Config. Verify that the role that\n\t\t\t\t\tyou assigned to your configuration recorder includes the\n\t\t\t\t\t\t<code>config:PutEvaluations</code> permission. If the\n\t\t\t\t\trule is a custom rule, verify that the AWS Lambda execution\n\t\t\t\t\trole includes the <code>config:PutEvaluations</code>\n\t\t\t\t\tpermission.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>The rule's AWS Lambda function has returned\n\t\t\t\t\t\t<code>NOT_APPLICABLE</code> for all evaluation results.\n\t\t\t\t\tThis can occur if the resources were deleted or removed from\n\t\t\t\t\tthe rule's scope.</p>\n\t\t\t         </li>\n         </ul>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ComplianceByResources",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeComplianceByResourceRequest": {
@@ -3375,7 +3403,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns status information for each of your AWS managed Config\n\t\t\trules. The status includes information such as the last time AWS\n\t\t\tConfig invoked the rule, the last time AWS Config failed to invoke\n\t\t\tthe rule, and the related error for the last failure.</p>"
+                "smithy.api#documentation": "<p>Returns status information for each of your AWS managed Config\n\t\t\trules. The status includes information such as the last time AWS\n\t\t\tConfig invoked the rule, the last time AWS Config failed to invoke\n\t\t\tthe rule, and the related error for the last failure.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConfigRulesEvaluationStatus",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeConfigRuleEvaluationStatusRequest": {
@@ -3441,7 +3475,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns details about your AWS Config rules.</p>"
+                "smithy.api#documentation": "<p>Returns details about your AWS Config rules.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConfigRules"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeConfigRulesRequest": {
@@ -3507,7 +3546,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns status information for sources within an aggregator.\n\t\t\tThe status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. </p>"
+                "smithy.api#documentation": "<p>Returns status information for sources within an aggregator.\n\t\t\tThe status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AggregatedSourceStatusList",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeConfigurationAggregatorSourcesStatusRequest": {
@@ -3580,7 +3625,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of one or more configuration aggregators.\n\t\t\tIf the configuration aggregator is not specified, this action\n\t\t\treturns the details for all the configuration aggregators associated\n\t\t\twith the account. </p>"
+                "smithy.api#documentation": "<p>Returns the details of one or more configuration aggregators.\n\t\t\tIf the configuration aggregator is not specified, this action\n\t\t\treturns the details for all the configuration aggregators associated\n\t\t\twith the account. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConfigurationAggregators",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeConfigurationAggregatorsRequest": {
@@ -3739,7 +3790,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns compliance details for each rule in that conformance pack.</p>\n\t\t       <note>\n            <p>You must provide exact rule names.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns compliance details for each rule in that conformance pack.</p>\n\t\t       <note>\n            <p>You must provide exact rule names.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeConformancePackComplianceLimit": {
@@ -3826,7 +3882,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides one or more conformance packs deployment status.</p>\n\t\t       <note>\n            <p>If there are no conformance packs then you will see an empty result.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides one or more conformance packs deployment status.</p>\n\t\t       <note>\n            <p>If there are no conformance packs then you will see an empty result.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConformancePackStatusDetails",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeConformancePackStatusRequest": {
@@ -3892,7 +3954,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of one or more conformance packs.</p>"
+                "smithy.api#documentation": "<p>Returns a list of one or more conformance packs.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConformancePackDetails",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeConformancePacksRequest": {
@@ -4048,7 +4116,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides organization config rule deployment status for an organization.</p>\n\t\t\n\t\t       <note>\n            <p>The status is not considered successful until organization config rule is successfully deployed in all the member \n\t\t\taccounts with an exception of excluded accounts.</p>\n\t\t\t         <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization config rule names. \n\t\t\tIt is only applicable, when you request all the organization config rules.</p>\n\t\t\t      </note>"
+                "smithy.api#documentation": "<p>Provides organization config rule deployment status for an organization.</p>\n\t\t\n\t\t       <note>\n            <p>The status is not considered successful until organization config rule is successfully deployed in all the member \n\t\t\taccounts with an exception of excluded accounts.</p>\n\t\t\t         <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization config rule names. \n\t\t\tIt is only applicable, when you request all the organization config rules.</p>\n\t\t\t      </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OrganizationConfigRuleStatuses",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeOrganizationConfigRuleStatusesRequest": {
@@ -4114,7 +4188,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of organization config rules. </p>\n\t\t\t\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization config rule names. \n\t\t\tIt is only applicable, when you request all the organization config rules.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns a list of organization config rules. </p>\n\t\t\t\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response.\n\t\t\tLimit and next token are not applicable if you specify organization config rule names. \n\t\t\tIt is only applicable, when you request all the organization config rules.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OrganizationConfigRules",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeOrganizationConfigRulesRequest": {
@@ -4180,7 +4260,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides organization conformance pack deployment status for an organization. </p>\n\t\t       <note>\n\t\t\t         <p>The status is not considered successful until organization conformance pack is successfully \n\t\t\t\tdeployed in all the member accounts with an exception of excluded accounts.</p>\n\t\t\t         <p>When you specify the limit and the next token, you receive a paginated response. \n\t\t\t\tLimit and next token are not applicable if you specify organization conformance pack names. \n\t\t\t\tThey are only applicable, when you request all the organization conformance packs.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Provides organization conformance pack deployment status for an organization. </p>\n\t\t       <note>\n\t\t\t         <p>The status is not considered successful until organization conformance pack is successfully \n\t\t\t\tdeployed in all the member accounts with an exception of excluded accounts.</p>\n\t\t\t         <p>When you specify the limit and the next token, you receive a paginated response. \n\t\t\t\tLimit and next token are not applicable if you specify organization conformance pack names. \n\t\t\t\tThey are only applicable, when you request all the organization conformance packs.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OrganizationConformancePackStatuses",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeOrganizationConformancePackStatusesRequest": {
@@ -4246,7 +4332,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of organization conformance packs. </p>\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response. </p>\n\t\t\t         <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable,\n\t\t\twhen you request all the organization conformance packs. </p> \n         </note>"
+                "smithy.api#documentation": "<p>Returns a list of organization conformance packs. </p>\n\t\t       <note>\n            <p>When you specify the limit and the next token, you receive a paginated response. </p>\n\t\t\t         <p>Limit and next token are not applicable if you specify organization conformance packs names. They are only applicable,\n\t\t\twhen you request all the organization conformance packs. </p> \n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OrganizationConformancePacks",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeOrganizationConformancePacksRequest": {
@@ -4309,7 +4401,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all pending aggregation requests.</p>"
+                "smithy.api#documentation": "<p>Returns a list of all pending aggregation requests.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "PendingAggregationRequests",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#DescribePendingAggregationRequestsLimit": {
@@ -4558,7 +4656,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the details of one or more retention configurations. If\n\t\t\tthe retention configuration name is not specified, this action\n\t\t\treturns the details for all the retention configurations for that\n\t\t\taccount.</p>\n\t\t       <note>\n\t\t\t         <p>Currently, AWS Config supports only one retention\n\t\t\t\tconfiguration per region in your account.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>Returns the details of one or more retention configurations. If\n\t\t\tthe retention configuration name is not specified, this action\n\t\t\treturns the details for all the retention configurations for that\n\t\t\taccount.</p>\n\t\t       <note>\n\t\t\t         <p>Currently, AWS Config supports only one retention\n\t\t\t\tconfiguration per region in your account.</p>\n\t\t       </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RetentionConfigurations"
+                }
             }
         },
         "com.amazonaws.configservice#DescribeRetentionConfigurationsRequest": {
@@ -4978,7 +5081,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the evaluation results for the specified AWS Config\n\t\t\trule for a specific resource in a rule. The results indicate which\n\t\t\tAWS resources were evaluated by the rule, when each resource was\n\t\t\tlast evaluated, and whether each resource complies with the rule. </p>\n\t\t       <note>\n\t\t\t         <p>The results can return an empty result page. But if you\n\t\t\t\thave a <code>nextToken</code>, the results are displayed on the next\n\t\t\t\tpage.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>Returns the evaluation results for the specified AWS Config\n\t\t\trule for a specific resource in a rule. The results indicate which\n\t\t\tAWS resources were evaluated by the rule, when each resource was\n\t\t\tlast evaluated, and whether each resource complies with the rule. </p>\n\t\t       <note>\n\t\t\t         <p>The results can return an empty result page. But if you\n\t\t\t\thave a <code>nextToken</code>, the results are displayed on the next\n\t\t\t\tpage.</p>\n\t\t       </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AggregateEvaluationResults",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetAggregateComplianceDetailsByConfigRuleRequest": {
@@ -5072,7 +5181,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the number of compliant and noncompliant rules for one\n\t\t\tor more accounts and regions in an aggregator.</p>\n\t\t       <note>\n\t\t\t         <p>The results can return an empty result page, but if you\n\t\t\t\thave a nextToken, the results are displayed on the next\n\t\t\t\tpage.</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>Returns the number of compliant and noncompliant rules for one\n\t\t\tor more accounts and regions in an aggregator.</p>\n\t\t       <note>\n\t\t\t         <p>The results can return an empty result page, but if you\n\t\t\t\thave a nextToken, the results are displayed on the next\n\t\t\t\tpage.</p>\n\t\t       </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetAggregateConfigRuleComplianceSummaryRequest": {
@@ -5157,7 +5271,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions in an aggregator. You can filter based on AWS Account ID or AWS Region.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions in an aggregator. You can filter based on AWS Account ID or AWS Region.</p>\n\t\t       <note>\n            <p>The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetAggregateConformancePackComplianceSummaryRequest": {
@@ -5242,7 +5361,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the resource counts across accounts and regions that are present in your AWS Config aggregator. You can request the resource counts by providing filters and GroupByKey.</p>\n\t\t       <p>For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1.\n\t\t\tIf the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.</p>"
+                "smithy.api#documentation": "<p>Returns the resource counts across accounts and regions that are present in your AWS Config aggregator. You can request the resource counts by providing filters and GroupByKey.</p>\n\t\t       <p>For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1.\n\t\t\tIf the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetAggregateDiscoveredResourceCountsRequest": {
@@ -5387,7 +5511,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the evaluation results for the specified AWS Config\n\t\t\trule. The results indicate which AWS resources were evaluated by the\n\t\t\trule, when each resource was last evaluated, and whether each\n\t\t\tresource complies with the rule.</p>"
+                "smithy.api#documentation": "<p>Returns the evaluation results for the specified AWS Config\n\t\t\trule. The results indicate which AWS resources were evaluated by the\n\t\t\trule, when each resource was last evaluated, and whether each\n\t\t\tresource complies with the rule.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "EvaluationResults",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetComplianceDetailsByConfigRuleRequest": {
@@ -5457,7 +5587,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the evaluation results for the specified AWS resource.\n\t\t\tThe results indicate which AWS Config rules were used to evaluate\n\t\t\tthe resource, when each rule was last used, and whether the resource\n\t\t\tcomplies with each rule.</p>"
+                "smithy.api#documentation": "<p>Returns the evaluation results for the specified AWS resource.\n\t\t\tThe results indicate which AWS Config rules were used to evaluate\n\t\t\tthe resource, when each rule was last used, and whether the resource\n\t\t\tcomplies with each rule.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "EvaluationResults"
+                }
             }
         },
         "com.amazonaws.configservice#GetComplianceDetailsByResourceRequest": {
@@ -5608,7 +5743,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns compliance details of a conformance pack for all AWS resources that are monitered by conformance pack.</p>"
+                "smithy.api#documentation": "<p>Returns compliance details of a conformance pack for all AWS resources that are monitered by conformance pack.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetConformancePackComplianceDetailsLimit": {
@@ -5694,7 +5834,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns compliance details for the conformance pack based on the cumulative compliance results of all the rules in that conformance pack.</p>"
+                "smithy.api#documentation": "<p>Returns compliance details for the conformance pack based on the cumulative compliance results of all the rules in that conformance pack.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ConformancePackComplianceSummaryList",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetConformancePackComplianceSummaryRequest": {
@@ -5758,7 +5904,12 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the resource types, the number of each resource type,\n\t\t\tand the total number of resources that AWS Config is recording in\n\t\t\tthis region for your AWS account. </p>\n\t\t       <p class=\"title\">\n            <b>Example</b>\n         </p>\n         <ol>\n            <li>\n\t\t\t\t           <p>AWS Config is recording three resource types in the US\n\t\t\t\t\tEast (Ohio) Region for your account: 25 EC2 instances, 20\n\t\t\t\t\tIAM users, and 15 S3 buckets.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You make a call to the\n\t\t\t\t\t\t<code>GetDiscoveredResourceCounts</code> action and\n\t\t\t\t\tspecify that you want all resource types. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>AWS Config returns the following:</p>\n\n\t\t\t\t           <ul>\n                  <li>\n\t\t\t\t\t\t               <p>The resource types (EC2 instances, IAM users,\n\t\t\t\t\t\t\tand S3 buckets).</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>The number of each resource type (25, 20, and\n\t\t\t\t\t\t\t15).</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>The total number of all resources\n\t\t\t\t\t\t\t(60).</p>\n\t\t\t\t\t             </li>\n               </ul>\n\n\t\t\t         </li>\n         </ol>\n\n\t\t       <p>The response is paginated. By default, AWS Config lists 100\n\t\t\t\t<a>ResourceCount</a> objects on each page. You can\n\t\t\tcustomize this number with the <code>limit</code> parameter. The\n\t\t\tresponse includes a <code>nextToken</code> string. To get the next\n\t\t\tpage of results, run the request again and specify the string for\n\t\t\tthe <code>nextToken</code> parameter.</p>\n\n\t\t       <note>\n\t\t\t         <p>If you make a call to the <a>GetDiscoveredResourceCounts</a> action, you might\n\t\t\t\tnot immediately receive resource counts in the following\n\t\t\t\tsituations:</p>\n\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>You are a new AWS Config customer.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>You just enabled resource recording.</p>\n\t\t\t\t           </li>\n            </ul>\n\n\t\t\t         <p>It might take a few minutes for AWS Config to record and\n\t\t\t\tcount your resources. Wait a few minutes and then retry the\n\t\t\t\t\t<a>GetDiscoveredResourceCounts</a> action.\n\t\t\t</p>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>Returns the resource types, the number of each resource type,\n\t\t\tand the total number of resources that AWS Config is recording in\n\t\t\tthis region for your AWS account. </p>\n\t\t       <p class=\"title\">\n            <b>Example</b>\n         </p>\n         <ol>\n            <li>\n\t\t\t\t           <p>AWS Config is recording three resource types in the US\n\t\t\t\t\tEast (Ohio) Region for your account: 25 EC2 instances, 20\n\t\t\t\t\tIAM users, and 15 S3 buckets.</p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>You make a call to the\n\t\t\t\t\t\t<code>GetDiscoveredResourceCounts</code> action and\n\t\t\t\t\tspecify that you want all resource types. </p>\n\t\t\t         </li>\n            <li>\n\t\t\t\t           <p>AWS Config returns the following:</p>\n\n\t\t\t\t           <ul>\n                  <li>\n\t\t\t\t\t\t               <p>The resource types (EC2 instances, IAM users,\n\t\t\t\t\t\t\tand S3 buckets).</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>The number of each resource type (25, 20, and\n\t\t\t\t\t\t\t15).</p>\n\t\t\t\t\t             </li>\n                  <li>\n\t\t\t\t\t\t               <p>The total number of all resources\n\t\t\t\t\t\t\t(60).</p>\n\t\t\t\t\t             </li>\n               </ul>\n\n\t\t\t         </li>\n         </ol>\n\n\t\t       <p>The response is paginated. By default, AWS Config lists 100\n\t\t\t\t<a>ResourceCount</a> objects on each page. You can\n\t\t\tcustomize this number with the <code>limit</code> parameter. The\n\t\t\tresponse includes a <code>nextToken</code> string. To get the next\n\t\t\tpage of results, run the request again and specify the string for\n\t\t\tthe <code>nextToken</code> parameter.</p>\n\n\t\t       <note>\n\t\t\t         <p>If you make a call to the <a>GetDiscoveredResourceCounts</a> action, you might\n\t\t\t\tnot immediately receive resource counts in the following\n\t\t\t\tsituations:</p>\n\n\t\t\t         <ul>\n               <li>\n\t\t\t\t\t             <p>You are a new AWS Config customer.</p>\n\t\t\t\t           </li>\n               <li>\n\t\t\t\t\t             <p>You just enabled resource recording.</p>\n\t\t\t\t           </li>\n            </ul>\n\n\t\t\t         <p>It might take a few minutes for AWS Config to record and\n\t\t\t\tcount your resources. Wait a few minutes and then retry the\n\t\t\t\t\t<a>GetDiscoveredResourceCounts</a> action.\n\t\t\t</p>\n\t\t       </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetDiscoveredResourceCountsRequest": {
@@ -5830,7 +5981,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed status for each member account within an organization for a given organization config rule.</p>"
+                "smithy.api#documentation": "<p>Returns detailed status for each member account within an organization for a given organization config rule.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OrganizationConfigRuleDetailedStatus",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetOrganizationConfigRuleDetailedStatusRequest": {
@@ -5903,7 +6060,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed status for each member account within an organization for a given organization conformance pack.</p>"
+                "smithy.api#documentation": "<p>Returns detailed status for each member account within an organization for a given organization conformance pack.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OrganizationConformancePackDetailedStatuses",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#GetOrganizationConformancePackDetailedStatusRequest": {
@@ -6439,7 +6602,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions. \n\t\t\tA resource identifier includes the resource type, ID, (if available) the custom resource name, source account, and source region. \n\t\t\tYou can narrow the results to include only resources that have specific resource IDs, or a resource name, or source account ID, or source region.</p>\n\t\t\t      <p>For example, if the input consists of accountID 12345678910 and the region is us-east-1 for resource type <code>AWS::EC2::Instance</code> then the API returns all the EC2 instance identifiers of accountID 12345678910 and region us-east-1.</p>"
+                "smithy.api#documentation": "<p>Accepts a resource type and returns a list of resource identifiers that are aggregated for a specific resource type across accounts and regions. \n\t\t\tA resource identifier includes the resource type, ID, (if available) the custom resource name, source account, and source region. \n\t\t\tYou can narrow the results to include only resources that have specific resource IDs, or a resource name, or source account ID, or source region.</p>\n\t\t\t      <p>For example, if the input consists of accountID 12345678910 and the region is us-east-1 for resource type <code>AWS::EC2::Instance</code> then the API returns all the EC2 instance identifiers of accountID 12345678910 and region us-east-1.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "ResourceIdentifiers",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#ListAggregateDiscoveredResourcesRequest": {
@@ -6519,7 +6688,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Accepts a resource type and returns a list of resource\n\t\t\tidentifiers for the resources of that type. A resource identifier\n\t\t\tincludes the resource type, ID, and (if available) the custom\n\t\t\tresource name. The results consist of resources that AWS Config has\n\t\t\tdiscovered, including those that AWS Config is not currently\n\t\t\trecording. You can narrow the results to include only resources that\n\t\t\thave specific resource IDs or a resource name.</p>\n\t\t       <note>\n\t\t\t         <p>You can specify either resource IDs or a resource name, but\n\t\t\t\tnot both, in the same request.</p>\n\t\t       </note>\n\t\t       <p>The response is paginated. By default, AWS Config lists 100\n\t\t\tresource identifiers on each page. You can customize this number\n\t\t\twith the <code>limit</code> parameter. The response includes a\n\t\t\t\t<code>nextToken</code> string. To get the next page of results,\n\t\t\trun the request again and specify the string for the\n\t\t\t\t<code>nextToken</code> parameter.</p>"
+                "smithy.api#documentation": "<p>Accepts a resource type and returns a list of resource\n\t\t\tidentifiers for the resources of that type. A resource identifier\n\t\t\tincludes the resource type, ID, and (if available) the custom\n\t\t\tresource name. The results consist of resources that AWS Config has\n\t\t\tdiscovered, including those that AWS Config is not currently\n\t\t\trecording. You can narrow the results to include only resources that\n\t\t\thave specific resource IDs or a resource name.</p>\n\t\t       <note>\n\t\t\t         <p>You can specify either resource IDs or a resource name, but\n\t\t\t\tnot both, in the same request.</p>\n\t\t       </note>\n\t\t       <p>The response is paginated. By default, AWS Config lists 100\n\t\t\tresource identifiers on each page. You can customize this number\n\t\t\twith the <code>limit</code> parameter. The response includes a\n\t\t\t\t<code>nextToken</code> string. To get the next page of results,\n\t\t\trun the request again and specify the string for the\n\t\t\t\t<code>nextToken</code> parameter.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "resourceIdentifiers",
+                    "pageSize": "limit"
+                }
             }
         },
         "com.amazonaws.configservice#ListDiscoveredResourcesRequest": {
@@ -6670,7 +6845,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List the tags for AWS Config resource.</p>"
+                "smithy.api#documentation": "<p>List the tags for AWS Config resource.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Tags",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#ListTagsForResourceRequest": {
@@ -10302,7 +10483,8 @@
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
-                    "pageSize": "MaxResults"
+                    "items": "Results",
+                    "pageSize": "Limit"
                 }
             }
         },
@@ -10383,7 +10565,13 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Accepts a structured query language (SQL) <code>SELECT</code> command, performs the corresponding search, and returns resource configurations matching the properties.</p>\n\t\t       <p>For more information about query components, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/config/latest/developerguide/query-components.html\">\n               <b>Query Components</b>\n            </a> section in the AWS Config Developer Guide.</p>"
+                "smithy.api#documentation": "<p>Accepts a structured query language (SQL) <code>SELECT</code> command, performs the corresponding search, and returns resource configurations matching the properties.</p>\n\t\t       <p>For more information about query components, see the \n\t\t\t<a href=\"https://docs.aws.amazon.com/config/latest/developerguide/query-components.html\">\n               <b>Query Components</b>\n            </a> section in the AWS Config Developer Guide.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Results",
+                    "pageSize": "Limit"
+                }
             }
         },
         "com.amazonaws.configservice#SelectResourceConfigRequest": {

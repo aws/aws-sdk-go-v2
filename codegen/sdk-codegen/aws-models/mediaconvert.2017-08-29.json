@@ -4861,6 +4861,27 @@
                         "smithy.api#jsonName": "backgroundOpacity"
                     }
                 },
+                "DdsHandling": {
+                    "target": "com.amazonaws.mediaconvert#DvbddsHandling",
+                    "traits": {
+                        "smithy.api#documentation": "Specify how MediaConvert handles the display definition segment (DDS). Keep the default, None (NONE), to exclude the DDS from this set of captions. Choose No display window (NO_DISPLAY_WINDOW) to have MediaConvert include the DDS but not include display window data. In this case, MediaConvert writes that information to the page composition segment (PCS) instead. Choose Specify (SPECIFIED) to have MediaConvert set up the display window based on the values that you specify in related job settings. For video resolutions that are 576 pixels or smaller in height, MediaConvert doesn't include the DDS, regardless of the value you choose for DDS handling (ddsHandling). In this case, it doesn't write the display window data to the PCS either. Related settings: Use the settings DDS x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate) to specify the offset between the top left corner of the display window and the top left corner of the video frame. All burn-in and DVB-Sub font settings must match.",
+                        "smithy.api#jsonName": "ddsHandling"
+                    }
+                },
+                "DdsXCoordinate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting, along with DDS y-coordinate (ddsYCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the left side of the frame and the left side of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match.",
+                        "smithy.api#jsonName": "ddsXCoordinate"
+                    }
+                },
+                "DdsYCoordinate": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting, along with DDS x-coordinate (ddsXCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the top of the frame and the top of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match.",
+                        "smithy.api#jsonName": "ddsYCoordinate"
+                    }
+                },
                 "FontColor": {
                     "target": "com.amazonaws.mediaconvert#DvbSubtitleFontColor",
                     "traits": {
@@ -4894,6 +4915,13 @@
                     "traits": {
                         "smithy.api#documentation": "A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.",
                         "smithy.api#jsonName": "fontSize"
+                    }
+                },
+                "Height": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the height, in pixels, of this set of DVB-Sub captions. The default value is 576 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match.",
+                        "smithy.api#jsonName": "height"
                     }
                 },
                 "OutlineColor": {
@@ -4950,6 +4978,13 @@
                     "traits": {
                         "smithy.api#documentation": "Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption.",
                         "smithy.api#jsonName": "teletextSpacing"
+                    }
+                },
+                "Width": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the width, in pixels, of this set of DVB-Sub captions. The default value is 720 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match.",
+                        "smithy.api#jsonName": "width"
                     }
                 },
                 "XPosition": {
@@ -5151,6 +5186,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "Use these settings to insert a DVB Time and Date Table (TDT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings."
+            }
+        },
+        "com.amazonaws.mediaconvert#DvbddsHandling": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Specify how MediaConvert handles the display definition segment (DDS). Keep the default, None (NONE), to exclude the DDS from this set of captions. Choose No display window (NO_DISPLAY_WINDOW) to have MediaConvert include the DDS but not include display window data. In this case, MediaConvert writes that information to the page composition segment (PCS) instead. Choose Specify (SPECIFIED) to have MediaConvert set up the display window based on the values that you specify in related job settings. For video resolutions that are 576 pixels or smaller in height, MediaConvert doesn't include the DDS, regardless of the value you choose for DDS handling (ddsHandling). In this case, it doesn't write the display window data to the PCS either. Related settings: Use the settings DDS x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate) to specify the offset between the top left corner of the display window and the top left corner of the video frame. All burn-in and DVB-Sub font settings must match.",
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "SPECIFIED",
+                        "name": "SPECIFIED"
+                    },
+                    {
+                        "value": "NO_DISPLAY_WINDOW",
+                        "name": "NO_DISPLAY_WINDOW"
+                    }
+                ]
             }
         },
         "com.amazonaws.mediaconvert#Eac3AtmosBitstreamMode": {
@@ -9348,6 +9403,26 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#InputSampleRange": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata.",
+                "smithy.api#enum": [
+                    {
+                        "value": "FOLLOW",
+                        "name": "FOLLOW"
+                    },
+                    {
+                        "value": "FULL_RANGE",
+                        "name": "FULL_RANGE"
+                    },
+                    {
+                        "value": "LIMITED_RANGE",
+                        "name": "LIMITED_RANGE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#InputScanType": {
             "type": "string",
             "traits": {
@@ -9870,6 +9945,13 @@
                         "smithy.api#jsonName": "inputs"
                     }
                 },
+                "KantarWatermark": {
+                    "target": "com.amazonaws.mediaconvert#KantarWatermarkSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.",
+                        "smithy.api#jsonName": "kantarWatermark"
+                    }
+                },
                 "MotionImageInserter": {
                     "target": "com.amazonaws.mediaconvert#MotionImageInserter",
                     "traits": {
@@ -10097,6 +10179,13 @@
                         "smithy.api#jsonName": "inputs"
                     }
                 },
+                "KantarWatermark": {
+                    "target": "com.amazonaws.mediaconvert#KantarWatermarkSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html.",
+                        "smithy.api#jsonName": "kantarWatermark"
+                    }
+                },
                 "MotionImageInserter": {
                     "target": "com.amazonaws.mediaconvert#MotionImageInserter",
                     "traits": {
@@ -10142,6 +10231,105 @@
             },
             "traits": {
                 "smithy.api#documentation": "JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it."
+            }
+        },
+        "com.amazonaws.mediaconvert#KantarWatermarkSettings": {
+            "type": "structure",
+            "members": {
+                "ChannelName": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max20",
+                    "traits": {
+                        "smithy.api#documentation": "Provide an audio channel name from your Kantar audio license.",
+                        "smithy.api#jsonName": "channelName"
+                    }
+                },
+                "ContentReference": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max50PatternAZAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "Specify a unique identifier for Kantar to use for this piece of content.",
+                        "smithy.api#jsonName": "contentReference"
+                    }
+                },
+                "CredentialsSecretName": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max512PatternAZAZ09",
+                    "traits": {
+                        "smithy.api#documentation": "Provide the name of the AWS Secrets Manager secret where your Kantar credentials are stored. Note that your MediaConvert service role must provide access to this secret. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/granting-permissions-for-mediaconvert-to-access-secrets-manager-secret.html. For instructions on creating a secret, see https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html, in the AWS Secrets Manager User Guide.",
+                        "smithy.api#jsonName": "credentialsSecretName"
+                    }
+                },
+                "FileOffset": {
+                    "target": "com.amazonaws.mediaconvert#__doubleMin0",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify an offset, in whole seconds, from the start of your output and the beginning of the watermarking. When you don't specify an offset, Kantar defaults to zero.",
+                        "smithy.api#jsonName": "fileOffset"
+                    }
+                },
+                "KantarLicenseId": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max2147483647",
+                    "traits": {
+                        "smithy.api#documentation": "Provide your Kantar license ID number. You should get this number from Kantar.",
+                        "smithy.api#jsonName": "kantarLicenseId"
+                    }
+                },
+                "KantarServerUrl": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternHttpsKantarmediaCom",
+                    "traits": {
+                        "smithy.api#documentation": "Provide the HTTPS endpoint to the Kantar server. You should get this endpoint from Kantar.",
+                        "smithy.api#jsonName": "kantarServerUrl"
+                    }
+                },
+                "LogDestination": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3",
+                    "traits": {
+                        "smithy.api#documentation": "Optional. Specify the Amazon S3 bucket where you want MediaConvert to store your Kantar watermark XML logs. When you don't specify a bucket, MediaConvert doesn't save these logs. Note that your MediaConvert service role must provide access to this location. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html",
+                        "smithy.api#jsonName": "logDestination"
+                    }
+                },
+                "Metadata3": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max50",
+                    "traits": {
+                        "smithy.api#documentation": "You can optionally use this field to specify the first timestamp that Kantar embeds during watermarking. Kantar suggests that you be very cautious when using this Kantar feature, and that you use it only on channels that are managed specifically for use with this feature by your Audience Measurement Operator. For more information about this feature, contact Kantar technical support.",
+                        "smithy.api#jsonName": "metadata3"
+                    }
+                },
+                "Metadata4": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max50",
+                    "traits": {
+                        "smithy.api#documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.",
+                        "smithy.api#jsonName": "metadata4"
+                    }
+                },
+                "Metadata5": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max50",
+                    "traits": {
+                        "smithy.api#documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.",
+                        "smithy.api#jsonName": "metadata5"
+                    }
+                },
+                "Metadata6": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max50",
+                    "traits": {
+                        "smithy.api#documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.",
+                        "smithy.api#jsonName": "metadata6"
+                    }
+                },
+                "Metadata7": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max50",
+                    "traits": {
+                        "smithy.api#documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.",
+                        "smithy.api#jsonName": "metadata7"
+                    }
+                },
+                "Metadata8": {
+                    "target": "com.amazonaws.mediaconvert#__stringMin1Max50",
+                    "traits": {
+                        "smithy.api#documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters.",
+                        "smithy.api#jsonName": "metadata8"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html."
             }
         },
         "com.amazonaws.mediaconvert#LanguageCode": {
@@ -11971,6 +12159,13 @@
                     "traits": {
                         "smithy.api#documentation": "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.",
                         "smithy.api#jsonName": "audioPids"
+                    }
+                },
+                "MaxPcrInterval": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0Max500",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream.",
+                        "smithy.api#jsonName": "maxPcrInterval"
                     }
                 },
                 "NielsenId3": {
@@ -13989,7 +14184,7 @@
                 "VideoDescription": {
                     "target": "com.amazonaws.mediaconvert#VideoDescription",
                     "traits": {
-                        "smithy.api#documentation": "VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.",
+                        "smithy.api#documentation": "VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.",
                         "smithy.api#jsonName": "videoDescription"
                     }
                 }
@@ -14011,7 +14206,7 @@
                 "InputChannelsFineTune": {
                     "target": "com.amazonaws.mediaconvert#__listOf__doubleMinNegative60Max6",
                     "traits": {
-                        "smithy.api#documentation": "Use this setting to specify your remix values when they have a decimal component, such as  -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.",
+                        "smithy.api#documentation": "Use this setting to specify your remix values when they have a decimal component, such as -10.312, 0.08, or 4.9. MediaConvert rounds your remixing values to the nearest thousandth.",
                         "smithy.api#jsonName": "inputChannelsFineTune"
                     }
                 }
@@ -14345,7 +14540,7 @@
                 "VideoDescription": {
                     "target": "com.amazonaws.mediaconvert#VideoDescription",
                     "traits": {
-                        "smithy.api#documentation": "VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of  VideoDescription per output.",
+                        "smithy.api#documentation": "VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output.",
                         "smithy.api#jsonName": "videoDescription"
                     }
                 }
@@ -16644,6 +16839,13 @@
                         "smithy.api#documentation": "Use Rotate (InputRotate) to specify how the service rotates your video. You can choose automatic rotation or specify a rotation. You can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or .mp4 and your input has rotation metadata, you can choose Automatic to have the service rotate your video according to the rotation specified in the metadata. The rotation must be within one degree of 90, 180, or 270 degrees. If the rotation metadata specifies any other rotation, the service will default to no rotation. By default, the service does no rotation, even if your input video has rotation metadata. The service doesn't pass through rotation metadata.",
                         "smithy.api#jsonName": "rotate"
                     }
+                },
+                "SampleRange": {
+                    "target": "com.amazonaws.mediaconvert#InputSampleRange",
+                    "traits": {
+                        "smithy.api#documentation": "Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata.",
+                        "smithy.api#jsonName": "sampleRange"
+                    }
                 }
             },
             "traits": {
@@ -18310,6 +18512,26 @@
                 }
             }
         },
+        "com.amazonaws.mediaconvert#__stringMin1Max50PatternAZAZ09": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\/_+=.@-]*$"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringMin1Max512PatternAZAZ09": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\/_+=.@-]*$"
+            }
+        },
         "com.amazonaws.mediaconvert#__stringMin24Max512PatternAZaZ0902": {
             "type": "string",
             "traits": {
@@ -18446,6 +18668,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^https:\\/\\/"
+            }
+        },
+        "com.amazonaws.mediaconvert#__stringPatternHttpsKantarmediaCom": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^https:\\/\\/.*.kantarmedia.com$"
             }
         },
         "com.amazonaws.mediaconvert#__stringPatternIdentityAZaZ26AZaZ09163": {
