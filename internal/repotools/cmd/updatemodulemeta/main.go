@@ -94,9 +94,9 @@ func main() {
 			log.Printf("[WARN] unable to determine go package for %v...skipping", modDir)
 			continue
 		}
-		latest, _ := moduleTags.Latest(modDir)
+		latest, isTagged := moduleTags.Latest(modDir)
 
-		if cfg, ok := config.Modules[modDir]; ok && cfg.NoTag {
+		if cfg, ok := config.Modules[modDir]; (ok && cfg.NoTag) || !isTagged {
 			latest = "tip"
 		}
 
