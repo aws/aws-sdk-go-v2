@@ -1,3 +1,61 @@
+# Release (2021-05-14)
+
+## General Highlights
+* **Feature**: Constant has been added to modules to enable runtime version inspection for reporting.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.5.0
+  * **Feature**: `AddSDKAgentKey` and `AddSDKAgentKeyValue` in `aws/middleware` package have been updated to direct metadata to `User-Agent` HTTP header.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.3.0](service/codeartifact/CHANGELOG.md#v130-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/commander`: [v1.0.0](service/commander/CHANGELOG.md#v100-2021-05-14)
+  * **Release**: New AWS service client module
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.5.0](service/configservice/CHANGELOG.md#v150-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.4.0](service/connect/CHANGELOG.md#v140-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.7.0](service/ec2/CHANGELOG.md#v170-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.4.0](service/ecs/CHANGELOG.md#v140-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.4.0](service/eks/CHANGELOG.md#v140-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.0.0](service/finspace/CHANGELOG.md#v100-2021-05-14)
+  * **Release**: New AWS service client module
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.0.0](service/finspacedata/CHANGELOG.md#v100-2021-05-14)
+  * **Release**: New AWS service client module
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.4.0](service/iot/CHANGELOG.md#v140-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.5.0](service/iotwireless/CHANGELOG.md#v150-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.3.0](service/kinesis/CHANGELOG.md#v130-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.2.0](service/kinesisanalytics/CHANGELOG.md#v120-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.3.0](service/kinesisanalyticsv2/CHANGELOG.md#v130-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.3.0](service/lakeformation/CHANGELOG.md#v130-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutmetrics`: [v1.1.0](service/lookoutmetrics/CHANGELOG.md#v110-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.5.0](service/mediaconvert/CHANGELOG.md#v150-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.6.0](service/route53/CHANGELOG.md#v160-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.7.0](service/s3/CHANGELOG.md#v170-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.6.0](service/s3control/CHANGELOG.md#v160-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.6.0](service/ssm/CHANGELOG.md#v160-2021-05-14)
+  * **Feature**: Updated to latest service API model.
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.0.0](service/ssmcontacts/CHANGELOG.md#v100-2021-05-14)
+  * **Release**: New AWS service client module
+  * **Feature**: Updated to latest service API model.
+
 # Release 2021-05-06
 
 ## Breaking change

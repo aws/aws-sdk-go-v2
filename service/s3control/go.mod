@@ -3,8 +3,8 @@ module github.com/aws/aws-sdk-go-v2/service/s3control
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.4.0
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.2.3
+	github.com/aws/aws-sdk-go-v2 v1.5.0
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.3.0
 	github.com/aws/smithy-go v1.4.0
 )
 
