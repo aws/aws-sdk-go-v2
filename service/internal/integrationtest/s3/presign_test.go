@@ -124,6 +124,8 @@ func TestInteg_PresignURL(t *testing.T) {
 }
 
 func TestInteg_MultipartPresignURL(t *testing.T) {
+	t.Skip("CompleteMultipartUpload requires part number to be passed for successful testing.")
+
 	cases := map[string]struct {
 		key                  string
 		body                 io.Reader
