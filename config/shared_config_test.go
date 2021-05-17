@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/ini"
@@ -22,31 +23,33 @@ var _ regionProvider = (*SharedConfig)(nil)
 var (
 	testConfigFilename      = filepath.Join("testdata", "shared_config")
 	testConfigOtherFilename = filepath.Join("testdata", "shared_config_other")
+	testCredentialsFilename = filepath.Join("testdata", "shared_credentials")
 )
 
 func TestNewSharedConfig(t *testing.T) {
 	cases := map[string]struct {
-		Filenames []string
-		Profile   string
-		Expected  SharedConfig
-		Err       error
+		ConfigFilenames      []string
+		CredentialsFilenames []string
+		Profile              string
+		Expected             SharedConfig
+		Err                  error
 	}{
 		"file not exist": {
-			Filenames: []string{"file_not_exist"},
-			Profile:   "default",
-			Err:       fmt.Errorf("failed to get shared config profile"),
+			ConfigFilenames: []string{"file_not_exist"},
+			Profile:         "default",
+			Err:             fmt.Errorf("failed to get shared config profile"),
 		},
 		"default profile": {
-			Filenames: []string{testConfigFilename},
-			Profile:   "default",
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "default",
 			Expected: SharedConfig{
 				Profile: "default",
 				Region:  "default_region",
 			},
 		},
 		"multiple config files": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "config_file_load_order",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "config_file_load_order",
 			Expected: SharedConfig{
 				Profile: "config_file_load_order",
 				Region:  "shared_config_region",
@@ -58,8 +61,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"mutliple config files reverse order": {
-			Filenames: []string{testConfigFilename, testConfigOtherFilename},
-			Profile:   "config_file_load_order",
+			ConfigFilenames: []string{testConfigFilename, testConfigOtherFilename},
+			Profile:         "config_file_load_order",
 			Expected: SharedConfig{
 				Profile: "config_file_load_order",
 				Region:  "shared_config_other_region",
@@ -71,8 +74,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume role": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "assume_role",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "assume_role",
 			Expected: SharedConfig{
 				Profile:           "assume_role",
 				RoleARN:           "assume_role_role_arn",
@@ -88,8 +91,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume role with invalid source profile": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "assume_role_invalid_source_profile",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "assume_role_invalid_source_profile",
 			Err: SharedConfigAssumeRoleError{
 				Profile: "profile_not_exists",
 				RoleARN: "assume_role_invalid_source_profile_role_arn",
@@ -100,8 +103,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume role with creds": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "assume_role_w_creds",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "assume_role_w_creds",
 			Expected: SharedConfig{
 				Profile:           "assume_role_w_creds",
 				RoleARN:           "assume_role_w_creds_role_arn",
@@ -119,8 +122,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume role without creds": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "assume_role_wo_creds",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "assume_role_wo_creds",
 			Expected: SharedConfig{
 				Profile:           "assume_role_wo_creds",
 				RoleARN:           "assume_role_wo_creds_role_arn",
@@ -132,32 +135,32 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Invalid INI file": {
-			Filenames: []string{filepath.Join("testdata", "shared_config_invalid_ini")},
-			Profile:   "profile_name",
+			ConfigFilenames: []string{filepath.Join("testdata", "shared_config_invalid_ini")},
+			Profile:         "profile_name",
 			Err: SharedConfigLoadError{
 				Filename: filepath.Join("testdata", "shared_config_invalid_ini"),
 				Err:      fmt.Errorf("invalid state"),
 			},
 		},
 		"S3UseARNRegion property on profile": {
-			Profile:   "valid_arn_region",
-			Filenames: []string{testConfigFilename},
+			Profile:         "valid_arn_region",
+			ConfigFilenames: []string{testConfigFilename},
 			Expected: SharedConfig{
 				Profile:        "valid_arn_region",
 				S3UseARNRegion: ptr.Bool(true),
 			},
 		},
 		"EndpointDiscovery property on profile": {
-			Profile:   "endpoint_discovery",
-			Filenames: []string{testConfigFilename},
+			Profile:         "endpoint_discovery",
+			ConfigFilenames: []string{testConfigFilename},
 			Expected: SharedConfig{
 				Profile:                 "endpoint_discovery",
 				EnableEndpointDiscovery: ptr.Bool(true),
 			},
 		},
 		"Assume role with credential source Ec2Metadata": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "assume_role_with_credential_source",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "assume_role_with_credential_source",
 			Expected: SharedConfig{
 				Profile:          "assume_role_with_credential_source",
 				RoleARN:          "assume_role_with_credential_source_role_arn",
@@ -165,8 +168,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume role chained with creds": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "multiple_assume_role",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "multiple_assume_role",
 			Expected: SharedConfig{
 				Profile:           "multiple_assume_role",
 				RoleARN:           "multiple_assume_role_role_arn",
@@ -187,8 +190,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume role chained with credential source": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "multiple_assume_role_with_credential_source",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "multiple_assume_role_with_credential_source",
 			Expected: SharedConfig{
 				Profile:           "multiple_assume_role_with_credential_source",
 				RoleARN:           "multiple_assume_role_with_credential_source_role_arn",
@@ -201,8 +204,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume role chained with credential source reversed order": {
-			Filenames: []string{testConfigOtherFilename, testConfigFilename},
-			Profile:   "multiple_assume_role_with_credential_source2",
+			ConfigFilenames: []string{testConfigOtherFilename, testConfigFilename},
+			Profile:         "multiple_assume_role_with_credential_source2",
 			Expected: SharedConfig{
 				Profile:           "multiple_assume_role_with_credential_source2",
 				RoleARN:           "multiple_assume_role_with_credential_source2_role_arn",
@@ -220,8 +223,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"AWS SSO Profile": {
-			Filenames: []string{testConfigFilename},
-			Profile:   "sso_creds",
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "sso_creds",
 			Expected: SharedConfig{
 				Profile:      "sso_creds",
 				SSOAccountID: "012345678901",
@@ -231,8 +234,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume Role with AWS SSO Credentials": {
-			Filenames: []string{testConfigFilename},
-			Profile:   "source_sso_creds",
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "source_sso_creds",
 			Expected: SharedConfig{
 				Profile:           "source_sso_creds",
 				RoleARN:           "source_sso_creds_arn",
@@ -247,8 +250,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"AWS SSO Profile and Static Credentials": {
-			Filenames: []string{testConfigFilename},
-			Profile:   "sso_and_static",
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "sso_and_static",
 			Expected: SharedConfig{
 				Profile: "sso_and_static",
 				Credentials: aws.Credentials{
@@ -264,8 +267,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"Assume Role with AWS SSO Configuration and Source Profile": {
-			Filenames: []string{testConfigFilename},
-			Profile:   "source_sso_and_assume",
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "source_sso_and_assume",
 			Expected: SharedConfig{
 				Profile:           "source_sso_and_assume",
 				RoleARN:           "source_sso_and_assume_arn",
@@ -288,8 +291,8 @@ func TestNewSharedConfig(t *testing.T) {
 			},
 		},
 		"SSO Mixed with Additional Credential Providrer": {
-			Filenames: []string{testConfigFilename},
-			Profile:   "sso_mixed_credproc",
+			ConfigFilenames: []string{testConfigFilename},
+			Profile:         "sso_mixed_credproc",
 			Expected: SharedConfig{
 				Profile:           "sso_mixed_credproc",
 				SSOAccountID:      "012345678901",
@@ -299,13 +302,86 @@ func TestNewSharedConfig(t *testing.T) {
 				CredentialProcess: "/path/to/process",
 			},
 		},
+		"profile names are case-sensitive (Mixed)": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "DoNotNormalize",
+			Expected: SharedConfig{
+				Profile: "DoNotNormalize",
+				Credentials: aws.Credentials{
+					AccessKeyID:     "DoNotNormalize_credentials_akid",
+					SecretAccessKey: "DoNotNormalize_credentials_secret",
+					SessionToken:    "DoNotNormalize_config_session_token",
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testCredentialsFilename),
+				},
+				RoleDurationSeconds: func() *time.Duration { d := time.Minute * 20; return &d }(),
+				Region:              "eu-west-1",
+			},
+		},
+		"profile names are case-sensitive (lower)": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "donotnormalize",
+			Expected: SharedConfig{
+				Profile: "donotnormalize",
+				Credentials: aws.Credentials{
+					AccessKeyID:     "donotnormalize_credentials_akid",
+					SecretAccessKey: "donotnormalize_credentials_secret",
+					SessionToken:    "donotnormalize_config_session_token",
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testCredentialsFilename),
+				},
+				RoleDurationSeconds: func() *time.Duration { d := time.Minute * 25; return &d }(),
+				Region:              "eu-west-2",
+			},
+		},
+		"profile names are case-sensitive (upper)": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "DONOTNORMALIZE",
+			Expected: SharedConfig{
+				Profile: "DONOTNORMALIZE",
+				Credentials: aws.Credentials{
+					AccessKeyID:     "DONOTNORMALIZE_credentials_akid",
+					SecretAccessKey: "DONOTNORMALIZE_credentials_secret",
+					SessionToken:    "DONOTNORMALIZE_config_session_token",
+					Source:          fmt.Sprintf("SharedConfigCredentials: %s", testCredentialsFilename),
+				},
+				RoleDurationSeconds: func() *time.Duration { d := time.Minute * 30; return &d }(),
+				Region:              "eu-west-3",
+			},
+		},
+		"source profile name is case-sensitive": {
+			ConfigFilenames:      []string{testConfigFilename},
+			CredentialsFilenames: []string{testCredentialsFilename},
+			Profile:              "AssumeWithDoNotNormalize",
+			Expected: SharedConfig{
+				Profile:           "AssumeWithDoNotNormalize",
+				RoleARN:           "AssumeWithDoNotNormalize_role_arn",
+				SourceProfileName: "DoNotNormalize",
+				Source: &SharedConfig{
+					Profile: "DoNotNormalize",
+					Credentials: aws.Credentials{
+						AccessKeyID:     "DoNotNormalize_credentials_akid",
+						SecretAccessKey: "DoNotNormalize_credentials_secret",
+						SessionToken:    "DoNotNormalize_config_session_token",
+						Source:          fmt.Sprintf("SharedConfigCredentials: %s", testCredentialsFilename),
+					},
+					RoleDurationSeconds: func() *time.Duration { d := time.Minute * 20; return &d }(),
+					Region:              "eu-west-1",
+				},
+			},
+		},
 	}
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
 			cfg, err := LoadSharedConfigProfile(context.TODO(), c.Profile, func(o *LoadSharedConfigOptions) {
-				o.ConfigFiles = c.Filenames
-				o.CredentialsFiles = []string{filepath.Join("testdata", "empty_creds_config")}
+				o.ConfigFiles = c.ConfigFilenames
+				if c.CredentialsFilenames != nil {
+					o.CredentialsFiles = c.CredentialsFilenames
+				} else {
+					o.CredentialsFiles = []string{filepath.Join("testdata", "empty_creds_config")}
+				}
 			})
 			if c.Err != nil && err != nil {
 				if e, a := c.Err.Error(), err.Error(); !strings.Contains(a, e) {
@@ -1040,18 +1116,5 @@ func TestSharedConfigLoading(t *testing.T) {
 			}
 
 		})
-	}
-}
-
-// TestGitHubIssue1204 https://github.com/aws/aws-sdk-go-v2/issues/1204
-func TestGitHubIssue1204(t *testing.T) {
-	_, err := LoadDefaultConfig(
-		context.TODO(),
-		WithSharedConfigProfile("default"),
-		WithSharedConfigFiles([]string{filepath.Join("testdata", "gh1204_config")}),
-		WithSharedCredentialsFiles([]string{filepath.Join("testdata", "gh1204_credentials")}),
-	)
-	if err != nil {
-		t.Errorf("expect no error, got %v", err)
 	}
 }

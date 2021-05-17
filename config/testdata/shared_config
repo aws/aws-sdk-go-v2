@@ -142,3 +142,35 @@ sso_region = us-west-2
 sso_role_name = TestRole
 sso_start_url = https://127.0.0.1/start
 credential_process = /path/to/process
+
+[profile DoNotNormalize]
+aws_access_key_id = DoNotNormalize_config_akid
+aws_secret_access_key = DoNotNormalize_config_secret
+aws_session_token = DoNotNormalize_config_session_token
+
+[profile donotnormalize]
+aws_access_key_id = donotnormalize_config_akid
+aws_secret_access_key = donotnormalize_config_secret
+aws_session_token = donotnormalize_config_session_token
+
+
+[profile DONOTNORMALIZE]
+aws_access_key_id = DONOTNORMALIZE_config_akid
+aws_secret_access_key = DONOTNORMALIZE_config_secret
+aws_session_token = DONOTNORMALIZE_config_session_token
+
+[profile DoNotNormalize]
+region = us-west-2
+duration_seconds = 1200
+
+[profile donotnormalize]
+region = us-west-1
+duration_seconds = 1500
+
+[profile DONOTNORMALIZE]
+region = us-west-3
+duration_seconds = 1800
+
+[profile AssumeWithDoNotNormalize]
+role_arn = AssumeWithDoNotNormalize_role_arn
+source_profile = DoNotNormalize

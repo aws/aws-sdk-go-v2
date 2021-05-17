@@ -19,6 +19,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sso"
 	"github.com/aws/aws-sdk-go-v2/service/sts"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 )
 
 func swapECSContainerURI(path string) func() {
@@ -72,15 +73,13 @@ func setupCredentialsEndpoints(t *testing.T) (aws.EndpointResolver, func()) {
 			case "AssumeRole":
 				w.Write([]byte(fmt.Sprintf(
 					assumeRoleRespMsg,
-					time.Now().
-						Add(15*time.Minute).
-						Format("2006-01-02T15:04:05Z"))))
+					smithytime.FormatDateTime(time.Now().
+						Add(15*time.Minute)))))
 				return
 			case "AssumeRoleWithWebIdentity":
 				w.Write([]byte(fmt.Sprintf(assumeRoleWithWebIdentityResponse,
-					time.Now().
-						Add(15*time.Minute).
-						Format("2006-01-02T15:04:05Z"))))
+					smithytime.FormatDateTime(time.Now().
+						Add(15*time.Minute)))))
 				return
 			default:
 				w.WriteHeader(404)

@@ -1,7 +1,7 @@
 {
     "id": "016af652-b95e-472f-960d-ed9a2e976e11",
     "type": "bugfix",
-    "description": "`internal/ini`: Disable noramalization of config profile names",
+    "description": "`internal/ini`: Disable normalization of config profile names",
     "modules": [
         "."
     ]
