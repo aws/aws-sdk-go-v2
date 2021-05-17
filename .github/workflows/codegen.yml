@@ -1,0 +1,46 @@
+name: Codegen Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  codegen-test:
+    name: SDK Codegen Test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        java-version: ['11', '8']
+        go-version: [1.16]
+    env:
+      JAVA_TOOL_OPTIONS: "-Xmx2g"
+    steps:
+    - uses: actions/checkout@v2
+
+    - uses: actions/setup-java@v2
+      with:
+        distribution: 'zulu'
+        java-version: ${{ matrix.java-version }}
+
+    - uses: actions/setup-go@v2
+      with:
+        go-version: ${{ matrix.go-version }}
+
+    - uses: actions/checkout@v2
+      with:
+        repository: aws/smithy-go
+        path: tmp-smithy-go
+
+    - name: Build and publish smithy-go
+      working-directory: tmp-smithy-go
+      run: make smithy-publish-local
+
+    - name: Cleanup smithy-go
+      run: rm -rf tmp-smithy-go
+
+    - name: SDK Codegen
+      run: make smithy-generate
+

@@ -2,83 +2,27 @@ language: go
 sudo: true
 dist: bionic
 
+branches:
+  only:
+    - main
+
 os:
     - linux
     - osx
+
 go:
-    - 1.15.x
-    - 1.16.x
     - tip
+
+allow_failures:
+    - go: tip
 
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "windows" ]; then choco install make; fi
-
-install:
   - (cd /tmp/; go get golang.org/x/lint/golint)
 
 env:
   - EACHMODULE_CONCURRENCY=4
-    #- EACHMODULE_FAILFAST=false
 
 script:
   - make ci-test-no-generate;
 
-matrix:
-  allow_failures:
-      - go: tip
-
-  include:
-    - language: go
-      os: linux
-      go: 1.16.x
-      script:
-        - make go-build-modules-.
-
-    - language: go
-      os: windows
-      go: 1.16.x
-      env:
-        - EACHMODULE_CONCURRENCY=4
-        - EACHMODULE_SKIP="internal\repotools\changes"
-      script:
-        - make vet build unit-test
-
-    - language: java
-      jdk: openjdk8
-      env:
-        - JAVA_TOOL_OPTIONS="-Xmx1g"
-      before_script:
-          - sudo apt-get -y install golang
-          - go get golang.org/dl/go1.16.4
-          - $(go env GOPATH)/bin/go1.16.4 download
-          - export PATH=$HOME/sdk/go1.16.4/bin:$PATH
-          - export GOROOT=$HOME/sdk/go1.16.4
-          - rm -rf /tmp/smithy-go
-          - git clone https://github.com/aws/smithy-go /tmp/smithy-go
-          - pushd /tmp/smithy-go/codegen
-          - ./gradlew clean publishToMavenLocal -Plog-tests
-          - popd
-      script:
-          - make smithy-generate # generation is not stable ci-test-generate-validate
-
-    - language: java
-      jdk: openjdk11
-      env:
-        - JAVA_TOOL_OPTIONS="-Xmx1g"
-      before_script:
-          - sudo apt-get -y install golang
-          - go get golang.org/dl/go1.16.4
-          - $(go env GOPATH)/bin/go1.16.4 download
-          - export PATH=$HOME/sdk/go1.16.4/bin:$PATH
-          - export GOROOT=$HOME/sdk/go1.16.4
-          - rm -rf /tmp/smithy-go
-          - git clone https://github.com/aws/smithy-go /tmp/smithy-go
-          - pushd /tmp/smithy-go/codegen
-          - ./gradlew clean publishToMavenLocal -Plog-tests
-          - popd
-      script:
-          - make smithy-generate # generation is not stable ci-test-generate-validate
-
-branches:
-  only:
-    - main
