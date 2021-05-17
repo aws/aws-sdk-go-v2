@@ -2,15 +2,32 @@ package git
 
 import (
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/internal/repotools/semver"
-	"golang.org/x/mod/module"
 	"os"
 	"os/exec"
 	"path"
 	"sort"
 	"strconv"
 	"strings"
+
+	"github.com/aws/aws-sdk-go-v2/internal/repotools/semver"
+	"golang.org/x/mod/module"
 )
+
+// LsTree lists the files present in the tree-ish for the repository. An optional set of one or more paths can be
+// provided to limit the output file paths.
+func LsTree(repository, tree string, path ...string) ([]string, error) {
+	arguments := []string{"ls-tree", "-r", "--name-only", tree}
+	if len(path) > 0 {
+		arguments = append(arguments, path...)
+	}
+
+	output, err := Git(repository, arguments...)
+	if err != nil {
+		return nil, err
+	}
+
+	return splitOutput(string(output)), nil
+}
 
 // Tags returns a slice of Git tags at the repository located at path
 func Tags(path string) ([]string, error) {

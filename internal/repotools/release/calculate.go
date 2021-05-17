@@ -2,13 +2,13 @@ package release
 
 import (
 	"fmt"
-	"log"
-	"path/filepath"
-
 	"github.com/aws/aws-sdk-go-v2/internal/repotools"
 	"github.com/aws/aws-sdk-go-v2/internal/repotools/changelog"
 	"github.com/aws/aws-sdk-go-v2/internal/repotools/git"
 	"github.com/aws/aws-sdk-go-v2/internal/repotools/gomod"
+	"log"
+	"path"
+	"path/filepath"
 )
 
 // ModuleFinder is a type that
@@ -67,6 +67,29 @@ func Calculate(finder ModuleFinder, tags git.ModuleTags, config repotools.Config
 			if err != nil {
 				return nil, fmt.Errorf("failed to determine module changes: %w", err)
 			}
+
+			if !hasChanges {
+				// Check if any of the submodules have been "carved out" of this module since the last tagged release
+				for _, subModuleDir := range repositoryModules[moduleDir] {
+					if _, ok := tags.Latest(subModuleDir); ok {
+						continue
+					}
+
+					treeFiles, err := git.LsTree(rootDir, latestVersion, subModuleDir)
+					if err != nil {
+						return nil, fmt.Errorf("failed to list git tree: %v", err)
+					}
+
+					carvedOut, err := isModuleCarvedOut(treeFiles, repositoryModules[subModuleDir])
+					if err != nil {
+						return nil, err
+					}
+					if carvedOut {
+						hasChanges = true
+						break
+					}
+				}
+			}
 		}
 
 		var changeReason ModuleChange
@@ -97,4 +120,46 @@ func Calculate(finder ModuleFinder, tags git.ModuleTags, config repotools.Config
 	}
 
 	return modules, nil
+}
+
+// isModuleCarvedOut takes a list of files for a (new) submodule directory. The list of files are the files that are located
+// in the submodule directory path from the parent's previous tagged release. Returns true the new submodule has been
+// carved out of the parent module directory it is located under. This is determined by looking through the file list
+// and determining if Go source is present but no `go.mod` file existed.
+func isModuleCarvedOut(files []string, subModules []string) (bool, error) {
+	hasGoSource := false
+	hasGoMod := false
+
+	isChildPathCache := make(map[string]bool)
+
+	for _, file := range files {
+		dir, fileName := path.Split(file)
+		dir = path.Clean(dir)
+
+		isGoMod := gomod.IsGoMod(fileName)
+		isGoSource := gomod.IsGoSource(fileName)
+
+		if !(isGoMod || isGoSource) {
+			continue
+		}
+
+		if isChild, ok := isChildPathCache[dir]; (isChild && ok) || (!ok && gomod.IsSubmodulePath(dir, subModules)) {
+			isChildPathCache[dir] = true
+			continue
+		} else {
+			isChildPathCache[dir] = false
+		}
+
+		if isGoSource {
+			hasGoSource = true
+		} else if isGoMod {
+			hasGoMod = true
+		}
+
+		if hasGoMod && hasGoSource {
+			break
+		}
+	}
+
+	return !hasGoMod && hasGoSource, nil
 }

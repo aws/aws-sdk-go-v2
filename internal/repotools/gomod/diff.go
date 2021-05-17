@@ -28,10 +28,10 @@ func IsModuleChanged(moduleDir string, submodules []string, changes []string) (b
 			continue
 		}
 
-		if len(dir) == 0 && IsGoSource(fileName) {
+		if len(dir) == 0 && (IsGoSource(fileName) || IsGoMod(fileName)) {
 			hasChanges = true
 			continue
-		} else if !IsGoSource(fileName) {
+		} else if !(IsGoSource(fileName) || IsGoMod(fileName)) {
 			continue
 		}
 		dir = path.Clean(dir)
@@ -56,7 +56,12 @@ func IsModuleChanged(moduleDir string, submodules []string, changes []string) (b
 	return hasChanges, nil
 }
 
-// IsGoSource returns whether a given file name is a Go source code file ending in `.go` or if the file is `go.mod`.
+// IsGoSource returns whether a given file name is a Go source code file ending in `.go`
 func IsGoSource(name string) bool {
-	return !strings.HasPrefix(name, ".") && strings.HasSuffix(name, ".go") || name == "go.mod"
+	return !strings.HasPrefix(name, ".") && strings.HasSuffix(name, ".go")
+}
+
+// IsGoMod returns whether a given file name is `go.mod`.
+func IsGoMod(name string) bool {
+	return name == "go.mod"
 }
