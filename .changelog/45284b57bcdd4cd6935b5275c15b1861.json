@@ -1,0 +1,8 @@
+{
+    "id": "45284b57-bcdd-4cd6-935b-5275c15b1861",
+    "type": "bugfix",
+    "description": "Profile names were incorrectly normalized to lower-case, which could result in unexpected profile configurations.",
+    "modules": [
+        "config"
+    ]
+}
