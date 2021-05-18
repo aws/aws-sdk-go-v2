@@ -18,7 +18,7 @@ plugins {
     jacoco
 }
 
-group = "software.amazon.smithy"
+group = "software.amazon.smithy.go"
 version = "0.1.0"
 
 java {
@@ -32,8 +32,8 @@ tasks.withType<Test> {
 
 dependencies {
     api("software.amazon.smithy:smithy-aws-traits:[1.5.1,2.0.0[")
-    api("software.amazon.smithy:smithy-go-codegen:0.1.0")
     api("software.amazon.smithy:smithy-aws-iam-traits:[1.6.1,2.0.0[")
+    api("software.amazon.smithy.go:smithy-go-codegen:0.1.0")
     testCompile("org.junit.jupiter:junit-jupiter-api:5.4.0")
     testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.0")
     testCompile("org.junit.jupiter:junit-jupiter-params:5.4.0")
