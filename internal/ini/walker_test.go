@@ -52,9 +52,6 @@ func TestValidDataFiles(t *testing.T) {
 		}
 
 		for profile, tableIface := range e {
-			// standardize by lower casing
-			profile = strings.ToLower(profile)
-
 			p, ok := v.Sections.GetSection(profile)
 			if !ok {
 				t.Fatal("could not find profile " + profile)

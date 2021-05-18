@@ -1,0 +1,8 @@
+{
+    "id": "9eda03d6-8f18-49a9-8136-2947a1a2941f",
+    "type": "feature",
+    "description": "SSO credentials can now be defined alongside other credential providers within the same configuration profile.",
+    "modules": [
+        "config"
+    ]
+}
