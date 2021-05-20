@@ -46,8 +46,9 @@ func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, 
 type CreateMembersInput struct {
 
 	// The list of AWS accounts to invite to become member accounts in the behavior
-	// graph. For each invited account, the account list contains the account
-	// identifier and the AWS account root user email address.
+	// graph. You can invite up to 50 accounts at a time. For each invited account, the
+	// account list contains the account identifier and the AWS account root user email
+	// address.
 	//
 	// This member is required.
 	Accounts []types.Account

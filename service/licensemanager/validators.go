@@ -170,6 +170,26 @@ func (m *validateOpCreateLicense) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLicenseManagerReportGenerator struct {
+}
+
+func (*validateOpCreateLicenseManagerReportGenerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLicenseManagerReportGenerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLicenseManagerReportGeneratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLicenseManagerReportGeneratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLicenseVersion struct {
 }
 
@@ -265,6 +285,26 @@ func (m *validateOpDeleteLicense) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLicenseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLicenseManagerReportGenerator struct {
+}
+
+func (*validateOpDeleteLicenseManagerReportGenerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLicenseManagerReportGenerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLicenseManagerReportGeneratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLicenseManagerReportGeneratorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -385,6 +425,26 @@ func (m *validateOpGetLicense) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetLicenseInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLicenseManagerReportGenerator struct {
+}
+
+func (*validateOpGetLicenseManagerReportGenerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLicenseManagerReportGenerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLicenseManagerReportGeneratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLicenseManagerReportGeneratorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,6 +690,26 @@ func (m *validateOpUpdateLicenseConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLicenseManagerReportGenerator struct {
+}
+
+func (*validateOpUpdateLicenseManagerReportGenerator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLicenseManagerReportGenerator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLicenseManagerReportGeneratorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLicenseManagerReportGeneratorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateLicenseSpecificationsForResource struct {
 }
 
@@ -702,6 +782,10 @@ func addOpCreateLicenseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLicense{}, middleware.After)
 }
 
+func addOpCreateLicenseManagerReportGeneratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLicenseManagerReportGenerator{}, middleware.After)
+}
+
 func addOpCreateLicenseVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLicenseVersion{}, middleware.After)
 }
@@ -720,6 +804,10 @@ func addOpDeleteLicenseConfigurationValidationMiddleware(stack *middleware.Stack
 
 func addOpDeleteLicenseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLicense{}, middleware.After)
+}
+
+func addOpDeleteLicenseManagerReportGeneratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLicenseManagerReportGenerator{}, middleware.After)
 }
 
 func addOpDeleteTokenValidationMiddleware(stack *middleware.Stack) error {
@@ -744,6 +832,10 @@ func addOpGetLicenseConfigurationValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetLicenseValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLicense{}, middleware.After)
+}
+
+func addOpGetLicenseManagerReportGeneratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLicenseManagerReportGenerator{}, middleware.After)
 }
 
 func addOpGetLicenseUsageValidationMiddleware(stack *middleware.Stack) error {
@@ -792,6 +884,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateLicenseConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLicenseConfiguration{}, middleware.After)
+}
+
+func addOpUpdateLicenseManagerReportGeneratorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLicenseManagerReportGenerator{}, middleware.After)
 }
 
 func addOpUpdateLicenseSpecificationsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1110,6 +1206,21 @@ func validateProvisionalConfiguration(v *types.ProvisionalConfiguration) error {
 	}
 }
 
+func validateReportContext(v *types.ReportContext) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportContext"}
+	if v.LicenseConfigurationArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseConfigurationArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptGrantInput(v *AcceptGrantInput) error {
 	if v == nil {
 		return nil
@@ -1328,6 +1439,37 @@ func validateOpCreateLicenseInput(v *CreateLicenseInput) error {
 	}
 }
 
+func validateOpCreateLicenseManagerReportGeneratorInput(v *CreateLicenseManagerReportGeneratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLicenseManagerReportGeneratorInput"}
+	if v.ReportGeneratorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportGeneratorName"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ReportContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportContext"))
+	} else if v.ReportContext != nil {
+		if err := validateReportContext(v.ReportContext); err != nil {
+			invalidParams.AddNested("ReportContext", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportFrequency"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLicenseVersionInput(v *CreateLicenseVersionInput) error {
 	if v == nil {
 		return nil
@@ -1455,6 +1597,21 @@ func validateOpDeleteLicenseInput(v *DeleteLicenseInput) error {
 	}
 }
 
+func validateOpDeleteLicenseManagerReportGeneratorInput(v *DeleteLicenseManagerReportGeneratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLicenseManagerReportGeneratorInput"}
+	if v.LicenseManagerReportGeneratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseManagerReportGeneratorArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTokenInput(v *DeleteTokenInput) error {
 	if v == nil {
 		return nil
@@ -1537,6 +1694,21 @@ func validateOpGetLicenseInput(v *GetLicenseInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseInput"}
 	if v.LicenseArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LicenseArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetLicenseManagerReportGeneratorInput(v *GetLicenseManagerReportGeneratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLicenseManagerReportGeneratorInput"}
+	if v.LicenseManagerReportGeneratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseManagerReportGeneratorArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1730,6 +1902,40 @@ func validateOpUpdateLicenseConfigurationInput(v *UpdateLicenseConfigurationInpu
 		if err := validateProductInformationList(v.ProductInformationList); err != nil {
 			invalidParams.AddNested("ProductInformationList", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLicenseManagerReportGeneratorInput(v *UpdateLicenseManagerReportGeneratorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLicenseManagerReportGeneratorInput"}
+	if v.LicenseManagerReportGeneratorArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LicenseManagerReportGeneratorArn"))
+	}
+	if v.ReportGeneratorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportGeneratorName"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ReportContext == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportContext"))
+	} else if v.ReportContext != nil {
+		if err := validateReportContext(v.ReportContext); err != nil {
+			invalidParams.AddNested("ReportContext", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportFrequency == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportFrequency"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -384,6 +384,44 @@ func (RenewType) Values() []RenewType {
 	}
 }
 
+type ReportFrequencyType string
+
+// Enum values for ReportFrequencyType
+const (
+	ReportFrequencyTypeDay   ReportFrequencyType = "DAY"
+	ReportFrequencyTypeWeek  ReportFrequencyType = "WEEK"
+	ReportFrequencyTypeMonth ReportFrequencyType = "MONTH"
+)
+
+// Values returns all known values for ReportFrequencyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ReportFrequencyType) Values() []ReportFrequencyType {
+	return []ReportFrequencyType{
+		"DAY",
+		"WEEK",
+		"MONTH",
+	}
+}
+
+type ReportType string
+
+// Enum values for ReportType
+const (
+	ReportTypeLicenseConfigurationSummaryReport ReportType = "LicenseConfigurationSummaryReport"
+	ReportTypeLicenseConfigurationUsageReport   ReportType = "LicenseConfigurationUsageReport"
+)
+
+// Values returns all known values for ReportType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ReportType) Values() []ReportType {
+	return []ReportType{
+		"LicenseConfigurationSummaryReport",
+		"LicenseConfigurationUsageReport",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType

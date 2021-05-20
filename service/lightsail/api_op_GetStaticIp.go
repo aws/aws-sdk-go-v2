@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specific static IP.
+// Returns information about an Amazon Lightsail static IP.
 func (c *Client) GetStaticIp(ctx context.Context, params *GetStaticIpInput, optFns ...func(*Options)) (*GetStaticIpOutput, error) {
 	if params == nil {
 		params = &GetStaticIpInput{}

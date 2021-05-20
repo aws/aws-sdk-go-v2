@@ -17,25 +17,35 @@ import (
 // call this operation. Status A solution version can be in one of the following
 // states:
 //
-// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+// * CREATE PENDING
 //
-// To
-// get the status of the version, call DescribeSolutionVersion. Wait until the
-// status shows as ACTIVE before calling CreateCampaign. If the status shows as
-// CREATE FAILED, the response includes a failureReason key, which describes why
-// the job failed. Related APIs
+// * CREATE IN_PROGRESS
 //
-// * ListSolutionVersions
+// * ACTIVE
+//
+// * CREATE FAILED
 //
 // *
-// DescribeSolutionVersion
+// CREATE STOPPING
+//
+// * CREATE STOPPED
+//
+// To get the status of the version, call
+// DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling
+// CreateCampaign. If the status shows as CREATE FAILED, the response includes a
+// failureReason key, which describes why the job failed. Related APIs
+//
+// *
+// ListSolutionVersions
+//
+// * DescribeSolutionVersion
 //
 // * ListSolutions
 //
-// * CreateSolution
-//
 // *
-// DescribeSolution
+// CreateSolution
+//
+// * DescribeSolution
 //
 // * DeleteSolution
 func (c *Client) CreateSolutionVersion(ctx context.Context, params *CreateSolutionVersionInput, optFns ...func(*Options)) (*CreateSolutionVersionOutput, error) {

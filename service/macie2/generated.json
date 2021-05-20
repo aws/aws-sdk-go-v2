@@ -52,6 +52,7 @@
         "api_op_ListTagsForResource.go",
         "api_op_PutClassificationExportConfiguration.go",
         "api_op_PutFindingsPublicationConfiguration.go",
+        "api_op_SearchResources.go",
         "api_op_TagResource.go",
         "api_op_TestCustomDataIdentifier.go",
         "api_op_UntagResource.go",

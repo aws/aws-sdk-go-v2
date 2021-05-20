@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddFlowMediaStreams struct {
+}
+
+func (*validateOpAddFlowMediaStreams) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddFlowMediaStreams) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddFlowMediaStreamsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddFlowMediaStreamsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAddFlowOutputs struct {
 }
 
@@ -230,6 +250,26 @@ func (m *validateOpPurchaseOffering) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRemoveFlowMediaStream struct {
+}
+
+func (*validateOpRemoveFlowMediaStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveFlowMediaStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveFlowMediaStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveFlowMediaStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRemoveFlowOutput struct {
 }
 
@@ -430,6 +470,26 @@ func (m *validateOpUpdateFlow) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFlowMediaStream struct {
+}
+
+func (*validateOpUpdateFlowMediaStream) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFlowMediaStream) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFlowMediaStreamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFlowMediaStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFlowOutput struct {
 }
 
@@ -468,6 +528,10 @@ func (m *validateOpUpdateFlowSource) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAddFlowMediaStreamsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddFlowMediaStreams{}, middleware.After)
 }
 
 func addOpAddFlowOutputsValidationMiddleware(stack *middleware.Stack) error {
@@ -514,6 +578,10 @@ func addOpPurchaseOfferingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPurchaseOffering{}, middleware.After)
 }
 
+func addOpRemoveFlowMediaStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveFlowMediaStream{}, middleware.After)
+}
+
 func addOpRemoveFlowOutputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveFlowOutput{}, middleware.After)
 }
@@ -554,12 +622,33 @@ func addOpUpdateFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFlow{}, middleware.After)
 }
 
+func addOpUpdateFlowMediaStreamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFlowMediaStream{}, middleware.After)
+}
+
 func addOpUpdateFlowOutputValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFlowOutput{}, middleware.After)
 }
 
 func addOpUpdateFlowSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFlowSource{}, middleware.After)
+}
+
+func validate__listOfAddMediaStreamRequest(v []types.AddMediaStreamRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfAddMediaStreamRequest"}
+	for i := range v {
+		if err := validateAddMediaStreamRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validate__listOfAddOutputRequest(v []types.AddOutputRequest) error {
@@ -579,6 +668,23 @@ func validate__listOfAddOutputRequest(v []types.AddOutputRequest) error {
 	}
 }
 
+func validate__listOfDestinationConfigurationRequest(v []types.DestinationConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfDestinationConfigurationRequest"}
+	for i := range v {
+		if err := validateDestinationConfigurationRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validate__listOfGrantEntitlementRequest(v []types.GrantEntitlementRequest) error {
 	if v == nil {
 		return nil
@@ -586,6 +692,57 @@ func validate__listOfGrantEntitlementRequest(v []types.GrantEntitlementRequest) 
 	invalidParams := smithy.InvalidParamsError{Context: "ListOfGrantEntitlementRequest"}
 	for i := range v {
 		if err := validateGrantEntitlementRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfInputConfigurationRequest(v []types.InputConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfInputConfigurationRequest"}
+	for i := range v {
+		if err := validateInputConfigurationRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfMediaStreamOutputConfigurationRequest(v []types.MediaStreamOutputConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfMediaStreamOutputConfigurationRequest"}
+	for i := range v {
+		if err := validateMediaStreamOutputConfigurationRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validate__listOfMediaStreamSourceConfigurationRequest(v []types.MediaStreamSourceConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfMediaStreamSourceConfigurationRequest"}
+	for i := range v {
+		if err := validateMediaStreamSourceConfigurationRequest(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -630,6 +787,24 @@ func validate__listOfVpcInterfaceRequest(v []types.VpcInterfaceRequest) error {
 	}
 }
 
+func validateAddMediaStreamRequest(v *types.AddMediaStreamRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddMediaStreamRequest"}
+	if v.MediaStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStreamName"))
+	}
+	if len(v.MediaStreamType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStreamType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAddOutputRequest(v *types.AddOutputRequest) error {
 	if v == nil {
 		return nil
@@ -640,8 +815,50 @@ func validateAddOutputRequest(v *types.AddOutputRequest) error {
 			invalidParams.AddNested("Encryption", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MediaStreamOutputConfigurations != nil {
+		if err := validate__listOfMediaStreamOutputConfigurationRequest(v.MediaStreamOutputConfigurations); err != nil {
+			invalidParams.AddNested("MediaStreamOutputConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
 	if len(v.Protocol) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Protocol"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDestinationConfigurationRequest(v *types.DestinationConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DestinationConfigurationRequest"}
+	if v.DestinationIp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationIp"))
+	}
+	if v.Interface == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Interface"))
+	} else if v.Interface != nil {
+		if err := validateInterfaceRequest(v.Interface); err != nil {
+			invalidParams.AddNested("Interface", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEncodingParametersRequest(v *types.EncodingParametersRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EncodingParametersRequest"}
+	if len(v.EncoderProfile) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncoderProfile"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -685,6 +902,91 @@ func validateGrantEntitlementRequest(v *types.GrantEntitlementRequest) error {
 	}
 }
 
+func validateInputConfigurationRequest(v *types.InputConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InputConfigurationRequest"}
+	if v.Interface == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Interface"))
+	} else if v.Interface != nil {
+		if err := validateInterfaceRequest(v.Interface); err != nil {
+			invalidParams.AddNested("Interface", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInterfaceRequest(v *types.InterfaceRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InterfaceRequest"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaStreamOutputConfigurationRequest(v *types.MediaStreamOutputConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaStreamOutputConfigurationRequest"}
+	if v.DestinationConfigurations != nil {
+		if err := validate__listOfDestinationConfigurationRequest(v.DestinationConfigurations); err != nil {
+			invalidParams.AddNested("DestinationConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.EncodingName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncodingName"))
+	}
+	if v.EncodingParameters != nil {
+		if err := validateEncodingParametersRequest(v.EncodingParameters); err != nil {
+			invalidParams.AddNested("EncodingParameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaStreamSourceConfigurationRequest(v *types.MediaStreamSourceConfigurationRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaStreamSourceConfigurationRequest"}
+	if len(v.EncodingName) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EncodingName"))
+	}
+	if v.InputConfigurations != nil {
+		if err := validate__listOfInputConfigurationRequest(v.InputConfigurations); err != nil {
+			invalidParams.AddNested("InputConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSetSourceRequest(v *types.SetSourceRequest) error {
 	if v == nil {
 		return nil
@@ -693,6 +995,11 @@ func validateSetSourceRequest(v *types.SetSourceRequest) error {
 	if v.Decryption != nil {
 		if err := validateEncryption(v.Decryption); err != nil {
 			invalidParams.AddNested("Decryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaStreamSourceConfigurations != nil {
+		if err := validate__listOfMediaStreamSourceConfigurationRequest(v.MediaStreamSourceConfigurations); err != nil {
+			invalidParams.AddNested("MediaStreamSourceConfigurations", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -718,6 +1025,28 @@ func validateVpcInterfaceRequest(v *types.VpcInterfaceRequest) error {
 	}
 	if v.SubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAddFlowMediaStreamsInput(v *AddFlowMediaStreamsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddFlowMediaStreamsInput"}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.MediaStreams == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStreams"))
+	} else if v.MediaStreams != nil {
+		if err := validate__listOfAddMediaStreamRequest(v.MediaStreams); err != nil {
+			invalidParams.AddNested("MediaStreams", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -800,6 +1129,11 @@ func validateOpCreateFlowInput(v *CreateFlowInput) error {
 	if v.Entitlements != nil {
 		if err := validate__listOfGrantEntitlementRequest(v.Entitlements); err != nil {
 			invalidParams.AddNested("Entitlements", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaStreams != nil {
+		if err := validate__listOfAddMediaStreamRequest(v.MediaStreams); err != nil {
+			invalidParams.AddNested("MediaStreams", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Name == nil {
@@ -942,6 +1276,24 @@ func validateOpPurchaseOfferingInput(v *PurchaseOfferingInput) error {
 	}
 	if v.Start == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Start"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveFlowMediaStreamInput(v *RemoveFlowMediaStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveFlowMediaStreamInput"}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.MediaStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStreamName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1121,6 +1473,24 @@ func validateOpUpdateFlowInput(v *UpdateFlowInput) error {
 	}
 }
 
+func validateOpUpdateFlowMediaStreamInput(v *UpdateFlowMediaStreamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowMediaStreamInput"}
+	if v.FlowArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.MediaStreamName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFlowOutputInput(v *UpdateFlowOutputInput) error {
 	if v == nil {
 		return nil
@@ -1128,6 +1498,11 @@ func validateOpUpdateFlowOutputInput(v *UpdateFlowOutputInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowOutputInput"}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.MediaStreamOutputConfigurations != nil {
+		if err := validate__listOfMediaStreamOutputConfigurationRequest(v.MediaStreamOutputConfigurations); err != nil {
+			invalidParams.AddNested("MediaStreamOutputConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.OutputArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputArn"))
@@ -1146,6 +1521,11 @@ func validateOpUpdateFlowSourceInput(v *UpdateFlowSourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowSourceInput"}
 	if v.FlowArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FlowArn"))
+	}
+	if v.MediaStreamSourceConfigurations != nil {
+		if err := validate__listOfMediaStreamSourceConfigurationRequest(v.MediaStreamSourceConfigurations); err != nil {
+			invalidParams.AddNested("MediaStreamSourceConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.SourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceArn"))

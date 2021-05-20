@@ -32,7 +32,8 @@ func (c *Client) UpdateVocabulary(ctx context.Context, params *UpdateVocabularyI
 
 type UpdateVocabularyInput struct {
 
-	// The language code of the vocabulary entries.
+	// The language code of the vocabulary entries. For a list of languages and their
+	// corresponding language codes, see what-is-transcribe.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode

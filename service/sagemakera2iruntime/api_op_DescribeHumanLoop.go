@@ -12,7 +12,8 @@ import (
 	"time"
 )
 
-// Returns information about the specified human loop.
+// Returns information about the specified human loop. If the human loop was
+// deleted, this operation will return a ResourceNotFoundException error.
 func (c *Client) DescribeHumanLoop(ctx context.Context, params *DescribeHumanLoopInput, optFns ...func(*Options)) (*DescribeHumanLoopOutput, error) {
 	if params == nil {
 		params = &DescribeHumanLoopInput{}
@@ -65,7 +66,8 @@ type DescribeHumanLoopOutput struct {
 	// This member is required.
 	HumanLoopStatus types.HumanLoopStatus
 
-	// A failure code that identifies the type of failure.
+	// A failure code that identifies the type of failure. Possible values:
+	// ValidationError, Expired, InternalError
 	FailureCode *string
 
 	// The reason why a human loop failed. The failure reason is returned when the

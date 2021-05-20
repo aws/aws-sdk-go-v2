@@ -28,7 +28,7 @@ func (c *Client) DeleteSuiteDefinition(ctx context.Context, params *DeleteSuiteD
 
 type DeleteSuiteDefinitionInput struct {
 
-	// Deletes a Device Advisor test suite with defined suite Id.
+	// Suite definition Id of the test suite to be deleted.
 	//
 	// This member is required.
 	SuiteDefinitionId *string

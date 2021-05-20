@@ -91,6 +91,21 @@ type BotAliasSummary struct {
 	LastUpdatedDateTime *time.Time
 }
 
+// Provided the identity of a the bot that was exported.
+type BotExportSpecification struct {
+
+	// The identifier of the bot assigned by Amazon Lex.
+	//
+	// This member is required.
+	BotId *string
+
+	// The version of the bot that was exported. This will be either DRAFT or the
+	// version number.
+	//
+	// This member is required.
+	BotVersion *string
+}
+
 // Filters the responses returned by the ListBots operation.
 type BotFilter struct {
 
@@ -110,6 +125,64 @@ type BotFilter struct {
 	//
 	// This member is required.
 	Values []string
+}
+
+// Provides the bot parameters required for importing a bot.
+type BotImportSpecification struct {
+
+	// The name that Amazon Lex should use for the bot.
+	//
+	// This member is required.
+	BotName *string
+
+	// By default, data stored by Amazon Lex is encrypted. The DataPrivacy structure
+	// provides settings that determine how Amazon Lex handles special cases of
+	// securing the data for your bot.
+	//
+	// This member is required.
+	DataPrivacy *DataPrivacy
+
+	// The Amazon Resource Name (ARN) of the IAM role used to build and run the bot.
+	//
+	// This member is required.
+	RoleArn *string
+
+	// A list of tags to add to the bot. You can only add tags when you import a bot.
+	// You can't use the UpdateBot operation to update tags. To update tags, use the
+	// TagResource operation.
+	BotTags map[string]string
+
+	// The time, in seconds, that Amazon Lex should keep information about a user's
+	// conversation with the bot. A user interaction remains active for the amount of
+	// time specified. If no conversation occurs during this time, the session expires
+	// and Amazon Lex deletes any data provided before the timeout. You can specify
+	// between 60 (1 minute) and 86,400 (24 hours) seconds.
+	IdleSessionTTLInSeconds *int32
+
+	// A list of tags to add to the test alias for a bot. You can only add tags when
+	// you import a bot. You can't use the UpdateAlias operation to update tags. To
+	// update tags on the test alias, use the TagResource operation.
+	TestBotAliasTags map[string]string
+}
+
+// Provides the bot locale parameters required for exporting a bot locale.
+type BotLocaleExportSpecification struct {
+
+	// The identifier of the bot to create the locale for.
+	//
+	// This member is required.
+	BotId *string
+
+	// The version of the bot to export.
+	//
+	// This member is required.
+	BotVersion *string
+
+	// The identifier of the language and locale to export. The string must match one
+	// of the locales in the bot.
+	//
+	// This member is required.
+	LocaleId *string
 }
 
 // Filters responses returned by the ListBotLocales operation.
@@ -145,6 +218,51 @@ type BotLocaleHistoryEvent struct {
 	//
 	// This member is required.
 	EventDate *time.Time
+}
+
+// Provides the bot locale parameters required for importing a bot locale.
+type BotLocaleImportSpecification struct {
+
+	// The identifier of the bot to import the locale to.
+	//
+	// This member is required.
+	BotId *string
+
+	// The version of the bot to import the locale to. This can only be the DRAFT
+	// version of the bot.
+	//
+	// This member is required.
+	BotVersion *string
+
+	// The identifier of the language and locale that the bot will be used in. The
+	// string must match one of the supported locales. All of the intents, slot types,
+	// and slots used in the bot must have the same locale. For more information, see
+	// Supported languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
+	//
+	// This member is required.
+	LocaleId *string
+
+	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent,
+	// AMAZON.KendraSearchIntent, or both when returning alternative intents.
+	// AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they
+	// are configured for the bot. For example, suppose a bot is configured with the
+	// confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns
+	// three alternative intents with the following confidence scores: IntentA (0.70),
+	// IntentB (0.60), IntentC (0.50). The response from the PostText operation would
+	// be:
+	//
+	// * AMAZON.FallbackIntent
+	//
+	// * IntentA
+	//
+	// * IntentB
+	//
+	// * IntentC
+	NluIntentConfidenceThreshold *float64
+
+	// Defines settings for using an Amazon Polly voice to communicate with a user.
+	VoiceSettings *VoiceSettings
 }
 
 // Specifies attributes for sorting a list of bot locales.
@@ -425,6 +543,77 @@ type DialogCodeHookSettings struct {
 	Enabled bool
 }
 
+// Filtes the response form the operation
+type ExportFilter struct {
+
+	// The name of the field to use for filtering.
+	//
+	// This member is required.
+	Name ExportFilterName
+
+	// The operator to use for the filter. Specify EQ when the ListExports operation
+	// should return only resource types that equal the specified value. Specify CO
+	// when the ListExports operation should return resource types that contain the
+	// specified value.
+	//
+	// This member is required.
+	Operator ExportFilterOperator
+
+	// The values to use to fileter the response.
+	//
+	// This member is required.
+	Values []string
+}
+
+// Provides information about the bot or bot locale that you want to export. You
+// can specify the botExportSpecification or the botLocaleExportSpecification, but
+// not both.
+type ExportResourceSpecification struct {
+
+	// Parameters for exporting a bot.
+	BotExportSpecification *BotExportSpecification
+
+	// Parameters for exporting a bot locale.
+	BotLocaleExportSpecification *BotLocaleExportSpecification
+}
+
+// Provides information about sorting a list of exports.
+type ExportSortBy struct {
+
+	// The export field to use for sorting.
+	//
+	// This member is required.
+	Attribute ExportSortAttribute
+
+	// The order to sort the list.
+	//
+	// This member is required.
+	Order SortOrder
+}
+
+// Provides summary information about an export in an export list.
+type ExportSummary struct {
+
+	// The date and time that the export was created.
+	CreationDateTime *time.Time
+
+	// The unique identifier that Amazon Lex assigned to the export.
+	ExportId *string
+
+	// The status of the export. When the status is Completed the export is ready to
+	// download.
+	ExportStatus ExportStatus
+
+	// The file format used in the export files.
+	FileFormat ImportExportFileFormat
+
+	// The date and time that the export was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// Information about the bot or bot locale that was exported.
+	ResourceSpecification *ExportResourceSpecification
+}
+
 // Determines if a Lambda function should be invoked for a specific intent.
 type FulfillmentCodeHookSettings struct {
 
@@ -459,6 +648,81 @@ type ImageResponseCard struct {
 	// The subtitle to display on the response card. The format of the subtitle is
 	// determined by the platform displaying the response card.
 	Subtitle *string
+}
+
+// Filters the response from the operation.
+type ImportFilter struct {
+
+	// The name of the field to use for filtering.
+	//
+	// This member is required.
+	Name ImportFilterName
+
+	// The operator to use for the filter. Specify EQ when the ListImports operation
+	// should return only resource types that equal the specified value. Specify CO
+	// when the ListImports operation should return resource types that contain the
+	// specified value.
+	//
+	// This member is required.
+	Operator ImportFilterOperator
+
+	// The values to use to filter the response.
+	//
+	// This member is required.
+	Values []string
+}
+
+// Provides information about the bot or bot locale that you want to import. You
+// can sepcifiy the botImportSpecification or the botLocaleImportSpecification, but
+// not both.
+type ImportResourceSpecification struct {
+
+	// Parameters for importing a bot.
+	BotImportSpecification *BotImportSpecification
+
+	// Parameters for importing a bot locale.
+	BotLocaleImportSpecification *BotLocaleImportSpecification
+}
+
+// Provides information for sorting a list of imports.
+type ImportSortBy struct {
+
+	// The export field to use for sorting.
+	//
+	// This member is required.
+	Attribute ImportSortAttribute
+
+	// The order to sort the list.
+	//
+	// This member is required.
+	Order SortOrder
+}
+
+// Provides summary information about an import in an import list.
+type ImportSummary struct {
+
+	// The date and time that the import was created.
+	CreationDateTime *time.Time
+
+	// The unique identifier that Amazon Lex assigned to the import.
+	ImportId *string
+
+	// The status of the resource. When the status is Completed the resource is ready
+	// to build.
+	ImportStatus ImportStatus
+
+	// The unique identifier that Amazon Lex assigned to the imported resource.
+	ImportedResourceId *string
+
+	// The name that you gave the imported resource.
+	ImportedResourceName *string
+
+	// The date and time that the import was last updated.
+	LastUpdatedDateTime *time.Time
+
+	// The strategy used to merge existing bot or bot locale definitions with the
+	// imported definition.
+	MergeStrategy MergeStrategy
 }
 
 // The name of a context that must be active for an intent to be selected by Amazon
@@ -673,6 +937,20 @@ type PlainTextMessage struct {
 	//
 	// This member is required.
 	Value *string
+}
+
+// The IAM principal that you allowing or denying access to an Amazon Lex action.
+// You must provide a service or an arn, but not both in the same statement. For
+// more information, see  AWS JSON policy elements: Principal
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html).
+type Principal struct {
+
+	// The Amazon Resource Name (ARN) of the principal.
+	Arn *string
+
+	// The name of the AWS service that should allowed or denied access to an Amazon
+	// Lex action.
+	Service *string
 }
 
 // Specifies a list of message groups that Amazon Lex sends to a user to elicit a

@@ -61,7 +61,7 @@
                     "name": "sagemaker"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<important>\n            <p>Amazon Augmented AI is in preview release and is subject to change. We do not recommend using this\n        product in production environments.</p>\n         </important>\n         <p>Amazon Augmented AI (Amazon A2I) adds the benefit of human judgment to any machine learning\n      application. When an AI application can't evaluate data with a high degree of confidence,\n      human reviewers can take over. This human review is called a human review workflow. To create\n      and start a human review workflow, you need three resources: a <i>worker task\n        template</i>, a <i>flow definition</i>, and a <i>human\n        loop</i>.</p>\n         <p>For information about these resources and prerequisites for using Amazon A2I, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-getting-started.html\">Get Started with\n        Amazon Augmented AI</a> in the Amazon SageMaker Developer Guide.</p>\n         <p>This API reference includes information about API actions and data types that you can use\n      to interact with Amazon A2I programmatically. Use this guide to:</p>\n         <ul>\n            <li>\n               <p>Start a human loop with the <code>StartHumanLoop</code> operation when using\n          Amazon A2I with a <i>custom task type</i>. To learn more about the\n          difference between custom and built-in task types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-task-types-general.html\">Use Task Types </a>. To learn\n          how to start a human loop using this API, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-start-human-loop.html#a2i-instructions-starthumanloop\">Create and Start a Human Loop for a Custom Task Type </a> in the\n          Amazon SageMaker Developer Guide.</p>\n            </li>\n            <li>\n               <p>Manage your human loops. You can list all human loops that you have created, describe\n          individual human loops, and stop and delete human loops. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-monitor-humanloop-results.html\">Monitor and Manage Your Human Loop </a> in the Amazon SageMaker Developer Guide.</p>\n            </li>\n         </ul>\n         <p>Amazon A2I integrates APIs from various AWS services to create and start human review\n      workflows for those services. To learn how Amazon A2I uses these APIs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-api-references.html\">Use APIs in\n        Amazon A2I</a> in the Amazon SageMaker Developer Guide.</p>",
+                "smithy.api#documentation": "<p>Amazon Augmented AI (Amazon A2I) adds the benefit of human judgment to any machine learning\n      application. When an AI application can't evaluate data with a high degree of confidence,\n      human reviewers can take over. This human review is called a human review workflow. To create\n      and start a human review workflow, you need three resources: a <i>worker task\n        template</i>, a <i>flow definition</i>, and a <i>human\n        loop</i>.</p>\n         <p>For information about these resources and prerequisites for using Amazon A2I, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-getting-started.html\">Get Started with\n        Amazon Augmented AI</a> in the Amazon SageMaker Developer Guide.</p>\n         <p>This API reference includes information about API actions and data types that you can use\n      to interact with Amazon A2I programmatically. Use this guide to:</p>\n         <ul>\n            <li>\n               <p>Start a human loop with the <code>StartHumanLoop</code> operation when using\n          Amazon A2I with a <i>custom task type</i>. To learn more about the\n          difference between custom and built-in task types, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-task-types-general.html\">Use Task Types </a>. To learn\n          how to start a human loop using this API, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-start-human-loop.html#a2i-instructions-starthumanloop\">Create and Start a Human Loop for a Custom Task Type </a> in the\n          Amazon SageMaker Developer Guide.</p>\n            </li>\n            <li>\n               <p>Manage your human loops. You can list all human loops that you have created, describe\n          individual human loops, and stop and delete human loops. To learn more, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-monitor-humanloop-results.html\">Monitor and Manage Your Human Loop </a> in the Amazon SageMaker Developer Guide.</p>\n            </li>\n         </ul>\n         <p>Amazon A2I integrates APIs from various AWS services to create and start human review\n      workflows for those services. To learn how Amazon A2I uses these APIs, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/a2i-api-references.html\">Use APIs in\n        Amazon A2I</a> in the Amazon SageMaker Developer Guide.</p>",
                 "smithy.api#title": "Amazon Augmented AI Runtime"
             }
         },
@@ -128,7 +128,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified human loop for a flow definition.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified human loop for a flow definition.</p>\n         <p>If the human loop was deleted, this operation will return a\n        <code>ResourceNotFoundException</code>. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/human-loops/{HumanLoopName}",
@@ -176,7 +176,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the specified human loop.</p>",
+                "smithy.api#documentation": "<p>Returns information about the specified human loop. If the human loop was deleted, this\n      operation will return a <code>ResourceNotFoundException</code> error. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/human-loops/{HumanLoopName}",
@@ -216,7 +216,7 @@
                 "FailureCode": {
                     "target": "com.amazonaws.sagemakera2iruntime#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A failure code that identifies\n      the\n      type of failure.</p>"
+                        "smithy.api#documentation": "<p>A failure code that identifies the type of failure.</p>\n         <p>Possible values: <code>ValidationError</code>, <code>Expired</code>,\n        <code>InternalError</code>\n         </p>"
                     }
                 },
                 "HumanLoopStatus": {
@@ -562,7 +562,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>We couldn't find\n      the\n      requested resource.</p>",
+                "smithy.api#documentation": "<p>We couldn't find the requested resource. Check that your resources exists and were created\n      in the same AWS Region as your request, and try your request again. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -575,7 +575,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You exceeded your\n      service\n      quota. Delete some resources or request an increase in your\n      service\n      quota.</p>",
+                "smithy.api#documentation": "<p>You exceeded your service quota. Service quotas, also referred to as limits, are the\n      maximum number of service resources or operations for your AWS account. For a list of\n      Amazon A2I service quotes, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/a2i.html\">Amazon Augmented AI Service Quotes</a>. Delete some resources or request an increase in your\n      service quota. You can request a quota increase using Service Quotas or the AWS Support\n      Center. To request an increase, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">AWS Service Quotas</a> in the\n        <i>AWS General Reference</i>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
             }

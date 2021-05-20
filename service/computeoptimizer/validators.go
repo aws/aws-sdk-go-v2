@@ -29,6 +29,26 @@ func (m *validateOpExportAutoScalingGroupRecommendations) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpExportEBSVolumeRecommendations struct {
+}
+
+func (*validateOpExportEBSVolumeRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportEBSVolumeRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportEBSVolumeRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportEBSVolumeRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpExportEC2InstanceRecommendations struct {
 }
 
@@ -44,6 +64,26 @@ func (m *validateOpExportEC2InstanceRecommendations) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpExportEC2InstanceRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExportLambdaFunctionRecommendations struct {
+}
+
+func (*validateOpExportLambdaFunctionRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExportLambdaFunctionRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExportLambdaFunctionRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExportLambdaFunctionRecommendationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -93,8 +133,16 @@ func addOpExportAutoScalingGroupRecommendationsValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpExportAutoScalingGroupRecommendations{}, middleware.After)
 }
 
+func addOpExportEBSVolumeRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportEBSVolumeRecommendations{}, middleware.After)
+}
+
 func addOpExportEC2InstanceRecommendationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportEC2InstanceRecommendations{}, middleware.After)
+}
+
+func addOpExportLambdaFunctionRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExportLambdaFunctionRecommendations{}, middleware.After)
 }
 
 func addOpGetEC2RecommendationProjectedMetricsValidationMiddleware(stack *middleware.Stack) error {
@@ -120,11 +168,41 @@ func validateOpExportAutoScalingGroupRecommendationsInput(v *ExportAutoScalingGr
 	}
 }
 
+func validateOpExportEBSVolumeRecommendationsInput(v *ExportEBSVolumeRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportEBSVolumeRecommendationsInput"}
+	if v.S3DestinationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DestinationConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpExportEC2InstanceRecommendationsInput(v *ExportEC2InstanceRecommendationsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ExportEC2InstanceRecommendationsInput"}
+	if v.S3DestinationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3DestinationConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExportLambdaFunctionRecommendationsInput(v *ExportLambdaFunctionRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExportLambdaFunctionRecommendationsInput"}
 	if v.S3DestinationConfig == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3DestinationConfig"))
 	}

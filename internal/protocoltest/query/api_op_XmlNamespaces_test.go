@@ -33,7 +33,7 @@ func TestClient_XmlNamespaces_awsAwsqueryDeserialize(t *testing.T) {
 				"Content-Type": []string{"text/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlNamespacesResponse xmlns="http://foo.com" xmlns="https://example.com/">
+			Body: []byte(`<XmlNamespacesResponse xmlns="https://example.com/">
 			    <XmlNamespacesResult>
 			        <nested>
 			            <foo xmlns:baz="http://baz.com">Foo</foo>

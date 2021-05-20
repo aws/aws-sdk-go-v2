@@ -17,7 +17,9 @@ import (
 	"time"
 )
 
-// Describes one or more Auto Scaling groups.
+// Describes one or more Auto Scaling groups. This operation returns information
+// about instances in Auto Scaling groups. To retrieve information about the
+// instances in a warm pool, you must call the DescribeWarmPool API.
 func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *DescribeAutoScalingGroupsInput, optFns ...func(*Options)) (*DescribeAutoScalingGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeAutoScalingGroupsInput{}

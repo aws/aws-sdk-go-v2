@@ -3865,6 +3865,15 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJob(v **types.MedicalTr
 				sv.CompletionTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
 			}
 
+		case "ContentIdentificationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MedicalContentIdentificationType to be of type string, got %T instead", value)
+				}
+				sv.ContentIdentificationType = types.MedicalContentIdentificationType(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4058,6 +4067,15 @@ func awsAwsjson11_deserializeDocumentMedicalTranscriptionJobSummary(v **types.Me
 					return err
 				}
 				sv.CompletionTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+			}
+
+		case "ContentIdentificationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MedicalContentIdentificationType to be of type string, got %T instead", value)
+				}
+				sv.ContentIdentificationType = types.MedicalContentIdentificationType(jtv)
 			}
 
 		case "CreationTime":

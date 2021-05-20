@@ -18,13 +18,17 @@ import (
 // You must set the AWS Region to us-east-1.
 //
 // * You must have a Business or
-// Enterprise support plan to use the AWS Support API.
+// Enterprise Support plan to use the AWS Support API.
 //
 // * If you call the AWS
-// Support API from an account that does not have a Business or Enterprise support
+// Support API from an account that does not have a Business or Enterprise Support
 // plan, the SubscriptionRequiredException error message appears. For information
 // about changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
+//
+// * The names and descriptions for
+// Trusted Advisor checks are subject to change. We recommend that you specify the
+// check ID in your code to uniquely identify a check.
 func (c *Client) DescribeTrustedAdvisorChecks(ctx context.Context, params *DescribeTrustedAdvisorChecksInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorChecksOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorChecksInput{}

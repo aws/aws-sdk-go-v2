@@ -3030,6 +3030,11 @@ func awsAwsjson11_serializeOpDocumentCreateProjectVersionInput(v *CreateProjectV
 	object := value.Object()
 	defer object.Close()
 
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	if v.OutputConfig != nil {
 		ok := object.Key("OutputConfig")
 		if err := awsAwsjson11_serializeDocumentOutputConfig(v.OutputConfig, ok); err != nil {

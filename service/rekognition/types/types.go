@@ -876,6 +876,10 @@ type ProjectVersionDescription struct {
 	// successful.
 	EvaluationResult *EvaluationResult
 
+	// The identifer for the AWS Key Management Service (AWS KMS) customer master key
+	// that was used to encrypt the model during training.
+	KmsKeyId *string
+
 	// The location of the summary manifest. The summary manifest provides aggregate
 	// data validation results for the training and test datasets.
 	ManifestSummary *GroundTruthManifest

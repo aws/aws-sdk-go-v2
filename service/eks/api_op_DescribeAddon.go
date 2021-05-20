@@ -281,6 +281,23 @@ func addonActiveStateRetryable(ctx context.Context, input *DescribeAddonInput, o
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}
 
+		expectedValue := "DEGRADED"
+		value, ok := pathValue.(types.AddonStatus)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected types.AddonStatus value, got %T", pathValue)
+		}
+
+		if string(value) == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("addon.status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
 		expectedValue := "ACTIVE"
 		value, ok := pathValue.(types.AddonStatus)
 		if !ok {

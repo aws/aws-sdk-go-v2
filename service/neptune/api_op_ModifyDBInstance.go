@@ -40,8 +40,7 @@ type ModifyDBInstanceInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The new amount of storage (in gibibytes) to allocate for the DB instance. Not
-	// applicable. Storage is managed by the DB Cluster.
+	// Not supported by Neptune.
 	AllocatedStorage *int32
 
 	// Indicates that major version upgrades are allowed. Changing this parameter
@@ -132,9 +131,9 @@ type ModifyDBInstanceInput struct {
 	// Not supported
 	DomainIAMRoleName *string
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
-	// database accounts, and otherwise false. You can enable IAM database
-	// authentication for the following database engines Not applicable. Mapping AWS
+	// True to enable mapping of Amazon Identity and Access Management (IAM) accounts
+	// to database accounts, and otherwise false. You can enable IAM database
+	// authentication for the following database engines Not applicable. Mapping Amazon
 	// IAM accounts to database accounts is managed by the DB cluster. For more
 	// information, see ModifyDBCluster. Default: false
 	EnableIAMDatabaseAuthentication *bool
@@ -153,10 +152,10 @@ type ModifyDBInstanceInput struct {
 	// to true for this request. Default: Uses existing setting
 	Iops *int32
 
-	// Not supported.
+	// Not supported by Neptune.
 	LicenseModel *string
 
-	// Not applicable.
+	// Not supported by Neptune.
 	MasterUserPassword *string
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are

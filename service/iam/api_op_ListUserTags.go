@@ -4,6 +4,7 @@ package iam
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
@@ -141,6 +142,97 @@ func addOperationListUserTagsMiddlewares(stack *middleware.Stack, options Option
 		return err
 	}
 	return nil
+}
+
+// ListUserTagsAPIClient is a client that implements the ListUserTags operation.
+type ListUserTagsAPIClient interface {
+	ListUserTags(context.Context, *ListUserTagsInput, ...func(*Options)) (*ListUserTagsOutput, error)
+}
+
+var _ ListUserTagsAPIClient = (*Client)(nil)
+
+// ListUserTagsPaginatorOptions is the paginator options for ListUserTags
+type ListUserTagsPaginatorOptions struct {
+	// (Optional) Use this only when paginating results to indicate the maximum number
+	// of items that you want in the response. If additional items exist beyond the
+	// maximum that you specify, the IsTruncated response element is true. If you do
+	// not include this parameter, it defaults to 100. Note that IAM might return fewer
+	// results, even when more results are available. In that case, the IsTruncated
+	// response element returns true, and Marker contains a value to include in the
+	// subsequent call that tells the service where to continue from.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// ListUserTagsPaginator is a paginator for ListUserTags
+type ListUserTagsPaginator struct {
+	options   ListUserTagsPaginatorOptions
+	client    ListUserTagsAPIClient
+	params    *ListUserTagsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewListUserTagsPaginator returns a new ListUserTagsPaginator
+func NewListUserTagsPaginator(client ListUserTagsAPIClient, params *ListUserTagsInput, optFns ...func(*ListUserTagsPaginatorOptions)) *ListUserTagsPaginator {
+	if params == nil {
+		params = &ListUserTagsInput{}
+	}
+
+	options := ListUserTagsPaginatorOptions{}
+	if params.MaxItems != nil {
+		options.Limit = *params.MaxItems
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &ListUserTagsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *ListUserTagsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next ListUserTags page.
+func (p *ListUserTagsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*ListUserTagsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxItems = limit
+
+	result, err := p.client.ListUserTags(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opListUserTags(region string) *awsmiddleware.RegisterServiceMetadata {

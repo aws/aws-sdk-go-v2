@@ -161,6 +161,9 @@ type AutoScalingGroup struct {
 	// The name of the placement group into which to launch your instances, if any.
 	PlacementGroup *string
 
+	// The predicted capacity of the group when it has a predictive scaling policy.
+	PredictedCapacity *int32
+
 	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
 	// group uses to call other AWS services on your behalf.
 	ServiceLinkedRoleARN *string
@@ -275,6 +278,22 @@ type BlockDeviceMapping struct {
 	// The name of the virtual device (for example, ephemeral0). You can specify either
 	// VirtualName or Ebs, but not both.
 	VirtualName *string
+}
+
+// A GetPredictiveScalingForecast call returns the capacity forecast for a
+// predictive scaling policy. This structure includes the data points for that
+// capacity forecast, along with the timestamps of those data points.
+type CapacityForecast struct {
+
+	// The time stamps for the data points, in UTC format.
+	//
+	// This member is required.
+	Timestamps []time.Time
+
+	// The values of the data points.
+	//
+	// This member is required.
+	Values []float64
 }
 
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
@@ -574,8 +593,8 @@ type InstanceRefresh struct {
 	// The percentage of the instance refresh that is complete. For each instance
 	// replacement, Amazon EC2 Auto Scaling tracks the instance's health status and
 	// warm-up time. When the instance's health status changes to healthy and the
-	// specified warm-up time passes, the instance is considered updated and added to
-	// the percentage complete.
+	// specified warm-up time passes, the instance is considered updated and is added
+	// to the percentage complete.
 	PercentageComplete *int32
 
 	// Additional progress details for an Auto Scaling group that has a warm pool.
@@ -610,7 +629,7 @@ type InstanceRefresh struct {
 	StatusReason *string
 }
 
-// Reports the progress of an instance fresh on instances that are in the Auto
+// Reports the progress of an instance refresh on instances that are in the Auto
 // Scaling group.
 type InstanceRefreshLivePoolProgress struct {
 
@@ -621,7 +640,7 @@ type InstanceRefreshLivePoolProgress struct {
 	// For each instance replacement, Amazon EC2 Auto Scaling tracks the instance's
 	// health status and warm-up time. When the instance's health status changes to
 	// healthy and the specified warm-up time passes, the instance is considered
-	// updated and added to the percentage complete.
+	// updated and is added to the percentage complete.
 	PercentageComplete *int32
 }
 
@@ -630,16 +649,16 @@ type InstanceRefreshLivePoolProgress struct {
 // instances in the Auto Scaling group (the live pool).
 type InstanceRefreshProgressDetails struct {
 
-	// Indicates the progress of an instance fresh on instances that are in the Auto
+	// Indicates the progress of an instance refresh on instances that are in the Auto
 	// Scaling group.
 	LivePoolProgress *InstanceRefreshLivePoolProgress
 
-	// Indicates the progress of an instance fresh on instances that are in the warm
+	// Indicates the progress of an instance refresh on instances that are in the warm
 	// pool.
 	WarmPoolProgress *InstanceRefreshWarmPoolProgress
 }
 
-// Reports the progress of an instance fresh on instances that are in the warm
+// Reports the progress of an instance refresh on instances that are in the warm
 // pool.
 type InstanceRefreshWarmPoolProgress struct {
 
@@ -649,7 +668,7 @@ type InstanceRefreshWarmPoolProgress struct {
 	// The percentage of instances in the warm pool that have been replaced. For each
 	// instance replacement, Amazon EC2 Auto Scaling tracks the instance's health
 	// status and warm-up time. When the instance's health status changes to healthy
-	// and the specified warm-up time passes, the instance is considered updated and
+	// and the specified warm-up time passes, the instance is considered updated and is
 	// added to the percentage complete.
 	PercentageComplete *int32
 }
@@ -1138,6 +1157,27 @@ type LoadBalancerTargetGroupState struct {
 	State *string
 }
 
+// A GetPredictiveScalingForecast call returns the load forecast for a predictive
+// scaling policy. This structure includes the data points for that load forecast,
+// along with the timestamps of those data points and the metric specification.
+type LoadForecast struct {
+
+	// The metric specification for the load forecast.
+	//
+	// This member is required.
+	MetricSpecification *PredictiveScalingMetricSpecification
+
+	// The time stamps for the data points, in UTC format.
+	//
+	// This member is required.
+	Timestamps []time.Time
+
+	// The values of the data points.
+	//
+	// This member is required.
+	Values []float64
+}
+
 // Describes a metric.
 type MetricCollectionType struct {
 
@@ -1309,6 +1349,218 @@ type PredefinedMetricSpecification struct {
 	ResourceLabel *string
 }
 
+// Represents a predictive scaling policy configuration to use with Amazon EC2 Auto
+// Scaling.
+type PredictiveScalingConfiguration struct {
+
+	// This structure includes the metrics and target utilization to use for predictive
+	// scaling. This is an array, but we currently only support a single metric
+	// specification. That is, you can specify a target value and a single metric pair,
+	// or a target value and one scaling metric and one load metric.
+	//
+	// This member is required.
+	MetricSpecifications []PredictiveScalingMetricSpecification
+
+	// Defines the behavior that should be applied if the forecast capacity approaches
+	// or exceeds the maximum capacity of the Auto Scaling group. Defaults to
+	// HonorMaxCapacity if not specified. The following are possible values:
+	//
+	// *
+	// HonorMaxCapacity - Amazon EC2 Auto Scaling cannot scale out capacity higher than
+	// the maximum capacity. The maximum capacity is enforced as a hard limit.
+	//
+	// *
+	// IncreaseMaxCapacity - Amazon EC2 Auto Scaling can scale out capacity higher than
+	// the maximum capacity when the forecast capacity is close to or exceeds the
+	// maximum capacity. The upper limit is determined by the forecasted capacity and
+	// the value for MaxCapacityBuffer.
+	MaxCapacityBreachBehavior PredictiveScalingMaxCapacityBreachBehavior
+
+	// The size of the capacity buffer to use when the forecast capacity is close to or
+	// exceeds the maximum capacity. The value is specified as a percentage relative to
+	// the forecast capacity. For example, if the buffer is 10, this means a 10 percent
+	// buffer, such that if the forecast capacity is 50, and the maximum capacity is
+	// 40, then the effective maximum capacity is 55. If set to 0, Amazon EC2 Auto
+	// Scaling may scale capacity higher than the maximum capacity to equal but not
+	// exceed forecast capacity. Required if the MaxCapacityBreachBehavior property is
+	// set to IncreaseMaxCapacity, and cannot be used otherwise.
+	MaxCapacityBuffer *int32
+
+	// The predictive scaling mode. Defaults to ForecastOnly if not specified.
+	Mode PredictiveScalingMode
+
+	// The amount of time, in seconds, by which the instance launch time can be
+	// advanced. For example, the forecast says to add capacity at 10:00 AM, and you
+	// choose to pre-launch instances by 5 minutes. In that case, the instances will be
+	// launched at 9:55 AM. The intention is to give resources time to be provisioned.
+	// It can take a few minutes to launch an EC2 instance. The actual amount of time
+	// required depends on several factors, such as the size of the instance and
+	// whether there are startup scripts to complete. The value must be less than the
+	// forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds
+	// if not specified.
+	SchedulingBufferTime *int32
+}
+
+// This structure specifies the metrics and target utilization settings for a
+// predictive scaling policy. You must specify either a metric pair, or a load
+// metric and a scaling metric individually. Specifying a metric pair instead of
+// individual metrics provides a simpler way to configure metrics for a scaling
+// policy. You choose the metric pair, and the policy automatically knows the
+// correct sum and average statistics to use for the load metric and the scaling
+// metric. Example
+//
+// * You create a predictive scaling policy and specify
+// ALBRequestCount as the value for the metric pair and 1000.0 as the target value.
+// For this type of metric, you must provide the metric dimension for the
+// corresponding target group, so you also provide a resource label for the
+// Application Load Balancer target group that is attached to your Auto Scaling
+// group.
+//
+// * The number of requests the target group receives per minute provides
+// the load metric, and the request count averaged between the members of the
+// target group provides the scaling metric. In CloudWatch, this refers to the
+// RequestCount and RequestCountPerTarget metrics, respectively.
+//
+// * For optimal use
+// of predictive scaling, you adhere to the best practice of using a dynamic
+// scaling policy to automatically scale between the minimum capacity and maximum
+// capacity in response to real-time changes in resource utilization.
+//
+// * Amazon EC2
+// Auto Scaling consumes data points for the load metric over the last 14 days and
+// creates an hourly load forecast for predictive scaling. (A minimum of 24 hours
+// of data is required.)
+//
+// * After creating the load forecast, Amazon EC2 Auto
+// Scaling determines when to reduce or increase the capacity of your Auto Scaling
+// group in each hour of the forecast period so that the average number of requests
+// received by each instance is as close to 1000 requests per minute as possible at
+// all times.
+type PredictiveScalingMetricSpecification struct {
+
+	// Specifies the target utilization.
+	//
+	// This member is required.
+	TargetValue *float64
+
+	// The load metric specification.
+	PredefinedLoadMetricSpecification *PredictiveScalingPredefinedLoadMetric
+
+	// The metric pair specification from which Amazon EC2 Auto Scaling determines the
+	// appropriate scaling metric and load metric to use.
+	PredefinedMetricPairSpecification *PredictiveScalingPredefinedMetricPair
+
+	// The scaling metric specification.
+	PredefinedScalingMetricSpecification *PredictiveScalingPredefinedScalingMetric
+}
+
+// Describes a load metric for a predictive scaling policy. When returned in the
+// output of DescribePolicies, it indicates that a predictive scaling policy uses
+// individually specified load and scaling metrics instead of a metric pair.
+type PredictiveScalingPredefinedLoadMetric struct {
+
+	// The metric type.
+	//
+	// This member is required.
+	PredefinedMetricType PredefinedLoadMetricType
+
+	// A label that uniquely identifies a specific Application Load Balancer target
+	// group from which to determine the request count served by your Auto Scaling
+	// group. You can't specify a resource label unless the target group is attached to
+	// the Auto Scaling group. You create the resource label by appending the final
+	// portion of the load balancer ARN and the final portion of the target group ARN
+	// into a single value, separated by a forward slash (/). The format of the
+	// resource label is:
+	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	// Where:
+	//
+	// * app// is the final portion of the load balancer ARN
+	//
+	// * targetgroup//
+	// is the final portion of the target group ARN.
+	//
+	// To find the ARN for an
+	// Application Load Balancer, use the DescribeLoadBalancers
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
+	// API operation. To find the ARN for the target group, use the
+	// DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// API operation.
+	ResourceLabel *string
+}
+
+// Represents a metric pair for a predictive scaling policy.
+type PredictiveScalingPredefinedMetricPair struct {
+
+	// Indicates which metrics to use. There are two different types of metrics for
+	// each metric type: one is a load metric and one is a scaling metric. For example,
+	// if the metric type is ASGCPUUtilization, the Auto Scaling group's total CPU
+	// metric is used as the load metric, and the average CPU metric is used for the
+	// scaling metric.
+	//
+	// This member is required.
+	PredefinedMetricType PredefinedMetricPairType
+
+	// A label that uniquely identifies a specific Application Load Balancer target
+	// group from which to determine the request count served by your Auto Scaling
+	// group. You can't specify a resource label unless the target group is attached to
+	// the Auto Scaling group. You create the resource label by appending the final
+	// portion of the load balancer ARN and the final portion of the target group ARN
+	// into a single value, separated by a forward slash (/). The format of the
+	// resource label is:
+	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	// Where:
+	//
+	// * app// is the final portion of the load balancer ARN
+	//
+	// * targetgroup//
+	// is the final portion of the target group ARN.
+	//
+	// To find the ARN for an
+	// Application Load Balancer, use the DescribeLoadBalancers
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
+	// API operation. To find the ARN for the target group, use the
+	// DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// API operation.
+	ResourceLabel *string
+}
+
+// Describes a scaling metric for a predictive scaling policy. When returned in the
+// output of DescribePolicies, it indicates that a predictive scaling policy uses
+// individually specified load and scaling metrics instead of a metric pair.
+type PredictiveScalingPredefinedScalingMetric struct {
+
+	// The metric type.
+	//
+	// This member is required.
+	PredefinedMetricType PredefinedScalingMetricType
+
+	// A label that uniquely identifies a specific Application Load Balancer target
+	// group from which to determine the request count served by your Auto Scaling
+	// group. You can't specify a resource label unless the target group is attached to
+	// the Auto Scaling group. You create the resource label by appending the final
+	// portion of the load balancer ARN and the final portion of the target group ARN
+	// into a single value, separated by a forward slash (/). The format of the
+	// resource label is:
+	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
+	// Where:
+	//
+	// * app// is the final portion of the load balancer ARN
+	//
+	// * targetgroup//
+	// is the final portion of the target group ARN.
+	//
+	// To find the ARN for an
+	// Application Load Balancer, use the DescribeLoadBalancers
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
+	// API operation. To find the ARN for the target group, use the
+	// DescribeTargetGroups
+	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
+	// API operation.
+	ResourceLabel *string
+}
+
 // Describes a process type. For more information, see Scaling processes
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html#process-types)
 // in the Amazon EC2 Auto Scaling User Guide.
@@ -1425,13 +1677,18 @@ type ScalingPolicy struct {
 	// *
 	// SimpleScaling (default)
 	//
-	// For more information, see Target tracking scaling
-	// policies
+	// * PredictiveScaling
+	//
+	// For more information, see Target
+	// tracking scaling policies
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
 	// and Step and simple scaling policies
 	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html)
 	// in the Amazon EC2 Auto Scaling User Guide.
 	PolicyType *string
+
+	// A predictive scaling policy.
+	PredictiveScalingConfiguration *PredictiveScalingConfiguration
 
 	// The amount by which to scale, based on the specified adjustment type. A positive
 	// value adds to the current capacity while a negative number removes from the
@@ -1676,15 +1933,14 @@ type TargetTrackingConfiguration struct {
 // Describes a warm pool configuration.
 type WarmPoolConfiguration struct {
 
-	// The total maximum number of instances that are allowed to be in the warm pool or
-	// in any state except Terminated for the Auto Scaling group.
+	// The maximum number of instances that are allowed to be in the warm pool or in
+	// any state except Terminated for the Auto Scaling group.
 	MaxGroupPreparedCapacity *int32
 
 	// The minimum number of instances to maintain in the warm pool.
 	MinSize *int32
 
-	// The instance state to transition to after the lifecycle actions are complete:
-	// Stopped or Running.
+	// The instance state to transition to after the lifecycle actions are complete.
 	PoolState WarmPoolState
 
 	// The status of a warm pool that is marked for deletion.

@@ -1893,6 +1893,11 @@ func awsAwsjson11_serializeOpDocumentStartMedicalTranscriptionJobInput(v *StartM
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ContentIdentificationType) > 0 {
+		ok := object.Key("ContentIdentificationType")
+		ok.String(string(v.ContentIdentificationType))
+	}
+
 	if len(v.LanguageCode) > 0 {
 		ok := object.Key("LanguageCode")
 		ok.String(string(v.LanguageCode))

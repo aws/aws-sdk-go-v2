@@ -54,6 +54,10 @@ type CreateApplicationInput struct {
 	// A summary description of the application.
 	ApplicationDescription *string
 
+	// Use the STREAMING mode to create a Kinesis Data Analytics Studio notebook. To
+	// create a Kinesis Data Analytics Studio notebook, use the INTERACTIVE mode.
+	ApplicationMode types.ApplicationMode
+
 	// Use this parameter to configure an Amazon CloudWatch log stream to monitor
 	// application configuration errors.
 	CloudWatchLoggingOptions []types.CloudWatchLoggingOption

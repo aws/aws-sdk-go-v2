@@ -38,12 +38,6 @@
                 }
             }
         },
-        "com.amazonaws.iotdeviceadvisor#CategoryName": {
-            "type": "string"
-        },
-        "com.amazonaws.iotdeviceadvisor#ConfigString": {
-            "type": "string"
-        },
         "com.amazonaws.iotdeviceadvisor#ConflictException": {
             "type": "structure",
             "members": {
@@ -162,7 +156,7 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Deletes a Device Advisor test suite with defined suite Id.</p>",
+                        "smithy.api#documentation": "<p>Suite definition Id of the test suite to be deleted.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -245,7 +239,7 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Requests suite definition Id with GetSuiteDefinition API call.</p>",
+                        "smithy.api#documentation": "<p>Suite definition Id of the test suite to get.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -253,7 +247,7 @@
                 "suiteDefinitionVersion": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Requests the suite definition version of a test suite.</p>",
+                        "smithy.api#documentation": "<p>Suite definition version of the test suite to get.</p>",
                         "smithy.api#httpQuery": "suiteDefinitionVersion"
                     }
                 }
@@ -265,7 +259,7 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets suite definition Id with GetSuiteDefinition API call.</p>"
+                        "smithy.api#documentation": "<p>Suite definition Id of the suite definition.</p>"
                     }
                 },
                 "suiteDefinitionArn": {
@@ -277,31 +271,31 @@
                 "suiteDefinitionVersion": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets suite definition version with GetSuiteDefinition API call.</p>"
+                        "smithy.api#documentation": "<p>Suite definition version of the suite definition.</p>"
                     }
                 },
                 "latestVersion": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets latest suite definition version with GetSuiteDefinition API call.</p>"
+                        "smithy.api#documentation": "<p>Latest suite definition version of the suite definition.</p>"
                     }
                 },
                 "suiteDefinitionConfiguration": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the suite configuration with GetSuiteDefinition API call.</p>"
+                        "smithy.api#documentation": "<p>Suite configuration of the suite definition.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the timestamp of the time suite was created with GetSuiteDefinition API call.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the suite definition was created.</p>"
                     }
                 },
                 "lastModifiedAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the timestamp of the time suite was modified with GetSuiteDefinition API call.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the suite definition was last modified.</p>"
                     }
                 },
                 "tags": {
@@ -374,7 +368,7 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Device Advisor suite definition Id.</p>",
+                        "smithy.api#documentation": "<p>Suite definition Id of the test suite.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -382,7 +376,7 @@
                 "suiteRunId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Device Advisor suite run Id.</p>",
+                        "smithy.api#documentation": "<p>Suite run Id of the test suite run.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -395,7 +389,7 @@
                 "qualificationReportDownloadUrl": {
                     "target": "com.amazonaws.iotdeviceadvisor#QualificationReportDownloadUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the download URL of the qualification report.</p>"
+                        "smithy.api#documentation": "<p>Download URL of the qualification report.</p>"
                     }
                 }
             }
@@ -406,7 +400,7 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Requests the information about Device Advisor test suite run based on suite definition Id.</p>",
+                        "smithy.api#documentation": "<p>Suite definition Id for the test suite run.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -414,7 +408,7 @@
                 "suiteRunId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Requests the information about Device Advisor test suite run based on suite run Id.</p>",
+                        "smithy.api#documentation": "<p>Suite run Id for the test suite run.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -427,19 +421,19 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on suite definition Id.</p>"
+                        "smithy.api#documentation": "<p>Suite definition Id for the test suite run.</p>"
                     }
                 },
                 "suiteDefinitionVersion": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on suite definition version.</p>"
+                        "smithy.api#documentation": "<p>Suite definition version for the test suite run.</p>"
                     }
                 },
                 "suiteRunId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on suite run Id.</p>"
+                        "smithy.api#documentation": "<p>Suite run Id for the test suite run.</p>"
                     }
                 },
                 "suiteRunArn": {
@@ -451,37 +445,37 @@
                 "suiteRunConfiguration": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteRunConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on suite configuration.</p>"
+                        "smithy.api#documentation": "<p>Suite run configuration for the test suite run.</p>"
                     }
                 },
                 "testResult": {
                     "target": "com.amazonaws.iotdeviceadvisor#TestResult",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on test case runs.</p>"
+                        "smithy.api#documentation": "<p>Test results for the test suite run.</p>"
                     }
                 },
                 "startTime": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on start time.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the test suite run was started.</p>"
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on end time.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the test suite run ended.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteRunStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on its status.</p>"
+                        "smithy.api#documentation": "<p>Status for the test suite run.</p>"
                     }
                 },
                 "errorReason": {
                     "target": "com.amazonaws.iotdeviceadvisor#ErrorReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information about Device Advisor test suite run based on error.</p>"
+                        "smithy.api#documentation": "<p>Error reason for any test suite run failure.</p>"
                     }
                 },
                 "tags": {
@@ -501,19 +495,19 @@
                 "groupId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Show Group Result Id.</p>"
+                        "smithy.api#documentation": "<p>Group result Id.</p>"
                     }
                 },
                 "groupName": {
                     "target": "com.amazonaws.iotdeviceadvisor#GroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Show Group Result Name.</p>"
+                        "smithy.api#documentation": "<p>Group Result Name.</p>"
                     }
                 },
                 "tests": {
                     "target": "com.amazonaws.iotdeviceadvisor#TestCaseRuns",
                     "traits": {
-                        "smithy.api#documentation": "<p>Show Group Result.</p>"
+                        "smithy.api#documentation": "<p>Tests under Group Result.</p>"
                     }
                 }
             },
@@ -527,7 +521,7 @@
                 "target": "com.amazonaws.iotdeviceadvisor#GroupResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>how Group Result list.</p>"
+                "smithy.api#documentation": "<p>Group Result list.</p>"
             }
         },
         "com.amazonaws.iotdeviceadvisor#IntendedForQualificationBoolean": {
@@ -578,10 +572,10 @@
                     "target": "com.amazonaws.iotdeviceadvisor#ListTagsForResource"
                 },
                 {
-                    "target": "com.amazonaws.iotdeviceadvisor#ListTestCases"
+                    "target": "com.amazonaws.iotdeviceadvisor#StartSuiteRun"
                 },
                 {
-                    "target": "com.amazonaws.iotdeviceadvisor#StartSuiteRun"
+                    "target": "com.amazonaws.iotdeviceadvisor#StopSuiteRun"
                 },
                 {
                     "target": "com.amazonaws.iotdeviceadvisor#TagResource"
@@ -645,14 +639,14 @@
                 "maxResults": {
                     "target": "com.amazonaws.iotdeviceadvisor#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request the list of all the Device Advisor test suites.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return at once.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iotdeviceadvisor#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Requests the Device Advisor test suites next token.</p>",
+                        "smithy.api#documentation": "<p>A token used to get the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -664,13 +658,13 @@
                 "suiteDefinitionInformationList": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionInformationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists test suite information using List suite definition.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that provide summaries of information about the suite definitions in the list.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iotdeviceadvisor#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Creates a Device Advisor test suite.</p>"
+                        "smithy.api#documentation": "<p>A token used to get the next set of results.</p>"
                     }
                 }
             }
@@ -711,28 +705,28 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the runs of the specified Device Advisor test suite based on suite definition Id.</p>",
+                        "smithy.api#documentation": "<p>Lists the test suite runs of the specified test suite based on suite definition Id.</p>",
                         "smithy.api#httpQuery": "suiteDefinitionId"
                     }
                 },
                 "suiteDefinitionVersion": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the runs of the specified Device Advisor test suite based on suite definition version.</p>",
+                        "smithy.api#documentation": "<p>Must be passed along with suiteDefinitionId. Lists the test suite runs of the specified test suite based on suite definition version.</p>",
                         "smithy.api#httpQuery": "suiteDefinitionVersion"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.iotdeviceadvisor#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>MaxResults for list suite run API request.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to return at once.</p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iotdeviceadvisor#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Next pagination token for list suite run request.</p>",
+                        "smithy.api#documentation": "<p>A token to retrieve the next set of results.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 }
@@ -744,13 +738,13 @@
                 "suiteRunsList": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteRunsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Lists the runs of the specified Device Advisor test suite.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that provide summaries of information about the suite runs in the list.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.iotdeviceadvisor#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Next pagination token for list suite run response.</p>"
+                        "smithy.api#documentation": "<p>A token to retrieve the next set of results.</p>"
                     }
                 }
             }
@@ -803,88 +797,6 @@
                     "target": "com.amazonaws.iotdeviceadvisor#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags attached to the IoT Device Advisor resource.</p>"
-                    }
-                }
-            }
-        },
-        "com.amazonaws.iotdeviceadvisor#ListTestCases": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.iotdeviceadvisor#ListTestCasesRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.iotdeviceadvisor#ListTestCasesResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.iotdeviceadvisor#InternalServerException"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Lists all the test cases in the test suite.</p>",
-                "smithy.api#http": {
-                    "method": "GET",
-                    "uri": "/testCases",
-                    "code": 200
-                },
-                "smithy.api#paginated": {
-                    "inputToken": "nextToken",
-                    "outputToken": "nextToken",
-                    "pageSize": "maxResults"
-                }
-            }
-        },
-        "com.amazonaws.iotdeviceadvisor#ListTestCasesRequest": {
-            "type": "structure",
-            "members": {
-                "intendedForQualification": {
-                    "target": "com.amazonaws.iotdeviceadvisor#IntendedForQualificationBoolean",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Lists all the qualification test cases in the test suite.</p>",
-                        "smithy.api#httpQuery": "intendedForQualification"
-                    }
-                },
-                "maxResults": {
-                    "target": "com.amazonaws.iotdeviceadvisor#MaxResults",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Requests the test cases max results.</p>",
-                        "smithy.api#httpQuery": "maxResults"
-                    }
-                },
-                "nextToken": {
-                    "target": "com.amazonaws.iotdeviceadvisor#Token",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Requests the test cases next token.</p>",
-                        "smithy.api#httpQuery": "nextToken"
-                    }
-                }
-            }
-        },
-        "com.amazonaws.iotdeviceadvisor#ListTestCasesResponse": {
-            "type": "structure",
-            "members": {
-                "categories": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestCategory",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Gets the category of test case.</p>"
-                    }
-                },
-                "rootGroupConfiguration": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Gets the configuration of root test group.</p>"
-                    }
-                },
-                "groupConfiguration": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Gets the configuration of test group.</p>"
-                    }
-                },
-                "nextToken": {
-                    "target": "com.amazonaws.iotdeviceadvisor#Token",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Test cases next token response.</p>"
                     }
                 }
             }
@@ -984,7 +896,7 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request to start suite run based on suite definition Id.</p>",
+                        "smithy.api#documentation": "<p>Suite definition Id of the test suite.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -992,13 +904,13 @@
                 "suiteDefinitionVersion": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request to start suite run based on suite definition version.</p>"
+                        "smithy.api#documentation": "<p>Suite definition version of the test suite.</p>"
                     }
                 },
                 "suiteRunConfiguration": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteRunConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request to start suite run based on suite configuration.</p>"
+                        "smithy.api#documentation": "<p>Suite run configuration.</p>"
                     }
                 },
                 "tags": {
@@ -1015,19 +927,19 @@
                 "suiteRunId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Starts a Device Advisor test suite run based on suite Run Id.</p>"
+                        "smithy.api#documentation": "<p>Suite Run Id of the started suite run.</p>"
                     }
                 },
                 "suiteRunArn": {
                     "target": "com.amazonaws.iotdeviceadvisor#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Starts a Device Advisor test suite run based on suite run arn.</p>"
+                        "smithy.api#documentation": "<p>Amazon resource name of the started suite run.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Starts a Device Advisor test suite run based on suite create time.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the suite run was created.</p>"
                     }
                 }
             }
@@ -1057,6 +969,14 @@
                         "name": "RUNNING"
                     },
                     {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
+                    },
+                    {
                         "value": "PASS_WITH_WARNINGS",
                         "name": "PASS_WITH_WARNINGS"
                     },
@@ -1066,6 +986,59 @@
                     }
                 ]
             }
+        },
+        "com.amazonaws.iotdeviceadvisor#StopSuiteRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotdeviceadvisor#StopSuiteRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotdeviceadvisor#StopSuiteRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotdeviceadvisor#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotdeviceadvisor#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotdeviceadvisor#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a Device Advisor test suite run that is currently running.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/suiteDefinitions/{suiteDefinitionId}/suiteRuns/{suiteRunId}/stop",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotdeviceadvisor#StopSuiteRunRequest": {
+            "type": "structure",
+            "members": {
+                "suiteDefinitionId": {
+                    "target": "com.amazonaws.iotdeviceadvisor#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Suite definition Id of the test suite run to be stopped.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "suiteRunId": {
+                    "target": "com.amazonaws.iotdeviceadvisor#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Suite run Id of the test suite run to be stopped.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotdeviceadvisor#StopSuiteRunResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.iotdeviceadvisor#String128": {
             "type": "string",
@@ -1129,36 +1102,36 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite definition Id.</p>"
+                        "smithy.api#documentation": "<p>Suite definition Id of the test suite.</p>"
                     }
                 },
                 "suiteDefinitionName": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get test suite name.</p>"
+                        "smithy.api#documentation": "<p>Suite name of the test suite.</p>"
                     }
                 },
                 "defaultDevices": {
                     "target": "com.amazonaws.iotdeviceadvisor#DeviceUnderTestList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the devices under test.</p>"
+                        "smithy.api#documentation": "<p>Specifies the devices under test for the test suite.</p>"
                     }
                 },
                 "intendedForQualification": {
                     "target": "com.amazonaws.iotdeviceadvisor#IntendedForQualificationBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the test suites which will be used for qualification.</p>"
+                        "smithy.api#documentation": "<p>Specifies if the test suite is intended for qualification.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets the information of when the test suite was created.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the test suite was created.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Get suite definition information.</p>"
+                "smithy.api#documentation": "<p>Information about the suite definition.</p>"
             }
         },
         "com.amazonaws.iotdeviceadvisor#SuiteDefinitionInformationList": {
@@ -1194,12 +1167,6 @@
                         "smithy.api#documentation": "<p>Gets the primary device for suite run.</p>"
                     }
                 },
-                "secondaryDevice": {
-                    "target": "com.amazonaws.iotdeviceadvisor#DeviceUnderTest",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Gets the secondary device for suite run.</p>"
-                    }
-                },
                 "selectedTestList": {
                     "target": "com.amazonaws.iotdeviceadvisor#SelectedTestList",
                     "traits": {
@@ -1217,66 +1184,66 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on suite definition Id.</p>"
+                        "smithy.api#documentation": "<p>Suite definition Id of the suite run.</p>"
                     }
                 },
                 "suiteDefinitionVersion": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on suite definition version.</p>"
+                        "smithy.api#documentation": "<p>Suite definition version of the suite run.</p>"
                     }
                 },
                 "suiteDefinitionName": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on suite definition name.</p>"
+                        "smithy.api#documentation": "<p>Suite definition name of the suite run.</p>"
                     }
                 },
                 "suiteRunId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on suite run Id.</p>"
+                        "smithy.api#documentation": "<p>Suite run Id of the suite run.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on time suite was created.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the suite run was created.</p>"
                     }
                 },
                 "startedAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on start time of the run.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the suite run was started.</p>"
                     }
                 },
                 "endAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on end time of the run.</p>"
+                        "smithy.api#documentation": "<p>Date (in Unix epoch time) when the suite run ended.</p>"
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteRunStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on test run status.</p>"
+                        "smithy.api#documentation": "<p>Status of the suite run.</p>"
                     }
                 },
                 "passed": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteRunResultCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on result of the test suite run.</p>"
+                        "smithy.api#documentation": "<p>Number of test cases that passed in the suite run.</p>"
                     }
                 },
                 "failed": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteRunResultCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>Get suite run information based on result of the test suite run.</p>"
+                        "smithy.api#documentation": "<p>Number of test cases that failed in the suite run.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Get suite run information.</p>"
+                "smithy.api#documentation": "<p>Information about the suite run.</p>"
             }
         },
         "com.amazonaws.iotdeviceadvisor#SuiteRunResultCount": {
@@ -1311,6 +1278,14 @@
                     {
                         "value": "RUNNING",
                         "name": "RUNNING"
+                    },
+                    {
+                        "value": "STOPPING",
+                        "name": "STOPPING"
+                    },
+                    {
+                        "value": "STOPPED",
+                        "name": "STOPPED"
                     },
                     {
                         "value": "PASS_WITH_WARNINGS",
@@ -1408,82 +1383,7 @@
             "type": "structure",
             "members": {}
         },
-        "com.amazonaws.iotdeviceadvisor#TestCase": {
-            "type": "structure",
-            "members": {
-                "name": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseName",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Shows test case name.</p>"
-                    }
-                },
-                "configuration": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestConfiguration",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Shows test case configuration.</p>"
-                    }
-                },
-                "test": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseDefinition",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies a test.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Shows tests in a test group.</p>"
-            }
-        },
-        "com.amazonaws.iotdeviceadvisor#TestCaseCategory": {
-            "type": "structure",
-            "members": {
-                "name": {
-                    "target": "com.amazonaws.iotdeviceadvisor#CategoryName",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Lists all the tests name in the specified category.</p>"
-                    }
-                },
-                "tests": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Lists all the tests in the specified category.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Gets the test case category.</p>"
-            }
-        },
-        "com.amazonaws.iotdeviceadvisor#TestCaseDefinition": {
-            "type": "structure",
-            "members": {
-                "id": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseName",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Provides test case definition Id.</p>"
-                    }
-                },
-                "testCaseVersion": {
-                    "target": "com.amazonaws.iotdeviceadvisor#TestCaseVersion",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Provides test case definition version.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Provides test case definition.</p>"
-            }
-        },
         "com.amazonaws.iotdeviceadvisor#TestCaseDefinitionName": {
-            "type": "string"
-        },
-        "com.amazonaws.iotdeviceadvisor#TestCaseList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.iotdeviceadvisor#TestCase"
-            }
-        },
-        "com.amazonaws.iotdeviceadvisor#TestCaseName": {
             "type": "string"
         },
         "com.amazonaws.iotdeviceadvisor#TestCaseRun": {
@@ -1554,25 +1454,7 @@
                 "target": "com.amazonaws.iotdeviceadvisor#TestCaseRun"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Show each group result.</p>"
-            }
-        },
-        "com.amazonaws.iotdeviceadvisor#TestCaseVersion": {
-            "type": "string"
-        },
-        "com.amazonaws.iotdeviceadvisor#TestCategory": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.iotdeviceadvisor#TestCaseCategory"
-            }
-        },
-        "com.amazonaws.iotdeviceadvisor#TestConfiguration": {
-            "type": "map",
-            "key": {
-                "target": "com.amazonaws.iotdeviceadvisor#ConfigString"
-            },
-            "value": {
-                "target": "com.amazonaws.iotdeviceadvisor#ConfigString"
+                "smithy.api#documentation": "<p>Tests under each group result.</p>"
             }
         },
         "com.amazonaws.iotdeviceadvisor#TestResult": {
@@ -1605,7 +1487,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 36,
+                    "min": 12,
                     "max": 36
                 }
             }
@@ -1694,7 +1576,7 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates a Device Advisor test suite with suite definition id.</p>",
+                        "smithy.api#documentation": "<p>Suite definition Id of the test suite to be updated.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1713,37 +1595,37 @@
                 "suiteDefinitionId": {
                     "target": "com.amazonaws.iotdeviceadvisor#UUID",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates a Device Advisor test suite with suite UUID.</p>"
+                        "smithy.api#documentation": "<p>Suite definition Id of the updated test suite.</p>"
                     }
                 },
                 "suiteDefinitionArn": {
                     "target": "com.amazonaws.iotdeviceadvisor#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates a Device Advisor test suite with Amazon Resource name.</p>"
+                        "smithy.api#documentation": "<p>Amazon Resource name of the updated test suite.</p>"
                     }
                 },
                 "suiteDefinitionName": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates a Device Advisor test suite with suite definition name.</p>"
+                        "smithy.api#documentation": "<p>Suite definition name of the updated test suite.</p>"
                     }
                 },
                 "suiteDefinitionVersion": {
                     "target": "com.amazonaws.iotdeviceadvisor#SuiteDefinitionVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates a Device Advisor test suite with suite definition version.</p>"
+                        "smithy.api#documentation": "<p>Suite definition version of the updated test suite.</p>"
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates a Device Advisor test suite with TimeStamp of when it was created.</p>"
+                        "smithy.api#documentation": "<p>Timestamp of when the test suite was created.</p>"
                     }
                 },
                 "lastUpdatedAt": {
                     "target": "com.amazonaws.iotdeviceadvisor#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Updates a Device Advisor test suite with TimeStamp of when it was updated.</p>"
+                        "smithy.api#documentation": "<p>Timestamp of when the test suite was updated.</p>"
                     }
                 }
             }

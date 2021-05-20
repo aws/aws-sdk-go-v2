@@ -4,6 +4,7 @@ package neptune
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
@@ -53,15 +54,15 @@ type DescribeDBClusterSnapshotsInput struct {
 	Filters []types.Filter
 
 	// True to include manual DB cluster snapshots that are public and can be copied or
-	// restored by any AWS account, and otherwise false. The default is false. The
+	// restored by any Amazon account, and otherwise false. The default is false. The
 	// default is false. You can share a manual DB cluster snapshot as public by using
 	// the ModifyDBClusterSnapshotAttribute API action.
 	IncludePublic bool
 
-	// True to include shared manual DB cluster snapshots from other AWS accounts that
-	// this AWS account has been given permission to copy or restore, and otherwise
-	// false. The default is false. You can give an AWS account permission to restore a
-	// manual DB cluster snapshot from another AWS account by the
+	// True to include shared manual DB cluster snapshots from other Amazon accounts
+	// that this AWS account has been given permission to copy or restore, and
+	// otherwise false. The default is false. You can give an Amazon account permission
+	// to restore a manual DB cluster snapshot from another Amazon account by the
 	// ModifyDBClusterSnapshotAttribute API action.
 	IncludeShared bool
 
@@ -80,26 +81,26 @@ type DescribeDBClusterSnapshotsInput struct {
 	// following values:
 	//
 	// * automated - Return all DB cluster snapshots that have been
-	// automatically taken by Amazon Neptune for my AWS account.
+	// automatically taken by Amazon Neptune for my Amazon account.
 	//
-	// * manual - Return all
-	// DB cluster snapshots that have been taken by my AWS account.
+	// * manual - Return
+	// all DB cluster snapshots that have been taken by my AWS account.
 	//
-	// * shared - Return
-	// all manual DB cluster snapshots that have been shared to my AWS account.
+	// * shared -
+	// Return all manual DB cluster snapshots that have been shared to my Amazon
+	// account.
 	//
-	// *
-	// public - Return all DB cluster snapshots that have been marked as public.
+	// * public - Return all DB cluster snapshots that have been marked as
+	// public.
 	//
-	// If
-	// you don't specify a SnapshotType value, then both automated and manual DB
-	// cluster snapshots are returned. You can include shared DB cluster snapshots with
-	// these results by setting the IncludeShared parameter to true. You can include
-	// public DB cluster snapshots with these results by setting the IncludePublic
-	// parameter to true. The IncludeShared and IncludePublic parameters don't apply
-	// for SnapshotType values of manual or automated. The IncludePublic parameter
-	// doesn't apply when SnapshotType is set to shared. The IncludeShared parameter
-	// doesn't apply when SnapshotType is set to public.
+	// If you don't specify a SnapshotType value, then both automated and
+	// manual DB cluster snapshots are returned. You can include shared DB cluster
+	// snapshots with these results by setting the IncludeShared parameter to true. You
+	// can include public DB cluster snapshots with these results by setting the
+	// IncludePublic parameter to true. The IncludeShared and IncludePublic parameters
+	// don't apply for SnapshotType values of manual or automated. The IncludePublic
+	// parameter doesn't apply when SnapshotType is set to shared. The IncludeShared
+	// parameter doesn't apply when SnapshotType is set to public.
 	SnapshotType *string
 }
 
@@ -178,6 +179,98 @@ func addOperationDescribeDBClusterSnapshotsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	return nil
+}
+
+// DescribeDBClusterSnapshotsAPIClient is a client that implements the
+// DescribeDBClusterSnapshots operation.
+type DescribeDBClusterSnapshotsAPIClient interface {
+	DescribeDBClusterSnapshots(context.Context, *DescribeDBClusterSnapshotsInput, ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error)
+}
+
+var _ DescribeDBClusterSnapshotsAPIClient = (*Client)(nil)
+
+// DescribeDBClusterSnapshotsPaginatorOptions is the paginator options for
+// DescribeDBClusterSnapshots
+type DescribeDBClusterSnapshotsPaginatorOptions struct {
+	// The maximum number of records to include in the response. If more records exist
+	// than the specified MaxRecords value, a pagination token called a marker is
+	// included in the response so that the remaining results can be retrieved.
+	// Default: 100 Constraints: Minimum 20, maximum 100.
+	Limit int32
+
+	// Set to true if pagination should stop if the service returns a pagination token
+	// that matches the most recent token provided to the service.
+	StopOnDuplicateToken bool
+}
+
+// DescribeDBClusterSnapshotsPaginator is a paginator for
+// DescribeDBClusterSnapshots
+type DescribeDBClusterSnapshotsPaginator struct {
+	options   DescribeDBClusterSnapshotsPaginatorOptions
+	client    DescribeDBClusterSnapshotsAPIClient
+	params    *DescribeDBClusterSnapshotsInput
+	nextToken *string
+	firstPage bool
+}
+
+// NewDescribeDBClusterSnapshotsPaginator returns a new
+// DescribeDBClusterSnapshotsPaginator
+func NewDescribeDBClusterSnapshotsPaginator(client DescribeDBClusterSnapshotsAPIClient, params *DescribeDBClusterSnapshotsInput, optFns ...func(*DescribeDBClusterSnapshotsPaginatorOptions)) *DescribeDBClusterSnapshotsPaginator {
+	if params == nil {
+		params = &DescribeDBClusterSnapshotsInput{}
+	}
+
+	options := DescribeDBClusterSnapshotsPaginatorOptions{}
+	if params.MaxRecords != nil {
+		options.Limit = *params.MaxRecords
+	}
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	return &DescribeDBClusterSnapshotsPaginator{
+		options:   options,
+		client:    client,
+		params:    params,
+		firstPage: true,
+	}
+}
+
+// HasMorePages returns a boolean indicating whether more pages are available
+func (p *DescribeDBClusterSnapshotsPaginator) HasMorePages() bool {
+	return p.firstPage || p.nextToken != nil
+}
+
+// NextPage retrieves the next DescribeDBClusterSnapshots page.
+func (p *DescribeDBClusterSnapshotsPaginator) NextPage(ctx context.Context, optFns ...func(*Options)) (*DescribeDBClusterSnapshotsOutput, error) {
+	if !p.HasMorePages() {
+		return nil, fmt.Errorf("no more pages available")
+	}
+
+	params := *p.params
+	params.Marker = p.nextToken
+
+	var limit *int32
+	if p.options.Limit > 0 {
+		limit = &p.options.Limit
+	}
+	params.MaxRecords = limit
+
+	result, err := p.client.DescribeDBClusterSnapshots(ctx, &params, optFns...)
+	if err != nil {
+		return nil, err
+	}
+	p.firstPage = false
+
+	prevToken := p.nextToken
+	p.nextToken = result.Marker
+
+	if p.options.StopOnDuplicateToken && prevToken != nil && p.nextToken != nil && *prevToken == *p.nextToken {
+		p.nextToken = nil
+	}
+
+	return result, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeDBClusterSnapshots(region string) *awsmiddleware.RegisterServiceMetadata {

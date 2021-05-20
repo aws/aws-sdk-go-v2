@@ -525,67 +525,6 @@ func awsRestjson1_serializeOpHttpBindingsListTagsForResourceInput(v *ListTagsFor
 	return nil
 }
 
-type awsRestjson1_serializeOpListTestCases struct {
-}
-
-func (*awsRestjson1_serializeOpListTestCases) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpListTestCases) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*ListTestCasesInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/testCases")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "GET"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeOpHttpBindingsListTestCasesInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsListTestCasesInput(v *ListTestCasesInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.IntendedForQualification {
-		encoder.SetQuery("intendedForQualification").Boolean(v.IntendedForQualification)
-	}
-
-	if v.MaxResults != 0 {
-		encoder.SetQuery("maxResults").Integer(v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		encoder.SetQuery("nextToken").String(*v.NextToken)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpStartSuiteRun struct {
 }
 
@@ -674,6 +613,73 @@ func awsRestjson1_serializeOpDocumentStartSuiteRunInput(v *StartSuiteRunInput, v
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpStopSuiteRun struct {
+}
+
+func (*awsRestjson1_serializeOpStopSuiteRun) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpStopSuiteRun) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*StopSuiteRunInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/suiteDefinitions/{suiteDefinitionId}/suiteRuns/{suiteRunId}/stop")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsStopSuiteRunInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsStopSuiteRunInput(v *StopSuiteRunInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.SuiteDefinitionId == nil || len(*v.SuiteDefinitionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member suiteDefinitionId must not be empty")}
+	}
+	if v.SuiteDefinitionId != nil {
+		if err := encoder.SetURI("suiteDefinitionId").String(*v.SuiteDefinitionId); err != nil {
+			return err
+		}
+	}
+
+	if v.SuiteRunId == nil || len(*v.SuiteRunId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member suiteRunId must not be empty")}
+	}
+	if v.SuiteRunId != nil {
+		if err := encoder.SetURI("suiteRunId").String(*v.SuiteRunId); err != nil {
 			return err
 		}
 	}
@@ -993,13 +999,6 @@ func awsRestjson1_serializeDocumentSuiteRunConfiguration(v *types.SuiteRunConfig
 	if v.PrimaryDevice != nil {
 		ok := object.Key("primaryDevice")
 		if err := awsRestjson1_serializeDocumentDeviceUnderTest(v.PrimaryDevice, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.SecondaryDevice != nil {
-		ok := object.Key("secondaryDevice")
-		if err := awsRestjson1_serializeDocumentDeviceUnderTest(v.SecondaryDevice, ok); err != nil {
 			return err
 		}
 	}

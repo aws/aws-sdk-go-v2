@@ -10946,7 +10946,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a specific static IP.</p>",
+                "smithy.api#documentation": "<p>Returns information about an Amazon Lightsail static IP.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/GetStaticIp",

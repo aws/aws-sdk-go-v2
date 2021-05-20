@@ -7655,6 +7655,46 @@ func awsRestjson1_deserializeDocumentCognitoOptionsStatus(v **types.CognitoOptio
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentColdStorageOptions(v **types.ColdStorageOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ColdStorageOptions
+	if *v == nil {
+		sv = &types.ColdStorageOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCompatibleElasticsearchVersionsList(v *[]types.CompatibleVersionsMap, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8400,6 +8440,11 @@ func awsRestjson1_deserializeDocumentElasticsearchClusterConfig(v **types.Elasti
 
 	for key, value := range shape {
 		switch key {
+		case "ColdStorageOptions":
+			if err := awsRestjson1_deserializeDocumentColdStorageOptions(&sv.ColdStorageOptions, value); err != nil {
+				return err
+			}
+
 		case "DedicatedMasterCount":
 			if value != nil {
 				jtv, ok := value.(json.Number)

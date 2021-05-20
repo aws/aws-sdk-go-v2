@@ -31,27 +31,28 @@ func (c *Client) ListSuiteRuns(ctx context.Context, params *ListSuiteRunsInput, 
 
 type ListSuiteRunsInput struct {
 
-	// MaxResults for list suite run API request.
+	// The maximum number of results to return at once.
 	MaxResults int32
 
-	// Next pagination token for list suite run request.
+	// A token to retrieve the next set of results.
 	NextToken *string
 
-	// Lists the runs of the specified Device Advisor test suite based on suite
-	// definition Id.
+	// Lists the test suite runs of the specified test suite based on suite definition
+	// Id.
 	SuiteDefinitionId *string
 
-	// Lists the runs of the specified Device Advisor test suite based on suite
-	// definition version.
+	// Must be passed along with suiteDefinitionId. Lists the test suite runs of the
+	// specified test suite based on suite definition version.
 	SuiteDefinitionVersion *string
 }
 
 type ListSuiteRunsOutput struct {
 
-	// Next pagination token for list suite run response.
+	// A token to retrieve the next set of results.
 	NextToken *string
 
-	// Lists the runs of the specified Device Advisor test suite.
+	// An array of objects that provide summaries of information about the suite runs
+	// in the list.
 	SuiteRunsList []types.SuiteRunInformation
 
 	// Metadata pertaining to the operation's result.
@@ -127,7 +128,7 @@ var _ ListSuiteRunsAPIClient = (*Client)(nil)
 
 // ListSuiteRunsPaginatorOptions is the paginator options for ListSuiteRuns
 type ListSuiteRunsPaginatorOptions struct {
-	// MaxResults for list suite run API request.
+	// The maximum number of results to return at once.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -47,8 +47,8 @@ type DescribePoliciesInput struct {
 	// ignored with no error.
 	PolicyNames []string
 
-	// One or more policy types. The valid values are SimpleScaling, StepScaling, and
-	// TargetTrackingScaling.
+	// One or more policy types. The valid values are SimpleScaling, StepScaling,
+	// TargetTrackingScaling, and PredictiveScaling.
 	PolicyTypes []string
 }
 

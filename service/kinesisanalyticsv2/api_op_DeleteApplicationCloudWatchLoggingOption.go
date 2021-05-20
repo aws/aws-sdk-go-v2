@@ -43,13 +43,17 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	CloudWatchLoggingOptionId *string
 
 	// A value you use to implement strong concurrency for application updates. You
-	// must provide the ApplicationVersionID or the ConditionalToken. You get the
-	// application's current ConditionalToken using DescribeApplication.
+	// must provide the CurrentApplicationVersionId or the ConditionalToken. You get
+	// the application's current ConditionalToken using DescribeApplication. For better
+	// concurrency support, use the ConditionalToken parameter instead of
+	// CurrentApplicationVersionId.
 	ConditionalToken *string
 
-	// The version ID of the application. You must provide the ApplicationVersionID or
-	// the ConditionalToken. You can retrieve the application version ID using
-	// DescribeApplication.
+	// The version ID of the application. You must provide the
+	// CurrentApplicationVersionId or the ConditionalToken. You can retrieve the
+	// application version ID using DescribeApplication. For better concurrency
+	// support, use the ConditionalToken parameter instead of
+	// CurrentApplicationVersionId.
 	CurrentApplicationVersionId *int64
 }
 

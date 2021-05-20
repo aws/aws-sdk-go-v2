@@ -2,6 +2,24 @@
 
 package types
 
+type ApplicationMode string
+
+// Enum values for ApplicationMode
+const (
+	ApplicationModeStreaming   ApplicationMode = "STREAMING"
+	ApplicationModeInteractive ApplicationMode = "INTERACTIVE"
+)
+
+// Values returns all known values for ApplicationMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ApplicationMode) Values() []ApplicationMode {
+	return []ApplicationMode{
+		"STREAMING",
+		"INTERACTIVE",
+	}
+}
+
 type ApplicationRestoreType string
 
 // Enum values for ApplicationRestoreType
@@ -55,6 +73,24 @@ func (ApplicationStatus) Values() []ApplicationStatus {
 		"MAINTENANCE",
 		"ROLLING_BACK",
 		"ROLLED_BACK",
+	}
+}
+
+type ArtifactType string
+
+// Enum values for ArtifactType
+const (
+	ArtifactTypeUdf           ArtifactType = "UDF"
+	ArtifactTypeDependencyJar ArtifactType = "DEPENDENCY_JAR"
+)
+
+// Values returns all known values for ArtifactType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ArtifactType) Values() []ArtifactType {
+	return []ArtifactType{
+		"UDF",
+		"DEPENDENCY_JAR",
 	}
 }
 
@@ -180,10 +216,11 @@ type RuntimeEnvironment string
 
 // Enum values for RuntimeEnvironment
 const (
-	RuntimeEnvironmentSql10    RuntimeEnvironment = "SQL-1_0"
-	RuntimeEnvironmentFlink16  RuntimeEnvironment = "FLINK-1_6"
-	RuntimeEnvironmentFlink18  RuntimeEnvironment = "FLINK-1_8"
-	RuntimeEnvironmentFlink111 RuntimeEnvironment = "FLINK-1_11"
+	RuntimeEnvironmentSql10           RuntimeEnvironment = "SQL-1_0"
+	RuntimeEnvironmentFlink16         RuntimeEnvironment = "FLINK-1_6"
+	RuntimeEnvironmentFlink18         RuntimeEnvironment = "FLINK-1_8"
+	RuntimeEnvironmentFlink111        RuntimeEnvironment = "FLINK-1_11"
+	RuntimeEnvironmentZeppelinFlink10 RuntimeEnvironment = "ZEPPELIN-FLINK-1_0"
 )
 
 // Values returns all known values for RuntimeEnvironment. Note that this can be
@@ -195,6 +232,7 @@ func (RuntimeEnvironment) Values() []RuntimeEnvironment {
 		"FLINK-1_6",
 		"FLINK-1_8",
 		"FLINK-1_11",
+		"ZEPPELIN-FLINK-1_0",
 	}
 }
 
@@ -225,6 +263,7 @@ type UrlType string
 // Enum values for UrlType
 const (
 	UrlTypeFlinkDashboardUrl UrlType = "FLINK_DASHBOARD_URL"
+	UrlTypeZeppelinUiUrl     UrlType = "ZEPPELIN_UI_URL"
 )
 
 // Values returns all known values for UrlType. Note that this can be expanded in
@@ -233,5 +272,6 @@ const (
 func (UrlType) Values() []UrlType {
 	return []UrlType{
 		"FLINK_DASHBOARD_URL",
+		"ZEPPELIN_UI_URL",
 	}
 }

@@ -1328,7 +1328,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new image. This request will create a new image along with all of the\n      configured output resources defined in the distribution configuration.</p>",
+                "smithy.api#documentation": "<p> Creates a new image. This request will create a new image along with all of the \n      configured output resources defined in the distribution configuration. You must specify \n      exactly one recipe for your image, using either a ContainerRecipeArn or an ImageRecipeArn.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/CreateImage",
@@ -1574,7 +1574,7 @@
                 "parentImage": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent\n      image or an AMI ID. The format for the ARN follows this example:\n        <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/xxxx.x.x</code>.\n      You can provide the specific version that you want to use, or you can use a wildcard in all of\n      the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and\n      the AMI must be in the same Region in which you are using Image Builder.</p>",
+                        "smithy.api#documentation": "<p>The parent image of the image recipe. The value of the string can be the ARN of the parent\n      image or an AMI ID. The format for the ARN follows this example:\n        <code>arn:aws:imagebuilder:us-west-2:aws:image/windows-server-2016-english-full-base-x86/x.x.x</code>.\n      You can provide the specific version that you want to use, or you can use a wildcard in all of\n      the fields. If you enter an AMI ID for the string value, you must have access to the AMI, and\n      the AMI must be in the same Region in which you are using Image Builder.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6954,7 +6954,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Updates a new image pipeline. Image pipelines enable you to automate the creation and\n      distribution of images.</p>",
+                "smithy.api#documentation": "<p> Updates an image pipeline. Image pipelines enable you to automate the creation and\n      distribution of images.</p>\n  \t      <note>\n            <p>UpdateImagePipeline does not support selective updates for the pipeline. \n  \t\tYou must specify all of the required properties in the update request, not just \n  \t\tthe properties that have changed.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/UpdateImagePipeline",

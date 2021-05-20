@@ -976,6 +976,21 @@
                 "smithy.api#documentation": "<p>Status of the Cognito options for the specified Elasticsearch domain.</p>"
             }
         },
+        "com.amazonaws.elasticsearchservice#ColdStorageOptions": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.elasticsearchservice#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>True to enable cold storage for an Elasticsearch domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies settings for cold storage.</p>"
+            }
+        },
         "com.amazonaws.elasticsearchservice#CommitMessage": {
             "type": "string",
             "traits": {
@@ -3209,6 +3224,12 @@
                     "target": "com.amazonaws.elasticsearchservice#IntegerClass",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of warm nodes in the cluster.</p>"
+                    }
+                },
+                "ColdStorageOptions": {
+                    "target": "com.amazonaws.elasticsearchservice#ColdStorageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.</p>"
                     }
                 }
             },

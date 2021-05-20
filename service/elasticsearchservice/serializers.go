@@ -3024,6 +3024,18 @@ func awsRestjson1_serializeDocumentCognitoOptions(v *types.CognitoOptions, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColdStorageOptions(v *types.ColdStorageOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDescribePackagesFilter(v *types.DescribePackagesFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3179,6 +3191,13 @@ func awsRestjson1_serializeDocumentEBSOptions(v *types.EBSOptions, value smithyj
 func awsRestjson1_serializeDocumentElasticsearchClusterConfig(v *types.ElasticsearchClusterConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ColdStorageOptions != nil {
+		ok := object.Key("ColdStorageOptions")
+		if err := awsRestjson1_serializeDocumentColdStorageOptions(v.ColdStorageOptions, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DedicatedMasterCount != nil {
 		ok := object.Key("DedicatedMasterCount")

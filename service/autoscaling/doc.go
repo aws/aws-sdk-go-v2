@@ -5,9 +5,12 @@
 //
 // Amazon EC2 Auto Scaling Amazon EC2 Auto Scaling is designed to automatically
 // launch or terminate EC2 instances based on user-defined scaling policies,
-// scheduled actions, and health checks. Use this service with AWS Auto Scaling,
-// Amazon CloudWatch, and Elastic Load Balancing. For more information, including
-// information about granting IAM users required permissions for Amazon EC2 Auto
-// Scaling actions, see the Amazon EC2 Auto Scaling User Guide
+// scheduled actions, and health checks. For more information about Amazon EC2 Auto
+// Scaling, see the Amazon EC2 Auto Scaling User Guide
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/what-is-amazon-ec2-auto-scaling.html).
+// For information about granting IAM users required permissions for calls to
+// Amazon EC2 Auto Scaling, see Granting IAM users required permissions for Amazon
+// EC2 Auto Scaling resources
+// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/ec2-auto-scaling-api-permissions.html)
+// in the Amazon EC2 Auto Scaling API Reference.
 package autoscaling

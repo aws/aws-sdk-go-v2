@@ -119,6 +119,7 @@ const (
 	BotLocaleStatusFailed              BotLocaleStatus = "Failed"
 	BotLocaleStatusDeleting            BotLocaleStatus = "Deleting"
 	BotLocaleStatusNotBuilt            BotLocaleStatus = "NotBuilt"
+	BotLocaleStatusImporting           BotLocaleStatus = "Importing"
 )
 
 // Values returns all known values for BotLocaleStatus. Note that this can be
@@ -133,6 +134,7 @@ func (BotLocaleStatus) Values() []BotLocaleStatus {
 		"Failed",
 		"Deleting",
 		"NotBuilt",
+		"Importing",
 	}
 }
 
@@ -162,6 +164,7 @@ const (
 	BotStatusDeleting   BotStatus = "Deleting"
 	BotStatusFailed     BotStatus = "Failed"
 	BotStatusVersioning BotStatus = "Versioning"
+	BotStatusImporting  BotStatus = "Importing"
 )
 
 // Values returns all known values for BotStatus. Note that this can be expanded in
@@ -175,6 +178,7 @@ func (BotStatus) Values() []BotStatus {
 		"Deleting",
 		"Failed",
 		"Versioning",
+		"Importing",
 	}
 }
 
@@ -223,6 +227,184 @@ const (
 func (BuiltInSlotTypeSortAttribute) Values() []BuiltInSlotTypeSortAttribute {
 	return []BuiltInSlotTypeSortAttribute{
 		"SlotTypeSignature",
+	}
+}
+
+type Effect string
+
+// Enum values for Effect
+const (
+	EffectAllow Effect = "Allow"
+	EffectDeny  Effect = "Deny"
+)
+
+// Values returns all known values for Effect. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Effect) Values() []Effect {
+	return []Effect{
+		"Allow",
+		"Deny",
+	}
+}
+
+type ExportFilterName string
+
+// Enum values for ExportFilterName
+const (
+	ExportFilterNameExportResourceType ExportFilterName = "ExportResourceType"
+)
+
+// Values returns all known values for ExportFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportFilterName) Values() []ExportFilterName {
+	return []ExportFilterName{
+		"ExportResourceType",
+	}
+}
+
+type ExportFilterOperator string
+
+// Enum values for ExportFilterOperator
+const (
+	ExportFilterOperatorContains ExportFilterOperator = "CO"
+	ExportFilterOperatorEquals   ExportFilterOperator = "EQ"
+)
+
+// Values returns all known values for ExportFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportFilterOperator) Values() []ExportFilterOperator {
+	return []ExportFilterOperator{
+		"CO",
+		"EQ",
+	}
+}
+
+type ExportSortAttribute string
+
+// Enum values for ExportSortAttribute
+const (
+	ExportSortAttributeLastUpdatedDateTime ExportSortAttribute = "LastUpdatedDateTime"
+)
+
+// Values returns all known values for ExportSortAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportSortAttribute) Values() []ExportSortAttribute {
+	return []ExportSortAttribute{
+		"LastUpdatedDateTime",
+	}
+}
+
+type ExportStatus string
+
+// Enum values for ExportStatus
+const (
+	ExportStatusInProgress ExportStatus = "InProgress"
+	ExportStatusCompleted  ExportStatus = "Completed"
+	ExportStatusFailed     ExportStatus = "Failed"
+	ExportStatusDeleting   ExportStatus = "Deleting"
+)
+
+// Values returns all known values for ExportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ExportStatus) Values() []ExportStatus {
+	return []ExportStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Deleting",
+	}
+}
+
+type ImportExportFileFormat string
+
+// Enum values for ImportExportFileFormat
+const (
+	ImportExportFileFormatLexJson ImportExportFileFormat = "LexJson"
+)
+
+// Values returns all known values for ImportExportFileFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportExportFileFormat) Values() []ImportExportFileFormat {
+	return []ImportExportFileFormat{
+		"LexJson",
+	}
+}
+
+type ImportFilterName string
+
+// Enum values for ImportFilterName
+const (
+	ImportFilterNameImportResourceType ImportFilterName = "ImportResourceType"
+)
+
+// Values returns all known values for ImportFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportFilterName) Values() []ImportFilterName {
+	return []ImportFilterName{
+		"ImportResourceType",
+	}
+}
+
+type ImportFilterOperator string
+
+// Enum values for ImportFilterOperator
+const (
+	ImportFilterOperatorContains ImportFilterOperator = "CO"
+	ImportFilterOperatorEquals   ImportFilterOperator = "EQ"
+)
+
+// Values returns all known values for ImportFilterOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportFilterOperator) Values() []ImportFilterOperator {
+	return []ImportFilterOperator{
+		"CO",
+		"EQ",
+	}
+}
+
+type ImportSortAttribute string
+
+// Enum values for ImportSortAttribute
+const (
+	ImportSortAttributeLastUpdatedDateTime ImportSortAttribute = "LastUpdatedDateTime"
+)
+
+// Values returns all known values for ImportSortAttribute. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ImportSortAttribute) Values() []ImportSortAttribute {
+	return []ImportSortAttribute{
+		"LastUpdatedDateTime",
+	}
+}
+
+type ImportStatus string
+
+// Enum values for ImportStatus
+const (
+	ImportStatusInProgress ImportStatus = "InProgress"
+	ImportStatusCompleted  ImportStatus = "Completed"
+	ImportStatusFailed     ImportStatus = "Failed"
+	ImportStatusDeleting   ImportStatus = "Deleting"
+)
+
+// Values returns all known values for ImportStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ImportStatus) Values() []ImportStatus {
+	return []ImportStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Deleting",
 	}
 }
 
@@ -275,6 +457,24 @@ func (IntentSortAttribute) Values() []IntentSortAttribute {
 	return []IntentSortAttribute{
 		"IntentName",
 		"LastUpdatedDateTime",
+	}
+}
+
+type MergeStrategy string
+
+// Enum values for MergeStrategy
+const (
+	MergeStrategyOverwrite      MergeStrategy = "Overwrite"
+	MergeStrategyFailOnConflict MergeStrategy = "FailOnConflict"
+)
+
+// Values returns all known values for MergeStrategy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MergeStrategy) Values() []MergeStrategy {
+	return []MergeStrategy{
+		"Overwrite",
+		"FailOnConflict",
 	}
 }
 

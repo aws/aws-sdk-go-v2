@@ -72,6 +72,10 @@ type CreateDBClusterInput struct {
 	// (Not supported by Neptune)
 	CharacterSetName *string
 
+	// If set to true, tags are copied to any snapshot of the DB cluster that is
+	// created.
+	CopyTagsToSnapshot *bool
+
 	// The name of the DB cluster parameter group to associate with this DB cluster. If
 	// this argument is omitted, the default is used. Constraints:
 	//
@@ -96,50 +100,42 @@ type CreateDBClusterInput struct {
 	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
 	EnableCloudwatchLogsExports []string
 
-	// Not supported by Neptune.
+	// If set to true, enables Amazon Identity and Access Management (IAM)
+	// authentication for the entire DB cluster (this cannot be set at an instance
+	// level). Default: false.
 	EnableIAMDatabaseAuthentication *bool
 
 	// The version number of the database engine to use for the new DB cluster.
 	// Example: 1.0.2.1
 	EngineVersion *string
 
-	// The AWS KMS key identifier for an encrypted DB cluster. The KMS key identifier
-	// is the Amazon Resource Name (ARN) for the KMS encryption key. If you are
-	// creating a DB cluster with the same AWS account that owns the KMS encryption key
-	// used to encrypt the new DB cluster, then you can use the KMS key alias instead
-	// of the ARN for the KMS encryption key. If an encryption key is not specified in
-	// KmsKeyId:
+	// The Amazon KMS key identifier for an encrypted DB cluster. The KMS key
+	// identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you
+	// are creating a DB cluster with the same Amazon account that owns the KMS
+	// encryption key used to encrypt the new DB cluster, then you can use the KMS key
+	// alias instead of the ARN for the KMS encryption key. If an encryption key is not
+	// specified in KmsKeyId:
 	//
-	// * If ReplicationSourceIdentifier identifies an encrypted source, then
-	// Amazon Neptune will use the encryption key used to encrypt the source.
-	// Otherwise, Amazon Neptune will use your default encryption key.
+	// * If ReplicationSourceIdentifier identifies an encrypted
+	// source, then Amazon Neptune will use the encryption key used to encrypt the
+	// source. Otherwise, Amazon Neptune will use your default encryption key.
 	//
-	// * If the
-	// StorageEncrypted parameter is true and ReplicationSourceIdentifier is not
+	// * If
+	// the StorageEncrypted parameter is true and ReplicationSourceIdentifier is not
 	// specified, then Amazon Neptune will use your default encryption key.
 	//
-	// AWS KMS
-	// creates the default encryption key for your AWS account. Your AWS account has a
-	// different default encryption key for each AWS Region. If you create a Read
-	// Replica of an encrypted DB cluster in another AWS Region, you must set KmsKeyId
-	// to a KMS key ID that is valid in the destination AWS Region. This key is used to
-	// encrypt the Read Replica in that AWS Region.
+	// Amazon KMS
+	// creates the default encryption key for your Amazon account. Your Amazon account
+	// has a different default encryption key for each Amazon Region. If you create a
+	// Read Replica of an encrypted DB cluster in another Amazon Region, you must set
+	// KmsKeyId to a KMS key ID that is valid in the destination Amazon Region. This
+	// key is used to encrypt the Read Replica in that Amazon Region.
 	KmsKeyId *string
 
-	// The password for the master database user. This password can contain any
-	// printable ASCII character except "/", """, or "@". Constraints: Must contain
-	// from 8 to 41 characters.
+	// Not supported by Neptune.
 	MasterUserPassword *string
 
-	// The name of the master user for the DB cluster. Constraints:
-	//
-	// * Must be 1 to 16
-	// letters or numbers.
-	//
-	// * First character must be a letter.
-	//
-	// * Cannot be a reserved
-	// word for the chosen database engine.
+	// Not supported by Neptune.
 	MasterUsername *string
 
 	// (Not supported by Neptune)
@@ -154,7 +150,7 @@ type CreateDBClusterInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Region. To see the time blocks available, see  Adjusting the Preferred
 	// Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)
@@ -173,7 +169,7 @@ type CreateDBClusterInput struct {
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Region, occurring on a random day of the week. To see the time blocks available,
 	// see  Adjusting the Preferred Maintenance Window
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/AdjustingTheMaintenanceWindow.html)

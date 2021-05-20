@@ -670,6 +670,26 @@ func (m *validateOpGetSolutionMetrics) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopSolutionVersionCreation struct {
+}
+
+func (*validateOpStopSolutionVersionCreation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopSolutionVersionCreation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopSolutionVersionCreationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopSolutionVersionCreationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCampaign struct {
 }
 
@@ -820,6 +840,10 @@ func addOpDescribeSolutionVersionValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetSolutionMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSolutionMetrics{}, middleware.After)
+}
+
+func addOpStopSolutionVersionCreationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopSolutionVersionCreation{}, middleware.After)
 }
 
 func addOpUpdateCampaignValidationMiddleware(stack *middleware.Stack) error {
@@ -1455,6 +1479,21 @@ func validateOpGetSolutionMetricsInput(v *GetSolutionMetricsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetSolutionMetricsInput"}
+	if v.SolutionVersionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SolutionVersionArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopSolutionVersionCreationInput(v *StopSolutionVersionCreationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopSolutionVersionCreationInput"}
 	if v.SolutionVersionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SolutionVersionArn"))
 	}

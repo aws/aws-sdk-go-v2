@@ -13,11 +13,11 @@ import (
 // Resolves a support case. This operation takes a caseId and returns the initial
 // and final state of the case.
 //
-// * You must have a Business or Enterprise support
+// * You must have a Business or Enterprise Support
 // plan to use the AWS Support API.
 //
 // * If you call the AWS Support API from an
-// account that does not have a Business or Enterprise support plan, the
+// account that does not have a Business or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
 // changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
@@ -38,7 +38,7 @@ func (c *Client) ResolveCase(ctx context.Context, params *ResolveCaseInput, optF
 
 type ResolveCaseInput struct {
 
-	// The AWS Support case ID requested or returned in the call. The case ID is an
+	// The support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string formatted as shown in this example:
 	// case-12345678910-2013-c4c1d2bf33c5cf47
 	CaseId *string

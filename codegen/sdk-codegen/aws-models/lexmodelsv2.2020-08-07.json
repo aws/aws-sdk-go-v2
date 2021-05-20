@@ -263,6 +263,28 @@
                 "target": "com.amazonaws.lexmodelsv2#BotAliasSummary"
             }
         },
+        "com.amazonaws.lexmodelsv2#BotExportSpecification": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot assigned by Amazon Lex.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that was exported. This will be either\n            <code>DRAFT</code> or the version number.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provided the identity of a the bot that was exported.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#BotFilter": {
             "type": "structure",
             "members": {
@@ -328,6 +350,81 @@
                     "min": 1,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotImportSpecification": {
+            "type": "structure",
+            "members": {
+                "botName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that Amazon Lex should use for the bot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.lexmodelsv2#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role used to build and run\n         the bot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataPrivacy": {
+                    "target": "com.amazonaws.lexmodelsv2#DataPrivacy",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "idleSessionTTLInSeconds": {
+                    "target": "com.amazonaws.lexmodelsv2#SessionTTL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds, that Amazon Lex should keep information about a\n         user's conversation with the bot. </p>\n         <p>A user interaction remains active for the amount of time specified.\n         If no conversation occurs during this time, the session expires and\n         Amazon Lex deletes any data provided before the timeout.</p>\n         <p>You can specify between 60 (1 minute) and 86,400 (24 hours)\n         seconds.</p>"
+                    }
+                },
+                "botTags": {
+                    "target": "com.amazonaws.lexmodelsv2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to add to the bot. You can only add tags when you\n         import a bot. You can't use the <code>UpdateBot</code> operation to\n         update tags. To update tags, use the <code>TagResource</code>\n         operation.</p>"
+                    }
+                },
+                "testBotAliasTags": {
+                    "target": "com.amazonaws.lexmodelsv2#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to add to the test alias for a bot. You can only add\n         tags when you import a bot. You can't use the <code>UpdateAlias</code>\n         operation to update tags. To update tags on the test alias, use the\n            <code>TagResource</code> operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the bot parameters required for importing a bot.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#BotLocaleExportSpecification": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot to create the locale for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale to export. The string must\n         match one of the locales in the bot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the bot locale parameters required for exporting a bot\n         locale.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotLocaleFilter": {
@@ -428,6 +525,44 @@
                 "target": "com.amazonaws.lexmodelsv2#BotLocaleHistoryEvent"
             }
         },
+        "com.amazonaws.lexmodelsv2#BotLocaleImportSpecification": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the bot to import the locale to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to import the locale to. This can only be the\n            <code>DRAFT</code> version of the bot.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "localeId": {
+                    "target": "com.amazonaws.lexmodelsv2#LocaleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that the bot will be used\n         in. The string must match one of the supported locales. All of the\n         intents, slot types, and slots used in the bot must have the same\n         locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported\n         languages</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nluIntentConfidenceThreshold": {
+                    "target": "com.amazonaws.lexmodelsv2#ConfidenceThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the threshold where Amazon Lex will insert the\n            <code>AMAZON.FallbackIntent</code>,\n            <code>AMAZON.KendraSearchIntent</code>, or both when returning\n         alternative intents. <code>AMAZON.FallbackIntent</code> and\n            <code>AMAZON.KendraSearchIntent</code> are only inserted if they are\n         configured for the bot. </p>\n         <p>For example, suppose a bot is configured with the confidence\n         threshold of 0.80 and the <code>AMAZON.FallbackIntent</code>. Amazon\n         Lex returns three alternative intents with the following confidence\n         scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response\n         from the <code>PostText</code> operation would be:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AMAZON.FallbackIntent</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentA</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentB</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IntentC</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "voiceSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#VoiceSettings"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the bot locale parameters required for importing a bot\n         locale.</p>"
+            }
+        },
         "com.amazonaws.lexmodelsv2#BotLocaleSortAttribute": {
             "type": "string",
             "traits": {
@@ -492,6 +627,10 @@
                     {
                         "value": "NotBuilt",
                         "name": "NotBuilt"
+                    },
+                    {
+                        "value": "Importing",
+                        "name": "Importing"
                     }
                 ]
             }
@@ -606,6 +745,10 @@
                     {
                         "value": "Versioning",
                         "name": "Versioning"
+                    },
+                    {
+                        "value": "Importing",
+                        "name": "Importing"
                     }
                 ]
             }
@@ -841,7 +984,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that the bot will be used\n         in. The string must match one of the supported locales. All of the\n         intents, slot types, and slots used in the bot must have the same\n         locale. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that the bot will be used\n         in. The string must match one of the supported locales. All of the\n         intents, slot types, and slots used in the bot must have the same\n         locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1129,6 +1272,62 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains information about code hooks that Amazon Lex calls during a\n         conversation.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionKeyValueMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexmodelsv2#ConditionKey"
+            },
+            "value": {
+                "target": "com.amazonaws.lexmodelsv2#ConditionValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.lexmodelsv2#ConditionOperator"
+            },
+            "value": {
+                "target": "com.amazonaws.lexmodelsv2#ConditionKeyValueMap"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ConditionValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
             }
         },
         "com.amazonaws.lexmodelsv2#ConfidenceThreshold": {
@@ -1448,7 +1647,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that the bot will be used\n         in. The string must match one of the supported locales. All of the\n         intents, slot types, and slots used in the bot must have the same\n         locale. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that the bot will be used\n         in. The string must match one of the supported locales. All of the\n         intents, slot types, and slots used in the bot must have the same\n         locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1752,6 +1951,103 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#CreateExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#CreateExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#CreateExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a zip archive containing the contents of a bot or a bot\n         locale. The archive contains a directory structure that contains JSON\n         files that define the bot.</p>\n         <p>You can create an archive that contains the complete definition of a\n         bot, or you can specify that the archive contain only the definition of\n         a single bot locale.</p>\n         <p>For more information about exporting bots, and about the structure\n         of the export archive, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html\"> Importing and\n            exporting bots </a>\n         </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/exports",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateExportRequest": {
+            "type": "structure",
+            "members": {
+                "resourceSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportResourceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the type of resource to export, either a bot or a bot\n         locale. You can only specify one type of resource to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportExportFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format of the bot or bot locale definition files.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filePassword": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportExportFilePassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An password to use to encrypt the exported archive. Using a password\n         is optional, but you should encrypt the archive to protect the data in\n         transit between Amazon Lex and your local computer.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateExportResponse": {
+            "type": "structure",
+            "members": {
+                "exportId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for a specific request to create an export.</p>"
+                    }
+                },
+                "resourceSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportResourceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the type of resource that was exported, either a\n         bot or a bot locale.</p>"
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportExportFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format used for the bot or bot locale definition\n         files.</p>"
+                    }
+                },
+                "exportStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>,\n         you can use the  operation to get\n         the pre-signed S3 URL link to your exported bot or bot locale.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the request to export a bot was\n         created.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#CreateIntent": {
             "type": "operation",
             "input": {
@@ -1878,7 +2174,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale where this intent is used.\n         All of the bots, slot types, and slots used by the intent must have the\n         same locale.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this intent is used.\n         All of the bots, slot types, and slots used by the intent must have the\n         same locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1986,6 +2282,191 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#CreateResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#CreateResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#CreateResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new resource policy with the specified policy\n         statements.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/policy/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy is attached to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.lexmodelsv2#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A resource policy to add to the resource. The policy is a JSON\n         structure that contains one or more statements that define the policy.\n         The policy must follow the IAM syntax. For more information about the\n         contents of a JSON policy document, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html\"> IAM JSON policy\n            reference </a>. </p>\n         <p>If the policy isn't valid, Amazon Lex returns a validation\n         exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy was attached to.</p>"
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current revision of the resource policy. Use the revision ID to\n         make sure that you are updating the most current version of a resource\n         policy when you add a policy statement to a resource, delete a\n         resource, or update a resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateResourcePolicyStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#CreateResourcePolicyStatementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#CreateResourcePolicyStatementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a new resource policy statement to a bot or bot alias. If a\n         resource policy exists, the statement is added to the current resource\n         policy. If a policy doesn't exist, a new policy is created.</p>\n         <p>You can create a resource policy statement that allows cross-account\n         access.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/policy/{resourceArn}/statements",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateResourcePolicyStatementRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy is attached to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "statementId": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the statement. The ID is the same as the\n            <code>Sid</code> IAM property. The statement name must be unique\n         within the policy. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_sid.html\">IAM\n            JSON policy elements: Sid</a>. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "effect": {
+                    "target": "com.amazonaws.lexmodelsv2#Effect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the statement allows or denies access to the\n         resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "principal": {
+                    "target": "com.amazonaws.lexmodelsv2#PrincipalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An IAM principal, such as an IAM users, IAM roles, or AWS services\n         that is allowed or denied access to a resource. For more information,\n         see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\">AWS JSON policy elements: Principal</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.lexmodelsv2#OperationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Lex action that this policy either allows or denies. The\n         action must apply to the resource type of the specified ARN. For more\n         information, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonlexv2.html\">\n            Actions, resources, and condition keys for Amazon Lex V2</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.lexmodelsv2#ConditionMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a condition when the policy is in effect. If the principal\n         of the policy is a service principal, you must provide two condition\n         blocks, one with a SourceAccount global condition key and one with a\n         SourceArn global condition key.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html\">IAM JSON policy elements: Condition </a>.</p>"
+                    }
+                },
+                "expectedRevisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the revision of the policy to edit. If this\n         revision ID doesn't match the current revision ID, Amazon Lex throws an\n         exception.</p>\n         <p>If you don't specify a revision, Amazon Lex overwrites the contents of\n         the policy with the new values.</p>",
+                        "smithy.api#httpQuery": "expectedRevisionId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateResourcePolicyStatementResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy is attached to.</p>"
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current revision of the resource policy. Use the revision ID to\n         make sure that you are updating the most current version of a resource\n         policy when you add a policy statement to a resource, delete a\n         resource, or update a resource.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#CreateSlot": {
             "type": "operation",
             "input": {
@@ -2078,7 +2559,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that the slot will be used\n         in. The string must match one of the supported locales. All of the\n         bots, intents, slot types used by the slot must have the same locale.\n         For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that the slot will be used\n         in. The string must match one of the supported locales. All of the\n         bots, intents, slot types used by the slot must have the same locale.\n         For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2255,7 +2736,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that the slot type will be\n         used in. The string must match one of the supported locales. All of the\n         bots, intents, and slots used by the slot type must have the same\n         locale. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that the slot type will be\n         used in. The string must match one of the supported locales. All of the\n         bots, intents, and slots used by the slot type must have the same\n         locale. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2323,6 +2804,61 @@
                     "target": "com.amazonaws.lexmodelsv2#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A timestamp of the date and time that the slot type was\n         created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateUploadUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#CreateUploadUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#CreateUploadUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets a pre-signed S3 write URL that you use to upload the zip\n         archive when importing a bot or a bot locale. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/createuploadurl",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#CreateUploadUrlRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.lexmodelsv2#CreateUploadUrlResponse": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier for a unique import job. Use it when you call the\n             operation.</p>"
+                    }
+                },
+                "uploadUrl": {
+                    "target": "com.amazonaws.lexmodelsv2#PresignedS3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pre-signed S3 write URL. Upload the zip archive file that contains\n         the definition of your bot or bot locale.</p>"
                     }
                 }
             }
@@ -2550,7 +3086,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that will be deleted. The\n         string must match one of the supported locales. For more information,\n         see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that will be deleted. The\n         string must match one of the supported locales. For more information,\n         see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2711,6 +3247,134 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#DeleteExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a previous export and the associated files stored in an S3\n         bucket.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/exports/{exportId}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteExportRequest": {
+            "type": "structure",
+            "members": {
+                "exportId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteExportResponse": {
+            "type": "structure",
+            "members": {
+                "exportId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deleted export.</p>"
+                    }
+                },
+                "exportStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the export will no longer be returned by the  operation and calls to the  with the export identifier will\n         fail.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteImportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteImportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a previous import and the associated file stored in an S3\n         bucket.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/imports/{importId}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteImportRequest": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the import to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteImportResponse": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the deleted import.</p>"
+                    }
+                },
+                "importStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the deletion. When the deletion is complete,\n         the import will no longer be returned by the  operation and calls to the  with the import identifier will\n         fail.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#DeleteIntent": {
             "type": "operation",
             "input": {
@@ -2775,9 +3439,153 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale where the bot will be\n         deleted. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where the bot will be\n         deleted. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes an existing policy from a bot or bot alias. If the resource\n         doesn't have a policy attached, Amazon Lex returns an exception.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/policy/{resourceArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that has the\n         resource policy attached.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "expectedRevisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the revision to edit. If this ID doesn't match the\n         current revision number, Amazon Lex returns an exception</p>\n         <p>If you don't specify a revision ID, Amazon Lex will delete the current\n         policy.</p>",
+                        "smithy.api#httpQuery": "expectedRevisionId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy was deleted from.</p>"
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current revision of the resource policy. Use the revision ID to\n         make sure that you are updating the most current version of a resource\n         policy when you add a policy statement to a resource, delete a\n         resource, or update a resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteResourcePolicyStatement": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteResourcePolicyStatementRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DeleteResourcePolicyStatementResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a policy statement from a resource policy. If you delete the\n         last statement from a policy, the policy is deleted. If you specify a\n         statement ID that doesn't exist in the policy, or if the bot or bot\n         alias doesn't have a policy attached, Amazon Lex returns an\n         exception.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/policy/{resourceArn}/statements/{statementId}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteResourcePolicyStatementRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy is attached to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "statementId": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the statement (SID) to delete from the policy.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "expectedRevisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the revision of the policy to delete the statement\n         from. If this revision ID doesn't match the current revision ID, Amazon Lex\n         throws an exception.</p>\n         <p>If you don't specify a revision, Amazon Lex removes the current contents\n         of the statement. </p>",
+                        "smithy.api#httpQuery": "expectedRevisionId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DeleteResourcePolicyStatementResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy statement was removed from.</p>"
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current revision of the resource policy. Use the revision ID to\n         make sure that you are updating the most current version of a resource\n         policy when you add a policy statement to a resource, delete a\n         resource, or update a resource.</p>"
                     }
                 }
             }
@@ -2846,7 +3654,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that the slot will be\n         deleted from. The string must match one of the supported locales. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that the slot will be\n         deleted from. The string must match one of the supported locales. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2925,7 +3733,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that the slot type will be\n         deleted from. The string must match one of the supported locales. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that the slot type will be\n         deleted from. The string must match one of the supported locales. For\n         more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3158,7 +3966,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the locale to describe. The string must\n         match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.\n      </p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the locale to describe. The string must\n         match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3452,6 +4260,206 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#DescribeExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a specific export.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/exports/{exportId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeExportRequest": {
+            "type": "structure",
+            "members": {
+                "exportId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the export to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeExportResponse": {
+            "type": "structure",
+            "members": {
+                "exportId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the described export.</p>"
+                    }
+                },
+                "resourceSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportResourceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The bot, bot ID, and optional locale ID of the exported bot or bot\n         locale.</p>"
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportExportFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format used in the files that describe the bot or bot\n         locale.</p>"
+                    }
+                },
+                "exportStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Complete</code>\n         the export archive file is available for download.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the <code>exportStatus</code> is failed, contains one or more\n         reasons why the export could not be completed.</p>"
+                    }
+                },
+                "downloadUrl": {
+                    "target": "com.amazonaws.lexmodelsv2#PresignedS3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pre-signed S3 URL that points to the bot or bot locale archive.\n         The URL is only available for 5 minutes after calling the\n            <code>DescribeExport</code> operation.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the export was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last date and time that the export was updated.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeImportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeImportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information about a specific import.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/imports/{importId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeImportRequest": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the import to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeImportResponse": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the described import.</p>"
+                    }
+                },
+                "resourceSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportResourceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specifications of the imported bot or bot locale.</p>"
+                    }
+                },
+                "importedResourceId": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportedResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Amazon Lex assigned to the resource created by\n         the import.</p>"
+                    }
+                },
+                "importedResourceName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the imported resource.</p>"
+                    }
+                },
+                "mergeStrategy": {
+                    "target": "com.amazonaws.lexmodelsv2#MergeStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy used when there was a name conflict between the\n         imported resource and an existing resource. When the merge strategy is\n            <code>FailOnConflict</code> existing resources are not overwritten\n         and the import fails.</p>"
+                    }
+                },
+                "importStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the import process. When the status is\n            <code>Completed</code> the resource is imported and ready for\n         use.</p>"
+                    }
+                },
+                "failureReasons": {
+                    "target": "com.amazonaws.lexmodelsv2#FailureReasons",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the <code>importStatus</code> field is <code>Failed</code>, this\n         provides one or more reasons for the failture.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the import was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the import was last updated.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#DescribeIntent": {
             "type": "operation",
             "input": {
@@ -3516,7 +4524,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale of the intent to describe.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the intent to describe.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3636,6 +4644,70 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#DescribeResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#DescribeResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the resource policy and policy revision for a bot or bot\n         alias.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/policy/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy is attached to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#DescribeResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy is attached to.</p>"
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.lexmodelsv2#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON structure that contains the resource policy. For more\n         information about the contents of a JSON policy document, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html\"> IAM JSON policy\n            reference </a>.</p>"
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current revision of the resource policy. Use the revision ID to\n         make sure that you are updating the most current version of a resource\n         policy when you add a policy statement to a resource, delete a\n         resource, or update a resource.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#DescribeSlot": {
             "type": "operation",
             "input": {
@@ -3700,7 +4772,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slot to describe.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slot to describe.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3856,7 +4928,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slot type to\n         describe. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slot type to\n         describe. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3968,8 +5040,216 @@
                 "smithy.api#pattern": "^DRAFT$"
             }
         },
+        "com.amazonaws.lexmodelsv2#Effect": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Allow",
+                        "name": "Allow"
+                    },
+                    {
+                        "value": "Deny",
+                        "name": "Deny"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lexmodelsv2#ExceptionMessage": {
             "type": "string"
+        },
+        "com.amazonaws.lexmodelsv2#ExportFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field to use for filtering.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use to fileter the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use for the filter. Specify EQ when the\n            <code>ListExports</code> operation should return only resource types\n         that equal the specified value. Specify CO when the\n            <code>ListExports</code> operation should return resource types that\n         contain the specified value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filtes the response form the \n         operation</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ExportResourceType",
+                        "name": "ExportResourceType"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportFilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CO",
+                        "name": "Contains"
+                    },
+                    {
+                        "value": "EQ",
+                        "name": "Equals"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#ExportFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportResourceSpecification": {
+            "type": "structure",
+            "members": {
+                "botExportSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#BotExportSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for exporting a bot.</p>"
+                    }
+                },
+                "botLocaleExportSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#BotLocaleExportSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for exporting a bot locale.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the bot or bot locale that you want to\n         export. You can specify the <code>botExportSpecification</code> or the\n            <code>botLocaleExportSpecification</code>, but not both.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportSortAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LastUpdatedDateTime",
+                        "name": "LastUpdatedDateTime"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportSortBy": {
+            "type": "structure",
+            "members": {
+                "attribute": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportSortAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export field to use for sorting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to sort the list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about sorting a list of exports.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "InProgress",
+                        "name": "InProgress"
+                    },
+                    {
+                        "value": "Completed",
+                        "name": "Completed"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "Failed"
+                    },
+                    {
+                        "value": "Deleting",
+                        "name": "Deleting"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportSummary": {
+            "type": "structure",
+            "members": {
+                "exportId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Amazon Lex assigned to the export.</p>"
+                    }
+                },
+                "resourceSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportResourceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the bot or bot locale that was exported.</p>"
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportExportFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format used in the export files.</p>"
+                    }
+                },
+                "exportStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>\n         the export is ready to download.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the export was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the export was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information about an export in an export list.\n      </p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ExportSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#ExportSummary"
+            }
         },
         "com.amazonaws.lexmodelsv2#FailureReason": {
             "type": "string"
@@ -4058,6 +5338,236 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A card that is shown to the user by a messaging platform. You define\n         the contents of the card, the card is displayed by the platform. </p>\n         <p>When you use a response card, the response from the user is\n         constrained to the text associated with a button on the card.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportExportFileFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LexJson",
+                        "name": "LexJson"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportExportFilePassword": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field to use for filtering.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.lexmodelsv2#FilterValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values to use to filter the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportFilterOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use for the filter. Specify EQ when the\n            <code>ListImports</code> operation should return only resource types\n         that equal the specified value. Specify CO when the\n            <code>ListImports</code> operation should return resource types that\n         contain the specified value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters the response from the \n         operation.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ImportResourceType",
+                        "name": "ImportResourceType"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportFilterOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CO",
+                        "name": "Contains"
+                    },
+                    {
+                        "value": "EQ",
+                        "name": "Equals"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#ImportFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportResourceSpecification": {
+            "type": "structure",
+            "members": {
+                "botImportSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#BotImportSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for importing a bot.</p>"
+                    }
+                },
+                "botLocaleImportSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#BotLocaleImportSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for importing a bot locale.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about the bot or bot locale that you want to\n         import. You can sepcifiy the <code>botImportSpecification</code> or the\n            <code>botLocaleImportSpecification</code>, but not both.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportSortAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LastUpdatedDateTime",
+                        "name": "LastUpdatedDateTime"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportSortBy": {
+            "type": "structure",
+            "members": {
+                "attribute": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportSortAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The export field to use for sorting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "order": {
+                    "target": "com.amazonaws.lexmodelsv2#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order to sort the list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information for sorting a list of imports.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "InProgress",
+                        "name": "InProgress"
+                    },
+                    {
+                        "value": "Completed",
+                        "name": "Completed"
+                    },
+                    {
+                        "value": "Failed",
+                        "name": "Failed"
+                    },
+                    {
+                        "value": "Deleting",
+                        "name": "Deleting"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportSummary": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Amazon Lex assigned to the import.</p>"
+                    }
+                },
+                "importedResourceId": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportedResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Amazon Lex assigned to the imported\n         resource.</p>"
+                    }
+                },
+                "importedResourceName": {
+                    "target": "com.amazonaws.lexmodelsv2#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that you gave the imported resource.</p>"
+                    }
+                },
+                "importStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the resource. When the status is\n            <code>Completed</code> the resource is ready to build.</p>"
+                    }
+                },
+                "mergeStrategy": {
+                    "target": "com.amazonaws.lexmodelsv2#MergeStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy used to merge existing bot or bot locale definitions\n         with the imported definition.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the import was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the import was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information about an import in an import\n         list.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#ImportSummary"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ImportedResourceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^([0-9a-zA-Z_])+$"
             }
         },
         "com.amazonaws.lexmodelsv2#InputContext": {
@@ -4354,7 +5864,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws:lambda:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?"
+                "smithy.api#pattern": "^arn:aws:lambda:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:function:[a-zA-Z0-9-_]+(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})?(:[a-zA-Z0-9-_]+)?$"
             }
         },
         "com.amazonaws.lexmodelsv2#LambdaCodeHook": {
@@ -4399,13 +5909,25 @@
                     "target": "com.amazonaws.lexmodelsv2#CreateBotVersion"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#CreateExport"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#CreateIntent"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#CreateResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#CreateResourcePolicyStatement"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#CreateSlot"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#CreateSlotType"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#CreateUploadUrl"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DeleteBot"
@@ -4420,7 +5942,19 @@
                     "target": "com.amazonaws.lexmodelsv2#DeleteBotVersion"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteExport"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteImport"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#DeleteIntent"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DeleteResourcePolicyStatement"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DeleteSlot"
@@ -4441,7 +5975,16 @@
                     "target": "com.amazonaws.lexmodelsv2#DescribeBotVersion"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeExport"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeImport"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#DescribeIntent"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#DescribeResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#DescribeSlot"
@@ -4468,6 +6011,12 @@
                     "target": "com.amazonaws.lexmodelsv2#ListBuiltInSlotTypes"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#ListExports"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ListImports"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#ListIntents"
                 },
                 {
@@ -4478,6 +6027,9 @@
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#StartImport"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#TagResource"
@@ -4495,7 +6047,13 @@
                     "target": "com.amazonaws.lexmodelsv2#UpdateBotLocale"
                 },
                 {
+                    "target": "com.amazonaws.lexmodelsv2#UpdateExport"
+                },
+                {
                     "target": "com.amazonaws.lexmodelsv2#UpdateIntent"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#UpdateResourcePolicy"
                 },
                 {
                     "target": "com.amazonaws.lexmodelsv2#UpdateSlot"
@@ -4928,7 +6486,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale of the intents to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the intents to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5018,7 +6576,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slot types to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slot types to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5062,6 +6620,212 @@
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
                         "smithy.api#documentation": "<p>The language and locale of the slot types in the list.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListExports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListExportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListExportsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the exports for a bot or bot locale. Exports are kept in the list for 7\n         days.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/exports",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListExportsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Amazon Lex assigned to the bot.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to list exports for. </p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the field that the list of exports is sorted by. You can\n         sort by the <code>LastUpdatedDateTime</code> field in ascending or\n         descending order.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the specification of a filter used to limit the exports in\n         the response to only those that match the filter specification. You can\n         only specify one filter and one string to filter on.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of exports to return in each page of results. If\n         there are fewer results than the max page size, only the actual number\n         of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the <code>ListExports</code> operation contans\n         more results that specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. Use that token in the\n            <code>nextToken</code> parameter to return the next page of\n         results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListExportsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned to the bot by Amazon Lex.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#BotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that was exported.</p>"
+                    }
+                },
+                "exportSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for the exports that meet the filter criteria\n         specified in the request. The length of the list is specified in the\n            <code>maxResults</code> parameter. If there are more exports\n         available, the <code>nextToken</code> field contains a token to get the\n         next page of results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the <code>ListExports</code> operation. If the\n            <code>nextToken</code> field is present, you send the contents as\n         the <code>nextToken</code> parameter of a <code>ListExports</code>\n         operation request to get the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListImports": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#ListImportsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#ListImportsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the imports for a bot or bot locale. Imports are kept in the list for 7\n         days.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/imports",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListImportsRequest": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier that Amazon Lex assigned to the bot.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot to list imports for.</p>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines the field that the list of imports is sorted by. You can\n         sort by the <code>LastUpdatedDateTime</code> field in ascending or\n         descending order.</p>"
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the specification of a filter used to limit the bots in the\n         response to only those that match the filter specification. You can\n         only specify one filter and one string to filter on.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.lexmodelsv2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of imports to return in each page of results. If\n         there are fewer results than the max page size, only the actual number\n         of results are returned.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the response from the <code>ListImports</code> operation contains\n         more results than specified in the <code>maxResults</code> parameter, a\n         token is returned in the response. Use that token in the\n            <code>nextToken</code> parameter to return the next page of\n         results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ListImportsResponse": {
+            "type": "structure",
+            "members": {
+                "botId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier assigned by Amazon Lex to the bot.</p>"
+                    }
+                },
+                "botVersion": {
+                    "target": "com.amazonaws.lexmodelsv2#DraftBotVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the bot that was imported. It will always be\n            <code>DRAFT</code>.</p>"
+                    }
+                },
+                "importSummaries": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for the imports that meet the filter criteria\n         specified in the request. The length of the list is specified in the\n            <code>maxResults</code> parameter. If there are more imports\n         available, the <code>nextToken</code> field contains a token to get the\n         next page of results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.lexmodelsv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token that indicates whether there are more results to return in a\n         response to the <code>ListImports</code> operation. If the\n            <code>nextToken</code> field is present, you send the contents as\n         the <code>nextToken</code> parameter of a <code>ListImports</code>\n         operation request to get the next page of results.</p>"
                     }
                 }
             }
@@ -5124,7 +6888,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale of the intents to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the intents to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5248,7 +7012,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slot types to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slot types to list.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5372,7 +7136,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slots to list. The\n         string must match one of the supported locales. For more information,\n         see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale of the slots to list. The\n         string must match one of the supported locales. For more information,\n         see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5532,6 +7296,21 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#MergeStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Overwrite",
+                        "name": "Overwrite"
+                    },
+                    {
+                        "value": "FailOnConflict",
+                        "name": "FailOnConflict"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.lexmodelsv2#Message": {
             "type": "structure",
             "members": {
@@ -5662,6 +7441,22 @@
                 ]
             }
         },
+        "com.amazonaws.lexmodelsv2#Operation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^lex:[a-zA-Z*]+$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#OperationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#Operation"
+            }
+        },
         "com.amazonaws.lexmodelsv2#OutputContext": {
             "type": "structure",
             "members": {
@@ -5727,6 +7522,14 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#Policy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#PreconditionFailedException": {
             "type": "structure",
             "members": {
@@ -5738,6 +7541,51 @@
                 "smithy.api#documentation": "<p></p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 412
+            }
+        },
+        "com.amazonaws.lexmodelsv2#PresignedS3Url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#Principal": {
+            "type": "structure",
+            "members": {
+                "service": {
+                    "target": "com.amazonaws.lexmodelsv2#ServicePrincipal",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS service that should allowed or denied access to\n         an Amazon Lex action.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.lexmodelsv2#PrincipalArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the principal.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The IAM principal that you allowing or denying access to an Amazon Lex\n         action. You must provide a <code>service</code> or an <code>arn</code>,\n         but not both in the same statement. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html\"> AWS JSON policy elements: Principal </a>.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#PrincipalArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 30,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws:iam::[0-9]{12}:(root|(user|role)/.*)$"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#PrincipalList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.lexmodelsv2#Principal"
             }
         },
         "com.amazonaws.lexmodelsv2#PriorityValue": {
@@ -5848,6 +7696,16 @@
         },
         "com.amazonaws.lexmodelsv2#RetryAfterSeconds": {
             "type": "integer"
+        },
+        "com.amazonaws.lexmodelsv2#RevisionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^[0-9]+$"
+            }
         },
         "com.amazonaws.lexmodelsv2#RoleArn": {
             "type": "string",
@@ -5970,6 +7828,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of\n         user utterances.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#ServicePrincipal": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z_.]+$"
             }
         },
         "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException": {
@@ -6537,6 +8405,110 @@
                 ]
             }
         },
+        "com.amazonaws.lexmodelsv2#StartImport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#StartImportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#StartImportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts importing a bot or bot locale from a zip archive that you\n         uploaded to an S3 bucket.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/imports",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartImportRequest": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the import. It is included in the response\n         from the  operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportResourceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters for creating the bot or bot locale.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "mergeStrategy": {
+                    "target": "com.amazonaws.lexmodelsv2#MergeStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy to use when there is a name conflict between the\n         imported resource and an existing resource. When the merge strategy is\n            <code>FailOnConflict</code> existing resources are not overwritten\n         and the import fails.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filePassword": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportExportFilePassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password used to encrypt the zip archive that contains the bot\n         or bot locale definition. You should always encrypt the zip archive to\n         protect it during transit between your site and Amazon Lex.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#StartImportResponse": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the import.</p>"
+                    }
+                },
+                "resourceSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportResourceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters used when importing the bot or bot locale.</p>"
+                    }
+                },
+                "mergeStrategy": {
+                    "target": "com.amazonaws.lexmodelsv2#MergeStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The strategy used when there was a name conflict between the\n         imported resource and an existing resource. When the merge strategy is\n            <code>FailOnConflict</code> existing resources are not overwritten\n         and the import fails.</p>"
+                    }
+                },
+                "importStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the import. When the status is\n            <code>Complete</code> the bot or bot alias is ready to use.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the import request was created.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#StillWaitingResponseFrequency": {
             "type": "integer",
             "traits": {
@@ -7086,7 +9058,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale to update. The string must\n         match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale to update. The string must\n         match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7289,6 +9261,103 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#UpdateExport": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#UpdateExportRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#UpdateExportResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the password used to encrypt an export zip archive.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/exports/{exportId}",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UpdateExportRequest": {
+            "type": "structure",
+            "members": {
+                "exportId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier Amazon Lex assigned to the export.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "filePassword": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportExportFilePassword",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new password to use to encrypt the export zip archive.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UpdateExportResponse": {
+            "type": "structure",
+            "members": {
+                "exportId": {
+                    "target": "com.amazonaws.lexmodelsv2#Id",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier Amazon Lex assigned to the export.</p>"
+                    }
+                },
+                "resourceSpecification": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportResourceSpecification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the type of resource that was exported, either a\n         bot or a bot locale.</p>"
+                    }
+                },
+                "fileFormat": {
+                    "target": "com.amazonaws.lexmodelsv2#ImportExportFileFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file format used for the files that define the resource.</p>"
+                    }
+                },
+                "exportStatus": {
+                    "target": "com.amazonaws.lexmodelsv2#ExportStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the export. When the status is <code>Completed</code>\n         the export archive is available for download.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the export was created.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.lexmodelsv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the export was last updated.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#UpdateIntent": {
             "type": "operation",
             "input": {
@@ -7429,7 +9498,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale where this intent is used.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale where this intent is used.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7549,6 +9618,87 @@
                 }
             }
         },
+        "com.amazonaws.lexmodelsv2#UpdateResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lexmodelsv2#UpdateResourcePolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lexmodelsv2#UpdateResourcePolicyResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lexmodelsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#PreconditionFailedException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.lexmodelsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Replaces the existing resource policy for a bot or bot alias with a\n         new one. If the policy doesn't exist, Amazon Lex returns an\n         exception.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/policy/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UpdateResourcePolicyRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy is attached to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.lexmodelsv2#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A resource policy to add to the resource. The policy is a JSON\n         structure that contains one or more statements that define the policy.\n         The policy must follow the IAM syntax. For more information about the\n         contents of a JSON policy document, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html\"> IAM JSON policy\n            reference </a>. </p>\n         <p>If the policy isn't valid, Amazon Lex returns a validation\n         exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "expectedRevisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the revision of the policy to update. If this\n         revision ID doesn't match the current revision ID, Amazon Lex throws an\n         exception.</p>\n         <p>If you don't specify a revision, Amazon Lex overwrites the contents of\n         the policy with the new values.</p>",
+                        "smithy.api#httpQuery": "expectedRevisionId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lexmodelsv2#UpdateResourcePolicyResponse": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.lexmodelsv2#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the bot or bot alias that the\n         resource policy is attached to.</p>"
+                    }
+                },
+                "revisionId": {
+                    "target": "com.amazonaws.lexmodelsv2#RevisionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current revision of the resource policy. Use the revision ID to\n         make sure that you are updating the most current version of a resource\n         policy when you add a policy statement to a resource, delete a\n         resource, or update a resource.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#UpdateSlot": {
             "type": "operation",
             "input": {
@@ -7649,7 +9799,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that contains the slot.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that contains the slot.\n         The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7840,7 +9990,7 @@
                 "localeId": {
                     "target": "com.amazonaws.lexmodelsv2#LocaleId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the language and locale that contains the slot\n         type. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html\">https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html</a>.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the language and locale that contains the slot\n         type. The string must match one of the supported locales. For more\n         information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }

@@ -1,0 +1,2932 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.apprunner#ASConfigMaxConcurrency": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ASConfigMaxSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ASConfigMinSize": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.apprunner#AppRunner": {
+            "type": "service",
+            "version": "2020-05-15",
+            "operations": [
+                {
+                    "target": "com.amazonaws.apprunner#AssociateCustomDomain"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#CreateAutoScalingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#CreateConnection"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#CreateService"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DeleteAutoScalingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DeleteConnection"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DeleteService"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DescribeAutoScalingConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DescribeCustomDomains"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DescribeService"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#DisassociateCustomDomain"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ListAutoScalingConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ListConnections"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ListOperations"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ListServices"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#PauseService"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResumeService"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#StartDeployment"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#UpdateService"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "AppRunner",
+                    "arnNamespace": "apprunner",
+                    "cloudFormationName": "AppRunner",
+                    "cloudTrailEventSource": "apprunner.amazonaws.com",
+                    "endpointPrefix": "apprunner"
+                },
+                "aws.auth#sigv4": {
+                    "name": "apprunner"
+                },
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#documentation": "<fullname>AWS App Runner</fullname>\n\n      \n\n         <p>AWS App Runner is an application service that provides a fast, simple, and cost-effective way to go directly from an existing container image or source code\n      to a running service in the AWS cloud in seconds. You don't need to learn new technologies, decide which compute service to use, or understand how to\n      provision and configure AWS resources.</p>\n         <p>App Runner connects directly to your container registry or source code repository. It provides an automatic delivery pipeline with fully managed operations,\n      high performance, scalability, and security.</p>\n         <p>For more information about App Runner, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/dg/\">AWS App Runner Developer Guide</a>.\n      For release information, see the <a href=\"https://docs.aws.amazon.com/apprunner/latest/relnotes/\">AWS App Runner Release Notes</a>.</p>\n         <p>\n       To install the Software Development Kits (SDKs), Integrated\n      Development Environment (IDE) Toolkits, and command line tools that you can use to access the API, see <a href=\"http://aws.amazon.com/tools/\">Tools for\n        Amazon Web Services</a>.</p>\n         <p>\n            <b>Endpoints</b>\n         </p>\n         <p>For a list of Region-specific endpoints that App Runner supports, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/apprunner.html\">AWS App Runner\n        endpoints and quotas</a> in the <i>AWS General Reference</i>.</p>",
+                "smithy.api#title": "AWS App Runner",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://apprunner.amazonaws.com/doc/2020-05-15/"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#AppRunnerResourceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "arn:aws(-[\\w]+)*:[a-z0-9-\\\\.]{0,63}:[a-z0-9-\\\\.]{0,63}:[0-9]{12}:(\\w|\\/|-){1,1011}"
+            }
+        },
+        "com.amazonaws.apprunner#AssociateCustomDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#AssociateCustomDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#AssociateCustomDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate your own domain name with the AWS App Runner subdomain URL of your App Runner service.</p>\n         <p>After you call <code>AssociateCustomDomain</code> and receive a successful response, use the information in the <a>CustomDomain</a> record\n      that's returned to add CNAME records to your Domain Name System (DNS). For each mapped domain name, add a mapping to the target App Runner subdomain and one or\n      more certificate validation records. App Runner then performs DNS validation to verify that you own or control the domain name that you associated. App Runner tracks\n      domain validity in a certificate stored in <a href=\"https://docs.aws.amazon.com/acm/latest/userguide\">AWS Certificate Manager (ACM)</a>.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#AssociateCustomDomainRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want to associate a custom domain name with.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.apprunner#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom domain endpoint to associate. Specify a root domain (for example, <code>example.com</code>), a subdomain (for example,\n        <code>login.example.com</code> or <code>admin.login.example.com</code>), or a wildcard (for example, <code>*.example.com</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableWWWSubdomain": {
+                    "target": "com.amazonaws.apprunner#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to associate the subdomain <code>www.<i>DomainName</i>\n            </code> with the App Runner service in addition to the base\n      domain.</p>\n         <p>Default: <code>true</code>\n         </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#AssociateCustomDomainResponse": {
+            "type": "structure",
+            "members": {
+                "DNSTarget": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The App Runner subdomain of the App Runner service. The custom domain name is mapped to this target name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service with which a custom domain name is associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomDomain": {
+                    "target": "com.amazonaws.apprunner#CustomDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the domain name that's being associated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#AuthenticationConfiguration": {
+            "type": "structure",
+            "members": {
+                "ConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner connection that enables the App Runner service to connect to a source repository. It's required for GitHub code\n      repositories.</p>"
+                    }
+                },
+                "AccessRoleArn": {
+                    "target": "com.amazonaws.apprunner#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants the App Runner service access to a source repository. It's required for ECR image repositories\n      (but not for ECR Public repositories).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes resources needed to authenticate access to some source repositories. The specific resource depends on the repository provider.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#AutoScalingConfiguration": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this auto scaling configuration.</p>"
+                    }
+                },
+                "AutoScalingConfigurationName": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided auto scaling configuration name. It can be used in multiple revisions of a configuration.</p>"
+                    }
+                },
+                "AutoScalingConfigurationRevision": {
+                    "target": "com.amazonaws.apprunner#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of this auto scaling configuration. It's unique among all the active configurations (<code>\"Status\": \"ACTIVE\"</code>) that share the same\n        <code>AutoScalingConfigurationName</code>.</p>"
+                    }
+                },
+                "Latest": {
+                    "target": "com.amazonaws.apprunner#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>It's set to <code>true</code> for the configuration with the highest <code>Revision</code> among all configurations that share the same\n        <code>Name</code>. It's set to <code>false</code> otherwise.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the auto scaling configuration. If the status of a configuration revision is <code>INACTIVE</code>, it was deleted and can't be\n      used. Inactive configuration revisions are permanently removed some time after they are deleted.</p>"
+                    }
+                },
+                "MaxConcurrency": {
+                    "target": "com.amazonaws.apprunner#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent requests that an instance processes. If the number of concurrent requests exceeds this limit, App Runner scales the service\n      up.</p>"
+                    }
+                },
+                "MinSize": {
+                    "target": "com.amazonaws.apprunner#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of instances that App Runner provisions for a service. The service always has at least <code>MinSize</code> provisioned instances. Some\n      of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to be\n      quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.</p>\n         <p>App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.</p>"
+                    }
+                },
+                "MaxSize": {
+                    "target": "com.amazonaws.apprunner#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of instances that a service scales up to. At most <code>MaxSize</code> instances actively serve traffic for your service.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the auto scaling configuration was created. It's in Unix time stamp format.</p>"
+                    }
+                },
+                "DeletedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the auto scaling configuration was deleted. It's in Unix time stamp format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an AWS App Runner automatic scaling configuration resource. Multiple revisions of a configuration have the same\n        <code>AutoScalingConfigurationName</code> and different <code>AutoScalingConfigurationRevision</code> values.</p>\n         <p>A higher <code>MinSize</code> increases the spread of your App Runner service over more Availability Zones in the AWS Region. The tradeoff is a higher\n      minimal cost.</p>\n         <p>A lower <code>MaxSize</code> controls your cost. The tradeoff is lower responsiveness during peak demand.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#AutoScalingConfigurationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 32
+                },
+                "smithy.api#pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}"
+            }
+        },
+        "com.amazonaws.apprunner#AutoScalingConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#AutoScalingConfigurationSummary": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this auto scaling configuration.</p>"
+                    }
+                },
+                "AutoScalingConfigurationName": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided auto scaling configuration name. It can be used in multiple revisions of a configuration.</p>"
+                    }
+                },
+                "AutoScalingConfigurationRevision": {
+                    "target": "com.amazonaws.apprunner#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The revision of this auto scaling configuration. It's unique among all the active configurations (<code>\"Status\": \"ACTIVE\"</code>) with the same\n        <code>AutoScalingConfigurationName</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information about an AWS App Runner automatic scaling configuration resource.</p>\n         <p>This type contains limited information about an auto scaling configuration. It includes only identification information, without configuration\n      details. It's returned by the <a>ListAutoScalingConfigurations</a> action. Complete configuration information is returned by the <a>CreateAutoScalingConfiguration</a>, <a>DescribeAutoScalingConfiguration</a>, and <a>DeleteAutoScalingConfiguration</a>\n      actions using the <a>AutoScalingConfiguration</a> type.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#AutoScalingConfigurationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#AutoScalingConfigurationSummary"
+            }
+        },
+        "com.amazonaws.apprunner#Boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.apprunner#BuildCommand": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.apprunner#CertificateValidationRecord": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate CNAME record name.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The record type, always <code>CNAME</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate CNAME record value.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#CertificateValidationRecordStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the certificate CNAME record validation. It should change to <code>SUCCESS</code> after App Runner completes validation with your\n      DNS.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a certificate CNAME record to add to your DNS. For more information, see <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_AssociateCustomDomain.html\">AssociateCustomDomain</a>.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CertificateValidationRecordList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#CertificateValidationRecord"
+            }
+        },
+        "com.amazonaws.apprunner#CertificateValidationRecordStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING_VALIDATION",
+                        "name": "PENDING_VALIDATION"
+                    },
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#CodeConfiguration": {
+            "type": "structure",
+            "members": {
+                "ConfigurationSource": {
+                    "target": "com.amazonaws.apprunner#ConfigurationSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the App Runner configuration. Values are interpreted as follows:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>REPOSITORY</code> – App Runner reads configuration values from the <code>apprunner.yaml</code> file in the source code repository and\n          ignores <code>CodeConfigurationValues</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>API</code> – App Runner uses configuration values provided in <code>CodeConfigurationValues</code> and ignores the\n            <code>apprunner.yaml</code> file in the source code repository.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CodeConfigurationValues": {
+                    "target": "com.amazonaws.apprunner#CodeConfigurationValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The basic configuration for building and running the App Runner service. Use it to quickly launch an App Runner service without providing a\n        <code>apprunner.yaml</code> file in the source code repository (or ignoring the file if it exists).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration that AWS App Runner uses to build and run an App Runner service from a source code repository.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CodeConfigurationValues": {
+            "type": "structure",
+            "members": {
+                "Runtime": {
+                    "target": "com.amazonaws.apprunner#Runtime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A runtime environment type for building and running an App Runner service.\n       It represents a\n      programming language runtime.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BuildCommand": {
+                    "target": "com.amazonaws.apprunner#BuildCommand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command App Runner runs to build your application.</p>"
+                    }
+                },
+                "StartCommand": {
+                    "target": "com.amazonaws.apprunner#StartCommand",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The command App Runner runs to start your application.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that your application listens to in the container.</p>\n         <p>Default: <code>8080</code>\n         </p>"
+                    }
+                },
+                "RuntimeEnvironmentVariables": {
+                    "target": "com.amazonaws.apprunner#RuntimeEnvironmentVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of\n        <code>AWSAPPRUNNER</code> are reserved for system use and aren't valid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the basic configuration needed for building and running an AWS App Runner service. This type doesn't support the full set of possible\n      configuration options. Fur full configuration capabilities, use a <code>apprunner.yaml</code> file in the source code repository.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CodeRepository": {
+            "type": "structure",
+            "members": {
+                "RepositoryUrl": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the repository that contains the source code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceCodeVersion": {
+                    "target": "com.amazonaws.apprunner#SourceCodeVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version that should be used within the source code repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CodeConfiguration": {
+                    "target": "com.amazonaws.apprunner#CodeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for building and running the service from a source code repository.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a source code repository.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ConfigurationSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "REPOSITORY",
+                        "name": "REPOSITORY"
+                    },
+                    {
+                        "value": "API",
+                        "name": "API"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#Connection": {
+            "type": "structure",
+            "members": {
+                "ConnectionName": {
+                    "target": "com.amazonaws.apprunner#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided connection name.</p>"
+                    }
+                },
+                "ConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this connection.</p>"
+                    }
+                },
+                "ProviderType": {
+                    "target": "com.amazonaws.apprunner#ProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source repository provider.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#ConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the App Runner connection. When the state is <code>AVAILABLE</code>, you can use the connection to create an App Runner service.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The App Runner connection creation time, expressed as a Unix time stamp.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an AWS App Runner connection resource.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ConnectionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 32
+                },
+                "smithy.api#pattern": "[A-Za-z0-9][A-Za-z0-9\\-_]{3,31}"
+            }
+        },
+        "com.amazonaws.apprunner#ConnectionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING_HANDSHAKE",
+                        "name": "PENDING_HANDSHAKE"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#ConnectionSummary": {
+            "type": "structure",
+            "members": {
+                "ConnectionName": {
+                    "target": "com.amazonaws.apprunner#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided connection name.</p>"
+                    }
+                },
+                "ConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this connection.</p>"
+                    }
+                },
+                "ProviderType": {
+                    "target": "com.amazonaws.apprunner#ProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source repository provider.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#ConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the App Runner connection. When the state is <code>AVAILABLE</code>, you can use the connection to create an App Runner service.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The App Runner connection creation time, expressed as a Unix time stamp.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information about an AWS App Runner connection resource.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ConnectionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#ConnectionSummary"
+            }
+        },
+        "com.amazonaws.apprunner#Cpu": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 6
+                },
+                "smithy.api#pattern": "1024|2048|(1|2) vCPU"
+            }
+        },
+        "com.amazonaws.apprunner#CreateAutoScalingConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#CreateAutoScalingConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#CreateAutoScalingConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create an AWS App Runner automatic scaling configuration resource. App Runner requires this resource\n      when you create App Runner services that require non-default auto scaling settings. You can share an\n      auto scaling configuration across multiple services.</p>\n         <p>Create multiple revisions of a configuration by using the same <code>AutoScalingConfigurationName</code> and different\n        <code>AutoScalingConfigurationRevision</code> values. When you create a service, you can set it to use the latest active revision of an auto scaling\n      configuration or a specific revision.</p>\n         <p>Configure a higher <code>MinSize</code> to increase the spread of your App Runner service over more Availability Zones in the AWS Region. The tradeoff is\n      a higher minimal cost.</p>\n         <p>Configure a lower <code>MaxSize</code> to control your cost. The tradeoff is lower responsiveness during peak demand.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CreateAutoScalingConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationName": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the auto scaling configuration. When you use it for the first time in an AWS Region, App Runner creates revision number <code>1</code> of this\n      name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxConcurrency": {
+                    "target": "com.amazonaws.apprunner#ASConfigMaxConcurrency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of concurrent requests that you want an instance to process. If the number of concurrent requests exceeds this limit, App Runner scales\n      up your service.</p>\n         <p>Default: <code>100</code>\n         </p>"
+                    }
+                },
+                "MinSize": {
+                    "target": "com.amazonaws.apprunner#ASConfigMinSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum number of instances that App Runner provisions for your service. The service always has at least <code>MinSize</code> provisioned instances.\n      Some of them actively serve traffic. The rest of them (provisioned and inactive instances) are a cost-effective compute capacity reserve and are ready to\n      be quickly activated. You pay for memory usage of all the provisioned instances. You pay for CPU usage of only the active subset.</p>\n         <p>App Runner temporarily doubles the number of provisioned instances during deployments, to maintain the same capacity for both old and new code.</p>\n         <p>Default: <code>1</code>\n         </p>"
+                    }
+                },
+                "MaxSize": {
+                    "target": "com.amazonaws.apprunner#ASConfigMaxSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of instances that your service scales up to. At most <code>MaxSize</code> instances actively serve traffic for your service.</p>\n         <p>Default: <code>25</code>\n         </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apprunner#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metadata items that you can associate with your auto scaling configuration resource. A tag is a key-value pair.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateAutoScalingConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfiguration": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner auto scaling configuration that's created by this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#CreateConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#CreateConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create an AWS App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from\n      certain third-party providers. You can share a connection across multiple services.</p>\n         <p>A connection resource is needed to access GitHub repositories. GitHub requires a user interface approval process through the App Runner console before you\n      can use the connection.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CreateConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectionName": {
+                    "target": "com.amazonaws.apprunner#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the new connection. It must be unique across all App Runner connections for the AWS account in the AWS Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProviderType": {
+                    "target": "com.amazonaws.apprunner#ProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source repository provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apprunner#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of metadata items that you can associate with your connection resource. A tag is a key-value pair.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "Connection": {
+                    "target": "com.amazonaws.apprunner#Connection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner connection that's created by this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#CreateServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#CreateServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ServiceQuotaExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create an AWS App Runner service. After the service is created, the action also automatically starts a deployment.</p>\n         <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html\">ListOperations</a> call to track the operation's progress.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CreateServiceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceName": {
+                    "target": "com.amazonaws.apprunner#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the new service. It must be unique across all the running App Runner services in your AWS account in the AWS Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceConfiguration": {
+                    "target": "com.amazonaws.apprunner#SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source to deploy to the App Runner service. It can be a code or an image repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceConfiguration": {
+                    "target": "com.amazonaws.apprunner#InstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime configuration of instances (scaling units) of the App Runner service.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apprunner#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional list of metadata items that you can associate with your service resource. A tag is a key-value pair.</p>"
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.apprunner#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default,\n      App Runner uses an AWS managed CMK.</p>"
+                    }
+                },
+                "HealthCheckConfiguration": {
+                    "target": "com.amazonaws.apprunner#HealthCheckConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the health check that AWS App Runner performs to monitor the health of your service.</p>"
+                    }
+                },
+                "AutoScalingConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service. If not provided, App Runner\n      associates the latest revision of a default auto scaling configuration.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CreateServiceResponse": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "com.amazonaws.apprunner#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner service that's created by this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.apprunner#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html\">ListOperations</a> call to track the operation's progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#CustomDomain": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.apprunner#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An associated custom domain endpoint. It can be a root domain (for example, <code>example.com</code>), a subdomain (for example,\n        <code>login.example.com</code> or <code>admin.login.example.com</code>), or a wildcard (for example, <code>*.example.com</code>).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EnableWWWSubdomain": {
+                    "target": "com.amazonaws.apprunner#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, the subdomain <code>www.<i>DomainName</i>\n            </code> is associated with the App Runner service in addition to the base\n      domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CertificateValidationRecords": {
+                    "target": "com.amazonaws.apprunner#CertificateValidationRecordList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of certificate CNAME records that's used for this domain name.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#CustomDomainAssociationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the domain name association.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a custom domain that's associated with an AWS App Runner service.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#CustomDomainAssociationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    },
+                    {
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
+                    },
+                    {
+                        "value": "PENDING_CERTIFICATE_DNS_VALIDATION",
+                        "name": "PENDING_CERTIFICATE_DNS_VALIDATION"
+                    },
+                    {
+                        "value": "BINDING_CERTIFICATE",
+                        "name": "BINDING_CERTIFICATE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#CustomDomainList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#CustomDomain"
+            }
+        },
+        "com.amazonaws.apprunner#DeleteAutoScalingConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DeleteAutoScalingConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DeleteAutoScalingConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an AWS App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a\n      configuration that's used by one or more App Runner services.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DeleteAutoScalingConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want to delete.</p>\n         <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i>\n            </code> or\n          <code>.../<i>name</i>/<i>revision</i>\n            </code>. If a revision isn't specified, the latest active revision is deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteAutoScalingConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfiguration": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner auto scaling configuration that this request just deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteConnection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DeleteConnectionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DeleteConnectionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an AWS App Runner connection. You must first ensure that there are no running App Runner services that use this connection. If there are any, the\n        <code>DeleteConnection</code> action fails.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DeleteConnectionRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectionArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner connection that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteConnectionResponse": {
+            "type": "structure",
+            "members": {
+                "Connection": {
+                    "target": "com.amazonaws.apprunner#Connection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner connection that this request just deleted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DeleteServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DeleteServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an AWS App Runner service.</p>\n         <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a>ListOperations</a>\n      call to track the operation's progress.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DeleteServiceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DeleteServiceResponse": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "com.amazonaws.apprunner#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner service that this request just deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.apprunner#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track\n      the operation's progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeAutoScalingConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DescribeAutoScalingConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DescribeAutoScalingConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return a full description of an AWS App Runner automatic scaling configuration resource.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DescribeAutoScalingConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner auto scaling configuration that you want a description for.</p>\n         <p>The ARN can be a full auto scaling configuration ARN, or a partial ARN ending with either <code>.../<i>name</i>\n            </code> or\n          <code>.../<i>name</i>/<i>revision</i>\n            </code>. If a revision isn't specified, the latest active revision is\n      described.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeAutoScalingConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfiguration": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A full description of the App Runner auto scaling configuration that you specified in this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeCustomDomains": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DescribeCustomDomainsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DescribeCustomDomainsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return a description of custom domain names that are associated with an AWS App Runner service.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeCustomDomainsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeCustomDomainsRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want associated custom domain names to be described for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#DescribeCustomDomainsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results that each response (result page) can include. It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeCustomDomainsResponse": {
+            "type": "structure",
+            "members": {
+                "DNSTarget": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The App Runner subdomain of the App Runner service. The associated custom domain names are mapped to this target name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service whose associated custom domain names you want to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomDomains": {
+                    "target": "com.amazonaws.apprunner#CustomDomainList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of descriptions of custom domain names that are associated with the service. In a paginated request, the request returns up to\n        <code>MaxResults</code> records per call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DescribeServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DescribeServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return a full description of an AWS App Runner service.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DescribeServiceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want a description for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DescribeServiceResponse": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "com.amazonaws.apprunner#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A full description of the App Runner service that you specified in this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DisassociateCustomDomain": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#DisassociateCustomDomainRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#DisassociateCustomDomainResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociate a custom domain name from an AWS App Runner service.</p>\n         <p>Certificates tracking domain validity are associated with a custom domain and are stored in <a href=\"https://docs.aws.amazon.com/acm/latest/userguide\">AWS\n        Certificate Manager (ACM)</a>. These certificates aren't deleted as part of this action. App Runner delays certificate deletion for\n      30 days after a domain is disassociated from your service.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#DisassociateCustomDomainRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want to disassociate a custom domain name from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DomainName": {
+                    "target": "com.amazonaws.apprunner#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain name that you want to disassociate from the App Runner service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DisassociateCustomDomainResponse": {
+            "type": "structure",
+            "members": {
+                "DNSTarget": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The App Runner subdomain of the App Runner service. The disassociated custom domain name was mapped to this target name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that a custom domain name is disassociated from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomDomain": {
+                    "target": "com.amazonaws.apprunner#CustomDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the domain name that's being disassociated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#DomainName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.apprunner#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "KmsKey": {
+                    "target": "com.amazonaws.apprunner#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the KMS key that's used for encryption.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a custom encryption key that AWS App Runner uses to encrypt copies of the source repository and service logs.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ErrorMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 600
+                }
+            }
+        },
+        "com.amazonaws.apprunner#HealthCheckConfiguration": {
+            "type": "structure",
+            "members": {
+                "Protocol": {
+                    "target": "com.amazonaws.apprunner#HealthCheckProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP protocol that App Runner uses to perform health checks for your service.</p>\n         <p>If you set <code>Protocol</code> to <code>HTTP</code>, App Runner sends health check requests to the HTTP path specified by <code>Path</code>.</p>\n         <p>Default: <code>TCP</code>\n         </p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL that health check requests are sent to.</p>\n         <p>\n            <code>Path</code> is only applicable when you set <code>Protocol</code> to <code>HTTP</code>.</p>\n         <p>Default: <code>\"/\"</code>\n         </p>"
+                    }
+                },
+                "Interval": {
+                    "target": "com.amazonaws.apprunner#HealthCheckInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time interval, in seconds, between health checks.</p>\n         <p>Default: <code>5</code>\n         </p>"
+                    }
+                },
+                "Timeout": {
+                    "target": "com.amazonaws.apprunner#HealthCheckTimeout",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds, to wait for a health check response before deciding it failed.</p>\n         <p>Default: <code>2</code>\n         </p>"
+                    }
+                },
+                "HealthyThreshold": {
+                    "target": "com.amazonaws.apprunner#HealthCheckHealthyThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive checks that must succeed before App Runner decides that the service is healthy.</p>\n         <p>Default: <code>3</code>\n         </p>"
+                    }
+                },
+                "UnhealthyThreshold": {
+                    "target": "com.amazonaws.apprunner#HealthCheckUnhealthyThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of consecutive checks that must fail before App Runner decides that the service is unhealthy.</p>\n         <p>Default: <code>3</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the settings for the health check that AWS App Runner performs to monitor the health of a service.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#HealthCheckHealthyThreshold": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.apprunner#HealthCheckInterval": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.apprunner#HealthCheckProtocol": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TCP",
+                        "name": "TCP"
+                    },
+                    {
+                        "value": "HTTP",
+                        "name": "HTTP"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#HealthCheckTimeout": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.apprunner#HealthCheckUnhealthyThreshold": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ImageConfiguration": {
+            "type": "structure",
+            "members": {
+                "RuntimeEnvironmentVariables": {
+                    "target": "com.amazonaws.apprunner#RuntimeEnvironmentVariables",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Environment variables that are available to your running App Runner service. An array of key-value pairs. Keys with a prefix of <code>AWSAPPRUNNER</code>\n      are reserved for system use and aren't valid.</p>"
+                    }
+                },
+                "StartCommand": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional command that App Runner runs to start the application in the source image. If specified, this command overrides the Docker image’s default start\n      command.</p>"
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port that your application listens to in the container.</p>\n         <p>Default: <code>8080</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the configuration that AWS App Runner uses to run an App Runner service using an image pulled from a source image repository.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ImageIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)"
+            }
+        },
+        "com.amazonaws.apprunner#ImageRepository": {
+            "type": "structure",
+            "members": {
+                "ImageIdentifier": {
+                    "target": "com.amazonaws.apprunner#ImageIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of an image.</p>\n         <p>For an image in Amazon Elastic Container Registry (Amazon ECR), this is an image name. For the image name format, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html\">Pulling an image</a> in the <i>Amazon ECR User Guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImageConfiguration": {
+                    "target": "com.amazonaws.apprunner#ImageConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for running the identified image.</p>"
+                    }
+                },
+                "ImageRepositoryType": {
+                    "target": "com.amazonaws.apprunner#ImageRepositoryType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the image repository. This reflects the repository provider and whether the repository is private or public.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a source image repository.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ImageRepositoryType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ECR",
+                        "name": "ECR"
+                    },
+                    {
+                        "value": "ECR_PUBLIC",
+                        "name": "ECR_PUBLIC"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#InstanceConfiguration": {
+            "type": "structure",
+            "members": {
+                "Cpu": {
+                    "target": "com.amazonaws.apprunner#Cpu",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of CPU units reserved for each instance of your App Runner service.</p>\n         <p>Default: <code>1 vCPU</code>\n         </p>"
+                    }
+                },
+                "Memory": {
+                    "target": "com.amazonaws.apprunner#Memory",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of memory, in MB or GB, reserved for each instance of your App Runner service.</p>\n         <p>Default: <code>2 GB</code>\n         </p>"
+                    }
+                },
+                "InstanceRoleArn": {
+                    "target": "com.amazonaws.apprunner#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls\n      any AWS APIs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the runtime configuration of an AWS App Runner service instance (scaling unit).</p>"
+            }
+        },
+        "com.amazonaws.apprunner#Integer": {
+            "type": "integer"
+        },
+        "com.amazonaws.apprunner#InternalServiceErrorException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.apprunner#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An unexpected service exception occurred.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.apprunner#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.apprunner#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>One or more input parameters aren't valid. Refer to the API action's document page, correct the input parameters, and try the action again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.apprunner#InvalidStateException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.apprunner#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You can't perform this action when the resource is in its current state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.apprunner#KmsKeyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+            }
+        },
+        "com.amazonaws.apprunner#ListAutoScalingConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListAutoScalingConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListAutoScalingConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of AWS App Runner automatic scaling configurations in your AWS account. You can query the revisions for a specific configuration name or\n      the revisions for all configurations in your account. You can optionally query only the latest revision of each requested name.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListAutoScalingConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationName": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the App Runner auto scaling configuration that you want to list. If specified, App Runner lists revisions that share this name. If not specified, App Runner\n      returns revisions of all configurations.</p>"
+                    }
+                },
+                "LatestOnly": {
+                    "target": "com.amazonaws.apprunner#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>true</code> to list only the latest revision for each requested configuration name.</p>\n         <p>Keep as <code>false</code> to list all revisions for each requested configuration name.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones that are specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListAutoScalingConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "AutoScalingConfigurationSummaryList": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of summary information records for auto scaling configurations. In a paginated request, the request returns up to <code>MaxResults</code>\n      records for each call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListConnections": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListConnectionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListConnectionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of AWS App Runner connections that are associated with your AWS account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListConnectionsRequest": {
+            "type": "structure",
+            "members": {
+                "ConnectionName": {
+                    "target": "com.amazonaws.apprunner#ConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If specified, only this connection is returned. If not specified, the result isn't filtered by name.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). Used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. Used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListConnectionsResponse": {
+            "type": "structure",
+            "members": {
+                "ConnectionSummaryList": {
+                    "target": "com.amazonaws.apprunner#ConnectionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of summary information records for connections. In a paginated request, the request returns up to <code>MaxResults</code> records for each\n      call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. Returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListOperations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListOperationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListOperationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Return a list of operations that occurred on an AWS App Runner service.</p>\n         <p>The resulting list of <a>OperationSummary</a> objects is sorted in reverse chronological order. The first object on the list represents the\n      last started operation.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListOperationsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListOperationsRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want a list of operations for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. It's used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#ListOperationsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListOperationsResponse": {
+            "type": "structure",
+            "members": {
+                "OperationSummaryList": {
+                    "target": "com.amazonaws.apprunner#OperationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of operation summary information records. In a paginated request, the request returns up to <code>MaxResults</code> records for each\n      call.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListServices": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListServicesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListServicesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of running AWS App Runner services in your AWS account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListServicesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token from a previous result page. Used for a paginated request. The request retrieves the next result page. All other parameter values must be\n      identical to the ones specified in the initial request.</p>\n         <p>If you don't specify <code>NextToken</code>, the request retrieves the first result page.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.apprunner#ServiceMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to include in each response (result page). It's used for a paginated request.</p>\n         <p>If you don't specify <code>MaxResults</code>, the request retrieves all available results in a single response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListServicesResponse": {
+            "type": "structure",
+            "members": {
+                "ServiceSummaryList": {
+                    "target": "com.amazonaws.apprunner#ServiceSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of service summary information records. In a paginated request, the request returns up to <code>MaxResults</code> records for each call.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can pass in a subsequent request to get the next result page. It's returned in a paginated request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List tags that are associated with for an AWS App Runner resource. The response contains a list of tag key-value pairs.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that a tag list is requested for.</p>\n         <p>It must be the ARN of an App Runner resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.apprunner#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the tag key-value pairs that are associated with the resource.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.apprunner#Memory": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 4
+                },
+                "smithy.api#pattern": "2048|3072|4096|(2|3|4) GB"
+            }
+        },
+        "com.amazonaws.apprunner#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.apprunner#NullableBoolean": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.apprunner#OperationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "ROLLBACK_IN_PROGRESS",
+                        "name": "ROLLBACK_IN_PROGRESS"
+                    },
+                    {
+                        "value": "ROLLBACK_FAILED",
+                        "name": "ROLLBACK_FAILED"
+                    },
+                    {
+                        "value": "ROLLBACK_SUCCEEDED",
+                        "name": "ROLLBACK_SUCCEEDED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#OperationSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.apprunner#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID of this operation. It's unique in the scope of the App Runner service.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.apprunner#OperationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of operation. It indicates a specific action that occured.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#OperationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the operation.</p>"
+                    }
+                },
+                "TargetArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that the operation acted on (for example, an App Runner service).</p>"
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the operation started. It's in the Unix time stamp format.</p>"
+                    }
+                },
+                "EndedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the operation ended. It's in the Unix time stamp format.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the operation was last updated. It's in the Unix time stamp format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information for an operation that occurred on an AWS App Runner service.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#OperationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#OperationSummary"
+            }
+        },
+        "com.amazonaws.apprunner#OperationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "START_DEPLOYMENT",
+                        "name": "START_DEPLOYMENT"
+                    },
+                    {
+                        "value": "CREATE_SERVICE",
+                        "name": "CREATE_SERVICE"
+                    },
+                    {
+                        "value": "PAUSE_SERVICE",
+                        "name": "PAUSE_SERVICE"
+                    },
+                    {
+                        "value": "RESUME_SERVICE",
+                        "name": "RESUME_SERVICE"
+                    },
+                    {
+                        "value": "DELETE_SERVICE",
+                        "name": "DELETE_SERVICE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#PauseService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#PauseServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#PauseServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Pause an active AWS App Runner service. App Runner reduces compute capacity for the service to zero and loses state (for example, ephemeral storage is\n      removed).</p>\n         <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a>ListOperations</a>\n      call to track the operation's progress.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#PauseServiceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want to pause.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#PauseServiceResponse": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "com.amazonaws.apprunner#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner service that this request just paused.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.apprunner#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track\n      the operation's progress.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ProviderType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GITHUB",
+                        "name": "GITHUB"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.apprunner#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource doesn't exist for the specified Amazon Resource Name (ARN) in your AWS account.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.apprunner#ResumeService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#ResumeServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#ResumeServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Resume an active AWS App Runner service. App Runner provisions compute capacity for the service.</p>\n         <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a>ListOperations</a>\n      call to track the operation's progress.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ResumeServiceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want to resume.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ResumeServiceResponse": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "com.amazonaws.apprunner#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner service that this request just resumed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.apprunner#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track\n      the operation's progress.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#RoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 29,
+                    "max": 102
+                },
+                "smithy.api#pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"
+            }
+        },
+        "com.amazonaws.apprunner#Runtime": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PYTHON_3",
+                        "name": "PYTHON_3"
+                    },
+                    {
+                        "value": "NODEJS_12",
+                        "name": "NODEJS_12"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#RuntimeEnvironmentVariables": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.apprunner#RuntimeEnvironmentVariablesKey"
+            },
+            "value": {
+                "target": "com.amazonaws.apprunner#RuntimeEnvironmentVariablesValue"
+            }
+        },
+        "com.amazonaws.apprunner#RuntimeEnvironmentVariablesKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.apprunner#RuntimeEnvironmentVariablesValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.apprunner#Service": {
+            "type": "structure",
+            "members": {
+                "ServiceName": {
+                    "target": "com.amazonaws.apprunner#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided service name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceId": {
+                    "target": "com.amazonaws.apprunner#ServiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ID that App Runner generated for this service. It's unique within the AWS Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceUrl": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the App Runner service was created. It's in the Unix time stamp format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the App Runner service was last updated at. It's in the Unix time stamp format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the App Runner service was deleted. It's in the Unix time stamp format.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#ServiceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the App Runner service. These particular values mean the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> – The service failed to create. To troubleshoot this failure, read the failure events and logs, change any\n          parameters that need to be fixed, and retry the call to create the service.</p>\n               <p>The failed service isn't usable, and still counts towards your service quota. When you're done analyzing the failure, delete the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure\n          that all related resources are removed.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceConfiguration": {
+                    "target": "com.amazonaws.apprunner#SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source deployed to the App Runner service. It can be a code or an image repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "InstanceConfiguration": {
+                    "target": "com.amazonaws.apprunner#InstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime configuration of instances (scaling units) of this service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EncryptionConfiguration": {
+                    "target": "com.amazonaws.apprunner#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be\n      either a customer-provided encryption key or an AWS managed CMK.</p>"
+                    }
+                },
+                "HealthCheckConfiguration": {
+                    "target": "com.amazonaws.apprunner#HealthCheckConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the health check that App Runner performs to monitor the health of this service.</p>"
+                    }
+                },
+                "AutoScalingConfigurationSummary": {
+                    "target": "com.amazonaws.apprunner#AutoScalingConfigurationSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for the App Runner automatic scaling configuration resource that's associated with this service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an AWS App Runner service. It can describe a service in any state, including deleted services.</p>\n         <p>This type contains the full information about a service, including configuration details. It's returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html\">CreateService</a>, <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html\">DescribeService</a>, and <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html\">DeleteService</a> actions. A subset of this\n      information is returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html\">ListServices</a> action using the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ServiceSummary.html\">ServiceSummary</a> type.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ServiceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 32
+                },
+                "smithy.api#pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
+            }
+        },
+        "com.amazonaws.apprunner#ServiceMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.apprunner#ServiceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 40
+                },
+                "smithy.api#pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}"
+            }
+        },
+        "com.amazonaws.apprunner#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.apprunner#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>App Runner can't create this resource. You've reached your account quota for this resource type.</p>\n         <p>For App Runner per-resource quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/apprunner.html\">AWS App Runner endpoints and quotas</a> in the\n        <i>AWS General Reference</i>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.apprunner#ServiceStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    },
+                    {
+                        "value": "DELETE_FAILED",
+                        "name": "DELETE_FAILED"
+                    },
+                    {
+                        "value": "PAUSED",
+                        "name": "PAUSED"
+                    },
+                    {
+                        "value": "OPERATION_IN_PROGRESS",
+                        "name": "OPERATION_IN_PROGRESS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#ServiceSummary": {
+            "type": "structure",
+            "members": {
+                "ServiceName": {
+                    "target": "com.amazonaws.apprunner#ServiceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-provided service name.</p>"
+                    }
+                },
+                "ServiceId": {
+                    "target": "com.amazonaws.apprunner#ServiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ID that App Runner generated for this service. It's unique within the AWS Region.</p>"
+                    }
+                },
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of this service.</p>"
+                    }
+                },
+                "ServiceUrl": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A subdomain URL that App Runner generated for this service. You can use this URL to access your service web application.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the App Runner service was created. It's in the Unix time stamp format.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.apprunner#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the App Runner service was last updated. It's in theUnix time stamp format.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.apprunner#ServiceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the App Runner service. These particular values mean the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_FAILED</code> – The service failed to create. Read the failure events and logs, change any parameters that need to be fixed,\n          and retry the call to create the service.</p>\n               <p>The failed service isn't usable, and still counts towards your service quota. When you're done analyzing the failure, delete the service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_FAILED</code> – The service failed to delete and can't be successfully recovered. Retry the service deletion call to ensure\n          that all related resources are removed.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information for an AWS App Runner service.</p>\n         <p>This type contains limited information about a service. It doesn't include configuration details. It's returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html\">ListServices</a> action. Complete service information is returned by the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html\">CreateService</a>, <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html\">DescribeService</a>, and <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html\">DeleteService</a> actions using the <a href=\"https://docs.aws.amazon.com/apprunner/latest/api/API_Service.html\">Service</a> type.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#ServiceSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#ServiceSummary"
+            }
+        },
+        "com.amazonaws.apprunner#SourceCodeVersion": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.apprunner#SourceCodeVersionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of version identifier.</p>\n         <p>For a git-based repository, branches represent versions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.apprunner#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A source code version.</p>\n         <p>For a git-based repository, a branch name maps to a specific version. App Runner uses the most recent commit to the branch.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Identifies a version of code that AWS App Runner refers to within a source code repository.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#SourceCodeVersionType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BRANCH",
+                        "name": "BRANCH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.apprunner#SourceConfiguration": {
+            "type": "structure",
+            "members": {
+                "CodeRepository": {
+                    "target": "com.amazonaws.apprunner#CodeRepository",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of a source code repository.</p>\n         <p>You must provide either this member or <code>ImageRepository</code> (but not both).</p>"
+                    }
+                },
+                "ImageRepository": {
+                    "target": "com.amazonaws.apprunner#ImageRepository",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of a source image\n      repository.</p>\n         <p>You must provide either this member or <code>CodeRepository</code> (but not both).</p>"
+                    }
+                },
+                "AutoDeploymentsEnabled": {
+                    "target": "com.amazonaws.apprunner#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>true</code>, continuous integration from the source repository is enabled for the App Runner service. Each repository change (source code commit or\n      new image version) starts a deployment.</p>\n         <p>Default: <code>true</code>\n         </p>"
+                    }
+                },
+                "AuthenticationConfiguration": {
+                    "target": "com.amazonaws.apprunner#AuthenticationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the resources that are needed to authenticate access to some source repositories.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the source deployed to an AWS App Runner service. It can be a code or an image repository.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#StartCommand": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.apprunner#StartDeployment": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#StartDeploymentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#StartDeploymentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Initiate a manual deployment of the latest commit in a source code repository or the latest image in a source image repository to an AWS App Runner\n      service.</p>\n         <p>For a source code repository, App Runner retrieves the commit and builds a Docker image. For a source image repository, App Runner retrieves the latest Docker\n      image. In both cases, App Runner then deploys the new image to your service and starts a new container instance.</p>\n         <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a>ListOperations</a>\n      call to track the operation's progress.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#StartDeploymentRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want to manually deploy to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#StartDeploymentResponse": {
+            "type": "structure",
+            "members": {
+                "OperationId": {
+                    "target": "com.amazonaws.apprunner#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track\n      the operation's progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#String": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 51200
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.apprunner#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.apprunner#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.apprunner#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a tag that is applied to an AWS App Runner resource. A tag is a metadata item consisting of a key-value pair.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:).+"
+            }
+        },
+        "com.amazonaws.apprunner#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#TagKey"
+            }
+        },
+        "com.amazonaws.apprunner#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.apprunner#Tag"
+            }
+        },
+        "com.amazonaws.apprunner#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add tags to, or update the tag values of, an App Runner resource. A tag is a key-value pair.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to update tags for.</p>\n         <p>It must be the ARN of an App Runner resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.apprunner#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag key-value pairs to add or update. If a key is new to the resource, the tag is added with the provided value. If a key is already\n      associated with the resource, the value of the tag is updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.apprunner#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": ".*"
+            }
+        },
+        "com.amazonaws.apprunner#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.apprunner#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
+            }
+        },
+        "com.amazonaws.apprunner#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove tags from an App Runner resource.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource that you want to remove tags from.</p>\n         <p>It must be the ARN of an App Runner resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.apprunner#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tag keys that you want to remove.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.apprunner#UpdateService": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.apprunner#UpdateServiceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.apprunner#UpdateServiceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.apprunner#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#InvalidStateException"
+                },
+                {
+                    "target": "com.amazonaws.apprunner#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update an AWS App Runner service. You can update the source configuration and instance configuration of the service. You can also update the ARN of the auto\n      scaling configuration resource that's associated with the service. However, you can't change the name or the encryption configuration of the service.\n      These can be set only when you create the service.</p>\n         <p>To update the tags applied to your service, use the separate actions <a>TagResource</a> and <a>UntagResource</a>.</p>\n         <p>This is an asynchronous operation. On a successful call, you can use the returned <code>OperationId</code> and the <a>ListOperations</a>\n      call to track the operation's progress.</p>"
+            }
+        },
+        "com.amazonaws.apprunner#UpdateServiceRequest": {
+            "type": "structure",
+            "members": {
+                "ServiceArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the App Runner service that you want to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SourceConfiguration": {
+                    "target": "com.amazonaws.apprunner#SourceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source configuration to apply to the App Runner service.</p>\n         <p>You can change the configuration of the code or image repository that the service uses. However, you can't switch from code to image or the other way\n      around. This means that you must provide the same structure member of <code>SourceConfiguration</code> that you originally included when you created the\n      service. Specifically, you can include either <code>CodeRepository</code> or <code>ImageRepository</code>. To update the source configuration, set the\n      values to members of the structure that you include.</p>"
+                    }
+                },
+                "InstanceConfiguration": {
+                    "target": "com.amazonaws.apprunner#InstanceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runtime configuration to apply to instances (scaling units) of the App Runner service.</p>"
+                    }
+                },
+                "AutoScalingConfigurationArn": {
+                    "target": "com.amazonaws.apprunner#AppRunnerResourceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration resource that you want to associate with your service.</p>"
+                    }
+                },
+                "HealthCheckConfiguration": {
+                    "target": "com.amazonaws.apprunner#HealthCheckConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the health check that AWS App Runner performs to monitor the health of your service.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.apprunner#UpdateServiceResponse": {
+            "type": "structure",
+            "members": {
+                "Service": {
+                    "target": "com.amazonaws.apprunner#Service",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the App Runner service updated by this request. All configuration values in the returned <code>Service</code> structure reflect\n      configuration changes that are being applied by this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OperationId": {
+                    "target": "com.amazonaws.apprunner#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the asynchronous operation that this request started. You can use it combined with the <a>ListOperations</a> call to track\n      the operation's progress.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        }
+    }
+}

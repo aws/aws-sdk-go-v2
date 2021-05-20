@@ -129,6 +129,26 @@ func (m *validateOpStartSuiteRun) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStopSuiteRun struct {
+}
+
+func (*validateOpStopSuiteRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopSuiteRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopSuiteRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopSuiteRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -211,6 +231,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpStartSuiteRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartSuiteRun{}, middleware.After)
+}
+
+func addOpStopSuiteRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopSuiteRun{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -313,6 +337,24 @@ func validateOpStartSuiteRunInput(v *StartSuiteRunInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "StartSuiteRunInput"}
 	if v.SuiteDefinitionId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SuiteDefinitionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopSuiteRunInput(v *StopSuiteRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopSuiteRunInput"}
+	if v.SuiteDefinitionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuiteDefinitionId"))
+	}
+	if v.SuiteRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SuiteRunId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

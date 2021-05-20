@@ -32,9 +32,15 @@ type ListReceivedGrantsInput struct {
 	// Filters to scope the results. The following filters are supported:
 	//
 	// *
-	// LicenseARN
+	// ProductSKU
 	//
-	// * Status
+	// * LicenseIssuerName
+	//
+	// * LicenseArn
+	//
+	// * GrantStatus
+	//
+	// * GranterAccountId
 	Filters []types.Filter
 
 	// Amazon Resource Names (ARNs) of the grants.

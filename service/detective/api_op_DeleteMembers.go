@@ -34,7 +34,7 @@ func (c *Client) DeleteMembers(ctx context.Context, params *DeleteMembersInput, 
 type DeleteMembersInput struct {
 
 	// The list of AWS account identifiers for the member accounts to delete from the
-	// behavior graph.
+	// behavior graph. You can delete up to 50 member accounts at a time.
 	//
 	// This member is required.
 	AccountIds []string

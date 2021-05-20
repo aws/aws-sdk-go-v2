@@ -58,6 +58,9 @@
                     "target": "com.amazonaws.licensemanager#CreateLicenseConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.licensemanager#CreateLicenseManagerReportGenerator"
+                },
+                {
                     "target": "com.amazonaws.licensemanager#CreateLicenseVersion"
                 },
                 {
@@ -71,6 +74,9 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanager#DeleteLicenseConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#DeleteLicenseManagerReportGenerator"
                 },
                 {
                     "target": "com.amazonaws.licensemanager#DeleteToken"
@@ -91,6 +97,9 @@
                     "target": "com.amazonaws.licensemanager#GetLicenseConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.licensemanager#GetLicenseManagerReportGenerator"
+                },
+                {
                     "target": "com.amazonaws.licensemanager#GetLicenseUsage"
                 },
                 {
@@ -107,6 +116,9 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanager#ListLicenseConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ListLicenseManagerReportGenerators"
                 },
                 {
                     "target": "com.amazonaws.licensemanager#ListLicenses"
@@ -146,6 +158,9 @@
                 },
                 {
                     "target": "com.amazonaws.licensemanager#UpdateLicenseConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#UpdateLicenseManagerReportGenerator"
                 },
                 {
                     "target": "com.amazonaws.licensemanager#UpdateLicenseSpecificationsForResource"
@@ -310,7 +325,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+                "smithy.api#pattern": "^arn:aws(-(cn|us-gov|iso-b|iso-c|iso-d))?:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
             }
         },
         "com.amazonaws.licensemanager#ArnList": {
@@ -739,6 +754,15 @@
                 ]
             }
         },
+        "com.amazonaws.licensemanager#ClientRequestToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                }
+            }
+        },
         "com.amazonaws.licensemanager#ClientToken": {
             "type": "string",
             "traits": {
@@ -1155,6 +1179,107 @@
                     "target": "com.amazonaws.licensemanager#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the license configuration.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#CreateLicenseManagerReportGenerator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanager#CreateLicenseManagerReportGeneratorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanager#CreateLicenseManagerReportGeneratorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#AuthorizationException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#RateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ServerInternalException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new report generator.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#CreateLicenseManagerReportGeneratorRequest": {
+            "type": "structure",
+            "members": {
+                "ReportGeneratorName": {
+                    "target": "com.amazonaws.licensemanager#ReportGeneratorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the report generator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.licensemanager#ReportTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of reports to generate. The following report types an be generated:</p>\n         <ul>\n            <li>\n               <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p>\n            </li>\n            <li>\n               <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportContext": {
+                    "target": "com.amazonaws.licensemanager#ReportContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the type of license configuration the report generator tracks.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportFrequency": {
+                    "target": "com.amazonaws.licensemanager#ReportFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Frequency by which reports are generated.  Reports can be generated daily, monthly, or weekly.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.licensemanager#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the report generator.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags to add to the report generator.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#CreateLicenseManagerReportGeneratorResponse": {
+            "type": "structure",
+            "members": {
+                "LicenseManagerReportGeneratorArn": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the new report generator.</p>"
                     }
                 }
             }
@@ -1690,6 +1815,60 @@
             }
         },
         "com.amazonaws.licensemanager#DeleteLicenseConfigurationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.licensemanager#DeleteLicenseManagerReportGenerator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanager#DeleteLicenseManagerReportGeneratorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanager#DeleteLicenseManagerReportGeneratorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#AuthorizationException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#RateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ServerInternalException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an existing report generator.</p>\n         <p>This action deletes the report generator, which stops it from generating future reports and cannot be reversed. However, the previous reports from this generator will remain in your S3 bucket.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#DeleteLicenseManagerReportGeneratorRequest": {
+            "type": "structure",
+            "members": {
+                "LicenseManagerReportGeneratorArn": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Number (ARN) of the report generator that will be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#DeleteLicenseManagerReportGeneratorResponse": {
             "type": "structure",
             "members": {}
         },
@@ -2612,6 +2791,67 @@
                 }
             }
         },
+        "com.amazonaws.licensemanager#GetLicenseManagerReportGenerator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanager#GetLicenseManagerReportGeneratorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanager#GetLicenseManagerReportGeneratorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#AuthorizationException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#RateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ServerInternalException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets information on the specified report generator.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#GetLicenseManagerReportGeneratorRequest": {
+            "type": "structure",
+            "members": {
+                "LicenseManagerReportGeneratorArn": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>mazon Resource Number (ARN) of the report generator to retrieve information on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#GetLicenseManagerReportGeneratorResponse": {
+            "type": "structure",
+            "members": {
+                "ReportGenerator": {
+                    "target": "com.amazonaws.licensemanager#ReportGenerator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A report generator that creates periodic reports on your license configurations.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.licensemanager#GetLicenseRequest": {
             "type": "structure",
             "members": {
@@ -2756,7 +2996,7 @@
                 "LicenseManagerResourceShareArn": {
                     "target": "com.amazonaws.licensemanager#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the AWS resource share. The License Manager master account will provide member\n         accounts with access to this share.</p>"
+                        "smithy.api#documentation": "<p>Amazon Resource Name (ARN) of the AWS resource share. The License Manager management account \n         provides member accounts with access to this share.</p>"
                     }
                 }
             }
@@ -3769,7 +4009,7 @@
                 "Filters": {
                     "target": "com.amazonaws.licensemanager#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LicenseARN</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PrincipalARN</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ParentARN</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LicenseArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GrantStatus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GranteePrincipalARN</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProductSKU</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LicenseIssuerName</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -3941,6 +4181,84 @@
                     "target": "com.amazonaws.licensemanager#LicenseConfigurations",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the license configurations.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#ListLicenseManagerReportGenerators": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanager#ListLicenseManagerReportGeneratorsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanager#ListLicenseManagerReportGeneratorsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#AuthorizationException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#RateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ServerInternalException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the report generators for your account.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#ListLicenseManagerReportGeneratorsRequest": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.licensemanager#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported: </p>\n         <ul>\n            <li>\n               <p>\n                  <code>LicenseConfigurationArn</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token for the next set of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.licensemanager#MaxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single call.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#ListLicenseManagerReportGeneratorsResponse": {
+            "type": "structure",
+            "members": {
+                "ReportGenerators": {
+                    "target": "com.amazonaws.licensemanager#ReportGeneratorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A report generator that creates periodic reports on your license configurations.</p>"
                     }
                 },
                 "NextToken": {
@@ -4135,7 +4453,7 @@
                 "Filters": {
                     "target": "com.amazonaws.licensemanager#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Beneficiary</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProductSKU</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyFingerprint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Beneficiary</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ProductSKU</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Fingerprint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -4216,7 +4534,7 @@
                 "Filters": {
                     "target": "com.amazonaws.licensemanager#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LicenseARN</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ProductSKU</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LicenseIssuerName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>LicenseArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GrantStatus</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>GranterAccountId</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -4297,7 +4615,7 @@
                 "Filters": {
                     "target": "com.amazonaws.licensemanager#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ProductSKU</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>KeyFingerprint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Issuer</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filters are supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ProductSKU</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Status</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Fingerprint</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>IssuerName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Beneficiary</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -4499,7 +4817,7 @@
                 "Filters": {
                     "target": "com.amazonaws.licensemanager#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filters to scope the results. The following filter is supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>licenseArns</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Filters to scope the results. The following filter is supported:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LicenseArns</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -4751,7 +5069,7 @@
                 "ProductInformationFilterList": {
                     "target": "com.amazonaws.licensemanager#ProductInformationFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Product information filters.</p> \n         <p>The following filters and logical operators are supported when the resource type \n         is <code>SSM_MANAGED</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Application Name</code> - The name of the application.\n              Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Application Publisher</code> - The publisher of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Application Version</code> - The version of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Platform Name</code> - The name of the platform.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Platform Type</code> - The platform type.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>License Included</code> - The type of license included.\n               Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.\n               Possible values are: <code>sql-server-enterprise</code> | \n               <code>sql-server-standard</code> | \n               <code>sql-server-web</code> |  \n               <code>windows-server-datacenter</code>.</p>\n            </li>\n         </ul>\n         <p>The following filters and logical operators are supported when the resource type\n         is <code>RDS</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Engine Edition</code> - The edition of the database engine.\n               Logical operator is <code>EQUALS</code>.\n               Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>License Pack</code> - The license pack.\n               Logical operator is <code>EQUALS</code>.\n               Possible values are: <code>data guard</code> | \n               <code>diagnostic pack sqlt</code> | \n               <code>tuning pack sqlt</code> | \n               <code>ols</code> | \n               <code>olap</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A Product information filter consists of a <code>ProductInformationFilterComparator</code> which is a logical operator, a <code>ProductInformationFilterName</code> which specifies the type of filter being declared, and a <code>ProductInformationFilterValue</code> that specifies the value to filter on. </p>\n         <p>Accepted values for <code>ProductInformationFilterName</code> are listed here along with descriptions and valid options for <code>ProductInformationFilterComparator</code>. </p> \n         <p>The following filters and are supported when the resource type \n         is <code>SSM_MANAGED</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Application Name</code> - The name of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Application Publisher</code> - The publisher of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Application Version</code> - The version of the application.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Platform Name</code> - The name of the platform.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Platform Type</code> - The platform type.\n               Logical operator is <code>EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Tag:key</code> - The key of a tag attached to an AWS resource you wish to exclude from automated discovery. Logical operator is <code>NOT_EQUALS</code>.  The key for your tag must be appended to <code>Tag:</code> following the example: <code>Tag:name-of-your-key</code>. <code>ProductInformationFilterValue</code> is optional if you are not using values for the key.\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>AccountId</code> - The 12-digit ID of an AWS account you wish to exclude from automated discovery.\n               Logical operator is <code>NOT_EQUALS</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>License Included</code> - The type of license included.\n               Logical operators are <code>EQUALS</code> and <code>NOT_EQUALS</code>.\n               Possible values are: <code>sql-server-enterprise</code> | \n               <code>sql-server-standard</code> | \n               <code>sql-server-web</code> |  \n               <code>windows-server-datacenter</code>.</p>\n            </li>\n         </ul>\n         <p>The following filters and logical operators are supported when the resource type\n         is <code>RDS</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Engine Edition</code> - The edition of the database engine.\n               Logical operator is <code>EQUALS</code>.\n               Possible values are: <code>oracle-ee</code> | <code>oracle-se</code> | <code>oracle-se1</code> | <code>oracle-se2</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>License Pack</code> - The license pack.\n               Logical operator is <code>EQUALS</code>.\n               Possible values are: <code>data guard</code> | \n               <code>diagnostic pack sqlt</code> | \n               <code>tuning pack sqlt</code> | \n               <code>ols</code> | \n               <code>olap</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4991,6 +5309,182 @@
                 ]
             }
         },
+        "com.amazonaws.licensemanager#ReportContext": {
+            "type": "structure",
+            "members": {
+                "licenseConfigurationArns": {
+                    "target": "com.amazonaws.licensemanager#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Number (ARN) of the license configuration that this generator reports on.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the license configuration that this generator reports on.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#ReportFrequency": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.licensemanager#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of times within the frequency period that a report will be generated.  Currently only <code>1</code> is supported.</p>"
+                    }
+                },
+                "period": {
+                    "target": "com.amazonaws.licensemanager#ReportFrequencyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time period between each report. The period can be daily, weekly, or monthly.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details on how frequently reports are generated.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#ReportFrequencyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "DAY",
+                        "name": "DAY"
+                    },
+                    {
+                        "value": "WEEK",
+                        "name": "WEEK"
+                    },
+                    {
+                        "value": "MONTH",
+                        "name": "MONTH"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanager#ReportGenerator": {
+            "type": "structure",
+            "members": {
+                "ReportGeneratorName": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the report generator.</p>"
+                    }
+                },
+                "ReportType": {
+                    "target": "com.amazonaws.licensemanager#ReportTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of reports that are generated.</p>"
+                    }
+                },
+                "ReportContext": {
+                    "target": "com.amazonaws.licensemanager#ReportContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>License configuration type this generator reports on.</p>"
+                    }
+                },
+                "ReportFrequency": {
+                    "target": "com.amazonaws.licensemanager#ReportFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details on how frequently reports are generated.</p>"
+                    }
+                },
+                "LicenseManagerReportGeneratorArn": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Number (ARN) of the report generator.</p>"
+                    }
+                },
+                "LastRunStatus": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Status of the last report generation attempt.</p>"
+                    }
+                },
+                "LastRunFailureReason": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Failure message for the last report generation attempt.</p>"
+                    }
+                },
+                "LastReportGenerationTime": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time the last report was generated at.</p>"
+                    }
+                },
+                "ReportCreatorAccount": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS account ID used to create the report generator.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the report generator.</p>"
+                    }
+                },
+                "S3Location": {
+                    "target": "com.amazonaws.licensemanager#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the S3 bucket that report generator reports are published to.</p>"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Time the report was created.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.licensemanager#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags associated with the report generator.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describe the details of a report generator.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#ReportGeneratorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanager#ReportGenerator"
+            }
+        },
+        "com.amazonaws.licensemanager#ReportGeneratorName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#ReportType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LicenseConfigurationSummaryReport",
+                        "name": "LICENSE_CONFIGURATION_SUMMARY_REPORT"
+                    },
+                    {
+                        "value": "LicenseConfigurationUsageReport",
+                        "name": "LICENSE_CONFIGURATION_USAGE_REPORT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.licensemanager#ReportTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.licensemanager#ReportType"
+            }
+        },
         "com.amazonaws.licensemanager#ResourceInventory": {
             "type": "structure",
             "members": {
@@ -5092,6 +5586,26 @@
                         "name": "SYSTEMS_MANAGER_MANAGED_INSTANCE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.licensemanager#S3Location": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket reports are published to.</p>"
+                    }
+                },
+                "keyPrefix": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Prefix of the S3 bucket reports are published to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the S3 bucket that report generator reports are published to.</p>"
             }
         },
         "com.amazonaws.licensemanager#ServerInternalException": {
@@ -5443,6 +5957,101 @@
             }
         },
         "com.amazonaws.licensemanager#UpdateLicenseConfigurationResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.licensemanager#UpdateLicenseManagerReportGenerator": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.licensemanager#UpdateLicenseManagerReportGeneratorRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.licensemanager#UpdateLicenseManagerReportGeneratorResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.licensemanager#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#AuthorizationException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#RateLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ServerInternalException"
+                },
+                {
+                    "target": "com.amazonaws.licensemanager#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a report generator.</p>\n         <p>After you make changes to a report generator, it will start generating new reports within 60 minutes of being updated.</p>"
+            }
+        },
+        "com.amazonaws.licensemanager#UpdateLicenseManagerReportGeneratorRequest": {
+            "type": "structure",
+            "members": {
+                "LicenseManagerReportGeneratorArn": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Resource Number (ARN) of the report generator to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportGeneratorName": {
+                    "target": "com.amazonaws.licensemanager#ReportGeneratorName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the report generator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.licensemanager#ReportTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Type of reports to generate. The following report types an be generated:</p>\n         <ul>\n            <li>\n               <p>License configuration report - Reports on the number and details of consumed licenses for a license configuration.</p>\n            </li>\n            <li>\n               <p>Resource report - Reports on the tracked licenses and resource consumption for a license configuration.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportContext": {
+                    "target": "com.amazonaws.licensemanager#ReportContext",
+                    "traits": {
+                        "smithy.api#documentation": "<p>?</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportFrequency": {
+                    "target": "com.amazonaws.licensemanager#ReportFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Frequency by which reports are generated.  The following options are avaiable:</p>\n         <p>??? What are the APi value options?</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.licensemanager#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.licensemanager#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the report generator.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.licensemanager#UpdateLicenseManagerReportGeneratorResponse": {
             "type": "structure",
             "members": {}
         },

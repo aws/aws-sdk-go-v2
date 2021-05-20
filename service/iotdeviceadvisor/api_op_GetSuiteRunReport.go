@@ -29,12 +29,12 @@ func (c *Client) GetSuiteRunReport(ctx context.Context, params *GetSuiteRunRepor
 
 type GetSuiteRunReportInput struct {
 
-	// Device Advisor suite definition Id.
+	// Suite definition Id of the test suite.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
 
-	// Device Advisor suite run Id.
+	// Suite run Id of the test suite run.
 	//
 	// This member is required.
 	SuiteRunId *string
@@ -42,7 +42,7 @@ type GetSuiteRunReportInput struct {
 
 type GetSuiteRunReportOutput struct {
 
-	// Gets the download URL of the qualification report.
+	// Download URL of the qualification report.
 	QualificationReportDownloadUrl *string
 
 	// Metadata pertaining to the operation's result.

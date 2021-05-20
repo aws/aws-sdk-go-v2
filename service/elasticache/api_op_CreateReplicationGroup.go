@@ -361,7 +361,7 @@ type CreateReplicationGroupInput struct {
 	// TransitEncryptionEnabled as true, an AuthToken, and a CacheSubnetGroup.
 	TransitEncryptionEnabled *bool
 
-	// The list of user groups to associate with the replication group.
+	// The user group to associate with the replication group.
 	UserGroupIds []string
 }
 

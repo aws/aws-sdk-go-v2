@@ -770,9 +770,7 @@ func validateApplicationConfiguration(v *types.ApplicationConfiguration) error {
 			invalidParams.AddNested("EnvironmentProperties", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.ApplicationCodeConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationCodeConfiguration"))
-	} else if v.ApplicationCodeConfiguration != nil {
+	if v.ApplicationCodeConfiguration != nil {
 		if err := validateApplicationCodeConfiguration(v.ApplicationCodeConfiguration); err != nil {
 			invalidParams.AddNested("ApplicationCodeConfiguration", err.(smithy.InvalidParamsError))
 		}
@@ -785,6 +783,11 @@ func validateApplicationConfiguration(v *types.ApplicationConfiguration) error {
 	if v.VpcConfigurations != nil {
 		if err := validateVpcConfigurations(v.VpcConfigurations); err != nil {
 			invalidParams.AddNested("VpcConfigurations", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ZeppelinApplicationConfiguration != nil {
+		if err := validateZeppelinApplicationConfiguration(v.ZeppelinApplicationConfiguration); err != nil {
+			invalidParams.AddNested("ZeppelinApplicationConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -817,6 +820,11 @@ func validateApplicationConfigurationUpdate(v *types.ApplicationConfigurationUpd
 	if v.VpcConfigurationUpdates != nil {
 		if err := validateVpcConfigurationUpdates(v.VpcConfigurationUpdates); err != nil {
 			invalidParams.AddNested("VpcConfigurationUpdates", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ZeppelinApplicationConfigurationUpdate != nil {
+		if err := validateZeppelinApplicationConfigurationUpdate(v.ZeppelinApplicationConfigurationUpdate); err != nil {
+			invalidParams.AddNested("ZeppelinApplicationConfigurationUpdate", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -878,6 +886,40 @@ func validateApplicationSnapshotConfigurationUpdate(v *types.ApplicationSnapshot
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationSnapshotConfigurationUpdate"}
 	if v.SnapshotsEnabledUpdate == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotsEnabledUpdate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCatalogConfiguration(v *types.CatalogConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogConfiguration"}
+	if v.GlueDataCatalogConfiguration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlueDataCatalogConfiguration"))
+	} else if v.GlueDataCatalogConfiguration != nil {
+		if err := validateGlueDataCatalogConfiguration(v.GlueDataCatalogConfiguration); err != nil {
+			invalidParams.AddNested("GlueDataCatalogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCatalogConfigurationUpdate(v *types.CatalogConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CatalogConfigurationUpdate"}
+	if v.GlueDataCatalogConfigurationUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlueDataCatalogConfigurationUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1000,6 +1042,86 @@ func validateCSVMappingParameters(v *types.CSVMappingParameters) error {
 	}
 }
 
+func validateCustomArtifactConfiguration(v *types.CustomArtifactConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomArtifactConfiguration"}
+	if len(v.ArtifactType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactType"))
+	}
+	if v.S3ContentLocation != nil {
+		if err := validateS3ContentLocation(v.S3ContentLocation); err != nil {
+			invalidParams.AddNested("S3ContentLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MavenReference != nil {
+		if err := validateMavenReference(v.MavenReference); err != nil {
+			invalidParams.AddNested("MavenReference", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomArtifactsConfigurationList(v []types.CustomArtifactConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomArtifactsConfigurationList"}
+	for i := range v {
+		if err := validateCustomArtifactConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeployAsApplicationConfiguration(v *types.DeployAsApplicationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeployAsApplicationConfiguration"}
+	if v.S3ContentLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3ContentLocation"))
+	} else if v.S3ContentLocation != nil {
+		if err := validateS3ContentBaseLocation(v.S3ContentLocation); err != nil {
+			invalidParams.AddNested("S3ContentLocation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeployAsApplicationConfigurationUpdate(v *types.DeployAsApplicationConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeployAsApplicationConfigurationUpdate"}
+	if v.S3ContentLocationUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3ContentLocationUpdate"))
+	} else if v.S3ContentLocationUpdate != nil {
+		if err := validateS3ContentBaseLocationUpdate(v.S3ContentLocationUpdate); err != nil {
+			invalidParams.AddNested("S3ContentLocationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDestinationSchema(v *types.DestinationSchema) error {
 	if v == nil {
 		return nil
@@ -1072,6 +1194,21 @@ func validateFlinkApplicationConfiguration(v *types.FlinkApplicationConfiguratio
 		if err := validateParallelismConfiguration(v.ParallelismConfiguration); err != nil {
 			invalidParams.AddNested("ParallelismConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGlueDataCatalogConfiguration(v *types.GlueDataCatalogConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GlueDataCatalogConfiguration"}
+	if v.DatabaseARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1483,6 +1620,27 @@ func validateMappingParameters(v *types.MappingParameters) error {
 	}
 }
 
+func validateMavenReference(v *types.MavenReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MavenReference"}
+	if v.GroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
+	}
+	if v.ArtifactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ArtifactId"))
+	}
+	if v.Version == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Version"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMonitoringConfiguration(v *types.MonitoringConfiguration) error {
 	if v == nil {
 		return nil
@@ -1842,6 +2000,36 @@ func validateS3Configuration(v *types.S3Configuration) error {
 	}
 }
 
+func validateS3ContentBaseLocation(v *types.S3ContentBaseLocation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ContentBaseLocation"}
+	if v.BucketARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3ContentBaseLocationUpdate(v *types.S3ContentBaseLocationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3ContentBaseLocationUpdate"}
+	if v.BucketARNUpdate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketARNUpdate"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3ContentLocation(v *types.S3ContentLocation) error {
 	if v == nil {
 		return nil
@@ -2066,6 +2254,100 @@ func validateVpcConfigurationUpdates(v []types.VpcConfigurationUpdate) error {
 		if err := validateVpcConfigurationUpdate(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateZeppelinApplicationConfiguration(v *types.ZeppelinApplicationConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ZeppelinApplicationConfiguration"}
+	if v.MonitoringConfiguration != nil {
+		if err := validateZeppelinMonitoringConfiguration(v.MonitoringConfiguration); err != nil {
+			invalidParams.AddNested("MonitoringConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogConfiguration != nil {
+		if err := validateCatalogConfiguration(v.CatalogConfiguration); err != nil {
+			invalidParams.AddNested("CatalogConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeployAsApplicationConfiguration != nil {
+		if err := validateDeployAsApplicationConfiguration(v.DeployAsApplicationConfiguration); err != nil {
+			invalidParams.AddNested("DeployAsApplicationConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomArtifactsConfiguration != nil {
+		if err := validateCustomArtifactsConfigurationList(v.CustomArtifactsConfiguration); err != nil {
+			invalidParams.AddNested("CustomArtifactsConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateZeppelinApplicationConfigurationUpdate(v *types.ZeppelinApplicationConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ZeppelinApplicationConfigurationUpdate"}
+	if v.MonitoringConfigurationUpdate != nil {
+		if err := validateZeppelinMonitoringConfigurationUpdate(v.MonitoringConfigurationUpdate); err != nil {
+			invalidParams.AddNested("MonitoringConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CatalogConfigurationUpdate != nil {
+		if err := validateCatalogConfigurationUpdate(v.CatalogConfigurationUpdate); err != nil {
+			invalidParams.AddNested("CatalogConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.DeployAsApplicationConfigurationUpdate != nil {
+		if err := validateDeployAsApplicationConfigurationUpdate(v.DeployAsApplicationConfigurationUpdate); err != nil {
+			invalidParams.AddNested("DeployAsApplicationConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomArtifactsConfigurationUpdate != nil {
+		if err := validateCustomArtifactsConfigurationList(v.CustomArtifactsConfigurationUpdate); err != nil {
+			invalidParams.AddNested("CustomArtifactsConfigurationUpdate", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateZeppelinMonitoringConfiguration(v *types.ZeppelinMonitoringConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ZeppelinMonitoringConfiguration"}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateZeppelinMonitoringConfigurationUpdate(v *types.ZeppelinMonitoringConfigurationUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ZeppelinMonitoringConfigurationUpdate"}
+	if len(v.LogLevelUpdate) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevelUpdate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2578,9 +2860,7 @@ func validateOpStartApplicationInput(v *StartApplicationInput) error {
 	if v.ApplicationName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationName"))
 	}
-	if v.RunConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RunConfiguration"))
-	} else if v.RunConfiguration != nil {
+	if v.RunConfiguration != nil {
 		if err := validateRunConfiguration(v.RunConfiguration); err != nil {
 			invalidParams.AddNested("RunConfiguration", err.(smithy.InvalidParamsError))
 		}

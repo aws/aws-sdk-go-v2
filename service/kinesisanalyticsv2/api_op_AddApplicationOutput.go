@@ -46,10 +46,9 @@ type AddApplicationOutputInput struct {
 	ApplicationName *string
 
 	// The version of the application to which you want to add the output
-	// configuration. You must provide the ApplicationVersionID or the
-	// ConditionalToken. You can use the DescribeApplication operation to get the
-	// current application version. If the version specified is not the current
-	// version, the ConcurrentModificationException is returned.
+	// configuration. You can use the DescribeApplication operation to get the current
+	// application version. If the version specified is not the current version, the
+	// ConcurrentModificationException is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64

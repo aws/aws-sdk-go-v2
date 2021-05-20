@@ -31,7 +31,7 @@ type ListTokensInput struct {
 
 	// Filters to scope the results. The following filter is supported:
 	//
-	// * licenseArns
+	// * LicenseArns
 	Filters []types.Filter
 
 	// Maximum number of results to return in a single call.

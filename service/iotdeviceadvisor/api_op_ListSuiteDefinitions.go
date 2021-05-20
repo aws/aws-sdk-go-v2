@@ -30,19 +30,20 @@ func (c *Client) ListSuiteDefinitions(ctx context.Context, params *ListSuiteDefi
 
 type ListSuiteDefinitionsInput struct {
 
-	// Request the list of all the Device Advisor test suites.
+	// The maximum number of results to return at once.
 	MaxResults int32
 
-	// Requests the Device Advisor test suites next token.
+	// A token used to get the next set of results.
 	NextToken *string
 }
 
 type ListSuiteDefinitionsOutput struct {
 
-	// Creates a Device Advisor test suite.
+	// A token used to get the next set of results.
 	NextToken *string
 
-	// Lists test suite information using List suite definition.
+	// An array of objects that provide summaries of information about the suite
+	// definitions in the list.
 	SuiteDefinitionInformationList []types.SuiteDefinitionInformation
 
 	// Metadata pertaining to the operation's result.
@@ -120,7 +121,7 @@ var _ ListSuiteDefinitionsAPIClient = (*Client)(nil)
 // ListSuiteDefinitionsPaginatorOptions is the paginator options for
 // ListSuiteDefinitions
 type ListSuiteDefinitionsPaginatorOptions struct {
-	// Request the list of all the Device Advisor test suites.
+	// The maximum number of results to return at once.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -14,6 +14,89 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsRestjson1_serializeOpAddFlowMediaStreams struct {
+}
+
+func (*awsRestjson1_serializeOpAddFlowMediaStreams) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAddFlowMediaStreams) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AddFlowMediaStreamsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/flows/{FlowArn}/mediaStreams")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAddFlowMediaStreamsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAddFlowMediaStreamsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAddFlowMediaStreamsInput(v *AddFlowMediaStreamsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
+	}
+	if v.FlowArn != nil {
+		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAddFlowMediaStreamsInput(v *AddFlowMediaStreamsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MediaStreams != nil {
+		ok := object.Key("mediaStreams")
+		if err := awsRestjson1_serializeDocument__listOfAddMediaStreamRequest(v.MediaStreams, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpAddFlowOutputs struct {
 }
 
@@ -331,6 +414,13 @@ func awsRestjson1_serializeOpDocumentCreateFlowInput(v *CreateFlowInput, value s
 	if v.Entitlements != nil {
 		ok := object.Key("entitlements")
 		if err := awsRestjson1_serializeDocument__listOfGrantEntitlementRequest(v.Entitlements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MediaStreams != nil {
+		ok := object.Key("mediaStreams")
+		if err := awsRestjson1_serializeDocument__listOfAddMediaStreamRequest(v.MediaStreams, ok); err != nil {
 			return err
 		}
 	}
@@ -1065,6 +1155,73 @@ func awsRestjson1_serializeOpDocumentPurchaseOfferingInput(v *PurchaseOfferingIn
 	return nil
 }
 
+type awsRestjson1_serializeOpRemoveFlowMediaStream struct {
+}
+
+func (*awsRestjson1_serializeOpRemoveFlowMediaStream) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpRemoveFlowMediaStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveFlowMediaStreamInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/flows/{FlowArn}/mediaStreams/{MediaStreamName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsRemoveFlowMediaStreamInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsRemoveFlowMediaStreamInput(v *RemoveFlowMediaStreamInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
+	}
+	if v.FlowArn != nil {
+		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
+			return err
+		}
+	}
+
+	if v.MediaStreamName == nil || len(*v.MediaStreamName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MediaStreamName must not be empty")}
+	}
+	if v.MediaStreamName != nil {
+		if err := encoder.SetURI("MediaStreamName").String(*v.MediaStreamName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpRemoveFlowOutput struct {
 }
 
@@ -1788,6 +1945,118 @@ func awsRestjson1_serializeOpDocumentUpdateFlowEntitlementInput(v *UpdateFlowEnt
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateFlowMediaStream struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateFlowMediaStream) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateFlowMediaStream) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateFlowMediaStreamInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/flows/{FlowArn}/mediaStreams/{MediaStreamName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateFlowMediaStreamInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateFlowMediaStreamInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateFlowMediaStreamInput(v *UpdateFlowMediaStreamInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.FlowArn == nil || len(*v.FlowArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member FlowArn must not be empty")}
+	}
+	if v.FlowArn != nil {
+		if err := encoder.SetURI("FlowArn").String(*v.FlowArn); err != nil {
+			return err
+		}
+	}
+
+	if v.MediaStreamName == nil || len(*v.MediaStreamName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MediaStreamName must not be empty")}
+	}
+	if v.MediaStreamName != nil {
+		if err := encoder.SetURI("MediaStreamName").String(*v.MediaStreamName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateFlowMediaStreamInput(v *UpdateFlowMediaStreamInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentMediaStreamAttributesRequest(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClockRate != 0 {
+		ok := object.Key("clockRate")
+		ok.Integer(v.ClockRate)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if len(v.MediaStreamType) > 0 {
+		ok := object.Key("mediaStreamType")
+		ok.String(string(v.MediaStreamType))
+	}
+
+	if v.VideoFormat != nil {
+		ok := object.Key("videoFormat")
+		ok.String(*v.VideoFormat)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateFlowOutput struct {
 }
 
@@ -1897,6 +2166,13 @@ func awsRestjson1_serializeOpDocumentUpdateFlowOutputInput(v *UpdateFlowOutputIn
 	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
 		ok.Integer(v.MaxLatency)
+	}
+
+	if v.MediaStreamOutputConfigurations != nil {
+		ok := object.Key("mediaStreamOutputConfigurations")
+		if err := awsRestjson1_serializeDocument__listOfMediaStreamOutputConfigurationRequest(v.MediaStreamOutputConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MinLatency != 0 {
@@ -2053,6 +2329,18 @@ func awsRestjson1_serializeOpDocumentUpdateFlowSourceInput(v *UpdateFlowSourceIn
 		ok.Integer(v.MaxLatency)
 	}
 
+	if v.MaxSyncBuffer != 0 {
+		ok := object.Key("maxSyncBuffer")
+		ok.Integer(v.MaxSyncBuffer)
+	}
+
+	if v.MediaStreamSourceConfigurations != nil {
+		ok := object.Key("mediaStreamSourceConfigurations")
+		if err := awsRestjson1_serializeDocument__listOfMediaStreamSourceConfigurationRequest(v.MediaStreamSourceConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MinLatency != 0 {
 		ok := object.Key("minLatency")
 		ok.Integer(v.MinLatency)
@@ -2092,6 +2380,19 @@ func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfAddMediaStreamRequest(v []types.AddMediaStreamRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAddMediaStreamRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfAddOutputRequest(v []types.AddOutputRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2105,6 +2406,19 @@ func awsRestjson1_serializeDocument__listOfAddOutputRequest(v []types.AddOutputR
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfDestinationConfigurationRequest(v []types.DestinationConfigurationRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDestinationConfigurationRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfGrantEntitlementRequest(v []types.GrantEntitlementRequest, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2112,6 +2426,45 @@ func awsRestjson1_serializeDocument__listOfGrantEntitlementRequest(v []types.Gra
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentGrantEntitlementRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfInputConfigurationRequest(v []types.InputConfigurationRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentInputConfigurationRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfMediaStreamOutputConfigurationRequest(v []types.MediaStreamOutputConfigurationRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMediaStreamOutputConfigurationRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfMediaStreamSourceConfigurationRequest(v []types.MediaStreamSourceConfigurationRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMediaStreamSourceConfigurationRequest(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -2155,6 +2508,50 @@ func awsRestjson1_serializeDocument__mapOf__string(v map[string]string, value sm
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAddMediaStreamRequest(v *types.AddMediaStreamRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("attributes")
+		if err := awsRestjson1_serializeDocumentMediaStreamAttributesRequest(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClockRate != 0 {
+		ok := object.Key("clockRate")
+		ok.Integer(v.ClockRate)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	{
+		ok := object.Key("mediaStreamId")
+		ok.Integer(v.MediaStreamId)
+	}
+
+	if v.MediaStreamName != nil {
+		ok := object.Key("mediaStreamName")
+		ok.String(*v.MediaStreamName)
+	}
+
+	if len(v.MediaStreamType) > 0 {
+		ok := object.Key("mediaStreamType")
+		ok.String(string(v.MediaStreamType))
+	}
+
+	if v.VideoFormat != nil {
+		ok := object.Key("videoFormat")
+		ok.String(*v.VideoFormat)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2186,6 +2583,13 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
 		ok.Integer(v.MaxLatency)
+	}
+
+	if v.MediaStreamOutputConfigurations != nil {
+		ok := object.Key("mediaStreamOutputConfigurations")
+		if err := awsRestjson1_serializeDocument__listOfMediaStreamOutputConfigurationRequest(v.MediaStreamOutputConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MinLatency != 0 {
@@ -2228,6 +2632,47 @@ func awsRestjson1_serializeDocumentAddOutputRequest(v *types.AddOutputRequest, v
 		if err := awsRestjson1_serializeDocumentVpcInterfaceAttachment(v.VpcInterfaceAttachment, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDestinationConfigurationRequest(v *types.DestinationConfigurationRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationIp != nil {
+		ok := object.Key("destinationIp")
+		ok.String(*v.DestinationIp)
+	}
+
+	{
+		ok := object.Key("destinationPort")
+		ok.Integer(v.DestinationPort)
+	}
+
+	if v.Interface != nil {
+		ok := object.Key("interface")
+		if err := awsRestjson1_serializeDocumentInterfaceRequest(v.Interface, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEncodingParametersRequest(v *types.EncodingParametersRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("compressionFactor")
+		ok.Double(v.CompressionFactor)
+	}
+
+	if len(v.EncoderProfile) > 0 {
+		ok := object.Key("encoderProfile")
+		ok.String(string(v.EncoderProfile))
 	}
 
 	return nil
@@ -2302,6 +2747,48 @@ func awsRestjson1_serializeDocumentFailoverConfig(v *types.FailoverConfig, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFmtpRequest(v *types.FmtpRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ChannelOrder != nil {
+		ok := object.Key("channelOrder")
+		ok.String(*v.ChannelOrder)
+	}
+
+	if len(v.Colorimetry) > 0 {
+		ok := object.Key("colorimetry")
+		ok.String(string(v.Colorimetry))
+	}
+
+	if v.ExactFramerate != nil {
+		ok := object.Key("exactFramerate")
+		ok.String(*v.ExactFramerate)
+	}
+
+	if v.Par != nil {
+		ok := object.Key("par")
+		ok.String(*v.Par)
+	}
+
+	if len(v.Range) > 0 {
+		ok := object.Key("range")
+		ok.String(string(v.Range))
+	}
+
+	if len(v.ScanMode) > 0 {
+		ok := object.Key("scanMode")
+		ok.String(string(v.ScanMode))
+	}
+
+	if len(v.Tcs) > 0 {
+		ok := object.Key("tcs")
+		ok.String(string(v.Tcs))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGrantEntitlementRequest(v *types.GrantEntitlementRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2343,6 +2830,111 @@ func awsRestjson1_serializeDocumentGrantEntitlementRequest(v *types.GrantEntitle
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInputConfigurationRequest(v *types.InputConfigurationRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("inputPort")
+		ok.Integer(v.InputPort)
+	}
+
+	if v.Interface != nil {
+		ok := object.Key("interface")
+		if err := awsRestjson1_serializeDocumentInterfaceRequest(v.Interface, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInterfaceRequest(v *types.InterfaceRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaStreamAttributesRequest(v *types.MediaStreamAttributesRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fmtp != nil {
+		ok := object.Key("fmtp")
+		if err := awsRestjson1_serializeDocumentFmtpRequest(v.Fmtp, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Lang != nil {
+		ok := object.Key("lang")
+		ok.String(*v.Lang)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaStreamOutputConfigurationRequest(v *types.MediaStreamOutputConfigurationRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DestinationConfigurations != nil {
+		ok := object.Key("destinationConfigurations")
+		if err := awsRestjson1_serializeDocument__listOfDestinationConfigurationRequest(v.DestinationConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.EncodingName) > 0 {
+		ok := object.Key("encodingName")
+		ok.String(string(v.EncodingName))
+	}
+
+	if v.EncodingParameters != nil {
+		ok := object.Key("encodingParameters")
+		if err := awsRestjson1_serializeDocumentEncodingParametersRequest(v.EncodingParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MediaStreamName != nil {
+		ok := object.Key("mediaStreamName")
+		ok.String(*v.MediaStreamName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaStreamSourceConfigurationRequest(v *types.MediaStreamSourceConfigurationRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EncodingName) > 0 {
+		ok := object.Key("encodingName")
+		ok.String(string(v.EncodingName))
+	}
+
+	if v.InputConfigurations != nil {
+		ok := object.Key("inputConfigurations")
+		if err := awsRestjson1_serializeDocument__listOfInputConfigurationRequest(v.InputConfigurations, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MediaStreamName != nil {
+		ok := object.Key("mediaStreamName")
+		ok.String(*v.MediaStreamName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2377,6 +2969,18 @@ func awsRestjson1_serializeDocumentSetSourceRequest(v *types.SetSourceRequest, v
 	if v.MaxLatency != 0 {
 		ok := object.Key("maxLatency")
 		ok.Integer(v.MaxLatency)
+	}
+
+	if v.MaxSyncBuffer != 0 {
+		ok := object.Key("maxSyncBuffer")
+		ok.Integer(v.MaxSyncBuffer)
+	}
+
+	if v.MediaStreamSourceConfigurations != nil {
+		ok := object.Key("mediaStreamSourceConfigurations")
+		if err := awsRestjson1_serializeDocument__listOfMediaStreamSourceConfigurationRequest(v.MediaStreamSourceConfigurations, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.MinLatency != 0 {
@@ -2500,6 +3104,11 @@ func awsRestjson1_serializeDocumentVpcInterfaceRequest(v *types.VpcInterfaceRequ
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.NetworkInterfaceType) > 0 {
+		ok := object.Key("networkInterfaceType")
+		ok.String(string(v.NetworkInterfaceType))
 	}
 
 	if v.RoleArn != nil {

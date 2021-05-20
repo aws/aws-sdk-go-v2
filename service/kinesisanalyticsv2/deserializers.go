@@ -4371,6 +4371,11 @@ func awsAwsjson11_deserializeDocumentApplicationConfigurationDescription(v **typ
 				return err
 			}
 
+		case "ZeppelinApplicationConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentZeppelinApplicationConfigurationDescription(&sv.ZeppelinApplicationConfigurationDescription, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4428,6 +4433,15 @@ func awsAwsjson11_deserializeDocumentApplicationDetail(v **types.ApplicationDeta
 		case "ApplicationMaintenanceConfigurationDescription":
 			if err := awsAwsjson11_deserializeDocumentApplicationMaintenanceConfigurationDescription(&sv.ApplicationMaintenanceConfigurationDescription, value); err != nil {
 				return err
+			}
+
+		case "ApplicationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationMode to be of type string, got %T instead", value)
+				}
+				sv.ApplicationMode = types.ApplicationMode(jtv)
 			}
 
 		case "ApplicationName":
@@ -4770,6 +4784,15 @@ func awsAwsjson11_deserializeDocumentApplicationSummary(v **types.ApplicationSum
 				sv.ApplicationARN = ptr.String(jtv)
 			}
 
+		case "ApplicationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationMode to be of type string, got %T instead", value)
+				}
+				sv.ApplicationMode = types.ApplicationMode(jtv)
+			}
+
 		case "ApplicationName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4895,6 +4918,42 @@ func awsAwsjson11_deserializeDocumentApplicationVersionSummary(v **types.Applica
 					return err
 				}
 				sv.ApplicationVersionId = ptr.Int64(i64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCatalogConfigurationDescription(v **types.CatalogConfigurationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CatalogConfigurationDescription
+	if *v == nil {
+		sv = &types.CatalogConfigurationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "GlueDataCatalogConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentGlueDataCatalogConfigurationDescription(&sv.GlueDataCatalogConfigurationDescription, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5269,6 +5328,126 @@ func awsAwsjson11_deserializeDocumentCSVMappingParameters(v **types.CSVMappingPa
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentCustomArtifactConfigurationDescription(v **types.CustomArtifactConfigurationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CustomArtifactConfigurationDescription
+	if *v == nil {
+		sv = &types.CustomArtifactConfigurationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ArtifactType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArtifactType to be of type string, got %T instead", value)
+				}
+				sv.ArtifactType = types.ArtifactType(jtv)
+			}
+
+		case "MavenReferenceDescription":
+			if err := awsAwsjson11_deserializeDocumentMavenReference(&sv.MavenReferenceDescription, value); err != nil {
+				return err
+			}
+
+		case "S3ContentLocationDescription":
+			if err := awsAwsjson11_deserializeDocumentS3ContentLocation(&sv.S3ContentLocationDescription, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCustomArtifactsConfigurationDescriptionList(v *[]types.CustomArtifactConfigurationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CustomArtifactConfigurationDescription
+	if *v == nil {
+		cv = []types.CustomArtifactConfigurationDescription{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CustomArtifactConfigurationDescription
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCustomArtifactConfigurationDescription(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDeployAsApplicationConfigurationDescription(v **types.DeployAsApplicationConfigurationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeployAsApplicationConfigurationDescription
+	if *v == nil {
+		sv = &types.DeployAsApplicationConfigurationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3ContentLocationDescription":
+			if err := awsAwsjson11_deserializeDocumentS3ContentBaseLocationDescription(&sv.S3ContentLocationDescription, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDestinationSchema(v **types.DestinationSchema, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5429,6 +5608,46 @@ func awsAwsjson11_deserializeDocumentFlinkRunConfiguration(v **types.FlinkRunCon
 					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
 				}
 				sv.AllowNonRestoredState = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentGlueDataCatalogConfigurationDescription(v **types.GlueDataCatalogConfigurationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GlueDataCatalogConfigurationDescription
+	if *v == nil {
+		sv = &types.GlueDataCatalogConfigurationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DatabaseARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DatabaseARN to be of type string, got %T instead", value)
+				}
+				sv.DatabaseARN = ptr.String(jtv)
 			}
 
 		default:
@@ -6238,6 +6457,64 @@ func awsAwsjson11_deserializeDocumentMappingParameters(v **types.MappingParamete
 		case "JSONMappingParameters":
 			if err := awsAwsjson11_deserializeDocumentJSONMappingParameters(&sv.JSONMappingParameters, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentMavenReference(v **types.MavenReference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MavenReference
+	if *v == nil {
+		sv = &types.MavenReference{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ArtifactId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MavenArtifactId to be of type string, got %T instead", value)
+				}
+				sv.ArtifactId = ptr.String(jtv)
+			}
+
+		case "GroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MavenGroupId to be of type string, got %T instead", value)
+				}
+				sv.GroupId = ptr.String(jtv)
+			}
+
+		case "Version":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MavenVersion to be of type string, got %T instead", value)
+				}
+				sv.Version = ptr.String(jtv)
 			}
 
 		default:
@@ -7202,6 +7479,113 @@ func awsAwsjson11_deserializeDocumentS3ApplicationCodeLocationDescription(v **ty
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentS3ContentBaseLocationDescription(v **types.S3ContentBaseLocationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3ContentBaseLocationDescription
+	if *v == nil {
+		sv = &types.S3ContentBaseLocationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BasePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BasePath to be of type string, got %T instead", value)
+				}
+				sv.BasePath = ptr.String(jtv)
+			}
+
+		case "BucketARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketARN to be of type string, got %T instead", value)
+				}
+				sv.BucketARN = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentS3ContentLocation(v **types.S3ContentLocation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3ContentLocation
+	if *v == nil {
+		sv = &types.S3ContentLocation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "BucketARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketARN to be of type string, got %T instead", value)
+				}
+				sv.BucketARN = ptr.String(jtv)
+			}
+
+		case "FileKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileKey to be of type string, got %T instead", value)
+				}
+				sv.FileKey = ptr.String(jtv)
+			}
+
+		case "ObjectVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ObjectVersion to be of type string, got %T instead", value)
+				}
+				sv.ObjectVersion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentS3ReferenceDataSourceDescription(v **types.S3ReferenceDataSourceDescription, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7880,6 +8264,97 @@ func awsAwsjson11_deserializeDocumentVpcConfigurationDescriptions(v *[]types.Vpc
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentZeppelinApplicationConfigurationDescription(v **types.ZeppelinApplicationConfigurationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ZeppelinApplicationConfigurationDescription
+	if *v == nil {
+		sv = &types.ZeppelinApplicationConfigurationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CatalogConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentCatalogConfigurationDescription(&sv.CatalogConfigurationDescription, value); err != nil {
+				return err
+			}
+
+		case "CustomArtifactsConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentCustomArtifactsConfigurationDescriptionList(&sv.CustomArtifactsConfigurationDescription, value); err != nil {
+				return err
+			}
+
+		case "DeployAsApplicationConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentDeployAsApplicationConfigurationDescription(&sv.DeployAsApplicationConfigurationDescription, value); err != nil {
+				return err
+			}
+
+		case "MonitoringConfigurationDescription":
+			if err := awsAwsjson11_deserializeDocumentZeppelinMonitoringConfigurationDescription(&sv.MonitoringConfigurationDescription, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentZeppelinMonitoringConfigurationDescription(v **types.ZeppelinMonitoringConfigurationDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ZeppelinMonitoringConfigurationDescription
+	if *v == nil {
+		sv = &types.ZeppelinMonitoringConfigurationDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LogLevel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogLevel to be of type string, got %T instead", value)
+				}
+				sv.LogLevel = types.LogLevel(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

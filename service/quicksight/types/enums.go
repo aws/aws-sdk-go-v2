@@ -758,6 +758,25 @@ func (ResourceStatus) Values() []ResourceStatus {
 	}
 }
 
+type RowLevelPermissionFormatVersion string
+
+// Enum values for RowLevelPermissionFormatVersion
+const (
+	RowLevelPermissionFormatVersionVersion1 RowLevelPermissionFormatVersion = "VERSION_1"
+	RowLevelPermissionFormatVersionVersion2 RowLevelPermissionFormatVersion = "VERSION_2"
+)
+
+// Values returns all known values for RowLevelPermissionFormatVersion. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (RowLevelPermissionFormatVersion) Values() []RowLevelPermissionFormatVersion {
+	return []RowLevelPermissionFormatVersion{
+		"VERSION_1",
+		"VERSION_2",
+	}
+}
+
 type RowLevelPermissionPolicy string
 
 // Enum values for RowLevelPermissionPolicy

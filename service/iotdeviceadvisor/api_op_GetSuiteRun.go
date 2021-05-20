@@ -30,14 +30,12 @@ func (c *Client) GetSuiteRun(ctx context.Context, params *GetSuiteRunInput, optF
 
 type GetSuiteRunInput struct {
 
-	// Requests the information about Device Advisor test suite run based on suite
-	// definition Id.
+	// Suite definition Id for the test suite run.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
 
-	// Requests the information about Device Advisor test suite run based on suite run
-	// Id.
+	// Suite run Id for the test suite run.
 	//
 	// This member is required.
 	SuiteRunId *string
@@ -45,41 +43,37 @@ type GetSuiteRunInput struct {
 
 type GetSuiteRunOutput struct {
 
-	// Gets the information about Device Advisor test suite run based on end time.
+	// Date (in Unix epoch time) when the test suite run ended.
 	EndTime *time.Time
 
-	// Gets the information about Device Advisor test suite run based on error.
+	// Error reason for any test suite run failure.
 	ErrorReason *string
 
-	// Gets the information about Device Advisor test suite run based on start time.
+	// Date (in Unix epoch time) when the test suite run was started.
 	StartTime *time.Time
 
-	// Gets the information about Device Advisor test suite run based on its status.
+	// Status for the test suite run.
 	Status types.SuiteRunStatus
 
-	// Gets the information about Device Advisor test suite run based on suite
-	// definition Id.
+	// Suite definition Id for the test suite run.
 	SuiteDefinitionId *string
 
-	// Gets the information about Device Advisor test suite run based on suite
-	// definition version.
+	// Suite definition version for the test suite run.
 	SuiteDefinitionVersion *string
 
 	// The ARN of the suite run.
 	SuiteRunArn *string
 
-	// Gets the information about Device Advisor test suite run based on suite
-	// configuration.
+	// Suite run configuration for the test suite run.
 	SuiteRunConfiguration *types.SuiteRunConfiguration
 
-	// Gets the information about Device Advisor test suite run based on suite run Id.
+	// Suite run Id for the test suite run.
 	SuiteRunId *string
 
 	// The tags attached to the suite run.
 	Tags map[string]string
 
-	// Gets the information about Device Advisor test suite run based on test case
-	// runs.
+	// Test results for the test suite run.
 	TestResult *types.TestResult
 
 	// Metadata pertaining to the operation's result.

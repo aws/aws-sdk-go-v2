@@ -11,6 +11,8 @@ const (
 	StatusCanceled         Status = "CANCELED"
 	StatusPending          Status = "PENDING"
 	StatusRunning          Status = "RUNNING"
+	StatusStopping         Status = "STOPPING"
+	StatusStopped          Status = "STOPPED"
 	StatusPassWithWarnings Status = "PASS_WITH_WARNINGS"
 	StatusError            Status = "ERROR"
 )
@@ -25,6 +27,8 @@ func (Status) Values() []Status {
 		"CANCELED",
 		"PENDING",
 		"RUNNING",
+		"STOPPING",
+		"STOPPED",
 		"PASS_WITH_WARNINGS",
 		"ERROR",
 	}
@@ -39,6 +43,8 @@ const (
 	SuiteRunStatusCanceled         SuiteRunStatus = "CANCELED"
 	SuiteRunStatusPending          SuiteRunStatus = "PENDING"
 	SuiteRunStatusRunning          SuiteRunStatus = "RUNNING"
+	SuiteRunStatusStopping         SuiteRunStatus = "STOPPING"
+	SuiteRunStatusStopped          SuiteRunStatus = "STOPPED"
 	SuiteRunStatusPassWithWarnings SuiteRunStatus = "PASS_WITH_WARNINGS"
 	SuiteRunStatusError            SuiteRunStatus = "ERROR"
 )
@@ -53,6 +59,8 @@ func (SuiteRunStatus) Values() []SuiteRunStatus {
 		"CANCELED",
 		"PENDING",
 		"RUNNING",
+		"STOPPING",
+		"STOPPED",
 		"PASS_WITH_WARNINGS",
 		"ERROR",
 	}

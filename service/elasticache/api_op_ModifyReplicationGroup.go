@@ -194,11 +194,11 @@ type ModifyReplicationGroupInput struct {
 	// groups.
 	SnapshottingClusterId *string
 
-	// A list of user group IDs.
+	// The user group you are associating with the replication group.
 	UserGroupIdsToAdd []string
 
-	// A list of users groups to remove, meaning the users in the group no longer can
-	// access thereplication group.
+	// The user group to remove, meaning the users in the group no longer can access
+	// the replication group.
 	UserGroupIdsToRemove []string
 }
 

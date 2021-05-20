@@ -254,7 +254,7 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// A collection with the specified ID already exists.
+// A resource with the specified ID already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
 
@@ -294,7 +294,7 @@ func (e *ResourceInUseException) ErrorMessage() string {
 func (e *ResourceInUseException) ErrorCode() string             { return "ResourceInUseException" }
 func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The collection specified in the request cannot be found.
+// The resource specified in the request cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -335,9 +335,8 @@ func (e *ResourceNotReadyException) ErrorMessage() string {
 func (e *ResourceNotReadyException) ErrorCode() string             { return "ResourceNotReadyException" }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The size of the collection or tag list exceeds the allowed limit. For more
-// information, see Limits in Amazon Rekognition in the Amazon Rekognition
-// Developer Guide.
+// The size of the collection exceeds the allowed limit. For more information, see
+// Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide.
 type ServiceQuotaExceededException struct {
 	Message *string
 

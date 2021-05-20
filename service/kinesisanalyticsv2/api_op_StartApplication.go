@@ -37,8 +37,6 @@ type StartApplicationInput struct {
 
 	// Identifies the run configuration (start parameters) of a Kinesis Data Analytics
 	// application.
-	//
-	// This member is required.
 	RunConfiguration *types.RunConfiguration
 }
 

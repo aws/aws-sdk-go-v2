@@ -771,6 +771,21 @@ func validateAdvancedSecurityOptionsInput(v *types.AdvancedSecurityOptionsInput)
 	}
 }
 
+func validateColdStorageOptions(v *types.ColdStorageOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ColdStorageOptions"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDomainInformation(v *types.DomainInformation) error {
 	if v == nil {
 		return nil
@@ -778,6 +793,23 @@ func validateDomainInformation(v *types.DomainInformation) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DomainInformation"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateElasticsearchClusterConfig(v *types.ElasticsearchClusterConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ElasticsearchClusterConfig"}
+	if v.ColdStorageOptions != nil {
+		if err := validateColdStorageOptions(v.ColdStorageOptions); err != nil {
+			invalidParams.AddNested("ColdStorageOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -933,6 +965,11 @@ func validateOpCreateElasticsearchDomainInput(v *CreateElasticsearchDomainInput)
 	invalidParams := smithy.InvalidParamsError{Context: "CreateElasticsearchDomainInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ElasticsearchClusterConfig != nil {
+		if err := validateElasticsearchClusterConfig(v.ElasticsearchClusterConfig); err != nil {
+			invalidParams.AddNested("ElasticsearchClusterConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AdvancedSecurityOptions != nil {
 		if err := validateAdvancedSecurityOptionsInput(v.AdvancedSecurityOptions); err != nil {
@@ -1335,6 +1372,11 @@ func validateOpUpdateElasticsearchDomainConfigInput(v *UpdateElasticsearchDomain
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateElasticsearchDomainConfigInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.ElasticsearchClusterConfig != nil {
+		if err := validateElasticsearchClusterConfig(v.ElasticsearchClusterConfig); err != nil {
+			invalidParams.AddNested("ElasticsearchClusterConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AdvancedSecurityOptions != nil {
 		if err := validateAdvancedSecurityOptionsInput(v.AdvancedSecurityOptions); err != nil {

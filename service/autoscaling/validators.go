@@ -630,6 +630,26 @@ func (m *validateOpExitStandby) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPredictiveScalingForecast struct {
+}
+
+func (*validateOpGetPredictiveScalingForecast) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPredictiveScalingForecast) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPredictiveScalingForecastInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPredictiveScalingForecastInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutLifecycleHook struct {
 }
 
@@ -1034,6 +1054,10 @@ func addOpExitStandbyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExitStandby{}, middleware.After)
 }
 
+func addOpGetPredictiveScalingForecastValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPredictiveScalingForecast{}, middleware.After)
+}
+
 func addOpPutLifecycleHookValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutLifecycleHook{}, middleware.After)
 }
@@ -1223,6 +1247,117 @@ func validatePredefinedMetricSpecification(v *types.PredefinedMetricSpecificatio
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PredefinedMetricSpecification"}
+	if len(v.PredefinedMetricType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PredefinedMetricType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictiveScalingConfiguration(v *types.PredictiveScalingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingConfiguration"}
+	if v.MetricSpecifications == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricSpecifications"))
+	} else if v.MetricSpecifications != nil {
+		if err := validatePredictiveScalingMetricSpecifications(v.MetricSpecifications); err != nil {
+			invalidParams.AddNested("MetricSpecifications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictiveScalingMetricSpecification(v *types.PredictiveScalingMetricSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingMetricSpecification"}
+	if v.TargetValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetValue"))
+	}
+	if v.PredefinedMetricPairSpecification != nil {
+		if err := validatePredictiveScalingPredefinedMetricPair(v.PredefinedMetricPairSpecification); err != nil {
+			invalidParams.AddNested("PredefinedMetricPairSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PredefinedScalingMetricSpecification != nil {
+		if err := validatePredictiveScalingPredefinedScalingMetric(v.PredefinedScalingMetricSpecification); err != nil {
+			invalidParams.AddNested("PredefinedScalingMetricSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PredefinedLoadMetricSpecification != nil {
+		if err := validatePredictiveScalingPredefinedLoadMetric(v.PredefinedLoadMetricSpecification); err != nil {
+			invalidParams.AddNested("PredefinedLoadMetricSpecification", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictiveScalingMetricSpecifications(v []types.PredictiveScalingMetricSpecification) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingMetricSpecifications"}
+	for i := range v {
+		if err := validatePredictiveScalingMetricSpecification(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictiveScalingPredefinedLoadMetric(v *types.PredictiveScalingPredefinedLoadMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingPredefinedLoadMetric"}
+	if len(v.PredefinedMetricType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PredefinedMetricType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictiveScalingPredefinedMetricPair(v *types.PredictiveScalingPredefinedMetricPair) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingPredefinedMetricPair"}
+	if len(v.PredefinedMetricType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PredefinedMetricType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePredictiveScalingPredefinedScalingMetric(v *types.PredictiveScalingPredefinedScalingMetric) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PredictiveScalingPredefinedScalingMetric"}
 	if len(v.PredefinedMetricType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("PredefinedMetricType"))
 	}
@@ -1894,6 +2029,30 @@ func validateOpExitStandbyInput(v *ExitStandbyInput) error {
 	}
 }
 
+func validateOpGetPredictiveScalingForecastInput(v *GetPredictiveScalingForecastInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPredictiveScalingForecastInput"}
+	if v.AutoScalingGroupName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AutoScalingGroupName"))
+	}
+	if v.PolicyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyName"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutLifecycleHookInput(v *PutLifecycleHookInput) error {
 	if v == nil {
 		return nil
@@ -1952,6 +2111,11 @@ func validateOpPutScalingPolicyInput(v *PutScalingPolicyInput) error {
 	if v.TargetTrackingConfiguration != nil {
 		if err := validateTargetTrackingConfiguration(v.TargetTrackingConfiguration); err != nil {
 			invalidParams.AddNested("TargetTrackingConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PredictiveScalingConfiguration != nil {
+		if err := validatePredictiveScalingConfiguration(v.PredictiveScalingConfiguration); err != nil {
+			invalidParams.AddNested("PredictiveScalingConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

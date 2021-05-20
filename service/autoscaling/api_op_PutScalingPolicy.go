@@ -11,13 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates a scaling policy for an Auto Scaling group. For more
-// information about using scaling policies to scale your Auto Scaling group, see
-// Target tracking scaling policies
+// Creates or updates a scaling policy for an Auto Scaling group. Scaling policies
+// are used to scale an Auto Scaling group based on configurable metrics. If no
+// policies are defined, the dynamic scaling and predictive scaling features are
+// not used. For more information about using dynamic scaling, see Target tracking
+// scaling policies
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-target-tracking.html)
 // and Step and simple scaling policies
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-scaling-simple-step.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// in the Amazon EC2 Auto Scaling User Guide. For more information about using
+// predictive scaling, see Predictive scaling for Amazon EC2 Auto Scaling
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html)
+// in the Amazon EC2 Auto Scaling User Guide. You can view the scaling policies for
+// an Auto Scaling group using the DescribePolicies API call. If you are no longer
+// using a scaling policy, you can delete it by calling the DeletePolicy API.
 func (c *Client) PutScalingPolicy(ctx context.Context, params *PutScalingPolicyInput, optFns ...func(*Options)) (*PutScalingPolicyOutput, error) {
 	if params == nil {
 		params = &PutScalingPolicyInput{}
@@ -106,7 +113,18 @@ type PutScalingPolicyInput struct {
 	//
 	// *
 	// SimpleScaling (default)
+	//
+	// * PredictiveScaling
 	PolicyType *string
+
+	// A predictive scaling policy. Provides support for only predefined metrics.
+	// Predictive scaling works with CPU utilization, network in/out, and the
+	// Application Load Balancer request count. For more information, see
+	// PredictiveScalingConfiguration
+	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_PredictiveScalingConfiguration.html)
+	// in the Amazon EC2 Auto Scaling API Reference. Required if the policy type is
+	// PredictiveScaling.
+	PredictiveScalingConfiguration *types.PredictiveScalingConfiguration
 
 	// The amount by which to scale, based on the specified adjustment type. A positive
 	// value adds to the current capacity while a negative number removes from the
@@ -120,7 +138,7 @@ type PutScalingPolicyInput struct {
 	// policy type.)
 	StepAdjustments []types.StepAdjustment
 
-	// A target tracking scaling policy. Includes support for predefined or customized
+	// A target tracking scaling policy. Provides support for predefined or customized
 	// metrics. The following predefined metrics are available:
 	//
 	// *

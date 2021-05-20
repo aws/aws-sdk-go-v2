@@ -30,15 +30,15 @@ func (c *Client) StartSuiteRun(ctx context.Context, params *StartSuiteRunInput, 
 
 type StartSuiteRunInput struct {
 
-	// Request to start suite run based on suite definition Id.
+	// Suite definition Id of the test suite.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
 
-	// Request to start suite run based on suite definition version.
+	// Suite definition version of the test suite.
 	SuiteDefinitionVersion *string
 
-	// Request to start suite run based on suite configuration.
+	// Suite run configuration.
 	SuiteRunConfiguration *types.SuiteRunConfiguration
 
 	// The tags to be attached to the suite run.
@@ -47,13 +47,13 @@ type StartSuiteRunInput struct {
 
 type StartSuiteRunOutput struct {
 
-	// Starts a Device Advisor test suite run based on suite create time.
+	// Date (in Unix epoch time) when the suite run was created.
 	CreatedAt *time.Time
 
-	// Starts a Device Advisor test suite run based on suite run arn.
+	// Amazon resource name of the started suite run.
 	SuiteRunArn *string
 
-	// Starts a Device Advisor test suite run based on suite Run Id.
+	// Suite Run Id of the started suite run.
 	SuiteRunId *string
 
 	// Metadata pertaining to the operation's result.

@@ -17,7 +17,9 @@ import (
 // the collection for faces in the user-specific container. When you create a
 // collection, it is associated with the latest version of the face model version.
 // Collection names are case-sensitive. This operation requires permissions to
-// perform the rekognition:CreateCollection action.
+// perform the rekognition:CreateCollection action. If you want to tag your
+// collection, you also require permission to perform the rekognition:TagResource
+// operation.
 func (c *Client) CreateCollection(ctx context.Context, params *CreateCollectionInput, optFns ...func(*Options)) (*CreateCollectionOutput, error) {
 	if params == nil {
 		params = &CreateCollectionInput{}

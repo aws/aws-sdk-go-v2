@@ -36,11 +36,11 @@ func TestClient_HttpRequestWithGreedyLabelInPath_awsRestjson1Serialize(t *testin
 		// Serializes greedy labels and normal labels
 		"RestJsonHttpRequestWithGreedyLabelInPath": {
 			Params: &HttpRequestWithGreedyLabelInPathInput{
-				Foo: ptr.String("hello"),
+				Foo: ptr.String("hello/escape"),
 				Baz: ptr.String("there/guy"),
 			},
 			ExpectMethod:  "GET",
-			ExpectURIPath: "/HttpRequestWithGreedyLabelInPath/foo/hello/baz/there/guy",
+			ExpectURIPath: "/HttpRequestWithGreedyLabelInPath/foo/hello%2Fescape/baz/there/guy",
 			ExpectQuery:   []smithytesting.QueryItem{},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)

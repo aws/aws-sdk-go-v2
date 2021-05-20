@@ -30,7 +30,7 @@ func (c *Client) UpdateSuiteDefinition(ctx context.Context, params *UpdateSuiteD
 
 type UpdateSuiteDefinitionInput struct {
 
-	// Updates a Device Advisor test suite with suite definition id.
+	// Suite definition Id of the test suite to be updated.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
@@ -41,22 +41,22 @@ type UpdateSuiteDefinitionInput struct {
 
 type UpdateSuiteDefinitionOutput struct {
 
-	// Updates a Device Advisor test suite with TimeStamp of when it was created.
+	// Timestamp of when the test suite was created.
 	CreatedAt *time.Time
 
-	// Updates a Device Advisor test suite with TimeStamp of when it was updated.
+	// Timestamp of when the test suite was updated.
 	LastUpdatedAt *time.Time
 
-	// Updates a Device Advisor test suite with Amazon Resource name.
+	// Amazon Resource name of the updated test suite.
 	SuiteDefinitionArn *string
 
-	// Updates a Device Advisor test suite with suite UUID.
+	// Suite definition Id of the updated test suite.
 	SuiteDefinitionId *string
 
-	// Updates a Device Advisor test suite with suite definition name.
+	// Suite definition name of the updated test suite.
 	SuiteDefinitionName *string
 
-	// Updates a Device Advisor test suite with suite definition version.
+	// Suite definition version of the updated test suite.
 	SuiteDefinitionVersion *string
 
 	// Metadata pertaining to the operation's result.

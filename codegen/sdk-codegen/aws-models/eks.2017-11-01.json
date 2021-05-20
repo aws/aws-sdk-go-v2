@@ -1629,6 +1629,16 @@
                                 }
                             },
                             {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "addon.status",
+                                        "expected": "DEGRADED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
                                 "state": "success",
                                 "matcher": {
                                     "output": {

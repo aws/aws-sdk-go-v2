@@ -1224,6 +1224,9 @@
                         "smithy.api#httpHeader": "x-amz-request-charged"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "CompleteMultipartUploadResult"
             }
         },
         "com.amazonaws.s3#CompleteMultipartUploadRequest": {
@@ -1821,7 +1824,7 @@
         "com.amazonaws.s3#CopySource": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\/.+\\/.+"
+                "smithy.api#pattern": "^\\/.+\\/.+$"
             }
         },
         "com.amazonaws.s3#CopySourceIfMatch": {
@@ -2076,6 +2079,9 @@
                         "smithy.api#httpHeader": "x-amz-request-charged"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "InitiateMultipartUploadResult"
             }
         },
         "com.amazonaws.s3#CreateMultipartUploadRequest": {
@@ -3100,6 +3106,9 @@
                         "smithy.api#xmlName": "Error"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "DeleteResult"
             }
         },
         "com.amazonaws.s3#DeleteObjectsRequest": {
@@ -3654,6 +3663,9 @@
                         "smithy.api#documentation": "<p>The accelerate configuration of the bucket.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "AccelerateConfiguration"
             }
         },
         "com.amazonaws.s3#GetBucketAccelerateConfigurationRequest": {
@@ -3709,6 +3721,9 @@
                         "smithy.api#xmlName": "AccessControlList"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "AccessControlPolicy"
             }
         },
         "com.amazonaws.s3#GetBucketAclRequest": {
@@ -3816,6 +3831,9 @@
                         "smithy.api#xmlName": "CORSRule"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "CORSConfiguration"
             }
         },
         "com.amazonaws.s3#GetBucketCorsRequest": {
@@ -4021,6 +4039,9 @@
                         "smithy.api#xmlName": "Rule"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "LifecycleConfiguration"
             }
         },
         "com.amazonaws.s3#GetBucketLifecycleConfigurationRequest": {
@@ -4069,6 +4090,9 @@
                         "smithy.api#documentation": "<p>Specifies the Region where the bucket resides. For a list of all the Amazon S3 supported\n         location constraints by Region, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region\">Regions and Endpoints</a>.\n         Buckets in Region <code>us-east-1</code> have a LocationConstraint of\n         <code>null</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "LocationConstraint"
             }
         },
         "com.amazonaws.s3#GetBucketLocationRequest": {
@@ -4114,6 +4138,9 @@
                 "LoggingEnabled": {
                     "target": "com.amazonaws.s3#LoggingEnabled"
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "BucketLoggingStatus"
             }
         },
         "com.amazonaws.s3#GetBucketLoggingRequest": {
@@ -4451,6 +4478,9 @@
                         "smithy.api#documentation": "<p>Specifies who pays for the download and request fees.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "RequestPaymentConfiguration"
             }
         },
         "com.amazonaws.s3#GetBucketRequestPaymentRequest": {
@@ -4500,6 +4530,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "Tagging"
             }
         },
         "com.amazonaws.s3#GetBucketTaggingRequest": {
@@ -4555,6 +4588,9 @@
                         "smithy.api#xmlName": "MfaDelete"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "VersioningConfiguration"
             }
         },
         "com.amazonaws.s3#GetBucketVersioningRequest": {
@@ -4621,6 +4657,9 @@
                         "smithy.api#documentation": "<p>Rules that define when a redirect is applied and the redirect behavior.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "WebsiteConfiguration"
             }
         },
         "com.amazonaws.s3#GetBucketWebsiteRequest": {
@@ -4712,6 +4751,9 @@
                         "smithy.api#httpHeader": "x-amz-request-charged"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "AccessControlPolicy"
             }
         },
         "com.amazonaws.s3#GetObjectAclRequest": {
@@ -5355,6 +5397,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "Tagging"
             }
         },
         "com.amazonaws.s3#GetObjectTaggingRequest": {
@@ -5537,7 +5582,11 @@
                 "Grantee": {
                     "target": "com.amazonaws.s3#Grantee",
                     "traits": {
-                        "smithy.api#documentation": "<p>The person being granted permissions.</p>"
+                        "smithy.api#documentation": "<p>The person being granted permissions.</p>",
+                        "smithy.api#xmlNamespace": {
+                            "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                            "prefix": "xsi"
+                        }
                     }
                 },
                 "Permission": {
@@ -5604,11 +5653,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Container for the person being granted permissions.</p>",
-                "smithy.api#xmlNamespace": {
-                    "uri": "http://www.w3.org/2001/XMLSchema-instance",
-                    "prefix": "xsi"
-                }
+                "smithy.api#documentation": "<p>Container for the person being granted permissions.</p>"
             }
         },
         "com.amazonaws.s3#Grants": {
@@ -6867,6 +6912,9 @@
                         "smithy.api#xmlName": "AnalyticsConfiguration"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListBucketAnalyticsConfigurationResult"
             }
         },
         "com.amazonaws.s3#ListBucketAnalyticsConfigurationsRequest": {
@@ -7010,6 +7058,9 @@
                         "smithy.api#documentation": "<p>The marker used to continue this inventory configuration listing. Use the\n            <code>NextContinuationToken</code> from this response to continue the listing in a\n         subsequent request. The continuation token is an opaque value that Amazon S3 understands.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListInventoryConfigurationsResult"
             }
         },
         "com.amazonaws.s3#ListBucketInventoryConfigurationsRequest": {
@@ -7085,6 +7136,9 @@
                         "smithy.api#xmlName": "MetricsConfiguration"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListMetricsConfigurationsResult"
             }
         },
         "com.amazonaws.s3#ListBucketMetricsConfigurationsRequest": {
@@ -7143,6 +7197,9 @@
                         "smithy.api#documentation": "<p>The owner of the buckets listed.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListAllMyBucketsResult"
             }
         },
         "com.amazonaws.s3#ListMultipartUploads": {
@@ -7240,6 +7297,9 @@
                         "smithy.api#documentation": "<p>Encoding type used by Amazon S3 to encode object keys in the response.</p>\n         <p>If you specify <code>encoding-type</code> request parameter, Amazon S3 includes this element\n         in the response, and returns encoded key name values in the following response\n         elements:</p>\n\n         <p>\n            <code>Delimiter</code>, <code>KeyMarker</code>, <code>Prefix</code>,\n            <code>NextKeyMarker</code>, <code>Key</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListMultipartUploadsResult"
             }
         },
         "com.amazonaws.s3#ListMultipartUploadsRequest": {
@@ -7406,6 +7466,9 @@
                         "smithy.api#documentation": "<p> Encoding type used by Amazon S3 to encode object key names in the XML response.</p>\n\n         <p>If you specify encoding-type request parameter, Amazon S3 includes this element in the\n         response, and returns encoded key name values in the following response elements:</p>\n\n         <p>\n            <code>KeyMarker, NextKeyMarker, Prefix, Key</code>, and <code>Delimiter</code>.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListVersionsResult"
             }
         },
         "com.amazonaws.s3#ListObjectVersionsRequest": {
@@ -7556,6 +7619,9 @@
                         "smithy.api#documentation": "<p>Encoding type used by Amazon S3 to encode object keys in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListBucketResult"
             }
         },
         "com.amazonaws.s3#ListObjectsRequest": {
@@ -7723,6 +7789,9 @@
                         "smithy.api#documentation": "<p>If StartAfter was sent with the request, it is included in the response.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListBucketResult"
             }
         },
         "com.amazonaws.s3#ListObjectsV2Request": {
@@ -7915,6 +7984,9 @@
                         "smithy.api#httpHeader": "x-amz-request-charged"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#xmlName": "ListPartsResult"
             }
         },
         "com.amazonaws.s3#ListPartsRequest": {
@@ -12294,7 +12366,11 @@
                 "Grantee": {
                     "target": "com.amazonaws.s3#Grantee",
                     "traits": {
-                        "smithy.api#documentation": "<p>Container for the person being granted permissions.</p>"
+                        "smithy.api#documentation": "<p>Container for the person being granted permissions.</p>",
+                        "smithy.api#xmlNamespace": {
+                            "uri": "http://www.w3.org/2001/XMLSchema-instance",
+                            "prefix": "xsi"
+                        }
                     }
                 },
                 "Permission": {

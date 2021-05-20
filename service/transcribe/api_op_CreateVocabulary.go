@@ -31,7 +31,8 @@ func (c *Client) CreateVocabulary(ctx context.Context, params *CreateVocabularyI
 
 type CreateVocabularyInput struct {
 
-	// The language code of the vocabulary entries.
+	// The language code of the vocabulary entries. For a list of languages and their
+	// corresponding language codes, see what-is-transcribe.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -53,7 +54,7 @@ type CreateVocabularyInput struct {
 	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide. For more information about custom
 	// vocabularies, see Custom Vocabularies
-	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
+	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary).
 	VocabularyFileUri *string
 }
 

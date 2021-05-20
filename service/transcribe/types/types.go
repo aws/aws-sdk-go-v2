@@ -129,6 +129,11 @@ type MedicalTranscriptionJob struct {
 	// A timestamp that shows when the job was completed.
 	CompletionTime *time.Time
 
+	// Shows the type of content that you've configured Amazon Transcribe Medical to
+	// identify in a transcription job. If the value is PHI, you've configured the job
+	// to identify personal health information (PHI) in the transcription output.
+	ContentIdentificationType MedicalContentIdentificationType
+
 	// A timestamp that shows when the job was created.
 	CreationTime *time.Time
 
@@ -224,6 +229,11 @@ type MedicalTranscriptionJobSummary struct {
 
 	// A timestamp that shows when the job was completed.
 	CompletionTime *time.Time
+
+	// Shows the type of information you've configured Amazon Transcribe Medical to
+	// identify in a transcription job. If the value is PHI, you've configured the
+	// transcription job to identify personal health information (PHI).
+	ContentIdentificationType MedicalContentIdentificationType
 
 	// A timestamp that shows when the medical transcription job was created.
 	CreationTime *time.Time

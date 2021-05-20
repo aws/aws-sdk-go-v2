@@ -36,7 +36,7 @@ type ListLicensesInput struct {
 	//
 	// * ProductSKU
 	//
-	// * KeyFingerprint
+	// * Fingerprint
 	//
 	// * Status
 	Filters []types.Filter

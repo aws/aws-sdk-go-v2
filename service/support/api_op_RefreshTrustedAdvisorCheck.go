@@ -19,10 +19,10 @@ import (
 // TrustedAdvisorCheckRefreshStatus object.
 //
 // * You must have a Business or
-// Enterprise support plan to use the AWS Support API.
+// Enterprise Support plan to use the AWS Support API.
 //
 // * If you call the AWS
-// Support API from an account that does not have a Business or Enterprise support
+// Support API from an account that does not have a Business or Enterprise Support
 // plan, the SubscriptionRequiredException error message appears. For information
 // about changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
@@ -44,8 +44,8 @@ func (c *Client) RefreshTrustedAdvisorCheck(ctx context.Context, params *Refresh
 //
 type RefreshTrustedAdvisorCheckInput struct {
 
-	// The unique identifier for the Trusted Advisor check to refresh. Note: Specifying
-	// the check ID of a check that is automatically refreshed causes an
+	// The unique identifier for the Trusted Advisor check to refresh. Specifying the
+	// check ID of a check that is automatically refreshed causes an
 	// InvalidParameterValue error.
 	//
 	// This member is required.

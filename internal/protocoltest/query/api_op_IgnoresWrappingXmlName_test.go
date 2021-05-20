@@ -32,7 +32,7 @@ func TestClient_IgnoresWrappingXmlName_awsAwsqueryDeserialize(t *testing.T) {
 				"Content-Type": []string{"text/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<IgnoresWrappingXmlNameResponse xmlns="http://foo.com" xmlns="https://example.com/">
+			Body: []byte(`<IgnoresWrappingXmlNameResponse xmlns="https://example.com/">
 			    <IgnoresWrappingXmlNameResult>
 			        <foo>bar</foo>
 			    </IgnoresWrappingXmlNameResult>

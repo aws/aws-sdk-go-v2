@@ -49,11 +49,11 @@ type GetBucketStatisticsOutput struct {
 	// buckets that don't encrypt new objects by default.
 	BucketCountByEncryptionType *types.BucketCountByEncryptionType
 
-	// The total number of buckets whose bucket policies do and don't require
+	// The total number of buckets whose bucket policies do or don't require
 	// server-side encryption of objects when objects are uploaded to the buckets.
 	BucketCountByObjectEncryptionRequirement *types.BucketCountPolicyAllowsUnencryptedObjectUploads
 
-	// The total number of buckets that are and aren't shared with another AWS account.
+	// The total number of buckets that are or aren't shared with another AWS account.
 	BucketCountBySharedAccessType *types.BucketCountBySharedAccessType
 
 	// The total number of objects that Amazon Macie can analyze in the buckets. These
@@ -84,10 +84,11 @@ type GetBucketStatisticsOutput struct {
 	// size of all versions of the objects in the buckets.
 	SizeInBytes int64
 
-	// The total compressed storage size, in bytes, of the buckets. If versioning is
-	// enabled for any of the buckets, Macie calculates this value based on the size of
-	// the latest version of each object in those buckets. This value doesn't reflect
-	// the storage size of all versions of the objects in the buckets.
+	// The total storage size, in bytes, of the objects that are compressed (.gz,
+	// .gzip, .zip) files in the buckets. If versioning is enabled for any of the
+	// buckets, Macie calculates this value based on the size of the latest version of
+	// each applicable object in those buckets. This value doesn't reflect the storage
+	// size of all versions of the applicable objects in the buckets.
 	SizeInBytesCompressed int64
 
 	// The total number of objects that Amazon Macie can't analyze in the buckets.

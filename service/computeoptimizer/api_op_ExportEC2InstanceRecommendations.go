@@ -77,11 +77,15 @@ type ExportEC2InstanceRecommendationsInput struct {
 
 	// Indicates whether to include recommendations for resources in all member
 	// accounts of the organization if your account is the management account of an
-	// organization. The member accounts must also be opted in to Compute Optimizer.
-	// Recommendations for member accounts of the organization are not included in the
-	// export file if this parameter is omitted. Recommendations for member accounts
-	// are not included in the export if this parameter, or the account IDs parameter,
-	// is omitted.
+	// organization. The member accounts must also be opted in to Compute Optimizer,
+	// and trusted access for Compute Optimizer must be enabled in the organization
+	// account. For more information, see Compute Optimizer and AWS Organizations
+	// trusted access
+	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access)
+	// in the AWS Compute Optimizer User Guide. Recommendations for member accounts of
+	// the organization are not included in the export file if this parameter is
+	// omitted. Recommendations for member accounts are not included in the export if
+	// this parameter, or the account IDs parameter, is omitted.
 	IncludeMemberAccounts bool
 }
 
