@@ -17,6 +17,8 @@ replace github.com/aws/aws-sdk-go-v2/credentials => ../../../../credentials/
 
 replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../../feature/ec2/imds/
 
+replace github.com/aws/aws-sdk-go-v2/internal/ini => ../../../../internal/ini/
+
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../../service/internal/accept-encoding/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/presigned-url => ../../../../service/internal/presigned-url/
