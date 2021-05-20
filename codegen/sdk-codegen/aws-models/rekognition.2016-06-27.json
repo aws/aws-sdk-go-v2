@@ -725,7 +725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a collection in an AWS Region. You can add faces to the collection using the\n        <a>IndexFaces</a> operation. </p>\n         <p>For example, you might create collections, one for each of your application users. A\n      user can then index faces using the <code>IndexFaces</code> operation and persist results in a\n      specific collection. Then, a user can search the collection for faces in the user-specific\n      container. </p>\n         <p>When you create a collection, it is associated with the latest version of the face model version.</p>\n         <note>\n            <p>Collection names are case-sensitive.</p>\n         </note>\n\n         <p>This operation requires permissions to perform the\n        <code>rekognition:CreateCollection</code> action.</p>"
+                "smithy.api#documentation": "<p>Creates a collection in an AWS Region. You can add faces to the collection using the\n        <a>IndexFaces</a> operation. </p>\n         <p>For example, you might create collections, one for each of your application users. A\n      user can then index faces using the <code>IndexFaces</code> operation and persist results in a\n      specific collection. Then, a user can search the collection for faces in the user-specific\n      container. </p>\n         <p>When you create a collection, it is associated with the latest version of the face model version.</p>\n         <note>\n            <p>Collection names are case-sensitive.</p>\n         </note>\n\n         <p>This operation requires permissions to perform the\n      <code>rekognition:CreateCollection</code> action. If you want to tag your collection, you also require permission to perform the <code>rekognition:TagResource</code> operation.</p>"
             }
         },
         "com.amazonaws.rekognition#CreateCollectionRequest": {
@@ -911,6 +911,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n      A set of tags (key-value pairs) that you want to attach to the model.\n    </p>"
                     }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rekognition#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK).\n         You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your CMK,\n         or an alias for your CMK.\n         The key is used to encrypt training and test images copied into the service for model training. Your \n         source images are unaffected. The key is also used to encrypt training results and manifest files written\n         to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>\n         <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted\n         using a key that AWS owns and manages.</p>"
+                    }
                 }
             }
         },
@@ -960,7 +966,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Rekognition stream processor that you can use to detect and recognize faces in a streaming video.</p>\n        <p>Amazon Rekognition Video is a consumer of live video from Amazon Kinesis Video Streams. Amazon Rekognition Video sends analysis results to Amazon Kinesis Data Streams.</p>\n        <p>You provide as input a Kinesis video stream (<code>Input</code>) and a Kinesis data stream (<code>Output</code>) stream. You also specify the\n            face recognition criteria in <code>Settings</code>. For example, the collection containing faces that you want to recognize.\n            Use <code>Name</code> to assign an identifier for the stream processor. You use <code>Name</code>\n            to manage the stream processor. For example, you can start processing the source video by calling <a>StartStreamProcessor</a> with\n            the <code>Name</code> field. </p>\n        <p>After you have finished analyzing a streaming video, use <a>StopStreamProcessor</a> to\n        stop processing. You can delete the stream processor by calling <a>DeleteStreamProcessor</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon Rekognition stream processor that you can use to detect and recognize faces in a streaming video.</p>\n        <p>Amazon Rekognition Video is a consumer of live video from Amazon Kinesis Video Streams. Amazon Rekognition Video sends analysis results to Amazon Kinesis Data Streams.</p>\n        <p>You provide as input a Kinesis video stream (<code>Input</code>) and a Kinesis data stream (<code>Output</code>) stream. You also specify the\n            face recognition criteria in <code>Settings</code>. For example, the collection containing faces that you want to recognize.\n            Use <code>Name</code> to assign an identifier for the stream processor. You use <code>Name</code>\n            to manage the stream processor. For example, you can start processing the source video by calling <a>StartStreamProcessor</a> with\n            the <code>Name</code> field. </p>\n        <p>After you have finished analyzing a streaming video, use <a>StopStreamProcessor</a> to\n        stop processing. You can delete the stream processor by calling <a>DeleteStreamProcessor</a>.</p>\n        <p>This operation requires permissions to perform the\n            <code>rekognition:CreateStreamProcessor</code> action. If you want to tag your stream processor, you also require permission to perform the <code>rekognition:TagResource</code> operation.</p>"
             }
         },
         "com.amazonaws.rekognition#CreateStreamProcessorRequest": {
@@ -4305,6 +4311,16 @@
                 "smithy.api#documentation": "<p>Kinesis video stream stream that provides the source streaming video for a Amazon Rekognition Video stream processor. For more information, see\n            CreateStreamProcessor in the Amazon Rekognition Developer Guide.</p>"
             }
         },
+        "com.amazonaws.rekognition#KmsKeyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
+            }
+        },
         "com.amazonaws.rekognition#Label": {
             "type": "structure",
             "members": {
@@ -4833,7 +4849,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Returns a list of tags in an Amazon Rekognition collection, stream processor, or Custom Labels model.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Returns a list of tags in an Amazon Rekognition collection, stream processor, or Custom Labels model.\n    </p>\n         <p>This operation requires permissions to perform the\n      <code>rekognition:ListTagsForResource</code> action. </p>"
             }
         },
         "com.amazonaws.rekognition#ListTagsForResourceRequest": {
@@ -5381,6 +5397,12 @@
                     "target": "com.amazonaws.rekognition#GroundTruthManifest",
                     "traits": {
                         "smithy.api#documentation": "<p>The location of the summary manifest. The summary manifest provides aggregate data validation results for the training\n         and test datasets.</p>"
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.rekognition#KmsKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifer for the AWS Key Management Service (AWS KMS) customer master key that was used to encrypt the model during training. </p>"
                     }
                 }
             },
@@ -5985,7 +6007,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A collection with the specified ID already exists.</p>",
+                "smithy.api#documentation": "<p>A resource with the specified ID already exists.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -6036,7 +6058,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The collection specified in the request cannot be found.</p>",
+                "smithy.api#documentation": "<p>The resource specified in the request cannot be found.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -6206,7 +6228,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>For a given input image, first detects the largest face in the image, and then searches\n      the specified collection for matching faces. The operation compares the features of the input\n      face with faces in the specified collection. </p>\n         <note>\n            <p>To search for all faces in an input image, you might first call the <a>IndexFaces</a> operation, and then use the face IDs returned in subsequent\n        calls to the <a>SearchFaces</a> operation. </p>\n            <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes\n        in the response to make face crops, which then you can pass in to the\n          <code>SearchFacesByImage</code> operation. </p>\n         </note>\n\n         <p>You pass the input image either as base64-encoded image bytes or as a reference to an\n      image in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p>\n      The response returns an array of faces that match, ordered by similarity score with the\n      highest similarity first. More specifically, it is an\n      array of metadata for each face match found. Along with the metadata, the response also\n      includes a <code>similarity</code> indicating how similar the face is\n      to the input face.\n\n      In the response, the operation also returns the bounding\n      box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition\n      used for the input image.\n    </p>\n      \n         <p>For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide.</p>\n    \n         <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces\n      that don’t meet a required quality bar. The quality bar is based on a\n      variety of common use cases. \n      Use <code>QualityFilter</code> to set the quality bar for \n      filtering by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>.\n      If you do not want to filter detected faces, specify <code>NONE</code>. The default\n      value is <code>NONE</code>.</p>\n         <note>\n            <p>To use quality filtering, you need a collection associated with version 3 of the \n      face model or higher. To get the version of the face model associated with a collection, call \n      <a>DescribeCollection</a>. </p>\n         </note>\n    \n         <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code>\n      action.</p>"
+                "smithy.api#documentation": "<p>For a given input image, first detects the largest face in the image, and then searches\n      the specified collection for matching faces. The operation compares the features of the input\n      face with faces in the specified collection. </p>\n         <note>\n            <p>To search for all faces in an input image, you might first call the <a>IndexFaces</a> operation, and then use the face IDs returned in subsequent\n        calls to the <a>SearchFaces</a> operation. </p>\n            <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes\n        in the response to make face crops, which then you can pass in to the\n          <code>SearchFacesByImage</code> operation. </p>\n         </note>\n\n         <p>You pass the input image either as base64-encoded image bytes or as a reference to an\n      image in an Amazon S3 bucket. If you use the\n      AWS\n      CLI to call Amazon Rekognition operations, passing image bytes is not\n      supported. The image must be either a PNG or JPEG formatted file. </p>\n         <p>\n      The response returns an array of faces that match, ordered by similarity score with the\n      highest similarity first. More specifically, it is an\n      array of metadata for each face match found. Along with the metadata, the response also\n      includes a <code>similarity</code> indicating how similar the face is\n      to the input face.\n\n      In the response, the operation also returns the bounding\n      box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition\n      used for the input image.\n    </p>\n         <p>If no faces are detected in the input image, <code>SearchFacesByImage</code> returns an \n      <code>InvalidParameterException</code> error. </p>\n      \n         <p>For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide.</p>\n    \n         <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces\n      that don’t meet a required quality bar. The quality bar is based on a\n      variety of common use cases. \n      Use <code>QualityFilter</code> to set the quality bar for \n      filtering by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>.\n      If you do not want to filter detected faces, specify <code>NONE</code>. The default\n      value is <code>NONE</code>.</p>\n         <note>\n            <p>To use quality filtering, you need a collection associated with version 3 of the \n      face model or higher. To get the version of the face model associated with a collection, call \n      <a>DescribeCollection</a>. </p>\n         </note>\n    \n         <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code>\n      action.</p>"
             }
         },
         "com.amazonaws.rekognition#SearchFacesByImageRequest": {
@@ -6476,7 +6498,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>\n    \n      \n         <p>The size of the collection or tag list exceeds the allowed limit. For more information, see \n      Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
+                "smithy.api#documentation": "<p></p>\n    \n      \n         <p>The size of the collection exceeds the allowed limit. For more information, see \n      Limits in Amazon Rekognition in the Amazon Rekognition Developer Guide. </p>",
                 "smithy.api#error": "client"
             }
         },
@@ -7755,7 +7777,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Adds one or more key-value tags to an Amazon Rekognition collection, stream processor, or Custom Labels model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a>.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Adds one or more key-value tags to an Amazon Rekognition collection, stream processor, or Custom Labels model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a>.\n    </p>\n         <p>This operation requires permissions to perform the\n      <code>rekognition:TagResource</code> action. </p>"
             }
         },
         "com.amazonaws.rekognition#TagResourceRequest": {
@@ -8107,7 +8129,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Removes one or more tags from an Amazon Rekognition collection, stream processor, or Custom Labels model.\n    </p>"
+                "smithy.api#documentation": "<p>\n      Removes one or more tags from an Amazon Rekognition collection, stream processor, or Custom Labels model.\n    </p>\n         <p>This operation requires permissions to perform the\n      <code>rekognition:UntagResource</code> action. </p>"
             }
         },
         "com.amazonaws.rekognition#UntagResourceRequest": {

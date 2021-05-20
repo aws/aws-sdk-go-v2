@@ -341,7 +341,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles\n            transcription of an audio file. </p>",
+                "smithy.api#documentation": "<p>Creates a new custom vocabulary that you can use to change the way Amazon Transcribe handles\n            transcription of an audio file.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/vocabularies/{VocabularyName}",
@@ -449,7 +449,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.transcribe#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code of the vocabulary entries.</p>",
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their\n            corresponding language codes, see <a>what-is-transcribe</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -462,7 +462,7 @@
                 "VocabularyFileUri": {
                     "target": "com.amazonaws.transcribe#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 location of the text file that contains the definition of the custom\n            vocabulary. The URI must be in the same region as the API endpoint that you are calling.\n            The general form is </p>\n        \n        \n        \n        <p>For more information about S3 object names, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies, see <a href=\"http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary\">Custom Vocabularies</a>.</p>"
+                        "smithy.api#documentation": "<p>The S3 location of the text file that contains the definition of the custom\n            vocabulary. The URI must be in the same region as the API endpoint that you are calling.\n            The general form is </p>\n        \n        \n        \n        <p>For more information about S3 object names, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies, see <a href=\"http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary\">Custom\n                Vocabularies</a>.</p>"
                     }
                 }
             }
@@ -2081,6 +2081,17 @@
                 }
             }
         },
+        "com.amazonaws.transcribe#MedicalContentIdentificationType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PHI",
+                        "name": "PHI"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.transcribe#MedicalTranscript": {
             "type": "structure",
             "members": {
@@ -2167,6 +2178,12 @@
                         "smithy.api#documentation": "<p>Object that contains  object.</p>"
                     }
                 },
+                "ContentIdentificationType": {
+                    "target": "com.amazonaws.transcribe#MedicalContentIdentificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the type of content that you've configured Amazon Transcribe Medical to identify in a transcription\n            job. If the value is <code>PHI</code>, you've configured the job to identify personal\n            health information (PHI) in the transcription output.</p>"
+                    }
+                },
                 "Specialty": {
                     "target": "com.amazonaws.transcribe#Specialty",
                     "traits": {
@@ -2245,6 +2262,12 @@
                     "target": "com.amazonaws.transcribe#Specialty",
                     "traits": {
                         "smithy.api#documentation": "<p>The medical specialty of the transcription job. <code>Primary care</code> is the only\n            valid value.</p>"
+                    }
+                },
+                "ContentIdentificationType": {
+                    "target": "com.amazonaws.transcribe#MedicalContentIdentificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the type of information you've configured Amazon Transcribe Medical to identify in a transcription\n            job. If the value is <code>PHI</code>, you've configured the transcription job to identify\n            personal health information (PHI).</p>"
                     }
                 },
                 "Type": {
@@ -2499,7 +2522,7 @@
                 "VocabularyFilterMethod": {
                     "target": "com.amazonaws.transcribe#VocabularyFilterMethod",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <code>mask</code> to remove filtered text from the transcript and replace it\n            with three asterisks (\"***\") as placeholder text. Set to <code>remove</code> to remove\n            filtered text from the transcript without using placeholder text. Set to\n                <code>tag</code> to mark the word in the transcription output that matches the\n            vocabulary filter. When you set the filter method to <code>tag</code>, the words matching\n            your vocabulary filter are not masked or removed.</p>"
+                        "smithy.api#documentation": "<p>Set to <code>mask</code> to remove filtered text from the transcript and replace it\n            with three asterisks (\"***\") as placeholder text. Set to <code>remove</code> to remove\n            filtered text from the transcript without using placeholder text. Set to\n                <code>tag</code> to mark the word in the transcription output that matches the\n            vocabulary filter. When you set the filter method to <code>tag</code>, the words\n            matching your vocabulary filter are not masked or removed.</p>"
                     }
                 }
             },
@@ -2595,7 +2618,7 @@
                 "OutputKey": {
                     "target": "com.amazonaws.transcribe#OutputKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can specify a location in an Amazon S3 bucket to store the output of your medical\n            transcription job.</p>\n        <p>If you don't specify an output key, Amazon Transcribe Medical stores the output of your transcription job\n            in the Amazon S3 bucket you specified. By default, the object key is\n            \"your-transcription-job-name.json\".</p>\n        <p>You can use output keys to specify the Amazon S3 prefix and file name of the transcription\n            output. For example, specifying the Amazon S3 prefix, \"folder1/folder2/\", as an output key\n            would lead to the output being stored as\n            \"folder1/folder2/your-transcription-job-name.json\". If you specify\n            \"my-other-job-name.json\" as the output key, the object key is changed to\n            \"my-other-job-name.json\". You can use an output key to change both the prefix and the\n            file name, for example \"folder/my-other-job-name.json\".</p>\n        <p>If you specify an output key, you must also specify an S3 bucket in the <code>OutputBucketName</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>You can specify a location in an Amazon S3 bucket to store the output of your medical\n            transcription job.</p>\n        <p>If you don't specify an output key, Amazon Transcribe Medical stores the output of your transcription job\n            in the Amazon S3 bucket you specified. By default, the object key is\n            \"your-transcription-job-name.json\".</p>\n        <p>You can use output keys to specify the Amazon S3 prefix and file name of the transcription\n            output. For example, specifying the Amazon S3 prefix, \"folder1/folder2/\", as an output key\n            would lead to the output being stored as\n            \"folder1/folder2/your-transcription-job-name.json\". If you specify\n            \"my-other-job-name.json\" as the output key, the object key is changed to\n            \"my-other-job-name.json\". You can use an output key to change both the prefix and the\n            file name, for example \"folder/my-other-job-name.json\".</p>\n        <p>If you specify an output key, you must also specify an S3 bucket in the\n                <code>OutputBucketName</code> parameter.</p>"
                     }
                 },
                 "OutputEncryptionKMSKeyId": {
@@ -2608,6 +2631,12 @@
                     "target": "com.amazonaws.transcribe#MedicalTranscriptionSetting",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional settings for the medical transcription job.</p>"
+                    }
+                },
+                "ContentIdentificationType": {
+                    "target": "com.amazonaws.transcribe#MedicalContentIdentificationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can configure Amazon Transcribe Medical to label content in the transcription output. If you specify\n                <code>PHI</code>, Amazon Transcribe Medical labels the personal health information (PHI) that it identifies in the transcription\n            output.</p>"
                     }
                 },
                 "Specialty": {
@@ -2660,7 +2689,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts an asynchronous job to transcribe speech to text. </p>",
+                "smithy.api#documentation": "<p>Starts an asynchronous job to transcribe speech to text.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/transcriptionjobs/{TranscriptionJobName}",
@@ -2682,7 +2711,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.transcribe#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code for the language used in the input media file.</p>"
+                        "smithy.api#documentation": "<p>The language code for the language used in the input media file.</p>\n        <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must\n            be encoded at a sample rate of 16000 Hz or higher.</p>"
                     }
                 },
                 "MediaSampleRateHertz": {
@@ -2713,7 +2742,7 @@
                 "OutputKey": {
                     "target": "com.amazonaws.transcribe#OutputKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can specify a location in an Amazon S3 bucket to store the output of your transcription job.</p>\n        <p>If you don't specify an output key, Amazon Transcribe stores the output of your transcription job\n            in the Amazon S3 bucket you specified. By default, the object key is\n            \"your-transcription-job-name.json\".</p>\n        <p>You can use output keys to specify the Amazon S3 prefix and file name of the transcription\n            output. For example, specifying the Amazon S3 prefix, \"folder1/folder2/\", as an output key\n            would lead to the output being stored as\n            \"folder1/folder2/your-transcription-job-name.json\". If you specify\n            \"my-other-job-name.json\" as the output key, the object key is changed to\n            \"my-other-job-name.json\". You can use an output key to change both the prefix and the\n            file name, for example \"folder/my-other-job-name.json\".</p>\n        <p>If you specify an output key, you must also specify an S3 bucket in the <code>OutputBucketName</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>You can specify a location in an Amazon S3 bucket to store the output of your transcription\n            job.</p>\n        <p>If you don't specify an output key, Amazon Transcribe stores the output of your transcription job\n            in the Amazon S3 bucket you specified. By default, the object key is\n            \"your-transcription-job-name.json\".</p>\n        <p>You can use output keys to specify the Amazon S3 prefix and file name of the transcription\n            output. For example, specifying the Amazon S3 prefix, \"folder1/folder2/\", as an output key\n            would lead to the output being stored as\n            \"folder1/folder2/your-transcription-job-name.json\". If you specify\n            \"my-other-job-name.json\" as the output key, the object key is changed to\n            \"my-other-job-name.json\". You can use an output key to change both the prefix and the\n            file name, for example \"folder/my-other-job-name.json\".</p>\n        <p>If you specify an output key, you must also specify an S3 bucket in the\n                <code>OutputBucketName</code> parameter.</p>"
                     }
                 },
                 "OutputEncryptionKMSKeyId": {
@@ -3359,7 +3388,7 @@
                 "LanguageCode": {
                     "target": "com.amazonaws.transcribe#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code of the vocabulary entries.</p>",
+                        "smithy.api#documentation": "<p>The language code of the vocabulary entries. For a list of languages and their\n            corresponding language codes, see <a>what-is-transcribe</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -2007,7 +2007,7 @@
                 "NumCacheNodes": {
                     "target": "com.amazonaws.elasticache#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The initial number of cache nodes that the cluster has.</p>\n        <p>For clusters running Redis, this value must be 1. \n    For clusters running Memcached, this value must be between 1 and 40.</p>\n        <p>If you need more than 20 nodes for your Memcached cluster, \n            please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>"
+                        "smithy.api#documentation": "<p>The initial number of cache nodes that the cluster has.</p>\n        <p>For clusters running Redis, this value must be 1. \n    For clusters running Memcached, this value must be between 1 and 40.</p>\n        <p>If you need more than 40 nodes for your Memcached cluster, \n            please fill out the ElastiCache Limit Increase Request form at <a href=\"http://aws.amazon.com/contact-us/elasticache-node-limit-request/\">http://aws.amazon.com/contact-us/elasticache-node-limit-request/</a>.</p>"
                     }
                 },
                 "CacheNodeType": {
@@ -2691,7 +2691,7 @@
                 "UserGroupIds": {
                     "target": "com.amazonaws.elasticache#UserGroupIdListInput",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of user groups to associate with the replication group.</p>"
+                        "smithy.api#documentation": "<p>The user group to associate with the replication group.</p>"
                     }
                 },
                 "LogDeliveryConfigurations": {
@@ -6703,13 +6703,13 @@
                 "UserGroupIdsToAdd": {
                     "target": "com.amazonaws.elasticache#UserGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of user group IDs.</p>"
+                        "smithy.api#documentation": "<p>The user group you are associating with the replication group.</p>"
                     }
                 },
                 "UserGroupIdsToRemove": {
                     "target": "com.amazonaws.elasticache#UserGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of users groups to remove, meaning the users in the group no longer can access thereplication group.</p>"
+                        "smithy.api#documentation": "<p>The user group to remove, meaning the users in the group no longer can access the replication group.</p>"
                     }
                 },
                 "RemoveUserGroups": {

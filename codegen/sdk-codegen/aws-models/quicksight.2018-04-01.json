@@ -165,7 +165,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\w\\-]+|(\\$LATEST)|(\\$PUBLISHED)"
+                "smithy.api#pattern": "^[\\w\\-]+|(\\$LATEST)|(\\$PUBLISHED)$"
             }
         },
         "com.amazonaws.quicksight#AmazonElasticsearchParameters": {
@@ -1136,7 +1136,7 @@
         "com.amazonaws.quicksight#CopySourceArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+"
+                "smithy.api#pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+$"
             }
         },
         "com.amazonaws.quicksight#CreateAccountCustomization": {
@@ -8249,7 +8249,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+                "smithy.api#pattern": "^[\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.quicksight#GroupName": {
@@ -8258,7 +8258,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+                "smithy.api#pattern": "^[\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.quicksight#GutterStyle": {
@@ -8341,7 +8341,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "(?=^.{2,256}$)(?!.*\\s)[0-9a-zA-Z-_.:=+@]*$"
+                "smithy.api#pattern": "^(?=^.{2,256}$)(?!.*\\s)[0-9a-zA-Z-_.:=+@]*$"
             }
         },
         "com.amazonaws.quicksight#IAMPolicyAssignmentSummary": {
@@ -8385,7 +8385,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+                "smithy.api#pattern": "^[\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.quicksight#IdentityNameList": {
@@ -11202,7 +11202,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[0-9a-zA-Z-]*"
+                "smithy.api#pattern": "^[0-9a-zA-Z-]*$"
             }
         },
         "com.amazonaws.quicksight#LogicalTableMap": {
@@ -11478,7 +11478,7 @@
         "com.amazonaws.quicksight#NonEmptyString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.quicksight#OnClause": {
@@ -11634,7 +11634,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[0-9a-zA-Z-]*"
+                "smithy.api#pattern": "^[0-9a-zA-Z-]*$"
             }
         },
         "com.amazonaws.quicksight#PhysicalTableMap": {
@@ -12710,7 +12710,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\w\\-]+"
+                "smithy.api#pattern": "^[\\w\\-]+$"
             }
         },
         "com.amazonaws.quicksight#RoleName": {
@@ -12730,7 +12730,7 @@
                     "min": 2,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\w+=.@-]*"
+                "smithy.api#pattern": "^[\\w+=.@-]*$"
             }
         },
         "com.amazonaws.quicksight#RowInfo": {
@@ -12777,10 +12777,31 @@
                         "smithy.api#documentation": "<p>The type of permissions to use when interpretting the permissions for RLS. <code>DENY_ACCESS</code> \n        is included for backward compatibility only.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "FormatVersion": {
+                    "target": "com.amazonaws.quicksight#RowLevelPermissionFormatVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user or group rules associated with the dataset that contains permissions for RLS.</p>\n         <p>By default, <code>FormatVersion</code> is <code>VERSION_1</code>. When <code>FormatVersion</code> is <code>VERSION_1</code>, <code>UserName</code> and <code>GroupName</code> are required. When <code>FormatVersion</code> is <code>VERSION_2</code>, <code>UserARN</code> and <code>GroupARN</code> are required, and <code>Namespace</code> must not exist.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about a dataset that contains permissions for row-level security (RLS). \n            The permissions dataset maps fields to users or groups. For more information, see \n            <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/restrict-access-to-a-data-set-using-row-level-security.html\">Using Row-Level Security (RLS) to Restrict Access to a Dataset</a> in the <i>Amazon QuickSight User\n                Guide</i>.</p>\n            <p>The option to deny permissions by setting <code>PermissionPolicy</code> to <code>DENY_ACCESS</code> is \n            not supported for new RLS datasets.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#RowLevelPermissionFormatVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "VERSION_1",
+                        "name": "VERSION_1"
+                    },
+                    {
+                        "value": "VERSION_2",
+                        "name": "VERSION_2"
+                    }
+                ]
             }
         },
         "com.amazonaws.quicksight#RowLevelPermissionPolicy": {
@@ -16994,7 +17015,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "[\\u0020-\\u00FF]+"
+                "smithy.api#pattern": "^[\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.quicksight#UserName2": {

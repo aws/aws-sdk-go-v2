@@ -613,7 +613,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the number of S3 buckets that are and aren't shared with other AWS accounts.</p>"
+                "smithy.api#documentation": "<p>Provides information about the number of S3 buckets that are or aren't shared with other AWS accounts.</p>"
             }
         },
         "com.amazonaws.macie2#BucketCountPolicyAllowsUnencryptedObjectUploads": {
@@ -642,7 +642,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the number of S3 buckets whose bucket policies do and don't require server-side encryption of objects when objects are uploaded to the buckets.</p>"
+                "smithy.api#documentation": "<p>Provides information about the number of S3 buckets whose bucket policies do or don't require server-side encryption of objects when objects are uploaded to the buckets.</p>"
             }
         },
         "com.amazonaws.macie2#BucketCriteria": {
@@ -868,7 +868,7 @@
                 "sizeInBytesCompressed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total compressed storage size, in bytes, of the bucket.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.</p>",
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p> <p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
                         "smithy.api#jsonName": "sizeInBytesCompressed"
                     }
                 },
@@ -1777,6 +1777,43 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.macie2#CriteriaBlockForJob": {
+            "type": "structure",
+            "members": {
+                "and": {
+                    "target": "com.amazonaws.macie2#__listOfCriteriaForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of conditions, one for each condition that determines which buckets to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>",
+                        "smithy.api#jsonName": "and"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies one or more property- and tag-based conditions that define criteria for including or excluding S3 buckets from a classification job.</p>"
+            }
+        },
+        "com.amazonaws.macie2#CriteriaForJob": {
+            "type": "structure",
+            "members": {
+                "simpleCriterion": {
+                    "target": "com.amazonaws.macie2#SimpleCriterionForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A property-based condition that defines a property, operator, and one or more values for including or excluding buckets from the job.</p>",
+                        "smithy.api#jsonName": "simpleCriterion"
+                    }
+                },
+                "tagCriterion": {
+                    "target": "com.amazonaws.macie2#TagCriterionForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding buckets from the job.</p>",
+                        "smithy.api#jsonName": "tagCriterion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding S3 buckets from a classification job.</p>"
+            }
+        },
         "com.amazonaws.macie2#Criterion": {
             "type": "map",
             "key": {
@@ -2591,7 +2628,7 @@
                 "s3JobDefinition": {
                     "target": "com.amazonaws.macie2#S3JobDefinition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 buckets that the job is configured to analyze, and the scope of that analysis.</p>",
+                        "smithy.api#documentation": "<p>The S3 buckets that contain the objects to analyze, and the scope of that analysis.</p>",
                         "smithy.api#jsonName": "s3JobDefinition"
                     }
                 },
@@ -3734,14 +3771,14 @@
                 "bucketCountByObjectEncryptionRequirement": {
                     "target": "com.amazonaws.macie2#BucketCountPolicyAllowsUnencryptedObjectUploads",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of buckets whose bucket policies do and don't require server-side encryption of objects when objects are uploaded to the buckets.</p>",
+                        "smithy.api#documentation": "<p>The total number of buckets whose bucket policies do or don't require server-side encryption of objects when objects are uploaded to the buckets.</p>",
                         "smithy.api#jsonName": "bucketCountByObjectEncryptionRequirement"
                     }
                 },
                 "bucketCountBySharedAccessType": {
                     "target": "com.amazonaws.macie2#BucketCountBySharedAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of buckets that are and aren't shared with another AWS account.</p>",
+                        "smithy.api#documentation": "<p>The total number of buckets that are or aren't shared with another AWS account.</p>",
                         "smithy.api#jsonName": "bucketCountBySharedAccessType"
                     }
                 },
@@ -3783,7 +3820,7 @@
                 "sizeInBytesCompressed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total compressed storage size, in bytes, of the buckets.</p> <p>If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each object in those buckets. This value doesn't reflect the storage size of all versions of the objects in the buckets.</p>",
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the buckets.</p> <p>If versioning is enabled for any of the buckets, Macie calculates this value based on the size of the latest version of each applicable object in those buckets. This value doesn't reflect the storage size of all versions of the applicable objects in the buckets.</p>",
                         "smithy.api#jsonName": "sizeInBytesCompressed"
                     }
                 },
@@ -5178,28 +5215,28 @@
                 "isDefinedInJob": {
                     "target": "com.amazonaws.macie2#IsDefinedInJob",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - One or more jobs is configured to analyze data in the bucket, and at least one of those jobs has a status other than CANCELLED.</p></li> <li><p>FALSE - No jobs are configured to analyze data in the bucket, or all the jobs that are configured to analyze data in the bucket have a status of CANCELLED.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul> <p></p>",
+                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at least one of those jobs has a status other than CANCELLED. Or the bucket matched the bucket criteria (S3BucketCriteriaForJob) for at least one job that previously ran.</p></li> <li><p>FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly include the bucket in their bucket definitions have a status of CANCELLED, or the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any jobs that previously ran.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul> <p></p>",
                         "smithy.api#jsonName": "isDefinedInJob"
                     }
                 },
                 "isMonitoredByJob": {
                     "target": "com.amazonaws.macie2#IsMonitoredByJob",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - One or more recurring jobs is configured to analyze data in the bucket, and at least one of those jobs has a status other than CANCELLED.</p></li> <li><p>FALSE - No recurring jobs are configured to analyze data in the bucket, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul>",
+                        "smithy.api#documentation": "<p>Specifies whether any recurring jobs are configured to analyze data in the bucket. Possible values are:</p> <ul><li><p>TRUE - The bucket is explicitly included in the bucket definition (S3BucketDefinitionForJob) for one or more recurring jobs or the bucket matches the bucket criteria (S3BucketCriteriaForJob) for one or more recurring jobs. At least one of those jobs has a status other than CANCELLED.</p></li> <li><p>FALSE - The bucket isn't explicitly included in the bucket definition (S3BucketDefinitionForJob) for any recurring jobs, the bucket doesn't match the bucket criteria (S3BucketCriteriaForJob) for any recurring jobs, or all the recurring jobs that are configured to analyze data in the bucket have a status of CANCELLED.</p></li> <li><p>UNKNOWN - An exception occurred when Amazon Macie attempted to retrieve job data for the bucket.</p></li></ul>",
                         "smithy.api#jsonName": "isMonitoredByJob"
                     }
                 },
                 "lastJobId": {
                     "target": "com.amazonaws.macie2#__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the job that ran most recently (either the latest run of a recurring job or the only run of a one-time job) and is configured to analyze data in the bucket.</p> <p>This value is null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the job that ran most recently and is configured to analyze data in the bucket, either the latest run of a recurring job or the only run of a one-time job.</p> <p>This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>",
                         "smithy.api#jsonName": "lastJobId"
                     }
                 },
                 "lastJobRunTime": {
                     "target": "com.amazonaws.macie2#__timestampIso8601",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId) started. If the job is a recurring job, this value indicates when the most recent run started.</p> <p>This value is null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>",
+                        "smithy.api#documentation": "<p>The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId) started. If the job is a recurring job, this value indicates when the most recent run started.</p> <p>This value is typically null if the value for the isDefinedInJob property is FALSE or UNKNOWN.</p>",
                         "smithy.api#jsonName": "lastJobRunTime"
                     }
                 }
@@ -5243,20 +5280,20 @@
                 "simpleScopeTerm": {
                     "target": "com.amazonaws.macie2#SimpleScopeTerm",
                     "traits": {
-                        "smithy.api#documentation": "<p>A property-based condition that defines a property, operator, and one or more values for including or excluding an object from the job.</p>",
+                        "smithy.api#documentation": "<p>A property-based condition that defines a property, operator, and one or more values for including or excluding objects from the job.</p>",
                         "smithy.api#jsonName": "simpleScopeTerm"
                     }
                 },
                 "tagScopeTerm": {
                     "target": "com.amazonaws.macie2#TagScopeTerm",
                     "traits": {
-                        "smithy.api#documentation": "<p>A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding an object from the job.</p>",
+                        "smithy.api#documentation": "<p>A tag-based condition that defines the operator and tag keys or tag key and value pairs for including or excluding objects from the job.</p>",
                         "smithy.api#jsonName": "tagScopeTerm"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding objects from a classification job.</p>"
+                "smithy.api#documentation": "<p>Specifies a property- or tag-based condition that defines criteria for including or excluding S3 objects from a classification job.</p>"
             }
         },
         "com.amazonaws.macie2#JobScopingBlock": {
@@ -5265,13 +5302,13 @@
                 "and": {
                     "target": "com.amazonaws.macie2#__listOfJobScopeTerm",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of conditions, one for each condition that determines which objects to include or exclude from the job.</p>",
+                        "smithy.api#documentation": "<p>An array of conditions, one for each condition that determines which objects to include or exclude from the job. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>",
                         "smithy.api#jsonName": "and"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies one or more property- and tag-based conditions that define criteria for including or excluding objects from a classification job. If you specify more than one condition, Amazon Macie uses an AND operator to join the conditions.</p>"
+                "smithy.api#documentation": "<p>Specifies one or more property- and tag-based conditions that define criteria for including or excluding S3 objects from a classification job.</p>"
             }
         },
         "com.amazonaws.macie2#JobStatus": {
@@ -5312,7 +5349,7 @@
                 "bucketDefinitions": {
                     "target": "com.amazonaws.macie2#__listOfS3BucketDefinitionForJob",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 buckets that the job is configured to analyze.</p>",
+                        "smithy.api#documentation": "<p>An array of objects, one for each AWS account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>",
                         "smithy.api#jsonName": "bucketDefinitions"
                     }
                 },
@@ -5363,6 +5400,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the current status of the job is USER_PAUSED, specifies when the job was paused and when the job or job run will expire and be cancelled if it isn't resumed. This value is present only if the value for jobStatus is USER_PAUSED.</p>",
                         "smithy.api#jsonName": "userPausedDetails"
+                    }
+                },
+                "bucketCriteria": {
+                    "target": "com.amazonaws.macie2#S3BucketCriteriaForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which S3 buckets are included or excluded from the job's analysis. Each time the job runs, the job uses these criteria to determine which buckets to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.</p>",
+                        "smithy.api#jsonName": "bucketCriteria"
                     }
                 }
             },
@@ -5429,7 +5473,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies whether any account- or bucket-level access errors occurred when a classification job ran. For example, the job is configured to analyze data for a member account that was suspended, or the job is configured to analyze an S3 bucket that Amazon Macie isn't allowed to access.</p>"
+                "smithy.api#documentation": "<p>Specifies whether any account- or bucket-level access errors occurred when a classification job ran. For information about using logging data to investigate these errors, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-monitor-cw-logs.html\">Monitoring sensitive data discovery jobs</a> in the <i>Amazon Macie User Guide</i>.</p>"
             }
         },
         "com.amazonaws.macie2#LastRunErrorStatusCode": {
@@ -6380,6 +6424,9 @@
                     "target": "com.amazonaws.macie2#PutFindingsPublicationConfiguration"
                 },
                 {
+                    "target": "com.amazonaws.macie2#SearchResources"
+                },
+                {
                     "target": "com.amazonaws.macie2#TagResource"
                 },
                 {
@@ -6434,6 +6481,106 @@
                         "name": "ENABLED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.macie2#MatchingBucket": {
+            "type": "structure",
+            "members": {
+                "accountId": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the AWS account that owns the bucket.</p>",
+                        "smithy.api#jsonName": "accountId"
+                    }
+                },
+                "bucketName": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket.</p>",
+                        "smithy.api#jsonName": "bucketName"
+                    }
+                },
+                "classifiableObjectCount": {
+                    "target": "com.amazonaws.macie2#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p>",
+                        "smithy.api#jsonName": "classifiableObjectCount"
+                    }
+                },
+                "classifiableSizeInBytes": {
+                    "target": "com.amazonaws.macie2#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that Amazon Macie can analyze in the bucket. These objects use a supported storage class and have a file name extension for a supported file or storage format.</p><p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
+                        "smithy.api#jsonName": "classifiableSizeInBytes"
+                    }
+                },
+                "jobDetails": {
+                    "target": "com.amazonaws.macie2#JobDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether any one-time or recurring classification jobs are configured to analyze objects in the bucket, and, if so, the details of the job that ran most recently.</p>",
+                        "smithy.api#jsonName": "jobDetails"
+                    }
+                },
+                "objectCount": {
+                    "target": "com.amazonaws.macie2#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of objects in the bucket.</p>",
+                        "smithy.api#jsonName": "objectCount"
+                    }
+                },
+                "objectCountByEncryptionType": {
+                    "target": "com.amazonaws.macie2#ObjectCountByEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of objects that are in the bucket, grouped by server-side encryption type. This includes a grouping that reports the total number of objects that aren't encrypted or use client-side encryption.</p>",
+                        "smithy.api#jsonName": "objectCountByEncryptionType"
+                    }
+                },
+                "sizeInBytes": {
+                    "target": "com.amazonaws.macie2#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the bucket.</p><p>If versioning is enabled for the bucket, Amazon Macie calculates this value based on the size of the latest version of each object in the bucket. This value doesn't reflect the storage size of all versions of each object in the bucket.</p>",
+                        "smithy.api#jsonName": "sizeInBytes"
+                    }
+                },
+                "sizeInBytesCompressed": {
+                    "target": "com.amazonaws.macie2#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that are compressed (.gz, .gzip, .zip) files in the bucket.</p><p>If versioning is enabled for the bucket, Macie calculates this value based on the size of the latest version of each applicable object in the bucket. This value doesn't reflect the storage size of all versions of each applicable object in the bucket.</p>",
+                        "smithy.api#jsonName": "sizeInBytesCompressed"
+                    }
+                },
+                "unclassifiableObjectCount": {
+                    "target": "com.amazonaws.macie2#ObjectLevelStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.</p>",
+                        "smithy.api#jsonName": "unclassifiableObjectCount"
+                    }
+                },
+                "unclassifiableObjectSizeInBytes": {
+                    "target": "com.amazonaws.macie2#ObjectLevelStatistics",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total storage size, in bytes, of the objects that Amazon Macie can't analyze in the bucket. These objects don't use a supported storage class or don't have a file name extension for a supported file or storage format.</p>",
+                        "smithy.api#jsonName": "unclassifiableObjectSizeInBytes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides statistical data and other information about an S3 bucket that Amazon Macie monitors and analyzes.</p>"
+            }
+        },
+        "com.amazonaws.macie2#MatchingResource": {
+            "type": "structure",
+            "members": {
+                "matchingBucket": {
+                    "target": "com.amazonaws.macie2#MatchingBucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of an S3 bucket that Amazon Macie monitors and analyzes.</p>",
+                        "smithy.api#jsonName": "matchingBucket"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides statistical data and other information about an AWS resource that Amazon Macie monitors and analyzes.</p>"
             }
         },
         "com.amazonaws.macie2#MaxResults": {
@@ -6537,21 +6684,21 @@
                 "customerManaged": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of objects that are encrypted using a customer-managed key. The objects use customer-provided server-side encryption (SSE-C).</p>",
+                        "smithy.api#documentation": "<p>The total number of objects that are encrypted with a customer-managed key. The objects use customer-provided server-side encryption (SSE-C).</p>",
                         "smithy.api#jsonName": "customerManaged"
                     }
                 },
                 "kmsManaged": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of objects that are encrypted using an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).</p>",
+                        "smithy.api#documentation": "<p>The total number of objects that are encrypted with an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).</p>",
                         "smithy.api#jsonName": "kmsManaged"
                     }
                 },
                 "s3Managed": {
                     "target": "com.amazonaws.macie2#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of objects that are encrypted using an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).</p>",
+                        "smithy.api#documentation": "<p>The total number of objects that are encrypted with an Amazon S3 managed key. The objects use Amazon S3 managed encryption (SSE-S3).</p>",
                         "smithy.api#jsonName": "s3Managed"
                     }
                 },
@@ -6600,7 +6747,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can't analyze in one or more S3 buckets. In a BucketMetadata object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results. If versioning is enabled for a bucket, total storage size values are based on the size of the latest version of each applicable object in the bucket.</p>"
+                "smithy.api#documentation": "<p>Provides information about the total storage size (in bytes) or number of objects that Amazon Macie can't analyze in one or more S3 buckets. In a BucketMetadata or MatchingBucket object, this data is for a specific bucket. In a GetBucketStatisticsResponse object, this data is aggregated for all the buckets in the query results. If versioning is enabled for a bucket, total storage size values are based on the size of the latest version of each applicable object in the bucket.</p>"
             }
         },
         "com.amazonaws.macie2#Occurrences": {
@@ -7099,6 +7246,28 @@
                 "smithy.api#documentation": "<p>Provides information about an S3 bucket that a finding applies to.</p>"
             }
         },
+        "com.amazonaws.macie2#S3BucketCriteriaForJob": {
+            "type": "structure",
+            "members": {
+                "excludes": {
+                    "target": "com.amazonaws.macie2#CriteriaBlockForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which buckets to exclude from the job.</p>",
+                        "smithy.api#jsonName": "excludes"
+                    }
+                },
+                "includes": {
+                    "target": "com.amazonaws.macie2#CriteriaBlockForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which buckets to include in the job.</p>",
+                        "smithy.api#jsonName": "includes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies property- and tag-based conditions that define criteria for including or excluding S3 buckets from a classification job. Exclude conditions take precedence over include conditions.</p>"
+            }
+        },
         "com.amazonaws.macie2#S3BucketDefinitionForJob": {
             "type": "structure",
             "members": {
@@ -7120,7 +7289,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies which AWS account owns the S3 buckets that a classification job analyzes, and the buckets to analyze for the account.</p>"
+                "smithy.api#documentation": "<p>Specifies an AWS account that owns S3 buckets for a classification job to analyze, and one or more specific buckets to analyze for that account.</p>"
             }
         },
         "com.amazonaws.macie2#S3BucketOwner": {
@@ -7182,20 +7351,27 @@
                 "bucketDefinitions": {
                     "target": "com.amazonaws.macie2#__listOfS3BucketDefinitionForJob",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects, one for each AWS account that owns buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for the account.</p>",
+                        "smithy.api#documentation": "<p>An array of objects, one for each AWS account that owns specific S3 buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>",
                         "smithy.api#jsonName": "bucketDefinitions"
                     }
                 },
                 "scoping": {
                     "target": "com.amazonaws.macie2#Scoping",
                     "traits": {
-                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which objects to include or exclude from the analysis.</p>",
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which S3 objects to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which objects to analyze.</p>",
                         "smithy.api#jsonName": "scoping"
+                    }
+                },
+                "bucketCriteria": {
+                    "target": "com.amazonaws.macie2#S3BucketCriteriaForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which S3 buckets to include or exclude from the analysis. Each time the job runs, the job uses these criteria to determine which buckets contain objects to analyze. A job's definition can contain a bucketCriteria object or a bucketDefinitions array, not both.</p>",
+                        "smithy.api#jsonName": "bucketCriteria"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies which S3 buckets contain the objects that a classification job analyzes, and the scope of that analysis.</p>"
+                "smithy.api#documentation": "<p>Specifies which S3 buckets contain the objects that a classification job analyzes, and the scope of that analysis. The bucket specification can be static (bucketDefinitions) or dynamic (bucketCriteria). If it's static, the job analyzes objects in the same predefined set of buckets each time the job runs. If it's dynamic, the job analyzes objects in any buckets that match the specified criteria each time the job starts to run.</p>"
             }
         },
         "com.amazonaws.macie2#S3Object": {
@@ -7293,7 +7469,7 @@
         "com.amazonaws.macie2#ScopeFilterKey": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The property to use in a condition that determines which objects are analyzed by a classification job. Valid values are:</p>",
+                "smithy.api#documentation": "<p>The property to use in a condition that determines whether an S3 object is included or excluded from a classification job. Valid values are:</p>",
                 "smithy.api#enum": [
                     {
                         "value": "BUCKET_CREATION_DATE",
@@ -7341,7 +7517,323 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies one or more property- and tag-based conditions that refine the scope of a classification job. These conditions define criteria that determine which objects a job analyzes. Exclude conditions take precedence over include conditions.</p>"
+                "smithy.api#documentation": "<p>Specifies one or more property- and tag-based conditions that define criteria for including or excluding S3 objects from a classification job. Exclude conditions take precedence over include conditions.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SearchResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.macie2#SearchResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.macie2#SearchResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.macie2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.macie2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves (queries) statistical data and other information about AWS resources that Amazon Macie monitors and analyzes.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasources/search-resources",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "matchingResources",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesBucketCriteria": {
+            "type": "structure",
+            "members": {
+                "excludes": {
+                    "target": "com.amazonaws.macie2#SearchResourcesCriteriaBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which buckets to exclude from the results.</p>",
+                        "smithy.api#jsonName": "excludes"
+                    }
+                },
+                "includes": {
+                    "target": "com.amazonaws.macie2#SearchResourcesCriteriaBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property- and tag-based conditions that determine which buckets to include in the results.</p>",
+                        "smithy.api#jsonName": "includes"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies property- and tag-based conditions that define filter criteria for including or excluding S3 buckets from the query results. Exclude conditions take precedence over include conditions.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesComparator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The operator to use in a condition that filters the results of a query. Valid values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "EQ",
+                        "name": "EQ"
+                    },
+                    {
+                        "value": "NE",
+                        "name": "NE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesCriteria": {
+            "type": "structure",
+            "members": {
+                "simpleCriterion": {
+                    "target": "com.amazonaws.macie2#SearchResourcesSimpleCriterion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A property-based condition that defines a property, operator, and one or more values for including or excluding resources from the results.</p>",
+                        "smithy.api#jsonName": "simpleCriterion"
+                    }
+                },
+                "tagCriterion": {
+                    "target": "com.amazonaws.macie2#SearchResourcesTagCriterion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding resources from the results.</p>",
+                        "smithy.api#jsonName": "tagCriterion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a property- or tag-based filter condition for including or excluding AWS resources from the query results.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesCriteriaBlock": {
+            "type": "structure",
+            "members": {
+                "and": {
+                    "target": "com.amazonaws.macie2#__listOfSearchResourcesCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each property- or tag-based condition that includes or excludes resources from the query results. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>",
+                        "smithy.api#jsonName": "and"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies property- and tag-based conditions that define filter criteria for including or excluding AWS resources from the query results.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "bucketCriteria": {
+                    "target": "com.amazonaws.macie2#SearchResourcesBucketCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter conditions that determine which S3 buckets to include or exclude from the query results.</p>",
+                        "smithy.api#jsonName": "bucketCriteria"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.macie2#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to include in each page of the response. The default value is 50.</p>",
+                        "smithy.api#jsonName": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The nextToken string that specifies which page of results to return in a paginated response.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                },
+                "sortCriteria": {
+                    "target": "com.amazonaws.macie2#SearchResourcesSortCriteria",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria to use to sort the results.</p>",
+                        "smithy.api#jsonName": "sortCriteria"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "matchingResources": {
+                    "target": "com.amazonaws.macie2#__listOfMatchingResource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of objects, one for each resource that meets the filter criteria specified in the request.</p>",
+                        "smithy.api#jsonName": "matchingResources"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>",
+                        "smithy.api#jsonName": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesSimpleCriterion": {
+            "type": "structure",
+            "members": {
+                "comparator": {
+                    "target": "com.amazonaws.macie2#SearchResourcesComparator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).</p>",
+                        "smithy.api#jsonName": "comparator"
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.macie2#SearchResourcesSimpleCriterionKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property to use in the condition.</p>",
+                        "smithy.api#jsonName": "key"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.macie2#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the AWS account that owns the resource.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of an S3 bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of an S3 bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.</p>",
+                        "smithy.api#jsonName": "values"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a property-based filter condition that determines which AWS resources are included or excluded from the query results.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesSimpleCriterionKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The property to use in a condition that filters the query results. Valid values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCOUNT_ID",
+                        "name": "ACCOUNT_ID"
+                    },
+                    {
+                        "value": "S3_BUCKET_NAME",
+                        "name": "S3_BUCKET_NAME"
+                    },
+                    {
+                        "value": "S3_BUCKET_EFFECTIVE_PERMISSION",
+                        "name": "S3_BUCKET_EFFECTIVE_PERMISSION"
+                    },
+                    {
+                        "value": "S3_BUCKET_SHARED_ACCESS",
+                        "name": "S3_BUCKET_SHARED_ACCESS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesSortAttributeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The property to sort the query results by. Valid values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCOUNT_ID",
+                        "name": "ACCOUNT_ID"
+                    },
+                    {
+                        "value": "RESOURCE_NAME",
+                        "name": "RESOURCE_NAME"
+                    },
+                    {
+                        "value": "S3_CLASSIFIABLE_OBJECT_COUNT",
+                        "name": "S3_CLASSIFIABLE_OBJECT_COUNT"
+                    },
+                    {
+                        "value": "S3_CLASSIFIABLE_SIZE_IN_BYTES",
+                        "name": "S3_CLASSIFIABLE_SIZE_IN_BYTES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesSortCriteria": {
+            "type": "structure",
+            "members": {
+                "attributeName": {
+                    "target": "com.amazonaws.macie2#SearchResourcesSortAttributeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property to sort the results by.</p>",
+                        "smithy.api#jsonName": "attributeName"
+                    }
+                },
+                "orderBy": {
+                    "target": "com.amazonaws.macie2#OrderBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>",
+                        "smithy.api#jsonName": "orderBy"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies criteria for sorting the results of a query for information about AWS resources that Amazon Macie monitors and analyzes.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesTagCriterion": {
+            "type": "structure",
+            "members": {
+                "comparator": {
+                    "target": "com.amazonaws.macie2#SearchResourcesComparator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).</p>",
+                        "smithy.api#jsonName": "comparator"
+                    }
+                },
+                "tagValues": {
+                    "target": "com.amazonaws.macie2#__listOfSearchResourcesTagCriterionPair",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>",
+                        "smithy.api#jsonName": "tagValues"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a tag-based filter condition that determines which AWS resources are included or excluded from the query results.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SearchResourcesTagCriterionPair": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the tag key to use in the condition.</p>",
+                        "smithy.api#jsonName": "key"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value to use in the condition.</p>",
+                        "smithy.api#jsonName": "value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in a tag-based filter condition for a query. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based filter conditions.</p>"
             }
         },
         "com.amazonaws.macie2#SecurityHubConfiguration": {
@@ -7650,6 +8142,59 @@
                 ]
             }
         },
+        "com.amazonaws.macie2#SimpleCriterionForJob": {
+            "type": "structure",
+            "members": {
+                "comparator": {
+                    "target": "com.amazonaws.macie2#JobComparator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).</p>",
+                        "smithy.api#jsonName": "comparator"
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.macie2#SimpleCriterionKeyForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The property to use in the condition.</p>",
+                        "smithy.api#jsonName": "key"
+                    }
+                },
+                "values": {
+                    "target": "com.amazonaws.macie2#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the AWS account that owns the bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of a bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of a bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of a bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.</p>",
+                        "smithy.api#jsonName": "values"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a property-based condition that determines whether an S3 bucket is included or excluded from a classification job.</p>"
+            }
+        },
+        "com.amazonaws.macie2#SimpleCriterionKeyForJob": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The property to use in a condition that determines whether an S3 bucket is included or excluded from a classification job. Valid values are:</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACCOUNT_ID",
+                        "name": "ACCOUNT_ID"
+                    },
+                    {
+                        "value": "S3_BUCKET_NAME",
+                        "name": "S3_BUCKET_NAME"
+                    },
+                    {
+                        "value": "S3_BUCKET_EFFECTIVE_PERMISSION",
+                        "name": "S3_BUCKET_EFFECTIVE_PERMISSION"
+                    },
+                    {
+                        "value": "S3_BUCKET_SHARED_ACCESS",
+                        "name": "S3_BUCKET_SHARED_ACCESS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.macie2#SimpleScopeTerm": {
             "type": "structure",
             "members": {
@@ -7670,13 +8215,13 @@
                 "values": {
                     "target": "com.amazonaws.macie2#__listOf__string",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf</p></li> <li><p>OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value.</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z</p></li> <li><p>OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object.</p></li> <li><p>TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based condition for the job.</p></li></ul> <p>Macie doesn't support use of wildcard characters in values. Also, string values are case sensitive.</p>",
+                        "smithy.api#documentation": "<p>An array that lists the values to use in the condition. If the value for the key property is OBJECT_EXTENSION or OBJECT_KEY, this array can specify multiple values and Amazon Macie uses an OR operator to join the values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported property (key) are:</p> <ul><li><p>OBJECT_EXTENSION - A string that represents the file name extension of an object. For example: docx or pdf</p></li> <li><p>OBJECT_KEY - A string that represents the key prefix (folder name or path) of an object. For example: logs or awslogs/eventlogs. This value applies a condition to objects whose keys (names) begin with the specified value.</p></li> <li><p>OBJECT_LAST_MODIFIED_DATE - The date and time (in UTC and extended ISO 8601 format) when an object was created or last changed, whichever is latest. For example: 2020-09-28T14:31:13Z</p></li> <li><p>OBJECT_SIZE - An integer that represents the storage size (in bytes) of an object.</p></li> <li><p>TAG - A string that represents a tag key for an object. For advanced options, use a TagScopeTerm object instead of a SimpleScopeTerm object to define a tag-based condition for the job.</p></li></ul> <p>Macie doesn't support use of wildcard characters in these values. Also, string values are case sensitive.</p>",
                         "smithy.api#jsonName": "values"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a property-based condition that determines whether an object is included or excluded from a classification job.</p>"
+                "smithy.api#documentation": "<p>Specifies a property-based condition that determines whether an S3 object is included or excluded from a classification job.</p>"
             }
         },
         "com.amazonaws.macie2#SortCriteria": {
@@ -7757,6 +8302,50 @@
                         "name": "GLACIER"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.macie2#TagCriterionForJob": {
+            "type": "structure",
+            "members": {
+                "comparator": {
+                    "target": "com.amazonaws.macie2#JobComparator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The operator to use in the condition. Valid values are EQ (equals) and NE (not equals).</p>",
+                        "smithy.api#jsonName": "comparator"
+                    }
+                },
+                "tagValues": {
+                    "target": "com.amazonaws.macie2#__listOfTagCriterionPairForJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>",
+                        "smithy.api#jsonName": "tagValues"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a tag-based condition that determines whether an S3 bucket is included or excluded from a classification job.</p>"
+            }
+        },
+        "com.amazonaws.macie2#TagCriterionPairForJob": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value for the tag key to use in the condition.</p>",
+                        "smithy.api#jsonName": "key"
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.macie2#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value to use in the condition.</p>",
+                        "smithy.api#jsonName": "value"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in a tag-based condition that determines whether an S3 bucket is included or excluded from a classification job. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based conditions.</p>"
             }
         },
         "com.amazonaws.macie2#TagMap": {
@@ -7846,7 +8435,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a tag-based condition that determines whether an object is included or excluded from a classification job.</p>"
+                "smithy.api#documentation": "<p>Specifies a tag-based condition that determines whether an S3 object is included or excluded from a classification job. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based conditions.</p>"
             }
         },
         "com.amazonaws.macie2#TagTarget": {
@@ -7880,7 +8469,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a tag key or tag key and value pair to use in a tag-based condition for a classification job.</p>"
+                "smithy.api#documentation": "<p>Specifies a tag key or tag key and value pair to use in a tag-based condition that determines whether an S3 object is included or excluded from a classification job. Tag keys and values are case sensitive. Also, Amazon Macie doesn't support use of partial values or wildcard characters in tag-based conditions.</p>"
             }
         },
         "com.amazonaws.macie2#TestCustomDataIdentifier": {
@@ -8919,6 +9508,12 @@
                 "target": "com.amazonaws.macie2#BucketMetadata"
             }
         },
+        "com.amazonaws.macie2#__listOfCriteriaForJob": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#CriteriaForJob"
+            }
+        },
         "com.amazonaws.macie2#__listOfCustomDataIdentifierSummary": {
             "type": "list",
             "member": {
@@ -8979,6 +9574,12 @@
                 "target": "com.amazonaws.macie2#ListJobsFilterTerm"
             }
         },
+        "com.amazonaws.macie2#__listOfMatchingResource": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#MatchingResource"
+            }
+        },
         "com.amazonaws.macie2#__listOfMember": {
             "type": "list",
             "member": {
@@ -8989,6 +9590,24 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.macie2#S3BucketDefinitionForJob"
+            }
+        },
+        "com.amazonaws.macie2#__listOfSearchResourcesCriteria": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#SearchResourcesCriteria"
+            }
+        },
+        "com.amazonaws.macie2#__listOfSearchResourcesTagCriterionPair": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#SearchResourcesTagCriterionPair"
+            }
+        },
+        "com.amazonaws.macie2#__listOfTagCriterionPairForJob": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.macie2#TagCriterionPairForJob"
             }
         },
         "com.amazonaws.macie2#__listOfTagValuePair": {

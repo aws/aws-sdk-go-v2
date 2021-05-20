@@ -1,0 +1,834 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.applicationcostprofiler#AWSApplicationCostProfiler": {
+            "type": "service",
+            "version": "2020-09-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#DeleteReportDefinition"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#GetReportDefinition"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ImportApplicationUsage"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ListReportDefinitions"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#PutReportDefinition"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#UpdateReportDefinition"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ApplicationCostProfiler",
+                    "arnNamespace": "application-cost-profiler",
+                    "cloudFormationName": "ApplicationCostProfiler",
+                    "cloudTrailEventSource": "applicationcostprofiler.amazonaws.com",
+                    "endpointPrefix": "application-cost-profiler"
+                },
+                "aws.auth#sigv4": {
+                    "name": "application-cost-profiler"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>This reference provides descriptions of the AWS Application Cost Profiler API.</p>\n         <p>The AWS Application Cost Profiler API provides programmatic access to view, create, update, and delete\n      application cost report definitions, as well as to import your usage data into the Application Cost Profiler\n      service.</p>\n         <p>For more information about using this service, see the <a href=\"https://docs.aws.amazon.com/application-cost-profiler/latest/userguide/introduction.html\">AWS Application Cost\n        Profiler User Guide</a>.</p>",
+                "smithy.api#title": "AWS Application Cost Profiler"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.applicationcostprofiler#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have permission to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#DeleteReportDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationcostprofiler#DeleteReportDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationcostprofiler#DeleteReportDefinitionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified report definition in AWS Application Cost Profiler. This stops the report from being\n      generated.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/reportDefinition/{reportId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#DeleteReportDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. ID of the report to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#DeleteReportDefinitionResult": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the report that was deleted.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.applicationcostprofiler#Format": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CSV",
+                        "name": "CSV"
+                    },
+                    {
+                        "value": "PARQUET",
+                        "name": "PARQUET"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#GetReportDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationcostprofiler#GetReportDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationcostprofiler#GetReportDefinitionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the definition of a report already configured in AWS Application Cost Profiler.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/reportDefinition/{reportId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#GetReportDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the report to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#GetReportDefinitionResult": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the report retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reportDescription": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reportFrequency": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Cadence used to generate the report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.applicationcostprofiler#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Format of the generated report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationS3Location": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon Simple Storage Service (Amazon S3) location where the report is uploaded.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.applicationcostprofiler#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp (milliseconds) when this report definition was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUpdated": {
+                    "target": "com.amazonaws.applicationcostprofiler#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp (milliseconds) when this report definition was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ImportApplicationUsage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationcostprofiler#ImportApplicationUsageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationcostprofiler#ImportApplicationUsageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Ingests application usage data from Amazon Simple Storage Service (Amazon S3).</p>\n         <p>The data must already exist in the S3 location. As part of the action, AWS Application Cost Profiler\n      copies the object from your S3 bucket to an S3 bucket owned by Amazon for processing\n      asynchronously.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/importApplicationUsage",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ImportApplicationUsageRequest": {
+            "type": "structure",
+            "members": {
+                "sourceS3Location": {
+                    "target": "com.amazonaws.applicationcostprofiler#SourceS3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Amazon S3 location to import application usage data from.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ImportApplicationUsageResult": {
+            "type": "structure",
+            "members": {
+                "importId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ImportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the import request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ImportId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "[0-9A-Za-z\\.\\-_]*"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#Integer": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.applicationcostprofiler#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal server error occurred. Retry your request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ListReportDefinitions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationcostprofiler#ListReportDefinitionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationcostprofiler#ListReportDefinitionsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a list of all reports and their configurations for your AWS account.</p>\n         <p>The maximum number of reports is one.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/reportDefinition",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ListReportDefinitionsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.applicationcostprofiler#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token value from a previous call to access the next page of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.applicationcostprofiler#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ListReportDefinitionsResult": {
+            "type": "structure",
+            "members": {
+                "reportDefinitions": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportDefinitionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retrieved reports.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.applicationcostprofiler#Token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the next token, if it exists. Null if there are no more results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#PutReportDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationcostprofiler#PutReportDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationcostprofiler#PutReportDefinitionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates the report definition for a report in Application Cost Profiler.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/reportDefinition",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#PutReportDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. ID of the report. You can choose any valid string matching the pattern for the\n      ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reportDescription": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. Description of the report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reportFrequency": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The cadence to generate the report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.applicationcostprofiler#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The format to use for the generated report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationS3Location": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. Amazon Simple Storage Service (Amazon S3) location where Application Cost Profiler uploads the\n      report.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#PutReportDefinitionResult": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the report.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ReportDefinition": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the report.</p>"
+                    }
+                },
+                "reportDescription": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Description of the report</p>"
+                    }
+                },
+                "reportFrequency": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cadence at which the report is generated.</p>"
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.applicationcostprofiler#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format used for the generated reports.</p>"
+                    }
+                },
+                "destinationS3Location": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location in Amazon Simple Storage Service (Amazon S3) the reports should be saved to.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.applicationcostprofiler#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp (milliseconds) when this report definition was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.applicationcostprofiler#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp (milliseconds) when this report definition was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of a report in AWS Application Cost Profiler.</p>"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ReportDefinitionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.applicationcostprofiler#ReportDefinition"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ReportDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ReportFrequency": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "MONTHLY",
+                        "name": "MONTHLY"
+                    },
+                    {
+                        "value": "DAILY",
+                        "name": "DAILY"
+                    },
+                    {
+                        "value": "ALL",
+                        "name": "ALL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ReportId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]+$"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#S3Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "(?=^.{3,63}$)(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#S3BucketRegion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ap-east-1",
+                        "name": "AP_EAST_1"
+                    },
+                    {
+                        "value": "me-south-1",
+                        "name": "ME_SOUTH_1"
+                    },
+                    {
+                        "value": "eu-south-1",
+                        "name": "EU_SOUTH_1"
+                    },
+                    {
+                        "value": "af-south-1",
+                        "name": "AF_SOUTH_1"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#S3Key": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#S3Location": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the S3 bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "prefix": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Prefix for the location to write to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the Amazon Simple Storage Service (Amazon S3) location where AWS Application Cost Profiler\n      reports are generated and then written to.</p>"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#S3Prefix": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": ".*\\S.*"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.applicationcostprofiler#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Your request exceeds one or more of the service quotas.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#SourceS3Location": {
+            "type": "structure",
+            "members": {
+                "bucket": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the bucket.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key of the object.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "region": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3BucketRegion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Region of the bucket. Only required for Regions that are disabled by default.\n        For more infomration about Regions that are disabled by default, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable\">\n          Enabling a Region</a> in the <i>AWS General Reference guide</i>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents the Amazon Simple Storage Service (Amazon S3) location where usage data is read\n      from.</p>"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.applicationcostprofiler#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The calls to AWS Application Cost Profiler API are throttled. The request was denied.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.applicationcostprofiler#Token": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 102400
+                },
+                "smithy.api#pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#UpdateReportDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.applicationcostprofiler#UpdateReportDefinitionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.applicationcostprofiler#UpdateReportDefinitionResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.applicationcostprofiler#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates existing report in AWS Application Cost Profiler.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/reportDefinition/{reportId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#UpdateReportDefinitionRequest": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. ID of the report to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "reportDescription": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. Description of the report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reportFrequency": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportFrequency",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The cadence to generate the report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "format": {
+                    "target": "com.amazonaws.applicationcostprofiler#Format",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. The format to use for the generated report.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "destinationS3Location": {
+                    "target": "com.amazonaws.applicationcostprofiler#S3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Required. Amazon Simple Storage Service (Amazon S3) location where Application Cost Profiler uploads the\n      report.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#UpdateReportDefinitionResult": {
+            "type": "structure",
+            "members": {
+                "reportId": {
+                    "target": "com.amazonaws.applicationcostprofiler#ReportId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ID of the report.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.applicationcostprofiler#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.applicationcostprofiler#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints for the API.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

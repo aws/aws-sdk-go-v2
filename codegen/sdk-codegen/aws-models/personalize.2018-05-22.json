@@ -267,6 +267,9 @@
                     "target": "com.amazonaws.personalize#ListSolutionVersions"
                 },
                 {
+                    "target": "com.amazonaws.personalize#StopSolutionVersionCreation"
+                },
+                {
                     "target": "com.amazonaws.personalize#UpdateCampaign"
                 }
             ],
@@ -293,7 +296,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+"
+                "smithy.api#pattern": "^arn:([a-z\\d-]+):personalize:.*:.*:.+$"
             }
         },
         "com.amazonaws.personalize#ArnList": {
@@ -1589,7 +1592,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Trains or retrains an active solution. A solution is created using the <a>CreateSolution</a> operation and must be in the ACTIVE state before calling\n        <code>CreateSolutionVersion</code>. A new version of the solution is created every time you\n      call this operation.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution version can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the version, call <a>DescribeSolutionVersion</a>. Wait\n      until the status shows as ACTIVE before calling <code>CreateCampaign</code>.</p>\n         <p>If the status shows as CREATE FAILED, the response includes a <code>failureReason</code>\n      key, which describes why the job failed.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteSolution</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Trains or retrains an active solution. A solution is created using the <a>CreateSolution</a> operation and must be in the ACTIVE state before calling\n        <code>CreateSolutionVersion</code>. A new version of the solution is created every time you\n      call this operation.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution version can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING</p>\n            </li>\n            <li>\n               <p>CREATE IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n            <li>\n               <p>CREATE STOPPING</p>\n            </li>\n            <li>\n               <p>CREATE STOPPED</p>\n            </li>\n         </ul>\n         <p>To get the status of the version, call <a>DescribeSolutionVersion</a>. Wait\n      until the status shows as ACTIVE before calling <code>CreateCampaign</code>.</p>\n         <p>If the status shows as CREATE FAILED, the response includes a <code>failureReason</code>\n      key, which describes why the job failed.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a>ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>CreateSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a>DeleteSolution</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateSolutionVersionRequest": {
@@ -3821,6 +3824,15 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.personalize#ItemAttribute": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 150
+                }
+            }
+        },
         "com.amazonaws.personalize#KmsKeyArn": {
             "type": "string"
         },
@@ -4676,7 +4688,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
             }
         },
         "com.amazonaws.personalize#NextToken": {
@@ -4692,6 +4704,49 @@
             "type": "integer",
             "traits": {
                 "smithy.api#box": {}
+            }
+        },
+        "com.amazonaws.personalize#ObjectiveSensitivity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LOW",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "MEDIUM",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "HIGH",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "OFF",
+                        "name": "OFF"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.personalize#OptimizationObjective": {
+            "type": "structure",
+            "members": {
+                "itemAttribute": {
+                    "target": "com.amazonaws.personalize#ItemAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).</p>"
+                    }
+                },
+                "objectiveSensitivity": {
+                    "target": "com.amazonaws.personalize#ObjectiveSensitivity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the additional objective for the solution, such as maximizing streaming \n      minutes or increasing revenue. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html\">Optimizing a solution</a>.</p>"
             }
         },
         "com.amazonaws.personalize#ParameterName": {
@@ -4911,7 +4966,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"
+                "smithy.api#pattern": "^arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.personalize#S3DataConfig": {
@@ -5074,6 +5129,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <a>AutoMLConfig</a> object containing a list of recipes to search\n      when AutoML is performed.</p>"
                     }
+                },
+                "optimizationObjective": {
+                    "target": "com.amazonaws.personalize#OptimizationObjective",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the additional objective for the solution, such as maximizing streaming \n      minutes or increasing revenue. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html\">Optimizing a solution</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5190,7 +5251,7 @@
                 "status": {
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the solution version.</p>\n         <p>A solution version can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING</p>\n            </li>\n            <li>\n               <p>CREATE IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the solution version.</p>\n         <p>A solution version can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING</p>\n            </li>\n            <li>\n               <p>CREATE IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>ACTIVE</p>\n            </li>\n            <li>\n               <p>CREATE FAILED</p>\n            </li>\n            <li>\n               <p>CREATE STOPPING</p>\n            </li>\n            <li>\n               <p>CREATE STOPPED</p>\n            </li>\n         </ul>"
                     }
                 },
                 "failureReason": {
@@ -5284,6 +5345,39 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 256
+                }
+            }
+        },
+        "com.amazonaws.personalize#StopSolutionVersionCreation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#StopSolutionVersionCreationRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Stops creating a solution version that is in a state of CREATE_PENDING or CREATE IN_PROGRESS.\n      </p>\n         <p>Depending on the current state of the solution version, the solution version state changes as follows:</p>\n         <ul>\n            <li>\n               <p>CREATE_PENDING > CREATE_STOPPED</p>\n               <p>or</p>\n            </li>\n            <li>\n               <p>CREATE_IN_PROGRESS > CREATE_STOPPING > CREATE_STOPPED</p>\n            </li>\n         </ul>\n         <p>You are billed for all of the training completed up\n      until you stop the solution version creation. You cannot resume creating a solution version once it has been stopped.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#StopSolutionVersionCreationRequest": {
+            "type": "structure",
+            "members": {
+                "solutionVersionArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution version you want to stop creating.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
