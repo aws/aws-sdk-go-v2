@@ -289,6 +289,15 @@ type CognitoOptionsStatus struct {
 	Status *OptionStatus
 }
 
+// Specifies settings for cold storage.
+type ColdStorageOptions struct {
+
+	// True to enable cold storage for an Elasticsearch domain.
+	//
+	// This member is required.
+	Enabled *bool
+}
+
 // A map from an ElasticsearchVersion to a list of compatible ElasticsearchVersion
 // s to which the domain can be upgraded.
 type CompatibleVersionsMap struct {
@@ -461,6 +470,9 @@ type EBSOptionsStatus struct {
 // Specifies the configuration for the domain cluster, such as the type and number
 // of instances.
 type ElasticsearchClusterConfig struct {
+
+	// Specifies the ColdStorageOptions configuration for an Elasticsearch domain.
+	ColdStorageOptions *ColdStorageOptions
 
 	// Total number of dedicated master nodes, active and on standby, for the cluster.
 	DedicatedMasterCount *int32

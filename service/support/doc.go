@@ -3,18 +3,18 @@
 // Package support provides the API client, operations, and parameter types for AWS
 // Support.
 //
-// AWS Support The AWS Support API reference is intended for programmers who need
-// detailed information about the AWS Support operations and data types. This
-// service enables you to manage your AWS Support cases programmatically. It uses
-// HTTP methods that return results in JSON format.
+// AWS Support The AWS Support API Reference is intended for programmers who need
+// detailed information about the AWS Support operations and data types. You can
+// use the API to manage your support cases programmatically. The AWS Support API
+// uses HTTP methods that return results in JSON format.
 //
-// * You must have a Business or
-// Enterprise support plan to use the AWS Support API.
+// * You must have a
+// Business or Enterprise Support plan to use the AWS Support API.
 //
-// * If you call the AWS
-// Support API from an account that does not have a Business or Enterprise support
-// plan, the SubscriptionRequiredException error message appears. For information
-// about changing your support plan, see AWS Support
+// * If you call
+// the AWS Support API from an account that does not have a Business or Enterprise
+// Support plan, the SubscriptionRequiredException error message appears. For
+// information about changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
 //
 // The AWS Support service also exposes a
@@ -25,17 +25,17 @@
 // describes the AWS Support case management operations:
 //
 // * Service names, issue
-// categories, and available severity levels. The DescribeServices and
+// categories, and available severity levels - The DescribeServices and
 // DescribeSeverityLevels operations return AWS service names, service codes,
 // service categories, and problem severity levels. You use these values when you
 // call the CreateCase operation.
 //
 // * Case creation, case details, and case
-// resolution. The CreateCase, DescribeCases, DescribeAttachment, and ResolveCase
+// resolution - The CreateCase, DescribeCases, DescribeAttachment, and ResolveCase
 // operations create AWS Support cases, retrieve information about cases, and
 // resolve cases.
 //
-// * Case communication. The DescribeCommunications,
+// * Case communication - The DescribeCommunications,
 // AddCommunicationToCase, and AddAttachmentsToSet operations retrieve and add
 // communications and attachments to AWS Support cases.
 //

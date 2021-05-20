@@ -36,7 +36,8 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tag values that are assigned to the behavior graph.
+	// The tag values that are assigned to the behavior graph. The request returns up
+	// to 50 tag values.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

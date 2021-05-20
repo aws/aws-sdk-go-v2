@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a warm pool to the specified Auto Scaling group. A warm pool is a pool of
-// pre-initialized EC2 instances that sits alongside the Auto Scaling group.
-// Whenever your application needs to scale out, the Auto Scaling group can draw on
-// the warm pool to meet its new desired capacity. For more information, see Warm
-// pools for Amazon EC2 Auto Scaling
+// Creates or updates a warm pool for the specified Auto Scaling group. A warm pool
+// is a pool of pre-initialized EC2 instances that sits alongside the Auto Scaling
+// group. Whenever your application needs to scale out, the Auto Scaling group can
+// draw on the warm pool to meet its new desired capacity. For more information and
+// example configurations, see Warm pools for Amazon EC2 Auto Scaling
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-warm-pools.html)
 // in the Amazon EC2 Auto Scaling User Guide. This operation must be called from
 // the Region in which the Auto Scaling group was created. This operation cannot be
@@ -45,20 +45,21 @@ type PutWarmPoolInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// Specifies the total maximum number of instances that are allowed to be in the
-	// warm pool or in any state except Terminated for the Auto Scaling group. This is
-	// an optional property. Specify it only if the warm pool size should not be
+	// Specifies the maximum number of instances that are allowed to be in the warm
+	// pool or in any state except Terminated for the Auto Scaling group. This is an
+	// optional property. Specify it only if you do not want the warm pool size to be
 	// determined by the difference between the group's maximum capacity and its
-	// desired capacity. Amazon EC2 Auto Scaling will launch and maintain either the
-	// difference between the group's maximum capacity and its desired capacity, if a
-	// value for MaxGroupPreparedCapacity is not specified, or the difference between
-	// the MaxGroupPreparedCapacity and the desired capacity, if a value for
-	// MaxGroupPreparedCapacity is specified. The size of the warm pool is dynamic.
-	// Only when MaxGroupPreparedCapacity and MinSize are set to the same value does
-	// the warm pool have an absolute size. If the desired capacity of the Auto Scaling
-	// group is higher than the MaxGroupPreparedCapacity, the capacity of the warm pool
-	// is 0. To remove a value that you previously set, include the property but
-	// specify -1 for the value.
+	// desired capacity. If a value for MaxGroupPreparedCapacity is not specified,
+	// Amazon EC2 Auto Scaling launches and maintains the difference between the
+	// group's maximum capacity and its desired capacity. If you specify a value for
+	// MaxGroupPreparedCapacity, Amazon EC2 Auto Scaling uses the difference between
+	// the MaxGroupPreparedCapacity and the desired capacity instead. The size of the
+	// warm pool is dynamic. Only when MaxGroupPreparedCapacity and MinSize are set to
+	// the same value does the warm pool have an absolute size. If the desired capacity
+	// of the Auto Scaling group is higher than the MaxGroupPreparedCapacity, the
+	// capacity of the warm pool is 0, unless you specify a value for MinSize. To
+	// remove a value that you previously set, include the property but specify -1 for
+	// the value.
 	MaxGroupPreparedCapacity *int32
 
 	// Specifies the minimum number of instances to maintain in the warm pool. This
@@ -66,8 +67,8 @@ type PutWarmPoolInput struct {
 	// available to handle traffic spikes. Defaults to 0 if not specified.
 	MinSize *int32
 
-	// Sets the instance state to transition to after the lifecycle hooks finish. Valid
-	// values are: Stopped (default) or Running.
+	// Sets the instance state to transition to after the lifecycle actions are
+	// complete. Default is Stopped.
 	PoolState types.WarmPoolState
 }
 

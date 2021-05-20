@@ -2563,6 +2563,62 @@ func (m *awsAwsquery_serializeOpExitStandby) HandleSerialize(ctx context.Context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpGetPredictiveScalingForecast struct {
+}
+
+func (*awsAwsquery_serializeOpGetPredictiveScalingForecast) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpGetPredictiveScalingForecast) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetPredictiveScalingForecastInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("GetPredictiveScalingForecast")
+	body.Key("Version").String("2011-01-01")
+
+	if err := awsAwsquery_serializeOpDocumentGetPredictiveScalingForecastInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpPutLifecycleHook struct {
 }
 
@@ -3957,6 +4013,139 @@ func awsAwsquery_serializeDocumentPredefinedMetricSpecification(v *types.Predefi
 	return nil
 }
 
+func awsAwsquery_serializeDocumentPredictiveScalingConfiguration(v *types.PredictiveScalingConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.MaxCapacityBreachBehavior) > 0 {
+		objectKey := object.Key("MaxCapacityBreachBehavior")
+		objectKey.String(string(v.MaxCapacityBreachBehavior))
+	}
+
+	if v.MaxCapacityBuffer != nil {
+		objectKey := object.Key("MaxCapacityBuffer")
+		objectKey.Integer(*v.MaxCapacityBuffer)
+	}
+
+	if v.MetricSpecifications != nil {
+		objectKey := object.Key("MetricSpecifications")
+		if err := awsAwsquery_serializeDocumentPredictiveScalingMetricSpecifications(v.MetricSpecifications, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Mode) > 0 {
+		objectKey := object.Key("Mode")
+		objectKey.String(string(v.Mode))
+	}
+
+	if v.SchedulingBufferTime != nil {
+		objectKey := object.Key("SchedulingBufferTime")
+		objectKey.Integer(*v.SchedulingBufferTime)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPredictiveScalingMetricSpecification(v *types.PredictiveScalingMetricSpecification, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.PredefinedLoadMetricSpecification != nil {
+		objectKey := object.Key("PredefinedLoadMetricSpecification")
+		if err := awsAwsquery_serializeDocumentPredictiveScalingPredefinedLoadMetric(v.PredefinedLoadMetricSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.PredefinedMetricPairSpecification != nil {
+		objectKey := object.Key("PredefinedMetricPairSpecification")
+		if err := awsAwsquery_serializeDocumentPredictiveScalingPredefinedMetricPair(v.PredefinedMetricPairSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.PredefinedScalingMetricSpecification != nil {
+		objectKey := object.Key("PredefinedScalingMetricSpecification")
+		if err := awsAwsquery_serializeDocumentPredictiveScalingPredefinedScalingMetric(v.PredefinedScalingMetricSpecification, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.TargetValue != nil {
+		objectKey := object.Key("TargetValue")
+		objectKey.Double(*v.TargetValue)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPredictiveScalingMetricSpecifications(v []types.PredictiveScalingMetricSpecification, value query.Value) error {
+	if len(v) == 0 {
+		return nil
+	}
+	array := value.Array("member")
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsquery_serializeDocumentPredictiveScalingMetricSpecification(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPredictiveScalingPredefinedLoadMetric(v *types.PredictiveScalingPredefinedLoadMetric, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.PredefinedMetricType) > 0 {
+		objectKey := object.Key("PredefinedMetricType")
+		objectKey.String(string(v.PredefinedMetricType))
+	}
+
+	if v.ResourceLabel != nil {
+		objectKey := object.Key("ResourceLabel")
+		objectKey.String(*v.ResourceLabel)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPredictiveScalingPredefinedMetricPair(v *types.PredictiveScalingPredefinedMetricPair, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.PredefinedMetricType) > 0 {
+		objectKey := object.Key("PredefinedMetricType")
+		objectKey.String(string(v.PredefinedMetricType))
+	}
+
+	if v.ResourceLabel != nil {
+		objectKey := object.Key("ResourceLabel")
+		objectKey.String(*v.ResourceLabel)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeDocumentPredictiveScalingPredefinedScalingMetric(v *types.PredictiveScalingPredefinedScalingMetric, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.PredefinedMetricType) > 0 {
+		objectKey := object.Key("PredefinedMetricType")
+		objectKey.String(string(v.PredefinedMetricType))
+	}
+
+	if v.ResourceLabel != nil {
+		objectKey := object.Key("ResourceLabel")
+		objectKey.String(*v.ResourceLabel)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentProcessNames(v []string, value query.Value) error {
 	if len(v) == 0 {
 		return nil
@@ -5295,6 +5484,33 @@ func awsAwsquery_serializeOpDocumentExitStandbyInput(v *ExitStandbyInput, value 
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentGetPredictiveScalingForecastInput(v *GetPredictiveScalingForecastInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.AutoScalingGroupName != nil {
+		objectKey := object.Key("AutoScalingGroupName")
+		objectKey.String(*v.AutoScalingGroupName)
+	}
+
+	if v.EndTime != nil {
+		objectKey := object.Key("EndTime")
+		objectKey.String(smithytime.FormatDateTime(*v.EndTime))
+	}
+
+	if v.PolicyName != nil {
+		objectKey := object.Key("PolicyName")
+		objectKey.String(*v.PolicyName)
+	}
+
+	if v.StartTime != nil {
+		objectKey := object.Key("StartTime")
+		objectKey.String(smithytime.FormatDateTime(*v.StartTime))
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentPutLifecycleHookInput(v *PutLifecycleHookInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5418,6 +5634,13 @@ func awsAwsquery_serializeOpDocumentPutScalingPolicyInput(v *PutScalingPolicyInp
 	if v.PolicyType != nil {
 		objectKey := object.Key("PolicyType")
 		objectKey.String(*v.PolicyType)
+	}
+
+	if v.PredictiveScalingConfiguration != nil {
+		objectKey := object.Key("PredictiveScalingConfiguration")
+		if err := awsAwsquery_serializeDocumentPredictiveScalingConfiguration(v.PredictiveScalingConfiguration, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.ScalingAdjustment != nil {

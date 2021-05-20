@@ -22,6 +22,34 @@ func (Algorithm) Values() []Algorithm {
 	}
 }
 
+type Colorimetry string
+
+// Enum values for Colorimetry
+const (
+	ColorimetryBt601   Colorimetry = "BT601"
+	ColorimetryBt709   Colorimetry = "BT709"
+	ColorimetryBt2020  Colorimetry = "BT2020"
+	ColorimetryBt2100  Colorimetry = "BT2100"
+	ColorimetrySt20651 Colorimetry = "ST2065-1"
+	ColorimetrySt20653 Colorimetry = "ST2065-3"
+	ColorimetryXyz     Colorimetry = "XYZ"
+)
+
+// Values returns all known values for Colorimetry. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (Colorimetry) Values() []Colorimetry {
+	return []Colorimetry{
+		"BT601",
+		"BT709",
+		"BT2020",
+		"BT2100",
+		"ST2065-1",
+		"ST2065-3",
+		"XYZ",
+	}
+}
+
 type DurationUnits string
 
 // Enum values for DurationUnits
@@ -35,6 +63,46 @@ const (
 func (DurationUnits) Values() []DurationUnits {
 	return []DurationUnits{
 		"MONTHS",
+	}
+}
+
+type EncoderProfile string
+
+// Enum values for EncoderProfile
+const (
+	EncoderProfileMain EncoderProfile = "main"
+	EncoderProfileHigh EncoderProfile = "high"
+)
+
+// Values returns all known values for EncoderProfile. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncoderProfile) Values() []EncoderProfile {
+	return []EncoderProfile{
+		"main",
+		"high",
+	}
+}
+
+type EncodingName string
+
+// Enum values for EncodingName
+const (
+	EncodingNameJxsv     EncodingName = "jxsv"
+	EncodingNameRaw      EncodingName = "raw"
+	EncodingNameSmpte291 EncodingName = "smpte291"
+	EncodingNamePcm      EncodingName = "pcm"
+)
+
+// Values returns all known values for EncodingName. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (EncodingName) Values() []EncodingName {
+	return []EncodingName{
+		"jxsv",
+		"raw",
+		"smpte291",
+		"pcm",
 	}
 }
 
@@ -76,6 +144,44 @@ func (KeyType) Values() []KeyType {
 	}
 }
 
+type MediaStreamType string
+
+// Enum values for MediaStreamType
+const (
+	MediaStreamTypeVideo         MediaStreamType = "video"
+	MediaStreamTypeAudio         MediaStreamType = "audio"
+	MediaStreamTypeAncillaryData MediaStreamType = "ancillary-data"
+)
+
+// Values returns all known values for MediaStreamType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MediaStreamType) Values() []MediaStreamType {
+	return []MediaStreamType{
+		"video",
+		"audio",
+		"ancillary-data",
+	}
+}
+
+type NetworkInterfaceType string
+
+// Enum values for NetworkInterfaceType
+const (
+	NetworkInterfaceTypeEna NetworkInterfaceType = "ena"
+	NetworkInterfaceTypeEfa NetworkInterfaceType = "efa"
+)
+
+// Values returns all known values for NetworkInterfaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkInterfaceType) Values() []NetworkInterfaceType {
+	return []NetworkInterfaceType{
+		"ena",
+		"efa",
+	}
+}
+
 type PriceUnits string
 
 // Enum values for PriceUnits
@@ -96,12 +202,14 @@ type Protocol string
 
 // Enum values for Protocol
 const (
-	ProtocolZixiPush    Protocol = "zixi-push"
-	ProtocolRtpFec      Protocol = "rtp-fec"
-	ProtocolRtp         Protocol = "rtp"
-	ProtocolZixiPull    Protocol = "zixi-pull"
-	ProtocolRist        Protocol = "rist"
-	ProtocolSrtListener Protocol = "srt-listener"
+	ProtocolZixiPush     Protocol = "zixi-push"
+	ProtocolRtpFec       Protocol = "rtp-fec"
+	ProtocolRtp          Protocol = "rtp"
+	ProtocolZixiPull     Protocol = "zixi-pull"
+	ProtocolRist         Protocol = "rist"
+	ProtocolSt2110Jpegxs Protocol = "st2110-jpegxs"
+	ProtocolCdi          Protocol = "cdi"
+	ProtocolSrtListener  Protocol = "srt-listener"
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
@@ -114,7 +222,29 @@ func (Protocol) Values() []Protocol {
 		"rtp",
 		"zixi-pull",
 		"rist",
+		"st2110-jpegxs",
+		"cdi",
 		"srt-listener",
+	}
+}
+
+type Range string
+
+// Enum values for Range
+const (
+	RangeNarrow      Range = "NARROW"
+	RangeFull        Range = "FULL"
+	RangeFullprotect Range = "FULLPROTECT"
+)
+
+// Values returns all known values for Range. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Range) Values() []Range {
+	return []Range{
+		"NARROW",
+		"FULL",
+		"FULLPROTECT",
 	}
 }
 
@@ -153,6 +283,26 @@ const (
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Mbps_Outbound_Bandwidth",
+	}
+}
+
+type ScanMode string
+
+// Enum values for ScanMode
+const (
+	ScanModeProgressive               ScanMode = "progressive"
+	ScanModeInterlace                 ScanMode = "interlace"
+	ScanModeProgressiveSegmentedFrame ScanMode = "progressive-segmented-frame"
+)
+
+// Values returns all known values for ScanMode. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (ScanMode) Values() []ScanMode {
+	return []ScanMode{
+		"progressive",
+		"interlace",
+		"progressive-segmented-frame",
 	}
 }
 
@@ -217,5 +367,37 @@ func (Status) Values() []Status {
 		"STARTING",
 		"STOPPING",
 		"ERROR",
+	}
+}
+
+type Tcs string
+
+// Enum values for Tcs
+const (
+	TcsSdr          Tcs = "SDR"
+	TcsPq           Tcs = "PQ"
+	TcsHlg          Tcs = "HLG"
+	TcsLinear       Tcs = "LINEAR"
+	TcsBt2100linpq  Tcs = "BT2100LINPQ"
+	TcsBt2100linhlg Tcs = "BT2100LINHLG"
+	TcsSt20651      Tcs = "ST2065-1"
+	TcsSt4281       Tcs = "ST428-1"
+	TcsDensity      Tcs = "DENSITY"
+)
+
+// Values returns all known values for Tcs. Note that this can be expanded in the
+// future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Tcs) Values() []Tcs {
+	return []Tcs{
+		"SDR",
+		"PQ",
+		"HLG",
+		"LINEAR",
+		"BT2100LINPQ",
+		"BT2100LINHLG",
+		"ST2065-1",
+		"ST428-1",
+		"DENSITY",
 	}
 }

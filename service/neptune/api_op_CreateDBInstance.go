@@ -30,7 +30,7 @@ func (c *Client) CreateDBInstance(ctx context.Context, params *CreateDBInstanceI
 type CreateDBInstanceInput struct {
 
 	// The compute and memory capacity of the DB instance, for example, db.m4.large.
-	// Not all DB instance classes are available in all AWS Regions.
+	// Not all DB instance classes are available in all Amazon Regions.
 	//
 	// This member is required.
 	DBInstanceClass *string
@@ -57,10 +57,7 @@ type CreateDBInstanceInput struct {
 	// This member is required.
 	Engine *string
 
-	// The amount of storage (in gibibytes) to allocate for the DB instance. Type:
-	// Integer Not applicable. Neptune cluster volumes automatically grow as the amount
-	// of data in your database increases, though you are only charged for the space
-	// that you use in a Neptune cluster volume.
+	// Not supported by Neptune.
 	AllocatedStorage *int32
 
 	// Indicates that minor engine upgrades are applied automatically to the DB
@@ -68,10 +65,10 @@ type CreateDBInstanceInput struct {
 	AutoMinorVersionUpgrade *bool
 
 	// The EC2 Availability Zone that the DB instance is created in Default: A random,
-	// system-chosen Availability Zone in the endpoint's AWS Region. Example:
+	// system-chosen Availability Zone in the endpoint's Amazon Region. Example:
 	// us-east-1d Constraint: The AvailabilityZone parameter can't be specified if the
 	// MultiAZ parameter is set to true. The specified Availability Zone must be in the
-	// same AWS Region as the current endpoint.
+	// same Amazon Region as the current endpoint.
 	AvailabilityZone *string
 
 	// The number of days for which automated backups are retained. Not applicable. The
@@ -138,8 +135,7 @@ type CreateDBInstanceInput struct {
 	// The list of log types that need to be enabled for exporting to CloudWatch Logs.
 	EnableCloudwatchLogsExports []string
 
-	// True to enable AWS Identity and Access Management (IAM) authentication for
-	// Neptune. Default: false
+	// Not supported by Neptune (ignored).
 	EnableIAMDatabaseAuthentication *bool
 
 	// (Not supported by Neptune)
@@ -153,28 +149,27 @@ type CreateDBInstanceInput struct {
 	// initially allocated for the DB instance.
 	Iops *int32
 
-	// The AWS KMS key identifier for an encrypted DB instance. The KMS key identifier
-	// is the Amazon Resource Name (ARN) for the KMS encryption key. If you are
-	// creating a DB instance with the same AWS account that owns the KMS encryption
-	// key used to encrypt the new DB instance, then you can use the KMS key alias
-	// instead of the ARN for the KM encryption key. Not applicable. The KMS key
+	// The Amazon KMS key identifier for an encrypted DB instance. The KMS key
+	// identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you
+	// are creating a DB instance with the same Amazon account that owns the KMS
+	// encryption key used to encrypt the new DB instance, then you can use the KMS key
+	// alias instead of the ARN for the KM encryption key. Not applicable. The KMS key
 	// identifier is managed by the DB cluster. For more information, see
 	// CreateDBCluster. If the StorageEncrypted parameter is true, and you do not
 	// specify a value for the KmsKeyId parameter, then Amazon Neptune will use your
-	// default encryption key. AWS KMS creates the default encryption key for your AWS
-	// account. Your AWS account has a different default encryption key for each AWS
-	// Region.
+	// default encryption key. Amazon KMS creates the default encryption key for your
+	// Amazon account. Your Amazon account has a different default encryption key for
+	// each Amazon Region.
 	KmsKeyId *string
 
 	// License model information for this DB instance. Valid values: license-included |
 	// bring-your-own-license | general-public-license
 	LicenseModel *string
 
-	// The password for the master user. The password can include any printable ASCII
-	// character except "/", """, or "@". Not used.
+	// Not supported by Neptune.
 	MasterUserPassword *string
 
-	// The name for the master user. Not used.
+	// Not supported by Neptune.
 	MasterUsername *string
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
@@ -212,7 +207,7 @@ type CreateDBInstanceInput struct {
 
 	// The time range each week during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu,
 	// Fri, Sat, Sun. Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string

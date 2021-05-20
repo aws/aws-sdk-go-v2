@@ -72,6 +72,10 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// cluster can be created in.
 	AvailabilityZones []string
 
+	// If set to true, tags are copied to any snapshot of the restored DB cluster that
+	// is created.
+	CopyTagsToSnapshot *bool
+
 	// The name of the DB cluster parameter group to associate with the new DB cluster.
 	// Constraints:
 	//
@@ -96,17 +100,17 @@ type RestoreDBClusterFromSnapshotInput struct {
 	// Logs.
 	EnableCloudwatchLogsExports []string
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
-	// database accounts, and otherwise false. Default: false
+	// True to enable mapping of Amazon Identity and Access Management (IAM) accounts
+	// to database accounts, and otherwise false. Default: false
 	EnableIAMDatabaseAuthentication *bool
 
 	// The version of the database engine to use for the new DB cluster.
 	EngineVersion *string
 
-	// The AWS KMS key identifier to use when restoring an encrypted DB cluster from a
-	// DB snapshot or DB cluster snapshot. The KMS key identifier is the Amazon
+	// The Amazon KMS key identifier to use when restoring an encrypted DB cluster from
+	// a DB snapshot or DB cluster snapshot. The KMS key identifier is the Amazon
 	// Resource Name (ARN) for the KMS encryption key. If you are restoring a DB
-	// cluster with the same AWS account that owns the KMS encryption key used to
+	// cluster with the same Amazon account that owns the KMS encryption key used to
 	// encrypt the new DB cluster, then you can use the KMS key alias instead of the
 	// ARN for the KMS encryption key. If you do not specify a value for the KmsKeyId
 	// parameter, then the following will occur:

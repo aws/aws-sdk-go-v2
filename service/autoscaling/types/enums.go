@@ -170,6 +170,109 @@ func (MetricType) Values() []MetricType {
 	}
 }
 
+type PredefinedLoadMetricType string
+
+// Enum values for PredefinedLoadMetricType
+const (
+	PredefinedLoadMetricTypeASGTotalCPUUtilization     PredefinedLoadMetricType = "ASGTotalCPUUtilization"
+	PredefinedLoadMetricTypeASGTotalNetworkIn          PredefinedLoadMetricType = "ASGTotalNetworkIn"
+	PredefinedLoadMetricTypeASGTotalNetworkOut         PredefinedLoadMetricType = "ASGTotalNetworkOut"
+	PredefinedLoadMetricTypeALBTargetGroupRequestCount PredefinedLoadMetricType = "ALBTargetGroupRequestCount"
+)
+
+// Values returns all known values for PredefinedLoadMetricType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PredefinedLoadMetricType) Values() []PredefinedLoadMetricType {
+	return []PredefinedLoadMetricType{
+		"ASGTotalCPUUtilization",
+		"ASGTotalNetworkIn",
+		"ASGTotalNetworkOut",
+		"ALBTargetGroupRequestCount",
+	}
+}
+
+type PredefinedMetricPairType string
+
+// Enum values for PredefinedMetricPairType
+const (
+	PredefinedMetricPairTypeASGCPUUtilization PredefinedMetricPairType = "ASGCPUUtilization"
+	PredefinedMetricPairTypeASGNetworkIn      PredefinedMetricPairType = "ASGNetworkIn"
+	PredefinedMetricPairTypeASGNetworkOut     PredefinedMetricPairType = "ASGNetworkOut"
+	PredefinedMetricPairTypeALBRequestCount   PredefinedMetricPairType = "ALBRequestCount"
+)
+
+// Values returns all known values for PredefinedMetricPairType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PredefinedMetricPairType) Values() []PredefinedMetricPairType {
+	return []PredefinedMetricPairType{
+		"ASGCPUUtilization",
+		"ASGNetworkIn",
+		"ASGNetworkOut",
+		"ALBRequestCount",
+	}
+}
+
+type PredefinedScalingMetricType string
+
+// Enum values for PredefinedScalingMetricType
+const (
+	PredefinedScalingMetricTypeASGAverageCPUUtilization PredefinedScalingMetricType = "ASGAverageCPUUtilization"
+	PredefinedScalingMetricTypeASGAverageNetworkIn      PredefinedScalingMetricType = "ASGAverageNetworkIn"
+	PredefinedScalingMetricTypeASGAverageNetworkOut     PredefinedScalingMetricType = "ASGAverageNetworkOut"
+	PredefinedScalingMetricTypeALBRequestCountPerTarget PredefinedScalingMetricType = "ALBRequestCountPerTarget"
+)
+
+// Values returns all known values for PredefinedScalingMetricType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PredefinedScalingMetricType) Values() []PredefinedScalingMetricType {
+	return []PredefinedScalingMetricType{
+		"ASGAverageCPUUtilization",
+		"ASGAverageNetworkIn",
+		"ASGAverageNetworkOut",
+		"ALBRequestCountPerTarget",
+	}
+}
+
+type PredictiveScalingMaxCapacityBreachBehavior string
+
+// Enum values for PredictiveScalingMaxCapacityBreachBehavior
+const (
+	PredictiveScalingMaxCapacityBreachBehaviorHonorMaxCapacity    PredictiveScalingMaxCapacityBreachBehavior = "HonorMaxCapacity"
+	PredictiveScalingMaxCapacityBreachBehaviorIncreaseMaxCapacity PredictiveScalingMaxCapacityBreachBehavior = "IncreaseMaxCapacity"
+)
+
+// Values returns all known values for PredictiveScalingMaxCapacityBreachBehavior.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PredictiveScalingMaxCapacityBreachBehavior) Values() []PredictiveScalingMaxCapacityBreachBehavior {
+	return []PredictiveScalingMaxCapacityBreachBehavior{
+		"HonorMaxCapacity",
+		"IncreaseMaxCapacity",
+	}
+}
+
+type PredictiveScalingMode string
+
+// Enum values for PredictiveScalingMode
+const (
+	PredictiveScalingModeForecastAndScale PredictiveScalingMode = "ForecastAndScale"
+	PredictiveScalingModeForecastOnly     PredictiveScalingMode = "ForecastOnly"
+)
+
+// Values returns all known values for PredictiveScalingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PredictiveScalingMode) Values() []PredictiveScalingMode {
+	return []PredictiveScalingMode{
+		"ForecastAndScale",
+		"ForecastOnly",
+	}
+}
+
 type RefreshStrategy string
 
 // Enum values for RefreshStrategy

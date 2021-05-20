@@ -22,6 +22,28 @@ func (IngestionMode) Values() []IngestionMode {
 	}
 }
 
+type ObjectiveSensitivity string
+
+// Enum values for ObjectiveSensitivity
+const (
+	ObjectiveSensitivityLow    ObjectiveSensitivity = "LOW"
+	ObjectiveSensitivityMedium ObjectiveSensitivity = "MEDIUM"
+	ObjectiveSensitivityHigh   ObjectiveSensitivity = "HIGH"
+	ObjectiveSensitivityOff    ObjectiveSensitivity = "OFF"
+)
+
+// Values returns all known values for ObjectiveSensitivity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ObjectiveSensitivity) Values() []ObjectiveSensitivity {
+	return []ObjectiveSensitivity{
+		"LOW",
+		"MEDIUM",
+		"HIGH",
+		"OFF",
+	}
+}
+
 type RecipeProvider string
 
 // Enum values for RecipeProvider

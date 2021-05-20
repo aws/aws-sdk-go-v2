@@ -390,6 +390,53 @@ func (m *awsAwsjson11_serializeOpCreateLicenseConfiguration) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateLicenseManagerReportGenerator struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateLicenseManagerReportGenerator) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateLicenseManagerReportGenerator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLicenseManagerReportGeneratorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.CreateLicenseManagerReportGenerator")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateLicenseManagerReportGeneratorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCreateLicenseVersion struct {
 }
 
@@ -610,6 +657,53 @@ func (m *awsAwsjson11_serializeOpDeleteLicenseConfiguration) HandleSerialize(ctx
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteLicenseConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteLicenseManagerReportGenerator struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteLicenseManagerReportGenerator) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteLicenseManagerReportGenerator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLicenseManagerReportGeneratorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.DeleteLicenseManagerReportGenerator")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteLicenseManagerReportGeneratorInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -907,6 +1001,53 @@ func (m *awsAwsjson11_serializeOpGetLicenseConfiguration) HandleSerialize(ctx co
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetLicenseManagerReportGenerator struct {
+}
+
+func (*awsAwsjson11_serializeOpGetLicenseManagerReportGenerator) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetLicenseManagerReportGenerator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLicenseManagerReportGeneratorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.GetLicenseManagerReportGenerator")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetLicenseManagerReportGeneratorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetLicenseUsage struct {
 }
 
@@ -1174,6 +1315,53 @@ func (m *awsAwsjson11_serializeOpListLicenseConfigurations) HandleSerialize(ctx 
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentListLicenseConfigurationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpListLicenseManagerReportGenerators struct {
+}
+
+func (*awsAwsjson11_serializeOpListLicenseManagerReportGenerators) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListLicenseManagerReportGenerators) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLicenseManagerReportGeneratorsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.ListLicenseManagerReportGenerators")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListLicenseManagerReportGeneratorsInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -1800,6 +1988,53 @@ func (m *awsAwsjson11_serializeOpUpdateLicenseConfiguration) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateLicenseManagerReportGenerator struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateLicenseManagerReportGenerator) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateLicenseManagerReportGenerator) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLicenseManagerReportGeneratorInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSLicenseManager.UpdateLicenseManagerReportGenerator")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateLicenseManagerReportGeneratorInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateLicenseSpecificationsForResource struct {
 }
 
@@ -2343,6 +2578,48 @@ func awsAwsjson11_serializeDocumentProvisionalConfiguration(v *types.Provisional
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentReportContext(v *types.ReportContext, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseConfigurationArns != nil {
+		ok := object.Key("licenseConfigurationArns")
+		if err := awsAwsjson11_serializeDocumentArnList(v.LicenseConfigurationArns, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentReportFrequency(v *types.ReportFrequency, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Period) > 0 {
+		ok := object.Key("period")
+		ok.String(string(v.Period))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.Integer(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentReportTypeList(v []types.ReportType, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentStringList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2719,6 +2996,56 @@ func awsAwsjson11_serializeOpDocumentCreateLicenseInput(v *CreateLicenseInput, v
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentCreateLicenseManagerReportGeneratorInput(v *CreateLicenseManagerReportGeneratorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.ReportContext != nil {
+		ok := object.Key("ReportContext")
+		if err := awsAwsjson11_serializeDocumentReportContext(v.ReportContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportFrequency != nil {
+		ok := object.Key("ReportFrequency")
+		if err := awsAwsjson11_serializeDocumentReportFrequency(v.ReportFrequency, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportGeneratorName != nil {
+		ok := object.Key("ReportGeneratorName")
+		ok.String(*v.ReportGeneratorName)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		if err := awsAwsjson11_serializeDocumentReportTypeList(v.Type, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentCreateLicenseVersionInput(v *CreateLicenseVersionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2878,6 +3205,18 @@ func awsAwsjson11_serializeOpDocumentDeleteLicenseInput(v *DeleteLicenseInput, v
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDeleteLicenseManagerReportGeneratorInput(v *DeleteLicenseManagerReportGeneratorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseManagerReportGeneratorArn != nil {
+		ok := object.Key("LicenseManagerReportGeneratorArn")
+		ok.String(*v.LicenseManagerReportGeneratorArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDeleteTokenInput(v *DeleteTokenInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2967,6 +3306,18 @@ func awsAwsjson11_serializeOpDocumentGetLicenseInput(v *GetLicenseInput, value s
 	if v.Version != nil {
 		ok := object.Key("Version")
 		ok.String(*v.Version)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentGetLicenseManagerReportGeneratorInput(v *GetLicenseManagerReportGeneratorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LicenseManagerReportGeneratorArn != nil {
+		ok := object.Key("LicenseManagerReportGeneratorArn")
+		ok.String(*v.LicenseManagerReportGeneratorArn)
 	}
 
 	return nil
@@ -3080,6 +3431,30 @@ func awsAwsjson11_serializeOpDocumentListLicenseConfigurationsInput(v *ListLicen
 	if v.LicenseConfigurationArns != nil {
 		ok := object.Key("LicenseConfigurationArns")
 		if err := awsAwsjson11_serializeDocumentStringList(v.LicenseConfigurationArns, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListLicenseManagerReportGeneratorsInput(v *ListLicenseManagerReportGeneratorsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentFilterList(v.Filters, ok); err != nil {
 			return err
 		}
 	}
@@ -3429,6 +3804,54 @@ func awsAwsjson11_serializeOpDocumentUpdateLicenseConfigurationInput(v *UpdateLi
 	if v.ProductInformationList != nil {
 		ok := object.Key("ProductInformationList")
 		if err := awsAwsjson11_serializeDocumentProductInformationList(v.ProductInformationList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateLicenseManagerReportGeneratorInput(v *UpdateLicenseManagerReportGeneratorInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Description != nil {
+		ok := object.Key("Description")
+		ok.String(*v.Description)
+	}
+
+	if v.LicenseManagerReportGeneratorArn != nil {
+		ok := object.Key("LicenseManagerReportGeneratorArn")
+		ok.String(*v.LicenseManagerReportGeneratorArn)
+	}
+
+	if v.ReportContext != nil {
+		ok := object.Key("ReportContext")
+		if err := awsAwsjson11_serializeDocumentReportContext(v.ReportContext, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportFrequency != nil {
+		ok := object.Key("ReportFrequency")
+		if err := awsAwsjson11_serializeDocumentReportFrequency(v.ReportFrequency, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReportGeneratorName != nil {
+		ok := object.Key("ReportGeneratorName")
+		ok.String(*v.ReportGeneratorName)
+	}
+
+	if v.Type != nil {
+		ok := object.Key("Type")
+		if err := awsAwsjson11_serializeDocumentReportTypeList(v.Type, ok); err != nil {
 			return err
 		}
 	}

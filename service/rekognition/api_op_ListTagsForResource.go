@@ -11,7 +11,8 @@ import (
 )
 
 // Returns a list of tags in an Amazon Rekognition collection, stream processor, or
-// Custom Labels model.
+// Custom Labels model. This operation requires permissions to perform the
+// rekognition:ListTagsForResource action.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

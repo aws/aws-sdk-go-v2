@@ -2,6 +2,40 @@
 
 package types
 
+// The media stream that you want to add to the flow.
+type AddMediaStreamRequest struct {
+
+	// A unique identifier for the media stream.
+	//
+	// This member is required.
+	MediaStreamId int32
+
+	// A name that helps you distinguish one media stream from another.
+	//
+	// This member is required.
+	MediaStreamName *string
+
+	// The type of media stream.
+	//
+	// This member is required.
+	MediaStreamType MediaStreamType
+
+	// The attributes that you want to assign to the new media stream.
+	Attributes *MediaStreamAttributesRequest
+
+	// The sample rate (in Hz) for the stream. If the media stream type is video or
+	// ancillary data, set this value to 90000. If the media stream type is audio, set
+	// this value to either 48000 or 96000.
+	ClockRate int32
+
+	// A description that can help you quickly identify what your media stream is used
+	// for.
+	Description *string
+
+	// The resolution of the video.
+	VideoFormat *string
+}
+
 // The output that you want to add to this flow.
 type AddOutputRequest struct {
 
@@ -29,6 +63,10 @@ type AddOutputRequest struct {
 	// The maximum latency in milliseconds for Zixi-based streams.
 	MaxLatency int32
 
+	// The media streams that are associated with the output, and the parameters for
+	// those associations.
+	MediaStreamOutputConfigurations []MediaStreamOutputConfigurationRequest
+
 	// The minimum latency in milliseconds for SRT-based streams. In streams that use
 	// the SRT protocol, this value that you set on your MediaConnect source or output
 	// represents the minimal potential latency of that connection. The latency of the
@@ -54,6 +92,98 @@ type AddOutputRequest struct {
 
 	// The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
+}
+
+// The transport parameters that are associated with an outbound media stream.
+type DestinationConfiguration struct {
+
+	// The IP address where contents of the media stream will be sent.
+	//
+	// This member is required.
+	DestinationIp *string
+
+	// The port to use when the content of the media stream is distributed to the
+	// output.
+	//
+	// This member is required.
+	DestinationPort int32
+
+	// The VPC interface that is used for the media stream associated with the output.
+	//
+	// This member is required.
+	Interface *Interface
+
+	// The IP address that the receiver requires in order to establish a connection
+	// with the flow. This value is represented by the elastic network interface IP
+	// address of the VPC. This field applies only to outputs that use the CDI or ST
+	// 2110 JPEG XS protocol.
+	//
+	// This member is required.
+	OutboundIp *string
+}
+
+// The transport parameters that you want to associate with an outbound media
+// stream.
+type DestinationConfigurationRequest struct {
+
+	// The IP address where you want MediaConnect to send contents of the media stream.
+	//
+	// This member is required.
+	DestinationIp *string
+
+	// The port that you want MediaConnect to use when it distributes the media stream
+	// to the output.
+	//
+	// This member is required.
+	DestinationPort int32
+
+	// The VPC interface that you want to use for the media stream associated with the
+	// output.
+	//
+	// This member is required.
+	Interface *InterfaceRequest
+}
+
+// A collection of parameters that determine how MediaConnect will convert the
+// content. These fields only apply to outputs on flows that have a CDI source.
+type EncodingParameters struct {
+
+	// A value that is used to calculate compression for an output. The bitrate of the
+	// output is calculated as follows: Output bitrate = (1 / compressionFactor) *
+	// (source bitrate) This property only applies to outputs that use the ST 2110 JPEG
+	// XS protocol, with a flow source that uses the CDI protocol. Valid values are
+	// floating point numbers in the range of 3.0 to 10.0, inclusive.
+	//
+	// This member is required.
+	CompressionFactor float64
+
+	// A setting on the encoder that drives compression settings. This property only
+	// applies to video media streams associated with outputs that use the ST 2110 JPEG
+	// XS protocol, with a flow source that uses the CDI protocol.
+	//
+	// This member is required.
+	EncoderProfile EncoderProfile
+}
+
+// A collection of parameters that determine how MediaConnect will convert the
+// content. These fields only apply to outputs on flows that have a CDI source.
+type EncodingParametersRequest struct {
+
+	// A value that is used to calculate compression for an output. The bitrate of the
+	// output is calculated as follows: Output bitrate = (1 / compressionFactor) *
+	// (source bitrate) This property only applies to outputs that use the ST 2110 JPEG
+	// XS protocol, with a flow source that uses the CDI protocol. Valid values are
+	// floating point numbers in the range of 3.0 to 10.0, inclusive.
+	//
+	// This member is required.
+	CompressionFactor float64
+
+	// A setting on the encoder that drives compression settings. This property only
+	// applies to video media streams associated with outputs that use the ST 2110 JPEG
+	// XS protocol, if at least one source on the flow uses the CDI protocol.
+	//
+	// This member is required.
+	EncoderProfile EncoderProfile
 }
 
 // Information about the encryption of the flow.
@@ -195,6 +325,10 @@ type Flow struct {
 	// The IP address from which video will be sent to output destinations.
 	EgressIp *string
 
+	// The media streams that are associated with the flow. After you associate a media
+	// stream with a source, you can also associate it with outputs on the flow.
+	MediaStreams []MediaStream
+
 	// The settings for source failover
 	SourceFailoverConfig *FailoverConfig
 
@@ -202,6 +336,60 @@ type Flow struct {
 
 	// The VPC Interfaces for this flow.
 	VpcInterfaces []VpcInterface
+}
+
+// FMTP
+type Fmtp struct {
+
+	// The format of the audio channel.
+	ChannelOrder *string
+
+	// The format that is used for the representation of color.
+	Colorimetry Colorimetry
+
+	// The frame rate for the video stream, in frames/second. For example: 60000/1001.
+	// If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if
+	// you specify 60, MediaConnect uses 60/1 as the exactFramerate.
+	ExactFramerate *string
+
+	// The pixel aspect ratio (PAR) of the video.
+	Par *string
+
+	// The encoding range of the video.
+	Range Range
+
+	// The type of compression that was used to smooth the video’s appearance
+	ScanMode ScanMode
+
+	// The transfer characteristic system (TCS) that is used in the video.
+	Tcs Tcs
+}
+
+// The settings that you want to use to define the media stream.
+type FmtpRequest struct {
+
+	// The format of the audio channel.
+	ChannelOrder *string
+
+	// The format that is used for the representation of color.
+	Colorimetry Colorimetry
+
+	// The frame rate for the video stream, in frames/second. For example: 60000/1001.
+	// If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if
+	// you specify 60, MediaConnect uses 60/1 as the exactFramerate.
+	ExactFramerate *string
+
+	// The pixel aspect ratio (PAR) of the video.
+	Par *string
+
+	// The encoding range of the video.
+	Range Range
+
+	// The type of compression that was used to smooth the video’s appearance.
+	ScanMode ScanMode
+
+	// The transfer characteristic system (TCS) that is used in the video.
+	Tcs Tcs
 }
 
 // The entitlements that you want to grant on a flow.
@@ -232,6 +420,60 @@ type GrantEntitlementRequest struct {
 	EntitlementStatus EntitlementStatus
 
 	// The name of the entitlement. This value must be unique within the current flow.
+	Name *string
+}
+
+// The transport parameters that are associated with an incoming media stream.
+type InputConfiguration struct {
+
+	// The IP address that the flow listens on for incoming content for a media stream.
+	//
+	// This member is required.
+	InputIp *string
+
+	// The port that the flow listens on for an incoming media stream.
+	//
+	// This member is required.
+	InputPort int32
+
+	// The VPC interface where the media stream comes in from.
+	//
+	// This member is required.
+	Interface *Interface
+}
+
+// The transport parameters that you want to associate with an incoming media
+// stream.
+type InputConfigurationRequest struct {
+
+	// The port that you want the flow to listen on for an incoming media stream.
+	//
+	// This member is required.
+	InputPort int32
+
+	// The VPC interface that you want to use for the incoming media stream.
+	//
+	// This member is required.
+	Interface *InterfaceRequest
+}
+
+// The VPC interface that is used for the media stream associated with the source
+// or output.
+type Interface struct {
+
+	// The name of the VPC interface.
+	//
+	// This member is required.
+	Name *string
+}
+
+// The VPC interface that you want to designate where the media stream is coming
+// from or going to.
+type InterfaceRequest struct {
+
+	// The name of the VPC interface.
+	//
+	// This member is required.
 	Name *string
 }
 
@@ -287,6 +529,160 @@ type ListedFlow struct {
 	//
 	// This member is required.
 	Status Status
+}
+
+// A single track or stream of media that contains video, audio, or ancillary data.
+// After you add a media stream to a flow, you can associate it with sources and
+// outputs on that flow, as long as they use the CDI protocol or the ST 2110 JPEG
+// XS protocol. Each source or output can consist of one or many media streams.
+type MediaStream struct {
+
+	// The format type number (sometimes referred to as RTP payload type) of the media
+	// stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS
+	// outputs, you need to provide this value to the receiver.
+	//
+	// This member is required.
+	Fmt int32
+
+	// A unique identifier for the media stream.
+	//
+	// This member is required.
+	MediaStreamId int32
+
+	// A name that helps you distinguish one media stream from another.
+	//
+	// This member is required.
+	MediaStreamName *string
+
+	// The type of media stream.
+	//
+	// This member is required.
+	MediaStreamType MediaStreamType
+
+	// Attributes that are related to the media stream.
+	Attributes *MediaStreamAttributes
+
+	// The sample rate for the stream. This value is measured in Hz.
+	ClockRate int32
+
+	// A description that can help you quickly identify what your media stream is used
+	// for.
+	Description *string
+
+	// The resolution of the video.
+	VideoFormat *string
+}
+
+// Attributes that are related to the media stream.
+type MediaStreamAttributes struct {
+
+	// A set of parameters that define the media stream.
+	//
+	// This member is required.
+	Fmtp *Fmtp
+
+	// The audio language, in a format that is recognized by the receiver.
+	Lang *string
+}
+
+// Attributes that are related to the media stream.
+type MediaStreamAttributesRequest struct {
+
+	// The settings that you want to use to define the media stream.
+	Fmtp *FmtpRequest
+
+	// The audio language, in a format that is recognized by the receiver.
+	Lang *string
+}
+
+// The media stream that is associated with the output, and the parameters for that
+// association.
+type MediaStreamOutputConfiguration struct {
+
+	// The format that was used to encode the data. For ancillary data streams, set the
+	// encoding name to smpte291. For audio streams, set the encoding name to pcm. For
+	// video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams,
+	// set the encoding name to jxsv.
+	//
+	// This member is required.
+	EncodingName EncodingName
+
+	// The name of the media stream.
+	//
+	// This member is required.
+	MediaStreamName *string
+
+	// The transport parameters that are associated with each outbound media stream.
+	DestinationConfigurations []DestinationConfiguration
+
+	// Encoding parameters
+	EncodingParameters *EncodingParameters
+}
+
+// The media stream that you want to associate with the output, and the parameters
+// for that association.
+type MediaStreamOutputConfigurationRequest struct {
+
+	// The format that will be used to encode the data. For ancillary data streams, set
+	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
+	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
+	// streams, set the encoding name to jxsv.
+	//
+	// This member is required.
+	EncodingName EncodingName
+
+	// The name of the media stream that is associated with the output.
+	//
+	// This member is required.
+	MediaStreamName *string
+
+	// The transport parameters that you want to associate with the media stream.
+	DestinationConfigurations []DestinationConfigurationRequest
+
+	// A collection of parameters that determine how MediaConnect will convert the
+	// content. These fields only apply to outputs on flows that have a CDI source.
+	EncodingParameters *EncodingParametersRequest
+}
+
+// The media stream that is associated with the source, and the parameters for that
+// association.
+type MediaStreamSourceConfiguration struct {
+
+	// The format that was used to encode the data. For ancillary data streams, set the
+	// encoding name to smpte291. For audio streams, set the encoding name to pcm. For
+	// video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams,
+	// set the encoding name to jxsv.
+	//
+	// This member is required.
+	EncodingName EncodingName
+
+	// The name of the media stream.
+	//
+	// This member is required.
+	MediaStreamName *string
+
+	// The transport parameters that are associated with an incoming media stream.
+	InputConfigurations []InputConfiguration
+}
+
+// The definition of a media stream that you want to associate with the source.
+type MediaStreamSourceConfigurationRequest struct {
+
+	// The format you want to use to encode the data. For ancillary data streams, set
+	// the encoding name to smpte291. For audio streams, set the encoding name to pcm.
+	// For video, 2110 streams, set the encoding name to raw. For video, JPEG XS
+	// streams, set the encoding name to jxsv.
+	//
+	// This member is required.
+	EncodingName EncodingName
+
+	// The name of the media stream.
+	//
+	// This member is required.
+	MediaStreamName *string
+
+	// The transport parameters that you want to associate with the media stream.
+	InputConfigurations []InputConfigurationRequest
 }
 
 // Messages that provide the state of the flow.
@@ -387,6 +783,9 @@ type Output struct {
 	// The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant
 	// only for outputs that were added by creating a MediaLive input.
 	MediaLiveInputArn *string
+
+	// The configuration for each media stream that is associated with the output.
+	MediaStreamOutputConfigurations []MediaStreamOutputConfiguration
 
 	// The port to use when content is distributed to this output.
 	Port int32
@@ -520,6 +919,13 @@ type SetSourceRequest struct {
 	// and Zixi-based streams.
 	MaxLatency int32
 
+	// The size of the buffer (in milliseconds) to use to sync incoming source data.
+	MaxSyncBuffer int32
+
+	// The media streams that are associated with the source, and the parameters for
+	// those associations.
+	MediaStreamSourceConfigurations []MediaStreamSourceConfigurationRequest
+
 	// The minimum latency in milliseconds for SRT-based streams. In streams that use
 	// the SRT protocol, this value that you set on your MediaConnect source or output
 	// represents the minimal potential latency of that connection. The latency of the
@@ -580,10 +986,14 @@ type Source struct {
 	// The port that the flow will be listening on for incoming content.
 	IngestPort int32
 
+	// The media streams that are associated with the source, and the parameters for
+	// those associations.
+	MediaStreamSourceConfigurations []MediaStreamSourceConfiguration
+
 	// Attributes related to the transport stream that are used in the source.
 	Transport *Transport
 
-	// The name of the VPC Interface this Source is configured with.
+	// The name of the VPC interface that is used for this source.
 	VpcInterfaceName *string
 
 	// The range of IP addresses that should be allowed to contribute content to your
@@ -611,6 +1021,9 @@ type Transport struct {
 	// The maximum latency in milliseconds. This parameter applies only to RIST-based
 	// and Zixi-based streams.
 	MaxLatency int32
+
+	// The size of the buffer (in milliseconds) to use to sync incoming source data.
+	MaxSyncBuffer int32
 
 	// The minimum latency in milliseconds for SRT-based streams. In streams that use
 	// the SRT protocol, this value that you set on your MediaConnect source or output
@@ -699,6 +1112,11 @@ type VpcInterface struct {
 	// This member is required.
 	NetworkInterfaceIds []string
 
+	// The type of network interface.
+	//
+	// This member is required.
+	NetworkInterfaceType NetworkInterfaceType
+
 	// Role Arn MediaConnect can assumes to create ENIs in customer's account
 	//
 	// This member is required.
@@ -745,4 +1163,8 @@ type VpcInterfaceRequest struct {
 	//
 	// This member is required.
 	SubnetId *string
+
+	// The type of network interface. If this value is not included in the request,
+	// MediaConnect uses ENA as the networkInterfaceType.
+	NetworkInterfaceType NetworkInterfaceType
 }

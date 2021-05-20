@@ -63,6 +63,16 @@ type CreateProjectVersionInput struct {
 	// This member is required.
 	VersionName *string
 
+	// The identifier for your AWS Key Management Service (AWS KMS) customer master key
+	// (CMK). You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your
+	// CMK, or an alias for your CMK. The key is used to encrypt training and test
+	// images copied into the service for model training. Your source images are
+	// unaffected. The key is also used to encrypt training results and manifest files
+	// written to the output Amazon S3 bucket (OutputConfig). If you don't specify a
+	// value for KmsKeyId, images copied into the service are encrypted using a key
+	// that AWS owns and manages.
+	KmsKeyId *string
+
 	// A set of tags (key-value pairs) that you want to attach to the model.
 	Tags map[string]string
 }

@@ -33,10 +33,10 @@ import (
 // DescribeCases operation to get the displayId.
 //
 // * You must have a Business or
-// Enterprise support plan to use the AWS Support API.
+// Enterprise Support plan to use the AWS Support API.
 //
 // * If you call the AWS
-// Support API from an account that does not have a Business or Enterprise support
+// Support API from an account that does not have a Business or Enterprise Support
 // plan, the SubscriptionRequiredException error message appears. For information
 // about changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
@@ -64,8 +64,8 @@ type CreateCaseInput struct {
 	// This member is required.
 	CommunicationBody *string
 
-	// The title of the AWS Support case. The title appears in the Subject field on the
-	// AWS Support Center Create Case
+	// The title of the support case. The title appears in the Subject field on the AWS
+	// Support Center Create Case
 	// (https://console.aws.amazon.com/support/home#/case/create) page.
 	//
 	// This member is required.
@@ -75,9 +75,9 @@ type CreateCaseInput struct {
 	// the AddAttachmentsToSet operation.
 	AttachmentSetId *string
 
-	// The category of problem for the AWS Support case. You also use the
-	// DescribeServices operation to get the category code for a service. Each AWS
-	// service defines its own set of category codes.
+	// The category of problem for the support case. You also use the DescribeServices
+	// operation to get the category code for a service. Each AWS service defines its
+	// own set of category codes.
 	CategoryCode *string
 
 	// A list of email addresses that AWS Support copies on case correspondence. AWS
@@ -109,11 +109,11 @@ type CreateCaseInput struct {
 	SeverityCode *string
 }
 
-// The AWS Support case ID returned by a successful completion of the CreateCase
+// The support case ID returned by a successful completion of the CreateCase
 // operation.
 type CreateCaseOutput struct {
 
-	// The AWS Support case ID requested or returned in the call. The case ID is an
+	// The support case ID requested or returned in the call. The case ID is an
 	// alphanumeric string in the following format:
 	// case-12345678910-2013-c4c1d2bf33c5cf47
 	CaseId *string

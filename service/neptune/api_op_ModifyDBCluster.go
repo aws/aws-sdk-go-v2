@@ -44,12 +44,11 @@ type ModifyDBClusterInput struct {
 	// modifications are asynchronously applied as soon as possible, regardless of the
 	// PreferredMaintenanceWindow setting for the DB cluster. If this parameter is set
 	// to false, changes to the DB cluster are applied during the next maintenance
-	// window. The ApplyImmediately parameter only affects the NewDBClusterIdentifier
-	// and MasterUserPassword values. If you set the ApplyImmediately parameter value
-	// to false, then changes to the NewDBClusterIdentifier and MasterUserPassword
-	// values are applied during the next maintenance window. All other changes are
-	// applied immediately, regardless of the value of the ApplyImmediately parameter.
-	// Default: false
+	// window. The ApplyImmediately parameter only affects NewDBClusterIdentifier
+	// values. If you set the ApplyImmediately parameter value to false, then changes
+	// to NewDBClusterIdentifier values are applied during the next maintenance window.
+	// All other changes are applied immediately, regardless of the value of the
+	// ApplyImmediately parameter. Default: false
 	ApplyImmediately bool
 
 	// The number of days for which automated backups are retained. You must specify a
@@ -62,6 +61,10 @@ type ModifyDBClusterInput struct {
 	// CloudWatch Logs for a specific DB cluster.
 	CloudwatchLogsExportConfiguration *types.CloudwatchLogsExportConfiguration
 
+	// If set to true, tags are copied to any snapshot of the DB cluster that is
+	// created.
+	CopyTagsToSnapshot *bool
+
 	// The name of the DB cluster parameter group to use for the DB cluster.
 	DBClusterParameterGroupName *string
 
@@ -70,8 +73,8 @@ type ModifyDBClusterInput struct {
 	// deletion protection is disabled.
 	DeletionProtection *bool
 
-	// True to enable mapping of AWS Identity and Access Management (IAM) accounts to
-	// database accounts, and otherwise false. Default: false
+	// True to enable mapping of Amazon Identity and Access Management (IAM) accounts
+	// to database accounts, and otherwise false. Default: false
 	EnableIAMDatabaseAuthentication *bool
 
 	// The version number of the database engine to which you want to upgrade. Changing
@@ -83,9 +86,7 @@ type ModifyDBClusterInput struct {
 	// (https://docs.aws.amazon.com/neptune/latest/userguide/api-other-apis.html#DescribeDBEngineVersions).
 	EngineVersion *string
 
-	// The new password for the master database user. This password can contain any
-	// printable ASCII character except "/", """, or "@". Constraints: Must contain
-	// from 8 to 41 characters.
+	// Not supported by Neptune.
 	MasterUserPassword *string
 
 	// The new DB cluster identifier for the DB cluster when renaming a DB cluster.
@@ -103,7 +104,7 @@ type ModifyDBClusterInput struct {
 	// my-cluster2
 	NewDBClusterIdentifier *string
 
-	// (Not supported by Neptune)
+	// Not supported by Neptune.
 	OptionGroupName *string
 
 	// The port number on which the DB cluster accepts connections. Constraints: Value
@@ -112,7 +113,7 @@ type ModifyDBClusterInput struct {
 
 	// The daily time range during which automated backups are created if automated
 	// backups are enabled, using the BackupRetentionPeriod parameter. The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Region. Constraints:
 	//
 	// * Must be in the format hh24:mi-hh24:mi.
@@ -128,7 +129,7 @@ type ModifyDBClusterInput struct {
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi The default is a
-	// 30-minute window selected at random from an 8-hour block of time for each AWS
+	// 30-minute window selected at random from an 8-hour block of time for each Amazon
 	// Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu,
 	// Fri, Sat, Sun. Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string

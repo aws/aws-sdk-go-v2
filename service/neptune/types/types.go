@@ -44,10 +44,14 @@ type DBCluster struct {
 	// not fixed, but instead automatically adjusts as needed.
 	AllocatedStorage *int32
 
-	// Provides a list of the AWS Identity and Access Management (IAM) roles that are
-	// associated with the DB cluster. IAM roles that are associated with a DB cluster
-	// grant permission for the DB cluster to access other AWS services on your behalf.
+	// Provides a list of the Amazon Identity and Access Management (IAM) roles that
+	// are associated with the DB cluster. IAM roles that are associated with a DB
+	// cluster grant permission for the DB cluster to access other Amazon services on
+	// your behalf.
 	AssociatedRoles []DBClusterRole
+
+	// Time at which the DB cluster will be automatically restarted.
+	AutomaticRestartTime *time.Time
 
 	// Provides the list of EC2 Availability Zones that instances in the DB cluster can
 	// be created in.
@@ -56,7 +60,7 @@ type DBCluster struct {
 	// Specifies the number of days for which automatic DB snapshots are retained.
 	BackupRetentionPeriod *int32
 
-	// (Not supported by Neptune)
+	// Not supported by Neptune.
 	CharacterSetName *string
 
 	// Identifies the clone group to which the DB cluster is associated.
@@ -65,6 +69,13 @@ type DBCluster struct {
 	// Specifies the time when the DB cluster was created, in Universal Coordinated
 	// Time (UTC).
 	ClusterCreateTime *time.Time
+
+	// If set to true, tags are copied to any snapshot of the DB cluster that is
+	// created.
+	CopyTagsToSnapshot *bool
+
+	// If set to true, the DB cluster can be cloned across accounts.
+	CrossAccountClone *bool
 
 	// The Amazon Resource Name (ARN) for the DB cluster.
 	DBClusterArn *string
@@ -76,7 +87,7 @@ type DBCluster struct {
 	// Provides the list of instances that make up the DB cluster.
 	DBClusterMembers []DBClusterMember
 
-	// (Not supported by Neptune)
+	// Not supported by Neptune.
 	DBClusterOptionGroupMemberships []DBClusterOptionGroupStatus
 
 	// Specifies the name of the DB cluster parameter group for the DB cluster.
@@ -91,9 +102,9 @@ type DBCluster struct {
 	// name is returned for the life of the DB cluster.
 	DatabaseName *string
 
-	// The AWS Region-unique, immutable identifier for the DB cluster. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// cluster is accessed.
+	// The Amazon Region-unique, immutable identifier for the DB cluster. This
+	// identifier is found in Amazon CloudTrail log entries whenever the Amazon KMS key
+	// for the DB cluster is accessed.
 	DbClusterResourceId *string
 
 	// Indicates whether or not the DB cluster has deletion protection enabled. The
@@ -120,11 +131,11 @@ type DBCluster struct {
 	// Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 	HostedZoneId *string
 
-	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false.
+	// True if mapping of Amazon Identity and Access Management (IAM) accounts to
+	// database accounts is enabled, and otherwise false.
 	IAMDatabaseAuthenticationEnabled bool
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
+	// If StorageEncrypted is true, the Amazon KMS key identifier for the encrypted DB
 	// cluster.
 	KmsKeyId *string
 
@@ -132,7 +143,7 @@ type DBCluster struct {
 	// restore.
 	LatestRestorableTime *time.Time
 
-	// Contains the master username for the DB cluster.
+	// Not supported by Neptune.
 	MasterUsername *string
 
 	// Specifies whether the DB cluster has instances in multiple Availability Zones.
@@ -255,13 +266,13 @@ type DBClusterMember struct {
 	PromotionTier *int32
 }
 
-// Contains status information for a DB cluster option group.
+// Not supported by Neptune.
 type DBClusterOptionGroupStatus struct {
 
-	// Specifies the name of the DB cluster option group.
+	// Not supported by Neptune.
 	DBClusterOptionGroupName *string
 
-	// Specifies the status of the DB cluster option group.
+	// Not supported by Neptune.
 	Status *string
 }
 
@@ -284,12 +295,13 @@ type DBClusterParameterGroup struct {
 	Description *string
 }
 
-// Describes an AWS Identity and Access Management (IAM) role that is associated
+// Describes an Amazon Identity and Access Management (IAM) role that is associated
 // with a DB cluster.
 type DBClusterRole struct {
 
-	// The name of the feature associated with the AWS Identity and Access Management
-	// (IAM) role. For the list of supported feature names, see DBEngineVersion.
+	// The name of the feature associated with the Amazon Identity and Access
+	// Management (IAM) role. For the list of supported feature names, see
+	// DBEngineVersion.
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
@@ -300,15 +312,15 @@ type DBClusterRole struct {
 	// Status property returns one of the following values:
 	//
 	// * ACTIVE - the IAM role
-	// ARN is associated with the DB cluster and can be used to access other AWS
+	// ARN is associated with the DB cluster and can be used to access other Amazon
 	// services on your behalf.
 	//
 	// * PENDING - the IAM role ARN is being associated with
 	// the DB cluster.
 	//
 	// * INVALID - the IAM role ARN is associated with the DB cluster,
-	// but the DB cluster is unable to assume the IAM role in order to access other AWS
-	// services on your behalf.
+	// but the DB cluster is unable to assume the IAM role in order to access other
+	// Amazon services on your behalf.
 	Status *string
 }
 
@@ -353,18 +365,18 @@ type DBClusterSnapshot struct {
 	// Provides the version of the database engine for this DB cluster snapshot.
 	EngineVersion *string
 
-	// True if mapping of AWS Identity and Access Management (IAM) accounts to database
-	// accounts is enabled, and otherwise false.
+	// True if mapping of Amazon Identity and Access Management (IAM) accounts to
+	// database accounts is enabled, and otherwise false.
 	IAMDatabaseAuthenticationEnabled bool
 
-	// If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB
+	// If StorageEncrypted is true, the Amazon KMS key identifier for the encrypted DB
 	// cluster snapshot.
 	KmsKeyId *string
 
 	// Provides the license model information for this DB cluster snapshot.
 	LicenseModel *string
 
-	// Provides the master username for the DB cluster snapshot.
+	// Not supported by Neptune.
 	MasterUsername *string
 
 	// Specifies the percentage of the estimated data that has been transferred.
@@ -397,29 +409,29 @@ type DBClusterSnapshot struct {
 }
 
 // Contains the name and values of a manual DB cluster snapshot attribute. Manual
-// DB cluster snapshot attributes are used to authorize other AWS accounts to
+// DB cluster snapshot attributes are used to authorize other Amazon accounts to
 // restore a manual DB cluster snapshot. For more information, see the
 // ModifyDBClusterSnapshotAttribute API action.
 type DBClusterSnapshotAttribute struct {
 
 	// The name of the manual DB cluster snapshot attribute. The attribute named
-	// restore refers to the list of AWS accounts that have permission to copy or
+	// restore refers to the list of Amazon accounts that have permission to copy or
 	// restore the manual DB cluster snapshot. For more information, see the
 	// ModifyDBClusterSnapshotAttribute API action.
 	AttributeName *string
 
 	// The value(s) for the manual DB cluster snapshot attribute. If the AttributeName
-	// field is set to restore, then this element returns a list of IDs of the AWS
+	// field is set to restore, then this element returns a list of IDs of the Amazon
 	// accounts that are authorized to copy or restore the manual DB cluster snapshot.
 	// If a value of all is in the list, then the manual DB cluster snapshot is public
-	// and available for any AWS account to copy or restore.
+	// and available for any Amazon account to copy or restore.
 	AttributeValues []string
 }
 
 // Contains the results of a successful call to the
 // DescribeDBClusterSnapshotAttributes API action. Manual DB cluster snapshot
-// attributes are used to authorize other AWS accounts to copy or restore a manual
-// DB cluster snapshot. For more information, see the
+// attributes are used to authorize other Amazon accounts to copy or restore a
+// manual DB cluster snapshot. For more information, see the
 // ModifyDBClusterSnapshotAttribute API action.
 type DBClusterSnapshotAttributesResult struct {
 
@@ -478,7 +490,7 @@ type DBEngineVersion struct {
 // a response element in the DescribeDBInstances action.
 type DBInstance struct {
 
-	// Specifies the allocated storage size specified in gibibytes.
+	// Not supported by Neptune.
 	AllocatedStorage int32
 
 	// Indicates that minor version patches are applied automatically.
@@ -535,9 +547,9 @@ type DBInstance struct {
 	// of a DB cluster, this can be a different port than the DB cluster port.
 	DbInstancePort int32
 
-	// The AWS Region-unique, immutable identifier for the DB instance. This identifier
-	// is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB
-	// instance is accessed.
+	// The Amazon Region-unique, immutable identifier for the DB instance. This
+	// identifier is found in Amazon CloudTrail log entries whenever the Amazon KMS key
+	// for the DB instance is accessed.
 	DbiResourceId *string
 
 	// Indicates whether or not the DB instance has deletion protection enabled. The
@@ -566,8 +578,8 @@ type DBInstance struct {
 	// receives the Enhanced Monitoring metrics data for the DB instance.
 	EnhancedMonitoringResourceArn *string
 
-	// True if AWS Identity and Access Management (IAM) authentication is enabled, and
-	// otherwise false.
+	// True if Amazon Identity and Access Management (IAM) authentication is enabled,
+	// and otherwise false.
 	IAMDatabaseAuthenticationEnabled bool
 
 	// Provides the date and time the DB instance was created.
@@ -586,7 +598,7 @@ type DBInstance struct {
 	// License model information for this DB instance.
 	LicenseModel *string
 
-	// Contains the master username for the DB instance.
+	// Not supported by Neptune.
 	MasterUsername *string
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
@@ -857,7 +869,7 @@ type EventSubscription struct {
 	// The event notification subscription Id.
 	CustSubscriptionId *string
 
-	// The AWS customer account associated with the event notification subscription.
+	// The Amazon customer account associated with the event notification subscription.
 	CustomerAwsId *string
 
 	// A Boolean value indicating if the subscription is enabled. True indicates the
@@ -904,15 +916,13 @@ type Filter struct {
 	Values []string
 }
 
-// Provides information on the option groups the DB instance is a member of.
+// Not supported by Neptune.
 type OptionGroupMembership struct {
 
-	// The name of the option group that the instance belongs to.
+	// Not supported by Neptune.
 	OptionGroupName *string
 
-	// The status of the DB instance's option group membership. Valid values are:
-	// in-sync, pending-apply, pending-removal, pending-maintenance-apply,
-	// pending-maintenance-removal, applying, removing, and failed.
+	// Not supported by Neptune.
 	Status *string
 }
 
@@ -1094,12 +1104,10 @@ type PendingModifiedValues struct {
 	// applied or is currently being applied.
 	Iops *int32
 
-	// The license model for the DB instance. Valid values: license-included |
-	// bring-your-own-license | general-public-license
+	// Not supported by Neptune.
 	LicenseModel *string
 
-	// Contains the pending or currently-in-progress change of the master credentials
-	// for the DB instance.
+	// Not supported by Neptune.
 	MasterUserPassword *string
 
 	// Indicates that the Single-AZ DB instance is to change to a Multi-AZ deployment.

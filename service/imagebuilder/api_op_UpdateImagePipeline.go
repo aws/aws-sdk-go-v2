@@ -12,8 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a new image pipeline. Image pipelines enable you to automate the
-// creation and distribution of images.
+// Updates an image pipeline. Image pipelines enable you to automate the creation
+// and distribution of images. UpdateImagePipeline does not support selective
+// updates for the pipeline. You must specify all of the required properties in the
+// update request, not just the properties that have changed.
 func (c *Client) UpdateImagePipeline(ctx context.Context, params *UpdateImagePipelineInput, optFns ...func(*Options)) (*UpdateImagePipelineOutput, error) {
 	if params == nil {
 		params = &UpdateImagePipelineInput{}

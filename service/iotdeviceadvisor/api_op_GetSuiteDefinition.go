@@ -30,38 +30,36 @@ func (c *Client) GetSuiteDefinition(ctx context.Context, params *GetSuiteDefinit
 
 type GetSuiteDefinitionInput struct {
 
-	// Requests suite definition Id with GetSuiteDefinition API call.
+	// Suite definition Id of the test suite to get.
 	//
 	// This member is required.
 	SuiteDefinitionId *string
 
-	// Requests the suite definition version of a test suite.
+	// Suite definition version of the test suite to get.
 	SuiteDefinitionVersion *string
 }
 
 type GetSuiteDefinitionOutput struct {
 
-	// Gets the timestamp of the time suite was created with GetSuiteDefinition API
-	// call.
+	// Date (in Unix epoch time) when the suite definition was created.
 	CreatedAt *time.Time
 
-	// Gets the timestamp of the time suite was modified with GetSuiteDefinition API
-	// call.
+	// Date (in Unix epoch time) when the suite definition was last modified.
 	LastModifiedAt *time.Time
 
-	// Gets latest suite definition version with GetSuiteDefinition API call.
+	// Latest suite definition version of the suite definition.
 	LatestVersion *string
 
 	// The ARN of the suite definition.
 	SuiteDefinitionArn *string
 
-	// Gets the suite configuration with GetSuiteDefinition API call.
+	// Suite configuration of the suite definition.
 	SuiteDefinitionConfiguration *types.SuiteDefinitionConfiguration
 
-	// Gets suite definition Id with GetSuiteDefinition API call.
+	// Suite definition Id of the suite definition.
 	SuiteDefinitionId *string
 
-	// Gets suite definition version with GetSuiteDefinition API call.
+	// Suite definition version of the suite definition.
 	SuiteDefinitionVersion *string
 
 	// Tags attached to the suite definition.

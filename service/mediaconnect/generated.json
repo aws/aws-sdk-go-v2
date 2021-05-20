@@ -6,6 +6,7 @@
     },
     "files": [
         "api_client.go",
+        "api_op_AddFlowMediaStreams.go",
         "api_op_AddFlowOutputs.go",
         "api_op_AddFlowSources.go",
         "api_op_AddFlowVpcInterfaces.go",
@@ -21,6 +22,7 @@
         "api_op_ListReservations.go",
         "api_op_ListTagsForResource.go",
         "api_op_PurchaseOffering.go",
+        "api_op_RemoveFlowMediaStream.go",
         "api_op_RemoveFlowOutput.go",
         "api_op_RemoveFlowSource.go",
         "api_op_RemoveFlowVpcInterface.go",
@@ -31,6 +33,7 @@
         "api_op_UntagResource.go",
         "api_op_UpdateFlow.go",
         "api_op_UpdateFlowEntitlement.go",
+        "api_op_UpdateFlowMediaStream.go",
         "api_op_UpdateFlowOutput.go",
         "api_op_UpdateFlowSource.go",
         "deserializers.go",

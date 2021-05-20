@@ -34,15 +34,15 @@ func (c *Client) CopyDBClusterSnapshot(ctx context.Context, params *CopyDBCluste
 type CopyDBClusterSnapshotInput struct {
 
 	// The identifier of the DB cluster snapshot to copy. This parameter is not
-	// case-sensitive. You can't copy from one AWS Region to another. Constraints:
+	// case-sensitive. Constraints:
 	//
-	// *
-	// Must specify a valid system snapshot in the "available" state.
+	// * Must specify a valid system snapshot in the
+	// "available" state.
 	//
-	// * Specify a
-	// valid DB snapshot identifier.
+	// * Specify a valid DB snapshot identifier.
 	//
-	// Example: my-cluster-snapshot1
+	// Example:
+	// my-cluster-snapshot1
 	//
 	// This member is required.
 	SourceDBClusterSnapshotIdentifier *string
@@ -68,19 +68,19 @@ type CopyDBClusterSnapshotInput struct {
 	// cluster snapshot, and otherwise false. The default is false.
 	CopyTags *bool
 
-	// The AWS AWS KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is
-	// the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the
-	// KMS encryption key. If you copy an encrypted DB cluster snapshot from your AWS
-	// account, you can specify a value for KmsKeyId to encrypt the copy with a new KMS
-	// encryption key. If you don't specify a value for KmsKeyId, then the copy of the
-	// DB cluster snapshot is encrypted with the same KMS key as the source DB cluster
-	// snapshot. If you copy an encrypted DB cluster snapshot that is shared from
-	// another AWS account, then you must specify a value for KmsKeyId. KMS encryption
-	// keys are specific to the AWS Region that they are created in, and you can't use
-	// encryption keys from one AWS Region in another AWS Region. You cannot encrypt an
-	// unencrypted DB cluster snapshot when you copy it. If you try to copy an
-	// unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter,
-	// an error is returned.
+	// The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key
+	// ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias
+	// for the KMS encryption key. If you copy an encrypted DB cluster snapshot from
+	// your Amazon account, you can specify a value for KmsKeyId to encrypt the copy
+	// with a new KMS encryption key. If you don't specify a value for KmsKeyId, then
+	// the copy of the DB cluster snapshot is encrypted with the same KMS key as the
+	// source DB cluster snapshot. If you copy an encrypted DB cluster snapshot that is
+	// shared from another Amazon account, then you must specify a value for KmsKeyId.
+	// KMS encryption keys are specific to the Amazon Region that they are created in,
+	// and you can't use encryption keys from one Amazon Region in another Amazon
+	// Region. You cannot encrypt an unencrypted DB cluster snapshot when you copy it.
+	// If you try to copy an unencrypted DB cluster snapshot and specify a value for
+	// the KmsKeyId parameter, an error is returned.
 	KmsKeyId *string
 
 	// Not currently supported.

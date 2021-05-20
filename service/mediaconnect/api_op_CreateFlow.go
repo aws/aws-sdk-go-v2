@@ -44,6 +44,10 @@ type CreateFlowInput struct {
 	// The entitlements that you want to grant on a flow.
 	Entitlements []types.GrantEntitlementRequest
 
+	// The media streams that you want to add to the flow. You can associate these
+	// media streams with sources and outputs on the flow.
+	MediaStreams []types.AddMediaStreamRequest
+
 	// The outputs that you want to add to this flow.
 	Outputs []types.AddOutputRequest
 

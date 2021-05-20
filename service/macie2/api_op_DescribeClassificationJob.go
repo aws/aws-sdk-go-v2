@@ -113,7 +113,7 @@ type DescribeClassificationJobOutput struct {
 	// The custom name of the job.
 	Name *string
 
-	// The S3 buckets that the job is configured to analyze, and the scope of that
+	// The S3 buckets that contain the objects to analyze, and the scope of that
 	// analysis.
 	S3JobDefinition *types.S3JobDefinition
 

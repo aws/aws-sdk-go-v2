@@ -19,11 +19,11 @@ import (
 // for these checks, you might see an InvalidParameterValue error.
 //
 // * You must have
-// a Business or Enterprise support plan to use the AWS Support API.
+// a Business or Enterprise Support plan to use the AWS Support API.
 //
 // * If you call
 // the AWS Support API from an account that does not have a Business or Enterprise
-// support plan, the SubscriptionRequiredException error message appears. For
+// Support plan, the SubscriptionRequiredException error message appears. For
 // information about changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeTrustedAdvisorCheckRefreshStatuses(ctx context.Context, params *DescribeTrustedAdvisorCheckRefreshStatusesInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckRefreshStatusesOutput, error) {
@@ -43,7 +43,7 @@ func (c *Client) DescribeTrustedAdvisorCheckRefreshStatuses(ctx context.Context,
 
 type DescribeTrustedAdvisorCheckRefreshStatusesInput struct {
 
-	// The IDs of the Trusted Advisor checks to get the status of. If you specify the
+	// The IDs of the Trusted Advisor checks to get the status. If you specify the
 	// check ID of a check that is automatically refreshed, you might see an
 	// InvalidParameterValue error.
 	//

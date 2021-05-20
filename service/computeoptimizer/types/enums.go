@@ -227,6 +227,127 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 	}
 }
 
+type ExportableLambdaFunctionField string
+
+// Enum values for ExportableLambdaFunctionField
+const (
+	ExportableLambdaFunctionFieldAccountId                                                          ExportableLambdaFunctionField = "AccountId"
+	ExportableLambdaFunctionFieldFunctionArn                                                        ExportableLambdaFunctionField = "FunctionArn"
+	ExportableLambdaFunctionFieldFunctionVersion                                                    ExportableLambdaFunctionField = "FunctionVersion"
+	ExportableLambdaFunctionFieldFinding                                                            ExportableLambdaFunctionField = "Finding"
+	ExportableLambdaFunctionFieldFindingReasonCodes                                                 ExportableLambdaFunctionField = "FindingReasonCodes"
+	ExportableLambdaFunctionFieldNumberOfInvocations                                                ExportableLambdaFunctionField = "NumberOfInvocations"
+	ExportableLambdaFunctionFieldUtilizationMetricsDurationMaximum                                  ExportableLambdaFunctionField = "UtilizationMetricsDurationMaximum"
+	ExportableLambdaFunctionFieldUtilizationMetricsDurationAverage                                  ExportableLambdaFunctionField = "UtilizationMetricsDurationAverage"
+	ExportableLambdaFunctionFieldUtilizationMetricsMemoryMaximum                                    ExportableLambdaFunctionField = "UtilizationMetricsMemoryMaximum"
+	ExportableLambdaFunctionFieldUtilizationMetricsMemoryAverage                                    ExportableLambdaFunctionField = "UtilizationMetricsMemoryAverage"
+	ExportableLambdaFunctionFieldLookbackPeriodInDays                                               ExportableLambdaFunctionField = "LookbackPeriodInDays"
+	ExportableLambdaFunctionFieldCurrentConfigurationMemorySize                                     ExportableLambdaFunctionField = "CurrentConfigurationMemorySize"
+	ExportableLambdaFunctionFieldCurrentConfigurationTimeout                                        ExportableLambdaFunctionField = "CurrentConfigurationTimeout"
+	ExportableLambdaFunctionFieldCurrentCostTotal                                                   ExportableLambdaFunctionField = "CurrentCostTotal"
+	ExportableLambdaFunctionFieldCurrentCostAverage                                                 ExportableLambdaFunctionField = "CurrentCostAverage"
+	ExportableLambdaFunctionFieldRecommendationOptionsConfigurationMemorySize                       ExportableLambdaFunctionField = "RecommendationOptionsConfigurationMemorySize"
+	ExportableLambdaFunctionFieldRecommendationOptionsCostLow                                       ExportableLambdaFunctionField = "RecommendationOptionsCostLow"
+	ExportableLambdaFunctionFieldRecommendationOptionsCostHigh                                      ExportableLambdaFunctionField = "RecommendationOptionsCostHigh"
+	ExportableLambdaFunctionFieldRecommendationOptionsProjectedUtilizationMetricsDurationLowerBound ExportableLambdaFunctionField = "RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound"
+	ExportableLambdaFunctionFieldRecommendationOptionsProjectedUtilizationMetricsDurationUpperBound ExportableLambdaFunctionField = "RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound"
+	ExportableLambdaFunctionFieldRecommendationOptionsProjectedUtilizationMetricsDurationExpected   ExportableLambdaFunctionField = "RecommendationOptionsProjectedUtilizationMetricsDurationExpected"
+	ExportableLambdaFunctionFieldLastRefreshTimestamp                                               ExportableLambdaFunctionField = "LastRefreshTimestamp"
+)
+
+// Values returns all known values for ExportableLambdaFunctionField. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ExportableLambdaFunctionField) Values() []ExportableLambdaFunctionField {
+	return []ExportableLambdaFunctionField{
+		"AccountId",
+		"FunctionArn",
+		"FunctionVersion",
+		"Finding",
+		"FindingReasonCodes",
+		"NumberOfInvocations",
+		"UtilizationMetricsDurationMaximum",
+		"UtilizationMetricsDurationAverage",
+		"UtilizationMetricsMemoryMaximum",
+		"UtilizationMetricsMemoryAverage",
+		"LookbackPeriodInDays",
+		"CurrentConfigurationMemorySize",
+		"CurrentConfigurationTimeout",
+		"CurrentCostTotal",
+		"CurrentCostAverage",
+		"RecommendationOptionsConfigurationMemorySize",
+		"RecommendationOptionsCostLow",
+		"RecommendationOptionsCostHigh",
+		"RecommendationOptionsProjectedUtilizationMetricsDurationLowerBound",
+		"RecommendationOptionsProjectedUtilizationMetricsDurationUpperBound",
+		"RecommendationOptionsProjectedUtilizationMetricsDurationExpected",
+		"LastRefreshTimestamp",
+	}
+}
+
+type ExportableVolumeField string
+
+// Enum values for ExportableVolumeField
+const (
+	ExportableVolumeFieldAccountId                                                  ExportableVolumeField = "AccountId"
+	ExportableVolumeFieldVolumeArn                                                  ExportableVolumeField = "VolumeArn"
+	ExportableVolumeFieldFinding                                                    ExportableVolumeField = "Finding"
+	ExportableVolumeFieldUtilizationMetricsVolumeReadOpsPerSecondMaximum            ExportableVolumeField = "UtilizationMetricsVolumeReadOpsPerSecondMaximum"
+	ExportableVolumeFieldUtilizationMetricsVolumeWriteOpsPerSecondMaximum           ExportableVolumeField = "UtilizationMetricsVolumeWriteOpsPerSecondMaximum"
+	ExportableVolumeFieldUtilizationMetricsVolumeReadBytesPerSecondMaximum          ExportableVolumeField = "UtilizationMetricsVolumeReadBytesPerSecondMaximum"
+	ExportableVolumeFieldUtilizationMetricsVolumeWriteBytesPerSecondMaximum         ExportableVolumeField = "UtilizationMetricsVolumeWriteBytesPerSecondMaximum"
+	ExportableVolumeFieldLookbackPeriodInDays                                       ExportableVolumeField = "LookbackPeriodInDays"
+	ExportableVolumeFieldCurrentConfigurationVolumeType                             ExportableVolumeField = "CurrentConfigurationVolumeType"
+	ExportableVolumeFieldCurrentConfigurationVolumeBaselineIops                     ExportableVolumeField = "CurrentConfigurationVolumeBaselineIOPS"
+	ExportableVolumeFieldCurrentConfigurationVolumeBaselineThroughput               ExportableVolumeField = "CurrentConfigurationVolumeBaselineThroughput"
+	ExportableVolumeFieldCurrentConfigurationVolumeBurstIops                        ExportableVolumeField = "CurrentConfigurationVolumeBurstIOPS"
+	ExportableVolumeFieldCurrentConfigurationVolumeBurstThroughput                  ExportableVolumeField = "CurrentConfigurationVolumeBurstThroughput"
+	ExportableVolumeFieldCurrentConfigurationVolumeSize                             ExportableVolumeField = "CurrentConfigurationVolumeSize"
+	ExportableVolumeFieldCurrentMonthlyPrice                                        ExportableVolumeField = "CurrentMonthlyPrice"
+	ExportableVolumeFieldRecommendationOptionsConfigurationVolumeType               ExportableVolumeField = "RecommendationOptionsConfigurationVolumeType"
+	ExportableVolumeFieldRecommendationOptionsConfigurationVolumeBaselineIops       ExportableVolumeField = "RecommendationOptionsConfigurationVolumeBaselineIOPS"
+	ExportableVolumeFieldRecommendationOptionsConfigurationVolumeBaselineThroughput ExportableVolumeField = "RecommendationOptionsConfigurationVolumeBaselineThroughput"
+	ExportableVolumeFieldRecommendationOptionsConfigurationVolumeBurstIops          ExportableVolumeField = "RecommendationOptionsConfigurationVolumeBurstIOPS"
+	ExportableVolumeFieldRecommendationOptionsConfigurationVolumeBurstThroughput    ExportableVolumeField = "RecommendationOptionsConfigurationVolumeBurstThroughput"
+	ExportableVolumeFieldRecommendationOptionsConfigurationVolumeSize               ExportableVolumeField = "RecommendationOptionsConfigurationVolumeSize"
+	ExportableVolumeFieldRecommendationOptionsMonthlyPrice                          ExportableVolumeField = "RecommendationOptionsMonthlyPrice"
+	ExportableVolumeFieldRecommendationOptionsPerformanceRisk                       ExportableVolumeField = "RecommendationOptionsPerformanceRisk"
+	ExportableVolumeFieldLastRefreshTimestamp                                       ExportableVolumeField = "LastRefreshTimestamp"
+)
+
+// Values returns all known values for ExportableVolumeField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExportableVolumeField) Values() []ExportableVolumeField {
+	return []ExportableVolumeField{
+		"AccountId",
+		"VolumeArn",
+		"Finding",
+		"UtilizationMetricsVolumeReadOpsPerSecondMaximum",
+		"UtilizationMetricsVolumeWriteOpsPerSecondMaximum",
+		"UtilizationMetricsVolumeReadBytesPerSecondMaximum",
+		"UtilizationMetricsVolumeWriteBytesPerSecondMaximum",
+		"LookbackPeriodInDays",
+		"CurrentConfigurationVolumeType",
+		"CurrentConfigurationVolumeBaselineIOPS",
+		"CurrentConfigurationVolumeBaselineThroughput",
+		"CurrentConfigurationVolumeBurstIOPS",
+		"CurrentConfigurationVolumeBurstThroughput",
+		"CurrentConfigurationVolumeSize",
+		"CurrentMonthlyPrice",
+		"RecommendationOptionsConfigurationVolumeType",
+		"RecommendationOptionsConfigurationVolumeBaselineIOPS",
+		"RecommendationOptionsConfigurationVolumeBaselineThroughput",
+		"RecommendationOptionsConfigurationVolumeBurstIOPS",
+		"RecommendationOptionsConfigurationVolumeBurstThroughput",
+		"RecommendationOptionsConfigurationVolumeSize",
+		"RecommendationOptionsMonthlyPrice",
+		"RecommendationOptionsPerformanceRisk",
+		"LastRefreshTimestamp",
+	}
+}
+
 type FileFormat string
 
 // Enum values for FileFormat
@@ -551,6 +672,8 @@ type ResourceType string
 const (
 	ResourceTypeEc2Instance      ResourceType = "Ec2Instance"
 	ResourceTypeAutoScalingGroup ResourceType = "AutoScalingGroup"
+	ResourceTypeEbsVolume        ResourceType = "EbsVolume"
+	ResourceTypeLambdaFunction   ResourceType = "LambdaFunction"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -560,6 +683,8 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Ec2Instance",
 		"AutoScalingGroup",
+		"EbsVolume",
+		"LambdaFunction",
 	}
 }
 

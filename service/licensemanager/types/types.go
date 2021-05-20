@@ -508,7 +508,12 @@ type OrganizationConfiguration struct {
 // Describes product information for a license configuration.
 type ProductInformation struct {
 
-	// Product information filters. The following filters and logical operators are
+	// A Product information filter consists of a ProductInformationFilterComparator
+	// which is a logical operator, a ProductInformationFilterName which specifies the
+	// type of filter being declared, and a ProductInformationFilterValue that
+	// specifies the value to filter on. Accepted values for
+	// ProductInformationFilterName are listed here along with descriptions and valid
+	// options for ProductInformationFilterComparator. The following filters and are
 	// supported when the resource type is SSM_MANAGED:
 	//
 	// * Application Name - The name
@@ -526,21 +531,30 @@ type ProductInformation struct {
 	// * Platform Type - The
 	// platform type. Logical operator is EQUALS.
 	//
-	// * License Included - The type of
-	// license included. Logical operators are EQUALS and NOT_EQUALS. Possible values
-	// are: sql-server-enterprise | sql-server-standard | sql-server-web |
-	// windows-server-datacenter.
+	// * Tag:key - The key of a tag
+	// attached to an AWS resource you wish to exclude from automated discovery.
+	// Logical operator is NOT_EQUALS. The key for your tag must be appended to Tag:
+	// following the example: Tag:name-of-your-key. ProductInformationFilterValue is
+	// optional if you are not using values for the key.
 	//
-	// The following filters and logical operators are
-	// supported when the resource type is RDS:
+	// * AccountId - The 12-digit ID
+	// of an AWS account you wish to exclude from automated discovery. Logical operator
+	// is NOT_EQUALS.
 	//
-	// * Engine Edition - The edition of the
-	// database engine. Logical operator is EQUALS. Possible values are: oracle-ee |
-	// oracle-se | oracle-se1 | oracle-se2.
+	// * License Included - The type of license included. Logical
+	// operators are EQUALS and NOT_EQUALS. Possible values are: sql-server-enterprise
+	// | sql-server-standard | sql-server-web | windows-server-datacenter.
 	//
-	// * License Pack - The license pack. Logical
-	// operator is EQUALS. Possible values are: data guard | diagnostic pack sqlt |
-	// tuning pack sqlt | ols | olap.
+	// The
+	// following filters and logical operators are supported when the resource type is
+	// RDS:
+	//
+	// * Engine Edition - The edition of the database engine. Logical operator is
+	// EQUALS. Possible values are: oracle-ee | oracle-se | oracle-se1 | oracle-se2.
+	//
+	// *
+	// License Pack - The license pack. Logical operator is EQUALS. Possible values
+	// are: data guard | diagnostic pack sqlt | tuning pack sqlt | ols | olap.
 	//
 	// This member is required.
 	ProductInformationFilterList []ProductInformationFilter
@@ -587,6 +601,70 @@ type ReceivedMetadata struct {
 	ReceivedStatus ReceivedStatus
 }
 
+// Details of the license configuration that this generator reports on.
+type ReportContext struct {
+
+	// Amazon Resource Number (ARN) of the license configuration that this generator
+	// reports on.
+	//
+	// This member is required.
+	LicenseConfigurationArns []string
+}
+
+// Details on how frequently reports are generated.
+type ReportFrequency struct {
+
+	// Time period between each report. The period can be daily, weekly, or monthly.
+	Period ReportFrequencyType
+
+	// Number of times within the frequency period that a report will be generated.
+	// Currently only 1 is supported.
+	Value *int32
+}
+
+// Describe the details of a report generator.
+type ReportGenerator struct {
+
+	// Time the report was created.
+	CreateTime *string
+
+	// Description of the report generator.
+	Description *string
+
+	// Time the last report was generated at.
+	LastReportGenerationTime *string
+
+	// Failure message for the last report generation attempt.
+	LastRunFailureReason *string
+
+	// Status of the last report generation attempt.
+	LastRunStatus *string
+
+	// Amazon Resource Number (ARN) of the report generator.
+	LicenseManagerReportGeneratorArn *string
+
+	// License configuration type this generator reports on.
+	ReportContext *ReportContext
+
+	// The AWS account ID used to create the report generator.
+	ReportCreatorAccount *string
+
+	// Details on how frequently reports are generated.
+	ReportFrequency *ReportFrequency
+
+	// Name of the report generator.
+	ReportGeneratorName *string
+
+	// Type of reports that are generated.
+	ReportType []ReportType
+
+	// Details of the S3 bucket that report generator reports are published to.
+	S3Location *S3Location
+
+	// Tags associated with the report generator.
+	Tags []Tag
+}
+
 // Details about a resource.
 type ResourceInventory struct {
 
@@ -607,6 +685,16 @@ type ResourceInventory struct {
 
 	// Type of resource.
 	ResourceType ResourceType
+}
+
+// Details of the S3 bucket that report generator reports are published to.
+type S3Location struct {
+
+	// Name of the S3 bucket reports are published to.
+	Bucket *string
+
+	// Prefix of the S3 bucket reports are published to.
+	KeyPrefix *string
 }
 
 // Details about a tag for a license configuration.

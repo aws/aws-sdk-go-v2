@@ -12,7 +12,7 @@ import (
 )
 
 // Starts an Amazon Neptune DB cluster that was stopped using the AWS console, the
-// AWS CLI stop-db-cluster command, or the StopDBCluster API.
+// Amazon CLI stop-db-cluster command, or the StopDBCluster API.
 func (c *Client) StartDBCluster(ctx context.Context, params *StartDBClusterInput, optFns ...func(*Options)) (*StartDBClusterOutput, error) {
 	if params == nil {
 		params = &StartDBClusterInput{}

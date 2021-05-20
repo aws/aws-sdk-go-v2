@@ -6,8 +6,7 @@ import (
 	"time"
 )
 
-// Describes code configuration for a Flink-based Kinesis Data Analytics
-// application.
+// Describes code configuration for an application.
 type ApplicationCodeConfiguration struct {
 
 	// Specifies whether the code content is in text or zip format.
@@ -19,8 +18,7 @@ type ApplicationCodeConfiguration struct {
 	CodeContent *CodeContent
 }
 
-// Describes code configuration for a Flink-based Kinesis Data Analytics
-// application.
+// Describes code configuration for an application.
 type ApplicationCodeConfigurationDescription struct {
 
 	// Specifies whether the code content is in text or zip format.
@@ -32,8 +30,9 @@ type ApplicationCodeConfigurationDescription struct {
 	CodeContentDescription *CodeContentDescription
 }
 
-// Describes code configuration updates to a Flink-based Kinesis Data Analytics
-// application.
+// Describes code configuration updates for an application. This is supported for a
+// Flink-based Kinesis Data Analytics application or a SQL-based Kinesis Data
+// Analytics application.
 type ApplicationCodeConfigurationUpdate struct {
 
 	// Describes updates to the code content type.
@@ -48,8 +47,6 @@ type ApplicationConfiguration struct {
 
 	// The code location and type parameters for a Flink-based Kinesis Data Analytics
 	// application.
-	//
-	// This member is required.
 	ApplicationCodeConfiguration *ApplicationCodeConfiguration
 
 	// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
@@ -70,6 +67,9 @@ type ApplicationConfiguration struct {
 
 	// The array of descriptions of VPC configurations available to the application.
 	VpcConfigurations []VpcConfiguration
+
+	// The configuration parameters for a Kinesis Data Analytics Studio notebook.
+	ZeppelinApplicationConfiguration *ZeppelinApplicationConfiguration
 }
 
 // Describes details about the application code and starting parameters for a
@@ -101,13 +101,15 @@ type ApplicationConfigurationDescription struct {
 
 	// The array of descriptions of VPC configurations available to the application.
 	VpcConfigurationDescriptions []VpcConfigurationDescription
+
+	// The configuration parameters for a Kinesis Data Analytics Studio notebook.
+	ZeppelinApplicationConfigurationDescription *ZeppelinApplicationConfigurationDescription
 }
 
 // Describes updates to an application's configuration.
 type ApplicationConfigurationUpdate struct {
 
-	// Describes updates to a Flink-based Kinesis Data Analytics application's code
-	// configuration.
+	// Describes updates to an application's code configuration.
 	ApplicationCodeConfigurationUpdate *ApplicationCodeConfigurationUpdate
 
 	// Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics
@@ -129,6 +131,9 @@ type ApplicationConfigurationUpdate struct {
 	// Updates to the array of descriptions of VPC configurations available to the
 	// application.
 	VpcConfigurationUpdates []VpcConfigurationUpdate
+
+	// Updates to the configuration of a Kinesis Data Analytics Studio notebook.
+	ZeppelinApplicationConfigurationUpdate *ZeppelinApplicationConfigurationUpdate
 }
 
 // Describes the application, including the application Amazon Resource Name (ARN),
@@ -162,8 +167,8 @@ type ApplicationDetail struct {
 	// This member is required.
 	RuntimeEnvironment RuntimeEnvironment
 
-	// Provides details about the application's Java, SQL, or Scala code and starting
-	// parameters.
+	// Describes details about the application code and starting parameters for a
+	// Kinesis Data Analytics application.
 	ApplicationConfigurationDescription *ApplicationConfigurationDescription
 
 	// The description of the application.
@@ -171,6 +176,11 @@ type ApplicationDetail struct {
 
 	// The details of the maintenance configuration for the application.
 	ApplicationMaintenanceConfigurationDescription *ApplicationMaintenanceConfigurationDescription
+
+	// To create a Kinesis Data Analytics Studio notebook, you must set the mode to
+	// INTERACTIVE. However, for a Kinesis Data Analytics for Apache Flink application,
+	// the mode is optional.
+	ApplicationMode ApplicationMode
 
 	// If you reverted the application using RollbackApplication, the application
 	// version when RollbackApplication was called.
@@ -263,8 +273,7 @@ type ApplicationSnapshotConfigurationDescription struct {
 // Data Analytics application.
 type ApplicationSnapshotConfigurationUpdate struct {
 
-	// Describes updates to whether snapshots are enabled for a Flink-based Kinesis
-	// Data Analytics application.
+	// Describes updates to whether snapshots are enabled for an application.
 	//
 	// This member is required.
 	SnapshotsEnabledUpdate *bool
@@ -294,11 +303,14 @@ type ApplicationSummary struct {
 	// This member is required.
 	ApplicationVersionId *int64
 
-	// The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or
-	// FLINK-1_11).
+	// The runtime environment for the application.
 	//
 	// This member is required.
 	RuntimeEnvironment RuntimeEnvironment
+
+	// For a Kinesis Data Analytics for Apache Flink application, the mode is
+	// STREAMING. For a Kinesis Data Analytics Studio notebook, it is INTERACTIVE.
+	ApplicationMode ApplicationMode
 }
 
 // The summary of the application version.
@@ -314,6 +326,43 @@ type ApplicationVersionSummary struct {
 	//
 	// This member is required.
 	ApplicationVersionId *int64
+}
+
+// The configuration parameters for the default AWS Glue database. You use this
+// database for SQL queries that you write in a Kinesis Data Analytics Studio
+// notebook.
+type CatalogConfiguration struct {
+
+	// The configuration parameters for the default AWS Glue database. You use this
+	// database for Apache Flink SQL queries and table API transforms that you write in
+	// a Kinesis Data Analytics Studio notebook.
+	//
+	// This member is required.
+	GlueDataCatalogConfiguration *GlueDataCatalogConfiguration
+}
+
+// The configuration parameters for the default AWS Glue database. You use this
+// database for Apache Flink SQL queries and table API transforms that you write in
+// a Kinesis Data Analytics Studio notebook.
+type CatalogConfigurationDescription struct {
+
+	// The configuration parameters for the default AWS Glue database. You use this
+	// database for SQL queries that you write in a Kinesis Data Analytics Studio
+	// notebook.
+	//
+	// This member is required.
+	GlueDataCatalogConfigurationDescription *GlueDataCatalogConfigurationDescription
+}
+
+// Updates to
+type CatalogConfigurationUpdate struct {
+
+	// Updates to the configuration parameters for the default AWS Glue database. You
+	// use this database for SQL queries that you write in a Kinesis Data Analytics
+	// Studio notebook.
+	//
+	// This member is required.
+	GlueDataCatalogConfigurationUpdate *GlueDataCatalogConfigurationUpdate
 }
 
 // Describes an application's checkpointing configuration. Checkpointing is the
@@ -487,7 +536,7 @@ type CloudWatchLoggingOptionUpdate struct {
 // for a Flink-based Kinesis Data Analytics application.
 type CodeContent struct {
 
-	// Information about the Amazon S3 bucket containing the application code.
+	// Information about the Amazon S3 bucket that contains the application code.
 	S3ContentLocation *S3ContentLocation
 
 	// The text-format code for a Flink-based Kinesis Data Analytics application.
@@ -497,8 +546,7 @@ type CodeContent struct {
 	ZipFileContent []byte
 }
 
-// Describes details about the application code for a Flink-based Kinesis Data
-// Analytics application.
+// Describes details about the code of a Kinesis Data Analytics application.
 type CodeContentDescription struct {
 
 	// The checksum that can be used to validate zip-format code.
@@ -516,8 +564,8 @@ type CodeContentDescription struct {
 	TextContent *string
 }
 
-// Describes an update to the code of a Flink-based Kinesis Data Analytics
-// application.
+// Describes an update to the code of an application. Not supported for Apache
+// Zeppelin.
 type CodeContentUpdate struct {
 
 	// Describes an update to the location of code for an application.
@@ -551,6 +599,78 @@ type CSVMappingParameters struct {
 	RecordRowDelimiter *string
 }
 
+// Specifies dependency JARs, as well as JAR files that contain user-defined
+// functions (UDF).
+type CustomArtifactConfiguration struct {
+
+	// UDF stands for user-defined functions. This type of artifact must be in an S3
+	// bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
+	//
+	// This member is required.
+	ArtifactType ArtifactType
+
+	// The parameters required to fully specify a Maven reference.
+	MavenReference *MavenReference
+
+	// For a Kinesis Data Analytics application provides a description of an Amazon S3
+	// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
+	// the Amazon S3 object that contains the data, and the version number of the
+	// Amazon S3 object that contains the data.
+	S3ContentLocation *S3ContentLocation
+}
+
+// Specifies a dependency JAR or a JAR of user-defined functions.
+type CustomArtifactConfigurationDescription struct {
+
+	// UDF stands for user-defined functions. This type of artifact must be in an S3
+	// bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
+	ArtifactType ArtifactType
+
+	// The parameters that are required to specify a Maven dependency.
+	MavenReferenceDescription *MavenReference
+
+	// For a Kinesis Data Analytics application provides a description of an Amazon S3
+	// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
+	// the Amazon S3 object that contains the data, and the version number of the
+	// Amazon S3 object that contains the data.
+	S3ContentLocationDescription *S3ContentLocation
+}
+
+// The information required to deploy a Kinesis Data Analytics Studio notebook as
+// an application with durable state..
+type DeployAsApplicationConfiguration struct {
+
+	// The description of an Amazon S3 object that contains the Amazon Data Analytics
+	// application, including the Amazon Resource Name (ARN) of the S3 bucket, the name
+	// of the Amazon S3 object that contains the data, and the version number of the
+	// Amazon S3 object that contains the data.
+	//
+	// This member is required.
+	S3ContentLocation *S3ContentBaseLocation
+}
+
+// The configuration information required to deploy an Amazon Data Analytics Studio
+// notebook as an application with durable state.
+type DeployAsApplicationConfigurationDescription struct {
+
+	// The location that holds the data required to specify an Amazon Data Analytics
+	// application.
+	//
+	// This member is required.
+	S3ContentLocationDescription *S3ContentBaseLocationDescription
+}
+
+// Updates to the configuration information required to deploy an Amazon Data
+// Analytics Studio notebook as an application with durable state..
+type DeployAsApplicationConfigurationUpdate struct {
+
+	// Updates to the location that holds the data required to specify an Amazon Data
+	// Analytics application.
+	//
+	// This member is required.
+	S3ContentLocationUpdate *S3ContentBaseLocationUpdate
+}
+
 // Describes the data format when records are written to the destination in a
 // SQL-based Kinesis Data Analytics application.
 type DestinationSchema struct {
@@ -571,8 +691,7 @@ type EnvironmentProperties struct {
 	PropertyGroups []PropertyGroup
 }
 
-// Describes the execution properties for a Flink-based Kinesis Data Analytics
-// application.
+// Describes the execution properties for an Apache Flink runtime.
 type EnvironmentPropertyDescriptions struct {
 
 	// Describes the execution property groups.
@@ -580,7 +699,7 @@ type EnvironmentPropertyDescriptions struct {
 }
 
 // Describes updates to the execution property groups for a Flink-based Kinesis
-// Data Analytics application.
+// Data Analytics application or a Studio notebook.
 type EnvironmentPropertyUpdates struct {
 
 	// Describes updates to the execution property groups.
@@ -590,7 +709,7 @@ type EnvironmentPropertyUpdates struct {
 }
 
 // Describes configuration parameters for a Flink-based Kinesis Data Analytics
-// application.
+// application or a Studio notebook.
 type FlinkApplicationConfiguration struct {
 
 	// Describes an application's checkpointing configuration. Checkpointing is the
@@ -670,6 +789,34 @@ type FlinkRunConfiguration struct {
 	// parameter, AllowNonRestoredState will be set to false, even if it was previously
 	// set to true.
 	AllowNonRestoredState *bool
+}
+
+// The configuration of the Glue Data Catalog that you use for Apache Flink SQL
+// queries and table API transforms that you write in an application.
+type GlueDataCatalogConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the database.
+	//
+	// This member is required.
+	DatabaseARN *string
+}
+
+// The configuration of the Glue Data Catalog that you use for Apache Flink SQL
+// queries and table API transforms that you write in an application.
+type GlueDataCatalogConfigurationDescription struct {
+
+	// The Amazon Resource Name (ARN) of the database.
+	//
+	// This member is required.
+	DatabaseARN *string
+}
+
+// Updates to the configuration of the Glue Data Catalog that you use for SQL
+// queries that you write in a Kinesis Data Analytics Studio notebook.
+type GlueDataCatalogConfigurationUpdate struct {
+
+	// The updated Amazon Resource Name (ARN) of the database.
+	DatabaseARNUpdate *string
 }
 
 // When you configure the application input for a SQL-based Kinesis Data Analytics
@@ -1148,9 +1295,28 @@ type MappingParameters struct {
 	JSONMappingParameters *JSONMappingParameters
 }
 
-// Describes configuration parameters for Amazon CloudWatch logging for a
-// Flink-based Kinesis Data Analytics application. For more information about
-// CloudWatch logging, see Monitoring
+// The information required to specify a Maven reference. You can use Maven
+// references to specify dependency JAR files.
+type MavenReference struct {
+
+	// The artifact ID of the Maven reference.
+	//
+	// This member is required.
+	ArtifactId *string
+
+	// The group ID of the Maven reference.
+	//
+	// This member is required.
+	GroupId *string
+
+	// The version of the Maven reference.
+	//
+	// This member is required.
+	Version *string
+}
+
+// Describes configuration parameters for Amazon CloudWatch logging for an
+// application. For more information about CloudWatch logging, see Monitoring
 // (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html).
 type MonitoringConfiguration struct {
 
@@ -1170,8 +1336,7 @@ type MonitoringConfiguration struct {
 	MetricsLevel MetricsLevel
 }
 
-// Describes configuration parameters for CloudWatch logging for a Flink-based
-// Kinesis Data Analytics application.
+// Describes configuration parameters for CloudWatch logging for an application.
 type MonitoringConfigurationDescription struct {
 
 	// Describes whether to use the default CloudWatch logging configuration for an
@@ -1186,7 +1351,7 @@ type MonitoringConfigurationDescription struct {
 }
 
 // Describes updates to configuration parameters for Amazon CloudWatch logging for
-// a Flink-based Kinesis Data Analytics application.
+// an application.
 type MonitoringConfigurationUpdate struct {
 
 	// Describes updates to whether to use the default CloudWatch logging configuration
@@ -1359,12 +1524,13 @@ type ParallelismConfigurationDescription struct {
 	ParallelismPerKPU *int32
 }
 
-// Describes updates to parameters for how a Flink-based Kinesis Data Analytics
-// application executes multiple tasks simultaneously.
+// Describes updates to parameters for how an application executes multiple tasks
+// simultaneously.
 type ParallelismConfigurationUpdate struct {
 
 	// Describes updates to whether the Kinesis Data Analytics service can increase the
-	// parallelism of the application in response to increased throughput.
+	// parallelism of a Flink-based Kinesis Data Analytics application in response to
+	// increased throughput.
 	AutoScalingEnabledUpdate *bool
 
 	// Describes updates to whether the application uses the default parallelism for
@@ -1388,8 +1554,7 @@ type ParallelismConfigurationUpdate struct {
 	ParallelismUpdate *int32
 }
 
-// Property key-value pairs passed into a Flink-based Kinesis Data Analytics
-// application.
+// Property key-value pairs passed into an application.
 type PropertyGroup struct {
 
 	// Describes the key of an application execution property key-value pair.
@@ -1560,8 +1725,7 @@ type RunConfigurationUpdate struct {
 	FlinkRunConfiguration *FlinkRunConfiguration
 }
 
-// Describes the location of a Flink-based Kinesis Data Analytics application's
-// code stored in an S3 bucket.
+// Describes the location of an application's code stored in an S3 bucket.
 type S3ApplicationCodeLocationDescription struct {
 
 	// The Amazon Resource Name (ARN) for the S3 bucket containing the application
@@ -1595,10 +1759,47 @@ type S3Configuration struct {
 	FileKey *string
 }
 
-// For a Flink-based Kinesis Data Analytics application, provides a description of
-// an Amazon S3 object, including the Amazon Resource Name (ARN) of the S3 bucket,
-// the name of the Amazon S3 object that contains the data, and the version number
-// of the Amazon S3 object that contains the data.
+// The S3 bucket that holds the application information.
+type S3ContentBaseLocation struct {
+
+	// The Amazon Resource Name (ARN) of the S3 bucket.
+	//
+	// This member is required.
+	BucketARN *string
+
+	// The base path for the S3 bucket.
+	BasePath *string
+}
+
+// The description of the S3 base location that holds the application.
+type S3ContentBaseLocationDescription struct {
+
+	// The Amazon Resource Name (ARN) of the S3 bucket.
+	//
+	// This member is required.
+	BucketARN *string
+
+	// The base path for the S3 bucket.
+	BasePath *string
+}
+
+// The information required to update the S3 base location that holds the
+// application.
+type S3ContentBaseLocationUpdate struct {
+
+	// The updated Amazon Resource Name (ARN) of the S3 bucket.
+	//
+	// This member is required.
+	BucketARNUpdate *string
+
+	// The updated S3 bucket path.
+	BasePathUpdate *string
+}
+
+// For a Kinesis Data Analytics application provides a description of an Amazon S3
+// object, including the Amazon Resource Name (ARN) of the S3 bucket, the name of
+// the Amazon S3 object that contains the data, and the version number of the
+// Amazon S3 object that contains the data.
 type S3ContentLocation struct {
 
 	// The Amazon Resource Name (ARN) for the S3 bucket containing the application
@@ -1616,8 +1817,7 @@ type S3ContentLocation struct {
 	ObjectVersion *string
 }
 
-// Describes an update for the Amazon S3 code content location for a Flink-based
-// Kinesis Data Analytics application.
+// Describes an update for the Amazon S3 code content location for an application.
 type S3ContentLocationUpdate struct {
 
 	// The new Amazon Resource Name (ARN) for the S3 bucket containing the application
@@ -1866,4 +2066,93 @@ type VpcConfigurationUpdate struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Subnet.html) IDs
 	// used by the VPC configuration.
 	SubnetIdUpdates []string
+}
+
+// The configuration of a Kinesis Data Analytics Studio notebook.
+type ZeppelinApplicationConfiguration struct {
+
+	// The AWS Glue Data Catalog that you use in queries in a Kinesis Data Analytics
+	// Studio notebook.
+	CatalogConfiguration *CatalogConfiguration
+
+	// Custom artifacts are dependency JARs and user-defined functions (UDF).
+	CustomArtifactsConfiguration []CustomArtifactConfiguration
+
+	// The information required to deploy a Kinesis Data Analytics Studio notebook as
+	// an application with durable state..
+	DeployAsApplicationConfiguration *DeployAsApplicationConfiguration
+
+	// The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+	MonitoringConfiguration *ZeppelinMonitoringConfiguration
+}
+
+// The configuration of a Kinesis Data Analytics Studio notebook.
+type ZeppelinApplicationConfigurationDescription struct {
+
+	// The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+	//
+	// This member is required.
+	MonitoringConfigurationDescription *ZeppelinMonitoringConfigurationDescription
+
+	// The AWS Glue Data Catalog that is associated with the Kinesis Data Analytics
+	// Studio notebook.
+	CatalogConfigurationDescription *CatalogConfigurationDescription
+
+	// Custom artifacts are dependency JARs and user-defined functions (UDF).
+	CustomArtifactsConfigurationDescription []CustomArtifactConfigurationDescription
+
+	// The parameters required to deploy a Kinesis Data Analytics Studio notebook as an
+	// application with durable state..
+	DeployAsApplicationConfigurationDescription *DeployAsApplicationConfigurationDescription
+}
+
+// Updates to the configuration of Kinesis Data Analytics Studio notebook.
+type ZeppelinApplicationConfigurationUpdate struct {
+
+	// Updates to the configuration of the AWS Glue Data Catalog that is associated
+	// with the Kinesis Data Analytics Studio notebook.
+	CatalogConfigurationUpdate *CatalogConfigurationUpdate
+
+	// Updates to the customer artifacts. Custom artifacts are dependency JAR files and
+	// user-defined functions (UDF).
+	CustomArtifactsConfigurationUpdate []CustomArtifactConfiguration
+
+	// Updates to the configuration information required to deploy an Amazon Data
+	// Analytics Studio notebook as an application with durable state..
+	DeployAsApplicationConfigurationUpdate *DeployAsApplicationConfigurationUpdate
+
+	// Updates to the monitoring configuration of a Kinesis Data Analytics Studio
+	// notebook.
+	MonitoringConfigurationUpdate *ZeppelinMonitoringConfigurationUpdate
+}
+
+// Describes configuration parameters for Amazon CloudWatch logging for a Kinesis
+// Data Analytics Studio notebook. For more information about CloudWatch logging,
+// see Monitoring
+// (https://docs.aws.amazon.com/kinesisanalytics/latest/java/monitoring-overview.html).
+type ZeppelinMonitoringConfiguration struct {
+
+	// The verbosity of the CloudWatch Logs for an application.
+	//
+	// This member is required.
+	LogLevel LogLevel
+}
+
+// The monitoring configuration for Apache Zeppelin within a Kinesis Data Analytics
+// Studio notebook.
+type ZeppelinMonitoringConfigurationDescription struct {
+
+	// Describes the verbosity of the CloudWatch Logs for an application.
+	LogLevel LogLevel
+}
+
+// Updates to the monitoring configuration for Apache Zeppelin within a Kinesis
+// Data Analytics Studio notebook.
+type ZeppelinMonitoringConfigurationUpdate struct {
+
+	// Updates to the logging level for Apache Zeppelin within a Kinesis Data Analytics
+	// Studio notebook.
+	//
+	// This member is required.
+	LogLevelUpdate LogLevel
 }

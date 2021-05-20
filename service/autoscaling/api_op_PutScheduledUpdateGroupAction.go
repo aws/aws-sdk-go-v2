@@ -14,7 +14,10 @@ import (
 // Creates or updates a scheduled scaling action for an Auto Scaling group. For
 // more information, see Scheduled scaling
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html) in
-// the Amazon EC2 Auto Scaling User Guide.
+// the Amazon EC2 Auto Scaling User Guide. You can view the scheduled actions for
+// an Auto Scaling group using the DescribeScheduledActions API call. If you are no
+// longer using a scheduled action, you can delete it by calling the
+// DeleteScheduledAction API.
 func (c *Client) PutScheduledUpdateGroupAction(ctx context.Context, params *PutScheduledUpdateGroupActionInput, optFns ...func(*Options)) (*PutScheduledUpdateGroupActionOutput, error) {
 	if params == nil {
 		params = &PutScheduledUpdateGroupActionInput{}

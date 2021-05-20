@@ -55,9 +55,9 @@ type DescribeDBInstancesInput struct {
 	// - Accepts an engine name (such as neptune), and restricts the results list to DB
 	// instances created by that engine.
 	//
-	// For example, to invoke this API from the AWS
-	// CLI and filter so that only Neptune DB instances are returned, you could use the
-	// following command:
+	// For example, to invoke this API from the
+	// Amazon CLI and filter so that only Neptune DB instances are returned, you could
+	// use the following command:
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous DescribeDBInstances request.

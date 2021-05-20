@@ -41,9 +41,8 @@ type DescribeBotLocaleInput struct {
 	BotVersion *string
 
 	// The unique identifier of the locale to describe. The string must match one of
-	// the supported locales. For more information, see
-	// https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html
-	// (https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html).
+	// the supported locales. For more information, see Supported languages
+	// (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html).
 	//
 	// This member is required.
 	LocaleId *string

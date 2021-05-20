@@ -29,11 +29,11 @@ import (
 // for 12 months after creation. If a case was created more than 12 months ago, a
 // request might return an error.
 //
-// * You must have a Business or Enterprise support
+// * You must have a Business or Enterprise Support
 // plan to use the AWS Support API.
 //
 // * If you call the AWS Support API from an
-// account that does not have a Business or Enterprise support plan, the
+// account that does not have a Business or Enterprise Support plan, the
 // SubscriptionRequiredException error message appears. For information about
 // changing your support plan, see AWS Support
 // (http://aws.amazon.com/premiumsupport/).
@@ -70,7 +70,7 @@ type DescribeCasesInput struct {
 	DisplayId *string
 
 	// Specifies whether to include communications in the DescribeCases response. By
-	// default, communications are incuded.
+	// default, communications are included.
 	IncludeCommunications *bool
 
 	// Specifies whether to include resolved support cases in the DescribeCases

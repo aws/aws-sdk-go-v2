@@ -4090,6 +4090,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.String(*v.CharacterSetName)
 	}
 
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
 	if v.DatabaseName != nil {
 		objectKey := object.Key("DatabaseName")
 		objectKey.String(*v.DatabaseName)
@@ -5418,6 +5423,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		}
 	}
 
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
+	}
+
 	if v.DBClusterIdentifier != nil {
 		objectKey := object.Key("DBClusterIdentifier")
 		objectKey.String(*v.DBClusterIdentifier)
@@ -5952,6 +5962,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		if err := awsAwsquery_serializeDocumentAvailabilityZones(v.AvailabilityZones, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.CopyTagsToSnapshot != nil {
+		objectKey := object.Key("CopyTagsToSnapshot")
+		objectKey.Boolean(*v.CopyTagsToSnapshot)
 	}
 
 	if v.DatabaseName != nil {

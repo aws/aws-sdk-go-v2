@@ -33,10 +33,10 @@ type DeleteWarmPoolInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// Specifies that the warm pool is to be deleted along with all instances
-	// associated with the warm pool, without waiting for all instances to be
-	// terminated. This parameter also deletes any outstanding lifecycle actions
-	// associated with the warm pool instances.
+	// Specifies that the warm pool is to be deleted along with all of its associated
+	// instances, without waiting for all instances to be terminated. This parameter
+	// also deletes any outstanding lifecycle actions associated with the warm pool
+	// instances.
 	ForceDelete *bool
 }
 

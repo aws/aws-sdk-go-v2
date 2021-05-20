@@ -11,7 +11,8 @@ import (
 )
 
 // Removes one or more tags from an Amazon Rekognition collection, stream
-// processor, or Custom Labels model.
+// processor, or Custom Labels model. This operation requires permissions to
+// perform the rekognition:UntagResource action.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

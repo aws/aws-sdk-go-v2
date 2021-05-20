@@ -218,7 +218,7 @@ type BucketCountByEncryptionType struct {
 	Unknown int64
 }
 
-// Provides information about the number of S3 buckets that are and aren't shared
+// Provides information about the number of S3 buckets that are or aren't shared
 // with other AWS accounts.
 type BucketCountBySharedAccessType struct {
 
@@ -239,7 +239,7 @@ type BucketCountBySharedAccessType struct {
 	Unknown int64
 }
 
-// Provides information about the number of S3 buckets whose bucket policies do and
+// Provides information about the number of S3 buckets whose bucket policies do or
 // don't require server-side encryption of objects when objects are uploaded to the
 // buckets.
 type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
@@ -411,10 +411,11 @@ type BucketMetadata struct {
 	// size of all versions of each object in the bucket.
 	SizeInBytes int64
 
-	// The total compressed storage size, in bytes, of the bucket. If versioning is
-	// enabled for the bucket, Macie calculates this value based on the size of the
-	// latest version of each object in the bucket. This value doesn't reflect the
-	// storage size of all versions of each object in the bucket.
+	// The total storage size, in bytes, of the objects that are compressed (.gz,
+	// .gzip, .zip) files in the bucket. If versioning is enabled for the bucket, Macie
+	// calculates this value based on the size of the latest version of each applicable
+	// object in the bucket. This value doesn't reflect the storage size of all
+	// versions of each applicable object in the bucket.
 	SizeInBytesCompressed int64
 
 	// An array that specifies the tags (keys and values) that are associated with the
@@ -634,6 +635,29 @@ type ClassificationResultStatus struct {
 	// to notify you of any errors, warnings, or considerations that might impact your
 	// analysis of the finding.
 	Reason *string
+}
+
+// Specifies one or more property- and tag-based conditions that define criteria
+// for including or excluding S3 buckets from a classification job.
+type CriteriaBlockForJob struct {
+
+	// An array of conditions, one for each condition that determines which buckets to
+	// include or exclude from the job. If you specify more than one condition, Amazon
+	// Macie uses AND logic to join the conditions.
+	And []CriteriaForJob
+}
+
+// Specifies a property- or tag-based condition that defines criteria for including
+// or excluding S3 buckets from a classification job.
+type CriteriaForJob struct {
+
+	// A property-based condition that defines a property, operator, and one or more
+	// values for including or excluding buckets from the job.
+	SimpleCriterion *SimpleCriterionForJob
+
+	// A tag-based condition that defines an operator and tag keys, tag values, or tag
+	// key and value pairs for including or excluding buckets from the job.
+	TagCriterion *TagCriterionForJob
 }
 
 // Specifies the operator to use in a property-based condition that filters the
@@ -1059,43 +1083,51 @@ type JobDetails struct {
 	// Specifies whether any one-time or recurring jobs are configured to analyze data
 	// in the bucket. Possible values are:
 	//
-	// * TRUE - One or more jobs is configured to
-	// analyze data in the bucket, and at least one of those jobs has a status other
-	// than CANCELLED.
+	// * TRUE - The bucket is explicitly included
+	// in the bucket definition (S3BucketDefinitionForJob) for one or more jobs and at
+	// least one of those jobs has a status other than CANCELLED. Or the bucket matched
+	// the bucket criteria (S3BucketCriteriaForJob) for at least one job that
+	// previously ran.
 	//
-	// * FALSE - No jobs are configured to analyze data in the bucket,
-	// or all the jobs that are configured to analyze data in the bucket have a status
-	// of CANCELLED.
+	// * FALSE - The bucket isn't explicitly included in the bucket
+	// definition (S3BucketDefinitionForJob) for any jobs, all the jobs that explicitly
+	// include the bucket in their bucket definitions have a status of CANCELLED, or
+	// the bucket didn't match the bucket criteria (S3BucketCriteriaForJob) for any
+	// jobs that previously ran.
 	//
-	// * UNKNOWN - An exception occurred when Amazon Macie attempted to
-	// retrieve job data for the bucket.
+	// * UNKNOWN - An exception occurred when Amazon Macie
+	// attempted to retrieve job data for the bucket.
 	IsDefinedInJob IsDefinedInJob
 
 	// Specifies whether any recurring jobs are configured to analyze data in the
 	// bucket. Possible values are:
 	//
-	// * TRUE - One or more recurring jobs is configured
-	// to analyze data in the bucket, and at least one of those jobs has a status other
-	// than CANCELLED.
+	// * TRUE - The bucket is explicitly included in the
+	// bucket definition (S3BucketDefinitionForJob) for one or more recurring jobs or
+	// the bucket matches the bucket criteria (S3BucketCriteriaForJob) for one or more
+	// recurring jobs. At least one of those jobs has a status other than CANCELLED.
 	//
-	// * FALSE - No recurring jobs are configured to analyze data in
-	// the bucket, or all the recurring jobs that are configured to analyze data in the
-	// bucket have a status of CANCELLED.
+	// *
+	// FALSE - The bucket isn't explicitly included in the bucket definition
+	// (S3BucketDefinitionForJob) for any recurring jobs, the bucket doesn't match the
+	// bucket criteria (S3BucketCriteriaForJob) for any recurring jobs, or all the
+	// recurring jobs that are configured to analyze data in the bucket have a status
+	// of CANCELLED.
 	//
-	// * UNKNOWN - An exception occurred when
-	// Amazon Macie attempted to retrieve job data for the bucket.
+	// * UNKNOWN - An exception occurred when Amazon Macie attempted to
+	// retrieve job data for the bucket.
 	IsMonitoredByJob IsMonitoredByJob
 
-	// The unique identifier for the job that ran most recently (either the latest run
-	// of a recurring job or the only run of a one-time job) and is configured to
-	// analyze data in the bucket. This value is null if the value for the
+	// The unique identifier for the job that ran most recently and is configured to
+	// analyze data in the bucket, either the latest run of a recurring job or the only
+	// run of a one-time job. This value is typically null if the value for the
 	// isDefinedInJob property is FALSE or UNKNOWN.
 	LastJobId *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when the job (lastJobId)
 	// started. If the job is a recurring job, this value indicates when the most
-	// recent run started. This value is null if the value for the isDefinedInJob
-	// property is FALSE or UNKNOWN.
+	// recent run started. This value is typically null if the value for the
+	// isDefinedInJob property is FALSE or UNKNOWN.
 	LastJobRunTime *time.Time
 }
 
@@ -1113,26 +1145,25 @@ type JobScheduleFrequency struct {
 }
 
 // Specifies a property- or tag-based condition that defines criteria for including
-// or excluding objects from a classification job.
+// or excluding S3 objects from a classification job.
 type JobScopeTerm struct {
 
 	// A property-based condition that defines a property, operator, and one or more
-	// values for including or excluding an object from the job.
+	// values for including or excluding objects from the job.
 	SimpleScopeTerm *SimpleScopeTerm
 
 	// A tag-based condition that defines the operator and tag keys or tag key and
-	// value pairs for including or excluding an object from the job.
+	// value pairs for including or excluding objects from the job.
 	TagScopeTerm *TagScopeTerm
 }
 
 // Specifies one or more property- and tag-based conditions that define criteria
-// for including or excluding objects from a classification job. If you specify
-// more than one condition, Amazon Macie uses an AND operator to join the
-// conditions.
+// for including or excluding S3 objects from a classification job.
 type JobScopingBlock struct {
 
 	// An array of conditions, one for each condition that determines which objects to
-	// include or exclude from the job.
+	// include or exclude from the job. If you specify more than one condition, Amazon
+	// Macie uses AND logic to join the conditions.
 	And []JobScopeTerm
 }
 
@@ -1140,7 +1171,16 @@ type JobScopingBlock struct {
 // the job.
 type JobSummary struct {
 
-	// The S3 buckets that the job is configured to analyze.
+	// The property- and tag-based conditions that determine which S3 buckets are
+	// included or excluded from the job's analysis. Each time the job runs, the job
+	// uses these criteria to determine which buckets to analyze. A job's definition
+	// can contain a bucketCriteria object or a bucketDefinitions array, not both.
+	BucketCriteria *S3BucketCriteriaForJob
+
+	// An array of objects, one for each AWS account that owns specific S3 buckets for
+	// the job to analyze. Each object specifies the account ID for an account and one
+	// or more buckets to analyze for that account. A job's definition can contain a
+	// bucketDefinitions array or a bucketCriteria object, not both.
 	BucketDefinitions []S3BucketDefinitionForJob
 
 	// The date and time, in UTC and extended ISO 8601 format, when the job was
@@ -1215,9 +1255,10 @@ type KeyValuePair struct {
 }
 
 // Specifies whether any account- or bucket-level access errors occurred when a
-// classification job ran. For example, the job is configured to analyze data for a
-// member account that was suspended, or the job is configured to analyze an S3
-// bucket that Amazon Macie isn't allowed to access.
+// classification job ran. For information about using logging data to investigate
+// these errors, see Monitoring sensitive data discovery jobs
+// (https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-monitor-cw-logs.html)
+// in the Amazon Macie User Guide.
 type LastRunErrorStatus struct {
 
 	// Specifies whether any account- or bucket-level access errors occurred when the
@@ -1271,6 +1312,74 @@ type ListJobsSortCriteria struct {
 	// specified by the attributeName property. Valid values are: ASC, sort the results
 	// in ascending order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
+}
+
+// Provides statistical data and other information about an S3 bucket that Amazon
+// Macie monitors and analyzes.
+type MatchingBucket struct {
+
+	// The unique identifier for the AWS account that owns the bucket.
+	AccountId *string
+
+	// The name of the bucket.
+	BucketName *string
+
+	// The total number of objects that Amazon Macie can analyze in the bucket. These
+	// objects use a supported storage class and have a file name extension for a
+	// supported file or storage format.
+	ClassifiableObjectCount int64
+
+	// The total storage size, in bytes, of the objects that Amazon Macie can analyze
+	// in the bucket. These objects use a supported storage class and have a file name
+	// extension for a supported file or storage format.If versioning is enabled for
+	// the bucket, Macie calculates this value based on the size of the latest version
+	// of each applicable object in the bucket. This value doesn't reflect the storage
+	// size of all versions of each applicable object in the bucket.
+	ClassifiableSizeInBytes int64
+
+	// Specifies whether any one-time or recurring classification jobs are configured
+	// to analyze objects in the bucket, and, if so, the details of the job that ran
+	// most recently.
+	JobDetails *JobDetails
+
+	// The total number of objects in the bucket.
+	ObjectCount int64
+
+	// The total number of objects that are in the bucket, grouped by server-side
+	// encryption type. This includes a grouping that reports the total number of
+	// objects that aren't encrypted or use client-side encryption.
+	ObjectCountByEncryptionType *ObjectCountByEncryptionType
+
+	// The total storage size, in bytes, of the bucket.If versioning is enabled for the
+	// bucket, Amazon Macie calculates this value based on the size of the latest
+	// version of each object in the bucket. This value doesn't reflect the storage
+	// size of all versions of each object in the bucket.
+	SizeInBytes int64
+
+	// The total storage size, in bytes, of the objects that are compressed (.gz,
+	// .gzip, .zip) files in the bucket.If versioning is enabled for the bucket, Macie
+	// calculates this value based on the size of the latest version of each applicable
+	// object in the bucket. This value doesn't reflect the storage size of all
+	// versions of each applicable object in the bucket.
+	SizeInBytesCompressed int64
+
+	// The total number of objects that Amazon Macie can't analyze in the bucket. These
+	// objects don't use a supported storage class or don't have a file name extension
+	// for a supported file or storage format.
+	UnclassifiableObjectCount *ObjectLevelStatistics
+
+	// The total storage size, in bytes, of the objects that Amazon Macie can't analyze
+	// in the bucket. These objects don't use a supported storage class or don't have a
+	// file name extension for a supported file or storage format.
+	UnclassifiableObjectSizeInBytes *ObjectLevelStatistics
+}
+
+// Provides statistical data and other information about an AWS resource that
+// Amazon Macie monitors and analyzes.
+type MatchingResource struct {
+
+	// The details of an S3 bucket that Amazon Macie monitors and analyzes.
+	MatchingBucket *MatchingBucket
 }
 
 // Provides information about an account that's associated with an Amazon Macie
@@ -1330,16 +1439,16 @@ type MonthlySchedule struct {
 // aren't encrypted.
 type ObjectCountByEncryptionType struct {
 
-	// The total number of objects that are encrypted using a customer-managed key. The
+	// The total number of objects that are encrypted with a customer-managed key. The
 	// objects use customer-provided server-side encryption (SSE-C).
 	CustomerManaged int64
 
-	// The total number of objects that are encrypted using an AWS Key Management
+	// The total number of objects that are encrypted with an AWS Key Management
 	// Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS
 	// encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).
 	KmsManaged int64
 
-	// The total number of objects that are encrypted using an Amazon S3 managed key.
+	// The total number of objects that are encrypted with an Amazon S3 managed key.
 	// The objects use Amazon S3 managed encryption (SSE-S3).
 	S3Managed int64
 
@@ -1354,11 +1463,11 @@ type ObjectCountByEncryptionType struct {
 
 // Provides information about the total storage size (in bytes) or number of
 // objects that Amazon Macie can't analyze in one or more S3 buckets. In a
-// BucketMetadata object, this data is for a specific bucket. In a
-// GetBucketStatisticsResponse object, this data is aggregated for all the buckets
-// in the query results. If versioning is enabled for a bucket, total storage size
-// values are based on the size of the latest version of each applicable object in
-// the bucket.
+// BucketMetadata or MatchingBucket object, this data is for a specific bucket. In
+// a GetBucketStatisticsResponse object, this data is aggregated for all the
+// buckets in the query results. If versioning is enabled for a bucket, total
+// storage size values are based on the size of the latest version of each
+// applicable object in the bucket.
 type ObjectLevelStatistics struct {
 
 	// The total storage size (in bytes) or number of objects that Amazon Macie can't
@@ -1572,8 +1681,22 @@ type S3Bucket struct {
 	Tags []KeyValuePair
 }
 
-// Specifies which AWS account owns the S3 buckets that a classification job
-// analyzes, and the buckets to analyze for the account.
+// Specifies property- and tag-based conditions that define criteria for including
+// or excluding S3 buckets from a classification job. Exclude conditions take
+// precedence over include conditions.
+type S3BucketCriteriaForJob struct {
+
+	// The property- and tag-based conditions that determine which buckets to exclude
+	// from the job.
+	Excludes *CriteriaBlockForJob
+
+	// The property- and tag-based conditions that determine which buckets to include
+	// in the job.
+	Includes *CriteriaBlockForJob
+}
+
+// Specifies an AWS account that owns S3 buckets for a classification job to
+// analyze, and one or more specific buckets to analyze for that account.
 type S3BucketDefinitionForJob struct {
 
 	// The unique identifier for the AWS account that owns the buckets.
@@ -1619,16 +1742,29 @@ type S3Destination struct {
 }
 
 // Specifies which S3 buckets contain the objects that a classification job
-// analyzes, and the scope of that analysis.
+// analyzes, and the scope of that analysis. The bucket specification can be static
+// (bucketDefinitions) or dynamic (bucketCriteria). If it's static, the job
+// analyzes objects in the same predefined set of buckets each time the job runs.
+// If it's dynamic, the job analyzes objects in any buckets that match the
+// specified criteria each time the job starts to run.
 type S3JobDefinition struct {
 
-	// An array of objects, one for each AWS account that owns buckets to analyze. Each
-	// object specifies the account ID for an account and one or more buckets to
-	// analyze for the account.
+	// The property- and tag-based conditions that determine which S3 buckets to
+	// include or exclude from the analysis. Each time the job runs, the job uses these
+	// criteria to determine which buckets contain objects to analyze. A job's
+	// definition can contain a bucketCriteria object or a bucketDefinitions array, not
+	// both.
+	BucketCriteria *S3BucketCriteriaForJob
+
+	// An array of objects, one for each AWS account that owns specific S3 buckets to
+	// analyze. Each object specifies the account ID for an account and one or more
+	// buckets to analyze for that account. A job's definition can contain a
+	// bucketDefinitions array or a bucketCriteria object, not both.
 	BucketDefinitions []S3BucketDefinitionForJob
 
-	// The property- and tag-based conditions that determine which objects to include
-	// or exclude from the analysis.
+	// The property- and tag-based conditions that determine which S3 objects to
+	// include or exclude from the analysis. Each time the job runs, the job uses these
+	// criteria to determine which objects to analyze.
 	Scoping *Scoping
 }
 
@@ -1677,10 +1813,9 @@ type S3Object struct {
 	VersionId *string
 }
 
-// Specifies one or more property- and tag-based conditions that refine the scope
-// of a classification job. These conditions define criteria that determine which
-// objects a job analyzes. Exclude conditions take precedence over include
-// conditions.
+// Specifies one or more property- and tag-based conditions that define criteria
+// for including or excluding S3 objects from a classification job. Exclude
+// conditions take precedence over include conditions.
 type Scoping struct {
 
 	// The property- or tag-based conditions that determine which objects to exclude
@@ -1690,6 +1825,118 @@ type Scoping struct {
 	// The property- or tag-based conditions that determine which objects to include in
 	// the analysis.
 	Includes *JobScopingBlock
+}
+
+// Specifies property- and tag-based conditions that define filter criteria for
+// including or excluding S3 buckets from the query results. Exclude conditions
+// take precedence over include conditions.
+type SearchResourcesBucketCriteria struct {
+
+	// The property- and tag-based conditions that determine which buckets to exclude
+	// from the results.
+	Excludes *SearchResourcesCriteriaBlock
+
+	// The property- and tag-based conditions that determine which buckets to include
+	// in the results.
+	Includes *SearchResourcesCriteriaBlock
+}
+
+// Specifies a property- or tag-based filter condition for including or excluding
+// AWS resources from the query results.
+type SearchResourcesCriteria struct {
+
+	// A property-based condition that defines a property, operator, and one or more
+	// values for including or excluding resources from the results.
+	SimpleCriterion *SearchResourcesSimpleCriterion
+
+	// A tag-based condition that defines an operator and tag keys, tag values, or tag
+	// key and value pairs for including or excluding resources from the results.
+	TagCriterion *SearchResourcesTagCriterion
+}
+
+// Specifies property- and tag-based conditions that define filter criteria for
+// including or excluding AWS resources from the query results.
+type SearchResourcesCriteriaBlock struct {
+
+	// An array of objects, one for each property- or tag-based condition that includes
+	// or excludes resources from the query results. If you specify more than one
+	// condition, Amazon Macie uses AND logic to join the conditions.
+	And []SearchResourcesCriteria
+}
+
+// Specifies a property-based filter condition that determines which AWS resources
+// are included or excluded from the query results.
+type SearchResourcesSimpleCriterion struct {
+
+	// The operator to use in the condition. Valid values are EQ (equals) and NE (not
+	// equals).
+	Comparator SearchResourcesComparator
+
+	// The property to use in the condition.
+	Key SearchResourcesSimpleCriterionKey
+
+	// An array that lists one or more values to use in the condition. If you specify
+	// multiple values, Amazon Macie uses OR logic to join the values. Valid values for
+	// each supported property (key) are:
+	//
+	// * ACCOUNT_ID - A string that represents the
+	// unique identifier for the AWS account that owns the resource.
+	//
+	// *
+	// S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value
+	// that Macie defines for the BucketPublicAccess.effectivePermission
+	// (https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission)
+	// property of an S3 bucket.
+	//
+	// * S3_BUCKET_NAME - A string that represents the name
+	// of an S3 bucket.
+	//
+	// * S3_BUCKET_SHARED_ACCESS - A string that represents an
+	// enumerated value that Macie defines for the BucketMetadata.sharedAccess
+	// (https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess)
+	// property of an S3 bucket.
+	//
+	// Values are case sensitive. Also, Macie doesn't
+	// support use of partial values or wildcard characters in values.
+	Values []string
+}
+
+// Specifies criteria for sorting the results of a query for information about AWS
+// resources that Amazon Macie monitors and analyzes.
+type SearchResourcesSortCriteria struct {
+
+	// The property to sort the results by.
+	AttributeName SearchResourcesSortAttributeName
+
+	// The sort order to apply to the results, based on the value for the property
+	// specified by the attributeName property. Valid values are: ASC, sort the results
+	// in ascending order; and, DESC, sort the results in descending order.
+	OrderBy OrderBy
+}
+
+// Specifies a tag-based filter condition that determines which AWS resources are
+// included or excluded from the query results.
+type SearchResourcesTagCriterion struct {
+
+	// The operator to use in the condition. Valid values are EQ (equals) and NE (not
+	// equals).
+	Comparator SearchResourcesComparator
+
+	// The tag keys, tag values, or tag key and value pairs to use in the condition.
+	TagValues []SearchResourcesTagCriterionPair
+}
+
+// Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in a
+// tag-based filter condition for a query. Tag keys and values are case sensitive.
+// Also, Amazon Macie doesn't support use of partial values or wildcard characters
+// in tag-based filter conditions.
+type SearchResourcesTagCriterionPair struct {
+
+	// The value for the tag key to use in the condition.
+	Key *string
+
+	// The tag value to use in the condition.
+	Value *string
 }
 
 // Specifies configuration settings that determine which findings are published to
@@ -1829,7 +2076,44 @@ type Severity struct {
 	Score int64
 }
 
-// Specifies a property-based condition that determines whether an object is
+// Specifies a property-based condition that determines whether an S3 bucket is
+// included or excluded from a classification job.
+type SimpleCriterionForJob struct {
+
+	// The operator to use in the condition. Valid values are EQ (equals) and NE (not
+	// equals).
+	Comparator JobComparator
+
+	// The property to use in the condition.
+	Key SimpleCriterionKeyForJob
+
+	// An array that lists one or more values to use in the condition. If you specify
+	// multiple values, Amazon Macie uses OR logic to join the values. Valid values for
+	// each supported property (key) are:
+	//
+	// * ACCOUNT_ID - A string that represents the
+	// unique identifier for the AWS account that owns the bucket.
+	//
+	// *
+	// S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value
+	// that Macie defines for the BucketPublicAccess.effectivePermission
+	// (https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission)
+	// property of a bucket.
+	//
+	// * S3_BUCKET_NAME - A string that represents the name of a
+	// bucket.
+	//
+	// * S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated
+	// value that Macie defines for the BucketMetadata.sharedAccess
+	// (https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess)
+	// property of a bucket.
+	//
+	// Values are case sensitive. Also, Macie doesn't support
+	// use of partial values or wildcard characters in these values.
+	Values []string
+}
+
+// Specifies a property-based condition that determines whether an S3 object is
 // included or excluded from a classification job.
 type SimpleScopeTerm struct {
 
@@ -1876,11 +2160,11 @@ type SimpleScopeTerm struct {
 	//
 	// * TAG - A
 	// string that represents a tag key for an object. For advanced options, use a
-	// TagScopeTerm object, instead of a SimpleScopeTerm object, to define a tag-based
+	// TagScopeTerm object instead of a SimpleScopeTerm object to define a tag-based
 	// condition for the job.
 	//
 	// Macie doesn't support use of wildcard characters in
-	// values. Also, string values are case sensitive.
+	// these values. Also, string values are case sensitive.
 	Values []string
 }
 
@@ -1908,8 +2192,36 @@ type Statistics struct {
 	NumberOfRuns float64
 }
 
-// Specifies a tag-based condition that determines whether an object is included or
-// excluded from a classification job.
+// Specifies a tag-based condition that determines whether an S3 bucket is included
+// or excluded from a classification job.
+type TagCriterionForJob struct {
+
+	// The operator to use in the condition. Valid values are EQ (equals) and NE (not
+	// equals).
+	Comparator JobComparator
+
+	// The tag keys, tag values, or tag key and value pairs to use in the condition.
+	TagValues []TagCriterionPairForJob
+}
+
+// Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in a
+// tag-based condition that determines whether an S3 bucket is included or excluded
+// from a classification job. Tag keys and values are case sensitive. Also, Amazon
+// Macie doesn't support use of partial values or wildcard characters in tag-based
+// conditions.
+type TagCriterionPairForJob struct {
+
+	// The value for the tag key to use in the condition.
+	Key *string
+
+	// The tag value to use in the condition.
+	Value *string
+}
+
+// Specifies a tag-based condition that determines whether an S3 object is included
+// or excluded from a classification job. Tag keys and values are case sensitive.
+// Also, Amazon Macie doesn't support use of partial values or wildcard characters
+// in tag-based conditions.
 type TagScopeTerm struct {
 
 	// The operator to use in the condition. Valid operators are EQ (equals) or NE (not
@@ -1927,7 +2239,10 @@ type TagScopeTerm struct {
 }
 
 // Specifies a tag key or tag key and value pair to use in a tag-based condition
-// for a classification job.
+// that determines whether an S3 object is included or excluded from a
+// classification job. Tag keys and values are case sensitive. Also, Amazon Macie
+// doesn't support use of partial values or wildcard characters in tag-based
+// conditions.
 type TagValuePair struct {
 
 	// The value for the tag key to use in the condition.

@@ -36,9 +36,11 @@ type ListReceivedLicensesInput struct {
 	//
 	// * Status
 	//
-	// * KeyFingerprint
+	// * Fingerprint
 	//
-	// * Issuer
+	// * IssuerName
+	//
+	// * Beneficiary
 	Filters []types.Filter
 
 	// Amazon Resource Names (ARNs) of the licenses.

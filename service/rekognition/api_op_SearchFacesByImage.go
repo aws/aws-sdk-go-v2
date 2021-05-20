@@ -28,16 +28,18 @@ import (
 // similarity indicating how similar the face is to the input face. In the
 // response, the operation also returns the bounding box (and a confidence level
 // that the bounding box contains a face) of the face that Amazon Rekognition used
-// for the input image. For an example, Searching for a Face Using an Image in the
-// Amazon Rekognition Developer Guide. The QualityFilter input parameter allows you
-// to filter out detected faces that don’t meet a required quality bar. The quality
-// bar is based on a variety of common use cases. Use QualityFilter to set the
-// quality bar for filtering by specifying LOW, MEDIUM, or HIGH. If you do not want
-// to filter detected faces, specify NONE. The default value is NONE. To use
-// quality filtering, you need a collection associated with version 3 of the face
-// model or higher. To get the version of the face model associated with a
-// collection, call DescribeCollection. This operation requires permissions to
-// perform the rekognition:SearchFacesByImage action.
+// for the input image. If no faces are detected in the input image,
+// SearchFacesByImage returns an InvalidParameterException error. For an example,
+// Searching for a Face Using an Image in the Amazon Rekognition Developer Guide.
+// The QualityFilter input parameter allows you to filter out detected faces that
+// don’t meet a required quality bar. The quality bar is based on a variety of
+// common use cases. Use QualityFilter to set the quality bar for filtering by
+// specifying LOW, MEDIUM, or HIGH. If you do not want to filter detected faces,
+// specify NONE. The default value is NONE. To use quality filtering, you need a
+// collection associated with version 3 of the face model or higher. To get the
+// version of the face model associated with a collection, call DescribeCollection.
+// This operation requires permissions to perform the
+// rekognition:SearchFacesByImage action.
 func (c *Client) SearchFacesByImage(ctx context.Context, params *SearchFacesByImageInput, optFns ...func(*Options)) (*SearchFacesByImageOutput, error) {
 	if params == nil {
 		params = &SearchFacesByImageInput{}

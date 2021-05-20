@@ -26,23 +26,22 @@ import (
 // In addition, the
 // response contains these fields:
 //
-// * status - The alert status of the check: "ok"
-// (green), "warning" (yellow), "error" (red), or "not_available".
+// * status - The alert status of the check can be
+// ok (green), warning (yellow), error (red), or not_available.
 //
-// * timestamp -
-// The time of the last refresh of the check.
+// * timestamp - The
+// time of the last refresh of the check.
 //
-// * checkId - The unique identifier
-// for the check.
+// * checkId - The unique identifier for
+// the check.
 //
-// * You must have a Business or Enterprise support plan to use the
-// AWS Support API.
+// * You must have a Business or Enterprise Support plan to use the AWS
+// Support API.
 //
-// * If you call the AWS Support API from an account that does
-// not have a Business or Enterprise support plan, the
-// SubscriptionRequiredException error message appears. For information about
-// changing your support plan, see AWS Support
-// (http://aws.amazon.com/premiumsupport/).
+// * If you call the AWS Support API from an account that does not
+// have a Business or Enterprise Support plan, the SubscriptionRequiredException
+// error message appears. For information about changing your support plan, see AWS
+// Support (http://aws.amazon.com/premiumsupport/).
 func (c *Client) DescribeTrustedAdvisorCheckResult(ctx context.Context, params *DescribeTrustedAdvisorCheckResultInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckResultOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorCheckResultInput{}

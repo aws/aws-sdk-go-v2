@@ -27,6 +27,22 @@ func (e *ComplexError) ErrorMessage() string {
 func (e *ComplexError) ErrorCode() string             { return "ComplexError" }
 func (e *ComplexError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+type CustomCodeError struct {
+	Message *string
+}
+
+func (e *CustomCodeError) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *CustomCodeError) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *CustomCodeError) ErrorCode() string             { return "CustomCodeError" }
+func (e *CustomCodeError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // This error is thrown when an invalid greeting value is provided.
 type InvalidGreeting struct {
 	Message *string

@@ -32,13 +32,16 @@ type ListDistributedGrantsInput struct {
 	// Filters to scope the results. The following filters are supported:
 	//
 	// *
-	// LicenseARN
+	// LicenseArn
 	//
-	// * Status
+	// * GrantStatus
 	//
-	// * PrincipalARN
+	// * GranteePrincipalARN
 	//
-	// * ParentARN
+	// * ProductSKU
+	//
+	// *
+	// LicenseIssuerName
 	Filters []types.Filter
 
 	// Amazon Resource Names (ARNs) of the grants.

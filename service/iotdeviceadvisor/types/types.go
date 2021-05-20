@@ -19,13 +19,13 @@ type DeviceUnderTest struct {
 // Show Group Result.
 type GroupResult struct {
 
-	// Show Group Result Id.
+	// Group result Id.
 	GroupId *string
 
-	// Show Group Result Name.
+	// Group Result Name.
 	GroupName *string
 
-	// Show Group Result.
+	// Tests under Group Result.
 	Tests []TestCaseRun
 }
 
@@ -48,22 +48,22 @@ type SuiteDefinitionConfiguration struct {
 	SuiteDefinitionName *string
 }
 
-// Get suite definition information.
+// Information about the suite definition.
 type SuiteDefinitionInformation struct {
 
-	// Gets the information of when the test suite was created.
+	// Date (in Unix epoch time) when the test suite was created.
 	CreatedAt *time.Time
 
-	// Specifies the devices under test.
+	// Specifies the devices under test for the test suite.
 	DefaultDevices []DeviceUnderTest
 
-	// Gets the test suites which will be used for qualification.
+	// Specifies if the test suite is intended for qualification.
 	IntendedForQualification bool
 
-	// Get suite definition Id.
+	// Suite definition Id of the test suite.
 	SuiteDefinitionId *string
 
-	// Get test suite name.
+	// Suite name of the test suite.
 	SuiteDefinitionName *string
 }
 
@@ -73,78 +73,42 @@ type SuiteRunConfiguration struct {
 	// Gets the primary device for suite run.
 	PrimaryDevice *DeviceUnderTest
 
-	// Gets the secondary device for suite run.
-	SecondaryDevice *DeviceUnderTest
-
 	// Gets test case list.
 	SelectedTestList []string
 }
 
-// Get suite run information.
+// Information about the suite run.
 type SuiteRunInformation struct {
 
-	// Get suite run information based on time suite was created.
+	// Date (in Unix epoch time) when the suite run was created.
 	CreatedAt *time.Time
 
-	// Get suite run information based on end time of the run.
+	// Date (in Unix epoch time) when the suite run ended.
 	EndAt *time.Time
 
-	// Get suite run information based on result of the test suite run.
+	// Number of test cases that failed in the suite run.
 	Failed int32
 
-	// Get suite run information based on result of the test suite run.
+	// Number of test cases that passed in the suite run.
 	Passed int32
 
-	// Get suite run information based on start time of the run.
+	// Date (in Unix epoch time) when the suite run was started.
 	StartedAt *time.Time
 
-	// Get suite run information based on test run status.
+	// Status of the suite run.
 	Status SuiteRunStatus
 
-	// Get suite run information based on suite definition Id.
+	// Suite definition Id of the suite run.
 	SuiteDefinitionId *string
 
-	// Get suite run information based on suite definition name.
+	// Suite definition name of the suite run.
 	SuiteDefinitionName *string
 
-	// Get suite run information based on suite definition version.
+	// Suite definition version of the suite run.
 	SuiteDefinitionVersion *string
 
-	// Get suite run information based on suite run Id.
+	// Suite run Id of the suite run.
 	SuiteRunId *string
-}
-
-// Shows tests in a test group.
-type TestCase struct {
-
-	// Shows test case configuration.
-	Configuration map[string]string
-
-	// Shows test case name.
-	Name *string
-
-	// Specifies a test.
-	Test *TestCaseDefinition
-}
-
-// Gets the test case category.
-type TestCaseCategory struct {
-
-	// Lists all the tests name in the specified category.
-	Name *string
-
-	// Lists all the tests in the specified category.
-	Tests []TestCase
-}
-
-// Provides test case definition.
-type TestCaseDefinition struct {
-
-	// Provides test case definition Id.
-	Id *string
-
-	// Provides test case definition version.
-	TestCaseVersion *string
 }
 
 // Provides test case run.

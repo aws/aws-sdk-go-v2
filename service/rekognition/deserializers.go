@@ -11666,6 +11666,15 @@ func awsAwsjson11_deserializeDocumentProjectVersionDescription(v **types.Project
 				return err
 			}
 
+		case "KmsKeyId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyId to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyId = ptr.String(jtv)
+			}
+
 		case "ManifestSummary":
 			if err := awsAwsjson11_deserializeDocumentGroundTruthManifest(&sv.ManifestSummary, value); err != nil {
 				return err

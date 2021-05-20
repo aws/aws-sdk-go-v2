@@ -564,6 +564,70 @@ func (ScopeFilterKey) Values() []ScopeFilterKey {
 	}
 }
 
+type SearchResourcesComparator string
+
+// Enum values for SearchResourcesComparator
+const (
+	SearchResourcesComparatorEq SearchResourcesComparator = "EQ"
+	SearchResourcesComparatorNe SearchResourcesComparator = "NE"
+)
+
+// Values returns all known values for SearchResourcesComparator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SearchResourcesComparator) Values() []SearchResourcesComparator {
+	return []SearchResourcesComparator{
+		"EQ",
+		"NE",
+	}
+}
+
+type SearchResourcesSimpleCriterionKey string
+
+// Enum values for SearchResourcesSimpleCriterionKey
+const (
+	SearchResourcesSimpleCriterionKeyAccountId                   SearchResourcesSimpleCriterionKey = "ACCOUNT_ID"
+	SearchResourcesSimpleCriterionKeyS3BucketName                SearchResourcesSimpleCriterionKey = "S3_BUCKET_NAME"
+	SearchResourcesSimpleCriterionKeyS3BucketEffectivePermission SearchResourcesSimpleCriterionKey = "S3_BUCKET_EFFECTIVE_PERMISSION"
+	SearchResourcesSimpleCriterionKeyS3BucketSharedAccess        SearchResourcesSimpleCriterionKey = "S3_BUCKET_SHARED_ACCESS"
+)
+
+// Values returns all known values for SearchResourcesSimpleCriterionKey. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SearchResourcesSimpleCriterionKey) Values() []SearchResourcesSimpleCriterionKey {
+	return []SearchResourcesSimpleCriterionKey{
+		"ACCOUNT_ID",
+		"S3_BUCKET_NAME",
+		"S3_BUCKET_EFFECTIVE_PERMISSION",
+		"S3_BUCKET_SHARED_ACCESS",
+	}
+}
+
+type SearchResourcesSortAttributeName string
+
+// Enum values for SearchResourcesSortAttributeName
+const (
+	SearchResourcesSortAttributeNameAccountId                 SearchResourcesSortAttributeName = "ACCOUNT_ID"
+	SearchResourcesSortAttributeNameResourceName              SearchResourcesSortAttributeName = "RESOURCE_NAME"
+	SearchResourcesSortAttributeNameS3ClassifiableObjectCount SearchResourcesSortAttributeName = "S3_CLASSIFIABLE_OBJECT_COUNT"
+	SearchResourcesSortAttributeNameS3ClassifiableSizeInBytes SearchResourcesSortAttributeName = "S3_CLASSIFIABLE_SIZE_IN_BYTES"
+)
+
+// Values returns all known values for SearchResourcesSortAttributeName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SearchResourcesSortAttributeName) Values() []SearchResourcesSortAttributeName {
+	return []SearchResourcesSortAttributeName{
+		"ACCOUNT_ID",
+		"RESOURCE_NAME",
+		"S3_CLASSIFIABLE_OBJECT_COUNT",
+		"S3_CLASSIFIABLE_SIZE_IN_BYTES",
+	}
+}
+
 type SensitiveDataItemCategory string
 
 // Enum values for SensitiveDataItemCategory
@@ -625,6 +689,28 @@ func (SharedAccess) Values() []SharedAccess {
 		"INTERNAL",
 		"NOT_SHARED",
 		"UNKNOWN",
+	}
+}
+
+type SimpleCriterionKeyForJob string
+
+// Enum values for SimpleCriterionKeyForJob
+const (
+	SimpleCriterionKeyForJobAccountId                   SimpleCriterionKeyForJob = "ACCOUNT_ID"
+	SimpleCriterionKeyForJobS3BucketName                SimpleCriterionKeyForJob = "S3_BUCKET_NAME"
+	SimpleCriterionKeyForJobS3BucketEffectivePermission SimpleCriterionKeyForJob = "S3_BUCKET_EFFECTIVE_PERMISSION"
+	SimpleCriterionKeyForJobS3BucketSharedAccess        SimpleCriterionKeyForJob = "S3_BUCKET_SHARED_ACCESS"
+)
+
+// Values returns all known values for SimpleCriterionKeyForJob. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SimpleCriterionKeyForJob) Values() []SimpleCriterionKeyForJob {
+	return []SimpleCriterionKeyForJob{
+		"ACCOUNT_ID",
+		"S3_BUCKET_NAME",
+		"S3_BUCKET_EFFECTIVE_PERMISSION",
+		"S3_BUCKET_SHARED_ACCESS",
 	}
 }
 

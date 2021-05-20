@@ -26768,6 +26768,15 @@ func awsRestjson1_deserializeDocumentRowLevelPermissionDataSet(v **types.RowLeve
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "FormatVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RowLevelPermissionFormatVersion to be of type string, got %T instead", value)
+				}
+				sv.FormatVersion = types.RowLevelPermissionFormatVersion(jtv)
+			}
+
 		case "Namespace":
 			if value != nil {
 				jtv, ok := value.(string)

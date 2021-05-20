@@ -9977,6 +9977,11 @@ func awsRestjson1_serializeDocumentRowLevelPermissionDataSet(v *types.RowLevelPe
 		ok.String(*v.Arn)
 	}
 
+	if len(v.FormatVersion) > 0 {
+		ok := object.Key("FormatVersion")
+		ok.String(string(v.FormatVersion))
+	}
+
 	if v.Namespace != nil {
 		ok := object.Key("Namespace")
 		ok.String(*v.Namespace)

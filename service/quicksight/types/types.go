@@ -1605,6 +1605,12 @@ type RowLevelPermissionDataSet struct {
 	// This member is required.
 	PermissionPolicy RowLevelPermissionPolicy
 
+	// The user or group rules associated with the dataset that contains permissions
+	// for RLS. By default, FormatVersion is VERSION_1. When FormatVersion is
+	// VERSION_1, UserName and GroupName are required. When FormatVersion is VERSION_2,
+	// UserARN and GroupARN are required, and Namespace must not exist.
+	FormatVersion RowLevelPermissionFormatVersion
+
 	// The namespace associated with the dataset that contains permissions for RLS.
 	Namespace *string
 }

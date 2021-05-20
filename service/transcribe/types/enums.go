@@ -158,6 +158,23 @@ func (MediaFormat) Values() []MediaFormat {
 	}
 }
 
+type MedicalContentIdentificationType string
+
+// Enum values for MedicalContentIdentificationType
+const (
+	MedicalContentIdentificationTypePhi MedicalContentIdentificationType = "PHI"
+)
+
+// Values returns all known values for MedicalContentIdentificationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MedicalContentIdentificationType) Values() []MedicalContentIdentificationType {
+	return []MedicalContentIdentificationType{
+		"PHI",
+	}
+}
+
 type ModelStatus string
 
 // Enum values for ModelStatus

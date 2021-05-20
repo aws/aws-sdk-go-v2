@@ -1555,6 +1555,13 @@ func awsAwsjson11_serializeDocumentApplicationConfiguration(v *types.Application
 		}
 	}
 
+	if v.ZeppelinApplicationConfiguration != nil {
+		ok := object.Key("ZeppelinApplicationConfiguration")
+		if err := awsAwsjson11_serializeDocumentZeppelinApplicationConfiguration(v.ZeppelinApplicationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1600,6 +1607,13 @@ func awsAwsjson11_serializeDocumentApplicationConfigurationUpdate(v *types.Appli
 	if v.VpcConfigurationUpdates != nil {
 		ok := object.Key("VpcConfigurationUpdates")
 		if err := awsAwsjson11_serializeDocumentVpcConfigurationUpdates(v.VpcConfigurationUpdates, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ZeppelinApplicationConfigurationUpdate != nil {
+		ok := object.Key("ZeppelinApplicationConfigurationUpdate")
+		if err := awsAwsjson11_serializeDocumentZeppelinApplicationConfigurationUpdate(v.ZeppelinApplicationConfigurationUpdate, ok); err != nil {
 			return err
 		}
 	}
@@ -1655,6 +1669,34 @@ func awsAwsjson11_serializeDocumentApplicationSnapshotConfigurationUpdate(v *typ
 	if v.SnapshotsEnabledUpdate != nil {
 		ok := object.Key("SnapshotsEnabledUpdate")
 		ok.Boolean(*v.SnapshotsEnabledUpdate)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCatalogConfiguration(v *types.CatalogConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GlueDataCatalogConfiguration != nil {
+		ok := object.Key("GlueDataCatalogConfiguration")
+		if err := awsAwsjson11_serializeDocumentGlueDataCatalogConfiguration(v.GlueDataCatalogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCatalogConfigurationUpdate(v *types.CatalogConfigurationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GlueDataCatalogConfigurationUpdate != nil {
+		ok := object.Key("GlueDataCatalogConfigurationUpdate")
+		if err := awsAwsjson11_serializeDocumentGlueDataCatalogConfigurationUpdate(v.GlueDataCatalogConfigurationUpdate, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1834,6 +1876,73 @@ func awsAwsjson11_serializeDocumentCSVMappingParameters(v *types.CSVMappingParam
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCustomArtifactConfiguration(v *types.CustomArtifactConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ArtifactType) > 0 {
+		ok := object.Key("ArtifactType")
+		ok.String(string(v.ArtifactType))
+	}
+
+	if v.MavenReference != nil {
+		ok := object.Key("MavenReference")
+		if err := awsAwsjson11_serializeDocumentMavenReference(v.MavenReference, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3ContentLocation != nil {
+		ok := object.Key("S3ContentLocation")
+		if err := awsAwsjson11_serializeDocumentS3ContentLocation(v.S3ContentLocation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCustomArtifactsConfigurationList(v []types.CustomArtifactConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCustomArtifactConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeployAsApplicationConfiguration(v *types.DeployAsApplicationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3ContentLocation != nil {
+		ok := object.Key("S3ContentLocation")
+		if err := awsAwsjson11_serializeDocumentS3ContentBaseLocation(v.S3ContentLocation, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDeployAsApplicationConfigurationUpdate(v *types.DeployAsApplicationConfigurationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3ContentLocationUpdate != nil {
+		ok := object.Key("S3ContentLocationUpdate")
+		if err := awsAwsjson11_serializeDocumentS3ContentBaseLocationUpdate(v.S3ContentLocationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDestinationSchema(v *types.DestinationSchema, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1937,6 +2046,30 @@ func awsAwsjson11_serializeDocumentFlinkRunConfiguration(v *types.FlinkRunConfig
 	if v.AllowNonRestoredState != nil {
 		ok := object.Key("AllowNonRestoredState")
 		ok.Boolean(*v.AllowNonRestoredState)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGlueDataCatalogConfiguration(v *types.GlueDataCatalogConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseARN != nil {
+		ok := object.Key("DatabaseARN")
+		ok.String(*v.DatabaseARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentGlueDataCatalogConfigurationUpdate(v *types.GlueDataCatalogConfigurationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DatabaseARNUpdate != nil {
+		ok := object.Key("DatabaseARNUpdate")
+		ok.String(*v.DatabaseARNUpdate)
 	}
 
 	return nil
@@ -2329,6 +2462,28 @@ func awsAwsjson11_serializeDocumentMappingParameters(v *types.MappingParameters,
 		if err := awsAwsjson11_serializeDocumentJSONMappingParameters(v.JSONMappingParameters, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentMavenReference(v *types.MavenReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ArtifactId != nil {
+		ok := object.Key("ArtifactId")
+		ok.String(*v.ArtifactId)
+	}
+
+	if v.GroupId != nil {
+		ok := object.Key("GroupId")
+		ok.String(*v.GroupId)
+	}
+
+	if v.Version != nil {
+		ok := object.Key("Version")
+		ok.String(*v.Version)
 	}
 
 	return nil
@@ -2789,6 +2944,40 @@ func awsAwsjson11_serializeDocumentS3Configuration(v *types.S3Configuration, val
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3ContentBaseLocation(v *types.S3ContentBaseLocation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BasePath != nil {
+		ok := object.Key("BasePath")
+		ok.String(*v.BasePath)
+	}
+
+	if v.BucketARN != nil {
+		ok := object.Key("BucketARN")
+		ok.String(*v.BucketARN)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentS3ContentBaseLocationUpdate(v *types.S3ContentBaseLocationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BasePathUpdate != nil {
+		ok := object.Key("BasePathUpdate")
+		ok.String(*v.BasePathUpdate)
+	}
+
+	if v.BucketARNUpdate != nil {
+		ok := object.Key("BucketARNUpdate")
+		ok.String(*v.BucketARNUpdate)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3ContentLocation(v *types.S3ContentLocation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3117,6 +3306,100 @@ func awsAwsjson11_serializeDocumentVpcConfigurationUpdates(v []types.VpcConfigur
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentZeppelinApplicationConfiguration(v *types.ZeppelinApplicationConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogConfiguration != nil {
+		ok := object.Key("CatalogConfiguration")
+		if err := awsAwsjson11_serializeDocumentCatalogConfiguration(v.CatalogConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomArtifactsConfiguration != nil {
+		ok := object.Key("CustomArtifactsConfiguration")
+		if err := awsAwsjson11_serializeDocumentCustomArtifactsConfigurationList(v.CustomArtifactsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeployAsApplicationConfiguration != nil {
+		ok := object.Key("DeployAsApplicationConfiguration")
+		if err := awsAwsjson11_serializeDocumentDeployAsApplicationConfiguration(v.DeployAsApplicationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MonitoringConfiguration != nil {
+		ok := object.Key("MonitoringConfiguration")
+		if err := awsAwsjson11_serializeDocumentZeppelinMonitoringConfiguration(v.MonitoringConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentZeppelinApplicationConfigurationUpdate(v *types.ZeppelinApplicationConfigurationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogConfigurationUpdate != nil {
+		ok := object.Key("CatalogConfigurationUpdate")
+		if err := awsAwsjson11_serializeDocumentCatalogConfigurationUpdate(v.CatalogConfigurationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomArtifactsConfigurationUpdate != nil {
+		ok := object.Key("CustomArtifactsConfigurationUpdate")
+		if err := awsAwsjson11_serializeDocumentCustomArtifactsConfigurationList(v.CustomArtifactsConfigurationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeployAsApplicationConfigurationUpdate != nil {
+		ok := object.Key("DeployAsApplicationConfigurationUpdate")
+		if err := awsAwsjson11_serializeDocumentDeployAsApplicationConfigurationUpdate(v.DeployAsApplicationConfigurationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MonitoringConfigurationUpdate != nil {
+		ok := object.Key("MonitoringConfigurationUpdate")
+		if err := awsAwsjson11_serializeDocumentZeppelinMonitoringConfigurationUpdate(v.MonitoringConfigurationUpdate, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentZeppelinMonitoringConfiguration(v *types.ZeppelinMonitoringConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LogLevel) > 0 {
+		ok := object.Key("LogLevel")
+		ok.String(string(v.LogLevel))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentZeppelinMonitoringConfigurationUpdate(v *types.ZeppelinMonitoringConfigurationUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.LogLevelUpdate) > 0 {
+		ok := object.Key("LogLevelUpdate")
+		ok.String(string(v.LogLevelUpdate))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentAddApplicationCloudWatchLoggingOptionInput(v *AddApplicationCloudWatchLoggingOptionInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3290,6 +3573,11 @@ func awsAwsjson11_serializeOpDocumentCreateApplicationInput(v *CreateApplication
 	if v.ApplicationDescription != nil {
 		ok := object.Key("ApplicationDescription")
 		ok.String(*v.ApplicationDescription)
+	}
+
+	if len(v.ApplicationMode) > 0 {
+		ok := object.Key("ApplicationMode")
+		ok.String(string(v.ApplicationMode))
 	}
 
 	if v.ApplicationName != nil {

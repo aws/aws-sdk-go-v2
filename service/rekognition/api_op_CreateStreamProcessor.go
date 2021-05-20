@@ -22,7 +22,10 @@ import (
 // example, you can start processing the source video by calling
 // StartStreamProcessor with the Name field. After you have finished analyzing a
 // streaming video, use StopStreamProcessor to stop processing. You can delete the
-// stream processor by calling DeleteStreamProcessor.
+// stream processor by calling DeleteStreamProcessor. This operation requires
+// permissions to perform the rekognition:CreateStreamProcessor action. If you want
+// to tag your stream processor, you also require permission to perform the
+// rekognition:TagResource operation.
 func (c *Client) CreateStreamProcessor(ctx context.Context, params *CreateStreamProcessorInput, optFns ...func(*Options)) (*CreateStreamProcessorOutput, error) {
 	if params == nil {
 		params = &CreateStreamProcessorInput{}

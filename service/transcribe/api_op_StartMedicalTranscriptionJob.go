@@ -78,6 +78,12 @@ type StartMedicalTranscriptionJobInput struct {
 	// This member is required.
 	Type types.Type
 
+	// You can configure Amazon Transcribe Medical to label content in the
+	// transcription output. If you specify PHI, Amazon Transcribe Medical labels the
+	// personal health information (PHI) that it identifies in the transcription
+	// output.
+	ContentIdentificationType types.MedicalContentIdentificationType
+
 	// The audio format of the input media file.
 	MediaFormat types.MediaFormat
 

@@ -3125,6 +3125,93 @@ func awsRestjson1_serializeOpDocumentPutFindingsPublicationConfigurationInput(v 
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchResources struct {
+}
+
+func (*awsRestjson1_serializeOpSearchResources) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchResources) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchResourcesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/datasources/search-resources")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSearchResourcesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchResourcesInput(v *SearchResourcesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSearchResourcesInput(v *SearchResourcesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketCriteria != nil {
+		ok := object.Key("bucketCriteria")
+		if err := awsRestjson1_serializeDocumentSearchResourcesBucketCriteria(v.BucketCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != 0 {
+		ok := object.Key("maxResults")
+		ok.Integer(v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("nextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.SortCriteria != nil {
+		ok := object.Key("sortCriteria")
+		if err := awsRestjson1_serializeDocumentSearchResourcesSortCriteria(v.SortCriteria, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -3781,6 +3868,19 @@ func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfCriteriaForJob(v []types.CriteriaForJob, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentCriteriaForJob(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfFindingType(v []types.FindingType, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3825,6 +3925,45 @@ func awsRestjson1_serializeDocument__listOfS3BucketDefinitionForJob(v []types.S3
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentS3BucketDefinitionForJob(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfSearchResourcesCriteria(v []types.SearchResourcesCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSearchResourcesCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfSearchResourcesTagCriterionPair(v []types.SearchResourcesTagCriterionPair, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSearchResourcesTagCriterionPair(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocument__listOfTagCriterionPairForJob(v []types.TagCriterionPairForJob, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTagCriterionPairForJob(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -3958,6 +4097,41 @@ func awsRestjson1_serializeDocumentClassificationExportConfiguration(v *types.Cl
 	if v.S3Destination != nil {
 		ok := object.Key("s3Destination")
 		if err := awsRestjson1_serializeDocumentS3Destination(v.S3Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCriteriaBlockForJob(v *types.CriteriaBlockForJob, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.And != nil {
+		ok := object.Key("and")
+		if err := awsRestjson1_serializeDocument__listOfCriteriaForJob(v.And, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCriteriaForJob(v *types.CriteriaForJob, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SimpleCriterion != nil {
+		ok := object.Key("simpleCriterion")
+		if err := awsRestjson1_serializeDocumentSimpleCriterionForJob(v.SimpleCriterion, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TagCriterion != nil {
+		ok := object.Key("tagCriterion")
+		if err := awsRestjson1_serializeDocumentTagCriterionForJob(v.TagCriterion, ok); err != nil {
 			return err
 		}
 	}
@@ -4202,6 +4376,27 @@ func awsRestjson1_serializeDocumentMonthlySchedule(v *types.MonthlySchedule, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3BucketCriteriaForJob(v *types.S3BucketCriteriaForJob, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Excludes != nil {
+		ok := object.Key("excludes")
+		if err := awsRestjson1_serializeDocumentCriteriaBlockForJob(v.Excludes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Includes != nil {
+		ok := object.Key("includes")
+		if err := awsRestjson1_serializeDocumentCriteriaBlockForJob(v.Includes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentS3BucketDefinitionForJob(v *types.S3BucketDefinitionForJob, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4247,6 +4442,13 @@ func awsRestjson1_serializeDocumentS3JobDefinition(v *types.S3JobDefinition, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.BucketCriteria != nil {
+		ok := object.Key("bucketCriteria")
+		if err := awsRestjson1_serializeDocumentS3BucketCriteriaForJob(v.BucketCriteria, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.BucketDefinitions != nil {
 		ok := object.Key("bucketDefinitions")
 		if err := awsRestjson1_serializeDocument__listOfS3BucketDefinitionForJob(v.BucketDefinitions, ok); err != nil {
@@ -4285,6 +4487,139 @@ func awsRestjson1_serializeDocumentScoping(v *types.Scoping, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSearchResourcesBucketCriteria(v *types.SearchResourcesBucketCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Excludes != nil {
+		ok := object.Key("excludes")
+		if err := awsRestjson1_serializeDocumentSearchResourcesCriteriaBlock(v.Excludes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Includes != nil {
+		ok := object.Key("includes")
+		if err := awsRestjson1_serializeDocumentSearchResourcesCriteriaBlock(v.Includes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResourcesCriteria(v *types.SearchResourcesCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SimpleCriterion != nil {
+		ok := object.Key("simpleCriterion")
+		if err := awsRestjson1_serializeDocumentSearchResourcesSimpleCriterion(v.SimpleCriterion, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TagCriterion != nil {
+		ok := object.Key("tagCriterion")
+		if err := awsRestjson1_serializeDocumentSearchResourcesTagCriterion(v.TagCriterion, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResourcesCriteriaBlock(v *types.SearchResourcesCriteriaBlock, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.And != nil {
+		ok := object.Key("and")
+		if err := awsRestjson1_serializeDocument__listOfSearchResourcesCriteria(v.And, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResourcesSimpleCriterion(v *types.SearchResourcesSimpleCriterion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Comparator) > 0 {
+		ok := object.Key("comparator")
+		ok.String(string(v.Comparator))
+	}
+
+	if len(v.Key) > 0 {
+		ok := object.Key("key")
+		ok.String(string(v.Key))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResourcesSortCriteria(v *types.SearchResourcesSortCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AttributeName) > 0 {
+		ok := object.Key("attributeName")
+		ok.String(string(v.AttributeName))
+	}
+
+	if len(v.OrderBy) > 0 {
+		ok := object.Key("orderBy")
+		ok.String(string(v.OrderBy))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResourcesTagCriterion(v *types.SearchResourcesTagCriterion, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Comparator) > 0 {
+		ok := object.Key("comparator")
+		ok.String(string(v.Comparator))
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("tagValues")
+		if err := awsRestjson1_serializeDocument__listOfSearchResourcesTagCriterionPair(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSearchResourcesTagCriterionPair(v *types.SearchResourcesTagCriterionPair, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSecurityHubConfiguration(v *types.SecurityHubConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4297,6 +4632,30 @@ func awsRestjson1_serializeDocumentSecurityHubConfiguration(v *types.SecurityHub
 	{
 		ok := object.Key("publishPolicyFindings")
 		ok.Boolean(v.PublishPolicyFindings)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSimpleCriterionForJob(v *types.SimpleCriterionForJob, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Comparator) > 0 {
+		ok := object.Key("comparator")
+		ok.String(string(v.Comparator))
+	}
+
+	if len(v.Key) > 0 {
+		ok := object.Key("key")
+		ok.String(string(v.Key))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.Values, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -4338,6 +4697,42 @@ func awsRestjson1_serializeDocumentSortCriteria(v *types.SortCriteria, value smi
 	if len(v.OrderBy) > 0 {
 		ok := object.Key("orderBy")
 		ok.String(string(v.OrderBy))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagCriterionForJob(v *types.TagCriterionForJob, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Comparator) > 0 {
+		ok := object.Key("comparator")
+		ok.String(string(v.Comparator))
+	}
+
+	if v.TagValues != nil {
+		ok := object.Key("tagValues")
+		if err := awsRestjson1_serializeDocument__listOfTagCriterionPairForJob(v.TagValues, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagCriterionPairForJob(v *types.TagCriterionPairForJob, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
 	}
 
 	return nil

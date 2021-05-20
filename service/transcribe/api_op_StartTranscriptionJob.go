@@ -55,7 +55,9 @@ type StartTranscriptionJobInput struct {
 	// limit is reached and there are no slots available to immediately run the job.
 	JobExecutionSettings *types.JobExecutionSettings
 
-	// The language code for the language used in the input media file.
+	// The language code for the language used in the input media file. To transcribe
+	// speech in Modern Standard Arabic (ar-SA), your audio or video file must be
+	// encoded at a sample rate of 16000 Hz or higher.
 	LanguageCode types.LanguageCode
 
 	// An object containing a list of languages that might be present in your
