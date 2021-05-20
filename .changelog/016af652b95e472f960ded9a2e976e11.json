@@ -1,8 +1,0 @@
-{
-    "id": "016af652-b95e-472f-960d-ed9a2e976e11",
-    "type": "feature",
-    "description": "`internal/ini`: This package has been migrated to a separate module at `github.com/aws/aws-sdk-go-v2/internal/ini`.",
-    "modules": [
-        "."
-    ]
-}

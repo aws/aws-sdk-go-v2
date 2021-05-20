@@ -1,8 +1,0 @@
-{
-    "id": "01afcb6e-5f9d-44c9-ab76-d3e414115636",
-    "type": "release",
-    "description": "The `github.com/aws/aws-sdk-go-v2/internal/ini` package is now a Go Module.",
-    "modules": [
-        "internal/ini"
-    ]
-}
