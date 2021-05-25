@@ -1,0 +1,8 @@
+{
+    "id": "7a75f947-6b5e-404b-9501-d7a874471404",
+    "type": "feature",
+    "description": "Deprecated module. The API client was incorrectly named. Use AWS Systems Manager Incident Manager (ssmincidents) instead.",
+    "modules": [
+        "service/commander"
+    ]
+}
