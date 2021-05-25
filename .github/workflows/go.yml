@@ -13,16 +13,10 @@ jobs:
   unix-tests:
     name: Test SDK
     runs-on: ${{ matrix.os }}
-    #continue-on-error: ${{ matrix.experimental }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
         go-version: [1.16, 1.15]
-        #experimental: [false]
-        #include:
-        #  - go-version: tip
-        #    os: [ubuntu-latest, macos-latest]
-        #    experimental: true
     steps:
     - uses: actions/checkout@v2
 
@@ -37,18 +31,11 @@ jobs:
   windows-tests:
     name: Test SDK
     runs-on: ${{ matrix.os }}
-    #continue-on-error: ${{ matrix.experimental }}
+    continue-on-error: ${{ matrix.go-version == '1.15' }}
     strategy:
       matrix:
         os: [windows-latest]
         go-version: [1.16, 1.15]
-        #experimental: [false]
-        #include:
-        #  - go-version: tip
-        #    os: [windows-latest]
-        #    experimental: true
-    env:
-      EACHMODULE_SKIP: "internal\\repotools\\changes"
     steps:
     - uses: actions/checkout@v2
 
