@@ -1,3 +1,7 @@
+# v1.1.0 (2021-05-25)
+
+* **Feature**: Deprecated module. The API client was incorrectly named. Use AWS Systems Manager Incident Manager (ssmincidents) instead.
+
 # v1.0.1 (2021-05-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,38 @@
+# Release (2021-05-25)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.4.0](service/cloudwatchlogs/CHANGELOG.md#v140-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/commander`: [v1.1.0](service/commander/CHANGELOG.md#v110-2021-05-25)
+  * **Feature**: Deprecated module. The API client was incorrectly named. Use AWS Systems Manager Incident Manager (ssmincidents) instead.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.5.0](service/computeoptimizer/CHANGELOG.md#v150-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.6.0](service/costexplorer/CHANGELOG.md#v160-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.8.0](service/ec2/CHANGELOG.md#v180-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.4.0](service/efs/CHANGELOG.md#v140-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.6.0](service/forecast/CHANGELOG.md#v160-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.6.0](service/iot/CHANGELOG.md#v160-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/opsworkscm`: [v1.4.0](service/opsworkscm/CHANGELOG.md#v140-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.5.0](service/quicksight/CHANGELOG.md#v150-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.9.0](service/s3/CHANGELOG.md#v190-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.0.0](service/ssmincidents/CHANGELOG.md#v100-2021-05-25)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.4.0](service/transfer/CHANGELOG.md#v140-2021-05-25)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.4.0](service/workspaces/CHANGELOG.md#v140-2021-05-25)
+  * **Feature**: API client updated
+
 # Release (2021-05-20)
 
 ## General Highlights

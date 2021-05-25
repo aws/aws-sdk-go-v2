@@ -31,10 +31,10 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/directoryservice v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/docdb v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.3.1
-	github.com/aws/aws-sdk-go-v2/service/ec2 v1.7.1
+	github.com/aws/aws-sdk-go-v2/service/ec2 v1.8.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/ecs v1.4.1
-	github.com/aws/aws-sdk-go-v2/service/efs v1.3.1
+	github.com/aws/aws-sdk-go-v2/service/efs v1.4.0
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.6.0
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing v1.3.1
@@ -50,7 +50,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/health v1.4.1
 	github.com/aws/aws-sdk-go-v2/service/iam v1.5.0
 	github.com/aws/aws-sdk-go-v2/service/inspector v1.2.1
-	github.com/aws/aws-sdk-go-v2/service/iot v1.5.0
+	github.com/aws/aws-sdk-go-v2/service/iot v1.6.0
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.4.0
 	github.com/aws/aws-sdk-go-v2/service/kms v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.3.1
@@ -66,7 +66,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/route53 v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.4.1
-	github.com/aws/aws-sdk-go-v2/service/s3 v1.8.0
+	github.com/aws/aws-sdk-go-v2/service/s3 v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/secretsmanager v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/servicecatalog v1.3.1
@@ -83,7 +83,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/waf v1.2.1
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.3.1
 	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.5.1
-	github.com/aws/aws-sdk-go-v2/service/workspaces v1.3.1
+	github.com/aws/aws-sdk-go-v2/service/workspaces v1.4.0
 	github.com/aws/smithy-go v1.4.0
 	github.com/google/go-cmp v0.5.4
 )
