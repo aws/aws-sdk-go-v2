@@ -450,6 +450,26 @@ func (m *validateOpCreateJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateJobTemplate struct {
+}
+
+func (*validateOpCreateJobTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateJobTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateJobTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateJobTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMitigationAction struct {
 }
 
@@ -985,6 +1005,26 @@ func (m *validateOpDeleteJob) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteJobTemplate struct {
+}
+
+func (*validateOpDeleteJobTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteJobTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteJobTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteJobTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1625,6 +1665,26 @@ func (m *validateOpDescribeJob) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeJobTemplate struct {
+}
+
+func (*validateOpDescribeJobTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeJobTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeJobTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeJobTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3538,6 +3598,10 @@ func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
 }
 
+func addOpCreateJobTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateJobTemplate{}, middleware.After)
+}
+
 func addOpCreateMitigationActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMitigationAction{}, middleware.After)
 }
@@ -3644,6 +3708,10 @@ func addOpDeleteJobExecutionValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteJob{}, middleware.After)
+}
+
+func addOpDeleteJobTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteJobTemplate{}, middleware.After)
 }
 
 func addOpDeleteMitigationActionValidationMiddleware(stack *middleware.Stack) error {
@@ -3772,6 +3840,10 @@ func addOpDescribeJobExecutionValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJob{}, middleware.After)
+}
+
+func addOpDescribeJobTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeJobTemplate{}, middleware.After)
 }
 
 func addOpDescribeMitigationActionValidationMiddleware(stack *middleware.Stack) error {
@@ -6073,6 +6145,39 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	}
 }
 
+func validateOpCreateJobTemplateInput(v *CreateJobTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateJobTemplateInput"}
+	if v.JobTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobTemplateId"))
+	}
+	if v.Description == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Description"))
+	}
+	if v.JobExecutionsRolloutConfig != nil {
+		if err := validateJobExecutionsRolloutConfig(v.JobExecutionsRolloutConfig); err != nil {
+			invalidParams.AddNested("JobExecutionsRolloutConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AbortConfig != nil {
+		if err := validateAbortConfig(v.AbortConfig); err != nil {
+			invalidParams.AddNested("AbortConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMitigationActionInput(v *CreateMitigationActionInput) error {
 	if v == nil {
 		return nil
@@ -6627,6 +6732,21 @@ func validateOpDeleteJobInput(v *DeleteJobInput) error {
 	}
 }
 
+func validateOpDeleteJobTemplateInput(v *DeleteJobTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteJobTemplateInput"}
+	if v.JobTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobTemplateId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMitigationActionInput(v *DeleteMitigationActionInput) error {
 	if v == nil {
 		return nil
@@ -7114,6 +7234,21 @@ func validateOpDescribeJobInput(v *DescribeJobInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobInput"}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeJobTemplateInput(v *DescribeJobTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobTemplateInput"}
+	if v.JobTemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobTemplateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

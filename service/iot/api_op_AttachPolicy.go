@@ -35,7 +35,7 @@ type AttachPolicyInput struct {
 
 	// The identity
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html) to
-	// which the policy is attached.
+	// which the policy is attached. For example, a thing group or a certificate.
 	//
 	// This member is required.
 	Target *string

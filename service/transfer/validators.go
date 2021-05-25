@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateAccess struct {
+}
+
+func (*validateOpCreateAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateServer struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccess struct {
+}
+
+func (*validateOpDeleteAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -105,6 +145,26 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAccess struct {
+}
+
+func (*validateOpDescribeAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAccessInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -185,6 +245,26 @@ func (m *validateOpImportSshPublicKey) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpImportSshPublicKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAccesses struct {
+}
+
+func (*validateOpListAccesses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAccesses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAccessesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAccessesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -330,6 +410,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAccess struct {
+}
+
+func (*validateOpUpdateAccess) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAccess) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAccessInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateServer struct {
 }
 
@@ -370,12 +470,20 @@ func (m *validateOpUpdateUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccess{}, middleware.After)
+}
+
 func addOpCreateServerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateServer{}, middleware.After)
 }
 
 func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
+}
+
+func addOpDeleteAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccess{}, middleware.After)
 }
 
 func addOpDeleteServerValidationMiddleware(stack *middleware.Stack) error {
@@ -388,6 +496,10 @@ func addOpDeleteSshPublicKeyValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
+}
+
+func addOpDescribeAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAccess{}, middleware.After)
 }
 
 func addOpDescribeSecurityPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -404,6 +516,10 @@ func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpImportSshPublicKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportSshPublicKey{}, middleware.After)
+}
+
+func addOpListAccessesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAccesses{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -432,6 +548,10 @@ func addOpTestIdentityProviderValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateAccessValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAccess{}, middleware.After)
 }
 
 func addOpUpdateServerValidationMiddleware(stack *middleware.Stack) error {
@@ -530,6 +650,37 @@ func validateTags(v []types.Tag) error {
 	}
 }
 
+func validateOpCreateAccessInput(v *CreateAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccessInput"}
+	if v.HomeDirectoryMappings != nil {
+		if err := validateHomeDirectoryMappings(v.HomeDirectoryMappings); err != nil {
+			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PosixProfile != nil {
+		if err := validatePosixProfile(v.PosixProfile); err != nil {
+			invalidParams.AddNested("PosixProfile", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.ExternalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateServerInput(v *CreateServerInput) error {
 	if v == nil {
 		return nil
@@ -575,6 +726,24 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAccessInput(v *DeleteAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccessInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.ExternalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -629,6 +798,24 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAccessInput(v *DescribeAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAccessInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.ExternalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -698,6 +885,21 @@ func validateOpImportSshPublicKeyInput(v *ImportSshPublicKeyInput) error {
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAccessesInput(v *ListAccessesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAccessesInput"}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -816,6 +1018,34 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAccessInput(v *UpdateAccessInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAccessInput"}
+	if v.HomeDirectoryMappings != nil {
+		if err := validateHomeDirectoryMappings(v.HomeDirectoryMappings); err != nil {
+			invalidParams.AddNested("HomeDirectoryMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.PosixProfile != nil {
+		if err := validatePosixProfile(v.PosixProfile); err != nil {
+			invalidParams.AddNested("PosixProfile", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ServerId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.ExternalId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExternalId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

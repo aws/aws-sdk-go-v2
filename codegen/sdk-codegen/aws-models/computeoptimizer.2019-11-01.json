@@ -119,7 +119,7 @@
                 "finding": {
                     "target": "com.amazonaws.computeoptimizer#Finding",
                     "traits": {
-                        "smithy.api#documentation": "<p>The finding classification for the Auto Scaling group.</p>\n        <p>Findings for Auto Scaling groups include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b>—An Auto Scaling\n                    group is considered not optimized when AWS Compute Optimizer identifies a recommendation that\n                    can provide better performance for your workload.</p>\n                \n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An Auto Scaling group is\n                    considered optimized when Compute Optimizer determines that the group is correctly\n                    provisioned to run your workload based on the chosen instance type. For\n                    optimized resources, Compute Optimizer might recommend a new generation instance type.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The finding classification of the Auto Scaling group.</p>\n        <p>Findings for Auto Scaling groups include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b>—An Auto Scaling\n                    group is considered not optimized when AWS Compute Optimizer identifies a recommendation that\n                    can provide better performance for your workload.</p>\n                \n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An Auto Scaling group is\n                    considered optimized when Compute Optimizer determines that the group is correctly\n                    provisioned to run your workload based on the chosen instance type. For\n                    optimized resources, Compute Optimizer might recommend a new generation instance type.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "utilizationMetrics": {
@@ -175,7 +175,7 @@
                 "performanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
                     "traits": {
-                        "smithy.api#documentation": "<p>The performance risk of the Auto Scaling group configuration recommendation.</p>\n        <p>Performance risk is the likelihood of the recommended instance type not meeting the\n            performance requirement of your workload.</p>\n        <p>The lowest performance risk is categorized as <code>0</code>, and the highest as\n                <code>5</code>.</p>"
+                        "smithy.api#documentation": "<p>The performance risk of the Auto Scaling group configuration recommendation.</p>\n        <p>Performance risk indicates the likelihood of the recommended instance type not meeting\n            the resource needs of your workload. Compute Optimizer calculates an individual performance risk\n            score for each specification of the recommended instance, including CPU, memory, EBS\n            throughput, EBS IOPS, disk throughput, disk IOPS, network throughput, and network PPS.\n            The performance\n            risk of the recommended instance is calculated as the maximum performance risk score\n            across the analyzed resource specifications.</p>\n        <p>The value ranges from 0 to 5, with 0 meaning that the recommended resource is\n            predicted to always provide enough hardware capability. The higher the performance risk\n            is, the more likely you should validate whether the recommended resource meets the\n            performance requirements of your workload before migrating your resource.</p>"
                     }
                 },
                 "rank": {
@@ -372,7 +372,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#EBSFilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n\n        <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (e.g., <code>Optimized</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n\n        <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (e.g., <code>NotOptimized</code>).</p>"
                     }
                 },
                 "values": {
@@ -383,7 +383,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of Amazon Elastic Block Store (Amazon EBS) volume\n            recommendations.</p>\n\n        <p>This filter is used with the <code>GetEBSVolumeRecommendations</code> action.</p>"
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of Amazon Elastic Block Store (Amazon EBS) volume\n            recommendations. Use this filter with the <code>GetEBSVolumeRecommendations</code>\n            action.</p>\n\n        <p>You can use <code>LambdaFunctionRecommendationFilter</code> with the\n                <code>GetLambdaFunctionRecommendations</code> action, <code>JobFilter</code> with\n            the <code>DescribeRecommendationExportJobs</code> action, and <code>Filter</code> with\n            the <code>GetAutoScalingGroupRecommendations</code> and\n                <code>GetEC2InstanceRecommendations</code> actions.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#EBSFilterName": {
@@ -915,6 +915,38 @@
                         "name": "UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM"
                     },
                     {
+                        "value": "UtilizationMetricsDiskReadOpsPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsDiskWriteOpsPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsDiskReadBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsDiskWriteBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsNetworkInBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsNetworkOutBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsNetworkPacketsInPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsNetworkPacketsOutPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM"
+                    },
+                    {
                         "value": "LookbackPeriodInDays",
                         "name": "LOOKBACK_PERIOD_IN_DAYS"
                     },
@@ -1052,6 +1084,10 @@
                         "name": "FINDING"
                     },
                     {
+                        "value": "FindingReasonCodes",
+                        "name": "Finding_Reason_Codes"
+                    },
+                    {
                         "value": "LookbackPeriodInDays",
                         "name": "LOOKBACK_PERIOD_IN_DAYS"
                     },
@@ -1082,6 +1118,38 @@
                     {
                         "value": "UtilizationMetricsEbsWriteBytesPerSecondMaximum",
                         "name": "UTILIZATION_METRICS_EBS_WRITE_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsDiskReadOpsPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_DISK_READ_OPS_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsDiskWriteOpsPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_DISK_WRITE_OPS_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsDiskReadBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_DISK_READ_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsDiskWriteBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_DISK_WRITE_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsNetworkInBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_NETWORK_IN_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsNetworkOutBytesPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_NETWORK_OUT_BYTES_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsNetworkPacketsInPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_NETWORK_PACKETS_IN_PER_SECOND_MAXIMUM"
+                    },
+                    {
+                        "value": "UtilizationMetricsNetworkPacketsOutPerSecondMaximum",
+                        "name": "UTILIZATION_METRICS_NETWORK_PACKETS_OUT_PER_SECOND_MAXIMUM"
                     },
                     {
                         "value": "CurrentOnDemandPrice",
@@ -1122,6 +1190,10 @@
                     {
                         "value": "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
                         "name": "RECOMMENDATION_OPTIONS_PROJECTED_UTILIZATION_METRICS_MEMORY_MAXIMUM"
+                    },
+                    {
+                        "value": "RecommendationOptionsPlatformDifferences",
+                        "name": "RECOMMENDATION_OPTIONS_PLATFORM_DIFFERENCES"
                     },
                     {
                         "value": "RecommendationOptionsPerformanceRisk",
@@ -1406,18 +1478,18 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#FilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the filter.</p>\n\n        <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (e.g., <code>Overprovisioned</code>).</p>\n\n        <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific\n            resource type (e.g., <code>AutoScalingGroup</code>).</p>"
+                        "smithy.api#documentation": "<p>The name of the filter.</p>\n\n        <p>Specify <code>Finding</code> to return recommendations with a specific finding\n            classification (e.g., <code>Underprovisioned</code>).</p>\n\n        <p>Specify <code>RecommendationSourceType</code> to return recommendations of a specific\n            resource type (e.g., <code>Ec2Instance</code>).</p>\n\n        <p>Specify <code>FindingReasonCodes</code> to return recommendations with a specific\n            finding reason code (e.g., <code>CPUUnderprovisioned</code>).</p>"
                     }
                 },
                 "values": {
                     "target": "com.amazonaws.computeoptimizer#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter and the resource type that you wish to filter results\n            for:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Optimized</code> or <code>NotOptimized</code> if you specified\n                    the <code>name</code> parameter as <code>Finding</code> and you want to filter\n                    results for Auto Scaling groups.</p>\n            </li>\n            <li>\n                <p>Specify <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code> if you specified the <code>name</code> parameter as\n                        <code>Finding</code> and you want to filter results for EC2\n                    instances.</p>\n            </li>\n            <li>\n                <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you\n                    specified the <code>name</code> parameter as\n                        <code>RecommendationSourceType</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter and the resource type that you wish to filter results\n            for:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Optimized</code> or <code>NotOptimized</code> if you specify the\n                        <code>name</code> parameter as <code>Finding</code> and you want to filter\n                    results for Auto Scaling groups.</p>\n            </li>\n            <li>\n                <p>Specify <code>Underprovisioned</code>, <code>Overprovisioned</code>, or\n                        <code>Optimized</code> if you specify the <code>name</code> parameter as\n                        <code>Finding</code> and you want to filter results for EC2\n                    instances.</p>\n            </li>\n            <li>\n                <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you\n                    specify the <code>name</code> parameter as\n                    <code>RecommendationSourceType</code>.</p>\n            </li>\n            <li>\n                <p>Specify one of the following options if you specify the <code>name</code>\n                    parameter as <code>FindingReasonCodes</code>:</p>\n\n                <ul>\n                  <li>\n                        <p>\n                        <b>\n                           <code>CPUOverprovisioned</code>\n                        </b> — The\n                            instance’s CPU configuration can be sized down while still meeting the\n                            performance requirements of your workload.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>CPUUnderprovisioned</code>\n                        </b> —\n                            The instance’s CPU configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better CPU performance.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>MemoryOverprovisioned</code>\n                        </b> —\n                            The instance’s memory configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>MemoryUnderprovisioned</code>\n                        </b> —\n                            The instance’s memory configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better memory performance.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>EBSThroughputOverprovisioned</code>\n                        </b> — The\n                            instance’s EBS throughput configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>EBSThroughputUnderprovisioned</code>\n                        </b> — The\n                            instance’s EBS throughput configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better EBS throughput performance.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>EBSIOPSOverprovisioned</code>\n                        </b> —\n                            The instance’s EBS IOPS configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>EBSIOPSUnderprovisioned</code>\n                        </b>\n                            — The instance’s EBS IOPS configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better EBS IOPS performance.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>NetworkBandwidthOverprovisioned</code>\n                        </b> — The\n                            instance’s network bandwidth configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>NetworkBandwidthUnderprovisioned</code>\n                        </b> — The\n                            instance’s network bandwidth configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better network bandwidth performance. This finding reason\n                            happens when the <code>NetworkIn</code> or <code>NetworkOut</code>\n                            performance of an instance is impacted.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>NetworkPPSOverprovisioned</code>\n                        </b> — The instance’s\n                            network PPS (packets per second) configuration can be sized down while\n                            still meeting the performance requirements of your workload.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>NetworkPPSUnderprovisioned</code>\n                        </b> — The instance’s\n                            network PPS (packets per second) configuration doesn't meet the\n                            performance requirements of your workload and there is an alternative\n                            instance type that provides better network PPS performance.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>DiskIOPSOverprovisioned</code>\n                        </b>\n                            — The instance’s disk IOPS configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>DiskIOPSUnderprovisioned</code>\n                        </b>\n                            — The instance’s disk IOPS configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better disk IOPS performance.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>DiskThroughputOverprovisioned</code>\n                        </b> — The\n                            instance’s disk throughput configuration can be sized down while still\n                            meeting the performance requirements of your workload.</p>\n                    </li>\n                  <li>\n                        <p>\n                        <b>\n                           <code>DiskThroughputUnderprovisioned</code>\n                        </b> — The\n                            instance’s disk throughput configuration doesn't meet the performance\n                            requirements of your workload and there is an alternative instance type\n                            that provides better disk throughput performance.</p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommendations.</p>\n\n        <p>This filter is used with the <code>GetAutoScalingGroupRecommendations</code> and\n                <code>GetEC2InstanceRecommendations</code> actions.</p>"
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommendations. Use this\n            filter with the <code>GetAutoScalingGroupRecommendations</code> and\n                <code>GetEC2InstanceRecommendations</code> actions.</p>\n\n        <p>You can use <code>EBSFilter</code> with the <code>GetEBSVolumeRecommendations</code>\n            action, <code>LambdaFunctionRecommendationFilter</code> with the\n                <code>GetLambdaFunctionRecommendations</code> action, and <code>JobFilter</code>\n            with the <code>DescribeRecommendationExportJobs</code> action.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#FilterName": {
@@ -1427,6 +1499,10 @@
                     {
                         "value": "Finding",
                         "name": "FINDING"
+                    },
+                    {
+                        "value": "FindingReasonCodes",
+                        "name": "FINDING_REASON_CODES"
                     },
                     {
                         "value": "RecommendationSourceType",
@@ -2181,7 +2257,13 @@
                 "finding": {
                     "target": "com.amazonaws.computeoptimizer#Finding",
                     "traits": {
-                        "smithy.api#documentation": "<p>The finding classification for the instance.</p>\n        <p>Findings for instances include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b>—An instance is\n                    considered under-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, does not meet the performance requirements of\n                    your workload. Under-provisioned instances may lead to poor application\n                    performance.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b>—An instance is\n                    considered over-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, can be sized down while still meeting the\n                    performance requirements of your workload, and no specification is\n                    under-provisioned. Over-provisioned instances may lead to unnecessary\n                    infrastructure cost.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An instance\n                    is considered optimized when all specifications of your instance, such as CPU,\n                    memory, and network, meet the performance requirements of your workload and is\n                    not over provisioned. An optimized instance runs your workloads with optimal\n                    performance and infrastructure cost. For optimized resources, AWS Compute Optimizer might\n                    recommend a new generation instance type.</p>\n                \n                \n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The finding classification of the instance.</p>\n        <p>Findings for instances include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>Underprovisioned</code>\n                  </b>—An instance is\n                    considered under-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, does not meet the performance requirements of\n                    your workload. Under-provisioned instances may lead to poor application\n                    performance.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Overprovisioned</code>\n                  </b>—An instance is\n                    considered over-provisioned when at least one specification of your instance,\n                    such as CPU, memory, or network, can be sized down while still meeting the\n                    performance requirements of your workload, and no specification is\n                    under-provisioned. Over-provisioned instances may lead to unnecessary\n                    infrastructure cost.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An instance\n                    is considered optimized when all specifications of your instance, such as CPU,\n                    memory, and network, meet the performance requirements of your workload and is\n                    not over provisioned. For optimized resources, AWS Compute Optimizer might recommend a new\n                    generation instance type.</p>\n                \n                \n            </li>\n         </ul>"
+                    }
+                },
+                "findingReasonCodes": {
+                    "target": "com.amazonaws.computeoptimizer#InstanceRecommendationFindingReasonCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the finding classification of the instance.</p>\n        <p>Finding reason codes for instances include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>CPUOverprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>CPUUtilization</code> metric of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>CPUUnderprovisioned</code>\n                  </b> — The\n                    instance’s CPU configuration doesn't meet the performance requirements of your\n                    workload and there is an alternative instance type that provides better CPU\n                    performance. This is identified by analyzing the <code>CPUUtilization</code>\n                    metric of the current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                    memory utilization metric of the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — The\n                    instance’s memory configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    memory performance. This is identified by analyzing the memory utilization\n                    metric of the current instance during the look-back period.</p>\n                <note>\n                    <p>Memory utilization is analyzed only for resources that have the\n                        unified CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling memory\n                            utilization with the Amazon CloudWatch Agent</a> in the <i>AWS Compute Optimizer\n                            User Guide</i>. On Linux instances, Compute Optimizer analyses the\n                            <code>mem_used_percent</code> metric in the <code>CWAgent</code>\n                        namespace, or the legacy <code>MemoryUtilization</code> metric in the\n                            <code>System/Linux</code> namespace. On Windows instances, Compute Optimizer analyses\n                        the <code>Memory % Committed Bytes In Use</code> metric in the\n                            <code>CWAgent</code> namespace.</p>\n                    \n                    \n                </note>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>EBSThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metrics\n                    of EBS volumes attached to the current instance during the look-back\n                    period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>EBSThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s EBS throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better EBS throughput performance. This is identified by analyzing the\n                        <code>VolumeReadOps</code> and <code>VolumeWriteOps</code> metrics of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>EBSIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>EBSIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s EBS IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better EBS\n                    IOPS performance. This is identified by analyzing the\n                        <code>VolumeReadBytes</code> and <code>VolumeWriteBytes</code> metric of EBS\n                    volumes attached to the current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>NetworkBandwidthOverprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>NetworkBandwidthUnderprovisioned</code>\n                  </b>\n                    — The instance’s network bandwidth configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better network bandwidth performance. This is identified by analyzing\n                    the <code>NetworkIn</code> and <code>NetworkOut</code> metrics of the current\n                    instance during the look-back period. This finding reason happens when the\n                        <code>NetworkIn</code> or <code>NetworkOut</code> performance of an instance\n                    is impacted.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>NetworkPPSOverprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration can be sized down\n                    while still meeting the performance requirements of your workload. This is\n                    identified by analyzing the <code>NetworkPacketsIn</code> and\n                        <code>NetworkPacketsIn</code> metrics of the current instance during the\n                    look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>NetworkPPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s network PPS (packets per second) configuration doesn't meet the\n                    performance requirements of your workload and there is an alternative instance\n                    type that provides better network PPS performance. This is identified by\n                    analyzing the <code>NetworkPacketsIn</code> and <code>NetworkPacketsIn</code>\n                    metrics of the current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>DiskIOPSOverprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration can be sized down while still meeting the\n                    performance requirements of your workload. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>DiskIOPSUnderprovisioned</code>\n                  </b> — The\n                    instance’s disk IOPS configuration doesn't meet the performance requirements of\n                    your workload and there is an alternative instance type that provides better\n                    disk IOPS performance. This is identified by analyzing the\n                        <code>DiskReadOps</code> and <code>DiskWriteOps</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>DiskThroughputOverprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration can be sized down while still\n                    meeting the performance requirements of your workload. This is identified by\n                    analyzing the <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics\n                    of the current instance during the look-back period.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>DiskThroughputUnderprovisioned</code>\n                  </b> —\n                    The instance’s disk throughput configuration doesn't meet the performance\n                    requirements of your workload and there is an alternative instance type that\n                    provides better disk throughput performance. This is identified by analyzing the\n                        <code>DiskReadBytes</code> and <code>DiskWriteBytes</code> metrics of the\n                    current instance during the look-back period.</p>\n            </li>\n         </ul>\n        <note>\n            <p>For more information about instance metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/viewing_metrics_with_cloudwatch.html\">List the\n                    available CloudWatch metrics for your instances</a> in the <i>Amazon Elastic Compute Cloud\n                    User Guide</i>. For more information about EBS volume metrics, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using_cloudwatch_ebs.html\">Amazon CloudWatch metrics for Amazon EBS</a> in the <i>Amazon Elastic Compute Cloud User\n                    Guide</i>.</p>\n        </note>"
                     }
                 },
                 "utilizationMetrics": {
@@ -2219,6 +2301,83 @@
                 "smithy.api#documentation": "<p>Describes an Amazon EC2 instance recommendation.</p>"
             }
         },
+        "com.amazonaws.computeoptimizer#InstanceRecommendationFindingReasonCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CPUOverprovisioned",
+                        "name": "CPU_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "CPUUnderprovisioned",
+                        "name": "CPU_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "MemoryOverprovisioned",
+                        "name": "MEMORY_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "MemoryUnderprovisioned",
+                        "name": "MEMORY_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "EBSThroughputOverprovisioned",
+                        "name": "EBS_THROUGHPUT_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "EBSThroughputUnderprovisioned",
+                        "name": "EBS_THROUGHPUT_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "EBSIOPSOverprovisioned",
+                        "name": "EBS_IOPS_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "EBSIOPSUnderprovisioned",
+                        "name": "EBS_IOPS_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "NetworkBandwidthOverprovisioned",
+                        "name": "NETWORK_BANDWIDTH_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "NetworkBandwidthUnderprovisioned",
+                        "name": "NETWORK_BANDWIDTH_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "NetworkPPSOverprovisioned",
+                        "name": "NETWORK_PPS_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "NetworkPPSUnderprovisioned",
+                        "name": "NETWORK_PPS_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "DiskIOPSOverprovisioned",
+                        "name": "DISK_IOPS_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "DiskIOPSUnderprovisioned",
+                        "name": "DISK_IOPS_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "DiskThroughputOverprovisioned",
+                        "name": "DISK_THROUGHPUT_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "DiskThroughputUnderprovisioned",
+                        "name": "DISK_THROUGHPUT_UNDER_PROVISIONED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#InstanceRecommendationFindingReasonCodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#InstanceRecommendationFindingReasonCode"
+            }
+        },
         "com.amazonaws.computeoptimizer#InstanceRecommendationOption": {
             "type": "structure",
             "members": {
@@ -2234,10 +2393,16 @@
                         "smithy.api#documentation": "<p>An array of objects that describe the projected utilization metrics of the instance\n            recommendation option.</p>\n\n        <note>\n            <p>The <code>Cpu</code> and <code>Memory</code> metrics are the only projected\n                utilization metrics returned. Additionally, the <code>Memory</code> metric is\n                returned only for resources that have the unified CloudWatch agent installed on them. For\n                more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                    Utilization with the CloudWatch Agent</a>.</p>\n        </note>"
                     }
                 },
+                "platformDifferences": {
+                    "target": "com.amazonaws.computeoptimizer#PlatformDifferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the configuration differences between the current instance and the\n            recommended instance type. You should consider the configuration differences before\n            migrating your workloads from the current instance to the recommended instance type. The\n                <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-resize.html\">Change the instance type guide for Linux</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-resize.html\">Change the instance type\n                guide for Windows</a> provide general guidance for getting started with an\n            instance migration.</p>\n\n        <p>Platform differences include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>Hypervisor</code>\n                  </b> — The\n                    hypervisor of the recommended instance type is different than that of the\n                    current instance. For example, the recommended instance type uses a Nitro\n                    hypervisor and the current instance uses a Xen hypervisor. The differences that\n                    you should consider between these hypervisors are covered in the <a href=\"http://aws.amazon.com/ec2/faqs/#Nitro_Hypervisor\">Nitro Hypervisor</a>\n                    section of the Amazon EC2 frequently asked questions. For more information, see\n                        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances\">Instances built on the Nitro System</a> in the <i>Amazon EC2\n                        User Guide for Linux</i>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#ec2-nitro-instances\">Instances built on the Nitro System</a> in the <i>Amazon EC2\n                        User Guide for Windows</i>.</p>\n                \n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>NetworkInterface</code>\n                  </b> — The network\n                    interface of the recommended instance type is different than that of the current\n                    instance. For example, the recommended instance type supports enhanced\n                    networking and the current instance might not. To enable enhanced networking for\n                    the recommended instance type, you will need to install the Elastic Network\n                    Adapter (ENA) driver or the Intel 82599 Virtual Function driver. For more\n                    information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage\">Networking and storage features</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html\">Enhanced networking\n                        on Linux</a> in the <i>Amazon EC2 User Guide for\n                    Linux</i>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage\">Networking and storage features</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/enhanced-networking.html\">Enhanced\n                        networking on Windows</a> in the <i>Amazon EC2 User Guide for\n                        Windows</i>.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>StorageInterface</code>\n                  </b> — The storage\n                    interface of the recommended instance type is different than that of the current\n                    instance. For example, the recommended instance type uses an NVMe storage\n                    interface and the current instance does not. To access NVMe volumes for the\n                    recommended instance type, you will need to install or upgrade the NVMe driver.\n                    For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage\">Networking and storage features</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/nvme-ebs-volumes.html\">Amazon EBS and NVMe on\n                        Linux instances</a> in the <i>Amazon EC2 User Guide for\n                        Linux</i>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage\">Networking and storage features</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/nvme-ebs-volumes.html\">Amazon EBS and NVMe\n                        on Windows instances</a> in the <i>Amazon EC2 User Guide for\n                        Windows</i>.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>InstanceStoreAvailability</code>\n                  </b> — The recommended\n                    instance type does not support instance store volumes and the current instance\n                    does. Before migrating, you might need to back up the data on your instance\n                    store volumes if you want to preserve them. For more information, see <a href=\"https://aws.amazon.com/premiumsupport/knowledge-center/back-up-instance-store-ebs/\">How do I back up an instance store volume on my Amazon EC2 instance to\n                        Amazon EBS?</a> in the <i>AWS Premium Support Knowledge\n                        Base</i>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage\">Networking and storage features</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html\">Amazon EC2 instance\n                        store</a> in the <i>Amazon EC2 User Guide for Linux</i>, or see\n                        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/instance-types.html#instance-networking-storage\">Networking and storage features</a> and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/InstanceStorage.html\">Amazon EC2 instance\n                        store</a> in the <i>Amazon EC2 User Guide for\n                    Windows</i>.</p>\n                \n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>VirtualizationType</code>\n                  </b> — The\n                    recommended instance type uses the hardware virtual machine (HVM) virtualization\n                    type and the current instance uses the paravirtual (PV) virtualization type. For\n                    more information about the differences between these virtualization types, see\n                        <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/virtualization_types.html\">Linux AMI\n                        virtualization types</a> in the <i>Amazon EC2 User Guide for\n                        Linux</i>, or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/windows-ami-version-history.html#virtualization-types\">Windows AMI virtualization types</a> in the <i>Amazon EC2 User\n                        Guide for Windows</i>.</p>\n            </li>\n         </ul>"
+                    }
+                },
                 "performanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
                     "traits": {
-                        "smithy.api#documentation": "<p>The performance risk of the instance recommendation option.</p>\n        <p>Performance risk is the likelihood of the recommended instance type not meeting the\n            performance requirement of your workload.</p>\n        <p>The lowest performance risk is categorized as <code>0</code>, and the highest as\n                <code>5</code>.</p>"
+                        "smithy.api#documentation": "<p>The performance risk of the instance recommendation option.</p>\n        <p>Performance risk indicates the likelihood of the recommended instance type not meeting\n            the resource needs of your workload. Compute Optimizer calculates an individual performance risk\n            score for each specification of the recommended instance, including CPU, memory, EBS\n            throughput, EBS IOPS, disk throughput, disk IOPS, network throughput, and network PPS.\n            The performance\n            risk of the recommended instance is calculated as the maximum performance risk score\n            across the analyzed resource specifications.</p>\n        <p>The value ranges from <code>0</code> to <code>5</code>, with <code>0</code> meaning\n            that the recommended resource is predicted to always provide enough hardware capability.\n            The higher the performance risk is, the more likely you should validate whether the\n            recommendation will meet the performance requirements of your workload before migrating\n            your resource.</p>"
                     }
                 },
                 "rank": {
@@ -2298,12 +2463,12 @@
                 "values": {
                     "target": "com.amazonaws.computeoptimizer#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you\n                    specified the <code>name</code> parameter as <code>ResourceType</code>. There is\n                    no filter for EBS volumes because volume recommendations cannot be exported at\n                    this time.</p>\n            </li>\n            <li>\n                <p>Specify <code>Queued</code>, <code>InProgress</code>, <code>Complete</code>,\n                    or <code>Failed</code> if you specified the <code>name</code> parameter as\n                        <code>JobStatus</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Ec2Instance</code> or <code>AutoScalingGroup</code> if you\n                    specify the <code>name</code> parameter as <code>ResourceType</code>. There is\n                    no filter for EBS volumes because volume recommendations cannot be exported at\n                    this time.</p>\n            </li>\n            <li>\n                <p>Specify <code>Queued</code>, <code>InProgress</code>, <code>Complete</code>,\n                    or <code>Failed</code> if you specify the <code>name</code> parameter as\n                        <code>JobStatus</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommendation export\n            jobs.</p>\n\n        <p>This filter is used with the <code>DescribeRecommendationExportJobs</code>\n            action.</p>"
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of recommendation export jobs.\n            Use this filter with the <code>DescribeRecommendationExportJobs</code> action.</p>\n\n        <p>You can use <code>EBSFilter</code> with the <code>GetEBSVolumeRecommendations</code>\n            action, <code>LambdaFunctionRecommendationFilter</code> with the\n                <code>GetLambdaFunctionRecommendations</code> action, and <code>Filter</code> with\n            the <code>GetAutoScalingGroupRecommendations</code> and\n                <code>GetEC2InstanceRecommendations</code> actions.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#JobFilterName": {
@@ -2537,13 +2702,13 @@
                 "finding": {
                     "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFinding",
                     "traits": {
-                        "smithy.api#documentation": "<p>The finding classification for the function.</p>\n        <p>Findings for functions include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — The function is\n                    correctly provisioned to run your workload based on its current configuration\n                    and its utilization history. This finding classification does not include\n                    finding reason codes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b> — The function is\n                    performing at a higher level (over-provisioned) or at a lower level\n                    (under-provisioned) than required for your workload because its current\n                    configuration is not optimal. Over-provisioned resources might lead to\n                    unnecessary infrastructure cost, and under-provisioned resources might lead to\n                    poor application performance. This finding classification can include the\n                        <code>MemoryUnderprovisioned</code> and <code>MemoryUnderprovisioned</code>\n                    finding reason codes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Unavailable</code>\n                  </b> — Compute Optimizer was unable to\n                    generate a recommendation for the function. This could be because the function\n                    has not accumulated sufficient metric data, or the function does not qualify for\n                    a recommendation. This finding classification can include the\n                        <code>InsufficientData</code> and <code>Inconclusive</code> finding reason\n                    codes.</p>\n                <note>\n                    <p>Functions with a finding of unavailable are not returned unless you\n                        specify the <code>filter</code> parameter with a value of\n                            <code>Unavailable</code> in your\n                            <code>GetLambdaFunctionRecommendations</code> request.</p>\n                </note>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The finding classification of the function.</p>\n        <p>Findings for functions include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b> — The function is\n                    correctly provisioned to run your workload based on its current configuration\n                    and its utilization history. This finding classification does not include\n                    finding reason codes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b> — The function is\n                    performing at a higher level (over-provisioned) or at a lower level\n                    (under-provisioned) than required for your workload because its current\n                    configuration is not optimal. Over-provisioned resources might lead to\n                    unnecessary infrastructure cost, and under-provisioned resources might lead to\n                    poor application performance. This finding classification can include the\n                        <code>MemoryUnderprovisioned</code> and <code>MemoryUnderprovisioned</code>\n                    finding reason codes.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Unavailable</code>\n                  </b> — Compute Optimizer was unable to\n                    generate a recommendation for the function. This could be because the function\n                    has not accumulated sufficient metric data, or the function does not qualify for\n                    a recommendation. This finding classification can include the\n                        <code>InsufficientData</code> and <code>Inconclusive</code> finding reason\n                    codes.</p>\n                <note>\n                    <p>Functions with a finding of unavailable are not returned unless you\n                        specify the <code>filter</code> parameter with a value of\n                            <code>Unavailable</code> in your\n                            <code>GetLambdaFunctionRecommendations</code> request.</p>\n                </note>\n            </li>\n         </ul>"
                     }
                 },
                 "findingReasonCodes": {
                     "target": "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFindingReasonCodes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason for the finding classification of the function.</p>\n        <note>\n            <p>Functions that have a finding classification of <code>Optimized</code> don't have\n                a finding reason code.</p>\n        </note>\n        <p>Reason codes include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — The\n                    function is over-provisioned when its memory configuration can be sized down\n                    while still meeting the performance requirements of your workload. An\n                    over-provisioned function might lead to unnecessary infrastructure cost. This\n                    finding reason code is part of the <code>NotOptimized</code> finding\n                    classification.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — The\n                    function is under-provisioned when its memory configuration doesn't meet the\n                    performance requirements of the workload. An under-provisioned function might\n                    lead to poor application performance. This finding reason code is part of the\n                        <code>NotOptimized</code> finding classification.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>InsufficientData</code>\n                  </b> — The\n                    function does not have sufficient metric data for Compute Optimizer to generate a\n                    recommendation. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                        requirements</a> in the <i>AWS Compute Optimizer User Guide</i>. This\n                    finding reason code is part of the <code>Unavailable</code> finding\n                    classification.</p>\n                \n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Inconclusive</code>\n                  </b> — The function does\n                    not qualify for a recommendation because Compute Optimizer cannot generate a recommendation\n                    with a high degree of confidence. This finding reason code is part of the\n                        <code>Unavailable</code> finding classification.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The reason for the finding classification of the function.</p>\n        <note>\n            <p>Functions that have a finding classification of <code>Optimized</code> don't have\n                a finding reason code.</p>\n        </note>\n        <p>Finding reason codes for functions include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>MemoryOverprovisioned</code>\n                  </b> — The\n                    function is over-provisioned when its memory configuration can be sized down\n                    while still meeting the performance requirements of your workload. An\n                    over-provisioned function might lead to unnecessary infrastructure cost. This\n                    finding reason code is part of the <code>NotOptimized</code> finding\n                    classification.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>MemoryUnderprovisioned</code>\n                  </b> — The\n                    function is under-provisioned when its memory configuration doesn't meet the\n                    performance requirements of the workload. An under-provisioned function might\n                    lead to poor application performance. This finding reason code is part of the\n                        <code>NotOptimized</code> finding classification.</p>\n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>InsufficientData</code>\n                  </b> — The\n                    function does not have sufficient metric data for Compute Optimizer to generate a\n                    recommendation. For more information, see the <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html\">Supported resources and\n                        requirements</a> in the <i>AWS Compute Optimizer User Guide</i>. This\n                    finding reason code is part of the <code>Unavailable</code> finding\n                    classification.</p>\n                \n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Inconclusive</code>\n                  </b> — The function does\n                    not qualify for a recommendation because Compute Optimizer cannot generate a recommendation\n                    with a high degree of confidence. This finding reason code is part of the\n                        <code>Unavailable</code> finding classification.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "memorySizeRecommendationOptions": {
@@ -2569,12 +2734,12 @@
                 "values": {
                     "target": "com.amazonaws.computeoptimizer#FilterValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Optimized</code>, <code>NotOptimized</code>, or\n                        <code>Unavailable</code> if you specified the <code>name</code> parameter as\n                        <code>Finding</code>.</p>\n            </li>\n            <li>\n                <p>Specify <code>MemoryOverprovisioned</code>,\n                        <code>MemoryUnderprovisioned</code>, <code>InsufficientData</code>, or\n                        <code>Inconclusive</code> if you specified the <code>name</code> parameter\n                    as <code>FindingReasonCode</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The value of the filter.</p>\n\n        <p>The valid values for this parameter are as follows, depending on what you specify for\n            the <code>name</code> parameter:</p>\n\n        <ul>\n            <li>\n                <p>Specify <code>Optimized</code>, <code>NotOptimized</code>, or\n                        <code>Unavailable</code> if you specify the <code>name</code> parameter as\n                        <code>Finding</code>.</p>\n            </li>\n            <li>\n                <p>Specify <code>MemoryOverprovisioned</code>,\n                        <code>MemoryUnderprovisioned</code>, <code>InsufficientData</code>, or\n                        <code>Inconclusive</code> if you specify the <code>name</code> parameter as\n                        <code>FindingReasonCode</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of AWS Lambda function\n            recommendations.</p>"
+                "smithy.api#documentation": "<p>Describes a filter that returns a more specific list of AWS Lambda function\n            recommendations. Use this filter with the <code>GetLambdaFunctionRecommendations</code>\n            action.</p>\n        \n        \n\n        <p>You can use <code>EBSFilter</code> with the <code>GetEBSVolumeRecommendations</code>\n            action, <code>JobFilter</code> with the <code>DescribeRecommendationExportJobs</code>\n            action, and <code>Filter</code> with the <code>GetAutoScalingGroupRecommendations</code>\n            and <code>GetEC2InstanceRecommendations</code> actions.</p>"
             }
         },
         "com.amazonaws.computeoptimizer#LambdaFunctionRecommendationFilterName": {
@@ -2754,6 +2919,38 @@
                     {
                         "value": "EBS_WRITE_BYTES_PER_SECOND",
                         "name": "EBS_WRITE_BYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "DISK_READ_OPS_PER_SECOND",
+                        "name": "DISK_READ_OPS_PER_SECOND"
+                    },
+                    {
+                        "value": "DISK_WRITE_OPS_PER_SECOND",
+                        "name": "DISK_WRITE_OPS_PER_SECOND"
+                    },
+                    {
+                        "value": "DISK_READ_BYTES_PER_SECOND",
+                        "name": "DISK_READ_BYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "DISK_WRITE_BYTES_PER_SECOND",
+                        "name": "DISK_WRITE_BYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "NETWORK_IN_BYTES_PER_SECOND",
+                        "name": "NETWORK_IN_BYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "NETWORK_OUT_BYTES_PER_SECOND",
+                        "name": "NETWORK_OUT_BYTES_PER_SECOND"
+                    },
+                    {
+                        "value": "NETWORK_PACKETS_IN_PER_SECOND",
+                        "name": "NETWORK_PACKETS_IN_PER_SECOND"
+                    },
+                    {
+                        "value": "NETWORK_PACKETS_OUT_PER_SECOND",
+                        "name": "NETWORK_PACKETS_OUT_PER_SECOND"
                     }
                 ]
             }
@@ -2828,6 +3025,39 @@
         },
         "com.amazonaws.computeoptimizer#Period": {
             "type": "integer"
+        },
+        "com.amazonaws.computeoptimizer#PlatformDifference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Hypervisor",
+                        "name": "HYPERVISOR"
+                    },
+                    {
+                        "value": "NetworkInterface",
+                        "name": "NETWORK_INTERFACE"
+                    },
+                    {
+                        "value": "StorageInterface",
+                        "name": "STORAGE_INTERFACE"
+                    },
+                    {
+                        "value": "InstanceStoreAvailability",
+                        "name": "INSTANCE_STORE_AVAILABILITY"
+                    },
+                    {
+                        "value": "VirtualizationType",
+                        "name": "VIRTUALIZATION_TYPE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.computeoptimizer#PlatformDifferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.computeoptimizer#PlatformDifference"
+            }
         },
         "com.amazonaws.computeoptimizer#ProjectedMetric": {
             "type": "structure",
@@ -3331,7 +3561,7 @@
                 "name": {
                     "target": "com.amazonaws.computeoptimizer#MetricName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n        <p>The following utilization metrics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Cpu</code> - The percentage of allocated EC2 compute units that are\n                    currently in use on the instance. This metric identifies the processing power\n                    required to run an application on the instance.</p>\n                <p>Depending on the instance type, tools in your operating system can show a\n                    lower percentage than CloudWatch when the instance is not allocated a full\n                    processor core.</p>\n                <p>Units: Percent</p>\n            </li>\n            <li>\n                <p>\n                  <code>Memory</code> - The percentage of memory that is currently in use on the\n                    instance. This metric identifies the amount of memory required to run an\n                    application on the instance.</p>\n                <p>Units: Percent</p>\n                <note>\n                    <p>The <code>Memory</code> metric is returned only for resources that have\n                        the unified CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                            Utilization with the CloudWatch Agent</a>.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_READ_OPS_PER_SECOND</code> - The completed read operations from all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n                <p>Unit: Count</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_WRITE_OPS_PER_SECOND</code> - The completed write operations to all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n                <p>Unit: Count</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_READ_BYTES_PER_SECOND</code> - The bytes read from all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n                <p>Unit: Bytes</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_WRITE_BYTES_PER_SECOND</code> - The bytes written to all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n                <p>Unit: Bytes</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The name of the utilization metric.</p>\n        <p>The following utilization metrics are available:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>Cpu</code> - The percentage of allocated EC2 compute units that are\n                    currently in use on the instance. This metric identifies the processing power\n                    required to run an application on the instance.</p>\n                <p>Depending on the instance type, tools in your operating system can show a\n                    lower percentage than CloudWatch when the instance is not allocated a full\n                    processor core.</p>\n                <p>Units: Percent</p>\n            </li>\n            <li>\n                <p>\n                  <code>Memory</code> - The percentage of memory that is currently in use on the\n                    instance. This metric identifies the amount of memory required to run an\n                    application on the instance.</p>\n                <p>Units: Percent</p>\n                <note>\n                    <p>The <code>Memory</code> metric is returned only for resources that have\n                        the unified CloudWatch agent installed on them. For more information, see <a href=\"https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent\">Enabling Memory\n                            Utilization with the CloudWatch Agent</a>.</p>\n                </note>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_READ_OPS_PER_SECOND</code> - The completed read operations from all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n                <p>Unit: Count</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_WRITE_OPS_PER_SECOND</code> - The completed write operations to all\n                    EBS volumes attached to the instance in a specified period of time.</p>\n                <p>Unit: Count</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_READ_BYTES_PER_SECOND</code> - The bytes read from all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n                <p>Unit: Bytes</p>\n            </li>\n            <li>\n                <p>\n                  <code>EBS_WRITE_BYTES_PER_SECOND</code> - The bytes written to all EBS volumes\n                    attached to the instance in a specified period of time.</p>\n                <p>Unit: Bytes</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISK_READ_OPS_PER_SECOND</code> - The completed read operations from all\n                    instance store volumes available to the instance in a specified period of\n                    time.</p>\n                <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISK_WRITE_OPS_PER_SECOND</code> - The completed write operations from\n                    all instance store volumes available to the instance in a specified period of\n                    time.</p>\n                <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISK_READ_BYTES_PER_SECOND</code> - The bytes read from all instance\n                    store volumes available to the instance. This metric is used to determine the\n                    volume of the data the application reads from the disk of the instance. This can\n                    be used to determine the speed of the application.</p>\n                <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n                <p>\n                  <code>DISK_WRITE_BYTES_PER_SECOND</code> - The bytes written to all instance\n                    store volumes available to the instance. This metric is used to determine the\n                    volume of the data the application writes onto the disk of the instance. This\n                    can be used to determine the speed of the application.</p>\n                <p>If there are no instance store volumes, either the value is <code>0</code> or\n                    the metric is not reported.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NETWORK_IN_BYTES_PER_SECOND</code> - The number of bytes received by the\n                    instance on all network interfaces. This metric identifies the volume of\n                    incoming network traffic to a single instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NETWORK_OUT_BYTES_PER_SECOND</code> - The number of bytes sent out by\n                    the instance on all network interfaces. This metric identifies the volume of\n                    outgoing network traffic from a single instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NETWORK_PACKETS_IN_PER_SECOND</code> - The number of packets received by\n                    the instance on all network interfaces. This metric identifies the volume of\n                    incoming traffic in terms of the number of packets on a single instance.</p>\n            </li>\n            <li>\n                <p>\n                  <code>NETWORK_PACKETS_OUT_PER_SECOND</code> - The number of packets sent out\n                    by the instance on all network interfaces. This metric identifies the volume of\n                    outgoing traffic in terms of the number of packets on a single instance.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "statistic": {
@@ -3446,7 +3676,7 @@
                 "finding": {
                     "target": "com.amazonaws.computeoptimizer#EBSFinding",
                     "traits": {
-                        "smithy.api#documentation": "<p>The finding classification for the volume.</p>\n        <p>Findings for volumes include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b>—A volume\n                    is considered not optimized when AWS Compute Optimizer identifies a recommendation that can\n                    provide better performance for your workload.</p>\n                \n                \n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An volume is\n                    considered optimized when Compute Optimizer determines that the volume is correctly\n                    provisioned to run your workload based on the chosen volume type. For optimized\n                    resources, Compute Optimizer might recommend a new generation volume type.</p>\n                \n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The finding classification of the volume.</p>\n        <p>Findings for volumes include:</p>\n        <ul>\n            <li>\n                <p>\n                  <b>\n                     <code>NotOptimized</code>\n                  </b>—A volume\n                    is considered not optimized when AWS Compute Optimizer identifies a recommendation that can\n                    provide better performance for your workload.</p>\n                \n                \n                \n            </li>\n            <li>\n                <p>\n                  <b>\n                     <code>Optimized</code>\n                  </b>—An volume is\n                    considered optimized when Compute Optimizer determines that the volume is correctly\n                    provisioned to run your workload based on the chosen volume type. For optimized\n                    resources, Compute Optimizer might recommend a new generation volume type.</p>\n                \n            </li>\n         </ul>"
                     }
                 },
                 "utilizationMetrics": {
@@ -3490,7 +3720,7 @@
                 "performanceRisk": {
                     "target": "com.amazonaws.computeoptimizer#PerformanceRisk",
                     "traits": {
-                        "smithy.api#documentation": "<p>The performance risk of the volume recommendation option.</p>\n        <p>Performance risk is the likelihood of the recommended volume type not meeting the\n            performance requirement of your workload.</p>\n        <p>The lowest performance risk is categorized as <code>0</code>, and the highest as\n                <code>5</code>.</p>"
+                        "smithy.api#documentation": "<p>The performance risk of the volume recommendation option.</p>\n        <p>Performance risk is the likelihood of the recommended volume type meeting the\n            performance requirement of your workload.</p>\n        <p>The value ranges from <code>0</code> to <code>5</code>, with <code>0</code> meaning\n            that the recommended resource is predicted to always provide enough hardware capability.\n            The higher the performance risk is, the more likely you should validate whether the\n            recommendation will meet the performance requirements of your workload before migrating\n            your resource.</p>"
                     }
                 },
                 "rank": {

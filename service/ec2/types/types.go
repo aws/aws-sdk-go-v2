@@ -658,6 +658,10 @@ type CapacityReservation struct {
 	// The type of instance for which the Capacity Reservation reserves capacity.
 	InstanceType *string
 
+	// The Amazon Resource Name (ARN) of the Outpost on which the Capacity Reservation
+	// was created.
+	OutpostArn *string
+
 	// The ID of the AWS account that owns the Capacity Reservation.
 	OwnerId *string
 

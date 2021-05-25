@@ -45,7 +45,7 @@ type AccessControlTranslation struct {
 	// Specifies the replica ownership. For default and valid values, see PUT bucket
 	// replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)
-	// in the Amazon Simple Storage Service API Reference.
+	// in the Amazon S3 API Reference.
 	//
 	// This member is required.
 	Owner OwnerOverride
@@ -181,7 +181,7 @@ type BucketLoggingStatus struct {
 	// Describes where logs are stored and the prefix that Amazon S3 assigns to all log
 	// object keys for a bucket. For more information, see PUT Bucket logging
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) in
-	// the Amazon Simple Storage Service API Reference.
+	// the Amazon S3 API Reference.
 	LoggingEnabled *LoggingEnabled
 }
 
@@ -513,7 +513,7 @@ type Destination struct {
 	// the account ID of the destination bucket owner. For more information, see
 	// Replication Additional Configuration: Changing the Replica Owner
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-change-owner.html)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	Account *string
 
 	// A container that provides information about encryption. If
@@ -534,7 +534,7 @@ type Destination struct {
 	// object to create the object replica. For valid values, see the StorageClass
 	// element of the PUT Bucket replication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)
-	// action in the Amazon Simple Storage Service API Reference.
+	// action in the Amazon S3 API Reference.
 	StorageClass StorageClass
 }
 
@@ -554,7 +554,7 @@ type Encryption struct {
 	// If the encryption type is aws:kms, this optional value specifies the ID of the
 	// symmetric customer managed AWS KMS CMK to use for encryption of job results.
 	// Amazon S3 only supports symmetric CMKs. For more information, see Using
-	// Symmetric and Asymmetric Keys
+	// symmetric and asymmetric keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	KMSKeyId *string
@@ -564,11 +564,11 @@ type Encryption struct {
 // destination for replicated objects.
 type EncryptionConfiguration struct {
 
-	// Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master
-	// key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket.
-	// Amazon S3 uses this key to encrypt replica objects. Amazon S3 only supports
-	// symmetric customer managed CMKs. For more information, see Using Symmetric and
-	// Asymmetric Keys
+	// Specifies the ID (Key ARN or Alias ARN) of the customer managed AWS KMS key
+	// stored in AWS Key Management Service (KMS) for the destination bucket. Amazon S3
+	// uses this key to encrypt replica objects. Amazon S3 only supports symmetric,
+	// customer managed KMS keys. For more information, see Using symmetric and
+	// asymmetric keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	ReplicaKmsKeyID *string
@@ -1538,7 +1538,7 @@ type ErrorDocument struct {
 // Optional configuration to replicate existing source bucket objects. For more
 // information, see Replicating Existing Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-what-is-isnot-replicated.html#existing-object-replication)
-// in the Amazon S3 Developer Guide.
+// in the Amazon S3 User Guide.
 type ExistingObjectReplication struct {
 
 	//
@@ -1734,7 +1734,7 @@ type IntelligentTieringFilter struct {
 // Specifies the inventory configuration for an Amazon S3 bucket. For more
 // information, see GET Bucket inventory
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketGETInventoryConfig.html)
-// in the Amazon Simple Storage Service API Reference.
+// in the Amazon S3 API Reference.
 type InventoryConfiguration struct {
 
 	// Contains information about where to publish the inventory results.
@@ -2014,7 +2014,7 @@ func (*LifecycleRuleFilterMemberAnd) isLifecycleRuleFilter() {}
 // Describes where logs are stored and the prefix that Amazon S3 assigns to all log
 // object keys for a bucket. For more information, see PUT Bucket logging
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) in
-// the Amazon Simple Storage Service API Reference.
+// the Amazon S3 API Reference.
 type LoggingEnabled struct {
 
 	// Specifies the bucket where you want Amazon S3 to store server access logs. You
@@ -2080,7 +2080,7 @@ type MetricsAndOperator struct {
 // existing metrics configuration. If you don't include the elements you want to
 // keep, they are erased. For more information, see  PUT Bucket metrics
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html)
-// in the Amazon Simple Storage Service API Reference.
+// in the Amazon S3 API Reference.
 type MetricsConfiguration struct {
 
 	// The ID used to identify the metrics configuration.
@@ -2162,7 +2162,7 @@ type NoncurrentVersionExpiration struct {
 	// perform the associated action. For information about the noncurrent days
 	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// in the Amazon S3 User Guide.
 	NoncurrentDays int32
 }
 
@@ -2857,7 +2857,7 @@ type SelectParameters struct {
 // default encryption will be applied. For more information, see PUT Bucket
 // encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTencryption.html)
-// in the Amazon Simple Storage Service API Reference.
+// in the Amazon S3 API Reference.
 type ServerSideEncryptionByDefault struct {
 
 	// Server-side encryption algorithm to use for the default encryption.
@@ -2865,12 +2865,12 @@ type ServerSideEncryptionByDefault struct {
 	// This member is required.
 	SSEAlgorithm ServerSideEncryption
 
-	// AWS Key Management Service (KMS) customer master key ID to use for the default
+	// AWS Key Management Service (KMS) customer AWS KMS key ID to use for the default
 	// encryption. This parameter is allowed if and only if SSEAlgorithm is set to
-	// aws:kms. You can specify the key ID or the Amazon Resource Name (ARN) of the
-	// CMK. However, if you are using encryption with cross-account operations, you
-	// must use a fully qualified CMK ARN. For more information, see Using encryption
-	// for cross-account operations
+	// aws:kms. You can specify the key ID or the Amazon Resource Name (ARN) of the KMS
+	// key. However, if you are using encryption with cross-account operations, you
+	// must use a fully qualified KMS key ARN. For more information, see Using
+	// encryption for cross-account operations
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html#bucket-encryption-update-bucket-policy).
 	// For example:
 	//
@@ -2880,8 +2880,8 @@ type ServerSideEncryptionByDefault struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// Amazon
-	// S3 only supports symmetric CMKs and not asymmetric CMKs. For more information,
-	// see Using Symmetric and Asymmetric Keys
+	// S3 only supports symmetric KMS keys and not asymmetric KMS keys. For more
+	// information, see Using symmetric and asymmetric keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	KMSMasterKeyID *string
@@ -2952,8 +2952,7 @@ type SSEKMS struct {
 type SseKmsEncryptedObjects struct {
 
 	// Specifies whether Amazon S3 replicates objects created with server-side
-	// encryption using a customer master key (CMK) stored in AWS Key Management
-	// Service.
+	// encryption using an AWS KMS key stored in AWS Key Management Service.
 	//
 	// This member is required.
 	Status SseKmsEncryptedObjectsStatus
@@ -3095,7 +3094,7 @@ type Transition struct {
 // Describes the versioning state of an Amazon S3 bucket. For more information, see
 // PUT Bucket versioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTVersioningStatus.html)
-// in the Amazon Simple Storage Service API Reference.
+// in the Amazon S3 API Reference.
 type VersioningConfiguration struct {
 
 	// Specifies whether MFA delete is enabled in the bucket versioning configuration.

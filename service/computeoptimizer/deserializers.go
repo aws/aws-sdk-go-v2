@@ -2671,6 +2671,11 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 				sv.Finding = types.Finding(jtv)
 			}
 
+		case "findingReasonCodes":
+			if err := awsAwsjson10_deserializeDocumentInstanceRecommendationFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
+				return err
+			}
+
 		case "instanceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2739,6 +2744,42 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendation(v **types.InstanceRe
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentInstanceRecommendationFindingReasonCodes(v *[]types.InstanceRecommendationFindingReasonCode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.InstanceRecommendationFindingReasonCode
+	if *v == nil {
+		cv = []types.InstanceRecommendationFindingReasonCode{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.InstanceRecommendationFindingReasonCode
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected InstanceRecommendationFindingReasonCode to be of type string, got %T instead", value)
+			}
+			col = types.InstanceRecommendationFindingReasonCode(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.InstanceRecommendationOption, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2781,6 +2822,11 @@ func awsAwsjson10_deserializeDocumentInstanceRecommendationOption(v **types.Inst
 					return err
 				}
 				sv.PerformanceRisk = f64
+			}
+
+		case "platformDifferences":
+			if err := awsAwsjson10_deserializeDocumentPlatformDifferences(&sv.PlatformDifferences, value); err != nil {
+				return err
 			}
 
 		case "projectedUtilizationMetrics":
@@ -3573,6 +3619,42 @@ func awsAwsjson10_deserializeDocumentOptInRequiredException(v **types.OptInRequi
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentPlatformDifferences(v *[]types.PlatformDifference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PlatformDifference
+	if *v == nil {
+		cv = []types.PlatformDifference{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PlatformDifference
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PlatformDifference to be of type string, got %T instead", value)
+			}
+			col = types.PlatformDifference(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

@@ -17,10 +17,10 @@ import (
 // Amazon Forecast resources possess the following parent-child resource
 // hierarchies:
 //
-// * Dataset Group: predictors, predictor backtest export jobs,
-// forecasts, forecast export jobs
-//
 // * Dataset: dataset import jobs
+//
+// * Dataset Group: predictors,
+// predictor backtest export jobs, forecasts, forecast export jobs
 //
 // * Predictor:
 // predictor backtest export jobs, forecasts, forecast export jobs

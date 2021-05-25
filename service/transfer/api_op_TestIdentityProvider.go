@@ -12,11 +12,11 @@ import (
 )
 
 // If the IdentityProviderType of a file transfer protocol-enabled server is
-// API_Gateway, tests whether your API Gateway is set up successfully. We highly
-// recommend that you call this operation to test your authentication method as
-// soon as you create your server. By doing so, you can troubleshoot issues with
-// the API Gateway integration to ensure that your users can successfully use the
-// service.
+// AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is
+// set up successfully. We highly recommend that you call this operation to test
+// your authentication method as soon as you create your server. By doing so, you
+// can troubleshoot issues with the identity provider integration to ensure that
+// your users can successfully use the service.
 func (c *Client) TestIdentityProvider(ctx context.Context, params *TestIdentityProviderInput, optFns ...func(*Options)) (*TestIdentityProviderOutput, error) {
 	if params == nil {
 		params = &TestIdentityProviderInput{}

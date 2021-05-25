@@ -1012,7 +1012,7 @@
                 "Tags": {
                     "target": "com.amazonaws.workspaces#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags associated with the bundle.</p>\n      \n         <note>\n            <p>To add tags at the same time that you're creating the bundle, you must create an IAM policy that \n            grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p>\n         </note>"
+                        "smithy.api#documentation": "<p>The tags associated with the bundle.</p>\n      \n         <note>\n            <p>To add tags at the same time when you're creating the bundle, you must create an IAM policy that \n            grants your IAM user permissions to use <code>workspaces:CreateTags</code>. </p>\n         </note>"
                     }
                 }
             }
@@ -4565,6 +4565,12 @@
                     "target": "com.amazonaws.workspaces#AccessPropertyValue",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether users can use zero client devices to access their WorkSpaces.</p>"
+                    }
+                },
+                "DeviceTypeLinux": {
+                    "target": "com.amazonaws.workspaces#AccessPropertyValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether users can use Linux clients to access their WorkSpaces.</p>"
                     }
                 }
             },

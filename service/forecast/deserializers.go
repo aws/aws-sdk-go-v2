@@ -6837,6 +6837,32 @@ func awsAwsjson11_deserializeDocumentStatistics(v **types.Statistics, value inte
 				sv.CountDistinct = ptr.Int32(int32(i64))
 			}
 
+		case "CountDistinctLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CountDistinctLong = ptr.Int64(i64)
+			}
+
+		case "CountLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CountLong = ptr.Int64(i64)
+			}
+
 		case "CountNan":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6850,6 +6876,19 @@ func awsAwsjson11_deserializeDocumentStatistics(v **types.Statistics, value inte
 				sv.CountNan = ptr.Int32(int32(i64))
 			}
 
+		case "CountNanLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CountNanLong = ptr.Int64(i64)
+			}
+
 		case "CountNull":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -6861,6 +6900,19 @@ func awsAwsjson11_deserializeDocumentStatistics(v **types.Statistics, value inte
 					return err
 				}
 				sv.CountNull = ptr.Int32(int32(i64))
+			}
+
+		case "CountNullLong":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Long to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CountNullLong = ptr.Int64(i64)
 			}
 
 		case "Max":

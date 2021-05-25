@@ -6,6 +6,70 @@ import (
 	"time"
 )
 
+// Describes the properties of the access that was specified.
+type DescribedAccess struct {
+
+	// A unique identifier that might be required when you assume a role in another
+	// account. Think of the ExternalID as a group membership mechanism that uses a
+	// unique identifier (often a SID, but could be a group name or something else) as
+	// a basis. If the administrator of the account to which the role belongs provided
+	// you with an external ID, then provide that value in the ExternalId parameter. A
+	// cross-account role is usually set up to trust everyone in an account. Therefore,
+	// the administrator of the trusting account might send an external ID to the
+	// administrator of the trusted account. That way, only someone with the ID can
+	// assume the role, rather than everyone in the account. The regex used to validate
+	// this parameter is a string of characters consisting of uppercase and lowercase
+	// alphanumeric characters with no spaces. You can also include underscores or any
+	// of the following characters: =,.@:/-
+	ExternalId *string
+
+	// Specifies the landing directory (or folder), which is the location that files
+	// are written to or read from in an Amazon S3 bucket, for the described access.
+	HomeDirectory *string
+
+	// Specifies the logical directory mappings that specify what Amazon S3 or Amazon
+	// EFS paths and keys should be visible to the associated access and how you want
+	// to make them visible. You must specify the "Entry" and "Target" pair, where
+	// Entry shows how the path is made visible and Target is the actual Amazon S3 or
+	// EFS path. If you only specify a target, it will be displayed as is. You also
+	// must ensure that your AWS Identity and Access Management (IAM) role provides
+	// access to paths in Target. In most cases, you can use this value instead of the
+	// scope-down policy to lock down the associated access to the designated home
+	// directory ("chroot"). To do this, you can set Entry to '/' and set Target to the
+	// HomeDirectory parameter value.
+	HomeDirectoryMappings []HomeDirectoryMapEntry
+
+	// The type of landing directory (folder) that you want your users' home directory
+	// to be when they log in to the server. If you set it to PATH, the user will see
+	// the absolute Amazon S3 bucket paths as is in their file transfer protocol
+	// clients. If you set it to LOGICAL, you must provide mappings in the
+	// HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your
+	// users.
+	HomeDirectoryType HomeDirectoryType
+
+	// A scope-down policy for your user so that you can use the same AWS Identity and
+	// Access Management (IAM) role across multiple users. This policy scopes down user
+	// access to portions of their Amazon S3 bucket. Variables that you can use inside
+	// this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and
+	// ${Transfer:HomeBucket}.
+	Policy *string
+
+	// The full POSIX identity, including user ID (Uid), group ID (Gid), and any
+	// secondary groups IDs (SecondaryGids), that controls your users' access to your
+	// Amazon EFS file systems. The POSIX permissions that are set on files and
+	// directories in your file system determine the level of access your users get
+	// when transferring files into and out of your Amazon EFS file systems.
+	PosixProfile *PosixProfile
+
+	// The IAM role that controls access to your Amazon S3 bucket from the specified
+	// associated access. The policies attached to this role will determine the level
+	// of access that you want to provide the associated access when transferring files
+	// into and out of your Amazon S3 bucket or buckets. The IAM role should also
+	// contain a trust relationship that allows a server to access your resources when
+	// servicing transfer requests for the associated access.
+	Role *string
+}
+
 // Describes the properties of a security policy that was specified. For more
 // information about security policies, see Working with security policies
 // (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html).
@@ -50,6 +114,7 @@ type DescribedServer struct {
 	// when Protocols is set to FTPS.
 	Certificate *string
 
+	// Specifies the domain of the storage system that is used for file transfers.
 	Domain Domain
 
 	// Specifies the virtual private cloud (VPC) endpoint settings that you configured
@@ -67,10 +132,14 @@ type DescribedServer struct {
 	HostKeyFingerprint *string
 
 	// Specifies information to call a customer-supplied authentication API. This field
-	// is not populated when the IdentityProviderType of a server is SERVICE_MANAGED.
+	// is not populated when the IdentityProviderType of a server is
+	// AWS_DIRECTORY_SERVICE or SERVICE_MANAGED.
 	IdentityProviderDetails *IdentityProviderDetails
 
 	// Specifies the mode of authentication method enabled for this service. A value of
+	// AWS_DIRECTORY_SERVICE means that you are providing access to Active Directory
+	// groups in AWS Managed Active Directory or Microsoft Active Directory in your
+	// on-premises environment or in AWS using AD Connectors. A value of
 	// SERVICE_MANAGED means that you are using this server to store and access user
 	// credentials within the service. A value of API_GATEWAY indicates that you have
 	// integrated an API Gateway endpoint that will be invoked for authenticating your
@@ -78,8 +147,8 @@ type DescribedServer struct {
 	IdentityProviderType IdentityProviderType
 
 	// Specifies the AWS Identity and Access Management (IAM) role that allows a server
-	// to turn on Amazon CloudWatch logging for Amazon S3 events. When set, user
-	// activity can be viewed in your CloudWatch logs.
+	// to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When
+	// set, user activity can be viewed in your CloudWatch logs.
 	LoggingRole *string
 
 	// Specifies the file transfer protocol or protocols over which your file transfer
@@ -133,37 +202,42 @@ type DescribedUser struct {
 	// example is your-Amazon-S3-bucket-name>/home/username .
 	HomeDirectory *string
 
-	// Specifies the logical directory mappings that specify what Amazon S3 paths and
-	// keys should be visible to your user and how you want to make them visible. You
-	// will need to specify the "Entry" and "Target" pair, where Entry shows how the
-	// path is made visible and Target is the actual Amazon S3 path. If you only
-	// specify a target, it will be displayed as is. You will need to also make sure
-	// that your AWS Identity and Access Management (IAM) role provides access to paths
-	// in Target. In most cases, you can use this value instead of the scope-down
-	// policy to lock your user down to the designated home directory ("chroot"). To do
-	// this, you can set Entry to '/' and set Target to the HomeDirectory parameter
-	// value.
+	// Specifies the logical directory mappings that specify what Amazon S3 or EFS
+	// paths and keys should be visible to your user and how you want to make them
+	// visible. You will need to specify the "Entry" and "Target" pair, where Entry
+	// shows how the path is made visible and Target is the actual Amazon S3 or EFS
+	// path. If you only specify a target, it will be displayed as is. You will need to
+	// also make sure that your AWS Identity and Access Management (IAM) role provides
+	// access to paths in Target. In most cases, you can use this value instead of the
+	// scope-down policy to lock your user down to the designated home directory
+	// ("chroot"). To do this, you can set Entry to '/' and set Target to the
+	// HomeDirectory parameter value.
 	HomeDirectoryMappings []HomeDirectoryMapEntry
 
 	// Specifies the type of landing directory (folder) you mapped for your users to
 	// see when they log into the file transfer protocol-enabled server. If you set it
-	// to PATH, the user will see the absolute Amazon S3 bucket paths as is in their
-	// file transfer protocol clients. If you set it LOGICAL, you will need to provide
-	// mappings in the HomeDirectoryMappings for how you want to make Amazon S3 paths
-	// visible to your users.
+	// to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in
+	// their file transfer protocol clients. If you set it LOGICAL, you will need to
+	// provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3
+	// or EFS paths visible to your users.
 	HomeDirectoryType HomeDirectoryType
 
 	// Specifies the name of the policy in use for the described user.
 	Policy *string
 
+	// Specifies the full POSIX identity, including user ID (Uid), group ID (Gid), and
+	// any secondary groups IDs (SecondaryGids), that controls your users' access to
+	// your Amazon Elastic File System (Amazon EFS) file systems. The POSIX permissions
+	// that are set on files and directories in your file system determine the level of
+	// access your users get when transferring files into and out of your Amazon EFS
+	// file systems.
 	PosixProfile *PosixProfile
 
-	// Specifies the IAM role that controls your users' access to your Amazon S3
-	// bucket. The policies attached to this role will determine the level of access
-	// you want to provide your users when transferring files into and out of your
-	// Amazon S3 bucket or buckets. The IAM role should also contain a trust
-	// relationship that allows a server to access your resources when servicing your
-	// users' transfer requests.
+	// The IAM role that controls your users' access to your Amazon S3 bucket. The
+	// policies attached to this role will determine the level of access you want to
+	// provide your users when transferring files into and out of your Amazon S3 bucket
+	// or buckets. The IAM role should also contain a trust relationship that allows a
+	// server to access your resources when servicing your users' transfer requests.
 	Role *string
 
 	// Specifies the public key portion of the Secure Shell (SSH) keys stored for the
@@ -183,8 +257,14 @@ type DescribedUser struct {
 // The virtual private cloud (VPC) endpoint settings that are configured for your
 // file transfer protocol-enabled server. With a VPC endpoint, you can restrict
 // access to your server and resources only within your VPC. To control incoming
-// internet traffic, invoke the UpdateServer API and attach an Elastic IP to your
-// server's endpoint.
+// internet traffic, invoke the UpdateServer API and attach an Elastic IP address
+// to your server's endpoint. After March 31, 2021, you won't be able to create a
+// server using EndpointType=VPC_ENDPOINT in your AWS account if your account
+// hasn't already done so before March 31, 2021. If you have already created
+// servers with EndpointType=VPC_ENDPOINT in your AWS account on or before March
+// 31, 2021, you will not be affected. After this date, use EndpointType=VPC. For
+// more information, see
+// https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
 type EndpointDetails struct {
 
 	// A list of address allocation IDs that are required to attach an Elastic IP
@@ -194,8 +274,13 @@ type EndpointDetails struct {
 
 	// A list of security groups IDs that are available to attach to your server's
 	// endpoint. This property can only be set when EndpointType is set to VPC. You can
-	// only edit the SecurityGroupIds property in the UpdateServer API and only if you
-	// are changing the EndpointType from PUBLIC or VPC_ENDPOINT to VPC.
+	// edit the SecurityGroupIds property in the UpdateServer
+	// (https://docs.aws.amazon.com/transfer/latest/userguide/API_UpdateServer.html)
+	// API only if you are changing the EndpointType from PUBLIC or VPC_ENDPOINT to
+	// VPC. To change security groups associated with your server's VPC endpoint after
+	// creation, use the Amazon EC2 ModifyVpcEndpoint
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyVpcEndpoint.html)
+	// API.
 	SecurityGroupIds []string
 
 	// A list of subnet IDs that are required to host your server endpoint in your VPC.
@@ -203,7 +288,8 @@ type EndpointDetails struct {
 	SubnetIds []string
 
 	// The ID of the VPC endpoint. This property can only be set when EndpointType is
-	// set to VPC_ENDPOINT.
+	// set to VPC_ENDPOINT. For more information, see
+	// https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
 	VpcEndpointId *string
 
 	// The VPC ID of the VPC in which a server's endpoint will be hosted. This property
@@ -231,11 +317,54 @@ type HomeDirectoryMapEntry struct {
 // method of authentication.
 type IdentityProviderDetails struct {
 
+	// The identifier of the AWS Directory Service directory that you want to stop
+	// sharing.
+	DirectoryId *string
+
 	// Provides the type of InvocationRole used to authenticate the user account.
 	InvocationRole *string
 
 	// Provides the location of the service endpoint used to authenticate users.
 	Url *string
+}
+
+// Lists the properties for one or more specified associated accesses.
+type ListedAccess struct {
+
+	// A unique identifier that might be required when you assume a role in another
+	// account. Think of the ExternalID as a group membership mechanism that uses a
+	// unique identifier (often a SID, but could be a group name or something else) as
+	// a basis. If the administrator of the account to which the role belongs provided
+	// you with an external ID, then provide that value in the ExternalId parameter. A
+	// cross-account role is usually set up to trust everyone in an account. Therefore,
+	// the administrator of the trusting account might send an external ID to the
+	// administrator of the trusted account. That way, only someone with the ID can
+	// assume the role, rather than everyone in the account. The regex used to validate
+	// this parameter is a string of characters consisting of uppercase and lowercase
+	// alphanumeric characters with no spaces. You can also include underscores or any
+	// of the following characters: =,.@:/-
+	ExternalId *string
+
+	// Specifies the landing directory (or folder), which is the location that files
+	// are written to or read from in an Amazon S3 bucket, for the described access.
+	HomeDirectory *string
+
+	// The type of landing directory (folder) that you want your users' home directory
+	// to be when they log in to the server. If you set it to PATH, the user will see
+	// the absolute Amazon S3 bucket paths as is in their file transfer protocol
+	// clients. If you set it to LOGICAL, you must provide mappings in the
+	// HomeDirectoryMappings for how you want to make Amazon S3 paths visible to your
+	// users.
+	HomeDirectoryType HomeDirectoryType
+
+	// The AWS Identity and Access Management (IAM) role that controls access to your
+	// Amazon S3 bucket from the specified associated access. The policies attached to
+	// this role will determine the level of access that you want to provide the
+	// associated access when transferring files into and out of your Amazon S3 bucket
+	// or buckets. The IAM role should also contain a trust relationship that allows a
+	// server to access your resources when servicing transfer requests for the
+	// associated access.
+	Role *string
 }
 
 // Returns properties of a file transfer protocol-enabled server that was
@@ -247,6 +376,7 @@ type ListedServer struct {
 	// This member is required.
 	Arn *string
 
+	// Specifies the domain of the storage system that is used for file transfers.
 	Domain Domain
 
 	// Specifies the type of VPC endpoint that your server is connected to. If your
@@ -255,9 +385,8 @@ type ListedServer struct {
 	EndpointType EndpointType
 
 	// Specifies the authentication method used to validate a user for a server that
-	// was specified. This can include Secure Shell (SSH), user name and password
-	// combinations, or your own custom authentication method. Valid values include
-	// SERVICE_MANAGED or API_GATEWAY.
+	// was specified. This can include Secure Shell (SSH), Active Directory groups,
+	// user name and password combinations, or your own custom authentication method.
 	IdentityProviderType IdentityProviderType
 
 	// Specifies the AWS Identity and Access Management (IAM) role that allows a server
@@ -305,7 +434,11 @@ type ListedUser struct {
 	// Access Management (IAM) entity that, in this case, allows a file transfer
 	// protocol-enabled server to act on a user's behalf. It allows the server to
 	// inherit the trust relationship that enables that user to perform file operations
-	// to their Amazon S3 bucket.
+	// to their Amazon S3 bucket. The IAM role that controls your users' access to your
+	// Amazon S3 bucket for servers with Domain=S3, or your EFS file system for servers
+	// with Domain=EFS. The policies attached to this role determine the level of
+	// access you want to provide your users when transferring files into and out of
+	// your S3 buckets or EFS file systems.
 	Role *string
 
 	// Specifies the number of SSH public keys stored for the user you specified.
@@ -316,14 +449,24 @@ type ListedUser struct {
 	UserName *string
 }
 
+// The full POSIX identity, including user ID (Uid), group ID (Gid), and any
+// secondary groups IDs (SecondaryGids), that controls your users' access to your
+// Amazon EFS file systems. The POSIX permissions that are set on files and
+// directories in your file system determine the level of access your users get
+// when transferring files into and out of your Amazon EFS file systems.
 type PosixProfile struct {
 
+	// The POSIX group ID used for all EFS operations by this user.
+	//
 	// This member is required.
 	Gid *int64
 
+	// The POSIX user ID used for all EFS operations by this user.
+	//
 	// This member is required.
 	Uid *int64
 
+	// The secondary POSIX group IDs used for all EFS operations by this user.
 	SecondaryGids []int64
 }
 

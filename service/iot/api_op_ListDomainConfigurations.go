@@ -13,8 +13,7 @@ import (
 )
 
 // Gets a list of domain configurations for the user. This list is sorted
-// alphabetically by domain configuration name. The domain configuration feature is
-// in public preview and is subject to change.
+// alphabetically by domain configuration name.
 func (c *Client) ListDomainConfigurations(ctx context.Context, params *ListDomainConfigurationsInput, optFns ...func(*Options)) (*ListDomainConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListDomainConfigurationsInput{}

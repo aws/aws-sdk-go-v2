@@ -14,8 +14,8 @@ import (
 
 // Creates a new lifecycle configuration for the bucket or replaces an existing
 // lifecycle configuration. For information about lifecycle configuration, see
-// Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// Managing your storage lifecycle
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-lifecycle-mgmt.html).
 // Bucket lifecycle configuration now supports specifying a lifecycle rule using an
 // object key name prefix, one or more object tags, or a combination of both.
 // Accordingly, this section describes the latest API. The previous version of the

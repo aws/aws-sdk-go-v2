@@ -42,8 +42,8 @@ type ListTagsForResourceInput struct {
 	// response. The default value is 100.
 	MaxResults *int32
 
-	// You can use NextToken in a subsequent request to fetch the next page of access
-	// point descriptions if the response payload was paginated.
+	// (Optional) You can use NextToken in a subsequent request to fetch the next page
+	// of access point descriptions if the response payload was paginated.
 	NextToken *string
 }
 

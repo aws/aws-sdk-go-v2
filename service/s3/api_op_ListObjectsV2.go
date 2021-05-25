@@ -13,17 +13,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns some or all (up to 1,000) of the objects in a bucket. You can use the
-// request parameters as selection criteria to return a subset of the objects in a
-// bucket. A 200 OK response can contain valid or invalid XML. Make sure to design
-// your application to parse the contents of the response and handle it
-// appropriately. Objects are returned sorted in an ascending order of the
-// respective key names in the list. To use this operation, you must have READ
-// access to the bucket. To use this action in an AWS Identity and Access
-// Management (IAM) policy, you must have permissions to perform the s3:ListBucket
-// action. The bucket owner has this permission by default and can grant this
-// permission to others. For more information about permissions, see Permissions
-// Related to Bucket Subresource Operations
+// Returns some or all (up to 1,000) of the objects in a bucket with each request.
+// You can use the request parameters as selection criteria to return a subset of
+// the objects in a bucket. A 200 OK response can contain valid or invalid XML.
+// Make sure to design your application to parse the contents of the response and
+// handle it appropriately. Objects are returned sorted in an ascending order of
+// the respective key names in the list. For more information about listing
+// objects, see Listing object keys programmatically
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ListingKeysUsingAPIs.html)
+// To use this operation, you must have READ access to the bucket. To use this
+// action in an AWS Identity and Access Management (IAM) policy, you must have
+// permissions to perform the s3:ListBucket action. The bucket owner has this
+// permission by default and can grant this permission to others. For more
+// information about permissions, see Permissions Related to Bucket Subresource
+// Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
@@ -67,7 +70,7 @@ type ListObjectsV2Input struct {
 	// the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When
 	// using this action with an access point through the AWS SDKs, you provide the
 	// access point ARN in place of the bucket name. For more information about access
-	// point ARNs, see Using Access Points
+	// point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
@@ -170,7 +173,7 @@ type ListObjectsV2Output struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the AWS SDKs, you provide the access point
 	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using Access Points
+	// see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts

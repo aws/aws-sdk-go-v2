@@ -2295,6 +2295,23 @@ type User struct {
 	// The user's email address.
 	Email *string
 
+	// The type of supported external login provider that provides identity to let the
+	// user federate into Amazon QuickSight with an associated IAM role. The type can
+	// be one of the following.
+	//
+	// * COGNITO: Amazon Cognito. The provider URL is
+	// cognito-identity.amazonaws.com.
+	//
+	// * CUSTOM_OIDC: Custom OpenID Connect (OIDC)
+	// provider.
+	ExternalLoginFederationProviderType *string
+
+	// The URL of the external login provider.
+	ExternalLoginFederationProviderUrl *string
+
+	// The identity ID for the user in the external login provider.
+	ExternalLoginId *string
+
 	// The type of identity authentication used by the user.
 	IdentityType IdentityType
 

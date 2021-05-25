@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the tags associated with the Amazon Resource Number (ARN) you
+// Lists all of the tags associated with the Amazon Resource Name (ARN) that you
 // specify. The resource can be a user, server, or role.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {

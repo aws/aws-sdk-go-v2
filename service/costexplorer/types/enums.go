@@ -243,6 +243,52 @@ func (Dimension) Values() []Dimension {
 	}
 }
 
+type FindingReasonCode string
+
+// Enum values for FindingReasonCode
+const (
+	FindingReasonCodeCpuOverProvisioned               FindingReasonCode = "CPU_OVER_PROVISIONED"
+	FindingReasonCodeCpuUnderProvisioned              FindingReasonCode = "CPU_UNDER_PROVISIONED"
+	FindingReasonCodeMemoryOverProvisioned            FindingReasonCode = "MEMORY_OVER_PROVISIONED"
+	FindingReasonCodeMemoryUnderProvisioned           FindingReasonCode = "MEMORY_UNDER_PROVISIONED"
+	FindingReasonCodeEbsThroughputOverProvisioned     FindingReasonCode = "EBS_THROUGHPUT_OVER_PROVISIONED"
+	FindingReasonCodeEbsThroughputUnderProvisioned    FindingReasonCode = "EBS_THROUGHPUT_UNDER_PROVISIONED"
+	FindingReasonCodeEbsIopsOverProvisioned           FindingReasonCode = "EBS_IOPS_OVER_PROVISIONED"
+	FindingReasonCodeEbsIopsUnderProvisioned          FindingReasonCode = "EBS_IOPS_UNDER_PROVISIONED"
+	FindingReasonCodeNetworkBandwidthOverProvisioned  FindingReasonCode = "NETWORK_BANDWIDTH_OVER_PROVISIONED"
+	FindingReasonCodeNetworkBandwidthUnderProvisioned FindingReasonCode = "NETWORK_BANDWIDTH_UNDER_PROVISIONED"
+	FindingReasonCodeNetworkPpsOverProvisioned        FindingReasonCode = "NETWORK_PPS_OVER_PROVISIONED"
+	FindingReasonCodeNetworkPpsUnderProvisioned       FindingReasonCode = "NETWORK_PPS_UNDER_PROVISIONED"
+	FindingReasonCodeDiskIopsOverProvisioned          FindingReasonCode = "DISK_IOPS_OVER_PROVISIONED"
+	FindingReasonCodeDiskIopsUnderProvisioned         FindingReasonCode = "DISK_IOPS_UNDER_PROVISIONED"
+	FindingReasonCodeDiskThroughputOverProvisioned    FindingReasonCode = "DISK_THROUGHPUT_OVER_PROVISIONED"
+	FindingReasonCodeDiskThroughputUnderProvisioned   FindingReasonCode = "DISK_THROUGHPUT_UNDER_PROVISIONED"
+)
+
+// Values returns all known values for FindingReasonCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FindingReasonCode) Values() []FindingReasonCode {
+	return []FindingReasonCode{
+		"CPU_OVER_PROVISIONED",
+		"CPU_UNDER_PROVISIONED",
+		"MEMORY_OVER_PROVISIONED",
+		"MEMORY_UNDER_PROVISIONED",
+		"EBS_THROUGHPUT_OVER_PROVISIONED",
+		"EBS_THROUGHPUT_UNDER_PROVISIONED",
+		"EBS_IOPS_OVER_PROVISIONED",
+		"EBS_IOPS_UNDER_PROVISIONED",
+		"NETWORK_BANDWIDTH_OVER_PROVISIONED",
+		"NETWORK_BANDWIDTH_UNDER_PROVISIONED",
+		"NETWORK_PPS_OVER_PROVISIONED",
+		"NETWORK_PPS_UNDER_PROVISIONED",
+		"DISK_IOPS_OVER_PROVISIONED",
+		"DISK_IOPS_UNDER_PROVISIONED",
+		"DISK_THROUGHPUT_OVER_PROVISIONED",
+		"DISK_THROUGHPUT_UNDER_PROVISIONED",
+	}
+}
+
 type Granularity string
 
 // Enum values for Granularity
@@ -460,6 +506,30 @@ func (PaymentOption) Values() []PaymentOption {
 		"LIGHT_UTILIZATION",
 		"MEDIUM_UTILIZATION",
 		"HEAVY_UTILIZATION",
+	}
+}
+
+type PlatformDifference string
+
+// Enum values for PlatformDifference
+const (
+	PlatformDifferenceHypervisor                PlatformDifference = "HYPERVISOR"
+	PlatformDifferenceNetworkInterface          PlatformDifference = "NETWORK_INTERFACE"
+	PlatformDifferenceStorageInterface          PlatformDifference = "STORAGE_INTERFACE"
+	PlatformDifferenceInstanceStoreAvailability PlatformDifference = "INSTANCE_STORE_AVAILABILITY"
+	PlatformDifferenceVirtualizationType        PlatformDifference = "VIRTUALIZATION_TYPE"
+)
+
+// Values returns all known values for PlatformDifference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PlatformDifference) Values() []PlatformDifference {
+	return []PlatformDifference{
+		"HYPERVISOR",
+		"NETWORK_INTERFACE",
+		"STORAGE_INTERFACE",
+		"INSTANCE_STORE_AVAILABILITY",
+		"VIRTUALIZATION_TYPE",
 	}
 }
 

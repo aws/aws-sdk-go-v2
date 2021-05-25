@@ -397,6 +397,9 @@ type WorkspaceAccessProperties struct {
 	// Indicates whether users can use iOS devices to access their WorkSpaces.
 	DeviceTypeIos AccessPropertyValue
 
+	// Indicates whether users can use Linux clients to access their WorkSpaces.
+	DeviceTypeLinux AccessPropertyValue
+
 	// Indicates whether users can use macOS clients to access their WorkSpaces. To
 	// restrict WorkSpaces access to trusted devices (also known as managed devices)
 	// with valid certificates, specify a value of TRUST. For more information, see

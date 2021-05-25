@@ -24,15 +24,15 @@ import (
 // can continue to use that approach. For more information, see Access Control List
 // (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) in the
-// Amazon S3 Developer Guide. Access Permissions You can set access permissions
-// using one of the following methods:
+// Amazon S3 User Guide. Access Permissions You can set access permissions using
+// one of the following methods:
 //
-// * Specify a canned ACL with the x-amz-acl
-// request header. Amazon S3 supports a set of predefined ACLs, known as canned
-// ACLs. Each canned ACL has a predefined set of grantees and permissions. Specify
-// the canned ACL name as the value of x-amz-acl. If you use this header, you
-// cannot use other access control-specific headers in your request. For more
-// information, see Canned ACL
+// * Specify a canned ACL with the x-amz-acl request
+// header. Amazon S3 supports a set of predefined ACLs, known as canned ACLs. Each
+// canned ACL has a predefined set of grantees and permissions. Specify the canned
+// ACL name as the value of x-amz-acl. If you use this header, you cannot use other
+// access control-specific headers in your request. For more information, see
+// Canned ACL
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#CannedACL).
 //
 // *
@@ -159,7 +159,7 @@ type PutObjectAclInput struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the AWS SDKs, you provide the access point
 	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using Access Points
+	// see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide.
 	//
@@ -172,7 +172,7 @@ type PutObjectAclInput struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the AWS SDKs, you provide the access point
 	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using Access Points
+	// see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
@@ -217,7 +217,9 @@ type PutObjectAclInput struct {
 	// on Outposts.
 	GrantReadACP *string
 
-	// Allows grantee to create, overwrite, and delete any object in the bucket.
+	// Allows grantee to create new objects in the bucket. For the bucket and object
+	// owners of existing objects, also allows deletions and overwrites of those
+	// objects.
 	GrantWrite *string
 
 	// Allows grantee to write the ACL for the applicable bucket. This action is not
@@ -229,7 +231,7 @@ type PutObjectAclInput struct {
 	// about downloading objects from requester pays buckets, see Downloading Objects
 	// in Requestor Pays Buckets
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
+	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
 
 	// VersionId used to reference a specific version of the object.

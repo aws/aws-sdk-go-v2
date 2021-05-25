@@ -5602,6 +5602,73 @@ func awsAwsjson11_deserializeDocumentDimensionValuesWithAttributesList(v *[]type
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDiskResourceUtilization(v **types.DiskResourceUtilization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DiskResourceUtilization
+	if *v == nil {
+		sv = &types.DiskResourceUtilization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DiskReadBytesPerSecond":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.DiskReadBytesPerSecond = ptr.String(jtv)
+			}
+
+		case "DiskReadOpsPerSecond":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.DiskReadOpsPerSecond = ptr.String(jtv)
+			}
+
+		case "DiskWriteBytesPerSecond":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.DiskWriteBytesPerSecond = ptr.String(jtv)
+			}
+
+		case "DiskWriteOpsPerSecond":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.DiskWriteOpsPerSecond = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentEBSResourceUtilization(v **types.EBSResourceUtilization, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5906,6 +5973,11 @@ func awsAwsjson11_deserializeDocumentEC2ResourceUtilization(v **types.EC2Resourc
 
 	for key, value := range shape {
 		switch key {
+		case "DiskResourceUtilization":
+			if err := awsAwsjson11_deserializeDocumentDiskResourceUtilization(&sv.DiskResourceUtilization, value); err != nil {
+				return err
+			}
+
 		case "EBSResourceUtilization":
 			if err := awsAwsjson11_deserializeDocumentEBSResourceUtilization(&sv.EBSResourceUtilization, value); err != nil {
 				return err
@@ -5936,6 +6008,11 @@ func awsAwsjson11_deserializeDocumentEC2ResourceUtilization(v **types.EC2Resourc
 					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
 				}
 				sv.MaxStorageUtilizationPercentage = ptr.String(jtv)
+			}
+
+		case "NetworkResourceUtilization":
+			if err := awsAwsjson11_deserializeDocumentNetworkResourceUtilization(&sv.NetworkResourceUtilization, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6236,6 +6313,42 @@ func awsAwsjson11_deserializeDocumentExpressions(v *[]types.Expression, value in
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFindingReasonCodes(v *[]types.FindingReasonCode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FindingReasonCode
+	if *v == nil {
+		cv = []types.FindingReasonCode{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FindingReasonCode
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FindingReasonCode to be of type string, got %T instead", value)
+			}
+			col = types.FindingReasonCode(jtv)
+		}
 		cv = append(cv, col)
 
 	}
@@ -6911,6 +7024,109 @@ func awsAwsjson11_deserializeDocumentMonitorArnList(v *[]string, value interface
 				return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 			}
 			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNetworkResourceUtilization(v **types.NetworkResourceUtilization, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.NetworkResourceUtilization
+	if *v == nil {
+		sv = &types.NetworkResourceUtilization{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NetworkInBytesPerSecond":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.NetworkInBytesPerSecond = ptr.String(jtv)
+			}
+
+		case "NetworkOutBytesPerSecond":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.NetworkOutBytesPerSecond = ptr.String(jtv)
+			}
+
+		case "NetworkPacketsInPerSecond":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.NetworkPacketsInPerSecond = ptr.String(jtv)
+			}
+
+		case "NetworkPacketsOutPerSecond":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.NetworkPacketsOutPerSecond = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPlatformDifferences(v *[]types.PlatformDifference, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.PlatformDifference
+	if *v == nil {
+		cv = []types.PlatformDifference{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.PlatformDifference
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected PlatformDifference to be of type string, got %T instead", value)
+			}
+			col = types.PlatformDifference(jtv)
 		}
 		cv = append(cv, col)
 
@@ -8188,6 +8404,11 @@ func awsAwsjson11_deserializeDocumentRightsizingRecommendation(v **types.Rightsi
 
 		case "CurrentInstance":
 			if err := awsAwsjson11_deserializeDocumentCurrentInstance(&sv.CurrentInstance, value); err != nil {
+				return err
+			}
+
+		case "FindingReasonCodes":
+			if err := awsAwsjson11_deserializeDocumentFindingReasonCodes(&sv.FindingReasonCodes, value); err != nil {
 				return err
 			}
 
@@ -9968,6 +10189,11 @@ func awsAwsjson11_deserializeDocumentTargetInstance(v **types.TargetInstance, va
 
 		case "ExpectedResourceUtilization":
 			if err := awsAwsjson11_deserializeDocumentResourceUtilization(&sv.ExpectedResourceUtilization, value); err != nil {
+				return err
+			}
+
+		case "PlatformDifferences":
+			if err := awsAwsjson11_deserializeDocumentPlatformDifferences(&sv.PlatformDifferences, value); err != nil {
 				return err
 			}
 

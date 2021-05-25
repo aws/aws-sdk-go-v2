@@ -1149,9 +1149,6 @@ type DetectMitigationActionsTaskTarget struct {
 // * Jobs
 //
 // * CredentialProvider
-//
-// The domain
-// configuration feature is in public preview and is subject to change.
 type DomainConfigurationSummary struct {
 
 	// The ARN of the domain configuration.
@@ -1584,6 +1581,9 @@ type Job struct {
 	// Details about the job process.
 	JobProcessDetails *JobProcessDetails
 
+	// The ARN of the job template used to create the job.
+	JobTemplateArn *string
+
 	// The time, in seconds since the epoch, when the job was last updated.
 	LastUpdatedAt *time.Time
 
@@ -1795,6 +1795,22 @@ type JobSummary struct {
 
 	// The ID of the thing group.
 	ThingGroupId *string
+}
+
+// An object that contains information about the job template.
+type JobTemplateSummary struct {
+
+	// The time, in seconds since the epoch, when the job template was created.
+	CreatedAt *time.Time
+
+	// A description of the job template.
+	Description *string
+
+	// The ARN of the job template.
+	JobTemplateArn *string
+
+	// The unique identifier of the job template.
+	JobTemplateId *string
 }
 
 // Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or

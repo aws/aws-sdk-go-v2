@@ -106,16 +106,16 @@ type CreateFileSystemInput struct {
 	// system.
 	Encrypted *bool
 
-	// The ID of the AWS KMS CMK to be used to protect the encrypted file system. This
-	// parameter is only required if you want to use a non-default CMK. If this
-	// parameter is not specified, the default CMK for Amazon EFS is used. This ID can
-	// be in one of the following formats:
+	// The ID of the AWS KMS CMK that you want to use to protect the encrypted file
+	// system. This parameter is only required if you want to use a non-default KMS
+	// key. If this parameter is not specified, the default CMK for Amazon EFS is used.
+	// This ID can be in one of the following formats:
 	//
-	// * Key ID - A unique identifier of the key,
-	// for example 1234abcd-12ab-34cd-56ef-1234567890ab.
+	// * Key ID - A unique identifier
+	// of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
-	// * ARN - An Amazon Resource
-	// Name (ARN) for the key, for example
+	// * ARN - An Amazon
+	// Resource Name (ARN) for the key, for example
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
 	// *
@@ -127,7 +127,8 @@ type CreateFileSystemInput struct {
 	//
 	// If KmsKeyId is specified,
 	// the CreateFileSystemRequest$Encrypted parameter must be set to true. EFS accepts
-	// only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.
+	// only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file
+	// systems.
 	KmsKeyId *string
 
 	// The performance mode of the file system. We recommend generalPurpose performance

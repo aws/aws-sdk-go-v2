@@ -12336,6 +12336,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>(Enterprise edition only) The name of the custom permissions profile that you want to\n            assign to this user. Customized permissions allows you to control a user's access by\n            restricting access the following operations:</p>\n        <ul>\n            <li>\n                <p>Create and update data sources</p>\n            </li>\n            <li>\n                <p>Create and update datasets</p>\n            </li>\n            <li>\n                <p>Create and update email reports</p>\n            </li>\n            <li>\n                <p>Subscribe to email reports</p>\n            </li>\n         </ul>\n        <p>To add custom permissions to an existing user, use <code>\n               <a>UpdateUser</a>\n            </code> instead.</p>\n        <p>A set of custom permissions includes any combination of these restrictions. Currently,\n            you need to create the profile names for custom permission sets by using the QuickSight\n            console. Then, you use the <code>RegisterUser</code> API operation to assign the named set of\n            permissions to a QuickSight user. </p>\n        <p>QuickSight custom permissions are applied through IAM policies. Therefore, they\n            override the permissions typically granted by assigning QuickSight users to one of the\n            default security cohorts in QuickSight (admin, author, reader).</p>\n        <p>This feature is available only to QuickSight Enterprise edition subscriptions that use\n            SAML 2.0-Based Federation for Single Sign-On (SSO).</p>"
                     }
+                },
+                "ExternalLoginFederationProviderType": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of supported external login provider that provides identity to let a user federate into Amazon QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the <code>COGNITO</code> provider type, don’t use the \"CustomFederationProviderUrl\" parameter which is only needed when the external provider is custom.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider. When choosing <code>CUSTOM_OIDC</code> type, use the <code>CustomFederationProviderUrl</code> parameter to provide the custom OIDC provider URL.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CustomFederationProviderUrl": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate\n         into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should\n         only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.</p>"
+                    }
+                },
+                "ExternalLoginId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity ID for a user in the external login provider.</p>"
+                    }
                 }
             }
         },
@@ -16880,6 +16898,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A flag that you use to indicate that you want to remove all custom permissions\n            from this user. Using this parameter resets the user to the state\n            it was in before a custom permissions profile was applied. This parameter defaults to\n            NULL and it doesn't accept any other value.</p>"
                     }
+                },
+                "ExternalLoginFederationProviderType": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of supported external login provider that provides identity to let a user federate into QuickSight with an associated AWS Identity and Access Management (IAM) role. The type of supported external login provider can be one of the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com. When choosing the <code>COGNITO</code> provider type, don’t use the \"CustomFederationProviderUrl\" parameter which is only needed when the external provider is custom.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider. When choosing <code>CUSTOM_OIDC</code> type, use the <code>CustomFederationProviderUrl</code> parameter to provide the custom OIDC provider URL.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NONE</code>: This clears all the previously saved external login information for a user. Use <code>\n                     <a>DescribeUser</a>\n                  </code> API to check the external login information.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CustomFederationProviderUrl": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the custom OpenID Connect (OIDC) provider that provides identity to let a user federate\n         into QuickSight with an associated AWS Identity and Access Management (IAM) role. This parameter should\n         only be used when <code>ExternalLoginFederationProviderType</code> parameter is set to <code>CUSTOM_OIDC</code>.</p>"
+                    }
+                },
+                "ExternalLoginId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity ID for a user in the external login provider.</p>"
+                    }
                 }
             }
         },
@@ -16996,6 +17032,24 @@
                     "target": "com.amazonaws.quicksight#RoleName",
                     "traits": {
                         "smithy.api#documentation": "<p>The custom permissions profile associated with this user.</p>"
+                    }
+                },
+                "ExternalLoginFederationProviderType": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of supported external login provider that provides identity to let the user\n            federate into Amazon QuickSight with an associated IAM role. The type can be one of the following.</p>\n        <ul>\n            <li>\n                    <p>\n                  <code>COGNITO</code>: Amazon Cognito. The provider URL is cognito-identity.amazonaws.com.</p>\n                </li>\n            <li>\n                    <p>\n                  <code>CUSTOM_OIDC</code>: Custom OpenID Connect (OIDC) provider.</p>\n                </li>\n         </ul>"
+                    }
+                },
+                "ExternalLoginFederationProviderUrl": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the external login provider.</p>"
+                    }
+                },
+                "ExternalLoginId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity ID for the user in the external login provider.</p>"
                     }
                 }
             },

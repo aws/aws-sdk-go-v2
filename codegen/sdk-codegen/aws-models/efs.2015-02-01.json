@@ -237,7 +237,7 @@
                 "Status": {
                     "target": "com.amazonaws.efs#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the status of the file system's backup policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLED</code>\n                  </b> - EFS is automatically backing up the file system.></p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLING</code>\n                  </b> - EFS is turning on automatic backups for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLED</code>\n                  </b> - automatic back ups are turned off for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLING</code>\n                  </b> - EFS is turning off automatic backups for the file system.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Describes the status of the file system's backup policy.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLED</code>\n                  </b> - EFS is automatically backing up the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>ENABLING</code>\n                  </b> - EFS is turning on automatic backups for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLED</code>\n                  </b> - automatic back ups are turned off for the file system.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>DISABLING</code>\n                  </b> - EFS is turning off automatic backups for the file system.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -430,7 +430,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.efs#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS KMS CMK to be used to protect the encrypted file system. This\n      parameter is only required if you want to use a non-default CMK. If this parameter is not\n      specified, the default CMK for Amazon EFS is used. This ID can be in one of the following\n      formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n            <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>\n         <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>\n         <important>\n            <p>EFS accepts only symmetric CMKs. You cannot use asymmetric CMKs with EFS file systems.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The ID of the AWS KMS CMK that you want to use to protect the encrypted file system. This\n      parameter is only required if you want to use a non-default KMS key. If this parameter is not\n      specified, the default CMK for Amazon EFS is used. This ID can be in one of the following\n      formats:</p>\n         <ul>\n            <li>\n               <p>Key ID - A unique identifier of the key, for example\n            <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>ARN - An Amazon Resource Name (ARN) for the key, for example\n            <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>.</p>\n            </li>\n            <li>\n               <p>Key alias - A previously created display name for a key, for example\n            <code>alias/projectKey1</code>.</p>\n            </li>\n            <li>\n               <p>Key alias ARN - An ARN for a key alias, for example\n            <code>arn:aws:kms:us-west-2:444455556666:alias/projectKey1</code>.</p>\n            </li>\n         </ul>\n         <p>If <code>KmsKeyId</code> is specified, the <a>CreateFileSystemRequest$Encrypted</a> parameter must be set to true.</p>\n         <important>\n            <p>EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with EFS file systems.</p>\n         </important>"
                     }
                 },
                 "ThroughputMode": {
@@ -577,7 +577,7 @@
                 "smithy.api#deprecated": {
                     "message": "Use TagResource."
                 },
-                "smithy.api#documentation": "<p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If\n      a tag key specified in the request already exists on the file system, this operation\n      overwrites its value with the value provided in the request. If you add the <code>Name</code>\n      tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p>\n         <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code>\n      action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - CreateTags is deprecated and not maintained. Please use the \n       API action to create tags for EFS resources.</p>\n         </note>\n         <p>Creates or overwrites tags associated with a file system. Each tag is a key-value pair. If\n      a tag key specified in the request already exists on the file system, this operation\n      overwrites its value with the value provided in the request. If you add the <code>Name</code>\n      tag to your file system, Amazon EFS returns it in the response to the <a>DescribeFileSystems</a> operation. </p>\n         <p>This operation requires permission for the <code>elasticfilesystem:CreateTags</code>\n      action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/create-tags/{FileSystemId}",
@@ -831,7 +831,7 @@
                 "smithy.api#deprecated": {
                     "message": "Use UntagResource."
                 },
-                "smithy.api#documentation": "<p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request\n      includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an\n      error. For more information about tags and related restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Tag Restrictions</a> in the\n        <i>AWS Billing and Cost Management User Guide</i>.</p>\n\n         <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code>\n      action.</p>",
+                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - DeleteTags is deprecated and not maintained. Please use the \n       API action to remove tags from EFS resources.</p>\n         </note>\n         <p>Deletes the specified tags from a file system. If the <code>DeleteTags</code> request\n      includes a tag key that doesn't exist, Amazon EFS ignores it and doesn't cause an\n      error. For more information about tags and related restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Tag Restrictions</a> in the\n        <i>AWS Billing and Cost Management User Guide</i>.</p>\n\n         <p>This operation requires permissions for the <code>elasticfilesystem:DeleteTags</code>\n      action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/2015-02-01/delete-tags/{FileSystemId}",
@@ -964,6 +964,49 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Present if there are more access points than returned in the response. \n      You can use the NextMarker in the subsequent request to fetch the additional descriptions.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.efs#DescribeAccountPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.efs#DescribeAccountPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.efs#DescribeAccountPreferencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.efs#InternalServerError"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2015-02-01/account-preferences",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.efs#DescribeAccountPreferencesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.efs#Token"
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.efs#MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.efs#DescribeAccountPreferencesResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceIdPreference": {
+                    "target": "com.amazonaws.efs#ResourceIdPreference"
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.efs#Token"
                 }
             }
         },
@@ -1373,7 +1416,7 @@
                 "smithy.api#deprecated": {
                     "message": "Use ListTagsForResource."
                 },
-                "smithy.api#documentation": "<p>Returns the tags associated with a file system. The order of tags returned in the\n      response of one <code>DescribeTags</code> call and the order of tags returned across the\n      responses of a multiple-call iteration (when using pagination) is unspecified. </p>\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:DescribeTags</code> action. </p>",
+                "smithy.api#documentation": "<note>\n            <p>DEPRECATED - The DeleteTags action is deprecated and not maintained. Please use the \n         API action to remove tags from EFS resources.</p>\n         </note>\n         <p>Returns the tags associated with a file system. The order of tags returned in the\n      response of one <code>DescribeTags</code> call and the order of tags returned across the\n      responses of a multiple-call iteration (when using pagination) is unspecified. </p>\n         <p> This operation requires permissions for the\n        <code>elasticfilesystem:DescribeTags</code> action. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/2015-02-01/tags/{FileSystemId}",
@@ -1885,7 +1928,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(alias/[a-zA-Z0-9/_-]+))))$"
+                "smithy.api#pattern": "^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|mrk-[0-9a-f]{32}|alias/[a-zA-Z0-9/_-]+|(arn:aws[-a-z]*:kms:[a-z0-9-]+:\\d{12}:((key/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})|(key/mrk-[0-9a-f]{32})|(alias/[a-zA-Z0-9/_-]+))))$"
             }
         },
         "com.amazonaws.efs#LifeCycleState": {
@@ -2007,7 +2050,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.efs#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.</p>",
+                        "smithy.api#documentation": "<p>(Optional) You can use <code>NextToken</code> in a subsequent request to fetch the next page of access point descriptions if the response payload was paginated.</p>",
                         "smithy.api#httpQuery": "NextToken"
                     }
                 }
@@ -2065,6 +2108,9 @@
                     "target": "com.amazonaws.efs#DescribeAccessPoints"
                 },
                 {
+                    "target": "com.amazonaws.efs#DescribeAccountPreferences"
+                },
+                {
                     "target": "com.amazonaws.efs#DescribeBackupPolicy"
                 },
                 {
@@ -2090,6 +2136,9 @@
                 },
                 {
                     "target": "com.amazonaws.efs#ModifyMountTargetSecurityGroups"
+                },
+                {
+                    "target": "com.amazonaws.efs#PutAccountPreferences"
                 },
                 {
                     "target": "com.amazonaws.efs#PutBackupPolicy"
@@ -2122,7 +2171,7 @@
                     "name": "elasticfilesystem"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Elastic File System</fullname>\n         <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use\n      with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic,\n      growing and shrinking automatically as you add and remove files, so your applications have the\n      storage they need, when they need it. For more information, see the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/api-reference.html\">User Guide</a>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Elastic File System</fullname>\n         <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for use\n      with Amazon EC2 instances in the AWS Cloud. With Amazon EFS, storage capacity is elastic,\n      growing and shrinking automatically as you add and remove files, so your applications have the\n      storage they need, when they need it. For more information, see the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/api-reference.html\">Amazon Elastic File System API Reference</a> and the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon Elastic File System User Guide</a>.</p>",
                 "smithy.api#title": "Amazon Elastic File System"
             }
         },
@@ -2507,6 +2556,46 @@
                 }
             }
         },
+        "com.amazonaws.efs#PutAccountPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.efs#PutAccountPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.efs#PutAccountPreferencesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.efs#InternalServerError"
+                }
+            ],
+            "traits": {
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/2015-02-01/account-preferences",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.efs#PutAccountPreferencesRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdType": {
+                    "target": "com.amazonaws.efs#ResourceIdType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.efs#PutAccountPreferencesResponse": {
+            "type": "structure",
+            "members": {
+                "ResourceIdPreference": {
+                    "target": "com.amazonaws.efs#ResourceIdPreference"
+                }
+            }
+        },
         "com.amazonaws.efs#PutBackupPolicy": {
             "type": "operation",
             "input": {
@@ -2669,6 +2758,22 @@
                 }
             }
         },
+        "com.amazonaws.efs#Resource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "An EFS resource, for example a file system or a mount target.",
+                "smithy.api#enum": [
+                    {
+                        "value": "FILE_SYSTEM",
+                        "name": "FileSystem"
+                    },
+                    {
+                        "value": "MOUNT_TARGET",
+                        "name": "MountTarget"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.efs#ResourceId": {
             "type": "string",
             "traits": {
@@ -2677,6 +2782,42 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$"
+            }
+        },
+        "com.amazonaws.efs#ResourceIdPreference": {
+            "type": "structure",
+            "members": {
+                "ResourceIdType": {
+                    "target": "com.amazonaws.efs#ResourceIdType"
+                },
+                "Resources": {
+                    "target": "com.amazonaws.efs#Resources"
+                }
+            }
+        },
+        "com.amazonaws.efs#ResourceIdType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A preference indicating a choice to use 63bit/32bit IDs for all applicable resources.",
+                "smithy.api#enum": [
+                    {
+                        "value": "LONG_ID",
+                        "name": "LongId"
+                    },
+                    {
+                        "value": "SHORT_ID",
+                        "name": "ShortId"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.efs#Resources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.efs#Resource"
+            },
+            "traits": {
+                "smithy.api#documentation": "EFS resources to which a preference applies to."
             }
         },
         "com.amazonaws.efs#RootDirectory": {
@@ -2842,7 +2983,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag is a key-value pair. Allowed characters are letters, white space, and numbers that\n      can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code>\n         </p>"
+                "smithy.api#documentation": "<p>A tag is a key-value pair. Allowed characters are letters, white space, and numbers that\n      can be represented in UTF-8, and the following characters:<code> + - = . _ : /</code>.</p>"
             }
         },
         "com.amazonaws.efs#TagKey": {
@@ -2901,7 +3042,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.efs#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID specifying the EFS resource that you want to create a tag for. </p>",
+                        "smithy.api#documentation": "<p>The ID specifying the EFS resource that you want to create a tag for.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2909,7 +3050,7 @@
                 "Tags": {
                     "target": "com.amazonaws.efs#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p></p>",
+                        "smithy.api#documentation": "<p>An array of <code>Tag</code> objects to add. Each <code>Tag</code> object is a key-value\n      pair.</p>",
                         "smithy.api#required": {}
                     }
                 }

@@ -42,10 +42,10 @@ type GetLogGroupFieldsInput struct {
 	// This member is required.
 	LogGroupName *string
 
-	// The time to set as the center of the query. If you specify time, the 8 minutes
-	// before and 8 minutes after this time are searched. If you omit time, the past 15
-	// minutes are queried. The time value is specified as epoch time, the number of
-	// seconds since January 1, 1970, 00:00:00 UTC.
+	// The time to set as the center of the query. If you specify time, the 15 minutes
+	// before this time are queries. If you omit time the 8 minutes before and 8
+	// minutes after this time are searched. The time value is specified as epoch time,
+	// the number of seconds since January 1, 1970, 00:00:00 UTC.
 	Time *int64
 }
 

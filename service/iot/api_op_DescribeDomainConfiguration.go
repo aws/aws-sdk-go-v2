@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Gets summary information about a domain configuration. The domain configuration
-// feature is in public preview and is subject to change.
+// Gets summary information about a domain configuration.
 func (c *Client) DescribeDomainConfiguration(ctx context.Context, params *DescribeDomainConfigurationInput, optFns ...func(*Options)) (*DescribeDomainConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeDomainConfigurationInput{}

@@ -36,7 +36,7 @@ type TagResourceInput struct {
 	// This member is required.
 	ResourceId *string
 
-	//
+	// An array of Tag objects to add. Each Tag object is a key-value pair.
 	//
 	// This member is required.
 	Tags []types.Tag

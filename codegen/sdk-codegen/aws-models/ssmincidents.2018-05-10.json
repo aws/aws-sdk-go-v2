@@ -1,0 +1,4044 @@
+{
+    "smithy": "1.0",
+    "shapes": {
+        "com.amazonaws.ssmincidents#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ssmincidents#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.ssmincidents#Action": {
+            "type": "union",
+            "members": {
+                "ssmAutomation": {
+                    "target": "com.amazonaws.ssmincidents#SsmAutomation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Systems Manager automation document to start as the runbook at the beginning of the\n         incident.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The action that starts at the beginning of an incident. The response plan defines the\n         action.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ActionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#Action"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#AddRegionAction": {
+            "type": "structure",
+            "members": {
+                "regionName": {
+                    "target": "com.amazonaws.ssmincidents#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region name to add to the replication set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sseKmsKeyId": {
+                    "target": "com.amazonaws.ssmincidents#SseKmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key ID to use to encrypt your replication set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the Region and KMS key to add to the replication set. </p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:[a-z0-9-]*:[a-z0-9-]*:([0-9]{12})?:.+$"
+            }
+        },
+        "com.amazonaws.ssmincidents#AttributeValueList": {
+            "type": "union",
+            "members": {
+                "stringValues": {
+                    "target": "com.amazonaws.ssmincidents#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of string values that the filter matches.</p>"
+                    }
+                },
+                "integerValues": {
+                    "target": "com.amazonaws.ssmincidents#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of integer values that the filter matches.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Use the AttributeValueList to filter by string or integer values.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#AutomationExecution": {
+            "type": "union",
+            "members": {
+                "ssmExecutionArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the automation process.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Systems Manager automation document\n         process\n         to start as the runbook at the beginning of the incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#AutomationExecutionSet": {
+            "type": "set",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#AutomationExecution"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ChatChannel": {
+            "type": "union",
+            "members": {
+                "empty": {
+                    "target": "com.amazonaws.ssmincidents#EmptyChatChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to remove the chat channel from an incident record or response plan.</p>"
+                    }
+                },
+                "chatbotSns": {
+                    "target": "com.amazonaws.ssmincidents#ChatbotSnsConfigurationSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an\n         incident. You can also make updates to the incident through the chat channel\n         by\n         using the SNS topics. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The AWS Chatbot chat channel used for collaboration during an incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ChatbotSnsConfigurationSet": {
+            "type": "set",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#SnsArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#SSMIncidents": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ssmincidents#CreateReplicationSet"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#CreateResponsePlan"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#CreateTimelineEvent"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteIncidentRecord"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteReplicationSet"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteResponsePlan"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteTimelineEvent"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetIncidentRecord"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetReplicationSet"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetResourcePolicies"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetResponsePlan"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetTimelineEvent"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListIncidentRecords"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListRelatedItems"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListReplicationSets"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListResponsePlans"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListTimelineEvents"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#PutResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#StartIncident"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateDeletionProtection"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateIncidentRecord"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateRelatedItems"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateReplicationSet"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateResponsePlan"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateTimelineEvent"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSM Incidents",
+                    "arnNamespace": "ssm-incidents",
+                    "cloudFormationName": "SSMIncidents",
+                    "cloudTrailEventSource": "ssm-incidents.amazonaws.com",
+                    "endpointPrefix": "ssm-incidents"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm-incidents"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "content-type",
+                        "x-amzn-platform-id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>AWS Systems Manager Incident Manager is an incident management console designed to help\n      users mitigate and recover from incidents affecting their AWS-hosted applications. An incident\n      is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n      highlighting relevant troubleshooting data, and providing collaboration tools to get services\n      back up and running. To achieve the primary goal of reducing the time-to-resolution of\n      critical incidents, Incident Manager automates response plans and enables responder team\n      escalation. </p>",
+                "smithy.api#title": "AWS Systems Manager Incident Manager"
+            }
+        },
+        "com.amazonaws.ssmincidents#Condition": {
+            "type": "union",
+            "members": {
+                "before": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Before the specified timestamp</p>"
+                    }
+                },
+                "after": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>After the specified timestamp.</p>"
+                    }
+                },
+                "equals": {
+                    "target": "com.amazonaws.ssmincidents#AttributeValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value is equal to the provided string or integer. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A conditional statement with which to compare a value, after a timestamp, before a\n         timestamp, or equal to a string or integer. If multiple conditions are specified, the\n         conditionals become an <code>AND</code>ed statement. If multiple values are specified for a\n         conditional, the values are <code>OR</code>d.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ssmincidents#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The identifier of the requested resource"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.ssmincidents#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "The resource type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updating or deleting a resource causes an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateReplicationSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#CreateReplicationSetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#CreateReplicationSetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>A replication set replicates and encrypts your data to the provided Regions with the\n            provided KMS key. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/createReplicationSet",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateReplicationSetInput": {
+            "type": "structure",
+            "members": {
+                "regions": {
+                    "target": "com.amazonaws.ssmincidents#RegionMapInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Regions that Incident Manager replicates your data to. You can have up to three Regions\n            in your replication set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateReplicationSetOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replication set. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateResponsePlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#CreateResponsePlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#CreateResponsePlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a response plan that automates the initial response to incidents. A response\n            plan engages contacts, starts chat channel collaboration, and\n            initiates\n            runbooks at the beginning of an incident.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/createResponsePlan",
+                    "code": 201
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateResponsePlanInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ssmincidents#ResponsePlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short format name of the response plan. Can't include spaces.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.ssmincidents#ResponsePlanDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long format of the response plan name. This field can contain spaces.</p>"
+                    }
+                },
+                "incidentTemplate": {
+                    "target": "com.amazonaws.ssmincidents#IncidentTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details used to create an incident when using this response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chatChannel": {
+                    "target": "com.amazonaws.ssmincidents#ChatChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The\n            AWS Chatbot\n            chat channel used for collaboration during an incident.</p>"
+                    }
+                },
+                "engagements": {
+                    "target": "com.amazonaws.ssmincidents#EngagementSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contacts and escalation plans that the response plan engages during an\n            incident.</p>"
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.ssmincidents#ActionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actions that the response plan starts at the beginning of an incident.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ssmincidents#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags that you are adding to the response plan.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateResponsePlanOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateTimelineEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#CreateTimelineEventInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#CreateTimelineEventOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a custom timeline event on the incident details page of an incident record.\n            Timeline events are automatically created by Incident Manager, marking key moment during an\n            incident. You can create custom timeline events to mark important events that are\n            automatically detected by Incident Manager.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/createTimelineEvent",
+                    "code": 201
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateTimelineEventInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record you are adding the event\n            to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the event occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.ssmincidents#TimelineEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the event. You can create timeline events of type <code>Custom\n                Event</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventData": {
+                    "target": "com.amazonaws.ssmincidents#EventData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#CreateTimelineEventOutput": {
+            "type": "structure",
+            "members": {
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the incident record that you added the event to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.ssmincidents#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the event for easy reference later. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DedupeString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteIncidentRecord": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#DeleteIncidentRecordInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#DeleteIncidentRecordOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete an incident record from Incident Manager. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteIncidentRecord",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteIncidentRecordInput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record you are deleting.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteIncidentRecordOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#DeleteRegionAction": {
+            "type": "structure",
+            "members": {
+                "regionName": {
+                    "target": "com.amazonaws.ssmincidents#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Region you're deleting from the replication set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the information about the Region you're deleting from your replication\n         set.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteReplicationSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#DeleteReplicationSetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#DeleteReplicationSetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes all Regions in your replication set. Deleting the replication set deletes all\n            Incident Manager data.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteReplicationSet",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteReplicationSetInput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replication set you're deleting.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteReplicationSetOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#DeleteResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#DeleteResourcePolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#DeleteResourcePolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the resource policy that\n            AWS\n            Resource Access Manager uses to share your Incident Manager resource.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteResourcePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteResourcePolicyInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource you're deleting the policy from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyId": {
+                    "target": "com.amazonaws.ssmincidents#PolicyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource policy you're deleting.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteResourcePolicyOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#DeleteResponsePlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#DeleteResponsePlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#DeleteResponsePlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified response plan. Deleting a response plan stops all linked\n            CloudWatch alarms and EventBridge events from creating an incident with this response\n            plan.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteResponsePlan",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteResponsePlanInput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteResponsePlanOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#DeleteTimelineEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#DeleteTimelineEventInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#DeleteTimelineEventOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a timeline event from an incident.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/deleteTimelineEvent",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteTimelineEventInput": {
+            "type": "structure",
+            "members": {
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that the event is part of.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.ssmincidents#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#DeleteTimelineEventOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#EmptyChatChannel": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>Used to remove the chat channel from an incident record or response plan.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#EngagementSet": {
+            "type": "set",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#SsmContactsArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#EventData": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 6000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#EventSummary": {
+            "type": "structure",
+            "members": {
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that the event happened during.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.ssmincidents#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timeline event ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the event occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventUpdatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the timeline event was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.ssmincidents#TimelineEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of event. The timeline event must be <code>Custom Event</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a timeline event during an incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#EventSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#EventSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ExceptionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.ssmincidents#Filter": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key that you're filtering on.</p>",
+                        "smithy.api#length": {
+                            "max": 50
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "condition": {
+                    "target": "com.amazonaws.ssmincidents#Condition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition accepts before or after a specified time, equal to a string, or equal to an integer.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filter the selection by using a condition.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#FilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#Filter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetIncidentRecord": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#GetIncidentRecordInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#GetIncidentRecordOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details of the specified incident record.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/getIncidentRecord",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#GetIncidentRecordInput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetIncidentRecordOutput": {
+            "type": "structure",
+            "members": {
+                "incidentRecord": {
+                    "target": "com.amazonaws.ssmincidents#IncidentRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details structure of the incident record.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetReplicationSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#GetReplicationSetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#GetReplicationSetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve your Incident Manager replication set.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/getReplicationSet",
+                    "code": 200
+                },
+                "smithy.api#readonly": {},
+                "smithy.waiters#waitable": {
+                    "WaitForReplicationSetActive": {
+                        "documentation": "Wait for a replication set to become ACTIVE",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "replicationSet.status",
+                                        "expected": "ACTIVE",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "replicationSet.status",
+                                        "expected": "CREATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "replicationSet.status",
+                                        "expected": "UPDATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "replicationSet.status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30,
+                        "maxDelay": 30
+                    },
+                    "WaitForReplicationSetDeleted": {
+                        "documentation": "Wait for a replication set to be deleted",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "replicationSet.status",
+                                        "expected": "DELETING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "replicationSet.status",
+                                        "expected": "FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 30,
+                        "maxDelay": 30
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetReplicationSetInput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replication set you want to retrieve.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetReplicationSetOutput": {
+            "type": "structure",
+            "members": {
+                "replicationSet": {
+                    "target": "com.amazonaws.ssmincidents#ReplicationSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the replication set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetResourcePolicies": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#GetResourcePoliciesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#GetResourcePoliciesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the resource policies attached to the specified response plan.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/getResourcePolicies",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "resourcePolicies",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#GetResourcePoliciesInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan with the attached resource policy. </p>",
+                        "smithy.api#httpQuery": "resourceArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ssmincidents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of resource policies to display per page of results.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetResourcePoliciesOutput": {
+            "type": "structure",
+            "members": {
+                "resourcePolicies": {
+                    "target": "com.amazonaws.ssmincidents#ResourcePolicyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the resource policy attached to the response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetResponsePlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#GetResponsePlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#GetResponsePlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of the specified response plan.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/getResponsePlan",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#GetResponsePlanInput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan.</p>",
+                        "smithy.api#httpQuery": "arn",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetResponsePlanOutput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ssmincidents#ResponsePlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short format name of the response plan. Can't contain spaces.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.ssmincidents#ResponsePlanDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long format name of the response plan. Can contain spaces.</p>"
+                    }
+                },
+                "incidentTemplate": {
+                    "target": "com.amazonaws.ssmincidents#IncidentTemplate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details used to create the incident when using this response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chatChannel": {
+                    "target": "com.amazonaws.ssmincidents#ChatChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The\n            AWS\n            Chatbot chat channel used for collaboration during an\n            incident.</p>"
+                    }
+                },
+                "engagements": {
+                    "target": "com.amazonaws.ssmincidents#EngagementSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contacts and escalation plans that the response plan engages during an\n            incident.</p>"
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.ssmincidents#ActionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actions that this response plan takes at the beginning of the incident.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetTimelineEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#GetTimelineEventInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#GetTimelineEventOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a timeline event based on its ID and incident record.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/getTimelineEvent",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#GetTimelineEventInput": {
+            "type": "structure",
+            "members": {
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that the timeline event is part of.</p>",
+                        "smithy.api#httpQuery": "incidentRecordArn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.ssmincidents#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the event. You can get an event's ID when you create it or by using <code>ListTimelineEvents</code>.</p>",
+                        "smithy.api#httpQuery": "eventId",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#GetTimelineEventOutput": {
+            "type": "structure",
+            "members": {
+                "event": {
+                    "target": "com.amazonaws.ssmincidents#TimelineEvent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the timeline event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#Impact": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentRecord": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.ssmincidents#IncidentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "summary": {
+                    "target": "com.amazonaws.ssmincidents#IncidentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the incident. The summary is a brief synopsis of what occurred, what is currently happening, and context.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ssmincidents#IncidentRecordStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "impact": {
+                    "target": "com.amazonaws.ssmincidents#Impact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impact of the incident on customers and applications.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that Incident Manager created the incident record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resolvedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the incident was resolved. This appears as a timeline event.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the incident was most recently modified.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedBy": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Who modified the incident most recently.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "automationExecutions": {
+                    "target": "com.amazonaws.ssmincidents#AutomationExecutionSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The runbook, or automation document, that's run at the beginning of the incident.</p>"
+                    }
+                },
+                "incidentRecordSource": {
+                    "target": "com.amazonaws.ssmincidents#IncidentRecordSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the action that started the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dedupeString": {
+                    "target": "com.amazonaws.ssmincidents#DedupeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The string Incident Manager uses to prevent duplicate incidents from being created by the same incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "chatChannel": {
+                    "target": "com.amazonaws.ssmincidents#ChatChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The chat channel used for collaboration during an incident.</p>"
+                    }
+                },
+                "notificationTargets": {
+                    "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SNS targets that\n         AWS Chatbot uses\n         to notify the chat channels and perform actions on the incident record.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The record of the incident that's created when an incident occurs.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentRecordSource": {
+            "type": "structure",
+            "members": {
+                "createdBy": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal that started the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "invokedBy": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The principal the assumed the role specified of the <code>createdBy</code>.</p>"
+                    }
+                },
+                "resourceArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource that caused the incident to be created.</p>"
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.ssmincidents#IncidentSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service that started the incident. This can be manually created from Incident Manager,\n         automatically created using an\n         AWS\n         CloudWatch alarm, or\n         Amazon\n         EventBridge event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about how the incident record was created and when.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentRecordStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "OPEN",
+                        "name": "OPEN"
+                    },
+                    {
+                        "value": "RESOLVED",
+                        "name": "RESOLVED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentRecordSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.ssmincidents#IncidentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the incident. This value is either provided by the response plan or\n         overwritten on creation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ssmincidents#IncidentRecordStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "impact": {
+                    "target": "com.amazonaws.ssmincidents#Impact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the impact to customers and applications.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the incident was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resolvedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the incident was resolved.</p>"
+                    }
+                },
+                "incidentRecordSource": {
+                    "target": "com.amazonaws.ssmincidents#IncidentRecordSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>What caused Incident Manager to create the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details describing an incident record.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentRecordSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#IncidentRecordSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentSummary": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentTemplate": {
+            "type": "structure",
+            "members": {
+                "title": {
+                    "target": "com.amazonaws.ssmincidents#IncidentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the incident. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "impact": {
+                    "target": "com.amazonaws.ssmincidents#Impact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The impact of the incident on your customers and applications. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "summary": {
+                    "target": "com.amazonaws.ssmincidents#IncidentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary of the incident. The summary is a brief synopsis of what occurred, what's\n         currently happening, and context.</p>"
+                    }
+                },
+                "dedupeString": {
+                    "target": "com.amazonaws.ssmincidents#DedupeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to stop Incident Manager from creating multiple incident records for the same incident. </p>"
+                    }
+                },
+                "notificationTargets": {
+                    "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an\n         incident. You can also make updates to the incident through the chat channel using the SNS\n         topics. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Basic details used in creating a response plan. The response plan is then used to create an incident record.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#IncidentTitle": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#IntegerList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#Integer"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ssmincidents#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or\n      failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.ssmincidents#ItemIdentifier": {
+            "type": "structure",
+            "members": {
+                "value": {
+                    "target": "com.amazonaws.ssmincidents#ItemValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.ssmincidents#ItemType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of related item. Incident Manager supports the following types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ANALYSIS</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>INCIDENT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>METRIC</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>PARENT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ATTACHMENT</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>OTHER</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details and type of a related item.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ItemType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ANALYSIS",
+                        "name": "ANALYSIS"
+                    },
+                    {
+                        "value": "INCIDENT",
+                        "name": "INCIDENT"
+                    },
+                    {
+                        "value": "METRIC",
+                        "name": "METRIC"
+                    },
+                    {
+                        "value": "PARENT",
+                        "name": "PARENT"
+                    },
+                    {
+                        "value": "ATTACHMENT",
+                        "name": "ATTACHMENT"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#ItemValue": {
+            "type": "union",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the related item, if the related item is an Amazon\n         resource.</p>"
+                    }
+                },
+                "url": {
+                    "target": "com.amazonaws.ssmincidents#Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL, if the related item is a non-AWS resource.</p>"
+                    }
+                },
+                "metricDefinition": {
+                    "target": "com.amazonaws.ssmincidents#MetricDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric definition, if the related item is a metric in CloudWatch.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a related item.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ListIncidentRecords": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#ListIncidentRecordsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#ListIncidentRecordsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all incident records in your account. Use this command to retrieve the Amazon\n            Resource Name (ARN) of the incident record you want to update. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listIncidentRecords",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "incidentRecordSummaries",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#ListIncidentRecordsInput": {
+            "type": "structure",
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.ssmincidents#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter the list of incident records you are searching through. You can filter on the\n            following keys:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>creationTime</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>impact</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>status</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>createdBy</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ssmincidents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListIncidentRecordsOutput": {
+            "type": "structure",
+            "members": {
+                "incidentRecordSummaries": {
+                    "target": "com.amazonaws.ssmincidents#IncidentRecordSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of each listed incident record.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListRelatedItems": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#ListRelatedItemsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#ListRelatedItemsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all related items for an incident record.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listRelatedItems",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "relatedItems",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#ListRelatedItemsInput": {
+            "type": "structure",
+            "members": {
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record that you are listing related items for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ssmincidents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of related items per page.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListRelatedItemsOutput": {
+            "type": "structure",
+            "members": {
+                "relatedItems": {
+                    "target": "com.amazonaws.ssmincidents#RelatedItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about each related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListReplicationSets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#ListReplicationSetsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#ListReplicationSetsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists details about the replication set configured in your account. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listReplicationSets",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "replicationSetArns",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#ListReplicationSetsInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.ssmincidents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results per page. </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListReplicationSetsOutput": {
+            "type": "structure",
+            "members": {
+                "replicationSetArns": {
+                    "target": "com.amazonaws.ssmincidents#ReplicationSetArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the list replication set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListResponsePlans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#ListResponsePlansInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#ListResponsePlansOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all response plans in your account.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listResponsePlans",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "responsePlanSummaries",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#ListResponsePlansInput": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.ssmincidents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response plans per page.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListResponsePlansOutput": {
+            "type": "structure",
+            "members": {
+                "responsePlanSummaries": {
+                    "target": "com.amazonaws.ssmincidents#ResponsePlanSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of each response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the tags that are attached to the specified response plan.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.ssmincidents#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags for the response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListTimelineEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#ListTimelineEventsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#ListTimelineEventsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists timeline events of the specified incident record.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/listTimelineEvents",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "eventSummaries",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#ListTimelineEventsInput": {
+            "type": "structure",
+            "members": {
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that the event is part of.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "filters": {
+                    "target": "com.amazonaws.ssmincidents#FilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the timeline events based on the provided conditional values. You can filter\n            timeline events using the following keys:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>eventTime</code>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <code>eventType</code>\n               </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "sortBy": {
+                    "target": "com.amazonaws.ssmincidents#TimelineEventSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sort by the specified key value pair.</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.ssmincidents#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sorts the order of timeline events by the value specified in the <code>sortBy</code>\n            field.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.ssmincidents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results per page.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ListTimelineEventsOutput": {
+            "type": "structure",
+            "members": {
+                "eventSummaries": {
+                    "target": "com.amazonaws.ssmincidents#EventSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about each event that occurred during the incident.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.ssmincidents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to continue to the next page of results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#MetricDefinition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#NotificationTargetItem": {
+            "type": "union",
+            "members": {
+                "snsTopicArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SNS topic that's used by\n         AWS\n         Chatbot to notify the incidents chat channel.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#NotificationTargetSet": {
+            "type": "set",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#NotificationTargetItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#Policy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#PolicyId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#PutResourcePolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#PutResourcePolicyInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#PutResourcePolicyOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a resource policy to the specified response plan.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/putResourcePolicy",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#PutResourcePolicyInput": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan you're adding the resource policy\n            to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policy": {
+                    "target": "com.amazonaws.ssmincidents#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the resource policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#PutResourcePolicyOutput": {
+            "type": "structure",
+            "members": {
+                "policyId": {
+                    "target": "com.amazonaws.ssmincidents#PolicyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#RawData": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#RegionInfo": {
+            "type": "structure",
+            "members": {
+                "sseKmsKeyId": {
+                    "target": "com.amazonaws.ssmincidents#SseKmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the KMS key used to encrypt the data in this Region.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ssmincidents#RegionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Region in the replication set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "statusMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information displayed about the status of the Region.</p>"
+                    }
+                },
+                "statusUpdateDateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The most recent date and time that the Region's status was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a Region in your replication set.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#RegionInfoMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssmincidents#RegionName"
+            },
+            "value": {
+                "target": "com.amazonaws.ssmincidents#RegionInfo"
+            }
+        },
+        "com.amazonaws.ssmincidents#RegionMapInput": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssmincidents#RegionName"
+            },
+            "value": {
+                "target": "com.amazonaws.ssmincidents#RegionMapInputValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#RegionMapInputValue": {
+            "type": "structure",
+            "members": {
+                "sseKmsKeyId": {
+                    "target": "com.amazonaws.ssmincidents#SseKmsKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The KMS key used to encrypt the data in your replication set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The mapping between a Region and the key that's used to encrypt the data.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#RegionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#RegionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE",
+                        "documentation": "All operations have completed successfully and the region is ready to use"
+                    },
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING",
+                        "documentation": "The region is in the process of being created."
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING",
+                        "documentation": "The region is in the process of being deleted."
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED",
+                        "documentation": "The region is not healthy and we cannot automatically fix it."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#RelatedItem": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.ssmincidents#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the related item.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the related item.</p>",
+                        "smithy.api#length": {
+                            "max": 200
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Resources that responders use to triage and mitigate the incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#RelatedItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#RelatedItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#RelatedItemsUpdate": {
+            "type": "union",
+            "members": {
+                "itemToAdd": {
+                    "target": "com.amazonaws.ssmincidents#RelatedItem",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the related item you're adding.</p>"
+                    }
+                },
+                "itemToRemove": {
+                    "target": "com.amazonaws.ssmincidents#ItemIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the related item you're deleting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the related item you're adding.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ReplicationSet": {
+            "type": "structure",
+            "members": {
+                "regionMap": {
+                    "target": "com.amazonaws.ssmincidents#RegionInfoMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The map between each Region in your replication set and the KMS key that is used to\n         encrypt the data in that Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ssmincidents#ReplicationSetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the replication set. If the replication set is still pending, you can't\n         use Incident Manager functionality.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionProtected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if the replication set deletion protection is enabled or not. If deletion\n         protection is enabled, you can't delete the last Region in the replication set. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the replication set was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about who created the replication set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the replication set was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastModifiedBy": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Who last modified the replication set.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The set of Regions that your Incident Manager data will be replicated to and the KMS key used\n         to encrypt the data. </p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ReplicationSetArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#Arn"
+            }
+        },
+        "com.amazonaws.ssmincidents#ReplicationSetStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE",
+                        "documentation": "All operations have completed successfully and the replication set is ready to use"
+                    },
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING",
+                        "documentation": "Replication set is in the process of being created."
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING",
+                        "documentation": "Replication set is in the process of being updated."
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING",
+                        "documentation": "Replication set is in the process of being deleted."
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED",
+                        "documentation": "Replication set is not healthy and we cannot fix it."
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ssmincidents#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The identifier for the requested resource"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.ssmincidents#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "The resource type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request references a resource which does not exist. </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.ssmincidents#ResourcePolicy": {
+            "type": "structure",
+            "members": {
+                "policyDocument": {
+                    "target": "com.amazonaws.ssmincidents#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The JSON blob that describes the policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policyId": {
+                    "target": "com.amazonaws.ssmincidents#PolicyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the resource policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ramResourceShareRegion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Region that policy allows resources to be used in.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The resource policy that allows Incident Manager to perform actions on resources on your behalf.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ResourcePolicyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#ResourcePolicy"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ResourceType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RESPONSE_PLAN",
+                        "name": "RESPONSE_PLAN"
+                    },
+                    {
+                        "value": "INCIDENT_RECORD",
+                        "name": "INCIDENT_RECORD"
+                    },
+                    {
+                        "value": "TIMELINE_EVENT",
+                        "name": "TIMELINE_EVENT"
+                    },
+                    {
+                        "value": "REPLICATION_SET",
+                        "name": "REPLICATION_SET"
+                    },
+                    {
+                        "value": "RESOURCE_POLICY",
+                        "name": "RESOURCE_POLICY"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#ResponsePlanDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ResponsePlanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]*$"
+            }
+        },
+        "com.amazonaws.ssmincidents#ResponsePlanSummary": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ssmincidents#ResponsePlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the response plan. This can't include spaces.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.ssmincidents#ResponsePlanDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The human readable name of the response plan. This can include spaces.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the response plan that are used when creating an incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#ResponsePlanSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#ResponsePlanSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#RoleArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::IAM::Role"
+                },
+                "smithy.api#length": {
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:iam::([0-9]{12})?:role/.+$"
+            }
+        },
+        "com.amazonaws.ssmincidents#ServiceCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ssm-incidents",
+                        "name": "SSM_INCIDENTS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ssmincidents#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The identifier for the requested resource"
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.ssmincidents#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "The resource type"
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.ssmincidents#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "Originating service code",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Originating quota code",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Request would cause a service quota to be exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.ssmincidents#SnsArn": {
+            "type": "string",
+            "traits": {
+                "aws.api#arnReference": {
+                    "type": "AWS::SNS::Topic"
+                },
+                "smithy.api#length": {
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#SortOrder": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ASCENDING",
+                        "name": "ASCENDING"
+                    },
+                    {
+                        "value": "DESCENDING",
+                        "name": "DESCENDING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#SseKmsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#SsmAutomation": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.ssmincidents#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that the automation document will assume when running commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The automation document's name.</p>",
+                        "smithy.api#pattern": "^[a-zA-Z0-9_\\-.:/]{3,128}$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "documentVersion": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The automation document's version to use when running.</p>",
+                        "smithy.api#length": {
+                            "max": 128
+                        }
+                    }
+                },
+                "targetAccount": {
+                    "target": "com.amazonaws.ssmincidents#SsmTargetAccount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account that the automation document will be run in. This can be in either the management account or an application account.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.ssmincidents#SsmParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key-value pair parameters to use when running the automation document.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the Systems Manager automation document that will be used as a runbook during an incident.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#SsmContactsArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:[-\\w+=/,.@]+:ssm-contacts:[-\\w+=/,.@]*:[0-9]+:([\\w+=/,.@:-]+)*$"
+            }
+        },
+        "com.amazonaws.ssmincidents#SsmParameterValues": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 0,
+                        "max": 512
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#SsmParameters": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "min": 1,
+                        "max": 50
+                    }
+                }
+            },
+            "value": {
+                "target": "com.amazonaws.ssmincidents#SsmParameterValues"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#SsmTargetAccount": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RESPONSE_PLAN_OWNER_ACCOUNT",
+                        "name": "RESPONSE_PLAN_OWNER_ACCOUNT"
+                    },
+                    {
+                        "value": "IMPACTED_ACCOUNT",
+                        "name": "IMPACTED_ACCOUNT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#StartIncident": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#StartIncidentInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#StartIncidentOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Used to start an incident from CloudWatch alarms, EventBridge events, or manually. </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/startIncident",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#StartIncidentInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "responsePlanArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan that pre-defines summary, chat\n            channels, SNS topics, runbooks, title, and impact of the incident. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.ssmincidents#IncidentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provide a title for the incident. Providing a title overwrites the title provided by\n            the response plan. </p>"
+                    }
+                },
+                "impact": {
+                    "target": "com.amazonaws.ssmincidents#Impact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact\n            provided by a response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n                <p>\n                  <code>1</code> - Critical impact, this typically relates to full application\n                    failure that impacts many to all customers. </p>\n            </li>\n            <li>\n                <p>\n                  <code>2</code> - High impact, partial application failure with impact to many\n                    customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>3</code> -  Medium impact, the application is providing reduced service\n                    to customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>4</code> -  Low impact, customer might aren't impacted by the problem\n                    yet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>5</code> - No impact, customers aren't currently impacted but urgent\n                    action is needed to avoid impact.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "triggerDetails": {
+                    "target": "com.amazonaws.ssmincidents#TriggerDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of what created the incident record in Incident Manager.</p>"
+                    }
+                },
+                "relatedItems": {
+                    "target": "com.amazonaws.ssmincidents#RelatedItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Add related items to the incident for other responders to use. Related items are AWS\n            resources, external links, or files uploaded to an S3 bucket. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#StartIncidentOutput": {
+            "type": "structure",
+            "members": {
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the newly created incident record.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#StringList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String",
+                "traits": {
+                    "smithy.api#length": {
+                        "max": 1000
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!aws:)[A-Za-z0-9 _=@:.+-/]+$"
+            }
+        },
+        "com.amazonaws.ssmincidents#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.ssmincidents#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.ssmincidents#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds a tag to a response plan.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan you're adding the tags to.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.ssmincidents#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags that you are adding to the response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9 _=@:.+-/]*$"
+            }
+        },
+        "com.amazonaws.ssmincidents#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ssmincidents#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "serviceCode": {
+                    "target": "com.amazonaws.ssmincidents#ServiceCode",
+                    "traits": {
+                        "smithy.api#documentation": "Originating service code",
+                        "smithy.api#required": {}
+                    }
+                },
+                "quotaCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Originating quota code",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.ssmincidents#TimelineEvent": {
+            "type": "structure",
+            "members": {
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that the event occurred during.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.ssmincidents#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the timeline event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the event occurred.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventUpdatedTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the timeline event was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.ssmincidents#TimelineEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of event that occurred. Currently Incident Manager supports only the <code>Custom\n            Event</code> type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventData": {
+                    "target": "com.amazonaws.ssmincidents#EventData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A significant event that happened during the incident. </p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#TimelineEventSort": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EVENT_TIME",
+                        "name": "EVENT_TIME"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ssmincidents#TimelineEventType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#TriggerDetails": {
+            "type": "structure",
+            "members": {
+                "source": {
+                    "target": "com.amazonaws.ssmincidents#IncidentSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the service that sourced the event. All events sourced from within AWS begin\n         with \"aws.\" Customer-generated events can have any value here, as long as it doesn't begin\n         with \"aws.\" We recommend the use of Java package-name style reverse domain-name strings. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "triggerArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the source that detected the incident.</p>"
+                    }
+                },
+                "timestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the incident was detected.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "rawData": {
+                    "target": "com.amazonaws.ssmincidents#RawData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Raw data passed from either EventBridge, CloudWatch, or Incident Manager when an\n         incident is created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about what caused the incident to be created in Incident Manager.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes a tag from a resource.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan you're removing a tag from.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.ssmincidents#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the tag you're removing from the response plan.</p>",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#UpdateActionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.ssmincidents#UpdateReplicationSetAction"
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateDeletionProtection": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#UpdateDeletionProtectionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#UpdateDeletionProtectionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update deletion protection to either allow or deny deletion of the final Region in a\n            replication set.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateDeletionProtection",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateDeletionProtectionInput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replication set you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletionProtected": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details if deletion protection is enabled or disabled in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateDeletionProtectionOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#UpdateIncidentRecord": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#UpdateIncidentRecordInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#UpdateIncidentRecordOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the details of an incident record. You can use this action to update an\n            incident record from the defined chat channel. For more information about using actions\n            in chat channels, see <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact\">Interacting through chat</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateIncidentRecord",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateIncidentRecordInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record you are updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "title": {
+                    "target": "com.amazonaws.ssmincidents#IncidentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The title of the incident is a brief and easily recognizable.</p>"
+                    }
+                },
+                "summary": {
+                    "target": "com.amazonaws.ssmincidents#IncidentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The summary describes what has happened during the incident.</p>"
+                    }
+                },
+                "impact": {
+                    "target": "com.amazonaws.ssmincidents#Impact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the impact to customers and applications. Providing an impact overwrites the\n            impact provided by the response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n                <p>\n                  <code>1</code> - Critical impact, this typically relates to full application\n                    failure that impacts many to all customers. </p>\n            </li>\n            <li>\n                <p>\n                  <code>2</code> - High impact, partial application failure with impact to many\n                    customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>3</code> -  Medium impact, the application is providing reduced service\n                    to customers.</p>\n            </li>\n            <li>\n                <p>\n                  <code>4</code> -  Low impact, customer might aren't impacted by the problem\n                    yet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>5</code> - No impact, customers aren't currently impacted but urgent\n                    action is needed to avoid impact.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.ssmincidents#IncidentRecordStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the incident. An incident can be <code>Open</code> or <code>Resolved</code>.</p>"
+                    }
+                },
+                "chatChannel": {
+                    "target": "com.amazonaws.ssmincidents#ChatChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Chatbot chat channel for responders to collaborate in.</p>"
+                    }
+                },
+                "notificationTargets": {
+                    "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an\n            incident. You can also make updates to the incident through the chat channel using the\n            SNS topics. </p>\n        <p>Using multiple SNS topics creates redundancy in the case that a Region is down during\n            the incident.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateIncidentRecordOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#UpdateRelatedItems": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#UpdateRelatedItemsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#UpdateRelatedItemsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add or remove related items from the related items tab of an incident record.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateRelatedItems",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateRelatedItemsInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident record you are updating related items\n            in.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "relatedItemsUpdate": {
+                    "target": "com.amazonaws.ssmincidents#RelatedItemsUpdate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the item you are adding or deleting.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateRelatedItemsOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#UpdateReplicationSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#UpdateReplicationSetInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#UpdateReplicationSetOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Add or delete Regions from your replication set.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateReplicationSet",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateReplicationSetAction": {
+            "type": "union",
+            "members": {
+                "addRegionAction": {
+                    "target": "com.amazonaws.ssmincidents#AddRegionAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the Region that you're adding to the replication set.</p>"
+                    }
+                },
+                "deleteRegionAction": {
+                    "target": "com.amazonaws.ssmincidents#DeleteRegionAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about the Region that you're deleting to the replication set.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details used when updating the replication set.</p>"
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateReplicationSetInput": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replication set you're updating.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.ssmincidents#UpdateActionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An action to add or delete a Region.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateReplicationSetOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#UpdateResponsePlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#UpdateResponsePlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#UpdateResponsePlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the specified response plan.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateResponsePlan",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateResponsePlanInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the response plan.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "displayName": {
+                    "target": "com.amazonaws.ssmincidents#ResponsePlanDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The long format name of the response plan. Can't contain spaces.</p>"
+                    }
+                },
+                "incidentTemplateTitle": {
+                    "target": "com.amazonaws.ssmincidents#IncidentTitle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The short format name of the incident. Can't contain spaces.</p>"
+                    }
+                },
+                "incidentTemplateImpact": {
+                    "target": "com.amazonaws.ssmincidents#Impact",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the impact to the customers. Providing an impact overwrites the impact\n            provided by a response plan.</p>\n        <p class=\"title\">\n            <b>Possible impacts:</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>5</code> - Severe impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>4</code> - High impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>3</code> - Medium impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>2</code> - Low impact</p>\n            </li>\n            <li>\n               <p>\n                  <code>1</code> - No impact</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "incidentTemplateSummary": {
+                    "target": "com.amazonaws.ssmincidents#IncidentSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A brief summary of the incident. This typically contains what has happened, what's\n            currently happening, and next steps.</p>"
+                    }
+                },
+                "incidentTemplateDedupeString": {
+                    "target": "com.amazonaws.ssmincidents#DedupeString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to create only one incident record for an incident.</p>"
+                    }
+                },
+                "incidentTemplateNotificationTargets": {
+                    "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The SNS targets that\n            AWS\n            Chatbot uses to notify the chat channels and perform actions on the\n            incident record.</p>"
+                    }
+                },
+                "chatChannel": {
+                    "target": "com.amazonaws.ssmincidents#ChatChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The\n            AWS\n            Chatbot chat channel used for collaboration during an\n            incident.</p>"
+                    }
+                },
+                "engagements": {
+                    "target": "com.amazonaws.ssmincidents#EngagementSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contacts and escalation plans that Incident Manager engages at the start of the incident.</p>"
+                    }
+                },
+                "actions": {
+                    "target": "com.amazonaws.ssmincidents#ActionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The actions that this response plan takes at the beginning of an incident.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateResponsePlanOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#UpdateTimelineEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ssmincidents#UpdateTimelineEventInput"
+            },
+            "output": {
+                "target": "com.amazonaws.ssmincidents#UpdateTimelineEventOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ssmincidents#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a timeline event. You can update events of type <code>Custom\n            Event</code>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/updateTimelineEvent",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateTimelineEventInput": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.ssmincidents#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "incidentRecordArn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the incident that the timeline event is part\n            of.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventId": {
+                    "target": "com.amazonaws.ssmincidents#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the event you are updating. You can find this by using <code>ListTimelineEvents</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the event occurred.</p>"
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.ssmincidents#TimelineEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the event. You can update events of type <code>Custom Event</code>.</p>"
+                    }
+                },
+                "eventData": {
+                    "target": "com.amazonaws.ssmincidents#EventData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the event.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#UpdateTimelineEventOutput": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.ssmincidents#Url": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.ssmincidents#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ssmincidents#ExceptionMessage",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an AWS service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

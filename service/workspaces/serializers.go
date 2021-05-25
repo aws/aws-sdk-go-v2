@@ -2904,6 +2904,11 @@ func awsAwsjson11_serializeDocumentWorkspaceAccessProperties(v *types.WorkspaceA
 		ok.String(string(v.DeviceTypeIos))
 	}
 
+	if len(v.DeviceTypeLinux) > 0 {
+		ok := object.Key("DeviceTypeLinux")
+		ok.String(string(v.DeviceTypeLinux))
+	}
+
 	if len(v.DeviceTypeOsx) > 0 {
 		ok := object.Key("DeviceTypeOsx")
 		ok.String(string(v.DeviceTypeOsx))

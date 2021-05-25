@@ -59,7 +59,7 @@ type CreateWorkspaceBundleInput struct {
 	// Describes the root volume for a WorkSpace bundle.
 	RootStorage *types.RootStorage
 
-	// The tags associated with the bundle. To add tags at the same time that you're
+	// The tags associated with the bundle. To add tags at the same time when you're
 	// creating the bundle, you must create an IAM policy that grants your IAM user
 	// permissions to use workspaces:CreateTags.
 	Tags []types.Tag

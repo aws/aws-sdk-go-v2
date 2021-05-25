@@ -1987,6 +1987,17 @@ func (m *awsAwsjson11_serializeOpUntagLogGroup) HandleSerialize(ctx context.Cont
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentDimensions(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentInputLogEvent(v *types.InputLogEvent, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2048,6 +2059,13 @@ func awsAwsjson11_serializeDocumentMetricTransformation(v *types.MetricTransform
 		ok.Double(*v.DefaultValue)
 	}
 
+	if v.Dimensions != nil {
+		ok := object.Key("dimensions")
+		if err := awsAwsjson11_serializeDocumentDimensions(v.Dimensions, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MetricName != nil {
 		ok := object.Key("metricName")
 		ok.String(*v.MetricName)
@@ -2061,6 +2079,11 @@ func awsAwsjson11_serializeDocumentMetricTransformation(v *types.MetricTransform
 	if v.MetricValue != nil {
 		ok := object.Key("metricValue")
 		ok.String(*v.MetricValue)
+	}
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("unit")
+		ok.String(string(v.Unit))
 	}
 
 	return nil
