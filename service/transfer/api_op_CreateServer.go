@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Instantiates an autoscaling virtual server based on the selected file transfer
+// Instantiates an auto-scaling virtual server based on the selected file transfer
 // protocol in AWS. When you make updates to your file transfer protocol-enabled
 // server or when you work with users, use the service-generated ServerId property
 // that is assigned to the newly created server.
@@ -63,22 +63,34 @@ type CreateServerInput struct {
 	// the issuer.
 	Certificate *string
 
+	// The domain of the storage system that is used for file transfers. There are two
+	// domains available: Amazon Simple Storage Service (Amazon S3) and Amazon Elastic
+	// File System (Amazon EFS). The default value is S3. After the server is created,
+	// the domain cannot be changed.
 	Domain types.Domain
 
 	// The virtual private cloud (VPC) endpoint settings that are configured for your
 	// server. When you host your endpoint within your VPC, you can make it accessible
-	// only to resources within your VPC, or you can attach Elastic IPs and make it
-	// accessible to clients over the internet. Your VPC's default security groups are
-	// automatically assigned to your endpoint.
+	// only to resources within your VPC, or you can attach Elastic IP addresses and
+	// make it accessible to clients over the internet. Your VPC's default security
+	// groups are automatically assigned to your endpoint.
 	EndpointDetails *types.EndpointDetails
 
-	// The type of VPC endpoint that you want your server to connect to. You can choose
-	// to connect to the public internet or a VPC endpoint. With a VPC endpoint, you
-	// can restrict access to your server and resources only within your VPC. It is
-	// recommended that you use VPC as the EndpointType. With this endpoint type, you
-	// have the option to directly associate up to three Elastic IPv4 addresses (BYO IP
-	// included) with your server's endpoint and use VPC security groups to restrict
-	// traffic by the client's public IP address. This is not possible with
+	// The type of endpoint that you want your server to use. You can choose to make
+	// your server's endpoint publicly accessible (PUBLIC) or host it inside your VPC.
+	// With an endpoint that is hosted in a VPC, you can restrict access to your server
+	// and resources only within your VPC or choose to make it internet facing by
+	// attaching Elastic IP addresses directly to it. After March 31, 2021, you won't
+	// be able to create a server using EndpointType=VPC_ENDPOINT in your AWS account
+	// if your account hasn't already done so before March 31, 2021. If you have
+	// already created servers with EndpointType=VPC_ENDPOINT in your AWS account on or
+	// before March 31, 2021, you will not be affected. After this date, use
+	// EndpointType=VPC. For more information, see
+	// https://docs.aws.amazon.com/transfer/latest/userguide/create-server-in-vpc.html#deprecate-vpc-endpoint.
+	// It is recommended that you use VPC as the EndpointType. With this endpoint type,
+	// you have the option to directly associate up to three Elastic IPv4 addresses
+	// (BYO IP included) with your server's endpoint and use VPC security groups to
+	// restrict traffic by the client's public IP address. This is not possible with
 	// EndpointType set to VPC_ENDPOINT.
 	EndpointType types.EndpointType
 
@@ -91,16 +103,21 @@ type CreateServerInput struct {
 	// in the AWS Transfer Family User Guide.
 	HostKey *string
 
-	// Required when IdentityProviderType is set to API_GATEWAY. Accepts an array
-	// containing all of the information required to call a customer-supplied
+	// Required when IdentityProviderType is set to AWS_DIRECTORY_SERVICE or
+	// API_GATEWAY. Accepts an array containing all of the information required to use
+	// a directory in AWS_DIRECTORY_SERVICE or invoke a customer-supplied
 	// authentication API, including the API Gateway URL. Not required when
 	// IdentityProviderType is set to SERVICE_MANAGED.
 	IdentityProviderDetails *types.IdentityProviderDetails
 
 	// Specifies the mode of authentication for a server. The default value is
 	// SERVICE_MANAGED, which allows you to store and access user credentials within
-	// the AWS Transfer Family service. Use the API_GATEWAY value to integrate with an
-	// identity provider of your choosing. The API_GATEWAY setting requires you to
+	// the AWS Transfer Family service. Use AWS_DIRECTORY_SERVICE to provide access to
+	// Active Directory groups in AWS Managed Active Directory or Microsoft Active
+	// Directory in your on-premises environment or in AWS using AD Connectors. This
+	// option also requires you to provide a Directory ID using the
+	// IdentityProviderDetails parameter. Use the API_GATEWAY value to integrate with
+	// an identity provider of your choosing. The API_GATEWAY setting requires you to
 	// provide an API Gateway endpoint URL to call for authentication using the
 	// IdentityProviderDetails parameter.
 	IdentityProviderType types.IdentityProviderType
@@ -125,10 +142,10 @@ type CreateServerInput struct {
 	// select FTPS, you must choose a certificate stored in AWS Certificate Manager
 	// (ACM) which will be used to identify your server when clients connect to it over
 	// FTPS. If Protocol includes either FTP or FTPS, then the EndpointType must be VPC
-	// and the IdentityProviderType must be API_GATEWAY. If Protocol includes FTP, then
-	// AddressAllocationIds cannot be associated. If Protocol is set only to SFTP, the
-	// EndpointType can be set to PUBLIC and the IdentityProviderType can be set to
-	// SERVICE_MANAGED.
+	// and the IdentityProviderType must be AWS_DIRECTORY_SERVICE or API_GATEWAY. If
+	// Protocol includes FTP, then AddressAllocationIds cannot be associated. If
+	// Protocol is set only to SFTP, the EndpointType can be set to PUBLIC and the
+	// IdentityProviderType can be set to SERVICE_MANAGED.
 	Protocols []types.Protocol
 
 	// Specifies the name of the security policy that is attached to the server.

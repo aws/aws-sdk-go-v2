@@ -192,7 +192,9 @@ type PutBucketAclInput struct {
 	// Allows grantee to read the bucket ACL.
 	GrantReadACP *string
 
-	// Allows grantee to create, overwrite, and delete any object in the bucket.
+	// Allows grantee to create new objects in the bucket. For the bucket and object
+	// owners of existing objects, also allows deletions and overwrites of those
+	// objects.
 	GrantWrite *string
 
 	// Allows grantee to write the ACL for the applicable bucket.

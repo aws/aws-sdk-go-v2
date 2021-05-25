@@ -5145,6 +5145,42 @@ func awsAwsjson11_deserializeDocumentDestinations(v *[]types.Destination, value 
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDimensions(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DimensionsValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentExportTask(v **types.ExportTask, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6462,6 +6498,11 @@ func awsAwsjson11_deserializeDocumentMetricTransformation(v **types.MetricTransf
 				sv.DefaultValue = ptr.Float64(f64)
 			}
 
+		case "dimensions":
+			if err := awsAwsjson11_deserializeDocumentDimensions(&sv.Dimensions, value); err != nil {
+				return err
+			}
+
 		case "metricName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6487,6 +6528,15 @@ func awsAwsjson11_deserializeDocumentMetricTransformation(v **types.MetricTransf
 					return fmt.Errorf("expected MetricValue to be of type string, got %T instead", value)
 				}
 				sv.MetricValue = ptr.String(jtv)
+			}
+
+		case "unit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StandardUnit to be of type string, got %T instead", value)
+				}
+				sv.Unit = types.StandardUnit(jtv)
 			}
 
 		default:

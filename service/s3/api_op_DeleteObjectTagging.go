@@ -49,7 +49,7 @@ type DeleteObjectTaggingInput struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the AWS SDKs, you provide the access point
 	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using Access Points
+	// see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts

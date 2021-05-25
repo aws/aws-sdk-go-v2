@@ -265,6 +265,23 @@ type MetricTransformation struct {
 	// (Optional) The value to emit when a filter pattern does not match a log event.
 	// This value can be null.
 	DefaultValue *float64
+
+	// The fields to use as dimensions for the metric. One metric filter can include as
+	// many as three dimensions. Metrics extracted from log events are charged as
+	// custom metrics. To prevent unexpected high charges, do not specify
+	// high-cardinality fields such as IPAddress or requestID as dimensions. Each
+	// different value found for a dimension is treated as a separate metric and
+	// accrues charges as a separate custom metric. To help prevent accidental high
+	// charges, Amazon disables a metric filter if it generates 1000 different
+	// name/value pairs for the dimensions that you have specified within a certain
+	// amount of time. You can also set up a billing alarm to alert you if your charges
+	// are higher than expected. For more information, see  Creating a Billing Alarm to
+	// Monitor Your Estimated AWS Charges
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).
+	Dimensions map[string]string
+
+	// The unit to assign to the metric. If you omit this, the unit is set as None.
+	Unit StandardUnit
 }
 
 // Represents a log event.

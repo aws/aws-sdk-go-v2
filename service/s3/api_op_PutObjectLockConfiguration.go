@@ -65,7 +65,7 @@ type PutObjectLockConfigurationInput struct {
 	// about downloading objects from requester pays buckets, see Downloading Objects
 	// in Requestor Pays Buckets
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
+	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
 
 	// A token to allow Object Lock to be enabled for an existing bucket.

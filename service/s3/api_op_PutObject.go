@@ -56,12 +56,12 @@ import (
 // different Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage
 // Class. For more information, see Storage Classes
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
-// the Amazon S3 Service Developer Guide. Versioning If you enable versioning for a
-// bucket, Amazon S3 automatically generates a unique version ID for the object
-// being stored. Amazon S3 returns this ID in the response. When you enable
-// versioning for a bucket, if Amazon S3 receives multiple write requests for the
-// same object simultaneously, it stores all of the objects. For more information
-// about versioning, see Adding Objects to Versioning Enabled Buckets
+// the Amazon S3 User Guide. Versioning If you enable versioning for a bucket,
+// Amazon S3 automatically generates a unique version ID for the object being
+// stored. Amazon S3 returns this ID in the response. When you enable versioning
+// for a bucket, if Amazon S3 receives multiple write requests for the same object
+// simultaneously, it stores all of the objects. For more information about
+// versioning, see Adding Objects to Versioning Enabled Buckets
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/AddingObjectstoVersioningEnabledBuckets.html).
 // For information about returning the versioning state of a bucket, see
 // GetBucketVersioning
@@ -97,7 +97,7 @@ type PutObjectInput struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the AWS SDKs, you provide the access point
 	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using Access Points
+	// see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
@@ -216,7 +216,7 @@ type PutObjectInput struct {
 	// about downloading objects from requester pays buckets, see Downloading Objects
 	// in Requestor Pays Buckets
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
+	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
 
 	// Specifies the algorithm to use to when encrypting the object (for example,
@@ -242,12 +242,11 @@ type PutObjectInput struct {
 
 	// If x-amz-server-side-encryption is present and has the value of aws:kms, this
 	// header specifies the ID of the AWS Key Management Service (AWS KMS) symmetrical
-	// customer managed customer master key (CMK) that was used for the object. If the
-	// value of x-amz-server-side-encryption is aws:kms, this header specifies the ID
-	// of the symmetric customer managed AWS KMS CMK that will be used for the object.
-	// If you specify x-amz-server-side-encryption:aws:kms, but do not provide
+	// customer managed customer master key (CMK) that was used for the object. If you
+	// specify x-amz-server-side-encryption:aws:kms, but do not provide
 	// x-amz-server-side-encryption-aws-kms-key-id, Amazon S3 uses the AWS managed CMK
-	// in AWS to protect the data.
+	// in AWS to protect the data. If the KMS key does not exist in the same account
+	// issuing the command, you must use the full ARN and not just the ID.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3
@@ -260,7 +259,7 @@ type PutObjectInput struct {
 	// Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage Class. For
 	// more information, see Storage Classes
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
-	// the Amazon S3 Service Developer Guide.
+	// the Amazon S3 User Guide.
 	StorageClass types.StorageClass
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.

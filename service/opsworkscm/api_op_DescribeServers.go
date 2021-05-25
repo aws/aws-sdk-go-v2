@@ -54,10 +54,19 @@ type DescribeServersOutput struct {
 	// CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef
 	// Automate 2. To be eligible for upgrade, a server running Chef Automate 1 must
 	// have had at least one successful maintenance run after November 1, 2019. For
-	// Puppet Server: DescribeServersResponse$Servers$EngineAttributes contains
-	// PUPPET_API_CA_CERT. This is the PEM-encoded CA certificate that is used by the
-	// Puppet API over TCP port number 8140. The CA certificate is also used to sign
-	// node certificates.
+	// Puppet servers: DescribeServersResponse$Servers$EngineAttributes contains the
+	// following two responses:
+	//
+	// * PUPPET_API_CA_CERT, the PEM-encoded CA certificate
+	// that is used by the Puppet API over TCP port number 8140. The CA certificate is
+	// also used to sign node certificates.
+	//
+	// * PUPPET_API_CRL, a certificate revocation
+	// list. The certificate revocation list is for internal maintenance purposes only.
+	// For more information about the Puppet certificate revocation list, see Man Page:
+	// puppet certificate_revocation_list
+	// (https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html) in the
+	// Puppet documentation.
 	Servers []types.Server
 
 	// Metadata pertaining to the operation's result.

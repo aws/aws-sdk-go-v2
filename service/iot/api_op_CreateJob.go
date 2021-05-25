@@ -46,18 +46,22 @@ type CreateJobInput struct {
 	// A short text description of the job.
 	Description *string
 
-	// The job document. If the job document resides in an S3 bucket, you must use a
+	// The job document. Required if you don't specify a value for documentSource.
+	Document *string
+
+	// An S3 link to the job document. Required if you don't specify a value for
+	// document. If the job document resides in an S3 bucket, you must use a
 	// placeholder link when specifying the document. The placeholder link is of the
 	// following form: ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}
 	// where bucket is your bucket name and key is the object in the bucket to which
 	// you are linking.
-	Document *string
-
-	// An S3 link to the job document.
 	DocumentSource *string
 
 	// Allows you to create a staged rollout of the job.
 	JobExecutionsRolloutConfig *types.JobExecutionsRolloutConfig
+
+	// The ARN of the job template used to create the job.
+	JobTemplateArn *string
 
 	// The namespace used to indicate that a job is a customer-managed job. When you
 	// specify a value for this parameter, AWS IoT Core sends jobs notifications to

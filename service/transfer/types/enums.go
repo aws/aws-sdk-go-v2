@@ -62,8 +62,9 @@ type IdentityProviderType string
 
 // Enum values for IdentityProviderType
 const (
-	IdentityProviderTypeServiceManaged IdentityProviderType = "SERVICE_MANAGED"
-	IdentityProviderTypeApiGateway     IdentityProviderType = "API_GATEWAY"
+	IdentityProviderTypeServiceManaged      IdentityProviderType = "SERVICE_MANAGED"
+	IdentityProviderTypeApiGateway          IdentityProviderType = "API_GATEWAY"
+	IdentityProviderTypeAwsDirectoryService IdentityProviderType = "AWS_DIRECTORY_SERVICE"
 )
 
 // Values returns all known values for IdentityProviderType. Note that this can be
@@ -73,6 +74,7 @@ func (IdentityProviderType) Values() []IdentityProviderType {
 	return []IdentityProviderType{
 		"SERVICE_MANAGED",
 		"API_GATEWAY",
+		"AWS_DIRECTORY_SERVICE",
 	}
 }
 

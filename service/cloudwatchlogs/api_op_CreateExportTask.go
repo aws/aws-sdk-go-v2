@@ -62,9 +62,9 @@ type CreateExportTaskInput struct {
 	// This member is required.
 	LogGroupName *string
 
-	// The end time of the range for the request, expressed as the number of
-	// milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than
-	// this time are not exported.
+	// The end time of the range for the request, expreswatchlogsdocused as the number
+	// of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later
+	// than this time are not exported.
 	//
 	// This member is required.
 	To *int64

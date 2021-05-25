@@ -182,8 +182,8 @@ type CreateServerInput struct {
 	EngineModel *string
 
 	// The major release version of the engine that you want to use. For a Chef server,
-	// the valid value for EngineVersion is currently 2. For a Puppet server, the valid
-	// value is 2017.
+	// the valid value for EngineVersion is currently 2. For a Puppet server, valid
+	// values are 2019 or 2017.
 	EngineVersion *string
 
 	// The Amazon EC2 key pair to set for the instance. This parameter is optional; if

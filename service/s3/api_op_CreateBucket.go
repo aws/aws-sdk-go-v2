@@ -16,9 +16,9 @@ import (
 // and have a valid AWS Access Key ID to authenticate requests. Anonymous requests
 // are never allowed to create buckets. By creating the bucket, you become the
 // bucket owner. Not every string is an acceptable bucket name. For information
-// about bucket naming restrictions, see Working with Amazon S3 buckets
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html). If you want
-// to create an Amazon S3 on Outposts bucket, see Create Bucket
+// about bucket naming restrictions, see Bucket naming rules
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html).
+// If you want to create an Amazon S3 on Outposts bucket, see Create Bucket
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html).
 // By default, the bucket is created in the US East (N. Virginia) Region. You can
 // optionally specify a Region in the request body. You might choose a Region to
@@ -140,7 +140,9 @@ type CreateBucketInput struct {
 	// Allows grantee to read the bucket ACL.
 	GrantReadACP *string
 
-	// Allows grantee to create, overwrite, and delete any object in the bucket.
+	// Allows grantee to create new objects in the bucket. For the bucket and object
+	// owners of existing objects, also allows deletions and overwrites of those
+	// objects.
 	GrantWrite *string
 
 	// Allows grantee to write the ACL for the applicable bucket.

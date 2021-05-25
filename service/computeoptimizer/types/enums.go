@@ -72,6 +72,14 @@ const (
 	ExportableAutoScalingGroupFieldUtilizationMetricsEbsWriteOpsPerSecondMaximum                 ExportableAutoScalingGroupField = "UtilizationMetricsEbsWriteOpsPerSecondMaximum"
 	ExportableAutoScalingGroupFieldUtilizationMetricsEbsReadBytesPerSecondMaximum                ExportableAutoScalingGroupField = "UtilizationMetricsEbsReadBytesPerSecondMaximum"
 	ExportableAutoScalingGroupFieldUtilizationMetricsEbsWriteBytesPerSecondMaximum               ExportableAutoScalingGroupField = "UtilizationMetricsEbsWriteBytesPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilizationMetricsDiskReadOpsPerSecondMaximum                 ExportableAutoScalingGroupField = "UtilizationMetricsDiskReadOpsPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilizationMetricsDiskWriteOpsPerSecondMaximum                ExportableAutoScalingGroupField = "UtilizationMetricsDiskWriteOpsPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilizationMetricsDiskReadBytesPerSecondMaximum               ExportableAutoScalingGroupField = "UtilizationMetricsDiskReadBytesPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilizationMetricsDiskWriteBytesPerSecondMaximum              ExportableAutoScalingGroupField = "UtilizationMetricsDiskWriteBytesPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilizationMetricsNetworkInBytesPerSecondMaximum              ExportableAutoScalingGroupField = "UtilizationMetricsNetworkInBytesPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilizationMetricsNetworkOutBytesPerSecondMaximum             ExportableAutoScalingGroupField = "UtilizationMetricsNetworkOutBytesPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilizationMetricsNetworkPacketsInPerSecondMaximum            ExportableAutoScalingGroupField = "UtilizationMetricsNetworkPacketsInPerSecondMaximum"
+	ExportableAutoScalingGroupFieldUtilizationMetricsNetworkPacketsOutPerSecondMaximum           ExportableAutoScalingGroupField = "UtilizationMetricsNetworkPacketsOutPerSecondMaximum"
 	ExportableAutoScalingGroupFieldLookbackPeriodInDays                                          ExportableAutoScalingGroupField = "LookbackPeriodInDays"
 	ExportableAutoScalingGroupFieldCurrentConfigurationInstanceType                              ExportableAutoScalingGroupField = "CurrentConfigurationInstanceType"
 	ExportableAutoScalingGroupFieldCurrentConfigurationDesiredCapacity                           ExportableAutoScalingGroupField = "CurrentConfigurationDesiredCapacity"
@@ -117,6 +125,14 @@ func (ExportableAutoScalingGroupField) Values() []ExportableAutoScalingGroupFiel
 		"UtilizationMetricsEbsWriteOpsPerSecondMaximum",
 		"UtilizationMetricsEbsReadBytesPerSecondMaximum",
 		"UtilizationMetricsEbsWriteBytesPerSecondMaximum",
+		"UtilizationMetricsDiskReadOpsPerSecondMaximum",
+		"UtilizationMetricsDiskWriteOpsPerSecondMaximum",
+		"UtilizationMetricsDiskReadBytesPerSecondMaximum",
+		"UtilizationMetricsDiskWriteBytesPerSecondMaximum",
+		"UtilizationMetricsNetworkInBytesPerSecondMaximum",
+		"UtilizationMetricsNetworkOutBytesPerSecondMaximum",
+		"UtilizationMetricsNetworkPacketsInPerSecondMaximum",
+		"UtilizationMetricsNetworkPacketsOutPerSecondMaximum",
 		"LookbackPeriodInDays",
 		"CurrentConfigurationInstanceType",
 		"CurrentConfigurationDesiredCapacity",
@@ -155,6 +171,7 @@ const (
 	ExportableInstanceFieldInstanceArn                                                   ExportableInstanceField = "InstanceArn"
 	ExportableInstanceFieldInstanceName                                                  ExportableInstanceField = "InstanceName"
 	ExportableInstanceFieldFinding                                                       ExportableInstanceField = "Finding"
+	ExportableInstanceFieldFindingReasonCodes                                            ExportableInstanceField = "FindingReasonCodes"
 	ExportableInstanceFieldLookbackPeriodInDays                                          ExportableInstanceField = "LookbackPeriodInDays"
 	ExportableInstanceFieldCurrentInstanceType                                           ExportableInstanceField = "CurrentInstanceType"
 	ExportableInstanceFieldUtilizationMetricsCpuMaximum                                  ExportableInstanceField = "UtilizationMetricsCpuMaximum"
@@ -163,6 +180,14 @@ const (
 	ExportableInstanceFieldUtilizationMetricsEbsWriteOpsPerSecondMaximum                 ExportableInstanceField = "UtilizationMetricsEbsWriteOpsPerSecondMaximum"
 	ExportableInstanceFieldUtilizationMetricsEbsReadBytesPerSecondMaximum                ExportableInstanceField = "UtilizationMetricsEbsReadBytesPerSecondMaximum"
 	ExportableInstanceFieldUtilizationMetricsEbsWriteBytesPerSecondMaximum               ExportableInstanceField = "UtilizationMetricsEbsWriteBytesPerSecondMaximum"
+	ExportableInstanceFieldUtilizationMetricsDiskReadOpsPerSecondMaximum                 ExportableInstanceField = "UtilizationMetricsDiskReadOpsPerSecondMaximum"
+	ExportableInstanceFieldUtilizationMetricsDiskWriteOpsPerSecondMaximum                ExportableInstanceField = "UtilizationMetricsDiskWriteOpsPerSecondMaximum"
+	ExportableInstanceFieldUtilizationMetricsDiskReadBytesPerSecondMaximum               ExportableInstanceField = "UtilizationMetricsDiskReadBytesPerSecondMaximum"
+	ExportableInstanceFieldUtilizationMetricsDiskWriteBytesPerSecondMaximum              ExportableInstanceField = "UtilizationMetricsDiskWriteBytesPerSecondMaximum"
+	ExportableInstanceFieldUtilizationMetricsNetworkInBytesPerSecondMaximum              ExportableInstanceField = "UtilizationMetricsNetworkInBytesPerSecondMaximum"
+	ExportableInstanceFieldUtilizationMetricsNetworkOutBytesPerSecondMaximum             ExportableInstanceField = "UtilizationMetricsNetworkOutBytesPerSecondMaximum"
+	ExportableInstanceFieldUtilizationMetricsNetworkPacketsInPerSecondMaximum            ExportableInstanceField = "UtilizationMetricsNetworkPacketsInPerSecondMaximum"
+	ExportableInstanceFieldUtilizationMetricsNetworkPacketsOutPerSecondMaximum           ExportableInstanceField = "UtilizationMetricsNetworkPacketsOutPerSecondMaximum"
 	ExportableInstanceFieldCurrentOnDemandPrice                                          ExportableInstanceField = "CurrentOnDemandPrice"
 	ExportableInstanceFieldCurrentStandardOneYearNoUpfrontReservedPrice                  ExportableInstanceField = "CurrentStandardOneYearNoUpfrontReservedPrice"
 	ExportableInstanceFieldCurrentStandardThreeYearNoUpfrontReservedPrice                ExportableInstanceField = "CurrentStandardThreeYearNoUpfrontReservedPrice"
@@ -173,6 +198,7 @@ const (
 	ExportableInstanceFieldRecommendationOptionsInstanceType                             ExportableInstanceField = "RecommendationOptionsInstanceType"
 	ExportableInstanceFieldRecommendationOptionsProjectedUtilizationMetricsCpuMaximum    ExportableInstanceField = "RecommendationOptionsProjectedUtilizationMetricsCpuMaximum"
 	ExportableInstanceFieldRecommendationOptionsProjectedUtilizationMetricsMemoryMaximum ExportableInstanceField = "RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum"
+	ExportableInstanceFieldRecommendationOptionsPlatformDifferences                      ExportableInstanceField = "RecommendationOptionsPlatformDifferences"
 	ExportableInstanceFieldRecommendationOptionsPerformanceRisk                          ExportableInstanceField = "RecommendationOptionsPerformanceRisk"
 	ExportableInstanceFieldRecommendationOptionsVcpus                                    ExportableInstanceField = "RecommendationOptionsVcpus"
 	ExportableInstanceFieldRecommendationOptionsMemory                                   ExportableInstanceField = "RecommendationOptionsMemory"
@@ -195,6 +221,7 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"InstanceArn",
 		"InstanceName",
 		"Finding",
+		"FindingReasonCodes",
 		"LookbackPeriodInDays",
 		"CurrentInstanceType",
 		"UtilizationMetricsCpuMaximum",
@@ -203,6 +230,14 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"UtilizationMetricsEbsWriteOpsPerSecondMaximum",
 		"UtilizationMetricsEbsReadBytesPerSecondMaximum",
 		"UtilizationMetricsEbsWriteBytesPerSecondMaximum",
+		"UtilizationMetricsDiskReadOpsPerSecondMaximum",
+		"UtilizationMetricsDiskWriteOpsPerSecondMaximum",
+		"UtilizationMetricsDiskReadBytesPerSecondMaximum",
+		"UtilizationMetricsDiskWriteBytesPerSecondMaximum",
+		"UtilizationMetricsNetworkInBytesPerSecondMaximum",
+		"UtilizationMetricsNetworkOutBytesPerSecondMaximum",
+		"UtilizationMetricsNetworkPacketsInPerSecondMaximum",
+		"UtilizationMetricsNetworkPacketsOutPerSecondMaximum",
 		"CurrentOnDemandPrice",
 		"CurrentStandardOneYearNoUpfrontReservedPrice",
 		"CurrentStandardThreeYearNoUpfrontReservedPrice",
@@ -213,6 +248,7 @@ func (ExportableInstanceField) Values() []ExportableInstanceField {
 		"RecommendationOptionsInstanceType",
 		"RecommendationOptionsProjectedUtilizationMetricsCpuMaximum",
 		"RecommendationOptionsProjectedUtilizationMetricsMemoryMaximum",
+		"RecommendationOptionsPlatformDifferences",
 		"RecommendationOptionsPerformanceRisk",
 		"RecommendationOptionsVcpus",
 		"RecommendationOptionsMemory",
@@ -369,6 +405,7 @@ type FilterName string
 // Enum values for FilterName
 const (
 	FilterNameFinding                  FilterName = "Finding"
+	FilterNameFindingReasonCodes       FilterName = "FindingReasonCodes"
 	FilterNameRecommendationSourceType FilterName = "RecommendationSourceType"
 )
 
@@ -378,6 +415,7 @@ const (
 func (FilterName) Values() []FilterName {
 	return []FilterName{
 		"Finding",
+		"FindingReasonCodes",
 		"RecommendationSourceType",
 	}
 }
@@ -419,6 +457,53 @@ func (FindingReasonCode) Values() []FindingReasonCode {
 	return []FindingReasonCode{
 		"MemoryOverprovisioned",
 		"MemoryUnderprovisioned",
+	}
+}
+
+type InstanceRecommendationFindingReasonCode string
+
+// Enum values for InstanceRecommendationFindingReasonCode
+const (
+	InstanceRecommendationFindingReasonCodeCpuOverProvisioned               InstanceRecommendationFindingReasonCode = "CPUOverprovisioned"
+	InstanceRecommendationFindingReasonCodeCpuUnderProvisioned              InstanceRecommendationFindingReasonCode = "CPUUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeMemoryOverProvisioned            InstanceRecommendationFindingReasonCode = "MemoryOverprovisioned"
+	InstanceRecommendationFindingReasonCodeMemoryUnderProvisioned           InstanceRecommendationFindingReasonCode = "MemoryUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEbsThroughputOverProvisioned     InstanceRecommendationFindingReasonCode = "EBSThroughputOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEbsThroughputUnderProvisioned    InstanceRecommendationFindingReasonCode = "EBSThroughputUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeEbsIopsOverProvisioned           InstanceRecommendationFindingReasonCode = "EBSIOPSOverprovisioned"
+	InstanceRecommendationFindingReasonCodeEbsIopsUnderProvisioned          InstanceRecommendationFindingReasonCode = "EBSIOPSUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeNetworkBandwidthOverProvisioned  InstanceRecommendationFindingReasonCode = "NetworkBandwidthOverprovisioned"
+	InstanceRecommendationFindingReasonCodeNetworkBandwidthUnderProvisioned InstanceRecommendationFindingReasonCode = "NetworkBandwidthUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeNetworkPpsOverProvisioned        InstanceRecommendationFindingReasonCode = "NetworkPPSOverprovisioned"
+	InstanceRecommendationFindingReasonCodeNetworkPpsUnderProvisioned       InstanceRecommendationFindingReasonCode = "NetworkPPSUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeDiskIopsOverProvisioned          InstanceRecommendationFindingReasonCode = "DiskIOPSOverprovisioned"
+	InstanceRecommendationFindingReasonCodeDiskIopsUnderProvisioned         InstanceRecommendationFindingReasonCode = "DiskIOPSUnderprovisioned"
+	InstanceRecommendationFindingReasonCodeDiskThroughputOverProvisioned    InstanceRecommendationFindingReasonCode = "DiskThroughputOverprovisioned"
+	InstanceRecommendationFindingReasonCodeDiskThroughputUnderProvisioned   InstanceRecommendationFindingReasonCode = "DiskThroughputUnderprovisioned"
+)
+
+// Values returns all known values for InstanceRecommendationFindingReasonCode.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstanceRecommendationFindingReasonCode) Values() []InstanceRecommendationFindingReasonCode {
+	return []InstanceRecommendationFindingReasonCode{
+		"CPUOverprovisioned",
+		"CPUUnderprovisioned",
+		"MemoryOverprovisioned",
+		"MemoryUnderprovisioned",
+		"EBSThroughputOverprovisioned",
+		"EBSThroughputUnderprovisioned",
+		"EBSIOPSOverprovisioned",
+		"EBSIOPSUnderprovisioned",
+		"NetworkBandwidthOverprovisioned",
+		"NetworkBandwidthUnderprovisioned",
+		"NetworkPPSOverprovisioned",
+		"NetworkPPSUnderprovisioned",
+		"DiskIOPSOverprovisioned",
+		"DiskIOPSUnderprovisioned",
+		"DiskThroughputOverprovisioned",
+		"DiskThroughputUnderprovisioned",
 	}
 }
 
@@ -604,12 +689,20 @@ type MetricName string
 
 // Enum values for MetricName
 const (
-	MetricNameCpu                    MetricName = "Cpu"
-	MetricNameMemory                 MetricName = "Memory"
-	MetricNameEbsReadOpsPerSecond    MetricName = "EBS_READ_OPS_PER_SECOND"
-	MetricNameEbsWriteOpsPerSecond   MetricName = "EBS_WRITE_OPS_PER_SECOND"
-	MetricNameEbsReadBytesPerSecond  MetricName = "EBS_READ_BYTES_PER_SECOND"
-	MetricNameEbsWriteBytesPerSecond MetricName = "EBS_WRITE_BYTES_PER_SECOND"
+	MetricNameCpu                        MetricName = "Cpu"
+	MetricNameMemory                     MetricName = "Memory"
+	MetricNameEbsReadOpsPerSecond        MetricName = "EBS_READ_OPS_PER_SECOND"
+	MetricNameEbsWriteOpsPerSecond       MetricName = "EBS_WRITE_OPS_PER_SECOND"
+	MetricNameEbsReadBytesPerSecond      MetricName = "EBS_READ_BYTES_PER_SECOND"
+	MetricNameEbsWriteBytesPerSecond     MetricName = "EBS_WRITE_BYTES_PER_SECOND"
+	MetricNameDiskReadOpsPerSecond       MetricName = "DISK_READ_OPS_PER_SECOND"
+	MetricNameDiskWriteOpsPerSecond      MetricName = "DISK_WRITE_OPS_PER_SECOND"
+	MetricNameDiskReadBytesPerSecond     MetricName = "DISK_READ_BYTES_PER_SECOND"
+	MetricNameDiskWriteBytesPerSecond    MetricName = "DISK_WRITE_BYTES_PER_SECOND"
+	MetricNameNetworkInBytesPerSecond    MetricName = "NETWORK_IN_BYTES_PER_SECOND"
+	MetricNameNetworkOutBytesPerSecond   MetricName = "NETWORK_OUT_BYTES_PER_SECOND"
+	MetricNameNetworkPacketsInPerSecond  MetricName = "NETWORK_PACKETS_IN_PER_SECOND"
+	MetricNameNetworkPacketsOutPerSecond MetricName = "NETWORK_PACKETS_OUT_PER_SECOND"
 )
 
 // Values returns all known values for MetricName. Note that this can be expanded
@@ -623,6 +716,14 @@ func (MetricName) Values() []MetricName {
 		"EBS_WRITE_OPS_PER_SECOND",
 		"EBS_READ_BYTES_PER_SECOND",
 		"EBS_WRITE_BYTES_PER_SECOND",
+		"DISK_READ_OPS_PER_SECOND",
+		"DISK_WRITE_OPS_PER_SECOND",
+		"DISK_READ_BYTES_PER_SECOND",
+		"DISK_WRITE_BYTES_PER_SECOND",
+		"NETWORK_IN_BYTES_PER_SECOND",
+		"NETWORK_OUT_BYTES_PER_SECOND",
+		"NETWORK_PACKETS_IN_PER_SECOND",
+		"NETWORK_PACKETS_OUT_PER_SECOND",
 	}
 }
 
@@ -641,6 +742,30 @@ func (MetricStatistic) Values() []MetricStatistic {
 	return []MetricStatistic{
 		"Maximum",
 		"Average",
+	}
+}
+
+type PlatformDifference string
+
+// Enum values for PlatformDifference
+const (
+	PlatformDifferenceHypervisor                PlatformDifference = "Hypervisor"
+	PlatformDifferenceNetworkInterface          PlatformDifference = "NetworkInterface"
+	PlatformDifferenceStorageInterface          PlatformDifference = "StorageInterface"
+	PlatformDifferenceInstanceStoreAvailability PlatformDifference = "InstanceStoreAvailability"
+	PlatformDifferenceVirtualizationType        PlatformDifference = "VirtualizationType"
+)
+
+// Values returns all known values for PlatformDifference. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (PlatformDifference) Values() []PlatformDifference {
+	return []PlatformDifference{
+		"Hypervisor",
+		"NetworkInterface",
+		"StorageInterface",
+		"InstanceStoreAvailability",
+		"VirtualizationType",
 	}
 }
 

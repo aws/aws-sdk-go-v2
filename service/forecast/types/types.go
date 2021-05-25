@@ -796,17 +796,37 @@ type Statistics struct {
 	// For a numeric field, the average value in the field.
 	Avg *float64
 
-	// The number of values in the field.
+	// The number of values in the field. If the response value is -1, refer to
+	// CountLong.
 	Count *int32
 
-	// The number of distinct values in the field.
+	// The number of distinct values in the field. If the response value is -1, refer
+	// to CountDistinctLong.
 	CountDistinct *int32
 
-	// The number of NAN (not a number) values in the field.
+	// The number of distinct values in the field. CountDistinctLong is used instead of
+	// CountDistinct if the value is greater than 2,147,483,647.
+	CountDistinctLong *int64
+
+	// The number of values in the field. CountLong is used instead of Count if the
+	// value is greater than 2,147,483,647.
+	CountLong *int64
+
+	// The number of NAN (not a number) values in the field. If the response value is
+	// -1, refer to CountNanLong.
 	CountNan *int32
 
-	// The number of null values in the field.
+	// The number of NAN (not a number) values in the field. CountNanLong is used
+	// instead of CountNan if the value is greater than 2,147,483,647.
+	CountNanLong *int64
+
+	// The number of null values in the field. If the response value is -1, refer to
+	// CountNullLong.
 	CountNull *int32
+
+	// The number of null values in the field. CountNullLong is used instead of
+	// CountNull if the value is greater than 2,147,483,647.
+	CountNullLong *int64
 
 	// For a numeric field, the maximum value in the field.
 	Max *string

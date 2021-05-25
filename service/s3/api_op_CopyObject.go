@@ -53,8 +53,8 @@ import (
 // when objects are uploaded. For more information, see Specifying Conditions in a
 // Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/amazon-s3-policy-keys.html) in
-// the Amazon S3 Developer Guide. For a complete list of Amazon S3-specific
-// condition keys, see Actions, Resources, and Condition Keys for Amazon S3
+// the Amazon S3 User Guide. For a complete list of Amazon S3-specific condition
+// keys, see Actions, Resources, and Condition Keys for Amazon S3
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/list_amazons3.html).
 // x-amz-copy-source-if Headers To only copy an object under certain conditions,
 // such as whether the Etag matches or whether the object was modified before or
@@ -116,17 +116,17 @@ import (
 // class of an object that is already stored in Amazon S3 using the StorageClass
 // parameter. For more information, see Storage Classes
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
-// the Amazon S3 Service Developer Guide. Versioning By default, x-amz-copy-source
-// identifies the current version of an object to copy. If the current version is a
-// delete marker, Amazon S3 behaves as if the object was deleted. To copy a
-// different version, use the versionId subresource. If you enable versioning on
-// the target bucket, Amazon S3 generates a unique version ID for the object being
-// copied. This version ID is different from the version ID of the source object.
-// Amazon S3 returns the version ID of the copied object in the x-amz-version-id
-// response header in the response. If you do not enable versioning or suspend it
-// on the target bucket, the version ID that Amazon S3 generates is always null. If
-// the source object's storage class is GLACIER, you must restore a copy of this
-// object before you can use it as a source object for the copy operation. For more
+// the Amazon S3 User Guide. Versioning By default, x-amz-copy-source identifies
+// the current version of an object to copy. If the current version is a delete
+// marker, Amazon S3 behaves as if the object was deleted. To copy a different
+// version, use the versionId subresource. If you enable versioning on the target
+// bucket, Amazon S3 generates a unique version ID for the object being copied.
+// This version ID is different from the version ID of the source object. Amazon S3
+// returns the version ID of the copied object in the x-amz-version-id response
+// header in the response. If you do not enable versioning or suspend it on the
+// target bucket, the version ID that Amazon S3 generates is always null. If the
+// source object's storage class is GLACIER, you must restore a copy of this object
+// before you can use it as a source object for the copy operation. For more
 // information, see RestoreObject
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_RestoreObject.html). The
 // following operations are related to CopyObject:
@@ -163,7 +163,7 @@ type CopyObjectInput struct {
 	// takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
 	// When using this action with an access point through the AWS SDKs, you provide
 	// the access point ARN in place of the bucket name. For more information about
-	// access point ARNs, see Using Access Points
+	// access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
@@ -324,7 +324,7 @@ type CopyObjectInput struct {
 	// about downloading objects from requester pays buckets, see Downloading Objects
 	// in Requestor Pays Buckets
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
+	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
 
 	// Specifies the algorithm to use to when encrypting the object (for example,
@@ -354,7 +354,7 @@ type CopyObjectInput struct {
 	// supported AWS SDKs and AWS CLI, see Specifying the Signature Version in Request
 	// Authentication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)
-	// in the Amazon S3 Developer Guide.
+	// in the Amazon S3 User Guide.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3
@@ -367,7 +367,7 @@ type CopyObjectInput struct {
 	// Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage Class. For
 	// more information, see Storage Classes
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
-	// the Amazon S3 Service Developer Guide.
+	// the Amazon S3 User Guide.
 	StorageClass types.StorageClass
 
 	// The tag-set for the object destination object this value must be used in

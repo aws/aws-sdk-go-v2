@@ -68,6 +68,12 @@ type UpdateUserInput struct {
 	// This member is required.
 	UserName *string
 
+	// The URL of the custom OpenID Connect (OIDC) provider that provides identity to
+	// let a user federate into QuickSight with an associated AWS Identity and Access
+	// Management (IAM) role. This parameter should only be used when
+	// ExternalLoginFederationProviderType parameter is set to CUSTOM_OIDC.
+	CustomFederationProviderUrl *string
+
 	// (Enterprise edition only) The name of the custom permissions profile that you
 	// want to assign to this user. Customized permissions allows you to control a
 	// user's access by restricting access the following operations:
@@ -92,6 +98,28 @@ type UpdateUserInput struct {
 	// author, reader). This feature is available only to QuickSight Enterprise edition
 	// subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).
 	CustomPermissionsName *string
+
+	// The type of supported external login provider that provides identity to let a
+	// user federate into QuickSight with an associated AWS Identity and Access
+	// Management (IAM) role. The type of supported external login provider can be one
+	// of the following.
+	//
+	// * COGNITO: Amazon Cognito. The provider URL is
+	// cognito-identity.amazonaws.com. When choosing the COGNITO provider type, don’t
+	// use the "CustomFederationProviderUrl" parameter which is only needed when the
+	// external provider is custom.
+	//
+	// * CUSTOM_OIDC: Custom OpenID Connect (OIDC)
+	// provider. When choosing CUSTOM_OIDC type, use the CustomFederationProviderUrl
+	// parameter to provide the custom OIDC provider URL.
+	//
+	// * NONE: This clears all the
+	// previously saved external login information for a user. Use DescribeUser API to
+	// check the external login information.
+	ExternalLoginFederationProviderType *string
+
+	// The identity ID for a user in the external login provider.
+	ExternalLoginId *string
 
 	// A flag that you use to indicate that you want to remove all custom permissions
 	// from this user. Using this parameter resets the user to the state it was in

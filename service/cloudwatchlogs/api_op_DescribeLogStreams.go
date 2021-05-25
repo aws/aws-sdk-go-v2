@@ -57,10 +57,10 @@ type DescribeLogStreamsInput struct {
 	// If the value is LogStreamName, the results are ordered by log stream name. If
 	// the value is LastEventTime, the results are ordered by the event time. The
 	// default value is LogStreamName. If you order the results by event time, you
-	// cannot specify the logStreamNamePrefix parameter. lastEventTimeStamp represents
+	// cannot specify the logStreamNamePrefix parameter. lastEventTimestamp represents
 	// the time of the most recent log event in the log stream in CloudWatch Logs. This
 	// number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00
-	// UTC. lastEventTimeStamp updates on an eventual consistency basis. It typically
+	// UTC. lastEventTimestamp updates on an eventual consistency basis. It typically
 	// updates in less than an hour from ingestion, but in rare situations might take
 	// longer.
 	OrderBy types.OrderBy

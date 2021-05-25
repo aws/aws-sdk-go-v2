@@ -52,7 +52,7 @@ type BackupPolicy struct {
 	// Describes the status of the file system's backup policy.
 	//
 	// * ENABLED - EFS is
-	// automatically backing up the file system.>
+	// automatically backing up the file system.
 	//
 	// * ENABLING - EFS is turning on
 	// automatic backups for the file system.
@@ -305,6 +305,16 @@ type PosixUser struct {
 	SecondaryGids []int64
 }
 
+type ResourceIdPreference struct {
+
+	// A preference indicating a choice to use 63bit/32bit IDs for all applicable
+	// resources.
+	ResourceIdType ResourceIdType
+
+	// EFS resources to which a preference applies to.
+	Resources []Resource
+}
+
 // Specifies the directory on the Amazon EFS file system that the access point
 // provides access to. The access point exposes the specified file system path as
 // the root directory of your file system to applications using the access point.
@@ -330,7 +340,7 @@ type RootDirectory struct {
 
 // A tag is a key-value pair. Allowed characters are letters, white space, and
 // numbers that can be represented in UTF-8, and the following characters: + - = .
-// _ : /
+// _ : /.
 type Tag struct {
 
 	// The tag key (String). The key can't start with aws:.

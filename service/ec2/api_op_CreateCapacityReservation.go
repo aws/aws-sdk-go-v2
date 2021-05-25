@@ -136,6 +136,10 @@ type CreateCapacityReservationInput struct {
 	// Default: open
 	InstanceMatchCriteria types.InstanceMatchCriteria
 
+	// The Amazon Resource Name (ARN) of the Outpost on which to create the Capacity
+	// Reservation.
+	OutpostArn *string
+
 	// The tags to apply to the Capacity Reservation during launch.
 	TagSpecifications []types.TagSpecification
 

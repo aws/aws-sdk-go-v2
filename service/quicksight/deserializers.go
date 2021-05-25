@@ -29518,6 +29518,33 @@ func awsRestjson1_deserializeDocumentUser(v **types.User, value interface{}) err
 				sv.Email = ptr.String(jtv)
 			}
 
+		case "ExternalLoginFederationProviderType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ExternalLoginFederationProviderType = ptr.String(jtv)
+			}
+
+		case "ExternalLoginFederationProviderUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ExternalLoginFederationProviderUrl = ptr.String(jtv)
+			}
+
+		case "ExternalLoginId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ExternalLoginId = ptr.String(jtv)
+			}
+
 		case "IdentityType":
 			if value != nil {
 				jtv, ok := value.(string)

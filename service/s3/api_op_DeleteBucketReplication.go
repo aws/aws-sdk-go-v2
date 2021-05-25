@@ -22,7 +22,7 @@ import (
 // It can take a while for the deletion of a replication configuration to fully
 // propagate. For information about replication configuration, see Replication
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
-// S3 Developer Guide. The following operations are related to
+// S3 User Guide. The following operations are related to
 // DeleteBucketReplication:
 //
 // * PutBucketReplication

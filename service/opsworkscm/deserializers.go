@@ -4190,6 +4190,11 @@ func awsAwsjson11_deserializeOpDocumentRestoreServerOutput(v **RestoreServerOutp
 
 	for key, value := range shape {
 		switch key {
+		case "Server":
+			if err := awsAwsjson11_deserializeDocumentServer(&sv.Server, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

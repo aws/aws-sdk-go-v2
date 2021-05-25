@@ -9309,6 +9309,15 @@ func awsAwsjson11_deserializeDocumentWorkspaceAccessProperties(v **types.Workspa
 				sv.DeviceTypeIos = types.AccessPropertyValue(jtv)
 			}
 
+		case "DeviceTypeLinux":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccessPropertyValue to be of type string, got %T instead", value)
+				}
+				sv.DeviceTypeLinux = types.AccessPropertyValue(jtv)
+			}
+
 		case "DeviceTypeOsx":
 			if value != nil {
 				jtv, ok := value.(string)

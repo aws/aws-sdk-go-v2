@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a domain configuration. The domain configuration feature is in public
-// preview and is subject to change.
+// Creates a domain configuration.
 func (c *Client) CreateDomainConfiguration(ctx context.Context, params *CreateDomainConfigurationInput, optFns ...func(*Options)) (*CreateDomainConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateDomainConfigurationInput{}

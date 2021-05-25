@@ -5909,6 +5909,11 @@ func awsRestjson1_serializeOpDocumentRegisterUserInput(v *RegisterUserInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomFederationProviderUrl != nil {
+		ok := object.Key("CustomFederationProviderUrl")
+		ok.String(*v.CustomFederationProviderUrl)
+	}
+
 	if v.CustomPermissionsName != nil {
 		ok := object.Key("CustomPermissionsName")
 		ok.String(*v.CustomPermissionsName)
@@ -5917,6 +5922,16 @@ func awsRestjson1_serializeOpDocumentRegisterUserInput(v *RegisterUserInput, val
 	if v.Email != nil {
 		ok := object.Key("Email")
 		ok.String(*v.Email)
+	}
+
+	if v.ExternalLoginFederationProviderType != nil {
+		ok := object.Key("ExternalLoginFederationProviderType")
+		ok.String(*v.ExternalLoginFederationProviderType)
+	}
+
+	if v.ExternalLoginId != nil {
+		ok := object.Key("ExternalLoginId")
+		ok.String(*v.ExternalLoginId)
 	}
 
 	if v.IamArn != nil {
@@ -8383,6 +8398,11 @@ func awsRestjson1_serializeOpDocumentUpdateUserInput(v *UpdateUserInput, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomFederationProviderUrl != nil {
+		ok := object.Key("CustomFederationProviderUrl")
+		ok.String(*v.CustomFederationProviderUrl)
+	}
+
 	if v.CustomPermissionsName != nil {
 		ok := object.Key("CustomPermissionsName")
 		ok.String(*v.CustomPermissionsName)
@@ -8391,6 +8411,16 @@ func awsRestjson1_serializeOpDocumentUpdateUserInput(v *UpdateUserInput, value s
 	if v.Email != nil {
 		ok := object.Key("Email")
 		ok.String(*v.Email)
+	}
+
+	if v.ExternalLoginFederationProviderType != nil {
+		ok := object.Key("ExternalLoginFederationProviderType")
+		ok.String(*v.ExternalLoginFederationProviderType)
+	}
+
+	if v.ExternalLoginId != nil {
+		ok := object.Key("ExternalLoginId")
+		ok.String(*v.ExternalLoginId)
 	}
 
 	if len(v.Role) > 0 {

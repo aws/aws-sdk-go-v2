@@ -15,8 +15,8 @@ import (
 // Creates a replication configuration or replaces an existing one. For more
 // information, see Replication
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
-// S3 Developer Guide. To perform this operation, the user or role performing the
-// action must have the iam:PassRole
+// S3 User Guide. To perform this operation, the user or role performing the action
+// must have the iam:PassRole
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
 // permission. Specify the replication configuration in the request body. In the
 // replication configuration, you provide the name of the destination bucket or

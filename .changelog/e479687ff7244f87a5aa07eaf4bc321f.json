@@ -1,0 +1,23 @@
+{
+    "id": "e479687f-f724-4f87-a5aa-07eaf4bc321f",
+    "type": "feature",
+    "description": "API client updated",
+    "modules": [
+        "internal/protocoltest/query",
+        "service/cloudwatch",
+        "service/cloudwatchlogs",
+        "service/computeoptimizer",
+        "service/costexplorer",
+        "service/ec2",
+        "service/efs",
+        "service/forecast",
+        "service/iot",
+        "service/opsworks",
+        "service/opsworkscm",
+        "service/quicksight",
+        "service/route53",
+        "service/s3",
+        "service/transfer",
+        "service/workspaces"
+    ]
+}

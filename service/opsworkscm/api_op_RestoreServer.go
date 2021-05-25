@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +63,10 @@ type RestoreServerInput struct {
 }
 
 type RestoreServerOutput struct {
+
+	// Describes a configuration management server.
+	Server *types.Server
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 }

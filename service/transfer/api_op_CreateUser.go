@@ -35,12 +35,12 @@ func (c *Client) CreateUser(ctx context.Context, params *CreateUserInput, optFns
 
 type CreateUserInput struct {
 
-	// The IAM role that controls your users' access to your Amazon S3 bucket. The
-	// policies attached to this role will determine the level of access you want to
-	// provide your users when transferring files into and out of your Amazon S3 bucket
-	// or buckets. The IAM role should also contain a trust relationship that allows
-	// the server to access your resources when servicing your users' transfer
-	// requests.
+	// Specifies the IAM role that controls your users' access to your Amazon S3 bucket
+	// or EFS file system. The policies attached to this role will determine the level
+	// of access you want to provide your users when transferring files into and out of
+	// your Amazon S3 bucket or EFS file system. The IAM role should also contain a
+	// trust relationship that allows the server to access your resources when
+	// servicing your users' transfer requests.
 	//
 	// This member is required.
 	Role *string
@@ -61,26 +61,30 @@ type CreateUserInput struct {
 	UserName *string
 
 	// The landing directory (folder) for a user when they log in to the server using
-	// the client. An example is your-Amazon-S3-bucket-name>/home/username .
+	// the client. A HomeDirectory example is /bucket_name/home/mydirectory.
 	HomeDirectory *string
 
-	// Logical directory mappings that specify what Amazon S3 paths and keys should be
-	// visible to your user and how you want to make them visible. You will need to
-	// specify the "Entry" and "Target" pair, where Entry shows how the path is made
-	// visible and Target is the actual Amazon S3 path. If you only specify a target,
-	// it will be displayed as is. You will need to also make sure that your IAM role
-	// provides access to paths in Target. The following is an example. '[
-	// "/bucket2/documentation", { "Entry": "your-personal-report.pdf", "Target":
-	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]' In most cases, you
+	// Logical directory mappings that specify what Amazon S3 or EFS paths and keys
+	// should be visible to your user and how you want to make them visible. You will
+	// need to specify the Entry and Target pair, where Entry shows how the path is
+	// made visible and Target is the actual Amazon S3 or EFS path. If you only specify
+	// a target, it will be displayed as is. You will need to also make sure that your
+	// IAM role provides access to paths in Target. This value can only be set when
+	// HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair
+	// example. [ { "Entry": "your-personal-report.pdf", "Target":
+	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ] In most cases, you
 	// can use this value instead of the scope-down policy to lock your user down to
-	// the designated home directory ("chroot"). To do this, you can set Entry to '/'
-	// and set Target to the HomeDirectory parameter value. If the target of a logical
-	// directory entry does not exist in Amazon S3, the entry will be ignored. As a
-	// workaround, you can use the Amazon S3 API to create 0 byte objects as place
-	// holders for your directory. If using the CLI, use the s3api call instead of s3
-	// so you can use the put-object operation. For example, you use the following: aws
-	// s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the
-	// end of the key name ends in a '/' for it to be considered a folder.
+	// the designated home directory ("chroot"). To do this, you can set Entry to / and
+	// set Target to the HomeDirectory parameter value. The following is an Entry and
+	// Target pair example for chroot. [ { "Entry": "/", "Target":
+	// "/bucket_name/home/mydirectory" } ] If the target of a logical directory entry
+	// does not exist in Amazon S3 or EFS, the entry will be ignored. As a workaround,
+	// you can use the Amazon S3 API or EFS API to create 0 byte objects as place
+	// holders for your directory. If using the CLI, use the s3api or efsapi call
+	// instead of s3 or efs so you can use the put-object operation. For example, you
+	// use the following: aws s3api put-object --bucket bucketname --key
+	// path/to/folder/. Make sure that the end of the key name ends in a / for it to be
+	// considered a folder.
 	HomeDirectoryMappings []types.HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be
@@ -94,17 +98,23 @@ type CreateUserInput struct {
 	// A scope-down policy for your user so you can use the same IAM role across
 	// multiple users. This policy scopes down user access to portions of their Amazon
 	// S3 bucket. Variables that you can use inside this policy include
-	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}. For
-	// scope-down policies, AWS Transfer Family stores the policy as a JSON blob,
-	// instead of the Amazon Resource Name (ARN) of the policy. You save the policy as
-	// a JSON blob and pass it in the Policy argument. For an example of a scope-down
-	// policy, see Creating a scope-down policy
-	// (https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down).
+	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
+	// This only applies when domain of ServerId is S3. EFS does not use scope down
+	// policy. For scope-down policies, AWS Transfer Family stores the policy as a JSON
+	// blob, instead of the Amazon Resource Name (ARN) of the policy. You save the
+	// policy as a JSON blob and pass it in the Policy argument. For an example of a
+	// scope-down policy, see Example scope-down policy
+	// (https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html).
 	// For more information, see AssumeRole
 	// (https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) in the
 	// AWS Security Token Service API Reference.
 	Policy *string
 
+	// Specifies the full POSIX identity, including user ID (Uid), group ID (Gid), and
+	// any secondary groups IDs (SecondaryGids), that controls your users' access to
+	// your Amazon EFS file systems. The POSIX permissions that are set on files and
+	// directories in Amazon EFS determine the level of access your users get when
+	// transferring files into and out of your Amazon EFS file systems.
 	PosixProfile *types.PosixProfile
 
 	// The public portion of the Secure Shell (SSH) key used to authenticate the user

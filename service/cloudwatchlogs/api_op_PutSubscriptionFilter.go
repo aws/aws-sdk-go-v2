@@ -33,11 +33,10 @@ import (
 // * An AWS Lambda function that belongs to the same
 // account as the subscription filter, for same-account delivery.
 //
-// There can only
-// be one subscription filter associated with a log group. If you are updating an
-// existing filter, you must specify the correct name in filterName. Otherwise, the
-// call fails because you cannot associate a second filter with a log group. To
-// perform a PutSubscriptionFilter operation, you must also have the iam:PassRole
+// Each log group
+// can have up to two subscription filters associated with it. If you are updating
+// an existing filter, you must specify the correct name in filterName. To perform
+// a PutSubscriptionFilter operation, you must also have the iam:PassRole
 // permission.
 func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscriptionFilterInput, optFns ...func(*Options)) (*PutSubscriptionFilterOutput, error) {
 	if params == nil {
@@ -64,22 +63,25 @@ type PutSubscriptionFilterInput struct {
 	//
 	// * A logical
 	// destination (specified using an ARN) belonging to a different account, for
-	// cross-account delivery.
+	// cross-account delivery. If you are setting up a cross-account subscription, the
+	// destination must have an IAM policy associated with it that allows the sender to
+	// send logs to the destination. For more information, see PutDestinationPolicy
+	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html).
 	//
-	// * An Amazon Kinesis Firehose delivery stream belonging
-	// to the same account as the subscription filter, for same-account delivery.
+	// *
+	// An Amazon Kinesis Firehose delivery stream belonging to the same account as the
+	// subscription filter, for same-account delivery.
 	//
-	// * An
-	// AWS Lambda function belonging to the same account as the subscription filter,
-	// for same-account delivery.
+	// * An AWS Lambda function
+	// belonging to the same account as the subscription filter, for same-account
+	// delivery.
 	//
 	// This member is required.
 	DestinationArn *string
 
 	// A name for the subscription filter. If you are updating an existing filter, you
-	// must specify the correct name in filterName. Otherwise, the call fails because
-	// you cannot associate a second filter with a log group. To find the name of the
-	// filter currently associated with a log group, use DescribeSubscriptionFilters
+	// must specify the correct name in filterName. To find the name of the filter
+	// currently associated with a log group, use DescribeSubscriptionFilters
 	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html).
 	//
 	// This member is required.

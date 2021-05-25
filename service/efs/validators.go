@@ -330,6 +330,26 @@ func (m *validateOpModifyMountTargetSecurityGroups) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAccountPreferences struct {
+}
+
+func (*validateOpPutAccountPreferences) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAccountPreferences) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAccountPreferencesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAccountPreferencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutBackupPolicy struct {
 }
 
@@ -512,6 +532,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpModifyMountTargetSecurityGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyMountTargetSecurityGroups{}, middleware.After)
+}
+
+func addOpPutAccountPreferencesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAccountPreferences{}, middleware.After)
 }
 
 func addOpPutBackupPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -912,6 +936,21 @@ func validateOpModifyMountTargetSecurityGroupsInput(v *ModifyMountTargetSecurity
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyMountTargetSecurityGroupsInput"}
 	if v.MountTargetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MountTargetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutAccountPreferencesInput(v *PutAccountPreferencesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAccountPreferencesInput"}
+	if len(v.ResourceIdType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -52,15 +52,18 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_UploadPartCopy.html)
 // requests must match the headers you used in the request to initiate the upload
 // by using CreateMultipartUpload. To perform a multipart upload with encryption
-// using an AWS KMS CMK, the requester must have permission to the kms:Encrypt,
-// kms:Decrypt, kms:ReEncrypt*, kms:GenerateDataKey*, and kms:DescribeKey actions
-// on the key. These permissions are required because Amazon S3 must decrypt and
-// read data from the encrypted file parts before it completes the multipart
-// upload. If your AWS Identity and Access Management (IAM) user or role is in the
-// same AWS account as the AWS KMS CMK, then you must have these permissions on the
-// key policy. If your IAM user or role belongs to a different account than the
-// key, then you must have the permissions on both the key policy and your IAM user
-// or role. For more information, see Protecting Data Using Server-Side Encryption
+// using an AWS KMS CMK, the requester must have permission to the kms:Decrypt and
+// kms:GenerateDataKey* actions on the key. These permissions are required because
+// Amazon S3 must decrypt and read data from the encrypted file parts before it
+// completes the multipart upload. For more information, see Multipart upload API
+// and permissions
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/mpuoverview.html#mpuAndPermissions)
+// in the Amazon S3 User Guide. If your AWS Identity and Access Management (IAM)
+// user or role is in the same AWS account as the AWS KMS CMK, then you must have
+// these permissions on the key policy. If your IAM user or role belongs to a
+// different account than the key, then you must have the permissions on both the
+// key policy and your IAM user or role. For more information, see Protecting Data
+// Using Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html).
 // Access Permissions When copying an object, you can optionally specify the
 // accounts or groups that should be granted specific permissions on the new
@@ -248,7 +251,7 @@ type CreateMultipartUploadInput struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the AWS SDKs, you provide the access point
 	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using Access Points
+	// see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
@@ -336,7 +339,7 @@ type CreateMultipartUploadInput struct {
 	// about downloading objects from requester pays buckets, see Downloading Objects
 	// in Requestor Pays Buckets
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
-	// in the Amazon S3 Developer Guide.
+	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
 
 	// Specifies the algorithm to use to when encrypting the object (for example,
@@ -366,7 +369,7 @@ type CreateMultipartUploadInput struct {
 	// any of the officially supported AWS SDKs and AWS CLI, see Specifying the
 	// Signature Version in Request Authentication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)
-	// in the Amazon S3 Developer Guide.
+	// in the Amazon S3 User Guide.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3
@@ -379,7 +382,7 @@ type CreateMultipartUploadInput struct {
 	// Storage Class. Amazon S3 on Outposts only uses the OUTPOSTS Storage Class. For
 	// more information, see Storage Classes
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-class-intro.html) in
-	// the Amazon S3 Service Developer Guide.
+	// the Amazon S3 User Guide.
 	StorageClass types.StorageClass
 
 	// The tag-set for the object. The tag-set must be encoded as URL Query parameters.
@@ -415,7 +418,7 @@ type CreateMultipartUploadOutput struct {
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
 	// action with an access point through the AWS SDKs, you provide the access point
 	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using Access Points
+	// see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts

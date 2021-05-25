@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified domain configuration. The domain configuration feature is
-// in public preview and is subject to change.
+// Deletes the specified domain configuration.
 func (c *Client) DeleteDomainConfiguration(ctx context.Context, params *DeleteDomainConfigurationInput, optFns ...func(*Options)) (*DeleteDomainConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteDomainConfigurationInput{}

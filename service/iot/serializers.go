@@ -2023,6 +2023,11 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 		}
 	}
 
+	if v.JobTemplateArn != nil {
+		ok := object.Key("jobTemplateArn")
+		ok.String(*v.JobTemplateArn)
+	}
+
 	if v.NamespaceId != nil {
 		ok := object.Key("namespaceId")
 		ok.String(*v.NamespaceId)
@@ -2052,6 +2057,137 @@ func awsRestjson1_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smi
 	if len(v.TargetSelection) > 0 {
 		ok := object.Key("targetSelection")
 		ok.String(string(v.TargetSelection))
+	}
+
+	if v.TimeoutConfig != nil {
+		ok := object.Key("timeoutConfig")
+		if err := awsRestjson1_serializeDocumentTimeoutConfig(v.TimeoutConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateJobTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpCreateJobTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateJobTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateJobTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/job-templates/{jobTemplateId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateJobTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateJobTemplateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateJobTemplateInput(v *CreateJobTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.JobTemplateId == nil || len(*v.JobTemplateId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobTemplateId must not be empty")}
+	}
+	if v.JobTemplateId != nil {
+		if err := encoder.SetURI("jobTemplateId").String(*v.JobTemplateId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateJobTemplateInput(v *CreateJobTemplateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AbortConfig != nil {
+		ok := object.Key("abortConfig")
+		if err := awsRestjson1_serializeDocumentAbortConfig(v.AbortConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Document != nil {
+		ok := object.Key("document")
+		ok.String(*v.Document)
+	}
+
+	if v.DocumentSource != nil {
+		ok := object.Key("documentSource")
+		ok.String(*v.DocumentSource)
+	}
+
+	if v.JobArn != nil {
+		ok := object.Key("jobArn")
+		ok.String(*v.JobArn)
+	}
+
+	if v.JobExecutionsRolloutConfig != nil {
+		ok := object.Key("jobExecutionsRolloutConfig")
+		if err := awsRestjson1_serializeDocumentJobExecutionsRolloutConfig(v.JobExecutionsRolloutConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PresignedUrlConfig != nil {
+		ok := object.Key("presignedUrlConfig")
+		if err := awsRestjson1_serializeDocumentPresignedUrlConfig(v.PresignedUrlConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.TimeoutConfig != nil {
@@ -4378,6 +4514,64 @@ func awsRestjson1_serializeOpHttpBindingsDeleteJobExecutionInput(v *DeleteJobExe
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteJobTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteJobTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteJobTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteJobTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/job-templates/{jobTemplateId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteJobTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteJobTemplateInput(v *DeleteJobTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.JobTemplateId == nil || len(*v.JobTemplateId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobTemplateId must not be empty")}
+	}
+	if v.JobTemplateId != nil {
+		if err := encoder.SetURI("jobTemplateId").String(*v.JobTemplateId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteMitigationAction struct {
 }
 
@@ -6550,6 +6744,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeJobExecutionInput(v *DescribeJo
 	}
 	if v.ThingName != nil {
 		if err := encoder.SetURI("thingName").String(*v.ThingName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeJobTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeJobTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeJobTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeJobTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/job-templates/{jobTemplateId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeJobTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeJobTemplateInput(v *DescribeJobTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.JobTemplateId == nil || len(*v.JobTemplateId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member jobTemplateId must not be empty")}
+	}
+	if v.JobTemplateId != nil {
+		if err := encoder.SetURI("jobTemplateId").String(*v.JobTemplateId); err != nil {
 			return err
 		}
 	}
@@ -9989,6 +10241,63 @@ func awsRestjson1_serializeOpHttpBindingsListJobsInput(v *ListJobsInput, encoder
 
 	if v.ThingGroupName != nil {
 		encoder.SetQuery("thingGroupName").String(*v.ThingGroupName)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListJobTemplates struct {
+}
+
+func (*awsRestjson1_serializeOpListJobTemplates) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListJobTemplates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListJobTemplatesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/job-templates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListJobTemplatesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListJobTemplatesInput(v *ListJobTemplatesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil

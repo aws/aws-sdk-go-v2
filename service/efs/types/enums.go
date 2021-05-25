@@ -46,6 +46,42 @@ func (PerformanceMode) Values() []PerformanceMode {
 	}
 }
 
+type Resource string
+
+// Enum values for Resource
+const (
+	ResourceFileSystem  Resource = "FILE_SYSTEM"
+	ResourceMountTarget Resource = "MOUNT_TARGET"
+)
+
+// Values returns all known values for Resource. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Resource) Values() []Resource {
+	return []Resource{
+		"FILE_SYSTEM",
+		"MOUNT_TARGET",
+	}
+}
+
+type ResourceIdType string
+
+// Enum values for ResourceIdType
+const (
+	ResourceIdTypeLongId  ResourceIdType = "LONG_ID"
+	ResourceIdTypeShortId ResourceIdType = "SHORT_ID"
+)
+
+// Values returns all known values for ResourceIdType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceIdType) Values() []ResourceIdType {
+	return []ResourceIdType{
+		"LONG_ID",
+		"SHORT_ID",
+	}
+}
+
 type Status string
 
 // Enum values for Status

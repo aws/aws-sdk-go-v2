@@ -494,6 +494,23 @@ type DimensionValuesWithAttributes struct {
 	Value *string
 }
 
+// The field that contains a list of disk (local storage) metrics associated with
+// the current instance.
+type DiskResourceUtilization struct {
+
+	// The maximum read throughput operations per second.
+	DiskReadBytesPerSecond *string
+
+	// The maximum number of read operations per second.
+	DiskReadOpsPerSecond *string
+
+	// The maximum write throughput operations per second.
+	DiskWriteBytesPerSecond *string
+
+	// The maximum number of write operations per second.
+	DiskWriteOpsPerSecond *string
+}
+
 // The EBS field that contains a list of EBS metrics associated with the current
 // instance.
 type EBSResourceUtilization struct {
@@ -575,6 +592,10 @@ type EC2ResourceDetails struct {
 // Utilization metrics of the instance.
 type EC2ResourceUtilization struct {
 
+	// The field that contains a list of disk (local storage) metrics associated with
+	// the current instance.
+	DiskResourceUtilization *DiskResourceUtilization
+
 	// The EBS field that contains a list of EBS metrics associated with the current
 	// instance.
 	EBSResourceUtilization *EBSResourceUtilization
@@ -588,6 +609,10 @@ type EC2ResourceUtilization struct {
 	// Maximum observed or expected storage utilization of the instance (does not
 	// measure EBS storage).
 	MaxStorageUtilizationPercentage *string
+
+	// The network field that contains a list of network metrics associated with the
+	// current instance.
+	NetworkResourceUtilization *NetworkResourceUtilization
 }
 
 // The Amazon EC2 hardware specifications that you want AWS to provide
@@ -776,6 +801,23 @@ type ModifyRecommendationDetail struct {
 
 	// Identifies whether this instance type is the AWS default recommendation.
 	TargetInstances []TargetInstance
+}
+
+// The network field that contains a list of network metrics associated with the
+// current instance.
+type NetworkResourceUtilization struct {
+
+	// The network ingress throughput utilization measured in Bytes per second.
+	NetworkInBytesPerSecond *string
+
+	// The network outgress throughput utilization measured in Bytes per second.
+	NetworkOutBytesPerSecond *string
+
+	// The network ingress packets measured in packets per second.
+	NetworkPacketsInPerSecond *string
+
+	// The network outgress packets measured in packets per second.
+	NetworkPacketsOutPerSecond *string
 }
 
 // Details about the Amazon RDS instances that AWS recommends that you purchase.
@@ -1089,6 +1131,10 @@ type RightsizingRecommendation struct {
 
 	// Context regarding the current instance.
 	CurrentInstance *CurrentInstance
+
+	// The list of possible reasons why the recommendation is generated such as under
+	// or over utilization of specific metrics (for example, CPU, Memory, Network).
+	FindingReasonCodes []FindingReasonCode
 
 	// Details for modification recommendations.
 	ModifyRecommendationDetail *ModifyRecommendationDetail
@@ -1561,6 +1607,10 @@ type TargetInstance struct {
 
 	// Expected utilization metrics for target instance type.
 	ExpectedResourceUtilization *ResourceUtilization
+
+	// Explains the actions you might need to take in order to successfully migrate
+	// your workloads from the current instance type to the recommended instance type.
+	PlatformDifferences []PlatformDifference
 
 	// Details on the target instance type.
 	ResourceDetails *ResourceDetails
