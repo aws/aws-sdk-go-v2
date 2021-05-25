@@ -1580,6 +1580,38 @@
                 "target": "com.amazonaws.costexplorer#DimensionValuesWithAttributes"
             }
         },
+        "com.amazonaws.costexplorer#DiskResourceUtilization": {
+            "type": "structure",
+            "members": {
+                "DiskReadOpsPerSecond": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of read operations per second.\n        </p>"
+                    }
+                },
+                "DiskWriteOpsPerSecond": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum number of write operations per second.\n        </p>"
+                    }
+                },
+                "DiskReadBytesPerSecond": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum read throughput operations per second.\n        </p>"
+                    }
+                },
+                "DiskWriteBytesPerSecond": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The maximum write throughput operations per second.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The field that contains a list of disk (local storage) metrics associated with the current instance.\n        </p>"
+            }
+        },
         "com.amazonaws.costexplorer#EBSResourceUtilization": {
             "type": "structure",
             "members": {
@@ -1756,6 +1788,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The EBS field that contains a list of EBS metrics associated with the current instance.\n        </p>"
                     }
+                },
+                "DiskResourceUtilization": {
+                    "target": "com.amazonaws.costexplorer#DiskResourceUtilization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The field that contains a list of disk (local storage) metrics associated with the current instance.\n        </p>"
+                    }
+                },
+                "NetworkResourceUtilization": {
+                    "target": "com.amazonaws.costexplorer#NetworkResourceUtilization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network field that contains a list of network metrics associated with the current instance.\n        </p>"
+                    }
                 }
             },
             "traits": {
@@ -1915,6 +1959,83 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.costexplorer#Expression"
+            }
+        },
+        "com.amazonaws.costexplorer#FindingReasonCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CPU_OVER_PROVISIONED",
+                        "name": "CPU_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "CPU_UNDER_PROVISIONED",
+                        "name": "CPU_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "MEMORY_OVER_PROVISIONED",
+                        "name": "MEMORY_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "MEMORY_UNDER_PROVISIONED",
+                        "name": "MEMORY_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "EBS_THROUGHPUT_OVER_PROVISIONED",
+                        "name": "EBS_THROUGHPUT_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "EBS_THROUGHPUT_UNDER_PROVISIONED",
+                        "name": "EBS_THROUGHPUT_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "EBS_IOPS_OVER_PROVISIONED",
+                        "name": "EBS_IOPS_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "EBS_IOPS_UNDER_PROVISIONED",
+                        "name": "EBS_IOPS_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "NETWORK_BANDWIDTH_OVER_PROVISIONED",
+                        "name": "NETWORK_BANDWIDTH_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "NETWORK_BANDWIDTH_UNDER_PROVISIONED",
+                        "name": "NETWORK_BANDWIDTH_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "NETWORK_PPS_OVER_PROVISIONED",
+                        "name": "NETWORK_PPS_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "NETWORK_PPS_UNDER_PROVISIONED",
+                        "name": "NETWORK_PPS_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "DISK_IOPS_OVER_PROVISIONED",
+                        "name": "DISK_IOPS_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "DISK_IOPS_UNDER_PROVISIONED",
+                        "name": "DISK_IOPS_UNDER_PROVISIONED"
+                    },
+                    {
+                        "value": "DISK_THROUGHPUT_OVER_PROVISIONED",
+                        "name": "DISK_THROUGHPUT_OVER_PROVISIONED"
+                    },
+                    {
+                        "value": "DISK_THROUGHPUT_UNDER_PROVISIONED",
+                        "name": "DISK_THROUGHPUT_UNDER_PROVISIONED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.costexplorer#FindingReasonCodes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#FindingReasonCode"
             }
         },
         "com.amazonaws.costexplorer#ForecastResult": {
@@ -4094,6 +4215,38 @@
         "com.amazonaws.costexplorer#NetRISavings": {
             "type": "string"
         },
+        "com.amazonaws.costexplorer#NetworkResourceUtilization": {
+            "type": "structure",
+            "members": {
+                "NetworkInBytesPerSecond": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network ingress throughput utilization measured in Bytes per second.\n        </p>"
+                    }
+                },
+                "NetworkOutBytesPerSecond": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network outgress throughput utilization measured in Bytes per second.\n        </p>"
+                    }
+                },
+                "NetworkPacketsInPerSecond": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network ingress packets measured in packets per second.\n        </p>"
+                    }
+                },
+                "NetworkPacketsOutPerSecond": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The network outgress packets measured in packets per second.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The network field that contains a list of network metrics associated with the current instance.\n        </p>"
+            }
+        },
         "com.amazonaws.costexplorer#NextPageToken": {
             "type": "string",
             "traits": {
@@ -4214,6 +4367,39 @@
                         "name": "HEAVY_UTILIZATION"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.costexplorer#PlatformDifference": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "HYPERVISOR",
+                        "name": "HYPERVISOR"
+                    },
+                    {
+                        "value": "NETWORK_INTERFACE",
+                        "name": "NETWORK_INTERFACE"
+                    },
+                    {
+                        "value": "STORAGE_INTERFACE",
+                        "name": "STORAGE_INTERFACE"
+                    },
+                    {
+                        "value": "INSTANCE_STORE_AVAILABILITY",
+                        "name": "INSTANCE_STORE_AVAILABILITY"
+                    },
+                    {
+                        "value": "VIRTUALIZATION_TYPE",
+                        "name": "VIRTUALIZATION_TYPE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.costexplorer#PlatformDifferences": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#PlatformDifference"
             }
         },
         "com.amazonaws.costexplorer#PredictionIntervalLevel": {
@@ -4939,6 +5125,12 @@
                     "target": "com.amazonaws.costexplorer#TerminateRecommendationDetail",
                     "traits": {
                         "smithy.api#documentation": "<p>Details for termination recommendations.</p>"
+                    }
+                },
+                "FindingReasonCodes": {
+                    "target": "com.amazonaws.costexplorer#FindingReasonCodes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network).\n        </p>"
                     }
                 }
             },
@@ -5923,6 +6115,12 @@
                     "target": "com.amazonaws.costexplorer#ResourceUtilization",
                     "traits": {
                         "smithy.api#documentation": "<p> Expected utilization metrics for target instance type.</p>"
+                    }
+                },
+                "PlatformDifferences": {
+                    "target": "com.amazonaws.costexplorer#PlatformDifferences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type.\n        </p>"
                     }
                 }
             },

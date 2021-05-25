@@ -109,6 +109,9 @@
                     "target": "com.amazonaws.iot#CreateJob"
                 },
                 {
+                    "target": "com.amazonaws.iot#CreateJobTemplate"
+                },
+                {
                     "target": "com.amazonaws.iot#CreateKeysAndCertificate"
                 },
                 {
@@ -194,6 +197,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteJobExecution"
+                },
+                {
+                    "target": "com.amazonaws.iot#DeleteJobTemplate"
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteMitigationAction"
@@ -305,6 +311,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#DescribeJobExecution"
+                },
+                {
+                    "target": "com.amazonaws.iot#DescribeJobTemplate"
                 },
                 {
                     "target": "com.amazonaws.iot#DescribeMitigationAction"
@@ -464,6 +473,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ListJobs"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListJobTemplates"
                 },
                 {
                     "target": "com.amazonaws.iot#ListMitigationActions"
@@ -1641,7 +1653,7 @@
                 "target": {
                     "target": "com.amazonaws.iot#PolicyTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html\">identity</a> to which the policy is attached.</p>",
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/security-iam.html\">identity</a> to which the policy is attached. For example, a thing group or a certificate.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4587,6 +4599,19 @@
                 }
             }
         },
+        "com.amazonaws.iot#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.iot#ErrorMessage2"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource with the same name already exists.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.iot#ConflictingResourceUpdateException": {
             "type": "structure",
             "members": {
@@ -5199,7 +5224,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain configuration.</p>\n         <note>\n            <p>The domain configuration feature is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a domain configuration.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domainConfigurations/{domainConfigurationName}",
@@ -5456,13 +5481,13 @@
                 "documentSource": {
                     "target": "com.amazonaws.iot#JobDocumentSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An S3 link to the job document.</p>"
+                        "smithy.api#documentation": "<p>An S3 link to the job document. Required if you don't specify a value for <code>document</code>.</p>\n        <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n        </note>"
                     }
                 },
                 "document": {
                     "target": "com.amazonaws.iot#JobDocument",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job document.</p>\n        <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>"
                     }
                 },
                 "description": {
@@ -5512,6 +5537,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>"
                     }
+                },
+                "jobTemplateArn": {
+                    "target": "com.amazonaws.iot#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the job template used to create the job.</p>"
+                    }
                 }
             }
         },
@@ -5534,6 +5565,116 @@
                     "target": "com.amazonaws.iot#JobDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The job description.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#CreateJobTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#CreateJobTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#CreateJobTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a job template.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/job-templates/{jobTemplateId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#CreateJobTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "jobTemplateId": {
+                    "target": "com.amazonaws.iot#JobTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the job template. We recommend using a UUID. Alpha-numeric \n        characters, \"-\", and \"_\" are valid for use here.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "jobArn": {
+                    "target": "com.amazonaws.iot#JobArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the job to use as the basis for the job template.</p>"
+                    }
+                },
+                "documentSource": {
+                    "target": "com.amazonaws.iot#JobDocumentSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An S3 link to the job document to use in the template. Required if you don't specify a value for <code>document</code>.</p>\n        <note>\n            <p>If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document.</p>\n            <p>The placeholder link is of the following form:</p>\n            <p>\n               <code>${aws:iot:s3-presigned-url:https://s3.amazonaws.com/<i>bucket</i>/<i>key</i>}</code>\n            </p>\n            <p>where <i>bucket</i> is your bucket name and <i>key</i> is the object in the bucket to which you are linking.</p>\n        </note>"
+                    }
+                },
+                "document": {
+                    "target": "com.amazonaws.iot#JobDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job document. Required if you don't specify a value for <code>documentSource</code>.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#JobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the job document.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "presignedUrlConfig": {
+                    "target": "com.amazonaws.iot#PresignedUrlConfig"
+                },
+                "jobExecutionsRolloutConfig": {
+                    "target": "com.amazonaws.iot#JobExecutionsRolloutConfig"
+                },
+                "abortConfig": {
+                    "target": "com.amazonaws.iot#AbortConfig"
+                },
+                "timeoutConfig": {
+                    "target": "com.amazonaws.iot#TimeoutConfig"
+                },
+                "tags": {
+                    "target": "com.amazonaws.iot#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that can be used to manage the job template.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#CreateJobTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "jobTemplateArn": {
+                    "target": "com.amazonaws.iot#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the job template.</p>"
+                    }
+                },
+                "jobTemplateId": {
+                    "target": "com.amazonaws.iot#JobTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the job template.</p>"
                     }
                 }
             }
@@ -7773,7 +7914,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified domain configuration.</p>\n         <note>\n            <p>The domain configuration feature is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes the specified domain configuration.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/domainConfigurations/{domainConfigurationName}",
@@ -7984,6 +8125,47 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>",
                         "smithy.api#httpQuery": "namespaceId"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#DeleteJobTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DeleteJobTemplateRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified job template.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/job-templates/{jobTemplateId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#DeleteJobTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "jobTemplateId": {
+                    "target": "com.amazonaws.iot#JobTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the job template to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -9981,7 +10163,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets summary information about a domain configuration.</p>\n         <note>\n            <p>The domain configuration feature is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets summary information about a domain configuration.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/domainConfigurations/{domainConfigurationName}",
@@ -10374,6 +10556,103 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the job.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.iot#DescribeJobTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#DescribeJobTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DescribeJobTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a job template.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/job-templates/{jobTemplateId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#DescribeJobTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "jobTemplateId": {
+                    "target": "com.amazonaws.iot#JobTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the job template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#DescribeJobTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "jobTemplateArn": {
+                    "target": "com.amazonaws.iot#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the job template.</p>"
+                    }
+                },
+                "jobTemplateId": {
+                    "target": "com.amazonaws.iot#JobTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the job template.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#JobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the job template.</p>"
+                    }
+                },
+                "documentSource": {
+                    "target": "com.amazonaws.iot#JobDocumentSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An S3 link to the job document.</p>"
+                    }
+                },
+                "document": {
+                    "target": "com.amazonaws.iot#JobDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job document.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds since the epoch, when the job template was created.</p>"
+                    }
+                },
+                "presignedUrlConfig": {
+                    "target": "com.amazonaws.iot#PresignedUrlConfig"
+                },
+                "jobExecutionsRolloutConfig": {
+                    "target": "com.amazonaws.iot#JobExecutionsRolloutConfig"
+                },
+                "abortConfig": {
+                    "target": "com.amazonaws.iot#AbortConfig"
+                },
+                "timeoutConfig": {
+                    "target": "com.amazonaws.iot#TimeoutConfig"
                 }
             }
         },
@@ -12146,7 +12425,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. \n         A domain configuration can be associated with an AWS-managed domain \n         (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p>\n         <ul>\n            <li>\n               <p>Data</p>\n            </li>\n            <li>\n               <p>Jobs</p>\n            </li>\n            <li>\n               <p>CredentialProvider</p>\n            </li>\n         </ul>\n         <note>\n            <p>The domain configuration feature is in public preview and is subject to change.</p>\n         </note>"
+                "smithy.api#documentation": "<p>The summary of a domain configuration. A domain configuration specifies custom IoT-specific information about a domain. \n         A domain configuration can be associated with an AWS-managed domain \n         (for example, dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a default endpoint.</p>\n         <ul>\n            <li>\n               <p>Data</p>\n            </li>\n            <li>\n               <p>Jobs</p>\n            </li>\n            <li>\n               <p>CredentialProvider</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.iot#DomainConfigurations": {
@@ -14626,6 +14905,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The namespace used to indicate that a job is a customer-managed job.</p>\n        <p>When you specify a value for this parameter, AWS IoT Core sends jobs notifications to MQTT topics that \n            contain the value in the following format.</p>\n        <p>\n            <code>$aws/things/<i>THING_NAME</i>/jobs/<i>JOB_ID</i>/notify-namespace-<i>NAMESPACE_ID</i>/</code>\n         </p>\n        <note>\n            <p>The <code>namespaceId</code> feature is in public preview.</p>\n         </note>"
                     }
+                },
+                "jobTemplateArn": {
+                    "target": "com.amazonaws.iot#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the job template used to create the job.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15089,6 +15374,64 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.iot#JobTemplateArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:[!-~]+$"
+            }
+        },
+        "com.amazonaws.iot#JobTemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
+            }
+        },
+        "com.amazonaws.iot#JobTemplateSummary": {
+            "type": "structure",
+            "members": {
+                "jobTemplateArn": {
+                    "target": "com.amazonaws.iot#JobTemplateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the job template.</p>"
+                    }
+                },
+                "jobTemplateId": {
+                    "target": "com.amazonaws.iot#JobTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the job template.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#JobDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the job template.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.iot#DateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in seconds since the epoch, when the job template was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains information about the job template.</p>"
+            }
+        },
+        "com.amazonaws.iot#JobTemplateSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#JobTemplateSummary"
             }
         },
         "com.amazonaws.iot#JsonDocument": {
@@ -16736,7 +17079,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.</p>\n         <note>\n            <p>The domain configuration feature is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/domainConfigurations",
@@ -17042,6 +17385,70 @@
                     "target": "com.amazonaws.iot#JobExecutionSummaryForThingList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of job execution summaries.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if there are no\n            additional results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#ListJobTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iot#ListJobTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListJobTemplatesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of job templates.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/job-templates",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iot#ListJobTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.iot#LaserMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return in the list.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to use to return the next set of results in the list.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#ListJobTemplatesResponse": {
+            "type": "structure",
+            "members": {
+                "jobTemplates": {
+                    "target": "com.amazonaws.iot#JobTemplateSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects that contain information about the job templates.</p>"
                     }
                 },
                 "nextToken": {
@@ -20011,8 +20418,7 @@
             "traits": {
                 "smithy.api#box": {},
                 "smithy.api#range": {
-                    "min": 1,
-                    "max": 1000
+                    "min": 1
                 }
             }
         },
@@ -26864,7 +27270,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.</p>\n         <note>\n            <p>The domain configuration feature is in public preview and is subject to change.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domainConfigurations/{domainConfigurationName}",

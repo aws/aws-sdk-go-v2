@@ -181,7 +181,7 @@
                 "to": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time of the range for the request, expressed as the number of milliseconds\n      after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not\n      exported.</p>",
+                        "smithy.api#documentation": "<p>The end time of the range for the request, expreswatchlogsdocused as the number of milliseconds\n      after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not\n      exported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -892,7 +892,7 @@
                 "orderBy": {
                     "target": "com.amazonaws.cloudwatchlogs#OrderBy",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the value is <code>LogStreamName</code>, the results are ordered by log stream name.\n      If the value is <code>LastEventTime</code>, the results are ordered by the event time. \n      The default value is <code>LogStreamName</code>.</p>\n         <p>If you order the results by event time, you cannot specify the <code>logStreamNamePrefix</code> parameter.</p>\n         <p>\n            <code>lastEventTimeStamp</code> represents the time of the most recent log event in the\n      log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after\n      Jan 1, 1970 00:00:00 UTC. <code>lastEventTimeStamp</code> updates on an eventual consistency\n      basis. It typically updates in less than an hour from ingestion, but in rare situations might\n      take longer.</p>"
+                        "smithy.api#documentation": "<p>If the value is <code>LogStreamName</code>, the results are ordered by log stream name.\n      If the value is <code>LastEventTime</code>, the results are ordered by the event time. \n      The default value is <code>LogStreamName</code>.</p>\n         <p>If you order the results by event time, you cannot specify the <code>logStreamNamePrefix</code> parameter.</p>\n         <p>\n            <code>lastEventTimestamp</code> represents the time of the most recent log event in the\n      log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after\n      Jan 1, 1970 00:00:00 UTC. <code>lastEventTimestamp</code> updates on an eventual consistency\n      basis. It typically updates in less than an hour from ingestion, but in rare situations might\n      take longer.</p>"
                     }
                 },
                 "descending": {
@@ -1320,13 +1320,40 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[^:*]*"
+                "smithy.api#pattern": "^[^:*]*$"
             }
         },
         "com.amazonaws.cloudwatchlogs#Destinations": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.cloudwatchlogs#Destination"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#Dimensions": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.cloudwatchlogs#DimensionsKey"
+            },
+            "value": {
+                "target": "com.amazonaws.cloudwatchlogs#DimensionsValue"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DimensionsKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#DimensionsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.cloudwatchlogs#DisassociateKmsKey": {
@@ -1647,7 +1674,7 @@
                 "startTime": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time range, expressed as the number of milliseconds after Jan 1, 1970\n      00:00:00 UTC. Events with a timestamp before this time are not returned.</p>\n         <p>If you omit <code>startTime</code> and <code>endTime</code> the most recent log events\n    are retrieved, to up 1 MB or 10,000 log events.</p>"
+                        "smithy.api#documentation": "<p>The start of the time range, expressed as the number of milliseconds after Jan 1, 1970\n      00:00:00 UTC. Events with a timestamp before this time are not returned.</p>"
                     }
                 },
                 "endTime": {
@@ -1715,7 +1742,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[^:*]*"
+                "smithy.api#pattern": "^[^:*]*$"
             }
         },
         "com.amazonaws.cloudwatchlogs#FilterPattern": {
@@ -1912,7 +1939,7 @@
                 "time": {
                     "target": "com.amazonaws.cloudwatchlogs#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time to set as the center of the query. If you specify <code>time</code>, the 8\n      minutes before and 8 minutes after this time are searched. If you omit <code>time</code>, the\n      past 15 minutes are queried.</p>\n         <p>The <code>time</code> value is specified as epoch time, the number of seconds since\n      January 1, 1970, 00:00:00 UTC.</p>"
+                        "smithy.api#documentation": "<p>The time to set as the center of the query. If you specify <code>time</code>, the 15 minutes\n       before this time are queries. If you omit <code>time</code> the 8\n      minutes before and 8 minutes after this time are searched.</p>\n         <p>The <code>time</code> value is specified as epoch time, the number of seconds since\n      January 1, 1970, 00:00:00 UTC.</p>"
                     }
                 }
             }
@@ -2276,7 +2303,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\.\\-_/#A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.cloudwatchlogs#LogGroupNames": {
@@ -2369,7 +2396,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[^:*]*"
+                "smithy.api#pattern": "^[^:*]*$"
             }
         },
         "com.amazonaws.cloudwatchlogs#LogStreamSearchedCompletely": {
@@ -2527,7 +2554,7 @@
                     "name": "logs"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from\n      EC2 instances, AWS CloudTrail, or other sources. You can then retrieve the associated\n      log data from CloudWatch Logs using the CloudWatch console, CloudWatch Logs commands in the\n      AWS CLI, CloudWatch Logs API, or CloudWatch Logs SDK.</p> \n         <p>You can use CloudWatch Logs to:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Monitor logs from EC2 instances in real-time</b>: You\n          can use CloudWatch Logs to monitor applications and systems using log data. For example,\n          CloudWatch Logs can track the number of errors that occur in your application logs and\n          send you a notification whenever the rate of errors exceeds a threshold that you specify.\n          CloudWatch Logs uses your log data for monitoring so no code changes are required. For\n          example, you can monitor application logs for specific literal terms (such as\n          \"NullReferenceException\") or count the number of occurrences of a literal term at a\n          particular position in log data (such as \"404\" status codes in an Apache access log). When\n          the term you are searching for is found, CloudWatch Logs reports the data to a CloudWatch\n          metric that you specify.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Monitor AWS CloudTrail logged events</b>: You can\n          create alarms in CloudWatch and receive notifications of particular API activity as\n          captured by CloudTrail. You can use the notification to perform troubleshooting.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Archive log data</b>: You can use CloudWatch Logs to\n          store your log data in highly durable storage. You can change the log retention setting so\n          that any log events older than this setting are automatically deleted. The CloudWatch Logs\n          agent makes it easy to quickly send both rotated and non-rotated log data off of a host\n          and into the log service. You can then access the raw log data when you need it.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>You can use Amazon CloudWatch Logs to monitor, store, and access your log files from\n      EC2 instances, AWS CloudTrail, and other sources. You can then retrieve the associated\n      log data from CloudWatch Logs using the CloudWatch console, CloudWatch Logs commands in the\n      AWS CLI, CloudWatch Logs API, or CloudWatch Logs SDK.</p> \n         <p>You can use CloudWatch Logs to:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Monitor logs from EC2 instances in real-time</b>: You\n          can use CloudWatch Logs to monitor applications and systems using log data. For example,\n          CloudWatch Logs can track the number of errors that occur in your application logs and\n          send you a notification whenever the rate of errors exceeds a threshold that you specify.\n          CloudWatch Logs uses your log data for monitoring so no code changes are required. For\n          example, you can monitor application logs for specific literal terms (such as\n          \"NullReferenceException\") or count the number of occurrences of a literal term at a\n          particular position in log data (such as \"404\" status codes in an Apache access log). When\n          the term you are searching for is found, CloudWatch Logs reports the data to a CloudWatch\n          metric that you specify.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Monitor AWS CloudTrail logged events</b>: You can\n          create alarms in CloudWatch and receive notifications of particular API activity as\n          captured by CloudTrail. You can use the notification to perform troubleshooting.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Archive log data</b>: You can use CloudWatch Logs to\n          store your log data in highly durable storage. You can change the log retention setting so\n          that any log events older than this setting are automatically deleted. The CloudWatch Logs\n          agent makes it easy to quickly send both rotated and non-rotated log data off of a host\n          and into the log service. You can then access the raw log data when you need it.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon CloudWatch Logs",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://monitoring.amazonaws.com/doc/2014-03-28/"
@@ -2633,7 +2660,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "[^:*$]*"
+                "smithy.api#pattern": "^[^:*$]*$"
             }
         },
         "com.amazonaws.cloudwatchlogs#MetricNamespace": {
@@ -2643,7 +2670,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "[^:*$]*"
+                "smithy.api#pattern": "^[^:*$]*$"
             }
         },
         "com.amazonaws.cloudwatchlogs#MetricTransformation": {
@@ -2674,6 +2701,18 @@
                     "target": "com.amazonaws.cloudwatchlogs#DefaultValue",
                     "traits": {
                         "smithy.api#documentation": "<p>(Optional) The value to emit when a filter pattern does not match a log event. \n      This value can be null.</p>"
+                    }
+                },
+                "dimensions": {
+                    "target": "com.amazonaws.cloudwatchlogs#Dimensions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fields to use as dimensions for the metric. One metric filter can include\n    as many as three dimensions.</p>\n         <important>\n            <p>Metrics extracted from log events are charged as custom metrics.\n      To prevent unexpected high charges, do not specify high-cardinality fields such as \n      <code>IPAddress</code> or <code>requestID</code> as dimensions. Each different value \n      found for \n      a dimension is treated as a separate metric and accrues charges as a separate custom metric.\n    </p>\n            <p>To help prevent accidental high charges, Amazon disables a metric filter\n        if it generates 1000 different name/value pairs for the dimensions that you \n        have specified within a certain amount of time.</p>\n            <p>You can also set up a billing alarm to alert you if your charges are higher than \n        expected. For more information, \n        see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html\">\n          Creating a Billing Alarm to Monitor Your Estimated AWS Charges</a>.\n       </p>\n         </important>"
+                    }
+                },
+                "unit": {
+                    "target": "com.amazonaws.cloudwatchlogs#StandardUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit to assign to the metric. If you omit this, the unit is set as <code>None</code>.</p>"
                     }
                 }
             },
@@ -2832,7 +2871,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an access policy associated with an existing\n      destination. An access policy is an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html\">IAM policy document</a> that is used\n      to authorize claims to register a subscription filter against a given destination.</p>"
+                "smithy.api#documentation": "<p>Creates or updates an access policy associated with an existing\n      destination. An access policy is an <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/policies_overview.html\">IAM policy document</a> that is used\n      to authorize claims to register a subscription filter against a given destination.</p>\n         <p>If multiple AWS accounts are sending logs to this destination, each sender account must be \n    listed separately in the policy. The policy does not support specifying <code>*</code>\n    as the Principal or the use of the <code>aws:PrincipalOrgId</code> global key.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutDestinationPolicyRequest": {
@@ -2995,7 +3034,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a metric filter and associates it with the specified log group.\n      Metric filters allow you to configure rules to extract metric data from log events ingested\n      through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a>.</p>\n         <p>The maximum number of metric filters that can be associated with a log group is\n      100.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a metric filter and associates it with the specified log group.\n      Metric filters allow you to configure rules to extract metric data from log events ingested\n      through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a>.</p>\n         <p>The maximum number of metric filters that can be associated with a log group is\n      100.</p>\n         <p>When you create a metric filter, you can also optionally assign a unit and dimensions\n    to the metric that is created.</p>\n         <important>\n            <p>Metrics extracted from log events are charged as custom metrics.\n      To prevent unexpected high charges, do not specify high-cardinality fields such as \n      <code>IPAddress</code> or <code>requestID</code> as dimensions. Each different value \n      found for \n      a dimension is treated as a separate metric and accrues charges as a separate custom metric.\n    </p>\n            <p>To help prevent accidental high charges, Amazon disables a metric filter\n        if it generates 1000 different name/value pairs for the dimensions that you \n        have specified within a certain amount of time.</p>\n            <p>You can also set up a billing alarm to alert you if your charges are higher than \n        expected. For more information, \n        see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html\">\n          Creating a Billing Alarm to Monitor Your Estimated AWS Charges</a>.\n      </p>\n         </important>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutMetricFilterRequest": {
@@ -3211,7 +3250,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates a subscription filter and associates it with the specified log\n      group. Subscription filters allow you to subscribe to a real-time stream of log events\n      ingested through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a> and have them delivered to a specific\n      destination. When log events are sent to the \n      receiving service, they are Base64 encoded\n      and compressed with the gzip format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis stream belonging to the same account as the subscription filter,\n          for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination that belongs to a different account, for cross-account delivery.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Firehose delivery stream that belongs to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An AWS Lambda function that belongs to the same account as the subscription filter,\n          for same-account delivery.</p>\n            </li>\n         </ul> \n         <p>There can only be one subscription filter associated with a log group. If you are\n      updating an existing filter, you must specify the correct name in <code>filterName</code>.\n      Otherwise, the call fails because you cannot associate a second filter with a log\n      group.</p>\n         <p>To perform a <code>PutSubscriptionFilter</code> operation, you must also have the \n      <code>iam:PassRole</code> permission.</p>"
+                "smithy.api#documentation": "<p>Creates or updates a subscription filter and associates it with the specified log\n      group. Subscription filters allow you to subscribe to a real-time stream of log events\n      ingested through <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutLogEvents.html\">PutLogEvents</a> and have them delivered to a specific\n      destination. When log events are sent to the \n      receiving service, they are Base64 encoded\n      and compressed with the gzip format.</p>\n         <p>The following destinations are supported for subscription filters:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis stream belonging to the same account as the subscription filter,\n          for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination that belongs to a different account, for cross-account delivery.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Firehose delivery stream that belongs to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An AWS Lambda function that belongs to the same account as the subscription filter,\n          for same-account delivery.</p>\n            </li>\n         </ul> \n         <p>Each log group can have up to two subscription filters associated with it. If you are\n      updating an existing filter, you must specify the correct name in <code>filterName</code>.\n      </p>\n         <p>To perform a <code>PutSubscriptionFilter</code> operation, you must also have the \n      <code>iam:PassRole</code> permission.</p>"
             }
         },
         "com.amazonaws.cloudwatchlogs#PutSubscriptionFilterRequest": {
@@ -3227,7 +3266,7 @@
                 "filterName": {
                     "target": "com.amazonaws.cloudwatchlogs#FilterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A name for the subscription filter. If you are updating an existing filter, you must\n      specify the correct name in <code>filterName</code>. Otherwise, the call fails because you\n      cannot associate a second filter with a log group. To find the name of the filter currently\n      associated with a log group, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html\">DescribeSubscriptionFilters</a>.</p>",
+                        "smithy.api#documentation": "<p>A name for the subscription filter. If you are updating an existing filter, you must\n      specify the correct name in <code>filterName</code>. To find the name of the filter currently\n      associated with a log group, use <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeSubscriptionFilters.html\">DescribeSubscriptionFilters</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3241,7 +3280,7 @@
                 "destinationArn": {
                     "target": "com.amazonaws.cloudwatchlogs#DestinationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the destination to deliver matching log events to. Currently, the supported\n      destinations are:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis stream belonging to the same account as the subscription filter,\n          for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination (specified using an ARN) belonging to a different account, \n          for cross-account delivery.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Firehose delivery stream belonging to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An AWS Lambda function belonging to the same account as the subscription filter,\n          for same-account delivery.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The ARN of the destination to deliver matching log events to. Currently, the supported\n      destinations are:</p>\n         <ul>\n            <li>\n               <p>An Amazon Kinesis stream belonging to the same account as the subscription filter,\n          for same-account delivery.</p>\n            </li>\n            <li>\n               <p>A logical destination (specified using an ARN) belonging to a different account, \n          for cross-account delivery.</p>\n               <p>If you are setting up a cross-account subscription, the destination must have an \n        IAM policy associated with it that allows the sender to send logs to the destination.\n        For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDestinationPolicy.html\">PutDestinationPolicy</a>.</p>\n            </li>\n            <li>\n               <p>An Amazon Kinesis Firehose delivery stream belonging to the same account as the\n          subscription filter, for same-account delivery.</p>\n            </li>\n            <li>\n               <p>An AWS Lambda function belonging to the same account as the subscription filter,\n          for same-account delivery.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3486,6 +3525,14 @@
                     {
                         "value": "Cancelled",
                         "name": "Cancelled"
+                    },
+                    {
+                        "value": "Timeout",
+                        "name": "Timeout"
+                    },
+                    {
+                        "value": "Unknown",
+                        "name": "Unknown"
                     }
                 ]
             }
@@ -3659,6 +3706,121 @@
             "traits": {
                 "smithy.api#documentation": "<p>The service cannot complete the request.</p>",
                 "smithy.api#error": "server"
+            }
+        },
+        "com.amazonaws.cloudwatchlogs#StandardUnit": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Seconds",
+                        "name": "Seconds"
+                    },
+                    {
+                        "value": "Microseconds",
+                        "name": "Microseconds"
+                    },
+                    {
+                        "value": "Milliseconds",
+                        "name": "Milliseconds"
+                    },
+                    {
+                        "value": "Bytes",
+                        "name": "Bytes"
+                    },
+                    {
+                        "value": "Kilobytes",
+                        "name": "Kilobytes"
+                    },
+                    {
+                        "value": "Megabytes",
+                        "name": "Megabytes"
+                    },
+                    {
+                        "value": "Gigabytes",
+                        "name": "Gigabytes"
+                    },
+                    {
+                        "value": "Terabytes",
+                        "name": "Terabytes"
+                    },
+                    {
+                        "value": "Bits",
+                        "name": "Bits"
+                    },
+                    {
+                        "value": "Kilobits",
+                        "name": "Kilobits"
+                    },
+                    {
+                        "value": "Megabits",
+                        "name": "Megabits"
+                    },
+                    {
+                        "value": "Gigabits",
+                        "name": "Gigabits"
+                    },
+                    {
+                        "value": "Terabits",
+                        "name": "Terabits"
+                    },
+                    {
+                        "value": "Percent",
+                        "name": "Percent"
+                    },
+                    {
+                        "value": "Count",
+                        "name": "Count"
+                    },
+                    {
+                        "value": "Bytes/Second",
+                        "name": "BytesSecond"
+                    },
+                    {
+                        "value": "Kilobytes/Second",
+                        "name": "KilobytesSecond"
+                    },
+                    {
+                        "value": "Megabytes/Second",
+                        "name": "MegabytesSecond"
+                    },
+                    {
+                        "value": "Gigabytes/Second",
+                        "name": "GigabytesSecond"
+                    },
+                    {
+                        "value": "Terabytes/Second",
+                        "name": "TerabytesSecond"
+                    },
+                    {
+                        "value": "Bits/Second",
+                        "name": "BitsSecond"
+                    },
+                    {
+                        "value": "Kilobits/Second",
+                        "name": "KilobitsSecond"
+                    },
+                    {
+                        "value": "Megabits/Second",
+                        "name": "MegabitsSecond"
+                    },
+                    {
+                        "value": "Gigabits/Second",
+                        "name": "GigabitsSecond"
+                    },
+                    {
+                        "value": "Terabits/Second",
+                        "name": "TerabitsSecond"
+                    },
+                    {
+                        "value": "Count/Second",
+                        "name": "CountSecond"
+                    },
+                    {
+                        "value": "None",
+                        "name": "None"
+                    }
+                ]
             }
         },
         "com.amazonaws.cloudwatchlogs#StartFromHead": {

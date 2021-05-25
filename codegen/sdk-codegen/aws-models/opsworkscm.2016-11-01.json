@@ -509,7 +509,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.opsworkscm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        The major release version of the engine that you want to use. For a Chef server, the valid value for EngineVersion is currently <code>2</code>. For a Puppet server, the valid value is <code>2017</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n        The major release version of the engine that you want to use. For a Chef server, the valid value for EngineVersion \n        is currently <code>2</code>. For a Puppet server, valid values are <code>2019</code> or <code>2017</code>.\n      </p>"
                     }
                 },
                 "EngineAttributes": {
@@ -1030,7 +1030,7 @@
                 "Servers": {
                     "target": "com.amazonaws.opsworkscm#Servers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the response to a <code>DescribeServers</code> request.</p>\n         <p>\n            <i>For Chef Automate servers:</i>  If <code>DescribeServersResponse$Servers$EngineAttributes</code> includes \n      CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef Automate 2. To be eligible for upgrade, a server running \n      Chef Automate 1 must have had at least one successful maintenance run after November 1, 2019.</p>\n         <p>\n            <i>For Puppet Server:</i>  \n            <code>DescribeServersResponse$Servers$EngineAttributes</code> contains\n      PUPPET_API_CA_CERT. This is the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. \n      The CA certificate is also used to sign node certificates.</p>"
+                        "smithy.api#documentation": "<p>Contains the response to a <code>DescribeServers</code> request.</p>\n         <p>\n            <i>For Chef Automate servers:</i>  If <code>DescribeServersResponse$Servers$EngineAttributes</code> includes \n      CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef Automate 2. To be eligible for upgrade, a server running \n      Chef Automate 1 must have had at least one successful maintenance run after November 1, 2019.</p>\n         <p>\n            <i>For Puppet servers:</i>  \n            <code>DescribeServersResponse$Servers$EngineAttributes</code> contains\n      the following two responses:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>PUPPET_API_CA_CERT</code>, the PEM-encoded CA certificate that is used by the Puppet API over TCP port number 8140. \n        The CA certificate is also used to sign node certificates.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PUPPET_API_CRL</code>, a certificate revocation list. The certificate revocation list is for internal \n        maintenance purposes only. For more information about the Puppet certificate revocation list, see \n        <a href=\"https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html\">Man Page: puppet certificate_revocation_list</a> in the Puppet documentation.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "NextToken": {
@@ -1592,7 +1592,11 @@
         },
         "com.amazonaws.opsworkscm#RestoreServerResponse": {
             "type": "structure",
-            "members": {}
+            "members": {
+                "Server": {
+                    "target": "com.amazonaws.opsworkscm#Server"
+                }
+            }
         },
         "com.amazonaws.opsworkscm#Server": {
             "type": "structure",
@@ -1666,7 +1670,7 @@
                 "EngineVersion": {
                     "target": "com.amazonaws.opsworkscm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The engine version of the server. For a Chef server, the valid value for EngineVersion is currently <code>2</code>. For a Puppet server, the valid value is <code>2017</code>.\n    </p>"
+                        "smithy.api#documentation": "<p>The engine version of the server. For a Chef server, the valid value for EngineVersion is \n      currently <code>2</code>. For a Puppet server, specify either <code>2019</code> or <code>2017</code>.\n    </p>"
                     }
                 },
                 "InstanceProfileArn": {

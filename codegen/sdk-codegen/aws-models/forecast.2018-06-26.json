@@ -334,7 +334,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a dataset group, which holds a collection of related datasets. You can add\n      datasets to the dataset group when you create the dataset group, or later by using the <a>UpdateDatasetGroup</a> operation.</p>\n         <p>After creating a dataset group and adding datasets, you use the dataset group when you\n      create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p>\n         <p>To get a list of all your datasets groups, use the <a>ListDatasetGroups</a>\n      operation.</p>\n         <note>\n            <p>The <code>Status</code> of a dataset group must be <code>ACTIVE</code> before you can\n         use the dataset group to create a predictor. To get the status, use the <a>DescribeDatasetGroup</a> operation.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a dataset group, which holds a collection of related datasets. You can add\n      datasets to the dataset group when you create the dataset group, or later by using the <a>UpdateDatasetGroup</a> operation.</p>\n         <p>After creating a dataset group and adding datasets, you use the dataset group when you\n      create a predictor. For more information, see <a>howitworks-datasets-groups</a>.</p>\n         <p>To get a list of all your datasets groups, use the <a>ListDatasetGroups</a>\n      operation.</p>\n         <note>\n            <p>The <code>Status</code> of a dataset group must be <code>ACTIVE</code> before you can\n        use the dataset group to create a predictor. To get the status, use the <a>DescribeDatasetGroup</a> operation.</p>\n         </note>"
             }
         },
         "com.amazonaws.forecast#CreateDatasetGroupRequest": {
@@ -970,7 +970,7 @@
                 "Status": {
                     "target": "com.amazonaws.forecast#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the dataset import job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n          <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n          <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the dataset import job. States include:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code>, <code>CREATE_IN_PROGRESS</code>,\n            <code>CREATE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DELETE_PENDING</code>, <code>DELETE_IN_PROGRESS</code>,\n            <code>DELETE_FAILED</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code>, <code>CREATE_STOPPED</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Message": {
@@ -988,7 +988,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n      job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1319,7 +1319,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an entire resource tree. This operation will delete the parent resource and\n            its child resources.</p>\n        <p>Child resources are resources that were created from another resource. For example,\n            when a forecast is generated from a predictor, the forecast is the child resource and\n            the predictor is the parent resource.</p>\n        <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p>\n\n        <ul>\n            <li>\n                <p>\n                  <b>Dataset Group</b>: predictors, predictor backtest\n                    export jobs, forecasts, forecast export jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Dataset</b>: dataset import jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Predictor</b>: predictor backtest export jobs,\n                    forecasts, forecast export jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Forecast</b>: forecast export jobs</p>\n            </li>\n         </ul>\n        <note>\n            <p>\n               <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not\n                delete datasets or exported files stored in Amazon S3. </p>\n        </note>",
+                "smithy.api#documentation": "<p>Deletes an entire resource tree. This operation will delete the parent resource and\n            its child resources.</p>\n        <p>Child resources are resources that were created from another resource. For example,\n            when a forecast is generated from a predictor, the forecast is the child resource and\n            the predictor is the parent resource.</p>\n        <p>Amazon Forecast resources possess the following parent-child resource hierarchies:</p>\n\n        <ul>\n            <li>\n                <p>\n                  <b>Dataset</b>: dataset import jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Dataset Group</b>: predictors, predictor backtest\n                    export jobs, forecasts, forecast export jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Predictor</b>: predictor backtest export jobs,\n                    forecasts, forecast export jobs</p>\n            </li>\n            <li>\n                <p>\n                  <b>Forecast</b>: forecast export jobs</p>\n            </li>\n         </ul>\n        <note>\n            <p>\n               <code>DeleteResourceTree</code> will only delete Amazon Forecast resources, and will not\n                delete datasets or exported files stored in Amazon S3. </p>\n        </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1559,7 +1559,7 @@
                 "LastModificationTime": {
                     "target": "com.amazonaws.forecast#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the\n      job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -2530,7 +2530,7 @@
         "com.amazonaws.forecast#ForecastType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^0?\\.\\d\\d?$|^mean$)"
+                "smithy.api#pattern": "^(^0?\\.\\d\\d?$|^mean$)$"
             }
         },
         "com.amazonaws.forecast#ForecastTypes": {
@@ -2735,7 +2735,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:aws:kms:.*:key/.*"
+                "smithy.api#pattern": "^arn:aws:kms:.*:key/"
             }
         },
         "com.amazonaws.forecast#LimitExceededException": {
@@ -3300,7 +3300,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
             }
         },
         "com.amazonaws.forecast#NextToken": {
@@ -3667,25 +3667,25 @@
                 "Count": {
                     "target": "com.amazonaws.forecast#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of values in the field.</p>"
+                        "smithy.api#documentation": "<p>The number of values in the field. If the response value is -1, refer to\n        <code>CountLong</code>.</p>"
                     }
                 },
                 "CountDistinct": {
                     "target": "com.amazonaws.forecast#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of distinct values in the field.</p>"
+                        "smithy.api#documentation": "<p>The number of distinct values in the field. If the response value is -1, refer to\n      <code>CountDistinctLong</code>.</p>"
                     }
                 },
                 "CountNull": {
                     "target": "com.amazonaws.forecast#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of null values in the field.</p>"
+                        "smithy.api#documentation": "<p>The number of null values in the field. If the response value is -1, refer to\n      <code>CountNullLong</code>.</p>"
                     }
                 },
                 "CountNan": {
                     "target": "com.amazonaws.forecast#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of NAN (not a number) values in the field.</p>"
+                        "smithy.api#documentation": "<p>The number of NAN (not a number) values in the field. If the response value is -1, refer to\n      <code>CountNanLong</code>.</p>"
                     }
                 },
                 "Min": {
@@ -3710,6 +3710,30 @@
                     "target": "com.amazonaws.forecast#Double",
                     "traits": {
                         "smithy.api#documentation": "<p>For a numeric field, the standard deviation.</p>"
+                    }
+                },
+                "CountLong": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of values in the field. <code>CountLong</code> is used instead of\n        <code>Count</code> if the value is greater than 2,147,483,647.</p>"
+                    }
+                },
+                "CountDistinctLong": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of distinct values in the field. <code>CountDistinctLong</code> is used instead\n      of <code>CountDistinct</code> if the value is greater than 2,147,483,647.</p>"
+                    }
+                },
+                "CountNullLong": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of null values in the field. <code>CountNullLong</code> is used instead of\n        <code>CountNull</code> if the value is greater than 2,147,483,647.</p>"
+                    }
+                },
+                "CountNanLong": {
+                    "target": "com.amazonaws.forecast#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of NAN (not a number) values in the field. <code>CountNanLong</code> is used\n      instead of <code>CountNan</code> if the value is greater than 2,147,483,647.</p>"
                     }
                 }
             },
