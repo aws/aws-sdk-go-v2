@@ -3,7 +3,6 @@
     "type": "feature",
     "description": "API client updated",
     "modules": [
-        "internal/protocoltest/query",
         "service/cloudwatch",
         "service/cloudwatchlogs",
         "service/computeoptimizer",
