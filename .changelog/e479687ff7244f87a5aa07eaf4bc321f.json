@@ -14,7 +14,6 @@
         "service/opsworks",
         "service/opsworkscm",
         "service/quicksight",
-        "service/route53",
         "service/s3",
         "service/transfer",
         "service/workspaces"
