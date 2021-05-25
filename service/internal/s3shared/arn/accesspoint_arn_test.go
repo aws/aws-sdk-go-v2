@@ -81,6 +81,26 @@ func TestParseAccessPointResource(t *testing.T) {
 				AccessPointName: "endpoint",
 			},
 		},
+		"invalid FIPS pseudo region in ARN (prefix)": {
+			ARN: arn.ARN{
+				Partition: "aws",
+				Service:   "s3",
+				Region:    "fips-us-west-2",
+				AccountID: "012345678901",
+				Resource:  "accesspoint/endpoint",
+			},
+			ExpectErr: "FIPS region not allowed in ARN",
+		},
+		"invalid FIPS pseudo region in ARN (suffix)": {
+			ARN: arn.ARN{
+				Partition: "aws",
+				Service:   "s3",
+				Region:    "us-west-2-fips",
+				AccountID: "012345678901",
+				Resource:  "accesspoint/endpoint",
+			},
+			ExpectErr: "FIPS region not allowed in ARN",
+		},
 	}
 
 	for name, c := range cases {

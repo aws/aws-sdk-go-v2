@@ -35,6 +35,8 @@ func (r ResourceRequest) UseFips() bool {
 }
 
 // ResourceConfiguredForFIPS returns true if resource ARNs region is FIPS
+//
+// Deprecated: FIPS will not be present in the ARN region
 func (r ResourceRequest) ResourceConfiguredForFIPS() bool {
 	return IsFIPS(r.ARN().Region)
 }
@@ -68,8 +70,8 @@ func (r ResourceRequest) IsCrossRegion() bool {
 	return !strings.EqualFold(v, r.Resource.GetARN().Region)
 }
 
-// IsFIPS returns true if region is a fips region
-func IsFIPS(clientRegion string) bool {
-	return (strings.HasPrefix(clientRegion, "fips-") ||
-		strings.HasSuffix(clientRegion, "-fips"))
+// IsFIPS returns true if region is a fips pseudo-region
+func IsFIPS(region string) bool {
+	return strings.HasPrefix(region, "fips-") ||
+		strings.HasSuffix(region, "-fips")
 }

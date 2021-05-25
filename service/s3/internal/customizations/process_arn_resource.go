@@ -185,9 +185,10 @@ func (m *processARNResource) HandleSerialize(
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
 
-		// check if resource arn region is FIPS
-		if resourceRequest.ResourceConfiguredForFIPS() {
-			return out, metadata, s3shared.NewInvalidARNWithFIPSError(tv, nil)
+		// check if request region is FIPS
+		if resourceRequest.UseFips() {
+			return out, metadata, s3shared.NewFIPSConfigurationError(tv, resourceRequest.PartitionID,
+				resourceRequest.RequestRegion, nil)
 		}
 
 		// build outpost access point request

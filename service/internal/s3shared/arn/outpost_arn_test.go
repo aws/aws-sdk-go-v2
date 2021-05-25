@@ -94,6 +94,26 @@ func TestParseOutpostAccessPointARNResource(t *testing.T) {
 				OutpostID: "myoutpost",
 			},
 		},
+		"invalid FIPS pseudo region in ARN (prefix)": {
+			ARN: arn.ARN{
+				Partition: "aws",
+				Service:   "s3-outposts",
+				Region:    "fips-us-west-2",
+				AccountID: "012345678901",
+				Resource:  "outpost/myoutpost/accesspoint/myendpoint",
+			},
+			ExpectErr: "FIPS region not allowed in ARN",
+		},
+		"invalid FIPS pseudo region in ARN (suffix)": {
+			ARN: arn.ARN{
+				Partition: "aws",
+				Service:   "s3-outposts",
+				Region:    "us-west-2-fips",
+				AccountID: "012345678901",
+				Resource:  "outpost/myoutpost/accesspoint/myendpoint",
+			},
+			ExpectErr: "FIPS region not allowed in ARN",
+		},
 	}
 
 	for name, c := range cases {
