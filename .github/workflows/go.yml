@@ -31,7 +31,6 @@ jobs:
   windows-tests:
     name: Test SDK
     runs-on: ${{ matrix.os }}
-    continue-on-error: ${{ matrix.go-version == '1.15' }}
     strategy:
       matrix:
         os: [windows-latest]
