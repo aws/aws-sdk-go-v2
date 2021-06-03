@@ -4,7 +4,11 @@ import static software.amazon.smithy.go.codegen.integration.HttpProtocolGenerato
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.XmlProtocolUtils.initializeXmlDecoder;
 
+import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
+import software.amazon.smithy.aws.traits.protocols.AwsQueryErrorTrait;
 import software.amazon.smithy.aws.traits.protocols.AwsQueryTrait;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
@@ -25,7 +29,6 @@ import software.amazon.smithy.model.shapes.StructureShape;
  * Handles generating the aws query protocol for services.
  *
  * @inheritDoc
- *
  * @see HttpRpcProtocolGenerator
  */
 class AwsQuery extends HttpRpcProtocolGenerator {
@@ -81,8 +84,8 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
         writer.openBlock("if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {",
                 "}", () -> {
-            writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
-        });
+                    writer.write("return out, metadata, &smithy.SerializationError{Err: err}");
+                });
     }
 
     @Override
@@ -97,7 +100,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                 output, context.getService(), getProtocolName());
-        initializeXmlDecoder(writer, "response.Body", "out, metadata, ","nil");
+        initializeXmlDecoder(writer, "response.Body", "out, metadata, ", "nil");
         unwrapOutputDocument(context, operation);
         writer.write("err = $L(&output, decoder)", functionName);
         handleDecodeError(writer, "out, metadata, ");
@@ -151,5 +154,24 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     @Override
     public void generateProtocolTests(GenerationContext context) {
         AwsProtocolUtils.generateHttpProtocolTests(context);
+    }
+
+    @Override
+    public Map<String, ShapeId> getOperationErrors(GenerationContext context, OperationShape operation) {
+        Map<String, ShapeId> errors = new TreeMap<>();
+
+        operation.getErrors().forEach(shapeId -> {
+            Shape errorShape = context.getModel().expectShape(shapeId);
+            String errorName = shapeId.getName(context.getService());
+
+            Optional<AwsQueryErrorTrait> errorShapeTrait = errorShape.getTrait(AwsQueryErrorTrait.class);
+            if (errorShapeTrait.isPresent()) {
+                errors.put(errorShapeTrait.get().getCode(), shapeId);
+            } else {
+                errors.put(errorName, shapeId);
+            }
+        });
+
+        return errors;
     }
 }

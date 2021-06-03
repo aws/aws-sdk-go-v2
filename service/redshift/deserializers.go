@@ -2345,11 +2345,11 @@ func awsAwsquery_deserializeOpErrorCreateScheduledAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidScheduledActionFault", errorCode):
-		return awsAwsquery_deserializeErrorInvalidScheduledActionFault(response, errorBody)
-
 	case strings.EqualFold("InvalidScheduleFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
+
+	case strings.EqualFold("InvalidScheduledActionFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidScheduledActionFault(response, errorBody)
 
 	case strings.EqualFold("ScheduledActionAlreadyExistsFault", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionAlreadyExistsFault(response, errorBody)
@@ -9750,11 +9750,11 @@ func awsAwsquery_deserializeOpErrorModifyScheduledAction(response *smithyhttp.Re
 	}
 	errorBody.Seek(0, io.SeekStart)
 	switch {
-	case strings.EqualFold("InvalidScheduledActionFault", errorCode):
-		return awsAwsquery_deserializeErrorInvalidScheduledActionFault(response, errorBody)
-
 	case strings.EqualFold("InvalidScheduleFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidScheduleFault(response, errorBody)
+
+	case strings.EqualFold("InvalidScheduledActionFault", errorCode):
+		return awsAwsquery_deserializeErrorInvalidScheduledActionFault(response, errorBody)
 
 	case strings.EqualFold("ScheduledActionNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorScheduledActionNotFoundFault(response, errorBody)

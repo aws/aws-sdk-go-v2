@@ -207,7 +207,6 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsqueryDeserialize(t *tes
 }
 
 func TestClient_GreetingWithErrors_CustomCodeError_awsAwsqueryDeserialize(t *testing.T) {
-	t.Skip("skipping for release-2021-05-20")
 	cases := map[string]struct {
 		StatusCode    int
 		Header        http.Header

@@ -708,11 +708,11 @@ func awsAwsquery_deserializeOpErrorCreateApplicationVersion(response *smithyhttp
 	case strings.EqualFold("S3LocationNotInServiceRegionException", errorCode):
 		return awsAwsquery_deserializeErrorS3LocationNotInServiceRegionException(response, errorBody)
 
-	case strings.EqualFold("TooManyApplicationsException", errorCode):
-		return awsAwsquery_deserializeErrorTooManyApplicationsException(response, errorBody)
-
 	case strings.EqualFold("TooManyApplicationVersionsException", errorCode):
 		return awsAwsquery_deserializeErrorTooManyApplicationVersionsException(response, errorBody)
+
+	case strings.EqualFold("TooManyApplicationsException", errorCode):
+		return awsAwsquery_deserializeErrorTooManyApplicationsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

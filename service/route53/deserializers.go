@@ -107,11 +107,11 @@ func awsRestxml_deserializeOpErrorActivateKeySigningKey(response *smithyhttp.Res
 	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsRestxml_deserializeErrorConcurrentModification(response, errorBody)
 
-	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
-		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
-
 	case strings.EqualFold("InvalidKMSArn", errorCode):
 		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
+
+	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
+		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
 
 	case strings.EqualFold("InvalidSigningStatus", errorCode):
 		return awsRestxml_deserializeErrorInvalidSigningStatus(response, errorBody)
@@ -1009,14 +1009,14 @@ func awsRestxml_deserializeOpErrorCreateKeySigningKey(response *smithyhttp.Respo
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsRestxml_deserializeErrorInvalidInput(response, errorBody)
 
+	case strings.EqualFold("InvalidKMSArn", errorCode):
+		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
+
 	case strings.EqualFold("InvalidKeySigningKeyName", errorCode):
 		return awsRestxml_deserializeErrorInvalidKeySigningKeyName(response, errorBody)
 
 	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
 		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
-
-	case strings.EqualFold("InvalidKMSArn", errorCode):
-		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
 
 	case strings.EqualFold("InvalidSigningStatus", errorCode):
 		return awsRestxml_deserializeErrorInvalidSigningStatus(response, errorBody)
@@ -2557,11 +2557,11 @@ func awsRestxml_deserializeOpErrorDeleteKeySigningKey(response *smithyhttp.Respo
 	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsRestxml_deserializeErrorConcurrentModification(response, errorBody)
 
-	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
-		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
-
 	case strings.EqualFold("InvalidKMSArn", errorCode):
 		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
+
+	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
+		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
 
 	case strings.EqualFold("InvalidSigningStatus", errorCode):
 		return awsRestxml_deserializeErrorInvalidSigningStatus(response, errorBody)
@@ -3089,11 +3089,11 @@ func awsRestxml_deserializeOpErrorDisableHostedZoneDNSSEC(response *smithyhttp.R
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
 
-	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
-		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
-
 	case strings.EqualFold("InvalidKMSArn", errorCode):
 		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
+
+	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
+		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
 
 	case strings.EqualFold("KeySigningKeyInParentDSRecord", errorCode):
 		return awsRestxml_deserializeErrorKeySigningKeyInParentDSRecord(response, errorBody)
@@ -3396,11 +3396,11 @@ func awsRestxml_deserializeOpErrorEnableHostedZoneDNSSEC(response *smithyhttp.Re
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
 
-	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
-		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
-
 	case strings.EqualFold("InvalidKMSArn", errorCode):
 		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
+
+	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
+		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
 
 	case strings.EqualFold("KeySigningKeyWithActiveStatusNotFound", errorCode):
 		return awsRestxml_deserializeErrorKeySigningKeyWithActiveStatusNotFound(response, errorBody)

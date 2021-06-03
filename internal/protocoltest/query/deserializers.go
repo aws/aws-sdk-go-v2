@@ -683,7 +683,7 @@ func awsAwsquery_deserializeOpErrorGreetingWithErrors(response *smithyhttp.Respo
 	case strings.EqualFold("ComplexError", errorCode):
 		return awsAwsquery_deserializeErrorComplexError(response, errorBody)
 
-	case strings.EqualFold("CustomCodeError", errorCode):
+	case strings.EqualFold("Customized", errorCode):
 		return awsAwsquery_deserializeErrorCustomCodeError(response, errorBody)
 
 	case strings.EqualFold("InvalidGreeting", errorCode):
