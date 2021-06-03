@@ -860,11 +860,11 @@ func awsRestxml_deserializeOpErrorCreateDistributionWithTags(response *smithyhtt
 	case strings.EqualFold("InvalidResponseCode", errorCode):
 		return awsRestxml_deserializeErrorInvalidResponseCode(response, errorBody)
 
-	case strings.EqualFold("InvalidTagging", errorCode):
-		return awsRestxml_deserializeErrorInvalidTagging(response, errorBody)
-
 	case strings.EqualFold("InvalidTTLOrder", errorCode):
 		return awsRestxml_deserializeErrorInvalidTTLOrder(response, errorBody)
+
+	case strings.EqualFold("InvalidTagging", errorCode):
+		return awsRestxml_deserializeErrorInvalidTagging(response, errorBody)
 
 	case strings.EqualFold("InvalidViewerCertificate", errorCode):
 		return awsRestxml_deserializeErrorInvalidViewerCertificate(response, errorBody)

@@ -531,11 +531,11 @@ func awsAwsjson11_deserializeOpErrorAdminCreateUser(response *smithyhttp.Respons
 	case strings.EqualFold("UserLambdaValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorUserLambdaValidationException(response, errorBody)
 
-	case strings.EqualFold("UsernameExistsException", errorCode):
-		return awsAwsjson11_deserializeErrorUsernameExistsException(response, errorBody)
-
 	case strings.EqualFold("UserNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorUserNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UsernameExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorUsernameExistsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3903,14 +3903,14 @@ func awsAwsjson11_deserializeOpErrorConfirmDevice(response *smithyhttp.Response,
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
-	case strings.EqualFold("UsernameExistsException", errorCode):
-		return awsAwsjson11_deserializeErrorUsernameExistsException(response, errorBody)
-
 	case strings.EqualFold("UserNotConfirmedException", errorCode):
 		return awsAwsjson11_deserializeErrorUserNotConfirmedException(response, errorBody)
 
 	case strings.EqualFold("UserNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorUserNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UsernameExistsException", errorCode):
+		return awsAwsjson11_deserializeErrorUsernameExistsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{

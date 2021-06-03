@@ -2158,14 +2158,14 @@ func awsAwsquery_deserializeOpErrorDecreaseReplicaCount(response *smithyhttp.Res
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
+	case strings.EqualFold("NoOperationFault", errorCode):
+		return awsAwsquery_deserializeErrorNoOperationFault(response, errorBody)
+
 	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorNodeGroupsPerReplicationGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
-
-	case strings.EqualFold("NoOperationFault", errorCode):
-		return awsAwsquery_deserializeErrorNoOperationFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)
@@ -5515,14 +5515,14 @@ func awsAwsquery_deserializeOpErrorIncreaseReplicaCount(response *smithyhttp.Res
 	case strings.EqualFold("InvalidVPCNetworkStateFault", errorCode):
 		return awsAwsquery_deserializeErrorInvalidVPCNetworkStateFault(response, errorBody)
 
+	case strings.EqualFold("NoOperationFault", errorCode):
+		return awsAwsquery_deserializeErrorNoOperationFault(response, errorBody)
+
 	case strings.EqualFold("NodeGroupsPerReplicationGroupQuotaExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorNodeGroupsPerReplicationGroupQuotaExceededFault(response, errorBody)
 
 	case strings.EqualFold("NodeQuotaForCustomerExceededFault", errorCode):
 		return awsAwsquery_deserializeErrorNodeQuotaForCustomerExceededFault(response, errorBody)
-
-	case strings.EqualFold("NoOperationFault", errorCode):
-		return awsAwsquery_deserializeErrorNoOperationFault(response, errorBody)
 
 	case strings.EqualFold("ReplicationGroupNotFoundFault", errorCode):
 		return awsAwsquery_deserializeErrorReplicationGroupNotFoundFault(response, errorBody)

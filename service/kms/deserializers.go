@@ -889,14 +889,14 @@ func awsAwsjson11_deserializeOpErrorDecrypt(response *smithyhttp.Response, metad
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -2113,14 +2113,14 @@ func awsAwsjson11_deserializeOpErrorEncrypt(response *smithyhttp.Response, metad
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -2245,14 +2245,14 @@ func awsAwsjson11_deserializeOpErrorGenerateDataKey(response *smithyhttp.Respons
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -2377,14 +2377,14 @@ func awsAwsjson11_deserializeOpErrorGenerateDataKeyPair(response *smithyhttp.Res
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -2512,14 +2512,14 @@ func awsAwsjson11_deserializeOpErrorGenerateDataKeyPairWithoutPlaintext(response
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -2647,14 +2647,14 @@ func awsAwsjson11_deserializeOpErrorGenerateDataKeyWithoutPlaintext(response *sm
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -3277,14 +3277,14 @@ func awsAwsjson11_deserializeOpErrorGetPublicKey(response *smithyhttp.Response, 
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -4401,14 +4401,14 @@ func awsAwsjson11_deserializeOpErrorReEncrypt(response *smithyhttp.Response, met
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -4867,14 +4867,14 @@ func awsAwsjson11_deserializeOpErrorSign(response *smithyhttp.Response, metadata
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)
@@ -5538,9 +5538,6 @@ func awsAwsjson11_deserializeOpErrorVerify(response *smithyhttp.Response, metada
 	case strings.EqualFold("InvalidKeyUsageException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidKeyUsageException(response, errorBody)
 
-	case strings.EqualFold("KeyUnavailableException", errorCode):
-		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
-
 	case strings.EqualFold("KMSInternalException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInternalException(response, errorBody)
 
@@ -5549,6 +5546,9 @@ func awsAwsjson11_deserializeOpErrorVerify(response *smithyhttp.Response, metada
 
 	case strings.EqualFold("KMSInvalidStateException", errorCode):
 		return awsAwsjson11_deserializeErrorKMSInvalidStateException(response, errorBody)
+
+	case strings.EqualFold("KeyUnavailableException", errorCode):
+		return awsAwsjson11_deserializeErrorKeyUnavailableException(response, errorBody)
 
 	case strings.EqualFold("NotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorNotFoundException(response, errorBody)

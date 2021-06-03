@@ -118,14 +118,14 @@ func awsAwsjson11_deserializeOpErrorAcceptHandshake(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("AccessDeniedForDependencyException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedForDependencyException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -237,11 +237,11 @@ func awsAwsjson11_deserializeOpErrorAttachPolicy(response *smithyhttp.Response, 
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -516,11 +516,11 @@ func awsAwsjson11_deserializeOpErrorCreateAccount(response *smithyhttp.Response,
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -651,11 +651,11 @@ func awsAwsjson11_deserializeOpErrorCreateGovCloudAccount(response *smithyhttp.R
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -918,11 +918,11 @@ func awsAwsjson11_deserializeOpErrorCreateOrganizationalUnit(response *smithyhtt
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -1053,11 +1053,11 @@ func awsAwsjson11_deserializeOpErrorCreatePolicy(response *smithyhttp.Response, 
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -1304,11 +1304,11 @@ func awsAwsjson11_deserializeOpErrorDeleteOrganization(response *smithyhttp.Resp
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -1411,11 +1411,11 @@ func awsAwsjson11_deserializeOpErrorDeleteOrganizationalUnit(response *smithyhtt
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -1521,11 +1521,11 @@ func awsAwsjson11_deserializeOpErrorDeletePolicy(response *smithyhttp.Response, 
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -1634,6 +1634,9 @@ func awsAwsjson11_deserializeOpErrorDeregisterDelegatedAdministrator(response *s
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
@@ -1642,9 +1645,6 @@ func awsAwsjson11_deserializeOpErrorDeregisterDelegatedAdministrator(response *s
 
 	case strings.EqualFold("AccountNotRegisteredException", errorCode):
 		return awsAwsjson11_deserializeErrorAccountNotRegisteredException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -1772,14 +1772,14 @@ func awsAwsjson11_deserializeOpErrorDescribeAccount(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("AccountNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorAccountNotFoundException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -1898,11 +1898,11 @@ func awsAwsjson11_deserializeOpErrorDescribeCreateAccountStatus(response *smithy
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("CreateAccountStatusNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorCreateAccountStatusNotFoundException(response, errorBody)
@@ -2027,11 +2027,11 @@ func awsAwsjson11_deserializeOpErrorDescribeEffectivePolicy(response *smithyhttp
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConstraintViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorConstraintViolationException(response, errorBody)
@@ -2288,11 +2288,11 @@ func awsAwsjson11_deserializeOpErrorDescribeOrganization(response *smithyhttp.Re
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -2411,11 +2411,11 @@ func awsAwsjson11_deserializeOpErrorDescribeOrganizationalUnit(response *smithyh
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -2537,11 +2537,11 @@ func awsAwsjson11_deserializeOpErrorDescribePolicy(response *smithyhttp.Response
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -2644,11 +2644,11 @@ func awsAwsjson11_deserializeOpErrorDetachPolicy(response *smithyhttp.Response, 
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -2766,11 +2766,11 @@ func awsAwsjson11_deserializeOpErrorDisableAWSServiceAccess(response *smithyhttp
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -2898,11 +2898,11 @@ func awsAwsjson11_deserializeOpErrorDisablePolicyType(response *smithyhttp.Respo
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -3039,11 +3039,11 @@ func awsAwsjson11_deserializeOpErrorEnableAllFeatures(response *smithyhttp.Respo
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -3146,11 +3146,11 @@ func awsAwsjson11_deserializeOpErrorEnableAWSServiceAccess(response *smithyhttp.
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -3278,11 +3278,11 @@ func awsAwsjson11_deserializeOpErrorEnablePolicyType(response *smithyhttp.Respon
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -3422,14 +3422,14 @@ func awsAwsjson11_deserializeOpErrorInviteAccountToOrganization(response *smithy
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("AccountOwnerNotVerifiedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccountOwnerNotVerifiedException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -3541,14 +3541,14 @@ func awsAwsjson11_deserializeOpErrorLeaveOrganization(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("AccountNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorAccountNotFoundException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -3676,11 +3676,11 @@ func awsAwsjson11_deserializeOpErrorListAccounts(response *smithyhttp.Response, 
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -3799,11 +3799,11 @@ func awsAwsjson11_deserializeOpErrorListAccountsForParent(response *smithyhttp.R
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -3925,11 +3925,11 @@ func awsAwsjson11_deserializeOpErrorListAWSServiceAccessForOrganization(response
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConstraintViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorConstraintViolationException(response, errorBody)
@@ -4054,11 +4054,11 @@ func awsAwsjson11_deserializeOpErrorListChildren(response *smithyhttp.Response, 
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -4180,11 +4180,11 @@ func awsAwsjson11_deserializeOpErrorListCreateAccountStatus(response *smithyhttp
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -4306,11 +4306,11 @@ func awsAwsjson11_deserializeOpErrorListDelegatedAdministrators(response *smithy
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConstraintViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorConstraintViolationException(response, errorBody)
@@ -4435,6 +4435,9 @@ func awsAwsjson11_deserializeOpErrorListDelegatedServicesForAccount(response *sm
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
@@ -4443,9 +4446,6 @@ func awsAwsjson11_deserializeOpErrorListDelegatedServicesForAccount(response *sm
 
 	case strings.EqualFold("AccountNotRegisteredException", errorCode):
 		return awsAwsjson11_deserializeErrorAccountNotRegisteredException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("ConstraintViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorConstraintViolationException(response, errorBody)
@@ -4693,11 +4693,11 @@ func awsAwsjson11_deserializeOpErrorListHandshakesForOrganization(response *smit
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -4819,11 +4819,11 @@ func awsAwsjson11_deserializeOpErrorListOrganizationalUnitsForParent(response *s
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -4945,11 +4945,11 @@ func awsAwsjson11_deserializeOpErrorListParents(response *smithyhttp.Response, m
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ChildNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorChildNotFoundException(response, errorBody)
@@ -5071,11 +5071,11 @@ func awsAwsjson11_deserializeOpErrorListPolicies(response *smithyhttp.Response, 
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -5197,11 +5197,11 @@ func awsAwsjson11_deserializeOpErrorListPoliciesForTarget(response *smithyhttp.R
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -5326,11 +5326,11 @@ func awsAwsjson11_deserializeOpErrorListRoots(response *smithyhttp.Response, met
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -5449,11 +5449,11 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -5575,11 +5575,11 @@ func awsAwsjson11_deserializeOpErrorListTargetsForPolicy(response *smithyhttp.Re
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("InvalidInputException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInputException(response, errorBody)
@@ -5682,14 +5682,14 @@ func awsAwsjson11_deserializeOpErrorMoveAccount(response *smithyhttp.Response, m
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("AccountNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorAccountNotFoundException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -5798,6 +5798,9 @@ func awsAwsjson11_deserializeOpErrorRegisterDelegatedAdministrator(response *smi
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
@@ -5806,9 +5809,6 @@ func awsAwsjson11_deserializeOpErrorRegisterDelegatedAdministrator(response *smi
 
 	case strings.EqualFold("AccountNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorAccountNotFoundException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -5914,14 +5914,14 @@ func awsAwsjson11_deserializeOpErrorRemoveAccountFromOrganization(response *smit
 	}
 
 	switch {
+	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
+		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("AccountNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorAccountNotFoundException(response, errorBody)
-
-	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
-		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -6027,11 +6027,11 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -6137,11 +6137,11 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -6269,11 +6269,11 @@ func awsAwsjson11_deserializeOpErrorUpdateOrganizationalUnit(response *smithyhtt
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -6401,11 +6401,11 @@ func awsAwsjson11_deserializeOpErrorUpdatePolicy(response *smithyhttp.Response, 
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSOrganizationsNotInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSOrganizationsNotInUseException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)

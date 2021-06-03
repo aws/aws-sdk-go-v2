@@ -117,11 +117,11 @@ func awsAwsjson11_deserializeOpErrorAssociateServiceQuotaTemplate(response *smit
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("DependencyAccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorDependencyAccessDeniedException(response, errorBody)
@@ -249,11 +249,11 @@ func awsAwsjson11_deserializeOpErrorDeleteServiceQuotaIncreaseRequestFromTemplat
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("DependencyAccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorDependencyAccessDeniedException(response, errorBody)
@@ -384,11 +384,11 @@ func awsAwsjson11_deserializeOpErrorDisassociateServiceQuotaTemplate(response *s
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("DependencyAccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorDependencyAccessDeniedException(response, errorBody)
@@ -516,11 +516,11 @@ func awsAwsjson11_deserializeOpErrorGetAssociationForServiceQuotaTemplate(respon
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("DependencyAccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorDependencyAccessDeniedException(response, errorBody)
@@ -1017,11 +1017,11 @@ func awsAwsjson11_deserializeOpErrorGetServiceQuotaIncreaseRequestFromTemplate(r
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("DependencyAccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorDependencyAccessDeniedException(response, errorBody)
@@ -1530,11 +1530,11 @@ func awsAwsjson11_deserializeOpErrorListServiceQuotaIncreaseRequestsInTemplate(r
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("DependencyAccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorDependencyAccessDeniedException(response, errorBody)
@@ -2034,11 +2034,11 @@ func awsAwsjson11_deserializeOpErrorPutServiceQuotaIncreaseRequestIntoTemplate(r
 	}
 
 	switch {
-	case strings.EqualFold("AccessDeniedException", errorCode):
-		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
-
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
 
 	case strings.EqualFold("DependencyAccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorDependencyAccessDeniedException(response, errorBody)
