@@ -198,6 +198,17 @@
                 ]
             }
         },
+        "com.amazonaws.forecast#AutoMLOverrideStrategy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "LatencyOptimized",
+                        "name": "LatencyOptimized"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.forecast#Boolean": {
             "type": "boolean",
             "traits": {
@@ -813,6 +824,12 @@
                     "target": "com.amazonaws.forecast#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates the algorithms it\n      provides and chooses the best algorithm and configuration for your training dataset.</p>\n         <p>The default value is <code>false</code>. In this case, you are required to specify an\n      algorithm.</p>\n         <p>Set <code>PerformAutoML</code> to <code>true</code> to have Amazon Forecast perform AutoML. This\n      is a good option if you aren't sure which algorithm is suitable for your training data. In\n      this case, <code>PerformHPO</code> must be false.</p>"
+                    }
+                },
+                "AutoMLOverrideStrategy": {
+                    "target": "com.amazonaws.forecast#AutoMLOverrideStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to overide the default AutoML strategy, which is to optimize predictor accuracy.\n            To apply an AutoML strategy that minimizes training time, use\n                <code>LatencyOptimized</code>.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
                     }
                 },
                 "PerformHPO": {
@@ -1980,6 +1997,12 @@
                         "smithy.api#documentation": "<p>Whether the predictor is set to perform AutoML.</p>"
                     }
                 },
+                "AutoMLOverrideStrategy": {
+                    "target": "com.amazonaws.forecast#AutoMLOverrideStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>\n            is specified, the AutoML strategy optimizes predictor accuracy.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
+                    }
+                },
                 "PerformHPO": {
                     "target": "com.amazonaws.forecast#Boolean",
                     "traits": {
@@ -2610,6 +2633,12 @@
                     "target": "com.amazonaws.forecast#PredictorEvaluationResults",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of results from evaluating the predictor.</p>"
+                    }
+                },
+                "AutoMLOverrideStrategy": {
+                    "target": "com.amazonaws.forecast#AutoMLOverrideStrategy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>\n            is specified, the AutoML strategy optimizes predictor accuracy.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
                     }
                 }
             }

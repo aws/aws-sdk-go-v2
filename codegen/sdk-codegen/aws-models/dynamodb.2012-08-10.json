@@ -270,7 +270,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "\\p{Print}+"
+                "smithy.api#pattern": "^\\p{Print}+$"
             }
         },
         "com.amazonaws.dynamodb#AutoScalingPolicyUpdate": {
@@ -301,7 +301,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.dynamodb#AutoScalingSettingsDescription": {
@@ -564,7 +564,7 @@
                     "min": 3,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.dynamodb#BackupNotFoundException": {
@@ -802,6 +802,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>The <code>BatchGetItem</code> operation returns the attributes of one or more items from one or\n      more tables. You identify requested items by primary key.</p>\n         <p>A single operation can retrieve up to 16 MB of data, which can contain as many as 100\n            items. <code>BatchGetItem</code> returns a partial result if the response size limit is\n            exceeded, the table's provisioned throughput is exceeded, or an internal processing\n            failure occurs. If a partial result is returned, the operation returns a value for\n                <code>UnprocessedKeys</code>. You can use this value to retry the operation starting\n            with the next item to get.</p>\n         <important>\n            <p>If you request more than 100 items, <code>BatchGetItem</code> returns a\n                    <code>ValidationException</code> with the message \"Too many items requested for\n                the BatchGetItem call.\"</p>\n         </important>\n         <p>For example, if you ask to retrieve 100 items, but each individual item is 300 KB in\n            size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns\n            an appropriate <code>UnprocessedKeys</code> value so you can get the next page of\n            results. If desired, your application can include its own logic to assemble the pages of\n            results into one dataset.</p>\n         <p>If <i>none</i> of the items can be processed due to insufficient\n            provisioned throughput on all of the tables in the request, then\n                <code>BatchGetItem</code> returns a\n                <code>ProvisionedThroughputExceededException</code>. If <i>at least\n                one</i> of the items is successfully processed, then\n                <code>BatchGetItem</code> completes successfully, while returning the keys of the\n            unread items in <code>UnprocessedKeys</code>.</p>\n         <important>\n            <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on those\n        items. However, <i>we strongly recommend that you use an exponential backoff algorithm</i>.\n        If you retry the batch operation immediately, the underlying read or write requests can\n        still fail due to throttling on the individual tables. If you delay the batch operation\n        using exponential backoff, the individual requests in the batch are much more likely to\n        succeed.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#BatchOperations\">Batch\n          Operations and Error Handling</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>\n         </important>\n         <p>By default, <code>BatchGetItem</code> performs eventually consistent reads on every table in the\n      request. If you want strongly consistent reads instead, you can set <code>ConsistentRead</code> to\n        <code>true</code> for any or all tables.</p>\n         <p>In order to minimize response latency, <code>BatchGetItem</code> retrieves items in parallel.</p>\n         <p>When designing your application, keep in mind that DynamoDB does not return items in any\n      particular order. To help parse the response by item, include the primary key values for the\n      items in your request in the <code>ProjectionExpression</code> parameter.</p>\n         <p>If a requested item does not exist, it is not returned in the result. Requests for\n            nonexistent items consume the minimum read capacity units according to the type of read.\n            For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithTables.html#CapacityUnitCalculations\">Working with Tables</a> in the <i>Amazon DynamoDB Developer\n                Guide</i>.</p>"
             }
         },
@@ -1026,6 +1029,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>The <code>BatchWriteItem</code> operation puts or deletes multiple items in one or more\n            tables. A single call to <code>BatchWriteItem</code> can write up to 16 MB of data,\n            which can comprise as many as 25 put or delete requests. Individual items to be written\n            can be as large as 400 KB.</p>\n         <note>\n            <p>\n               <code>BatchWriteItem</code> cannot update items. To update items, use the <code>UpdateItem</code>\n        action.</p>\n         </note>\n         <p>The individual <code>PutItem</code> and <code>DeleteItem</code> operations specified in\n        <code>BatchWriteItem</code> are atomic; however <code>BatchWriteItem</code> as a whole is not. If any\n      requested operations fail because the table's provisioned throughput is exceeded or an\n      internal processing failure occurs, the failed operations are returned in the\n        <code>UnprocessedItems</code> response parameter. You can investigate and optionally resend the\n      requests. Typically, you would call <code>BatchWriteItem</code> in a loop. Each iteration would\n      check for unprocessed items and submit a new <code>BatchWriteItem</code> request with those\n      unprocessed items until all items have been processed.</p>\n         <p>If <i>none</i> of the items can be processed due to insufficient\n            provisioned throughput on all of the tables in the request, then\n                <code>BatchWriteItem</code> returns a\n                <code>ProvisionedThroughputExceededException</code>.</p>\n         <important>\n            <p>If DynamoDB returns any unprocessed items, you should retry the batch operation on those\n        items. However, <i>we strongly recommend that you use an exponential backoff algorithm</i>.\n        If you retry the batch operation immediately, the underlying read or write requests can\n        still fail due to throttling on the individual tables. If you delay the batch operation\n        using exponential backoff, the individual requests in the batch are much more likely to\n        succeed.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/ErrorHandling.html#Programming.Errors.BatchOperations\">Batch Operations and Error Handling</a> in the <i>Amazon DynamoDB\n                    Developer Guide</i>.</p>\n         </important>\n\n         <p>With <code>BatchWriteItem</code>, you can efficiently write or delete large amounts of\n            data, such as from Amazon EMR, or copy data from another database into DynamoDB. In\n            order to improve performance with these large-scale operations,\n                <code>BatchWriteItem</code> does not behave in the same way as individual\n                <code>PutItem</code> and <code>DeleteItem</code> calls would. For example, you\n            cannot specify conditions on individual put and delete requests, and\n                <code>BatchWriteItem</code> does not return deleted items in the response.</p>\n         <p>If you use a programming language that supports concurrency, you can use\n      threads to write items in parallel. Your application must include the necessary logic to\n      manage the threads. With languages that don't support threading, you must update\n      or delete the specified items one at a time. In both situations, <code>BatchWriteItem</code>\n      performs the specified put and delete operations in\n      parallel, giving you the power of the thread pool approach without having to introduce\n      complexity into your application.</p>\n         <p>Parallel processing reduces latency, but each specified put and delete request consumes the same number of write capacity units whether it is processed in parallel or not. Delete operations on nonexistent items consume one write capacity unit.</p>\n         <p>If one or more of the following is true, DynamoDB rejects the entire batch write operation:</p>\n         <ul>\n            <li>\n               <p>One or more tables specified in the <code>BatchWriteItem</code> request does not exist.</p>\n            </li>\n            <li>\n               <p>Primary key attributes specified on an item in the request do not match those in the corresponding table's primary key schema.</p>\n            </li>\n            <li>\n               <p>You try to perform multiple operations on the same item in the same <code>BatchWriteItem</code>\n          request. For example, you cannot put and delete the same item in the same\n            <code>BatchWriteItem</code> request. </p>\n            </li>\n            <li>\n\t              <p>\n\t\tYour request contains at least two items with identical hash and range keys (which essentially is two put operations).\n\t    </p>\n    \t       </li>\n            <li>\n               <p>There are more than 25 requests in the batch.</p>\n            </li>\n            <li>\n               <p>Any individual item in a batch exceeds 400 KB.</p>\n            </li>\n            <li>\n               <p>The total request size exceeds 16 MB.</p>\n            </li>\n         </ul>"
             }
         },
@@ -1532,7 +1538,7 @@
         "com.amazonaws.dynamodb#ContributorInsightsRule": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[A-Za-z0-9][A-Za-z0-9\\-\\_\\.]{0,126}[A-Za-z0-9]"
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9\\-\\_\\.]{0,126}[A-Za-z0-9]$"
             }
         },
         "com.amazonaws.dynamodb#ContributorInsightsRuleList": {
@@ -1632,6 +1638,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Creates a backup for an existing table.</p>\n         <p> Each time you create an on-demand backup, the entire table data is backed up. There\n            is no limit to the number of on-demand backups that can be taken. </p>\n         <p> When you create an on-demand backup, a time marker of the request is cataloged, and\n            the backup is created asynchronously, by applying all changes until the time of the\n            request to the last full table snapshot. Backup requests are processed instantaneously\n            and become available for restore within minutes. </p>\n         <p>You can call <code>CreateBackup</code> at a maximum rate of 50 times per second.</p>\n         <p>All backups in DynamoDB work without consuming any provisioned throughput on the table.</p>\n         <p> If you submit a backup request on 2018-12-14 at 14:25:00, the backup is guaranteed\n            to contain all data committed to the table up to 14:24:00, and data committed after\n            14:26:00 will not be. The backup might contain data modifications made between 14:24:00\n            and 14:26:00. On-demand backup does not support causal consistency. </p>\n         <p>\n             Along with data, the following are also included on the backups:\n         </p>\n           <ul>\n            <li>\n                  <p>Global secondary indexes (GSIs)</p>\n              </li>\n            <li>\n                  <p>Local secondary indexes (LSIs)</p>\n              </li>\n            <li>\n                  <p>Streams</p>\n              </li>\n            <li>\n                  <p>Provisioned read and write capacity</p>\n              </li>\n         </ul>"
             }
         },
@@ -1726,6 +1735,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Creates a global table from an existing table. A global table creates a replication\n            relationship between two or more DynamoDB tables with the same table name in the\n            provided Regions. </p>\n         <note>\n            <p>This operation only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.</p>\n         </note>\n\n         <p>If you want to add a new replica table to a global table, each of the following conditions\n   must be true:</p>\n         <ul>\n            <li>\n               <p>The table must have the same primary key as all of the other replicas.</p>\n            </li>\n            <li>\n               <p>The table must have the same name as all of the other replicas.</p>\n            </li>\n            <li>\n               <p>The table must have DynamoDB Streams enabled, with the stream containing both the new and the old\n     images of the item.</p>\n            </li>\n            <li>\n               <p>None of the replica tables in the global table can contain any data.</p>\n            </li>\n         </ul>\n         <p>\n     If global secondary indexes are specified, then the following conditions must also be met:\n   </p>\n        <ul>\n            <li>\n               <p>\n               The global secondary indexes must have the same name.\n            </p>\n            </li>\n            <li>\n               <p>\n               The global secondary indexes must have the same hash key and sort key (if present).\n            </p>\n            </li>\n         </ul>\n         <p>\n     If local secondary indexes are specified, then the following conditions must also be met:\n   </p>\n        <ul>\n            <li>\n               <p>\n               The local secondary indexes must have the same name.\n            </p>\n            </li>\n            <li>\n               <p>\n               The local secondary indexes must have the same hash key and sort key (if present).\n            </p>\n            </li>\n         </ul>\n\n         <important>\n            <p>\n       Write capacity settings should be set consistently across your replica tables and\n       secondary indexes. DynamoDB strongly recommends enabling auto scaling to manage the write\n       capacity settings for all of your global tables replicas and indexes.\n    </p>\n            <p>\n       If you prefer to manage write capacity settings manually, you should provision equal\n       replicated write capacity units to your replica tables. You should also provision\n       equal replicated write capacity units to matching secondary indexes across\n       your global table.\n    </p>\n         </important>"
             }
         },
@@ -1830,6 +1842,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>The <code>CreateTable</code> operation adds a new table to your account. In an AWS\n            account, table names must be unique within each Region. That is, you can have two tables\n            with same name if you create the tables in different Regions.</p>\n         <p>\n            <code>CreateTable</code> is an asynchronous operation. Upon receiving a <code>CreateTable</code> request,\n      DynamoDB immediately returns a response with a <code>TableStatus</code> of <code>CREATING</code>. After\n      the table is created, DynamoDB sets the <code>TableStatus</code> to <code>ACTIVE</code>. You can\n      perform read and write operations only on an <code>ACTIVE</code> table. </p>\n         <p>You can optionally define secondary indexes on the new table, as part of the <code>CreateTable</code>\n      operation. If you want to create multiple tables with secondary indexes on them, you must create the\n      tables sequentially. Only one table with secondary indexes can be in the <code>CREATING</code> state at\n      any given time.</p>\n         <p>You can use the <code>DescribeTable</code> action to check the table status.</p>"
             }
         },
@@ -1993,6 +2008,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Deletes an existing backup of a table.</p>\n         <p>You can call <code>DeleteBackup</code> at a maximum rate of 10 times per second.</p>"
             }
         },
@@ -2069,6 +2087,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Deletes a single item in a table by primary key. You can perform a conditional delete operation that deletes the item if it exists, or if it has an expected attribute value.</p>\n         <p>In addition to deleting an item, you can also return the item's attribute values in the same\n      operation, using the <code>ReturnValues</code> parameter.</p>\n         <p>Unless you specify conditions, the <code>DeleteItem</code> is an idempotent operation; running it\n      multiple times on the same item or attribute does <i>not</i> result in an error response.</p>\n         <p>Conditional deletes are useful for deleting items only if specific conditions are met. If those conditions are met, DynamoDB performs the delete. Otherwise, the item is not deleted.</p>"
             }
         },
@@ -2236,6 +2257,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>The <code>DeleteTable</code> operation deletes a table and all of its items. After a\n        <code>DeleteTable</code> request, the specified table is in the <code>DELETING</code> state until\n      DynamoDB completes the deletion. If the table is in the <code>ACTIVE</code> state, you can delete\n      it. If a table is in <code>CREATING</code> or <code>UPDATING</code> states, then DynamoDB returns\n      a <code>ResourceInUseException</code>. If the specified table does not exist, DynamoDB returns a\n        <code>ResourceNotFoundException</code>. If table is already in the <code>DELETING</code> state, no\n      error is returned. </p>\n         <note>\n            <p>DynamoDB might continue to accept data read and write operations, such as <code>GetItem</code> and\n          <code>PutItem</code>, on a table in the <code>DELETING</code> state until the table deletion is\n        complete.</p>\n         </note>\n         <p>When you delete a table, any indexes on that table are also deleted.</p>\n         <p>If you have DynamoDB Streams enabled on the table, then the corresponding stream on that table goes\n      into the <code>DISABLED</code> state, and the stream is automatically deleted after 24 hours.</p>\n\n         <p>Use the <code>DescribeTable</code> action to check the status of the table. </p>"
             }
         },
@@ -2288,6 +2312,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Describes an existing backup of a table.</p>\n         <p>You can call <code>DescribeBackup</code> at a maximum rate of 10 times per second.</p>"
             }
         },
@@ -2334,6 +2361,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Checks the status of continuous backups and point in time recovery on the specified table.\n      Continuous backups are <code>ENABLED</code> on all tables at table creation.\n      If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p>\n         <p> After continuous backups and point in time recovery are enabled, you can restore to any\n            point in time within <code>EarliestRestorableDateTime</code> and\n                <code>LatestRestorableDateTime</code>. </p>\n         <p>\n            <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time. You can restore your table to any point\n       in time during the last 35 days.\n     </p>\n         <p>You can call <code>DescribeContinuousBackups</code> at a maximum rate of 10 times per second.</p>"
             }
         },
@@ -2533,6 +2563,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Returns information about the specified global table.</p>\n          <note>\n            <p>This operation only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.\n                   If you are using global tables <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html\">Version 2019.11.21</a> you can use <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_DescribeTable.html\">DescribeTable</a> instead.</p>\n         </note>"
             }
         },
@@ -2579,6 +2612,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Describes Region-specific settings for a global table.</p>\n          <note>\n            <p>This operation only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.</p>\n         </note>"
             }
         },
@@ -2631,6 +2667,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Returns information about the status of Kinesis streaming.</p>"
             }
         },
@@ -2680,6 +2719,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Returns the current provisioned-capacity quotas for your AWS account in a Region, both\n            for the Region as a whole and for any one DynamoDB table that you create there.</p>\n         <p>When you establish an AWS account, the account has initial quotas on the maximum read\n            capacity units and write capacity units that you can provision across all of your\n            DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you\n            create a table there. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Limits.html\">Service, Account, and Table\n                Quotas</a> page in the <i>Amazon DynamoDB Developer\n            Guide</i>.</p>\n\n         <p>Although you can increase these quotas by filing a case at <a href=\"https://console.aws.amazon.com/support/home#/\">AWS Support Center</a>, obtaining the increase is not\n            instantaneous. The <code>DescribeLimits</code> action lets you write code to compare the\n            capacity you are currently using to those quotas imposed by your account so that you\n            have enough time to apply for an increase before you hit a quota.</p>\n\n         <p>For example, you could use one of the AWS SDKs to do the following:</p>\n\n         <ol>\n            <li>\n               <p>Call <code>DescribeLimits</code> for a particular Region to obtain your current\n                    account quotas on provisioned capacity there.</p>\n            </li>\n            <li>\n               <p>Create a variable to hold the aggregate read capacity units provisioned for all\n                    your tables in that Region, and one to hold the aggregate write capacity units.\n                    Zero them both.</p>\n            </li>\n            <li>\n               <p>Call <code>ListTables</code> to obtain a list of all your DynamoDB tables.</p>\n            </li>\n            <li>\n               <p>For each table name listed by <code>ListTables</code>, do the following:</p>\n               <ul>\n                  <li>\n                     <p>Call <code>DescribeTable</code> with the table name.</p>\n                  </li>\n                  <li>\n                     <p>Use the data returned by <code>DescribeTable</code> to add the read capacity units and write capacity\n            units provisioned for the table itself to your variables.</p>\n                  </li>\n                  <li>\n                     <p>If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Report the account quotas for that Region returned by <code>DescribeLimits</code>, along with\n                    the total current provisioned capacity levels you have calculated.</p>\n            </li>\n         </ol>\n\n         <p>This will let you see whether you are getting close to your account-level quotas.</p>\n         <p>The per-table quotas apply only when you are creating a new table. They restrict the sum\n            of the provisioned capacity of the new table itself and all its global secondary\n            indexes.</p>\n         <p>For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned\n            capacity extremely rapidly, but the only quota that applies is that the aggregate\n            provisioned capacity over all your tables and GSIs cannot exceed either of the\n            per-account quotas.</p>\n         <note>\n            <p>\n               <code>DescribeLimits</code> should only be called periodically. You can expect throttling\n        errors if you call it more than once in a minute.</p>\n         </note>\n         <p>The <code>DescribeLimits</code> Request element has no content.</p>"
             }
         },
@@ -2742,6 +2784,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Returns information about the table, including the current status of the table, when it was created, the primary key schema, and any indexes on the table.</p>\n         <note>\n            <p>If you issue a <code>DescribeTable</code> request immediately after a <code>CreateTable</code> request, DynamoDB might\n        return a <code>ResourceNotFoundException</code>. This is because <code>DescribeTable</code> uses an eventually\n        consistent query, and the metadata for your table might not be available at that moment.\n        Wait for a few seconds, and then try the <code>DescribeTable</code> request again.</p>\n         </note>",
                 "smithy.waiters#waitable": {
                     "TableExists": {
@@ -2871,6 +2916,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Gives a description of the Time to Live (TTL) status on the specified table. </p>"
             }
         },
@@ -2950,6 +2998,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Stops replication from the DynamoDB table to the Kinesis data stream. This is done\n            without deleting either of the resources.</p>"
             }
         },
@@ -3175,6 +3226,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Starts table data replication to the specified Kinesis data stream at a timestamp chosen\n            during the enable workflow. If this operation doesn't return results immediately, use\n            DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is\n            ACTIVE.</p>"
             }
         },
@@ -3860,6 +3914,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>The <code>GetItem</code> operation returns a set of attributes for the item with the given primary\n          key. If there is no matching item, <code>GetItem</code> does not return any data and there will be no <code>Item</code> element in the response.</p>\n         <p>\n            <code>GetItem</code> provides an eventually consistent read by default. If your application\n      requires a strongly consistent read, set <code>ConsistentRead</code> to <code>true</code>. Although\n      a strongly consistent read might take more time than an eventually consistent read, it always\n      returns the last updated value.</p>"
             }
         },
@@ -4311,7 +4368,7 @@
                     "min": 3,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.dynamodb#IndexNotFoundException": {
@@ -4772,6 +4829,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>List backups associated with an AWS account. To list backups for a given table, specify\n                <code>TableName</code>. <code>ListBackups</code> returns a paginated list of results\n            with at most 1 MB worth of items in a page. You can also specify a maximum number of\n            entries to be returned in a page. </p>\n         <p>In the request, start time is inclusive, but end time is exclusive. Note that these\n            boundaries are for the time at which the original backup was requested.</p>\n         <p>You can call <code>ListBackups</code> a maximum of five times per second.</p>"
             }
         },
@@ -4998,6 +5058,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Lists all global tables that have a replica in the specified Region.</p>\n          <note>\n            <p>This operation only applies to <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html\">Version 2017.11.29</a> of global tables.</p>\n         </note>"
             }
         },
@@ -5058,6 +5121,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Returns an array of table names associated with the current account and endpoint. The output\n      from <code>ListTables</code> is paginated, with each page returning a maximum of 100 table\n      names.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "ExclusiveStartTableName",
@@ -5137,6 +5203,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>List all tags on an Amazon DynamoDB resource. You can call ListTagsOfResource up to 10 times per second, per account.</p>\n         <p>For an overview on tagging DynamoDB resources, see\n      <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a>\n      in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
             }
         },
@@ -5730,6 +5799,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Creates a new item, or replaces an old item with a new item. If an item that has the same primary key as the new item already exists in the specified table, the new item completely replaces the existing item. You can perform a conditional put operation (add a new item if one with the specified primary key doesn't exist), or replace an existing item if it has certain attribute values. You can return the item's attribute values in the same operation, using the <code>ReturnValues</code> parameter.</p>\n         <important>\n            <p>This topic provides general information about the <code>PutItem</code> API.</p>\n            <p>For information on how to call the <code>PutItem</code> API using the AWS SDK in specific languages, see the following:</p>\n            <ul>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/aws-cli/dynamodb-2012-08-10/PutItem\"> PutItem in the AWS Command Line Interface</a>\n                    </p>\n               </li>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/DotNetSDKV3/dynamodb-2012-08-10/PutItem\"> PutItem in the AWS SDK for .NET</a>\n                    </p>\n               </li>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/SdkForCpp/dynamodb-2012-08-10/PutItem\"> PutItem in the AWS SDK for C++</a>\n                    </p>\n               </li>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/SdkForGoV1/dynamodb-2012-08-10/PutItem\"> PutItem in the AWS SDK for Go</a>\n                    </p>\n               </li>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/SdkForJava/dynamodb-2012-08-10/PutItem\"> PutItem in the AWS SDK for Java</a>\n                    </p>\n               </li>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/AWSJavaScriptSDK/dynamodb-2012-08-10/PutItem\"> PutItem in the AWS SDK for JavaScript</a>\n                    </p>\n               </li>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/SdkForPHPV3/dynamodb-2012-08-10/PutItem\"> PutItem in the AWS SDK for PHP V3</a>\n                    </p>\n               </li>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/boto3/dynamodb-2012-08-10/PutItem\">\n                            PutItem in the AWS SDK for Python</a>\n                    </p>\n               </li>\n               <li>\n                  <p>\n                        <a href=\"http://docs.aws.amazon.com/goto/SdkForRubyV2/dynamodb-2012-08-10/PutItem\"> PutItem in the AWS SDK for Ruby V2</a>\n                    </p>\n               </li>\n            </ul>\n         </important>\n\n         <p>When you add an item, the primary key attributes are the only required attributes.\n            Attribute values cannot be null.</p> \n            <p>Empty String and Binary attribute values are allowed. Attribute values of type String and Binary must have a length greater than zero if the attribute is used as a key attribute for a table or index.\n            Set type attributes cannot be empty. </p>\n            <p>Invalid Requests with empty values will\n            be rejected with a <code>ValidationException</code> exception.</p>\n         <note>\n            <p>To prevent a new item from replacing an existing item, use a conditional expression\n         that contains the <code>attribute_not_exists</code> function with the name of the\n         attribute being used as the partition key for the table.  Since every record must contain\n         that attribute, the <code>attribute_not_exists</code> function will only succeed if\n         no matching item exists.</p>\n         </note>\n         <p>For more information about <code>PutItem</code>, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html\">Working with Items</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
             }
         },
@@ -5876,6 +5948,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>The <code>Query</code> operation finds items based on primary key values.\n            You can query any table or secondary index that has a composite primary key (a partition\n            key and a sort key).\n        </p>\n        <p>Use the <code>KeyConditionExpression</code> parameter to provide a specific value\n            for the partition key. The <code>Query</code> operation will return all of the items\n            from the table or index with that partition key value. You can optionally narrow the\n            scope of the <code>Query</code> operation by specifying a sort key value and a\n            comparison operator in <code>KeyConditionExpression</code>. To further refine the <code>Query</code> results,\n            you can optionally provide a <code>FilterExpression</code>. A <code>FilterExpression</code> determines which items\n            within the results should be returned to you. All of the other results are discarded.\n        </p>\n        <p>\n            A <code>Query</code> operation always returns a result set. If no matching items are found,\n            the result set will be empty. Queries that do not return results consume the minimum number of\n            read capacity units for that type of read operation.\n        </p>\n        <note>\n            <p>\n                DynamoDB calculates the number of read capacity units consumed based on item size,\n                not on the amount of data that is returned to an application. The number of capacity\n                units consumed will be the same whether you request all of the attributes (the default behavior)\n                or just some of them (using a projection expression). The number will also be the same\n                whether or not you use a <code>FilterExpression</code>.\n            </p>\n        </note>\n        <p>\n            <code>Query</code> results are always sorted by the sort key value. If the data type of the sort key is Number,\n            the results are returned in numeric order; otherwise, the results are returned in order of UTF-8 bytes.\n            By default, the sort order is ascending. To reverse the order, set the <code>ScanIndexForward</code> parameter\n            to false.\n        </p>\n        <p> A single <code>Query</code> operation will read up to the maximum number of items\n            set (if using the <code>Limit</code> parameter) or a maximum of 1 MB of data and then\n            apply any filtering to the results using <code>FilterExpression</code>. If\n                <code>LastEvaluatedKey</code> is present in the response, you will need to paginate\n            the result set. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.Pagination\">Paginating\n                the Results</a> in the <i>Amazon DynamoDB Developer Guide</i>. </p>\n        <p>\n            <code>FilterExpression</code> is applied after a <code>Query</code> finishes, but before\n            the results are returned.\n            A <code>FilterExpression</code> cannot contain partition key or sort key attributes.\n            You need to specify those attributes in the <code>KeyConditionExpression</code>.\n        </p>\n        <note>\n            <p>\n                A <code>Query</code> operation can return an empty result set and a <code>LastEvaluatedKey</code>\n                if all the items read for the page of results are filtered out.\n            </p>\n        </note>\n        <p>You can query a table, a local secondary index, or a global secondary index. For a\n            query on a table or on a local secondary index, you can set the\n                <code>ConsistentRead</code> parameter to <code>true</code> and obtain a\n            strongly consistent result. Global secondary indexes support eventually consistent reads\n            only, so do not specify <code>ConsistentRead</code> when querying a global\n            secondary index.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "ExclusiveStartKey",
@@ -6754,6 +6829,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Creates a new table from an existing backup. Any number of users can execute up to 4 concurrent restores\n        (any type of restore) in a given account.\n      </p>\n         <p>You can call <code>RestoreTableFromBackup</code> at a maximum rate of 10 times per second.</p>\n         <p>You must manually set up the following on the restored table:</p>\n         <ul>\n            <li>\n                 <p>Auto scaling policies</p>\n             </li>\n            <li>\n                 <p>IAM policies</p>\n             </li>\n            <li>\n                 <p>Amazon CloudWatch metrics and alarms</p>\n             </li>\n            <li>\n                 <p>Tags</p>\n             </li>\n            <li>\n                 <p>Stream settings</p>\n             </li>\n            <li>\n                 <p>Time to Live (TTL) settings</p>\n             </li>\n         </ul>"
             }
         },
@@ -6852,6 +6930,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Restores the specified table to the specified point in time within\n        <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>.\n        You can restore your table to any point in time during the last 35 days.\n        Any number of users can execute up to 4 concurrent restores (any type of restore) in a given account.\n      </p>\n         <p>\n     When you restore using point in time recovery, DynamoDB restores your table data to the state based on\n     the selected date and time (day:hour:minute:second) to a new table.\n     </p>\n         <p>\n    Along with data, the following are also included on the new restored table using point in time recovery:\n    </p>\n        <ul>\n            <li>\n                 <p>Global secondary indexes (GSIs)</p>\n             </li>\n            <li>\n                 <p>Local secondary indexes (LSIs)</p>\n             </li>\n            <li>\n                 <p>Provisioned read and write capacity</p>\n             </li>\n            <li>\n                 <p>Encryption settings</p>\n               <important>\n                  <p>\n                 All these settings come from the current settings of the source table at the time of restore.\n             </p>\n               </important>\n             </li>\n         </ul>\n\n           <p>You must manually set up the following on the restored table:</p>\n         <ul>\n            <li>\n                 <p>Auto scaling policies</p>\n             </li>\n            <li>\n                 <p>IAM policies</p>\n             </li>\n            <li>\n                 <p>Amazon CloudWatch metrics and alarms</p>\n             </li>\n            <li>\n                 <p>Tags</p>\n             </li>\n            <li>\n                 <p>Stream settings</p>\n             </li>\n            <li>\n                 <p>Time to Live (TTL) settings</p>\n             </li>\n            <li>\n                 <p>Point in time recovery settings</p>\n             </li>\n         </ul>"
             }
         },
@@ -7193,6 +7274,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>The <code>Scan</code> operation returns one or more items and item attributes by accessing every\n      item in a table or a secondary index. To have DynamoDB return fewer items, you can provide a <code>FilterExpression</code> operation.</p>\n         <p>If the total number of scanned items exceeds the maximum dataset size limit of 1 MB, the\n            scan stops and results are returned to the user as a <code>LastEvaluatedKey</code> value\n            to continue the scan in a subsequent operation. The results also include the number of\n            items exceeding the limit. A scan can result in no table data meeting the filter\n            criteria. </p>\n         <p>A single <code>Scan</code> operation reads up to the maximum number of items set (if\n            using the <code>Limit</code> parameter) or a maximum of 1 MB of data and then apply any\n            filtering to the results using <code>FilterExpression</code>. If\n                <code>LastEvaluatedKey</code> is present in the response, you need to paginate the\n            result set. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Pagination\">Paginating the\n                Results</a> in the <i>Amazon DynamoDB Developer Guide</i>. </p>\n         <p>\n            <code>Scan</code> operations proceed sequentially; however, for faster performance on\n            a large table or secondary index, applications can request a parallel <code>Scan</code>\n            operation by providing the <code>Segment</code> and <code>TotalSegments</code>\n            parameters. For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.ParallelScan\">Parallel\n                Scan</a> in the <i>Amazon DynamoDB Developer Guide</i>.</p>\n         <p>\n            <code>Scan</code> uses eventually consistent reads when accessing the data in a\n            table; therefore, the result set might not include the changes to data in the table\n            immediately before the operation began. If you need a consistent copy of the data, as of\n            the time that the <code>Scan</code> begins, you can set the <code>ConsistentRead</code>\n            parameter to <code>true</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "ExclusiveStartKey",
@@ -7754,7 +7838,7 @@
         "com.amazonaws.dynamodb#TableId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.dynamodb#TableInUseException": {
@@ -7776,7 +7860,7 @@
                     "min": 3,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.-]+$"
             }
         },
         "com.amazonaws.dynamodb#TableNameList": {
@@ -7898,6 +7982,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Associate a set of tags with an Amazon DynamoDB resource. You can then activate these\n            user-defined tags so that they appear on the Billing and Cost Management console for\n            cost allocation tracking. You can call TagResource up to five times per second, per\n            account. </p>\n         <p>For an overview on tagging DynamoDB resources, see\n      <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a>\n      in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
             }
         },
@@ -8071,6 +8158,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>\n            <code>TransactGetItems</code> is a synchronous operation that atomically retrieves\n            multiple items from one or more tables (but not from indexes) in a single account and\n            Region. A <code>TransactGetItems</code> call can contain up to 25\n                <code>TransactGetItem</code> objects, each of which contains a <code>Get</code>\n            structure that specifies an item to retrieve from a table in the account and Region. A\n            call to <code>TransactGetItems</code> cannot retrieve items from tables in more than one\n            AWS account or Region. The aggregate size of the items in the transaction cannot exceed\n            4 MB.</p>\n         <p>DynamoDB rejects the entire <code>TransactGetItems</code> request if any of the following is true:</p>\n         <ul>\n            <li>\n               <p>A conflicting operation is in the process of updating an\n          item to be read.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction\n          to be completed.</p>\n            </li>\n            <li>\n               <p>There is a user error, such as an invalid data format.</p>\n            </li>\n            <li>\n               <p>The aggregate size of the items in the transaction cannot exceed 4 MB.</p>\n            </li>\n         </ul>"
             }
         },
@@ -8188,6 +8278,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>\n            <code>TransactWriteItems</code> is a synchronous write operation that groups up to 25\n            action requests. These actions can target items in different tables, but not in\n            different AWS accounts or Regions, and no two actions can target the same item. For\n            example, you cannot both <code>ConditionCheck</code> and <code>Update</code> the same\n            item. The aggregate size of the items in the transaction cannot exceed 4 MB.</p>\n \n         <p>The actions are completed atomically so that either all of\n        them succeed, or all of them fail. They are defined by the following objects:</p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>Put</code>     Initiates a <code>PutItem</code> operation to write a new\n                    item. This structure specifies the primary key of the item to be written, the\n                    name of the table to write it in, an optional condition expression that must be\n                    satisfied for the write to succeed, a list of the item's attributes, and a field\n                    indicating whether to retrieve the item's attributes if the condition is not\n                    met.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Update</code>     Initiates an <code>UpdateItem</code> operation to\n                    update an existing item. This structure specifies the primary key of the item to\n                    be updated, the name of the table where it resides, an optional condition\n                    expression that must be satisfied for the update to succeed, an expression that\n                    defines one or more attributes to be updated, and a field indicating whether to\n                    retrieve the item's attributes if the condition is not met.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Delete</code>     Initiates a <code>DeleteItem</code> operation to\n                    delete an existing item. This structure specifies the primary key of the item to\n                    be deleted, the name of the table where it resides, an optional condition\n                    expression that must be satisfied for the deletion to succeed, and a field\n                    indicating whether to retrieve the item's attributes if the condition is not\n                    met.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ConditionCheck</code>     Applies a condition to an item that is not\n                    being modified by the transaction. This structure specifies the primary key of\n                    the item to be checked, the name of the table where it resides, a condition\n                    expression that must be satisfied for the transaction to succeed, and a field\n                    indicating whether to retrieve the item's attributes if the condition is not\n                    met.</p>\n            </li>\n         </ul>\n\n         <p>DynamoDB rejects the entire <code>TransactWriteItems</code> request if any of the following is true:</p>\n         <ul>\n            <li>\n               <p>A condition in one of the condition expressions is not met.</p>\n            </li>\n            <li>\n               <p>An ongoing operation is in the process of updating the same\n          item.</p>\n            </li>\n            <li>\n               <p>There is insufficient provisioned capacity for the transaction\n          to be completed.</p>\n            </li>\n            <li>\n               <p>An item size becomes too large (bigger than 400 KB), a local secondary index (LSI) becomes too\n                    large, or a similar validation error occurs because of changes made by the\n                    transaction.</p>\n            </li>\n            <li>\n               <p>The aggregate size of the items in the transaction exceeds 4 MB.</p>\n            </li>\n            <li>\n               <p>There  is a user error, such as an invalid data format.</p>\n            </li>\n         </ul>"
             }
         },
@@ -8301,6 +8394,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Removes the association of tags from an Amazon DynamoDB resource. You can call\n                <code>UntagResource</code> up to five times per second, per account. </p>\n         <p>For an overview on tagging DynamoDB resources, see\n      <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Tagging.html\">Tagging for DynamoDB</a>\n      in the <i>Amazon DynamoDB Developer Guide</i>.</p>"
             }
         },
@@ -8399,6 +8495,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>\n            <code>UpdateContinuousBackups</code> enables or disables point in time recovery for the specified table.\n      A successful <code>UpdateContinuousBackups</code> call returns the current <code>ContinuousBackupsDescription</code>.\n      Continuous backups are <code>ENABLED</code> on all tables at table creation.\n      If point in time recovery is enabled, <code>PointInTimeRecoveryStatus</code> will be set to ENABLED.</p>\n         <p>\n      Once continuous backups and point in time recovery are enabled, you can restore to any point in time within\n      <code>EarliestRestorableDateTime</code> and <code>LatestRestorableDateTime</code>.\n     </p>\n         <p>\n            <code>LatestRestorableDateTime</code> is typically 5 minutes before the current time.\n            You can restore your table to any point in time during the last 35 days. </p>"
             }
         },
@@ -8554,6 +8653,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Adds or removes replicas in the specified global table. The global table must already\n            exist to be able to use this operation. Any replica to be added must be empty, have the\n            same name as the global table, have the same key schema, have DynamoDB Streams enabled,\n            and have the same provisioned and maximum write capacity units.</p>\n        <note>\n            <p>Although you can use <code>UpdateGlobalTable</code> to add replicas and remove replicas in\n                a single request, for simplicity we recommend that you issue separate requests for\n                adding or removing replicas.</p>\n         </note>\n       \t<p>\n        If global secondary indexes are specified, then the following conditions must also be met:\n        </p>\n        <ul>\n            <li>\n               <p>\n               The global secondary indexes must have the same name.\n            </p>\n            </li>\n            <li>\n               <p>\n               The global secondary indexes must have the same hash key and sort key (if present).\n            </p>\n            </li>\n            <li>\n               <p>\n               The global secondary indexes must have the same provisioned and maximum write capacity units.\n            </p>\n            </li>\n         </ul>"
             }
         },
@@ -8619,6 +8721,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Updates settings for a global table.</p>"
             }
         },
@@ -8716,6 +8821,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Edits an existing item's attributes, or adds a new item to the table if it does not already exist. You can put, delete, or add attribute values. You can also perform a conditional update on an existing item (insert a new attribute name-value pair if it doesn't exist, or replace an existing name-value pair if it has certain expected attribute values).</p>\n         <p>You can also return the item's attribute values in the same <code>UpdateItem</code>\n      operation using the <code>ReturnValues</code> parameter.</p>"
             }
         },
@@ -8883,6 +8991,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>Modifies the provisioned throughput settings, global secondary indexes, or DynamoDB Streams settings for a given table.</p>\n         <p>You can only perform one of the following operations at once:</p>\n         <ul>\n            <li>\n               <p>Modify the provisioned throughput settings of the table.</p>\n            </li>\n            <li>\n               <p>Enable or disable DynamoDB Streams on the table.</p>\n            </li>\n            <li>\n               <p>Remove a global secondary index from the table.</p>\n            </li>\n            <li>\n               <p>Create a new global secondary index on the table. After the index begins\n                    backfilling, you can use <code>UpdateTable</code> to perform other\n                    operations.</p>\n            </li>\n         </ul>\n         <p>\n            <code>UpdateTable</code> is an asynchronous operation; while it is executing, the table status\n      changes from <code>ACTIVE</code> to <code>UPDATING</code>. While it is <code>UPDATING</code>,\n      you cannot issue another <code>UpdateTable</code> request. When the table returns to the\n        <code>ACTIVE</code> state, the <code>UpdateTable</code> operation is complete.</p>"
             }
         },
@@ -9047,6 +9158,9 @@
                 }
             ],
             "traits": {
+                "aws.api#clientDiscoveredEndpoint": {
+                    "required": false
+                },
                 "smithy.api#documentation": "<p>The <code>UpdateTimeToLive</code> method enables or disables Time to Live (TTL) for the\n            specified table. A successful <code>UpdateTimeToLive</code> call returns the current\n                <code>TimeToLiveSpecification</code>. It can take up to one hour for the change to\n            fully process. Any additional <code>UpdateTimeToLive</code> calls for the same table\n            during this one hour duration result in a <code>ValidationException</code>. </p>\n         <p>TTL compares the current time in epoch time format to the time stored in the TTL\n            attribute of an item. If the epoch time value stored in the attribute is less than the\n            current time, the item is marked as expired and subsequently deleted.</p>\n        <note>\n            <p> The epoch time format is the number of seconds elapsed since 12:00:00 AM January 1,\n                1970 UTC. </p>\n        </note>\n        <p>DynamoDB deletes expired items on a best-effort basis to ensure availability of\n            throughput for other data operations.\n        </p>\n            <important>\n                <p>DynamoDB typically deletes expired items within two days of expiration. The exact duration\n                within which an item gets deleted after expiration is specific to the\n                nature of the workload. Items that have expired and not been deleted will still show up in reads,\n                    queries, and scans.</p>\n            </important>\n        <p>As items are deleted, they are removed from any local secondary index and global\n            secondary index immediately in the same eventually consistent way as a standard delete\n            operation.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/TTL.html\">Time To Live</a> in the Amazon DynamoDB Developer Guide. </p>"
             }
         },

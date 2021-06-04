@@ -680,7 +680,7 @@
         "com.amazonaws.polly#LexiconName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9A-Za-z]{1,20}"
+                "smithy.api#pattern": "^[0-9A-Za-z]{1,20}$"
             }
         },
         "com.amazonaws.polly#LexiconNameList": {
@@ -1743,6 +1743,10 @@
                     {
                         "value": "Filiz",
                         "name": "Filiz"
+                    },
+                    {
+                        "value": "Gabrielle",
+                        "name": "Gabrielle"
                     },
                     {
                         "value": "Geraint",

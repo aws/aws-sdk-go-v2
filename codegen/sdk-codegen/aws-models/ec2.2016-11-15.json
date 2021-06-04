@@ -10579,6 +10579,13 @@
                         "smithy.api#documentation": "<p>The tags to apply to the new network interface.</p>",
                         "smithy.api#xmlName": "TagSpecification"
                     }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring Idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
                 }
             },
             "traits": {
@@ -10594,6 +10601,14 @@
                         "aws.protocols#ec2QueryName": "NetworkInterface",
                         "smithy.api#documentation": "<p>Information about the network interface.</p>",
                         "smithy.api#xmlName": "networkInterface"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "ClientToken",
+                        "smithy.api#documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return.</p>",
+                        "smithy.api#xmlName": "clientToken"
                     }
                 }
             },

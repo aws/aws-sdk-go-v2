@@ -208,7 +208,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#AlertName": {
@@ -218,7 +218,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
             }
         },
         "com.amazonaws.lookoutmetrics#AlertStatus": {
@@ -353,7 +353,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#AnomalyDetectorConfig": {
@@ -391,7 +391,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#AnomalyDetectorName": {
@@ -401,7 +401,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
             }
         },
         "com.amazonaws.lookoutmetrics#AnomalyDetectorStatus": {
@@ -692,7 +692,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+"
+                "smithy.api#pattern": "^arn:([a-z\\d-]+):.*:.*:.*:.+$"
             }
         },
         "com.amazonaws.lookoutmetrics#BackTestAnomalyDetector": {
@@ -773,7 +773,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
             }
         },
         "com.amazonaws.lookoutmetrics#CloudWatchConfig": {
@@ -798,7 +798,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
             }
         },
         "com.amazonaws.lookoutmetrics#ConflictException": {
@@ -1205,7 +1205,7 @@
                     "min": 1,
                     "max": 253
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#DatabasePort": {
@@ -1224,7 +1224,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#DeleteAlert": {
@@ -1337,7 +1337,7 @@
                     "min": 0,
                     "max": 1
                 },
-                "smithy.api#pattern": "[^\\r\\n]"
+                "smithy.api#pattern": "^[^\\r\\n]$"
             }
         },
         "com.amazonaws.lookoutmetrics#DescribeAlert": {
@@ -1884,7 +1884,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][\\w!@#.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9][\\w!@#.-]+$"
             }
         },
         "com.amazonaws.lookoutmetrics#Frequency": {
@@ -2248,7 +2248,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
+                "smithy.api#pattern": "^arn:aws.*:kms:.*:[0-9]{12}:key/[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$"
             }
         },
         "com.amazonaws.lookoutmetrics#LambdaConfiguration": {
@@ -2954,7 +2954,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
             }
         },
         "com.amazonaws.lookoutmetrics#MetricSetDescription": {
@@ -2964,7 +2964,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#MetricSetName": {
@@ -2974,7 +2974,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*$"
             }
         },
         "com.amazonaws.lookoutmetrics#MetricSetSummary": {
@@ -3087,7 +3087,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[^:].*"
+                "smithy.api#pattern": "^[^:]"
             }
         },
         "com.amazonaws.lookoutmetrics#NextToken": {
@@ -3097,7 +3097,7 @@
                     "min": 1,
                     "max": 3000
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#Offset": {
@@ -3116,7 +3116,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+"
+                "smithy.api#pattern": "^arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+$"
             }
         },
         "com.amazonaws.lookoutmetrics#PutFeedback": {
@@ -3186,7 +3186,7 @@
                     "min": 0,
                     "max": 1
                 },
-                "smithy.api#pattern": "[^\\r\\n]|^$"
+                "smithy.api#pattern": "^[^\\r\\n]|^$"
             }
         },
         "com.amazonaws.lookoutmetrics#RDSDatabaseIdentifier": {
@@ -3206,7 +3206,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.lookoutmetrics#RDSSourceConfig": {
@@ -3291,7 +3291,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.]+$"
             }
         },
         "com.amazonaws.lookoutmetrics#RedshiftSourceConfig": {
@@ -3510,7 +3510,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.lookoutmetrics#SecurityGroupIdList": {
@@ -3578,7 +3578,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "[\\-0-9a-zA-Z]+"
+                "smithy.api#pattern": "^[\\-0-9a-zA-Z]+$"
             }
         },
         "com.amazonaws.lookoutmetrics#SubnetIdList": {
@@ -3594,7 +3594,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_.]*$"
             }
         },
         "com.amazonaws.lookoutmetrics#TagKey": {
@@ -3780,7 +3780,7 @@
                     "min": 0,
                     "max": 520
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#TimeSeriesList": {
@@ -3835,7 +3835,7 @@
                     "min": 0,
                     "max": 60
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.lookoutmetrics#TooManyRequestsException": {
@@ -3861,7 +3861,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}"
+                "smithy.api#pattern": "^[a-z0-9]{8}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{4}-[a-z0-9]{12}$"
             }
         },
         "com.amazonaws.lookoutmetrics#UntagResource": {

@@ -89,6 +89,9 @@
                 },
                 {
                     "target": "com.amazonaws.qldb#UpdateLedger"
+                },
+                {
+                    "target": "com.amazonaws.qldb#UpdateLedgerPermissionsMode"
                 }
             ],
             "traits": {
@@ -235,7 +238,7 @@
                 "PermissionsMode": {
                     "target": "com.amazonaws.qldb#PermissionsMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permissions mode to assign to the ledger that you want to create.</p>",
+                        "smithy.api#documentation": "<p>The permissions mode to assign to the ledger that you want to create. This parameter can\n         have one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with\n               API-level granularity for ledgers.</p>\n               <p>This mode allows users who have <code>SendCommand</code> permissions for this\n               ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in\n               the specified ledger. This mode disregards any table-level or command-level IAM\n               permissions policies that you create for the ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that\n               enables access control with finer granularity for ledgers, tables, and PartiQL\n               commands.</p>\n               <p>By default, this mode denies all user requests to run any PartiQL commands on any\n               tables in this ledger. To allow PartiQL commands to run, you must create IAM\n               permissions policies for specific table resources and PartiQL actions, in addition to\n                  <code>SendCommand</code> API permissions for the ledger.</p>\n            </li>\n         </ul>\n         <note>\n            <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize\n            the security of your ledger data.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -272,6 +275,12 @@
                     "target": "com.amazonaws.qldb#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time, in epoch time format, when the ledger was created. (Epoch time format\n         is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)</p>"
+                    }
+                },
+                "PermissionsMode": {
+                    "target": "com.amazonaws.qldb#PermissionsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions mode of the ledger that you created.</p>"
                     }
                 },
                 "DeletionProtection": {
@@ -507,6 +516,12 @@
                     "target": "com.amazonaws.qldb#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time, in epoch time format, when the ledger was created. (Epoch time format\n         is the number of seconds elapsed since 12:00:00 AM January 1, 1970 UTC.)</p>"
+                    }
+                },
+                "PermissionsMode": {
+                    "target": "com.amazonaws.qldb#PermissionsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions mode of the ledger.</p>"
                     }
                 },
                 "DeletionProtection": {
@@ -1479,6 +1494,10 @@
                     {
                         "value": "ALLOW_ALL",
                         "name": "ALLOW_ALL"
+                    },
+                    {
+                        "value": "STANDARD",
+                        "name": "STANDARD"
                     }
                 ]
             }
@@ -1986,6 +2005,74 @@
                     "method": "PATCH",
                     "uri": "/ledgers/{Name}",
                     "code": 200
+                }
+            }
+        },
+        "com.amazonaws.qldb#UpdateLedgerPermissionsMode": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qldb#UpdateLedgerPermissionsModeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qldb#UpdateLedgerPermissionsModeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qldb#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.qldb#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the permissions mode of a ledger.</p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/ledgers/{Name}/permissions-mode",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.qldb#UpdateLedgerPermissionsModeRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.qldb#LedgerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ledger.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PermissionsMode": {
+                    "target": "com.amazonaws.qldb#PermissionsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions mode to assign to the ledger. This parameter can have one of the\n         following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW_ALL</code>: A legacy permissions mode that enables access control with\n               API-level granularity for ledgers.</p>\n               <p>This mode allows users who have <code>SendCommand</code> permissions for this\n               ledger to run all PartiQL commands (hence, <code>ALLOW_ALL</code>) on any tables in\n               the specified ledger. This mode disregards any table-level or command-level IAM\n               permissions policies that you create for the ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STANDARD</code>: (<i>Recommended</i>) A permissions mode that\n               enables access control with finer granularity for ledgers, tables, and PartiQL\n               commands.</p>\n               <p>By default, this mode denies all user requests to run any PartiQL commands on any\n               tables in this ledger. To allow PartiQL commands to run, you must create IAM\n               permissions policies for specific table resources and PartiQL actions, in addition to\n                  <code>SendCommand</code> API permissions for the ledger.</p>\n            </li>\n         </ul>\n         <note>\n            <p>We strongly recommend using the <code>STANDARD</code> permissions mode to maximize\n            the security of your ledger data.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.qldb#UpdateLedgerPermissionsModeResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.qldb#LedgerName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ledger.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.qldb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the ledger.</p>"
+                    }
+                },
+                "PermissionsMode": {
+                    "target": "com.amazonaws.qldb#PermissionsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current permissions mode of the ledger.</p>"
+                    }
                 }
             }
         },

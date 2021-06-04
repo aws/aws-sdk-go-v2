@@ -119,7 +119,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests \n           to be retried without the risk of executing the operation twice. \n      <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be\n\t\t\tretried without the risk of running the operation twice. <code>CreatorRequestId</code>\n\t\t\tcan be any unique string, for example, a date/time stamp. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -141,7 +141,7 @@
                 "Priority": {
                     "target": "com.amazonaws.route53resolver#Priority",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall \n           filters VPC traffic starting from rule group with the lowest numeric priority setting. </p>\n         <p>You must specify a unique priority for each rule group that you associate with a single VPC. \n           To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You \n   can change the priority setting for a rule group association after you create it.</p>",
+                        "smithy.api#documentation": "<p>The setting that determines the processing order of the rule group among the rule\n\t\t\tgroups that you associate with the specified VPC. DNS Firewall filters VPC traffic\n\t\t\tstarting from the rule group with the lowest numeric priority setting. </p>\n         <p>You must specify a unique priority for each rule group that you associate with a single VPC. \n           To make it easier to insert rule groups later, leave space between the numbers, for example, use 101, 200, and so on. You \n   can change the priority setting for a rule group association after you create it.</p>\n   \t     <p>The allowed values for <code>Priority</code> are between 100 and 9900.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -172,7 +172,7 @@
                 "FirewallRuleGroupAssociation": {
                     "target": "com.amazonaws.route53resolver#FirewallRuleGroupAssociation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The association that you just created. The association has an Id that you can use to identify it in other requests, like update and delete.</p>"
+                        "smithy.api#documentation": "<p>The association that you just created. The association has an ID that you can use to\n\t\t\tidentify it in other requests, like update and delete.</p>"
                     }
                 }
             }
@@ -486,7 +486,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests \n           without the risk of executing the operation twice. \n      <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests\n\t\t\twithout the risk of running the operation twice. <code>CreatorRequestId</code> can be\n\t\t\tany unique string, for example, a date/time stamp. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -512,7 +512,7 @@
                 "FirewallDomainList": {
                     "target": "com.amazonaws.route53resolver#FirewallDomainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The domain list that you just created.</p>"
+                        "smithy.api#documentation": "<p>The\n\t\t\tdomain list that you just created.</p>"
                     }
                 }
             }
@@ -584,7 +584,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests \n           without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>",
+                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed\n\t\t\trequests without the risk of running the operation twice. This can be any unique string,\n\t\t\tfor example, a timestamp. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -621,7 +621,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests \n           without the risk of executing the operation twice. \n      <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests\n\t\t\twithout the risk of running the operation twice. <code>CreatorRequestId</code> can be\n\t\t\tany unique string, for example, a date/time stamp. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -650,14 +650,14 @@
                 "Action": {
                     "target": "com.amazonaws.route53resolver#Action",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW</code> - Permit the request to go through.</p> \n            </li>\n            <li>\n               <p>\n                  <code>ALERT</code> - Permit the request and send metrics and log to Cloud Watch.</p> \n            </li>\n            <li>\n               <p>\n                  <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule's <code>BlockResponse</code>. </p> \n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW</code> - Permit the request to go through.</p> \n            </li>\n            <li>\n               <p>\n                  <code>ALERT</code> - Permit the request and send metrics and logs to Cloud Watch.</p> \n            </li>\n            <li>\n               <p>\n                  <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule's <code>BlockResponse</code>. </p> \n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "BlockResponse": {
                     "target": "com.amazonaws.route53resolver#BlockResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The way that you want DNS Firewall to block the request, used with the rule aciton setting <code>BLOCK</code>. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> \n            </li>\n            <li>\n               <p>\n                  <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p> \n            </li>\n            <li>\n               <p>\n                  <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings. </p> \n            </li>\n         </ul>\n         <p>This setting is required if the rule action setting is <code>BLOCK</code>.</p>"
+                        "smithy.api#documentation": "<p>The way that you want DNS Firewall to block the request, used with the rule action\n\t\t\tsetting <code>BLOCK</code>. </p>\n         <ul>\n            <li>\n               <p>\n                  <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> \n            </li>\n            <li>\n               <p>\n                  <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p> \n            </li>\n            <li>\n               <p>\n                  <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings. </p> \n            </li>\n         </ul>\n         <p>This setting is required if the rule action setting is <code>BLOCK</code>.</p>"
                     }
                 },
                 "BlockOverrideDomain": {
@@ -694,7 +694,7 @@
                 "FirewallRule": {
                     "target": "com.amazonaws.route53resolver#FirewallRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The firewall rule that you just created. </p>"
+                        "smithy.api#documentation": "<p>The\n\t\t\tfirewall rule that you just created. </p>"
                     }
                 }
             }
@@ -740,7 +740,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. \n\t\t\t<code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried\n\t\t\twithout the risk of running the operation twice. <code>CreatorRequestId</code> can be\n\t\t\tany unique string, for example, a date/time stamp. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -834,7 +834,7 @@
                 "Name": {
                     "target": "com.amazonaws.route53resolver#ResolverQueryLogConfigName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name that you want to give the query logging configuration</p>",
+                        "smithy.api#documentation": "<p>The name that you want to give the query logging configuration.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -848,7 +848,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. \n\t\t\t<code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried\n\t\t\twithout the risk of running the operation twice. <code>CreatorRequestId</code> can be\n\t\t\tany unique string, for example, a date/time stamp. </p>",
                         "smithy.api#idempotencyToken": {},
                         "smithy.api#required": {}
                     }
@@ -916,7 +916,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. \n\t\t\t<code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried\n\t\t\twithout the risk of running the operation twice. <code>CreatorRequestId</code> can be\n\t\t\tany unique string, for example, a date/time stamp. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -943,7 +943,7 @@
                 "TargetIps": {
                     "target": "com.amazonaws.route53resolver#TargetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a comma.</p>\n\t\t       <p>\n            <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>"
+                        "smithy.api#documentation": "<p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a space.</p>\n\t\t       <p>\n            <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>"
                     }
                 },
                 "ResolverEndpointId": {
@@ -1457,7 +1457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates a VPC from a query logging configuration.</p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used \n\t\t\t\tResource Access Manager (RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration \n\t\t\t\tin the following ways:</p>\n\t\t\t         <ul>\n               <li>\n                  <p>The accounts that you shared the configuration with can disassociate VPCs from the configuration.</p>\n               </li>\n               <li>\n                  <p>You can stop sharing the configuration.</p>\n               </li>\n            </ul>\n\t\t       </note>"
+                "smithy.api#documentation": "<p>Disassociates a VPC from a query logging configuration.</p>\n\t\t\n\t\t       <note>\n\t\t\t         <p>Before you can delete a query logging configuration, you must first disassociate all VPCs\n\t\t\t\tfrom the configuration. If you used AWS Resource Access Manager (AWS RAM) to share a\n\t\t\t\tquery logging configuration with other accounts, VPCs can be disassociated from the\n\t\t\t\tconfiguration in the following ways:</p>\n\t\t\t         <ul>\n               <li>\n                  <p>The accounts that you shared the configuration with can disassociate VPCs from the configuration.</p>\n               </li>\n               <li>\n                  <p>You can stop sharing the configuration.</p>\n               </li>\n            </ul>\n\t\t       </note>"
             }
         },
         "com.amazonaws.route53resolver#DisassociateResolverQueryLogConfigRequest": {
@@ -1623,7 +1623,7 @@
                 "Id": {
                     "target": "com.amazonaws.route53resolver#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Id of the firewall configuration.</p>"
+                        "smithy.api#documentation": "<p>The ID of the firewall configuration.</p>"
                     }
                 },
                 "ResourceId": {
@@ -1646,7 +1646,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+                "smithy.api#documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC from\n\t\t\tAmazon Virtual Private Cloud (Amazon VPC). </p>"
             }
         },
         "com.amazonaws.route53resolver#FirewallConfigList": {
@@ -1714,7 +1714,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests \n           without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed\n\t\t\trequests without the risk of running the operation twice. This can be any unique string,\n\t\t\tfor example, a timestamp. </p>"
                     }
                 },
                 "CreationTime": {
@@ -1731,7 +1731,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>High level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p>\n         <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>"
+                "smithy.api#documentation": "<p>High-level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p>\n         <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>"
             }
         },
         "com.amazonaws.route53resolver#FirewallDomainListMetadata": {
@@ -1758,7 +1758,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests \n           without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed\n\t\t\trequests without the risk of running the operation twice. This can be any unique string,\n\t\t\tfor example, a timestamp. </p>"
                     }
                 },
                 "ManagedOwnerName": {
@@ -1982,7 +1982,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests \n           without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed\n\t\t\trequests without the risk of running the operation twice. This can be any unique string,\n\t\t\tfor example, a timestamp. </p>"
                     }
                 },
                 "ShareStatus": {
@@ -2074,7 +2074,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests \n           without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed\n\t\t\trequests without the risk of running the operation twice. This can be any unique string,\n\t\t\tfor example, a timestamp. </p>"
                     }
                 },
                 "CreationTime": {
@@ -2091,7 +2091,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An association between a firewall rul group and a VPC, which enables DNS filtering for the VPC. </p>"
+                "smithy.api#documentation": "<p>An association between a firewall rule group and a VPC, which enables DNS filtering for\n\t\t\tthe VPC. </p>"
             }
         },
         "com.amazonaws.route53resolver#FirewallRuleGroupAssociationStatus": {
@@ -2149,7 +2149,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests \n           without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+                        "smithy.api#documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed\n\t\t\trequests without the risk of running the operation twice. This can be any unique string,\n\t\t\tfor example, a timestamp. </p>"
                     }
                 },
                 "ShareStatus": {
@@ -2229,7 +2229,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+                "smithy.api#documentation": "<p>Retrieves the configuration of the firewall behavior provided by DNS Firewall for a\n\t\t\tsingle VPC from Amazon Virtual Private Cloud (Amazon VPC). </p>"
             }
         },
         "com.amazonaws.route53resolver#GetFirewallConfigRequest": {
@@ -2238,7 +2238,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.route53resolver#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon virtual private cloud (VPC) that the configuration is for.</p>",
+                        "smithy.api#documentation": "<p>The ID of the VPC from Amazon VPC that the configuration is for.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2250,7 +2250,7 @@
                 "FirewallConfig": {
                     "target": "com.amazonaws.route53resolver#FirewallConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+                        "smithy.api#documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC from\n\t\t\tAmazonVPC. </p>"
                     }
                 }
             }
@@ -2405,7 +2405,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). </p>"
+                "smithy.api#documentation": "<p>Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the\n\t\t\tspecified rule group. You can use the policy to share the rule group using AWS Resource\n\t\t\tAccess Manager (AWS RAM). </p>"
             }
         },
         "com.amazonaws.route53resolver#GetFirewallRuleGroupPolicyRequest": {
@@ -2426,7 +2426,7 @@
                 "FirewallRuleGroupPolicy": {
                     "target": "com.amazonaws.route53resolver#FirewallRuleGroupPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). </p>"
+                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule\n\t\t\tgroup. You can use the policy to share the rule group using AWS Resource Access Manager\n\t\t\t(AWS RAM). </p>"
                     }
                 }
             }
@@ -2919,7 +2919,7 @@
                 "DomainFileUrl": {
                     "target": "com.amazonaws.route53resolver#DomainListFileUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (S3) that contains the list of domains to import.</p>\n         <p>The file must be in an S3 bucket that's in the same Region\n       as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>",
+                        "smithy.api#documentation": "<p>The fully qualified URL or URI of the file stored in Amazon Simple Storage Service\n\t\t\t(Amazon S3) that contains the list of domains to import.</p>\n         <p>The file must be in an S3 bucket that's in the same Region\n       as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -3311,7 +3311,7 @@
                 "FirewallConfigs": {
                     "target": "com.amazonaws.route53resolver#FirewallConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configurations for the firewall behavior provided by DNS Firewall for Amazon virtual private clouds (VPC). </p>"
+                        "smithy.api#documentation": "<p>The configurations for the firewall behavior provided by DNS Firewall for VPCs from\n\t\t\tAmazon Virtual Private Cloud (Amazon VPC). </p>"
                     }
                 }
             }
@@ -3377,7 +3377,7 @@
                 "FirewallDomainLists": {
                     "target": "com.amazonaws.route53resolver#FirewallDomainListMetadataList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the domain lists that you have defined.   </p>\n         <p>This might be a parital list of the domain lists that you've defined. For information, see <code>MaxResults</code>. </p>"
+                        "smithy.api#documentation": "<p>A list of the domain lists that you have defined.   </p>\n         <p>This might be a partial list of the domain lists that you've defined. For information,\n\t\t\tsee <code>MaxResults</code>. </p>"
                     }
                 }
             }
@@ -3453,7 +3453,7 @@
                 "Domains": {
                     "target": "com.amazonaws.route53resolver#FirewallDomains",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the domains in the firewall domain list.  </p>\n         <p>This might be a parital list of the domains that you've defined in the domain list. For information, see <code>MaxResults</code>. </p>"
+                        "smithy.api#documentation": "<p>A list of the domains in the firewall domain list.  </p>\n         <p>This might be a partial list of the domains that you've defined in the domain list. For\n\t\t\tinformation, see <code>MaxResults</code>. </p>"
                     }
                 }
             }
@@ -3508,7 +3508,7 @@
                     "target": "com.amazonaws.route53resolver#Priority",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall \n           filters VPC traffic starting from rule group with the lowest numeric priority setting. </p>"
+                        "smithy.api#documentation": "<p>The setting that determines the processing order of the rule group among the rule\n\t\t\tgroups that are associated with a single VPC. DNS Firewall filters VPC traffic starting\n\t\t\tfrom the rule group with the lowest numeric priority setting. </p>"
                     }
                 },
                 "Status": {
@@ -3699,7 +3699,7 @@
                 "FirewallRules": {
                     "target": "com.amazonaws.route53resolver#FirewallRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the rules that you have defined.  </p>\n         <p>This might be a parital list of the firewall rules that you've defined. For information, see <code>MaxResults</code>. </p>"
+                        "smithy.api#documentation": "<p>A list of the rules that you have defined.  </p>\n         <p>This might be a partial list of the firewall rules that you've defined. For information,\n\t\t\tsee <code>MaxResults</code>. </p>"
                     }
                 }
             }
@@ -4421,7 +4421,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "(?!^[0-9]+$)([a-zA-Z0-9\\-_' ']+)"
+                "smithy.api#pattern": "^(?!^[0-9]+$)([a-zA-Z0-9\\-_' ']+)$"
             }
         },
         "com.amazonaws.route53resolver#NextToken": {
@@ -4469,7 +4469,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (RAM). </p>"
+                "smithy.api#documentation": "<p>Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule\n\t\t\tgroup. You can use the policy to share the rule group using AWS Resource Access Manager\n\t\t\t(AWS RAM). </p>"
             }
         },
         "com.amazonaws.route53resolver#PutFirewallRuleGroupPolicyRequest": {
@@ -4699,7 +4699,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request that created the Resolver endpoint. The <code>CreatorRequestId</code> allows failed requests \n\t\t\tto be retried without the risk of executing the operation twice.</p>"
+                        "smithy.api#documentation": "<p>A unique string that identifies the request that created the Resolver endpoint. The\n\t\t\t\t<code>CreatorRequestId</code> allows failed requests to be retried without the risk\n\t\t\tof running the operation twice.</p>"
                     }
                 },
                 "Arn": {
@@ -4873,7 +4873,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies the request that created the query logging configuration. The <code>CreatorRequestId</code> allows failed requests \n\t\t\tto be retried without the risk of executing the operation twice.</p>"
+                        "smithy.api#documentation": "<p>A unique string that identifies the request that created the query logging configuration.\n\t\t\tThe <code>CreatorRequestId</code> allows failed requests to be retried without the risk\n\t\t\tof running the operation twice.</p>"
                     }
                 },
                 "CreationTime": {
@@ -5009,7 +5009,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "(?!^[0-9]+$)([a-zA-Z0-9\\-_' ']+)"
+                "smithy.api#pattern": "^(?!^[0-9]+$)([a-zA-Z0-9\\-_' ']+)$"
             }
         },
         "com.amazonaws.route53resolver#ResolverQueryLogConfigPolicy": {
@@ -5056,7 +5056,7 @@
                 "CreatorRequestId": {
                     "target": "com.amazonaws.route53resolver#CreatorRequestId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that you specified when you created the Resolver rule. <code>CreatorRequestId</code> identifies the request and \n\t\t\tallows failed requests to be retried without the risk of executing the operation twice. </p>"
+                        "smithy.api#documentation": "<p>A unique string that you specified when you created the Resolver rule.\n\t\t\t\t<code>CreatorRequestId</code> identifies the request and allows failed requests to\n\t\t\tbe retried without the risk of running the operation twice. </p>"
                     }
                 },
                 "Arn": {
@@ -5116,7 +5116,7 @@
                 "ShareStatus": {
                     "target": "com.amazonaws.route53resolver#ShareStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the rules is shared and, if so, whether the current account is sharing the rule with another account, or \n\t\t\tanother account is sharing the rule with the current account.</p>"
+                        "smithy.api#documentation": "<p>Whether the rule is shared and, if so, whether the current account is sharing the rule with\n\t\t\tanother account, or another account is sharing the rule with the current account.</p>"
                     }
                 },
                 "CreationTime": {
@@ -5564,7 +5564,7 @@
                     "name": "route53resolver"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>When you create a VPC using Amazon VPC, you automatically get DNS resolution within the VPC from Route 53 Resolver. \n\t\t\tBy default, Resolver answers DNS queries for VPC domain names such as domain names for EC2 instances or ELB load balancers. \n\t\t\tResolver performs recursive lookups against public name servers for all other domain names.</p>\n\n\t\t       <p>You can also configure DNS resolution between your VPC and your network over a Direct Connect or VPN connection:</p>\n\n\t\t       <p>\n            <b>Forward DNS queries from resolvers on your network to Route 53 Resolver</b>\n         </p>\n\n\t\t       <p>DNS resolvers on your network can forward DNS queries to Resolver in a specified VPC. This allows your DNS resolvers \n\t\t\tto easily resolve domain names for AWS resources such as EC2 instances or records in a Route 53 private hosted zone. \n\t\t\tFor more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc\">How DNS Resolvers \n\t\t\ton Your Network Forward DNS Queries to Route 53 Resolver</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t\n\t\t       <p>\n            <b>Conditionally forward queries from a VPC to resolvers on your network</b>\n         </p>\n\n\t\t       <p>You can configure Resolver to forward queries that it receives from EC2 instances in your VPCs to DNS resolvers on your network. \n\t\t\tTo forward selected queries, you create Resolver rules that specify the domain names for the DNS queries that you want to forward \n\t\t\t(such as example.com), and the IP addresses of the DNS resolvers on your network that you want to forward the queries to. \n\t\t\tIf a query matches multiple rules (example.com, acme.example.com), Resolver chooses the rule with the most specific match \n\t\t\t(acme.example.com) and forwards the query to the IP addresses that you specified in that rule. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network\">How Route 53 Resolver \n\t\t\tForwards DNS Queries from Your VPCs to Your Network</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n\n\t\t       <p>Like Amazon VPC, Resolver is regional. In each region where you have VPCs, you can choose whether to forward queries from your VPCs \n\t\t\tto your network (outbound queries), from your network to your VPCs (inbound queries), or both.</p>",
+                "smithy.api#documentation": "<p>When you create a VPC using Amazon VPC, you automatically get DNS resolution within the VPC\n\t\t\tfrom Route 53 Resolver. By default, Resolver answers DNS queries for VPC domain names\n\t\t\tsuch as domain names for EC2 instances or Elastic Load Balancing load balancers.\n\t\t\tResolver performs recursive lookups against public name servers for all other domain\n\t\t\tnames.</p>\n\n\t\t       <p>You can also configure DNS resolution between your VPC and your network over a Direct Connect or VPN connection:</p>\n\n\t\t       <p>\n            <b>Forward DNS queries from resolvers on your network to Route 53 Resolver</b>\n         </p>\n\n\t\t       <p>DNS resolvers on your network can forward DNS queries to Resolver in a specified VPC. This allows your DNS resolvers \n\t\t\tto easily resolve domain names for AWS resources such as EC2 instances or records in a Route 53 private hosted zone. \n\t\t\tFor more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc\">How DNS Resolvers \n\t\t\ton Your Network Forward DNS Queries to Route 53 Resolver</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n\t\t\n\t\t       <p>\n            <b>Conditionally forward queries from a VPC to resolvers on your network</b>\n         </p>\n\n\t\t       <p>You can configure Resolver to forward queries that it receives from EC2 instances in your VPCs to DNS resolvers on your network. \n\t\t\tTo forward selected queries, you create Resolver rules that specify the domain names for the DNS queries that you want to forward \n\t\t\t(such as example.com), and the IP addresses of the DNS resolvers on your network that you want to forward the queries to. \n\t\t\tIf a query matches multiple rules (example.com, acme.example.com), Resolver chooses the rule with the most specific match \n\t\t\t(acme.example.com) and forwards the query to the IP addresses that you specified in that rule. For more information, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network\">How Route 53 Resolver \n\t\t\tForwards DNS Queries from Your VPCs to Your Network</a> in the <i>Amazon Route 53 Developer Guide</i>.</p>\n\n\t\t       <p>Like Amazon VPC, Resolver is Regional. In each Region where you have VPCs, you can choose\n\t\t\twhether to forward queries from your VPCs to your network (outbound queries), from your\n\t\t\tnetwork to your VPCs (inbound queries), or both.</p>",
                 "smithy.api#title": "Amazon Route 53 Resolver"
             }
         },
@@ -5929,7 +5929,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+                "smithy.api#documentation": "<p>Updates the configuration of the firewall behavior provided by DNS Firewall for a single\n\t\t\tVPC from Amazon Virtual Private Cloud (Amazon VPC). </p>"
             }
         },
         "com.amazonaws.route53resolver#UpdateFirewallConfigRequest": {
@@ -5938,7 +5938,7 @@
                 "ResourceId": {
                     "target": "com.amazonaws.route53resolver#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the Amazon virtual private cloud (VPC) that the configuration is for.</p>",
+                        "smithy.api#documentation": "<p>The ID of the VPC that the configuration is for.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5957,7 +5957,7 @@
                 "FirewallConfig": {
                     "target": "com.amazonaws.route53resolver#FirewallConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single Amazon virtual private cloud (VPC). </p>"
+                        "smithy.api#documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC. </p>"
                     }
                 }
             }
@@ -6029,7 +6029,7 @@
                 "Id": {
                     "target": "com.amazonaws.route53resolver#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Id of the firewall domain list that DNS Firewall just updated.</p>"
+                        "smithy.api#documentation": "<p>The ID of the firewall domain list that DNS Firewall just updated.</p>"
                     }
                 },
                 "Name": {
@@ -6130,7 +6130,7 @@
                     "target": "com.amazonaws.route53resolver#Priority",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall \n           filters VPC traffic starting from rule group with the lowest numeric priority setting. </p>\n         <p>You must specify a unique priority for each rule group that you associate with a single VPC. \n           To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You \n   can change the priority setting for a rule group association after you create it.</p>"
+                        "smithy.api#documentation": "<p>The setting that determines the processing order of the rule group among the rule\n\t\t\tgroups that you associate with the specified VPC. DNS Firewall filters VPC traffic\n\t\t\tstarting from the rule group with the lowest numeric priority setting. </p>\n         <p>You must specify a unique priority for each rule group that you associate with a single VPC. \n           To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You \n   can change the priority setting for a rule group association after you create it.</p>"
                     }
                 },
                 "MutationProtection": {

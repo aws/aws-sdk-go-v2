@@ -14,12 +14,6 @@
                 "smithy.api#httpError": 403
             }
         },
-        "com.amazonaws.braket#Arn": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "/////"
-            }
-        },
         "com.amazonaws.braket#Braket": {
             "type": "service",
             "version": "2019-09-01",
@@ -39,10 +33,7 @@
                     "target": "com.amazonaws.braket#DeviceResource"
                 },
                 {
-                    "target": "com.amazonaws.braket#HybridJobResource"
-                },
-                {
-                    "target": "com.amazonaws.braket#QuantumJobResource"
+                    "target": "com.amazonaws.braket#JobResource"
                 },
                 {
                     "target": "com.amazonaws.braket#QuantumTaskResource"
@@ -53,7 +44,8 @@
                     "sdkId": "Braket",
                     "arnNamespace": "braket",
                     "cloudFormationName": "Braket",
-                    "cloudTrailEventSource": "braket.amazonaws.com"
+                    "cloudTrailEventSource": "braket.amazonaws.com",
+                    "endpointPrefix": "braket"
                 },
                 "aws.auth#sigv4": {
                     "name": "braket"
@@ -248,7 +240,7 @@
                         "smithy.api#documentation": "<p>The parameters for the device to run the task on.</p>",
                         "smithy.api#length": {
                             "min": 1,
-                            "max": 2048
+                            "max": 48000
                         }
                     }
                 },
@@ -359,6 +351,19 @@
                 }
             }
         },
+        "com.amazonaws.braket#DeviceRetiredException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified device has been retired.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 410
+            }
+        },
         "com.amazonaws.braket#DeviceStatus": {
             "type": "string",
             "traits": {
@@ -370,6 +375,10 @@
                     {
                         "value": "OFFLINE",
                         "name": "OFFLINE"
+                    },
+                    {
+                        "value": "RETIRED",
+                        "name": "RETIRED"
                     }
                 ]
             }
@@ -449,6 +458,12 @@
             "errors": [
                 {
                     "target": "com.amazonaws.braket#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.braket#DeviceOfflineException"
+                },
+                {
+                    "target": "com.amazonaws.braket#DeviceRetiredException"
                 },
                 {
                     "target": "com.amazonaws.braket#InternalServiceException"
@@ -662,22 +677,6 @@
                 }
             }
         },
-        "com.amazonaws.braket#HybridJobResource": {
-            "type": "resource",
-            "identifiers": {
-                "hybridJobArn": {
-                    "target": "com.amazonaws.braket#Arn"
-                }
-            },
-            "traits": {
-                "aws.api#arn": {
-                    "template": "{hybridJobArn}",
-                    "absolute": true,
-                    "noAccount": false,
-                    "noRegion": false
-                }
-            }
-        },
         "com.amazonaws.braket#InternalServiceException": {
             "type": "structure",
             "members": {
@@ -689,6 +688,28 @@
                 "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception, or failure.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.braket#JobArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:braket:[a-z0-9\\-]*:[0-9]{12}:job/.*$"
+            }
+        },
+        "com.amazonaws.braket#JobResource": {
+            "type": "resource",
+            "identifiers": {
+                "jobArn": {
+                    "target": "com.amazonaws.braket#JobArn"
+                }
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{jobArn}",
+                    "absolute": true,
+                    "noAccount": false,
+                    "noRegion": false
+                }
             }
         },
         "com.amazonaws.braket#JsonValue": {
@@ -747,22 +768,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Displays the key, value pairs of tags associated with this resource.</p>"
                     }
-                }
-            }
-        },
-        "com.amazonaws.braket#QuantumJobResource": {
-            "type": "resource",
-            "identifiers": {
-                "quantumJobArn": {
-                    "target": "com.amazonaws.braket#Arn"
-                }
-            },
-            "traits": {
-                "aws.api#arn": {
-                    "template": "{quantumJobArn}",
-                    "absolute": true,
-                    "noAccount": false,
-                    "noRegion": false
                 }
             }
         },
@@ -1374,7 +1379,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.braket#TagKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>pecify the keys for the tags to remove from the resource.</p>",
+                        "smithy.api#documentation": "<p>Specify the keys for the tags to remove from the resource.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
                     }

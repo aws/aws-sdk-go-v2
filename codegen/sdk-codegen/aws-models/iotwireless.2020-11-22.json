@@ -109,19 +109,19 @@
         "com.amazonaws.iotwireless#AppEui": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{16}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{16}$"
             }
         },
         "com.amazonaws.iotwireless#AppKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{32}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.iotwireless#AppSKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{32}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.iotwireless#AppServerPrivateKey": {
@@ -131,7 +131,7 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[a-fA-F0-9]{64}",
+                "smithy.api#pattern": "^[a-fA-F0-9]{64}$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -456,7 +456,7 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[^-A-Za-z0-9+/=]|=[^=]|={3,}${1,4096}"
+                "smithy.api#pattern": "^[^-A-Za-z0-9+/=]|=[^=]|={3,}${1,4096}$"
             }
         },
         "com.amazonaws.iotwireless#CertificateValue": {
@@ -1574,7 +1574,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-_]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
             }
         },
         "com.amazonaws.iotwireless#Destinations": {
@@ -1624,13 +1624,13 @@
         "com.amazonaws.iotwireless#DevAddr": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{8}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{8}$"
             }
         },
         "com.amazonaws.iotwireless#DevEui": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{16}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{16}$"
             }
         },
         "com.amazonaws.iotwireless#DevStatusReqFreq": {
@@ -2061,7 +2061,7 @@
         "com.amazonaws.iotwireless#FNwkSIntKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{32}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.iotwireless#FPort": {
@@ -2093,7 +2093,7 @@
                     "min": 64,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-fA-F0-9]{64}",
+                "smithy.api#pattern": "^[a-fA-F0-9]{64}$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -2267,6 +2267,58 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#GetLogLevelsByResourceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetLogLevelsByResourceTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetLogLevelsByResourceTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/log-levels",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetLogLevelsByResourceTypesRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#GetLogLevelsByResourceTypesResponse": {
+            "type": "structure",
+            "members": {
+                "DefaultLogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel"
+                },
+                "WirelessGatewayLogOptions": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayLogOptionList"
+                },
+                "WirelessDeviceLogOptions": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceLogOptionList"
+                }
+            }
+        },
         "com.amazonaws.iotwireless#GetPartnerAccount": {
             "type": "operation",
             "input": {
@@ -2333,6 +2385,68 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether the partner account is linked to the AWS account.</p>"
                     }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetResourceLogLevel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#GetResourceLogLevelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#GetResourceLogLevelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/log-levels/{ResourceIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetResourceLogLevelRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.iotwireless#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#GetResourceLogLevelResponse": {
+            "type": "structure",
+            "members": {
+                "LogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel"
                 }
             }
         },
@@ -3175,7 +3289,7 @@
         "com.amazonaws.iotwireless#JoinEui": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{16}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{16}$"
             }
         },
         "com.amazonaws.iotwireless#JoinEuiFilters": {
@@ -4344,6 +4458,26 @@
                 "smithy.api#documentation": "<p>LoRaWANUpdateGatewayTaskEntry object.</p>"
             }
         },
+        "com.amazonaws.iotwireless#LogLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The log level for a log message.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "INFO",
+                        "name": "INFO"
+                    },
+                    {
+                        "value": "ERROR",
+                        "name": "ERROR"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotwireless#MacVersion": {
             "type": "string",
             "traits": {
@@ -4441,7 +4575,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>LoRaWAN network ID.</p>",
-                "smithy.api#pattern": "[a-fA-F0-9]{6}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{6}$"
             }
         },
         "com.amazonaws.iotwireless#NetIdFilters": {
@@ -4472,19 +4606,19 @@
         "com.amazonaws.iotwireless#NwkKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{32}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.iotwireless#NwkSEncKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{32}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.iotwireless#NwkSKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{32}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.iotwireless#OtaaV1_0_x": {
@@ -4617,6 +4751,70 @@
                 }
             }
         },
+        "com.amazonaws.iotwireless#PutResourceLogLevel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#PutResourceLogLevelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#PutResourceLogLevelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/log-levels/{ResourceIdentifier}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#PutResourceLogLevelRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.iotwireless#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#PutResourceLogLevelResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#RaAllowed": {
             "type": "boolean"
         },
@@ -4635,8 +4833,118 @@
         "com.amazonaws.iotwireless#ReportDevStatusMargin": {
             "type": "boolean"
         },
+        "com.amazonaws.iotwireless#ResetAllResourceLogLevels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ResetAllResourceLogLevelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ResetAllResourceLogLevelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/log-levels",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ResetAllResourceLogLevelsRequest": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#ResetAllResourceLogLevelsResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.iotwireless#ResetResourceLogLevel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#ResetResourceLogLevelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#ResetResourceLogLevelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/log-levels/{ResourceIdentifier}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ResetResourceLogLevelRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceIdentifier": {
+                    "target": "com.amazonaws.iotwireless#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceType": {
+                    "target": "com.amazonaws.iotwireless#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource, currently support WirelessDevice and WirelessGateway.</p>",
+                        "smithy.api#httpQuery": "resourceType",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#ResetResourceLogLevelResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#ResourceId": {
             "type": "string"
+        },
+        "com.amazonaws.iotwireless#ResourceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The identifier of the resource. For a Wireless Device, it is the wireless device id. For a wireless gateway, it is the wireless gateway id.</p>",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.iotwireless#ResourceNotFoundException": {
             "type": "structure",
@@ -4736,7 +5044,7 @@
         "com.amazonaws.iotwireless#SNwkSIntKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-fA-F0-9]{32}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{32}$"
             }
         },
         "com.amazonaws.iotwireless#SendDataToWirelessDevice": {
@@ -5593,6 +5901,61 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotwireless#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/log-levels",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypesRequest": {
+            "type": "structure",
+            "members": {
+                "DefaultLogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel"
+                },
+                "WirelessDeviceLogOptions": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceLogOptionList"
+                },
+                "WirelessGatewayLogOptions": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayLogOptionList"
+                }
+            }
+        },
+        "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypesResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotwireless#UpdatePartnerAccount": {
             "type": "operation",
             "input": {
@@ -5877,6 +6240,63 @@
         "com.amazonaws.iotwireless#WirelessDeviceArn": {
             "type": "string"
         },
+        "com.amazonaws.iotwireless#WirelessDeviceEvent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The event for a log message, if the log message is tied to a wireless device.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "Join",
+                        "name": "Join"
+                    },
+                    {
+                        "value": "Rejoin",
+                        "name": "Rejoin"
+                    },
+                    {
+                        "value": "Uplink_Data",
+                        "name": "Uplink_Data"
+                    },
+                    {
+                        "value": "Downlink_Data",
+                        "name": "Downlink_Data"
+                    },
+                    {
+                        "value": "Registration",
+                        "name": "Registration"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessDeviceEventLogOption": {
+            "type": "structure",
+            "members": {
+                "Event": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceEvent",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The log option for a wireless device event. Can be used to set log level for a specific wireless device event. For a LoRaWAN device, the possible events for a log messsage are: Join, Rejoin, Downlink_Data, Uplink_Data. For a Sidewalk device, the possible events for a log message are: Registration, Downlink_Data, Uplink_Data.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessDeviceEventLogOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#WirelessDeviceEventLogOption"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of wireless device event log options.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#WirelessDeviceId": {
             "type": "string",
             "traits": {
@@ -5903,6 +6323,39 @@
                         "name": "ThingName"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessDeviceLogOption": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The wireless device type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Events": {
+                    "target": "com.amazonaws.iotwireless#WirelessDeviceEventLogOptionList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The log option for wireless devices. Can be used to set log level for a specific type of wireless device.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessDeviceLogOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#WirelessDeviceLogOption"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of wireless device log options.</p>"
             }
         },
         "com.amazonaws.iotwireless#WirelessDeviceName": {
@@ -5994,6 +6447,51 @@
         "com.amazonaws.iotwireless#WirelessGatewayArn": {
             "type": "string"
         },
+        "com.amazonaws.iotwireless#WirelessGatewayEvent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The event for a log message, if the log message is tied to a wireless gateway.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CUPS_Request",
+                        "name": "CUPS_Request"
+                    },
+                    {
+                        "value": "Certificate",
+                        "name": "Certificate"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessGatewayEventLogOption": {
+            "type": "structure",
+            "members": {
+                "Event": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayEvent",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The log option for a wireless gateway event. Can be used to set log level for a specific wireless gateway event. For a LoRaWAN gateway, the possible events for a log message are: CUPS_Request, Certificate.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessGatewayEventLogOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#WirelessGatewayEventLogOption"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of wireless gateway event log options.</p>"
+            }
+        },
         "com.amazonaws.iotwireless#WirelessGatewayId": {
             "type": "string",
             "traits": {
@@ -6020,6 +6518,38 @@
                         "name": "ThingName"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessGatewayLogOption": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayType",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogLevel": {
+                    "target": "com.amazonaws.iotwireless#LogLevel",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "Events": {
+                    "target": "com.amazonaws.iotwireless#WirelessGatewayEventLogOptionList"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The log option for wireless gateways. Can be used to set log level for a specific type of wireless gateway.</p>"
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessGatewayLogOptionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotwireless#WirelessGatewayLogOption"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The list of wireless gateway log options.</p>"
             }
         },
         "com.amazonaws.iotwireless#WirelessGatewayName": {
@@ -6106,7 +6636,7 @@
                     "min": 0,
                     "max": 36
                 },
-                "smithy.api#pattern": "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+                "smithy.api#pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
             }
         },
         "com.amazonaws.iotwireless#WirelessGatewayTaskDefinitionList": {
@@ -6162,6 +6692,18 @@
                     {
                         "value": "FAILED",
                         "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotwireless#WirelessGatewayType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The wireless gateway type.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "LoRaWAN",
+                        "name": "LoRaWAN"
                     }
                 ]
             }
@@ -6263,7 +6805,13 @@
                     "target": "com.amazonaws.iotwireless#GetDeviceProfile"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#GetLogLevelsByResourceTypes"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#GetPartnerAccount"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#GetResourceLogLevel"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#GetServiceEndpoint"
@@ -6320,6 +6868,15 @@
                     "target": "com.amazonaws.iotwireless#ListWirelessGatewayTaskDefinitions"
                 },
                 {
+                    "target": "com.amazonaws.iotwireless#PutResourceLogLevel"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResetAllResourceLogLevels"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#ResetResourceLogLevel"
+                },
+                {
                     "target": "com.amazonaws.iotwireless#SendDataToWirelessDevice"
                 },
                 {
@@ -6333,6 +6890,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdateDestination"
+                },
+                {
+                    "target": "com.amazonaws.iotwireless#UpdateLogLevelsByResourceTypes"
                 },
                 {
                     "target": "com.amazonaws.iotwireless#UpdatePartnerAccount"

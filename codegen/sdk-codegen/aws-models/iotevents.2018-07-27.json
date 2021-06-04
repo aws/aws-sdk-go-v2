@@ -29,6 +29,27 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.iotevents#AcknowledgeFlow": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.iotevents#AcknowledgeFlowEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value must be <code>TRUE</code> or <code>FALSE</code>. If <code>TRUE</code>, you\n      receive a notification when the alarm state changes. You must choose to acknowledge the\n      notification before the alarm state can return to <code>NORMAL</code>. If <code>FALSE</code>,\n      you won't receive notifications. The alarm automatically changes to the <code>NORMAL</code>\n      state when the input property value returns to the specified range.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies whether to get notified for alarm state changes.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AcknowledgeFlowEnabled": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.iotevents#Action": {
             "type": "structure",
             "members": {
@@ -121,6 +142,257 @@
                 "target": "com.amazonaws.iotevents#Action"
             }
         },
+        "com.amazonaws.iotevents#AlarmAction": {
+            "type": "structure",
+            "members": {
+                "sns": {
+                    "target": "com.amazonaws.iotevents#SNSTopicPublishAction"
+                },
+                "iotTopicPublish": {
+                    "target": "com.amazonaws.iotevents#IotTopicPublishAction"
+                },
+                "lambda": {
+                    "target": "com.amazonaws.iotevents#LambdaAction"
+                },
+                "iotEvents": {
+                    "target": "com.amazonaws.iotevents#IotEventsAction"
+                },
+                "sqs": {
+                    "target": "com.amazonaws.iotevents#SqsAction"
+                },
+                "firehose": {
+                    "target": "com.amazonaws.iotevents#FirehoseAction"
+                },
+                "dynamoDB": {
+                    "target": "com.amazonaws.iotevents#DynamoDBAction"
+                },
+                "dynamoDBv2": {
+                    "target": "com.amazonaws.iotevents#DynamoDBv2Action"
+                },
+                "iotSiteWise": {
+                    "target": "com.amazonaws.iotevents#IotSiteWiseAction"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies one of the following actions to receive notifications when the alarm state\n      changes.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#AlarmAction"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmCapabilities": {
+            "type": "structure",
+            "members": {
+                "initializationConfiguration": {
+                    "target": "com.amazonaws.iotevents#InitializationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the default alarm state. \nThe configuration applies to all alarms that were created based on this alarm model.</p>"
+                    }
+                },
+                "acknowledgeFlow": {
+                    "target": "com.amazonaws.iotevents#AcknowledgeFlow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether to get notified for alarm state changes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmEventActions": {
+            "type": "structure",
+            "members": {
+                "alarmActions": {
+                    "target": "com.amazonaws.iotevents#AlarmActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies one or more supported actions to receive notifications when the alarm state\n      changes.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about one or more alarm actions.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmModelArn": {
+            "type": "string"
+        },
+        "com.amazonaws.iotevents#AlarmModelDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iotevents#AlarmModelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmModelSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#AlarmModelSummary"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmModelSummary": {
+            "type": "structure",
+            "members": {
+                "creationTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+                    }
+                },
+                "alarmModelDescription": {
+                    "target": "com.amazonaws.iotevents#AlarmModelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the alarm model.</p>"
+                    }
+                },
+                "alarmModelName": {
+                    "target": "com.amazonaws.iotevents#AlarmModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alarm model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of an alarm model.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmModelVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.iotevents#AlarmModelVersionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "ACTIVATING",
+                        "name": "ACTIVATING"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.iotevents#AlarmModelVersionSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#AlarmModelVersionSummary"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmModelVersionSummary": {
+            "type": "structure",
+            "members": {
+                "alarmModelName": {
+                    "target": "com.amazonaws.iotevents#AlarmModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alarm model.</p>"
+                    }
+                },
+                "alarmModelArn": {
+                    "target": "com.amazonaws.iotevents#AlarmModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "alarmModelVersion": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the alarm model.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iotevents#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "creationTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+                    }
+                },
+                "lastUpdateTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was last updated, in the Unix epoch format.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the alarm model. The status can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. \n        Activating an alarm model can take up to a few minutes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. \n\t  Check your alarm model information and update the alarm model.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information \n        and try again.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.iotevents#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Contains information about the status of the alarm model version.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of an alarm model version.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmNotification": {
+            "type": "structure",
+            "members": {
+                "notificationActions": {
+                    "target": "com.amazonaws.iotevents#NotificationActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the notification settings of an alarm model. \nThe settings apply to all alarms that were created based on this alarm model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about one or more notification actions.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#AlarmRule": {
+            "type": "structure",
+            "members": {
+                "simpleRule": {
+                    "target": "com.amazonaws.iotevents#SimpleRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A rule that compares an input property value to a threshold value with a comparison operator.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines when your alarm is invoked.</p>"
+            }
+        },
         "com.amazonaws.iotevents#AmazonResourceName": {
             "type": "string",
             "traits": {
@@ -142,13 +414,13 @@
                 "type": {
                     "target": "com.amazonaws.iotevents#AnalysisType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the analysis result. Analyses fall into the following types based on the validators used to generate the analysis result:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>supported-actions</code> - You must specify AWS IoT Events supported actions that work with other AWS services in a supported AWS Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-limits</code> - Resources or operations can't exceed service limits. Update your detector model or request a limit adjust.</p>\n            </li>\n            <li>\n               <p>\n                  <code>structure</code> - The detector model must follow a structure that AWS IoT Events supports. </p>\n            </li>\n            <li>\n               <p>\n                  <code>expression-syntax</code> - Your expression must follow the required syntax.</p>\n            </li>\n            <li>\n               <p>\n                  <code>data-type</code> - Data types referenced in the detector model must be compatible.</p>\n            </li>\n            <li>\n               <p>\n                  <code>referenced-data</code> - You must define the data referenced in your detector model before you can use the data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>referenced-resource</code> - Resources that the detector model uses must be available.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> \n      in the <i>AWS IoT Events Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The type of the analysis result. Analyses fall into the following types based on the\n      validators used to generate the analysis result:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>supported-actions</code> - You must specify AWS IoT Events supported actions that work\n          with other AWS services in a supported AWS Region.</p>\n            </li>\n            <li>\n               <p>\n                  <code>service-limits</code> - Resources or API operations can't exceed service\n          quotas (also known as limits). Update your detector model or request a quota\n          increase.</p>\n            </li>\n            <li>\n               <p>\n                  <code>structure</code> - The detector model must follow a structure that AWS IoT Events\n          supports. </p>\n            </li>\n            <li>\n               <p>\n                  <code>expression-syntax</code> - Your expression must follow the required\n          syntax.</p>\n            </li>\n            <li>\n               <p>\n                  <code>data-type</code> - Data types referenced in the detector model must be\n          compatible.</p>\n            </li>\n            <li>\n               <p>\n                  <code>referenced-data</code> - You must define the data referenced in your detector\n          model before you can use the data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>referenced-resource</code> - Resources that the detector model uses must be\n          available.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model\n        analyses</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
                     }
                 },
                 "level": {
                     "target": "com.amazonaws.iotevents#AnalysisResultLevel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The severity level of the analysis result. Analysis results fall into three general categories based on the severity level:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INFO</code> - \n          An information result informs you about a significant field \n          in your detector model. This type of result usually doesn't require immediate action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WARNING</code> - \n          A warning result draws special attention to fields \n          that are potentially damaging to your detector model. \n          We recommend that you review warnings and take necessary actions \n          before you use your detetor model in production environments. \n          Otherwise, the detector model may not fully function as expected.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - \n          An error result notifies you about a problem found in your detector model. \n          You must fix all errors before you can publish your detector model.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The severity level of the analysis result. Based on the severity level, analysis results\n      fall into three general categories:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>INFO</code> - An information result tells you about a significant field in your\n          detector model. This type of result usually doesn't require immediate action.</p>\n            </li>\n            <li>\n               <p>\n                  <code>WARNING</code> - A warning result draws special attention to fields that might cause issues for your detector model. \n          We recommend that you review warnings and take necessary actions\n          before you use your detector model in production environments. Otherwise, the detector\n          model might not work as expected.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ERROR</code> - An error result notifies you about a problem found in your\n          detector model. You must fix all errors before you can publish your detector model.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "message": {
@@ -160,7 +432,7 @@
                 "locations": {
                     "target": "com.amazonaws.iotevents#AnalysisResultLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains one or more locations that you can use to locate the fields in your detector model that the analysis result references.</p>"
+                        "smithy.api#documentation": "<p>Contains one or more locations that you can use to locate the fields in your detector\n      model that the analysis result references.</p>"
                     }
                 }
             },
@@ -193,12 +465,12 @@
                 "path": {
                     "target": "com.amazonaws.iotevents#AnalysisResultLocationPath",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <a href=\"https://github.com/json-path/JsonPath\">JsonPath</a> expression \n      that identifies the error field in your detector model.</p>"
+                        "smithy.api#documentation": "<p>A <a href=\"https://github.com/json-path/JsonPath\">JsonPath</a> expression that\n      identifies the error field in your detector model.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information that you can use to locate the field in your detector model that the analysis result references.</p>"
+                "smithy.api#documentation": "<p>Contains information that you can use to locate the field in your detector model that the\n      analysis result references.</p>"
             }
         },
         "com.amazonaws.iotevents#AnalysisResultLocationPath": {
@@ -239,6 +511,9 @@
             "type": "string"
         },
         "com.amazonaws.iotevents#AssetId": {
+            "type": "string"
+        },
+        "com.amazonaws.iotevents#AssetModelId": {
             "type": "string"
         },
         "com.amazonaws.iotevents#AssetPropertyAlias": {
@@ -298,8 +573,7 @@
                 "value": {
                     "target": "com.amazonaws.iotevents#AssetPropertyVariant",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value to send to an asset property.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The value to send to an asset property.</p>"
                     }
                 },
                 "timestamp": {
@@ -403,6 +677,37 @@
                 "smithy.api#documentation": "<p>Information needed to clear the timer.</p>"
             }
         },
+        "com.amazonaws.iotevents#ComparisonOperator": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "GREATER",
+                        "name": "GREATER"
+                    },
+                    {
+                        "value": "GREATER_OR_EQUAL",
+                        "name": "GREATER_OR_EQUAL"
+                    },
+                    {
+                        "value": "LESS",
+                        "name": "LESS"
+                    },
+                    {
+                        "value": "LESS_OR_EQUAL",
+                        "name": "LESS_OR_EQUAL"
+                    },
+                    {
+                        "value": "EQUAL",
+                        "name": "EQUAL"
+                    },
+                    {
+                        "value": "NOT_EQUAL",
+                        "name": "NOT_EQUAL"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.iotevents#Condition": {
             "type": "string",
             "traits": {
@@ -417,6 +722,149 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iotevents#CreateAlarmModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#CreateAlarmModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#CreateAlarmModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an alarm model to monitor an AWS IoT Events input attribute. You can use the alarm to get\n      notified when the value is outside a specified range. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/create-alarms.html\">Create an\n        alarm model</a> in the <i>AWS IoT Events Developer Guide</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/alarm-models",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#CreateAlarmModelRequest": {
+            "type": "structure",
+            "members": {
+                "alarmModelName": {
+                    "target": "com.amazonaws.iotevents#AlarmModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique name that helps you identify the alarm model. You can't change this name after\n      you create the alarm model.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmModelDescription": {
+                    "target": "com.amazonaws.iotevents#AlarmModelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description that tells you what the alarm model detects.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iotevents#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.iotevents#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs that contain metadata for the alarm model. The tags help you\n      manage the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html\">Tagging your AWS IoT Events\n        resources</a> in the <i>AWS IoT Events Developer Guide</i>.</p>\n         <p>You can create up to 50 tags for one alarm model.</p>"
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.iotevents#AttributeJsonPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An input attribute used as a key to create an alarm. \nAWS IoT Events routes <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html\">inputs</a> \nassociated with this key to the alarm.</p>"
+                    }
+                },
+                "severity": {
+                    "target": "com.amazonaws.iotevents#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A non-negative integer that reflects the severity level of the alarm.</p>"
+                    }
+                },
+                "alarmRule": {
+                    "target": "com.amazonaws.iotevents#AlarmRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines when your alarm is invoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmNotification": {
+                    "target": "com.amazonaws.iotevents#AlarmNotification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about one or more notification actions.</p>"
+                    }
+                },
+                "alarmEventActions": {
+                    "target": "com.amazonaws.iotevents#AlarmEventActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about one or more alarm actions.</p>"
+                    }
+                },
+                "alarmCapabilities": {
+                    "target": "com.amazonaws.iotevents#AlarmCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#CreateAlarmModelResponse": {
+            "type": "structure",
+            "members": {
+                "creationTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+                    }
+                },
+                "alarmModelArn": {
+                    "target": "com.amazonaws.iotevents#AlarmModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "alarmModelVersion": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the alarm model.</p>"
+                    }
+                },
+                "lastUpdateTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was last updated, in the Unix epoch format.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the alarm model. The status can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. \n        Activating an alarm model can take up to a few minutes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. \n\t  Check your alarm model information and update the alarm model.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information \n        and try again.</p>\n            </li>\n         </ul>"
+                    }
                 }
             }
         },
@@ -597,6 +1045,60 @@
                 }
             }
         },
+        "com.amazonaws.iotevents#DeleteAlarmModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#DeleteAlarmModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#DeleteAlarmModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an alarm model. Any alarm instances that were created based on this alarm model\n      are also deleted. This action can't be undone.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/alarm-models/{alarmModelName}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.iotevents#DeleteAlarmModelRequest": {
+            "type": "structure",
+            "members": {
+                "alarmModelName": {
+                    "target": "com.amazonaws.iotevents#AlarmModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alarm model.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#DeleteAlarmModelResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.iotevents#DeleteDetectorModel": {
             "type": "operation",
             "input": {
@@ -708,6 +1210,155 @@
         "com.amazonaws.iotevents#DeliveryStreamName": {
             "type": "string"
         },
+        "com.amazonaws.iotevents#DescribeAlarmModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#DescribeAlarmModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#DescribeAlarmModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about an alarm model. If you don't specify a value for the\n        <code>alarmModelVersion</code> parameter, the latest version is returned.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/alarm-models/{alarmModelName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#DescribeAlarmModelRequest": {
+            "type": "structure",
+            "members": {
+                "alarmModelName": {
+                    "target": "com.amazonaws.iotevents#AlarmModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alarm model.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmModelVersion": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the alarm model.</p>",
+                        "smithy.api#httpQuery": "version"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#DescribeAlarmModelResponse": {
+            "type": "structure",
+            "members": {
+                "creationTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+                    }
+                },
+                "alarmModelArn": {
+                    "target": "com.amazonaws.iotevents#AlarmModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "alarmModelVersion": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the alarm model.</p>"
+                    }
+                },
+                "lastUpdateTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was last updated, in the Unix epoch format.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the alarm model. The status can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. \n        Activating an alarm model can take up to a few minutes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. \n\t  Check your alarm model information and update the alarm model.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information \n        and try again.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "statusMessage": {
+                    "target": "com.amazonaws.iotevents#StatusMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Contains information about the status of the alarm model.\n    </p>"
+                    }
+                },
+                "alarmModelName": {
+                    "target": "com.amazonaws.iotevents#AlarmModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alarm model.</p>"
+                    }
+                },
+                "alarmModelDescription": {
+                    "target": "com.amazonaws.iotevents#AlarmModelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the alarm model.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iotevents#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "key": {
+                    "target": "com.amazonaws.iotevents#AttributeJsonPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An input attribute used as a key to create an alarm. \nAWS IoT Events routes <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html\">inputs</a> \nassociated with this key to the alarm.</p>"
+                    }
+                },
+                "severity": {
+                    "target": "com.amazonaws.iotevents#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A non-negative integer that reflects the severity level of the alarm.</p>"
+                    }
+                },
+                "alarmRule": {
+                    "target": "com.amazonaws.iotevents#AlarmRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines when your alarm is invoked.</p>"
+                    }
+                },
+                "alarmNotification": {
+                    "target": "com.amazonaws.iotevents#AlarmNotification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about one or more notification actions.</p>"
+                    }
+                },
+                "alarmEventActions": {
+                    "target": "com.amazonaws.iotevents#AlarmEventActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about one or more alarm actions.</p>"
+                    }
+                },
+                "alarmCapabilities": {
+                    "target": "com.amazonaws.iotevents#AlarmCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotevents#DescribeDetectorModel": {
             "type": "operation",
             "input": {
@@ -768,7 +1419,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves execution information about a detector model analysis</p>",
+                "smithy.api#documentation": "<p>Retrieves runtime information about a detector model analysis.</p>\n         <note>\n            <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/analysis/detector-models/{analysisId}",
@@ -795,7 +1446,7 @@
                 "status": {
                     "target": "com.amazonaws.iotevents#AnalysisStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the analysis activity. The status can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take several minutes to complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model .</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - AWS IoT Events couldn't analyze your detector model. Try again later.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the analysis activity. The status can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RUNNING</code> - AWS IoT Events is analyzing your detector model. This process can take\n          several minutes to complete.</p>\n            </li>\n            <li>\n               <p>\n                  <code>COMPLETE</code> - AWS IoT Events finished analyzing your detector model.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - AWS IoT Events couldn't analyze your detector model. Try again\n          later.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -1243,6 +1894,12 @@
                 "smithy.api#documentation": "<p>Information about the detector model version.</p>"
             }
         },
+        "com.amazonaws.iotevents#DisabledOnInitialization": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.iotevents#DynamoDBAction": {
             "type": "structure",
             "members": {
@@ -1344,6 +2001,82 @@
         "com.amazonaws.iotevents#DynamoTableName": {
             "type": "string"
         },
+        "com.amazonaws.iotevents#EmailConfiguration": {
+            "type": "structure",
+            "members": {
+                "from": {
+                    "target": "com.amazonaws.iotevents#FromEmail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The email address that sends emails.</p>\n         <important>\n            <p>If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html\">verify\n          the email address that sends emails in Amazon SES</a>.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "content": {
+                    "target": "com.amazonaws.iotevents#EmailContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the subject and message of an email.</p>"
+                    }
+                },
+                "recipients": {
+                    "target": "com.amazonaws.iotevents#EmailRecipients",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the information of one or more recipients who receive the emails.</p>\n         <important>\n            <p>You must <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html\">add the users that receive emails to your AWS SSO store</a>.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration information of email notifications.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#EmailConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#EmailConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iotevents#EmailContent": {
+            "type": "structure",
+            "members": {
+                "subject": {
+                    "target": "com.amazonaws.iotevents#EmailSubject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subject of the email.</p>"
+                    }
+                },
+                "additionalMessage": {
+                    "target": "com.amazonaws.iotevents#NotificationAdditionalMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message that you want to send. The message can be up to 200 characters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the subject and message of an email.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#EmailRecipients": {
+            "type": "structure",
+            "members": {
+                "to": {
+                    "target": "com.amazonaws.iotevents#RecipientDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies one or more recipients who receive the email.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the information of one or more recipients who receive the emails.</p>\n         <important>\n            <p>You must <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html\">add the users that receive emails to your AWS SSO store</a>.</p>\n         </important>"
+            }
+        },
+        "com.amazonaws.iotevents#EmailSubject": {
+            "type": "string"
+        },
         "com.amazonaws.iotevents#EvaluationMethod": {
             "type": "string",
             "traits": {
@@ -1431,8 +2164,11 @@
         "com.amazonaws.iotevents#FirehoseSeparator": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "([\\n\\t])|(\\r\\n)|(,)"
+                "smithy.api#pattern": "^([\\n\\t])|(\\r\\n)|(,)$"
             }
+        },
+        "com.amazonaws.iotevents#FromEmail": {
+            "type": "string"
         },
         "com.amazonaws.iotevents#GetDetectorModelAnalysisResults": {
             "type": "operation",
@@ -1460,7 +2196,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves one or more analysis results of the detector model.</p>",
+                "smithy.api#documentation": "<p>Retrieves one or more analysis results of the detector model.</p>\n         <note>\n            <p>After AWS IoT Events starts analyzing your detector model, you have up to 24 hours to retrieve the analysis results.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/analysis/detector-models/{analysisId}/results",
@@ -1510,6 +2246,24 @@
                         "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.iotevents#IdentityStoreId": {
+            "type": "string"
+        },
+        "com.amazonaws.iotevents#InitializationConfiguration": {
+            "type": "structure",
+            "members": {
+                "disabledOnInitialization": {
+                    "target": "com.amazonaws.iotevents#DisabledOnInitialization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value must be <code>TRUE</code> or <code>FALSE</code>. If <code>FALSE</code>, all\n      alarm instances created based on the alarm model are activated. The default value is\n        <code>TRUE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the default alarm state. \nThe configuration applies to all alarms that were created based on this alarm model.</p>"
             }
         },
         "com.amazonaws.iotevents#Input": {
@@ -1608,6 +2362,26 @@
                 }
             }
         },
+        "com.amazonaws.iotevents#InputIdentifier": {
+            "type": "structure",
+            "members": {
+                "iotEventsInputIdentifier": {
+                    "target": "com.amazonaws.iotevents#IotEventsInputIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The identifier of the input routed to AWS IoT Events.\n    </p>"
+                    }
+                },
+                "iotSiteWiseInputIdentifier": {
+                    "target": "com.amazonaws.iotevents#IotSiteWiseInputIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The identifer of the input routed from AWS IoT SiteWise.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The identifer of the input.\n    </p>"
+            }
+        },
         "com.amazonaws.iotevents#InputName": {
             "type": "string",
             "traits": {
@@ -1616,6 +2390,15 @@
                     "max": 128
                 },
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+            }
+        },
+        "com.amazonaws.iotevents#InputProperty": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
             }
         },
         "com.amazonaws.iotevents#InputStatus": {
@@ -1728,16 +2511,25 @@
             "version": "2018-07-27",
             "operations": [
                 {
+                    "target": "com.amazonaws.iotevents#CreateAlarmModel"
+                },
+                {
                     "target": "com.amazonaws.iotevents#CreateDetectorModel"
                 },
                 {
                     "target": "com.amazonaws.iotevents#CreateInput"
                 },
                 {
+                    "target": "com.amazonaws.iotevents#DeleteAlarmModel"
+                },
+                {
                     "target": "com.amazonaws.iotevents#DeleteDetectorModel"
                 },
                 {
                     "target": "com.amazonaws.iotevents#DeleteInput"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#DescribeAlarmModel"
                 },
                 {
                     "target": "com.amazonaws.iotevents#DescribeDetectorModel"
@@ -1755,10 +2547,19 @@
                     "target": "com.amazonaws.iotevents#GetDetectorModelAnalysisResults"
                 },
                 {
+                    "target": "com.amazonaws.iotevents#ListAlarmModels"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ListAlarmModelVersions"
+                },
+                {
                     "target": "com.amazonaws.iotevents#ListDetectorModels"
                 },
                 {
                     "target": "com.amazonaws.iotevents#ListDetectorModelVersions"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ListInputRoutings"
                 },
                 {
                     "target": "com.amazonaws.iotevents#ListInputs"
@@ -1777,6 +2578,9 @@
                 },
                 {
                     "target": "com.amazonaws.iotevents#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#UpdateAlarmModel"
                 },
                 {
                     "target": "com.amazonaws.iotevents#UpdateDetectorModel"
@@ -1822,6 +2626,21 @@
                 "smithy.api#documentation": "<p>Sends an AWS IoT Events input, passing in information about the detector model instance and the\n      event that triggered the action.</p>"
             }
         },
+        "com.amazonaws.iotevents#IotEventsInputIdentifier": {
+            "type": "structure",
+            "members": {
+                "inputName": {
+                    "target": "com.amazonaws.iotevents#InputName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the input routed to AWS IoT Events.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The identifier of the input routed to AWS IoT Events.\n    </p>"
+            }
+        },
         "com.amazonaws.iotevents#IotSiteWiseAction": {
             "type": "structure",
             "members": {
@@ -1852,13 +2671,48 @@
                 "propertyValue": {
                     "target": "com.amazonaws.iotevents#AssetPropertyValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value to send to the asset property. This value contains timestamp, quality, and value\n      (TQV) information. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The value to send to the asset property. This value contains timestamp, quality, and value\n      (TQV) information. </p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Sends information about the detector model instance and the event that triggered the\n      action to a specified asset property in AWS IoT SiteWise.</p>\n         <p>You must use expressions for all parameters in <code>IotSiteWiseAction</code>. The\n      expressions accept literals, operators, functions, references, and substitutions\n      templates.</p>\n         <p class=\"title\">\n            <b>Examples</b>\n         </p>\n         <ul>\n            <li>\n               <p>For literal values, the expressions must contain single quotes. For example, the value\n          for the <code>propertyAlias</code> parameter can be\n            <code>'/company/windfarm/3/turbine/7/temperature'</code>.</p>\n            </li>\n            <li>\n               <p>For references, you must specify either variables or input values. For example, the\n          value for the <code>assetId</code> parameter can be\n            <code>$input.TurbineInput.assetId1</code>.</p>\n            </li>\n            <li>\n               <p>For a substitution template, you must use <code>${}</code>, and the template must be\n          in single quotes. A substitution template can also contain a combination of literals,\n          operators, functions, references, and substitution templates.</p>\n               <p>In the following example, the value for the <code>propertyAlias</code> parameter uses\n          a substitution template. </p>\n               <p>\n                  <code>'company/windfarm/${$input.TemperatureInput.sensorData.windfarmID}/turbine/\n            ${$input.TemperatureInput.sensorData.turbineID}/temperature'</code>\n               </p>\n            </li>\n         </ul>\n         <p>You must specify either <code>propertyAlias</code> or both <code>assetId</code> and\n        <code>propertyId</code> to identify the target asset property in AWS IoT SiteWise.</p>\n         <p>For more information, \n        see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-expressions.html\">Expressions</a> \n        in the <i>AWS IoT Events Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#IotSiteWiseAssetModelPropertyIdentifier": {
+            "type": "structure",
+            "members": {
+                "assetModelId": {
+                    "target": "com.amazonaws.iotevents#AssetModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the AWS IoT SiteWise asset model. \n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "propertyId": {
+                    "target": "com.amazonaws.iotevents#AssetPropertyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the AWS IoT SiteWise asset property.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The asset model property identifer of the input routed from AWS IoT SiteWise.\n    </p>"
+            }
+        },
+        "com.amazonaws.iotevents#IotSiteWiseInputIdentifier": {
+            "type": "structure",
+            "members": {
+                "iotSiteWiseAssetModelPropertyIdentifier": {
+                    "target": "com.amazonaws.iotevents#IotSiteWiseAssetModelPropertyIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The identifier of the AWS IoT SiteWise asset model property.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      The identifer of the input routed from AWS IoT SiteWise.\n    </p>"
             }
         },
         "com.amazonaws.iotevents#IotTopicPublishAction": {
@@ -1927,6 +2781,151 @@
                 "smithy.api#documentation": "<p>A limit was exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 410
+            }
+        },
+        "com.amazonaws.iotevents#ListAlarmModelVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#ListAlarmModelVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#ListAlarmModelVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the versions of an alarm model. The operation returns only the metadata\n      associated with each alarm model version.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/alarm-models/{alarmModelName}/versions",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#ListAlarmModelVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "alarmModelName": {
+                    "target": "com.amazonaws.iotevents#AlarmModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alarm model.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotevents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotevents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#ListAlarmModelVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "alarmModelVersionSummaries": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersionSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that summarizes each alarm model version.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotevents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#ListAlarmModels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#ListAlarmModelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#ListAlarmModelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the alarm models that you created. The operation returns only the metadata\n      associated with each alarm model.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/alarm-models",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#ListAlarmModelsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.iotevents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotevents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#ListAlarmModelsResponse": {
+            "type": "structure",
+            "members": {
+                "alarmModelSummaries": {
+                    "target": "com.amazonaws.iotevents#AlarmModelSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list that summarizes each alarm model.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotevents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.iotevents#ListDetectorModelVersions": {
@@ -2070,6 +3069,81 @@
                     "target": "com.amazonaws.iotevents#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#ListInputRoutings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#ListInputRoutingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#ListInputRoutingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Lists one or more input routings. \n    </p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/input-routings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#ListInputRoutingsRequest": {
+            "type": "structure",
+            "members": {
+                "inputIdentifier": {
+                    "target": "com.amazonaws.iotevents#InputIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The identifer of the routed input.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iotevents#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of results to be returned per request.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotevents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token that you can use to return the next set of results.\n    </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#ListInputRoutingsResponse": {
+            "type": "structure",
+            "members": {
+                "routedResources": {
+                    "target": "com.amazonaws.iotevents#RoutedResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Summary information about the routed resources.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iotevents#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token that you can use to return the next set of results, \nor <code>null</code> if there are no more results.\n    </p>"
                     }
                 }
             }
@@ -2284,6 +3358,58 @@
         "com.amazonaws.iotevents#NextToken": {
             "type": "string"
         },
+        "com.amazonaws.iotevents#NotificationAction": {
+            "type": "structure",
+            "members": {
+                "action": {
+                    "target": "com.amazonaws.iotevents#NotificationTargetActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies an AWS Lambda function to manage alarm notifications. \nYou can create one or use the <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html\">AWS Lambda function provided by AWS IoT Events</a>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "smsConfigurations": {
+                    "target": "com.amazonaws.iotevents#SMSConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of SMS notifications.</p>"
+                    }
+                },
+                "emailConfigurations": {
+                    "target": "com.amazonaws.iotevents#EmailConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of email notifications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the notification settings of an alarm model. \nThe settings apply to all alarms that were created based on this alarm model.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#NotificationActions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#NotificationAction"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iotevents#NotificationAdditionalMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.iotevents#NotificationTargetActions": {
+            "type": "structure",
+            "members": {
+                "lambdaAction": {
+                    "target": "com.amazonaws.iotevents#LambdaAction"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an AWS Lambda function to manage alarm notifications. \nYou can create one or use the <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html\">AWS Lambda function provided by AWS IoT Events</a>.</p>"
+            }
+        },
         "com.amazonaws.iotevents#OnEnterLifecycle": {
             "type": "structure",
             "members": {
@@ -2418,6 +3544,31 @@
         "com.amazonaws.iotevents#QueueUrl": {
             "type": "string"
         },
+        "com.amazonaws.iotevents#RecipientDetail": {
+            "type": "structure",
+            "members": {
+                "ssoIdentity": {
+                    "target": "com.amazonaws.iotevents#SSOIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Single Sign-On (AWS SSO) authentication information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information that identifies the recipient.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#RecipientDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#RecipientDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.iotevents#ResetTimerAction": {
             "type": "structure",
             "members": {
@@ -2477,6 +3628,9 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.iotevents#ResourceName": {
+            "type": "string"
+        },
         "com.amazonaws.iotevents#ResourceNotFoundException": {
             "type": "structure",
             "members": {
@@ -2492,6 +3646,73 @@
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
+        },
+        "com.amazonaws.iotevents#RoutedResource": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.iotevents#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The name of the routed resource.  \n    </p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.iotevents#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ARN of the routed resource. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Contains information about the routed resource.\n    </p>"
+            }
+        },
+        "com.amazonaws.iotevents#RoutedResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#RoutedResource"
+            }
+        },
+        "com.amazonaws.iotevents#SMSConfiguration": {
+            "type": "structure",
+            "members": {
+                "senderId": {
+                    "target": "com.amazonaws.iotevents#SMSSenderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sender ID.</p>"
+                    }
+                },
+                "additionalMessage": {
+                    "target": "com.amazonaws.iotevents#NotificationAdditionalMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message that you want to send. The message can be up to 200 characters.</p>"
+                    }
+                },
+                "recipients": {
+                    "target": "com.amazonaws.iotevents#RecipientDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies one or more recipients who receive the message.</p>\n         <important>\n            <p>You must <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/addusers.html\">add the users that receive SMS messages to your AWS SSO store</a>.</p>\n         </important>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the configuration information of SMS notifications.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#SMSConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iotevents#SMSConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.iotevents#SMSSenderId": {
+            "type": "string"
         },
         "com.amazonaws.iotevents#SNSTopicPublishAction": {
             "type": "structure",
@@ -2513,6 +3734,30 @@
             "traits": {
                 "smithy.api#documentation": "<p>Information required to publish the Amazon SNS message.</p>"
             }
+        },
+        "com.amazonaws.iotevents#SSOIdentity": {
+            "type": "structure",
+            "members": {
+                "identityStoreId": {
+                    "target": "com.amazonaws.iotevents#IdentityStoreId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the AWS SSO identity store.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "userId": {
+                    "target": "com.amazonaws.iotevents#SSOReferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about your identity source in AWS Single Sign-On. For more information, see\n      the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">AWS Single Sign-On\n        User Guide</a>.</p>"
+            }
+        },
+        "com.amazonaws.iotevents#SSOReferenceId": {
+            "type": "string"
         },
         "com.amazonaws.iotevents#Seconds": {
             "type": "integer",
@@ -2592,6 +3837,45 @@
                 "smithy.api#documentation": "<p>Information about the variable and its new value.</p>"
             }
         },
+        "com.amazonaws.iotevents#Severity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 2147483647
+                }
+            }
+        },
+        "com.amazonaws.iotevents#SimpleRule": {
+            "type": "structure",
+            "members": {
+                "inputProperty": {
+                    "target": "com.amazonaws.iotevents#InputProperty",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value on the left side of the comparison operator. You can specify an AWS IoT Events input\n      attribute as an input property.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "comparisonOperator": {
+                    "target": "com.amazonaws.iotevents#ComparisonOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "threshold": {
+                    "target": "com.amazonaws.iotevents#Threshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value on the right side of the comparison operator. You can enter a number or specify\n      an AWS IoT Events input attribute.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule that compares an input property value to a threshold value with a comparison operator.</p>"
+            }
+        },
         "com.amazonaws.iotevents#SqsAction": {
             "type": "structure",
             "members": {
@@ -2645,7 +3929,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Performs an analysis of your detector model. For more information, \n      see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Running detector model analyses</a> \n      in the <i>AWS IoT Events Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Performs an analysis of your detector model. For more information, \n      see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/iotevents-analyze-api.html\">Troubleshooting a detector model</a> \n      in the <i>AWS IoT Events Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/analysis/detector-models",
@@ -2727,6 +4011,9 @@
                     "min": 1
                 }
             }
+        },
+        "com.amazonaws.iotevents#StatusMessage": {
+            "type": "string"
         },
         "com.amazonaws.iotevents#Tag": {
             "type": "structure",
@@ -2839,6 +4126,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iotevents#Tag"
+            }
+        },
+        "com.amazonaws.iotevents#Threshold": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
             }
         },
         "com.amazonaws.iotevents#ThrottlingException": {
@@ -2984,6 +4280,135 @@
         "com.amazonaws.iotevents#UntagResourceResponse": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.iotevents#UpdateAlarmModel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.iotevents#UpdateAlarmModelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iotevents#UpdateAlarmModelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.iotevents#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.iotevents#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an alarm model. Any alarms that were created based on the previous version are\n      deleted and then created again as new data arrives.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/alarm-models/{alarmModelName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.iotevents#UpdateAlarmModelRequest": {
+            "type": "structure",
+            "members": {
+                "alarmModelName": {
+                    "target": "com.amazonaws.iotevents#AlarmModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the alarm model.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmModelDescription": {
+                    "target": "com.amazonaws.iotevents#AlarmModelDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the alarm model.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.iotevents#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that allows the alarm to perform actions and access AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "severity": {
+                    "target": "com.amazonaws.iotevents#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A non-negative integer that reflects the severity level of the alarm.</p>"
+                    }
+                },
+                "alarmRule": {
+                    "target": "com.amazonaws.iotevents#AlarmRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines when your alarm is invoked.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "alarmNotification": {
+                    "target": "com.amazonaws.iotevents#AlarmNotification",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about one or more notification actions.</p>"
+                    }
+                },
+                "alarmEventActions": {
+                    "target": "com.amazonaws.iotevents#AlarmEventActions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about one or more alarm actions.</p>"
+                    }
+                },
+                "alarmCapabilities": {
+                    "target": "com.amazonaws.iotevents#AlarmCapabilities",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iotevents#UpdateAlarmModelResponse": {
+            "type": "structure",
+            "members": {
+                "creationTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was created, in the Unix epoch format.</p>"
+                    }
+                },
+                "alarmModelArn": {
+                    "target": "com.amazonaws.iotevents#AlarmModelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the alarm model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "alarmModelVersion": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the alarm model.</p>"
+                    }
+                },
+                "lastUpdateTime": {
+                    "target": "com.amazonaws.iotevents#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the alarm model was last updated, in the Unix epoch format.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.iotevents#AlarmModelVersionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the alarm model. The status can be one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> - The alarm model is active and it's ready to evaluate data.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVATING</code> - AWS IoT Events is activating your alarm model. \n        Activating an alarm model can take up to a few minutes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> - The alarm model is inactive, so it isn't ready to evaluate data. \n\t  Check your alarm model information and update the alarm model.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> - You couldn't create or update the alarm model. Check your alarm model information \n        and try again.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            }
         },
         "com.amazonaws.iotevents#UpdateDetectorModel": {
             "type": "operation",
