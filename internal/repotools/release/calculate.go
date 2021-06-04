@@ -9,6 +9,7 @@ import (
 	"log"
 	"path"
 	"path/filepath"
+	"sort"
 )
 
 // ModuleFinder is a type that
@@ -36,6 +37,13 @@ func Calculate(finder ModuleFinder, tags git.ModuleTags, config repotools.Config
 	}
 
 	modules := make(map[string]*Module)
+	var repositoryModuleTombstonePaths []string
+
+	for moduleDir := range tags {
+		if _, ok := repositoryModules[moduleDir]; !ok {
+			repositoryModuleTombstonePaths = append(repositoryModuleTombstonePaths, moduleDir)
+		}
+	}
 
 	for moduleDir := range repositoryModules {
 		moduleFile, err := gomod.LoadModuleFile(filepath.Join(rootDir, moduleDir), nil, true)
@@ -63,14 +71,25 @@ func Calculate(finder ModuleFinder, tags git.ModuleTags, config repotools.Config
 				log.Fatalf("failed to get git changes: %v", err)
 			}
 
-			hasChanges, err = gomod.IsModuleChanged(moduleDir, repositoryModules[moduleDir], changes)
+			subModulePaths := repositoryModules[moduleDir]
+
+			ignoredModulePaths := make([]string, 0, len(subModulePaths)+len(repositoryModuleTombstonePaths))
+			ignoredModulePaths = append(ignoredModulePaths, subModulePaths...)
+
+			if len(repositoryModuleTombstonePaths) > 0 {
+				ignoredModulePaths = append(ignoredModulePaths, repositoryModuleTombstonePaths...)
+				// IsModuleChanged expects the provided list of ignored modules paths to be sorted
+				sort.Strings(ignoredModulePaths)
+			}
+
+			hasChanges, err = gomod.IsModuleChanged(moduleDir, ignoredModulePaths, changes)
 			if err != nil {
 				return nil, fmt.Errorf("failed to determine module changes: %w", err)
 			}
 
 			if !hasChanges {
 				// Check if any of the submodules have been "carved out" of this module since the last tagged release
-				for _, subModuleDir := range repositoryModules[moduleDir] {
+				for _, subModuleDir := range subModulePaths {
 					if _, ok := tags.Latest(subModuleDir); ok {
 						continue
 					}
