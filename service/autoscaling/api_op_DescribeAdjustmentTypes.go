@@ -11,17 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the available adjustment types for Amazon EC2 Auto Scaling scaling
-// policies. These settings apply to step scaling policies and simple scaling
-// policies; they do not apply to target tracking scaling policies. The following
-// adjustment types are supported:
+// Describes the available adjustment types for step scaling and simple scaling
+// policies. The following adjustment types are supported:
 //
 // * ChangeInCapacity
 //
-// * ExactCapacity
-//
 // *
-// PercentChangeInCapacity
+// ExactCapacity
+//
+// * PercentChangeInCapacity
 func (c *Client) DescribeAdjustmentTypes(ctx context.Context, params *DescribeAdjustmentTypesInput, optFns ...func(*Options)) (*DescribeAdjustmentTypesOutput, error) {
 	if params == nil {
 		params = &DescribeAdjustmentTypesInput{}

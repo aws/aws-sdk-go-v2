@@ -2,7 +2,8 @@
     "dependencies": {
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
         "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url": "v1.0.7",
-        "github.com/aws/smithy-go": "v1.4.0"
+        "github.com/aws/smithy-go": "v1.4.0",
+        "github.com/jmespath/go-jmespath": "v0.4.0"
     },
     "files": [
         "api_client.go",
@@ -19,12 +20,14 @@
         "api_op_CreateDBInstance.go",
         "api_op_CreateDBSubnetGroup.go",
         "api_op_CreateEventSubscription.go",
+        "api_op_CreateGlobalCluster.go",
         "api_op_DeleteDBCluster.go",
         "api_op_DeleteDBClusterParameterGroup.go",
         "api_op_DeleteDBClusterSnapshot.go",
         "api_op_DeleteDBInstance.go",
         "api_op_DeleteDBSubnetGroup.go",
         "api_op_DeleteEventSubscription.go",
+        "api_op_DeleteGlobalCluster.go",
         "api_op_DescribeCertificates.go",
         "api_op_DescribeDBClusterParameterGroups.go",
         "api_op_DescribeDBClusterParameters.go",
@@ -38,6 +41,7 @@
         "api_op_DescribeEventCategories.go",
         "api_op_DescribeEventSubscriptions.go",
         "api_op_DescribeEvents.go",
+        "api_op_DescribeGlobalClusters.go",
         "api_op_DescribeOrderableDBInstanceOptions.go",
         "api_op_DescribePendingMaintenanceActions.go",
         "api_op_FailoverDBCluster.go",
@@ -48,7 +52,9 @@
         "api_op_ModifyDBInstance.go",
         "api_op_ModifyDBSubnetGroup.go",
         "api_op_ModifyEventSubscription.go",
+        "api_op_ModifyGlobalCluster.go",
         "api_op_RebootDBInstance.go",
+        "api_op_RemoveFromGlobalCluster.go",
         "api_op_RemoveSourceIdentifierFromSubscription.go",
         "api_op_RemoveTagsFromResource.go",
         "api_op_ResetDBClusterParameterGroup.go",

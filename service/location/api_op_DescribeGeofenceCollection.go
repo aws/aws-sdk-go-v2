@@ -5,7 +5,6 @@ package location
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,6 +40,9 @@ type DescribeGeofenceCollectionOutput struct {
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
 	// you need to specify a resource across all AWS.
 	//
+	// * Format example:
+	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
+	//
 	// This member is required.
 	CollectionArn *string
 
@@ -75,9 +77,16 @@ type DescribeGeofenceCollectionOutput struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The data source selected for the geofence collection and associated pricing
-	// plan.
+	// A key identifier for an AWS KMS customer managed key
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
+	// assigned to the Amazon Location resource
+	KmsKeyId *string
+
+	// The specified data provider for the geofence collection.
 	PricingPlanDataSource *string
+
+	// Displays the key, value pairs of tags associated with this resource.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -104,13 +113,7 @@ func addOperationDescribeGeofenceCollectionMiddlewares(stack *middleware.Stack, 
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
-		return err
-	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
-		return err
-	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {

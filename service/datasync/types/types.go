@@ -3,7 +3,9 @@
 package types
 
 // Represents a single entry in a list of agents. AgentListEntry returns an array
-// that contains a list of agents when the ListAgents operation is called.
+// that contains a list of agents when the ListAgents
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html)
+// operation is called.
 type AgentListEntry struct {
 
 	// The Amazon Resource Name (ARN) of the agent.
@@ -35,7 +37,7 @@ type Ec2Config struct {
 	SubnetArn *string
 }
 
-// Specifies which files, folders and objects to include or exclude when
+// Specifies which files, folders, and objects to include or exclude when
 // transferring files from source to destination.
 type FilterRule struct {
 
@@ -60,7 +62,9 @@ type LocationFilter struct {
 	Name LocationFilterName
 
 	// The operator that is used to compare filter values (for example, Equals or
-	// Contains). For more about API filtering operators, see query-resources.
+	// Contains). For more about API filtering operators, see API filters for ListTasks
+	// and ListLocations
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html).
 	//
 	// This member is required.
 	Operator Operator
@@ -73,8 +77,9 @@ type LocationFilter struct {
 }
 
 // Represents a single entry in a list of locations. LocationListEntry returns an
-// array that contains a list of locations when the ListLocations operation is
-// called.
+// array that contains a list of locations when the ListLocations
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html)
+// operation is called.
 type LocationListEntry struct {
 
 	// The Amazon Resource Name (ARN) of the location. For Network File System (NFS) or
@@ -83,16 +88,17 @@ type LocationListEntry struct {
 	LocationArn *string
 
 	// Represents a list of URLs of a location. LocationUri returns an array that
-	// contains a list of locations when the ListLocations operation is called. Format:
-	// TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type of location. Valid values: NFS
-	// | EFS | S3. GLOBAL_ID is the globally unique identifier of the resource that
-	// backs the location. An example for EFS is us-east-2.fs-abcd1234. An example for
-	// Amazon S3 is the bucket name, such as myBucket. An example for NFS is a valid
-	// IPv4 address or a host name compliant with Domain Name Service (DNS). SUBDIR is
-	// a valid file system path, delimited by forward slashes as is the *nix
-	// convention. For NFS and Amazon EFS, it's the export path to mount the location.
-	// For Amazon S3, it's the prefix path that you mount to and treat as the root of
-	// the location.
+	// contains a list of locations when the ListLocations
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListLocations.html)
+	// operation is called. Format: TYPE://GLOBAL_ID/SUBDIR. TYPE designates the type
+	// of location. Valid values: NFS | EFS | S3. GLOBAL_ID is the globally unique
+	// identifier of the resource that backs the location. An example for EFS is
+	// us-east-2.fs-abcd1234. An example for Amazon S3 is the bucket name, such as
+	// myBucket. An example for NFS is a valid IPv4 address or a host name compliant
+	// with Domain Name Service (DNS). SUBDIR is a valid file system path, delimited by
+	// forward slashes as is the *nix convention. For NFS and Amazon EFS, it's the
+	// export path to mount the location. For Amazon S3, it's the prefix path that you
+	// mount to and treat as the root of the location.
 	LocationUri *string
 }
 
@@ -132,13 +138,16 @@ type OnPremConfig struct {
 }
 
 // Represents the options that are available to control the behavior of a
-// StartTaskExecution operation. Behavior includes preserving metadata such as user
-// ID (UID), group ID (GID), and file permissions, and also overwriting files in
-// the destination, data integrity verification, and so on. A task has a set of
-// default options associated with it. If you don't specify an option in
-// StartTaskExecution, the default value is used. You can override the defaults
-// options on each task execution by specifying an overriding Options value to
-// StartTaskExecution.
+// StartTaskExecution
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
+// operation. Behavior includes preserving metadata such as user ID (UID), group ID
+// (GID), and file permissions, and also overwriting files in the destination, data
+// integrity verification, and so on. A task has a set of default options
+// associated with it. If you don't specify an option in StartTaskExecution
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html),
+// the default value is used. You can override the defaults options on each task
+// execution by specifying an overriding Options value to StartTaskExecution
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
 type Options struct {
 
 	// A file metadata value that shows the last time a file was accessed (that is,
@@ -155,9 +164,13 @@ type Options struct {
 	// AWS DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
 	BytesPerSecond *int64
 
-	// The group ID (GID) of the file's owners. Default value: INT_VALUE. This
-	// preserves the integer value of the ID. INT_VALUE: Preserve the integer value of
-	// user ID (UID) and GID (recommended). NONE: Ignore UID and GID.
+	// The POSIX group ID (GID) of the file's owners. This option should only be set
+	// for NFS, EFS, and S3 locations. For more information about what metadata is
+	// copied by DataSync, see Metadata Copied by DataSync
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied).
+	// Default value: INT_VALUE. This preserves the integer value of the ID. INT_VALUE:
+	// Preserve the integer value of user ID (UID) and GID (recommended). NONE: Ignore
+	// UID and GID.
 	Gid Gid
 
 	// A value that determines the type of logs that DataSync publishes to a log stream
@@ -170,10 +183,11 @@ type Options struct {
 	LogLevel LogLevel
 
 	// A value that indicates the last time that a file was modified (that is, a file
-	// was written to) before the PREPARING phase. Default value: PRESERVE. PRESERVE:
-	// Preserve original Mtime (recommended) NONE: Ignore Mtime. If Mtime is set to
-	// PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must
-	// also be set to NONE.
+	// was written to) before the PREPARING phase. This option is required for cases
+	// when you need to run the same task more than one time. Default value: PRESERVE.
+	// PRESERVE: Preserve original Mtime (recommended) NONE: Ignore Mtime. If Mtime is
+	// set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE,
+	// Atime must also be set to NONE.
 	Mtime Mtime
 
 	// A value that determines whether files at the destination should be overwritten
@@ -182,37 +196,86 @@ type Options struct {
 	// file. If you modify files in the destination and you sync the files, you can use
 	// this value to protect against overwriting those changes. Some storage classes
 	// have specific behaviors that can affect your S3 storage cost. For detailed
-	// information, see using-storage-classes in the AWS DataSync User Guide.
+	// information, see Considerations when working with Amazon S3 storage classes in
+	// DataSync
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
+	// in the AWS DataSync User Guide.
 	OverwriteMode OverwriteMode
 
 	// A value that determines which users or groups can access a file for a specific
-	// purpose such as reading, writing, or execution of the file. Default value:
-	// PRESERVE. PRESERVE: Preserve POSIX-style permissions (recommended). NONE: Ignore
-	// permissions. AWS DataSync can preserve extant permissions of a source location.
+	// purpose such as reading, writing, or execution of the file. This option should
+	// only be set for NFS, EFS, and S3 locations. For more information about what
+	// metadata is copied by DataSync, see Metadata Copied by DataSync
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied).
+	// Default value: PRESERVE. PRESERVE: Preserve POSIX-style permissions
+	// (recommended). NONE: Ignore permissions. AWS DataSync can preserve extant
+	// permissions of a source location.
 	PosixPermissions PosixPermissions
 
 	// A value that specifies whether files in the destination that don't exist in the
 	// source file system should be preserved. This option can affect your storage
 	// cost. If your task deletes objects, you might incur minimum storage duration
 	// charges for certain storage classes. For detailed information, see
-	// using-storage-classes in the AWS DataSync User Guide. Default value: PRESERVE.
-	// PRESERVE: Ignore such destination files (recommended). REMOVE: Delete
-	// destination files that aren’t present in the source.
+	// Considerations when working with Amazon S3 storage classes in DataSync
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
+	// in the AWS DataSync User Guide. Default value: PRESERVE. PRESERVE: Ignore such
+	// destination files (recommended). REMOVE: Delete destination files that aren’t
+	// present in the source.
 	PreserveDeletedFiles PreserveDeletedFiles
 
 	// A value that determines whether AWS DataSync should preserve the metadata of
-	// block and character devices in the source file system, and recreate the files
-	// with that device name and metadata on the destination. AWS DataSync can't sync
-	// the actual contents of such devices, because they are nonterminal and don't
+	// block and character devices in the source file system, and re-create the files
+	// with that device name and metadata on the destination. DataSync does not copy
+	// the contents of such devices, only the name and metadata. AWS DataSync can't
+	// sync the actual contents of such devices, because they are nonterminal and don't
 	// return an end-of-file (EOF) marker. Default value: NONE. NONE: Ignore special
 	// devices (recommended). PRESERVE: Preserve character and block device metadata.
 	// This option isn't currently supported for Amazon EFS.
 	PreserveDevices PreserveDevices
 
+	// A value that determines which components of the SMB security descriptor are
+	// copied from source to destination objects. This value is only used for transfers
+	// between SMB and Amazon FSx for Windows File Server locations, or between two
+	// Amazon FSx for Windows File Server locations. For more information about how
+	// DataSync handles metadata, see How DataSync Handles Metadata and Special Files
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html).
+	// Default value: OWNER_DACL. OWNER_DACL: For each copied object, DataSync copies
+	// the following metadata:
+	//
+	// * Object owner.
+	//
+	// * NTFS discretionary access control
+	// lists (DACLs), which determine whether to grant access to an object.
+	//
+	// When
+	// choosing this option, DataSync does NOT copy the NTFS system access control
+	// lists (SACLs), which are used by administrators to log attempts to access a
+	// secured object. OWNER_DACL_SACL: For each copied object, DataSync copies the
+	// following metadata:
+	//
+	// * Object owner.
+	//
+	// * NTFS discretionary access control lists
+	// (DACLs), which determine whether to grant access to an object.
+	//
+	// * NTFS system
+	// access control lists (SACLs), which are used by administrators to log attempts
+	// to access a secured object.
+	//
+	// Copying SACLs requires granting additional
+	// permissions to the Windows user that DataSync uses to access your SMB location.
+	// For information about choosing a user that ensures sufficient permissions to
+	// files, folders, and metadata, see user. NONE: None of the SMB security
+	// descriptor components are copied. Destination objects are owned by the user that
+	// was provided for accessing the destination location. DACLs and SACLs are set
+	// based on the destination server’s configuration.
+	SecurityDescriptorCopyFlags SmbSecurityDescriptorCopyFlags
+
 	// A value that determines whether tasks should be queued before executing the
 	// tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If
 	// you use the same agent to run multiple tasks, you can enable the tasks to run in
-	// series. For more information, see queue-task-execution.
+	// series. For more information, see Queueing task executions
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/run-task.html#queue-task-execution).
 	TaskQueueing TaskQueueing
 
 	// A value that determines whether DataSync transfers only the data and metadata
@@ -224,22 +287,27 @@ type Options struct {
 	// comparing to existing content on the destination.
 	TransferMode TransferMode
 
-	// The user ID (UID) of the file's owner. Default value: INT_VALUE. This preserves
-	// the integer value of the ID. INT_VALUE: Preserve the integer value of UID and
-	// group ID (GID) (recommended). NONE: Ignore UID and GID.
+	// The POSIX user ID (UID) of the file's owner. This option should only be set for
+	// NFS, EFS, and S3 locations. To learn more about what metadata is copied by
+	// DataSync, see Metadata Copied by DataSync
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied).
+	// Default value: INT_VALUE. This preserves the integer value of the ID. INT_VALUE:
+	// Preserve the integer value of UID and group ID (GID) (recommended). NONE: Ignore
+	// UID and GID.
 	Uid Uid
 
 	// A value that determines whether a data integrity verification should be
 	// performed at the end of a task execution after all data and metadata have been
-	// transferred. For more information, see create-task Default value:
-	// POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform
-	// verification only on files that were transferred. POINT_IN_TIME_CONSISTENT: Scan
-	// the entire source and entire destination at the end of the transfer to verify
-	// that source and destination are fully synchronized. This option isn't supported
-	// when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes.
-	// NONE: No additional verification is done at the end of the transfer, but all
-	// data transmissions are integrity-checked with checksum verification during the
-	// transfer.
+	// transferred. For more information, see Configure task settings
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-task.html).
+	// Default value: POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended):
+	// Perform verification only on files that were transferred.
+	// POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the
+	// end of the transfer to verify that source and destination are fully
+	// synchronized. This option isn't supported when transferring to S3 Glacier or S3
+	// Glacier Deep Archive storage classes. NONE: No additional verification is done
+	// at the end of the transfer, but all data transmissions are integrity-checked
+	// with checksum verification during the transfer.
 	VerifyMode VerifyMode
 }
 
@@ -275,7 +343,9 @@ type PrivateLinkConfig struct {
 type S3Config struct {
 
 	// The Amazon S3 bucket to access. This bucket is used as a parameter in the
-	// CreateLocationS3 operation.
+	// CreateLocationS3
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html)
+	// operation.
 	//
 	// This member is required.
 	BucketAccessRoleArn *string
@@ -293,8 +363,9 @@ type SmbMountOptions struct {
 }
 
 // Represents a single entry in a list of AWS resource tags. TagListEntry returns
-// an array that contains a list of tasks when the ListTagsForResource operation is
-// called.
+// an array that contains a list of tasks when the ListTagsForResource
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html)
+// operation is called.
 type TagListEntry struct {
 
 	// The key for an AWS resource tag.
@@ -307,8 +378,10 @@ type TagListEntry struct {
 }
 
 // Represents a single entry in a list of task executions. TaskExecutionListEntry
-// returns an array that contains a list of specific invocations of a task when
-// ListTaskExecutions operation is called.
+// returns an array that contains a list of specific invocations of a task when the
+// ListTaskExecutions
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTaskExecutions.html)
+// operation is called.
 type TaskExecutionListEntry struct {
 
 	// The status of a task execution.
@@ -368,7 +441,9 @@ type TaskFilter struct {
 	Name TaskFilterName
 
 	// The operator that is used to compare filter values (for example, Equals or
-	// Contains). For more about API filtering operators, see query-resources.
+	// Contains). For more about API filtering operators, see API filters for ListTasks
+	// and ListLocations
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/query-resources.html).
 	//
 	// This member is required.
 	Operator Operator
@@ -381,9 +456,10 @@ type TaskFilter struct {
 }
 
 // Represents a single entry in a list of tasks. TaskListEntry returns an array
-// that contains a list of tasks when the ListTasks operation is called. A task
-// includes the source and destination file systems to sync and the options to use
-// for the tasks.
+// that contains a list of tasks when the ListTasks
+// (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTasks.html)
+// operation is called. A task includes the source and destination file systems to
+// sync and the options to use for the tasks.
 type TaskListEntry struct {
 
 	// The name of the task.

@@ -13,7 +13,8 @@ import (
 
 // Updates some of the parameters of a previously created location for self-managed
 // object storage server access. For information about creating a self-managed
-// object storage location, see create-object-location.
+// object storage location, see Creating a location for object storage
+// (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html).
 func (c *Client) UpdateLocationObjectStorage(ctx context.Context, params *UpdateLocationObjectStorageInput, optFns ...func(*Options)) (*UpdateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &UpdateLocationObjectStorageInput{}

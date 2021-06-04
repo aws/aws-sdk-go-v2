@@ -72,9 +72,8 @@ type ModifyDBClusterInput struct {
 	// disabled. DeletionProtection protects clusters from being accidentally deleted.
 	DeletionProtection *bool
 
-	// The version number of the database engine to which you want to upgrade. Changing
-	// this parameter results in an outage. The change is applied during the next
-	// maintenance window unless the ApplyImmediately parameter is set to true.
+	// The version number of the database engine to which you want to upgrade.
+	// Modifying engine version is not supported on Amazon DocumentDB.
 	EngineVersion *string
 
 	// The password for the master database user. This password can contain any

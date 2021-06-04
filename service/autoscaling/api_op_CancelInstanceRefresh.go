@@ -12,10 +12,11 @@ import (
 
 // Cancels an instance refresh operation in progress. Cancellation does not roll
 // back any replacements that have already been completed, but it prevents new
-// replacements from being started. For more information, see Replacing Auto
-// Scaling instances based on an instance refresh
+// replacements from being started. This operation is part of the instance refresh
+// feature
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
+// Scaling group after you make configuration changes.
 func (c *Client) CancelInstanceRefresh(ctx context.Context, params *CancelInstanceRefreshInput, optFns ...func(*Options)) (*CancelInstanceRefreshOutput, error) {
 	if params == nil {
 		params = &CancelInstanceRefreshInput{}

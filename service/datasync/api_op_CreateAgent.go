@@ -59,7 +59,8 @@ type CreateAgentInput struct {
 	AgentName *string
 
 	// The ARNs of the security groups used to protect your data transfer task subnets.
-	// See CreateAgentRequest$SubnetArns.
+	// See SecurityGroupArns
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_Ec2Config.html#DataSync-Type-Ec2Config-SecurityGroupArns).
 	SecurityGroupArns []string
 
 	// The Amazon Resource Names (ARNs) of the subnets in which DataSync will create

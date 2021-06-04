@@ -730,6 +730,26 @@ func (m *validateOpListDevicePools) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDevices struct {
+}
+
+func (*validateOpListDevices) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDevices) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDevicesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDevicesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListJobs struct {
 }
 
@@ -985,6 +1005,46 @@ func (m *validateOpListUploads) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListUploadsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPurchaseOffering struct {
+}
+
+func (*validateOpPurchaseOffering) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPurchaseOffering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PurchaseOfferingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPurchaseOfferingInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRenewOffering struct {
+}
+
+func (*validateOpRenewOffering) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRenewOffering) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RenewOfferingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRenewOfferingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1414,6 +1474,10 @@ func addOpListDevicePoolsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDevicePools{}, middleware.After)
 }
 
+func addOpListDevicesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDevices{}, middleware.After)
+}
+
 func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListJobs{}, middleware.After)
 }
@@ -1464,6 +1528,14 @@ func addOpListUniqueProblemsValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListUploadsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUploads{}, middleware.After)
+}
+
+func addOpPurchaseOfferingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPurchaseOffering{}, middleware.After)
+}
+
+func addOpRenewOfferingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRenewOffering{}, middleware.After)
 }
 
 func addOpScheduleRunValidationMiddleware(stack *middleware.Stack) error {
@@ -1522,6 +1594,44 @@ func addOpUpdateVPCEConfigurationValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpUpdateVPCEConfiguration{}, middleware.After)
 }
 
+func validateDeviceFilter(v *types.DeviceFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeviceFilter"}
+	if len(v.Attribute) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Attribute"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeviceFilters(v []types.DeviceFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeviceFilters"}
+	for i := range v {
+		if err := validateDeviceFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeviceSelectionConfiguration(v *types.DeviceSelectionConfiguration) error {
 	if v == nil {
 		return nil
@@ -1529,6 +1639,10 @@ func validateDeviceSelectionConfiguration(v *types.DeviceSelectionConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "DeviceSelectionConfiguration"}
 	if v.Filters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateDeviceFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.MaxDevices == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MaxDevices"))
@@ -1617,6 +1731,27 @@ func validateTagList(v []types.Tag) error {
 		if err := validateTag(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTestGridVpcConfig(v *types.TestGridVpcConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TestGridVpcConfig"}
+	if v.SecurityGroupIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecurityGroupIds"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1719,6 +1854,11 @@ func validateOpCreateTestGridProjectInput(v *CreateTestGridProjectInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTestGridProjectInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.VpcConfig != nil {
+		if err := validateTestGridVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2208,6 +2348,23 @@ func validateOpListDevicePoolsInput(v *ListDevicePoolsInput) error {
 	}
 }
 
+func validateOpListDevicesInput(v *ListDevicesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDevicesInput"}
+	if v.Filters != nil {
+		if err := validateDeviceFilters(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListJobsInput(v *ListJobsInput) error {
 	if v == nil {
 		return nil
@@ -2395,6 +2552,42 @@ func validateOpListUploadsInput(v *ListUploadsInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListUploadsInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPurchaseOfferingInput(v *PurchaseOfferingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PurchaseOfferingInput"}
+	if v.OfferingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OfferingId"))
+	}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRenewOfferingInput(v *RenewOfferingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RenewOfferingInput"}
+	if v.OfferingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OfferingId"))
+	}
+	if v.Quantity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Quantity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2602,6 +2795,11 @@ func validateOpUpdateTestGridProjectInput(v *UpdateTestGridProjectInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTestGridProjectInput"}
 	if v.ProjectArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if v.VpcConfig != nil {
+		if err := validateTestGridVpcConfig(v.VpcConfig); err != nil {
+			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

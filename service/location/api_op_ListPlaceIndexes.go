@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Place index resources in your AWS account.
+// Lists place index resources in your AWS account.
 func (c *Client) ListPlaceIndexes(ctx context.Context, params *ListPlaceIndexesInput, optFns ...func(*Options)) (*ListPlaceIndexesOutput, error) {
 	if params == nil {
 		params = &ListPlaceIndexesInput{}
@@ -41,7 +41,7 @@ type ListPlaceIndexesInput struct {
 
 type ListPlaceIndexesOutput struct {
 
-	// Lists the Place index resources that exist in your AWS account
+	// Lists the place index resources that exist in your AWS account
 	//
 	// This member is required.
 	Entries []types.ListPlaceIndexesResponseEntry

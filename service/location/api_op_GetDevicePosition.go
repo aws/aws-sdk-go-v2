@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves a device's most recent position according to its sample time. Device
-// positions are deleted after one year.
+// positions are deleted after 30 days.
 func (c *Client) GetDevicePosition(ctx context.Context, params *GetDevicePositionInput, optFns ...func(*Options)) (*GetDevicePositionOutput, error) {
 	if params == nil {
 		params = &GetDevicePositionInput{}

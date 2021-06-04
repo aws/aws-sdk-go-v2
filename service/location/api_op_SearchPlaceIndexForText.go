@@ -16,13 +16,6 @@ import (
 // additional parameters to narrow your list of results. You can search for places
 // near a given position using BiasPosition, or filter results within a bounding
 // box using FilterBBox. Providing both parameters simultaneously returns an error.
-// By using Places, you agree that AWS may transmit your API queries to your
-// selected third party provider for processing, which may be outside the AWS
-// region you are currently using. Also, when using HERE as your data provider, you
-// may not (a) use HERE Places for Asset Management, or (b) select the Storage
-// option for the IntendedUse parameter when requesting Places in Japan. For more
-// information, see the AWS Service Terms (https://aws.amazon.com/service-terms/)
-// for Amazon Location Service.
 func (c *Client) SearchPlaceIndexForText(ctx context.Context, params *SearchPlaceIndexForTextInput, optFns ...func(*Options)) (*SearchPlaceIndexForTextOutput, error) {
 	if params == nil {
 		params = &SearchPlaceIndexForTextInput{}
@@ -40,7 +33,7 @@ func (c *Client) SearchPlaceIndexForText(ctx context.Context, params *SearchPlac
 
 type SearchPlaceIndexForTextInput struct {
 
-	// The name of the Place index resource you want to use for the search.
+	// The name of the place index resource you want to use for the search.
 	//
 	// This member is required.
 	IndexName *string

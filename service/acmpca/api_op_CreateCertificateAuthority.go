@@ -67,10 +67,11 @@ type CreateCertificateAuthorityInput struct {
 	IdempotencyToken *string
 
 	// Specifies a cryptographic key management compliance standard used for handling
-	// CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: AWS Region ap-northeast-3
-	// supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must explicitly specify this
-	// parameter and value when creating a CA in that Region. Specifying a different
-	// value (or no value) results in an InvalidArgsException with the message "A
+	// CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note:
+	// FIPS_140_2_LEVEL_3_OR_HIGHER is not supported in Region ap-northeast-3. When
+	// creating a CA in the ap-northeast-3, you must provide
+	// FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for KeyStorageSecurityStandard.
+	// Failure to do this results in an InvalidArgsException with the message, "A
 	// certificate authority cannot be created in this region with the specified
 	// security standard."
 	KeyStorageSecurityStandard types.KeyStorageSecurityStandard

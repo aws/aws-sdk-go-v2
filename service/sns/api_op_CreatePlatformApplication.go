@@ -57,7 +57,7 @@ func (c *Client) CreatePlatformApplication(ctx context.Context, params *CreatePl
 type CreatePlatformApplicationInput struct {
 
 	// For a list of attributes, see SetPlatformApplicationAttributes
-	// (https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html)
+	// (https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html).
 	//
 	// This member is required.
 	Attributes map[string]string

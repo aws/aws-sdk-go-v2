@@ -13,14 +13,15 @@ import (
 
 // Starts a new instance refresh operation, which triggers a rolling replacement of
 // previously launched instances in the Auto Scaling group with a new group of
-// instances. If successful, this call creates a new instance refresh request with
-// a unique ID that you can use to track its progress. To query its status, call
-// the DescribeInstanceRefreshes API. To describe the instance refreshes that have
-// already run, call the DescribeInstanceRefreshes API. To cancel an instance
-// refresh operation in progress, use the CancelInstanceRefresh API. For more
-// information, see Replacing Auto Scaling instances based on an instance refresh
+// instances. This operation is part of the instance refresh feature
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
+// Scaling group after you make configuration changes. If the call succeeds, it
+// creates a new instance refresh request with a unique ID that you can use to
+// track its progress. To query its status, call the DescribeInstanceRefreshes API.
+// To describe the instance refreshes that have already run, call the
+// DescribeInstanceRefreshes API. To cancel an instance refresh operation in
+// progress, use the CancelInstanceRefresh API.
 func (c *Client) StartInstanceRefresh(ctx context.Context, params *StartInstanceRefreshInput, optFns ...func(*Options)) (*StartInstanceRefreshOutput, error) {
 	if params == nil {
 		params = &StartInstanceRefreshInput{}

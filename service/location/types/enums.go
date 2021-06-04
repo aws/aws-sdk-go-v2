@@ -18,6 +18,30 @@ func (BatchItemErrorCode) Values() []BatchItemErrorCode {
 	}
 }
 
+type DimensionUnit string
+
+// Values returns all known values for DimensionUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DimensionUnit) Values() []DimensionUnit {
+	return []DimensionUnit{
+		"Meters",
+		"Feet",
+	}
+}
+
+type DistanceUnit string
+
+// Values returns all known values for DistanceUnit. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (DistanceUnit) Values() []DistanceUnit {
+	return []DistanceUnit{
+		"Kilometers",
+		"Miles",
+	}
+}
+
 type IntendedUse string
 
 // Values returns all known values for IntendedUse. Note that this can be expanded
@@ -43,6 +67,19 @@ func (PricingPlan) Values() []PricingPlan {
 	}
 }
 
+type TravelMode string
+
+// Values returns all known values for TravelMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (TravelMode) Values() []TravelMode {
+	return []TravelMode{
+		"Car",
+		"Truck",
+		"Walking",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Values returns all known values for ValidationExceptionReason. Note that this
@@ -55,5 +92,17 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"CannotParse",
 		"FieldValidationFailed",
 		"Other",
+	}
+}
+
+type VehicleWeightUnit string
+
+// Values returns all known values for VehicleWeightUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VehicleWeightUnit) Values() []VehicleWeightUnit {
+	return []VehicleWeightUnit{
+		"Kilograms",
+		"Pounds",
 	}
 }

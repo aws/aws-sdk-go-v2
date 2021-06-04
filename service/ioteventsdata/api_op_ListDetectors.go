@@ -34,10 +34,10 @@ type ListDetectorsInput struct {
 	// This member is required.
 	DetectorModelName *string
 
-	// The maximum number of results to return at one time.
+	// The maximum number of results to be returned per request.
 	MaxResults *int32
 
-	// The token for the next set of results.
+	// The token that you can use to return the next set of results.
 	NextToken *string
 
 	// A filter that limits results to those detectors (instances) in the given state.
@@ -49,8 +49,8 @@ type ListDetectorsOutput struct {
 	// A list of summary information about the detectors (instances).
 	DetectorSummaries []types.DetectorSummary
 
-	// A token to retrieve the next set of results, or null if there are no additional
-	// results.
+	// The token that you can use to return the next set of results, or null if there
+	// are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

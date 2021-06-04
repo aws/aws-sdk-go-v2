@@ -350,6 +350,26 @@ func (m *validateOpUpdateLedger) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLedgerPermissionsMode struct {
+}
+
+func (*validateOpUpdateLedgerPermissionsMode) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLedgerPermissionsMode) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLedgerPermissionsModeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLedgerPermissionsModeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCancelJournalKinesisStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelJournalKinesisStream{}, middleware.After)
 }
@@ -416,6 +436,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateLedgerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLedger{}, middleware.After)
+}
+
+func addOpUpdateLedgerPermissionsModeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLedgerPermissionsMode{}, middleware.After)
 }
 
 func validateKinesisConfiguration(v *types.KinesisConfiguration) error {
@@ -779,6 +803,24 @@ func validateOpUpdateLedgerInput(v *UpdateLedgerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateLedgerInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLedgerPermissionsModeInput(v *UpdateLedgerPermissionsModeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLedgerPermissionsModeInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.PermissionsMode) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PermissionsMode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

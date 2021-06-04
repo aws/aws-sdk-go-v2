@@ -13,7 +13,8 @@ import (
 
 // Updates some of the parameters of a previously created location for Network File
 // System (NFS) access. For information about creating an NFS location, see
-// create-nfs-location.
+// Creating a location for NFS
+// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html).
 func (c *Client) UpdateLocationNfs(ctx context.Context, params *UpdateLocationNfsInput, optFns ...func(*Options)) (*UpdateLocationNfsOutput, error) {
 	if params == nil {
 		params = &UpdateLocationNfsInput{}

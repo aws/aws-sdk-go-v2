@@ -1877,6 +1877,19 @@ func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value in
 				sv.RequirementsS3Path = ptr.String(jtv)
 			}
 
+		case "Schedulers":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Schedulers to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Schedulers = ptr.Int32(int32(i64))
+			}
+
 		case "ServiceRoleArn":
 			if value != nil {
 				jtv, ok := value.(string)

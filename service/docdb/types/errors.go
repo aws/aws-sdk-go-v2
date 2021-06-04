@@ -434,6 +434,63 @@ func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+// The GlobalClusterIdentifier already exists. Choose a new global cluster
+// identifier (unique name) to create a new global cluster.
+type GlobalClusterAlreadyExistsFault struct {
+	Message *string
+}
+
+func (e *GlobalClusterAlreadyExistsFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GlobalClusterAlreadyExistsFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GlobalClusterAlreadyExistsFault) ErrorCode() string {
+	return "GlobalClusterAlreadyExistsFault"
+}
+func (e *GlobalClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The GlobalClusterIdentifier doesn't refer to an existing global cluster.
+type GlobalClusterNotFoundFault struct {
+	Message *string
+}
+
+func (e *GlobalClusterNotFoundFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GlobalClusterNotFoundFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GlobalClusterNotFoundFault) ErrorCode() string             { return "GlobalClusterNotFoundFault" }
+func (e *GlobalClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The number of global clusters for this account is already at the maximum
+// allowed.
+type GlobalClusterQuotaExceededFault struct {
+	Message *string
+}
+
+func (e *GlobalClusterQuotaExceededFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GlobalClusterQuotaExceededFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GlobalClusterQuotaExceededFault) ErrorCode() string {
+	return "GlobalClusterQuotaExceededFault"
+}
+func (e *GlobalClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request would cause you to exceed the allowed number of instances.
 type InstanceQuotaExceededFault struct {
 	Message *string
@@ -683,6 +740,23 @@ func (e *InvalidEventSubscriptionStateFault) ErrorCode() string {
 func (e *InvalidEventSubscriptionStateFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
+
+// The requested operation can't be performed while the cluster is in this state.
+type InvalidGlobalClusterStateFault struct {
+	Message *string
+}
+
+func (e *InvalidGlobalClusterStateFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidGlobalClusterStateFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidGlobalClusterStateFault) ErrorCode() string             { return "InvalidGlobalClusterStateFault" }
+func (e *InvalidGlobalClusterStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You cannot restore from a virtual private cloud (VPC) backup to a non-VPC DB
 // instance.

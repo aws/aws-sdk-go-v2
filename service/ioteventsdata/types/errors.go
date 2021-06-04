@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// An internal failure occured.
+// An internal failure occurred.
 type InternalFailureException struct {
 	Message *string
 }

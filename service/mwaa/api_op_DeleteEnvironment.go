@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an existing environment.
+// Deletes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
 func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmentInput, optFns ...func(*Options)) (*DeleteEnvironmentOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentInput{}
@@ -29,7 +29,7 @@ func (c *Client) DeleteEnvironment(ctx context.Context, params *DeleteEnvironmen
 
 type DeleteEnvironmentInput struct {
 
-	// The name of the environment to delete.
+	// The name of the Amazon MWAA environment. For example, MyMWAAEnvironment.
 	//
 	// This member is required.
 	Name *string

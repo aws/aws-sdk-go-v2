@@ -348,6 +348,27 @@ func (S3StorageClass) Values() []S3StorageClass {
 	}
 }
 
+type SmbSecurityDescriptorCopyFlags string
+
+// Enum values for SmbSecurityDescriptorCopyFlags
+const (
+	SmbSecurityDescriptorCopyFlagsNone          SmbSecurityDescriptorCopyFlags = "NONE"
+	SmbSecurityDescriptorCopyFlagsOwnerDacl     SmbSecurityDescriptorCopyFlags = "OWNER_DACL"
+	SmbSecurityDescriptorCopyFlagsOwnerDaclSacl SmbSecurityDescriptorCopyFlags = "OWNER_DACL_SACL"
+)
+
+// Values returns all known values for SmbSecurityDescriptorCopyFlags. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (SmbSecurityDescriptorCopyFlags) Values() []SmbSecurityDescriptorCopyFlags {
+	return []SmbSecurityDescriptorCopyFlags{
+		"NONE",
+		"OWNER_DACL",
+		"OWNER_DACL_SACL",
+	}
+}
+
 type SmbVersion string
 
 // Enum values for SmbVersion

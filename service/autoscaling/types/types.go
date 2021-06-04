@@ -165,7 +165,7 @@ type AutoScalingGroup struct {
 	PredictedCapacity *int32
 
 	// The Amazon Resource Name (ARN) of the service-linked role that the Auto Scaling
-	// group uses to call other AWS services on your behalf.
+	// group uses to call other Amazon Web Services on your behalf.
 	ServiceLinkedRoleARN *string
 
 	// The current state of the group when the DeleteAutoScalingGroup operation is in
@@ -373,33 +373,54 @@ type Ebs struct {
 	// in the Amazon EC2 Auto Scaling User Guide.
 	Encrypted *bool
 
-	// The number of I/O operations per second (IOPS) to provision for the volume. The
-	// maximum ratio of IOPS to volume size (in GiB) is 50:1. For more information, see
-	// Amazon EBS Volume Types
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
-	// Amazon EC2 User Guide for Linux Instances. Required when the volume type is io1.
-	// (Not used with standard, gp2, st1, or sc1 volumes.)
+	// The number of input/output (I/O) operations per second (IOPS) to provision for
+	// the volume. For gp3 and io1 volumes, this represents the number of IOPS that are
+	// provisioned for the volume. For gp2 volumes, this represents the baseline
+	// performance of the volume and the rate at which the volume accumulates I/O
+	// credits for bursting. The following are the supported values for each volume
+	// type:
+	//
+	// * gp3: 3,000-16,000 IOPS
+	//
+	// * io1: 100-64,000 IOPS
+	//
+	// For io1 volumes, we
+	// guarantee 64,000 IOPS only for Instances built on the Nitro System
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
+	// Other instance families guarantee performance up to 32,000 IOPS. Iops is
+	// supported when the volume type is gp3 or io1 and required only when the volume
+	// type is io1. (Not used with standard, gp2, st1, or sc1 volumes.)
 	Iops *int32
 
 	// The snapshot ID of the volume to use. You must specify either a VolumeSize or a
 	// SnapshotId.
 	SnapshotId *string
 
-	// The volume size, in Gibibytes (GiB). This can be a number from 1-1,024 for
-	// standard, 4-16,384 for io1, 1-16,384 for gp2, and 500-16,384 for st1 and sc1. If
-	// you specify a snapshot, the volume size must be equal to or larger than the
-	// snapshot size. Default: If you create a volume from a snapshot and you don't
-	// specify a volume size, the default is the snapshot size. You must specify either
-	// a VolumeSize or a SnapshotId. If you specify both SnapshotId and VolumeSize, the
-	// volume size must be equal or greater than the size of the snapshot.
+	// The throughput to provision for a gp3 volume. Valid Range: Minimum value of 125.
+	// Maximum value of 1000.
+	Throughput *int32
+
+	// The volume size, in GiBs. The following are the supported volumes sizes for each
+	// volume type:
+	//
+	// * gp2 and gp3: 1-16,384
+	//
+	// * io1: 4-16,384
+	//
+	// * st1 and sc1:
+	// 125-16,384
+	//
+	// * standard: 1-1,024
+	//
+	// You must specify either a SnapshotId or a
+	// VolumeSize. If you specify both SnapshotId and VolumeSize, the volume size must
+	// be equal or greater than the size of the snapshot.
 	VolumeSize *int32
 
-	// The volume type, which can be standard for Magnetic, io1 for Provisioned IOPS
-	// SSD, gp2 for General Purpose SSD, st1 for Throughput Optimized HDD, or sc1 for
-	// Cold HDD. For more information, see Amazon EBS Volume Types
+	// The volume type. For more information, see Amazon EBS Volume Types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon EC2 User Guide for Linux Instances. Valid Values: standard | io1 | gp2 |
-	// st1 | sc1
+	// st1 | sc1 | gp3
 	VolumeType *string
 }
 
@@ -1089,15 +1110,7 @@ type LifecycleHookSpecification struct {
 	RoleARN *string
 }
 
-// Describes the state of a Classic Load Balancer. If you specify a load balancer
-// when creating the Auto Scaling group, the state of the load balancer is
-// InService. If you attach a load balancer to an existing Auto Scaling group, the
-// initial state is Adding. The state transitions to Added after all instances in
-// the group are registered with the load balancer. If Elastic Load Balancing
-// health checks are enabled for the load balancer, the state transitions to
-// InService after at least one instance in the group passes the health check. If
-// EC2 health checks are enabled instead, the load balancer remains in the Added
-// state.
+// Describes the state of a Classic Load Balancer.
 type LoadBalancerState struct {
 
 	// The name of the load balancer.
@@ -1105,32 +1118,26 @@ type LoadBalancerState struct {
 
 	// One of the following load balancer states:
 	//
-	// * Adding - The instances in the
-	// group are being registered with the load balancer.
+	// * Adding - The Auto Scaling
+	// instances are being registered with the load balancer.
 	//
-	// * Added - All instances in
-	// the group are registered with the load balancer.
+	// * Added - All Auto
+	// Scaling instances are registered with the load balancer.
 	//
-	// * InService - At least one
-	// instance in the group passed an ELB health check.
+	// * InService - At least
+	// one Auto Scaling instance passed an ELB health check.
 	//
-	// * Removing - The instances in
-	// the group are being deregistered from the load balancer. If connection draining
-	// is enabled, Elastic Load Balancing waits for in-flight requests to complete
-	// before deregistering the instances.
+	// * Removing - The Auto
+	// Scaling instances are being deregistered from the load balancer. If connection
+	// draining is enabled, Elastic Load Balancing waits for in-flight requests to
+	// complete before deregistering the instances.
 	//
-	// * Removed - All instances in the group are
-	// deregistered from the load balancer.
+	// * Removed - All Auto Scaling
+	// instances are deregistered from the load balancer.
 	State *string
 }
 
-// Describes the state of a target group. If you attach a target group to an
-// existing Auto Scaling group, the initial state is Adding. The state transitions
-// to Added after all Auto Scaling instances are registered with the target group.
-// If Elastic Load Balancing health checks are enabled, the state transitions to
-// InService after at least one Auto Scaling instance passes the health check. If
-// EC2 health checks are enabled instead, the target group remains in the Added
-// state.
+// Describes the state of a target group.
 type LoadBalancerTargetGroupState struct {
 
 	// The Amazon Resource Name (ARN) of the target group.
@@ -1876,7 +1883,7 @@ type Tag struct {
 	// group.
 	PropagateAtLaunch *bool
 
-	// The name of the group.
+	// The name of the Auto Scaling group.
 	ResourceId *string
 
 	// The type of resource. The only supported value is auto-scaling-group.

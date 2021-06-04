@@ -538,6 +538,42 @@ type UpdateWirelessGatewayTaskEntry struct {
 	LoRaWAN *LoRaWANUpdateGatewayTaskEntry
 }
 
+// The log option for a wireless device event. Can be used to set log level for a
+// specific wireless device event. For a LoRaWAN device, the possible events for a
+// log messsage are: Join, Rejoin, Downlink_Data, Uplink_Data. For a Sidewalk
+// device, the possible events for a log message are: Registration, Downlink_Data,
+// Uplink_Data.
+type WirelessDeviceEventLogOption struct {
+
+	// The event for a log message, if the log message is tied to a wireless device.
+	//
+	// This member is required.
+	Event WirelessDeviceEvent
+
+	// The log level for a log message.
+	//
+	// This member is required.
+	LogLevel LogLevel
+}
+
+// The log option for wireless devices. Can be used to set log level for a specific
+// type of wireless device.
+type WirelessDeviceLogOption struct {
+
+	// The log level for a log message.
+	//
+	// This member is required.
+	LogLevel LogLevel
+
+	// The wireless device type.
+	//
+	// This member is required.
+	Type WirelessDeviceType
+
+	// The list of wireless device event log options.
+	Events []WirelessDeviceEventLogOption
+}
+
 // Information about a wireless device's operation.
 type WirelessDeviceStatistics struct {
 
@@ -564,6 +600,40 @@ type WirelessDeviceStatistics struct {
 
 	// The wireless device type.
 	Type WirelessDeviceType
+}
+
+// The log option for a wireless gateway event. Can be used to set log level for a
+// specific wireless gateway event. For a LoRaWAN gateway, the possible events for
+// a log message are: CUPS_Request, Certificate.
+type WirelessGatewayEventLogOption struct {
+
+	// The event for a log message, if the log message is tied to a wireless gateway.
+	//
+	// This member is required.
+	Event WirelessGatewayEvent
+
+	// The log level for a log message.
+	//
+	// This member is required.
+	LogLevel LogLevel
+}
+
+// The log option for wireless gateways. Can be used to set log level for a
+// specific type of wireless gateway.
+type WirelessGatewayLogOption struct {
+
+	// The log level for a log message.
+	//
+	// This member is required.
+	LogLevel LogLevel
+
+	// The wireless gateway type.
+	//
+	// This member is required.
+	Type WirelessGatewayType
+
+	// The list of wireless gateway event log options.
+	Events []WirelessGatewayEventLogOption
 }
 
 // Information about a wireless gateway's operation.

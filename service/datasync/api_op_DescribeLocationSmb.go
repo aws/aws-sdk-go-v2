@@ -53,7 +53,7 @@ type DescribeLocationSmbOutput struct {
 	// The Amazon Resource Name (ARN) of the SMB location that was described.
 	LocationArn *string
 
-	// The URL of the source SBM location that was described.
+	// The URL of the source SMB location that was described.
 	LocationUri *string
 
 	// The mount options that are available for DataSync to use to access an SMB

@@ -94,7 +94,7 @@ type DescribeDBClusterSnapshotsInput struct {
 	// If you don't specify a SnapshotType value, then both automated and
 	// manual cluster snapshots are returned. You can include shared cluster snapshots
 	// with these results by setting the IncludeShared parameter to true. You can
-	// include public cluster snapshots with these results by setting the IncludePublic
+	// include public cluster snapshots with these results by setting theIncludePublic
 	// parameter to true. The IncludeShared and IncludePublic parameters don't apply
 	// for SnapshotType values of manual or automated. The IncludePublic parameter
 	// doesn't apply when SnapshotType is set to shared. The IncludeShared parameter

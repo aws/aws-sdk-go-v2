@@ -6,6 +6,20 @@ import (
 	"time"
 )
 
+// Contains the tracker resource details.
+type BatchDeleteDevicePositionHistoryError struct {
+
+	// The ID of the device for this position.
+	//
+	// This member is required.
+	DeviceId *string
+
+	// Contains the batch request error details associated with the request.
+	//
+	// This member is required.
+	Error *BatchItemError
+}
+
 // Contains error details for each geofence that failed to delete from the geofence
 // collection.
 type BatchDeleteGeofenceError struct {
@@ -145,14 +159,102 @@ type BatchUpdateDevicePositionError struct {
 	SampleTime *time.Time
 }
 
-// Specifies the data storage option chosen for requesting Places. By using Places,
-// you agree that AWS may transmit your API queries to your selected third party
-// provider for processing, which may be outside the AWS region you are currently
-// using. Also, when using HERE as your data provider, you may not (a) use HERE
-// Places for Asset Management, or (b) select the Storage option for the
-// IntendedUse parameter when requesting Places in Japan. For more information, see
-// the AWS Service Terms (https://aws.amazon.com/service-terms/) for Amazon
-// Location Service.
+// Contains details about additional route preferences for requests that specify
+// TravelMode as Car.
+type CalculateRouteCarModeOptions struct {
+
+	// Avoids ferries when calculating routes. Default Value: false Valid Values: false
+	// | true
+	AvoidFerries *bool
+
+	// Avoids tolls when calculating routes. Default Value: false Valid Values: false |
+	// true
+	AvoidTolls *bool
+}
+
+// A summary of the calculated route.
+type CalculateRouteSummary struct {
+
+	// The data provider of traffic and road network data used to calculate the route.
+	// Indicates one of the available providers:
+	//
+	// * Esri
+	//
+	// * Here
+	//
+	// For more information
+	// about data providers, see Amazon Location Service data providers
+	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
+	//
+	// This member is required.
+	DataSource *string
+
+	// The total distance covered by the route. The sum of the distance travelled
+	// between every stop on the route. The route distance can't be greater than 250
+	// km. If the route exceeds 250 km, the response returns a 400
+	// RoutesValidationException error.
+	//
+	// This member is required.
+	Distance *float64
+
+	// The unit of measurement for the distance.
+	//
+	// This member is required.
+	DistanceUnit DistanceUnit
+
+	// The total travel time for the route measured in seconds. The sum of the travel
+	// time between every stop on the route.
+	//
+	// This member is required.
+	DurationSeconds *float64
+
+	// Specifies a geographical box surrounding a route. Used to zoom into a route when
+	// displaying it in a map. For example, [min x, min y, max x, max y] The first 2
+	// bbox parameters describe the lower southwest corner:
+	//
+	// * The first bbox position
+	// is the X coordinate or longitude of the lower southwest corner.
+	//
+	// * The second
+	// bbox position is the Y coordinate or latitude of the lower southwest
+	// corner.
+	//
+	// The next 2 bbox parameters describe the upper northeast corner:
+	//
+	// * The
+	// third bbox position is the X coordinate, or longitude of the upper northeast
+	// corner.
+	//
+	// * The fourth bbox position is the Y coordinate, or longitude of the
+	// upper northeast corner.
+	//
+	// This member is required.
+	RouteBBox []float64
+}
+
+// Contains details about additional route preferences for requests that specify
+// TravelMode as Truck.
+type CalculateRouteTruckModeOptions struct {
+
+	// Avoids ferries when calculating routes. Default Value: false Valid Values: false
+	// | true
+	AvoidFerries *bool
+
+	// Avoids ferries when calculating routes. Default Value: false Valid Values: false
+	// | true
+	AvoidTolls *bool
+
+	// Specifies the truck's dimension specifications including length, height, width,
+	// and unit of measurement. Used to avoid roads that can't support the truck's
+	// dimensions.
+	Dimensions *TruckDimensions
+
+	// Specifies the truck's weight specifications including total weight and unit of
+	// measurement. Used to avoid roads that can't support the truck's weight.
+	Weight *TruckWeight
+}
+
+// Specifies the data storage option chosen for requesting Places.
 type DataSourceConfiguration struct {
 
 	// Specifies how the results of an operation will be stored by the caller. Valid
@@ -161,8 +263,10 @@ type DataSourceConfiguration struct {
 	// * SingleUse specifies that the results won't be stored.
 	//
 	// *
-	// Storage specifies that the result can be cached or stored in a
-	// database.
+	// Storage specifies that the result can be cached or stored in a database. Place
+	// index resources using HERE as a data provider can't be configured to store
+	// results for locations in Japan when choosing Storage for the IntendedUse
+	// parameter.
 	//
 	// Default value: SingleUse
 	IntendedUse IntendedUse
@@ -217,7 +321,7 @@ type DevicePositionUpdate struct {
 	SampleTime *time.Time
 }
 
-// Contains the geofence geometry details. Amazon Location does not currently
+// Contains the geofence geometry details. Amazon Location doesn't currently
 // support polygons with holes, multipolygons, polygons that are wound clockwise,
 // or that cross the antimeridian.
 type GeofenceGeometry struct {
@@ -232,6 +336,106 @@ type GeofenceGeometry struct {
 	// rings must list their vertices in clockwise order, where the left side is the
 	// polygon's interior.
 	Polygon [][][]float64
+}
+
+// Contains the calculated route's details for each path between a pair of
+// positions. The number of legs returned corresponds to one less than the total
+// number of positions in the request. For example, a route with a departure
+// position and destination position returns one leg with the positions snapped to
+// a nearby road
+// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road):
+//
+// *
+// The StartPosition is the departure position.
+//
+// * The EndPosition is the
+// destination position.
+//
+// A route with a waypoint between the departure and
+// destination position returns two legs with the positions snapped to a nearby
+// road.:
+//
+// * Leg 1: The StartPosition is the departure position . The EndPosition
+// is the waypoint positon.
+//
+// * Leg 2: The StartPosition is the waypoint position.
+// The EndPosition is the destination position.
+type Leg struct {
+
+	// The distance between the leg's StartPosition and EndPosition along a calculated
+	// route.
+	//
+	// * The default measurement is Kilometers unless the request specifies a
+	// DistanceUnit of Miles.
+	//
+	// This member is required.
+	Distance *float64
+
+	// The estimated travel time between the leg's StartPosition and EndPosition. The
+	// travel mode and departure time that you specify in the request determines the
+	// calculated time.
+	//
+	// This member is required.
+	DurationSeconds *float64
+
+	// The terminating position of the leg. Follows the format [longitude,latitude]. If
+	// the EndPosition isn't located on a road, it's snapped to a nearby road
+	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
+	//
+	// This member is required.
+	EndPosition []float64
+
+	// The starting position of the leg. Follows the format [longitude,latitude]. If
+	// the StartPosition isn't located on a road, it's snapped to a nearby road
+	// (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#snap-to-nearby-road).
+	//
+	// This member is required.
+	StartPosition []float64
+
+	// Contains a list of steps, which represent subsections of a leg. Each step
+	// provides instructions for how to move to the next step in the leg such as the
+	// step's start position, end position, travel distance, travel duration, and
+	// geometry offset.
+	//
+	// This member is required.
+	Steps []Step
+
+	// Contains the calculated route's path as a linestring geometry.
+	Geometry *LegGeometry
+}
+
+// Contains the geometry details for each path between a pair of positions. Used in
+// plotting a route leg on a map.
+type LegGeometry struct {
+
+	// An ordered list of positions used to plot a route on a map. The first position
+	// is closest to the start position for the leg, and the last position is the
+	// closest to the end position for the leg.
+	//
+	// * For example, [[-123.117,
+	// 49.284],[-123.115, 49.285],[-123.115, 49.285]]
+	LineString [][]float64
+}
+
+// Contains the tracker resource details.
+type ListDevicePositionsResponseEntry struct {
+
+	// The ID of the device for this position.
+	//
+	// This member is required.
+	DeviceId *string
+
+	// The last known device position. Empty if no positions currently stored.
+	//
+	// This member is required.
+	Position []float64
+
+	// The timestamp at which the device position was determined. Uses  ISO 8601
+	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
+	// YYYY-MM-DDThh:mm:ss.sssZ.
+	//
+	// This member is required.
+	SampleTime *time.Time
 }
 
 // Contains the geofence collection details.
@@ -268,8 +472,7 @@ type ListGeofenceCollectionsResponseEntry struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The data source selected for the geofence collection and associated pricing
-	// plan.
+	// The specified data provider for the geofence collection.
 	PricingPlanDataSource *string
 }
 
@@ -360,10 +563,10 @@ type ListMapsResponseEntry struct {
 	UpdateTime *time.Time
 }
 
-// A Place index resource listed in your AWS account.
+// A place index resource listed in your AWS account.
 type ListPlaceIndexesResponseEntry struct {
 
-	// The timestamp for when the Place index resource was created in ISO 8601
+	// The timestamp for when the place index resource was created in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
 	//
@@ -375,7 +578,7 @@ type ListPlaceIndexesResponseEntry struct {
 	//
 	// * Esri
 	//
-	// * HERE
+	// * Here
 	//
 	// For additional details on data providers, see the
 	// Amazon Location Service data providers page
@@ -384,26 +587,79 @@ type ListPlaceIndexesResponseEntry struct {
 	// This member is required.
 	DataSource *string
 
-	// The optional description for the Place index resource.
+	// The optional description for the place index resource.
 	//
 	// This member is required.
 	Description *string
 
-	// The name of the Place index resource.
+	// The name of the place index resource.
 	//
 	// This member is required.
 	IndexName *string
 
-	// The pricing plan for the specified Place index resource. For additional details
+	// The pricing plan for the specified place index resource. For additional details
 	// and restrictions on each pricing plan option, see the Amazon Location Service
 	// pricing page (https://aws.amazon.com/location/pricing/).
 	//
 	// This member is required.
 	PricingPlan PricingPlan
 
-	// The timestamp for when the Place index resource was last updated in ISO 8601
+	// The timestamp for when the place index resource was last updated in ISO 8601
 	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
 	// YYYY-MM-DDThh:mm:ss.sssZ.
+	//
+	// This member is required.
+	UpdateTime *time.Time
+}
+
+// A route calculator resource listed in your AWS account.
+type ListRouteCalculatorsResponseEntry struct {
+
+	// The name of the route calculator resource.
+	//
+	// This member is required.
+	CalculatorName *string
+
+	// The timestamp when the route calculator resource was created in ISO 8601
+	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
+	// YYYY-MM-DDThh:mm:ss.sssZ.
+	//
+	// * For example, 2020–07-2T12:15:20.000Z+01:00
+	//
+	// This member is required.
+	CreateTime *time.Time
+
+	// The data provider of traffic and road network data. Indicates one of the
+	// available providers:
+	//
+	// * Esri
+	//
+	// * Here
+	//
+	// For more information about data providers,
+	// see Amazon Location Service data providers
+	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
+	//
+	// This member is required.
+	DataSource *string
+
+	// The optional description of the route calculator resource.
+	//
+	// This member is required.
+	Description *string
+
+	// The pricing plan for the specified route calculator resource. For additional
+	// details and restrictions on each pricing plan option, see Amazon Location
+	// Service pricing (https://aws.amazon.com/location/pricing/).
+	//
+	// This member is required.
+	PricingPlan PricingPlan
+
+	// The timestamp when the route calculator resource was last updated in ISO 8601
+	// (https://www.iso.org/iso-8601-date-and-time-format.html) format:
+	// YYYY-MM-DDThh:mm:ss.sssZ.
+	//
+	// * For example, 2020–07-2T12:15:20.000Z+01:00
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -443,7 +699,7 @@ type ListTrackersResponseEntry struct {
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The data source selected for the tracker resource and associated pricing plan.
+	// The specified data provider for the tracker resource.
 	PricingPlanDataSource *string
 }
 
@@ -451,11 +707,12 @@ type ListTrackersResponseEntry struct {
 type MapConfiguration struct {
 
 	// Specifies the map style selected from an available data provider. Valid styles:
-	// VectorEsriStreets, VectorEsriTopographic, VectorEsriNavigation,
-	// VectorEsriDarkGrayCanvas, VectorEsriLightGrayCanvas, VectorHereBerlin. When
-	// using HERE as your data provider, and selecting the Style VectorHereBerlin, you
-	// may not use HERE Maps for Asset Management. See the AWS Service Terms
-	// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
+	// RasterEsriImagery, VectorEsriStreets, VectorEsriTopographic,
+	// VectorEsriNavigation, VectorEsriDarkGrayCanvas, VectorEsriLightGrayCanvas,
+	// VectorHereBerlin. When using HERE as your data provider, and selecting the Style
+	// VectorHereBerlin, you may not use HERE Maps for Asset Management. See the AWS
+	// Service Terms (https://aws.amazon.com/service-terms/) for Amazon Location
+	// Service.
 	//
 	// This member is required.
 	Style *string
@@ -520,7 +777,7 @@ type PlaceGeometry struct {
 }
 
 // Specifies a single point of interest, or Place as a result of a search query
-// obtained from a dataset configured in the Place index Resource.
+// obtained from a dataset configured in the place index resource.
 type SearchForPositionResult struct {
 
 	// Contains details about the relevant point of interest.
@@ -605,6 +862,79 @@ type SearchPlaceIndexForTextSummary struct {
 	// A bounding box that contains the search results within the specified area
 	// indicated by FilterBBox. A subset of bounding box specified using FilterBBox.
 	ResultBBox []float64
+}
+
+// Represents an element of a leg within a route. A step contains instructions for
+// how to move to the next step in the leg.
+type Step struct {
+
+	// The travel distance between the step's StartPosition and EndPosition.
+	//
+	// This member is required.
+	Distance *float64
+
+	// The estimated travel time, in seconds, from the step's StartPosition to the
+	// EndPosition. . The travel mode and departure time that you specify in the
+	// request determines the calculated time.
+	//
+	// This member is required.
+	DurationSeconds *float64
+
+	// The end position of a step. If the position the last step in the leg, this
+	// position is the same as the end position of the leg.
+	//
+	// This member is required.
+	EndPosition []float64
+
+	// The starting position of a step. If the position is the first step in the leg,
+	// this position is the same as the start position of the leg.
+	//
+	// This member is required.
+	StartPosition []float64
+
+	// Represents the start position, or index, in a sequence of steps within the leg's
+	// line string geometry. For example, the index of the first step in a leg geometry
+	// is 0. Included in the response for queries that set IncludeLegGeometry to True.
+	GeometryOffset *int32
+}
+
+// Contains details about the truck dimensions in the unit of measurement that you
+// specify. Used to filter out roads that can't support or allow the specified
+// dimensions for requests that specify TravelMode as Truck.
+type TruckDimensions struct {
+
+	// The height of the truck.
+	//
+	// * For example, 4.5.
+	Height *float64
+
+	// The length of the truck.
+	//
+	// * For example, 15.5.
+	Length *float64
+
+	// Specifies the unit of measurement for the truck dimensions. Default Value:
+	// Meters
+	Unit DimensionUnit
+
+	// The width of the truck.
+	//
+	// * For example, 4.5.
+	Width *float64
+}
+
+// Contains details about the truck's weight specifications. Used to avoid roads
+// that can't support or allow the total weight for requests that specify
+// TravelMode as Truck.
+type TruckWeight struct {
+
+	// The total weight of the truck.
+	//
+	// * For example, 3500.
+	Total *float64
+
+	// The unit of measurement to use for the truck weight. Default Value: Kilograms
+	Unit VehicleWeightUnit
 }
 
 // The input failed to meet the constraints specified by the AWS service in a

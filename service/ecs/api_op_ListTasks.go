@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of tasks for a specified cluster. You can filter the results by
-// family name, by a particular container instance, or by the desired status of the
-// task with the family, containerInstance, and desiredStatus parameters. Recently
-// stopped tasks might appear in the returned results. Currently, stopped tasks
-// appear in the returned results for at least one hour.
+// Returns a list of tasks. You can filter the results by cluster, task definition
+// family, container instance, launch type, what IAM principal started the task, or
+// by the desired status of the task. Recently stopped tasks might appear in the
+// returned results. Currently, stopped tasks appear in the returned results for at
+// least one hour.
 func (c *Client) ListTasks(ctx context.Context, params *ListTasksInput, optFns ...func(*Options)) (*ListTasksOutput, error) {
 	if params == nil {
 		params = &ListTasksInput{}
@@ -34,30 +34,32 @@ func (c *Client) ListTasks(ctx context.Context, params *ListTasksInput, optFns .
 
 type ListTasksInput struct {
 
-	// The short name or full Amazon Resource Name (ARN) of the cluster that hosts the
-	// tasks to list. If you do not specify a cluster, the default cluster is assumed.
+	// The short name or full Amazon Resource Name (ARN) of the cluster to use when
+	// filtering the ListTasks results. If you do not specify a cluster, the default
+	// cluster is assumed.
 	Cluster *string
 
-	// The container instance ID or full ARN of the container instance with which to
-	// filter the ListTasks results. Specifying a containerInstance limits the results
-	// to tasks that belong to that container instance.
+	// The container instance ID or full ARN of the container instance to use when
+	// filtering the ListTasks results. Specifying a containerInstance limits the
+	// results to tasks that belong to that container instance.
 	ContainerInstance *string
 
-	// The task desired status with which to filter the ListTasks results. Specifying a
-	// desiredStatus of STOPPED limits the results to tasks that Amazon ECS has set the
-	// desired status to STOPPED. This can be useful for debugging tasks that are not
-	// starting properly or have died or finished. The default status filter is
+	// The task desired status to use when filtering the ListTasks results. Specifying
+	// a desiredStatus of STOPPED limits the results to tasks that Amazon ECS has set
+	// the desired status to STOPPED. This can be useful for debugging tasks that are
+	// not starting properly or have died or finished. The default status filter is
 	// RUNNING, which shows tasks that Amazon ECS has set the desired status to
 	// RUNNING. Although you can filter results based on a desired status of PENDING,
 	// this does not return any results. Amazon ECS never sets the desired status of a
 	// task to that value (only a task's lastStatus may have a value of PENDING).
 	DesiredStatus types.DesiredStatus
 
-	// The name of the family with which to filter the ListTasks results. Specifying a
-	// family limits the results to tasks that belong to that family.
+	// The name of the task definition family to use when filtering the ListTasks
+	// results. Specifying a family limits the results to tasks that belong to that
+	// family.
 	Family *string
 
-	// The launch type for services to list.
+	// The launch type to use when filtering the ListTasks results.
 	LaunchType types.LaunchType
 
 	// The maximum number of task results returned by ListTasks in paginated output.
@@ -77,8 +79,8 @@ type ListTasksInput struct {
 	// purposes.
 	NextToken *string
 
-	// The name of the service with which to filter the ListTasks results. Specifying a
-	// serviceName limits the results to tasks that belong to that service.
+	// The name of the service to use when filtering the ListTasks results. Specifying
+	// a serviceName limits the results to tasks that belong to that service.
 	ServiceName *string
 
 	// The startedBy value with which to filter the task results. Specifying a

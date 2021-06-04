@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a service, which defines the configuration for the following
+// Creates a service. This action defines the configuration for the following
 // entities:
 //
 // * For public and private DNS namespaces, one of the following
@@ -69,8 +69,8 @@ type CreateServiceInput struct {
 	//
 	// When you
 	// register an instance, AWS Cloud Map creates an SRV record and assigns a name to
-	// the record by concatenating the service name and the namespace name, for
-	// example: _exampleservice._tcp.example.com For services that are accessible by
+	// the record by concatenating the service name and the namespace name (for
+	// example, _exampleservice._tcp.example.com). For services that are accessible by
 	// DNS queries, you can't create multiple services with names that differ only by
 	// case (such as EXAMPLE and example). Otherwise, these services have the same DNS
 	// name and can't be distinguished. However, if you use a namespace that's only
@@ -82,7 +82,7 @@ type CreateServiceInput struct {
 
 	// A unique string that identifies the request and that allows failed CreateService
 	// requests to be retried without the risk of running the operation twice.
-	// CreatorRequestId can be any unique string, for example, a date/timestamp.
+	// CreatorRequestId can be any unique string (for example, a date/timestamp).
 	CreatorRequestId *string
 
 	// A description for the service.
@@ -119,8 +119,8 @@ type CreateServiceInput struct {
 	Tags []types.Tag
 
 	// If present, specifies that the service instances are only discoverable using the
-	// DiscoverInstances API operation. No DNS records will be registered for the
-	// service instances. The only valid value is HTTP.
+	// DiscoverInstances API operation. No DNS records is registered for the service
+	// instances. The only valid value is HTTP.
 	Type types.ServiceTypeOption
 }
 

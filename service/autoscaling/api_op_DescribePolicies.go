@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the policies for the specified Auto Scaling group.
+// Gets information about the scaling policies in the account and Region.
 func (c *Client) DescribePolicies(ctx context.Context, params *DescribePoliciesInput, optFns ...func(*Options)) (*DescribePoliciesOutput, error) {
 	if params == nil {
 		params = &DescribePoliciesInput{}
@@ -43,8 +43,8 @@ type DescribePoliciesInput struct {
 
 	// The names of one or more policies. If you omit this parameter, all policies are
 	// described. If a group name is provided, the results are limited to that group.
-	// This list is limited to 50 items. If you specify an unknown policy name, it is
-	// ignored with no error.
+	// If you specify an unknown policy name, it is ignored with no error. Array
+	// Members: Maximum number of 50 items.
 	PolicyNames []string
 
 	// One or more policy types. The valid values are SimpleScaling, StepScaling,

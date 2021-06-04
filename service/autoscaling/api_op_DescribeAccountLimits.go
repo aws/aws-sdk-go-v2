@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the current Amazon EC2 Auto Scaling resource quotas for your AWS
-// account. For information about requesting an increase, see Amazon EC2 Auto
-// Scaling service quotas
+// Describes the current Amazon EC2 Auto Scaling resource quotas for your account.
+// For information about requesting an increase, see Amazon EC2 Auto Scaling
+// service quotas
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-account-limits.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAccountLimitsInput, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {
@@ -35,18 +35,18 @@ type DescribeAccountLimitsInput struct {
 
 type DescribeAccountLimitsOutput struct {
 
-	// The maximum number of groups allowed for your AWS account. The default is 200
-	// groups per AWS Region.
+	// The maximum number of groups allowed for your account. The default is 200 groups
+	// per Region.
 	MaxNumberOfAutoScalingGroups *int32
 
-	// The maximum number of launch configurations allowed for your AWS account. The
-	// default is 200 launch configurations per AWS Region.
+	// The maximum number of launch configurations allowed for your account. The
+	// default is 200 launch configurations per Region.
 	MaxNumberOfLaunchConfigurations *int32
 
-	// The current number of groups for your AWS account.
+	// The current number of groups for your account.
 	NumberOfAutoScalingGroups *int32
 
-	// The current number of launch configurations for your AWS account.
+	// The current number of launch configurations for your account.
 	NumberOfLaunchConfigurations *int32
 
 	// Metadata pertaining to the operation's result.

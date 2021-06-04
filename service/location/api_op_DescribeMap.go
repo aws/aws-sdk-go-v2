@@ -5,7 +5,6 @@ package location
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -63,6 +62,9 @@ type DescribeMapOutput struct {
 	// The Amazon Resource Name (ARN) for the map resource. Used when you need to
 	// specify a resource across all AWS.
 	//
+	// * Format example:
+	// arn:aws:geo:region:account-id:maps/ExampleMap
+	//
 	// This member is required.
 	MapArn *string
 
@@ -84,6 +86,9 @@ type DescribeMapOutput struct {
 	//
 	// This member is required.
 	UpdateTime *time.Time
+
+	// Tags associated with the map resource.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -110,13 +115,7 @@ func addOperationDescribeMapMiddlewares(stack *middleware.Stack, options Options
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
-		return err
-	}
 	if err = addRetryMiddlewares(stack, options); err != nil {
-		return err
-	}
-	if err = addHTTPSignerV4Middleware(stack, options); err != nil {
 		return err
 	}
 	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {

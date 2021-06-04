@@ -932,6 +932,11 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 		ok.String(*v.DailyAutomaticBackupStartTime)
 	}
 
+	if len(v.DataCompressionType) > 0 {
+		ok := object.Key("DataCompressionType")
+		ok.String(string(v.DataCompressionType))
+	}
+
 	if len(v.DeploymentType) > 0 {
 		ok := object.Key("DeploymentType")
 		ok.String(string(v.DeploymentType))
@@ -1342,6 +1347,11 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.
 	if v.DailyAutomaticBackupStartTime != nil {
 		ok := object.Key("DailyAutomaticBackupStartTime")
 		ok.String(*v.DailyAutomaticBackupStartTime)
+	}
+
+	if len(v.DataCompressionType) > 0 {
+		ok := object.Key("DataCompressionType")
+		ok.String(string(v.DataCompressionType))
 	}
 
 	if v.WeeklyMaintenanceStartTime != nil {

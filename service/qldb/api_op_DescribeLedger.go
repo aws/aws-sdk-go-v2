@@ -58,6 +58,9 @@ type DescribeLedgerOutput struct {
 	// The name of the ledger.
 	Name *string
 
+	// The permissions mode of the ledger.
+	PermissionsMode types.PermissionsMode
+
 	// The current status of the ledger.
 	State types.LedgerState
 

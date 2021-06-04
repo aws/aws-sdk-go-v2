@@ -338,6 +338,19 @@ type CreateFileSystemLustreConfiguration struct {
 	// specifies 5 AM daily.
 	DailyAutomaticBackupStartTime *string
 
+	// Sets the data compression configuration for the file system. DataCompressionType
+	// can have the following values:
+	//
+	// * NONE - (Default) Data compression is turned
+	// off when the file system is created.
+	//
+	// * LZ4 - Data compression is turned on with
+	// the LZ4 algorithm.
+	//
+	// For more information, see Lustre data compression
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html).
+	DataCompressionType DataCompressionType
+
 	// Choose SCRATCH_1 and SCRATCH_2 deployment types when you need temporary storage
 	// and shorter-term processing of data. The SCRATCH_2 deployment type provides
 	// in-transit encryption of data and higher burst throughput capacity than
@@ -949,6 +962,19 @@ type LustreFileSystemConfiguration struct {
 	// specifies 5 AM daily.
 	DailyAutomaticBackupStartTime *string
 
+	// The data compression configuration for the file system. DataCompressionType can
+	// have the following values:
+	//
+	// * NONE - Data compression is turned off for the file
+	// system.
+	//
+	// * LZ4 - Data compression is turned on with the LZ4 algorithm.
+	//
+	// For more
+	// information, see Lustre data compression
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html).
+	DataCompressionType DataCompressionType
+
 	// The data repository configuration object for Lustre file systems returned in the
 	// response of the CreateFileSystem operation.
 	DataRepositoryConfiguration *DataRepositoryConfiguration
@@ -1142,6 +1168,20 @@ type UpdateFileSystemLustreConfiguration struct {
 	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
 	// specifies 5 AM daily.
 	DailyAutomaticBackupStartTime *string
+
+	// Sets the data compression configuration for the file system. DataCompressionType
+	// can have the following values:
+	//
+	// * NONE - Data compression is turned off for the
+	// file system.
+	//
+	// * LZ4 - Data compression is turned on with the LZ4 algorithm.
+	//
+	// If
+	// you don't use DataCompressionType, the file system retains its current data
+	// compression configuration. For more information, see Lustre data compression
+	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html).
+	DataCompressionType DataCompressionType
 
 	// (Optional) The preferred start time to perform weekly maintenance, formatted
 	// d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7,

@@ -26,6 +26,22 @@ func (AttributeType) Values() []AttributeType {
 	}
 }
 
+type AutoMLOverrideStrategy string
+
+// Enum values for AutoMLOverrideStrategy
+const (
+	AutoMLOverrideStrategyLatencyOptimized AutoMLOverrideStrategy = "LatencyOptimized"
+)
+
+// Values returns all known values for AutoMLOverrideStrategy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AutoMLOverrideStrategy) Values() []AutoMLOverrideStrategy {
+	return []AutoMLOverrideStrategy{
+		"LatencyOptimized",
+	}
+}
+
 type DatasetType string
 
 // Enum values for DatasetType

@@ -4673,6 +4673,20 @@ func awsRestjson1_deserializeOpDocumentDescribePortalOutput(v **DescribePortalOu
 
 	for key, value := range shape {
 		switch key {
+		case "alarms":
+			if err := awsRestjson1_deserializeDocumentAlarms(&sv.Alarms, value); err != nil {
+				return err
+			}
+
+		case "notificationSenderEmail":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Email to be of type string, got %T instead", value)
+				}
+				sv.NotificationSenderEmail = ptr.String(jtv)
+			}
+
 		case "portalArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9864,6 +9878,55 @@ func awsRestjson1_deserializeDocumentAggregates(v **types.Aggregates, value inte
 					return err
 				}
 				sv.Sum = ptr.Float64(f64)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAlarms(v **types.Alarms, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Alarms
+	if *v == nil {
+		sv = &types.Alarms{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "alarmRoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.AlarmRoleArn = ptr.String(jtv)
+			}
+
+		case "notificationLambdaArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
+				}
+				sv.NotificationLambdaArn = ptr.String(jtv)
 			}
 
 		default:

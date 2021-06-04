@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a tracker resource from your AWS account. This action deletes the
-// resource permanently. You can't undo this action. If the tracker resource is in
-// use, you may encounter an error. Make sure that the target resource is not a
-// dependency for your applications.
+// Deletes a tracker resource from your AWS account. This operation deletes the
+// resource permanently. If the tracker resource is in use, you may encounter an
+// error. Make sure that the target resource isn't a dependency for your
+// applications.
 func (c *Client) DeleteTracker(ctx context.Context, params *DeleteTrackerInput, optFns ...func(*Options)) (*DeleteTrackerOutput, error) {
 	if params == nil {
 		params = &DeleteTrackerInput{}

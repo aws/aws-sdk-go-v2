@@ -510,6 +510,26 @@ func (m *validateOpGetPartnerAccount) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourceLogLevel struct {
+}
+
+func (*validateOpGetResourceLogLevel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourceLogLevel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourceLogLevelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourceLogLevelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetServiceProfile struct {
 }
 
@@ -710,6 +730,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutResourceLogLevel struct {
+}
+
+func (*validateOpPutResourceLogLevel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourceLogLevel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourceLogLevelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourceLogLevelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResetResourceLogLevel struct {
+}
+
+func (*validateOpResetResourceLogLevel) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetResourceLogLevel) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetResourceLogLevelInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetResourceLogLevelInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendDataToWirelessDevice struct {
 }
 
@@ -805,6 +865,26 @@ func (m *validateOpUpdateDestination) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateDestinationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateLogLevelsByResourceTypes struct {
+}
+
+func (*validateOpUpdateLogLevelsByResourceTypes) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLogLevelsByResourceTypes) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLogLevelsByResourceTypesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLogLevelsByResourceTypesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -970,6 +1050,10 @@ func addOpGetPartnerAccountValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPartnerAccount{}, middleware.After)
 }
 
+func addOpGetResourceLogLevelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourceLogLevel{}, middleware.After)
+}
+
 func addOpGetServiceProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetServiceProfile{}, middleware.After)
 }
@@ -1010,6 +1094,14 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpPutResourceLogLevelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourceLogLevel{}, middleware.After)
+}
+
+func addOpResetResourceLogLevelValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetResourceLogLevel{}, middleware.After)
+}
+
 func addOpSendDataToWirelessDeviceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendDataToWirelessDevice{}, middleware.After)
 }
@@ -1028,6 +1120,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDestinationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDestination{}, middleware.After)
+}
+
+func addOpUpdateLogLevelsByResourceTypesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLogLevelsByResourceTypes{}, middleware.After)
 }
 
 func addOpUpdatePartnerAccountValidationMiddleware(stack *middleware.Stack) error {
@@ -1067,6 +1163,156 @@ func validateTagList(v []types.Tag) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TagList"}
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessDeviceEventLogOption(v *types.WirelessDeviceEventLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessDeviceEventLogOption"}
+	if len(v.Event) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Event"))
+	}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessDeviceEventLogOptionList(v []types.WirelessDeviceEventLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessDeviceEventLogOptionList"}
+	for i := range v {
+		if err := validateWirelessDeviceEventLogOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessDeviceLogOption(v *types.WirelessDeviceLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessDeviceLogOption"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if v.Events != nil {
+		if err := validateWirelessDeviceEventLogOptionList(v.Events); err != nil {
+			invalidParams.AddNested("Events", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessDeviceLogOptionList(v []types.WirelessDeviceLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessDeviceLogOptionList"}
+	for i := range v {
+		if err := validateWirelessDeviceLogOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessGatewayEventLogOption(v *types.WirelessGatewayEventLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessGatewayEventLogOption"}
+	if len(v.Event) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Event"))
+	}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessGatewayEventLogOptionList(v []types.WirelessGatewayEventLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessGatewayEventLogOptionList"}
+	for i := range v {
+		if err := validateWirelessGatewayEventLogOption(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessGatewayLogOption(v *types.WirelessGatewayLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessGatewayLogOption"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if v.Events != nil {
+		if err := validateWirelessGatewayEventLogOptionList(v.Events); err != nil {
+			invalidParams.AddNested("Events", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWirelessGatewayLogOptionList(v []types.WirelessGatewayLogOption) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WirelessGatewayLogOptionList"}
+	for i := range v {
+		if err := validateWirelessGatewayLogOption(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -1508,6 +1754,24 @@ func validateOpGetPartnerAccountInput(v *GetPartnerAccountInput) error {
 	}
 }
 
+func validateOpGetResourceLogLevelInput(v *GetResourceLogLevelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourceLogLevelInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetServiceProfileInput(v *GetServiceProfileInput) error {
 	if v == nil {
 		return nil
@@ -1664,6 +1928,45 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpPutResourceLogLevelInput(v *PutResourceLogLevelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourceLogLevelInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if len(v.LogLevel) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("LogLevel"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpResetResourceLogLevelInput(v *ResetResourceLogLevelInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResetResourceLogLevelInput"}
+	if v.ResourceIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceIdentifier"))
+	}
+	if v.ResourceType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendDataToWirelessDeviceInput(v *SendDataToWirelessDeviceInput) error {
 	if v == nil {
 		return nil
@@ -1747,6 +2050,28 @@ func validateOpUpdateDestinationInput(v *UpdateDestinationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDestinationInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLogLevelsByResourceTypesInput(v *UpdateLogLevelsByResourceTypesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLogLevelsByResourceTypesInput"}
+	if v.WirelessDeviceLogOptions != nil {
+		if err := validateWirelessDeviceLogOptionList(v.WirelessDeviceLogOptions); err != nil {
+			invalidParams.AddNested("WirelessDeviceLogOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.WirelessGatewayLogOptions != nil {
+		if err := validateWirelessGatewayLogOptionList(v.WirelessGatewayLogOptions); err != nil {
+			invalidParams.AddNested("WirelessGatewayLogOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

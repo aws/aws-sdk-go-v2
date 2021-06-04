@@ -110,6 +110,26 @@ func (m *validateOpCreatePlatformEndpoint) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateSMSSandboxPhoneNumber struct {
+}
+
+func (*validateOpCreateSMSSandboxPhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSMSSandboxPhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSMSSandboxPhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSMSSandboxPhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateTopic struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpDeletePlatformApplication) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeletePlatformApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSMSSandboxPhoneNumber struct {
+}
+
+func (*validateOpDeleteSMSSandboxPhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSMSSandboxPhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSMSSandboxPhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSMSSandboxPhoneNumberInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +610,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpVerifySMSSandboxPhoneNumber struct {
+}
+
+func (*validateOpVerifySMSSandboxPhoneNumber) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpVerifySMSSandboxPhoneNumber) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*VerifySMSSandboxPhoneNumberInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpVerifySMSSandboxPhoneNumberInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAddPermissionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddPermission{}, middleware.After)
 }
@@ -590,6 +650,10 @@ func addOpCreatePlatformEndpointValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreatePlatformEndpoint{}, middleware.After)
 }
 
+func addOpCreateSMSSandboxPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSMSSandboxPhoneNumber{}, middleware.After)
+}
+
 func addOpCreateTopicValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateTopic{}, middleware.After)
 }
@@ -600,6 +664,10 @@ func addOpDeleteEndpointValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeletePlatformApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePlatformApplication{}, middleware.After)
+}
+
+func addOpDeleteSMSSandboxPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSMSSandboxPhoneNumber{}, middleware.After)
 }
 
 func addOpDeleteTopicValidationMiddleware(stack *middleware.Stack) error {
@@ -680,6 +748,10 @@ func addOpUnsubscribeValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpVerifySMSSandboxPhoneNumberValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpVerifySMSSandboxPhoneNumber{}, middleware.After)
 }
 
 func validateMessageAttributeMap(v map[string]types.MessageAttributeValue) error {
@@ -846,6 +918,21 @@ func validateOpCreatePlatformEndpointInput(v *CreatePlatformEndpointInput) error
 	}
 }
 
+func validateOpCreateSMSSandboxPhoneNumberInput(v *CreateSMSSandboxPhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSMSSandboxPhoneNumberInput"}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateTopicInput(v *CreateTopicInput) error {
 	if v == nil {
 		return nil
@@ -888,6 +975,21 @@ func validateOpDeletePlatformApplicationInput(v *DeletePlatformApplicationInput)
 	invalidParams := smithy.InvalidParamsError{Context: "DeletePlatformApplicationInput"}
 	if v.PlatformApplicationArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PlatformApplicationArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSMSSandboxPhoneNumberInput(v *DeleteSMSSandboxPhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSMSSandboxPhoneNumberInput"}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1221,6 +1323,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpVerifySMSSandboxPhoneNumberInput(v *VerifySMSSandboxPhoneNumberInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VerifySMSSandboxPhoneNumberInput"}
+	if v.PhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if v.OneTimePassword == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OneTimePassword"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

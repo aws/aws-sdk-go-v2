@@ -30,6 +30,26 @@ func (m *validateOpAssociateTrackerConsumer) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchDeleteDevicePositionHistory struct {
+}
+
+func (*validateOpBatchDeleteDevicePositionHistory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteDevicePositionHistory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteDevicePositionHistoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteDevicePositionHistoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteGeofence struct {
 }
 
@@ -130,6 +150,26 @@ func (m *validateOpBatchUpdateDevicePosition) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCalculateRoute struct {
+}
+
+func (*validateOpCalculateRoute) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCalculateRoute) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CalculateRouteInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCalculateRouteInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGeofenceCollection struct {
 }
 
@@ -185,6 +225,26 @@ func (m *validateOpCreatePlaceIndex) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreatePlaceIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRouteCalculator struct {
+}
+
+func (*validateOpCreateRouteCalculator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRouteCalculator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRouteCalculatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRouteCalculatorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +330,26 @@ func (m *validateOpDeletePlaceIndex) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteRouteCalculator struct {
+}
+
+func (*validateOpDeleteRouteCalculator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRouteCalculator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRouteCalculatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRouteCalculatorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteTracker struct {
 }
 
@@ -345,6 +425,26 @@ func (m *validateOpDescribePlaceIndex) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribePlaceIndexInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRouteCalculator struct {
+}
+
+func (*validateOpDescribeRouteCalculator) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRouteCalculator) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRouteCalculatorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRouteCalculatorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -530,6 +630,26 @@ func (m *validateOpGetMapTile) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDevicePositions struct {
+}
+
+func (*validateOpListDevicePositions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDevicePositions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDevicePositionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDevicePositionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListGeofences struct {
 }
 
@@ -545,6 +665,26 @@ func (m *validateOpListGeofences) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListGeofencesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,8 +770,52 @@ func (m *validateOpSearchPlaceIndexForText) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateTrackerConsumerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateTrackerConsumer{}, middleware.After)
+}
+
+func addOpBatchDeleteDevicePositionHistoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteDevicePositionHistory{}, middleware.After)
 }
 
 func addOpBatchDeleteGeofenceValidationMiddleware(stack *middleware.Stack) error {
@@ -654,6 +838,10 @@ func addOpBatchUpdateDevicePositionValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpBatchUpdateDevicePosition{}, middleware.After)
 }
 
+func addOpCalculateRouteValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCalculateRoute{}, middleware.After)
+}
+
 func addOpCreateGeofenceCollectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGeofenceCollection{}, middleware.After)
 }
@@ -664,6 +852,10 @@ func addOpCreateMapValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreatePlaceIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreatePlaceIndex{}, middleware.After)
+}
+
+func addOpCreateRouteCalculatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRouteCalculator{}, middleware.After)
 }
 
 func addOpCreateTrackerValidationMiddleware(stack *middleware.Stack) error {
@@ -682,6 +874,10 @@ func addOpDeletePlaceIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePlaceIndex{}, middleware.After)
 }
 
+func addOpDeleteRouteCalculatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRouteCalculator{}, middleware.After)
+}
+
 func addOpDeleteTrackerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteTracker{}, middleware.After)
 }
@@ -696,6 +892,10 @@ func addOpDescribeMapValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribePlaceIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribePlaceIndex{}, middleware.After)
+}
+
+func addOpDescribeRouteCalculatorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRouteCalculator{}, middleware.After)
 }
 
 func addOpDescribeTrackerValidationMiddleware(stack *middleware.Stack) error {
@@ -734,8 +934,16 @@ func addOpGetMapTileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMapTile{}, middleware.After)
 }
 
+func addOpListDevicePositionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDevicePositions{}, middleware.After)
+}
+
 func addOpListGeofencesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGeofences{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpListTrackerConsumersValidationMiddleware(stack *middleware.Stack) error {
@@ -752,6 +960,14 @@ func addOpSearchPlaceIndexForPositionValidationMiddleware(stack *middleware.Stac
 
 func addOpSearchPlaceIndexForTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchPlaceIndexForText{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func validateBatchPutGeofenceRequestEntry(v *types.BatchPutGeofenceRequestEntry) error {
@@ -852,6 +1068,24 @@ func validateOpAssociateTrackerConsumerInput(v *AssociateTrackerConsumerInput) e
 	}
 	if v.ConsumerArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ConsumerArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchDeleteDevicePositionHistoryInput(v *BatchDeleteDevicePositionHistoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteDevicePositionHistoryInput"}
+	if v.TrackerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrackerName"))
+	}
+	if v.DeviceIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeviceIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -962,6 +1196,27 @@ func validateOpBatchUpdateDevicePositionInput(v *BatchUpdateDevicePositionInput)
 	}
 }
 
+func validateOpCalculateRouteInput(v *CalculateRouteInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CalculateRouteInput"}
+	if v.CalculatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatorName"))
+	}
+	if v.DeparturePosition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DeparturePosition"))
+	}
+	if v.DestinationPosition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPosition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateGeofenceCollectionInput(v *CreateGeofenceCollectionInput) error {
 	if v == nil {
 		return nil
@@ -1012,6 +1267,27 @@ func validateOpCreatePlaceIndexInput(v *CreatePlaceIndexInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreatePlaceIndexInput"}
 	if v.IndexName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if v.DataSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
+	}
+	if len(v.PricingPlan) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PricingPlan"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRouteCalculatorInput(v *CreateRouteCalculatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRouteCalculatorInput"}
+	if v.CalculatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatorName"))
 	}
 	if v.DataSource == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataSource"))
@@ -1089,6 +1365,21 @@ func validateOpDeletePlaceIndexInput(v *DeletePlaceIndexInput) error {
 	}
 }
 
+func validateOpDeleteRouteCalculatorInput(v *DeleteRouteCalculatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRouteCalculatorInput"}
+	if v.CalculatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatorName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteTrackerInput(v *DeleteTrackerInput) error {
 	if v == nil {
 		return nil
@@ -1141,6 +1432,21 @@ func validateOpDescribePlaceIndexInput(v *DescribePlaceIndexInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DescribePlaceIndexInput"}
 	if v.IndexName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRouteCalculatorInput(v *DescribeRouteCalculatorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRouteCalculatorInput"}
+	if v.CalculatorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CalculatorName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1314,6 +1620,21 @@ func validateOpGetMapTileInput(v *GetMapTileInput) error {
 	}
 }
 
+func validateOpListDevicePositionsInput(v *ListDevicePositionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDevicePositionsInput"}
+	if v.TrackerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TrackerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListGeofencesInput(v *ListGeofencesInput) error {
 	if v == nil {
 		return nil
@@ -1321,6 +1642,21 @@ func validateOpListGeofencesInput(v *ListGeofencesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListGeofencesInput"}
 	if v.CollectionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("CollectionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1393,6 +1729,42 @@ func validateOpSearchPlaceIndexForTextInput(v *SearchPlaceIndexForTextInput) err
 	}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

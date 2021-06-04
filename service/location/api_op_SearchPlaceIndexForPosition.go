@@ -12,12 +12,7 @@ import (
 )
 
 // Reverse geocodes a given coordinate and returns a legible address. Allows you to
-// search for Places or points of interest near a given position. By using Places,
-// you agree that AWS may transmit your API queries to your selected third party
-// provider for processing, which may be outside the AWS region you are currently
-// using. Because of licensing limitations, you may not use HERE to store results
-// for locations in Japan. For more information, see the AWS Service Terms
-// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
+// search for Places or points of interest near a given position.
 func (c *Client) SearchPlaceIndexForPosition(ctx context.Context, params *SearchPlaceIndexForPositionInput, optFns ...func(*Options)) (*SearchPlaceIndexForPositionOutput, error) {
 	if params == nil {
 		params = &SearchPlaceIndexForPositionInput{}
@@ -35,7 +30,7 @@ func (c *Client) SearchPlaceIndexForPosition(ctx context.Context, params *Search
 
 type SearchPlaceIndexForPositionInput struct {
 
-	// The name of the Place index resource you want to use for the search.
+	// The name of the place index resource you want to use for the search.
 	//
 	// This member is required.
 	IndexName *string

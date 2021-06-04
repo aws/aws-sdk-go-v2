@@ -37,7 +37,7 @@ type AssociateTrackerConsumerInput struct {
 	//
 	// *
 	// Format example:
-	// arn:partition:service:region:account-id:resource-type:resource-id
+	// arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer
 	//
 	// This member is required.
 	ConsumerArn *string

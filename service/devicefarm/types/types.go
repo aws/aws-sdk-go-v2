@@ -305,10 +305,14 @@ type DeviceFilter struct {
 	// device instance. Supported operators: EQUALS, IN, NOT_IN INSTANCE_LABELS The
 	// label of the device instance. Supported operators: CONTAINS FLEET_TYPE The fleet
 	// type. Valid values are PUBLIC or PRIVATE. Supported operators: EQUALS
+	//
+	// This member is required.
 	Attribute DeviceFilterAttribute
 
 	// Specifies how Device Farm compares the filter's attribute to the value. See the
 	// attribute descriptions.
+	//
+	// This member is required.
 	Operator RuleOperator
 
 	// An array of one or more filter values used in a device filter. Operator
@@ -332,6 +336,8 @@ type DeviceFilter struct {
 	// PHONE or TABLET.
 	//
 	// * The FLEET_TYPE attribute can be set to PUBLIC or PRIVATE.
+	//
+	// This member is required.
 	Values []string
 }
 
@@ -1851,6 +1857,9 @@ type TestGridProject struct {
 
 	// A human-readable name for the project.
 	Name *string
+
+	// The VPC security groups and subnets that are attached to a project.
+	VpcConfig *TestGridVpcConfig
 }
 
 // A TestGridSession is a single instance of a browser launched from the URL
@@ -1908,6 +1917,25 @@ type TestGridSessionArtifact struct {
 
 	// A semi-stable URL to the content of the object.
 	Url *string
+}
+
+// The VPC security groups and subnets that are attached to a project.
+type TestGridVpcConfig struct {
+
+	// A list of VPC security group IDs in your Amazon VPC.
+	//
+	// This member is required.
+	SecurityGroupIds []string
+
+	// A list of VPC subnet IDs in your Amazon VPC.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The ID of the Amazon VPC.
+	//
+	// This member is required.
+	VpcId *string
 }
 
 // Represents information about free trial device minutes for an AWS account.

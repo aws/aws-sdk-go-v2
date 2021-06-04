@@ -150,8 +150,9 @@ type Compatibility string
 
 // Enum values for Compatibility
 const (
-	CompatibilityEc2     Compatibility = "EC2"
-	CompatibilityFargate Compatibility = "FARGATE"
+	CompatibilityEc2      Compatibility = "EC2"
+	CompatibilityFargate  Compatibility = "FARGATE"
+	CompatibilityExternal Compatibility = "EXTERNAL"
 )
 
 // Values returns all known values for Compatibility. Note that this can be
@@ -161,6 +162,7 @@ func (Compatibility) Values() []Compatibility {
 	return []Compatibility{
 		"EC2",
 		"FARGATE",
+		"EXTERNAL",
 	}
 }
 
@@ -458,8 +460,9 @@ type LaunchType string
 
 // Enum values for LaunchType
 const (
-	LaunchTypeEc2     LaunchType = "EC2"
-	LaunchTypeFargate LaunchType = "FARGATE"
+	LaunchTypeEc2      LaunchType = "EC2"
+	LaunchTypeFargate  LaunchType = "FARGATE"
+	LaunchTypeExternal LaunchType = "EXTERNAL"
 )
 
 // Values returns all known values for LaunchType. Note that this can be expanded
@@ -469,6 +472,7 @@ func (LaunchType) Values() []LaunchType {
 	return []LaunchType{
 		"EC2",
 		"FARGATE",
+		"EXTERNAL",
 	}
 }
 

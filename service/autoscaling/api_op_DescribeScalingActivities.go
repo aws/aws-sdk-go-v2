@@ -12,12 +12,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more scaling activities for the specified Auto Scaling group.
-// To view the scaling activities from the Amazon EC2 Auto Scaling console, choose
-// the Activity tab of the Auto Scaling group. When scaling events occur, you see
-// scaling activity messages in the Activity history. For more information, see
-// Verifying a scaling activity for an Auto Scaling group
+// Gets information about the scaling activities in the account and Region. When
+// scaling events occur, you see a record of the scaling activity in the scaling
+// activities. For more information, see Verifying a scaling activity for an Auto
+// Scaling group
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-verify-scaling-activity.html)
+// in the Amazon EC2 Auto Scaling User Guide. If the scaling event succeeds, the
+// value of the StatusCode element in the response is Successful. If an attempt to
+// launch instances failed, the StatusCode value is Failed or Cancelled and the
+// StatusMessage element in the response indicates the cause of the failure. For
+// help interpreting the StatusMessage, see Troubleshooting Amazon EC2 Auto Scaling
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/CHAP_Troubleshooting.html)
 // in the Amazon EC2 Auto Scaling User Guide.
 func (c *Client) DescribeScalingActivities(ctx context.Context, params *DescribeScalingActivitiesInput, optFns ...func(*Options)) (*DescribeScalingActivitiesOutput, error) {
 	if params == nil {
@@ -36,10 +41,10 @@ func (c *Client) DescribeScalingActivities(ctx context.Context, params *Describe
 
 type DescribeScalingActivitiesInput struct {
 
-	// The activity IDs of the desired scaling activities. You can specify up to 50
-	// IDs. If you omit this parameter, all activities for the past six weeks are
-	// described. If unknown activities are requested, they are ignored with no error.
-	// If you specify an Auto Scaling group, the results are limited to that group.
+	// The activity IDs of the desired scaling activities. If you omit this parameter,
+	// all activities for the past six weeks are described. If unknown activities are
+	// requested, they are ignored with no error. If you specify an Auto Scaling group,
+	// the results are limited to that group. Array Members: Maximum number of 50 IDs.
 	ActivityIds []string
 
 	// The name of the Auto Scaling group.

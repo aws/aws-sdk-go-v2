@@ -459,6 +459,7 @@ const (
 	InventoryOptionalFieldObjectLockMode               InventoryOptionalField = "ObjectLockMode"
 	InventoryOptionalFieldObjectLockLegalHoldStatus    InventoryOptionalField = "ObjectLockLegalHoldStatus"
 	InventoryOptionalFieldIntelligentTieringAccessTier InventoryOptionalField = "IntelligentTieringAccessTier"
+	InventoryOptionalFieldBucketKeyStatus              InventoryOptionalField = "BucketKeyStatus"
 )
 
 // Values returns all known values for InventoryOptionalField. Note that this can
@@ -477,6 +478,7 @@ func (InventoryOptionalField) Values() []InventoryOptionalField {
 		"ObjectLockMode",
 		"ObjectLockLegalHoldStatus",
 		"IntelligentTieringAccessTier",
+		"BucketKeyStatus",
 	}
 }
 

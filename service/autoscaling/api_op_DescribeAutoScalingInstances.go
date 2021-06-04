@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more Auto Scaling instances.
+// Gets information about the Auto Scaling instances in the account and Region.
 func (c *Client) DescribeAutoScalingInstances(ctx context.Context, params *DescribeAutoScalingInstancesInput, optFns ...func(*Options)) (*DescribeAutoScalingInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeAutoScalingInstancesInput{}
@@ -30,9 +30,9 @@ func (c *Client) DescribeAutoScalingInstances(ctx context.Context, params *Descr
 
 type DescribeAutoScalingInstancesInput struct {
 
-	// The IDs of the instances. You can specify up to MaxRecords IDs. If you omit this
-	// parameter, all Auto Scaling instances are described. If you specify an ID that
-	// does not exist, it is ignored with no error.
+	// The IDs of the instances. If you omit this parameter, all Auto Scaling instances
+	// are described. If you specify an ID that does not exist, it is ignored with no
+	// error. Array Members: Maximum number of 50 items.
 	InstanceIds []string
 
 	// The maximum number of items to return with this call. The default value is 50

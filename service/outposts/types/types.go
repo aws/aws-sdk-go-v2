@@ -37,6 +37,9 @@ type Outpost struct {
 	// The AWS account ID of the Outpost owner.
 	OwnerId *string
 
+	// The Amazon Resource Name (ARN) of the site.
+	SiteArn *string
+
 	// The ID of the site.
 	SiteId *string
 
@@ -55,6 +58,9 @@ type Site struct {
 
 	// The name of the site.
 	Name *string
+
+	// The Amazon Resource Name (ARN) of the site.
+	SiteArn *string
 
 	// The ID of the site.
 	SiteId *string

@@ -4968,6 +4968,17 @@ func awsRestxml_serializeDocumentS3CopyObjectOperation(v *types.S3CopyObjectOper
 			return err
 		}
 	}
+	if v.BucketKeyEnabled {
+		rootAttr := []smithyxml.Attr{}
+		root := smithyxml.StartElement{
+			Name: smithyxml.Name{
+				Local: "BucketKeyEnabled",
+			},
+			Attr: rootAttr,
+		}
+		el := value.MemberElement(root)
+		el.Boolean(v.BucketKeyEnabled)
+	}
 	if len(v.CannedAccessControlList) > 0 {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

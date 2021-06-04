@@ -80,7 +80,9 @@ type DescribeTaskOutput struct {
 	// these options to preserve metadata such as user ID (UID) and group (GID), file
 	// permissions, data integrity verification, and so on. For each individual task
 	// execution, you can override these options by specifying the overriding
-	// OverrideOptions value to operation.
+	// OverrideOptions value to StartTaskExecution
+	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
+	// operation.
 	Options *types.Options
 
 	// The schedule used to periodically transfer files from a source to a destination

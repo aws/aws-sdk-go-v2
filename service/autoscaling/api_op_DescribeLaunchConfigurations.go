@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more launch configurations.
+// Gets information about the launch configurations in the account and Region.
 func (c *Client) DescribeLaunchConfigurations(ctx context.Context, params *DescribeLaunchConfigurationsInput, optFns ...func(*Options)) (*DescribeLaunchConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeLaunchConfigurationsInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeLaunchConfigurations(ctx context.Context, params *Descr
 type DescribeLaunchConfigurationsInput struct {
 
 	// The launch configuration names. If you omit this parameter, all launch
-	// configurations are described.
+	// configurations are described. Array Members: Maximum number of 50 items.
 	LaunchConfigurationNames []string
 
 	// The maximum number of items to return with this call. The default value is 50

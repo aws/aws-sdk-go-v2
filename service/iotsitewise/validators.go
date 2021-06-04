@@ -1186,6 +1186,21 @@ func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
 }
 
+func validateAlarms(v *types.Alarms) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Alarms"}
+	if v.AlarmRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AlarmRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetModelCompositeModel(v *types.AssetModelCompositeModel) error {
 	if v == nil {
 		return nil
@@ -2115,6 +2130,11 @@ func validateOpCreatePortalInput(v *CreatePortalInput) error {
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
+	if v.Alarms != nil {
+		if err := validateAlarms(v.Alarms); err != nil {
+			invalidParams.AddNested("Alarms", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2803,6 +2823,11 @@ func validateOpUpdatePortalInput(v *UpdatePortalInput) error {
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Alarms != nil {
+		if err := validateAlarms(v.Alarms); err != nil {
+			invalidParams.AddNested("Alarms", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

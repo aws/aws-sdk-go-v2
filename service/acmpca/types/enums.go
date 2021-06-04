@@ -282,6 +282,24 @@ func (RevocationReason) Values() []RevocationReason {
 	}
 }
 
+type S3ObjectAcl string
+
+// Enum values for S3ObjectAcl
+const (
+	S3ObjectAclPublicRead             S3ObjectAcl = "PUBLIC_READ"
+	S3ObjectAclBucketOwnerFullControl S3ObjectAcl = "BUCKET_OWNER_FULL_CONTROL"
+)
+
+// Values returns all known values for S3ObjectAcl. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (S3ObjectAcl) Values() []S3ObjectAcl {
+	return []S3ObjectAcl{
+		"PUBLIC_READ",
+		"BUCKET_OWNER_FULL_CONTROL",
+	}
+}
+
 type SigningAlgorithm string
 
 // Enum values for SigningAlgorithm

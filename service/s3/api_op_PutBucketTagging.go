@@ -19,15 +19,15 @@ import (
 // example, you can tag several resources with a specific application name, and
 // then organize your billing information to see the total cost of that application
 // across several services. For more information, see Cost Allocation and Tagging
-// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html).
-// Within a bucket, if you add a tag that has the same key as an existing tag, the
-// new value overwrites the old value. For more information, see Using Cost
-// Allocation in Amazon S3 Bucket Tags
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html). To use
-// this operation, you must have permissions to perform the s3:PutBucketTagging
-// action. The bucket owner has this permission by default and can grant this
-// permission to others. For more information about permissions, see Permissions
-// Related to Bucket Subresource Operations
+// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
+// and Using Cost Allocation in Amazon S3 Bucket Tags
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html). When
+// this operation sets the tags for a bucket, it will overwrite any current tags
+// the bucket already has. You cannot use this operation to add tags to an existing
+// list of tags. To use this operation, you must have permissions to perform the
+// s3:PutBucketTagging action. The bucket owner has this permission by default and
+// can grant this permission to others. For more information about permissions, see
+// Permissions Related to Bucket Subresource Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources)
 // and Managing Access Permissions to Your Amazon S3 Resources
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
