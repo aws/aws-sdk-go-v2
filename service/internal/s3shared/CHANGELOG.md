@@ -1,3 +1,7 @@
+# v1.4.0 (2021-06-04)
+
+* **Feature**: The handling of AccessPoint and Outpost ARNs have been updated.
+
 # v1.3.1 (2021-05-20)
 
 * **Dependency Update**: Updated to the latest SDK module versions

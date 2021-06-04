@@ -1,3 +1,9 @@
+# v1.10.0 (2021-06-04)
+
+* **Feature**: The handling of AccessPoint and Outpost ARNs have been updated.
+* **Feature**: Updated service client to latest API model.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.0 (2021-05-25)
 
 * **Feature**: API client updated
