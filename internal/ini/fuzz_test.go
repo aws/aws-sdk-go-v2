@@ -1,30 +1,58 @@
-//go:build fuzz
-// +build fuzz
+//go:build gofuzzbeta
+// +build gofuzzbeta
 
-// fuzz test data is stored in Amazon S3.
-package ini_test
+package ini
 
 import (
+	"bytes"
+	"fmt"
+	"io/ioutil"
 	"path/filepath"
 	"testing"
-
-	"github.com/aws/aws-sdk-go-v2/internal/ini"
 )
 
-// TestFuzz is used to test for crashes and not validity of the input
-func TestFuzz(t *testing.T) {
-	paths, err := filepath.Glob("testdata/fuzz/*")
+func FuzzParse(f *testing.F) {
+	corpus, err := loadCorpus(
+		// Also loads "testdata/corpus/FuzzParse" automatically,
+		// for previous known panics if present and contains any files
+		filepath.Join("testdata", "valid", "*"),
+		filepath.Join("testdata", "invalid", "*"),
+	)
 	if err != nil {
-		t.Errorf("expected no error, but received %v", err)
+		f.Fatalf("failed to load corpus, %v", err)
 	}
 
-	if paths == nil {
-		t.Errorf("expected fuzz files, but received none")
+	for name, c := range corpus {
+		f.Add(name, c)
 	}
 
-	for _, path := range paths {
-		t.Run(path, func(t *testing.T) {
-			ini.OpenFile(path)
-		})
+	f.Fuzz(func(t *testing.T, name string, c []byte) {
+		_, err := Parse(bytes.NewReader(c), name)
+		if err != nil {
+			t.Logf("parse failed for %v, %v", name, err.Error())
+		}
+	})
+}
+
+func loadCorpus(globs ...string) (map[string][]byte, error) {
+	corpus := map[string][]byte{}
+	for _, g := range globs {
+		paths, err := filepath.Glob(g)
+		if err != nil {
+			return nil, fmt.Errorf("unable to glob corpus, %w", err)
+		}
+		if len(paths) == 0 {
+			return nil, fmt.Errorf("no test corpus files found for glob %v", g)
+		}
+
+		for _, p := range paths {
+			c, err := ioutil.ReadFile(p)
+			if err != nil {
+				return nil, fmt.Errorf("failed to read corpus file, %w", err)
+			}
+			corpus[p] = c
+		}
 	}
+
+	return corpus, nil
 }
