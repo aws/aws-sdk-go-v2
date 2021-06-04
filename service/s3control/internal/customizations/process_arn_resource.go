@@ -112,8 +112,9 @@ func (m *processARNResource) HandleSerialize(
 		}
 
 		// check if resource arn region is FIPS
-		if resourceRequest.ResourceConfiguredForFIPS() {
-			return out, metadata, s3shared.NewInvalidARNWithFIPSError(tv, nil)
+		if resourceRequest.UseFips() {
+			return out, metadata, s3shared.NewFIPSConfigurationError(tv, resourceRequest.PartitionID,
+				resourceRequest.RequestRegion, nil)
 		}
 
 		// Disable endpoint host prefix for s3-control
@@ -127,11 +128,6 @@ func (m *processARNResource) HandleSerialize(
 		err = m.UpdateARNField(in.Parameters, tv.AccessPointName)
 		if err != nil {
 			return out, metadata, fmt.Errorf("error updating arnable field while serializing")
-		}
-
-		// check if request region is FIPS and ARN region usage is not allowed
-		if resourceRequest.UseFips() && !m.UseARNRegion {
-			return out, metadata, s3shared.NewInvalidARNWithFIPSError(tv, nil)
 		}
 
 		// Add outpostID header
@@ -158,8 +154,9 @@ func (m *processARNResource) HandleSerialize(
 		}
 
 		// check if resource arn region is FIPS
-		if resourceRequest.ResourceConfiguredForFIPS() {
-			return out, metadata, s3shared.NewInvalidARNWithFIPSError(tv, nil)
+		if resourceRequest.UseFips() {
+			return out, metadata, s3shared.NewFIPSConfigurationError(tv, resourceRequest.PartitionID,
+				resourceRequest.RequestRegion, nil)
 		}
 
 		// Disable endpoint host prefix for s3-control
@@ -222,11 +219,6 @@ func validateResourceRequest(resourceRequest s3shared.ResourceRequest) error {
 		// if cross region, but not use ARN region is not enabled
 		return s3shared.NewClientRegionMismatchError(resourceRequest.Resource,
 			resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
-	}
-
-	// resource configured with FIPS as region is not supported by outposts
-	if resourceRequest.ResourceConfiguredForFIPS() {
-		return s3shared.NewInvalidARNWithFIPSError(resourceRequest.Resource, nil)
 	}
 
 	return nil

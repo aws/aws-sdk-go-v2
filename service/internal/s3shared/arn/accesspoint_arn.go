@@ -28,6 +28,9 @@ func ParseAccessPointResource(a arn.ARN, resParts []string) (AccessPointARN, err
 	if len(a.Region) == 0 {
 		return AccessPointARN{}, InvalidARNError{ARN: a, Reason: "region not set"}
 	}
+	if isFIPS(a.Region) {
+		return AccessPointARN{}, InvalidARNError{ARN: a, Reason: "FIPS region not allowed in ARN"}
+	}
 	if len(a.AccountID) == 0 {
 		return AccessPointARN{}, InvalidARNError{ARN: a, Reason: "account-id not set"}
 	}
@@ -47,4 +50,8 @@ func ParseAccessPointResource(a arn.ARN, resParts []string) (AccessPointARN, err
 		ARN:             a,
 		AccessPointName: resID,
 	}, nil
+}
+
+func isFIPS(region string) bool {
+	return strings.HasPrefix(region, "fips-") || strings.HasSuffix(region, "-fips")
 }

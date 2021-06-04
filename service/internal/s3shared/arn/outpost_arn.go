@@ -31,6 +31,10 @@ func ParseOutpostARNResource(a arn.ARN, resParts []string) (OutpostARN, error) {
 		return nil, InvalidARNError{ARN: a, Reason: "region not set"}
 	}
 
+	if isFIPS(a.Region) {
+		return nil, InvalidARNError{ARN: a, Reason: "FIPS region not allowed in ARN"}
+	}
+
 	if len(a.AccountID) == 0 {
 		return nil, InvalidARNError{ARN: a, Reason: "account-id not set"}
 	}

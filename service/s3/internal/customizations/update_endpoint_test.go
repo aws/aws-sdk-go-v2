@@ -442,31 +442,28 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedSigningName:   "s3-outposts",
 			expectedSigningRegion: "us-gov-east-1",
 		},
-		"Outpost AccessPoint Fips region": {
+		"Outpost AccessPoint FIPS cross-region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3.Options{
 				Region: "fips-us-gov-west-1",
 			},
 			expectedErr: "ConfigurationError : client region does not match provided ARN region",
 		},
-		"Outpost AccessPoint Fips region in Arn": {
-			bucket: "arn:aws-us-gov:s3-outposts:fips-us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3.Options{
-				Region:          "fips-us-gov-west-1",
-				EndpointOptions: endpoints.Options{DisableHTTPS: true},
-				UseARNRegion:    true,
-			},
-			expectedErr: "InvalidARNError : resource ARN not supported for FIPS region",
-		},
-		"Outpost AccessPoint Fips region with valid ARN region": {
+		"Outpost AccessPoint with FIPS client cross-region": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3.Options{
 				Region:       "fips-us-gov-west-1",
 				UseARNRegion: true,
 			},
-			expectedReqURL:        "https://myaccesspoint-123456789012.op-01234567890123456.s3-outposts.us-gov-east-1.amazonaws.com/testkey?x-id=GetObject",
-			expectedSigningName:   "s3-outposts",
-			expectedSigningRegion: "us-gov-east-1",
+			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+		},
+		"Outpost AccessPoint with FIPS client matching region": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3.Options{
+				Region:       "fips-us-gov-west-1",
+				UseARNRegion: true,
+			},
+			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
 		},
 		"Outpost AccessPoint with Immutable Endpoint": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -808,6 +805,54 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedReqURL:        "https://s3.us-west-2.amazonaws.com:8443/mock-bucket/testkey?x-id=GetObject",
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "us-west-2",
+		},
+		"Invalid AccessPoint ARN with FIPS pseudo-region (prefix)": {
+			bucket: "arn:aws:s3:fips-us-east-1:123456789012:accesspoint:myendpoint",
+			options: s3.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid AccessPoint ARN with FIPS pseudo-region (suffix)": {
+			bucket: "arn:aws:s3:us-east-1-fips:123456789012:accesspoint:myendpoint",
+			options: s3.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (prefix)": {
+			bucket: "arn:aws:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (suffix)": {
+			bucket: "arn:aws:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid Object Lambda ARN with FIPS pseudo-region (prefix)": {
+			bucket: "arn:aws:s3-object-lambda:fips-us-east-1:123456789012:accesspoint/myap",
+			options: s3.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid Object Lambda ARN with FIPS pseudo-region (suffix)": {
+			bucket: "arn:aws:s3-object-lambda:us-east-1-fips:123456789012:accesspoint/myap",
+			options: s3.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
 		},
 	}
 
