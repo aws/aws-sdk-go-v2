@@ -66,7 +66,7 @@ type UpdateFirewallDomainsInput struct {
 
 type UpdateFirewallDomainsOutput struct {
 
-	// The Id of the firewall domain list that DNS Firewall just updated.
+	// The ID of the firewall domain list that DNS Firewall just updated.
 	Id *string
 
 	// The name of the domain list.

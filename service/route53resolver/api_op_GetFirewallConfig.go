@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves the configuration of the firewall behavior provided by DNS Firewall
-// for a single Amazon virtual private cloud (VPC).
+// for a single VPC from Amazon Virtual Private Cloud (Amazon VPC).
 func (c *Client) GetFirewallConfig(ctx context.Context, params *GetFirewallConfigInput, optFns ...func(*Options)) (*GetFirewallConfigOutput, error) {
 	if params == nil {
 		params = &GetFirewallConfigInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetFirewallConfig(ctx context.Context, params *GetFirewallConfi
 
 type GetFirewallConfigInput struct {
 
-	// The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+	// The ID of the VPC from Amazon VPC that the configuration is for.
 	//
 	// This member is required.
 	ResourceId *string
@@ -38,8 +38,8 @@ type GetFirewallConfigInput struct {
 
 type GetFirewallConfigOutput struct {
 
-	// Configuration of the firewall behavior provided by DNS Firewall for a single
-	// Amazon virtual private cloud (VPC).
+	// Configuration of the firewall behavior provided by DNS Firewall for a single VPC
+	// from AmazonVPC.
 	FirewallConfig *types.FirewallConfig
 
 	// Metadata pertaining to the operation's result.

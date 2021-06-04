@@ -75,7 +75,7 @@ type ListFirewallRulesInput struct {
 
 type ListFirewallRulesOutput struct {
 
-	// A list of the rules that you have defined. This might be a parital list of the
+	// A list of the rules that you have defined. This might be a partial list of the
 	// firewall rules that you've defined. For information, see MaxResults.
 	FirewallRules []types.FirewallRule
 

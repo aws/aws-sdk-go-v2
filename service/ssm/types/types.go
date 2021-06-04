@@ -995,6 +995,7 @@ type CommandInvocation struct {
 	// The command against which this invocation was requested.
 	CommandId *string
 
+	// Plugins processed by the command.
 	CommandPlugins []CommandPlugin
 
 	// User-specified information about the command, such as a brief description of
@@ -1542,7 +1543,7 @@ type DocumentDescription struct {
 	// The target type which defines the kinds of resources the document can run on.
 	// For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS
 	// resource and property types reference
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	TargetType *string
 
@@ -1613,7 +1614,7 @@ type DocumentIdentifier struct {
 	// The target type which defines the kinds of resources the document can run on.
 	// For example, /AWS::EC2::Instance. For a list of valid resource types, see AWS
 	// resource and property types reference
-	// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 	// in the AWS CloudFormation User Guide.
 	TargetType *string
 
@@ -1676,7 +1677,7 @@ type DocumentIdentifier struct {
 // Key=Name,Values=Te You can also use the TargetType AWS-provided key. For a list
 // of valid resource type values that can be used with this key, see AWS resource
 // and property types reference
-// (http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
+// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
 // in the AWS CloudFormation User Guide. If you specify more than two keys, only
 // documents that are identified by all the tags are returned in the results. If
 // you specify more than two values for a key, documents that are identified by any
@@ -1984,10 +1985,10 @@ type InstanceInformation struct {
 	// Systems Manager managed instance. This call does not return the IAM role for EC2
 	// instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2
 	// DescribeInstances action. For information, see DescribeInstances
-	// (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
 	// in the Amazon EC2 API Reference or describe-instances
-	// (http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html) in
-	// the AWS CLI Command Reference.
+	// (https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html) in the AWS
+	// CLI Command Reference.
 	IamRole *string
 
 	// The instance ID.
@@ -2014,15 +2015,15 @@ type InstanceInformation struct {
 	// to the managed instance by specifying the Activation Code and Activation ID when
 	// you install SSM Agent on the instance, as explained in Install SSM Agent for a
 	// hybrid environment (Linux)
-	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html)
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html)
 	// and Install SSM Agent for a hybrid environment (Windows)
-	// (http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html).
+	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html).
 	// To retrieve the Name tag of an EC2 instance, use the Amazon EC2
 	// DescribeInstances action. For information, see DescribeInstances
-	// (http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html)
 	// in the Amazon EC2 API Reference or describe-instances
-	// (http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html) in
-	// the AWS CLI Command Reference.
+	// (https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html) in the AWS
+	// CLI Command Reference.
 	Name *string
 
 	// Connection status of SSM Agent. The status Inactive has been deprecated and is
@@ -4022,7 +4023,7 @@ type ResourceDataSyncSource struct {
 
 	// The type of data source for the resource data sync. SourceType is either
 	// AwsOrganizations (if an organization is present in AWS Organizations) or
-	// singleAccountMultiRegions.
+	// SingleAccountMultiRegions.
 	//
 	// This member is required.
 	SourceType *string

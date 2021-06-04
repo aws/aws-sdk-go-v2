@@ -51,6 +51,9 @@ type UpdateServiceSettingInput struct {
 	// /ssm/automation/customer-script-log-group-name
 	//
 	// *
+	// /ssm/documents/console/public-sharing-permission
+	//
+	// *
 	// /ssm/parameter-store/default-parameter-tier
 	//
 	// *
@@ -78,7 +81,9 @@ type UpdateServiceSettingInput struct {
 	// or false. For the /ssm/automation/customer-script-log-destination setting ID,
 	// the setting value can be CloudWatch. For the
 	// /ssm/automation/customer-script-log-group-name setting ID, the setting value can
-	// be the name of a CloudWatch Logs log group.
+	// be the name of a CloudWatch Logs log group. For the
+	// /ssm/documents/console/public-sharing-permission setting ID, the setting value
+	// can be Enable or Disable.
 	//
 	// This member is required.
 	SettingValue *string

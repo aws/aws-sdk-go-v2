@@ -12,7 +12,7 @@ import (
 )
 
 // Updates the configuration of the firewall behavior provided by DNS Firewall for
-// a single Amazon virtual private cloud (VPC).
+// a single VPC from Amazon Virtual Private Cloud (Amazon VPC).
 func (c *Client) UpdateFirewallConfig(ctx context.Context, params *UpdateFirewallConfigInput, optFns ...func(*Options)) (*UpdateFirewallConfigOutput, error) {
 	if params == nil {
 		params = &UpdateFirewallConfigInput{}
@@ -49,7 +49,7 @@ type UpdateFirewallConfigInput struct {
 	// This member is required.
 	FirewallFailOpen types.FirewallFailOpenStatus
 
-	// The ID of the Amazon virtual private cloud (VPC) that the configuration is for.
+	// The ID of the VPC that the configuration is for.
 	//
 	// This member is required.
 	ResourceId *string
@@ -58,7 +58,7 @@ type UpdateFirewallConfigInput struct {
 type UpdateFirewallConfigOutput struct {
 
 	// Configuration of the firewall behavior provided by DNS Firewall for a single
-	// Amazon virtual private cloud (VPC).
+	// VPC.
 	FirewallConfig *types.FirewallConfig
 
 	// Metadata pertaining to the operation's result.

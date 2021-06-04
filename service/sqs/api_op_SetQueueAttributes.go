@@ -130,8 +130,8 @@ type SetQueueAttributesInput struct {
 	//
 	// *
 	// ContentBasedDeduplication – Enables content-based deduplication. For more
-	// information, see Exactly-Once Processing
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing)
+	// information, see Exactly-once processing
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-exactly-once-processing.html)
 	// in the Amazon Simple Queue Service Developer Guide. Note the following:
 	//
 	// * Every
@@ -163,26 +163,22 @@ type SetQueueAttributesInput struct {
 	// MessageDeduplicationId, the two messages are treated as duplicates and only one
 	// copy of the message is delivered.
 	//
-	// Preview: High throughput for FIFO queues High
-	// throughput for Amazon SQS FIFO queues is in preview release and is subject to
-	// change. This feature provides a high number of transactions per second (TPS) for
-	// messages in FIFO queues. For information on throughput quotas, see Quotas
-	// related to messages
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html)
-	// in the Amazon Simple Queue Service Developer Guide. This preview includes two
-	// new attributes:
+	// The following attributes apply only to high
+	// throughput for FIFO queues
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/high-throughput-fifo.html):
 	//
-	// * DeduplicationScope – Specifies whether message deduplication
-	// occurs at the message group or queue level. Valid values are messageGroup and
-	// queue.
+	// *
+	// DeduplicationScope – Specifies whether message deduplication occurs at the
+	// message group or queue level. Valid values are messageGroup and queue.
 	//
-	// * FifoThroughputLimit – Specifies whether the FIFO queue throughput
-	// quota applies to the entire queue or per message group. Valid values are
-	// perQueue and perMessageGroupId. The perMessageGroupId value is allowed only when
-	// the value for DeduplicationScope is messageGroup.
+	// *
+	// FifoThroughputLimit – Specifies whether the FIFO queue throughput quota applies
+	// to the entire queue or per message group. Valid values are perQueue and
+	// perMessageGroupId. The perMessageGroupId value is allowed only when the value
+	// for DeduplicationScope is messageGroup.
 	//
-	// To enable high throughput for
-	// FIFO queues, do the following:
+	// To enable high throughput for FIFO
+	// queues, do the following:
 	//
 	// * Set DeduplicationScope to messageGroup.
 	//
@@ -190,23 +186,10 @@ type SetQueueAttributesInput struct {
 	// FifoThroughputLimit to perMessageGroupId.
 	//
 	// If you set these attributes to
-	// anything other than the values shown for enabling high throughput, standard
-	// throughput is in effect and deduplication occurs as specified. This preview is
-	// available in the following AWS Regions:
-	//
-	// * US East (Ohio); us-east-2
-	//
-	// * US East
-	// (N. Virginia); us-east-1
-	//
-	// * US West (Oregon); us-west-2
-	//
-	// * Europe (Ireland);
-	// eu-west-1
-	//
-	// For more information about high throughput for FIFO queues, see
-	// Preview: High throughput for FIFO queues
-	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/high-throughput-fifo.html)
+	// anything other than the values shown for enabling high throughput, normal
+	// throughput is in effect and deduplication occurs as specified. For information
+	// on throughput quotas, see Quotas related to messages
+	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html)
 	// in the Amazon Simple Queue Service Developer Guide.
 	//
 	// This member is required.

@@ -31,8 +31,8 @@ func (c *Client) AssociateFirewallRuleGroup(ctx context.Context, params *Associa
 type AssociateFirewallRuleGroupInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of executing the operation twice. CreatorRequestId
-	// can be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice. CreatorRequestId can
+	// be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
@@ -49,11 +49,12 @@ type AssociateFirewallRuleGroupInput struct {
 
 	// The setting that determines the processing order of the rule group among the
 	// rule groups that you associate with the specified VPC. DNS Firewall filters VPC
-	// traffic starting from rule group with the lowest numeric priority setting. You
-	// must specify a unique priority for each rule group that you associate with a
+	// traffic starting from the rule group with the lowest numeric priority setting.
+	// You must specify a unique priority for each rule group that you associate with a
 	// single VPC. To make it easier to insert rule groups later, leave space between
-	// the numbers, for example, use 100, 200, and so on. You can change the priority
-	// setting for a rule group association after you create it.
+	// the numbers, for example, use 101, 200, and so on. You can change the priority
+	// setting for a rule group association after you create it. The allowed values for
+	// Priority are between 100 and 9900.
 	//
 	// This member is required.
 	Priority *int32
@@ -75,7 +76,7 @@ type AssociateFirewallRuleGroupInput struct {
 
 type AssociateFirewallRuleGroupOutput struct {
 
-	// The association that you just created. The association has an Id that you can
+	// The association that you just created. The association has an ID that you can
 	// use to identify it in other requests, like update and delete.
 	FirewallRuleGroupAssociation *types.FirewallRuleGroupAssociation
 

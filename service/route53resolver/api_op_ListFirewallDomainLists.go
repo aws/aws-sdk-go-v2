@@ -49,7 +49,7 @@ type ListFirewallDomainListsInput struct {
 
 type ListFirewallDomainListsOutput struct {
 
-	// A list of the domain lists that you have defined. This might be a parital list
+	// A list of the domain lists that you have defined. This might be a partial list
 	// of the domain lists that you've defined. For information, see MaxResults.
 	FirewallDomainLists []types.FirewallDomainListMetadata
 

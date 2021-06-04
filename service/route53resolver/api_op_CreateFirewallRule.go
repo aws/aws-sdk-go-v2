@@ -37,7 +37,7 @@ type CreateFirewallRuleInput struct {
 	// * ALLOW - Permit the request to go
 	// through.
 	//
-	// * ALERT - Permit the request and send metrics and log to Cloud
+	// * ALERT - Permit the request and send metrics and logs to Cloud
 	// Watch.
 	//
 	// * BLOCK - Disallow the request. This option requires additional details
@@ -47,7 +47,7 @@ type CreateFirewallRuleInput struct {
 	Action types.Action
 
 	// A unique string that identifies the request and that allows you to retry failed
-	// requests without the risk of executing the operation twice. CreatorRequestId can
+	// requests without the risk of running the operation twice. CreatorRequestId can
 	// be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
@@ -97,7 +97,7 @@ type CreateFirewallRuleInput struct {
 	BlockOverrideTtl *int32
 
 	// The way that you want DNS Firewall to block the request, used with the rule
-	// aciton setting BLOCK.
+	// action setting BLOCK.
 	//
 	// * NODATA - Respond indicating that the query was
 	// successful, but no response is available for it.

@@ -12,7 +12,7 @@ import (
 
 // Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the
 // rule group. You can use the policy to share the rule group using AWS Resource
-// Access Manager (RAM).
+// Access Manager (AWS RAM).
 func (c *Client) PutFirewallRuleGroupPolicy(ctx context.Context, params *PutFirewallRuleGroupPolicyInput, optFns ...func(*Options)) (*PutFirewallRuleGroupPolicyOutput, error) {
 	if params == nil {
 		params = &PutFirewallRuleGroupPolicyInput{}

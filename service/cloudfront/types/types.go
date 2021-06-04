@@ -709,8 +709,8 @@ type CloudFrontOriginAccessIdentityConfig struct {
 	// This member is required.
 	CallerReference *string
 
-	// An optional comment to describe the origin access identity. The comment cannot
-	// be longer than 128 characters.
+	// A comment to describe the origin access identity. The comment cannot be longer
+	// than 128 characters.
 	//
 	// This member is required.
 	Comment *string

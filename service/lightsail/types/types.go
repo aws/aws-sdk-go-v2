@@ -1305,20 +1305,26 @@ type DomainEntry struct {
 	// Deprecated: This member has been deprecated.
 	Options map[string]string
 
-	// The target AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load
-	// balancers, the value looks like
-	// ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. Be sure
-	// to also set isAlias to true when setting up an A record for a load balancer.
+	// The target IP address (e.g., 192.0.2.0), or AWS name server (e.g.,
+	// ns-111.awsdns-22.com.). For Lightsail load balancers, the value looks like
+	// ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. For
+	// Lightsail distributions, the value looks like exampled1182ne.cloudfront.net. For
+	// Lightsail container services, the value looks like
+	// container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com. Be sure to
+	// also set isAlias to true when setting up an A record for a Lightsail load
+	// balancer, distribution, or container service.
 	Target *string
 
-	// The type of domain entry, such as address (A), canonical name (CNAME), mail
-	// exchanger (MX), name server (NS), start of authority (SOA), service locator
-	// (SRV), or text (TXT). The following domain entry types can be used:
+	// The type of domain entry, such as address for IPv4 (A), address for IPv6 (AAAA),
+	// canonical name (CNAME), mail exchanger (MX), name server (NS), start of
+	// authority (SOA), service locator (SRV), or text (TXT). The following domain
+	// entry types can be used:
 	//
 	// * A
 	//
-	// *
-	// CNAME
+	// * AAAA
+	//
+	// * CNAME
 	//
 	// * MX
 	//
